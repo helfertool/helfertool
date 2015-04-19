@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Event, Job, Shift, Helper
+
+admin.site.register(Event)
+admin.site.register(Job)
+admin.site.register(Shift)
+admin.site.register(Helper)

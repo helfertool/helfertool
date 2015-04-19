@@ -10,10 +10,14 @@ class Event(models.Model):
         imprint: text at the end of registration
         active: is the registration opened?
     """
+    url_name = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
     text = models.TextField()
     imprint = models.TextField()
     active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
 
 
 class Job(models.Model):
@@ -27,6 +31,9 @@ class Job(models.Model):
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200)
     description = models.TextField()
+
+    def __str__(self):
+        return "%s (%s)" % (self.name, self.event)
 
 
 class Shift(models.Model):
@@ -42,6 +49,9 @@ class Shift(models.Model):
     begin = models.DateTimeField()
     end = models.DateTimeField()
     number = models.IntegerField(default=0)
+
+    def __str__(self):
+        return "%s %s to %s (%s)" % (self.job.name, self.begin, self.end, self.job.event)
 
 
 class Helper(models.Model):
@@ -83,6 +93,9 @@ class Helper(models.Model):
     surname = models.CharField(max_length=200)
     email = models.EmailField()
     phone = models.CharField(max_length=200)
-    comment = models.TextField()
+    comment = models.TextField(blank=True)
     shirt = models.CharField(max_length=20, choices=SHIRT_CHOICES,
                              default=SHIRT_S)
+
+    def __str__(self):
+        return "%s %s" % (self.prename, self.surname)
