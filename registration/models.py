@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import date as date_filter
 
 
 class Event(models.Model):
@@ -12,8 +13,8 @@ class Event(models.Model):
     """
     url_name = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
-    text = models.TextField()
-    imprint = models.TextField()
+    text = models.TextField(blank=True)
+    imprint = models.TextField(blank=True)
     active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -30,7 +31,7 @@ class Job(models.Model):
     """
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
@@ -51,7 +52,7 @@ class Shift(models.Model):
     number = models.IntegerField(default=0)
 
     def __str__(self):
-        return "%s %s to %s (%s)" % (self.job.name, self.begin, self.end, self.job.event)
+        return "%s %s (%s)" % (self.job.name, date_filter(self.begin, 'D, d.m H:i'), self.job.event)
 
 
 class Helper(models.Model):

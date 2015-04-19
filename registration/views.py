@@ -14,6 +14,7 @@ def form(request, event_url_name):
     form = RegisterForm(request.POST or None, event=event)
 
     if form.is_valid():
+        form.save()
         return None
 
     context = {'event': event,

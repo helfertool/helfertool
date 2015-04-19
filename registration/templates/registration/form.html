@@ -1,17 +1,114 @@
 {% extends "base.html" %}
 
+{% load lookup_shift %}
+
 {% block content %}
     <h1>{{ event }}</h1>
 
-    <p>{{ event.text }}</p>
+    {{ event.text | safe }}
 
-    <form action="{% url 'index' %}" method="post">
+
+    <form action="{% url 'form' event.url_name %}" method="post">
         {% csrf_token %}
 
-        {{ form }}
+        {{ form.non_field_errors }}
+
+        {# personal data, nothing special... #}
+        <table>
+            <tr>
+                <th>Vorname:</th>
+                <td>{{ form.prename }}</td>
+            <tr>
+            {% if form.prename.errors %}
+                <tr>
+                    <td></td>
+                    <td>{{ form.prename.errors }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th>Nachname:</th>
+                <td>{{ form.surname }}</td>
+            <tr>
+            {% if form.surname.errors %}
+                <tr>
+                    <td></td>
+                    <td>{{ form.surname.errors }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th>E-Mail:</th>
+                <td>{{ form.email }}</td>
+            <tr>
+            {% if form.email.errors %}
+                <tr>
+                    <td></td>
+                    <td>{{ form.email.errors }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th>Handy:</th>
+                <td>{{ form.phone }}</td>
+            <tr>
+            {% if form.phone.errors %}
+                <tr>
+                    <td></td>
+                    <td>{{ form.phone.errors }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th>T-Shirt:</th>
+                <td>{{ form.shirt }}</td>
+            <tr>
+            {% if form.shirt.errors %}
+                <tr>
+                    <td></td>
+                    <td>{{ form.shirt.errors }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th>Kommentar:</th>
+                <td>{{ form.comment }}</td>
+            <tr>
+            {% if form.comment.errors %}
+                <tr>
+                    <td></td>
+                    <td>{{ form.comment.errors }}</td>
+                </tr>
+            {% endif %}
+        </table>
+
+        {# list of all jobs and shifts #}
+        {% for job in event.job_set.all %}
+            <h2>{{ job.name }}</h2>
+            <p>{{ job.description }}</p>
+
+            {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
+            <table>
+                <tr>
+                    {% for day in shifts_by_day %}
+                        <td>{{ day.grouper }}</td>
+                    {% endfor %}
+                <tr/>
+                <tr>
+                    {% for day in shifts_by_day %}
+                        <td>
+                        {% for shift in day.list|dictsort:"begin" %}
+                            {{ form | lookup_shift:shift.pk }}
+                            {{ shift.begin | date:"H:i" }} - {{ shift.end | date:"H:i" }}<br />
+                        {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
 
         <input type="submit" value="Submit" />
     </form>
 
-    <p>{{ event.imprint }}</p>
+    {{ event.imprint | safe }}
 {% endblock %}

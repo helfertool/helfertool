@@ -8,8 +8,9 @@ class RegisterForm(forms.ModelForm):
         fields = ['prename', 'surname', 'email', 'phone', 'shirt', 'comment']
 
     def __init__(self, *args, **kwargs):
-        extra = kwargs.pop('event')
+        event = kwargs.pop('event')
         super(RegisterForm, self).__init__(*args, **kwargs)
-#
-#        for i, question in enumerate(extra):
-#            self.fields['custom_%s' % i] = forms.CharField(label=question)
+
+        for job in event.job_set.all():
+            for shift in job.shift_set.all():
+                self.fields['shift_%s' % shift.pk] = forms.BooleanField(label=shift)
