@@ -5,7 +5,7 @@
     {% if events %}
         <ul>
             {% for event in events %}
-                <li><a href="{% url 'register' event.url_name %}">{{ event }}</a></li>
+                <li><a href="{% url 'form' event.url_name %}">{{ event }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
