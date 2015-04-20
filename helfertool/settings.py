@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ADMINS = (('Sven Hertle', 'hertle@fs.tum.de'))
+
 
 # Application definition
 
