@@ -5,6 +5,11 @@ div#page
     padding-top:0;
 }
 
+div#login
+{
+    float:right;
+}
+
 /* tables */
 th, td
 {
@@ -19,7 +24,7 @@ table.inputform
 }
 
 /* input fields */
-input[type=text], input[type=email]
+input[type=text], input[type=email], input[type=password]
 {
     width:25em;
     border:0;

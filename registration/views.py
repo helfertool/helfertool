@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -31,3 +32,9 @@ def registered(request, event_url_name, helper_id):
     context = {'event': event,
                'data': helper}
     return render(request, 'registration/registered.html', context)
+
+@login_required
+def details(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+    context = {'event': event}
+    return render(request, 'registration/details.html', context)

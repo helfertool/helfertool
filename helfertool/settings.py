@@ -32,6 +32,10 @@ ADMINS = (('Sven Hertle', 'hertle@fs.tum.de'))
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+LOGIN_REDIRECT_URL = '/'
+
 # Application definition
 
 INSTALLED_APPS = (

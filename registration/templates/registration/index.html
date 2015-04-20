@@ -5,7 +5,13 @@
     {% if events %}
         <ul>
             {% for event in events %}
-                <li><a href="{% url 'form' event.url_name %}">{{ event }}</a></li>
+                <li><a href="{% url 'form' event.url_name %}">{{ event }}</a>
+
+                {% if user.is_authenticated %}
+                    (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
+                {% endif %}
+
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
