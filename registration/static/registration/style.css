@@ -82,6 +82,17 @@ input[type=submit]:hover
     background-color: rgb(76, 32, 93);
 }
 
+/* table with helpers */
+table.helpers
+{
+    border-collapse:collapse;
+}
+
+table.helpers th, table.helpers td
+{
+    border: 1px solid black;
+}
+
 /* normal links */
 a
 {

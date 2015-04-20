@@ -121,6 +121,7 @@ class Helper(models.Model):
     comment = models.CharField(max_length=200, blank=True)
     shirt = models.CharField(max_length=20, choices=SHIRT_CHOICES,
                              default=SHIRT_S)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "%s %s" % (self.prename, self.surname)

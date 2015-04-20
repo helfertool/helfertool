@@ -11,7 +11,7 @@
             {% for shift in day.list|dictsort:"begin" %}
                 <h4>{{ shift.begin | date:"H:i" }} - {{ shift.end | date:"H:i" }}
                     ({{ shift.helper_set.count }} von {{ shift.number}})</h4>
-                <table border="1">
+                <table class="helpers">
                     <tr>
                         <th>Vorname</th>
                         <th>Nachname</th>
@@ -19,8 +19,9 @@
                         <th>Handy</th>
                         <th>T-Shirt</th>
                         <th>Kommentar</th>
+                        <th>Anmeldezeit</th>
                     </tr>
-                {% for helper in shift.helper_set.all %}
+                {% for helper in shift.helper_set.all|dictsort:"timestamp" %}
                     <tr>
                         <td>{{ helper.prename }}</td>
                         <td>{{ helper.surname }}</td>
@@ -28,6 +29,7 @@
                         <td>{{ helper.phone }}</td>
                         <td>{{ helper.get_shirt_display }}</td>
                         <td>{{ helper.comment }}</td>
+                        <td>{{ helper.timestamp }}</td>
                     </tr>
                 {% endfor %}
                 </table>
