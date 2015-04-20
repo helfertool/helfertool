@@ -110,7 +110,7 @@ class Helper(models.Model):
     surname = models.CharField(max_length=200)
     email = models.EmailField()
     phone = models.CharField(max_length=200)
-    comment = models.TextField(blank=True)
+    comment = models.CharField(max_length=200, blank=True)
     shirt = models.CharField(max_length=20, choices=SHIRT_CHOICES,
                              default=SHIRT_S)
 

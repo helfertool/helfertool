@@ -7,91 +7,55 @@
 
     {{ event.text | safe }}
 
-
     <form action="{% url 'form' event.url_name %}" method="post">
         {% csrf_token %}
 
-        {{ form.non_field_errors }}
-
         {# personal data, nothing special... #}
-        <table>
+        <table class="inputform">
             <tr>
-                <th>Vorname:</th>
-                <td>{{ form.prename }}</td>
+                <th>Vorname</th>
+                <td>{{ form.prename }}{{ form.prename.errors }}</td>
             <tr>
-            {% if form.prename.errors %}
-                <tr>
-                    <td></td>
-                    <td>{{ form.prename.errors }}</td>
-                </tr>
-            {% endif %}
 
             <tr>
-                <th>Nachname:</th>
-                <td>{{ form.surname }}</td>
+                <th>Nachname</th>
+                <td>{{ form.surname }}{{ form.surname.errors }}</td>
             <tr>
-            {% if form.surname.errors %}
-                <tr>
-                    <td></td>
-                    <td>{{ form.surname.errors }}</td>
-                </tr>
-            {% endif %}
 
             <tr>
-                <th>E-Mail:</th>
-                <td>{{ form.email }}</td>
+                <th>E-Mail</th>
+                <td>{{ form.email }}{{ form.email.errors }}</td>
             <tr>
-            {% if form.email.errors %}
-                <tr>
-                    <td></td>
-                    <td>{{ form.email.errors }}</td>
-                </tr>
-            {% endif %}
 
             <tr>
-                <th>Handy:</th>
-                <td>{{ form.phone }}</td>
+                <th>Handy</th>
+                <td>{{ form.phone }}{{ form.phone.errors }}</td>
             <tr>
-            {% if form.phone.errors %}
-                <tr>
-                    <td></td>
-                    <td>{{ form.phone.errors }}</td>
-                </tr>
-            {% endif %}
 
             <tr>
-                <th>T-Shirt:</th>
-                <td>{{ form.shirt }}</td>
+                <th>T-Shirt</th>
+                <td>{{ form.shirt }}{{ form.shirt.errors }}</td>
             <tr>
-            {% if form.shirt.errors %}
-                <tr>
-                    <td></td>
-                    <td>{{ form.shirt.errors }}</td>
-                </tr>
-            {% endif %}
 
             <tr>
-                <th>Kommentar:</th>
-                <td>{{ form.comment }}</td>
+                <th>Kommentar</th>
+                <td>{{ form.comment }}{{ form.comment.errors }}</td>
             <tr>
-            {% if form.comment.errors %}
-                <tr>
-                    <td></td>
-                    <td>{{ form.comment.errors }}</td>
-                </tr>
-            {% endif %}
         </table>
 
+
+        <h2>Schichten</h2>
         {# list of all jobs and shifts #}
+
         {% for job in event.job_set.all %}
-            <h2>{{ job.name }}</h2>
+            <h3>{{ job.name }}</h3>
             <p>{{ job.description }}</p>
 
             {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
-            <table>
+            <table class="shifts">
                 <tr>
                     {% for day in shifts_by_day %}
-                        <td>{{ day.grouper }}</td>
+                        <th>{{ day.grouper }}</th>
                     {% endfor %}
                 <tr/>
                 <tr>
@@ -107,7 +71,9 @@
             </table>
         {% endfor %}
 
-        <input type="submit" value="Submit" />
+        {{ form.non_field_errors }}
+
+        <input type="submit" value="Verbindlich anmelden" />
     </form>
 
     {{ event.imprint | safe }}

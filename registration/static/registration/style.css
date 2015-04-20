@@ -1,0 +1,90 @@
+div#page
+{
+    font-family: verdana, helvetica, arial, sans-serif;
+    padding:1em;
+    padding-top:0;
+}
+
+/* tables */
+th, td
+{
+    text-align:left;
+    vertical-align: top;
+}
+
+/* table with text input fields */
+table.inputform
+{
+    border-spacing: 10px;
+}
+
+/* input fields */
+input[type=text], input[type=email]
+{
+    width:25em;
+    border:0;
+    padding:0.5em;
+    color:white;
+    background-color: rgb(124, 77, 129);
+}
+
+select
+{
+    border: 1px solid black;
+    padding:0.5em;
+    color:white;
+    background-color:rgb(124, 77, 129);
+}
+
+/* error list */
+ul.errorlist
+{
+    list-style:none;
+    padding:0;
+    margin:0;
+    color:red;
+    font-weight:bold;
+}
+
+/* table with shifts */
+table.shifts
+{
+    border-spacing: 10px;
+}
+
+table.shifts th
+{
+    border: 5px solid rgb(124, 77, 129);
+    color:white;
+    background-color: rgb(124, 77, 129);
+}
+
+/* submit button */
+input[type=submit]
+{
+    padding:1em 2em 1em 2em;
+    margin-top:2em;
+
+    font-weight:bold;
+
+    border:0 solid black;
+    color:white;
+    background-color: rgb(124, 77, 129);
+}
+
+input[type=submit]:hover
+{
+    background-color: rgb(76, 32, 93);
+}
+
+/* normal links */
+a
+{
+    color:#0088ff;
+    text-decoration:none;
+}
+
+a:hover
+{
+    color:#0066cc;
+}
