@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from django.template.defaultfilters import date as date_filter
 
@@ -11,10 +12,12 @@ class Event(models.Model):
         imprint: text at the end of registration
         active: is the registration opened?
     """
-    url_name = models.CharField(max_length=200, unique=True)
+    url_name = models.CharField(max_length=200, unique=True,
+                                validators=[RegexValidator('^[a-zA-Z0-9]+$')])
     name = models.CharField(max_length=200)
     text = models.TextField(blank=True)
     imprint = models.TextField(blank=True)
+    registered = models.TextField(blank=True)
     active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -53,6 +56,10 @@ class Shift(models.Model):
 
     def __str__(self):
         return "%s %s (%s)" % (self.job.name, date_filter(self.begin, 'D, d.m H:i'), self.job.event)
+
+    def time(self):
+        return "%s - %s" % (date_filter(self.begin, 'D, d.m, H:i'),
+                            date_filter(self.end, 'H:i'))
 
 
 class Helper(models.Model):

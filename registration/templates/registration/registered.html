@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load lookup_shift %}
+
+{% block content %}
+    <h1>{{ event }}</h1>
+
+    {{ event.registered | safe }}
+
+    <p>Du hast folgende Daten angegeben:</p>
+
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td>{{ data.prename }} {{ data.surname }}</td>
+        </tr>
+        <tr>
+            <td>E-Mail: </td>
+            <td>{{ data.email }}</td>
+        </tr>
+        <tr>
+            <td>Handy: </td>
+            <td>{{ data.phone }}</td>
+        </tr>
+        <tr>
+            <td>T-Shirt: </td>
+            <td>{{ data.shirt }}</td>
+        </tr>
+        <tr>
+            <td>Kommentar: </td>
+            <td>{{ data.comment }}</td>
+        </tr>
+    </table>
+
+    <h2>Schichten</h2>
+    <ul>
+    {% for shift in data.shifts.all %}
+        <li>{{ shift.job.name }}: {{ shift.time }} Uhr</li>
+    {% endfor %}
+    </ul>
+
+    {{ event.imprint | safe }}
+{% endblock %}
