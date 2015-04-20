@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 ADMINS = (('Sven Hertle', 'hertle@fs.tum.de'))
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 # Application definition
 

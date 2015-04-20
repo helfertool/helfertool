@@ -1,7 +1,12 @@
-import uuid
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
+from django.template import Context
 from django.template.defaultfilters import date as date_filter
+from django.template.loader import get_template
+import uuid
+import smtplib
 
 
 class Event(models.Model):
@@ -19,6 +24,7 @@ class Event(models.Model):
     text = models.TextField(blank=True)
     imprint = models.TextField(blank=True)
     registered = models.TextField(blank=True)
+    email = models.EmailField(default='party@fs.tum.de')
     active = models.BooleanField(default=False)
 
     def __str__(self):
@@ -110,3 +116,22 @@ class Helper(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.prename, self.surname)
+
+    def send_mail(self):
+        if self.shifts.count() == 0:
+            return
+
+        event = self.shifts.all()[0].job.event
+
+        subject_template = get_template('registration/mail_subject.txt')
+        subject = subject_template.render({ 'event': event }).rstrip()
+
+        text_template = get_template('registration/mail.txt')
+        text = text_template.render({ 'user': self })
+
+        try:
+            send_mail(subject, text, event.email, [self.email],
+                      fail_silently=False)
+        except smtplib.SMTPException as e:
+            mail_admins('Helfertool: Mail konnte nicht gesendet werden', text,
+                        fail_silently=True)

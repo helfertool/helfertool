@@ -17,6 +17,7 @@ def form(request, event_url_name):
 
     if form.is_valid():
         helper = form.save()
+        helper.send_mail()
         return HttpResponseRedirect(reverse('registered', args=[event.url_name, helper.pk]))
 
     context = {'event': event,
