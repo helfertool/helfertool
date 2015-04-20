@@ -5,6 +5,7 @@ from django.db import models
 from django.template import Context
 from django.template.defaultfilters import date as date_filter
 from django.template.loader import get_template
+from django.utils.timezone import localtime
 import uuid
 import smtplib
 
@@ -65,8 +66,15 @@ class Shift(models.Model):
         return "%s %s (%s)" % (self.job.name, date_filter(self.begin, 'D, d.m H:i'), self.job.event)
 
     def time(self):
-        return "%s - %s" % (date_filter(self.begin, 'D, d.m, H:i'),
-                            date_filter(self.end, 'H:i'))
+        return "%s - %s" % (date_filter(localtime(self.begin), 'D, d.m, H:i'),
+                            date_filter(localtime(self.end), 'H:i'))
+
+    def time_hours(self):
+        return "%s - %s" % (date_filter(localtime(self.begin), 'H:i'),
+                            date_filter(localtime(self.end), 'H:i'))
+
+    def is_full(self):
+        return self.helper_set.count() >= self.number
 
 
 class Helper(models.Model):

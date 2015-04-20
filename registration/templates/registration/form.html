@@ -63,7 +63,11 @@
                         <td>
                         {% for shift in day.list|dictsort:"begin" %}
                             {{ form | lookup_shift:shift.pk }}
-                            {{ shift.begin | date:"H:i" }} - {{ shift.end | date:"H:i" }}<br />
+                            {% if shift.is_full %}
+                                <del>{{ shift.time_hours }}</del><br />
+                            {% else %}
+                                {{ shift.time_hours }}<br />
+                            {% endif %}
                         {% endfor %}
                         </td>
                     {% endfor %}

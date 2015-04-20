@@ -16,12 +16,16 @@ class RegisterForm(forms.ModelForm):
 
         for job in event.job_set.all():
             for shift in job.shift_set.all():
-                self.fields['shift_%s' % shift.pk] = forms.BooleanField(label=shift, required=False)
-                self.shifts['shift_%s' % shift.pk] = shift.pk
+                id = 'shift_%s' % shift.pk
+                self.fields[id] = forms.BooleanField(label=shift, required=False)
+                if shift.is_full():
+                    self.fields[id].widget.attrs['disabled'] = True
+                self.shifts[id] = shift.pk
 
     def clean(self):
         super(RegisterForm, self).clean()
 
+        # number of shifts > 0
         number_of_shifts = 0
         for shift in self.shifts:
             if self.cleaned_data[shift]:
@@ -29,6 +33,13 @@ class RegisterForm(forms.ModelForm):
 
         if number_of_shifts == 0:
             raise ValidationError("Es muss mindestens eine Schicht gewählt sein")
+
+        # helper need for shift
+        for shift in self.shifts:
+            if self.cleaned_data[shift]:
+                cur_shift = Shift.objects.get(pk=self.shifts[shift])
+                if cur_shift.is_full():
+                    raise ValidationError("Es wurde eine volle Schicht ausgewählt")
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save()  # must commit
