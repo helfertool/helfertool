@@ -1,5 +1,9 @@
 Hallo {{ user.prename }},
 
-lalal...
+du bist in folgenden Schichten eingeteilt:
+
+{% for shift in user.shifts.all %}
+ * {{ shift.job.name }}: {{ shift.time }} Uhr
+{% endfor %}
 
 Vielen Dank für deine Unterstützung
