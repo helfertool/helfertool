@@ -54,6 +54,7 @@ ul.errorlist
 /* table with shifts */
 table.shifts
 {
+    margin-left: -10px;
     border-spacing: 10px;
 }
 
