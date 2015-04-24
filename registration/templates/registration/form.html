@@ -49,7 +49,7 @@
 
         {% for job in event.job_set.all %}
             <h3>{{ job.name }}</h3>
-            <p>{{ job.description }}</p>
+            <p>{{ job.description | safe }}</p>
 
             {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
             <table class="shifts">
