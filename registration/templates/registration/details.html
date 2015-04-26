@@ -18,6 +18,7 @@
                         <th>E-Mail</th>
                         <th>Handy</th>
                         <th>T-Shirt</th>
+                        <th>Vegetarier</th>
                         <th>Kommentar</th>
                         <th>Anmeldezeit</th>
                     </tr>
@@ -28,6 +29,7 @@
                         <td>{{ helper.email }}</td>
                         <td>{{ helper.phone }}</td>
                         <td>{{ helper.get_shirt_display }}</td>
+                        <td>{{ helper.vegetarian | yesno }}</td>
                         <td>{{ helper.comment }}</td>
                         <td>{{ helper.timestamp }}</td>
                     </tr>

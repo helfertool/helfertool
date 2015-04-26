@@ -27,6 +27,10 @@
             <td>{{ data.get_shirt_display }}</td>
         </tr>
         <tr>
+            <td>Vegetarier: </td>
+            <td>{{ data.vegetarian | yesno }}</td>
+        </tr>
+        <tr>
             <td>Kommentar: </td>
             <td>{{ data.comment }}</td>
         </tr>

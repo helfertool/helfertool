@@ -6,7 +6,7 @@ from .models import Helper, Shift
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = Helper
-        fields = ['prename', 'surname', 'email', 'phone', 'shirt', 'comment']
+        fields = ['prename', 'surname', 'email', 'phone', 'shirt', 'vegetarian', 'comment']
 
     def __init__(self, *args, **kwargs):
         event = kwargs.pop('event')
