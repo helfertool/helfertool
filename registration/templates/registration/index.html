@@ -5,9 +5,15 @@
     {% if events %}
         <ul>
             {% for event in events %}
-                <li><a href="{% url 'form' event.url_name %}">{{ event }}</a>
+                <li>
 
-                {% if user.is_authenticated %}
+                {% if not event.active %}
+                    INAKTIV
+                {% endif %}
+
+                <a href="{% url 'form' event.url_name %}">{{ event }}</a>
+
+                {% if event.is_admin %}
                     (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
                 {% endif %}
 

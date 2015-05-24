@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
@@ -27,9 +28,13 @@ class Event(models.Model):
     registered = models.TextField(blank=True)
     email = models.EmailField(default='party@fs.tum.de')
     active = models.BooleanField(default=False)
+    admins = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return self.name
+
+    def is_admin(self, user):
+        return user.is_superuser or self.admins.filter(pk=user.pk).exists()
 
 
 class Job(models.Model):
