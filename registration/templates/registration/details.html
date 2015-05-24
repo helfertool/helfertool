@@ -13,6 +13,9 @@
     {# show one job #}
     {% if job %}
         <h2>{{ job.name }}</h2>
+
+        <p><a href="{% url 'exceljob' event.url_name job.pk %}">Für Excel exportieren</a></p>
+
         {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
         {% for day in shifts_by_day %}
             <h3>{{ day.grouper }}</h3>
@@ -47,6 +50,9 @@
         {% endfor %}
     {# show one job #}
     {% else %}
+        <h2>Übersicht</h2>
+
+        <p><a href="{% url 'excel' event.url_name %}">Alles für Excel exportieren</a></p>
         <p>TODO: statistics</p>
     {% endif %}
 {% endblock %}
