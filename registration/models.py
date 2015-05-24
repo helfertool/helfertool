@@ -139,9 +139,5 @@ class Helper(models.Model):
         text_template = get_template('registration/mail.txt')
         text = text_template.render({ 'user': self })
 
-        try:
-            send_mail(subject, text, event.email, [self.email],
-                      fail_silently=False)
-        except smtplib.SMTPException as e:
-            mail_admins('Helfertool: Mail konnte nicht gesendet werden', text,
-                        fail_silently=True)
+        send_mail(subject, text, event.email, [self.email],
+                  fail_silently=False)
