@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import Event, Helper
+from .models import Event, Job, Helper
 from .forms import RegisterForm
 
 def index(request):
@@ -54,7 +54,7 @@ def registered(request, event_url_name, helper_id):
     return render(request, 'registration/registered.html', context)
 
 @login_required
-def details(request, event_url_name):
+def details(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -62,6 +62,11 @@ def details(request, event_url_name):
         context = {'event': event}
         return render(request, 'registration/nopermission.html', context)
 
+    # get job, if given
+    job = None
+    if job_pk:
+        job = get_object_or_404(Job, pk=job_pk)
+
     # show data
-    context = {'event': event}
+    context = {'event': event, 'job': job}
     return render(request, 'registration/details.html', context)

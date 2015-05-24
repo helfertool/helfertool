@@ -12,6 +12,7 @@ urlpatterns = [
         name='logout'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$', views.form, name='form'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/details/$', views.details, name='details'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/details/(?P<job_pk>[0-9]+)$', views.details, name='job'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/(?P<helper_id>[a-z0-9\-]+)/$',
         views.registered, name='registered'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

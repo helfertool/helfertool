@@ -3,7 +3,15 @@
 {% block content %}
     <h1>Helfer für {{ event.name }}</h1>
 
-    {% for job in event.job_set.all %}
+    <ul>
+        <li><a href="{% url 'details' event.url_name %}">Übersicht</a></li>
+        {% for j in event.job_set.all %}
+            <li><a href="{% url 'job' event.url_name j.pk %}">{{ j.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {# show one job #}
+    {% if job %}
         <h2>{{ job.name }}</h2>
         {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
         {% for day in shifts_by_day %}
@@ -37,5 +45,8 @@
                 </table>
             {% endfor %}
         {% endfor %}
-    {% endfor %}
+    {# show one job #}
+    {% else %}
+        <p>TODO: statistics</p>
+    {% endif %}
 {% endblock %}
