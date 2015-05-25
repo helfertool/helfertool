@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-ADMINS = (('Admin Name', 'admin@localhost'))
+ADMINS = (('Admin Name', 'admin@localhost'), )
 
 # for e-mail debugging
 #EMAIL_HOST = 'localhost'
