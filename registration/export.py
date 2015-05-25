@@ -1,3 +1,4 @@
+from django.template import defaultfilters as filters
 import xlsxwriter
 
 def xlsx(buffer, jobs):

@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from django.template import defaultfilters as filters
 from io import BytesIO
 
 from .models import Event, Job, Helper
