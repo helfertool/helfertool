@@ -47,6 +47,7 @@ class Job(models.Model):
     """
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200)
+    infection_instruction = models.BooleanField(default=False)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -116,6 +117,16 @@ class Helper(models.Model):
         (SHIRT_XL_GIRLY, 'XL (girly)'),
     )
 
+    INSTRUCTION_NO= "No"
+    INSTRUCTION_YES = "Yes"
+    INSTRUCTION_REFRESH = "Refresh"
+
+    INSTRUCTION_CHOICES = (
+        (INSTRUCTION_NO, 'Einweisung noch nie erhalten'),
+        (INSTRUCTION_YES, 'Einweisung gültig'),
+        (INSTRUCTION_REFRESH, 'Ersteinweisung durch Arzt erhalten, Auffrischung nötig')
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     shifts = models.ManyToManyField(Shift)
@@ -127,6 +138,9 @@ class Helper(models.Model):
     shirt = models.CharField(max_length=20, choices=SHIRT_CHOICES,
                              default=SHIRT_S)
     vegetarian = models.BooleanField(default=False)
+    infection_instruction = models.CharField(max_length=20,
+                                             choices=INSTRUCTION_CHOICES,
+                                             blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

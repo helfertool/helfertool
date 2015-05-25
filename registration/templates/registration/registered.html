@@ -26,6 +26,12 @@
             <td>T-Shirt: </td>
             <td>{{ data.get_shirt_display }}</td>
         </tr>
+        {% if data.infection_instruction %}
+        <tr>
+            <td>Gesundheitsbelehrung: </td>
+            <td>{{ data.get_infection_instruction_display }}</td>
+        </tr>
+        {% endif %}
         <tr>
             <td>Vegetarier: </td>
             <td>{{ data.vegetarian | yesno }}</td>
