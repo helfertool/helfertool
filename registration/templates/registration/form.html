@@ -65,20 +65,24 @@
                 <td>{{ form.phone }}{{ form.phone.errors }}</td>
             <tr>
 
+            {% if event.ask_shirt %}
             <tr>
                 <th>T-Shirt</th>
                 <td>{{ form.shirt }}{{ form.shirt.errors }}</td>
             <tr>
+            {% endif %}
 
             <tr id="infection_instruction_field">
                 <th>Gesundheitsbelehrung</th>
                 <td>{{ form.infection_instruction }}{{ form.infection_instruction.errors }}</td>
             <tr>
 
+            {% if event.ask_vegetarian %}
             <tr>
                 <th>Vegetarier</th>
                 <td>{{ form.vegetarian }}{{ form.vegetarian.errors }} Vegetarisches Helferessen</td>
             <tr>
+            {% endif %}
 
             <tr>
                 <th>Kommentar</th>

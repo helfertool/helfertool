@@ -22,20 +22,24 @@
             <td>Handy: </td>
             <td>{{ data.phone }}</td>
         </tr>
+        {% if event.ask_shirt %}
         <tr>
             <td>T-Shirt: </td>
             <td>{{ data.get_shirt_display }}</td>
         </tr>
+        {% endif %}
         {% if data.infection_instruction %}
         <tr>
             <td>Gesundheitsbelehrung: </td>
             <td>{{ data.get_infection_instruction_display }}</td>
         </tr>
         {% endif %}
+        {% if event.ask_vegetarian %}
         <tr>
             <td>Vegetarier: </td>
             <td>{{ data.vegetarian | yesno }}</td>
         </tr>
+        {% endif %}
         <tr>
             <td>Kommentar: </td>
             <td>{{ data.comment }}</td>

@@ -14,6 +14,15 @@ class RegisterForm(forms.ModelForm):
 
         super(RegisterForm, self).__init__(*args, **kwargs)
 
+        # remove field for shirt?
+        if not event.ask_shirt:
+            self.fields.pop('shirt')
+
+        # remove field for vegetarian food?
+        if not event.ask_vegetarian:
+            self.fields.pop('vegetarian')
+
+        # add fields for shifts
         for job in event.job_set.all():
             for shift in job.shift_set.all():
                 id = 'shift_%s' % shift.pk

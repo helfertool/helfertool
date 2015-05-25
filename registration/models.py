@@ -28,6 +28,8 @@ class Event(models.Model):
     registered = models.TextField(blank=True)
     email = models.EmailField(default='party@fs.tum.de')
     active = models.BooleanField(default=False)
+    ask_shirt = models.BooleanField(default=True)
+    ask_vegetarian = models.BooleanField(default=True)
     admins = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
