@@ -70,7 +70,7 @@
                 <td>{{ form.shirt }}{{ form.shirt.errors }}</td>
             <tr>
 
-            <tr>
+            <tr id="infection_instruction_field">
                 <th>Gesundheitsbelehrung</th>
                 <td>{{ form.infection_instruction }}{{ form.infection_instruction.errors }}</td>
             <tr>
@@ -89,6 +89,35 @@
         {{ form.non_field_errors }}
 
         <input type="submit" value="Verbindlich anmelden" />
+
+        <script>
+            function handle_infection_instruction()
+            {
+                var show_field = 0;
+
+                // iterate over all relevant checkboxes
+                var boxes = document.getElementsByClassName("infection_instruction");
+                for(var i=0; i < boxes.length; i++)
+                {
+                    if(boxes[i].checked)
+                    {
+                        show_field = 1;
+                        break;
+                    }
+                }
+
+                // show or hide input field
+                if(show_field)
+                    document.getElementById("infection_instruction_field").style.display = 'table-row';
+                else
+                    document.getElementById("infection_instruction_field").style.display = 'none';
+
+
+                // If you ask: Yes, I know JQuery
+            }
+
+            handle_infection_instruction();
+        </script>
     </form>
 
     {{ event.imprint | safe }}

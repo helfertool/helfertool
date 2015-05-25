@@ -17,9 +17,19 @@ class RegisterForm(forms.ModelForm):
         for job in event.job_set.all():
             for shift in job.shift_set.all():
                 id = 'shift_%s' % shift.pk
-                self.fields[id] = forms.BooleanField(label=shift, required=False)
+                self.fields[id] = forms.BooleanField(label=shift,
+                                                     required=False)
+
+                # disable button if shift is full
                 if shift.is_full():
                     self.fields[id].widget.attrs['disabled'] = True
+
+                # set class if infection instruction is needed for this shift
+                if shift.job.infection_instruction:
+                    self.fields[id].widget.attrs['class'] = 'infection_instruction'
+                    self.fields[id].widget.attrs['onClick'] = 'handle_infection_instruction()'
+
+                # safe mapping id <-> pk
                 self.shifts[id] = shift.pk
 
     def clean(self):
