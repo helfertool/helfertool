@@ -10,7 +10,40 @@
     <form action="{% url 'form' event.url_name %}" method="post">
         {% csrf_token %}
 
+        <h2>Schichten</h2>
+        {# list of all jobs and shifts #}
+
+        {% for job in event.job_set.all %}
+            <h3>{{ job.name }}</h3>
+            <p>{{ job.description | safe }}</p>
+
+            {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
+            <table class="shifts">
+                <tr>
+                    {% for day in shifts_by_day %}
+                        <th>{{ day.grouper }}</th>
+                    {% endfor %}
+                <tr/>
+                <tr>
+                    {% for day in shifts_by_day %}
+                        <td>
+                        {% for shift in day.list|dictsort:"begin" %}
+                            {{ form | lookup_shift:shift.pk }}
+                            {% if shift.is_full %}
+                                <del>{{ shift.time_hours }}</del><br />
+                            {% else %}
+                                {{ shift.time_hours }}<br />
+                            {% endif %}
+                        {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+
+        <h2>Persönliche Daten</h2>
         {# personal data, nothing special... #}
+
         <table class="inputform">
             <tr>
                 <th>Vorname</th>
@@ -47,38 +80,6 @@
                 <td>{{ form.comment }}{{ form.comment.errors }}</td>
             <tr>
         </table>
-
-
-        <h2>Schichten</h2>
-        {# list of all jobs and shifts #}
-
-        {% for job in event.job_set.all %}
-            <h3>{{ job.name }}</h3>
-            <p>{{ job.description | safe }}</p>
-
-            {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
-            <table class="shifts">
-                <tr>
-                    {% for day in shifts_by_day %}
-                        <th>{{ day.grouper }}</th>
-                    {% endfor %}
-                <tr/>
-                <tr>
-                    {% for day in shifts_by_day %}
-                        <td>
-                        {% for shift in day.list|dictsort:"begin" %}
-                            {{ form | lookup_shift:shift.pk }}
-                            {% if shift.is_full %}
-                                <del>{{ shift.time_hours }}</del><br />
-                            {% else %}
-                                {{ shift.time_hours }}<br />
-                            {% endif %}
-                        {% endfor %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            </table>
-        {% endfor %}
 
         {{ form.non_field_errors }}
 
