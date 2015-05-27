@@ -40,7 +40,6 @@ class Event(models.Model):
     def is_admin(self, user):
         return user.is_superuser or self.admins.filter(pk=user.pk).exists()
 
-
 class Job(models.Model):
     """ A job that contains min. 1 shift.
 
@@ -113,8 +112,10 @@ class Shift(models.Model):
         return self.helper_set.count()
 
     def is_full(self):
-        return self.helper_set.count() >= self.number
+        return self.num_helpers() >= self.number
 
+    def helpers_percent(self):
+        return self.num_helpers() / self.number * 100
 
 class Helper(models.Model):
     """ Helper in one or more shifts.

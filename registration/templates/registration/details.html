@@ -62,6 +62,37 @@
         <h2>Übersicht</h2>
 
         <p><a href="{% url 'excel' event.url_name %}">Alles für Excel exportieren</a></p>
-        <p>TODO: statistics</p>
+
+        {% for job in event.job_set.all %}
+            <h3>{{ job.name }}</h3>
+
+            {% for day, shifts in job.shifts_by_day.items %}
+                <h4>{{ day }}</h4>
+
+                <table class="shifts">
+                    <tr>
+                        {% for shift in shifts %}
+                            <th>{{ shift.time_hours }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for shift in shifts %}
+                            {% if shift.helpers_percent < 70 %}
+                                <td style="background-color:red;">
+                            {% elif shift.helpers_percent < 100 %}
+                                <td style="background-color:yellow;">
+                            {% else %}
+                                <td style="background-color:green;">
+                            {% endif %}
+
+                            {{ shift.helpers_percent }}
+                            {{ shift.num_helpers }}/{{ shift.number}}
+
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            {% endfor %}
+        {% endfor %}
     {% endif %}
 {% endblock %}
