@@ -26,7 +26,7 @@ table.inputform
 /* input fields */
 input[type=text], input[type=email], input[type=password]
 {
-    width:25em;
+    width:28em;
     border:0;
     padding:0.5em;
     color:white;

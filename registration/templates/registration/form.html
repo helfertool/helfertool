@@ -55,6 +55,9 @@
         {# personal data, nothing special... #}
 
         <table class="inputform">
+            <colgroup>
+                <col span="1" style="width: 10em;">
+            </colgroup>
             <tr>
                 <th>Vorname</th>
                 <td>{{ form.prename }}{{ form.prename.errors }}</td>
@@ -83,7 +86,7 @@
             {% endif %}
 
             <tr id="infection_instruction_field">
-                <th>Gesundheitsbelehrung</th>
+                <th>Gesundheits-<br/>belehrung</th>
                 <td>{{ form.infection_instruction }}{{ form.infection_instruction.errors }}</td>
             <tr>
 
