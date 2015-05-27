@@ -29,9 +29,10 @@ class Event(models.Model):
     registered = models.TextField(blank=True)
     email = models.EmailField(default='party@fs.tum.de')
     active = models.BooleanField(default=False)
+    admins = models.ManyToManyField(User, blank=True)
     ask_shirt = models.BooleanField(default=True)
     ask_vegetarian = models.BooleanField(default=True)
-    admins = models.ManyToManyField(User, blank=True)
+    show_public_numbers = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -107,6 +108,9 @@ class Shift(models.Model):
     def time_hours(self):
         return "%s - %s" % (date_filter(localtime(self.begin), 'H:i'),
                             date_filter(localtime(self.end), 'H:i'))
+
+    def num_helpers(self):
+        return self.helper_set.count()
 
     def is_full(self):
         return self.helper_set.count() >= self.number

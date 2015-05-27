@@ -15,7 +15,7 @@
             <div id="login">
                 {% if user.is_authenticated %}
                     <p>Hallo {{ user.username }}!
-                    <a href="{% url "index" %}">Start</a> | 
+                    <a href="{% url "index" %}">Veranstaltungen</a> | 
                     {% if user.is_superuser %}
                         <a href="{% url "admin:index" %}">Admin</a> | 
                     {% endif %}

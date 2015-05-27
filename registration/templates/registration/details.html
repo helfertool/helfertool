@@ -22,7 +22,7 @@
             {# iterate over shifts on this day #}
             {% for shift in shifts %}
                 <h4>{{ shift.time_hours }}
-                    ({{ shift.helper_set.count }} von {{ shift.number}})</h4>
+                    ({{ shift.num_helpers }} von {{ shift.number}})</h4>
                 <table class="helpers">
                     <tr>
                         <th>Vorname</th>

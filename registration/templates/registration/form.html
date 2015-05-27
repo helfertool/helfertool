@@ -27,12 +27,23 @@
                     {% for day, shifts in job.shifts_by_day.items %}
                         <td>
                         {% for shift in shifts %}
+                            {# checkbox #}
                             {{ form | lookup_shift:shift.pk }}
+
+                            {# time #}
                             {% if shift.is_full %}
-                                <del>{{ shift.time_hours }}</del><br />
+                                <del>{{ shift.time_hours }}</del>
                             {% else %}
-                                {{ shift.time_hours }}<br />
+                                {{ shift.time_hours }}
                             {% endif %}
+                            {# number of helpers #}
+                            {% if event.show_public_numbers %}
+                            <span class="numbers">
+                                ({{ shift.num_helpers }}/{{ shift.number }})
+                            </span>
+                            {% endif %}
+
+                            <br />
                         {% endfor %}
                         </td>
                     {% endfor %}

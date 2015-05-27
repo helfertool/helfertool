@@ -65,6 +65,12 @@ table.shifts th
     background-color: rgb(124, 77, 129);
 }
 
+table.shifts span.numbers
+{
+    font-size:80%;
+    color:grey;
+}
+
 /* submit button */
 input[type=submit]
 {
