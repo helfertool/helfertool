@@ -7,6 +7,7 @@ from django.template import Context
 from django.template.defaultfilters import date as date_filter
 from django.template.loader import get_template
 from django.utils.timezone import localtime
+from collections import OrderedDict
 import uuid
 import smtplib
 
@@ -54,6 +55,32 @@ class Job(models.Model):
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
+
+    def shifts_by_day(self):
+        tmp_shifts = dict()
+
+        # iterate over all shifts and group them by day
+        # (itertools.groupby is strange...)
+        for shift in self.shift_set.all():
+            day = shift.begin.date()
+
+            # add to list
+            if day in tmp_shifts:
+                tmp_shifts[day].append(shift)
+            # or create begin list
+            else:
+                tmp_shifts[day] = [shift, ]
+
+        # sort days
+        ordered_shifts = OrderedDict(sorted(tmp_shifts.items(),
+                                     key=lambda t: t[0]))
+
+        # sort shifts
+        for day in ordered_shifts:
+            ordered_shifts[day] = sorted(ordered_shifts[day],
+                                         key=lambda s : s.begin)
+
+        return ordered_shifts
 
 
 class Shift(models.Model):

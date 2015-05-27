@@ -17,17 +17,16 @@
             <h3>{{ job.name }}</h3>
             <p>{{ job.description | safe }}</p>
 
-            {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
             <table class="shifts">
                 <tr>
-                    {% for day in shifts_by_day %}
-                        <th>{{ day.grouper }}</th>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <th>{{ day }}</th>
                     {% endfor %}
                 <tr/>
                 <tr>
-                    {% for day in shifts_by_day %}
+                    {% for day, shifts in job.shifts_by_day.items %}
                         <td>
-                        {% for shift in day.list|dictsort:"begin" %}
+                        {% for shift in shifts %}
                             {{ form | lookup_shift:shift.pk }}
                             {% if shift.is_full %}
                                 <del>{{ shift.time_hours }}</del><br />

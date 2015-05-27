@@ -16,11 +16,12 @@
 
         <p><a href="{% url 'exceljob' event.url_name job.pk %}">Für Excel exportieren</a></p>
 
-        {% regroup  job.shift_set.all|dictsort:"begin" by begin|date:"d.m.Y" as shifts_by_day %}
-        {% for day in shifts_by_day %}
-            <h3>{{ day.grouper }}</h3>
-            {% for shift in day.list|dictsort:"begin" %}
-                <h4>{{ shift.begin | date:"H:i" }} - {{ shift.end | date:"H:i" }}
+        {# iterate over days #}
+        {% for day, shifts in job.shifts_by_day.items %}
+            <h3>{{ day }}</h3>
+            {# iterate over shifts on this day #}
+            {% for shift in shifts %}
+                <h4>{{ shift.time_hours }}
                     ({{ shift.helper_set.count }} von {{ shift.number}})</h4>
                 <table class="helpers">
                     <tr>
@@ -28,8 +29,12 @@
                         <th>Nachname</th>
                         <th>E-Mail</th>
                         <th>Handy</th>
+                        {% if event.ask_shirt %}
                         <th>T-Shirt</th>
+                        {% endif %}
+                        {% if event.ask_vegetarian %}
                         <th>Vegetarier</th>
+                        {% endif %}
                         <th>Kommentar</th>
                         <th>Anmeldezeit</th>
                     </tr>
@@ -39,8 +44,12 @@
                         <td>{{ helper.surname }}</td>
                         <td>{{ helper.email }}</td>
                         <td>{{ helper.phone }}</td>
+                        {% if event.ask_shirt %}
                         <td>{{ helper.get_shirt_display }}</td>
+                        {% endif %}
+                        {% if event.ask_vegetarian %}
                         <td>{{ helper.vegetarian | yesno }}</td>
+                        {% endif %}
                         <td>{{ helper.comment }}</td>
                         <td>{{ helper.timestamp }}</td>
                     </tr>
