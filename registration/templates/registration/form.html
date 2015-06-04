@@ -28,14 +28,17 @@
                         <td>
                         {% for shift in shifts %}
                             {# checkbox #}
-                            {{ form | lookup_shift:shift.pk }}
+                            <label>
+                                {{ form | lookup_shift:shift.pk }}
 
-                            {# time #}
-                            {% if shift.is_full %}
-                                <del>{{ shift.time_hours }}</del>
-                            {% else %}
-                                {{ shift.time_hours }}
-                            {% endif %}
+                                {# time #}
+                                {% if shift.is_full %}
+                                    <del>{{ shift.time_hours }}</del>
+                                {% else %}
+                                    {{ shift.time_hours }}
+                                {% endif %}
+                            </label>
+
                             {# number of helpers #}
                             {% if event.show_public_numbers %}
                             <span class="numbers">
