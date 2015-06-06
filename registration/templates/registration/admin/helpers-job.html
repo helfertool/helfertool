@@ -1,6 +1,8 @@
 {% extends "registration/admin/base.html" %}
 {% load staticfiles %}
 
+{% block title %}{{ job.name }} {{ event.name }}{% endblock %}
+
 {% block admincontent %}
     <h2>Helfer: {{ job.name }}</h2>
 
