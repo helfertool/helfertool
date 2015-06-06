@@ -115,16 +115,15 @@ a:hover
 /* admin interface */
 div.progress-outside
 {
-    border:1px solid #000;
-    background-color:white;
+    border:0;
+    background-color:red;
     width:150px;
     height:10px;
-    padding:1px;
 }
 
 div.progress-inside
 {
-    background-color:#000;
+    background-color:green;
     height:10px;
     width:0;
 }
