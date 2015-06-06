@@ -116,7 +116,7 @@ def excel(request, event_url_name, job_pk=None):
     buffer = BytesIO()
 
     # create xlsx sheets
-    xlsx(buffer, jobs)
+    xlsx(buffer, event, jobs)
 
     # close buffer, send file
     data = buffer.getvalue()

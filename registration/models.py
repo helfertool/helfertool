@@ -161,6 +161,12 @@ class Helper(models.Model):
         (INSTRUCTION_REFRESH, 'Ersteinweisung durch Arzt erhalten, Auffrischung nötig')
     )
 
+    INSTRUCTION_CHOICES_SHORT = (
+        (INSTRUCTION_NO, 'Nein'),
+        (INSTRUCTION_YES, 'Gültig'),
+        (INSTRUCTION_REFRESH, 'Auffrischung')
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     shifts = models.ManyToManyField(Shift)
@@ -179,6 +185,12 @@ class Helper(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.prename, self.surname)
+
+    def get_infection_instruction_short(self):
+        for item in Helper.INSTRUCTION_CHOICES_SHORT:
+            if item[0] == self.infection_instruction:
+                return item[1]
+        return ""
 
     def send_mail(self):
         if self.shifts.count() == 0:

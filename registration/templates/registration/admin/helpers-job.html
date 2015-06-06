@@ -31,6 +31,9 @@
                     {% if event.ask_vegetarian %}
                     <th>Vegetarier</th>
                     {% endif %}
+                    {% if job.infection_instruction %}
+                    <th>Gesundheitsbelehrung</th>
+                    {% endif %}
                     <th>Kommentar</th>
                     <th>Anmeldezeit</th>
                 </tr>
@@ -45,6 +48,9 @@
                     {% endif %}
                     {% if event.ask_vegetarian %}
                     <td>{{ helper.vegetarian | yesno }}</td>
+                    {% endif %}
+                    {% if job.infection_instruction %}
+                    <td>{{ helper.get_infection_instruction_short }}</td>
                     {% endif %}
                     <td>{{ helper.comment }}</td>
                     <td>{{ helper.timestamp }}</td>
