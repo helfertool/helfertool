@@ -6,6 +6,7 @@
     <h1>Verwaltung für {{ event.name }}</h1>
 
     <ul>
+        <li><a href="{% url 'form' event.url_name %}">Zur Anmeldung</a></li>
         <li><a href="{% url 'edit_event' event.url_name %}">Veranstaltung bearbeiten</a></li>
         <li><a href="{% url 'helpers' event.url_name %}">Angemeldete Helfer</a></li>
     </ul>
