@@ -10,5 +10,6 @@ translator.register(Event, EventTranslationOptions)
 
 class JobTranslationOptions(TranslationOptions):
     fields = ('name', 'description', )
+    required_languages = {'default': ('name',)}
 
 translator.register(Job, JobTranslationOptions)

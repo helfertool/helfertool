@@ -179,31 +179,44 @@ class Helper(models.Model):
     INSTRUCTION_REFRESH = "Refresh"
 
     INSTRUCTION_CHOICES = (
-        (INSTRUCTION_NO, 'Einweisung noch nie erhalten'),
-        (INSTRUCTION_YES, 'Einweisung gültig'),
-        (INSTRUCTION_REFRESH, 'Ersteinweisung durch Arzt erhalten, Auffrischung nötig')
+        (INSTRUCTION_NO, _("I never got an instruction")),
+        (INSTRUCTION_YES, _("I have a valid instruction")),
+        (INSTRUCTION_REFRESH, _("I got a instruction by a doctor, it must be refreshed"))
     )
 
     INSTRUCTION_CHOICES_SHORT = (
-        (INSTRUCTION_NO, 'Nein'),
-        (INSTRUCTION_YES, 'Gültig'),
-        (INSTRUCTION_REFRESH, 'Auffrischung')
+        (INSTRUCTION_NO, _("No")),
+        (INSTRUCTION_YES, _("Valid")),
+        (INSTRUCTION_REFRESH, _("Refreshment"))
     )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     shifts = models.ManyToManyField(Shift)
-    prename = models.CharField(max_length=200)
-    surname = models.CharField(max_length=200)
-    email = models.EmailField()
-    phone = models.CharField(max_length=200)
-    comment = models.CharField(max_length=200, blank=True)
+
+    prename = models.CharField(max_length=200, verbose_name=_("Prename"))
+
+    surname = models.CharField(max_length=200, verbose_name=_("Surname"))
+
+    email = models.EmailField(verbose_name=_("E-Mail"))
+
+    phone = models.CharField(max_length=200, verbose_name=_("Mobile phone"))
+
+    comment = models.CharField(max_length=200, blank=True,
+                               verbose_name=_("Comment"))
+
     shirt = models.CharField(max_length=20, choices=SHIRT_CHOICES,
-                             default=SHIRT_S)
-    vegetarian = models.BooleanField(default=False)
+                             default=SHIRT_S, verbose_name=_("T-shirt"))
+
+    vegetarian = models.BooleanField(default=False,
+                                     verbose_name=_("Vegetarian"),
+                                     help_text=_("This helps us to estimate the food for our helpers"))
+
     infection_instruction = models.CharField(max_length=20,
                                              choices=INSTRUCTION_CHOICES,
-                                             blank=True)
+                                             blank=True,
+                                             verbose_name=_("Instruction for the handling of food"))
+
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

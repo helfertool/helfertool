@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-    <h1>Veranstaltungen</h1>
+    <h1>{% trans "Events" %}</h1>
     {% if active_events %}
         <ul>
             {% for event in active_events %}
@@ -9,24 +10,24 @@
                     <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                     {% if event.is_admin %}
-                        (<a href="{% url 'admin' event.url_name %}">Verwaltung</a>)
+                        (<a href="{% url 'admin' event.url_name %}">{% trans "Manage" %}</a>)
                     {% endif %}
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>Zur Zeit gibt es keine Veranstaltungen mit aktiver Anmeldung.</p>
+        <p>{% trans "At the moment there is no event you can register for." %}</p>
     {% endif %}
 
     {% if administered_events %}
-        <h2>Inaktiv</h2>
+        <h2>{% trans "Inactive" %}</h2>
         <ul>
             {% for event in administered_events %}
                 <li>
                     <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                     {% if event.is_admin %}
-                        (<a href="{% url 'admin' event.url_name %}">Verwaltung</a>)
+                        (<a href="{% url 'admin' event.url_name %}">{% trans "Manage" %}</a>)
                     {% endif %}
                 </li>
             {% endfor %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Login</h1>
+    <h1>{% trans "Login" %}</h1>
 
     <form action="{% url "login" %}" method="post" accept-charset="utf-8">
         <table>
@@ -9,6 +9,6 @@
         </table>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="Login"/>
+        <input type="submit" value="{% trans "Login" %}"/>
     </form>
 {% endblock %}

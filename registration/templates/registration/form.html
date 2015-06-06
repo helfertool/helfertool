@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load lookup_shift %}
 
-{% block title %}Helferanmeldung {{ event }}{% endblock %}
+{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
 
 {% block content %}
     <h1>{{ event }}</h1>
@@ -12,7 +13,7 @@
     <form action="{% url 'form' event.url_name %}" method="post">
         {% csrf_token %}
 
-        <h2>Schichten</h2>
+        <h2>{% trans "Jobs" %}</h2>
         {# list of all jobs and shifts #}
 
         {% for job in event.job_set.all %}
@@ -56,7 +57,7 @@
             </table>
         {% endfor %}
 
-        <h2>Persönliche Daten</h2>
+        <h2>{% trans "Personal data" %}</h2>
         {# personal data, nothing special... #}
 
         <table class="inputform">
@@ -64,53 +65,55 @@
                 <col span="1" style="width: 10em;">
             </colgroup>
             <tr>
-                <th>Vorname</th>
-                <td>{{ form.prename }}{{ form.prename.errors }}</td>
+                <td>{{ form.prename.label }}</td>
+                <td>{{ form.prename }}{{ form.prename.errors }}{{ form.prename.description }}</td>
             <tr>
 
             <tr>
-                <th>Nachname</th>
+                <td>{{ form.surname.label }}</td>
                 <td>{{ form.surname }}{{ form.surname.errors }}</td>
             <tr>
 
             <tr>
-                <th>E-Mail</th>
+                <td>{{ form.email.label }}</td>
                 <td>{{ form.email }}{{ form.email.errors }}</td>
             <tr>
 
             <tr>
-                <th>Handy</th>
+                <td>{{ form.phone.label }}</td>
                 <td>{{ form.phone }}{{ form.phone.errors }}</td>
             <tr>
 
             {% if event.ask_shirt %}
             <tr>
-                <th>T-Shirt</th>
+                <td>{{ form.shirt.label }}</td>
                 <td>{{ form.shirt }}{{ form.shirt.errors }}</td>
             <tr>
             {% endif %}
 
             <tr id="infection_instruction_field">
-                <th>Gesundheits-<br/>belehrung</th>
-                <td>{{ form.infection_instruction }}{{ form.infection_instruction.errors }}</td>
+                <td>{{ form.infection_instruction.label }}</td>
+                <td>{{ form.infection_instruction }}{{ form.infection_instruction.errors }}
+                <p>{{ form.infection_instruction.help_text }}</p></td>
             <tr>
 
             {% if event.ask_vegetarian %}
             <tr>
-                <th>Vegetarier</th>
-                <td><label>{{ form.vegetarian }} Vegetarisches Helferessen</label>{{ form.vegetarian.errors }}</td>
+                <td>{{ form.vegetarian.label }}</td>
+                <td><label>{{ form.vegetarian }} {% trans "Vegetarian food" %}</label>{{ form.vegetarian.errors }}
+                <p>{{ form.vegetarian.help_text }}</p></td>
             <tr>
             {% endif %}
 
             <tr>
-                <th>Kommentar</th>
+                <td>{{ form.comment.label }}</td>
                 <td>{{ form.comment }}{{ form.comment.errors }}</td>
             <tr>
         </table>
 
         {{ form.non_field_errors }}
 
-        <input type="submit" value="Verbindlich anmelden" />
+        <input type="submit" value="{% trans "Register" %}" />
 
         <script>
             function handle_infection_instruction()
