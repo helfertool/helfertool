@@ -1,0 +1,40 @@
+{% extends "registration/admin/base.html" %}
+{% load staticfiles %}
+
+{% block admincontent %}
+    <h2>Helferübersicht</h2>
+
+    <p>Export:
+        <a href="{% url 'excel' event.url_name %}">
+            <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
+        </a>
+    </p>
+
+    {% for job in event.job_set.all %}
+        <h3><a href="{% url 'jobhelpers' event.url_name job.pk %}">{{ job.name }}</a></h3>
+
+        <table class="shifts">
+            <tr>
+                {% for day, shifts in job.shifts_by_day.items %}
+                    <th>{{ day }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for day, shifts in job.shifts_by_day.items %}
+                    <td>
+                        {% for shift in shifts %}
+                            {{ shift.time_hours }}
+                            <span class="numbers">
+                                ({{ shift.num_helpers }}/{{ shift.number }})
+                            </span>
+
+                            <div class="progress-outside">
+                                <div class="progress-inside" style="width:{{ shift.helpers_percent }}%;"></div>
+                            </div>
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

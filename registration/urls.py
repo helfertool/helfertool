@@ -18,12 +18,15 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/(?P<helper_id>[a-z0-9\-]+)/$',
         views.registered, name='registered'),
 
-    # details
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/details/$', views.details, name='details'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/details/(?P<job_pk>[0-9]+)$', views.details, name='job'),
+    # admin
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/admin/$', views.admin, name='admin'),
+
+    # helpers
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<job_pk>[0-9]+)$', views.helpers, name='jobhelpers'),
 
     # excel
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/all$', views.excel, name='excel'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/(?P<job_pk>[0-9]+)$', views.excel, name='exceljob'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/(?P<job_pk>[0-9]+)$', views.excel, name='jobexcel'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

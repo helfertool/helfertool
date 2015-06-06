@@ -128,3 +128,9 @@ div.progress-inside
     height:10px;
     width:0;
 }
+
+img.icon
+{
+    width:20px;
+    vertical-align: middle;
+}

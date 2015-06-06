@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Verwaltung für {{ event.name }}</h1>
+
+    <ul>
+        <li><a href="{% url 'helpers' event.url_name %}">Angemeldete Helfer</a></li>
+    </ul>
+
+    {% block admincontent %}
+    {% endblock %}
+{% endblock %}

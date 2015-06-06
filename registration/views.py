@@ -59,7 +59,7 @@ def registered(request, event_url_name, helper_id):
     return render(request, 'registration/registered.html', context)
 
 @login_required
-def details(request, event_url_name, job_pk=None):
+def admin(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -67,14 +67,28 @@ def details(request, event_url_name, job_pk=None):
         context = {'event': event}
         return render(request, 'registration/admin/nopermission.html', context)
 
-    # get job, if given
-    job = None
+    context = {'event': event}
+    return render(request, 'registration/admin/index.html', context)
+
+
+@login_required
+def helpers(request, event_url_name, job_pk=None):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        context = {'event': event}
+        return render(request, 'registration/admin/nopermission.html', context)
+
+    # helpers of one job
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
+        context = {'event': event, 'job': job}
+        return render(request, 'registration/admin/helpers-job.html', context)
 
-    # show data
-    context = {'event': event, 'job': job}
-    return render(request, 'registration/admin/details.html', context)
+    # overview over jobs
+    context = {'event': event}
+    return render(request, 'registration/admin/helpers.html', context)
 
 @login_required
 def excel(request, event_url_name, job_pk=None):

@@ -9,7 +9,7 @@
                     <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                     {% if event.is_admin %}
-                        (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
+                        (<a href="{% url 'admin' event.url_name %}">Verwaltung</a>)
                     {% endif %}
                 </li>
             {% endfor %}
@@ -26,7 +26,7 @@
                     <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                     {% if event.is_admin %}
-                        (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
+                        (<a href="{% url 'admin' event.url_name %}">Verwaltung</a>)
                     {% endif %}
                 </li>
             {% endfor %}
