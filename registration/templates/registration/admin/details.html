@@ -66,28 +66,29 @@
         {% for job in event.job_set.all %}
             <h3>{{ job.name }}</h3>
 
-            {% for day, shifts in job.shifts_by_day.items %}
-                <h4>{{ day }}</h4>
+            <table class="shifts">
+                <tr>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <td>
+                            {% for shift in shifts %}
+                                {{ shift.time_hours }}
+                                <span class="numbers">
+                                    ({{ shift.num_helpers }}/{{ shift.number }})
+                                </span>
 
-                <table class="shifts">
-                    <tr>
-                        {% for shift in shifts %}
-                            <th>{{ shift.time_hours }}</th>
-                        {% endfor %}
-                    </tr>
-                    <tr>
-                        {% for shift in shifts %}
-                            <td>
                                 <div class="progress-outside">
                                     <div class="progress-inside" style="width:{{ shift.helpers_percent }}%;"></div>
                                 </div>
-
-                                {{ shift.num_helpers }}/{{ shift.number}}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                </table>
-            {% endfor %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
         {% endfor %}
     {% endif %}
 {% endblock %}

@@ -117,8 +117,9 @@ div.progress-outside
 {
     border:0;
     background-color:red;
-    width:150px;
+    width:200px;
     height:10px;
+    margin-bottom:10px;
 }
 
 div.progress-inside
