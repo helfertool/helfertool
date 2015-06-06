@@ -115,7 +115,7 @@ class Shift(models.Model):
         return self.num_helpers() >= self.number
 
     def helpers_percent(self):
-        return self.num_helpers() / self.number * 100
+        return int(round(self.num_helpers() / self.number * 100, 0))
 
 class Helper(models.Model):
     """ Helper in one or more shifts.

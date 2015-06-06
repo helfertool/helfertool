@@ -77,17 +77,12 @@
                     </tr>
                     <tr>
                         {% for shift in shifts %}
-                            {% if shift.helpers_percent < 70 %}
-                                <td style="background-color:red;">
-                            {% elif shift.helpers_percent < 100 %}
-                                <td style="background-color:yellow;">
-                            {% else %}
-                                <td style="background-color:green;">
-                            {% endif %}
+                            <td>
+                                <div class="progress-outside">
+                                    <div class="progress-inside" style="width:{{ shift.helpers_percent }}%;"></div>
+                                </div>
 
-                            {{ shift.helpers_percent }}
-                            {{ shift.num_helpers }}/{{ shift.number}}
-
+                                {{ shift.num_helpers }}/{{ shift.number}}
                             </td>
                         {% endfor %}
                     </tr>
