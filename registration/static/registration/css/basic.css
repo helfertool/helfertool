@@ -43,9 +43,9 @@ table.inputform
 }
 
 /* input fields */
-input[type=text], input[type=email], input[type=password]
+input[type=text], input[type=email], input[type=password], textarea
 {
-    width:28em;
+    width:370px;
     border:0;
     padding:0.5em;
     color:white;

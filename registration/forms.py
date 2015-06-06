@@ -88,4 +88,4 @@ class RegisterForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['admins', ]
+        exclude = ['admins', 'text', 'imprint', 'registered', ]
