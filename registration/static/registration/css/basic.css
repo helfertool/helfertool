@@ -33,6 +33,23 @@ input[type=text], input[type=email], input[type=password]
     background-color: rgb(124, 77, 129);
 }
 
+input[type=submit]
+{
+    padding:1em 2em 1em 2em;
+    margin-top:2em;
+
+    font-weight:bold;
+
+    border:0 solid black;
+    color:white;
+    background-color: rgb(124, 77, 129);
+}
+
+input[type=submit]:hover
+{
+    background-color: rgb(76, 32, 93);
+}
+
 select
 {
     border: 1px solid black;
@@ -71,35 +88,6 @@ table.shifts span.numbers
     color:grey;
 }
 
-/* submit button */
-input[type=submit]
-{
-    padding:1em 2em 1em 2em;
-    margin-top:2em;
-
-    font-weight:bold;
-
-    border:0 solid black;
-    color:white;
-    background-color: rgb(124, 77, 129);
-}
-
-input[type=submit]:hover
-{
-    background-color: rgb(76, 32, 93);
-}
-
-/* table with helpers */
-table.helpers
-{
-    border-collapse:collapse;
-}
-
-table.helpers th, table.helpers td
-{
-    border: 1px solid black;
-}
-
 /* normal links */
 a
 {
@@ -110,27 +98,4 @@ a
 a:hover
 {
     color:#0066cc;
-}
-
-/* admin interface */
-div.progress-outside
-{
-    border:0;
-    background-color:red;
-    width:200px;
-    height:10px;
-    margin-bottom:10px;
-}
-
-div.progress-inside
-{
-    background-color:green;
-    height:10px;
-    width:0;
-}
-
-img.icon
-{
-    width:20px;
-    vertical-align: middle;
 }

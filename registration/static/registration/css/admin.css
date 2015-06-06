@@ -1,0 +1,36 @@
+/* admin interface */
+
+/* table with helpers */
+table.helpers
+{
+    border-collapse:collapse;
+}
+
+table.helpers th, table.helpers td
+{
+    border: 1px solid black;
+}
+
+/* progress bar */
+div.progress-outside
+{
+    border:0;
+    background-color:red;
+    width:200px;
+    height:10px;
+    margin-bottom:10px;
+}
+
+div.progress-inside
+{
+    background-color:green;
+    height:10px;
+    width:0;
+}
+
+/* icons (like xls or pdf) */
+img.icon
+{
+    width:20px;
+    vertical-align: middle;
+}
