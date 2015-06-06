@@ -5,6 +5,25 @@ div#page
     padding-top:0;
 }
 
+/* language chooser */
+div#language
+{
+    float:right;
+    margin-left:1em;
+}
+
+div#language input[type=submit]
+{
+    padding:2px;
+}
+
+div#language select
+{
+    padding:1px;
+}
+
+
+/* login menu */
 div#login
 {
     float:right;
@@ -36,7 +55,7 @@ input[type=text], input[type=email], input[type=password]
 input[type=submit]
 {
     padding:1em 2em 1em 2em;
-    margin-top:2em;
+    /*margin-top:2em;*/
 
     font-weight:bold;
 

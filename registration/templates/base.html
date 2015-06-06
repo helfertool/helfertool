@@ -1,4 +1,6 @@
 {% load staticfiles %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="de">
     <head>
@@ -13,16 +15,36 @@
 
     <body>
         <div id="page">
+            <div id="language">
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+
+                    <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <select name="language">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                        </select>
+                    <input type="submit" value="Go" />
+                </form>
+            </div>
+
             <div id="login">
                 {% if user.is_authenticated %}
-                    <p>Hallo {{ user.username }}!
+                    Hallo {{ user.username }}!
                     <a href="{% url "index" %}">Veranstaltungen</a> | 
                     {% if user.is_superuser %}
                         <a href="{% url "admin:index" %}">Admin</a> | 
                     {% endif %}
-                    <a href="{% url "logout" %}">Logout</a></p>
+                    <a href="{% url "logout" %}">Logout</a>
                 {% else %}
-                    <p><a href="{% url "login" %}">Login</a></p>
+                    <a href="{% url "login" %}">Login</a>
                 {% endif %}
             </div>
 

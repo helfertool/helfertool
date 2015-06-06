@@ -25,19 +25,16 @@ class Event(models.Model):
     url_name = models.CharField(max_length=200, unique=True,
                                 validators=[RegexValidator('^[a-zA-Z0-9]+$')],
                                 verbose_name=_("Name for URL"),
-                                help_text=_("May contain the following chars: \
-                                            a-zA-Z0-9."))
+                                help_text=_("May contain the following chars: a-zA-Z0-9."))
 
     name = models.CharField(max_length=200, verbose_name=_("Event name"))
 
     text = models.TextField(blank=True,
                             verbose_name=_("Text before registration"),
-                            help_text=_("Displayed as first text of the \
-                                        registration form."))
+                            help_text=_("Displayed as first text of the registration form."))
 
     imprint = models.TextField(blank=True, verbose_name=_('Imprint'),
-                               help_text=_("Display at the bottom of the \
-                                           registration form."))
+                               help_text=_("Display at the bottom of the registration form."))
 
     registered = models.TextField(blank=True,
                                   verbose_name=_("Text after registration"),
@@ -56,11 +53,9 @@ class Event(models.Model):
                                     verbose_name=_("Ask for T-shirt size"))
 
     ask_vegetarian = models.BooleanField(default=True,
-                                         verbose_name=_("Ask, if helper is \
-                                                        vegetarian"))
+                                         verbose_name=_("Ask, if helper is vegetarian"))
     show_public_numbers = models.BooleanField(default=True,
-                                              verbose_name=_("Show number of \
-                                              helpers on registration page"))
+                                              verbose_name=_("Show number of helpers on registration page"))
 
     def __str__(self):
         return self.name

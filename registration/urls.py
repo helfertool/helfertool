@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.conf.urls.static import static
 
 from . import views
@@ -12,6 +12,9 @@ urlpatterns = [
         {'template_name': 'registration/login.html'}, name='login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),
+
+    # internationalization
+    url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # registration
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$', views.form, name='form'),

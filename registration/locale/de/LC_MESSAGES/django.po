@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-06 20:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: models.py:27
+msgid "Name for URL"
+msgstr "Name für URL"
+
+#: models.py:28
+msgid "May contain the following chars: a-zA-Z0-9."
+msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
+
+#: models.py:30
+msgid "Event name"
+msgstr "Veranstaltungsname"
+
+#: models.py:33
+msgid "Text before registration"
+msgstr "Text vor Anmeldung"
+
+#: models.py:34
+msgid "Displayed as first text of the registration form."
+msgstr "Wird als erster Text bei der Anmeldung angezeigt."
+
+#: models.py:36
+msgid "Imprint"
+msgstr "Impressum"
+
+#: models.py:37
+msgid "Display at the bottom of the registration form."
+msgstr "Wird bei der Anmeldung unten angezeigt."
+
+#: models.py:40
+msgid "Text after registration"
+msgstr "Text nach Anmeldung"
+
+#: models.py:41
+msgid "Displayed after registration."
+msgstr "Wird nach der Anmeldung angezeigt."
+
+#: models.py:44
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: models.py:45
+msgid "Used as sender of e-mails."
+msgstr "Wird als Absender von E-Mail genutzt."
+
+#: models.py:48
+msgid "Registration possible"
+msgstr "Anmeldung möglich"
+
+#: models.py:53
+msgid "Ask for T-shirt size"
+msgstr "Nach T-Shirt Größe fragen"
+
+#: models.py:56
+msgid "Ask, if helper is vegetarian"
+msgstr "Fragen, ob der Helfer Vegetarier ist"
+
+#: models.py:58
+msgid "Show number of helpers on registration page"
+msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
