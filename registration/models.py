@@ -210,7 +210,7 @@ class Helper(models.Model):
 
     vegetarian = models.BooleanField(default=False,
                                      verbose_name=_("Vegetarian"),
-                                     help_text=_("This helps us to estimate the food for our helpers"))
+                                     help_text=_("This helps us estimating the food for our helpers."))
 
     infection_instruction = models.CharField(max_length=20,
                                              choices=INSTRUCTION_CHOICES,

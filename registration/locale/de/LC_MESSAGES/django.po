@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the helfertool package.
 # Sven Hertle <hertle@fs.tum.de>, 2015
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 00:40+0200\n"
+"POT-Creation-Date: 2015-06-07 01:02+0200\n"
 "PO-Revision-Date: 2015-06-07 00:42+2\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -127,16 +126,14 @@ msgid "Vegetarian"
 msgstr "Vegetarier"
 
 #: models.py:213
-msgid "This helps us to estimate the food for our helpers"
-msgstr "Dies hilft uns, das Helferessen abzuschätzen"
+msgid "This helps us estimating the food for our helpers."
+msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
 #: models.py:218
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
 #: templates/base.html:7
-#, fuzzy
-#| msgid "Registration possible"
 msgid "Registration for helpers"
 msgstr "Helferanmeldung"
 
@@ -159,8 +156,8 @@ msgstr "Admin"
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:47 templates/registration/login.html:4
-#: templates/registration/login.html:12
+#: templates/base.html:47 templates/registration/login.html:5
+#: templates/registration/login.html:13
 msgid "Login"
 msgstr "Login"
 
@@ -191,7 +188,8 @@ msgstr "Verwalten"
 
 #: templates/registration/index.html:19
 msgid "At the moment there is no event you can register for."
-msgstr "Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
+msgstr ""
+"Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
 
 #: templates/registration/index.html:23
 msgid "Inactive"
