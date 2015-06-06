@@ -7,6 +7,7 @@ from django.template import Context
 from django.template.defaultfilters import date as date_filter
 from django.template.loader import get_template
 from django.utils.timezone import localtime
+from django.utils.translation import ugettext_lazy as _
 from collections import OrderedDict
 import uuid
 import smtplib
@@ -22,17 +23,44 @@ class Event(models.Model):
         active: is the registration opened?
     """
     url_name = models.CharField(max_length=200, unique=True,
-                                validators=[RegexValidator('^[a-zA-Z0-9]+$')])
-    name = models.CharField(max_length=200)
-    text = models.TextField(blank=True)
-    imprint = models.TextField(blank=True)
-    registered = models.TextField(blank=True)
-    email = models.EmailField(default='party@fs.tum.de')
-    active = models.BooleanField(default=False)
+                                validators=[RegexValidator('^[a-zA-Z0-9]+$')],
+                                verbose_name=_("Name for URL"),
+                                help_text=_("May contain the following chars: \
+                                            a-zA-Z0-9."))
+
+    name = models.CharField(max_length=200, verbose_name=_("Event name"))
+
+    text = models.TextField(blank=True,
+                            verbose_name=_("Text before registration"),
+                            help_text=_("Displayed as first text of the \
+                                        registration form."))
+
+    imprint = models.TextField(blank=True, verbose_name=_('Imprint'),
+                               help_text=_("Display at the bottom of the \
+                                           registration form."))
+
+    registered = models.TextField(blank=True,
+                                  verbose_name=_("Text after registration"),
+                                  help_text=_("Displayed after registration."))
+
+    email = models.EmailField(default='party@fs.tum.de',
+                              verbose_name=_("E-Mail"),
+                              help_text=_("Used as sender of e-mails."))
+
+    active = models.BooleanField(default=False,
+                                 verbose_name=_("Registration possible"))
+
     admins = models.ManyToManyField(User, blank=True)
-    ask_shirt = models.BooleanField(default=True)
-    ask_vegetarian = models.BooleanField(default=True)
-    show_public_numbers = models.BooleanField(default=True)
+
+    ask_shirt = models.BooleanField(default=True,
+                                    verbose_name=_("Ask for T-shirt size"))
+
+    ask_vegetarian = models.BooleanField(default=True,
+                                         verbose_name=_("Ask, if helper is \
+                                                        vegetarian"))
+    show_public_numbers = models.BooleanField(default=True,
+                                              verbose_name=_("Show number of \
+                                              helpers on registration page"))
 
     def __str__(self):
         return self.name

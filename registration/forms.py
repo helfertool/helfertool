@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Helper, Shift
+from .models import Helper, Shift, Event
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -84,3 +84,8 @@ class RegisterForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        exclude = ['admins', ]

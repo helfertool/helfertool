@@ -21,6 +21,9 @@ urlpatterns = [
     # admin
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/admin/$', views.admin, name='admin'),
 
+    # edit event
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/admin/edit/$', views.edit_event, name='edit_event'),
+
     # helpers
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<job_pk>[0-9]+)$', views.helpers, name='jobhelpers'),

@@ -6,9 +6,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from io import BytesIO
 
 from .models import Event, Job, Helper
-from .forms import RegisterForm
+from .forms import RegisterForm, EventForm
 from .utils import escape_filename
 from .export import xlsx
+
+def nopermission(request, event):
+    context = {'event': event}
+    return render(request, 'registration/admin/nopermission.html', context)
+
 
 def index(request):
     events = Event.objects.all()
@@ -35,8 +40,7 @@ def form(request, event_url_name):
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
         # logged in -> check permission
         elif not event.is_admin(request.user):
-            context = {'event': event}
-            return render(request, 'registration/admin/nopermission.html', context)
+            return nopermission(request, event)
 
     # handle form
     form = RegisterForm(request.POST or None, event=event)
@@ -64,11 +68,31 @@ def admin(request, event_url_name):
 
     # check permission
     if not event.is_admin(request.user):
-        context = {'event': event}
-        return render(request, 'registration/admin/nopermission.html', context)
+        return nopermission(request, event)
 
     context = {'event': event}
     return render(request, 'registration/admin/index.html', context)
+
+
+@login_required
+def edit_event(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request, event)
+
+    # handle form
+    form = EventForm(request.POST or None, instance=event)
+
+    if form.is_valid():
+        helper = form.save()
+        # redirect to this page, so reload does not send the form data again
+        return HttpResponseRedirect(reverse('edit_event', args=[event.url_name]))
+
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/edit-event.html', context)
 
 
 @login_required
@@ -77,8 +101,7 @@ def helpers(request, event_url_name, job_pk=None):
 
     # check permission
     if not event.is_admin(request.user):
-        context = {'event': event}
-        return render(request, 'registration/admin/nopermission.html', context)
+        return nopermission(request, event)
 
     # helpers of one job
     if job_pk:
@@ -96,8 +119,7 @@ def excel(request, event_url_name, job_pk=None):
 
     # check permission
     if not event.is_admin(request.user):
-        context = {'event': event}
-        return render(request, 'registration/admin/nopermission.html', context)
+        return nopermission(request, event)
 
     # list of jobs for export
     if job_pk:
