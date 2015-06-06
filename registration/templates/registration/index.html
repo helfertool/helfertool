@@ -2,21 +2,32 @@
 
 {% block content %}
     <h1>Veranstaltungen</h1>
-    {% if events %}
+    {% if active_events %}
         <ul>
-            {% for event in events %}
+            {% for event in active_events %}
                 <li>
+                    <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
-                {% if not event.active %}
-                    INAKTIV
-                {% endif %}
+                    {% if event.is_admin %}
+                        (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Zur Zeit gibt es keine Veranstaltungen mit aktiver Anmeldung.</p>
+    {% endif %}
 
-                <a href="{% url 'form' event.url_name %}">{{ event }}</a>
+    {% if administered_events %}
+        <h2>Inaktiv</h2>
+        <ul>
+            {% for event in administered_events %}
+                <li>
+                    <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
-                {% if event.is_admin %}
-                    (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
-                {% endif %}
-
+                    {% if event.is_admin %}
+                        (<a href="{% url 'details' event.url_name %}">Helfer anzeigen</a>)
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>

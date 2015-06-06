@@ -18,9 +18,11 @@ def index(request):
         e.is_admin = e.is_admin(request.user)
 
     # filter events, that are not active and where user is not admin
-    events = [e for e in events if e.active or e.is_admin]
+    active_events = [e for e in events if e.active]
+    administered_events = [e for e in events if not  e.active and e.is_admin]
 
-    context = {'events': events}
+    context = {'active_events': active_events,
+               'administered_events': administered_events}
     return render(request, 'registration/index.html', context)
 
 def form(request, event_url_name):
@@ -34,7 +36,7 @@ def form(request, event_url_name):
         # logged in -> check permission
         elif not event.is_admin(request.user):
             context = {'event': event}
-            return render(request, 'registration/nopermission.html', context)
+            return render(request, 'registration/admin/nopermission.html', context)
 
     # handle form
     form = RegisterForm(request.POST or None, event=event)
@@ -63,7 +65,7 @@ def details(request, event_url_name, job_pk=None):
     # check permission
     if not event.is_admin(request.user):
         context = {'event': event}
-        return render(request, 'registration/nopermission.html', context)
+        return render(request, 'registration/admin/nopermission.html', context)
 
     # get job, if given
     job = None
@@ -72,7 +74,7 @@ def details(request, event_url_name, job_pk=None):
 
     # show data
     context = {'event': event, 'job': job}
-    return render(request, 'registration/details.html', context)
+    return render(request, 'registration/admin/details.html', context)
 
 @login_required
 def excel(request, event_url_name, job_pk=None):
@@ -81,7 +83,7 @@ def excel(request, event_url_name, job_pk=None):
     # check permission
     if not event.is_admin(request.user):
         context = {'event': event}
-        return render(request, 'registration/nopermission.html', context)
+        return render(request, 'registration/admin/nopermission.html', context)
 
     # list of jobs for export
     if job_pk:
