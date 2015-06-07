@@ -1,9 +1,7 @@
-Hallo {{ user.prename }},
+{% load i18n %}{% blocktrans with prename=user.prename %}Hello {{ prename }},
 
-du bist in folgenden Schichten eingeteilt:
-
+you registered for the following shifts:{% endblocktrans %}
 {% for shift in user.shifts.all %}
  * {{ shift.job.name }}: {{ shift.time }} Uhr
 {% endfor %}
-
-Vielen Dank für deine Unterstützung
+{% blocktrans %}Thanks for your support!{% endblocktrans %}

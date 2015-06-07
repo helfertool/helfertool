@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 11:12+0200\n"
-"PO-Revision-Date: 2015-06-07 00:42+2\n"
+"POT-Creation-Date: 2015-06-07 13:48+0200\n"
+"PO-Revision-Date: 2015-06-07 13:50+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: export.py:36 models.py:197
 msgid "Prename"
@@ -141,24 +142,24 @@ msgstr "Belehrung für Umgang mit Lebensmitteln"
 msgid "Registration for helpers"
 msgstr "Helferanmeldung"
 
-#: templates/base.html:34
-msgid "Go"
-msgstr "Go"
+#: templates/base.html:35
+msgid "Switch"
+msgstr ""
 
-#: templates/base.html:41 templates/registration/index.html:5
+#: templates/base.html:43 templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: templates/base.html:43
+#: templates/base.html:45
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/base.html:45
+#: templates/base.html:47
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:47 templates/registration/login.html:5
+#: templates/base.html:49 templates/registration/login.html:5
 #: templates/registration/login.html:13
 msgid "Login"
 msgstr "Login"
@@ -190,9 +191,28 @@ msgstr "Verwalten"
 
 #: templates/registration/index.html:19
 msgid "At the moment there is no event you can register for."
-msgstr ""
-"Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
+msgstr "Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
 
 #: templates/registration/index.html:23
 msgid "Inactive"
 msgstr "Inaktiv"
+
+#: templates/registration/mail.txt:1
+#, python-format
+msgid ""
+"Hello %(prename)s,\n"
+"\n"
+"you registered for the following shifts:"
+msgstr ""
+"Hallo %(prename)s,\n"
+"\n"
+"du hast dich für folgende Schichten angemeldet:"
+
+#: templates/registration/mail.txt:7
+msgid "Thanks for your support!"
+msgstr "Danke für deine Unterstützung!"
+
+#: templates/registration/mail_subject.txt:1
+#, python-format
+msgid "Registration for %(eventname)s"
+msgstr "Helferanmeldung für %(eventname)s"
