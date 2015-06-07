@@ -45,7 +45,7 @@
         {% endif %}
         <tr>
             <td>{% trans "Comment" %}: </td>
-            <td>{{ data.comment }}</td>
+            <td>{{ data.comment | default:"-" }}</td>
         </tr>
     </table>
 
