@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 01:02+0200\n"
+"POT-Creation-Date: 2015-06-07 11:12+0200\n"
 "PO-Revision-Date: 2015-06-07 00:42+2\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -16,6 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: export.py:36 models.py:197
+msgid "Prename"
+msgstr "Vorname"
+
+#: export.py:37 models.py:199
+msgid "Surname"
+msgstr "Nachname"
+
+#: export.py:38 models.py:44 models.py:201
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: export.py:41 models.py:203
+msgid "Mobile phone"
+msgstr "Handynummer"
+
+#: export.py:45 models.py:209
+msgid "T-shirt"
+msgstr "T-Shirt"
+
+#: export.py:49 models.py:212
+msgid "Vegetarian"
+msgstr "Vegetarier"
+
+#: export.py:53
+msgid "Food handling"
+msgstr "Gesundheitsbelehrung"
+
+#: export.py:56 models.py:206
+msgid "Comment"
+msgstr "Kommentar"
 
 #: models.py:27
 msgid "Name for URL"
@@ -52,10 +84,6 @@ msgstr "Text nach Anmeldung"
 #: models.py:41
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
-
-#: models.py:44 models.py:201
-msgid "E-Mail"
-msgstr "E-Mail"
 
 #: models.py:45
 msgid "Used as sender of e-mails."
@@ -101,30 +129,6 @@ msgstr "Gültig"
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: models.py:197
-msgid "Prename"
-msgstr "Vorname"
-
-#: models.py:199
-msgid "Surname"
-msgstr "Nachname"
-
-#: models.py:203
-msgid "Mobile phone"
-msgstr "Handynummer"
-
-#: models.py:206
-msgid "Comment"
-msgstr "Kommentar"
-
-#: models.py:209
-msgid "T-shirt"
-msgstr "T-Shirt"
-
-#: models.py:212
-msgid "Vegetarian"
-msgstr "Vegetarier"
-
 #: models.py:213
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
@@ -139,13 +143,11 @@ msgstr "Helferanmeldung"
 
 #: templates/base.html:34
 msgid "Go"
-msgstr "Los"
+msgstr "Go"
 
 #: templates/base.html:41 templates/registration/index.html:5
-#, fuzzy
-#| msgid "Event name"
 msgid "Events"
-msgstr "Veranstaltungsname"
+msgstr "Veranstaltungen"
 
 #: templates/base.html:43
 msgctxt "Admin interface"

@@ -1,4 +1,5 @@
 from django.template import defaultfilters as filters
+from django.utils.translation import ugettext as _
 import re
 import xlsxwriter
 
@@ -32,27 +33,27 @@ def xlsx(buffer, event, jobs):
         column = Iterator()
 
         # header
-        worksheet.write(0, column.next(), "Vorname", bold)
-        worksheet.write(0, column.next(), "Nachname", bold)
-        worksheet.write(0, column.next(), "E-Mail", bold)
+        worksheet.write(0, column.next(), _("Prename"), bold)
+        worksheet.write(0, column.next(), _("Surname"), bold)
+        worksheet.write(0, column.next(), _("E-Mail"), bold)
         worksheet.set_column(0, column.get(), 30)
 
-        worksheet.write(0, column.next(), "Handy", bold)
+        worksheet.write(0, column.next(), _("Mobile phone"), bold)
         worksheet.set_column(column.get(), column.get(), 20)
 
         if event.ask_shirt:
-            worksheet.write(0, column.next(), "T-Shirt", bold)
+            worksheet.write(0, column.next(), _("T-shirt"), bold)
             worksheet.set_column(column.get(), column.get(), 10)
 
         if event.ask_vegetarian:
-            worksheet.write(0, column.next(), "Vegetarier", bold)
+            worksheet.write(0, column.next(), _("Vegetarian"), bold)
             worksheet.set_column(column.get(), column.get(), 13)
 
         if job.infection_instruction:
-            worksheet.write(0, column.next(), "Gesundheitsbelehrung", bold)
+            worksheet.write(0, column.next(), _("Food handling"), bold)
             worksheet.set_column(column.get(), column.get(), 20)
 
-        worksheet.write(0, column.next(), "Kommentar", bold)
+        worksheet.write(0, column.next(), _("Comment"), bold)
         worksheet.set_column(column.get(), column.get(), 50)
 
         # last column, needed for merge later

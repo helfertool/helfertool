@@ -15,6 +15,7 @@
 
     <body>
         <div id="page">
+            {# language chooser #}
             <div id="language">
                 <form action="{% url 'set_language' %}" method="post">
                     {% csrf_token %}
@@ -31,10 +32,11 @@
                             </option>
                         {% endfor %}
                         </select>
-                    <input type="submit" value="{% trans "Go" %}" />
+                    <input type="submit" value="{% trans "Switch" %}" />
                 </form>
             </div>
 
+            {# login menu #}
             <div id="login">
                 {% if user.is_authenticated %}
                     Hallo {{ user.username }}!
