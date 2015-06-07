@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 14:40+0200\n"
-"PO-Revision-Date: 2015-06-07 14:40+0100\n"
+"POT-Creation-Date: 2015-06-07 15:24+0200\n"
+"PO-Revision-Date: 2015-06-07 15:24+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -71,7 +71,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: models.py:36
+#: models.py:36 templates/base.html:58
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -139,36 +139,40 @@ msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: templates/base.html:7
+#: templates/base.html:8
 msgid "Registration for helpers"
 msgstr "Helferanmeldung"
 
-#: templates/base.html:35
+#: templates/base.html:36
 msgid "Switch"
 msgstr "Switch"
 
-#: templates/base.html:42
+#: templates/base.html:43
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
-#: templates/base.html:43 templates/registration/index.html:5
+#: templates/base.html:44 templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: templates/base.html:45
+#: templates/base.html:46
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/base.html:47
+#: templates/base.html:48
 msgid "Logout"
 msgstr "Logout"
 
-#: templates/base.html:49 templates/registration/login.html:5
+#: templates/base.html:50 templates/registration/login.html:5
 #: templates/registration/login.html:13
 msgid "Login"
 msgstr "Login"
+
+#: templates/base.html:57
+msgid "Privacy"
+msgstr "Datenschutz"
 
 #: templates/registration/form.html:6 templates/registration/registered.html:6
 #, python-format

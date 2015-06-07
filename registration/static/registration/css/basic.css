@@ -29,6 +29,12 @@ div#login
     float:right;
 }
 
+/* footer */
+div#footer
+{
+    float:right;
+}
+
 /* tables */
 th, td
 {

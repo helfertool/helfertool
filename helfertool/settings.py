@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 
 ADMINS = (('Admin Name', 'admin@localhost'), )
 
+PRIVACY_URL = 'https://fs.tum.de/datenschutz/'
+IMPRINT_URL = 'https://fs.tum.de/impressum/'
+
 # for e-mail debugging
 #EMAIL_HOST = 'localhost'
 #EMAIL_PORT = 1025

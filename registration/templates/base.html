@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load setting %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -51,6 +52,11 @@
             </div>
 
             {% block content %}{% endblock %}
+
+            <div id="footer">
+                <a href="{% setting "PRIVACY_URL" %}">{% trans "Privacy" %}</a> | 
+                <a href="{% setting "IMPRINT_URL" %}">{% trans "Imprint" %}</a>
+            </div>
         </div>
     </body>
 </html>
