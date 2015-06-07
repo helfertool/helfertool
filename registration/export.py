@@ -1,4 +1,5 @@
 from django.template import defaultfilters as filters
+import re
 import xlsxwriter
 
 class Iterator():
@@ -15,13 +16,17 @@ class Iterator():
     def reset(self):
         self.__v = -1
 
+def cleanName(name):
+    # must not contain [ ] : * ? / \
+    return re.sub(r'[\[\]:*?\\\/]', '', name)
+
 def xlsx(buffer, event, jobs):
     # create xlsx
     workbook = xlsxwriter.Workbook(buffer)
 
     # export jobs
     for job in jobs:
-        worksheet = workbook.add_worksheet(job.name)
+        worksheet = workbook.add_worksheet(cleanName(job.name))
         bold = workbook.add_format({'bold': True})
 
         column = Iterator()
