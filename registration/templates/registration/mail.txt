@@ -2,6 +2,6 @@
 
 you registered for the following shifts:{% endblocktrans %}
 {% for shift in user.shifts.all %}
- * {{ shift.job.name }}: {{ shift.time }} Uhr
+ * {{ shift.job.name }}: {{ shift.time }}
 {% endfor %}
 {% blocktrans %}Thanks for your support!{% endblocktrans %}

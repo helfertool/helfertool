@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 13:48+0200\n"
-"PO-Revision-Date: 2015-06-07 13:50+0100\n"
+"POT-Creation-Date: 2015-06-07 14:24+0200\n"
+"PO-Revision-Date: 2015-06-07 14:24+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -27,18 +27,19 @@ msgid "Surname"
 msgstr "Nachname"
 
 #: export.py:38 models.py:44 models.py:201
+#: templates/registration/registered.html:21
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: export.py:41 models.py:203
+#: export.py:41 models.py:203 templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: export.py:45 models.py:209
+#: export.py:45 models.py:209 templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: export.py:49 models.py:212
+#: export.py:49 models.py:212 templates/registration/registered.html:42
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
@@ -46,7 +47,7 @@ msgstr "Vegetarier"
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: export.py:56 models.py:206
+#: export.py:56 models.py:206 templates/registration/registered.html:47
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -134,7 +135,7 @@ msgstr "Auffrischung"
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: models.py:218
+#: models.py:218 templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
@@ -144,7 +145,7 @@ msgstr "Helferanmeldung"
 
 #: templates/base.html:35
 msgid "Switch"
-msgstr ""
+msgstr "Switch"
 
 #: templates/base.html:43 templates/registration/index.html:5
 msgid "Events"
@@ -164,7 +165,7 @@ msgstr "Logout"
 msgid "Login"
 msgstr "Login"
 
-#: templates/registration/form.html:6
+#: templates/registration/form.html:6 templates/registration/registered.html:6
 #, python-format
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
@@ -216,3 +217,15 @@ msgstr "Danke für deine Unterstützung!"
 #, python-format
 msgid "Registration for %(eventname)s"
 msgstr "Helferanmeldung für %(eventname)s"
+
+#: templates/registration/registered.html:13
+msgid "You registered with the following information:"
+msgstr "Du hast folgende Daten angegeben:"
+
+#: templates/registration/registered.html:17
+msgid "Name"
+msgstr "Name"
+
+#: templates/registration/registered.html:52
+msgid "Shifts"
+msgstr "Schichten"

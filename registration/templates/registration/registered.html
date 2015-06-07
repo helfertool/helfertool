@@ -1,57 +1,58 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% load lookup_shift %}
 
-{% block title %}Helferanmeldung {{ event }}{% endblock %}
+{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
 
 {% block content %}
     <h1>{{ event }}</h1>
 
     {{ event.registered | safe }}
 
-    <p>Du hast folgende Daten angegeben:</p>
+    <p>{% trans "You registered with the following information:" %}</p>
 
     <table>
         <tr>
-            <td>Name: </td>
+            <td>{% trans "Name" %}: </td>
             <td>{{ data.prename }} {{ data.surname }}</td>
         </tr>
         <tr>
-            <td>E-Mail: </td>
+            <td>{% trans "E-Mail" %}: </td>
             <td>{{ data.email }}</td>
         </tr>
         <tr>
-            <td>Handy: </td>
+            <td>{% trans "Mobile phone" %}: </td>
             <td>{{ data.phone }}</td>
         </tr>
         {% if event.ask_shirt %}
         <tr>
-            <td>T-Shirt: </td>
+            <td>{% trans "T-shirt" %}: </td>
             <td>{{ data.get_shirt_display }}</td>
         </tr>
         {% endif %}
         {% if data.infection_instruction %}
         <tr>
-            <td>Gesundheitsbelehrung: </td>
+            <td>{% trans "Instruction for the handling of food" %}: </td>
             <td>{{ data.get_infection_instruction_display }}</td>
         </tr>
         {% endif %}
         {% if event.ask_vegetarian %}
         <tr>
-            <td>Vegetarier: </td>
+            <td>{% trans "Vegetarian" %}: </td>
             <td>{{ data.vegetarian | yesno }}</td>
         </tr>
         {% endif %}
         <tr>
-            <td>Kommentar: </td>
+            <td>{% trans "Comment" %}: </td>
             <td>{{ data.comment }}</td>
         </tr>
     </table>
 
-    <h2>Schichten</h2>
+    <h2>{% trans "Shifts" %}</h2>
     <ul>
     {% for shift in data.shifts.all %}
-        <li>{{ shift.job.name }}: {{ shift.time }} Uhr</li>
+        <li>{{ shift.job.name }}: {{ shift.time }}</li>
     {% endfor %}
     </ul>
 
