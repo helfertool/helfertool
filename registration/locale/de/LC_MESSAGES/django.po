@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 14:24+0200\n"
-"PO-Revision-Date: 2015-06-07 14:24+0100\n"
+"POT-Creation-Date: 2015-06-07 14:40+0200\n"
+"PO-Revision-Date: 2015-06-07 14:40+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -146,6 +146,11 @@ msgstr "Helferanmeldung"
 #: templates/base.html:35
 msgid "Switch"
 msgstr "Switch"
+
+#: templates/base.html:42
+#, python-format
+msgid "Hello %(username)s!"
+msgstr "Hallo %(username)s!"
 
 #: templates/base.html:43 templates/registration/index.html:5
 msgid "Events"

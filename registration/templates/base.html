@@ -39,7 +39,7 @@
             {# login menu #}
             <div id="login">
                 {% if user.is_authenticated %}
-                    Hallo {{ user.username }}!
+                    {% blocktrans with username=user.username %}Hello {{ username }}!{% endblocktrans %}
                     <a href="{% url "index" %}">{% trans "Events" %}</a> | 
                     {% if user.is_superuser %}
                         <a href="{% url "admin:index" %}">{% trans "Admin" context "Admin interface" %}</a> | 
