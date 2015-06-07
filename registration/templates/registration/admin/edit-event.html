@@ -1,7 +1,8 @@
 {% extends "registration/admin/base.html" %}
+{% load i18n %}
 
 {% block admincontent %}
-    <h2>Veranstaltung bearbeiten</h2>
+    <h2>{% trans "Edit event" %}</h2>
 
     <form action="{% url 'edit_event' event.url_name %}" method="post">
         {% csrf_token %}
@@ -10,6 +11,7 @@
             {{ form.as_table }}
         </table>
 
-        <input type="submit" value="Speichern" />
+        <input type="submit" value="{% trans "Save" %}" />
+        <input type="reset" value="{% trans "Reset" %}" />
     </form>
 {% endblock %}

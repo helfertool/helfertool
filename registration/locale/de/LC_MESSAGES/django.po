@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 15:24+0200\n"
-"PO-Revision-Date: 2015-06-07 15:24+0100\n"
+"POT-Creation-Date: 2015-06-07 16:28+0200\n"
+"PO-Revision-Date: 2015-06-07 16:29+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,36 +18,41 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.7.6\n"
 
-#: export.py:36 models.py:197
+#: export.py:36 models.py:198 templates/registration/admin/helpers-job.html:25
 msgid "Prename"
 msgstr "Vorname"
 
-#: export.py:37 models.py:199
+#: export.py:37 models.py:200 templates/registration/admin/helpers-job.html:26
 msgid "Surname"
 msgstr "Nachname"
 
-#: export.py:38 models.py:44 models.py:201
+#: export.py:38 models.py:44 models.py:202
+#: templates/registration/admin/helpers-job.html:27
 #: templates/registration/registered.html:21
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: export.py:41 models.py:203 templates/registration/registered.html:25
+#: export.py:41 models.py:204 templates/registration/admin/helpers-job.html:28
+#: templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: export.py:45 models.py:209 templates/registration/registered.html:30
+#: export.py:45 models.py:210 templates/registration/admin/helpers-job.html:30
+#: templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: export.py:49 models.py:212 templates/registration/registered.html:42
+#: export.py:49 models.py:213 templates/registration/admin/helpers-job.html:33
+#: templates/registration/registered.html:42
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: export.py:53
+#: export.py:53 templates/registration/admin/helpers-job.html:36
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: export.py:56 models.py:206 templates/registration/registered.html:47
+#: export.py:56 models.py:207 templates/registration/admin/helpers-job.html:38
+#: templates/registration/registered.html:47
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -107,35 +112,35 @@ msgstr "Fragen, ob der Helfer Vegetarier ist"
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: models.py:182
+#: models.py:183
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: models.py:183
+#: models.py:184
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: models.py:184
+#: models.py:185
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: models.py:188
+#: models.py:189
 msgid "No"
 msgstr "Nein"
 
-#: models.py:189
+#: models.py:190
 msgid "Valid"
 msgstr "Gültig"
 
-#: models.py:190
+#: models.py:191
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: models.py:213
+#: models.py:214
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: models.py:218 templates/registration/registered.html:36
+#: models.py:219 templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
@@ -173,6 +178,60 @@ msgstr "Login"
 #: templates/base.html:57
 msgid "Privacy"
 msgstr "Datenschutz"
+
+#: templates/registration/admin/base.html:4
+#: templates/registration/admin/base.html:9
+#, python-format
+msgid "Manage %(eventname)s"
+msgstr "Verwaltung %(eventname)s"
+
+#: templates/registration/admin/base.html:12
+msgid "Go to registration"
+msgstr "Zur Anmeldung"
+
+#: templates/registration/admin/base.html:13
+#: templates/registration/admin/edit-event.html:5
+msgid "Edit event"
+msgstr "Veranstaltung bearbeiten"
+
+#: templates/registration/admin/base.html:14
+msgid "Registered helpers"
+msgstr "Angemeldete Helfer"
+
+#: templates/registration/admin/edit-event.html:14
+msgid "Save"
+msgstr "Speichern"
+
+#: templates/registration/admin/edit-event.html:15
+msgid "Reset"
+msgstr "Reset"
+
+#: templates/registration/admin/helpers-job.html:8
+#, python-format
+msgid "Helpers: %(jobname)s"
+msgstr "Helfer: %(jobname)s"
+
+#: templates/registration/admin/helpers-job.html:10
+#: templates/registration/admin/helpers.html:10
+msgid "Export"
+msgstr "Export"
+
+#: templates/registration/admin/helpers-job.html:39
+msgid "Registration time"
+msgstr "Anmeldezeit"
+
+#: templates/registration/admin/helpers.html:5
+#, python-format
+msgid "Helpers for %(eventname)s"
+msgstr "Helfer für %(eventname)s"
+
+#: templates/registration/admin/helpers.html:8
+msgid "Overview over helpers"
+msgstr "Helferübersicht"
+
+#: templates/registration/admin/nopermission.html:7
+msgid "You have no permission to view this page!"
+msgstr "Du hast keine Berechtigung, um diese Seite anzusehen!"
 
 #: templates/registration/form.html:6 templates/registration/registered.html:6
 #, python-format
@@ -238,3 +297,8 @@ msgstr "Name"
 #: templates/registration/registered.html:52
 msgid "Shifts"
 msgstr "Schichten"
+
+#, fuzzy
+#~| msgid "Surname"
+#~ msgid "Vorname"
+#~ msgstr "Nachname"

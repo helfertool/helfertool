@@ -58,7 +58,7 @@ input[type=text], input[type=email], input[type=password], textarea
     background-color: rgb(124, 77, 129);
 }
 
-input[type=submit]
+input[type=submit], input[type=reset]
 {
     padding:1em 2em 1em 2em;
     /*margin-top:2em;*/
@@ -70,7 +70,7 @@ input[type=submit]
     background-color: rgb(124, 77, 129);
 }
 
-input[type=submit]:hover
+input[type=submit]:hover, input[type=reset]:hover
 {
     background-color: rgb(76, 32, 93);
 }
