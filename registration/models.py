@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
 from django.template import Context
-from django.template.defaultfilters import date as date_filter
+from django.template.defaultfilters import date as date_f
 from django.template.loader import get_template
 from django.utils.timezone import localtime
 from django.utils.translation import ugettext_lazy as _
@@ -121,15 +121,16 @@ class Shift(models.Model):
     number = models.IntegerField(default=0)
 
     def __str__(self):
-        return "%s %s (%s)" % (self.job.name, date_filter(self.begin, 'D, d.m H:i'), self.job.event)
+        return "%s %s (%s)" % (self.job.name, date_f(localtime(self.begin), 'DATETIME_FORMAT'), self.job.event)
 
     def time(self):
-        return "%s - %s" % (date_filter(localtime(self.begin), 'D, d.m, H:i'),
-                            date_filter(localtime(self.end), 'H:i'))
+        return "%s, %s - %s" % (date_f(localtime(self.begin), 'DATE_FORMAT'),
+                                date_f(localtime(self.begin), 'TIME_FORMAT'),
+                                date_f(localtime(self.end), 'TIME_FORMAT'))
 
     def time_hours(self):
-        return "%s - %s" % (date_filter(localtime(self.begin), 'H:i'),
-                            date_filter(localtime(self.end), 'H:i'))
+        return "%s - %s" % (date_f(localtime(self.begin), 'TIME_FORMAT'),
+                            date_f(localtime(self.end), 'TIME_FORMAT'))
 
     def num_helpers(self):
         return self.helper_set.count()
