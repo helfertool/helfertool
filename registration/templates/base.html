@@ -43,7 +43,7 @@
                     {% blocktrans with username=user.username %}Hello {{ username }}!{% endblocktrans %}
                     <a href="{% url "index" %}">{% trans "Events" %}</a> | 
                     {% if user.is_superuser %}
-                        <a href="{% url "admin:index" %}">{% trans "Admin" context "Admin interface" %}</a> | 
+                        <a href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a> |
                     {% endif %}
                     <a href="{% url "logout" %}">{% trans "Logout" %}</a>
                 {% else %}

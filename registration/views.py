@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+
 from io import BytesIO
 
 from .models import Event, Job, Helper
@@ -10,9 +12,9 @@ from .forms import RegisterForm, EventForm
 from .utils import escape_filename
 from .export import xlsx
 
-def nopermission(request, event):
+def nopermission(request, event=None):
     context = {'event': event}
-    return render(request, 'registration/admin/nopermission.html', context)
+    return render(request, 'registration/nopermission.html', context)
 
 
 def index(request):
@@ -63,7 +65,16 @@ def registered(request, event_url_name, helper_id):
     return render(request, 'registration/registered.html', context)
 
 @login_required
-def admin(request, event_url_name):
+def admin(request):
+    # check permission
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    context = {}
+    return render(request, 'registration/admin/index.html', context)
+
+@login_required
+def manage_event(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -71,7 +82,7 @@ def admin(request, event_url_name):
         return nopermission(request, event)
 
     context = {'event': event}
-    return render(request, 'registration/admin/index.html', context)
+    return render(request, 'registration/event/index.html', context)
 
 
 @login_required
@@ -92,7 +103,7 @@ def edit_event(request, event_url_name):
 
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/admin/edit-event.html', context)
+    return render(request, 'registration/event/edit.html', context)
 
 
 @login_required
@@ -107,11 +118,11 @@ def helpers(request, event_url_name, job_pk=None):
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
         context = {'event': event, 'job': job}
-        return render(request, 'registration/admin/helpers-job.html', context)
+        return render(request, 'registration/event/helpers-job.html', context)
 
     # overview over jobs
     context = {'event': event}
-    return render(request, 'registration/admin/helpers.html', context)
+    return render(request, 'registration/event/helpers.html', context)
 
 @login_required
 def excel(request, event_url_name, job_pk=None):

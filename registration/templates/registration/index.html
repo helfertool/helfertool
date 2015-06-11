@@ -10,7 +10,7 @@
                     <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                     {% if event.is_admin %}
-                        (<a href="{% url 'admin' event.url_name %}">{% trans "Manage" %}</a>)
+                        (<a href="{% url 'manage_event' event.url_name %}">{% trans "Manage" %}</a>)
                     {% endif %}
                 </li>
             {% endfor %}
@@ -27,7 +27,7 @@
                     <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                     {% if event.is_admin %}
-                        (<a href="{% url 'admin' event.url_name %}">{% trans "Manage" %}</a>)
+                        (<a href="{% url 'manage_event' event.url_name %}">{% trans "Manage" %}</a>)
                     {% endif %}
                 </li>
             {% endfor %}

@@ -13,6 +13,9 @@ urlpatterns = [
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),
 
+    # admin interface
+    url(r'^admin/$', views.admin, name='admin'),
+
     # internationalization
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
@@ -21,11 +24,9 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/(?P<helper_id>[a-z0-9\-]+)/$',
         views.registered, name='registered'),
 
-    # admin
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/admin/$', views.admin, name='admin'),
-
-    # edit event
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/admin/edit/$', views.edit_event, name='edit_event'),
+    # manage event
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.manage_event, name='manage_event'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$', views.edit_event, name='edit_event'),
 
     # helpers
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),
