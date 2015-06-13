@@ -109,11 +109,18 @@ def edit_event(request, event_url_name=None):
 
     if form.is_valid():
         helper = form.save()
+
         # redirect to this page, so reload does not send the form data again
         # if the event was created, this redirects to the event settings
+        #if event_url_name:  # edit of existing event
+        #    new_url_name = event.url_name
+        #else:  # new event created
+        #    new_url_name = form['url_name'].value()
         return HttpResponseRedirect(reverse('edit_event', args=[form['url_name'].value()]))
 
-    context = {'event': event,
+    saved_event = get_object_or_404(Event, url_name=event_url_name)
+
+    context = {'event': saved_event,
                'form': form}
     return render(request, 'registration/admin/event.html', context)
 
