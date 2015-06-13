@@ -118,8 +118,12 @@ def edit_event(request, event_url_name=None):
         #    new_url_name = form['url_name'].value()
         return HttpResponseRedirect(reverse('edit_event', args=[form['url_name'].value()]))
 
-    saved_event = get_object_or_404(Event, url_name=event_url_name)
+    # get event without possible invalid modifications from form
+    saved_event = None
+    if event_url_name:
+        saved_event = get_object_or_404(Event, url_name=event_url_name)
 
+    # render page
     context = {'event': saved_event,
                'form': form}
     return render(request, 'registration/admin/event.html', context)
