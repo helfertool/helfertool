@@ -1,13 +1,34 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{% trans "Administration" %}{% endblock %}
+{% block title %}
+    {% if event %}
+        {% blocktrans with eventname=event.name trimmed %}
+        Manage {{ eventname }}
+        {% endblocktrans %}
+    {% else %}
+        {% trans "Admin" %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Administration" %}</h1>
+    {% if event %}
+        <h1>{% blocktrans with eventname=event.name %}Manage {{ eventname }}{% endblocktrans %}</h1>
+    {% else %}
+        <h1>Admin</h1>
+    {% endif %}
+
+    {% if event %}
+        <ul>
+            <li><a href="{% url 'form' event.url_name %}">{% trans "Go to registration" %}</a></li>
+            <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
+            <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
+        </ul>
+    {% endif %}
 
     <ul>
-        <li><a href="{% url "admin:index" %}">{% trans "Django Admin" %}</a></li>
+        <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
+        <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
     </ul>
 
     {% block admincontent %}

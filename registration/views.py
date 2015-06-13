@@ -14,7 +14,18 @@ from .export import xlsx
 
 def nopermission(request, event=None):
     context = {'event': event}
-    return render(request, 'registration/nopermission.html', context)
+    return render(request, 'registration/admin/nopermission.html', context)
+
+
+def superuser_or_admin(user, event_url_name=None):
+    if user.is_superuser:
+        return True
+
+    event = Event.get(url_name=event_url_name)
+    if not event.is_admin(request.user):
+        return True
+
+    return False
 
 
 def index(request):
@@ -65,33 +76,31 @@ def registered(request, event_url_name, helper_id):
     return render(request, 'registration/registered.html', context)
 
 @login_required
-def admin(request):
+def admin(request, event_url_name=None):
     # check permission
-    if not request.user.is_superuser:
-        return nopermission(request)
+    if not superuser_or_admin(request.user, event_url_name):
+        return nopermission(request, event)
 
-    context = {}
+    # get event
+    event = None
+    if event_url_name:
+        event = get_object_or_404(Event, url_name=event_url_name)
+
+    # response
+    context = {'event': event}
     return render(request, 'registration/admin/index.html', context)
 
-@login_required
-def manage_event(request, event_url_name):
-    event = get_object_or_404(Event, url_name=event_url_name)
-
-    # check permission
-    if not event.is_admin(request.user):
-        return nopermission(request, event)
-
-    context = {'event': event}
-    return render(request, 'registration/event/index.html', context)
-
 
 @login_required
-def edit_event(request, event_url_name):
-    event = get_object_or_404(Event, url_name=event_url_name)
-
+def edit_event(request, event_url_name=None):
     # check permission
-    if not event.is_admin(request.user):
+    if not superuser_or_admin(request.user, event_url_name):
         return nopermission(request, event)
+
+    # get event
+    event = None
+    if event_url_name:
+        event = get_object_or_404(Event, url_name=event_url_name)
 
     # handle form
     form = EventForm(request.POST or None, instance=event)
@@ -99,11 +108,12 @@ def edit_event(request, event_url_name):
     if form.is_valid():
         helper = form.save()
         # redirect to this page, so reload does not send the form data again
-        return HttpResponseRedirect(reverse('edit_event', args=[event.url_name]))
+        # if the event was created, this redirects to the event settings
+        return HttpResponseRedirect(reverse('edit_event', args=[form['url_name'].value()]))
 
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/event/edit.html', context)
+    return render(request, 'registration/admin/event.html', context)
 
 
 @login_required
@@ -118,11 +128,11 @@ def helpers(request, event_url_name, job_pk=None):
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
         context = {'event': event, 'job': job}
-        return render(request, 'registration/event/helpers-job.html', context)
+        return render(request, 'registration/admin/helpers-job.html', context)
 
     # overview over jobs
     context = {'event': event}
-    return render(request, 'registration/event/helpers.html', context)
+    return render(request, 'registration/admin/helpers.html', context)
 
 @login_required
 def excel(request, event_url_name, job_pk=None):
@@ -138,7 +148,7 @@ def excel(request, event_url_name, job_pk=None):
         jobs = [job, ]
         filename = "%s - %s" % (event.name, job.name)
     else:
-        jobs = Job.objects.all()
+        jobs = event.job_set.all()
         filename = event.name
 
     # start http response
@@ -148,7 +158,6 @@ def excel(request, event_url_name, job_pk=None):
     # create buffer
     buffer = BytesIO()
 
-    # create xlsx sheets
     xlsx(buffer, event, jobs)
 
     # close buffer, send file

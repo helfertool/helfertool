@@ -15,6 +15,7 @@ urlpatterns = [
 
     # admin interface
     url(r'^admin/$', views.admin, name='admin'),
+    url(r'^admin/new/$', views.edit_event, name='new_event'),
 
     # internationalization
     url(r'^i18n/', include('django.conf.urls.i18n')),
@@ -25,7 +26,7 @@ urlpatterns = [
         views.registered, name='registered'),
 
     # manage event
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.manage_event, name='manage_event'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.admin, name='manage_event'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$', views.edit_event, name='edit_event'),
 
     # helpers
