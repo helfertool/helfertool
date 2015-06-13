@@ -12,18 +12,20 @@ from .forms import RegisterForm, EventForm
 from .utils import escape_filename
 from .export import xlsx
 
-def nopermission(request, event=None):
-    context = {'event': event}
-    return render(request, 'registration/admin/nopermission.html', context)
+def nopermission(request):
+    return render(request, 'registration/admin/nopermission.html')
 
 
 def superuser_or_admin(user, event_url_name=None):
     if user.is_superuser:
         return True
 
-    event = Event.get(url_name=event_url_name)
-    if not event.is_admin(request.user):
-        return True
+    try:
+        event = Event.objects.get(url_name=event_url_name)
+        if event.is_admin(user):
+            return True
+    except Event.DoesNotExist:
+        pass
 
     return False
 
@@ -53,7 +55,7 @@ def form(request, event_url_name):
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
         # logged in -> check permission
         elif not event.is_admin(request.user):
-            return nopermission(request, event)
+            return nopermission(request)
 
     # handle form
     form = RegisterForm(request.POST or None, event=event)
@@ -79,7 +81,7 @@ def registered(request, event_url_name, helper_id):
 def admin(request, event_url_name=None):
     # check permission
     if not superuser_or_admin(request.user, event_url_name):
-        return nopermission(request, event)
+        return nopermission(request)
 
     # get event
     event = None
@@ -95,7 +97,7 @@ def admin(request, event_url_name=None):
 def edit_event(request, event_url_name=None):
     # check permission
     if not superuser_or_admin(request.user, event_url_name):
-        return nopermission(request, event)
+        return nopermission(request)
 
     # get event
     event = None
@@ -122,7 +124,7 @@ def helpers(request, event_url_name, job_pk=None):
 
     # check permission
     if not event.is_admin(request.user):
-        return nopermission(request, event)
+        return nopermission(request)
 
     # helpers of one job
     if job_pk:
@@ -140,7 +142,7 @@ def excel(request, event_url_name, job_pk=None):
 
     # check permission
     if not event.is_admin(request.user):
-        return nopermission(request, event)
+        return nopermission(request)
 
     # list of jobs for export
     if job_pk:

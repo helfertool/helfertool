@@ -2,11 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    {% if event %}
-        <h1>{% trans "No permission" %}: {{ event }}</h1>
-    {% else %}
-        <h1>{% trans "No permission" %}</h1>
-    {% endif %}
+    <h1>{% trans "No permission" %}</h1>
 
     <p>{% trans "You have no permission to view this page!" %}</p>
 {% endblock %}

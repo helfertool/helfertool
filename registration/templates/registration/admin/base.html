@@ -12,12 +12,14 @@
 {% endblock %}
 
 {% block content %}
+    {# heading #}
     {% if event %}
         <h1>{% blocktrans with eventname=event.name %}Manage {{ eventname }}{% endblocktrans %}</h1>
     {% else %}
         <h1>Admin</h1>
     {% endif %}
 
+    {# for event #}
     {% if event %}
         <ul>
             <li><a href="{% url 'form' event.url_name %}">{% trans "Go to registration" %}</a></li>
@@ -26,10 +28,13 @@
         </ul>
     {% endif %}
 
-    <ul>
-        <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
-        <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
-    </ul>
+    {# for superusers #}
+    {% if user.is_superuser %}
+        <ul>
+            <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
+            <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
+        </ul>
+    {% endif %}
 
     {% block admincontent %}
     {% endblock %}
