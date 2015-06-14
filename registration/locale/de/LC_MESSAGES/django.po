@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-14 14:38+0200\n"
+"POT-Creation-Date: 2015-06-14 19:19+0200\n"
 "PO-Revision-Date: 2015-06-14 14:39+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -202,7 +202,7 @@ msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
 #: templates/registration/admin/base.html:24
-#: templates/registration/admin/jobs.html:7
+#: templates/registration/admin/jobs.html:5
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
@@ -254,20 +254,15 @@ msgstr "Helfer für %(eventname)s"
 msgid "Overview over helpers"
 msgstr "Helferübersicht"
 
-#: templates/registration/admin/jobs.html:4
-#, python-format
-msgid "Jobs of %(eventname)s"
-msgstr "Schichten von %(eventname)s"
-
-#: templates/registration/admin/jobs.html:13
+#: templates/registration/admin/jobs.html:11
 msgid "Begin"
 msgstr "Anfang"
 
-#: templates/registration/admin/jobs.html:14
+#: templates/registration/admin/jobs.html:12
 msgid "End"
 msgstr "Ende"
 
-#: templates/registration/admin/jobs.html:15
+#: templates/registration/admin/jobs.html:13
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
@@ -306,7 +301,8 @@ msgstr "Verwalten"
 
 #: templates/registration/index.html:19
 msgid "At the moment there is no event you can register for."
-msgstr "Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
+msgstr ""
+"Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
 
 #: templates/registration/index.html:23
 msgid "Inactive"
@@ -343,6 +339,9 @@ msgstr "Name"
 #: templates/registration/registered.html:52
 msgid "Shifts"
 msgstr "Schichten"
+
+#~ msgid "Jobs of %(eventname)s"
+#~ msgstr "Schichten von %(eventname)s"
 
 #, fuzzy
 #~| msgid "Surname"
