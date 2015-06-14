@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 16:45+0200\n"
-"PO-Revision-Date: 2015-06-13 16:46+0100\n"
+"POT-Creation-Date: 2015-06-14 14:38+0200\n"
+"PO-Revision-Date: 2015-06-14 14:39+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -180,7 +180,6 @@ msgid "Privacy"
 msgstr "Datenschutz"
 
 #: templates/registration/admin/base.html:6
-#: templates/registration/admin/base.html:17
 #, python-format
 msgid "Manage %(eventname)s"
 msgstr "Verwaltung %(eventname)s"
@@ -189,25 +188,38 @@ msgstr "Verwaltung %(eventname)s"
 msgid "Admin"
 msgstr "Admin"
 
-#: templates/registration/admin/base.html:25
+#: templates/registration/admin/base.html:15
+msgid "Administration"
+msgstr "Administration"
+
+#: templates/registration/admin/base.html:22
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
-#: templates/registration/admin/base.html:26
+#: templates/registration/admin/base.html:23
 #: templates/registration/admin/event.html:6
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
-#: templates/registration/admin/base.html:27
+#: templates/registration/admin/base.html:24
+#: templates/registration/admin/jobs.html:7
+msgid "Jobs and shifts"
+msgstr "Aufgaben und Schichten"
+
+#: templates/registration/admin/base.html:25
 msgid "Registered helpers"
 msgstr "Angemeldete Helfer"
 
-#: templates/registration/admin/base.html:34
+#: templates/registration/admin/base.html:31
+msgid "Common"
+msgstr "Allgemein"
+
+#: templates/registration/admin/base.html:33
 #: templates/registration/admin/event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: templates/registration/admin/base.html:35
+#: templates/registration/admin/base.html:34
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
@@ -241,6 +253,23 @@ msgstr "Helfer für %(eventname)s"
 #: templates/registration/admin/helpers.html:8
 msgid "Overview over helpers"
 msgstr "Helferübersicht"
+
+#: templates/registration/admin/jobs.html:4
+#, python-format
+msgid "Jobs of %(eventname)s"
+msgstr "Schichten von %(eventname)s"
+
+#: templates/registration/admin/jobs.html:13
+msgid "Begin"
+msgstr "Anfang"
+
+#: templates/registration/admin/jobs.html:14
+msgid "End"
+msgstr "Ende"
+
+#: templates/registration/admin/jobs.html:15
+msgid "Number of helpers"
+msgstr "Anzahl an Helfern"
 
 #: templates/registration/admin/nopermission.html:5
 msgid "No permission"
@@ -314,9 +343,6 @@ msgstr "Name"
 #: templates/registration/registered.html:52
 msgid "Shifts"
 msgstr "Schichten"
-
-#~ msgid "Administration"
-#~ msgstr "Administration"
 
 #, fuzzy
 #~| msgid "Surname"

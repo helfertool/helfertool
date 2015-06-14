@@ -12,30 +12,32 @@
 {% endblock %}
 
 {% block content %}
-    {# heading #}
-    {% if event %}
-        <h1>{% blocktrans with eventname=event.name %}Manage {{ eventname }}{% endblocktrans %}</h1>
-    {% else %}
-        <h1>Admin</h1>
-    {% endif %}
+    <h1>{% trans "Administration" %}</h1>
 
-    {# for event #}
-    {% if event %}
-        <ul>
-            <li><a href="{% url 'form' event.url_name %}">{% trans "Go to registration" %}</a></li>
-            <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
-            <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
-        </ul>
-    {% endif %}
+    <div class="sidebar">
+        {# for event #}
+        {% if event %}
+            <h2>{{ event.name }}</h2>
+            <ul>
+                <li><a href="{% url 'form' event.url_name %}" target="_blank">{% trans "Go to registration" %}</a></li>
+                <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
+                <li><a href="{% url 'edit_jobs' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
+                <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
+            </ul>
+        {% endif %}
 
-    {# for superusers #}
-    {% if user.is_superuser %}
-        <ul>
-            <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
-            <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
-        </ul>
-    {% endif %}
+        {# for superusers #}
+        {% if user.is_superuser %}
+            <h2>{% trans "Common" %}</h2>
+            <ul>
+                <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
+                <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
+            </ul>
+        {% endif %}
+    </div>
 
-    {% block admincontent %}
-    {% endblock %}
+    <div class="content">
+        {% block admincontent %}
+        {% endblock %}
+    </div>
 {% endblock %}

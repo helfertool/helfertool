@@ -28,6 +28,7 @@ urlpatterns = [
     # manage event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.admin, name='manage_event'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$', views.edit_event, name='edit_event'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$', views.edit_jobs, name='edit_jobs'),
 
     # helpers
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),

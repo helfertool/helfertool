@@ -1,0 +1,26 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans with eventname=event.name %}Jobs of {{ eventname }}{% endblocktrans %}{% endblock %}
+
+{% block admincontent %}
+    <h2>{% trans "Jobs and shifts" %}</h2>
+
+    {% for job in event.job_set.all %}
+        <h3>{{ job.name }}</h3>
+        <table class="table">
+            <tr>
+                <th>{% trans "Begin" %}</th>
+                <th>{% trans "End" %}</th>
+                <th>{% trans "Number of helpers" %}</th>
+            </tr>
+            {% for shift in job.shift_set.all %}
+                <tr>
+                    <td>{{ shift.begin }}</td>
+                    <td>{{ shift.end }}</td>
+                    <td>{{ shift.number }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+{% endblock %}

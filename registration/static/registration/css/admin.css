@@ -1,12 +1,12 @@
 /* admin interface */
 
 /* table with helpers */
-table.helpers
+table.table
 {
     border-collapse:collapse;
 }
 
-table.helpers th, table.helpers td
+table.table th, table.table td
 {
     border: 1px solid black;
 }
@@ -33,4 +33,22 @@ img.icon
 {
     width:20px;
     vertical-align: middle;
+}
+
+/* sidebar */
+div.sidebar
+{
+    float:left;
+    width: 14em;
+    margin-right: 1em;
+}
+
+div.sidebar h2
+{
+    margin-top:0;
+}
+
+div.content
+{
+    margin-left:15em;
 }
