@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load setting %}
+{% load bootstrap3 %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -12,6 +13,8 @@
 
         <link href="{% static "registration/css/basic.css" %}" rel="stylesheet">
         <link href="{% static "registration/css/admin.css" %}" rel="stylesheet">
+
+        {% block morecss %}{% endblock %}
     </head>
 
     <body>

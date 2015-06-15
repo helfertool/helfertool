@@ -5,3 +5,4 @@ Dependencies
 * Django 1.8
 * django-modeltranslation
 * XlsxWriter
+* django-bootstrap3

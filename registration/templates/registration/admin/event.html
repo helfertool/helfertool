@@ -1,5 +1,6 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
+{% load bootstrap3 %}
 
 {% block admincontent %}
     {% if event %}
@@ -14,7 +15,7 @@
         {% csrf_token %}
 
         <table>
-            {{ form.as_table }}
+            {% bootstrap_form form %}
         </table>
 
         <input type="submit" value="{% trans "Save" %}" />
