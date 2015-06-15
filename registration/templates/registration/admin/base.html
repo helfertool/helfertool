@@ -2,11 +2,6 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% block morecss %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-{% endblock %}
-
 {% block title %}
     {% if event %}
         {% blocktrans with eventname=event.name trimmed %}

@@ -1,0 +1,45 @@
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 40px;
+}
+
+/* footer */
+.footer
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 40px;
+    background-color: #f5f5f5;
+    text-align:center;
+}
+
+.footer .text-muted {
+      margin: 10px 0;
+}
+
+/* table with shifts */
+table.shifts
+{
+    border-spacing: 10px;
+}
+
+table.shifts th
+{
+    border: 5px solid rgb(124, 77, 129);
+    color:white;
+    background-color: rgb(124, 77, 129);
+}
+
+table.shifts span.numbers
+{
+    font-size:80%;
+    color:grey;
+}
