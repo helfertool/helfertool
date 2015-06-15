@@ -8,17 +8,22 @@
 
     {% for job in event.job_set.all %}
         <h3>{{ job.name }} (<a href="{% url 'edit_job' event.url_name job.pk %}">{% trans "Edit" %}</a>)</h3>
+
+        <p><a href="{% url 'new_shift' event.url_name job.pk %}">{% trans "New shift" %}</a></p>
+
         <table class="table">
             <tr>
                 <th>{% trans "Begin" %}</th>
                 <th>{% trans "End" %}</th>
                 <th>{% trans "Number of helpers" %}</th>
+                <th></th>
             </tr>
             {% for shift in job.shift_set.all %}
                 <tr>
                     <td>{{ shift.begin }}</td>
                     <td>{{ shift.end }}</td>
                     <td>{{ shift.number }}</td>
+                    <td><a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">{% trans "Edit" %}</a></td>
                 </tr>
             {% endfor %}
         </table>

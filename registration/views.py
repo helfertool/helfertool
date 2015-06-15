@@ -2,13 +2,13 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
 from io import BytesIO
 
-from .models import Event, Job, Helper
-from .forms import RegisterForm, EventForm, JobForm
+from .models import Event, Job, Helper, Shift
+from .forms import RegisterForm, EventForm, JobForm, ShiftForm
 from .utils import escape_filename
 from .export import xlsx
 
@@ -166,6 +166,38 @@ def edit_job(request, event_url_name, job_pk=None):
                'job': job,
                'form': form}
     return render(request, 'registration/admin/job.html', context)
+
+@login_required
+def edit_shift(request, event_url_name, job_pk, shift_pk=None):
+    event = get_object_or_404(Event, url_name=event_url_name)
+    job = get_object_or_404(Job, pk=job_pk)
+
+    # sanity check
+    if event != job.event:
+        raise Http404
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # get job, if available
+    shift = None
+    if shift_pk:
+        shift = get_object_or_404(Shift, pk=shift_pk)
+
+    # form
+    form = ShiftForm(request.POST or None, instance=shift, job=job)
+
+    if form.is_valid():
+        job = form.save()
+        return HttpResponseRedirect(reverse('jobs_and_shifts', args=[event_url_name]))
+
+    # render page
+    context = {'event': job.event,
+               'job': job,
+               'shift': shift,
+               'form': form}
+    return render(request, 'registration/admin/shift.html', context)
 
 
 @login_required

@@ -110,3 +110,25 @@ class JobForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class ShiftForm(forms.ModelForm):
+    class Meta:
+        model = Shift
+        exclude = ['job', ]
+
+    def __init__(self, *args, **kwargs):
+        self.job = kwargs.pop('job')
+
+        super(ShiftForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super(ShiftForm, self).save(False)  # event is missing
+
+        # add event
+        instance.job = self.job
+
+        if commit:
+            instance.save()
+
+        return instance

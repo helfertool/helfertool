@@ -32,7 +32,11 @@ urlpatterns = [
     # jobs
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$', views.jobs_and_shifts, name='jobs_and_shifts'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/new/$', views.edit_job, name='new_job'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/edit/(?P<job_pk>[0-9]+)$', views.edit_job, name='edit_job'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/edit/$', views.edit_job, name='edit_job'),
+
+    # shifts
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/(?P<shift_pk>[0-9]+)$', views.edit_shift, name='edit_shift'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/new$', views.edit_shift, name='new_shift'),
 
     # helpers
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),
