@@ -1,0 +1,23 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+
+{% block admincontent %}
+    {% if job %}
+        <h2>{% trans "Edit job" %}</h2>
+
+        <form action="{% url 'edit_job' event.url_name job.pk %}" method="post">
+    {% else %}
+        <h2>{% trans "New job" %}</h2>
+
+        <form action="{% url 'new_job' event.url_name %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <input type="submit" value="{% trans "Save" %}" />
+        <input type="reset" value="{% trans "Reset" %}" />
+    </form>
+{% endblock %}

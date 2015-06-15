@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Helper, Shift, Event
+from .models import Helper, Shift, Event, Job
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -89,3 +89,24 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ['admins', 'text', 'imprint', 'registered', ]
+
+class JobForm(forms.ModelForm):
+    class Meta:
+        model = Job
+        exclude = ['name', 'description', 'event', ]
+
+    def __init__(self, *args, **kwargs):
+        self.event = kwargs.pop('event')
+
+        super(JobForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super(JobForm, self).save(False)  # event is missing
+
+        # add event
+        instance.event = self.event
+
+        if commit:
+            instance.save()
+
+        return instance

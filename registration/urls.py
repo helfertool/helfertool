@@ -28,7 +28,11 @@ urlpatterns = [
     # manage event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.admin, name='manage_event'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$', views.edit_event, name='edit_event'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$', views.edit_jobs, name='edit_jobs'),
+
+    # jobs
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$', views.jobs_and_shifts, name='jobs_and_shifts'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/new/$', views.edit_job, name='new_job'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/edit/(?P<job_pk>[0-9]+)$', views.edit_job, name='edit_job'),
 
     # helpers
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),

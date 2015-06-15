@@ -4,8 +4,10 @@
 {% block admincontent %}
     <h2>{% trans "Jobs and shifts" %}</h2>
 
+    <p><a href="{% url 'new_job' event.url_name %}">{% trans "New job" %}</a></p>
+
     {% for job in event.job_set.all %}
-        <h3>{{ job.name }}</h3>
+        <h3>{{ job.name }} (<a href="{% url 'edit_job' event.url_name job.pk %}">{% trans "Edit" %}</a>)</h3>
         <table class="table">
             <tr>
                 <th>{% trans "Begin" %}</th>

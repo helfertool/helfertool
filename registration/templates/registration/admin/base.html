@@ -21,7 +21,7 @@
             <ul>
                 <li><a href="{% url 'form' event.url_name %}" target="_blank">{% trans "Go to registration" %}</a></li>
                 <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
-                <li><a href="{% url 'edit_jobs' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
+                <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
                 <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
             </ul>
         {% endif %}
