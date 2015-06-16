@@ -10,10 +10,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <script src="{% static "registration/js/bootstrap.min.js" %}"></script>
         <script src="{% static "registration/js/jquery.min.js" %}"></script>
+        <script src="{% static "registration/js/bootstrap.min.js" %}"></script>
 
         <link href="{% static "registration/css/bootstrap.min.css" %}" media="all" rel="stylesheet">
+        <link href="{% static "registration/css/bootstrap-theme.min.css" %}" media="all" rel="stylesheet">
         <link href="{% static "registration/css/style.css" %}" media="all" rel="stylesheet">
         <!--<link href="{% static "registration/css/basic.css" %}" media="all" rel="stylesheet">-->
         <!--<link href="{% static "registration/css/admin.css" %}" media="all" rel="stylesheet">-->
@@ -57,7 +58,7 @@
                         {# end login #}
 
                         {# language chooser #}
-                        <form action="{% url 'set_language' %}" method="post" class="navbar-form navbar-left" role="form">
+                        <form action="{% url 'set_language' %}" method="post" class="navbar-form navbar-right" role="form">
                             <div class="form-group">
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ redirect_to }}" />

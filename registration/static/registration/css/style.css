@@ -6,7 +6,7 @@ html
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 /* footer */
@@ -28,18 +28,38 @@ body {
 /* table with shifts */
 table.shifts
 {
+    border-collapse: separate;
     border-spacing: 10px;
+    margin-left:-10px;
+    margin-right:-10px;
 }
 
 table.shifts th
 {
-    border: 5px solid rgb(124, 77, 129);
     color:white;
     background-color: rgb(124, 77, 129);
+    padding:5px;
+}
+
+table.shifts td
+{
+    vertical-align: top;
 }
 
 table.shifts span.numbers
 {
     font-size:80%;
     color:grey;
+}
+
+/* icons (like xls or pdf) */
+a.icon
+{
+    text-decoration:none;
+}
+
+img.icon
+{
+    width:20px;
+    vertical-align: middle;
 }

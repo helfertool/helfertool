@@ -12,7 +12,7 @@
 
     <p>{% trans "You registered with the following information:" %}</p>
 
-    <table>
+    <table class="table-condensed">
         <tr>
             <td>{% trans "Name" %}: </td>
             <td>{{ data.prename }} {{ data.surname }}</td>
@@ -50,9 +50,9 @@
     </table>
 
     <h2>{% trans "Shifts" %}</h2>
-    <ul>
+    <ul class="list-group">
     {% for shift in data.shifts.all %}
-        <li>{{ shift.job.name }}: {{ shift.time }}</li>
+        <li class="list-group-item">{{ shift.job.name }}: {{ shift.time }}</li>
     {% endfor %}
     </ul>
 

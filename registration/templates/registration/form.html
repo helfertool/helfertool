@@ -14,12 +14,33 @@
     <form action="{% url 'form' event.url_name %}" method="post">
         {% csrf_token %}
 
+        {% bootstrap_form_errors form %}
+
         <h2>{% trans "Jobs" %}</h2>
         {# list of all jobs and shifts #}
 
         {% for job in event.job_set.all %}
-            <h3>{{ job.name }}</h3>
-            <p>{{ job.description | safe }}</p>
+            <div class="job-header">
+                <div class="pull-left">
+                    <h3>{{ job.name }}</h3>
+                </div>
+
+                {% if job.description %}
+                    <div class="pull-right">
+                        <button type="button"
+                                class="btn btn-info heading-button"
+                                data-toggle="collapse"
+                                data-target="#job-{{ job.pk }}">
+                            {% trans "Details" %}
+                        </button>
+                    </div>
+                {% endif %}
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="job-{{ job.pk }}" class="collapse">
+                <p>{{ job.description | safe }}</p>
+            </div>
 
             <table class="shifts">
                 <tr>
@@ -59,62 +80,22 @@
         {% endfor %}
 
         <h2>{% trans "Personal data" %}</h2>
+
         {# personal data, nothing special... #}
+        {% bootstrap_field form.prename %}
+        {% bootstrap_field form.surname %}
+        {% bootstrap_field form.email %}
+        {% bootstrap_field form.phone %}
+        {% if event.ask_shirt %}
+            {% bootstrap_field form.shirt %}
+        {% endif %}
+        {% bootstrap_field form.infection_instruction %}
+        {% if event.ask_vegetarian %}
+            {% bootstrap_field form.vegetarian %}
+        {% endif %}
+        {% bootstrap_field form.comment %}
 
-        <table class="inputform">
-            <colgroup>
-                <col span="1" style="width: 10em;">
-            </colgroup>
-            <tr>
-                <td>{{ form.prename.label }}</td>
-                <td>{{ form.prename }}{{ form.prename.errors }}{{ form.prename.description }}</td>
-            <tr>
-
-            <tr>
-                <td>{{ form.surname.label }}</td>
-                <td>{{ form.surname }}{{ form.surname.errors }}</td>
-            <tr>
-
-            <tr>
-                <td>{{ form.email.label }}</td>
-                <td>{{ form.email }}{{ form.email.errors }}</td>
-            <tr>
-
-            <tr>
-                <td>{{ form.phone.label }}</td>
-                <td>{{ form.phone }}{{ form.phone.errors }}</td>
-            <tr>
-
-            {% if event.ask_shirt %}
-            <tr>
-                <td>{{ form.shirt.label }}</td>
-                <td>{{ form.shirt }}{{ form.shirt.errors }}</td>
-            <tr>
-            {% endif %}
-
-            <tr id="infection_instruction_field">
-                <td>{{ form.infection_instruction.label }}</td>
-                <td>{{ form.infection_instruction }}{{ form.infection_instruction.errors }}
-                <p>{{ form.infection_instruction.help_text }}</p></td>
-            <tr>
-
-            {% if event.ask_vegetarian %}
-            <tr>
-                <td>{{ form.vegetarian.label }}</td>
-                <td><label>{{ form.vegetarian }} {% trans "Vegetarian food" %}</label>{{ form.vegetarian.errors }}
-                <p>{{ form.vegetarian.help_text }}</p></td>
-            <tr>
-            {% endif %}
-
-            <tr>
-                <td>{{ form.comment.label }}</td>
-                <td>{{ form.comment }}{{ form.comment.errors }}</td>
-            <tr>
-        </table>
-
-        {{ form.non_field_errors }}
-
-        <input type="submit" value="{% trans "Register" %}" />
+        <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
 
         <script>
             function handle_infection_instruction()
@@ -122,24 +103,19 @@
                 var show_field = 0;
 
                 // iterate over all relevant checkboxes
-                var boxes = document.getElementsByClassName("infection_instruction");
-                for(var i=0; i < boxes.length; i++)
-                {
-                    if(boxes[i].checked)
+                $(".infection_instruction").each(function() {
+                    if($(this).prop('checked'))
                     {
                         show_field = 1;
-                        break;
+                        return false;
                     }
-                }
+                })
 
                 // show or hide input field
                 if(show_field)
-                    document.getElementById("infection_instruction_field").style.display = 'table-row';
+                    $("#id_infection_instruction").parent().show()
                 else
-                    document.getElementById("infection_instruction_field").style.display = 'none';
-
-
-                // If you ask: Yes, I know JQuery
+                    $("#id_infection_instruction").parent().hide()
             }
 
             handle_infection_instruction();

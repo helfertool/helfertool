@@ -7,8 +7,10 @@
 {% block admincontent %}
     <h2>{% blocktrans with jobname=job.name%}Helpers: {{ jobname }}{% endblocktrans %}</h2>
 
-    <p>{% trans "Export" %}:
-        <a href="{% url 'jobexcel' event.url_name job.pk %}">
+    <p>
+        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+        &nbsp;{% trans "Export" %}:
+        &nbsp;<a href="{% url 'jobexcel' event.url_name job.pk %}" class="icon">
             <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
         </a>
     </p>

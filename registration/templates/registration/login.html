@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load bootstrap3 %}
 
 {% block content %}
     <h1>{% trans "Login" %}</h1>
 
-    <form action="{% url "login" %}" method="post" accept-charset="utf-8">
+    <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
         <table>
-            {{ form.as_table }}
+            {% bootstrap_form form %}
         </table>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="{% trans "Login" %}"/>
+        <input type="submit" value="{% trans "Login" %}" class="btn btn-default" />
     </form>
 {% endblock %}

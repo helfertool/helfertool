@@ -15,30 +15,36 @@
 {% block content %}
     <h1>{% trans "Administration" %}</h1>
 
-    <div class="sidebar">
-        {# for event #}
-        {% if event %}
-            <h2>{{ event.name }}</h2>
-            <ul>
-                <li><a href="{% url 'form' event.url_name %}" target="_blank">{% trans "Go to registration" %}</a></li>
-                <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
-                <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
-                <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
-            </ul>
-        {% endif %}
+    <div class="row">
+        <div class="col-md-3">
+            {# for event #}
+            {% if event %}
+                <h2>{{ event.name }}</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{% url 'form' event.url_name %}" target="_blank">
+                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                            {% trans "Go to registration" %}
+                        </a>
+                    </li>
+                    <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
+                    <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
+                    <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
+                </ul>
+            {% endif %}
 
-        {# for superusers #}
-        {% if user.is_superuser %}
-            <h2>{% trans "Common" %}</h2>
-            <ul>
-                <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
-                <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
-            </ul>
-        {% endif %}
-    </div>
-
-    <div class="content">
-        {% block admincontent %}
-        {% endblock %}
+            {# for superusers #}
+            {% if user.is_superuser %}
+                <h2>{% trans "Common" %}</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
+                    <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
+                </ul>
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            {% block admincontent %}
+            {% endblock %}
+        </div>
     </div>
 {% endblock %}

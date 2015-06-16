@@ -7,14 +7,22 @@
 {% block admincontent %}
     <h2>{% trans "Overview over helpers" %}</h2>
 
-    <p>{% trans "Export" %}:
-        <a href="{% url 'excel' event.url_name %}">
+    <p>
+        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+        &nbsp;{% trans "Export" %}:
+        &nbsp;<a href="{% url 'excel' event.url_name %}" class="icon">
             <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
         </a>
     </p>
 
     {% for job in event.job_set.all %}
-        <h3><a href="{% url 'jobhelpers' event.url_name job.pk %}">{{ job.name }}</a></h3>
+        <h3>{{ job.name }}</h3>
+
+        <p>
+            <a href="{% url 'jobhelpers' event.url_name job.pk %}">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            {% trans "Show" %}</a>
+        </p>
 
         <table class="shifts">
             <tr>
@@ -27,12 +35,14 @@
                     <td>
                         {% for shift in shifts %}
                             {{ shift.time_hours }}
-                            <span class="numbers">
-                                ({{ shift.num_helpers }}/{{ shift.number }})
-                            </span>
 
-                            <div class="progress-outside">
-                                <div class="progress-inside" style="width:{{ shift.helpers_percent }}%;"></div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar"
+                                     aria-valuenow="{{ shift.helpers_percent }}"
+                                     aria-valuemin="0" aria-valuemax="100"
+                                     style="width: {{ shift.helpers_percent }}%;">
+                                     {{ shift.num_helpers }}/{{ shift.number }}
+                                </div>
                             </div>
                         {% endfor %}
                     </td>
