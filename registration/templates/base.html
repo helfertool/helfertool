@@ -11,13 +11,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script src="{% static "registration/js/jquery.min.js" %}"></script>
+        <script src="{% static "registration/js/moment-with-locales.min.js" %}"></script>
         <script src="{% static "registration/js/bootstrap.min.js" %}"></script>
+        <script src="{% static "registration/js/bootstrap-datetimepicker.min.js" %}"></script>
 
         <link href="{% static "registration/css/bootstrap.min.css" %}" media="all" rel="stylesheet">
         <link href="{% static "registration/css/bootstrap-theme.min.css" %}" media="all" rel="stylesheet">
+        <link href="{% static "registration/css/bootstrap-datetimepicker.min.css" %}" media="all" rel="stylesheet">
+
         <link href="{% static "registration/css/style.css" %}" media="all" rel="stylesheet">
-        <!--<link href="{% static "registration/css/basic.css" %}" media="all" rel="stylesheet">-->
-        <!--<link href="{% static "registration/css/admin.css" %}" media="all" rel="stylesheet">-->
 
         <title>{% block title %}{% trans "Registration for helpers" %}{% endblock %}</title>
     </head>

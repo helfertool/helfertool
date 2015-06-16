@@ -6,10 +6,10 @@
     <h1>{% trans "Login" %}</h1>
 
     <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
-        <table>
-            {% bootstrap_form form %}
-        </table>
         {% csrf_token %}
+
+        {% bootstrap_form form %}
+
         <input type="hidden" name="next" value="{{ next }}" />
         <input type="submit" value="{% trans "Login" %}" class="btn btn-default" />
     </form>

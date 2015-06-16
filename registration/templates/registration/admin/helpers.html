@@ -1,6 +1,7 @@
 {% extends "registration/admin/base.html" %}
 {% load staticfiles %}
 {% load i18n %}
+{% load bootstrap3 %}
 
 {% block title %}{% blocktrans with eventname=event.name %}Helpers for {{ eventname }}{% endblocktrans %}{% endblock %}
 
@@ -8,7 +9,7 @@
     <h2>{% trans "Overview over helpers" %}</h2>
 
     <p>
-        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+        {% bootstrap_icon "download-alt" %}
         &nbsp;{% trans "Export" %}:
         &nbsp;<a href="{% url 'excel' event.url_name %}" class="icon">
             <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
@@ -20,7 +21,7 @@
 
         <p>
             <a href="{% url 'jobhelpers' event.url_name job.pk %}">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            {% bootstrap_icon "info-sign" %}
             {% trans "Show" %}</a>
         </p>
 

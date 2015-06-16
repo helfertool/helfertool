@@ -23,7 +23,7 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li>
                         <a href="{% url 'form' event.url_name %}" target="_blank">
-                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                            {% bootstrap_icon "share-alt" %}
                             {% trans "Go to registration" %}
                         </a>
                     </li>

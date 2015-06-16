@@ -82,18 +82,22 @@
         <h2>{% trans "Personal data" %}</h2>
 
         {# personal data, nothing special... #}
-        {% bootstrap_field form.prename %}
-        {% bootstrap_field form.surname %}
-        {% bootstrap_field form.email %}
-        {% bootstrap_field form.phone %}
-        {% if event.ask_shirt %}
-            {% bootstrap_field form.shirt %}
-        {% endif %}
-        {% bootstrap_field form.infection_instruction %}
-        {% if event.ask_vegetarian %}
-            {% bootstrap_field form.vegetarian %}
-        {% endif %}
-        {% bootstrap_field form.comment %}
+        <div class="row">
+            <div class="col-xs-5">
+                {% bootstrap_field form.prename %}
+                {% bootstrap_field form.surname %}
+                {% bootstrap_field form.email %}
+                {% bootstrap_field form.phone %}
+                {% if event.ask_shirt %}
+                    {% bootstrap_field form.shirt %}
+                {% endif %}
+                {% bootstrap_field form.infection_instruction %}
+                {% if event.ask_vegetarian %}
+                    {% bootstrap_field form.vegetarian %}
+                {% endif %}
+                {% bootstrap_field form.comment %}
+            </div>
+        </div>
 
         <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
 

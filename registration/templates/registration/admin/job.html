@@ -14,9 +14,7 @@
     {% endif %}
         {% csrf_token %}
 
-        <table>
-            {% bootstrap_form form %}
-        </table>
+        {% bootstrap_form form %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
         <input type="reset" value="{% trans "Reset" %}" class="btn btn-danger" />

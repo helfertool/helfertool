@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils import formats, translation
 
 from .models import Helper, Shift, Event, Job
 
@@ -116,6 +117,10 @@ class ShiftForm(forms.ModelForm):
     class Meta:
         model = Shift
         exclude = ['job', ]
+        widgets = {
+            'begin': forms.DateTimeInput(attrs={'type': 'datetime'}),
+            'end': forms.DateTimeInput(attrs={'type': 'datetime'}),
+        }
 
     def __init__(self, *args, **kwargs):
         self.job = kwargs.pop('job')
