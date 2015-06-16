@@ -24,21 +24,26 @@
             {% trans "New shift" %}</a>
         </p>
 
-        <table class="table">
-            <tr>
-                <th>{% trans "Begin" %}</th>
-                <th>{% trans "End" %}</th>
-                <th>{% trans "Number of helpers" %}</th>
-                <th></th>
-            </tr>
-            {% for shift in job.shift_set.all %}
+        {% if job.shift_set.count == 0 %}
+            <p class="text-muted">{% trans "There are no shifts." %}</p>
+        {% else %}
+            <table class="table">
                 <tr>
-                    <td>{{ shift.begin }}</td>
-                    <td>{{ shift.end }}</td>
-                    <td>{{ shift.number }}</td>
-                    <td><a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">{% trans "Edit" %}</a></td>
+                    <th>{% trans "Begin" %}</th>
+                    <th>{% trans "End" %}</th>
+                    <th>{% trans "Number of helpers" %}</th>
+                    <th></th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for shift in job.shift_set.all %}
+                    <tr>
+                        <td>{{ shift.begin }}</td>
+                        <td>{{ shift.end }}</td>
+                        <td>{{ shift.number }}</td>
+                        <td><a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">{% trans "Edit" %}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
     {% endfor %}
 {% endblock %}
