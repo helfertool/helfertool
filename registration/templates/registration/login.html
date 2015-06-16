@@ -8,7 +8,11 @@
     <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        <div class="row">
+            <div class="col-xs-5">
+                {% bootstrap_form form %}
+            </div>
+        </div>
 
         <input type="hidden" name="next" value="{{ next }}" />
         <input type="submit" value="{% trans "Login" %}" class="btn btn-default" />
