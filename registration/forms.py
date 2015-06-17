@@ -118,8 +118,8 @@ class ShiftForm(forms.ModelForm):
         model = Shift
         exclude = ['job', ]
         widgets = {
-            'begin': forms.DateTimeInput(attrs={'type': 'datetime'}),
-            'end': forms.DateTimeInput(attrs={'type': 'datetime'}),
+            'begin': forms.DateTimeInput(attrs={'class': 'datetime'}),
+            'end': forms.DateTimeInput(attrs={'class': 'datetime'}),
         }
 
     def __init__(self, *args, **kwargs):
