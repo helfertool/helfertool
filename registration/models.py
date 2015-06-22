@@ -72,9 +72,9 @@ class Job(models.Model):
         description: longer description of the job
     """
     event = models.ForeignKey(Event)
-    name = models.CharField(max_length=200)
-    infection_instruction = models.BooleanField(default=False)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=200, verbose_name=_("Name"))
+    infection_instruction = models.BooleanField(default=False, verbose_name=_("Instruction for the handling of food necessary"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
@@ -116,9 +116,9 @@ class Shift(models.Model):
         number: number of people
     """
     job = models.ForeignKey(Job)
-    begin = models.DateTimeField()
-    end = models.DateTimeField()
-    number = models.IntegerField(default=0)
+    begin = models.DateTimeField(verbose_name=_("Begin"))
+    end = models.DateTimeField(verbose_name=_("End"))
+    number = models.IntegerField(default=0, verbose_name=_("Number of helpers"))
 
     def __str__(self):
         return "%s %s (%s)" % (self.job.name, date_f(localtime(self.begin), 'DATETIME_FORMAT'), self.job.event)
