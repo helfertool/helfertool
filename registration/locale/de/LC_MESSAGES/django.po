@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-22 14:42+0200\n"
-"PO-Revision-Date: 2015-06-22 14:43+0100\n"
+"POT-Creation-Date: 2015-06-22 19:09+0200\n"
+"PO-Revision-Date: 2015-06-22 19:10+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -248,16 +248,27 @@ msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
 #: templates/registration/admin/event.html:19
+#: templates/registration/admin/helper.html:24
 #: templates/registration/admin/job.html:19
 #: templates/registration/admin/shift.html:23
 msgid "Save"
 msgstr "Speichern"
 
 #: templates/registration/admin/event.html:20
+#: templates/registration/admin/helper.html:25
 #: templates/registration/admin/job.html:20
 #: templates/registration/admin/shift.html:24
 msgid "Reset"
 msgstr "Reset"
+
+#: templates/registration/admin/helper.html:6
+msgid "Edit helper"
+msgstr "Helfer bearbeiten"
+
+#: templates/registration/admin/helper.html:17
+#: templates/registration/registered.html:52
+msgid "Shifts"
+msgstr "Schichten"
 
 #: templates/registration/admin/helpers-job.html:9
 #, python-format
@@ -272,6 +283,12 @@ msgstr "Export"
 #: templates/registration/admin/helpers-job.html:42
 msgid "Registration time"
 msgstr "Anmeldezeit"
+
+#: templates/registration/admin/helpers-job.html:66
+#: templates/registration/admin/jobs_and_shifts.html:19
+#: templates/registration/admin/jobs_and_shifts.html:46
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: templates/registration/admin/helpers.html:6
 #, python-format
@@ -294,11 +311,6 @@ msgstr "Aufgabe bearbeiten"
 #: templates/registration/admin/jobs_and_shifts.html:10
 msgid "New job"
 msgstr "Neue Aufgabe"
-
-#: templates/registration/admin/jobs_and_shifts.html:19
-#: templates/registration/admin/jobs_and_shifts.html:46
-msgid "Edit"
-msgstr "Bearbeiten"
 
 #: templates/registration/admin/jobs_and_shifts.html:25
 #: templates/registration/admin/shift.html:11
@@ -377,10 +389,6 @@ msgstr "Helferanmeldung für %(eventname)s"
 #: templates/registration/registered.html:13
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
-
-#: templates/registration/registered.html:52
-msgid "Shifts"
-msgstr "Schichten"
 
 #~ msgid "Vegetarian food"
 #~ msgstr "Vegetarisches Essen"
