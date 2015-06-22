@@ -37,12 +37,15 @@
                         {% for shift in shifts %}
                             {{ shift.time_hours }}
 
+                            <span class="numbers">
+                                ({{ shift.num_helpers }}/{{ shift.number }})
+                            </span>
+
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar"
                                      aria-valuenow="{{ shift.helpers_percent }}"
                                      aria-valuemin="0" aria-valuemax="100"
                                      style="width: {{ shift.helpers_percent }}%;">
-                                     {{ shift.num_helpers }}/{{ shift.number }}
                                 </div>
                             </div>
                         {% endfor %}

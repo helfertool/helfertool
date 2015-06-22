@@ -9,7 +9,3 @@ permissions:
 order of jobs
 
 responsive menu: bug with width of language dropdown
-
-Mobile:
-    DateTimePicker not in firefox on android
-    input fields to small
