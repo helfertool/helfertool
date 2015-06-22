@@ -42,7 +42,13 @@
                             </span>
 
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar"
+                                {% if shift.helpers_percent = 100 %}
+                                    <div class="progress-bar progress-bar-success" role="progressbar"
+                                {% elif shift.helpers_percent < 50 %}
+                                    <div class="progress-bar progress-bar-danger" role="progressbar"
+                                {% else %}
+                                    <div class="progress-bar" role="progressbar"
+                                {% endif %}
                                      aria-valuenow="{{ shift.helpers_percent }}"
                                      aria-valuemin="0" aria-valuemax="100"
                                      style="width: {{ shift.helpers_percent }}%;">
