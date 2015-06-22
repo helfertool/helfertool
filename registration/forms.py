@@ -137,3 +137,8 @@ class ShiftForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+class HelperForm(forms.ModelForm):
+    class Meta:
+        model = Helper
+        exclude = ['shifts', ]

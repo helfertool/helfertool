@@ -233,7 +233,7 @@ class Helper(models.Model):
         if self.shifts.count() == 0:
             return
 
-        event = self.shifts.all()[0].job.event
+        event = self.event
 
         subject_template = get_template('registration/mail_subject.txt')
         subject = subject_template.render({ 'event': event }).rstrip()
@@ -243,3 +243,10 @@ class Helper(models.Model):
 
         send_mail(subject, text, event.email, [self.email],
                   fail_silently=False)
+
+    @property
+    def event(self):
+        if self.shifts.count() == 0:
+            return None
+
+        return self.shifts.all()[0].job.event

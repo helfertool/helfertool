@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from io import BytesIO
 
 from .models import Event, Job, Helper, Shift
-from .forms import RegisterForm, EventForm, JobForm, ShiftForm
+from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm
 from .utils import escape_filename
 from .export import xlsx
 
@@ -199,6 +199,31 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
                'form': form}
     return render(request, 'registration/admin/shift.html', context)
 
+@login_required
+def edit_helper(request, event_url_name, helper_pk):
+    event = get_object_or_404(Event, url_name=event_url_name)
+    helper = get_object_or_404(Helper, pk=helper_pk)
+
+    # sanity check
+    if event != helper.event:
+        raise Http404
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = HelperForm(request.POST or None, instance=helper)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('helpers', args=[event_url_name]))
+
+    # render page
+    context = {'event': event,
+               'helper': helper,
+               'form': form}
+    return render(request, 'registration/admin/helper.html', context)
 
 @login_required
 def helpers(request, event_url_name, job_pk=None):
