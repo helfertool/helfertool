@@ -47,7 +47,7 @@ class Event(models.Model):
     active = models.BooleanField(default=False,
                                  verbose_name=_("Registration possible"))
 
-    admins = models.ManyToManyField(User, blank=True)
+    admins = models.ManyToManyField(User)
 
     ask_shirt = models.BooleanField(default=True,
                                     verbose_name=_("Ask for T-shirt size"))

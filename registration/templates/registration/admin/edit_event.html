@@ -22,9 +22,15 @@
 
     <script type="text/javascript">
         $(function () {
+            // activate DualListbox
             $('.duallistbox').bootstrapDualListbox({
                 moveOnSelect: false,
+                nonSelectedListLabel: "{% trans "Non-selected" %}",
+                selectedListLabel: "{% trans "Selected" %}",
             });
+
+            // remove required option, since it is handled wrong by firefox
+            $('.duallistbox').removeAttr('required');
         });
     </script>
 {% endblock %}
