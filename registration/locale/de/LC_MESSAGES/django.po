@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-30 18:35+0200\n"
-"PO-Revision-Date: 2015-06-30 18:38+0100\n"
+"POT-Creation-Date: 2015-06-30 20:52+0200\n"
+"PO-Revision-Date: 2015-06-30 20:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,46 +18,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.7.7\n"
 
-#: export.py:36 models.py:198
-#: templates/registration/admin/helpers_for_job.html:28
+#: export.py:36 models.py:201
+#: templates/registration/admin/helpers_for_job.html:32
 msgid "Prename"
 msgstr "Vorname"
 
-#: export.py:37 models.py:200
-#: templates/registration/admin/helpers_for_job.html:29
+#: export.py:37 models.py:203
+#: templates/registration/admin/helpers_for_job.html:33
 msgid "Surname"
 msgstr "Nachname"
 
-#: export.py:38 models.py:44 models.py:202
-#: templates/registration/admin/helpers_for_job.html:30
+#: export.py:38 models.py:44 models.py:205
+#: templates/registration/admin/helpers_for_job.html:34
 #: templates/registration/registered.html:21
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: export.py:41 models.py:204
-#: templates/registration/admin/helpers_for_job.html:31
+#: export.py:41 models.py:207
+#: templates/registration/admin/helpers_for_job.html:35
 #: templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: export.py:45 models.py:210
-#: templates/registration/admin/helpers_for_job.html:33
+#: export.py:45 models.py:213
+#: templates/registration/admin/helpers_for_job.html:37
 #: templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: export.py:49 models.py:213
-#: templates/registration/admin/helpers_for_job.html:36
+#: export.py:49 models.py:216
+#: templates/registration/admin/helpers_for_job.html:40
 #: templates/registration/registered.html:42
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: export.py:53 templates/registration/admin/helpers_for_job.html:39
+#: export.py:53 templates/registration/admin/helpers_for_job.html:43
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: export.py:56 models.py:207
-#: templates/registration/admin/helpers_for_job.html:41
+#: export.py:56 models.py:210
+#: templates/registration/admin/helpers_for_job.html:45
 #: templates/registration/registered.html:47
 msgid "Comment"
 msgstr "Kommentar"
@@ -138,11 +138,13 @@ msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: models.py:119 templates/registration/admin/jobs_and_shifts.html:33
+#: models.py:119 templates/registration/admin/delete_shift.html:17
+#: templates/registration/admin/jobs_and_shifts.html:33
 msgid "Begin"
 msgstr "Anfang"
 
-#: models.py:120 templates/registration/admin/jobs_and_shifts.html:34
+#: models.py:120 templates/registration/admin/delete_shift.html:21
+#: templates/registration/admin/jobs_and_shifts.html:34
 msgid "End"
 msgstr "Ende"
 
@@ -150,35 +152,35 @@ msgstr "Ende"
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: models.py:183
+#: models.py:186
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: models.py:184
+#: models.py:187
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: models.py:185
+#: models.py:188
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: models.py:189
+#: models.py:192
 msgid "No"
 msgstr "Nein"
 
-#: models.py:190
+#: models.py:193
 msgid "Valid"
 msgstr "Gültig"
 
-#: models.py:191
+#: models.py:194
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: models.py:214
+#: models.py:217
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: models.py:219 templates/registration/registered.html:36
+#: models.py:222 templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
@@ -270,9 +272,27 @@ msgid "Remove the helper from all selected shifts?"
 msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
 
 #: templates/registration/admin/delete_helper.html:21
-#: templates/registration/admin/helpers_for_job.html:70
+#: templates/registration/admin/delete_shift.html:36
+#: templates/registration/admin/helpers_for_job.html:73
+#: templates/registration/admin/jobs_and_shifts.html:50
 msgid "Delete"
 msgstr "Löschen"
+
+#: templates/registration/admin/delete_shift.html:6
+msgid "Delete shift"
+msgstr "Schicht löschen"
+
+#: templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
+#: templates/registration/admin/delete_shift.html:28
+msgid "There are registered helpers for this shift. Remove it anyway?"
+msgstr "Es sind Helfer für diese Schicht registriert. Die Schicht trotzdem löschen?"
+
+#: templates/registration/admin/delete_shift.html:31
+msgid "Remove this shift?"
+msgstr "Diese Schicht löschen?"
 
 #: templates/registration/admin/edit_event.html:19
 #: templates/registration/admin/edit_helper.html:24
@@ -281,56 +301,49 @@ msgstr "Löschen"
 msgid "Save"
 msgstr "Speichern"
 
-#: templates/registration/admin/edit_event.html:20
-#: templates/registration/admin/edit_helper.html:25
-#: templates/registration/admin/edit_job.html:20
-#: templates/registration/admin/edit_shift.html:24
-msgid "Reset"
-msgstr "Reset"
-
-#: templates/registration/admin/edit_event.html:28
+#: templates/registration/admin/edit_event.html:27
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: templates/registration/admin/edit_event.html:29
+#: templates/registration/admin/edit_event.html:28
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: templates/registration/admin/edit_event.html:30
+#: templates/registration/admin/edit_event.html:29
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: templates/registration/admin/edit_event.html:31
+#: templates/registration/admin/edit_event.html:30
 msgid "Filter"
 msgstr "Filter"
 
-#: templates/registration/admin/edit_event.html:32
+#: templates/registration/admin/edit_event.html:31
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: templates/registration/admin/edit_event.html:33
+#: templates/registration/admin/edit_event.html:32
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: templates/registration/admin/edit_event.html:34
+#: templates/registration/admin/edit_event.html:33
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: templates/registration/admin/edit_event.html:35
+#: templates/registration/admin/edit_event.html:34
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: templates/registration/admin/edit_event.html:36
+#: templates/registration/admin/edit_event.html:35
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: templates/registration/admin/edit_event.html:37
+#: templates/registration/admin/edit_event.html:36
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: templates/registration/admin/edit_event.html:38
+#: templates/registration/admin/edit_event.html:37
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -384,11 +397,15 @@ msgstr "Anzeigen"
 msgid "Helpers: %(jobname)s"
 msgstr "Helfer: %(jobname)s"
 
-#: templates/registration/admin/helpers_for_job.html:42
+#: templates/registration/admin/helpers_for_job.html:28
+msgid "Nobody is registered for this shift."
+msgstr "Es ist niemand zu dieser Schicht angemeldet."
+
+#: templates/registration/admin/helpers_for_job.html:46
 msgid "Registration time"
 msgstr "Anmeldezeit"
 
-#: templates/registration/admin/helpers_for_job.html:66
+#: templates/registration/admin/helpers_for_job.html:69
 #: templates/registration/admin/jobs_and_shifts.html:19
 #: templates/registration/admin/jobs_and_shifts.html:46
 msgid "Edit"
@@ -462,6 +479,9 @@ msgstr "Helferanmeldung für %(eventname)s"
 #: templates/registration/registered.html:13
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
+
+#~ msgid "Reset"
+#~ msgstr "Reset"
 
 #~ msgid "Vegetarian food"
 #~ msgstr "Vegetarisches Essen"
