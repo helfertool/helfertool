@@ -4,24 +4,43 @@ import re
 import xlsxwriter
 
 class Iterator():
+    """ Returns ascending natural numbers beginning from 0. """
     def __init__(self):
         self.__v = -1
 
     def next(self):
+        """ Returns the next number beginning from 0. """
         self.__v += 1
         return self.__v
 
     def get(self):
+        """ Returns the current number.
+
+        get() should only be used after next() to get the same number again.
+        """
         return self.__v
 
     def reset(self):
+        """ Resets the counter.
+
+        The first call to next() after this returns 0. """
         self.__v = -1
 
 def cleanName(name):
-    # must not contain [ ] : * ? / \
+    """ Cleans the name to be a valid sheet name in excel.
+
+    The characters [ ] : * ? / \ are removed.
+    """
     return re.sub(r'[\[\]:*?\\\/]', '', name)
 
 def xlsx(buffer, event, jobs):
+    """ Exports the helpers for given jobs of an event as excel spreadsheet.
+
+    Parameter:
+        buffer: a writeable bytes buffer (e.g. io.BytesIO or a file)
+        event:  the exported event
+        jobs:   a list of all exported jobs
+    """
     # create xlsx
     workbook = xlsxwriter.Workbook(buffer)
 
