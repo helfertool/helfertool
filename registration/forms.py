@@ -90,7 +90,10 @@ class RegisterForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['admins', 'text', 'imprint', 'registered', ]
+        exclude = ['text', 'imprint', 'registered', ]
+        widgets = {
+            'admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
+        }
 
 class JobForm(forms.ModelForm):
     class Meta:
