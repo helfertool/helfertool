@@ -1,0 +1,38 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete shift" %}</h2>
+
+    <form action="{% url 'delete_shift' event.url_name job.pk shift.pk %}" method="post">
+        {% csrf_token %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Job" %}</th>
+                <td>{{ shift.job.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Begin" %}</th>
+                <td>{{ shift.begin }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "End" %}</th>
+                <td>{{ shift.end }}</td>
+            </tr>
+        </table>
+
+        {% if shift.helper_set.count != 0 %}
+            <div class="alert alert-danger" role="alert">
+                {% trans "There are registered helpers for this shift. Remove it anyway?" %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">{% trans "Remove this shift?" %}</div>
+        {% endif %}
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}

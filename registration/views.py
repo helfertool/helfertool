@@ -9,7 +9,7 @@ from io import BytesIO
 
 from .models import Event, Job, Helper, Shift
 from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
-                   HelperDeleteForm
+                   HelperDeleteForm, ShiftDeleteForm
 from .utils import escape_filename
 from .export import xlsx
 
@@ -256,6 +256,37 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk):
                'shift': shift,
                'form': form}
     return render(request, 'registration/admin/delete_helper.html', context)
+
+@login_required
+def delete_shift(request, event_url_name, job_pk, shift_pk):
+    event = get_object_or_404(Event, url_name=event_url_name)
+    job = get_object_or_404(Job, pk=job_pk)
+    shift = get_object_or_404(Shift, pk=shift_pk)
+
+    # sanity check
+    if event != job.event or job != shift.job:
+        raise Http404
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = ShiftDeleteForm(request.POST or None, instance=shift)
+
+    if form.is_valid():
+        # delete shift
+        form.delete()
+
+        # redirect to shift
+        return HttpResponseRedirect(reverse('jobs_and_shifts', args=[event_url_name]))
+
+    # render page
+    context = {'event': event,
+               'shift': shift,
+               'job': job,
+               'form': form}
+    return render(request, 'registration/admin/delete_shift.html', context)
 
 @login_required
 def helpers(request, event_url_name, job_pk=None):

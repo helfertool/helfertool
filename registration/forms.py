@@ -173,3 +173,11 @@ class HelperDeleteForm(forms.ModelForm):
         # delete complete helper, if no shifts remain
         if self.instance.shifts.count() == 0:
             self.instance.delete()
+
+class ShiftDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Shift
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

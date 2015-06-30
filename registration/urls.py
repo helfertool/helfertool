@@ -36,6 +36,7 @@ urlpatterns = [
 
     # shifts
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/(?P<shift_pk>[0-9]+)$', views.edit_shift, name='edit_shift'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/(?P<shift_pk>[0-9]+)/delete/$', views.delete_shift, name='delete_shift'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/new$', views.edit_shift, name='new_shift'),
 
     # helpers
