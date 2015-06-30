@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils import formats, translation
+from django.utils.translation import ugettext as _
 
 from .models import Helper, Shift, Event, Job
 
@@ -59,19 +60,19 @@ class RegisterForm(forms.ModelForm):
                     infection_instruction_needed = True
 
         if number_of_shifts == 0:
-            raise ValidationError("Es muss mindestens eine Schicht gewählt sein")
+            raise ValidationError(_("You must select at least one shift."))
 
         # infection instruction needed but field not set?
         if infection_instruction_needed and self.cleaned_data['infection_instruction'] == "":
-            self.add_error('infection_instruction', "Es muss angegeben werden, \
-                           ob eine Gesundheitsbelehrung vorhanden ist")
+            self.add_error('infection_instruction',
+                           _("You must specify, if you have a instruction for the handling of food."))
 
         # helper need for shift
         for shift in self.shifts:
             if self.cleaned_data[shift]:
                 cur_shift = Shift.objects.get(pk=self.shifts[shift])
                 if cur_shift.is_full():
-                    raise ValidationError("Es wurde eine volle Schicht ausgewählt")
+                    raise ValidationError("You selected a full shift.")
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save()  # must commit
@@ -142,3 +143,30 @@ class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
         exclude = ['shifts', ]
+
+class HelperDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Helper
+        fields = ['prename', 'surname', 'email', 'shifts',]
+        widgets = {
+            'shifts': forms.CheckboxSelectMultiple
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(HelperDeleteForm, self).__init__(*args, **kwargs)
+
+        # show only shifts, where the helper is registered
+        self.fields['shifts'].queryset = self.instance.shifts
+
+        # make prename, surname and email readonly
+        for name in ('prename', 'surname', 'email'):
+            self.fields[name].widget.attrs['readonly'] = True
+
+    def delete(self):
+        # delete all selected shifts
+        for shift in self.cleaned_data['shifts']:
+            self.instance.shifts.remove(shift)
+
+        # delete complete helper, if no shifts remain
+        if self.instance.shifts.count() == 0:
+            self.instance.delete()

@@ -8,7 +8,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from io import BytesIO
 
 from .models import Event, Job, Helper, Shift
-from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm
+from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
+                   HelperDeleteForm
 from .utils import escape_filename
 from .export import xlsx
 
@@ -126,7 +127,7 @@ def edit_event(request, event_url_name=None):
     # render page
     context = {'event': saved_event,
                'form': form}
-    return render(request, 'registration/admin/event.html', context)
+    return render(request, 'registration/admin/edit_event.html', context)
 
 @login_required
 def jobs_and_shifts(request, event_url_name):
@@ -165,7 +166,7 @@ def edit_job(request, event_url_name, job_pk=None):
     context = {'event': event,
                'job': job,
                'form': form}
-    return render(request, 'registration/admin/job.html', context)
+    return render(request, 'registration/admin/edit_job.html', context)
 
 @login_required
 def edit_shift(request, event_url_name, job_pk, shift_pk=None):
@@ -197,7 +198,7 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
                'job': job,
                'shift': shift,
                'form': form}
-    return render(request, 'registration/admin/shift.html', context)
+    return render(request, 'registration/admin/edit_shift.html', context)
 
 @login_required
 def edit_helper(request, event_url_name, helper_pk):
@@ -223,7 +224,38 @@ def edit_helper(request, event_url_name, helper_pk):
     context = {'event': event,
                'helper': helper,
                'form': form}
-    return render(request, 'registration/admin/helper.html', context)
+    return render(request, 'registration/admin/edit_helper.html', context)
+
+@login_required
+def delete_helper(request, event_url_name, helper_pk, shift_pk):
+    event = get_object_or_404(Event, url_name=event_url_name)
+    shift = get_object_or_404(Shift, pk=shift_pk)
+    helper = get_object_or_404(Helper, pk=helper_pk)
+
+    # sanity check
+    if event != helper.event or event != shift.job.event:
+        raise Http404
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = HelperDeleteForm(request.POST or None, instance=helper)
+
+    if form.is_valid():
+        # delete shifts or complete helpers
+        form.delete()
+
+        # redirect to shift
+        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, shift.pk]))
+
+    # render page
+    context = {'event': event,
+               'helper': helper,
+               'shift': shift,
+               'form': form}
+    return render(request, 'registration/admin/delete_helper.html', context)
 
 @login_required
 def helpers(request, event_url_name, job_pk=None):
@@ -237,7 +269,7 @@ def helpers(request, event_url_name, job_pk=None):
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
         context = {'event': event, 'job': job}
-        return render(request, 'registration/admin/helpers-job.html', context)
+        return render(request, 'registration/admin/helpers_for_job.html', context)
 
     # overview over jobs
     context = {'event': event}
