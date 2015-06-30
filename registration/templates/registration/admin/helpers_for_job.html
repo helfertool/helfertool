@@ -65,7 +65,7 @@
                             {% bootstrap_icon "pencil" %}
                             {% trans "Edit" %}
                         </a>
-                        <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
+                        <a href="{% url 'delete_helper' event.url_name helper.pk job.pk %}">
                             {% bootstrap_icon "remove" %}
                             {% trans "Delete" %}
                         </a>

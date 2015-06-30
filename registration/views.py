@@ -248,7 +248,7 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk):
         form.delete()
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, shift.pk]))
+        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, shift.job.pk]))
 
     # render page
     context = {'event': event,
