@@ -41,7 +41,7 @@ urlpatterns = [
     # helpers
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)$', views.helpers, name='jobhelpers'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/edit$', views.edit_helper, name='edit_helper'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)$', views.edit_helper, name='edit_helper'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)$', views.delete_helper, name='delete_helper'),
 
     # excel
