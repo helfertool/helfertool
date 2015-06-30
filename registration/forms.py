@@ -6,11 +6,22 @@ from django.utils.translation import ugettext as _
 from .models import Helper, Shift, Event, Job
 
 class RegisterForm(forms.ModelForm):
+    """ Form for registration of helpers.
+
+    This form asks for the personal data and handles the selection of shifts.
+    There is a BooleanField for each shift. clean() does the validation and
+    save() handles the shifts.
+    """
     class Meta:
         model = Helper
         fields = ['prename', 'surname', 'email', 'phone', 'shirt', 'vegetarian', 'infection_instruction', 'comment']
 
     def __init__(self, *args, **kwargs):
+        """ Customize the form.
+
+        The fields 'shirt' and 'vegetarian' are removed, if they are not
+        necessary. Then the custom fields for the shifts are created.
+        """
         event = kwargs.pop('event')
         self.shifts = {}
 
@@ -44,6 +55,14 @@ class RegisterForm(forms.ModelForm):
                 self.shifts[id] = shift.pk
 
     def clean(self):
+        """ Custom validation of shifts and other fields.
+
+        This method performs some validations:
+          * The helper must register for at least one shift.
+          * The field 'infection_instruction' must be set, if one of the
+            selected shifts requires this.
+          * The selected shift is not full.
+        """
         super(RegisterForm, self).clean()
 
         # number of shifts > 0

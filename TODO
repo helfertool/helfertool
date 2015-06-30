@@ -8,6 +8,8 @@ permissions:
 
 order of jobs
 
+atomic validation is shift is full
+
 responsive menu: bug with width of language dropdown
 
 javascript translation with django
