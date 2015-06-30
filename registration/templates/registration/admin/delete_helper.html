@@ -5,7 +5,7 @@
 {% block admincontent %}
     <h2>{% trans "Delete helper" %}</h2>
 
-    <form action="{% url 'delete_helper' event.url_name helper.pk shift.pk %}" method="post">
+    <form action="{% url 'delete_helper' event.url_name helper.pk job.pk %}" method="post">
         {% csrf_token %}
 
         {% bootstrap_field form.prename %}

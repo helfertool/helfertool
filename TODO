@@ -2,9 +2,6 @@ Validation in shift: begin < end (in model and for datetimepicker)
 
 delete_{event,job}
 
-delete_shift
-    what happens to helpers with 0 shifts?
-
 permissions:
     add event (without being superusr)
     add user

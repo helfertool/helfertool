@@ -3,6 +3,8 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.template import Context
 from django.template.defaultfilters import date as date_f
 from django.template.loader import get_template
@@ -143,6 +145,13 @@ class Shift(models.Model):
             return 0
 
         return int(round(self.num_helpers() / self.number * 100, 0))
+
+@receiver(pre_delete, sender=Shift, dispatch_uid='shift_delete')
+def shift_delete(sender, instance, using, **kwargs):
+    # delete helpers, that have only one shift, when this shift is deleted
+    for helper in instance.helper_set.all():
+        if helper.shifts.count() == 1:
+            helper.delete()
 
 class Helper(models.Model):
     """ Helper in one or more shifts.

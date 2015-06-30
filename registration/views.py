@@ -238,9 +238,9 @@ def edit_helper(request, event_url_name, helper_pk):
     return render(request, 'registration/admin/edit_helper.html', context)
 
 @login_required
-def delete_helper(request, event_url_name, helper_pk, shift_pk):
+def delete_helper(request, event_url_name, helper_pk, job_pk):
     event, job, shift, helper = get_or_404(event_url_name,
-                                               shift_pk=shift_pk,
+                                               job_pk=job_pk,
                                                helper_pk=helper_pk)
     # check permission
     if not event.is_admin(request.user):
@@ -254,12 +254,12 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk):
         form.delete()
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, shift.job.pk]))
+        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, job.pk]))
 
     # render page
     context = {'event': event,
                'helper': helper,
-               'shift': shift,
+               'job': job,
                'form': form}
     return render(request, 'registration/admin/delete_helper.html', context)
 
