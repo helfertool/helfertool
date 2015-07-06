@@ -1,0 +1,40 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete job" %}</h2>
+
+    <form action="{% url 'delete_job' event.url_name job.pk %}" method="post">
+        {% csrf_token %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Job" %}</th>
+                <td>{{ job.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Description" %}</th>
+                <td>{{ job.description }}</td>
+            </tr>
+        </table>
+
+        {% if job.shift_set.count != 0 %}
+            <div class="alert alert-danger" role="alert">
+                {% trans "There are shifts for this job. Remove it anyway?" %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">{% trans "Remove this job?" %}</div>
+        {% endif %}
+
+        {% if helpers_registered %}
+            <div class="alert alert-danger" role="alert">
+                {% trans "There are registered helpers for some of the shifts. Remove this job with all shifts and helpers?" %}
+            </div>
+        {% endif %}
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}

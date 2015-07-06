@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-30 20:52+0200\n"
-"PO-Revision-Date: 2015-06-30 20:53+0100\n"
+"POT-Creation-Date: 2015-07-06 22:11+0200\n"
+"PO-Revision-Date: 2015-07-06 22:13+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,171 +16,172 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.7.7\n"
+"X-Generator: Poedit 1.8.2\n"
 
-#: export.py:36 models.py:201
+#: export.py:55 models.py:251
 #: templates/registration/admin/helpers_for_job.html:32
 msgid "Prename"
 msgstr "Vorname"
 
-#: export.py:37 models.py:203
+#: export.py:56 models.py:253
 #: templates/registration/admin/helpers_for_job.html:33
 msgid "Surname"
 msgstr "Nachname"
 
-#: export.py:38 models.py:44 models.py:205
+#: export.py:57 models.py:54 models.py:255
 #: templates/registration/admin/helpers_for_job.html:34
 #: templates/registration/registered.html:21
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: export.py:41 models.py:207
+#: export.py:60 models.py:257
 #: templates/registration/admin/helpers_for_job.html:35
 #: templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: export.py:45 models.py:213
+#: export.py:64 models.py:263
 #: templates/registration/admin/helpers_for_job.html:37
 #: templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: export.py:49 models.py:216
+#: export.py:68 models.py:266
 #: templates/registration/admin/helpers_for_job.html:40
 #: templates/registration/registered.html:42
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: export.py:53 templates/registration/admin/helpers_for_job.html:43
+#: export.py:72 templates/registration/admin/helpers_for_job.html:43
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: export.py:56 models.py:210
+#: export.py:75 models.py:260
 #: templates/registration/admin/helpers_for_job.html:45
 #: templates/registration/registered.html:47
 msgid "Comment"
 msgstr "Kommentar"
 
-#: forms.py:63
+#: forms.py:82
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: forms.py:68
+#: forms.py:87
 msgid "You must specify, if you have a instruction for the handling of food."
-msgstr "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
+msgstr ""
+"Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: models.py:27
+#: models.py:37
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: models.py:28
+#: models.py:38
 msgid "May contain the following chars: a-zA-Z0-9."
 msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
 
-#: models.py:30
+#: models.py:40
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: models.py:33
+#: models.py:43
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: models.py:34
+#: models.py:44
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: models.py:36 templates/base.html:100
+#: models.py:46 templates/base.html:100
 msgid "Imprint"
 msgstr "Impressum"
 
-#: models.py:37
+#: models.py:47
 msgid "Display at the bottom of the registration form."
 msgstr "Wird bei der Anmeldung unten angezeigt."
 
-#: models.py:40
+#: models.py:50
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: models.py:41
+#: models.py:51
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: models.py:45
+#: models.py:55
 msgid "Used as sender of e-mails."
 msgstr "Wird als Absender von E-Mail genutzt."
 
-#: models.py:48
+#: models.py:58
 msgid "Registration possible"
 msgstr "Anmeldung möglich"
 
-#: models.py:53
+#: models.py:63
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: models.py:56
+#: models.py:66
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: models.py:58
+#: models.py:68
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: models.py:75 templates/registration/registered.html:17
+#: models.py:90 templates/registration/registered.html:17
 msgid "Name"
 msgstr "Name"
 
-#: models.py:76
+#: models.py:91
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: models.py:77
+#: models.py:92 templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: models.py:119 templates/registration/admin/delete_shift.html:17
-#: templates/registration/admin/jobs_and_shifts.html:33
+#: models.py:139 templates/registration/admin/delete_shift.html:17
+#: templates/registration/admin/jobs_and_shifts.html:39
 msgid "Begin"
 msgstr "Anfang"
 
-#: models.py:120 templates/registration/admin/delete_shift.html:21
-#: templates/registration/admin/jobs_and_shifts.html:34
+#: models.py:140 templates/registration/admin/delete_shift.html:21
+#: templates/registration/admin/jobs_and_shifts.html:40
 msgid "End"
 msgstr "Ende"
 
-#: models.py:121 templates/registration/admin/jobs_and_shifts.html:35
+#: models.py:141 templates/registration/admin/jobs_and_shifts.html:41
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: models.py:186
+#: models.py:236
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: models.py:187
+#: models.py:237
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: models.py:188
+#: models.py:238
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: models.py:192
+#: models.py:242
 msgid "No"
 msgstr "Nein"
 
-#: models.py:193
+#: models.py:243
 msgid "Valid"
 msgstr "Gültig"
 
-#: models.py:194
+#: models.py:244
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: models.py:217
+#: models.py:267
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: models.py:222 templates/registration/registered.html:36
+#: models.py:272 templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
@@ -272,23 +273,47 @@ msgid "Remove the helper from all selected shifts?"
 msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
 
 #: templates/registration/admin/delete_helper.html:21
+#: templates/registration/admin/delete_job.html:38
 #: templates/registration/admin/delete_shift.html:36
 #: templates/registration/admin/helpers_for_job.html:73
-#: templates/registration/admin/jobs_and_shifts.html:50
+#: templates/registration/admin/jobs_and_shifts.html:25
+#: templates/registration/admin/jobs_and_shifts.html:56
 msgid "Delete"
 msgstr "Löschen"
+
+#: templates/registration/admin/delete_job.html:6
+msgid "Delete job"
+msgstr "Aufgabe löschen"
+
+#: templates/registration/admin/delete_job.html:13
+#: templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
+#: templates/registration/admin/delete_job.html:24
+msgid "There are shifts for this job. Remove it anyway?"
+msgstr "Es gibt Schichten für diese Aufgabe. Die Aufgabe trotzdem löschen?"
+
+#: templates/registration/admin/delete_job.html:27
+msgid "Remove this job?"
+msgstr "Diese Aufgabe löschen?"
+
+#: templates/registration/admin/delete_job.html:32
+msgid ""
+"There are registered helpers for some of the shifts. Remove this job with "
+"all shifts and helpers?"
+msgstr ""
+"Für manche Schichten sind Helfer registriert. Die Aufgabe mit den Schichten "
+"und Helfern trotzdem löschen?"
 
 #: templates/registration/admin/delete_shift.html:6
 msgid "Delete shift"
 msgstr "Schicht löschen"
 
-#: templates/registration/admin/delete_shift.html:13
-msgid "Job"
-msgstr "Aufgabe"
-
 #: templates/registration/admin/delete_shift.html:28
 msgid "There are registered helpers for this shift. Remove it anyway?"
-msgstr "Es sind Helfer für diese Schicht registriert. Die Schicht trotzdem löschen?"
+msgstr ""
+"Es sind Helfer für diese Schicht registriert. Die Schicht trotzdem löschen?"
 
 #: templates/registration/admin/delete_shift.html:31
 msgid "Remove this shift?"
@@ -370,7 +395,7 @@ msgid "Edit shift"
 msgstr "Schicht bearbeiten"
 
 #: templates/registration/admin/edit_shift.html:11
-#: templates/registration/admin/jobs_and_shifts.html:25
+#: templates/registration/admin/jobs_and_shifts.html:31
 msgid "New shift"
 msgstr "Neue Schicht"
 
@@ -407,11 +432,11 @@ msgstr "Anmeldezeit"
 
 #: templates/registration/admin/helpers_for_job.html:69
 #: templates/registration/admin/jobs_and_shifts.html:19
-#: templates/registration/admin/jobs_and_shifts.html:46
+#: templates/registration/admin/jobs_and_shifts.html:52
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: templates/registration/admin/jobs_and_shifts.html:29
+#: templates/registration/admin/jobs_and_shifts.html:35
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
 
@@ -423,7 +448,8 @@ msgstr "Kein Zugriff"
 msgid "You have no permission to view this page!"
 msgstr "Du hast keine Berechtigung, um diese Seite anzusehen!"
 
-#: templates/registration/form.html:7 templates/registration/registered.html:6
+#: templates/registration/form.html:7
+#: templates/registration/registered.html:6
 #, python-format
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
@@ -450,7 +476,8 @@ msgstr "Verwalten"
 
 #: templates/registration/index.html:19
 msgid "At the moment there is no event you can register for."
-msgstr "Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
+msgstr ""
+"Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
 
 #: templates/registration/index.html:23
 msgid "Inactive"

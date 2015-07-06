@@ -20,6 +20,12 @@
 
             &nbsp;
 
+            <a href="{% url 'delete_job' event.url_name job.pk %}">
+            {% bootstrap_icon "remove" %}
+            {% trans "Delete" %}</a>
+
+            &nbsp;
+
             <a href="{% url 'new_shift' event.url_name job.pk %}">
             {% bootstrap_icon "plus" %}
             {% trans "New shift" %}</a>

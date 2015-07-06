@@ -200,3 +200,11 @@ class ShiftDeleteForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
+class JobDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Job
+        fields = []
+
+    def delete(self):
+        self.instance.delete()
