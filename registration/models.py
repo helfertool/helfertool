@@ -314,3 +314,7 @@ class Helper(models.Model):
             return None
 
         return self.shifts.all()[0].job.event
+
+    @property
+    def full_name(self):
+        return "%s %s" % (self.prename, self.surname)

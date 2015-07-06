@@ -90,6 +90,12 @@
         </nav>
 
         <div class="container">
+            {# messages #}
+            {% if messages %}
+                {% bootstrap_messages messages %}
+            {% endif %}
+
+            {# content #}
             {% block content %}{% endblock %}
         </div>
 

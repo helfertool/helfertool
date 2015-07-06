@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-06 22:11+0200\n"
-"PO-Revision-Date: 2015-07-06 22:13+0200\n"
+"POT-Creation-Date: 2015-07-06 23:06+0200\n"
+"PO-Revision-Date: 2015-07-06 23:08+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -29,6 +29,7 @@ msgid "Surname"
 msgstr "Nachname"
 
 #: export.py:57 models.py:54 models.py:255
+#: templates/registration/admin/delete_event.html:17
 #: templates/registration/admin/helpers_for_job.html:34
 #: templates/registration/registered.html:21
 msgid "E-Mail"
@@ -91,7 +92,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: models.py:46 templates/base.html:100
+#: models.py:46 templates/base.html:106
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -216,7 +217,7 @@ msgstr "Login"
 msgid "Switch"
 msgstr "Switch"
 
-#: templates/base.html:99
+#: templates/base.html:105
 msgid "Privacy"
 msgstr "Datenschutz"
 
@@ -238,7 +239,7 @@ msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
 #: templates/registration/admin/base.html:30
-#: templates/registration/admin/edit_event.html:7
+#: templates/registration/admin/edit_event.html:8
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
@@ -256,13 +257,36 @@ msgid "Common"
 msgstr "Allgemein"
 
 #: templates/registration/admin/base.html:40
-#: templates/registration/admin/edit_event.html:11
+#: templates/registration/admin/edit_event.html:12
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
 #: templates/registration/admin/base.html:41
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
+
+#: templates/registration/admin/delete_event.html:6
+#: templates/registration/admin/edit_event.html:25
+msgid "Delete event"
+msgstr "Veranstaltung löschen"
+
+#: templates/registration/admin/delete_event.html:13
+msgid "Event"
+msgstr "Veranstaltung"
+
+#: templates/registration/admin/delete_event.html:21
+msgid "Admins"
+msgstr "Administratoren"
+
+#: templates/registration/admin/delete_event.html:36
+msgid "Do you want to remove this event with all jobs, shifts and helpers?"
+msgstr ""
+"Willst du diese Veranstaltung mit allen Aufgaben, Schichten und Helfern "
+"löschen?"
+
+#: templates/registration/admin/delete_event.html:41
+msgid "Yes, I want to delete the complete event!"
+msgstr "Ja, ich will die komplette Veranstaltung löschen!"
 
 #: templates/registration/admin/delete_helper.html:6
 msgid "Delete helper"
@@ -319,7 +343,7 @@ msgstr ""
 msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
-#: templates/registration/admin/edit_event.html:19
+#: templates/registration/admin/edit_event.html:20
 #: templates/registration/admin/edit_helper.html:24
 #: templates/registration/admin/edit_job.html:19
 #: templates/registration/admin/edit_shift.html:23
@@ -327,48 +351,54 @@ msgid "Save"
 msgstr "Speichern"
 
 #: templates/registration/admin/edit_event.html:27
+msgid "You can delete this event including all jobs, shifts and helpers."
+msgstr ""
+"Du kannst diese Veranstaltung mit allen Aufgaben, Schichten und Helfern "
+"löschen."
+
+#: templates/registration/admin/edit_event.html:39
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: templates/registration/admin/edit_event.html:28
+#: templates/registration/admin/edit_event.html:40
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: templates/registration/admin/edit_event.html:29
+#: templates/registration/admin/edit_event.html:41
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: templates/registration/admin/edit_event.html:30
+#: templates/registration/admin/edit_event.html:42
 msgid "Filter"
 msgstr "Filter"
 
-#: templates/registration/admin/edit_event.html:31
+#: templates/registration/admin/edit_event.html:43
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: templates/registration/admin/edit_event.html:32
+#: templates/registration/admin/edit_event.html:44
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: templates/registration/admin/edit_event.html:33
+#: templates/registration/admin/edit_event.html:45
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: templates/registration/admin/edit_event.html:34
+#: templates/registration/admin/edit_event.html:46
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: templates/registration/admin/edit_event.html:35
+#: templates/registration/admin/edit_event.html:47
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: templates/registration/admin/edit_event.html:36
+#: templates/registration/admin/edit_event.html:48
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: templates/registration/admin/edit_event.html:37
+#: templates/registration/admin/edit_event.html:49
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -506,6 +536,25 @@ msgstr "Helferanmeldung für %(eventname)s"
 #: templates/registration/registered.html:13
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
+
+#: views.py:257
+#, python-format
+msgid "Helper deleted: %(name)s"
+msgstr "Helfer gelöscht: %(name)s"
+
+#: views.py:282
+msgid "Shift deleted"
+msgstr "Schicht gelöscht"
+
+#: views.py:307
+#, python-format
+msgid "Job deleted: %(name)s"
+msgstr "Aufgabe gelöscht: %(name)s"
+
+#: views.py:340
+#, python-format
+msgid "Event deleted: %(name)s"
+msgstr "Veranstaltung gelöscht: %(name)s"
 
 #~ msgid "Reset"
 #~ msgstr "Reset"

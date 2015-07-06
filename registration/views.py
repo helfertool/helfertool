@@ -1,9 +1,10 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.translation import ugettext as _
 
 from io import BytesIO
 
@@ -253,6 +254,7 @@ def delete_helper(request, event_url_name, helper_pk, job_pk):
     if form.is_valid():
         # delete shifts or complete helpers
         form.delete()
+        messages.success(request, _("Helper deleted: %(name)s") % {'name': helper.full_name})
 
         # redirect to shift
         return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, job.pk]))
@@ -277,6 +279,7 @@ def delete_shift(request, event_url_name, job_pk, shift_pk):
 
     if form.is_valid():
         form.delete()
+        messages.success(request, _("Shift deleted"))
 
         # redirect to shift
         return HttpResponseRedirect(reverse('jobs_and_shifts', args=[event_url_name]))
@@ -301,6 +304,8 @@ def delete_job(request, event_url_name, job_pk):
 
     if form.is_valid():
         form.delete()
+        messages.success(request, _("Job deleted: %(name)s") % {'name': job.name})
+
 
         # redirect to shift
         return HttpResponseRedirect(reverse('jobs_and_shifts', args=[event_url_name]))
@@ -332,6 +337,7 @@ def delete_event(request, event_url_name):
 
     if form.is_valid():
         form.delete()
+        messages.success(request, _("Event deleted: %(name)s") % {'name': event.name})
 
         # redirect to shift
         return HttpResponseRedirect(reverse('index'))
