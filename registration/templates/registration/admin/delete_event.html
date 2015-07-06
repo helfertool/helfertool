@@ -1,0 +1,43 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete event" %}</h2>
+
+    <form action="{% url 'delete_event' event.url_name %}" method="post">
+        {% csrf_token %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Event" %}</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "E-Mail" %}</th>
+                <td>{{ event.email }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Admins" %}</th>
+                <td>
+                    {% for admin in event.admins.all %}
+                        {% if admin.first_name and admin.last_name %}
+                            {{ admin.first_name }} {{ admin.last_name }} ({{ admin.username }})
+                        {% else %}
+                            {{ admin.username }}
+                        {% endif %}
+                        <br />
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+
+        <div class="alert alert-danger" role="alert">
+            {% trans "Do you want to remove this event with all jobs, shifts and helpers?" %}
+        </div>
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Yes, I want to delete the complete event!" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}

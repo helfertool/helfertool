@@ -208,3 +208,11 @@ class JobDeleteForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
+class EventDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = []
+
+    def delete(self):
+        self.instance.delete()
