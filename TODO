@@ -1,7 +1,5 @@
 Validation in shift: begin < end (in model and for datetimepicker)
 
-delete_{event,job}
-
 permissions:
     add event (without being superusr)
     add user
