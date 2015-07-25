@@ -1,5 +1,6 @@
 from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
+from utils import u
 import re
 import xlsxwriter
 
@@ -95,11 +96,11 @@ def xlsx(buffer, event, jobs):
                 worksheet.write(row, column.next(), helper.email)
                 worksheet.write(row, column.next(), helper.phone)
                 if event.ask_shirt:
-                    worksheet.write(row, column.next(), str(helper.get_shirt_display()))
+                    worksheet.write(row, column.next(), u(helper.get_shirt_display()))
                 if event.ask_vegetarian:
                     worksheet.write(row, column.next(), filters.yesno(helper.vegetarian))
                 if job.infection_instruction:
-                    worksheet.write(row, column.next(), str(helper.get_infection_instruction_short()))
+                    worksheet.write(row, column.next(), u(helper.get_infection_instruction_short()))
                 worksheet.write(row, column.next(), helper.comment)
                 row += 1
 
