@@ -1,8 +1,9 @@
 from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
-from utils import u
 import re
 import xlsxwriter
+
+from .utils import u
 
 class Iterator():
     """ Returns ascending natural numbers beginning from 0. """
