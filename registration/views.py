@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, Group
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -11,9 +12,11 @@ from io import BytesIO
 from .models import Event, Job, Helper, Shift
 from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
                    HelperDeleteForm, ShiftDeleteForm, JobDeleteForm, \
-                   EventDeleteForm
+                   EventDeleteForm, UsernameForm, DeleteForm
 from .utils import escape_filename
 from .export import xlsx
+from .templatetags.groups import has_group, has_addevent_group, \
+                                 has_adduser_group, has_perm_group
 
 def nopermission(request):
     return render(request, 'registration/admin/nopermission.html')
@@ -109,7 +112,8 @@ def registered(request, event_url_name, helper_id):
 @login_required
 def admin(request, event_url_name=None):
     # check permission
-    if not superuser_or_admin(request.user, event_url_name):
+    if not (superuser_or_admin(request.user, event_url_name) or \
+            has_perm_group(request.user)):
         return nopermission(request)
 
     # get event
@@ -125,8 +129,14 @@ def admin(request, event_url_name=None):
 @login_required
 def edit_event(request, event_url_name=None):
     # check permission
-    if not superuser_or_admin(request.user, event_url_name):
-        return nopermission(request)
+    if event_url_name:
+        # event exists -> superuser or admin
+        if not superuser_or_admin(request.user, event_url_name):
+            return nopermission(request)
+    else:
+        # event will be created -> superuser or addevent group
+        if not (request.user.is_superuser or has_addevent_group(request.user)):
+            return nopermission(request)
 
     # get event
     event = None
@@ -137,14 +147,11 @@ def edit_event(request, event_url_name=None):
     form = EventForm(request.POST or None, instance=event)
 
     if form.is_valid():
-        helper = form.save()
+        event = form.save()
 
         # redirect to this page, so reload does not send the form data again
         # if the event was created, this redirects to the event settings
-        #if event_url_name:  # edit of existing event
-        #    new_url_name = event.url_name
-        #else:  # new event created
-        #    new_url_name = form['url_name'].value()
+        messages.success(request, _("Event was created: %(event)s") % {'event': event.name})
         return HttpResponseRedirect(reverse('edit_event', args=[form['url_name'].value()]))
 
     # get event without possible invalid modifications from form
@@ -364,6 +371,73 @@ def helpers(request, event_url_name, job_pk=None):
     # overview over jobs
     context = {'event': event}
     return render(request, 'registration/admin/helpers.html', context)
+
+@login_required
+def permissions(request):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    # users, that can add users
+    users_adduser = User.objects.filter(groups__name__in=[settings.GROUP_ADDUSER, ])
+
+    # users, that can add users
+    users_addevent = User.objects.filter(groups__name__in=[settings.GROUP_ADDEVENT, ])
+
+    # form for adduser
+    form_adduser = UsernameForm(request.POST or None, prefix='adduser')
+    if form_adduser.is_valid():
+        user = form_adduser.get_user()
+        if user:
+            group, created = Group.objects.get_or_create(name=settings.GROUP_ADDUSER)
+            user.groups.add(group)
+            messages.success(request, _("%(username)s can add users now") % {'username': user})
+
+    # form for addevent
+    form_addevent = UsernameForm(request.POST or None, prefix='addevent')
+    if form_addevent.is_valid():
+        user = form_addevent.get_user()
+        if user:
+            group, created = Group.objects.get_or_create(name=settings.GROUP_ADDEVENT)
+            user.groups.add(group)
+            messages.success(request, _("%(username)s can add events now") % {'username': user})
+
+    context = {'users_adduser': users_adduser,
+               'users_addevent': users_addevent,
+               'form_adduser': form_adduser,
+               'form_addevent': form_addevent}
+    return render(request, 'registration/admin/permissions.html', context)
+
+@login_required
+def delete_permission(request, user_pk, groupname):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    # get user
+    user = get_object_or_404(User, pk=user_pk)
+
+    # validate group (is only set in urls, so should be ok)
+    if not groupname in (settings.GROUP_ADDUSER, settings.GROUP_ADDEVENT):
+        raise Http404()
+
+    # form
+    form = DeleteForm(request.POST or None)
+    if form.is_valid():
+        # delete from group
+        group = Group.objects.get(name=groupname)
+        if group:
+            user.groups.remove(group)
+
+        # notification
+        messages.success(request, _("Removed permission for user %(username)s") % {'username': user})
+
+        # redirect to overview over permissions
+        return HttpResponseRedirect(reverse('permissions'))
+
+    context = {'form': form,
+               'user': user}
+    return render(request, 'registration/admin/delete_permission.html', context)
 
 @login_required
 def excel(request, event_url_name, job_pk=None):

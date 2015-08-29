@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load groups %}
 
 {% block title %}
     {% if event %}
@@ -34,11 +35,16 @@
             {% endif %}
 
             {# for superusers #}
-            {% if user.is_superuser %}
+            {% if user.is_superuser or user|has_perm_group %}
                 <h2>{% trans "Common" %}</h2>
                 <ul class="nav nav-pills nav-stacked">
-                    <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
-                    <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
+                    {% if user.is_superuser or user|has_addevent_group %}
+                        <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                        <li><a href="{% url 'permissions' %}">{% trans "Permissions" %}</a></li>
+                        <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
+                    {% endif %}
                 </ul>
             {% endif %}
         </div>

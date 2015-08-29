@@ -1,0 +1,68 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Permissions" %}</h2>
+
+    <h3>{% trans "Add events" %}</h3>
+    {% if users_addevent.count == 0 %}
+        <p class="text-muted">{% trans "There are no users, that can add events." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Username" %}</th>
+                <th></th>
+            </tr>
+            {% for u in users_addevent %}
+                <tr>
+                    <td>{{ u.get_full_name }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>
+                        <a href="{% url 'delete_event_permission' u.pk %}">
+                        {% bootstrap_icon "remove" %}
+                        {% trans "Delete permission" %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form_addevent show_label=False form_group_class="form-group pull-left"%}
+        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+    </form>
+
+
+    <h3>{% trans "Add users" %}</h3>
+    {% if users_adduser.count == 0 %}
+        <p class="text-muted">{% trans "There are no users, that can add users." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Username" %}</th>
+                <th></th>
+            </tr>
+            {% for u in users_adduser %}
+                <tr>
+                    <td>{{ u.get_full_name }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>
+                        <a href="{% url 'delete_user_permission' u.pk %}">
+                        {% bootstrap_icon "remove" %}
+                        {% trans "Delete permission" %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form_adduser show_label=False form_group_class="form-group pull-left"%}
+        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+    </form>
+{% endblock %}

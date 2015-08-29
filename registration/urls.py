@@ -16,6 +16,13 @@ urlpatterns = [
     # admin interface
     url(r'^admin/$', views.admin, name='admin'),
     url(r'^admin/new/$', views.edit_event, name='new_event'),
+    url(r'^admin/permissions/$', views.permissions, name='permissions'),
+    url(r'^admin/permissions/(?P<user_pk>[0-9]+)/event/delete/$',
+        views.delete_permission, {'groupname': settings.GROUP_ADDUSER},
+         name='delete_user_permission'),
+    url(r'^admin/permissions/(?P<user_pk>[0-9]+)/user/delete/$',
+        views.delete_permission, {'groupname': settings.GROUP_ADDEVENT},
+        name='delete_event_permission'),
 
     # internationalization
     url(r'^i18n/', include('django.conf.urls.i18n')),

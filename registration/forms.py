@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.utils import formats, translation
 from django.utils.translation import ugettext as _
@@ -166,6 +167,25 @@ class HelperForm(forms.ModelForm):
         model = Helper
         exclude = ['shifts', ]
 
+class UsernameForm(forms.Form):
+    username = forms.CharField(label=_('Username'), max_length=100, required=False)
+
+    instance = None
+
+    def clean(self):
+        cleaned_data = super(UsernameForm, self).clean()
+        username = cleaned_data.get("username")
+
+        # search for user
+        if username:
+            try:
+                self.instance = User.objects.get(username=username)
+            except User.DoesNotExist as e:
+                raise forms.ValidationError(_("The user does not exist."))
+
+    def get_user(self):
+        return self.instance
+
 class HelperDeleteForm(forms.ModelForm):
     class Meta:
         model = Helper
@@ -216,3 +236,6 @@ class EventDeleteForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
+class DeleteForm(forms.Form):
+    pass
