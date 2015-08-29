@@ -58,7 +58,7 @@ class Event(models.Model):
     active = models.BooleanField(default=False,
                                  verbose_name=_("Registration possible"))
 
-    admins = models.ManyToManyField(User)
+    admins = models.ManyToManyField(User, blank=True)
 
     ask_shirt = models.BooleanField(default=True,
                                     verbose_name=_("Ask for T-shirt size"))
@@ -97,7 +97,7 @@ class Job(models.Model):
     name = models.CharField(max_length=200, verbose_name=_("Name"))
     infection_instruction = models.BooleanField(default=False, verbose_name=_("Instruction for the handling of food necessary"))
     description = models.TextField(blank=True, verbose_name=_("Description"))
-    job_admins = models.ManyToManyField(User)
+    job_admins = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)

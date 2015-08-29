@@ -120,6 +120,9 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['name', 'description', 'event', ]
+        widgets = {
+            'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
+        }
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event')
@@ -128,6 +131,7 @@ class JobForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing
+        self.save_m2m() # save m2m, otherwise job_admins is lost
 
         # add event
         instance.event = self.event
