@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
-{% load groups %}
+{% load permissions %}
 
 {% block title %}
     {% if event %}
@@ -14,12 +14,15 @@
 {% endblock %}
 
 {% block content %}
+    {% is_involved event as involved %}
+    {% is_admin event as admin %}
+
     <h1>{% trans "Administration" %}</h1>
 
     <div class="row">
         <div class="col-md-3">
             {# for event #}
-            {% if event %}
+            {% if event and involved %}
                 <h2>{{ event.name }}</h2>
                 <ul class="nav nav-pills nav-stacked">
                     <li>
@@ -28,8 +31,10 @@
                             {% trans "Go to registration" %}
                         </a>
                     </li>
-                    <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
-                    <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
+                    {% if admin %}
+                        <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
+                        <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
+                    {% endif %}
                     <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
                 </ul>
             {% endif %}

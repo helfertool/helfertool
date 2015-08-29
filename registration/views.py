@@ -15,25 +15,29 @@ from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
                    EventDeleteForm, UsernameForm, DeleteForm, UserCreationForm
 from .utils import escape_filename
 from .export import xlsx
-from .templatetags.groups import has_group, has_addevent_group, \
-                                 has_adduser_group, has_perm_group
+from .templatetags.permissions import has_group, has_addevent_group, \
+                                      has_adduser_group, has_perm_group
 
 def nopermission(request):
     return render(request, 'registration/admin/nopermission.html')
 
-
-def superuser_or_admin(user, event_url_name=None):
+def is_involved(user, event_url_name=None, admin_required=False):
     if user.is_superuser:
         return True
 
     try:
         event = Event.objects.get(url_name=event_url_name)
-        if event.is_admin(user):
-            return True
+        if admin_required:
+            return event.is_admin(user)
+        else:
+            return event.is_involved(user)
     except Event.DoesNotExist:
         pass
 
     return False
+
+def is_admin(user, event_url_name=None):
+    return is_involved(user, event_url_name, admin_required=True)
 
 def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
                    helper_pk=None):
@@ -67,14 +71,14 @@ def index(request):
 
     # check is user is admin
     for e in events:
-        e.is_admin = e.is_admin(request.user)
+        e.involved = e.is_involved(request.user)
 
     # filter events, that are not active and where user is not admin
     active_events = [e for e in events if e.active]
-    administered_events = [e for e in events if not  e.active and e.is_admin]
+    involved_events = [e for e in events if not e.active and e.involved]
 
     context = {'active_events': active_events,
-               'administered_events': administered_events}
+               'involved_events': involved_events}
     return render(request, 'registration/index.html', context)
 
 def form(request, event_url_name):
@@ -86,7 +90,7 @@ def form(request, event_url_name):
         if not request.user.is_authenticated():
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
         # logged in -> check permission
-        elif not event.is_admin(request.user):
+        elif not event.is_involved(request.user):
             return nopermission(request)
 
     # handle form
@@ -102,8 +106,7 @@ def form(request, event_url_name):
     return render(request, 'registration/form.html', context)
 
 def registered(request, event_url_name, helper_id):
-    event = get_object_or_404(Event, url_name=event_url_name)
-    helper = get_object_or_404(Helper, pk=helper_id)
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
 
     context = {'event': event,
                'data': helper}
@@ -112,12 +115,13 @@ def registered(request, event_url_name, helper_id):
 @login_required
 def admin(request, event_url_name=None):
     # check permission
-    if not (superuser_or_admin(request.user, event_url_name) or \
+    if not (is_involved(request.user, event_url_name) or \
             has_perm_group(request.user)):
         return nopermission(request)
 
     # get event
     event = None
+    involved = False
     if event_url_name:
         event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -128,10 +132,11 @@ def admin(request, event_url_name=None):
 
 @login_required
 def edit_event(request, event_url_name=None):
+    # TODO shorten
     # check permission
     if event_url_name:
         # event exists -> superuser or admin
-        if not superuser_or_admin(request.user, event_url_name):
+        if not is_admin(request.user, event_url_name):
             return nopermission(request)
     else:
         # event will be created -> superuser or addevent group
@@ -149,9 +154,11 @@ def edit_event(request, event_url_name=None):
     if form.is_valid():
         event = form.save()
 
+        if event_url_name:
+            messages.success(request, _("Event was created: %(event)s") % {'event': event.name})
+
         # redirect to this page, so reload does not send the form data again
         # if the event was created, this redirects to the event settings
-        messages.success(request, _("Event was created: %(event)s") % {'event': event.name})
         return HttpResponseRedirect(reverse('edit_event', args=[form['url_name'].value()]))
 
     # get event without possible invalid modifications from form
@@ -230,7 +237,7 @@ def edit_helper(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not helper.can_edit(request.user):
         return nopermission(request)
 
     # form
@@ -252,16 +259,27 @@ def delete_helper(request, event_url_name, helper_pk, job_pk):
                                                job_pk=job_pk,
                                                helper_pk=helper_pk)
     # check permission
-    if not event.is_admin(request.user):
+    if not helper.can_edit(request.user):
         return nopermission(request)
 
     # form
     form = HelperDeleteForm(request.POST or None, instance=helper)
 
     if form.is_valid():
+        # check permission
+        allowed = True
+        for shift in form.get_deleted_shifts():
+            if not shift.job.is_admin(request.user):
+                allowed = False
+                messages.error(request, _("You cannot delete the helper from "
+                                          "other shifts. The helper was not "
+                                          "deleted"))
+                break
+
         # delete shifts or complete helpers
-        form.delete()
-        messages.success(request, _("Helper deleted: %(name)s") % {'name': helper.full_name})
+        if allowed:
+            form.delete()
+            messages.success(request, _("Helper deleted: %(name)s") % {'name': helper.full_name})
 
         # redirect to shift
         return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, job.pk]))
@@ -359,12 +377,18 @@ def helpers(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not event.is_involved(request.user):
         return nopermission(request)
 
     # helpers of one job
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
+
+        # check permission
+        if not job.is_admin(request.user):
+            return nopermission(request)
+
+        # show list of helpers
         context = {'event': event, 'job': job}
         return render(request, 'registration/admin/helpers_for_job.html', context)
 
@@ -460,16 +484,21 @@ def add_user(request):
 def excel(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
-    # check permission
-    if not event.is_admin(request.user):
-        return nopermission(request)
-
     # list of jobs for export
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
+
+        # check permission
+        if not job.is_admin(request.user):
+            return nopermission(request)
+
         jobs = [job, ]
         filename = "%s - %s" % (event.name, job.name)
     else:
+        # check permission
+        if not event.is_admin(request.user):
+            return nopermission(request)
+
         jobs = event.job_set.all()
         filename = event.name
 

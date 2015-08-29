@@ -2,61 +2,71 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load permissions %}
 
 {% block title %}{% blocktrans with eventname=event.name %}Helpers for {{ eventname }}{% endblocktrans %}{% endblock %}
 
 {% block admincontent %}
+    {% is_admin event as admin %}
+
     <h2>{% trans "Overview over helpers" %}</h2>
 
-    <p>
-        {% bootstrap_icon "download-alt" %}
-        &nbsp;{% trans "Export" %}:
-        &nbsp;<a href="{% url 'excel' event.url_name %}" class="icon">
-            <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
-        </a>
-    </p>
+    {# export of all jobs #}
+    {% if admin %}
+        <p>
+            {% bootstrap_icon "download-alt" %}
+            &nbsp;{% trans "Export" %}:
+            &nbsp;<a href="{% url 'excel' event.url_name %}" class="icon">
+                <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
+            </a>
+        </p>
+    {% endif %}
 
     {% for job in event.job_set.all %}
-        <h3>{{ job.name }}</h3>
+        {% is_job_admin job as job_admin %}
 
-        <p>
-            <a href="{% url 'jobhelpers' event.url_name job.pk %}">
-            {% bootstrap_icon "info-sign" %}
-            {% trans "Show" %}</a>
-        </p>
+        {% if job_admin %}
+            <h3>{{ job.name }}</h3>
 
-        <table class="shifts">
-            <tr>
-                {% for day, shifts in job.shifts_by_day.items %}
-                    <th>{{ day }}</th>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for day, shifts in job.shifts_by_day.items %}
-                    <td>
-                        {% for shift in shifts %}
-                            {{ shift.time_hours }}
+            <p>
+                <a href="{% url 'jobhelpers' event.url_name job.pk %}">
+                {% bootstrap_icon "info-sign" %}
+                {% trans "Show" %}</a>
+            </p>
 
-                            <span class="numbers">
-                                ({{ shift.num_helpers }}/{{ shift.number }})
-                            </span>
+            <table class="shifts">
+                <tr>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <td>
+                            {% for shift in shifts %}
+                                {{ shift.time_hours }}
 
-                            <div class="progress">
-                                {% if shift.helpers_percent = 100 %}
-                                    <div class="progress-bar progress-bar-success" role="progressbar"
-                                {% elif shift.helpers_percent < 50 %}
-                                    <div class="progress-bar progress-bar-danger" role="progressbar"
-                                {% else %}
-                                    <div class="progress-bar" role="progressbar"
-                                {% endif %}
-                                     aria-valuenow="{{ shift.helpers_percent }}"
-                                     aria-valuemin="0" aria-valuemax="100"
-                                     style="width: {{ shift.helpers_percent }}%;">
+                                <span class="numbers">
+                                    ({{ shift.num_helpers }}/{{ shift.number }})
+                                </span>
+
+                                <div class="progress">
+                                    {% if shift.helpers_percent = 100 %}
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                    {% elif shift.helpers_percent < 50 %}
+                                        <div class="progress-bar progress-bar-danger" role="progressbar"
+                                    {% else %}
+                                        <div class="progress-bar" role="progressbar"
+                                    {% endif %}
+                                         aria-valuenow="{{ shift.helpers_percent }}"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width: {{ shift.helpers_percent }}%;">
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </td>
-                {% endfor %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                {% endif %}
             </tr>
         </table>
     {% endfor %}

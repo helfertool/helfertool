@@ -241,6 +241,9 @@ class HelperDeleteForm(forms.ModelForm):
         for name in ('prename', 'surname', 'email'):
             self.fields[name].widget.attrs['readonly'] = True
 
+    def get_deleted_shifts(self):
+        return self.cleaned_data['shifts']
+
     def delete(self):
         # delete all selected shifts
         for shift in self.cleaned_data['shifts']:

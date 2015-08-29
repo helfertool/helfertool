@@ -83,6 +83,22 @@ class Event(models.Model):
         """
         return user.is_superuser or self.admins.filter(pk=user.pk).exists()
 
+    def is_involved(self, user):
+        """ Check if is_admin is fulfilled or the user is admin of a job.
+
+        :param user: the user
+        :type user: :class:`django.contrib.auth.models.User`
+        """
+        if self.is_admin(user):
+            return True
+
+        # iterate over all jobs
+        for job in self.job_set.all():
+            if job.job_admins.filter(pk=user.pk).exists():
+                return True
+
+        return False
+
 class Job(models.Model):
     """ A job that contains min. 1 shift.
 
@@ -101,6 +117,19 @@ class Job(models.Model):
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
+
+    def is_admin(self, user):
+        """ Check, if a user is admin of this job and returns a boolean.
+
+        Superusers and admins of the event are also admins of a shift.
+
+        :param user: the user
+        :type user: :class:`django.contrib.auth.models.User`
+
+        :returns: True or False
+        """
+        return self.event.is_admin(user) or \
+               self.job_admins.filter(pk=user.pk).exists()
 
     def shifts_by_day(self):
         """ Returns all shifts grouped sorted by day and sorted by time.
@@ -291,6 +320,12 @@ class Helper(models.Model):
             if item[0] == self.infection_instruction:
                 return item[1]
         return ""
+
+    def can_edit(self, user):
+        for shift in self.shifts.all():
+            if shift.job.is_admin(user):
+                return True
+        return False
 
     def send_mail(self):
         """ Send a confirmation e-mail to the registered helper.

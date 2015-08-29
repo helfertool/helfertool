@@ -1,24 +1,21 @@
-Validation in shift: begin < end (in model and for datetimepicker)
+* Validation in shift: begin < end (in model and for datetimepicker)
+* order of jobs
+* atomic validation if shift is full
+* ask for preferred language on registration
+* send mail to helpers (in job or all)
+* Form to add helper
+  * add helper to shift
+  * responsibles
+* Responsive menu: bug with width of language dropdown
+* Validierung per Mail
+* Badge Generierung (Rechte festlegen)
+* Verschicken mit Link
+* Freischalten um Uhrzeit
+* Load Test
 
-order of jobs
+After ESP
+=========
 
-atomic validation if shift is full
-
-ask for preferred language on registration
-
-Frontend
-========
- * Number of helpers in shift: negative number can be selected, validation only on save
- * Javascript translation with Django
- * Responsive menu: bug with width of language dropdown
-
-ESP
-===
-
-Validierung per Mail
-Badge Generierung (Rechte festlegen)
-Load Test
-Zugriff auf einzelne Aufgabe
-Verschicken mit Link
-Freischalten um Uhrzeit?
-
+* delete helper as job admin: cannot select other shifts
+* Javascript translation with Django
+* Number of helpers in shift: negative number can be selected, validation only on save

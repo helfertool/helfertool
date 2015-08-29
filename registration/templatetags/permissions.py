@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 
 register = template.Library()
 
+# groups
+
 @register.filter
 def has_group(user, groupname):
     return user.groups.filter(name=groupname).exists()
@@ -20,3 +22,17 @@ def has_addevent_group(user):
 def has_perm_group(user):
     return has_group(user, settings.GROUP_ADDUSER) or \
            has_group(user, settings.GROUP_ADDEVENT)
+
+# admins, involved, job_admins
+
+@register.assignment_tag(takes_context=True)
+def is_admin(context, event):
+    return event.is_admin(context["user"])
+
+@register.assignment_tag(takes_context=True)
+def is_involved(context, event):
+    return event.is_involved(context["user"])
+
+@register.assignment_tag(takes_context=True)
+def is_job_admin(context, job):
+    return job.is_admin(context["user"])
