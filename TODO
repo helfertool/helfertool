@@ -4,6 +4,8 @@ order of jobs
 
 atomic validation if shift is full
 
+ask for preferred language on registration
+
 Frontend
 ========
  * Number of helpers in shift: negative number can be selected, validation only on save
