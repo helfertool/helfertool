@@ -1,0 +1,15 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Add user" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Add" %}" class="btn btn-default" />
+    </form>
+{% endblock %}

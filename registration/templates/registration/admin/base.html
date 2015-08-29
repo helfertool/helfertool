@@ -41,6 +41,9 @@
                     {% if user.is_superuser or user|has_addevent_group %}
                         <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
                     {% endif %}
+                    {% if user.is_superuser or user|has_adduser_group %}
+                        <li><a href="{% url 'add_user' %}">{% trans "Add user" %}</a></li>
+                    {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'permissions' %}">{% trans "Permissions" %}</a></li>
                         <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>

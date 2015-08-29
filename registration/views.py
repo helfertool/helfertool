@@ -12,7 +12,7 @@ from io import BytesIO
 from .models import Event, Job, Helper, Shift
 from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
                    HelperDeleteForm, ShiftDeleteForm, JobDeleteForm, \
-                   EventDeleteForm, UsernameForm, DeleteForm
+                   EventDeleteForm, UsernameForm, DeleteForm, UserCreationForm
 from .utils import escape_filename
 from .export import xlsx
 from .templatetags.groups import has_group, has_addevent_group, \
@@ -438,6 +438,23 @@ def delete_permission(request, user_pk, groupname):
     context = {'form': form,
                'user': user}
     return render(request, 'registration/admin/delete_permission.html', context)
+
+@login_required
+def add_user(request):
+    # check permission
+    if not (request.user.is_superuser or has_adduser_group(request.user)):
+        return nopermission(request)
+
+    # form
+    form = UserCreationForm(request.POST or None)
+
+    if form.is_valid():
+        user = form.save()
+        messages.success(request, _("Added user %(username)s" % {'username': user}))
+        return HttpResponseRedirect(reverse('add_user'))
+
+    context = {'form': form}
+    return render(request, 'registration/admin/add_user.html', context)
 
 @login_required
 def excel(request, event_url_name, job_pk=None):

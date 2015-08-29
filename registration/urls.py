@@ -16,6 +16,7 @@ urlpatterns = [
     # admin interface
     url(r'^admin/$', views.admin, name='admin'),
     url(r'^admin/new/$', views.edit_event, name='new_event'),
+    url(r'^admin/user/$', views.add_user, name='add_user'),
     url(r'^admin/permissions/$', views.permissions, name='permissions'),
     url(r'^admin/permissions/(?P<user_pk>[0-9]+)/event/delete/$',
         views.delete_permission, {'groupname': settings.GROUP_ADDUSER},
