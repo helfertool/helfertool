@@ -12,5 +12,8 @@ Session.vim
 *.log
 *.pot
 
+# sphinx
+/doc/build/
+
 # sqlite database
 /db.sqlite3

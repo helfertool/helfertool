@@ -19,19 +19,20 @@ class Event(models.Model):
     """ Event for registration.
 
     Columns:
-        url_name: the ID of the event used in URLs
-        name: the name of the event
-        text: text at begin of registration
-        imprint: text at the bottom if the registration page
-        registered: text after the successful registration
-        email: e-mail address used as sender of automatic e-mails
-        active: is the registration opened?
-        admins: list of admins of this event, they can see and edit everything
-        ask_shirt: ask for the t-shirt size during registration
-        ask_vegetarian: ask, if the helper is vegetarian
-        show_public_numbers: show the number of current and maximal helpers on
+        :url_name: the ID of the event used in URLs
+        :name: the name of the event
+        :text: text at begin of registration
+        :imprint: text at the bottom if the registration page
+        :registered: text after the successful registration
+        :email: e-mail address used as sender of automatic e-mails
+        :active: is the registration opened?
+        :admins: list of admins of this event, they can see and edit everything
+        :ask_shirt: ask for the t-shirt size during registration
+        :ask_vegetarian: ask, if the helper is vegetarian
+        :show_public_numbers: show the number of current and maximal helpers on
                              the registration page
     """
+
     url_name = models.CharField(max_length=200, unique=True,
                                 validators=[RegexValidator('^[a-zA-Z0-9]+$')],
                                 verbose_name=_("Name for URL"),
@@ -74,6 +75,11 @@ class Event(models.Model):
         """ Check, if a user is admin of this event and returns a boolean.
 
         A superuser is also admin of an event.
+
+        :param user: the user
+        :type user: :class:`django.contrib.auth.models.User`
+
+        :returns: True or False
         """
         return user.is_superuser or self.admins.filter(pk=user.pk).exists()
 
@@ -81,10 +87,10 @@ class Job(models.Model):
     """ A job that contains min. 1 shift.
 
     Columns:
-        event: event of this job
-        name: name of the job, e.g, Bierstand
-        infection_instruction: is an instruction for the handling of food necessary?
-        description: longer description of the job
+        :event: event of this job
+        :name: name of the job, e.g, Bierstand
+        :infection_instruction: is an instruction for the handling of food necessary?
+        :description: longer description of the job
     """
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200, verbose_name=_("Name"))
@@ -130,10 +136,10 @@ class Shift(models.Model):
     """ A shift of one job.
 
     Columns:
-        job: job of this shift
-        begin: begin of the shift
-        end: end of the shift
-        number: number of people
+        :job: job of this shift
+        :begin: begin of the shift
+        :end: end of the shift
+        :number: number of people
     """
     job = models.ForeignKey(Job)
     begin = models.DateTimeField(verbose_name=_("Begin"))
@@ -195,16 +201,16 @@ class Helper(models.Model):
     """ Helper in one or more shifts.
 
     Columns:
-        shifts: all shifts of this person
-        prename: the prename
-        surname: the surname
-        email: the e-mail address
-        phone: phone number
-        comment: optional comment
-        shirt: t-shirt size (possible sizes are defined here)
-        vegetarian: is the helper vegetarian?
-        infection_instruction: status of the instruction for food handling
-        timestamp: time of registration
+        :shifts: all shifts of this person
+        :prename: the prename
+        :surname: the surname
+        :email: the e-mail address
+        :phone: phone number
+        :comment: optional comment
+        :shirt: t-shirt size (possible sizes are defined here)
+        :vegetarian: is the helper vegetarian?
+        :infection_instruction: status of the instruction for food handling
+        :timestamp: time of registration
     """
 
     SHIRT_S = 'S'
@@ -318,4 +324,5 @@ class Helper(models.Model):
 
     @property
     def full_name(self):
+        """ Returns full name of helper """
         return "%s %s" % (self.prename, self.surname)
