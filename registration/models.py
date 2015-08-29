@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator
 from django.db import models
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
@@ -138,7 +138,8 @@ class Shift(models.Model):
     job = models.ForeignKey(Job)
     begin = models.DateTimeField(verbose_name=_("Begin"))
     end = models.DateTimeField(verbose_name=_("End"))
-    number = models.IntegerField(default=0, verbose_name=_("Number of helpers"))
+    number = models.IntegerField(default=0, verbose_name=_("Number of helpers"),
+                                 validators=[MinValueValidator(0)])
 
     def __str__(self):
         return "%s %s (%s)" % (self.job.name, date_f(localtime(self.begin), 'DATETIME_FORMAT'), self.job.event)

@@ -6,13 +6,14 @@ permissions:
 
 order of jobs
 
-atomic validation is shift is full
+atomic validation if shift is full
 
-responsive menu: bug with width of language dropdown
 
-javascript translation with django
-
-negative number of helpers in shift possible
+Frontend
+========
+ * Number of helpers in shift: negative number can be selected, validation only on save
+ * Javascript translation with Django
+ * Responsive menu: bug with width of language dropdown
 
 ESP
 ===
