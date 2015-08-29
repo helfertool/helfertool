@@ -6,14 +6,12 @@
     <h2>{% trans "Delete permission" %}</h2>
 
     <div class="alert alert-warning" role="alert">
-        {% blocktrans %}
-            Remove permission for user {{ user }}?
-        {% endblocktrans %}
+        {% blocktrans %}Delete permission for user {{ user }}?{% endblocktrans %}
     </div>
 
     <form action="" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-critical">{% trans "Remove permission" %}</button>
+        <button type="submit" class="btn btn-critical">{% trans "Delete permission" %}</button>
     </form>
 {% endblock %}

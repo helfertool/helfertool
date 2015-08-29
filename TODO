@@ -1,13 +1,8 @@
 Validation in shift: begin < end (in model and for datetimepicker)
 
-permissions:
-    add event (without being superusr)
-    add user
-
 order of jobs
 
 atomic validation if shift is full
-
 
 Frontend
 ========
