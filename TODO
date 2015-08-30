@@ -11,11 +11,9 @@
 * Badge Generierung (Rechte festlegen)
 * Verschicken mit Link
 * Freischalten um Uhrzeit
-* rework "Details" button in registration form
 * change password
 * Mail: link to registered page
 * search username with name and mail
-* change color of shifts table
 * Load Test
 
 After ESP

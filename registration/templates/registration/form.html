@@ -20,23 +20,18 @@
         {# list of all jobs and shifts #}
 
         {% for job in event.public_jobs %}
-            <div class="job-header">
-                <div class="pull-left">
-                    <h3>{{ job.name }}</h3>
-                </div>
+            <h3>
 
                 {% if job.description %}
-                    <div class="pull-right">
-                        <button type="button"
-                                class="btn btn-info heading-button"
-                                data-toggle="collapse"
-                                data-target="#job-{{ job.pk }}">
-                            {% trans "Details" %}
-                        </button>
-                    </div>
+                    <button type="button"
+                            class="btn btn-info"
+                            data-toggle="collapse"
+                            data-target="#job-{{ job.pk }}">
+                        {% bootstrap_icon "info-sign" %}
+                    </button>
                 {% endif %}
-                <div class="clearfix"></div>
-            </div>
+                {{ job.name }}
+            </h3>
 
             <div id="job-{{ job.pk }}" class="collapse">
                 <p>{{ job.description | safe }}</p>
