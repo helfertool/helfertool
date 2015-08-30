@@ -158,6 +158,13 @@ class ShiftForm(forms.ModelForm):
 
         super(ShiftForm, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        super(ShiftForm, self).clean()
+
+        if self.cleaned_data['begin'] > self.cleaned_data['end']:
+            raise ValidationError(_("The begin of the shift must be before "
+                                    "the end."))
+
     def save(self, commit=True):
         instance = super(ShiftForm, self).save(False)  # event is missing
 
