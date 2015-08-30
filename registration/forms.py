@@ -133,13 +133,14 @@ class JobForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing
-        self.save_m2m() # save m2m, otherwise job_admins is lost
 
         # add event
         instance.event = self.event
 
         if commit:
             instance.save()
+
+        self.save_m2m() # save m2m, otherwise job_admins is lost
 
         return instance
 

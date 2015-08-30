@@ -1,8 +1,18 @@
 Dependencies
 ============
 
+Running
+
 * Python 3
 * Django 1.8
 * django-modeltranslation
 * XlsxWriter
 * django-bootstrap3
+
+Documentation
+
+* sphinx
+
+Load Testing
+
+* locustio (supports only python2)
