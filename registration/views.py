@@ -154,7 +154,7 @@ def edit_event(request, event_url_name=None):
     if form.is_valid():
         event = form.save()
 
-        if event_url_name:
+        if not event_url_name:
             messages.success(request, _("Event was created: %(event)s") % {'event': event.name})
 
         # redirect to this page, so reload does not send the form data again
