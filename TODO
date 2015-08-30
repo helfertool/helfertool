@@ -1,4 +1,3 @@
-* Validation in shift: begin < end (in model and for datetimepicker)
 * order of jobs
 * atomic validation if shift is full
 * ask for preferred language on registration
