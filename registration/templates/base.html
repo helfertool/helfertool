@@ -46,7 +46,7 @@
                 {# menu content #}
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     {# on the right #}
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-left">
                         {# login #}
                         {% if user.is_authenticated %}
                             <p class="navbar-text">
@@ -61,31 +61,31 @@
                             <li><a href="{% url "login" %}">{% trans "Login" %}</a></li>
                         {% endif %}
                         {# end login #}
-
-                        {# language chooser #}
-                        <form action="{% url 'set_language' %}" method="post" class="navbar-form navbar-right" role="form">
-                            <div class="form-group">
-                                {% csrf_token %}
-                                <input name="next" type="hidden" value="{{ redirect_to }}" />
-
-                                <select name="language" onchange="this.form.submit()" class="form-control">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-
-                                {% for language in languages %}
-                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                                        {{ language.name_local }}
-                                    </option>
-                                {% endfor %}
-                                </select>
-                            </div>
-                            <noscript>
-                                <button type="submit" class="btn btn-default">{% trans "Switch" %}</button>
-                            </noscript>
-                        </form>
-                        {# end language chooser #}
                     </ul>
+
+                    {# language chooser #}
+                    <form action="{% url 'set_language' %}" method="post" class="navbar-form navbar-right" role="form">
+                        <div class="form-group">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}" />
+
+                            <select name="language" onchange="this.form.submit()" class="form-control">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+
+                            {% for language in languages %}
+                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                                    {{ language.name_local }}
+                                </option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                        <noscript>
+                            <button type="submit" class="btn btn-default">{% trans "Switch" %}</button>
+                        </noscript>
+                    </form>
+                    {# end language chooser #}
                 </div>
             </div>
         </nav>
