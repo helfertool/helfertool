@@ -108,12 +108,14 @@ class Job(models.Model):
         :infection_instruction: is an instruction for the handling of food necessary?
         :description: longer description of the job
         :job_admins: users, that can see and edit the helpers
+        :public: job is visible publicly
     """
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200, verbose_name=_("Name"))
     infection_instruction = models.BooleanField(default=False, verbose_name=_("Instruction for the handling of food necessary"))
     description = models.TextField(blank=True, verbose_name=_("Description"))
     job_admins = models.ManyToManyField(User, blank=True)
+    public = models.BooleanField(default=False, verbose_name=_("This job is visible publicly"))
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
