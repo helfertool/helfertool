@@ -14,7 +14,7 @@
 * change password
 * Mail: link to registered page
 * search username with name and mail
-* Load Test
+* Load Test (locust.io)
 
 After ESP
 =========
