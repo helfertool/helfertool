@@ -38,7 +38,7 @@ class RegisterForm(forms.ModelForm):
             self.fields.pop('vegetarian')
 
         # add fields for shifts
-        for job in event.job_set.all():
+        for job in event.public_jobs:
             for shift in job.shift_set.all():
                 id = 'shift_%s' % shift.pk
                 self.fields[id] = forms.BooleanField(label=shift,

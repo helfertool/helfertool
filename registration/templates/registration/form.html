@@ -19,7 +19,7 @@
         <h2>{% trans "Jobs" %}</h2>
         {# list of all jobs and shifts #}
 
-        {% for job in event.job_set.all %}
+        {% for job in event.public_jobs %}
             <div class="job-header">
                 <div class="pull-left">
                     <h3>{{ job.name }}</h3>

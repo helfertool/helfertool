@@ -99,6 +99,10 @@ class Event(models.Model):
 
         return False
 
+    @property
+    def public_jobs(self):
+        return self.job_set.filter(public=True)
+
 class Job(models.Model):
     """ A job that contains min. 1 shift.
 
@@ -112,10 +116,10 @@ class Job(models.Model):
     """
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200, verbose_name=_("Name"))
+    public = models.BooleanField(default=False, verbose_name=_("This job is visible publicly"))
     infection_instruction = models.BooleanField(default=False, verbose_name=_("Instruction for the handling of food necessary"))
     description = models.TextField(blank=True, verbose_name=_("Description"))
     job_admins = models.ManyToManyField(User, blank=True)
-    public = models.BooleanField(default=False, verbose_name=_("This job is visible publicly"))
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
@@ -173,12 +177,14 @@ class Shift(models.Model):
         :begin: begin of the shift
         :end: end of the shift
         :number: number of people
+        :blocked: shift is blocked, if the job is public
     """
     job = models.ForeignKey(Job)
     begin = models.DateTimeField(verbose_name=_("Begin"))
     end = models.DateTimeField(verbose_name=_("End"))
     number = models.IntegerField(default=0, verbose_name=_("Number of helpers"),
                                  validators=[MinValueValidator(0)])
+    blocked = models.BooleanField(default=False, verbose_name=_("If the job is publicly visible, the shift is blocked."))
 
     def __str__(self):
         return "%s %s (%s)" % (self.job.name, date_f(localtime(self.begin), 'DATETIME_FORMAT'), self.job.event)

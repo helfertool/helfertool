@@ -11,7 +11,11 @@
     </a></p>
 
     {% for job in event.job_set.all %}
-        <h3>{{ job.name }}</h3>
+        <h3>{{ job.name }}
+        {% if job.public %}
+            <span class="glyphicon glyphicon-eye-open" title="{% trans "Public" %}" aria-hidden="true"></span>
+        {% endif %}
+        </h3>
 
         <p>
             <a href="{% url 'edit_job' event.url_name job.pk %}">
