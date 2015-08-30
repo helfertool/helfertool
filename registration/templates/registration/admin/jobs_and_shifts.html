@@ -12,9 +12,9 @@
 
     {% for job in event.job_set.all %}
         <h3>{{ job.name }}
-        {% if job.public %}
-            <span class="glyphicon glyphicon-eye-open" title="{% trans "Public" %}" aria-hidden="true"></span>
-        {% endif %}
+            {% if job.public %}
+                <span class="glyphicon glyphicon-eye-open" title="{% trans "Public" %}" aria-hidden="true"></span>
+            {% endif %}
         </h3>
 
         <p>
@@ -47,7 +47,12 @@
                 </tr>
                 {% for shift in job.shift_set.all %}
                     <tr>
-                        <td>{{ shift.begin }}</td>
+                        <td>
+                            {% if shift.blocked %}
+                                <span class="glyphicon glyphicon-lock" title="{% trans "Blocked" %}" aria-hidden="true"></span>
+                            {% endif %}
+                            {{ shift.begin }}
+                        </td>
                         <td>{{ shift.end }}</td>
                         <td>{{ shift.number }}</td>
                         <td>

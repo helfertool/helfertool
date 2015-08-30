@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-30 13:13+0200\n"
-"PO-Revision-Date: 2015-08-30 13:14+0200\n"
+"POT-Creation-Date: 2015-08-30 13:48+0200\n"
+"PO-Revision-Date: 2015-08-30 13:50+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,37 +18,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.3\n"
 
-#: registration/export.py:57 registration/models.py:295
+#: registration/export.py:57 registration/models.py:297
 #: registration/templates/registration/admin/helpers_for_job.html:32
 msgid "Prename"
 msgstr "Vorname"
 
-#: registration/export.py:58 registration/models.py:297
+#: registration/export.py:58 registration/models.py:299
 #: registration/templates/registration/admin/helpers_for_job.html:33
 msgid "Surname"
 msgstr "Nachname"
 
 #: registration/export.py:59 registration/models.py:55
-#: registration/models.py:299
+#: registration/models.py:301
 #: registration/templates/registration/admin/delete_event.html:17
 #: registration/templates/registration/admin/helpers_for_job.html:34
 #: registration/templates/registration/registered.html:21
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export.py:62 registration/models.py:301
+#: registration/export.py:62 registration/models.py:303
 #: registration/templates/registration/admin/helpers_for_job.html:35
 #: registration/templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export.py:66 registration/models.py:307
+#: registration/export.py:66 registration/models.py:309
 #: registration/templates/registration/admin/helpers_for_job.html:37
 #: registration/templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export.py:70 registration/models.py:310
+#: registration/export.py:70 registration/models.py:312
 #: registration/templates/registration/admin/helpers_for_job.html:40
 #: registration/templates/registration/registered.html:42
 msgid "Vegetarian"
@@ -59,7 +59,7 @@ msgstr "Vegetarier"
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export.py:77 registration/models.py:304
+#: registration/export.py:77 registration/models.py:306
 #: registration/templates/registration/admin/helpers_for_job.html:45
 #: registration/templates/registration/registered.html:47
 msgid "Comment"
@@ -74,25 +74,25 @@ msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: registration/forms.py:176
+#: registration/forms.py:178
 #: registration/templates/registration/admin/permissions.html:15
 #: registration/templates/registration/admin/permissions.html:46
 msgid "Username"
 msgstr "Benutzername"
 
-#: registration/forms.py:189
+#: registration/forms.py:191
 msgid "The user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
-#: registration/forms.py:195
+#: registration/forms.py:197
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: registration/forms.py:196
+#: registration/forms.py:198
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/forms.py:198
+#: registration/forms.py:200
 msgid "Last name"
 msgstr "Nachname"
 
@@ -172,52 +172,56 @@ msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models.py:182
+#: registration/models.py:183
 #: registration/templates/registration/admin/delete_shift.html:17
-#: registration/templates/registration/admin/jobs_and_shifts.html:39
+#: registration/templates/registration/admin/jobs_and_shifts.html:43
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models.py:183
+#: registration/models.py:184
 #: registration/templates/registration/admin/delete_shift.html:21
-#: registration/templates/registration/admin/jobs_and_shifts.html:40
+#: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "End"
 msgstr "Ende"
 
-#: registration/models.py:184
-#: registration/templates/registration/admin/jobs_and_shifts.html:41
+#: registration/models.py:185
+#: registration/templates/registration/admin/jobs_and_shifts.html:45
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models.py:280
+#: registration/models.py:187
+msgid "If the job is publicly visible, the shift is blocked."
+msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
+
+#: registration/models.py:282
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: registration/models.py:281
+#: registration/models.py:283
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: registration/models.py:282
+#: registration/models.py:284
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: registration/models.py:286
+#: registration/models.py:288
 msgid "No"
 msgstr "Nein"
 
-#: registration/models.py:287
+#: registration/models.py:289
 msgid "Valid"
 msgstr "Gültig"
 
-#: registration/models.py:288
+#: registration/models.py:290
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models.py:311
+#: registration/models.py:313
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models.py:316
+#: registration/models.py:318
 #: registration/templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
@@ -400,8 +404,8 @@ msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
 #: registration/templates/registration/admin/delete_job.html:38
 #: registration/templates/registration/admin/delete_shift.html:36
 #: registration/templates/registration/admin/helpers_for_job.html:73
-#: registration/templates/registration/admin/jobs_and_shifts.html:25
-#: registration/templates/registration/admin/jobs_and_shifts.html:56
+#: registration/templates/registration/admin/jobs_and_shifts.html:29
+#: registration/templates/registration/admin/jobs_and_shifts.html:65
 msgid "Delete"
 msgstr "Löschen"
 
@@ -491,7 +495,7 @@ msgid "Edit shift"
 msgstr "Schicht bearbeiten"
 
 #: registration/templates/registration/admin/edit_shift.html:11
-#: registration/templates/registration/admin/jobs_and_shifts.html:31
+#: registration/templates/registration/admin/jobs_and_shifts.html:35
 msgid "New shift"
 msgstr "Neue Schicht"
 
@@ -509,9 +513,19 @@ msgstr "Helferübersicht"
 msgid "Export"
 msgstr "Export"
 
-#: registration/templates/registration/admin/helpers.html:34
+#: registration/templates/registration/admin/helpers.html:30
+#: registration/templates/registration/admin/jobs_and_shifts.html:16
+msgid "Public"
+msgstr "Öffentlich"
+
+#: registration/templates/registration/admin/helpers.html:38
 msgid "Show"
 msgstr "Anzeigen"
+
+#: registration/templates/registration/admin/helpers.html:53
+#: registration/templates/registration/admin/jobs_and_shifts.html:52
+msgid "Blocked"
+msgstr "Gesperrt"
 
 #: registration/templates/registration/admin/helpers_for_job.html:9
 #, python-format
@@ -527,12 +541,12 @@ msgid "Registration time"
 msgstr "Anmeldezeit"
 
 #: registration/templates/registration/admin/helpers_for_job.html:69
-#: registration/templates/registration/admin/jobs_and_shifts.html:19
-#: registration/templates/registration/admin/jobs_and_shifts.html:52
+#: registration/templates/registration/admin/jobs_and_shifts.html:23
+#: registration/templates/registration/admin/jobs_and_shifts.html:61
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: registration/templates/registration/admin/jobs_and_shifts.html:35
+#: registration/templates/registration/admin/jobs_and_shifts.html:39
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
 
@@ -629,8 +643,8 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid ""
 "You cannot delete the helper from other shifts. The helper was not deleted"
 msgstr ""
-"Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde "
-"nicht gelöscht."
+"Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde nicht "
+"gelöscht."
 
 #: registration/views.py:282
 #, python-format

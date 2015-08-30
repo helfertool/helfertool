@@ -25,7 +25,11 @@
     {% for job in event.job_set.all %}
         {% is_job_admin job as job_admin %}
 
-        <h3>{{ job.name }}</h3>
+        <h3>{{ job.name }}
+            {% if job.public %}
+                <span class="glyphicon glyphicon-eye-open" title="{% trans "Public" %}" aria-hidden="true"></span>
+            {% endif %}
+        </h3>
 
         {% if job_admin %}
             <p>
@@ -45,6 +49,10 @@
                 {% for day, shifts in job.shifts_by_day.items %}
                     <td>
                         {% for shift in shifts %}
+                            {% if shift.blocked %}
+                                <span class="glyphicon glyphicon-lock" title="{% trans "Blocked" %}" aria-hidden="true"></span>
+                            {% endif %}
+
                             {{ shift.time_hours }}
 
                             <span class="numbers">

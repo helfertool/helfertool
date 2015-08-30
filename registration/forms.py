@@ -45,7 +45,7 @@ class RegisterForm(forms.ModelForm):
                                                      required=False)
 
                 # disable button if shift is full
-                if shift.is_full():
+                if shift.is_full() or shift.blocked:
                     self.fields[id].widget.attrs['disabled'] = True
 
                 # set class if infection instruction is needed for this shift
@@ -94,6 +94,8 @@ class RegisterForm(forms.ModelForm):
                 cur_shift = Shift.objects.get(pk=self.shifts[shift])
                 if cur_shift.is_full():
                     raise ValidationError("You selected a full shift.")
+                if cur_shift.blocked:
+                    raise ValidationError("You selected a blocked shift.")
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save()  # must commit

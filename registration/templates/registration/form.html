@@ -57,7 +57,7 @@
                                 {{ form | lookup_shift:shift.pk }}
 
                                 {# time #}
-                                {% if shift.is_full %}
+                                {% if shift.is_full or shift.blocked %}
                                     <del>{{ shift.time_hours }}</del>
                                 {% else %}
                                     {{ shift.time_hours }}
