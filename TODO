@@ -8,12 +8,13 @@
 * List of all responsibles
 * Validierung per Mail
 * Badge Generierung (Rechte festlegen)
+  * for some jobs an upload of an image is possible
+  * Badge -> OneToOne to Helper
+  * Image for responsibles? (option)
 * Verschicken mit Link
 * Freischalten um Uhrzeit
-* change password
 * Mail: link to registered page
-* search username with name and mail
-* Load Test (locust.io)
+* Load Test
 
 After ESP
 =========
@@ -21,3 +22,5 @@ After ESP
 * delete helper as job admin: cannot select other shifts
 * Javascript translation with Django
 * Number of helpers in shift: negative number can be selected, validation only on save
+* change password
+* search username with name and mail
