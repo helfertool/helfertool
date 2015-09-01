@@ -551,3 +551,13 @@ def excel(request, event_url_name, job_pk=None):
     response.write(data)
 
     return response
+
+@login_required
+def coordinators(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    if not event.is_involved(request.user):
+        return nopermission(request)
+
+    context = {'event': event}
+    return render(request, 'registration/admin/coordinators.html', context)

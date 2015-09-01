@@ -19,6 +19,7 @@
 * edit helper -> redirect to jobhelpers
 * PDF export
 * overview: t-shirts, vegetarian
+* modelform: mark optional fields
 
 After ESP
 =========

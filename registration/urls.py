@@ -61,4 +61,7 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/all$', views.excel, name='excel'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/(?P<job_pk>[0-9]+)$', views.excel, name='jobexcel'),
 
+    # summaries
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators$', views.coordinators, name='coordinators'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
