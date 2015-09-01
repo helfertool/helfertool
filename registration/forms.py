@@ -121,7 +121,7 @@ class EventForm(forms.ModelForm):
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
-        exclude = ['name', 'description', 'event', ]
+        exclude = ['name', 'description', 'event', 'coordinators']
         widgets = {
             'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }
@@ -180,6 +180,10 @@ class HelperForm(forms.ModelForm):
         if 'shift' in kwargs:
             self.shift = kwargs.pop('shift')
 
+        self.job = None
+        if 'job' in kwargs:
+            self.job = kwargs.pop('job')
+
         super(HelperForm, self).__init__(*args, **kwargs)
 
     def clean(self):
@@ -196,8 +200,10 @@ class HelperForm(forms.ModelForm):
 
         if self.shift:
             instance.shifts.add(self.shift)
+            self.save_m2m()
 
-        self.save_m2m()
+        if self.job:
+            self.job.coordinators.add(self.instance)
 
         return instance
 

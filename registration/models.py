@@ -120,6 +120,7 @@ class Job(models.Model):
     infection_instruction = models.BooleanField(default=False, verbose_name=_("Instruction for the handling of food necessary"))
     description = models.TextField(blank=True, verbose_name=_("Description"))
     job_admins = models.ManyToManyField(User, blank=True)
+    coordinators = models.ManyToManyField('Helper', blank=True)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)

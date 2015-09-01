@@ -16,6 +16,20 @@
         </a>
     </p>
 
+    <h3>{% trans "Coordinators" %}</h3>
+    {% if job.coordinators.count == 0 %}
+        <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
+    {% else %}
+        {% include "registration/admin/helpers_table.html" with event=event job=job helpers=job.coordinators.all %}
+    {% endif %}
+
+    <p>
+        <a href="{% url 'add_coordinator' event.url_name job.pk %}">
+            {% bootstrap_icon "plus" %}
+            {% trans "Add coordinator" %}
+        </a>
+   </p>
+
     {# iterate over days #}
     {% for day, shifts in job.shifts_by_day.items %}
         <h3>{{ day }}</h3>
@@ -27,55 +41,7 @@
             {% if shift.helper_set.count == 0 %}
                 <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
             {% else %}
-                <table class="table">
-                    <tr>
-                        <th>{% trans "Prename" %}</th>
-                        <th>{% trans "Surname" %}</th>
-                        <th>{% trans "E-Mail" %}</th>
-                        <th>{% trans "Mobile phone" %}</th>
-                        {% if event.ask_shirt %}
-                        <th>{% trans "T-shirt" %}</th>
-                        {% endif %}
-                        {% if event.ask_vegetarian %}
-                        <th>{% trans "Vegetarian" %}</th>
-                        {% endif %}
-                        {% if job.infection_instruction %}
-                        <th>{% trans "Food handling" %}</th>
-                        {% endif %}
-                        <th>{% trans "Comment" %}</th>
-                        <th>{% trans "Registration time" %}</th>
-                        <th></th>
-                    </tr>
-                    {% for helper in shift.helper_set.all|dictsort:"timestamp" %}
-                        <tr>
-                            <td>{{ helper.prename }}</td>
-                            <td>{{ helper.surname }}</td>
-                            <td>{{ helper.email }}</td>
-                            <td>{{ helper.phone }}</td>
-                            {% if event.ask_shirt %}
-                            <td>{{ helper.get_shirt_display }}</td>
-                            {% endif %}
-                            {% if event.ask_vegetarian %}
-                            <td>{{ helper.vegetarian | yesno }}</td>
-                            {% endif %}
-                            {% if job.infection_instruction %}
-                            <td>{{ helper.get_infection_instruction_short }}</td>
-                            {% endif %}
-                            <td>{{ helper.comment }}</td>
-                            <td>{{ helper.timestamp }}</td>
-                            <td>
-                                <a href="{% url 'edit_helper' event.url_name helper.pk %}">
-                                    {% bootstrap_icon "pencil" %}
-                                    {% trans "Edit" %}
-                                </a>
-                                <a href="{% url 'delete_helper' event.url_name helper.pk job.pk %}">
-                                    {% bootstrap_icon "remove" %}
-                                    {% trans "Delete" %}
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
+                {% include "registration/admin/helpers_table.html" with event=event job=job helpers=shift.helper_set.all %}
             {% endif %}
 
             {% if not shift.is_full %}
