@@ -331,9 +331,16 @@ class Helper(models.Model):
         return ""
 
     def can_edit(self, user):
+        # for helpers
         for shift in self.shifts.all():
             if shift.job.is_admin(user):
                 return True
+
+        # for coordinators
+        for job in self.job_set.all():
+            if job.is_admin(user):
+                return True
+
         return False
 
     def send_mail(self):
