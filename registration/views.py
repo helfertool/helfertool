@@ -254,6 +254,26 @@ def edit_helper(request, event_url_name, helper_pk):
     return render(request, 'registration/admin/edit_helper.html', context)
 
 @login_required
+def add_helper(request, event_url_name, shift_pk):
+    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
+
+    # check permission
+    if not shift.job.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = HelperForm(request.POST or None, shift=shift)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, shift.job.pk]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/edit_helper.html', context)
+
+@login_required
 def delete_helper(request, event_url_name, helper_pk, job_pk):
     event, job, shift, helper = get_or_404(event_url_name,
                                                job_pk=job_pk,

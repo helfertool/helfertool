@@ -77,6 +77,15 @@
                     {% endfor %}
                 </table>
             {% endif %}
+
+            {% if not shift.is_full %}
+                <p>
+                    <a href="{% url 'add_helper' event.url_name shift.pk %}">
+                        {% bootstrap_icon "plus" %}
+                        {% trans "Add helper" %}
+                    </a>
+               </p>
+           {% endif %}
         {% endfor %}
     {% endfor %}
 {% endblock %}

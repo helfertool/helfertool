@@ -3,7 +3,6 @@
 * ask for preferred language on registration
 * send mail to helpers (in job or all)
 * Form to add helper
-  * add helper to shift
   * responsibles
 * List of all responsibles
 * Validierung per Mail
@@ -16,6 +15,8 @@
 * Mail: link to registered page
 * Load Test
 * T-Shirts fixieren
+* Search helper (name, mail)
+* edit helper -> redirect to jobhelpers
 
 After ESP
 =========
@@ -25,3 +26,4 @@ After ESP
 * Number of helpers in shift: negative number can be selected, validation only on save
 * change password
 * search username with name and mail
+* add helper: infection_instruction only when necessary

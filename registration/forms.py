@@ -175,6 +175,33 @@ class HelperForm(forms.ModelForm):
         model = Helper
         exclude = ['shifts', ]
 
+    def __init__(self, *args, **kwargs):
+        self.shift = None
+        if 'shift' in kwargs:
+            self.shift = kwargs.pop('shift')
+
+        super(HelperForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        super(HelperForm, self).clean()
+
+        if self.shift and self.shift.is_full():
+            raise ValidationError("The shift is full already.")
+
+    def save(self, commit=True):
+        instance = super(HelperForm, self).save(False)
+
+        if commit:
+            instance.save()
+
+        if self.shift:
+            instance.shifts.add(self.shift)
+
+        self.save_m2m()
+
+        return instance
+
+
 class UsernameForm(forms.Form):
     username = forms.CharField(label=_('Username'), max_length=100, required=False)
 
