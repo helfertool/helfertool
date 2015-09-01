@@ -121,7 +121,7 @@ class EventForm(forms.ModelForm):
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
-        exclude = ['name', 'description', 'event', ]
+        exclude = ['name', 'description', 'event', 'coordinators']
         widgets = {
             'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }
@@ -181,6 +181,39 @@ class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
         exclude = ['shifts', ]
+
+    def __init__(self, *args, **kwargs):
+        self.shift = None
+        if 'shift' in kwargs:
+            self.shift = kwargs.pop('shift')
+
+        self.job = None
+        if 'job' in kwargs:
+            self.job = kwargs.pop('job')
+
+        super(HelperForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        super(HelperForm, self).clean()
+
+        if self.shift and self.shift.is_full():
+            raise ValidationError("The shift is full already.")
+
+    def save(self, commit=True):
+        instance = super(HelperForm, self).save(False)
+
+        if commit:
+            instance.save()
+
+        if self.shift:
+            instance.shifts.add(self.shift)
+            self.save_m2m()
+
+        if self.job:
+            self.job.coordinators.add(self.instance)
+
+        return instance
+
 
 class UsernameForm(forms.Form):
     username = forms.CharField(label=_('Username'), max_length=100, required=False)

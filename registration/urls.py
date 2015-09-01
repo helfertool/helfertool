@@ -54,9 +54,14 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)$', views.helpers, name='jobhelpers'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)$', views.edit_helper, name='edit_helper'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<job_pk>[0-9]+)$', views.delete_helper, name='delete_helper'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)$', views.add_helper, name='add_helper'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/(?P<job_pk>[0-9]+)$', views.add_helper, name='add_coordinator'),
 
     # excel
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/all$', views.excel, name='excel'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/(?P<job_pk>[0-9]+)$', views.excel, name='jobexcel'),
+
+    # summaries
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators$', views.coordinators, name='coordinators'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

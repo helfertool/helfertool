@@ -254,6 +254,40 @@ def edit_helper(request, event_url_name, helper_pk):
     return render(request, 'registration/admin/edit_helper.html', context)
 
 @login_required
+def add_helper(request, event_url_name, shift_pk=None, job_pk=None):
+    """ Add helper or coordinator.
+
+    If shift is given, a helper is added. If job is given, a coordinator is added.
+    """
+    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk, job_pk=job_pk)
+
+    # TODO: check if shift or job is given
+
+    if not job:
+        job = shift.job
+
+    # check permission
+    if not job.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    if job_pk:
+        # add coordinator
+        form = HelperForm(request.POST or None, job=job)
+    else:
+        # add helper
+        form = HelperForm(request.POST or None, shift=shift)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('jobhelpers', args=[event_url_name, job.pk]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/edit_helper.html', context)
+
+@login_required
 def delete_helper(request, event_url_name, helper_pk, job_pk):
     event, job, shift, helper = get_or_404(event_url_name,
                                                job_pk=job_pk,
@@ -517,3 +551,13 @@ def excel(request, event_url_name, job_pk=None):
     response.write(data)
 
     return response
+
+@login_required
+def coordinators(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    if not event.is_involved(request.user):
+        return nopermission(request)
+
+    context = {'event': event}
+    return render(request, 'registration/admin/coordinators.html', context)

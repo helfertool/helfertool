@@ -2,18 +2,21 @@
 * atomic validation if shift is full
 * ask for preferred language on registration
 * send mail to helpers (in job or all)
-* Form to add helper
-  * add helper to shift
-  * responsibles
-* List of all responsibles
 * Validierung per Mail
 * Badge Generierung (Rechte festlegen)
+  * for some jobs an upload of an image is possible
+  * Badge -> OneToOne to Helper
+  * Image for responsibles? (option)
 * Verschicken mit Link
 * Freischalten um Uhrzeit
-* change password
 * Mail: link to registered page
-* search username with name and mail
-* Load Test (locust.io)
+* Load Test
+* T-Shirts fixieren
+* Search helper (name, mail)
+* edit helper -> redirect to jobhelpers
+* PDF export
+* overview: t-shirts, vegetarian
+* modelform: mark optional fields
 
 After ESP
 =========
@@ -24,3 +27,6 @@ After ESP
 * Datetimepickers for shift
   * begin < end
   * change end when begin is changed
+* change password
+* search username with name and mail
+* add helper: infection_instruction only when necessary

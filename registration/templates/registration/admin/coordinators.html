@@ -1,0 +1,30 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Coordinators" %}</h2>
+
+    {% for job in event.job_set.all %}
+        <h3>{{ job.name }}</h3>
+
+        {% if job.coordinators.count == 0 %}
+            <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
+        {% else %}
+            <table class="table">
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "E-Mail" %}</th>
+                    <th>{% trans "Mobile phone" %}</th>
+                </tr>
+                {% for coordinator in job.coordinators.all %}
+                    <tr>
+                        <td>{{ coordinator.prename }} {{ coordinator.surname }}</td>
+                        <td>{{ coordinator.email }}</td>
+                        <td>{{ coordinator.phone }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
