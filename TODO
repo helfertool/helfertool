@@ -2,9 +2,6 @@
 * atomic validation if shift is full
 * ask for preferred language on registration
 * send mail to helpers (in job or all)
-* Form to add helper
-  * responsibles
-* List of all responsibles
 * Validierung per Mail
 * Badge Generierung (Rechte festlegen)
   * for some jobs an upload of an image is possible
