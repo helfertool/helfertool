@@ -4,7 +4,7 @@
 \usepackage[top=10mm,bottom=10mm,left=10mm,right=10mm]{geometry}
 \usepackage{tikz}
 \usepackage{graphicx}
-\usepackage{longtable}
+\usepackage{ifthen}
 
 \pagestyle{empty}
 
@@ -23,10 +23,24 @@
 \newcommand*\badge@prename{Prename}
 \newcommand*\badge@surname{Surname}
 \newcommand*\badge@job{Job}
+\newcommand*\badge@role{Role}
+\newcommand*\badge@comment{Comment}
+
+\newboolean{badge@food}
+\newboolean{badge@backstage}
+\newboolean{badge@finance}
+\newboolean{badge@orga}
 
 \define@key{badge}{prename}{\renewcommand\badge@prename{#1}}
 \define@key{badge}{surname}{\renewcommand\badge@surname{#1}}
 \define@key{badge}{job}{\renewcommand\badge@job{#1}}
+\define@key{badge}{role}{\renewcommand\badge@role{#1}}
+\define@key{badge}{comment}{\renewcommand\badge@comment{#1}}
+
+\define@key{badge}{food}{\setboolean{badge@food}{#1}}
+\define@key{badge}{backstage}{\setboolean{badge@backstage}{#1}}
+\define@key{badge}{finance}{\setboolean{badge@finance}{#1}}
+\define@key{badge}{orga}{\setboolean{badge@orga}{#1}}
 
 %
 % Badge
@@ -67,6 +81,38 @@
             \begin{scope}[x={(bg.south east)},y={(bg.north west)}]
                 % name
                 \node[draw=none] at (0,0) {\badge@prename\ \badge@surname};
+
+                % food
+                \ifthenelse{\boolean{badge@food}}
+                {
+                    \node[draw=none] at (0.2,0.2) {FOOD};
+                }
+                {
+                }
+
+                % backstage
+                \ifthenelse{\boolean{badge@backstage}}
+                {
+                    \node[draw=none] at (0.3,0.2) {BACKSTAGE};
+                }
+                {
+                }
+
+                % fiance
+                \ifthenelse{\boolean{badge@finance}}
+                {
+                    \node[draw=none] at (0.6,0.2) {FINANCE};
+                }
+                {
+                }
+
+                % orga
+                \ifthenelse{\boolean{badge@orga}}
+                {
+                    \node[draw=none] at (0.8,0.2) {ORGA};
+                }
+                {
+                }
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
@@ -78,7 +124,7 @@
     \centering
     \begin{tabular}{|l|l|}
         \hline
-        \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
+        \badgefront[prename=Test,surname=User,job=Bier,role=Standleiter,comment=lala,food=true,finance=false,orga=true,backstage=true] & \badgefront[prename=Test,surname=User] \\
         \hline
         \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
         \hline
@@ -94,7 +140,8 @@
 
     \begin{tabular}{|l|l|}
         \hline
-        \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
+        \badgeback[prename=Test,surname=User,job=Bier,role=Standleiter,comment=lala,food=true,finance=false,orga=true,backstage=true] & \badgeback[prename=Test,surname=User] \\
+        \hline
         \hline
         \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
         \hline
