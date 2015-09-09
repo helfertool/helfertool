@@ -1,7 +1,4 @@
-* order of jobs
 * atomic validation if shift is full
-* ask for preferred language on registration
-* send mail to helpers (in job or all)
 * Validierung per Mail
 * Badge Generierung (Rechte festlegen)
   * for some jobs an upload of an image is possible
@@ -9,18 +6,25 @@
   * Image for responsibles? (option)
 * Verschicken mit Link
 * Freischalten um Uhrzeit
+* Load Test (deactivate mail!)
+* edit helper -> redirect to jobhelpers
+* PDF export (lists of helpers)
+* overview: t-shirts, vegetarian
+
+Low priority
+============
+
+* send mail to helpers (in job or all)
 * Mail: link to registered page
-* Load Test
 * T-Shirts fixieren
 * Search helper (name, mail)
-* edit helper -> redirect to jobhelpers
-* PDF export
-* overview: t-shirts, vegetarian
 * modelform: mark optional fields
 
 After ESP
 =========
 
+* ask for preferred language on registration
+* order of jobs
 * delete helper as job admin: cannot select other shifts
 * Javascript translation with Django
 * Number of helpers in shift: negative number can be selected, validation only on save
@@ -30,3 +34,4 @@ After ESP
 * change password
 * search username with name and mail
 * add helper: infection_instruction only when necessary
+* delete event: delete badge upload directory

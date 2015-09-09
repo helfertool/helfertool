@@ -37,6 +37,9 @@ IMPRINT_URL = 'https://fs.tum.de/impressum/'
 GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"
 
+# badge creation
+BADGE_IMAGE_DIR= os.path.join(BASE_DIR, 'badgeupload')
+
 # for e-mail debugging
 #EMAIL_HOST = 'localhost'
 #EMAIL_PORT = 1025

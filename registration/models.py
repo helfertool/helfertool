@@ -1,9 +1,10 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import RegexValidator, MinValueValidator
 from django.db import models
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.template import Context
 from django.template.defaultfilters import date as date_f
@@ -13,6 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from collections import OrderedDict
 import uuid
 import smtplib
+import os
 
 
 class Event(models.Model):
@@ -31,6 +33,8 @@ class Event(models.Model):
         :ask_vegetarian: ask, if the helper is vegetarian
         :show_public_numbers: show the number of current and maximal helpers on
                              the registration page
+        :badge: use the badge creation system
+        :badge_design: the used badge design (optional)
     """
 
     url_name = models.CharField(max_length=200, unique=True,
@@ -68,6 +72,10 @@ class Event(models.Model):
     show_public_numbers = models.BooleanField(default=True,
                                               verbose_name=_("Show number of helpers on registration page"))
 
+    badges = models.BooleanField(default=False,
+                                 verbose_name=_("Use badge creation"))
+    badge_design = models.ForeignKey('BadgeDesign', blank=True, null=True)
+
     def __str__(self):
         return self.name
 
@@ -103,6 +111,20 @@ class Event(models.Model):
     def public_jobs(self):
         return self.job_set.filter(public=True)
 
+@receiver(post_save, sender=Event, dispatch_uid='event_saved')
+def event_saved(sender, instance, using, **kwargs):
+    """ Add default badge design if necessary.
+
+    This is a signal handler, that is called, when a event is saved. It
+    adds a default badge design if badge creation is enabled and it is not
+    there already.
+    """
+    if instance.badges and not instance.badge_design:
+        design = BadgeDesign()
+        design.save()
+        instance.badge_design = design
+        instance.save()
+
 class Job(models.Model):
     """ A job that contains min. 1 shift.
 
@@ -113,6 +135,7 @@ class Job(models.Model):
         :description: longer description of the job
         :job_admins: users, that can see and edit the helpers
         :public: job is visible publicly
+        :badge_design: badge design for this job
     """
     event = models.ForeignKey(Event)
     name = models.CharField(max_length=200, verbose_name=_("Name"))
@@ -121,6 +144,7 @@ class Job(models.Model):
     description = models.TextField(blank=True, verbose_name=_("Description"))
     job_admins = models.ManyToManyField(User, blank=True)
     coordinators = models.ManyToManyField('Helper', blank=True)
+    badge_design = models.ForeignKey('BadgeDesign', blank=True, null=True)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
@@ -168,6 +192,10 @@ class Job(models.Model):
                                          key=lambda s : s.begin)
 
         return ordered_shifts
+
+    @property
+    def has_badge_design(self):
+        return self.badge_design != None
 
 
 class Shift(models.Model):
@@ -379,3 +407,33 @@ class Helper(models.Model):
     def full_name(self):
         """ Returns full name of helper """
         return "%s %s" % (self.prename, self.surname)
+
+class BadgeDesign(models.Model):
+    """ Design of a badge (for an event or job)
+
+    Columns:
+        :font_color: Color of the text
+        :bg_front: Background picture of the front
+        :bg_back: Background picture of the back
+    """
+    font_color = models.CharField(max_length=7, default="#000000",
+                                  validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
+                                  verbose_name=_("Color for text"),
+                                  help_text=_("E.g. #00ff00"))
+
+    bg_front = models.ImageField(verbose_name=_("Background image for front"),
+                                                upload_to=settings.BADGE_IMAGE_DIR) # FIXME
+    bg_back = models.ImageField(verbose_name=_("Background image for back"),
+                                               upload_to=settings.BADGE_IMAGE_DIR) # FIXME
+
+    @property
+    def bg_front_path(self):
+        if not self.bg_front:
+            return None
+        return  os.path.join(settings.BADGE_IMAGE_DIR, self.pk, self.bg_front)
+
+    @property
+    def bg_back_path(self):
+        if not self.bg_back:
+            return None
+        return  os.path.join(settings.BADGE_IMAGE_DIR, self.pk, self.bg_back)

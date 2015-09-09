@@ -31,12 +31,18 @@
                             {% trans "Go to registration" %}
                         </a>
                     </li>
+
                     {% if admin %}
                         <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
                         <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
                     {% endif %}
+
                     <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
                     <li><a href="{% url 'coordinators' event.url_name %}">{% trans "Coordinators" %}</a></li>
+
+                    {% if admin and event.badges %}
+                        <li><a href="{% url 'badges' event.url_name %}">{% trans "Badges" %}</a></li>
+                    {% endif %}
                 </ul>
             {% endif %}
 

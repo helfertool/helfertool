@@ -15,5 +15,8 @@ Session.vim
 # sphinx
 /doc/build/
 
+# upload directory
+/badgeupload/
+
 # sqlite database
 /db.sqlite3

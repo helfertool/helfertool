@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 13:55+0200\n"
+"POT-Creation-Date: 2015-09-05 13:50+0200\n"
 "PO-Revision-Date: 2015-09-01 13:56+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.3\n"
 
-#: registration/export.py:57 registration/models.py:298
+#: registration/export.py:57 registration/models.py:320
 #: registration/templates/registration/admin/helpers_table.html:6
 msgid "Prename"
 msgstr "Vorname"
 
-#: registration/export.py:58 registration/models.py:300
+#: registration/export.py:58 registration/models.py:322
 #: registration/templates/registration/admin/helpers_table.html:7
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export.py:59 registration/models.py:55
-#: registration/models.py:302
+#: registration/export.py:59 registration/models.py:59
+#: registration/models.py:324
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
 #: registration/templates/registration/admin/helpers_table.html:8
@@ -37,20 +37,20 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export.py:62 registration/models.py:304
+#: registration/export.py:62 registration/models.py:326
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/admin/helpers_table.html:9
 #: registration/templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export.py:66 registration/models.py:310
+#: registration/export.py:66 registration/models.py:332
 #: registration/templates/registration/admin/helpers_table.html:11
 #: registration/templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export.py:70 registration/models.py:313
+#: registration/export.py:70 registration/models.py:335
 #: registration/templates/registration/admin/helpers_table.html:14
 #: registration/templates/registration/registered.html:42
 msgid "Vegetarian"
@@ -61,7 +61,7 @@ msgstr "Vegetarier"
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export.py:77 registration/models.py:307
+#: registration/export.py:77 registration/models.py:329
 #: registration/templates/registration/admin/helpers_table.html:19
 #: registration/templates/registration/registered.html:47
 msgid "Comment"
@@ -76,85 +76,93 @@ msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: registration/forms.py:212
+#: registration/forms.py:166
+msgid "The begin of the shift must be before the end."
+msgstr ""
+
+#: registration/forms.py:219
 #: registration/templates/registration/admin/permissions.html:15
 #: registration/templates/registration/admin/permissions.html:46
 msgid "Username"
 msgstr "Benutzername"
 
-#: registration/forms.py:225
+#: registration/forms.py:232
 msgid "The user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
-#: registration/forms.py:231
+#: registration/forms.py:238
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: registration/forms.py:232
+#: registration/forms.py:239
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/forms.py:234
+#: registration/forms.py:241
 msgid "Last name"
 msgstr "Nachname"
 
-#: registration/models.py:38
+#: registration/models.py:42
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: registration/models.py:39
+#: registration/models.py:43
 msgid "May contain the following chars: a-zA-Z0-9."
 msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
 
-#: registration/models.py:41
+#: registration/models.py:45
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: registration/models.py:44
+#: registration/models.py:48
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models.py:45
+#: registration/models.py:49
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models.py:47 registration/templates/base.html:107
+#: registration/models.py:51 registration/templates/base.html:107
 msgid "Imprint"
 msgstr "Impressum"
 
-#: registration/models.py:48
+#: registration/models.py:52
 msgid "Display at the bottom of the registration form."
 msgstr "Wird bei der Anmeldung unten angezeigt."
 
-#: registration/models.py:51
+#: registration/models.py:55
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models.py:52
+#: registration/models.py:56
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models.py:56
+#: registration/models.py:60
 msgid "Used as sender of e-mails."
 msgstr "Wird als Absender von E-Mail genutzt."
 
-#: registration/models.py:59
+#: registration/models.py:63
 msgid "Registration possible"
 msgstr "Anmeldung möglich"
 
-#: registration/models.py:64
+#: registration/models.py:68
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models.py:67
+#: registration/models.py:71
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models.py:69
+#: registration/models.py:73
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models.py:118
+#: registration/models.py:76
+msgid "Use badge creation"
+msgstr ""
+
+#: registration/models.py:140
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
@@ -162,72 +170,88 @@ msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 msgid "Name"
 msgstr "Name"
 
-#: registration/models.py:119
+#: registration/models.py:141
 msgid "This job is visible publicly"
 msgstr "Diese Aufgabe ist öffentlich sichtbar"
 
-#: registration/models.py:120
+#: registration/models.py:142
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: registration/models.py:121
+#: registration/models.py:143
 #: registration/templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models.py:184
+#: registration/models.py:206
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:43
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models.py:185
+#: registration/models.py:207
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "End"
 msgstr "Ende"
 
-#: registration/models.py:186
+#: registration/models.py:208
 #: registration/templates/registration/admin/jobs_and_shifts.html:45
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models.py:188
+#: registration/models.py:210
 msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
-#: registration/models.py:283
+#: registration/models.py:305
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: registration/models.py:284
+#: registration/models.py:306
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: registration/models.py:285
+#: registration/models.py:307
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: registration/models.py:289
+#: registration/models.py:311
 msgid "No"
 msgstr "Nein"
 
-#: registration/models.py:290
+#: registration/models.py:312
 msgid "Valid"
 msgstr "Gültig"
 
-#: registration/models.py:291
+#: registration/models.py:313
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models.py:314
+#: registration/models.py:336
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models.py:319
+#: registration/models.py:341
 #: registration/templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
+
+#: registration/models.py:415
+msgid "Color for text"
+msgstr ""
+
+#: registration/models.py:416
+msgid "E.g. #00ff00"
+msgstr ""
+
+#: registration/models.py:418
+msgid "Background image for front"
+msgstr ""
+
+#: registration/models.py:420
+msgid "Background image for back"
+msgstr ""
 
 #: registration/templates/base.html:27
 msgid "Registration for helpers"
@@ -267,7 +291,7 @@ msgid "Privacy"
 msgstr "Datenschutz"
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:51
+#: registration/templates/registration/admin/base.html:57
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -276,6 +300,25 @@ msgstr "Nutzer hinzufügen"
 #: registration/templates/registration/admin/permissions.html:66
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: registration/templates/registration/admin/badges.html:6
+#: registration/templates/registration/admin/base.html:44
+msgid "Badges"
+msgstr ""
+
+#: registration/templates/registration/admin/badges.html:10
+msgid "The badge creation is not actived."
+msgstr ""
+
+#: registration/templates/registration/admin/badges.html:17
+#: registration/templates/registration/admin/delete_job.html:13
+#: registration/templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
+#: registration/templates/registration/admin/badges.html:18
+msgid "Design"
+msgstr ""
 
 #: registration/templates/registration/admin/base.html:8
 #, python-format
@@ -294,86 +337,87 @@ msgstr "Administration"
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
-#: registration/templates/registration/admin/base.html:35
+#: registration/templates/registration/admin/base.html:36
 #: registration/templates/registration/admin/edit_event.html:8
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
-#: registration/templates/registration/admin/base.html:36
+#: registration/templates/registration/admin/base.html:37
 #: registration/templates/registration/admin/jobs_and_shifts.html:6
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: registration/templates/registration/admin/base.html:38
+#: registration/templates/registration/admin/base.html:40
 msgid "Registered helpers"
 msgstr "Angemeldete Helfer"
 
-#: registration/templates/registration/admin/base.html:39
+#: registration/templates/registration/admin/base.html:41
+#: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:19
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:45
+#: registration/templates/registration/admin/base.html:51
 msgid "Common"
 msgstr "Allgemein"
 
-#: registration/templates/registration/admin/base.html:48
+#: registration/templates/registration/admin/base.html:54
 #: registration/templates/registration/admin/edit_event.html:12
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:54
+#: registration/templates/registration/admin/base.html:60
 #: registration/templates/registration/admin/permissions.html:6
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:55
+#: registration/templates/registration/admin/base.html:61
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:72
+#: registration/templates/registration/admin/base.html:78
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:73
+#: registration/templates/registration/admin/base.html:79
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:74
+#: registration/templates/registration/admin/base.html:80
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:75
+#: registration/templates/registration/admin/base.html:81
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:76
+#: registration/templates/registration/admin/base.html:82
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:77
+#: registration/templates/registration/admin/base.html:83
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:78
+#: registration/templates/registration/admin/base.html:84
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:79
+#: registration/templates/registration/admin/base.html:85
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:80
+#: registration/templates/registration/admin/base.html:86
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:81
+#: registration/templates/registration/admin/base.html:87
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:82
+#: registration/templates/registration/admin/base.html:88
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -426,11 +470,6 @@ msgstr "Löschen"
 msgid "Delete job"
 msgstr "Aufgabe löschen"
 
-#: registration/templates/registration/admin/delete_job.html:13
-#: registration/templates/registration/admin/delete_shift.html:13
-msgid "Job"
-msgstr "Aufgabe"
-
 #: registration/templates/registration/admin/delete_job.html:24
 msgid "There are shifts for this job. Remove it anyway?"
 msgstr "Es gibt Schichten für diese Aufgabe. Die Aufgabe trotzdem löschen?"
@@ -472,6 +511,11 @@ msgstr ""
 msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
+#: registration/templates/registration/admin/edit_badgedesign.html:6
+msgid "Badge Design"
+msgstr ""
+
+#: registration/templates/registration/admin/edit_badgedesign.html:13
 #: registration/templates/registration/admin/edit_event.html:20
 #: registration/templates/registration/admin/edit_helper.html:30
 #: registration/templates/registration/admin/edit_job.html:19
@@ -652,53 +696,53 @@ msgstr "Helferanmeldung für %(eventname)s"
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
 
-#: registration/views.py:158
+#: registration/views.py:159
 #, python-format
 msgid "Event was created: %(event)s"
 msgstr "Veranstaltung wurde angelegt: %(event)s"
 
-#: registration/views.py:308
+#: registration/views.py:309
 msgid ""
 "You cannot delete the helper from other shifts. The helper was not deleted"
 msgstr ""
 "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde nicht "
 "gelöscht."
 
-#: registration/views.py:316
+#: registration/views.py:317
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views.py:341
+#: registration/views.py:342
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
 
-#: registration/views.py:366
+#: registration/views.py:367
 #, python-format
 msgid "Job deleted: %(name)s"
 msgstr "Aufgabe gelöscht: %(name)s"
 
-#: registration/views.py:399
+#: registration/views.py:400
 #, python-format
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views.py:452
+#: registration/views.py:453
 #, python-format
 msgid "%(username)s can add users now"
 msgstr "%(username)s kann jetzt Nutzer hinzufügen"
 
-#: registration/views.py:461
+#: registration/views.py:462
 #, python-format
 msgid "%(username)s can add events now"
 msgstr "%(username)s kann jetzt Veranstaltungen anlegen"
 
-#: registration/views.py:491
+#: registration/views.py:492
 #, python-format
 msgid "Removed permission for user %(username)s"
 msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 
-#: registration/views.py:511
+#: registration/views.py:512
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Nutzer %(username)s hinzugefügt"

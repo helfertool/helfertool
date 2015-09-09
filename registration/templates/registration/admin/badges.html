@@ -1,0 +1,40 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Badges" %}</h2>
+
+    {% if not event.badges %}
+        <div class="alert alert-danger" role="alert">
+            {% trans "The badge creation is not actived." %}
+        </div>
+    {% else %}
+        <p><a href="{% url 'badgedesign' event.url_name event.badge_design.pk %}">Edit default badge</a></p>
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Job" %}</th>
+                <th>{% trans "Design" %}</th>
+                <th></th>
+            </tr>
+
+            {% for job in event.job_set.all %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>
+                        {% if job.has_badge_design %}
+                            <a href="{% url 'badgedesign' event.url_name job.badge_design.pk %}">Edit</a>
+                        {% else %}
+                            {% trans "Default" %}
+                            (<a href="{% url 'new_badgedesign' event.url_name job.pk %}">New</a>)
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="">Create badges</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

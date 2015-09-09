@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.utils import formats, translation
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Helper, Shift, Event, Job
+from .models import Helper, Shift, Event, Job, BadgeDesign
 
 class RegisterForm(forms.ModelForm):
     """ Form for registration of helpers.
@@ -113,7 +113,7 @@ class RegisterForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['text', 'imprint', 'registered', ]
+        exclude = ['text', 'imprint', 'registered', 'badge_design']
         widgets = {
             'admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }
@@ -322,3 +322,8 @@ class EventDeleteForm(forms.ModelForm):
 
 class DeleteForm(forms.Form):
     pass
+
+class BadgeDesignForm(forms.ModelForm):
+    class Meta:
+        model = BadgeDesign
+        exclude = []

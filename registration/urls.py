@@ -62,6 +62,11 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/(?P<job_pk>[0-9]+)$', views.excel, name='jobexcel'),
 
     # summaries
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators$', views.coordinators, name='coordinators'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$', views.coordinators, name='coordinators'),
+
+    # badges
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$', views.badges, name='badges'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)$', views.edit_badgedesign, name='badgedesign'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/(?P<job_pk>[0-9]+)$', views.edit_badgedesign, name='new_badgedesign'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
