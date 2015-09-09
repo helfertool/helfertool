@@ -57,9 +57,9 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)$', views.add_helper, name='add_helper'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/(?P<job_pk>[0-9]+)$', views.add_helper, name='add_coordinator'),
 
-    # excel
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/all$', views.excel, name='excel'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/excel/(?P<job_pk>[0-9]+)$', views.excel, name='jobexcel'),
+    # export
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all$', views.export, name='export'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/(?P<job_pk>[0-9]+)$', views.export, name='jobexport'),
 
     # summaries
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$', views.coordinators, name='coordinators'),

@@ -8,8 +8,8 @@
 * Freischalten um Uhrzeit
 * Load Test (deactivate mail!)
 * edit helper -> redirect to jobhelpers
-* PDF export (lists of helpers)
 * overview: t-shirts, vegetarian
+* rework info button
 
 Low priority
 ============
@@ -19,6 +19,7 @@ Low priority
 * T-Shirts fixieren
 * Search helper (name, mail)
 * modelform: mark optional fields
+* sort helpers and coordinators
 
 After ESP
 =========
@@ -35,3 +36,4 @@ After ESP
 * search username with name and mail
 * add helper: infection_instruction only when necessary
 * delete event: delete badge upload directory
+* pdf export: vertical alignment

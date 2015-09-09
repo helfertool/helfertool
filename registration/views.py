@@ -15,7 +15,8 @@ from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
                    EventDeleteForm, UsernameForm, DeleteForm, \
                    UserCreationForm, BadgeDesignForm
 from .utils import escape_filename
-from .export import xlsx
+from .export.excel import xlsx
+from .export.pdf import pdf
 from .templatetags.permissions import has_group, has_addevent_group, \
                                       has_adduser_group, has_perm_group
 
@@ -516,7 +517,12 @@ def add_user(request):
     return render(request, 'registration/admin/add_user.html', context)
 
 @login_required
-def excel(request, event_url_name, job_pk=None):
+def export(request, event_url_name, type, job_pk=None):
+    # check for valid export type
+    if type not in ["excel", "pdf"]:
+        raise Http404
+
+    # get event
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # list of jobs for export
@@ -537,14 +543,25 @@ def excel(request, event_url_name, job_pk=None):
         jobs = event.job_set.all()
         filename = event.name
 
-    # start http response
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename="%s.xlsx"' % escape_filename(filename)
+    # escape filename
+    filename = escape_filename(filename)
 
     # create buffer
     buffer = BytesIO()
 
-    xlsx(buffer, event, jobs)
+    # do filetype specific stuff
+    if type == 'excel':
+        filename = "%s.xlsx" % filename
+        content_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        xlsx(buffer, event, jobs)
+    elif type == 'pdf':
+        filename = "%s.pdf" % filename
+        content_type = 'application/pdf'
+        pdf(buffer, event, jobs)
+
+    # start http response
+    response = HttpResponse(content_type=content_type)
+    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
 
     # close buffer, send file
     data = buffer.getvalue()
