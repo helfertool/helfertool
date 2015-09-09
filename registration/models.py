@@ -416,24 +416,24 @@ class BadgeDesign(models.Model):
         :bg_front: Background picture of the front
         :bg_back: Background picture of the back
     """
+
+    def upload_path(instance, filename):
+        path = os.path.join(settings.BADGE_IMAGE_DIR, filename)
+
+        # check is file already exists -> add number
+        counter = 0
+        while os.path.isfile(path) or os.path.isdir(path):
+            counter = counter + 1
+            path = os.path.join(settings.BADGE_IMAGE_DIR, "%d%s" % (counter, filename))
+
+        return path
+
     font_color = models.CharField(max_length=7, default="#000000",
                                   validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
                                   verbose_name=_("Color for text"),
                                   help_text=_("E.g. #00ff00"))
 
     bg_front = models.ImageField(verbose_name=_("Background image for front"),
-                                                upload_to=settings.BADGE_IMAGE_DIR) # FIXME
+                                                upload_to=upload_path)
     bg_back = models.ImageField(verbose_name=_("Background image for back"),
-                                               upload_to=settings.BADGE_IMAGE_DIR) # FIXME
-
-    @property
-    def bg_front_path(self):
-        if not self.bg_front:
-            return None
-        return  os.path.join(settings.BADGE_IMAGE_DIR, self.pk, self.bg_front)
-
-    @property
-    def bg_back_path(self):
-        if not self.bg_back:
-            return None
-        return  os.path.join(settings.BADGE_IMAGE_DIR, self.pk, self.bg_back)
+                                               upload_to=upload_path)
