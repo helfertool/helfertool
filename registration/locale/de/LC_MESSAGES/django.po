@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-16 13:37+0200\n"
-"PO-Revision-Date: 2015-09-01 13:56+0200\n"
+"POT-Creation-Date: 2015-09-16 14:33+0200\n"
+"PO-Revision-Date: 2015-09-16 14:38+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.3\n"
 
-#: registration/export/excel.py:58 registration/models.py:330
+#: registration/export/excel.py:58 registration/models.py:331
 #: registration/templates/registration/admin/helpers_table.html:7
 msgid "Prename"
 msgstr "Vorname"
 
-#: registration/export/excel.py:59 registration/models.py:332
+#: registration/export/excel.py:59 registration/models.py:333
 #: registration/templates/registration/admin/helpers_table.html:8
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:60 registration/models.py:60
-#: registration/models.py:334
+#: registration/export/excel.py:60 registration/models.py:61
+#: registration/models.py:335
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
 #: registration/templates/registration/admin/helpers_table.html:9
@@ -37,20 +37,20 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:63 registration/models.py:336
+#: registration/export/excel.py:63 registration/models.py:337
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/admin/helpers_table.html:10
 #: registration/templates/registration/registered.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export/excel.py:67 registration/models.py:342
+#: registration/export/excel.py:67 registration/models.py:343
 #: registration/templates/registration/admin/helpers_table.html:12
 #: registration/templates/registration/registered.html:30
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:71 registration/models.py:345
+#: registration/export/excel.py:71 registration/models.py:346
 #: registration/templates/registration/admin/helpers_table.html:15
 #: registration/templates/registration/registered.html:42
 msgid "Vegetarian"
@@ -61,7 +61,7 @@ msgstr "Vegetarier"
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export/excel.py:78 registration/models.py:339
+#: registration/export/excel.py:78 registration/models.py:340
 #: registration/templates/registration/admin/helpers_table.html:20
 #: registration/templates/registration/registered.html:47
 msgid "Comment"
@@ -74,7 +74,7 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:39 registration/models.py:144
+#: registration/export/pdf.py:39 registration/models.py:145
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
@@ -98,7 +98,7 @@ msgstr ""
 
 #: registration/forms.py:166
 msgid "The begin of the shift must be before the end."
-msgstr ""
+msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 
 #: registration/forms.py:219
 #: registration/templates/registration/admin/permissions.html:15
@@ -122,158 +122,160 @@ msgstr "Vorname"
 msgid "Last name"
 msgstr "Nachname"
 
-#: registration/models.py:43
+#: registration/models.py:44
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: registration/models.py:44
+#: registration/models.py:45
 msgid "May contain the following chars: a-zA-Z0-9."
 msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
 
-#: registration/models.py:46
+#: registration/models.py:47
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: registration/models.py:49
+#: registration/models.py:50
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models.py:50
+#: registration/models.py:51
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models.py:52 registration/templates/base.html:107
+#: registration/models.py:53 registration/templates/base.html:107
 msgid "Imprint"
 msgstr "Impressum"
 
-#: registration/models.py:53
+#: registration/models.py:54
 msgid "Display at the bottom of the registration form."
 msgstr "Wird bei der Anmeldung unten angezeigt."
 
-#: registration/models.py:56
+#: registration/models.py:57
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models.py:57
+#: registration/models.py:58
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models.py:61
+#: registration/models.py:62
 msgid "Used as sender of e-mails."
 msgstr "Wird als Absender von E-Mail genutzt."
 
-#: registration/models.py:64
+#: registration/models.py:65
 msgid "Registration possible"
 msgstr "Anmeldung möglich"
 
-#: registration/models.py:69
+#: registration/models.py:70
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models.py:72
+#: registration/models.py:73
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models.py:74
+#: registration/models.py:75
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models.py:76
+#: registration/models.py:77
 msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
 msgstr ""
+"Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
+"werden, der per E-Mail verschickt wird."
 
-#: registration/models.py:79
+#: registration/models.py:80
 msgid "Use badge creation"
-msgstr ""
+msgstr "Badge Generierung nutzen"
 
-#: registration/models.py:145
+#: registration/models.py:146
 msgid "This job is visible publicly"
 msgstr "Diese Aufgabe ist öffentlich sichtbar"
 
-#: registration/models.py:146
+#: registration/models.py:147
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: registration/models.py:147
+#: registration/models.py:148
 #: registration/templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models.py:215
+#: registration/models.py:216
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:43
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models.py:216
+#: registration/models.py:217
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "End"
 msgstr "Ende"
 
-#: registration/models.py:217
+#: registration/models.py:218
 #: registration/templates/registration/admin/jobs_and_shifts.html:45
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models.py:219
+#: registration/models.py:220
 msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
-#: registration/models.py:315
+#: registration/models.py:316
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: registration/models.py:316
+#: registration/models.py:317
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: registration/models.py:317
+#: registration/models.py:318
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: registration/models.py:321
+#: registration/models.py:322
 msgid "No"
 msgstr "Nein"
 
-#: registration/models.py:322
+#: registration/models.py:323
 msgid "Valid"
 msgstr "Gültig"
 
-#: registration/models.py:323
+#: registration/models.py:324
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models.py:346
+#: registration/models.py:347
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models.py:351
+#: registration/models.py:352
 #: registration/templates/registration/registered.html:36
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: registration/models.py:354
+#: registration/models.py:355
 msgid "E-Mail address was confirmed"
-msgstr ""
+msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models.py:456
+#: registration/models.py:458
 msgid "Color for text"
-msgstr ""
-
-#: registration/models.py:457
-msgid "E.g. #00ff00"
-msgstr ""
+msgstr "Textfarbe"
 
 #: registration/models.py:459
-msgid "Background image for front"
-msgstr ""
+msgid "E.g. #00ff00"
+msgstr "z.B. #00ff00"
 
 #: registration/models.py:461
+msgid "Background image for front"
+msgstr "Hintergrundbild für die Vorderseite"
+
+#: registration/models.py:463
 msgid "Background image for back"
-msgstr ""
+msgstr "Hintergrundbild für die Rückseite"
 
 #: registration/templates/base.html:27
 msgid "Registration for helpers"
@@ -326,11 +328,11 @@ msgstr "Hinzufügen"
 #: registration/templates/registration/admin/badges.html:6
 #: registration/templates/registration/admin/base.html:44
 msgid "Badges"
-msgstr ""
+msgstr "Badges"
 
 #: registration/templates/registration/admin/badges.html:10
 msgid "The badge creation is not actived."
-msgstr ""
+msgstr "Die Generierung von Badges ist nicht aktiviert."
 
 #: registration/templates/registration/admin/badges.html:17
 #: registration/templates/registration/admin/delete_job.html:13
@@ -340,11 +342,11 @@ msgstr "Aufgabe"
 
 #: registration/templates/registration/admin/badges.html:18
 msgid "Design"
-msgstr ""
+msgstr "Design"
 
 #: registration/templates/registration/admin/badges.html:29
 msgid "Default"
-msgstr ""
+msgstr "Standard"
 
 #: registration/templates/registration/admin/base.html:8
 #, python-format
@@ -534,7 +536,7 @@ msgstr "Diese Schicht löschen?"
 
 #: registration/templates/registration/admin/edit_badgedesign.html:6
 msgid "Badge Design"
-msgstr ""
+msgstr "Badge Design"
 
 #: registration/templates/registration/admin/edit_badgedesign.html:13
 #: registration/templates/registration/admin/edit_event.html:20
@@ -702,6 +704,17 @@ msgstr ""
 "du hast dich für folgende Schichten angemeldet:"
 
 #: registration/templates/registration/mail.txt:7
+#, python-format
+msgid ""
+"You have to confirm your mail address by clicking on the following link: "
+"%(validate_url)s\n"
+"\n"
+msgstr ""
+"Du musst deine E-Mail Adresse bestätigen, indem du auf folgenden Link "
+"klickst: %(validate_url)s\n"
+"\n"
+
+#: registration/templates/registration/mail.txt:9
 msgid "Thanks for your support!"
 msgstr "Danke für deine Unterstützung!"
 
@@ -719,14 +732,16 @@ msgid ""
 "You have to confirm your mail address by clicking on a link we just sent to "
 "you."
 msgstr ""
+"Du musst deine E-Mail Adresse bestätigen, indem du auf den Link klickst, den "
+"wir dir gerade geschickt haben."
 
 #: registration/templates/registration/validate.html:11
 msgid "Your mail address was already confirmed."
-msgstr ""
+msgstr "Deine E-Mail Adresse wurde bereits bestätigt."
 
 #: registration/templates/registration/validate.html:13
 msgid "You confirmed your mail address."
-msgstr ""
+msgstr "Du hast deine E-Mail Adresse bestätigt."
 
 #: registration/views.py:184
 #, python-format
