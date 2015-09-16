@@ -74,7 +74,7 @@ class Event(models.Model):
 
     badges = models.BooleanField(default=False,
                                  verbose_name=_("Use badge creation"))
-    badge_design = models.ForeignKey('BadgeDesign', blank=True, null=True)
+    badge_design = models.OneToOneField('BadgeDesign', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -144,7 +144,7 @@ class Job(models.Model):
     description = models.TextField(blank=True, verbose_name=_("Description"))
     job_admins = models.ManyToManyField(User, blank=True)
     coordinators = models.ManyToManyField('Helper', blank=True)
-    badge_design = models.ForeignKey('BadgeDesign', blank=True, null=True)
+    badge_design = models.OneToOneField('BadgeDesign', blank=True, null=True)
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
@@ -418,15 +418,24 @@ class BadgeDesign(models.Model):
     """
 
     def upload_path(instance, filename):
-        path = os.path.join(settings.BADGE_IMAGE_DIR, filename)
+        event = str(instance.get_event().pk)
+
+        path = os.path.join(settings.BADGE_IMAGE_DIR, event, filename)
 
         # check is file already exists -> add number
         counter = 0
         while os.path.isfile(path) or os.path.isdir(path):
             counter = counter + 1
-            path = os.path.join(settings.BADGE_IMAGE_DIR, "%d%s" % (counter, filename))
+            path = os.path.join(settings.BADGE_IMAGE_DIR, event,
+                                "%d%s" % (counter, filename))
 
         return path
+
+    def get_event(self):
+        try:
+            return self.event
+        except AttributeError as e:
+            return self.job.event
 
     font_color = models.CharField(max_length=7, default="#000000",
                                   validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],

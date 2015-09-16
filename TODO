@@ -21,6 +21,7 @@ Low priority
 * Search helper (name, mail)
 * modelform: mark optional fields
 * sort helpers and coordinators
+* remove badge design
 
 After ESP
 =========
@@ -38,3 +39,4 @@ After ESP
 * add helper: infection_instruction only when necessary
 * delete event: delete badge upload directory
 * pdf export: vertical alignment
+* remove old images in badgeupload directory
