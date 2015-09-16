@@ -26,7 +26,11 @@
         <div class="alert alert-danger" role="alert">
             <p><b>{% trans "You can delete this event including all jobs, shifts and helpers." %}</b></p>
 
-            <p><a href="{% url 'delete_event' event.url_name %}" class="btn btn-danger" role="button">Delete event</a></p>
+            <p>
+                <a href="{% url 'delete_event' event.url_name %}" class="btn btn-danger" role="button">
+                    {% trans "Delete event" %}
+                </a>
+            </p>
         </div>
     {% endif %}
 {% endblock %}
