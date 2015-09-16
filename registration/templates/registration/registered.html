@@ -49,6 +49,12 @@
         </tr>
     </table>
 
+    {% if data.has_to_validate %}
+        <div class="alert alert-info" role="alert">
+            {% trans "You have to confirm your mail address by clicking on a link we just sent to you." %}
+        </div>
+    {% endif %}
+
     <h2>{% trans "Shifts" %}</h2>
     <ul class="list-group">
     {% for shift in data.shifts.all %}

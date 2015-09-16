@@ -100,7 +100,13 @@ def form(request, event_url_name):
 
     if form.is_valid():
         helper = form.save()
-        helper.send_mail()
+
+        # if mail validation if necessary: helper is not validated
+        if event.mail_validation:
+            helper.validated = False
+            helper.save()
+
+        helper.send_mail(request)
         return HttpResponseRedirect(reverse('registered', args=[event.url_name, helper.pk]))
 
     context = {'event': event,
@@ -113,6 +119,24 @@ def registered(request, event_url_name, helper_id):
     context = {'event': event,
                'data': helper}
     return render(request, 'registration/registered.html', context)
+
+def validate(request, event_url_name, helper_id):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
+
+    # 404 if validation is not used
+    if not event.mail_validation:
+        raise Http404()
+
+    # already validated?
+    already_validated = helper.validated
+
+    # validate
+    helper.validated = True
+    helper.save()
+
+    context = {'event': event,
+               'already_validated': already_validated}
+    return render(request, 'registration/validate.html', context)
 
 @login_required
 def admin(request, event_url_name=None):

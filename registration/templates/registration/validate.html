@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    <h1>{{ event }}</h1>
+
+    <p>
+        {% if already_validated %}
+            {% trans "Your mail address was already confirmed." %}
+        {% else %}
+            {% trans "You confirmed your mail address." %}
+        {% endif %}
+    </p>
+
+    {{ event.imprint | safe }}
+{% endblock %}

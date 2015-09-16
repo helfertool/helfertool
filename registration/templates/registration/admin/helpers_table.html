@@ -3,6 +3,7 @@
 
 <table class="table">
     <tr>
+        <th></th>
         <th>{% trans "Prename" %}</th>
         <th>{% trans "Surname" %}</th>
         <th>{% trans "E-Mail" %}</th>
@@ -22,6 +23,11 @@
     </tr>
     {% for helper in helpers|dictsort:"timestamp" %}
         <tr>
+            <td>
+                {% if helper.has_to_validate %}
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>
+                {% endif %}
+            </td>
             <td>{{ helper.prename }}</td>
             <td>{{ helper.surname }}</td>
             <td>{{ helper.email }}</td>

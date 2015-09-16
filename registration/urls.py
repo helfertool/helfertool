@@ -32,6 +32,8 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$', views.form, name='form'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/(?P<helper_id>[a-z0-9\-]+)/$',
         views.registered, name='registered'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/(?P<helper_id>[a-z0-9\-]+)/$',
+        views.validate, name='validate'),
 
     # manage event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.admin, name='manage_event'),

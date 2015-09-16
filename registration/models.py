@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from django.core.validators import RegexValidator, MinValueValidator
 from django.db import models
 from django.db.models.signals import pre_delete, post_save
@@ -33,6 +34,7 @@ class Event(models.Model):
         :ask_vegetarian: ask, if the helper is vegetarian
         :show_public_numbers: show the number of current and maximal helpers on
                              the registration page
+        :mail_validation: helper must validate his mail address by a link
         :badge: use the badge creation system
         :badge_design: the used badge design (optional)
     """
@@ -71,6 +73,8 @@ class Event(models.Model):
                                          verbose_name=_("Ask, if helper is vegetarian"))
     show_public_numbers = models.BooleanField(default=True,
                                               verbose_name=_("Show number of helpers on registration page"))
+    mail_validation = models.BooleanField(default=True,
+                                          verbose_name=_("Registrations for public shifts must be validated by a link that is sent per mail"))
 
     badges = models.BooleanField(default=False,
                                  verbose_name=_("Use badge creation"))
@@ -279,6 +283,7 @@ class Helper(models.Model):
         :vegetarian: is the helper vegetarian?
         :infection_instruction: status of the instruction for food handling
         :timestamp: time of registration
+        :validated: the validation link was clicked (if validation is enabled)
     """
 
     SHIRT_S = 'S'
@@ -347,6 +352,7 @@ class Helper(models.Model):
                                              verbose_name=_("Instruction for the handling of food"))
 
     timestamp = models.DateTimeField(auto_now_add=True)
+    validated = models.BooleanField(default=True, verbose_name=_("E-Mail address was confirmed"))
 
     def __str__(self):
         return "%s %s" % (self.prename, self.surname)
@@ -371,7 +377,7 @@ class Helper(models.Model):
 
         return False
 
-    def send_mail(self):
+    def send_mail(self, request):
         """ Send a confirmation e-mail to the registered helper.
 
         This e-mail contains a list of the shifts, the helper registered for.
@@ -380,12 +386,13 @@ class Helper(models.Model):
             return
 
         event = self.event
+        validate_url = request.build_absolute_uri(reverse('validate', args=[event.url_name, self.id]))
 
         subject_template = get_template('registration/mail_subject.txt')
         subject = subject_template.render({ 'event': event }).rstrip()
 
         text_template = get_template('registration/mail.txt')
-        text = text_template.render({ 'user': self })
+        text = text_template.render({ 'user': self, 'event': event, 'validate_url': validate_url })
 
         send_mail(subject, text, event.email, [self.email],
                   fail_silently=False)
@@ -407,6 +414,15 @@ class Helper(models.Model):
     def full_name(self):
         """ Returns full name of helper """
         return "%s %s" % (self.prename, self.surname)
+
+    @property
+    def has_to_validate(self):
+        event = self.event
+
+        if not self.event:
+            return False
+
+        return self.event.mail_validation and not self.validated
 
 class BadgeDesign(models.Model):
     """ Design of a badge (for an event or job)

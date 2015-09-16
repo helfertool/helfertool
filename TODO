@@ -1,6 +1,4 @@
-* badgedesign: directory for one event
 * atomic validation if shift is full
-* Validierung per Mail
 * Badge Generierung (Rechte festlegen)
   * for some jobs an upload of an image is possible
   * Badge -> OneToOne to Helper
