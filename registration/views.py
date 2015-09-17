@@ -9,11 +9,11 @@ from django.utils.translation import ugettext as _
 
 from io import BytesIO
 
-from .models import Event, Job, Helper, Shift, BadgeDesign
+from .models import Event, Job, Helper, Shift, BadgeDesign, Link
 from .forms import RegisterForm, EventForm, JobForm, ShiftForm, HelperForm, \
                    HelperDeleteForm, ShiftDeleteForm, JobDeleteForm, \
-                   EventDeleteForm, UsernameForm, DeleteForm, \
-                   UserCreationForm, BadgeDesignForm
+                   EventDeleteForm, LinkDeleteForm, UsernameForm, DeleteForm, \
+                   UserCreationForm, LinkForm, BadgeDesignForm
 from .utils import escape_filename
 from .export.excel import xlsx
 from .export.pdf import pdf
@@ -83,11 +83,25 @@ def index(request):
                'involved_events': involved_events}
     return render(request, 'registration/index.html', context)
 
-def form(request, event_url_name):
+def form(request, event_url_name, link_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
+    # get link if given
+    link = None
+    if link_pk:
+        try:
+            link = Link.objects.get(pk=link_pk)
+        except Link.DoesNotExist as e:
+            # show some message when link does not exist
+            context = {'event': event}
+            return render(request, 'registration/invalid_link.html', context)
+
+        # check if link belongs to event
+        if link.event != event:
+            raise Http404()
+
     # check permission
-    if not event.active:
+    if not event.active and not link:
         # not logged in -> show login form
         if not request.user.is_authenticated():
             return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
@@ -96,7 +110,7 @@ def form(request, event_url_name):
             return nopermission(request)
 
     # handle form
-    form = RegisterForm(request.POST or None, event=event)
+    form = RegisterForm(request.POST or None, event=event, link=link)
 
     if form.is_valid():
         helper = form.save()
@@ -433,6 +447,35 @@ def delete_event(request, event_url_name):
     return render(request, 'registration/admin/delete_event.html', context)
 
 @login_required
+def delete_link(request, event_url_name, link_pk):
+    event = get_object_or_404(Event, url_name=event_url_name)
+    link = get_object_or_404(Link, pk=link_pk)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if event matches
+    if event != link.event:
+        raise Http404()
+
+    # form
+    form = LinkDeleteForm(request.POST or None, instance=link)
+
+    if form.is_valid():
+        form.delete()
+        messages.success(request, _("Link deleted"))
+
+        # redirect to shift
+        return HttpResponseRedirect(reverse('links', args=[event_url_name]))
+
+    # render page
+    context = {'event': event,
+               'link': link,
+               'form': form}
+    return render(request, 'registration/admin/delete_link.html', context)
+
+@login_required
 def helpers(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -603,6 +646,49 @@ def coordinators(request, event_url_name):
 
     context = {'event': event}
     return render(request, 'registration/admin/coordinators.html', context)
+
+@login_required
+def links(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # get all links
+    links = event.link_set.all()
+
+    context = {'event': event,
+               'links': links}
+    return render(request, 'registration/admin/links.html', context)
+
+@login_required
+def edit_link(request, event_url_name, link_pk=None):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # get job, if available
+    link = None
+    if link_pk:
+        link = get_object_or_404(Link, pk=link_pk)
+
+        if event != link.event:
+            raise Http404()
+
+    # form
+    form = LinkForm(request.POST or None, instance=link, event=event, creator=request.user)
+
+    if form.is_valid():
+        link = form.save()
+        return HttpResponseRedirect(reverse('links', args=[event_url_name]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/edit_link.html', context)
 
 @login_required
 def badges(request, event_url_name):

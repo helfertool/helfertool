@@ -1,0 +1,28 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete link" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <h3>{% trans "Shifts" %}</h3>
+
+        <ul>
+            {% for shift in link.shifts.all %}
+                <li>{{ shift.job.name }}, {{ shift.time }}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="alert alert-danger" role="alert">
+            {% trans "Do you want to delete this link?" %}
+        </div>
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Delete link!" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}
+

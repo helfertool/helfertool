@@ -1,0 +1,46 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Links" %}</h2>
+
+    {% if not links %}
+        <p class="text-muted">{% trans "There are no links." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Shifts" %}</th>
+                <th>{% trans "Creator" %}</th>
+                <th>{% trans "Usage" %}</th>
+                <th></th>
+            </tr>
+
+            {% for link in links %}
+                <tr>
+                    <td>
+                        <ul>
+                            {% for shift in link.shifts.all %}
+                                <li>{{ shift.job.name }}, {{ shift.time }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ link.usage }}</td>
+                    <td>{{ link.creator.get_full_name | default:link.creator.username }}</td>
+                    <td>
+                        <a href="{% url "form_for_link" event.url_name link.id %}">{% bootstrap_icon "link" %} Link</a><br />
+                        <a href="{% url "edit_link" event.url_name link.id %}">{% bootstrap_icon "wrench" %} Edit</a><br />
+                        <a href="{% url "delete_link" event.url_name link.id %}">{% bootstrap_icon "remove" %} Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'add_link' event.url_name %}">
+            {% bootstrap_icon "plus" %}
+            {% trans "Add link" %}
+        </a>
+   </p>
+{% endblock %}

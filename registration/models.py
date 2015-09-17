@@ -166,17 +166,24 @@ class Job(models.Model):
         return self.event.is_admin(user) or \
                self.job_admins.filter(pk=user.pk).exists()
 
-    def shifts_by_day(self):
+    def shifts_by_day(self, shifts=None):
         """ Returns all shifts grouped sorted by day and sorted by time.
 
         The result is a dict with date objects as keys. Each item of the
         dictionary is a OrderedDict of shifts.
+
+        :param shifts: list of shifts, they must be shifts of this job (optional)
+        :type shifts: list of Shift objects
         """
         tmp_shifts = dict()
 
+        # no shifts are given -> use all shifts of this job
+        if not shifts:
+            shifts = self.shift_set.all()
+
         # iterate over all shifts and group them by day
         # (itertools.groupby is strange...)
-        for shift in self.shift_set.all():
+        for shift in shifts:
             day = shift.begin.date()
 
             # add to list
@@ -212,6 +219,9 @@ class Shift(models.Model):
         :number: number of people
         :blocked: shift is blocked, if the job is public
     """
+    class Meta:
+        ordering = ['job', 'begin', 'end']
+
     job = models.ForeignKey(Job)
     begin = models.DateTimeField(verbose_name=_("Begin"))
     end = models.DateTimeField(verbose_name=_("End"))
@@ -462,3 +472,23 @@ class BadgeDesign(models.Model):
                                                 upload_to=upload_path)
     bg_back = models.ImageField(verbose_name=_("Background image for back"),
                                                upload_to=upload_path)
+
+class Link(models.Model):
+    """ Link to some shifts for registration
+
+    Columns:
+        :id: Primary key, UUID
+        :event: The event
+        :shifts: Shifts that are linked
+        :creator: User that created the link
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+    event = models.ForeignKey(Event)
+
+    shifts = models.ManyToManyField(Shift)
+
+    creator = models.ForeignKey(User)
+
+    usage = models.CharField(max_length=200, blank=True,
+                             verbose_name=_("Usage"))

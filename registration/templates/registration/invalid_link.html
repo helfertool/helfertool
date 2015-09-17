@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% load registerform_shifts %}
+
+{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    <h1>{{ event }}</h1>
+
+    <div class="alert alert-danger" role="alert">
+        {% trans "This link is not valid." %}
+    </div>
+
+    {% if event.active %}
+        <p>
+            <a href="{% url "form" event.url_name %}">
+                {% trans "Go to the registration." %}
+            </a>
+        </p>
+    {% endif %}
+
+    {{ event.imprint | safe }}
+{% endblock %}
+

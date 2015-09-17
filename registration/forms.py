@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.utils import formats, translation
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Helper, Shift, Event, Job, BadgeDesign
+from .models import Helper, Shift, Event, Job, Link, BadgeDesign
 
 class RegisterForm(forms.ModelForm):
     """ Form for registration of helpers.
@@ -24,37 +24,62 @@ class RegisterForm(forms.ModelForm):
         The fields 'shirt' and 'vegetarian' are removed, if they are not
         necessary. Then the custom fields for the shifts are created.
         """
-        event = kwargs.pop('event')
+        self.event = kwargs.pop('event')
+        self.link = kwargs.pop('link')
         self.shifts = {}
 
         super(RegisterForm, self).__init__(*args, **kwargs)
 
         # remove field for shirt?
-        if not event.ask_shirt:
+        if not self.event.ask_shirt:
             self.fields.pop('shirt')
 
         # remove field for vegetarian food?
-        if not event.ask_vegetarian:
+        if not self.event.ask_vegetarian:
             self.fields.pop('vegetarian')
 
+        # get a list of all shifts
+        if self.link:
+            all_shifts = self.link.shifts.all()
+        else:
+            all_shifts = Shift.objects.filter(job__event=self.event)
+
         # add fields for shifts
-        for job in event.public_jobs:
-            for shift in job.shift_set.all():
-                id = 'shift_%s' % shift.pk
-                self.fields[id] = forms.BooleanField(label=shift,
-                                                     required=False)
+        for shift in all_shifts:
+            id = 'shift_%s' % shift.pk
+            self.fields[id] = forms.BooleanField(label=shift,
+                                                 required=False)
 
-                # disable button if shift is full
-                if shift.is_full() or shift.blocked:
-                    self.fields[id].widget.attrs['disabled'] = True
+            # disable button if shift is full
+            if shift.is_full() or (shift.blocked and not self.link):
+                self.fields[id].widget.attrs['disabled'] = True
 
-                # set class if infection instruction is needed for this shift
-                if shift.job.infection_instruction:
-                    self.fields[id].widget.attrs['class'] = 'infection_instruction'
-                    self.fields[id].widget.attrs['onClick'] = 'handle_infection_instruction()'
+            # set class if infection instruction is needed for this shift
+            if shift.job.infection_instruction:
+                self.fields[id].widget.attrs['class'] = 'infection_instruction'
+                self.fields[id].widget.attrs['onClick'] = 'handle_infection_instruction()'
 
-                # safe mapping id <-> pk
-                self.shifts[id] = shift.pk
+            # safe mapping id <-> pk
+            self.shifts[id] = shift.pk
+
+    def get_jobs(self):
+        if self.link:
+            jobs = []
+
+            # get all jobs, that have a shift contained in link.shifts
+            for job in self.event.job_set.all():
+                if job.shift_set.all() & self.link.shifts.all():
+                    jobs.append(job)
+            return jobs
+        else:
+            return self.event.public_jobs
+
+    def get_shifts(self, job):
+        if self.link:
+            shifts = self.link.shifts.filter(job=job)
+            return job.shifts_by_day(shifts)
+        else:
+            return job.shifts_by_day()
 
     def clean(self):
         """ Custom validation of shifts and other fields.
@@ -74,7 +99,7 @@ class RegisterForm(forms.ModelForm):
             if self.cleaned_data[shift]:
                 number_of_shifts += 1
 
-                # while iteration over shifts, check if infection instruction
+                # while iterating over shifts, check if infection instruction
                 # is needed for one of the shifts
                 shift_obj = Shift.objects.get(pk=self.shifts[shift])
                 if shift_obj.job.infection_instruction:
@@ -94,7 +119,7 @@ class RegisterForm(forms.ModelForm):
                 cur_shift = Shift.objects.get(pk=self.shifts[shift])
                 if cur_shift.is_full():
                     raise ValidationError("You selected a full shift.")
-                if cur_shift.blocked:
+                if cur_shift.blocked and not self.link:
                     raise ValidationError("You selected a blocked shift.")
 
     def save(self, commit=True):
@@ -141,6 +166,39 @@ class JobForm(forms.ModelForm):
             instance.save()
 
         self.save_m2m() # save m2m, otherwise job_admins is lost
+
+        return instance
+
+
+class LinkForm(forms.ModelForm):
+    class Meta:
+        model = Link
+        exclude = ['event', 'creator']
+        widgets = {
+            'shifts': forms.CheckboxSelectMultiple(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.event = kwargs.pop('event')
+        self.creator = kwargs.pop('creator')
+
+        super(LinkForm, self).__init__(*args, **kwargs)
+
+        # only show shifts for this event
+        self.fields['shifts'].queryset = Shift.objects.filter(job__event=self.event)
+
+    def save(self, commit=True):
+        instance = super(LinkForm, self).save(False)
+
+        # add event and creator
+        instance.event = self.event
+        #if instance.creator is None:
+        instance.creator = self.creator # FIXME
+
+        if commit:
+            instance.save()
+
+        self.save_m2m()
 
         return instance
 
@@ -315,6 +373,14 @@ class JobDeleteForm(forms.ModelForm):
 class EventDeleteForm(forms.ModelForm):
     class Meta:
         model = Event
+        fields = []
+
+    def delete(self):
+        self.instance.delete()
+
+class LinkDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Link
         fields = []
 
     def delete(self):

@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% load lookup_shift %}
+{% load registerform_shifts %}
 
 {% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
 
@@ -11,7 +11,7 @@
 
     {{ event.text | safe }}
 
-    <form action="{% url 'form' event.url_name %}" method="post">
+    <form action="" method="post">
         {% csrf_token %}
 
         {% bootstrap_form_errors form %}
@@ -19,9 +19,11 @@
         <h2>{% trans "Jobs" %}</h2>
         {# list of all jobs and shifts #}
 
-        {% for job in event.public_jobs %}
-            <h3>
+        {% get_jobs form as jobs %}
+        {% for job in jobs %}
+            {% get_shifts form job as shifts %}
 
+            <h3>
                 {% if job.description %}
                     <button type="button"
                             class="btn btn-info"
@@ -39,12 +41,12 @@
 
             <table class="shifts">
                 <tr>
-                    {% for day, shifts in job.shifts_by_day.items %}
+                    {% for day, shifts in shifts.items %}
                         <th>{{ day }}</th>
                     {% endfor %}
                 </tr>
                 <tr>
-                    {% for day, shifts in job.shifts_by_day.items %}
+                    {% for day, shifts in shifts.items %}
                         <td>
                         {% for shift in shifts %}
                             {# checkbox #}
@@ -52,7 +54,9 @@
                                 {{ form | lookup_shift:shift.pk }}
 
                                 {# time #}
-                                {% if shift.is_full or shift.blocked %}
+                                {% if shift.is_full %}
+                                    <del>{{ shift.time_hours }}</del>
+                                {% elif shift.blocked and not form.link %}
                                     <del>{{ shift.time_hours }}</del>
                                 {% else %}
                                     {{ shift.time_hours }}

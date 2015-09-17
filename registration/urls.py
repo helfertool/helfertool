@@ -71,4 +71,13 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)$', views.edit_badgedesign, name='badgedesign'),
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/(?P<job_pk>[0-9]+)$', views.edit_badgedesign, name='new_badgedesign'),
 
+    # manage links
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$', views.links, name='links'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/add/$', views.edit_link, name='add_link'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/$', views.edit_link, name='edit_link'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/delete/$', views.delete_link, name='delete_link'),
+
+    # use links
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/l/(?P<link_pk>[0-9a-f\-]+)/$', views.form, name='form_for_link'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -40,6 +40,10 @@
                     <li><a href="{% url 'helpers' event.url_name %}">{% trans "Registered helpers" %}</a></li>
                     <li><a href="{% url 'coordinators' event.url_name %}">{% trans "Coordinators" %}</a></li>
 
+                    {% if admin %}
+                        <li><a href="{% url 'links' event.url_name %}">{% trans "Links" %}</a></li>
+                    {% endif %}
+
                     {% if admin and event.badges %}
                         <li><a href="{% url 'badges' event.url_name %}">{% trans "Badges" %}</a></li>
                     {% endif %}
