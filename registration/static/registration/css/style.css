@@ -63,3 +63,10 @@ img.icon
     width:20px;
     vertical-align: middle;
 }
+
+/* info button for job description */
+.info-expand
+{
+    padding:3px 6px 3px 6px;
+    vertical-align: top;
+}
