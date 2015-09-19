@@ -196,7 +196,7 @@ class Helper(models.Model):
     def has_to_validate(self):
         event = self.event
 
-        if event:
+        if not event:
             return False
 
         return event.mail_validation and not self.validated

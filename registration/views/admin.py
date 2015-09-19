@@ -1,13 +1,16 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
+from collections import OrderedDict
+
 from .utils import nopermission, is_involved
 
-from ..models import Event
+from ..models import Event, Helper
 from ..forms import UserCreationForm
 from ..templatetags.permissions import has_adduser_group, has_perm_group
 
@@ -70,3 +73,48 @@ def coordinators(request, event_url_name):
 
     context = {'event': event}
     return render(request, 'registration/admin/coordinators.html', context)
+
+
+@login_required
+def shirts(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # shirt sizes for helpers
+    helper_shirts = Helper.objects.filter(shifts__job__event=event). \
+        values('shirt').annotate(num=Count('shirt'))
+
+    # shirt sizes for coordinators
+    coordinator_shirts = {}
+    for job in event.job_set.all():
+        for coordinator in job.coordinators.all():
+            if coordinator.shirt in coordinator_shirts:
+                coordinator_shirts[coordinator.shirt] = \
+                    coordinator_shirts[coordinator.shirt] + 1
+            else:
+                coordinator_shirts[coordinator.shirt] = 1
+
+    # create data for template (iterate over all sizes and sum numbers)
+    shirts = OrderedDict()
+    for size, name in Helper.SHIRT_CHOICES:
+        num = 0
+
+        # get size for helpers
+        try:
+            num = num + helper_shirts.get(shirt=size)['num']
+        except Helper.DoesNotExist as e:
+            pass
+
+        # get size for coordinators
+        if size in coordinator_shirts:
+            num = num + coordinator_shirts[size]
+
+        shirts.update({name: num})
+
+    # render
+    context = {'event': event,
+               'shirts': shirts}
+    return render(request, 'registration/admin/shirts.html', context)

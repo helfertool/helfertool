@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
+from collections import OrderedDict
+
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Link

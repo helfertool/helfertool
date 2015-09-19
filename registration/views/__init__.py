@@ -1,6 +1,6 @@
 from .registration import index, form, registered, validate
 
-from .admin import admin, jobs_and_shifts, add_user, coordinators
+from .admin import admin, jobs_and_shifts, add_user, coordinators, shirts
 
 from .event import edit_event, delete_event
 from .job import edit_job, delete_job

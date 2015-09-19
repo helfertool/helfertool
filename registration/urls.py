@@ -65,6 +65,7 @@ urlpatterns = [
 
     # summaries
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$', views.coordinators, name='coordinators'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/shirts/$', views.shirts, name='shirts'),
 
     # badges
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$', views.badges, name='badges'),
