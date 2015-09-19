@@ -21,7 +21,7 @@ class UsernameForm(forms.Form):
         if username:
             try:
                 self.instance = User.objects.get(username=username)
-            except User.DoesNotExist as e:
+            except User.DoesNotExist:
                 raise forms.ValidationError(_("The user does not exist."))
 
     def get_user(self):

@@ -8,19 +8,37 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
 
     # login, logout
-    url(r'^login/$', 'django.contrib.auth.views.login',
-        {'template_name': 'registration/login.html'}, name='login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'},
+    url(r'^login/$',
+        'django.contrib.auth.views.login',
+        {'template_name': 'registration/login.html'},
+        name='login'),
+
+    url(r'^logout/$',
+        'django.contrib.auth.views.logout',
+        {'next_page': '/'},
         name='logout'),
 
     # admin interface
-    url(r'^admin/$', views.admin, name='admin'),
-    url(r'^admin/new/$', views.edit_event, name='new_event'),
-    url(r'^admin/user/$', views.add_user, name='add_user'),
-    url(r'^admin/permissions/$', views.permissions, name='permissions'),
+    url(r'^admin/$',
+        views.admin,
+        name='admin'),
+
+    url(r'^admin/new/$',
+        views.edit_event,
+        name='new_event'),
+
+    url(r'^admin/user/$',
+        views.add_user,
+        name='add_user'),
+
+    url(r'^admin/permissions/$',
+        views.permissions,
+        name='permissions'),
+
     url(r'^admin/permissions/(?P<user_pk>[0-9]+)/event/delete/$',
         views.delete_permission, {'groupname': settings.GROUP_ADDUSER},
-         name='delete_user_permission'),
+        name='delete_user_permission'),
+
     url(r'^admin/permissions/(?P<user_pk>[0-9]+)/user/delete/$',
         views.delete_permission, {'groupname': settings.GROUP_ADDEVENT},
         name='delete_event_permission'),
@@ -29,56 +47,149 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     # registration
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$', views.form, name='form'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/(?P<helper_id>[a-z0-9\-]+)/$',
-        views.registered, name='registered'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/(?P<helper_id>[a-z0-9\-]+)/$',
-        views.validate, name='validate'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$',
+        views.form,
+        name='form'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/'
+        '(?P<helper_id>[a-z0-9\-]+)/$',
+        views.registered,
+        name='registered'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/'
+        '(?P<helper_id>[a-z0-9\-]+)/$',
+        views.validate,
+        name='validate'),
 
     # manage event
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$', views.admin, name='manage_event'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$', views.edit_event, name='edit_event'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/delete/$', views.delete_event, name='delete_event'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$',
+        views.admin,
+        name='manage_event'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$',
+        views.edit_event,
+        name='edit_event'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/delete/$',
+        views.delete_event,
+        name='delete_event'),
 
     # jobs
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$', views.jobs_and_shifts, name='jobs_and_shifts'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/new/$', views.edit_job, name='new_job'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/edit/$', views.edit_job, name='edit_job'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/delete/$', views.delete_job, name='delete_job'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$',
+        views.jobs_and_shifts,
+        name='jobs_and_shifts'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/new/$',
+        views.edit_job,
+        name='new_job'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/edit/$',
+        views.edit_job,
+        name='edit_job'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/delete/$',
+        views.delete_job,
+        name='delete_job'),
 
     # shifts
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/(?P<shift_pk>[0-9]+)$', views.edit_shift, name='edit_shift'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/(?P<shift_pk>[0-9]+)/delete/$', views.delete_shift, name='delete_shift'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/new$', views.edit_shift, name='new_shift'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
+        '(?P<shift_pk>[0-9]+)$',
+        views.edit_shift,
+        name='edit_shift'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
+        '(?P<shift_pk>[0-9]+)/delete/$',
+        views.delete_shift,
+        name='delete_shift'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
+        'new$',
+        views.edit_shift,
+        name='new_shift'),
 
     # helpers
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$', views.helpers, name='helpers'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)$', views.helpers, name='jobhelpers'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)$', views.edit_helper, name='edit_helper'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<job_pk>[0-9]+)$', views.delete_helper, name='delete_helper'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)$', views.add_helper, name='add_helper'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/(?P<job_pk>[0-9]+)$', views.add_helper, name='add_coordinator'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/$',
+        views.helpers,
+        name='helpers'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)$',
+        views.helpers,
+        name='jobhelpers'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)$',
+        views.edit_helper,
+        name='edit_helper'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<job_pk>[0-9]+)$',
+        views.delete_helper,
+        name='delete_helper'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)$',
+        views.add_helper,
+        name='add_helper'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/'
+        '(?P<job_pk>[0-9]+)$',
+        views.add_helper,
+        name='add_coordinator'),
 
     # export
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all$', views.export, name='export'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/(?P<job_pk>[0-9]+)$', views.export, name='jobexport'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all$',
+        views.export,
+        name='export'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/'
+        '(?P<job_pk>[0-9]+)$',
+        views.export,
+        name='jobexport'),
 
     # summaries
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$', views.coordinators, name='coordinators'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/shirts/$', views.shirts, name='shirts'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$',
+        views.coordinators,
+        name='coordinators'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/shirts/$',
+        views.shirts,
+        name='shirts'),
 
     # badges
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$', views.badges, name='badges'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)$', views.edit_badgedesign, name='badgedesign'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/(?P<job_pk>[0-9]+)$', views.edit_badgedesign, name='new_badgedesign'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
+        views.badges,
+        name='badges'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/'
+        '(?P<design_pk>[0-9]+)$',
+        views.edit_badgedesign,
+        name='badgedesign'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/'
+        '(?P<job_pk>[0-9]+)$',
+        views.edit_badgedesign,
+        name='new_badgedesign'),
 
     # manage links
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$', views.links, name='links'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/add/$', views.edit_link, name='add_link'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/$', views.edit_link, name='edit_link'),
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/delete/$', views.delete_link, name='delete_link'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$',
+        views.links,
+        name='links'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/add/$',
+        views.edit_link,
+        name='add_link'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/$',
+        views.edit_link,
+        name='edit_link'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/'
+        'delete/$',
+        views.delete_link,
+        name='delete_link'),
 
     # use links
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/l/(?P<link_pk>[0-9a-f\-]+)/$', views.form, name='form_for_link'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/l/(?P<link_pk>[0-9a-f\-]+)/$',
+        views.form,
+        name='form_for_link'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -31,7 +31,7 @@ class BadgeDesign(models.Model):
     def get_event(self):
         try:
             return self.event
-        except AttributeError as e:
+        except AttributeError:
             return self.job.event
 
     font_color = models.CharField(

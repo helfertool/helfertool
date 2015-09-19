@@ -105,7 +105,7 @@ def shirts(request, event_url_name):
         # get size for helpers
         try:
             num = num + helper_shirts.get(shirt=size)['num']
-        except Helper.DoesNotExist as e:
+        except Helper.DoesNotExist:
             pass
 
         # get size for coordinators

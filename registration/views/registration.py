@@ -3,8 +3,6 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
-from collections import OrderedDict
-
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Link
@@ -35,7 +33,7 @@ def form(request, event_url_name, link_pk=None):
     if link_pk:
         try:
             link = Link.objects.get(pk=link_pk)
-        except Link.DoesNotExist as e:
+        except Link.DoesNotExist:
             # show some message when link does not exist
             context = {'event': event}
             return render(request, 'registration/invalid_link.html', context)
