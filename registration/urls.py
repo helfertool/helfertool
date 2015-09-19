@@ -173,6 +173,24 @@ urlpatterns = [
         views.edit_badgedesign,
         name='new_badgedesign'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/'
+        '(?P<permission_pk>[0-9]+)$',
+        views.edit_badgepermission,
+        name='edit_badgepermission'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/add/',
+        views.edit_badgepermission,
+        name='new_badgepermission'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/'
+        '(?P<role_pk>[0-9]+)$',
+        views.edit_badgerole,
+        name='edit_badgerole'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/add/',
+        views.edit_badgerole,
+        name='new_badgerole'),
+
     # manage links
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$',
         views.links,

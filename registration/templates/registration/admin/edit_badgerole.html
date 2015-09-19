@@ -3,9 +3,9 @@
 {% load bootstrap3 %}
 
 {% block admincontent %}
-    <h2>{% trans "Badge Design" %}</h2>
+    <h2>{% trans "Badge Role" %}</h2>
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post">
         {% csrf_token %}
 
         {% bootstrap_form form %}

@@ -105,3 +105,39 @@ class BadgeDesign(models.Model):
         verbose_name=_("Background image for back"),
         upload_to=upload_path,
     )
+
+
+class BadgePermission(models.Model):
+    badge_settings = models.ForeignKey(
+        BadgeSettings,
+    )
+
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_("Name"),
+    )
+
+    latex_name = models.CharField(
+        max_length=200,
+        verbose_name=_("Name for LaTeX template"),
+        help_text=_("This name is used for the LaTeX template, the prefix "
+                    "\"perm_\" is added."),
+    )
+
+    def __str__(self):
+        return self.name
+
+class BadgeRole(models.Model):
+    badge_settings = models.ForeignKey(
+        BadgeSettings,
+    )
+
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_("Name"),
+    )
+
+    permissions = models.ManyToManyField(
+        BadgePermission,
+        blank=True,
+    )
