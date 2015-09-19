@@ -3,6 +3,7 @@
   * for some jobs an upload of an image is possible
   * Badge -> OneToOne to Helper
   * Image for responsibles? (option)
+  * delete_badge{permission, role, design}
 * Load Test (deactivate mail!)
 * edit helper -> redirect to jobhelpers
 * overview: vegetarian
@@ -17,7 +18,6 @@ Low priority
 * Search helper (name, mail)
 * modelform: mark optional fields
 * sort helpers and coordinators
-* remove badge design
 
 After ESP
 =========

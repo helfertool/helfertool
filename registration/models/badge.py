@@ -31,6 +31,22 @@ class BadgeSettings(models.Model):
         'BadgeDesign',
     )
 
+    role = models.ForeignKey(
+        'BadgeRole',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Default role for all helpers"),
+    )
+
+    coordinator_role = models.ForeignKey(
+        'BadgeRole',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Default role for coordinators"),
+    )
+
     latex_template = models.FileField(
         verbose_name=_("LaTeX template"),
         upload_to=upload_path,
@@ -141,3 +157,6 @@ class BadgeRole(models.Model):
         BadgePermission,
         blank=True,
     )
+
+    def __str__(self):
+        return self.name

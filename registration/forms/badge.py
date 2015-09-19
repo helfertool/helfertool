@@ -8,6 +8,14 @@ class BadgeSettingsForm(forms.ModelForm):
         model = BadgeSettings
         exclude = ['event', 'design', 'permissions']
 
+    def __init__(self, *args, **kwargs):
+        super(BadgeSettingsForm, self).__init__(*args, **kwargs)
+
+        # restrict roles to this event
+        roles = BadgeRole.objects.filter(badge_settings=self.instance)
+        self.fields['role'].queryset = roles
+        self.fields['coordinator_role'].queryset = roles
+
 
 class BadgeDesignForm(forms.ModelForm):
     class Meta:
@@ -49,6 +57,10 @@ class BadgeRoleForm(forms.ModelForm):
         self.settings = kwargs.pop('settings')
 
         super(BadgeRoleForm, self).__init__(*args, **kwargs)
+
+        # restrict permissions to this event
+        self.fields['permissions'].queryset = BadgePermission.objects.filter(
+            badge_settings=self.settings)
 
     def save(self, commit=True):
         instance = super(BadgeRoleForm, self).save(False)
