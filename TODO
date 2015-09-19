@@ -3,10 +3,9 @@
   * for some jobs an upload of an image is possible
   * Badge -> OneToOne to Helper
   * Image for responsibles? (option)
-* Freischalten um Uhrzeit
 * Load Test (deactivate mail!)
 * edit helper -> redirect to jobhelpers
-* overview: t-shirts, vegetarian
+* overview: vegetarian
 * bot protection
 
 Low priority
