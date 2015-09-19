@@ -115,3 +115,6 @@ class Job(models.Model):
     @property
     def has_badge_design(self):
         return self.badge_design is not None
+
+    def get_badge_design(self):
+        return self.badge_design or self.event.badge_settings.design

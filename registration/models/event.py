@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 
-from .badge import BadgeDesign
+from .badge import BadgeSettings
 
 
 class Event(models.Model):
@@ -27,7 +27,6 @@ class Event(models.Model):
                              the registration page
         :mail_validation: helper must validate his mail address by a link
         :badge: use the badge creation system
-        :badge_design: the used badge design (optional)
     """
 
     url_name = models.CharField(
@@ -103,12 +102,6 @@ class Event(models.Model):
         verbose_name=_("Use badge creation"),
     )
 
-    badge_design = models.OneToOneField(
-        'BadgeDesign',
-        blank=True,
-        null=True,
-    )
-
     def __str__(self):
         return self.name
 
@@ -144,17 +137,23 @@ class Event(models.Model):
     def public_jobs(self):
         return self.job_set.filter(public=True)
 
+    @property
+    def badge_settings(self):
+        try:
+            return self.badgesettings
+        except AttributeError:
+            return None
+
 
 @receiver(post_save, sender=Event, dispatch_uid='event_saved')
 def event_saved(sender, instance, using, **kwargs):
-    """ Add default badge design if necessary.
+    """ Add badge settings if necessary.
 
     This is a signal handler, that is called, when a event is saved. It
-    adds a default badge design if badge creation is enabled and it is not
+    adds the badge settings if badge creation is enabled and it is not
     there already.
     """
-    if instance.badges and not instance.badge_design:
-        design = BadgeDesign()
-        design.save()
-        instance.badge_design = design
-        instance.save()
+    if instance.badges and not instance.badge_settings:
+        settings = BadgeSettings()
+        settings.event = instance
+        settings.save()

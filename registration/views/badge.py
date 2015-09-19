@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404
 
 from .utils import nopermission, get_or_404, is_involved
 
-from ..models import Event, BadgeDesign
-from ..forms import BadgeDesignForm
+from ..models import Event, BadgeSettings, BadgeDesign
+from ..forms import BadgeSettingsForm, BadgeDesignForm
 
 
 @login_required
@@ -19,6 +19,30 @@ def badges(request, event_url_name):
 
     context = {'event': event}
     return render(request, 'registration/admin/badges.html', context)
+
+
+@login_required
+def edit_badgesettings(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = BadgeSettingsForm(request.POST or None, request.FILES or None,
+                             instance=event.badge_settings)
+
+    if form.is_valid():
+        form.save()
+
+        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+
+    # render
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/edit_badgesettings.html',
+                  context)
 
 
 @login_required

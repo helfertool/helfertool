@@ -6,7 +6,7 @@ from ..models import Event
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['text', 'imprint', 'registered', 'badge_design']
+        exclude = ['text', 'imprint', 'registered', 'badge_settings']
         widgets = {
             'admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }

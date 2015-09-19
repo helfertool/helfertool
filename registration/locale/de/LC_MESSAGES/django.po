@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-19 14:50+0200\n"
-"PO-Revision-Date: 2015-09-17 16:20+0200\n"
+"POT-Creation-Date: 2015-09-19 16:27+0200\n"
+"PO-Revision-Date: 2015-09-19 16:28+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -28,7 +28,7 @@ msgstr "Vorname"
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:60 registration/models/event.py:61
+#: registration/export/excel.py:60 registration/models/event.py:65
 #: registration/models/helper.py:86
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
@@ -91,7 +91,7 @@ msgstr "Es ist niemand zu dieser Schicht angemeldet."
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: registration/forms/registration.py:114
+#: registration/forms/registration.py:115
 msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
@@ -122,39 +122,51 @@ msgstr "Vorname"
 msgid "Last name"
 msgstr "Nachname"
 
-#: registration/models/badge.py:41
+#: registration/models/badge.py:35
+msgid "LaTeX template"
+msgstr "LaTeX Template"
+
+#: registration/models/badge.py:43
+msgid "Number of rows on one page"
+msgstr "Anzahl der Zeilen auf einer Seite"
+
+#: registration/models/badge.py:49
+msgid "Number of columns on one page"
+msgstr "Anzahl der Spalten auf einer Seite"
+
+#: registration/models/badge.py:96
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: registration/models/badge.py:42
+#: registration/models/badge.py:97
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: registration/models/badge.py:46
+#: registration/models/badge.py:101
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: registration/models/badge.py:51
+#: registration/models/badge.py:106
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: registration/models/event.py:44
+#: registration/models/event.py:36
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: registration/models/event.py:45
+#: registration/models/event.py:37
 msgid "May contain the following chars: a-zA-Z0-9."
 msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
 
-#: registration/models/event.py:47
+#: registration/models/event.py:42
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: registration/models/event.py:50
+#: registration/models/event.py:47
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models/event.py:51
+#: registration/models/event.py:48
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
@@ -166,35 +178,35 @@ msgstr "Impressum"
 msgid "Display at the bottom of the registration form."
 msgstr "Wird bei der Anmeldung unten angezeigt."
 
-#: registration/models/event.py:57
+#: registration/models/event.py:59
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models/event.py:58
+#: registration/models/event.py:60
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models/event.py:62
+#: registration/models/event.py:66
 msgid "Used as sender of e-mails."
 msgstr "Wird als Absender von E-Mail genutzt."
 
-#: registration/models/event.py:65
+#: registration/models/event.py:71
 msgid "Registration possible"
 msgstr "Anmeldung möglich"
 
-#: registration/models/event.py:70
+#: registration/models/event.py:81
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:73
+#: registration/models/event.py:86
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models/event.py:75
+#: registration/models/event.py:91
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:77
+#: registration/models/event.py:96
 msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
@@ -202,7 +214,7 @@ msgstr ""
 "Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
 "werden, der per E-Mail verschickt wird."
 
-#: registration/models/event.py:80
+#: registration/models/event.py:102
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
@@ -339,19 +351,42 @@ msgstr "Badges"
 msgid "The badge creation is not actived."
 msgstr "Die Generierung von Badges ist nicht aktiviert."
 
-#: registration/templates/registration/admin/badges.html:17
+#: registration/templates/registration/admin/badges.html:15
+msgid "Edit settings"
+msgstr "Einstellungen bearbeiten"
+
+#: registration/templates/registration/admin/badges.html:21
+msgid "Edit default badge"
+msgstr "Standard Design bearbeiten"
+
+#: registration/templates/registration/admin/badges.html:27
 #: registration/templates/registration/admin/delete_job.html:13
 #: registration/templates/registration/admin/delete_shift.html:13
 msgid "Job"
 msgstr "Aufgabe"
 
-#: registration/templates/registration/admin/badges.html:18
+#: registration/templates/registration/admin/badges.html:28
 msgid "Design"
 msgstr "Design"
 
-#: registration/templates/registration/admin/badges.html:29
+#: registration/templates/registration/admin/badges.html:38
+#: registration/templates/registration/admin/helpers_table.html:49
+#: registration/templates/registration/admin/jobs_and_shifts.html:23
+#: registration/templates/registration/admin/jobs_and_shifts.html:61
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: registration/templates/registration/admin/badges.html:41
 msgid "Default"
 msgstr "Standard"
+
+#: registration/templates/registration/admin/badges.html:42
+msgid "New"
+msgstr "Neu"
+
+#: registration/templates/registration/admin/badges.html:47
+msgid "Create badges"
+msgstr "Badges erstellen"
 
 #: registration/templates/registration/admin/base.html:8
 #, python-format
@@ -386,10 +421,8 @@ msgstr "Angemeldete Helfer"
 
 #: registration/templates/registration/admin/base.html:44
 #: registration/templates/registration/admin/shirts.html:6
-#, fuzzy
-#| msgid "T-shirt"
 msgid "T-Shirts"
-msgstr "T-Shirt"
+msgstr "T-Shirts"
 
 #: registration/templates/registration/admin/base.html:48
 #: registration/templates/registration/admin/links.html:6
@@ -575,6 +608,7 @@ msgid "Badge Design"
 msgstr "Badge Design"
 
 #: registration/templates/registration/admin/edit_badgedesign.html:13
+#: registration/templates/registration/admin/edit_badgesettings.html:13
 #: registration/templates/registration/admin/edit_event.html:20
 #: registration/templates/registration/admin/edit_helper.html:30
 #: registration/templates/registration/admin/edit_job.html:19
@@ -582,6 +616,10 @@ msgstr "Badge Design"
 #: registration/templates/registration/admin/edit_shift.html:23
 msgid "Save"
 msgstr "Speichern"
+
+#: registration/templates/registration/admin/edit_badgesettings.html:6
+msgid "Badge Settings"
+msgstr "Badge Einstellungen"
 
 #: registration/templates/registration/admin/edit_event.html:27
 msgid "You can delete this event including all jobs, shifts and helpers."
@@ -661,12 +699,6 @@ msgstr "Koordinator hinzufügen"
 msgid "Registration time"
 msgstr "Anmeldezeit"
 
-#: registration/templates/registration/admin/helpers_table.html:49
-#: registration/templates/registration/admin/jobs_and_shifts.html:23
-#: registration/templates/registration/admin/jobs_and_shifts.html:61
-msgid "Edit"
-msgstr "Bearbeiten"
-
 #: registration/templates/registration/admin/jobs_and_shifts.html:39
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
@@ -709,11 +741,11 @@ msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
 
 #: registration/templates/registration/admin/shirts.html:10
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: registration/templates/registration/admin/shirts.html:11
 msgid "Number"
-msgstr ""
+msgstr "Anzahl"
 
 #: registration/templates/registration/form.html:7
 #: registration/templates/registration/invalid_link.html:7

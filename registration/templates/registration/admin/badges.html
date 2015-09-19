@@ -10,7 +10,17 @@
             {% trans "The badge creation is not actived." %}
         </div>
     {% else %}
-        <p><a href="{% url 'badgedesign' event.url_name event.badge_design.pk %}">Edit default badge</a></p>
+        <p>
+            <a href="{% url 'badgesettings' event.url_name %}">
+                {% trans "Edit settings" %}
+            </a>
+        </p>
+
+        <p>
+            <a href="{% url 'badgedesign' event.url_name event.badge_settings.design.pk %}">
+                {% trans "Edit default badge" %}
+            </a>
+        </p>
 
         <table class="table">
             <tr>
@@ -24,14 +34,18 @@
                     <td>{{ job.name }}</td>
                     <td>
                         {% if job.has_badge_design %}
-                            <a href="{% url 'badgedesign' event.url_name job.badge_design.pk %}">Edit</a>
+                            <a href="{% url 'badgedesign' event.url_name job.badge_design.pk %}">
+                                {% trans "Edit" %}
+                            </a>
                         {% else %}
                             {% trans "Default" %}
-                            (<a href="{% url 'new_badgedesign' event.url_name job.pk %}">New</a>)
+                            (<a href="{% url 'new_badgedesign' event.url_name job.pk %}">{% trans "New" %}</a>)
                         {% endif %}
                     </td>
                     <td>
-                        <a href="">Create badges</a>
+                        <a href="">
+                            {% trans "Create badges" %}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

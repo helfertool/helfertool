@@ -36,3 +36,4 @@ After ESP
 * delete event: delete badge upload directory
 * pdf export: vertical alignment
 * remove old images in badgeupload directory
+* latex_template: validation for .tex
