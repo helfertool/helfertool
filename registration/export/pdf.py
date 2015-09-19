@@ -41,7 +41,7 @@ def table_of_helpers(elements, helpers):
     for helper in helpers:
         data.append([par("%s %s" % (helper.prename, helper.surname)),
                      par(helper.phone),
-                     par(helper.shirt),
+                     par(helper.get_shirt_display()),
                      par(helper.comment)])
     add_table(elements, data, [6*cm, 4*cm, 2*cm, 5*cm])
 
