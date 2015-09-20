@@ -14,10 +14,12 @@
   * Default for Event and Job -> OneToOne Class
   * Background images optional, color instead
 
-  * Badge: OneToOne to all helpers
+  * no extra default for coordinator
 
-  * How to get all data for helper?
+  * Badge: OneToOne to all helpers
   * How to handle helpers with more than one shift?
+     -> primary job
+  * prefer coordinator
 
   * for some jobs an upload of an image is possible
   * Image for responsibles? (option)
@@ -25,6 +27,8 @@
   * delete_badge{permission, role, design}
 
   * generate_badges: error page with latex output
+
+  * configure path to pdflatex in settings
 
 Low priority
 ============
