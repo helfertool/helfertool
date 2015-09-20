@@ -160,3 +160,33 @@ class BadgeRole(models.Model):
 
     def __str__(self):
         return self.name
+
+class Badge(models.Model):
+    helper = models.OneToOneField(
+        'Helper',
+    )
+
+    prename = models.CharField(
+        max_length=200,
+        verbose_name=_("Prename"),
+    )
+
+    surname = models.CharField(
+        max_length=200,
+        verbose_name=_("Surname"),
+    )
+
+    job = models.CharField(
+        max_length=200,
+        verbose_name=_("Job"),
+    )
+
+    shift = models.CharField(
+        max_length=200,
+        verbose_name=_("Shift"),
+    )
+
+    role = models.CharField(
+        max_length=200,
+        verbose_name=_("Role"),
+    )

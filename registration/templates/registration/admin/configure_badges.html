@@ -1,0 +1,133 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Configure badges" %}</h2>
+
+    <p>
+        <a href="{% url 'badgesettings' event.url_name %}">
+            {% trans "Edit badge settings" %}
+        </a>
+    </p>
+
+    <h3>{% trans "Permissions" %}</h3>
+
+    {% if permissions.count == 0 %}
+        <p class="text-muted">{% trans "There are no permissions." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "LaTeX Name" %}</th>
+                <th></th>
+            </tr>
+
+            {% for perm in permissions %}
+                <tr>
+                    <td>{{ perm.name }}</td>
+                    <td>{{ perm.latex_name }}</td>
+                    <td>
+                        <a href="{% url 'edit_badgepermission' event.url_name perm.pk %}">
+                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'new_badgepermission' event.url_name %}">
+            {% bootstrap_icon "plus" %} {% trans "Add permission" %}
+        </a>
+    </p>
+
+    <h3>{% trans "Roles" %}</h3>
+
+    {% if roles.count == 0 %}
+        <p class="text-muted">{% trans "There are no roles." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Permissions" %}</th>
+                <th></th>
+            </tr>
+
+            {% for role in roles %}
+                <tr>
+                    <td>{{ role.name }}</td>
+                    <td>
+                        <ul>
+                            {% for perm in role.permissions.all %}
+                                <li>{{ perm.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_badgerole' event.url_name role.pk %}">
+                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'new_badgerole' event.url_name %}">
+            {% bootstrap_icon "plus" %} {% trans "Add role" %}
+        </a>
+    </p>
+
+    <h3>{% trans "Default roles" %}</h3>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_form default_roles_form %}
+
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+    </form>
+
+    <h3>{% trans "Design and roles for jobs" %}</h3>
+
+    <p>
+        <a href="{% url 'badgedesign' event.url_name event.badge_settings.design.pk %}">
+            {% trans "Edit default badge" %}
+        </a>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>{% trans "Job" %}</th>
+            <th>{% trans "Design" %}</th>
+            <th>{% trans "Role" %}</th>
+        </tr>
+
+        {% for job in event.job_set.all %}
+            <tr>
+                <td>{{ job.name }}</td>
+                <td>
+                    {% if job.has_badge_design %}
+                        <a href="{% url 'badgedesign' event.url_name job.badge_design.pk %}">
+                            {% trans "Edit" %}
+                        </a>
+                    {% else %}
+                        {% trans "Default" %}
+                        (<a href="{% url 'new_badgedesign' event.url_name job.pk %}">{% trans "New" %}</a>)
+                    {% endif %}
+                </td>
+                <td>
+                    {% if job.badge_role %}
+                        {{ job.badge_role }}
+                    {% else %}
+                        {% trans "Default" %}
+                    {% endif %}
+                    (<a href="{% url 'edit_job' event.url_name job.pk %}">{% trans "Change" %}</a>)
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

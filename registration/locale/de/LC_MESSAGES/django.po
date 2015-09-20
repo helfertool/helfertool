@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-20 13:07+0200\n"
-"PO-Revision-Date: 2015-09-20 13:08+0200\n"
+"POT-Creation-Date: 2015-09-20 13:22+0200\n"
+"PO-Revision-Date: 2015-09-20 13:22+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -76,8 +76,8 @@ msgstr "Koordinatoren"
 
 #: registration/export/pdf.py:39 registration/models/badge.py:133
 #: registration/models/badge.py:153 registration/models/job.py:27
-#: registration/templates/registration/admin/badges.html:21
-#: registration/templates/registration/admin/badges.html:53
+#: registration/templates/registration/admin/configure_badges.html:21
+#: registration/templates/registration/admin/configure_badges.html:53
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
@@ -368,107 +368,9 @@ msgstr "Nutzer hinzufügen"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: registration/templates/registration/admin/badges.html:6
 #: registration/templates/registration/admin/badges_not_active.html:6
-#: registration/templates/registration/admin/base.html:52
 msgid "Badges"
 msgstr "Badges"
-
-#: registration/templates/registration/admin/badges.html:10
-msgid "Edit badge settings"
-msgstr "Badge Einstellungen bearbeiten"
-
-#: registration/templates/registration/admin/badges.html:14
-#: registration/templates/registration/admin/badges.html:54
-#: registration/templates/registration/admin/base.html:68
-#: registration/templates/registration/admin/permissions.html:6
-msgid "Permissions"
-msgstr "Berechtigungen"
-
-#: registration/templates/registration/admin/badges.html:17
-msgid "There are no permissions."
-msgstr "Es gibt keine Berechtigungen."
-
-#: registration/templates/registration/admin/badges.html:22
-msgid "LaTeX Name"
-msgstr "LaTeX Name"
-
-#: registration/templates/registration/admin/badges.html:32
-#: registration/templates/registration/admin/badges.html:70
-#: registration/templates/registration/admin/badges.html:115
-#: registration/templates/registration/admin/helpers_table.html:49
-#: registration/templates/registration/admin/jobs_and_shifts.html:23
-#: registration/templates/registration/admin/jobs_and_shifts.html:61
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: registration/templates/registration/admin/badges.html:42
-msgid "Add permission"
-msgstr "Berechtigung hinzufügen"
-
-#: registration/templates/registration/admin/badges.html:46
-msgid "Roles"
-msgstr "Rollen"
-
-#: registration/templates/registration/admin/badges.html:49
-msgid "There are no roles."
-msgstr "Es gibt keine Rollen."
-
-#: registration/templates/registration/admin/badges.html:80
-msgid "Add role"
-msgstr "Rolle hinzufügen"
-
-#: registration/templates/registration/admin/badges.html:84
-msgid "Default roles"
-msgstr "Standard Rollen"
-
-#: registration/templates/registration/admin/badges.html:91
-#: registration/templates/registration/admin/edit_badgedesign.html:13
-#: registration/templates/registration/admin/edit_badgepermission.html:13
-#: registration/templates/registration/admin/edit_badgerole.html:13
-#: registration/templates/registration/admin/edit_badgesettings.html:13
-#: registration/templates/registration/admin/edit_event.html:20
-#: registration/templates/registration/admin/edit_helper.html:30
-#: registration/templates/registration/admin/edit_job.html:19
-#: registration/templates/registration/admin/edit_link.html:13
-#: registration/templates/registration/admin/edit_shift.html:23
-msgid "Save"
-msgstr "Speichern"
-
-#: registration/templates/registration/admin/badges.html:94
-msgid "Design and roles for jobs"
-msgstr "Design und Rollen für Aufgaben"
-
-#: registration/templates/registration/admin/badges.html:98
-msgid "Edit default badge"
-msgstr "Standard Design bearbeiten"
-
-#: registration/templates/registration/admin/badges.html:104
-#: registration/templates/registration/admin/delete_job.html:13
-#: registration/templates/registration/admin/delete_shift.html:13
-msgid "Job"
-msgstr "Aufgabe"
-
-#: registration/templates/registration/admin/badges.html:105
-msgid "Design"
-msgstr "Design"
-
-#: registration/templates/registration/admin/badges.html:106
-msgid "Role"
-msgstr "Rolle"
-
-#: registration/templates/registration/admin/badges.html:118
-#: registration/templates/registration/admin/badges.html:126
-msgid "Default"
-msgstr "Standard"
-
-#: registration/templates/registration/admin/badges.html:119
-msgid "New"
-msgstr "Neu"
-
-#: registration/templates/registration/admin/badges.html:128
-msgid "Change"
-msgstr "Ändern"
 
 #: registration/templates/registration/admin/badges_not_active.html:9
 msgid "The badge creation is not actived."
@@ -515,6 +417,11 @@ msgstr "T-Shirts"
 msgid "Links"
 msgstr "Links"
 
+#: registration/templates/registration/admin/base.html:52
+#: registration/templates/registration/admin/configure_badges.html:6
+msgid "Configure badges"
+msgstr "Badges konfigurieren"
+
 #: registration/templates/registration/admin/base.html:59
 msgid "Common"
 msgstr "Allgemein"
@@ -523,6 +430,13 @@ msgstr "Allgemein"
 #: registration/templates/registration/admin/edit_event.html:12
 msgid "New event"
 msgstr "Neue Veranstaltung"
+
+#: registration/templates/registration/admin/base.html:68
+#: registration/templates/registration/admin/configure_badges.html:14
+#: registration/templates/registration/admin/configure_badges.html:54
+#: registration/templates/registration/admin/permissions.html:6
+msgid "Permissions"
+msgstr "Berechtigungen"
 
 #: registration/templates/registration/admin/base.html:69
 msgid "Django Admin Interface"
@@ -573,6 +487,95 @@ msgstr "Zeige {0} von {1}"
 #: registration/templates/registration/admin/base.html:96
 msgid "Empty list"
 msgstr "Liste leer"
+
+#: registration/templates/registration/admin/configure_badges.html:10
+msgid "Edit badge settings"
+msgstr "Badge Einstellungen bearbeiten"
+
+#: registration/templates/registration/admin/configure_badges.html:17
+msgid "There are no permissions."
+msgstr "Es gibt keine Berechtigungen."
+
+#: registration/templates/registration/admin/configure_badges.html:22
+msgid "LaTeX Name"
+msgstr "LaTeX Name"
+
+#: registration/templates/registration/admin/configure_badges.html:32
+#: registration/templates/registration/admin/configure_badges.html:70
+#: registration/templates/registration/admin/configure_badges.html:115
+#: registration/templates/registration/admin/helpers_table.html:49
+#: registration/templates/registration/admin/jobs_and_shifts.html:23
+#: registration/templates/registration/admin/jobs_and_shifts.html:61
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: registration/templates/registration/admin/configure_badges.html:42
+msgid "Add permission"
+msgstr "Berechtigung hinzufügen"
+
+#: registration/templates/registration/admin/configure_badges.html:46
+msgid "Roles"
+msgstr "Rollen"
+
+#: registration/templates/registration/admin/configure_badges.html:49
+msgid "There are no roles."
+msgstr "Es gibt keine Rollen."
+
+#: registration/templates/registration/admin/configure_badges.html:80
+msgid "Add role"
+msgstr "Rolle hinzufügen"
+
+#: registration/templates/registration/admin/configure_badges.html:84
+msgid "Default roles"
+msgstr "Standard Rollen"
+
+#: registration/templates/registration/admin/configure_badges.html:91
+#: registration/templates/registration/admin/edit_badgedesign.html:13
+#: registration/templates/registration/admin/edit_badgepermission.html:13
+#: registration/templates/registration/admin/edit_badgerole.html:13
+#: registration/templates/registration/admin/edit_badgesettings.html:13
+#: registration/templates/registration/admin/edit_event.html:20
+#: registration/templates/registration/admin/edit_helper.html:30
+#: registration/templates/registration/admin/edit_job.html:19
+#: registration/templates/registration/admin/edit_link.html:13
+#: registration/templates/registration/admin/edit_shift.html:23
+msgid "Save"
+msgstr "Speichern"
+
+#: registration/templates/registration/admin/configure_badges.html:94
+msgid "Design and roles for jobs"
+msgstr "Design und Rollen für Aufgaben"
+
+#: registration/templates/registration/admin/configure_badges.html:98
+msgid "Edit default badge"
+msgstr "Standard Design bearbeiten"
+
+#: registration/templates/registration/admin/configure_badges.html:104
+#: registration/templates/registration/admin/delete_job.html:13
+#: registration/templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
+#: registration/templates/registration/admin/configure_badges.html:105
+msgid "Design"
+msgstr "Design"
+
+#: registration/templates/registration/admin/configure_badges.html:106
+msgid "Role"
+msgstr "Rolle"
+
+#: registration/templates/registration/admin/configure_badges.html:118
+#: registration/templates/registration/admin/configure_badges.html:126
+msgid "Default"
+msgstr "Standard"
+
+#: registration/templates/registration/admin/configure_badges.html:119
+msgid "New"
+msgstr "Neu"
+
+#: registration/templates/registration/admin/configure_badges.html:128
+msgid "Change"
+msgstr "Ändern"
 
 #: registration/templates/registration/admin/coordinators.html:12
 #: registration/templates/registration/admin/helpers_for_job.html:24
@@ -973,9 +976,6 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
-
-#~ msgid "Create badges"
-#~ msgstr "Badges erstellen"
 
 #~ msgid "Details"
 #~ msgstr "Details"

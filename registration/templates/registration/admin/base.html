@@ -49,7 +49,8 @@
                     {% endif %}
 
                     {% if admin and event.badges %}
-                        <li><a href="{% url 'badges' event.url_name %}">{% trans "Badges" %}</a></li>
+                        <li><a href="{% url 'configure_badges' event.url_name %}">{% trans "Configure badges" %}</a></li>
+                        <li><a href="{% url 'badges' event.url_name %}">{% trans "Generate badges" %}</a></li>
                     {% endif %}
                 </ul>
             {% endif %}

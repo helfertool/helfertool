@@ -156,8 +156,8 @@ urlpatterns = [
 
     # badges
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
-        views.badges,
-        name='badges'),
+        views.configure_badges,
+        name='configure_badges'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/',
         views.edit_badgesettings,
@@ -190,6 +190,15 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/add/',
         views.edit_badgerole,
         name='new_badgerole'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
+        '(?P<job_pk>[0-9]+)',
+        views.generate_badges,
+        name='generate_badges'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/',
+        views.badges,
+        name='badges'),
 
     # manage links
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$',

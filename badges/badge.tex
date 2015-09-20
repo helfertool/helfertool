@@ -15,32 +15,47 @@
 \setlength{\tabcolsep}{0pt}
 
 
-%
-% Insert new variables here
-%
+% Variables for badge commands
 \makeatletter
 
+%
+% Data for badge (do not change)
+%
 \newcommand*\badge@prename{Prename}
-\newcommand*\badge@surname{Surname}
-\newcommand*\badge@job{Job}
-\newcommand*\badge@role{Role}
-\newcommand*\badge@comment{Comment}
-
-\newboolean{badge@food}
-\newboolean{badge@backstage}
-\newboolean{badge@finance}
-\newboolean{badge@orga}
-
 \define@key{badge}{prename}{\renewcommand\badge@prename{#1}}
-\define@key{badge}{surname}{\renewcommand\badge@surname{#1}}
-\define@key{badge}{job}{\renewcommand\badge@job{#1}}
-\define@key{badge}{role}{\renewcommand\badge@role{#1}}
-\define@key{badge}{comment}{\renewcommand\badge@comment{#1}}
 
-\define@key{badge}{food}{\setboolean{badge@food}{#1}}
-\define@key{badge}{backstage}{\setboolean{badge@backstage}{#1}}
-\define@key{badge}{finance}{\setboolean{badge@finance}{#1}}
-\define@key{badge}{orga}{\setboolean{badge@orga}{#1}}
+\newcommand*\badge@surname{Surname}
+\define@key{badge}{surname}{\renewcommand\badge@surname{#1}}
+
+\newcommand*\badge@job{Job}
+\define@key{badge}{job}{\renewcommand\badge@job{#1}}
+
+\newcommand*\badge@shift{Shift}
+\define@key{badge}{shift}{\renewcommand\badge@shift{#1}}
+
+\newcommand*\badge@role{Role}
+\define@key{badge}{role}{\renewcommand\badge@role{#1}}
+
+%
+% Background images
+%
+\newcommand*\badge@bgfront{}
+\define@key{badge}{bgfront}{\renewcommand\badge@bgfront{#1}}
+
+\newcommand*\badge@bgback{}
+\define@key{badge}{bgback}{\renewcommand\badge@bgback{#1}}
+
+%
+% CHANGE: Insert your permissions here
+%
+\newboolean{badge@perm-finance}
+\define@key{badge}{perm-finance}{\setboolean{badge@perm-finance}{#1}}
+
+\newboolean{badge@perm-food}
+\define@key{badge}{perm-food}{\setboolean{badge@perm-food}{#1}}
+%
+% END
+%
 
 %
 % Badge
@@ -56,7 +71,7 @@
     \setkeys{badge}{#1}%
         \begin{tikzpicture}[x=1cm,y=1cm, inner sep=0, outer sep=0, anchor=north west]
             % background
-            \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{bg.png}};
+            \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{\badge@bgfront}};
 
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[x={(bg.south east)},y={(bg.north west)}]
@@ -64,6 +79,10 @@
                 \node[draw=none] at (0.1,0.1) {\badge@prename\ \badge@surname};
                 % job
                 \node[draw=none] at (0.2,0.2) {\badge@job};
+                % shift
+                \node[draw=none] at (0.3,0.3) {\badge@shift};
+                % role
+                \node[draw=none] at (0.4,0.4) {\badge@role};
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
@@ -75,7 +94,7 @@
     \setkeys{badge}{#1}%
         \begin{tikzpicture}[x=1cm,y=1cm, inner sep=0, outer sep=0, anchor=north west]
             % background
-            \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{bg_back.png}};
+            \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{\badge@bgback}};
 
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[x={(bg.south east)},y={(bg.north west)}]
@@ -83,33 +102,17 @@
                 \node[draw=none] at (0,0) {\badge@prename\ \badge@surname};
 
                 % food
-                \ifthenelse{\boolean{badge@food}}
+                \ifthenelse{\boolean{badge@perm-food}}
                 {
                     \node[draw=none] at (0.2,0.2) {FOOD};
                 }
                 {
                 }
 
-                % backstage
-                \ifthenelse{\boolean{badge@backstage}}
-                {
-                    \node[draw=none] at (0.3,0.2) {BACKSTAGE};
-                }
-                {
-                }
-
                 % fiance
-                \ifthenelse{\boolean{badge@finance}}
+                \ifthenelse{\boolean{badge@perm-finance}}
                 {
                     \node[draw=none] at (0.6,0.2) {FINANCE};
-                }
-                {
-                }
-
-                % orga
-                \ifthenelse{\boolean{badge@orga}}
-                {
-                    \node[draw=none] at (0.8,0.2) {ORGA};
                 }
                 {
                 }
@@ -122,34 +125,35 @@
 %
 \begin{document}
     \centering
-    \begin{tabular}{|l|l|}
-        \hline
-        \badgefront[prename=Test,surname=User,job=Bier,role=Standleiter,comment=lala,food=true,finance=false,orga=true,backstage=true] & \badgefront[prename=Test,surname=User] \\
-        \hline
-        \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-        \hline
-        \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-        \hline
-        \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-        \hline
-        \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-        \hline
-    \end{tabular}
+    %BADGEDATA%
+    %\begin{tabular}{|l|l|}
+    %    \hline
+    %    \badgefront[prename=Test1,surname=User,job=Bier,shift="",role=Standleiter,perm-food=true,perm-finance=false] & \badgefront[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
+    %    \hline
+    %\end{tabular}
 
-    \pagebreak
+    %\pagebreak
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \badgeback[prename=Test,surname=User,job=Bier,role=Standleiter,comment=lala,food=true,finance=false,orga=true,backstage=true] & \badgeback[prename=Test,surname=User] \\
-        \hline
-        \hline
-        \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-        \hline
-        \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-        \hline
-        \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-        \hline
-        \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-        \hline
-    \end{tabular}
+    %\begin{tabular}{|l|l|}
+    %    \hline
+    %    \badgeback[prename=Test1,surname=User,job=Bier,shift="",role=Standleiter,perm-food=true,perm-finance=false] & \badgeback[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
+    %    \hline
+    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
+    %    \hline
+    %\end{tabular}
+    %\pagebreak
 \end{document}

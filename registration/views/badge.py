@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 from .utils import nopermission, get_or_404, is_involved
@@ -8,6 +8,7 @@ from .utils import nopermission, get_or_404, is_involved
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultRolesForm
+from ..badges import BadgeCreator
 
 
 def notactive(request):
@@ -16,6 +17,64 @@ def notactive(request):
 
 @login_required
 def badges(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    context = {'event': event}
+    return render(request, 'registration/admin/badges.html', context)
+
+
+@login_required
+def generate_badges(request, event_url_name, job_pk):
+    event, job, shift, helper = get_or_404(event_url_name, job_pk)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # badge creation
+    creator = BadgeCreator(event.badge_settings)
+
+    # add coordinators
+    for c in job.coordinators.all():
+        creator.add_helper(c)
+
+    # add helpers
+    for shift in job.shift_set.all():
+        for h in shift.helper_set.all():
+            creator.add_helper(h)
+
+    pdf_filename = creator.generate()
+
+    # output
+    filename = "%s.pdf" % job.name
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+
+    # send file
+    with open(pdf_filename, 'rb') as f:
+        response.write(f.read())
+
+    # finish badge generation (delete files)
+    creator.finish()
+
+    return response
+
+
+@login_required
+def configure_badges(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -38,13 +97,13 @@ def badges(request, event_url_name):
     if default_roles_form.is_valid():
         default_roles_form.save()
 
-        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
 
     context = {'event': event,
                'permissions': permissions,
                'roles': roles,
                'default_roles_form': default_roles_form}
-    return render(request, 'registration/admin/badges.html', context)
+    return render(request, 'registration/admin/configure_badges.html', context)
 
 
 @login_required
@@ -66,7 +125,7 @@ def edit_badgesettings(request, event_url_name):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
 
     # render
     context = {'event': event,
@@ -104,7 +163,7 @@ def edit_badgedesign(request, event_url_name, design_pk=None, job_pk=None):
         if job_pk:
             job.badge_design = new_design
             job.save()
-        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
 
     context = {'event': event,
                'form': form}
@@ -139,7 +198,7 @@ def edit_badgepermission(request, event_url_name, permission_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
 
     context = {'event': event,
                'form': form}
@@ -175,7 +234,7 @@ def edit_badgerole(request, event_url_name, role_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
 
     context = {'event': event,
                'form': form}

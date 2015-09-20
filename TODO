@@ -1,21 +1,38 @@
 * atomic validation if shift is full
-* Badge Generierung (Rechte festlegen)
-  * for some jobs an upload of an image is possible
-  * Badge -> OneToOne to Helper
-  * Image for responsibles? (option)
-  * delete_badge{permission, role, design}
 * Load Test (deactivate mail!)
 * edit helper -> redirect to jobhelpers
 * overview: vegetarian
 * bot protection
+* add helper to more shifts
+
+* Helper: is_coordinator, get_jobs_as_coordinator?
+
+* get all helpers of event
+
+* Badge Generierung (Rechte festlegen)
+  * BadgeDesign like BadgeRole
+  * Default for Event and Job -> OneToOne Class
+  * Background images optional, color instead
+
+  * Badge: OneToOne to all helpers
+
+  * How to get all data for helper?
+  * How to handle helpers with more than one shift?
+
+  * for some jobs an upload of an image is possible
+  * Image for responsibles? (option)
+
+  * delete_badge{permission, role, design}
+
+  * generate_badges: error page with latex output
 
 Low priority
 ============
 
+* badges page: change role for job directly
 * set width of table columns
 * send mail to helpers (in job or all)
 * Mail: link to registered page
-* T-Shirts fixieren
 * Search helper (name, mail)
 * modelform: mark optional fields
 * sort helpers and coordinators
@@ -23,6 +40,7 @@ Low priority
 After ESP
 =========
 
+* T-Shirts fixieren
 * ask for preferred language on registration
 * order of jobs
 * delete helper as job admin: cannot select other shifts

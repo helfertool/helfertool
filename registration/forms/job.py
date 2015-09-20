@@ -1,6 +1,6 @@
 from django import forms
 
-from ..models import Job
+from ..models import Job, BadgeRole
 
 
 class JobForm(forms.ModelForm):
@@ -20,6 +20,10 @@ class JobForm(forms.ModelForm):
         # remove badge_role field if badge creation is disabled
         if not self.event.badges:
             self.fields.pop('badge_role')
+
+        # restrict badge roles
+        self.fields['badge_role'].queryset = BadgeRole.objects.filter(
+            badge_settings=self.event.badge_settings)
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing
