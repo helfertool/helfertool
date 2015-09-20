@@ -58,6 +58,14 @@ class Job(models.Model):
         null=True,
     )
 
+    badge_role = models.ForeignKey(
+        'BadgeRole',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Default role for this job"),
+    )
+
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
 

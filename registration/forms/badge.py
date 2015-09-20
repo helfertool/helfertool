@@ -6,10 +6,16 @@ from ..models import BadgeDesign, BadgeSettings, BadgePermission, BadgeRole
 class BadgeSettingsForm(forms.ModelForm):
     class Meta:
         model = BadgeSettings
-        exclude = ['event', 'design', 'permissions']
+        exclude = ['event', 'design', 'permissions', 'role',
+                   'coordinator_role', ]
+
+class BadgeDefaultRolesForm(forms.ModelForm):
+    class Meta:
+        model = BadgeSettings
+        fields = ['role', 'coordinator_role', ]
 
     def __init__(self, *args, **kwargs):
-        super(BadgeSettingsForm, self).__init__(*args, **kwargs)
+        super(BadgeDefaultRolesForm, self).__init__(*args, **kwargs)
 
         # restrict roles to this event
         roles = BadgeRole.objects.filter(badge_settings=self.instance)

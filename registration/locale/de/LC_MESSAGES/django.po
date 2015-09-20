@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-19 19:03+0200\n"
-"PO-Revision-Date: 2015-09-19 19:06+0200\n"
+"POT-Creation-Date: 2015-09-20 13:07+0200\n"
+"PO-Revision-Date: 2015-09-20 13:08+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -74,8 +74,8 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:39 registration/models/badge.py:117
-#: registration/models/badge.py:137 registration/models/job.py:27
+#: registration/export/pdf.py:39 registration/models/badge.py:133
+#: registration/models/badge.py:153 registration/models/job.py:27
 #: registration/templates/registration/admin/badges.html:21
 #: registration/templates/registration/admin/badges.html:53
 #: registration/templates/registration/admin/coordinators.html:16
@@ -125,39 +125,47 @@ msgstr "Vorname"
 msgid "Last name"
 msgstr "Nachname"
 
-#: registration/models/badge.py:35
+#: registration/models/badge.py:39
+msgid "Default role for all helpers"
+msgstr "Standard Rolle für alle Helfer"
+
+#: registration/models/badge.py:47
+msgid "Default role for coordinators"
+msgstr "Standard Rolle für alle Koordinatoren"
+
+#: registration/models/badge.py:51
 msgid "LaTeX template"
 msgstr "LaTeX Template"
 
-#: registration/models/badge.py:42
+#: registration/models/badge.py:58
 msgid "Number of rows on one page"
 msgstr "Anzahl der Zeilen auf einer Seite"
 
-#: registration/models/badge.py:48
+#: registration/models/badge.py:64
 msgid "Number of columns on one page"
 msgstr "Anzahl der Spalten auf einer Seite"
 
-#: registration/models/badge.py:95
+#: registration/models/badge.py:111
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: registration/models/badge.py:96
+#: registration/models/badge.py:112
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: registration/models/badge.py:100
+#: registration/models/badge.py:116
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: registration/models/badge.py:105
+#: registration/models/badge.py:121
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: registration/models/badge.py:122
+#: registration/models/badge.py:138
 msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
-#: registration/models/badge.py:123
+#: registration/models/badge.py:139
 msgid ""
 "This name is used for the LaTeX template, the prefix \"perm_\" is added."
 msgstr ""
@@ -282,6 +290,10 @@ msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 msgid "Description"
 msgstr "Beschreibung"
 
+#: registration/models/job.py:66
+msgid "Default role for this job"
+msgstr "Standard Rolle für diese Aufgabe"
+
 #: registration/models/link.py:37
 #: registration/templates/registration/admin/links.html:15
 msgid "Usage"
@@ -363,8 +375,8 @@ msgid "Badges"
 msgstr "Badges"
 
 #: registration/templates/registration/admin/badges.html:10
-msgid "Edit settings"
-msgstr "Einstellungen bearbeiten"
+msgid "Edit badge settings"
+msgstr "Badge Einstellungen bearbeiten"
 
 #: registration/templates/registration/admin/badges.html:14
 #: registration/templates/registration/admin/badges.html:54
@@ -383,7 +395,7 @@ msgstr "LaTeX Name"
 
 #: registration/templates/registration/admin/badges.html:32
 #: registration/templates/registration/admin/badges.html:70
-#: registration/templates/registration/admin/badges.html:104
+#: registration/templates/registration/admin/badges.html:115
 #: registration/templates/registration/admin/helpers_table.html:49
 #: registration/templates/registration/admin/jobs_and_shifts.html:23
 #: registration/templates/registration/admin/jobs_and_shifts.html:61
@@ -407,27 +419,56 @@ msgid "Add role"
 msgstr "Rolle hinzufügen"
 
 #: registration/templates/registration/admin/badges.html:84
-#: registration/templates/registration/admin/badges.html:95
-msgid "Design"
-msgstr "Design"
+msgid "Default roles"
+msgstr "Standard Rollen"
 
-#: registration/templates/registration/admin/badges.html:88
+#: registration/templates/registration/admin/badges.html:91
+#: registration/templates/registration/admin/edit_badgedesign.html:13
+#: registration/templates/registration/admin/edit_badgepermission.html:13
+#: registration/templates/registration/admin/edit_badgerole.html:13
+#: registration/templates/registration/admin/edit_badgesettings.html:13
+#: registration/templates/registration/admin/edit_event.html:20
+#: registration/templates/registration/admin/edit_helper.html:30
+#: registration/templates/registration/admin/edit_job.html:19
+#: registration/templates/registration/admin/edit_link.html:13
+#: registration/templates/registration/admin/edit_shift.html:23
+msgid "Save"
+msgstr "Speichern"
+
+#: registration/templates/registration/admin/badges.html:94
+msgid "Design and roles for jobs"
+msgstr "Design und Rollen für Aufgaben"
+
+#: registration/templates/registration/admin/badges.html:98
 msgid "Edit default badge"
 msgstr "Standard Design bearbeiten"
 
-#: registration/templates/registration/admin/badges.html:94
+#: registration/templates/registration/admin/badges.html:104
 #: registration/templates/registration/admin/delete_job.html:13
 #: registration/templates/registration/admin/delete_shift.html:13
 msgid "Job"
 msgstr "Aufgabe"
 
-#: registration/templates/registration/admin/badges.html:107
+#: registration/templates/registration/admin/badges.html:105
+msgid "Design"
+msgstr "Design"
+
+#: registration/templates/registration/admin/badges.html:106
+msgid "Role"
+msgstr "Rolle"
+
+#: registration/templates/registration/admin/badges.html:118
+#: registration/templates/registration/admin/badges.html:126
 msgid "Default"
 msgstr "Standard"
 
-#: registration/templates/registration/admin/badges.html:108
+#: registration/templates/registration/admin/badges.html:119
 msgid "New"
 msgstr "Neu"
+
+#: registration/templates/registration/admin/badges.html:128
+msgid "Change"
+msgstr "Ändern"
 
 #: registration/templates/registration/admin/badges_not_active.html:9
 msgid "The badge creation is not actived."
@@ -646,18 +687,6 @@ msgstr "Diese Schicht löschen?"
 #: registration/templates/registration/admin/edit_badgedesign.html:6
 msgid "Badge Design"
 msgstr "Badge Design"
-
-#: registration/templates/registration/admin/edit_badgedesign.html:13
-#: registration/templates/registration/admin/edit_badgepermission.html:13
-#: registration/templates/registration/admin/edit_badgerole.html:13
-#: registration/templates/registration/admin/edit_badgesettings.html:13
-#: registration/templates/registration/admin/edit_event.html:20
-#: registration/templates/registration/admin/edit_helper.html:30
-#: registration/templates/registration/admin/edit_job.html:19
-#: registration/templates/registration/admin/edit_link.html:13
-#: registration/templates/registration/admin/edit_shift.html:23
-msgid "Save"
-msgstr "Speichern"
 
 #: registration/templates/registration/admin/edit_badgepermission.html:6
 msgid "Badge Permission"

@@ -7,7 +7,7 @@ from .utils import nopermission, get_or_404, is_involved
 
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
-    BadgeRoleForm
+    BadgeRoleForm, BadgeDefaultRolesForm
 
 
 def notactive(request):
@@ -32,9 +32,18 @@ def badges(request, event_url_name):
     # roles
     roles = event.badge_settings.badgerole_set.all()
 
+    # form for default roles
+    default_roles_form = BadgeDefaultRolesForm(request.POST or None,
+                                               instance=event.badge_settings)
+    if default_roles_form.is_valid():
+        default_roles_form.save()
+
+        return HttpResponseRedirect(reverse('badges', args=[event.url_name, ]))
+
     context = {'event': event,
                'permissions': permissions,
-               'roles': roles}
+               'roles': roles,
+               'default_roles_form': default_roles_form}
     return render(request, 'registration/admin/badges.html', context)
 
 

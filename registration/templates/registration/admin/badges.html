@@ -7,7 +7,7 @@
 
     <p>
         <a href="{% url 'badgesettings' event.url_name %}">
-            {% trans "Edit settings" %}
+            {% trans "Edit badge settings" %}
         </a>
     </p>
 
@@ -81,7 +81,17 @@
         </a>
     </p>
 
-    <h3>{% trans "Design" %}</h3>
+    <h3>{% trans "Default roles" %}</h3>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_form default_roles_form %}
+
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+    </form>
+
+    <h3>{% trans "Design and roles for jobs" %}</h3>
 
     <p>
         <a href="{% url 'badgedesign' event.url_name event.badge_settings.design.pk %}">
@@ -93,6 +103,7 @@
         <tr>
             <th>{% trans "Job" %}</th>
             <th>{% trans "Design" %}</th>
+            <th>{% trans "Role" %}</th>
         </tr>
 
         {% for job in event.job_set.all %}
@@ -107,6 +118,14 @@
                         {% trans "Default" %}
                         (<a href="{% url 'new_badgedesign' event.url_name job.pk %}">{% trans "New" %}</a>)
                     {% endif %}
+                </td>
+                <td>
+                    {% if job.badge_role %}
+                        {{ job.badge_role }}
+                    {% else %}
+                        {% trans "Default" %}
+                    {% endif %}
+                    (<a href="{% url 'edit_job' event.url_name job.pk %}">{% trans "Change" %}</a>)
                 </td>
             </tr>
         {% endfor %}

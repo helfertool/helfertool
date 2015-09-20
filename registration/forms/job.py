@@ -6,7 +6,8 @@ from ..models import Job
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
-        exclude = ['name', 'description', 'event', 'coordinators']
+        exclude = ['name', 'description', 'event', 'coordinators',
+                   'badge_design', ]
         widgets = {
             'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }
@@ -15,6 +16,10 @@ class JobForm(forms.ModelForm):
         self.event = kwargs.pop('event')
 
         super(JobForm, self).__init__(*args, **kwargs)
+
+        # remove badge_role field if badge creation is disabled
+        if not self.event.badges:
+            self.fields.pop('badge_role')
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing
