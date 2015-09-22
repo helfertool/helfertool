@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-20 13:22+0200\n"
-"PO-Revision-Date: 2015-09-20 13:22+0200\n"
+"POT-Creation-Date: 2015-09-23 00:02+0200\n"
+"PO-Revision-Date: 2015-09-23 00:03+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,12 +18,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.3\n"
 
-#: registration/export/excel.py:58 registration/models/helper.py:77
+#: registration/export/excel.py:58 registration/models/badge.py:190
+#: registration/models/helper.py:77
 #: registration/templates/registration/admin/helpers_table.html:7
 msgid "Prename"
 msgstr "Vorname"
 
-#: registration/export/excel.py:59 registration/models/helper.py:82
+#: registration/export/excel.py:59 registration/models/badge.py:195
+#: registration/models/helper.py:82
 #: registration/templates/registration/admin/helpers_table.html:8
 msgid "Surname"
 msgstr "Nachname"
@@ -74,10 +76,12 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:39 registration/models/badge.py:133
-#: registration/models/badge.py:153 registration/models/job.py:27
+#: registration/export/pdf.py:39 registration/models/badge.py:112
+#: registration/models/badge.py:144 registration/models/badge.py:165
+#: registration/models/job.py:27
 #: registration/templates/registration/admin/configure_badges.html:21
 #: registration/templates/registration/admin/configure_badges.html:53
+#: registration/templates/registration/admin/configure_badges.html:93
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
@@ -125,52 +129,71 @@ msgstr "Vorname"
 msgid "Last name"
 msgstr "Nachname"
 
-#: registration/models/badge.py:39
-msgid "Default role for all helpers"
-msgstr "Standard Rolle für alle Helfer"
-
-#: registration/models/badge.py:47
-msgid "Default role for coordinators"
-msgstr "Standard Rolle für alle Koordinatoren"
-
-#: registration/models/badge.py:51
+#: registration/models/badge.py:32
 msgid "LaTeX template"
 msgstr "LaTeX Template"
 
-#: registration/models/badge.py:58
+#: registration/models/badge.py:39
 msgid "Number of rows on one page"
 msgstr "Anzahl der Zeilen auf einer Seite"
 
-#: registration/models/badge.py:64
+#: registration/models/badge.py:45
 msgid "Number of columns on one page"
 msgstr "Anzahl der Spalten auf einer Seite"
 
-#: registration/models/badge.py:111
+#: registration/models/badge.py:65
+msgid "Default role"
+msgstr "Standard Rolle"
+
+#: registration/models/badge.py:73
+msgid "Default design"
+msgstr "Standard Design"
+
+#: registration/models/badge.py:119
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: registration/models/badge.py:112
+#: registration/models/badge.py:120
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: registration/models/badge.py:116
+#: registration/models/badge.py:124
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: registration/models/badge.py:121
+#: registration/models/badge.py:129
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: registration/models/badge.py:138
+#: registration/models/badge.py:149 registration/models/badge.py:170
 msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
-#: registration/models/badge.py:139
+#: registration/models/badge.py:150
 msgid ""
-"This name is used for the LaTeX template, the prefix \"perm_\" is added."
+"This name is used for the LaTeX template, the prefix \"perm-\" is added."
 msgstr ""
-"Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm_\" "
+"Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
 "hinzugefügt."
+
+#: registration/models/badge.py:171
+msgid "This name is used for the LaTeX template."
+msgstr "Dieser Name wird im LaTeX Template verwendet."
+
+#: registration/models/badge.py:200
+#: registration/templates/registration/admin/badges.html:10
+#: registration/templates/registration/admin/delete_job.html:13
+#: registration/templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
+#: registration/models/badge.py:205
+msgid "Shift"
+msgstr "Schicht"
+
+#: registration/models/badge.py:210
+msgid "Role"
+msgstr "Rolle"
 
 #: registration/models/event.py:36
 msgid "Name for URL"
@@ -290,10 +313,6 @@ msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models/job.py:66
-msgid "Default role for this job"
-msgstr "Standard Rolle für diese Aufgabe"
-
 #: registration/models/link.py:37
 #: registration/templates/registration/admin/links.html:15
 msgid "Usage"
@@ -358,7 +377,7 @@ msgid "Privacy"
 msgstr "Datenschutz"
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:65
+#: registration/templates/registration/admin/base.html:66
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -367,6 +386,14 @@ msgstr "Nutzer hinzufügen"
 #: registration/templates/registration/admin/permissions.html:66
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: registration/templates/registration/admin/badges.html:6
+msgid "Generate badges"
+msgstr "Badges generieren"
+
+#: registration/templates/registration/admin/badges.html:19
+msgid "Generate"
+msgstr "Generieren"
 
 #: registration/templates/registration/admin/badges_not_active.html:6
 msgid "Badges"
@@ -422,69 +449,69 @@ msgstr "Links"
 msgid "Configure badges"
 msgstr "Badges konfigurieren"
 
-#: registration/templates/registration/admin/base.html:59
+#: registration/templates/registration/admin/base.html:60
 msgid "Common"
 msgstr "Allgemein"
 
-#: registration/templates/registration/admin/base.html:62
+#: registration/templates/registration/admin/base.html:63
 #: registration/templates/registration/admin/edit_event.html:12
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:68
+#: registration/templates/registration/admin/base.html:69
 #: registration/templates/registration/admin/configure_badges.html:14
-#: registration/templates/registration/admin/configure_badges.html:54
+#: registration/templates/registration/admin/configure_badges.html:55
 #: registration/templates/registration/admin/permissions.html:6
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:69
+#: registration/templates/registration/admin/base.html:70
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:86
+#: registration/templates/registration/admin/base.html:87
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:87
+#: registration/templates/registration/admin/base.html:88
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:88
+#: registration/templates/registration/admin/base.html:89
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:89
+#: registration/templates/registration/admin/base.html:90
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:90
+#: registration/templates/registration/admin/base.html:91
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:91
+#: registration/templates/registration/admin/base.html:92
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:92
+#: registration/templates/registration/admin/base.html:93
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:93
+#: registration/templates/registration/admin/base.html:94
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:94
+#: registration/templates/registration/admin/base.html:95
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:95
+#: registration/templates/registration/admin/base.html:96
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:96
+#: registration/templates/registration/admin/base.html:97
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -497,12 +524,13 @@ msgid "There are no permissions."
 msgstr "Es gibt keine Berechtigungen."
 
 #: registration/templates/registration/admin/configure_badges.html:22
+#: registration/templates/registration/admin/configure_badges.html:54
 msgid "LaTeX Name"
 msgstr "LaTeX Name"
 
 #: registration/templates/registration/admin/configure_badges.html:32
-#: registration/templates/registration/admin/configure_badges.html:70
-#: registration/templates/registration/admin/configure_badges.html:115
+#: registration/templates/registration/admin/configure_badges.html:72
+#: registration/templates/registration/admin/configure_badges.html:102
 #: registration/templates/registration/admin/helpers_table.html:49
 #: registration/templates/registration/admin/jobs_and_shifts.html:23
 #: registration/templates/registration/admin/jobs_and_shifts.html:61
@@ -521,15 +549,27 @@ msgstr "Rollen"
 msgid "There are no roles."
 msgstr "Es gibt keine Rollen."
 
-#: registration/templates/registration/admin/configure_badges.html:80
+#: registration/templates/registration/admin/configure_badges.html:82
 msgid "Add role"
 msgstr "Rolle hinzufügen"
 
-#: registration/templates/registration/admin/configure_badges.html:84
-msgid "Default roles"
-msgstr "Standard Rollen"
+#: registration/templates/registration/admin/configure_badges.html:86
+msgid "Designs"
+msgstr "Designs"
 
-#: registration/templates/registration/admin/configure_badges.html:91
+#: registration/templates/registration/admin/configure_badges.html:89
+msgid "There are no designs."
+msgstr "Es gibt keine Designs."
+
+#: registration/templates/registration/admin/configure_badges.html:112
+msgid "Add design"
+msgstr "Design hinzufügen"
+
+#: registration/templates/registration/admin/configure_badges.html:116
+msgid "Defaults"
+msgstr "Standards"
+
+#: registration/templates/registration/admin/configure_badges.html:123
 #: registration/templates/registration/admin/edit_badgedesign.html:13
 #: registration/templates/registration/admin/edit_badgepermission.html:13
 #: registration/templates/registration/admin/edit_badgerole.html:13
@@ -541,41 +581,6 @@ msgstr "Standard Rollen"
 #: registration/templates/registration/admin/edit_shift.html:23
 msgid "Save"
 msgstr "Speichern"
-
-#: registration/templates/registration/admin/configure_badges.html:94
-msgid "Design and roles for jobs"
-msgstr "Design und Rollen für Aufgaben"
-
-#: registration/templates/registration/admin/configure_badges.html:98
-msgid "Edit default badge"
-msgstr "Standard Design bearbeiten"
-
-#: registration/templates/registration/admin/configure_badges.html:104
-#: registration/templates/registration/admin/delete_job.html:13
-#: registration/templates/registration/admin/delete_shift.html:13
-msgid "Job"
-msgstr "Aufgabe"
-
-#: registration/templates/registration/admin/configure_badges.html:105
-msgid "Design"
-msgstr "Design"
-
-#: registration/templates/registration/admin/configure_badges.html:106
-msgid "Role"
-msgstr "Rolle"
-
-#: registration/templates/registration/admin/configure_badges.html:118
-#: registration/templates/registration/admin/configure_badges.html:126
-msgid "Default"
-msgstr "Standard"
-
-#: registration/templates/registration/admin/configure_badges.html:119
-msgid "New"
-msgstr "Neu"
-
-#: registration/templates/registration/admin/configure_badges.html:128
-msgid "Change"
-msgstr "Ändern"
 
 #: registration/templates/registration/admin/coordinators.html:12
 #: registration/templates/registration/admin/helpers_for_job.html:24
@@ -976,6 +981,27 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Default role for all helpers"
+#~ msgstr "Standard Rolle für alle Helfer"
+
+#~ msgid "Default role for coordinators"
+#~ msgstr "Standard Rolle für alle Koordinatoren"
+
+#~ msgid "Default role for this job"
+#~ msgstr "Standard Rolle für diese Aufgabe"
+
+#~ msgid "Design and roles for jobs"
+#~ msgstr "Design und Rollen für Aufgaben"
+
+#~ msgid "Edit default badge"
+#~ msgstr "Standard Design bearbeiten"
+
+#~ msgid "New"
+#~ msgstr "Neu"
+
+#~ msgid "Change"
+#~ msgstr "Ändern"
 
 #~ msgid "Details"
 #~ msgstr "Details"
