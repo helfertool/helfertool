@@ -1,32 +1,55 @@
 from django import forms
 
-from ..models import BadgeDesign, BadgeSettings, BadgePermission, BadgeRole
+from ..models import BadgeDesign, BadgeSettings, BadgePermission, BadgeRole, \
+    BadgeDefaults
 
 
 class BadgeSettingsForm(forms.ModelForm):
     class Meta:
         model = BadgeSettings
-        exclude = ['event', 'design', 'permissions', 'role',
-                   'coordinator_role', ]
+        exclude = ['event', 'defaults', ]
 
-class BadgeDefaultRolesForm(forms.ModelForm):
+
+class BadgeDefaultsForm(forms.ModelForm):
     class Meta:
-        model = BadgeSettings
-        fields = ['role', 'coordinator_role', ]
+        model = BadgeDefaults
+        fields = ['role', 'design', ]
 
     def __init__(self, *args, **kwargs):
-        super(BadgeDefaultRolesForm, self).__init__(*args, **kwargs)
+        self.settings = kwargs.pop('settings')
+
+        super(BadgeDefaultsForm, self).__init__(*args, **kwargs)
 
         # restrict roles to this event
-        roles = BadgeRole.objects.filter(badge_settings=self.instance)
-        self.fields['role'].queryset = roles
-        self.fields['coordinator_role'].queryset = roles
+        self.fields['role'].queryset = BadgeRole.objects.filter(
+            badge_settings=self.settings)
+        self.fields['design'].queryset = BadgeDesign.objects.filter(
+            badge_settings=self.settings)
 
+#
+# join following three forms?
+#
 
 class BadgeDesignForm(forms.ModelForm):
     class Meta:
         model = BadgeDesign
-        exclude = []
+        exclude = ['badge_settings', 'name', ]
+
+    def __init__(self, *args, **kwargs):
+        self.settings = kwargs.pop('settings')
+
+        super(BadgeDesignForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super(BadgeDesignForm, self).save(False)
+
+        # set settings
+        instance.badge_settings = self.settings
+
+        if commit:
+            instance.save()
+
+        return instance
 
 
 class BadgePermissionForm(forms.ModelForm):

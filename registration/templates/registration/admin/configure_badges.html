@@ -51,6 +51,7 @@
         <table class="table">
             <tr>
                 <th>{% trans "Name" %}</th>
+                <th>{% trans "LaTeX Name" %}</th>
                 <th>{% trans "Permissions" %}</th>
                 <th></th>
             </tr>
@@ -58,6 +59,7 @@
             {% for role in roles %}
                 <tr>
                     <td>{{ role.name }}</td>
+                    <td>{{ role.latex_name }}</td>
                     <td>
                         <ul>
                             {% for perm in role.permissions.all %}
@@ -81,53 +83,43 @@
         </a>
     </p>
 
-    <h3>{% trans "Default roles" %}</h3>
+    <h3>{% trans "Designs" %}</h3>
+
+    {% if designs.count == 0 %}
+        <p class="text-muted">{% trans "There are no designs." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th></th>
+            </tr>
+
+            {% for design in designs %}
+                <tr>
+                    <td>{{ design.name }}</td>
+                    <td>
+                        <a href="{% url 'edit_badgedesign' event.url_name design.pk %}">
+                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'new_badgedesign' event.url_name %}">
+            {% bootstrap_icon "plus" %} {% trans "Add design" %}
+        </a>
+    </p>
+
+    <h3>{% trans "Defaults" %}</h3>
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% bootstrap_form default_roles_form %}
+        {% bootstrap_form defaults_form %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
     </form>
-
-    <h3>{% trans "Design and roles for jobs" %}</h3>
-
-    <p>
-        <a href="{% url 'badgedesign' event.url_name event.badge_settings.design.pk %}">
-            {% trans "Edit default badge" %}
-        </a>
-    </p>
-
-    <table class="table">
-        <tr>
-            <th>{% trans "Job" %}</th>
-            <th>{% trans "Design" %}</th>
-            <th>{% trans "Role" %}</th>
-        </tr>
-
-        {% for job in event.job_set.all %}
-            <tr>
-                <td>{{ job.name }}</td>
-                <td>
-                    {% if job.has_badge_design %}
-                        <a href="{% url 'badgedesign' event.url_name job.badge_design.pk %}">
-                            {% trans "Edit" %}
-                        </a>
-                    {% else %}
-                        {% trans "Default" %}
-                        (<a href="{% url 'new_badgedesign' event.url_name job.pk %}">{% trans "New" %}</a>)
-                    {% endif %}
-                </td>
-                <td>
-                    {% if job.badge_role %}
-                        {{ job.badge_role }}
-                    {% else %}
-                        {% trans "Default" %}
-                    {% endif %}
-                    (<a href="{% url 'edit_job' event.url_name job.pk %}">{% trans "Change" %}</a>)
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
 {% endblock %}

@@ -2,8 +2,6 @@ from django.core.validators import MinValueValidator
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 import os
 
@@ -13,7 +11,6 @@ class BadgeSettings(models.Model):
 
     Columns:
         :event: The event that uses the badge creation
-        :badge_design: Default badge design
     """
 
     def upload_path(instance, filename):
@@ -27,24 +24,8 @@ class BadgeSettings(models.Model):
         'Event'
     )
 
-    design = models.OneToOneField(
-        'BadgeDesign',
-    )
-
-    role = models.ForeignKey(
-        'BadgeRole',
-        related_name='+',  # no reverse accessor
-        null=True,
-        blank=True,
-        verbose_name=_("Default role for all helpers"),
-    )
-
-    coordinator_role = models.ForeignKey(
-        'BadgeRole',
-        related_name='+',  # no reverse accessor
-        null=True,
-        blank=True,
-        verbose_name=_("Default role for coordinators"),
+    defaults = models.OneToOneField(
+        'BadgeDefaults'
     )
 
     latex_template = models.FileField(
@@ -66,19 +47,39 @@ class BadgeSettings(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not hasattr(self, 'design'):
-            design = BadgeDesign()
-            design.save()
+        if not hasattr(self, 'defaults'):
+            defaults = BadgeDefaults()
+            defaults.save()
 
-            self.design = design
+            self.defaults = defaults
 
         super(BadgeSettings, self).save(*args, **kwargs)
+
+
+class BadgeDefaults(models.Model):
+    role = models.ForeignKey(
+        'BadgeRole',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Default role"),
+    )
+
+    design = models.ForeignKey(
+        'BadgeDesign',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Default design"),
+    )
 
 
 class BadgeDesign(models.Model):
     """ Design of a badge (for an event or job)
 
     Columns:
+        :badge_settings: settings
+        :name: name of design
         :font_color: Color of the text
         :bg_front: Background picture of the front
         :bg_back: Background picture of the back
@@ -99,10 +100,17 @@ class BadgeDesign(models.Model):
         return path
 
     def get_event(self):
-        try:
-            return self.badgesettings.event
-        except AttributeError:
-            return self.job.event
+        return self.badge_settings.event
+
+
+    badge_settings = models.ForeignKey(
+        BadgeSettings,
+    )
+
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_("Name"),
+    )
 
     font_color = models.CharField(
         max_length=7,
@@ -122,6 +130,9 @@ class BadgeDesign(models.Model):
         upload_to=upload_path,
     )
 
+    def __str__(self):
+        return self.name
+
 
 class BadgePermission(models.Model):
     badge_settings = models.ForeignKey(
@@ -137,11 +148,12 @@ class BadgePermission(models.Model):
         max_length=200,
         verbose_name=_("Name for LaTeX template"),
         help_text=_("This name is used for the LaTeX template, the prefix "
-                    "\"perm_\" is added."),
+                    "\"perm-\" is added."),
     )
 
     def __str__(self):
         return self.name
+
 
 class BadgeRole(models.Model):
     badge_settings = models.ForeignKey(
@@ -153,6 +165,12 @@ class BadgeRole(models.Model):
         verbose_name=_("Name"),
     )
 
+    latex_name = models.CharField(
+        max_length=200,
+        verbose_name=_("Name for LaTeX template"),
+        help_text=_("This name is used for the LaTeX template."),
+    )
+
     permissions = models.ManyToManyField(
         BadgePermission,
         blank=True,
@@ -160,6 +178,7 @@ class BadgeRole(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Badge(models.Model):
     helper = models.OneToOneField(

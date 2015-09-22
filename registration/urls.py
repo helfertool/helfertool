@@ -191,6 +191,15 @@ urlpatterns = [
         views.edit_badgerole,
         name='new_badgerole'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/'
+        '(?P<design_pk>[0-9]+)$',
+        views.edit_badgedesign,
+        name='edit_badgedesign'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/',
+        views.edit_badgedesign,
+        name='new_badgedesign'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
         '(?P<job_pk>[0-9]+)',
         views.generate_badges,

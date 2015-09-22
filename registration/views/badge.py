@@ -7,7 +7,7 @@ from .utils import nopermission, get_or_404, is_involved
 
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
-    BadgeRoleForm, BadgeDefaultRolesForm
+    BadgeRoleForm, BadgeDefaultsForm
 from ..badges import BadgeCreator
 
 
@@ -91,18 +91,23 @@ def configure_badges(request, event_url_name):
     # roles
     roles = event.badge_settings.badgerole_set.all()
 
+    # designs
+    designs = event.badge_settings.badgedesign_set.all()
+
     # form for default roles
-    default_roles_form = BadgeDefaultRolesForm(request.POST or None,
-                                               instance=event.badge_settings)
-    if default_roles_form.is_valid():
-        default_roles_form.save()
+    defaults_form = BadgeDefaultsForm(request.POST or None,
+                                      instance=event.badge_settings.defaults,
+                                      settings=event.badge_settings)
+    if defaults_form.is_valid():
+        defaults_form.save()
 
         return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
 
     context = {'event': event,
                'permissions': permissions,
                'roles': roles,
-               'default_roles_form': default_roles_form}
+               'designs': designs,
+               'defaults_form': defaults_form,}
     return render(request, 'registration/admin/configure_badges.html', context)
 
 
@@ -133,42 +138,9 @@ def edit_badgesettings(request, event_url_name):
     return render(request, 'registration/admin/edit_badgesettings.html',
                   context)
 
-
-# TODO: join following 3 views
-@login_required
-def edit_badgedesign(request, event_url_name, design_pk=None, job_pk=None):
-    event, job, shift, helper = get_or_404(event_url_name, job_pk)
-
-    # check permission
-    if not is_involved(request.user, event_url_name, admin_required=True):
-        return nopermission(request)
-
-    # check if badge system is active
-    if not event.badges:
-        return notactive(request)
-
-    # get BadgeDesign
-    design = None
-    if design_pk:
-        design = get_object_or_404(BadgeDesign, pk=design_pk)
-
-    # form
-    form = BadgeDesignForm(request.POST or None, request.FILES or None,
-                           instance=design)
-
-    if form.is_valid():
-        new_design = form.save()
-
-        # add to job, if newly created
-        if job_pk:
-            job.badge_design = new_design
-            job.save()
-        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
-
-    context = {'event': event,
-               'form': form}
-    return render(request, 'registration/admin/edit_badgedesign.html', context)
-
+#
+# TODO: join the following three views
+#
 
 @login_required
 def edit_badgepermission(request, event_url_name, permission_pk=None):
@@ -239,4 +211,40 @@ def edit_badgerole(request, event_url_name, role_pk=None):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/edit_badgerole.html',
+                  context)
+
+
+@login_required
+def edit_badgedesign(request, event_url_name, design_pk=None):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # get BadgePermission
+    design = None
+    if design_pk:
+        design = get_object_or_404(BadgeDesign, pk=design_pk)
+
+        # check if permission belongs to event
+        if design not in event.badge_settings.badgedesign_set.all():
+            return Http404()
+
+    # form
+    form = BadgeDesignForm(request.POST or None, request.FILES or None,
+                           instance=design, settings=event.badge_settings)
+
+    if form.is_valid():
+        form.save()
+
+        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
+
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/edit_badgedesign.html',
                   context)

@@ -52,19 +52,12 @@ class Job(models.Model):
         blank=True,
     )
 
-    badge_design = models.OneToOneField(
-        'BadgeDesign',
+    badge_defaults = models.OneToOneField(
+        'BadgeDefaults',
         blank=True,
         null=True,
     )
 
-    badge_role = models.ForeignKey(
-        'BadgeRole',
-        related_name='+',  # no reverse accessor
-        null=True,
-        blank=True,
-        verbose_name=_("Default role for this job"),
-    )
 
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
@@ -119,10 +112,3 @@ class Job(models.Model):
                                          key=lambda s: s.begin)
 
         return ordered_shifts
-
-    @property
-    def has_badge_design(self):
-        return self.badge_design is not None
-
-    def get_badge_design(self):
-        return self.badge_design or self.event.badge_settings.design
