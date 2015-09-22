@@ -7,7 +7,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['name', 'description', 'event', 'coordinators',
-                   'badge_design', ]
+                   'badge_defaults', ]
         widgets = {
             'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }
@@ -16,14 +16,6 @@ class JobForm(forms.ModelForm):
         self.event = kwargs.pop('event')
 
         super(JobForm, self).__init__(*args, **kwargs)
-
-        # remove badge_role field if badge creation is disabled
-        if not self.event.badges:
-            self.fields.pop('badge_role')
-
-        # restrict badge roles
-        self.fields['badge_role'].queryset = BadgeRole.objects.filter(
-            badge_settings=self.event.badge_settings)
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing
