@@ -10,15 +10,9 @@
 * get all helpers of event
 
 * Badge Generierung (Rechte festlegen)
-  * BadgeDesign like BadgeRole
-  * Default for Event and Job -> OneToOne Class
   * Background images optional, color instead
 
-  * no extra default for coordinator
-
-  * Badge: OneToOne to all helpers
-  * How to handle helpers with more than one shift?
-     -> primary job
+  * Badge: get all data and add it to badge
   * prefer coordinator
 
   * for some jobs an upload of an image is possible

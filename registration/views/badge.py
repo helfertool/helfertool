@@ -27,7 +27,11 @@ def badges(request, event_url_name):
     if not event.badges:
         return notactive(request)
 
-    context = {'event': event}
+    # check if all necessary settings are done
+    possible = event.badge_settings.creation_possible()
+
+    context = {'event': event,
+               'possible': possible}
     return render(request, 'registration/admin/badges.html', context)
 
 
@@ -42,6 +46,8 @@ def generate_badges(request, event_url_name, job_pk):
     # check if badge system is active
     if not event.badges:
         return notactive(request)
+
+    # TODO: check if possible, show error page
 
     # badge creation
     creator = BadgeCreator(event.badge_settings)

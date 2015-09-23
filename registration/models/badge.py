@@ -57,6 +57,18 @@ class BadgeSettings(models.Model):
 
         super(BadgeSettings, self).save(*args, **kwargs)
 
+    def creation_possible(self):
+        if not self.latex_template:
+            return False
+
+        if not self.defaults.role:
+            return False
+
+        if not self.defaults.design:
+            return False
+
+        return True
+
 
 class BadgeDefaults(models.Model):
     role = models.ForeignKey(
@@ -214,4 +226,10 @@ class Badge(models.Model):
     role = models.CharField(
         max_length=200,
         verbose_name=_("Role"),
+    )
+
+    primary_job = models.ForeignKey(
+        'Job',
+        blank=True,
+        null=True,
     )

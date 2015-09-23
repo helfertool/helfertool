@@ -42,8 +42,8 @@ class BadgeCreator:
                'role': ''}
 
         # TODO
-        tmp['bgfront'] = self.settings.design.bg_front.url
-        tmp['bgback'] = self.settings.design.bg_back.url
+        tmp['bgfront'] = self.settings.defaults.design.bg_front.url
+        tmp['bgback'] = self.settings.defaults.design.bg_back.url
 
         self.helpers.append(tmp)
 
@@ -87,6 +87,10 @@ class BadgeCreator:
         shutil.rmtree(self.dir)
 
     def _get_latex(self):
+        # whitespace, if code would be empty
+        if len(self.helpers) == 0:
+            return r'\ '
+
         r = ''
 
         # number of badges on one page

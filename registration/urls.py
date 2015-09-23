@@ -163,16 +163,6 @@ urlpatterns = [
         views.edit_badgesettings,
         name='badgesettings'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/'
-        '(?P<design_pk>[0-9]+)$',
-        views.edit_badgedesign,
-        name='badgedesign'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/'
-        '(?P<job_pk>[0-9]+)$',
-        views.edit_badgedesign,
-        name='new_badgedesign'),
-
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/'
         '(?P<permission_pk>[0-9]+)$',
         views.edit_badgepermission,

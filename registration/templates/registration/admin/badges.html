@@ -5,21 +5,32 @@
 {% block admincontent %}
     <h2>{% trans "Generate badges" %}</h2>
 
-    <table class="table">
-        <tr>
-            <th>{% trans "Job" %}</th>
-            <th></th>
-        </tr>
-
-        {% for job in event.job_set.all %}
+    {% if not possible %}
+        <div class="alert alert-danger" role="alert">
+            {% trans "Some settings are missing to generate badges. Check the following settings:" %}
+            <ul>
+                <li>{% trans "LaTeX template" %}</li>
+                <li>{% trans "Default role" %}</li>
+                <li>{% trans "Default design" %}</li>
+            </ul>
+        </div>
+    {% else %}
+        <table class="table">
             <tr>
-                <td>{{ job.name }}</td>
-                <td>
-                    <a href="{% url "generate_badges" event.url_name job.pk %}">
-                        {% trans "Generate" %}
-                    </a>
-                </td>
+                <th>{% trans "Job" %}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-    </table>
+
+            {% for job in event.job_set.all %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>
+                        <a href="{% url "generate_badges" event.url_name job.pk %}">
+                            {% trans "Generate" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}
