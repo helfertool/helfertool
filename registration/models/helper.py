@@ -2,10 +2,12 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import get_template
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 import uuid
 
 
+@python_2_unicode_compatible
 class Helper(models.Model):
     """ Helper in one or more shifts.
 

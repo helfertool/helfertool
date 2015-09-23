@@ -1,7 +1,8 @@
-from django.core.validators import MinValueValidator
 from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.core.validators import RegexValidator
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 import os
 
@@ -74,6 +75,7 @@ class BadgeDefaults(models.Model):
     )
 
 
+@python_2_unicode_compatible
 class BadgeDesign(models.Model):
     """ Design of a badge (for an event or job)
 
@@ -101,7 +103,6 @@ class BadgeDesign(models.Model):
 
     def get_event(self):
         return self.badge_settings.event
-
 
     badge_settings = models.ForeignKey(
         BadgeSettings,
@@ -134,6 +135,7 @@ class BadgeDesign(models.Model):
         return self.name
 
 
+@python_2_unicode_compatible
 class BadgePermission(models.Model):
     badge_settings = models.ForeignKey(
         BadgeSettings,
@@ -155,6 +157,7 @@ class BadgePermission(models.Model):
         return self.name
 
 
+@python_2_unicode_compatible
 class BadgeRole(models.Model):
     badge_settings = models.ForeignKey(
         BadgeSettings,

@@ -30,12 +30,13 @@
 
   * configure path to pdflatex in settings
 
+* send mail to helpers (in job or all)
+
 Low priority
 ============
 
 * badges page: change role for job directly
 * set width of table columns
-* send mail to helpers (in job or all)
 * Mail: link to registered page
 * Search helper (name, mail)
 * modelform: mark optional fields

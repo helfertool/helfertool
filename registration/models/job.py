@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from collections import OrderedDict
 
 
+@python_2_unicode_compatible
 class Job(models.Model):
     """ A job that contains min. 1 shift.
 
