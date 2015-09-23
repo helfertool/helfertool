@@ -7,19 +7,20 @@ from django.utils.translation import ugettext_lazy as _
 import os
 
 
+def _settings_upload_path(instance, filename):
+    event = str(instance.event.pk)
+
+    path = os.path.join(settings.BADGE_IMAGE_DIR, event, 'template.tex')
+
+    return path
+
+
 class BadgeSettings(models.Model):
     """ Settings for badge creation
 
     Columns:
         :event: The event that uses the badge creation
     """
-
-    def upload_path(instance, filename):
-        event = str(instance.event.pk)
-
-        path = os.path.join(settings.BADGE_IMAGE_DIR, event, 'template.tex')
-
-        return path
 
     event = models.OneToOneField(
         'Event'
@@ -31,7 +32,7 @@ class BadgeSettings(models.Model):
 
     latex_template = models.FileField(
         verbose_name=_("LaTeX template"),
-        upload_to=upload_path,
+        upload_to=_settings_upload_path,
         null=True,
     )
 
@@ -75,6 +76,21 @@ class BadgeDefaults(models.Model):
     )
 
 
+def _design_upload_path(instance, filename):
+    event = str(instance.get_event().pk)
+
+    path = os.path.join(settings.BADGE_IMAGE_DIR, event, filename)
+
+    # check is file already exists -> add number
+    counter = 0
+    while os.path.isfile(path) or os.path.isdir(path):
+        counter = counter + 1
+        path = os.path.join(settings.BADGE_IMAGE_DIR, event,
+                            "%d%s" % (counter, filename))
+
+    return path
+
+
 @python_2_unicode_compatible
 class BadgeDesign(models.Model):
     """ Design of a badge (for an event or job)
@@ -87,19 +103,6 @@ class BadgeDesign(models.Model):
         :bg_back: Background picture of the back
     """
 
-    def upload_path(instance, filename):
-        event = str(instance.get_event().pk)
-
-        path = os.path.join(settings.BADGE_IMAGE_DIR, event, filename)
-
-        # check is file already exists -> add number
-        counter = 0
-        while os.path.isfile(path) or os.path.isdir(path):
-            counter = counter + 1
-            path = os.path.join(settings.BADGE_IMAGE_DIR, event,
-                                "%d%s" % (counter, filename))
-
-        return path
 
     def get_event(self):
         return self.badge_settings.event
@@ -123,12 +126,12 @@ class BadgeDesign(models.Model):
 
     bg_front = models.ImageField(
         verbose_name=_("Background image for front"),
-        upload_to=upload_path,
+        upload_to=_design_upload_path,
     )
 
     bg_back = models.ImageField(
         verbose_name=_("Background image for back"),
-        upload_to=upload_path,
+        upload_to=_design_upload_path,
     )
 
     def __str__(self):
