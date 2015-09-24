@@ -5,6 +5,8 @@
 * bot protection
 * add helper to more shifts
 
+* check for overlapping shifts
+
 * Helper: is_coordinator, get_jobs_as_coordinator?
 
 * get all helpers of event
