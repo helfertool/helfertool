@@ -99,7 +99,7 @@ class BadgeCreator:
                                      "-output-directory", self.dir,
                                      self.latex_filename])
         except subprocess.CalledProcessError as e:
-            raise BadgeCreatorError("PDF generation failed", e.out)
+            raise BadgeCreatorError("PDF generation failed", e.output)
 
         # return path to pdf
         return "%s.pdf" % os.path.splitext(self.latex_filename)[0]

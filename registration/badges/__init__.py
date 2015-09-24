@@ -1,1 +1,1 @@
-from .creator import BadgeCreator
+from .creator import BadgeCreator, BadgeCreatorError

@@ -8,7 +8,7 @@ from .utils import nopermission, get_or_404, is_involved
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultsForm
-from ..badges import BadgeCreator
+from ..badges import BadgeCreator, BadgeCreatorError
 
 
 def notactive(request):
@@ -61,7 +61,14 @@ def generate_badges(request, event_url_name, job_pk):
         for h in shift.helper_set.all():
             creator.add_helper(h)
 
-    pdf_filename = creator.generate()
+    try:
+        pdf_filename = creator.generate()
+    except BadgeCreatorError as e:
+        context = {'event': event,
+                   'error': e.value,
+                   'latex_output': e.get_latex_output()}
+        return render(request, 'registration/admin/badges_failed.html',
+                      context)
 
     # output
     filename = "%s.pdf" % job.name
