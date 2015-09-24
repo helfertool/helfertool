@@ -38,7 +38,10 @@ GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"
 
 # badge creation
-BADGE_IMAGE_DIR= os.path.join(BASE_DIR, 'badgeupload')
+BADGE_IMAGE_DIR = os.path.join(BASE_DIR, 'badgeupload')
+
+# copy generated latex code for badges to this file, disable with None
+BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 
 # for e-mail debugging
 #EMAIL_HOST = 'localhost'

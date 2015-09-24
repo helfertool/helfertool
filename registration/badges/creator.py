@@ -1,3 +1,6 @@
+from django.conf import settings
+from ..models import BadgePermission
+
 from tempfile import mkdtemp, mkstemp
 import os
 import subprocess
@@ -41,9 +44,23 @@ class BadgeCreator:
                'shift': '',
                'role': ''}
 
+        # design
         # TODO
         tmp['bgfront'] = self.settings.defaults.design.bg_front.url
         tmp['bgback'] = self.settings.defaults.design.bg_back.url
+
+        # role
+        tmp['roleid'] = self.settings.defaults.role.latex_name
+
+        # permissions
+        all_permissions = BadgePermission.objects.filter(
+            badge_settings=self.settings).all()
+        selected_permissions = self.settings.defaults.role.permissions
+        for perm in all_permissions:
+            if selected_permissions.filter(pk=perm.pk).exists():
+                tmp['perm-%s' % perm.latex_name] = 'true'
+            else:
+                tmp['perm-%s' % perm.latex_name] = 'false'
 
         self.helpers.append(tmp)
 
@@ -71,6 +88,10 @@ class BadgeCreator:
         except IOError as e:
             raise BadgeCreatorError("Cannot write to file \"%s\": %s" %
                                     (self.latex_filename, str(e)))
+
+        # debug
+        if settings.BADGE_TEMPLATE_DEBUG_FILE:
+            shutil.copyfile(self.latex_filename, settings.BADGE_TEMPLATE_DEBUG_FILE)
 
         # call pdflatex
         try:
