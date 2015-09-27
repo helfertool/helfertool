@@ -1,8 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from collections import OrderedDict
+
+from .badge import BadgeDefaults
 
 
 @python_2_unicode_compatible
@@ -60,7 +64,6 @@ class Job(models.Model):
         null=True,
     )
 
-
     def __str__(self):
         return "%s (%s)" % (self.name, self.event)
 
@@ -114,3 +117,18 @@ class Job(models.Model):
                                          key=lambda s: s.begin)
 
         return ordered_shifts
+
+
+@receiver(pre_save, sender=Job, dispatch_uid='job_pre_save')
+def job_pre_save(sender, instance, using, **kwargs):
+    """ Add badge defaults if necessary.
+
+    This is a signal handler, that is called, before a job is saved. It
+    adds the badge defaults if badge creation is enabled and it is not
+    there already.
+    """
+    if instance.event.badges and not instance.badge_defaults:
+        defaults = BadgeDefaults()
+        defaults.save()
+
+        instance.badge_defaults = defaults

@@ -7,7 +7,7 @@ from .utils import nopermission, get_or_404, is_involved
 
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
-    BadgeRoleForm, BadgeDefaultsForm
+    BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm
 from ..badges import BadgeCreator, BadgeCreatorError
 
 
@@ -107,20 +107,35 @@ def configure_badges(request, event_url_name):
     # designs
     designs = event.badge_settings.badgedesign_set.all()
 
-    # form for default roles
+    # forms, redirect if one of the forms were valid
+    redirect = False
+
+    # form for event defaults
     defaults_form = BadgeDefaultsForm(request.POST or None,
                                       instance=event.badge_settings.defaults,
-                                      settings=event.badge_settings)
+                                      settings=event.badge_settings,
+                                      prefix='event')
     if defaults_form.is_valid():
         defaults_form.save()
+        redirect = True
 
-        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
+    # form for job defaults
+    job_defaults_form = BadgeJobDefaultsForm(request.POST or None, event=event,
+                                             prefix='jobs')
+    if job_defaults_form.is_valid():
+        job_defaults_form.save()
+        redirect = True
+
+    if redirect:
+        return HttpResponseRedirect(reverse('configure_badges',
+                                            args=[event.url_name, ]))
 
     context = {'event': event,
                'permissions': permissions,
                'roles': roles,
                'designs': designs,
-               'defaults_form': defaults_form,}
+               'defaults_form': defaults_form,
+               'job_defaults_form': job_defaults_form}
     return render(request, 'registration/admin/configure_badges.html', context)
 
 

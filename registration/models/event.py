@@ -7,7 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
-from .badge import BadgeSettings
+from .badge import BadgeSettings, BadgeDefaults
 
 
 @python_2_unicode_compatible
@@ -153,9 +153,20 @@ def event_saved(sender, instance, using, **kwargs):
 
     This is a signal handler, that is called, when a event is saved. It
     adds the badge settings if badge creation is enabled and it is not
-    there already.
+    there already. It also adds badge defaults to all jobs if necessary.
     """
-    if instance.badges and not instance.badge_settings:
-        settings = BadgeSettings()
-        settings.event = instance
-        settings.save()
+    if instance.badges:
+        # badge settings for event
+        if not instance.badge_settings:
+            settings = BadgeSettings()
+            settings.event = instance
+            settings.save()
+
+        # badge defaults for jobs
+        for job in instance.job_set.all():
+            if not job.badge_defaults:
+                defaults = BadgeDefaults()
+                defaults.save()
+
+                job.badge_defaults = defaults
+                job.save()

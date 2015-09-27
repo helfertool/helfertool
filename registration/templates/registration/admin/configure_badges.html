@@ -1,6 +1,7 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load badges %}
 
 {% block admincontent %}
     <h2>{% trans "Configure badges" %}</h2>
@@ -113,12 +114,37 @@
         </a>
     </p>
 
-    <h3>{% trans "Defaults" %}</h3>
 
-    <form action="" method="post" enctype="multipart/form-data">
+    <h3>{% trans "Defaults" %}</h3>
+    <form action="" method="post">
         {% csrf_token %}
 
         {% bootstrap_form defaults_form %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Job" %}</th>
+                <th>{% trans "Role" %}</th>
+                <th>{% trans "Design" %}</th>
+            </tr>
+
+            {% for job in event.job_set.all %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>
+                        {% badge_job_role_field job_defaults_form job.pk as field %}
+                        {% bootstrap_field field show_label=False %}
+                    </td>
+                    <td>
+                        {% badge_job_design_field job_defaults_form job.pk as field %}
+                        {% bootstrap_field field show_label=False %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% bootstrap_form_errors job_defaults_form %}
+        {% bootstrap_form_errors job_defaults_form %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
     </form>
