@@ -5,6 +5,8 @@
 * bot protection
 * add helper to more shifts
 
+* check if delete and coordinators work fine
+
 * check for overlapping shifts
 
 * Helper: is_coordinator, get_jobs_as_coordinator?
@@ -27,6 +29,8 @@
   * delete primary_job if helper is deleted from shift
 
   * Badge: custom design and role
+
+  * timeout and other protection for subprocess call
 
 * send mail to helpers (in job or all)
 * add errors to all forms

@@ -7,9 +7,11 @@ from ..models import Helper
 class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
-        exclude = ['shifts', ]
+        exclude = ['event', 'shifts', ]
 
     def __init__(self, *args, **kwargs):
+        self.related_event = kwargs.pop('event')
+
         self.shift = None
         if 'shift' in kwargs:
             self.shift = kwargs.pop('shift')
@@ -28,6 +30,8 @@ class HelperForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(HelperForm, self).save(False)
+
+        instance.event = self.related_event
 
         if commit:
             instance.save()

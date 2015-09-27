@@ -78,6 +78,10 @@ class Helper(models.Model):
         'Shift',
     )
 
+    event = models.ForeignKey(
+        'Event',
+    )
+
     prename = models.CharField(
         max_length=200,
         verbose_name=_("Prename"),
@@ -181,31 +185,27 @@ class Helper(models.Model):
                   fail_silently=False)
 
     @property
-    def event(self):
-        """ Returns the event, where this person helps us.
-
-        If the helper is not registered for any shift, None is returned (this
-        should not happen).
-        """
-
-        if self.shifts.count() == 0:
-            return None
-
-        return self.shifts.all()[0].job.event
-
-    @property
     def full_name(self):
         """ Returns full name of helper """
         return "%s %s" % (self.prename, self.surname)
 
     @property
     def has_to_validate(self):
-        event = self.event
-
-        if not event:
+        if not self.event:
             return False
 
-        return event.mail_validation and not self.validated
+        return self.event.mail_validation and not self.validated
+
+    @property
+    def coordinated_jobs(self):
+        if hasattr(self, 'job_set'):
+            return getattr(self, 'job_set')
+        return None
+
+    @property
+    def if_coordinator(self):
+        return hasattr(self, 'job_set')
+
 
 @receiver(post_save, sender=Helper, dispatch_uid='helper_saved')
 def helper_saved(sender, instance, using, **kwargs):
@@ -214,7 +214,8 @@ def helper_saved(sender, instance, using, **kwargs):
     This is a signal handler, that is called, when a helper is saved. It
     adds the badge if badge creation is enabled and it is not there already.
     """
-    if instance.event.badges and not hasattr(instance, 'badge'):
+    if instance.event and instance.event.badges and \
+            not hasattr(instance, 'badge'):
         badge = Badge()
         badge.helper = instance
         badge.save()

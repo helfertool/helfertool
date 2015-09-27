@@ -1,7 +1,7 @@
 from django import forms
 
 from ..models import BadgeDesign, BadgeSettings, BadgePermission, BadgeRole, \
-    BadgeDefaults
+    BadgeDefaults, Badge
 
 
 class BadgeSettingsForm(forms.ModelForm):
@@ -133,3 +133,9 @@ class BadgeRoleForm(forms.ModelForm):
         self.save_m2m()
 
         return instance
+
+
+class BadgeForm(forms.ModelForm):
+    class Meta:
+        model = Badge
+        exclude = ['helper', ]

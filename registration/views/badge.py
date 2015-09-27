@@ -107,26 +107,18 @@ def configure_badges(request, event_url_name):
     # designs
     designs = event.badge_settings.badgedesign_set.all()
 
-    # forms, redirect if one of the forms were valid
-    redirect = False
-
-    # form for event defaults
+    # forms for defaults
     defaults_form = BadgeDefaultsForm(request.POST or None,
                                       instance=event.badge_settings.defaults,
                                       settings=event.badge_settings,
                                       prefix='event')
-    if defaults_form.is_valid():
-        defaults_form.save()
-        redirect = True
-
-    # form for job defaults
     job_defaults_form = BadgeJobDefaultsForm(request.POST or None, event=event,
                                              prefix='jobs')
-    if job_defaults_form.is_valid():
-        job_defaults_form.save()
-        redirect = True
 
-    if redirect:
+    if defaults_form.is_valid() and job_defaults_form.is_valid():
+        defaults_form.save()
+        job_defaults_form.save()
+
         return HttpResponseRedirect(reverse('configure_badges',
                                             args=[event.url_name, ]))
 

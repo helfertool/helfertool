@@ -95,5 +95,5 @@ def shift_delete(sender, instance, using, **kwargs):
     """
     # delete helpers, that have only one shift, when this shift is deleted
     for helper in instance.helper_set.all():
-        if helper.shifts.count() == 1:
+        if helper.shifts.count() == 1 and not helper.is_coordinator:
             helper.delete()

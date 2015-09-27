@@ -206,26 +206,31 @@ class Badge(models.Model):
     prename = models.CharField(
         max_length=200,
         verbose_name=_("Prename"),
+        blank=True,
     )
 
     surname = models.CharField(
         max_length=200,
         verbose_name=_("Surname"),
+        blank=True,
     )
 
     job = models.CharField(
         max_length=200,
         verbose_name=_("Job"),
+        blank=True,
     )
 
     shift = models.CharField(
         max_length=200,
         verbose_name=_("Shift"),
+        blank=True,
     )
 
     role = models.CharField(
         max_length=200,
         verbose_name=_("Role"),
+        blank=True,
     )
 
     primary_job = models.ForeignKey(

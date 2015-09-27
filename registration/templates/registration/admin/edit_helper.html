@@ -27,6 +27,12 @@
             </ul>
         {% endif %}
 
+        {% if badge_form %}
+            <h2>{% trans "Badge" %}</h2>
+
+            {% bootstrap_form badge_form %}
+        {% endif %}
+
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
     </form>
 {% endblock %}

@@ -59,12 +59,15 @@ def delete_job(request, event_url_name, job_pk):
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 
-    # check, if there are helpers registered
-    helpers_registered = False
-    for shift in job.shift_set.all():
-        if shift.helper_set.count() > 0:
-            helpers_registered = True
-            break
+    # check if there are coordinators
+    helpers_registered = job.coordinators.count() != 0
+
+    # check, if there are helpers registered (if no coordinators were found)
+    if not helpers_registered:
+        for shift in job.shift_set.all():
+            if shift.helper_set.count() > 0:
+                helpers_registered = True
+                break
 
     # render page
     context = {'event': event,

@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Job
-from ..forms import HelperForm, HelperDeleteForm
+from ..forms import HelperForm, HelperDeleteForm, BadgeForm
 
 
 @login_required
@@ -45,17 +45,26 @@ def edit_helper(request, event_url_name, helper_pk):
     if not helper.can_edit(request.user):
         return nopermission(request)
 
-    # form
-    form = HelperForm(request.POST or None, instance=helper)
+    # forms
+    form = HelperForm(request.POST or None, instance=helper, event=event)
+    badge_form = None
+    if event.badges:
+        badge_form = BadgeForm(request.POST or None, instance=helper.badge,
+                               prefix='badge')
 
-    if form.is_valid():
+    if form.is_valid() and (badge_form.is_valid() or not event.badges):
         form.save()
+
+        if event.badges:
+            badge_form.save()
+
         return HttpResponseRedirect(reverse('helpers', args=[event_url_name]))
 
     # render page
     context = {'event': event,
                'helper': helper,
-               'form': form}
+               'form': form,
+               'badge_form': badge_form}
     return render(request, 'registration/admin/edit_helper.html', context)
 
 
@@ -81,10 +90,10 @@ def add_helper(request, event_url_name, shift_pk=None, job_pk=None):
     # form
     if job_pk:
         # add coordinator
-        form = HelperForm(request.POST or None, job=job)
+        form = HelperForm(request.POST or None, job=job, event=event)
     else:
         # add helper
-        form = HelperForm(request.POST or None, shift=shift)
+        form = HelperForm(request.POST or None, shift=shift, event=event)
 
     if form.is_valid():
         form.save()

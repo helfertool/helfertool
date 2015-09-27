@@ -147,21 +147,14 @@ class Event(models.Model):
             return None
 
     @property
-    def helpers_and_coordinators(self):
+    def all_coordinators(self):
         result = []
 
         # iterate over jobs
         for job in self.job_set.all():
-            # coordinators
             for c in job.coordinators.all():
                 if not c in result:
-                    result.add(c)
-
-            # helpers
-            for shift in job.shift_set.all():
-                for h in shift.helper_set.all():
-                    if not h in result:
-                        result.add(h)
+                    result.append(c)
 
         return result
 
@@ -191,8 +184,15 @@ def event_saved(sender, instance, using, **kwargs):
                 job.badge_defaults = defaults
                 job.save()
 
-        # badge for helpers and coordinators
-        for helper in instance.helpers_and_coordinators:
+        # badge for coordinators
+        for coordinator in instance.all_coordinators:
+            if not hasattr(coordinator, 'badge'):
+                badge = Badge()
+                badge.helper = coordinator
+                badge.save()
+
+        # badge for helpers
+        for helper in instance.helper_set.all():
             if not hasattr(helper, 'badge'):
                 badge = Badge()
                 badge.helper = helper
