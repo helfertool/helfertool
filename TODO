@@ -9,10 +9,6 @@
 
 * check for overlapping shifts
 
-* Helper: is_coordinator, get_jobs_as_coordinator?
-
-* get all helpers of event
-
 * Badge Generierung (Rechte festlegen)
   * Background images optional, color instead
 
@@ -38,7 +34,6 @@
 Low priority
 ============
 
-* badges page: change role for job directly
 * set width of table columns
 * Mail: link to registered page
 * Search helper (name, mail)
