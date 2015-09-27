@@ -22,9 +22,11 @@
 
   * delete_badge{permission, role, design}
 
-  * generate_badges: error page with latex output
-
   * configure path to pdflatex in settings
+
+  * delete primary_job if helper is deleted from shift
+
+  * Badge: custom design and role
 
 * send mail to helpers (in job or all)
 * add errors to all forms

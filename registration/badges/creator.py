@@ -45,17 +45,18 @@ class BadgeCreator:
                'role': ''}
 
         # design
-        # TODO
-        tmp['bgfront'] = self.settings.defaults.design.bg_front.url
-        tmp['bgback'] = self.settings.defaults.design.bg_back.url
+        design = helper.badge.get_design()
+        tmp['bgfront'] = design.bg_front.url
+        tmp['bgback'] = design.bg_back.url
 
         # role
-        tmp['roleid'] = self.settings.defaults.role.latex_name
+        role = helper.badge.get_role()
+        tmp['roleid'] = role.latex_name
 
         # permissions
         all_permissions = BadgePermission.objects.filter(
             badge_settings=self.settings).all()
-        selected_permissions = self.settings.defaults.role.permissions
+        selected_permissions = role.permissions
         for perm in all_permissions:
             if selected_permissions.filter(pk=perm.pk).exists():
                 tmp['perm-%s' % perm.latex_name] = 'true'

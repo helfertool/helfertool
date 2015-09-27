@@ -1,10 +1,14 @@
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 import uuid
+
+from .badge import Badge
 
 
 @python_2_unicode_compatible
@@ -202,3 +206,15 @@ class Helper(models.Model):
             return False
 
         return event.mail_validation and not self.validated
+
+@receiver(post_save, sender=Helper, dispatch_uid='helper_saved')
+def helper_saved(sender, instance, using, **kwargs):
+    """ Add badge to helper if necessary.
+
+    This is a signal handler, that is called, when a helper is saved. It
+    adds the badge if badge creation is enabled and it is not there already.
+    """
+    if instance.event.badges and not hasattr(instance, 'badge'):
+        badge = Badge()
+        badge.helper = instance
+        badge.save()

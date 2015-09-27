@@ -233,3 +233,44 @@ class Badge(models.Model):
         blank=True,
         null=True,
     )
+
+    def _get_job(self):
+        # use primary job if set
+        if self.primary_job:
+            return primary_job
+
+        # collect all jobs
+        jobs = []
+
+        for shift in self.helper.shifts.all():
+            if not shift.job in jobs:
+                jobs.append(shift.job)
+
+        # only one job -> done
+        if len(jobs) == 1:
+            return jobs[0]
+
+        return None
+
+    def _get_defaults(self, key):
+        job = self._get_job()
+
+        # job not unambiguous
+        if not job:
+            return getattr(self.helper.event.badge_settings.defaults, key)
+
+        # try job
+        if getattr(job.badge_defaults, key):
+            return getattr(job.badge_defaults, key)
+
+        # else use event's default
+        return getattr(self.helper.event.badge_settings.defaults, key)
+
+    def is_ambiguous(self):
+        return self._get_job() is None
+
+    def get_design(self):
+        return self._get_defaults('design')
+
+    def get_role(self):
+        return self._get_defaults('role')

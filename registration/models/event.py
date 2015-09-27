@@ -7,7 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
-from .badge import BadgeSettings, BadgeDefaults
+from .badge import BadgeSettings, BadgeDefaults, Badge
 
 
 @python_2_unicode_compatible
@@ -146,6 +146,25 @@ class Event(models.Model):
         except AttributeError:
             return None
 
+    @property
+    def helpers_and_coordinators(self):
+        result = []
+
+        # iterate over jobs
+        for job in self.job_set.all():
+            # coordinators
+            for c in job.coordinators.all():
+                if not c in result:
+                    result.add(c)
+
+            # helpers
+            for shift in job.shift_set.all():
+                for h in shift.helper_set.all():
+                    if not h in result:
+                        result.add(h)
+
+        return result
+
 
 @receiver(post_save, sender=Event, dispatch_uid='event_saved')
 def event_saved(sender, instance, using, **kwargs):
@@ -153,7 +172,8 @@ def event_saved(sender, instance, using, **kwargs):
 
     This is a signal handler, that is called, when a event is saved. It
     adds the badge settings if badge creation is enabled and it is not
-    there already. It also adds badge defaults to all jobs if necessary.
+    there already. It also adds badge defaults to all jobs and badges to all
+    helpers and coordinators if necessary.
     """
     if instance.badges:
         # badge settings for event
@@ -170,3 +190,10 @@ def event_saved(sender, instance, using, **kwargs):
 
                 job.badge_defaults = defaults
                 job.save()
+
+        # badge for helpers and coordinators
+        for helper in instance.helpers_and_coordinators:
+            if not hasattr(helper, 'badge'):
+                badge = Badge()
+                badge.helper = helper
+                badge.save()
