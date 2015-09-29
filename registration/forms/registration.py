@@ -125,7 +125,12 @@ class RegisterForm(forms.ModelForm):
                     raise ValidationError("You selected a blocked shift.")
 
     def save(self, commit=True):
-        instance = super(RegisterForm, self).save()  # must commit
+        instance = super(RegisterForm, self).save(False)
+
+        instance.event = self.event
+
+        # must commit for m2m operations
+        instance.save()
 
         for shift in self.shifts:
             if self.cleaned_data[shift]:
