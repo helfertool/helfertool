@@ -70,3 +70,9 @@ img.icon
     padding:3px 6px 3px 6px;
     vertical-align: top;
 }
+
+/* wrap words */
+.wrap
+{
+    word-wrap: break-word;
+}
