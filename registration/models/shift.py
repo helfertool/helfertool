@@ -86,14 +86,14 @@ class Shift(models.Model):
         return int(round(self.num_helpers() / self.number * 100, 0))
 
 
-@receiver(pre_delete, sender=Shift, dispatch_uid='shift_delete')
-def shift_delete(sender, instance, using, **kwargs):
-    """ Delete helpers without shifts, when a shift is deleted.
-
-    This is a signal handler, that is called, when a shift is deleted. It
-    deletes all helpers, that are only registered for this single shift.
-    """
-    # delete helpers, that have only one shift, when this shift is deleted
-    for helper in instance.helper_set.all():
-        if helper.shifts.count() == 1 and not helper.is_coordinator:
-            helper.delete()
+#@receiver(pre_delete, sender=Shift, dispatch_uid='shift_delete')
+#def shift_delete(sender, instance, using, **kwargs):
+#    """ Delete helpers without shifts, when a shift is deleted.
+#
+#    This is a signal handler, that is called, when a shift is deleted. It
+#    deletes all helpers, that are only registered for this single shift.
+#    """
+#    # delete helpers, that have only one shift, when this shift is deleted
+#    for helper in instance.helper_set.all():
+#        if helper.shifts.count() == 1 and not helper.is_coordinator:
+#            helper.delete()

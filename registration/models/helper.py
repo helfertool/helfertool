@@ -1,7 +1,7 @@
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.encoding import python_2_unicode_compatible
@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 import uuid
 
 from .badge import Badge
+from .job import Job
 
 
 @python_2_unicode_compatible
@@ -198,13 +199,15 @@ class Helper(models.Model):
 
     @property
     def coordinated_jobs(self):
-        if hasattr(self, 'job_set'):
+        if self.is_coordinator:
             return getattr(self, 'job_set')
         return None
 
     @property
-    def if_coordinator(self):
-        return hasattr(self, 'job_set')
+    def is_coordinator(self):
+        if not hasattr(self, 'job_set'):
+            return False
+        return getattr(self, 'job_set').count() > 0
 
 
 @receiver(post_save, sender=Helper, dispatch_uid='helper_saved')
@@ -219,3 +222,19 @@ def helper_saved(sender, instance, using, **kwargs):
         badge = Badge()
         badge.helper = instance
         badge.save()
+
+def helper_deleted(sender, **kwargs):
+    action = kwargs.pop('action')
+    if action != "post_remove":
+        return
+
+    helper = kwargs.pop('instance')
+
+    if helper.shifts.count() == 0 and not helper.is_coordinator:
+        helper.delete()
+
+def coordinator_deleted(sender, **kwargs):
+    pass
+
+m2m_changed.connect(helper_deleted, sender=Helper.shifts.through)
+m2m_changed.connect(coordinator_deleted, sender=Job.coordinators.through)

@@ -71,7 +71,3 @@ class HelperDeleteForm(forms.ModelForm):
         # delete all selected shifts
         for shift in self.cleaned_data['shifts']:
             self.instance.shifts.remove(shift)
-
-        # delete complete helper, if no shifts remain
-        if self.instance.shifts.count() == 0:
-            self.instance.delete()

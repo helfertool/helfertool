@@ -4,10 +4,13 @@
 * overview: vegetarian
 * bot protection
 * add helper to more shifts
+* fix bug with tshirt sizes
 
 * check if delete and coordinators work fine
 
 * check for overlapping shifts
+
+* fix: delete coordinator not possible
 
 * Badge Generierung (Rechte festlegen)
   * Background images optional, color instead
@@ -30,6 +33,7 @@
 
 * send mail to helpers (in job or all)
 * add errors to all forms
+* job admin can see t-shirt size table of their job
 
 Low priority
 ============

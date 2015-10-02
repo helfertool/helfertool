@@ -84,33 +84,18 @@ def shirts(request, event_url_name):
         return nopermission(request)
 
     # shirt sizes for helpers
-    helper_shirts = Helper.objects.filter(shifts__job__event=event). \
-        values('shirt').annotate(num=Count('shirt'))
+    helper_shirts = event.helper_set.values('shirt').annotate(num=Count('shirt'))
 
-    # shirt sizes for coordinators
-    coordinator_shirts = {}
-    for job in event.job_set.all():
-        for coordinator in job.coordinators.all():
-            if coordinator.shirt in coordinator_shirts:
-                coordinator_shirts[coordinator.shirt] = \
-                    coordinator_shirts[coordinator.shirt] + 1
-            else:
-                coordinator_shirts[coordinator.shirt] = 1
-
-    # create data for template (iterate over all sizes and sum numbers)
+    # create data for template (iterate over all sizes in correct order)
     shirts = OrderedDict()
     for size, name in Helper.SHIRT_CHOICES:
         num = 0
 
         # get size for helpers
         try:
-            num = num + helper_shirts.get(shirt=size)['num']
+            num = helper_shirts.get(shirt=size)['num']
         except Helper.DoesNotExist:
             pass
-
-        # get size for coordinators
-        if size in coordinator_shirts:
-            num = num + coordinator_shirts[size]
 
         shirts.update({name: num})
 
