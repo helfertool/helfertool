@@ -52,7 +52,8 @@ def edit_helper(request, event_url_name, helper_pk):
         badge_form = BadgeForm(request.POST or None, instance=helper.badge,
                                prefix='badge')
 
-    if form.is_valid() and (badge_form.is_valid() or not event.badges):
+    if form.is_valid() and (not event.badges or
+                            (badge_form and badge_form.is_valid())):
         form.save()
 
         if event.badges:
