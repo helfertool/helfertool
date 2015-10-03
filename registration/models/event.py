@@ -68,14 +68,21 @@ class Event(models.Model):
         help_text=_("Used as sender of e-mails."),
     )
 
-    active = models.BooleanField(
-        default=False,
-        verbose_name=_("Registration possible"),
+    logo = models.ImageField(
+        upload_to='logos',
+        blank=True,
+        null=True,
+        verbose_name=_("Logo"),
     )
 
     admins = models.ManyToManyField(
         User,
         blank=True,
+    )
+
+    active = models.BooleanField(
+        default=False,
+        verbose_name=_("Registration possible"),
     )
 
     ask_shirt = models.BooleanField(

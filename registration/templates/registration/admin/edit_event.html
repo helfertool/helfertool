@@ -6,13 +6,11 @@
     {# edit/new #}
     {% if event %}
         <h2>{% trans "Edit event" %}</h2>
-
-        <form action="{% url 'edit_event' event.url_name %}" method="post">
     {% else %}
         <h2>{% trans "New event" %}</h2>
-
-        <form action="{% url 'new_event' %}" method="post">
     {% endif %}
+
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% bootstrap_form form %}

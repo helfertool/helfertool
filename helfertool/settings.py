@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -128,7 +129,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+# Static files and media (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'  # must end with '/' !
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

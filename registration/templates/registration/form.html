@@ -7,6 +7,10 @@
 {% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
 
 {% block content %}
+    {% if event.logo %}
+        <img src="{{ MEDIA_URL }}{{ event.logo }}" id="logo" />
+    {% endif %}
+
     <h1>{{ event }}</h1>
 
     {{ event.text | safe }}

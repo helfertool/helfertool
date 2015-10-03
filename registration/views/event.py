@@ -31,7 +31,8 @@ def edit_event(request, event_url_name=None):
         event = get_object_or_404(Event, url_name=event_url_name)
 
     # handle form
-    form = EventForm(request.POST or None, instance=event)
+    form = EventForm(request.POST or None, request.FILES or None,
+                     instance=event)
 
     if form.is_valid():
         event = form.save()

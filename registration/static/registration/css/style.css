@@ -76,3 +76,18 @@ img.icon
 {
     word-wrap: break-word;
 }
+
+/* logo of event */
+img#logo
+{
+    margin-top: 20px;
+    max-width: 200px;
+}
+
+@media (min-width: 768px)
+{
+    img#logo
+    {
+        float:right;
+    }
+}

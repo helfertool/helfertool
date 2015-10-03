@@ -5,8 +5,6 @@
 * bot protection
 * add helper to more shifts
 
-* logo for event
-
 * check for overlapping shifts
 
 * fix: delete coordinator not possible
@@ -42,6 +40,7 @@ Low priority
 * Search helper (name, mail)
 * modelform: mark optional fields
 * sort helpers and coordinators
+* delete event logo (the file)
 
 After ESP
 =========
