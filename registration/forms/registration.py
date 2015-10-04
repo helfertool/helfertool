@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift
 
+import itertools
+
 
 class RegisterForm(forms.ModelForm):
     """ Form for registration of helpers.
@@ -89,22 +91,39 @@ class RegisterForm(forms.ModelForm):
           * The field 'infection_instruction' must be set, if one of the
             selected shifts requires this.
           * The selected shift is not full.
+
+        TODO: improve performance: get shift only once from DB
         """
         super(RegisterForm, self).clean()
 
-        # number of shifts > 0
         number_of_shifts = 0
         infection_instruction_needed = False
-        for shift in self.shifts:
-            if self.cleaned_data[shift]:
-                number_of_shifts += 1
 
-                # while iterating over shifts, check if infection instruction
-                # is needed for one of the shifts
-                shift_obj = Shift.objects.get(pk=self.shifts[shift])
-                if shift_obj.job.infection_instruction:
-                    infection_instruction_needed = True
+        selected_shifts = list(filter(lambda s: self.cleaned_data[s],
+                                      self.shifts))
 
+        # iterate over all (selected) shifts
+        for shift in selected_shifts:
+            # get this shift
+            cur_shift = Shift.objects.get(pk=self.shifts[shift])
+
+            # number of shifts
+            number_of_shifts += 1
+
+            # check if infection instruction is needed for one of the
+            # shifts
+            if cur_shift.job.infection_instruction:
+                infection_instruction_needed = True
+
+            # check if shift is full
+            if cur_shift.is_full():
+                raise ValidationError("You selected a full shift.")
+
+            # check if shift is blocked
+            if cur_shift.blocked and not self.link:
+                raise ValidationError("You selected a blocked shift.")
+
+        # check number of shifts > 0
         if number_of_shifts == 0:
             raise ValidationError(_("You must select at least one shift."))
 
@@ -115,14 +134,23 @@ class RegisterForm(forms.ModelForm):
                            _("You must specify, if you have a instruction for "
                              "the handling of food."))
 
-        # helper need for shift
-        for shift in self.shifts:
-            if self.cleaned_data[shift]:
-                cur_shift = Shift.objects.get(pk=self.shifts[shift])
-                if cur_shift.is_full():
-                    raise ValidationError("You selected a full shift.")
-                if cur_shift.blocked and not self.link:
-                    raise ValidationError("You selected a blocked shift.")
+        # check for overlapping shifts
+        if self.event.max_overlapping:
+            max = self.event.max_overlapping
+            for shifts in itertools.combinations(selected_shifts, 2):
+                s1 = Shift.objects.get(pk=self.shifts[shifts[0]])
+                s2 = Shift.objects.get(pk=self.shifts[shifts[1]])
+
+                # check if shifts overlap (1st or term) or one shift is part
+                # of the other shift (2nd and 3rd or term)
+                if ((s2.end-s1.begin).total_seconds() > max*60 and
+                    (s1.end-s2.begin).total_seconds() > max*60) or \
+                   (s1.begin >= s2.begin and s1.end <= s2.end) or \
+                   (s2.begin >= s1.begin and s2.end <= s1.end):
+                    raise ValidationError(
+                        _("Some of your shifts overlap more then "
+                          "%(minutes)d minutes.") %
+                        {'minutes': max})
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save(False)

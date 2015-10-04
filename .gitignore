@@ -20,4 +20,4 @@ Session.vim
 /media/
 
 # sqlite database
-/db.sqlite3
+/db.sqlite3*

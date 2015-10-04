@@ -75,6 +75,15 @@ class Event(models.Model):
         verbose_name=_("Logo"),
     )
 
+    max_overlapping = models.IntegerField(
+        null=True,
+        blank=True,
+        verbose_name=_("Maximal overlapping of shifts"),
+        help_text = _("If two shifts overlap more than this value in minutes "
+                      "it is not possible to register for both shifts. Leave "
+                      "empty to disable this check."),
+    )
+
     admins = models.ManyToManyField(
         User,
         blank=True,
