@@ -46,8 +46,8 @@ class BadgeCreator:
 
         # design
         design = helper.badge.get_design()
-        tmp['bgfront'] = design.bg_front.url
-        tmp['bgback'] = design.bg_back.url
+        tmp['bgfront'] = design.bg_front.path
+        tmp['bgback'] = design.bg_back.path
 
         # role
         role = helper.badge.get_role()
@@ -76,7 +76,8 @@ class BadgeCreator:
             f.close()
         except IOError as e:
             raise BadgeCreatorError("Cannot open file \"%s\": %s" %
-                                    (self.settings.latex_template.url, str(e)))
+                                    (self.settings.latex_template.path,
+                                     str(e)))
 
         # replace '%BADGEDATA%'
         latex = template.replace('%BADGEDATA%', latex_code)
@@ -92,7 +93,8 @@ class BadgeCreator:
 
         # debug
         if settings.BADGE_TEMPLATE_DEBUG_FILE:
-            shutil.copyfile(self.latex_filename, settings.BADGE_TEMPLATE_DEBUG_FILE)
+            shutil.copyfile(self.latex_filename,
+                            settings.BADGE_TEMPLATE_DEBUG_FILE)
 
         # call pdflatex
         try:

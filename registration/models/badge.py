@@ -4,15 +4,13 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-import os
+import posixpath
 
 
 def _settings_upload_path(instance, filename):
     event = str(instance.event.pk)
 
-    path = os.path.join(settings.BADGE_IMAGE_DIR, event, 'template.tex')
-
-    return path
+    return posixpath.join('badges', event, 'template', filename)
 
 
 class BadgeSettings(models.Model):
@@ -91,16 +89,7 @@ class BadgeDefaults(models.Model):
 def _design_upload_path(instance, filename):
     event = str(instance.get_event().pk)
 
-    path = os.path.join(settings.BADGE_IMAGE_DIR, event, filename)
-
-    # check is file already exists -> add number
-    counter = 0
-    while os.path.isfile(path) or os.path.isdir(path):
-        counter = counter + 1
-        path = os.path.join(settings.BADGE_IMAGE_DIR, event,
-                            "%d%s" % (counter, filename))
-
-    return path
+    return posixpath.join('badges', event, 'backgrounds', filename)
 
 
 @python_2_unicode_compatible
