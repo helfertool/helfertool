@@ -8,6 +8,9 @@
 * refactor delete helper
 * fix: delete coordinator not possible
 
+* set FILE_UPLOAD_PERMISSIONS
+* check diff to productive settings
+
 * Badge Generierung (Rechte festlegen)
   * Background images optional, color instead
 
