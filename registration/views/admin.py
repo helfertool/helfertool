@@ -76,30 +76,47 @@ def coordinators(request, event_url_name):
 
 
 @login_required
-def shirts(request, event_url_name):
+def statistics(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # permission
     if not event.is_admin(request.user):
         return nopermission(request)
 
-    # shirt sizes for helpers
-    helper_shirts = event.helper_set.values('shirt').annotate(num=Count('shirt'))
+    # number of helpers
+    num_helpers = event.helper_set.count()
 
-    # create data for template (iterate over all sizes in correct order)
-    shirts = OrderedDict()
-    for size, name in Helper.SHIRT_CHOICES:
-        num = 0
+    # number of coordinators
+    num_coordinators = 0
+    for job in event.job_set.all():
+        num_coordinators = num_coordinators + job.coordinators.count()
 
-        # get size for helpers
-        try:
-            num = helper_shirts.get(shirt=size)['num']
-        except Helper.DoesNotExist:
-            pass
+    # number of vegetarians
+    num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
-        shirts.update({name: num})
+    # shirt sizes
+    if event.ask_shirt:
+        helper_shirts = event.helper_set.values('shirt').annotate(num=Count('shirt'))
+
+        # create data for template (iterate over all sizes in correct order)
+        shirts = OrderedDict()
+        for size, name in Helper.SHIRT_CHOICES:
+            num = 0
+
+            # get size for helpers
+            try:
+                num = helper_shirts.get(shirt=size)['num']
+            except Helper.DoesNotExist:
+                pass
+
+            shirts.update({name: num})
+    else:
+        shirts = None
 
     # render
     context = {'event': event,
-               'shirts': shirts}
-    return render(request, 'registration/admin/shirts.html', context)
+               'shirts': shirts,
+               'num_helpers': num_helpers,
+               'num_coordinators': num_coordinators,
+               'num_vegetarians': num_vegetarians}
+    return render(request, 'registration/admin/statistics.html', context)
