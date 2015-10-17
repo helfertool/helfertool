@@ -38,11 +38,11 @@ class BadgeCreator:
                                                        dir=self.dir)
 
     def add_helper(self, helper):
-        tmp = {'prename': helper.prename,
-               'surname': helper.surname,
-               'job': '',
-               'shift': '',
-               'role': ''}
+        tmp = {'prename': helper.badge.prename or helper.prename,
+               'surname': helper.badge.surname or helper.surname,
+               'job': helper.badge.job,
+               'shift': helper.badge.shift,
+               'role': helper.badge.role}
 
         # design
         design = helper.badge.get_design()

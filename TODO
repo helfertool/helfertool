@@ -14,7 +14,7 @@
 * Badge Generierung (Rechte festlegen)
   * Background images optional, color instead
 
-  * Badge: get all data and add it to badge
+  * Badge: get shift, job, role
   * prefer coordinator
 
   * for some jobs an upload of an image is possible
@@ -25,8 +25,6 @@
   * configure path to pdflatex in settings
 
   * delete primary_job if helper is deleted from shift
-
-  * Badge: custom design and role
 
   * timeout and other protection for subprocess call
 

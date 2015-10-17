@@ -194,38 +194,56 @@ class Badge(models.Model):
 
     prename = models.CharField(
         max_length=200,
-        verbose_name=_("Prename"),
+        verbose_name=_("Other prename"),
         blank=True,
     )
 
     surname = models.CharField(
         max_length=200,
-        verbose_name=_("Surname"),
+        verbose_name=_("Other surname"),
         blank=True,
     )
 
     job = models.CharField(
         max_length=200,
-        verbose_name=_("Job"),
+        verbose_name=_("Other text for job"),
         blank=True,
     )
 
     shift = models.CharField(
         max_length=200,
-        verbose_name=_("Shift"),
+        verbose_name=_("Other text for shift"),
         blank=True,
     )
 
     role = models.CharField(
         max_length=200,
-        verbose_name=_("Role"),
+        verbose_name=_("Other text for role"),
         blank=True,
     )
 
     primary_job = models.ForeignKey(
         'Job',
+        verbose_name=_("Primary job"),
+        help_text=_("Only necessary if this person has multiple jobs."),
         blank=True,
         null=True,
+    )
+
+    custom_role = models.ForeignKey(
+        'BadgeRole',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Role"),
+    )
+
+    custom_design = models.ForeignKey(
+        'BadgeDesign',
+        related_name='+',  # no reverse accessor
+        null=True,
+        blank=True,
+        verbose_name=_("Design"),
     )
 
     def _get_job(self):
@@ -249,11 +267,11 @@ class Badge(models.Model):
     def _get_defaults(self, key):
         job = self._get_job()
 
-        # job not unambiguous
+        # job ambiguous -> event default
         if not job:
             return getattr(self.helper.event.badge_settings.defaults, key)
 
-        # try job
+        # try if 'key' is set for selected job
         if getattr(job.badge_defaults, key):
             return getattr(job.badge_defaults, key)
 
@@ -264,7 +282,7 @@ class Badge(models.Model):
         return self._get_job() is None
 
     def get_design(self):
-        return self._get_defaults('design')
+        return self.custom_design or self._get_defaults('design')
 
     def get_role(self):
-        return self._get_defaults('role')
+        return self.custom_role or self._get_defaults('role')

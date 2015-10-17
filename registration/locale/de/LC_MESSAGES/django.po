@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-17 14:33+0200\n"
-"PO-Revision-Date: 2015-10-17 14:37+0200\n"
+"POT-Creation-Date: 2015-10-17 15:26+0200\n"
+"PO-Revision-Date: 2015-10-17 15:27+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,14 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.5\n"
 
-#: registration/export/excel.py:58 registration/models/badge.py:197
-#: registration/models/helper.py:88
+#: registration/export/excel.py:58 registration/models/helper.py:88
 #: registration/templates/registration/admin/helpers_table.html:7
 msgid "Prename"
 msgstr "Vorname"
 
-#: registration/export/excel.py:59 registration/models/badge.py:203
-#: registration/models/helper.py:93
+#: registration/export/excel.py:59 registration/models/helper.py:93
 #: registration/templates/registration/admin/helpers_table.html:8
 msgid "Surname"
 msgstr "Nachname"
@@ -190,22 +188,43 @@ msgstr ""
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
+#: registration/models/badge.py:197
+msgid "Other prename"
+msgstr "Anderer Vorname"
+
+#: registration/models/badge.py:203
+msgid "Other surname"
+msgstr "Anderer Nachname"
+
 #: registration/models/badge.py:209
-#: registration/templates/registration/admin/badges.html:20
-#: registration/templates/registration/admin/configure_badges.html:126
-#: registration/templates/registration/admin/delete_job.html:13
-#: registration/templates/registration/admin/delete_shift.html:13
-msgid "Job"
-msgstr "Aufgabe"
+msgid "Other text for job"
+msgstr "Anderer Text für Aufgabe"
 
 #: registration/models/badge.py:215
-msgid "Shift"
-msgstr "Schicht"
+msgid "Other text for shift"
+msgstr "Anderer Text für Schicht"
 
 #: registration/models/badge.py:221
+msgid "Other text for role"
+msgstr "Anderer Text für Rolle"
+
+#: registration/models/badge.py:227
+msgid "Primary job"
+msgstr "Primäre Aufgabe"
+
+#: registration/models/badge.py:228
+msgid "Only necessary if this person has multiple jobs."
+msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
+
+#: registration/models/badge.py:238
 #: registration/templates/registration/admin/configure_badges.html:127
 msgid "Role"
 msgstr "Rolle"
+
+#: registration/models/badge.py:246
+#: registration/templates/registration/admin/configure_badges.html:128
+msgid "Design"
+msgstr "Design"
 
 #: registration/models/event.py:38
 msgid "Name for URL"
@@ -428,6 +447,13 @@ msgstr ""
 "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
 "folgende Einstellungen:"
 
+#: registration/templates/registration/admin/badges.html:20
+#: registration/templates/registration/admin/configure_badges.html:126
+#: registration/templates/registration/admin/delete_job.html:13
+#: registration/templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
 #: registration/templates/registration/admin/badges.html:29
 msgid "Generate"
 msgstr "Generieren"
@@ -609,10 +635,6 @@ msgstr "Design hinzufügen"
 #: registration/templates/registration/admin/configure_badges.html:118
 msgid "Defaults"
 msgstr "Standards"
-
-#: registration/templates/registration/admin/configure_badges.html:128
-msgid "Design"
-msgstr "Design"
 
 #: registration/templates/registration/admin/configure_badges.html:149
 #: registration/templates/registration/admin/edit_badgedesign.html:13
@@ -1035,6 +1057,9 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Shift"
+#~ msgstr "Schicht"
 
 #~ msgid "Default role for all helpers"
 #~ msgstr "Standard Rolle für alle Helfer"
