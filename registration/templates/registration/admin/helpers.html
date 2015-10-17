@@ -43,9 +43,7 @@
         {% endif %}
 
         <p>
-            {% blocktrans with number=job.coordinators.count%}
-                Number of coordinators: {{ number }}
-            {% endblocktrans %}
+            {% blocktrans with number=job.coordinators.count%}Number of coordinators: {{ number }}{% endblocktrans %}
         </p>
 
         <table class="shifts">
