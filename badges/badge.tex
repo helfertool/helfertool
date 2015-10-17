@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{ifthen}
 \usepackage[normalem]{ulem}
+\usepackage{color}
 
 \pagestyle{empty}
 
@@ -26,6 +27,9 @@
 \usepackage{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 \fontfamily{phv}\selectfont
+
+% Default text color
+\definecolor{fontcolor}{HTML}{000000}
 
 % Variables for badge commands
 \makeatletter
@@ -53,6 +57,12 @@
 %
 \newcommand*\badge@roleid{}
 \define@key{badge}{roleid}{\renewcommand\badge@roleid{#1}}
+
+%
+% Badge text color
+%
+\newcommand*\badge@fontcolor{}
+\define@key{badge}{fontcolor}{\renewcommand\badge@fontcolor{#1}}
 
 %
 % Background images
@@ -89,6 +99,8 @@
 \newcommand*\badgefront[1][]{%
     \begingroup%
     \setkeys{badge}{#1}%
+        \definecolor{fontcolor}{HTML}{\badge@fontcolor}%
+        \color{fontcolor}%
         \begin{tikzpicture}[x=1cm, y=1cm, inner sep=0, outer sep=0, anchor=north west]
             % background
             \node (bg) at (0,0) {\includegraphics[width=\badgewidth, height=\badgeheight]{\badge@bgfront}};
@@ -116,6 +128,8 @@
 \newcommand*\badgeback[1][]{%
     \begingroup%
     \setkeys{badge}{#1}%
+        \definecolor{fontcolor}{HTML}{\badge@fontcolor}%
+        \color{fontcolor}%
         \begin{tikzpicture}[x=1cm,y=1cm, inner sep=0, outer sep=0, anchor=north west]
             % background
             \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{\badge@bgback}};

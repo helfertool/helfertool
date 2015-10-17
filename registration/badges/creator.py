@@ -48,6 +48,7 @@ class BadgeCreator:
         design = helper.badge.get_design()
         tmp['bgfront'] = design.bg_front.path
         tmp['bgback'] = design.bg_back.path
+        tmp['fontcolor'] = self._latex_color(design.font_color)
 
         # role
         role = helper.badge.get_role()
@@ -186,3 +187,10 @@ class BadgeCreator:
         r = r + "\n" + r'\pagebreak' + "\n\n"
 
         return r
+
+    def _latex_color(self, string):
+        # latex expects HTML colors without '#' and uppercase
+
+        if string.startswith('#'):
+            string = string[1:]
+        return string.upper()
