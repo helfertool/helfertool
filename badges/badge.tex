@@ -5,6 +5,7 @@
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{ifthen}
+\usepackage[normalem]{ulem}
 
 \pagestyle{empty}
 
@@ -14,6 +15,17 @@
 \renewcommand{\arraystretch}{0}
 \setlength{\tabcolsep}{0pt}
 
+% strikeout
+\renewcommand{\ULthickness}{3px}
+% custom command to place the line in the middle
+% (necessary due to higher thickness)
+\renewcommand\sout{\bgroup \markoverwith{\rule[0.4ex]{\ULthickness}{\ULthickness}}\ULon}
+
+
+% Font
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\fontfamily{phv}\selectfont
 
 % Variables for badge commands
 \makeatletter
@@ -67,28 +79,34 @@
 % Badge
 %
 
-% badge width
+% badge size
 \newlength{\badgewidth}
 \setlength{\badgewidth}{8cm}
+\newlength{\badgeheight}
+\setlength{\badgeheight}{5cm}
 
 % front
 \newcommand*\badgefront[1][]{%
     \begingroup%
     \setkeys{badge}{#1}%
-        \begin{tikzpicture}[x=1cm,y=1cm, inner sep=0, outer sep=0, anchor=north west]
+        \begin{tikzpicture}[x=1cm, y=1cm, inner sep=0, outer sep=0, anchor=north west]
             % background
-            \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{\badge@bgfront}};
+            \node (bg) at (0,0) {\includegraphics[width=\badgewidth, height=\badgeheight]{\badge@bgfront}};
 
             % all coordinates are relative to background (0,0) to (1,1)
-            \begin{scope}[x={(bg.south east)},y={(bg.north west)}]
+            \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
                 % name
-                \node[draw=none] at (0.1,0.1) {\badge@prename\ \badge@surname};
+                \node[draw=none, text width=0.5\badgewidth] at (0.05,0.1) {\Large \badge@prename\ \badge@surname};
+
                 % job
-                \node[draw=none] at (0.2,0.2) {\badge@job};
-                % shift
-                \node[draw=none] at (0.3,0.3) {\badge@shift};
+                \node at (0.05,0.5) {\badge@job};
                 % role
-                \node[draw=none] at (0.4,0.4) {\badge@role};
+                \node at (0.05,0.6) {\badge@role};
+                % shift
+                \node at (0.05,0.8) {\badge@shift};
+
+                % image
+                \draw [fill=orange,orange] (0.6,0.05) rectangle (0.95,0.9);
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
@@ -103,24 +121,26 @@
             \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{\badge@bgback}};
 
             % all coordinates are relative to background (0,0) to (1,1)
-            \begin{scope}[x={(bg.south east)},y={(bg.north west)}]
-                % name
-                \node[draw=none] at (0,0) {\badge@prename\ \badge@surname};
+            \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
+                % rotated name
+                \node[rotate=90, text width=\badgeheight, align=center] at (0.02,1) {\small \badge@prename\ \badge@surname};
 
                 % food
                 \ifthenelse{\boolean{badge@perm-food}}
                 {
-                    \node[draw=none] at (0.2,0.2) {FOOD};
+                    \node at (0.15,0.35) {Freie Verpflegung};
                 }
                 {
+                    \node at (0.15,0.35) {\sout{Freie Verpflegung}};
                 }
 
                 % fiance
                 \ifthenelse{\boolean{badge@perm-finance}}
                 {
-                    \node[draw=none] at (0.6,0.2) {FINANCE};
+                    \node at (0.15,0.6) {Finanzbereich};
                 }
                 {
+                    \node at (0.15,0.6) {\sout{Finanzbereich}};
                 }
             \end{scope}
         \end{tikzpicture}%
