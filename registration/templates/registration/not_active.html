@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% load registerform_shifts %}
+
+{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
+
+{% block content %}
+    <h1>{{ event }}</h1>
+
+    <div class="alert alert-warning" role="alert">
+        {% trans "The registration is not open." %}
+    </div>
+
+    {{ event.imprint | safe }}
+{% endblock %}
+

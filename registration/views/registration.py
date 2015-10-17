@@ -44,9 +44,11 @@ def form(request, event_url_name, link_pk=None):
 
     # check permission
     if not event.active and not link:
-        # not logged in -> show login form
+        # not logged in -> show message
         if not request.user.is_authenticated():
-            return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+            # show some message when link does not exist
+            context = {'event': event}
+            return render(request, 'registration/not_active.html', context)
         # logged in -> check permission
         elif not event.is_involved(request.user):
             return nopermission(request)
