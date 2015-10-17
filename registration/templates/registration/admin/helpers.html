@@ -36,11 +36,17 @@
 
         {% if job_admin %}
             <p>
-                <a href="{% url 'jobhelpers' event.url_name job.pk %}">
+                <a href="{% url 'helpers' event.url_name job.pk %}">
                 {% bootstrap_icon "info-sign" %}
                 {% trans "Show" %}</a>
             </p>
         {% endif %}
+
+        <p>
+            {% blocktrans with number=job.coordinators.count%}
+                Number of coordinators: {{ number }}
+            {% endblocktrans %}
+        </p>
 
         <table class="shifts">
             <tr>

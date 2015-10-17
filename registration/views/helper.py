@@ -38,7 +38,7 @@ def helpers(request, event_url_name, job_pk=None):
 
 
 @login_required
-def edit_helper(request, event_url_name, helper_pk):
+def edit_helper(request, event_url_name, helper_pk, job_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
@@ -59,7 +59,14 @@ def edit_helper(request, event_url_name, helper_pk):
         if event.badges:
             badge_form.save()
 
-        return HttpResponseRedirect(reverse('helpers', args=[event_url_name]))
+        # check if job_pk is given -> redirect to helpers of this job
+        if job_pk:
+            return HttpResponseRedirect(reverse('helpers',
+                                                args=[event_url_name, job_pk]))
+        else:
+            # else redirect to helpers overview
+            return HttpResponseRedirect(reverse('helpers',
+                                                args=[event_url_name]))
 
     # render page
     context = {'event': event,
@@ -98,7 +105,7 @@ def add_helper(request, event_url_name, shift_pk=None, job_pk=None):
 
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('jobhelpers',
+        return HttpResponseRedirect(reverse('helpers',
                                             args=[event_url_name, job.pk]))
 
     # render page
@@ -137,7 +144,7 @@ def delete_helper(request, event_url_name, helper_pk, job_pk):
                              {'name': helper.full_name})
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('jobhelpers',
+        return HttpResponseRedirect(reverse('helpers',
                                             args=[event_url_name, job.pk]))
 
     # render page

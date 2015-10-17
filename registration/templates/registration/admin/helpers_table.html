@@ -44,7 +44,7 @@
             <td>{{ helper.comment }}</td>
             <td>{{ helper.timestamp }}</td>
             <td>
-                <a href="{% url 'edit_helper' event.url_name helper.pk %}">
+                <a href="{% url 'edit_helper' event.url_name helper.pk job.pk %}">
                     {% bootstrap_icon "pencil" %}
                     {% trans "Edit" %}
                 </a><br />
