@@ -107,7 +107,7 @@ class BadgeCreator:
 
         # write code
         try:
-            f = open(self.latex_file, 'w')
+            f = os.fdopen(self.latex_file, 'w')
             f.write(latex)
             f.close()
         except IOError as e:
