@@ -1,9 +1,7 @@
-from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
 
-from ..utils import u
-
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, \
+    Paragraph, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -13,30 +11,36 @@ from reportlab.lib.units import cm
 par_style = getSampleStyleSheet()["Normal"]
 h1_style = getSampleStyleSheet()["Heading1"]
 h2_style = getSampleStyleSheet()["Heading2"]
-table_style = TableStyle([('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
-                          ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+table_style = TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+                          ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
                           ('VALIGN', (0, 0), (1, 0), 'TOP'),
-                         ])
+                          ])
 
 margin = 1.5*cm
+
 
 def h1(text):
     return Paragraph(text, h1_style)
 
+
 def h2(text):
     return Paragraph(text, h2_style)
+
 
 def par(text):
     return Paragraph(text, par_style)
 
+
 def add_table(elements, data, widths):
-    t=Table(data, widths, hAlign='LEFT')
+    t = Table(data, widths, hAlign='LEFT')
     t.setStyle(table_style)
     elements.append(t)
 
+
 def table_of_helpers(elements, helpers):
     # table
-    data = [[par(_("Name")), par("Mobile phone"), par("T-shirt"), par("Comment")], ]
+    data = [[par(_("Name")), par(_("Mobile phone")), par(_("T-shirt")),
+             par(_("Comment"))], ]
 
     for helper in helpers:
         data.append([par("%s %s" % (helper.prename, helper.surname)),
@@ -44,6 +48,7 @@ def table_of_helpers(elements, helpers):
                      par(helper.get_shirt_display()),
                      par(helper.comment)])
     add_table(elements, data, [6*cm, 4*cm, 2*cm, 5*cm])
+
 
 def pdf(buffer, event, jobs):
     doc = SimpleDocTemplate(buffer, topMargin=margin, rightMargin=margin,
