@@ -8,12 +8,10 @@
 
 * badges
   * shift (name for each shift, time,...?)
-
   * for some jobs an upload of an image is possible
-
   * delete_badge{permission, role, design}
-
   * delete primary_job if helper is deleted from shift
+  * do not print badge if its not the primary job
 
 * job admin can see t-shirt size table of their job
 
