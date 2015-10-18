@@ -79,7 +79,4 @@ class MailForm(forms.Form):
         if receiver == "all":
             return self.event.helper_set.distinct()
         else:
-            job = self.jobs[receiver]
-            helpers = Helper.objects.filter(shifts__job=job).distinct()
-            coordinators = job.coordinators.distinct()
-            return helpers | coordinators
+            return self.jobs[receiver].helpers_and_coordinators()

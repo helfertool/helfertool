@@ -80,6 +80,11 @@ class Job(models.Model):
         return self.event.is_admin(user) or \
             self.job_admins.filter(pk=user.pk).exists()
 
+    def helpers_and_coordinators(self):
+        helpers = Helper.objects.filter(shifts__job=self).distinct()
+        coordinators = self.coordinators.distinct()
+        return helpers | coordinators
+
     def shifts_by_day(self, shifts=None):
         """ Returns all shifts grouped sorted by day and sorted by time.
 
@@ -132,3 +137,6 @@ def job_pre_save(sender, instance, using, **kwargs):
         defaults.save()
 
         instance.badge_defaults = defaults
+
+# moving the import down here fixes a problem with a circular import
+from .helper import Helper

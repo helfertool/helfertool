@@ -52,15 +52,11 @@ def generate_badges(request, event_url_name, job_pk):
     # badge creation
     creator = BadgeCreator(event.badge_settings)
 
-    # add coordinators
-    for c in job.coordinators.all():
-        creator.add_helper(c)
+    # add helpers and coordinators
+    for h in job.helpers_and_coordinators():
+        creator.add_helper(h)
 
-    # add helpers
-    for shift in job.shift_set.all():
-        for h in shift.helper_set.all():
-            creator.add_helper(h)
-
+    # generate
     try:
         pdf_filename = creator.generate()
     except BadgeCreatorError as e:

@@ -19,12 +19,12 @@
 
   * delete primary_job if helper is deleted from shift
 
-* send mail to helpers (in job or all)
 * job admin can see t-shirt size table of their job
 
 Low priority
 ============
 
+* all vs. distinct
 * set width of table columns
 * Mail: link to registered page
 * Search helper (name, mail)
