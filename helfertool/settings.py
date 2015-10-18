@@ -43,6 +43,9 @@ BADGE_IMAGE_DIR = os.path.join(BASE_DIR, 'badgeupload')
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 
+# file permissions for newly uploaded files
+FILE_UPLOAD_PERMISSIONS = 0o640
+
 # for e-mail debugging
 #EMAIL_HOST = 'localhost'
 #EMAIL_PORT = 1025
