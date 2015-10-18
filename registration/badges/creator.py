@@ -40,9 +40,25 @@ class BadgeCreator:
     def add_helper(self, helper):
         tmp = {'prename': helper.badge.prename or helper.prename,
                'surname': helper.badge.surname or helper.surname,
-               'job': helper.badge.job,
-               'shift': helper.badge.shift,
-               'role': helper.badge.role}
+               'shift': helper.badge.shift}
+
+        job = helper.badge.get_job()
+
+        # job
+        if helper.badge.job:
+            tmp['job'] = helper.badge.job
+        elif job:
+            tmp['job'] = job.name
+        else:
+            tmp['job'] = ''
+
+        # role
+        if helper.badge.role:
+            tmp['role'] = helper.badge.role
+        elif helper.is_coordinator:
+            tmp['role'] = self.settings.coordinator_title
+        else:
+            tmp['role'] = self.settings.helper_title
 
         # photo
         if helper.badge.photo:

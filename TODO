@@ -7,7 +7,7 @@
 * fix: delete coordinator not possible
 
 * badges
-  * Badge: get shift, job, role
+  * shift (name for each shift, time,...?)
 
   * queryset for primary_job
 

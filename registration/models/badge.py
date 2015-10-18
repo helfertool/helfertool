@@ -46,6 +46,18 @@ class BadgeSettings(models.Model):
         validators=[MinValueValidator(1)],
     )
 
+    coordinator_title = models.CharField(
+        max_length=200,
+        default="",
+        verbose_name=_("Role for coordinators"),
+    )
+
+    helper_title = models.CharField(
+        max_length=200,
+        default="",
+        verbose_name=_("Role for helpers"),
+    )
+
     def save(self, *args, **kwargs):
         if not hasattr(self, 'defaults'):
             defaults = BadgeDefaults()
