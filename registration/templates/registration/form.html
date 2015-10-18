@@ -7,6 +7,8 @@
 {% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
 
 {% block content %}
+    {% bootstrap_form_errors form %}
+
     {% if event.logo %}
         <img src="{{ MEDIA_URL }}{{ event.logo }}" id="logo" />
     {% endif %}
@@ -17,8 +19,6 @@
 
     <form action="" method="post">
         {% csrf_token %}
-
-        {% bootstrap_form_errors form %}
 
         <h2>{% trans "Jobs" %}</h2>
         {# list of all jobs and shifts #}
