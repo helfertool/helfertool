@@ -44,6 +44,12 @@ class BadgeCreator:
                'shift': helper.badge.shift,
                'role': helper.badge.role}
 
+        # photo
+        if helper.badge.photo:
+            tmp['photo'] = helper.badge.photo.path
+        else:
+            tmp['photo'] = ''
+
         # design
         design = helper.badge.get_design()
         tmp['bgfront'] = design.bg_front.path

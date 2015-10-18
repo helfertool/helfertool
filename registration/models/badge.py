@@ -187,6 +187,12 @@ class BadgeRole(models.Model):
         return self.name
 
 
+def _badge_upload_path(instance, filename):
+    event = str(instance.helper.event.pk)
+
+    return posixpath.join('badges', event, 'photos', filename)
+
+
 class Badge(models.Model):
     helper = models.OneToOneField(
         'Helper',
@@ -220,6 +226,13 @@ class Badge(models.Model):
         max_length=200,
         verbose_name=_("Other text for role"),
         blank=True,
+    )
+
+    photo = models.ImageField(
+        verbose_name=_("Photo"),
+        upload_to=_badge_upload_path,
+        blank=True,
+        null=True,
     )
 
     primary_job = models.ForeignKey(

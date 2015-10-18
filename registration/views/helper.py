@@ -49,7 +49,8 @@ def edit_helper(request, event_url_name, helper_pk, job_pk=None):
     form = HelperForm(request.POST or None, instance=helper, event=event)
     badge_form = None
     if event.badges:
-        badge_form = BadgeForm(request.POST or None, instance=helper.badge,
+        badge_form = BadgeForm(request.POST or None, request.FILES or None,
+                               instance=helper.badge,
                                prefix='badge')
 
     if form.is_valid() and (not event.badges or
