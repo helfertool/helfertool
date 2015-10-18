@@ -98,9 +98,6 @@ def configure_badges(request, event_url_name):
     if not event.badges:
         return notactive(request)
 
-    # permissions
-    permissions = event.badge_settings.badgepermission_set.all()
-
     # roles
     roles = event.badge_settings.badgerole_set.all()
 
@@ -123,7 +120,6 @@ def configure_badges(request, event_url_name):
                                             args=[event.url_name, ]))
 
     context = {'event': event,
-               'permissions': permissions,
                'roles': roles,
                'designs': designs,
                'defaults_form': defaults_form,
@@ -143,24 +139,30 @@ def edit_badgesettings(request, event_url_name):
     if not event.badges:
         return notactive(request)
 
-    # form
+    # form for settings
     form = BadgeSettingsForm(request.POST or None, request.FILES or None,
                              instance=event.badge_settings)
+
+    # for for permissions
+    permissions = event.badge_settings.badgepermission_set.all()
 
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges',
+                                            args=[event.url_name, ]))
 
     # render
     context = {'event': event,
-               'form': form}
+               'form': form,
+               'permissions': permissions}
     return render(request, 'registration/admin/edit_badgesettings.html',
                   context)
 
 #
 # TODO: join the following three views
 #
+
 
 @login_required
 def edit_badgepermission(request, event_url_name, permission_pk=None):
@@ -190,7 +192,8 @@ def edit_badgepermission(request, event_url_name, permission_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('badgesettings',
+                                            args=[event.url_name, ]))
 
     context = {'event': event,
                'form': form}
@@ -226,7 +229,8 @@ def edit_badgerole(request, event_url_name, role_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges',
+                                            args=[event.url_name, ]))
 
     context = {'event': event,
                'form': form}
@@ -262,7 +266,8 @@ def edit_badgedesign(request, event_url_name, design_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('configure_badges', args=[event.url_name, ]))
+        return HttpResponseRedirect(reverse('configure_badges',
+                                            args=[event.url_name, ]))
 
     context = {'event': event,
                'form': form}

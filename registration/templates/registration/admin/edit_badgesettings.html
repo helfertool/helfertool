@@ -5,6 +5,12 @@
 {% block admincontent %}
     <h2>{% trans "Badge Settings" %}</h2>
 
+    <div class="alert alert-warning" role="alert">
+        {% trans "Changes of this settings require an update of the LaTeX template!" %}
+    </div>
+
+    <h3>{% trans "Template" %}</h3>
+
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -12,6 +18,40 @@
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
     </form>
+
+
+    <h3>{% trans "Permissions" %}</h3>
+
+    {% if permissions.count == 0 %}
+        <p class="text-muted">{% trans "There are no permissions." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "LaTeX Name" %}</th>
+                <th></th>
+            </tr>
+
+            {% for perm in permissions %}
+                <tr>
+                    <td>{{ perm.name }}</td>
+                    <td>{{ perm.latex_name }}</td>
+                    <td>
+                        <a href="{% url 'edit_badgepermission' event.url_name perm.pk %}">
+                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <p>
+        <a href="{% url 'new_badgepermission' event.url_name %}">
+            {% bootstrap_icon "plus" %} {% trans "Add permission" %}
+        </a>
+    </p>
+
 {% endblock %}
 
 
