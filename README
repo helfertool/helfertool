@@ -10,6 +10,7 @@ Running
 * django-bootstrap3
 * Pillow
 * reportlab
+* pdflatex
 
 Documentation
 
