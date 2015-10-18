@@ -8,7 +8,7 @@ from .utils import nopermission, get_or_404, is_involved
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm
-from ..badges import BadgeCreator, BadgeCreatorError
+from ..badges import BadgeCreator, BadgeCreatorError, warnings_for_job
 
 
 def notactive(request):
@@ -30,9 +30,37 @@ def badges(request, event_url_name):
     # check if all necessary settings are done
     possible = event.badge_settings.creation_possible()
 
+    # number for warnings for each job
+    jobs = event.job_set.all()
+    for job in jobs:
+        job.num_warnings = len(warnings_for_job(job))
+
     context = {'event': event,
+               'jobs': jobs,
                'possible': possible}
     return render(request, 'registration/admin/badges.html', context)
+
+
+@login_required
+def badges_warnings(request, event_url_name, job_pk):
+    event, job, shift, helper = get_or_404(event_url_name, job_pk)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # TODO: check if possible
+
+    helpers = warnings_for_job(job)
+
+    # render
+    context = {'event': event,
+               'helpers': helpers}
+    return render(request, 'registration/admin/badges_warnings.html', context)
 
 
 @login_required

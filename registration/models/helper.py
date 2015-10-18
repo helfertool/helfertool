@@ -199,9 +199,9 @@ class Helper(models.Model):
 
     @property
     def coordinated_jobs(self):
-        if self.is_coordinator:
-            return getattr(self, 'job_set')
-        return None
+        if hasattr(self, 'job_set'):
+            return getattr(self, 'job_set').all()
+        return []
 
     @property
     def is_coordinator(self):

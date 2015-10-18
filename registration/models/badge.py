@@ -259,10 +259,17 @@ class Badge(models.Model):
         verbose_name=_("Design"),
     )
 
-    def _get_job(self):
+    def get_job(self):
         # use primary job if set
         if self.primary_job:
-            return primary_job
+            return self.primary_job
+
+        # check if is coordinator
+        coordinated_jobs = self.helper.coordinated_jobs
+        if len(coordinated_jobs) == 1:
+            return coordinated_jobs[0]
+        elif len(coordinated_jobs) > 1:
+            return None
 
         # collect all jobs
         jobs = []
@@ -278,7 +285,7 @@ class Badge(models.Model):
         return None
 
     def _get_defaults(self, key):
-        job = self._get_job()
+        job = self.get_job()
 
         # job ambiguous -> event default
         if not job:
@@ -292,7 +299,7 @@ class Badge(models.Model):
         return getattr(self.helper.event.badge_settings.defaults, key)
 
     def is_ambiguous(self):
-        return self._get_job() is None
+        return self.get_job() is None
 
     def get_design(self):
         return self.custom_design or self._get_defaults('design')

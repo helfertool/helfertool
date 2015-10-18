@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 16:08+0200\n"
-"PO-Revision-Date: 2015-10-18 16:09+0200\n"
+"POT-Creation-Date: 2015-10-18 19:34+0200\n"
+"PO-Revision-Date: 2015-10-18 19:35+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -481,9 +481,15 @@ msgstr ""
 msgid "Job"
 msgstr "Aufgabe"
 
-#: registration/templates/registration/admin/badges.html:29
+#: registration/templates/registration/admin/badges.html:30
 msgid "Generate"
 msgstr "Generieren"
+
+#: registration/templates/registration/admin/badges.html:35
+#: registration/templates/registration/admin/badges.html:38
+#, python-format
+msgid "%(num)s warnings"
+msgstr "%(num)s Warnungen"
 
 #: registration/templates/registration/admin/badges_failed.html:6
 msgid "Generating badges failed"
@@ -496,6 +502,14 @@ msgstr "Badges"
 #: registration/templates/registration/admin/badges_not_active.html:9
 msgid "The badge creation is not actived."
 msgstr "Die Generierung von Badges ist nicht aktiviert."
+
+#: registration/templates/registration/admin/badges_warnings.html:6
+msgid "Warnings for badge generation"
+msgstr "Warnungen für die Badge Generierung"
+
+#: registration/templates/registration/admin/badges_warnings.html:9
+msgid "There are no warnings."
+msgstr "Es gibt keine Warnungen."
 
 #: registration/templates/registration/admin/base.html:8
 #, python-format

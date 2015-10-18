@@ -6,11 +6,10 @@
 * refactor delete helper
 * fix: delete coordinator not possible
 
-* check diff to productive settings
-
 * badges
   * Badge: get shift, job, role
-  * prefer coordinator?
+
+  * queryset for primary_job
 
   * for some jobs an upload of an image is possible
   * Image for responsibles? (option)

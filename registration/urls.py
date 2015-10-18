@@ -93,7 +93,7 @@ urlpatterns = [
 
     # shifts
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
-        '(?P<shift_pk>[0-9]+)$',
+        '(?P<shift_pk>[0-9]+)/$',
         views.edit_shift,
         name='edit_shift'),
 
@@ -103,7 +103,7 @@ urlpatterns = [
         name='delete_shift'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
-        'new$',
+        'new/$',
         views.edit_shift,
         name='new_shift'),
 
@@ -112,41 +112,41 @@ urlpatterns = [
         views.helpers,
         name='helpers'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)$',
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)/$',
         views.helpers,
         name='helpers'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)$',
+        '(?P<helper_pk>[0-9a-f\-]+)/$',
         views.edit_helper,
         name='edit_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/job/(?P<job_pk>[0-9]+)$',
+        '(?P<helper_pk>[0-9a-f\-]+)/job/(?P<job_pk>[0-9]+)/$',
         views.edit_helper,
         name='edit_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<job_pk>[0-9]+)$',
+        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<job_pk>[0-9]+)/$',
         views.delete_helper,
         name='delete_helper'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)$',
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)/$',
         views.add_helper,
         name='add_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/'
-        '(?P<job_pk>[0-9]+)$',
+        '(?P<job_pk>[0-9]+)/$',
         views.add_helper,
         name='add_coordinator'),
 
     # export
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all$',
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all/$',
         views.export,
         name='export'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/'
-        '(?P<job_pk>[0-9]+)$',
+        '(?P<job_pk>[0-9]+)/$',
         views.export,
         name='jobexport'),
 
@@ -169,7 +169,7 @@ urlpatterns = [
         name='badgesettings'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/'
-        '(?P<permission_pk>[0-9]+)$',
+        '(?P<permission_pk>[0-9]+)/$',
         views.edit_badgepermission,
         name='edit_badgepermission'),
 
@@ -178,7 +178,7 @@ urlpatterns = [
         name='new_badgepermission'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/'
-        '(?P<role_pk>[0-9]+)$',
+        '(?P<role_pk>[0-9]+)/$',
         views.edit_badgerole,
         name='edit_badgerole'),
 
@@ -187,7 +187,7 @@ urlpatterns = [
         name='new_badgerole'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/'
-        '(?P<design_pk>[0-9]+)$',
+        '(?P<design_pk>[0-9]+)/$',
         views.edit_badgedesign,
         name='edit_badgedesign'),
 
@@ -196,9 +196,14 @@ urlpatterns = [
         name='new_badgedesign'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
-        '(?P<job_pk>[0-9]+)',
+        '(?P<job_pk>[0-9]+)/$',
         views.generate_badges,
         name='generate_badges'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
+        '(?P<job_pk>[0-9]+)/warnings/$',
+        views.badges_warnings,
+        name='badges_warnings'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/',
         views.badges,

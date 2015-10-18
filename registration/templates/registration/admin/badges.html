@@ -19,15 +19,25 @@
             <tr>
                 <th>{% trans "Job" %}</th>
                 <th></th>
+                <th></th>
             </tr>
 
-            {% for job in event.job_set.all %}
+            {% for job in jobs %}
                 <tr>
                     <td>{{ job.name }}</td>
                     <td>
                         <a href="{% url "generate_badges" event.url_name job.pk %}">
                             {% trans "Generate" %}
                         </a>
+                    </td>
+                    <td>
+                        {% if job.num_warnings == 0 %}
+                            {% blocktrans with num=job.num_warnings %}{{ num }} warnings{% endblocktrans %}
+                        {% else %}
+                            <a href="{% url 'badges_warnings' event.url_name job.pk %}">
+                                {% blocktrans with num=job.num_warnings %}{{ num }} warnings{% endblocktrans %}
+                            </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
