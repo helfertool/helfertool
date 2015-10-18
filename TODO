@@ -38,6 +38,8 @@ Low priority
   * configure path to pdflatex in settings
   * timeout and other protection for subprocess call
 
+* mails: custom sender
+
 After ESP
 =========
 
@@ -50,10 +52,11 @@ After ESP
 * Datetimepickers for shift
   * begin < end
   * change end when begin is changed
-* change password
+* change password, forgot password
 * search username with name and mail
 * add helper: infection_instruction only when necessary
 * delete event: delete badge upload directory
 * pdf export: vertical alignment
-* remove old images in badgeupload directory
+* remove old uploaded files in media directory
 * latex_template: validation for .tex
+* copy event with job, shifts, settings, badge stuff but without admins and helpers
