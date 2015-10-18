@@ -18,3 +18,11 @@ Documentation
 Load Testing
 
 * locustio (supports only python2)
+
+Open and close registration with at
+===================================
+
+at '13:55 10/18/2015'
+
+python manage.py openregistration test
+python manage.py closeregistration test
