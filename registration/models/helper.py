@@ -234,7 +234,7 @@ def helper_deleted(sender, **kwargs):
         helper.delete()
 
 def coordinator_deleted(sender, **kwargs):
-    pass
+    pass # FIXME
 
 m2m_changed.connect(helper_deleted, sender=Helper.shifts.through)
 m2m_changed.connect(coordinator_deleted, sender=Job.coordinators.through)

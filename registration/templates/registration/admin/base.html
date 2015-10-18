@@ -38,6 +38,7 @@
                     {% endif %}
 
                     <li><a href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a></li>
+                    <li><a href="{% url 'mail' event.url_name %}">{% trans "Send mails" %}</a></li>
                     <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
 
                     {% if admin %}

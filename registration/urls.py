@@ -227,5 +227,10 @@ urlpatterns = [
         views.form,
         name='form_for_link'),
 
+    # send mails
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/mail/$',
+        views.mail,
+        name='mail'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

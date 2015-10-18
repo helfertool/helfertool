@@ -6,7 +6,6 @@
 * refactor delete helper
 * fix: delete coordinator not possible
 
-* set FILE_UPLOAD_PERMISSIONS
 * check diff to productive settings
 
 * badges

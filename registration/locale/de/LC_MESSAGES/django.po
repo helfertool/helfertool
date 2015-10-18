@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 11:00+0200\n"
-"PO-Revision-Date: 2015-10-18 11:01+0200\n"
+"POT-Creation-Date: 2015-10-18 16:08+0200\n"
+"PO-Revision-Date: 2015-10-18 16:09+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -94,6 +94,26 @@ msgstr "Name"
 #: registration/templates/registration/admin/helpers_for_job.html:45
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
+
+#: registration/forms/mail.py:24
+msgid "All helpers"
+msgstr "Alle Helfer"
+
+#: registration/forms/mail.py:42
+msgid "Receivers"
+msgstr "Empfänger"
+
+#: registration/forms/mail.py:47
+msgid "Sender"
+msgstr "Absender"
+
+#: registration/forms/mail.py:51
+msgid "Subject"
+msgstr "Betreff"
+
+#: registration/forms/mail.py:57
+msgid "Text"
+msgstr "Text"
 
 #: registration/forms/registration.py:128
 msgid "You must select at least one shift."
@@ -191,40 +211,44 @@ msgstr ""
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: registration/models/badge.py:197
+#: registration/models/badge.py:203
 msgid "Other prename"
 msgstr "Anderer Vorname"
 
-#: registration/models/badge.py:203
+#: registration/models/badge.py:209
 msgid "Other surname"
 msgstr "Anderer Nachname"
 
-#: registration/models/badge.py:209
+#: registration/models/badge.py:215
 msgid "Other text for job"
 msgstr "Anderer Text für Aufgabe"
 
-#: registration/models/badge.py:215
+#: registration/models/badge.py:221
 msgid "Other text for shift"
 msgstr "Anderer Text für Schicht"
 
-#: registration/models/badge.py:221
+#: registration/models/badge.py:227
 msgid "Other text for role"
 msgstr "Anderer Text für Rolle"
 
-#: registration/models/badge.py:227
+#: registration/models/badge.py:232
+msgid "Photo"
+msgstr "Foto"
+
+#: registration/models/badge.py:240
 msgid "Primary job"
 msgstr "Primäre Aufgabe"
 
-#: registration/models/badge.py:228
+#: registration/models/badge.py:241
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: registration/models/badge.py:238
+#: registration/models/badge.py:251
 #: registration/templates/registration/admin/configure_badges.html:95
 msgid "Role"
 msgstr "Rolle"
 
-#: registration/models/badge.py:246
+#: registration/models/badge.py:259
 #: registration/templates/registration/admin/configure_badges.html:96
 msgid "Design"
 msgstr "Design"
@@ -428,7 +452,7 @@ msgid "Privacy"
 msgstr "Datenschutz"
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:65
+#: registration/templates/registration/admin/base.html:66
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -439,7 +463,7 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 #: registration/templates/registration/admin/badges.html:6
-#: registration/templates/registration/admin/base.html:52
+#: registration/templates/registration/admin/base.html:53
 msgid "Generate badges"
 msgstr "Badges generieren"
 
@@ -506,87 +530,92 @@ msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
 #: registration/templates/registration/admin/base.html:41
+#: registration/templates/registration/admin/mail.html:6
+msgid "Send mails"
+msgstr "Mails senden"
+
+#: registration/templates/registration/admin/base.html:42
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:45
+#: registration/templates/registration/admin/base.html:46
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:47
+#: registration/templates/registration/admin/base.html:48
 #: registration/templates/registration/admin/links.html:6
 msgid "Links"
 msgstr "Links"
 
-#: registration/templates/registration/admin/base.html:51
+#: registration/templates/registration/admin/base.html:52
 #: registration/templates/registration/admin/configure_badges.html:7
 msgid "Configure badges"
 msgstr "Badges konfigurieren"
 
-#: registration/templates/registration/admin/base.html:59
+#: registration/templates/registration/admin/base.html:60
 msgid "Common"
 msgstr "Allgemein"
 
-#: registration/templates/registration/admin/base.html:62
+#: registration/templates/registration/admin/base.html:63
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:68
+#: registration/templates/registration/admin/base.html:69
 #: registration/templates/registration/admin/configure_badges.html:24
 #: registration/templates/registration/admin/edit_badgesettings.html:23
 #: registration/templates/registration/admin/permissions.html:6
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:69
+#: registration/templates/registration/admin/base.html:70
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:86
+#: registration/templates/registration/admin/base.html:87
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:87
+#: registration/templates/registration/admin/base.html:88
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:88
+#: registration/templates/registration/admin/base.html:89
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:89
+#: registration/templates/registration/admin/base.html:90
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:90
+#: registration/templates/registration/admin/base.html:91
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:91
+#: registration/templates/registration/admin/base.html:92
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:92
+#: registration/templates/registration/admin/base.html:93
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:93
+#: registration/templates/registration/admin/base.html:94
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:94
+#: registration/templates/registration/admin/base.html:95
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:95
+#: registration/templates/registration/admin/base.html:96
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:96
+#: registration/templates/registration/admin/base.html:97
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -896,6 +925,10 @@ msgstr "Ersteller"
 msgid "Add link"
 msgstr "Link hinzufügen"
 
+#: registration/templates/registration/admin/mail.html:13
+msgid "Send"
+msgstr "Senden"
+
 #: registration/templates/registration/admin/nopermission.html:5
 msgid "No permission"
 msgstr "Kein Zugriff"
@@ -1053,14 +1086,14 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:135
+#: registration/views/helper.py:136
 msgid ""
 "You cannot delete the helper from other shifts. The helper was not deleted"
 msgstr ""
 "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde nicht "
 "gelöscht."
 
-#: registration/views/helper.py:143
+#: registration/views/helper.py:144
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
@@ -1073,6 +1106,15 @@ msgstr "Aufgabe gelöscht: %(name)s"
 #: registration/views/link.py:78
 msgid "Link deleted"
 msgstr "Link gelöscht"
+
+#: registration/views/mail.py:30
+msgid "Mail was sent successfully"
+msgstr "Die E-Mails wurden erfolgreich verschickt"
+
+#: registration/views/mail.py:32
+#, python-format
+msgid "Sending mails failed: %(error)s"
+msgstr "Die E-Mails konnten nicht verschickt werden: %(error)s"
 
 #: registration/views/permissions.py:37
 #, python-format

@@ -10,3 +10,4 @@ from .badge import configure_badges, edit_badgedesign, edit_badgesettings, \
     edit_badgepermission, edit_badgerole, badges, generate_badges
 from .export import export
 from .permissions import permissions, delete_permission
+from .mail import mail

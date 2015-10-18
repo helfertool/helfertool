@@ -8,3 +8,4 @@ from .badge import BadgeDesignForm, BadgeSettingsForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm, BadgeForm
 from .delete import DeleteForm
 from .user import UsernameForm, UserCreationForm
+from .mail import MailForm
