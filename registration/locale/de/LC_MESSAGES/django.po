@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 19:34+0200\n"
-"PO-Revision-Date: 2015-10-18 19:35+0200\n"
+"POT-Creation-Date: 2015-10-18 19:57+0200\n"
+"PO-Revision-Date: 2015-10-18 19:57+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -77,8 +77,8 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:42 registration/models/badge.py:117
-#: registration/models/badge.py:150 registration/models/badge.py:172
+#: registration/export/pdf.py:42 registration/models/badge.py:129
+#: registration/models/badge.py:162 registration/models/badge.py:184
 #: registration/models/job.py:33
 #: registration/templates/registration/admin/configure_badges.html:22
 #: registration/templates/registration/admin/configure_badges.html:62
@@ -170,85 +170,93 @@ msgstr "Anzahl der Zeilen auf einer Seite"
 msgid "Number of columns on one page"
 msgstr "Anzahl der Spalten auf einer Seite"
 
-#: registration/models/badge.py:77
+#: registration/models/badge.py:52
+msgid "Role for coordinators"
+msgstr "Rolle für Koordinatoren"
+
+#: registration/models/badge.py:58
+msgid "Role for helpers"
+msgstr "Rolle für Helfer"
+
+#: registration/models/badge.py:89
 #: registration/templates/registration/admin/badges.html:13
 msgid "Default role"
 msgstr "Standard Rolle"
 
-#: registration/models/badge.py:85
+#: registration/models/badge.py:97
 #: registration/templates/registration/admin/badges.html:14
 msgid "Default design"
 msgstr "Standard Design"
 
-#: registration/models/badge.py:124
+#: registration/models/badge.py:136
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: registration/models/badge.py:125
+#: registration/models/badge.py:137
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: registration/models/badge.py:129
+#: registration/models/badge.py:141
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: registration/models/badge.py:134
+#: registration/models/badge.py:146
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: registration/models/badge.py:155 registration/models/badge.py:177
+#: registration/models/badge.py:167 registration/models/badge.py:189
 msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
-#: registration/models/badge.py:156
+#: registration/models/badge.py:168
 msgid ""
 "This name is used for the LaTeX template, the prefix \"perm-\" is added."
 msgstr ""
 "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
 "hinzugefügt."
 
-#: registration/models/badge.py:178
+#: registration/models/badge.py:190
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: registration/models/badge.py:203
+#: registration/models/badge.py:215
 msgid "Other prename"
 msgstr "Anderer Vorname"
 
-#: registration/models/badge.py:209
+#: registration/models/badge.py:221
 msgid "Other surname"
 msgstr "Anderer Nachname"
 
-#: registration/models/badge.py:215
+#: registration/models/badge.py:227
 msgid "Other text for job"
 msgstr "Anderer Text für Aufgabe"
 
-#: registration/models/badge.py:221
+#: registration/models/badge.py:233
 msgid "Other text for shift"
 msgstr "Anderer Text für Schicht"
 
-#: registration/models/badge.py:227
+#: registration/models/badge.py:239
 msgid "Other text for role"
 msgstr "Anderer Text für Rolle"
 
-#: registration/models/badge.py:232
+#: registration/models/badge.py:244
 msgid "Photo"
 msgstr "Foto"
 
-#: registration/models/badge.py:240
+#: registration/models/badge.py:252
 msgid "Primary job"
 msgstr "Primäre Aufgabe"
 
-#: registration/models/badge.py:241
+#: registration/models/badge.py:253
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: registration/models/badge.py:251
+#: registration/models/badge.py:263
 #: registration/templates/registration/admin/configure_badges.html:95
 msgid "Role"
 msgstr "Rolle"
 
-#: registration/models/badge.py:259
+#: registration/models/badge.py:271
 #: registration/templates/registration/admin/configure_badges.html:96
 msgid "Design"
 msgstr "Design"
@@ -819,10 +827,11 @@ msgid "Badge Settings"
 msgstr "Badge Einstellungen"
 
 #: registration/templates/registration/admin/edit_badgesettings.html:9
-msgid "Changes of this settings require an update of the LaTeX template!"
+msgid ""
+"Changes of most of this settings require an update of the LaTeX template!"
 msgstr ""
-"Bei Änderungen in diesen Einstellungen muss auch das LaTeX Template "
-"angepasst werden!"
+"Bei den meisten Änderungen in diesen Einstellungen muss auch das LaTeX "
+"Template angepasst werden!"
 
 #: registration/templates/registration/admin/edit_badgesettings.html:12
 msgid "Template"
@@ -1160,9 +1169,6 @@ msgstr "Schicht gelöscht"
 
 #~ msgid "Default role for all helpers"
 #~ msgstr "Standard Rolle für alle Helfer"
-
-#~ msgid "Default role for coordinators"
-#~ msgstr "Standard Rolle für alle Koordinatoren"
 
 #~ msgid "Default role for this job"
 #~ msgstr "Standard Rolle für diese Aufgabe"
