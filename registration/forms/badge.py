@@ -1,7 +1,7 @@
 from django import forms
 
 from ..models import BadgeDesign, BadgeSettings, BadgePermission, BadgeRole, \
-    BadgeDefaults, Badge
+    BadgeDefaults, Badge, Job
 
 
 class BadgeSettingsForm(forms.ModelForm):
@@ -139,3 +139,13 @@ class BadgeForm(forms.ModelForm):
     class Meta:
         model = Badge
         exclude = ['helper', ]
+
+    def __init__(self, *args, **kwargs):
+        super(BadgeForm, self).__init__(*args, **kwargs)
+
+        # restrict queryset of primary_job
+        jobs = Job.objects.filter(shift__helper=self.instance.helper).\
+            distinct()
+        coordinated_jobs = self.instance.helper.coordinated_jobs.distinct()
+
+        self.fields['primary_job'].queryset = jobs | coordinated_jobs

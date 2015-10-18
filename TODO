@@ -9,8 +9,6 @@
 * badges
   * shift (name for each shift, time,...?)
 
-  * queryset for primary_job
-
   * for some jobs an upload of an image is possible
 
   * delete_badge{permission, role, design}
