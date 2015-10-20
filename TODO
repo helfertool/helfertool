@@ -2,9 +2,9 @@
 * Load Test (deactivate mail!)
 * bot protection
 
-* add helper to more shifts
+* backup
 
-* change __str__ for shift and job
+* add helper to more shifts
 
 * badges
   * shift (name for each shift, time,...?)

@@ -48,7 +48,7 @@ class Shift(models.Model):
 
     def __str__(self):
         date = date_f(localtime(self.begin), 'DATETIME_FORMAT')
-        return "%s %s (%s)" % (self.job.name, date, self.job.event)
+        return "%s, %s" % (self.job.name, date)
 
     def time(self):
         """ Returns a string representation of the begin and end time.

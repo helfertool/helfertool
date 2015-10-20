@@ -65,7 +65,7 @@ class Job(models.Model):
     )
 
     def __str__(self):
-        return "%s (%s)" % (self.name, self.event)
+        return "%s" % self.name
 
     def is_admin(self, user):
         """ Check, if a user is admin of this job and returns a boolean.
