@@ -1,14 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Job
-from ..forms import HelperForm, HelperDeleteForm, BadgeForm
+from ..forms import HelperForm, HelperDeleteForm, BadgeForm, \
+    HelperDeleteCoordinatorForm
 
 
 @login_required
@@ -121,6 +122,11 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
     event, job, shift, helper = get_or_404(event_url_name,
                                            shift_pk=shift_pk,
                                            helper_pk=helper_pk)
+
+    # additional plausibility checks
+    if shift not in helper.shifts.all():
+        raise Http404
+
     # check permission
     if not helper.can_edit(request.user):
         return nopermission(request)
@@ -135,9 +141,8 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
                          {'name': helper.full_name})
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('helpers',
-                                            args=[event_url_name,
-                                                  shift.job.pk]))
+        return HttpResponseRedirect(reverse('helpers', args=[event_url_name,
+                                                             shift.job.pk]))
 
     # render page
     context = {'event': event,
@@ -145,3 +150,40 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
                'shift': shift,
                'form': form}
     return render(request, 'registration/admin/delete_helper.html', context)
+
+
+@login_required
+def delete_coordinator(request, event_url_name, helper_pk, job_pk):
+    event, job, shift, helper = get_or_404(event_url_name,
+                                           job_pk=job_pk,
+                                           helper_pk=helper_pk)
+
+    # check permission
+    if not job.is_admin(request.user):
+        return nopermission(request)
+
+    # additional plausibility checks
+    if helper not in job.coordinators.all():
+        raise Http404
+
+    # form
+    form = HelperDeleteCoordinatorForm(request.POST or None, instance=helper,
+                                       job=job)
+
+    if form.is_valid():
+        form.delete()
+        messages.success(request, _("Coordinator %(name)s from job "
+                                    "\"%(jobname)s\"") %
+                         {'name': helper.full_name, 'jobname': job.name})
+
+        # redirect to shift
+        return HttpResponseRedirect(reverse('helpers', args=[event_url_name,
+                                                             job.pk]))
+
+    # render page
+    context = {'event': event,
+               'helper': helper,
+               'job': job,
+               'form': form}
+    return render(request, 'registration/admin/delete_coordinator.html',
+                  context)

@@ -137,6 +137,11 @@ urlpatterns = [
         {'show_all_shifts': True},
         name='delete_helper_all'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/delete/coordinator/(?P<job_pk>[0-9]+)/$',
+        views.delete_coordinator,
+        name='delete_coordinator'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)/$',
         views.add_helper,
         name='add_helper'),

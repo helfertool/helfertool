@@ -91,3 +91,21 @@ class HelperDeleteForm(forms.ModelForm):
         # delete all selected shifts
         for shift in self.cleaned_data['shifts']:
             self.instance.shifts.remove(shift)
+
+
+class HelperDeleteCoordinatorForm(forms.ModelForm):
+    class Meta:
+        model = Helper
+        fields = ['prename', 'surname', 'email', ]
+
+    def __init__(self, *args, **kwargs):
+        self.job = kwargs.pop('job')
+
+        super(HelperDeleteCoordinatorForm, self).__init__(*args, **kwargs)
+
+        # make prename, surname and email readonly
+        for name in ('prename', 'surname', 'email'):
+            self.fields[name].widget.attrs['readonly'] = True
+
+    def delete(self):
+        self.job.coordinators.remove(self.instance)

@@ -4,7 +4,7 @@
 
 * add helper to more shifts
 
-* fix: delete coordinator not possible
+* change __str__ for shift and job
 
 * badges
   * shift (name for each shift, time,...?)

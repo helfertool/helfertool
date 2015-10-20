@@ -234,7 +234,19 @@ def helper_deleted(sender, **kwargs):
         helper.delete()
 
 def coordinator_deleted(sender, **kwargs):
-    pass # FIXME
+    action = kwargs.pop('action')
+    if action != "post_remove":
+        return
+
+    pk_set = kwargs.pop('pk_set')
+    model = kwargs.pop('model')  # this is Helper
+
+    # iterate over all deleted helpers, this should be only one helper
+    for helper_pk in pk_set:
+        helper = model.objects.get(pk=helper_pk)
+
+        if helper.shifts.count() == 0 and not helper.is_coordinator:
+            helper.delete()
 
 m2m_changed.connect(helper_deleted, sender=Helper.shifts.through)
 m2m_changed.connect(coordinator_deleted, sender=Job.coordinators.through)

@@ -68,7 +68,10 @@ coordinators. This is only important for the delete_helper view.
                         {% trans "Delete" %}
                     </a>
                 {% else %}
-                    {# TODO #}
+                    <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
+                        {% bootstrap_icon "remove" %}
+                        {% trans "Delete" %}
+                    </a>
                 {% endif %}
             </td>
         </tr>
