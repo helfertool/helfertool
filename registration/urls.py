@@ -127,9 +127,15 @@ urlpatterns = [
         name='edit_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<job_pk>[0-9]+)/$',
+        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)/$',
         views.delete_helper,
         name='delete_helper'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)/all/$',
+        views.delete_helper,
+        {'show_all_shifts': True},
+        name='delete_helper_all'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)/$',
         views.add_helper,

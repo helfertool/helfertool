@@ -44,7 +44,7 @@
             {% if shift.helper_set.count == 0 %}
                 <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
             {% else %}
-                {% include "registration/admin/helpers_table.html" with event=event job=job helpers=shift.helper_set.all %}
+                {% include "registration/admin/helpers_table.html" with event=event job=job shift=shift helpers=shift.helper_set.all %}
             {% endif %}
 
             {% if not shift.is_full %}

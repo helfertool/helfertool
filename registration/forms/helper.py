@@ -1,7 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
-from ..models import Helper
+from ..models import Helper, Shift
 
 
 class HelperForm(forms.ModelForm):
@@ -26,7 +27,7 @@ class HelperForm(forms.ModelForm):
         super(HelperForm, self).clean()
 
         if self.shift and self.shift.is_full():
-            raise ValidationError("The shift is full already.")
+            raise ValidationError(_("The shift is full already."))
 
     def save(self, commit=True):
         instance = super(HelperForm, self).save(False)
@@ -55,14 +56,33 @@ class HelperDeleteForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.shift = kwargs.pop('shift')
+        self.user = kwargs.pop('user')
+        self.show_all_shifts = kwargs.pop('show_all_shifts')
+
         super(HelperDeleteForm, self).__init__(*args, **kwargs)
 
-        # show only shifts, where the helper is registered
-        self.fields['shifts'].queryset = self.instance.shifts
+        # show only the one specified shift ot shifts, where the helper is
+        # registered
+        if self.show_all_shifts:
+            self.fields['shifts'].queryset = self.instance.shifts
+        else:
+            self.fields['shifts'].queryset = Shift.objects.filter(
+                pk=self.shift.pk)  # we need a queryset, not a Shift object
 
         # make prename, surname and email readonly
         for name in ('prename', 'surname', 'email'):
             self.fields[name].widget.attrs['readonly'] = True
+
+    def clean(self):
+        super(HelperDeleteForm, self).clean()
+
+        # check if user is admin for all shifts that will be deleted
+        for shift in self.get_deleted_shifts():
+            if not shift.job.is_admin(self.user):
+                raise ValidationError(_("You are not allowed to delete a "
+                                        "helper from the job \"%(jobname)s\"")
+                                      % {'jobname': shift.job.name})
 
     def get_deleted_shifts(self):
         return self.cleaned_data['shifts']

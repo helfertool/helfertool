@@ -5,8 +5,10 @@
 {% block admincontent %}
     <h2>{% trans "Delete helper" %}</h2>
 
-    <form action="{% url 'delete_helper' event.url_name helper.pk job.pk %}" method="post">
+    <form action="" method="post">
         {% csrf_token %}
+
+        {% bootstrap_form_errors form %}
 
         {% bootstrap_field form.prename %}
         {% bootstrap_field form.surname %}
@@ -14,9 +16,15 @@
 
         {% bootstrap_field form.shifts %}
 
-        <div class="alert alert-warning" role="alert">{% trans "Remove the helper from all selected shifts?" %}</div>
+        {% if helper.shifts.count > 1 %}
+            <p>
+                {% trans "There are more shifts for this helper." %}
+                <a href="{% url 'delete_helper_all' event.url_name helper.pk shift.pk %}">
+                    {% trans "Show" %}</a>.
+            </p>
+        {% endif %}
 
-        {% bootstrap_form_errors form %}
+        <div class="alert alert-danger" role="alert">{% trans "Remove the helper from all selected shifts?" %}</div>
 
         <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
     </form>

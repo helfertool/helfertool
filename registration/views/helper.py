@@ -116,41 +116,32 @@ def add_helper(request, event_url_name, shift_pk=None, job_pk=None):
 
 
 @login_required
-def delete_helper(request, event_url_name, helper_pk, job_pk):
+def delete_helper(request, event_url_name, helper_pk, shift_pk,
+                  show_all_shifts=False):
     event, job, shift, helper = get_or_404(event_url_name,
-                                           job_pk=job_pk,
+                                           shift_pk=shift_pk,
                                            helper_pk=helper_pk)
     # check permission
     if not helper.can_edit(request.user):
         return nopermission(request)
 
     # form
-    form = HelperDeleteForm(request.POST or None, instance=helper)
+    form = HelperDeleteForm(request.POST or None, instance=helper, shift=shift,
+                            user=request.user, show_all_shifts=show_all_shifts)
 
     if form.is_valid():
-        # check permission
-        allowed = True
-        for shift in form.get_deleted_shifts():
-            if not shift.job.is_admin(request.user):
-                allowed = False
-                messages.error(request, _("You cannot delete the helper from "
-                                          "other shifts. The helper was not "
-                                          "deleted"))
-                break
-
-        # delete shifts or complete helpers
-        if allowed:
-            form.delete()
-            messages.success(request, _("Helper deleted: %(name)s") %
-                             {'name': helper.full_name})
+        form.delete()
+        messages.success(request, _("Helper deleted: %(name)s") %
+                         {'name': helper.full_name})
 
         # redirect to shift
         return HttpResponseRedirect(reverse('helpers',
-                                            args=[event_url_name, job.pk]))
+                                            args=[event_url_name,
+                                                  shift.job.pk]))
 
     # render page
     context = {'event': event,
                'helper': helper,
-               'job': job,
+               'shift': shift,
                'form': form}
     return render(request, 'registration/admin/delete_helper.html', context)

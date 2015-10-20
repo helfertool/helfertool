@@ -1,6 +1,19 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
+{% comment %}
+required parameters:
+    event
+    job
+    helpers
+
+optional:
+    shift
+
+Ff shift is missing this template assumes that the printed helpers are
+coordinators. This is only important for the delete_helper view.
+{% endcomment %}
+
 <table class="table">
     <tr>
         <th></th>
@@ -48,10 +61,15 @@
                     {% bootstrap_icon "pencil" %}
                     {% trans "Edit" %}
                 </a><br />
-                <a href="{% url 'delete_helper' event.url_name helper.pk job.pk %}">
-                    {% bootstrap_icon "remove" %}
-                    {% trans "Delete" %}
-                </a>
+
+                {% if shift %}
+                    <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
+                        {% bootstrap_icon "remove" %}
+                        {% trans "Delete" %}
+                    </a>
+                {% else %}
+                    {# TODO #}
+                {% endif %}
             </td>
         </tr>
     {% endfor %}
