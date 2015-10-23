@@ -83,7 +83,7 @@ class Shift(models.Model):
         if self.number == 0:
             return 0
 
-        return int(round(self.num_helpers() / self.number * 100, 0))
+        return int(round(float(self.num_helpers()) / self.number * 100.0, 0))
 
 
 #@receiver(pre_delete, sender=Shift, dispatch_uid='shift_delete')
