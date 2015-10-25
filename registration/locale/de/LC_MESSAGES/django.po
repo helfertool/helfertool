@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 19:57+0200\n"
-"PO-Revision-Date: 2015-10-18 19:57+0200\n"
+"POT-Creation-Date: 2015-10-25 23:25+0100\n"
+"PO-Revision-Date: 2015-10-25 23:28+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-Generator: Poedit 1.8.5\n"
 
 #: registration/export/excel.py:58 registration/models/helper.py:88
-#: registration/templates/registration/admin/helpers_table.html:7
+#: registration/templates/registration/admin/helpers_table.html:20
 msgid "Prename"
 msgstr "Vorname"
 
 #: registration/export/excel.py:59 registration/models/helper.py:93
-#: registration/templates/registration/admin/helpers_table.html:8
+#: registration/templates/registration/admin/helpers_table.html:21
 msgid "Surname"
 msgstr "Nachname"
 
@@ -32,7 +32,7 @@ msgstr "Nachname"
 #: registration/models/helper.py:97
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
-#: registration/templates/registration/admin/helpers_table.html:9
+#: registration/templates/registration/admin/helpers_table.html:22
 #: registration/templates/registration/registered.html:20
 msgid "E-Mail"
 msgstr "E-Mail"
@@ -40,32 +40,32 @@ msgstr "E-Mail"
 #: registration/export/excel.py:63 registration/export/pdf.py:42
 #: registration/models/helper.py:102
 #: registration/templates/registration/admin/coordinators.html:18
-#: registration/templates/registration/admin/helpers_table.html:10
+#: registration/templates/registration/admin/helpers_table.html:23
 #: registration/templates/registration/registered.html:24
 msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:67 registration/export/pdf.py:42
 #: registration/models/helper.py:114
-#: registration/templates/registration/admin/helpers_table.html:12
+#: registration/templates/registration/admin/helpers_table.html:25
 #: registration/templates/registration/registered.html:29
 msgid "T-shirt"
 msgstr "T-Shirt"
 
 #: registration/export/excel.py:71 registration/models/helper.py:119
-#: registration/templates/registration/admin/helpers_table.html:15
+#: registration/templates/registration/admin/helpers_table.html:28
 #: registration/templates/registration/registered.html:41
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
 #: registration/export/excel.py:75
-#: registration/templates/registration/admin/helpers_table.html:18
+#: registration/templates/registration/admin/helpers_table.html:31
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
 #: registration/export/excel.py:78 registration/export/pdf.py:43
 #: registration/models/helper.py:108
-#: registration/templates/registration/admin/helpers_table.html:20
+#: registration/templates/registration/admin/helpers_table.html:33
 #: registration/templates/registration/registered.html:46
 msgid "Comment"
 msgstr "Kommentar"
@@ -95,6 +95,15 @@ msgstr "Name"
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
+#: registration/forms/helper.py:30
+msgid "The shift is full already."
+msgstr "Die Schicht ist bereits voll."
+
+#: registration/forms/helper.py:83
+#, python-format
+msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
+msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
+
 #: registration/forms/mail.py:24
 msgid "All helpers"
 msgstr "Alle Helfer"
@@ -108,10 +117,14 @@ msgid "Sender"
 msgstr "Absender"
 
 #: registration/forms/mail.py:51
+msgid "Reply to"
+msgstr "Antwort an"
+
+#: registration/forms/mail.py:56
 msgid "Subject"
 msgstr "Betreff"
 
-#: registration/forms/mail.py:57
+#: registration/forms/mail.py:62
 msgid "Text"
 msgstr "Text"
 
@@ -661,7 +674,7 @@ msgstr "LaTeX Name"
 #: registration/templates/registration/admin/configure_badges.html:41
 #: registration/templates/registration/admin/configure_badges.html:71
 #: registration/templates/registration/admin/edit_badgesettings.html:41
-#: registration/templates/registration/admin/helpers_table.html:49
+#: registration/templates/registration/admin/helpers_table.html:62
 #: registration/templates/registration/admin/jobs_and_shifts.html:23
 #: registration/templates/registration/admin/jobs_and_shifts.html:61
 msgid "Edit"
@@ -705,6 +718,26 @@ msgstr "Speichern"
 msgid "There are no coordinators for this job."
 msgstr "Es gibt keine Koordinatoren für diese Schicht."
 
+#: registration/templates/registration/admin/delete_coordinator.html:6
+msgid "Delete coordinator"
+msgstr "Koordinator löschen"
+
+#: registration/templates/registration/admin/delete_coordinator.html:18
+#, python-format
+msgid "Remove this coordinator from the job \"%(jobname)s\"?"
+msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
+
+#: registration/templates/registration/admin/delete_coordinator.html:21
+#: registration/templates/registration/admin/delete_helper.html:29
+#: registration/templates/registration/admin/delete_job.html:38
+#: registration/templates/registration/admin/delete_shift.html:36
+#: registration/templates/registration/admin/helpers_table.html:68
+#: registration/templates/registration/admin/helpers_table.html:73
+#: registration/templates/registration/admin/jobs_and_shifts.html:29
+#: registration/templates/registration/admin/jobs_and_shifts.html:65
+msgid "Delete"
+msgstr "Löschen"
+
 #: registration/templates/registration/admin/delete_event.html:6
 #: registration/templates/registration/admin/edit_event.html:23
 #: registration/templates/registration/admin/edit_event.html:29
@@ -733,18 +766,18 @@ msgstr "Ja, ich will die komplette Veranstaltung löschen!"
 msgid "Delete helper"
 msgstr "Helfer löschen"
 
-#: registration/templates/registration/admin/delete_helper.html:17
+#: registration/templates/registration/admin/delete_helper.html:21
+msgid "There are more shifts for this helper."
+msgstr "Dieser Helfer ist noch für weitere Schichten angemeldet."
+
+#: registration/templates/registration/admin/delete_helper.html:23
+#: registration/templates/registration/admin/helpers.html:41
+msgid "Show"
+msgstr "Anzeigen"
+
+#: registration/templates/registration/admin/delete_helper.html:27
 msgid "Remove the helper from all selected shifts?"
 msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
-
-#: registration/templates/registration/admin/delete_helper.html:21
-#: registration/templates/registration/admin/delete_job.html:38
-#: registration/templates/registration/admin/delete_shift.html:36
-#: registration/templates/registration/admin/helpers_table.html:53
-#: registration/templates/registration/admin/jobs_and_shifts.html:29
-#: registration/templates/registration/admin/jobs_and_shifts.html:65
-msgid "Delete"
-msgstr "Löschen"
 
 #: registration/templates/registration/admin/delete_job.html:6
 msgid "Delete job"
@@ -905,10 +938,6 @@ msgstr "Export"
 msgid "Public"
 msgstr "Öffentlich"
 
-#: registration/templates/registration/admin/helpers.html:41
-msgid "Show"
-msgstr "Anzeigen"
-
 #: registration/templates/registration/admin/helpers.html:46
 #, python-format
 msgid "Number of coordinators: %(number)s"
@@ -928,7 +957,7 @@ msgstr "Helfer: %(jobname)s"
 msgid "Add coordinator"
 msgstr "Koordinator hinzufügen"
 
-#: registration/templates/registration/admin/helpers_table.html:21
+#: registration/templates/registration/admin/helpers_table.html:34
 msgid "Registration time"
 msgstr "Anmeldezeit"
 
@@ -1109,17 +1138,15 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:136
-msgid ""
-"You cannot delete the helper from other shifts. The helper was not deleted"
-msgstr ""
-"Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde nicht "
-"gelöscht."
-
-#: registration/views/helper.py:144
+#: registration/views/helper.py:140
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
+
+#: registration/views/helper.py:175
+#, python-format
+msgid "Coordinator %(name)s from job \"%(jobname)s\""
+msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
 
 #: registration/views/job.py:55
 #, python-format
@@ -1157,6 +1184,12 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid ""
+#~ "You cannot delete the helper from other shifts. The helper was not deleted"
+#~ msgstr ""
+#~ "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde "
+#~ "nicht gelöscht."
 
 #~ msgid "Edit badge settings"
 #~ msgstr "Badge Einstellungen bearbeiten"
