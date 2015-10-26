@@ -5,6 +5,7 @@ from tempfile import mkdtemp, mkstemp
 import os
 import subprocess
 import shutil
+import sys
 
 
 class BadgeCreatorError(Exception):
@@ -108,7 +109,13 @@ class BadgeCreator:
         # write code
         try:
             f = os.fdopen(self.latex_file, 'w')
-            f.write(latex.encode('utf8'))
+
+            # ...
+            if sys.version_info < (3,):
+                f.write(latex.encode('utf8'))
+            else:
+                f.write(latex)
+
             f.close()
         except IOError as e:
             raise BadgeCreatorError("Cannot write to file \"%s\": %s" %
