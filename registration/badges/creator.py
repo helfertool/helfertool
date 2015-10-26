@@ -6,6 +6,8 @@ import os
 import subprocess
 import shutil
 
+from ..utils import u
+
 
 class BadgeCreatorError(Exception):
     def __init__(self, value, latex_output=None):
@@ -108,7 +110,7 @@ class BadgeCreator:
         # write code
         try:
             f = os.fdopen(self.latex_file, 'w')
-            f.write(latex)
+            f.write(u(latex))
             f.close()
         except IOError as e:
             raise BadgeCreatorError("Cannot write to file \"%s\": %s" %
