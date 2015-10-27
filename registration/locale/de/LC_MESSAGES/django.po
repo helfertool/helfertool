@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-25 23:25+0100\n"
-"PO-Revision-Date: 2015-10-25 23:28+0100\n"
+"POT-Creation-Date: 2015-10-27 12:47+0100\n"
+"PO-Revision-Date: 2015-10-27 12:48+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -117,14 +117,18 @@ msgid "Sender"
 msgstr "Absender"
 
 #: registration/forms/mail.py:51
+msgid "CC"
+msgstr "CC"
+
+#: registration/forms/mail.py:56
 msgid "Reply to"
 msgstr "Antwort an"
 
-#: registration/forms/mail.py:56
+#: registration/forms/mail.py:61
 msgid "Subject"
 msgstr "Betreff"
 
-#: registration/forms/mail.py:62
+#: registration/forms/mail.py:67
 msgid "Text"
 msgstr "Text"
 

@@ -47,6 +47,11 @@ class MailForm(forms.Form):
             label=_("Sender"),
         )
 
+        self.fields['cc'] = forms.EmailField(
+            label=_("CC"),
+            required=False,
+        )
+
         self.fields['reply-to'] = forms.EmailField(
             label=_("Reply to"),
             required=False,
@@ -68,16 +73,22 @@ class MailForm(forms.Form):
         receiver_list = [h.email for h in self._get_helpers()]
         sender = self.cleaned_data['sender']
 
+        # reply to and CC
         reply_to = []
         if self.cleaned_data['reply-to']:
             reply_to = [self.cleaned_data['reply-to'], ]
+
+        cc = []
+        if self.cleaned_data['cc']:
+            cc = [self.cleaned_data['cc'], ]
 
         mail = EmailMessage(subject,
                             text,
                             sender,      # from
                             [sender, ],  # to
                             receiver_list,
-                            reply_to=reply_to)
+                            reply_to=reply_to,
+                            cc=cc)
 
         try:
             mail.send(fail_silently=False)
