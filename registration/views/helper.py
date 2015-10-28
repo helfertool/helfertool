@@ -46,19 +46,22 @@ def edit_helper(request, event_url_name, helper_pk, job_pk=None):
     if not helper.can_edit(request.user):
         return nopermission(request)
 
+    # badges active and permission?
+    edit_badges = event.badges and event.is_admin(request.user)
+
     # forms
     form = HelperForm(request.POST or None, instance=helper, event=event)
     badge_form = None
-    if event.badges:
+    if edit_badges:
         badge_form = BadgeForm(request.POST or None, request.FILES or None,
                                instance=helper.badge,
                                prefix='badge')
 
-    if form.is_valid() and (not event.badges or
+    if form.is_valid() and (not edit_badges or
                             (badge_form and badge_form.is_valid())):
         form.save()
 
-        if event.badges:
+        if edit_badges:
             badge_form.save()
 
         # check if job_pk is given -> redirect to helpers of this job
