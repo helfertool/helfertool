@@ -37,17 +37,29 @@ def add_table(elements, data, widths):
     elements.append(t)
 
 
-def table_of_helpers(elements, helpers):
+def table_of_helpers(elements, helpers, event):
     # table
-    data = [[par(_("Name")), par(_("Mobile phone")), par(_("T-shirt")),
-             par(_("Comment"))], ]
+    header = [par(_("Name")), par(_("Mobile phone")), ]
+
+    if event.ask_shirt:
+        header.append(par(_("T-shirt")))
+    header.append(par(_("Comment")))
+
+    data = [header, ]
 
     for helper in helpers:
-        data.append([par("%s %s" % (helper.prename, helper.surname)),
-                     par(helper.phone),
-                     par(helper.get_shirt_display()),
-                     par(helper.comment)])
-    add_table(elements, data, [6*cm, 4*cm, 2*cm, 5*cm])
+        tmp = [par("%s %s" % (helper.prename, helper.surname)),
+                     par(helper.phone), ]
+        if event.ask_shirt:
+            tmp.append(par(helper.get_shirt_display()))
+        tmp.append(par(helper.comment))
+        data.append(tmp)
+
+    if event.ask_shirt:
+        spaces = [6*cm, 4*cm, 2*cm, 5*cm]
+    else:
+        spaces = [6*cm, 4*cm, 7*cm]
+    add_table(elements, data, spaces)
 
 
 def pdf(buffer, event, jobs):
@@ -69,7 +81,7 @@ def pdf(buffer, event, jobs):
             heading = h2(_("Coordinators"))
             elements.append(heading)
 
-            table_of_helpers(elements, job.coordinators.all())
+            table_of_helpers(elements, job.coordinators.all(), event)
 
         # iterate over shifts
         for shift in job.shift_set.all():
@@ -77,7 +89,7 @@ def pdf(buffer, event, jobs):
             elements.append(heading)
 
             if shift.helper_set.count() > 0:
-                table_of_helpers(elements, shift.helper_set.all())
+                table_of_helpers(elements, shift.helper_set.all(), event)
             else:
                 p = par(_("Nobody is registered for this shift."))
                 elements.append(p)
