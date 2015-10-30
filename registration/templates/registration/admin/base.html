@@ -42,9 +42,7 @@
                     <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
 
                     {% if admin %}
-                        {% if event.ask_shirt or event.ask_vegetarian %}
-                            <li><a href="{% url 'statistics' event.url_name %}">{% trans "Statistics" %}</a></li>
-                        {% endif %}
+                        <li><a href="{% url 'statistics' event.url_name %}">{% trans "Statistics" %}</a></li>
                         <li><a href="{% url 'links' event.url_name %}">{% trans "Links" %}</a></li>
                     {% endif %}
 

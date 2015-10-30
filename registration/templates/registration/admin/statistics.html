@@ -16,10 +16,12 @@
             <th>{% trans "Coordinators" %}</th>
             <td>{{ num_coordinators }}</td>
         </tr>
-        <tr>
-            <th>{% trans "Vegetarians" %}</th>
-            <td>{{ num_vegetarians }}</td>
-        </tr>
+        {% if event.ask_vegetarian %}
+            <tr>
+                <th>{% trans "Vegetarians" %}</th>
+                <td>{{ num_vegetarians }}</td>
+            </tr>
+        {% endif %}
     </table>
 
     {% if shirts %}
