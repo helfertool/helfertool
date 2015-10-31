@@ -39,27 +39,29 @@ class BadgeCreator:
                                                        dir=self.dir)
 
     def add_helper(self, helper):
-        tmp = {'prename': helper.badge.prename or helper.prename,
-               'surname': helper.badge.surname or helper.surname,
-               'shift': helper.badge.shift}
+        tmp = {'prename': self._latex_escape(helper.badge.prename or
+                                             helper.prename),
+               'surname': self._latex_escape(helper.badge.surname or
+                                             helper.surname),
+               'shift': self._latex_escape(helper.badge.shift)}
 
         job = helper.badge.get_job()
 
         # job
         if helper.badge.job:
-            tmp['job'] = helper.badge.job
+            tmp['job'] = self._latex_escape(helper.badge.job)
         elif job:
-            tmp['job'] = job.name
+            tmp['job'] = self._latex_escape(job.name)
         else:
             tmp['job'] = ''
 
         # role
         if helper.badge.role:
-            tmp['role'] = helper.badge.role
+            tmp['role'] = self._latex_escape(helper.badge.role)
         elif helper.is_coordinator:
-            tmp['role'] = self.settings.coordinator_title
+            tmp['role'] = self._latex_escape(self.settings.coordinator_title)
         else:
-            tmp['role'] = self.settings.helper_title
+            tmp['role'] = self._latex_escape(self.settings.helper_title)
 
         # photo
         if helper.badge.photo:
@@ -229,3 +231,18 @@ class BadgeCreator:
         if string.startswith('#'):
             string = string[1:]
         return string.upper()
+
+    def _latex_escape(self, string):
+        string = string.replace(r' ', r'\ ')
+        string = string.replace(r'&', r'\&')
+        string = string.replace(r'%', r'\%')
+        string = string.replace(r'$', r'\$')
+        string = string.replace(r'#', r'\#')
+        string = string.replace(r'_', r'\_')
+        string = string.replace(r'{', r'\{')
+        string = string.replace(r'}', r'\}')
+        string = string.replace(r'~', r'\textasciitilde ')
+        string = string.replace(r'^', r'\textasciicircum ')
+        string = string.replace(r'\\', r'\textbackslash ')
+
+        return string
