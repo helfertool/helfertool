@@ -46,6 +46,11 @@ class BadgeSettings(models.Model):
         validators=[MinValueValidator(1)],
     )
 
+    barcodes = models.BooleanField(
+        default=False,
+        verbose_name=_("Print barcodes on badges to avoid duplicates"),
+    )
+
     coordinator_title = models.CharField(
         max_length=200,
         default="",
@@ -269,6 +274,11 @@ class Badge(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Design"),
+    )
+
+    printed = models.BooleanField(
+        default=False,
+        verbose_name=_("Badge was printed already"),
     )
 
     def get_job(self):

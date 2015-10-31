@@ -9,7 +9,7 @@ from .helper import helpers, add_helper, edit_helper, delete_helper, \
 from .link import links, edit_link, delete_link
 from .badge import configure_badges, edit_badgedesign, edit_badgesettings, \
     edit_badgepermission, edit_badgerole, badges, generate_badges, \
-    badges_warnings
+    badges_warnings, register_badge
 from .export import export
 from .permissions import permissions, delete_permission
 from .mail import mail

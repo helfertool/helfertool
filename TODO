@@ -5,6 +5,7 @@
 * add helper to more shifts
 
 * badges
+  * escape for LaTeX
   * shift (name for each shift, time,...?)
   * for some jobs an upload of an image is possible
   * delete_badge{permission, role, design}

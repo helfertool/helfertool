@@ -77,6 +77,12 @@ class BadgeCreator:
         role = helper.badge.get_role()
         tmp['roleid'] = role.latex_name
 
+        # badge id
+        if self.settings.barcodes:
+            tmp['id'] = "%010d" % helper.badge.id
+        else:
+            tmp['id'] = ""
+
         # permissions
         all_permissions = BadgePermission.objects.filter(
             badge_settings=self.settings).all()

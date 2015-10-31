@@ -173,7 +173,7 @@
                 }
                 {
                     \fill [fill=white] (0.78,0) rectangle (1,1);
-                    \node[rotate=90, text width=\badgeheight, align=center] at (0.82,1) {\barcode{\badge@id}};
+                    \node[rotate=90, text width=\badgeheight, align=center, color=black] at (0.82,1) {\barcode{\badge@id}};
                 }
             \end{scope}
         \end{tikzpicture}%
@@ -185,70 +185,69 @@
 \begin{document}
     \centering
     %BADGEDATA%
-    \begin{tabular}{|l|l|}
-        \hline
-        \badgefront[prename=Test1,%
-            surname=User,%
-            job=Bier,%
-            shift="",%
-            role=Standleiter,%
-            photo=,%
-            roleid="",%
-            fontcolor=000000,%
-            bgfront=bg.png,%
-            bgback=bg_back.png,%
-            perm-food=true,%
-            perm-finance=false] %
-        & %
-        \badgefront[prename=Test1,%
-            surname=User,%
-            job=Bier,%
-            shift="",%
-            role=Standleiter,%
-            photo=,%
-            roleid="",%
-            fontcolor=000000,%
-            bgfront=bg.png,%
-            bgback=bg_back.png,%
-            perm-food=true,%
-            perm-finance=false] %
-        \\
-        \hline
-    \end{tabular}
+    %\begin{tabular}{|l|l|}
+    %    \hline
+    %    \badgefront[prename=Test1,%
+    %        surname=User,%
+    %        job=Bier,%
+    %        shift="",%
+    %        role=Standleiter,%
+    %        photo=,%
+    %        roleid="",%
+    %        fontcolor=000000,%
+    %        bgfront=bg.png,%
+    %        bgback=bg_back.png,%
+    %        perm-food=true,%
+    %        perm-finance=false] %
+    %    & %
+    %    \badgefront[prename=Test1,%
+    %        surname=User,%
+    %        job=Bier,%
+    %        shift="",%
+    %        role=Standleiter,%
+    %        photo=,%
+    %        roleid="",%
+    %        fontcolor=000000,%
+    %        bgfront=bg.png,%
+    %        bgback=bg_back.png,%
+    %        perm-food=true,%
+    %        perm-finance=false] %
+    %    \\
+    %    \hline
+    %\end{tabular}
 
-    \pagebreak
+    %\pagebreak
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \badgeback[prename=Test1,%
-            surname=User,%
-            job=Bier,%
-            shift="",%
-            role=Standleiter,%
-            photo=,%
-            roleid="",%
-            fontcolor=000000,%
-            bgfront=bg.png,%
-            bgback=bg_back.png,%
-            perm-food=true,%
-            perm-finance=false,
-            id=0000000001] %
-        & %
-        \badgeback[prename=Test1,%
-            surname=User,%
-            job=Bier,%
-            shift="",%
-            role=Standleiter,%
-            photo=,%
-            roleid="",%
-            fontcolor=000000,%
-            bgfront=bg.png,%
-            bgback=bg_back.png,%
-            perm-food=true,%
-            perm-finance=false,%
-            id=0000000002] %
-        \\
-        \hline
-    \end{tabular}
-    \pagebreak
+    %\begin{tabular}{|l|l|}
+    %    \hline
+    %    \badgeback[prename=Test1,%
+    %        surname=User,%
+    %        job=Bier,%
+    %        shift="",%
+    %        role=Standleiter,%
+    %        photo=,%
+    %        roleid="",%
+    %        fontcolor=000000,%
+    %        bgfront=bg.png,%
+    %        bgback=bg_back.png,%
+    %        perm-food=true,%
+    %        perm-finance=false,
+    %        id=0000000001] %
+    %    & %
+    %    \badgeback[prename=Test1,%
+    %        surname=User,%
+    %        job=Bier,%
+    %        shift="",%
+    %        role=Standleiter,%
+    %        photo=,%
+    %        roleid="",%
+    %        fontcolor=000000,%
+    %        bgfront=bg.png,%
+    %        bgback=bg_back.png,%
+    %        perm-food=true,%
+    %        perm-finance=false,%
+    %        id=0000000002] %
+    %    \\
+    %    \hline
+    %\end{tabular}
 \end{document}

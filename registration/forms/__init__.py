@@ -5,7 +5,8 @@ from .helper import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm
 from .link import LinkForm, LinkDeleteForm
 from .registration import RegisterForm
 from .badge import BadgeDesignForm, BadgeSettingsForm, BadgePermissionForm, \
-    BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm, BadgeForm
+    BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm, BadgeForm, \
+    RegisterBadgeForm
 from .delete import DeleteForm
 from .user import UsernameForm, UserCreationForm
 from .mail import MailForm

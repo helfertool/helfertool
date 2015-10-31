@@ -1,13 +1,15 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404, is_involved
 
 from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
-    BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm
+    BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm, RegisterBadgeForm
 from ..badges import BadgeCreator, BadgeCreatorError, warnings_for_job
 
 
@@ -296,4 +298,38 @@ def edit_badgedesign(request, event_url_name, design_pk=None):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/edit_badgedesign.html',
+                  context)
+
+@login_required
+def register_badge(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    if event.badge_settings.barcodes:
+        form = RegisterBadgeForm(request.POST or None, event=event)
+
+        if form.is_valid():
+            if form.badge.printed:
+                # duplicate -> error
+                messages.error(request, _("Badge already printed: %(name)s") %
+                               {'name': form.badge.helper.full_name})
+            else:
+                # mark as printed
+                form.badge.printed = True
+                form.badge.save()
+                messages.success(request, _("Badge registered: %(name)s") %
+                                 {'name': form.badge.helper.full_name})
+    else:
+        form = None
+
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/register_badge.html',
                   context)

@@ -117,11 +117,11 @@ class RegisterForm(forms.ModelForm):
 
             # check if shift is full
             if cur_shift.is_full():
-                raise ValidationError("You selected a full shift.")
+                raise ValidationError(_("You selected a full shift."))
 
             # check if shift is blocked
             if cur_shift.blocked and not self.link:
-                raise ValidationError("You selected a blocked shift.")
+                raise ValidationError(_("You selected a blocked shift."))
 
         # check number of shifts > 0
         if number_of_shifts == 0:

@@ -220,6 +220,10 @@ urlpatterns = [
         views.badges,
         name='badges'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/',
+        views.register_badge,
+        name='register_badge'),
+
     # manage links
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$',
         views.links,
