@@ -60,7 +60,7 @@
 \newcommand*\badge@roleid{}
 \define@key{badge}{roleid}{\renewcommand\badge@roleid{#1}}
 
-\newcommand*\badge@id{0000000001}
+\newcommand*\badge@id{}
 \define@key{badge}{id}{\renewcommand\badge@id{#1}}
 
 %
@@ -167,8 +167,14 @@
                     \node at (0.15,0.6) {\sout{Finanzbereich}};
                 }
 
-                \fill [fill=white] (0.78,0) rectangle (1,1);
-                \node[rotate=90, text width=\badgeheight, align=center] at (0.82,1) {\barcode{\badge@id}};
+                % barcode
+                \ifthenelse{\equal{\badge@id}{}}
+                {
+                }
+                {
+                    \fill [fill=white] (0.78,0) rectangle (1,1);
+                    \node[rotate=90, text width=\badgeheight, align=center] at (0.82,1) {\barcode{\badge@id}};
+                }
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
