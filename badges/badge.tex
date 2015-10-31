@@ -9,6 +9,7 @@
 \usepackage{ifthen}
 \usepackage[normalem]{ulem}
 \usepackage{color}
+\usepackage[code=Code39,X=.23mm,H=1cm]{makebarcode}
 
 \pagestyle{empty}
 
@@ -23,7 +24,6 @@
 % custom command to place the line in the middle
 % (necessary due to higher thickness)
 \renewcommand\sout{\bgroup \markoverwith{\rule[0.4ex]{\ULthickness}{\ULthickness}}\ULon}
-
 
 % Font
 \usepackage{helvet}
@@ -60,10 +60,13 @@
 \newcommand*\badge@roleid{}
 \define@key{badge}{roleid}{\renewcommand\badge@roleid{#1}}
 
+\newcommand*\badge@id{0000000001}
+\define@key{badge}{id}{\renewcommand\badge@id{#1}}
+
 %
 % Badge text color (do not change)
 %
-\newcommand*\badge@fontcolor{}
+\newcommand*\badge@fontcolor{000000}
 \define@key{badge}{fontcolor}{\renewcommand\badge@fontcolor{#1}}
 
 %
@@ -163,6 +166,9 @@
                 {
                     \node at (0.15,0.6) {\sout{Finanzbereich}};
                 }
+
+                \fill [fill=white] (0.78,0) rectangle (1,1);
+                \node[rotate=90, text width=\badgeheight, align=center] at (0.82,1) {\barcode{\badge@id}};
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
@@ -173,34 +179,70 @@
 \begin{document}
     \centering
     %BADGEDATA%
-    %\begin{tabular}{|l|l|}
-    %    \hline
-    %    \badgefront[prename=Test1,surname=User,job=Bier,shift="",role=Standleiter,perm-food=true,perm-finance=false] & \badgefront[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgefront[prename=Test,surname=User] & \badgefront[prename=Test,surname=User] \\
-    %    \hline
-    %\end{tabular}
+    \begin{tabular}{|l|l|}
+        \hline
+        \badgefront[prename=Test1,%
+            surname=User,%
+            job=Bier,%
+            shift="",%
+            role=Standleiter,%
+            photo=,%
+            roleid="",%
+            fontcolor=000000,%
+            bgfront=bg.png,%
+            bgback=bg_back.png,%
+            perm-food=true,%
+            perm-finance=false] %
+        & %
+        \badgefront[prename=Test1,%
+            surname=User,%
+            job=Bier,%
+            shift="",%
+            role=Standleiter,%
+            photo=,%
+            roleid="",%
+            fontcolor=000000,%
+            bgfront=bg.png,%
+            bgback=bg_back.png,%
+            perm-food=true,%
+            perm-finance=false] %
+        \\
+        \hline
+    \end{tabular}
 
-    %\pagebreak
+    \pagebreak
 
-    %\begin{tabular}{|l|l|}
-    %    \hline
-    %    \badgeback[prename=Test1,surname=User,job=Bier,shift="",role=Standleiter,perm-food=true,perm-finance=false] & \badgeback[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-    %    \hline
-    %    \badgeback[prename=Test,surname=User] & \badgeback[prename=Test,surname=User] \\
-    %    \hline
-    %\end{tabular}
-    %\pagebreak
+    \begin{tabular}{|l|l|}
+        \hline
+        \badgeback[prename=Test1,%
+            surname=User,%
+            job=Bier,%
+            shift="",%
+            role=Standleiter,%
+            photo=,%
+            roleid="",%
+            fontcolor=000000,%
+            bgfront=bg.png,%
+            bgback=bg_back.png,%
+            perm-food=true,%
+            perm-finance=false,
+            id=0000000001] %
+        & %
+        \badgeback[prename=Test1,%
+            surname=User,%
+            job=Bier,%
+            shift="",%
+            role=Standleiter,%
+            photo=,%
+            roleid="",%
+            fontcolor=000000,%
+            bgfront=bg.png,%
+            bgback=bg_back.png,%
+            perm-food=true,%
+            perm-finance=false,%
+            id=0000000002] %
+        \\
+        \hline
+    \end{tabular}
+    \pagebreak
 \end{document}
