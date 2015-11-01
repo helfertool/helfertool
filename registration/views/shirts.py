@@ -34,7 +34,7 @@ def shirts(request, event_url_name):
 
     # check if shirt sizes are collected for this event
     if not event.ask_shirt:
-        return notactive()
+        return notactive(request)
 
     # size names
     size_names = [name for size, name in Helper.SHIRT_CHOICES]

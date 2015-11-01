@@ -43,7 +43,11 @@
 
                     {% if admin %}
                         <li><a href="{% url 'statistics' event.url_name %}">{% trans "Statistics" %}</a></li>
-                        <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
+
+                        {% if event.ask_shirt %}
+                            <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
+                        {% endif %}
+
                         <li><a href="{% url 'links' event.url_name %}">{% trans "Links" %}</a></li>
                     {% endif %}
 
