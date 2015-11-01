@@ -26,7 +26,7 @@ class RegisterForm(forms.ModelForm):
         necessary. Then the custom fields for the shifts are created.
         """
         self.event = kwargs.pop('event')
-        self.link = kwargs.pop('link')
+        self.displayed_shifts = kwargs.pop('shifts')
         self.shifts = {}
 
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -40,8 +40,8 @@ class RegisterForm(forms.ModelForm):
             self.fields.pop('vegetarian')
 
         # get a list of all shifts
-        if self.link:
-            all_shifts = self.link.shifts.all()
+        if self.displayed_shifts:
+            all_shifts = self.displayed_shifts
         else:
             all_shifts = Shift.objects.filter(job__event=self.event)
 
@@ -52,7 +52,8 @@ class RegisterForm(forms.ModelForm):
                                                  required=False)
 
             # disable button if shift is full
-            if shift.is_full() or (shift.blocked and not self.link):
+            if shift.is_full() or (shift.blocked and not
+                                   self.displayed_shifts):
                 self.fields[id].widget.attrs['disabled'] = True
 
             # set class if infection instruction is needed for this shift
@@ -65,20 +66,20 @@ class RegisterForm(forms.ModelForm):
             self.shifts[id] = shift.pk
 
     def get_jobs(self):
-        if self.link:
+        if self.displayed_shifts:
             jobs = []
 
-            # get all jobs, that have a shift contained in link.shifts
+            # get all jobs, that have a shift contained in displayed_shifts
             for job in self.event.job_set.all():
-                if job.shift_set.all() & self.link.shifts.all():
+                if job.shift_set.all() & self.displayed_shifts.all():
                     jobs.append(job)
             return jobs
         else:
             return self.event.public_jobs
 
     def get_shifts(self, job):
-        if self.link:
-            shifts = self.link.shifts.filter(job=job)
+        if self.displayed_shifts:
+            shifts = self.displayed_shifts.filter(job=job)
             return job.shifts_by_day(shifts)
         else:
             return job.shifts_by_day()
@@ -120,7 +121,7 @@ class RegisterForm(forms.ModelForm):
                 raise ValidationError(_("You selected a full shift."))
 
             # check if shift is blocked
-            if cur_shift.blocked and not self.link:
+            if cur_shift.blocked and not self.displayed_shifts:
                 raise ValidationError(_("You selected a blocked shift."))
 
         # check number of shifts > 0

@@ -60,7 +60,7 @@
                                 {# time #}
                                 {% if shift.is_full %}
                                     <del>{{ shift.time_hours }}</del>
-                                {% elif shift.blocked and not form.link %}
+                                {% elif shift.blocked and not form.displayed_shifts %}
                                     <del>{{ shift.time_hours }}</del>
                                 {% else %}
                                     {{ shift.time_hours }}

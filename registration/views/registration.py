@@ -30,9 +30,11 @@ def form(request, event_url_name, link_pk=None):
 
     # get link if given
     link = None
+    all_shifts = None
     if link_pk:
         try:
             link = Link.objects.get(pk=link_pk)
+            all_shifts = link.shifts.all()
         except Link.DoesNotExist:
             # show some message when link does not exist
             context = {'event': event}
@@ -54,7 +56,7 @@ def form(request, event_url_name, link_pk=None):
             return nopermission(request)
 
     # handle form
-    form = RegisterForm(request.POST or None, event=event, link=link)
+    form = RegisterForm(request.POST or None, event=event, shifts=all_shifts)
 
     if form.is_valid():
         helper = form.save()
