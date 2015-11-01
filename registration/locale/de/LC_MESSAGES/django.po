@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-31 22:36+0100\n"
-"PO-Revision-Date: 2015-10-31 22:39+0100\n"
+"POT-Creation-Date: 2015-11-01 16:07+0100\n"
+"PO-Revision-Date: 2015-11-01 16:07+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -146,24 +146,24 @@ msgstr "Betreff"
 msgid "Text"
 msgstr "Text"
 
-#: registration/forms/registration.py:120
+#: registration/forms/registration.py:129
 msgid "You selected a full shift."
 msgstr "Du hast eine volle Schicht ausgewählt."
 
-#: registration/forms/registration.py:124
+#: registration/forms/registration.py:133
 msgid "You selected a blocked shift."
 msgstr "Du hast eine gesperrte Schicht ausgewählt."
 
-#: registration/forms/registration.py:128
+#: registration/forms/registration.py:137
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: registration/forms/registration.py:134
+#: registration/forms/registration.py:143
 msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: registration/forms/registration.py:151
+#: registration/forms/registration.py:160
 #, python-format
 msgid "Some of your shifts overlap more then %(minutes)d minutes."
 msgstr ""
@@ -294,17 +294,17 @@ msgstr "Primäre Aufgabe"
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: registration/models/badge.py:268
+#: registration/models/badge.py:269
 #: registration/templates/registration/admin/configure_badges.html:95
 msgid "Role"
 msgstr "Rolle"
 
-#: registration/models/badge.py:276
+#: registration/models/badge.py:277
 #: registration/templates/registration/admin/configure_badges.html:96
 msgid "Design"
 msgstr "Design"
 
-#: registration/models/badge.py:281
+#: registration/models/badge.py:282
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
@@ -506,6 +506,11 @@ msgstr "Switch"
 msgid "Privacy"
 msgstr "Datenschutz"
 
+#: registration/templates/registration/admin/add_helper.html:6
+#: registration/templates/registration/admin/helpers_for_job.html:54
+msgid "Add helper"
+msgstr "Helfer hinzufügen"
+
 #: registration/templates/registration/admin/add_user.html:6
 #: registration/templates/registration/admin/base.html:68
 msgid "Add user"
@@ -536,12 +541,16 @@ msgstr ""
 msgid "Job"
 msgstr "Aufgabe"
 
-#: registration/templates/registration/admin/badges.html:30
-msgid "Generate"
-msgstr "Generieren"
+#: registration/templates/registration/admin/badges.html:31
+msgid "Unregistered badges"
+msgstr "Nicht registrierte Badges"
 
-#: registration/templates/registration/admin/badges.html:35
-#: registration/templates/registration/admin/badges.html:38
+#: registration/templates/registration/admin/badges.html:36
+msgid "All badges"
+msgstr "Alle Badges"
+
+#: registration/templates/registration/admin/badges.html:41
+#: registration/templates/registration/admin/badges.html:44
 #, python-format
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
@@ -749,7 +758,6 @@ msgstr "Standards"
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:23
-#: registration/templates/registration/admin/register_badge.html:18
 msgid "Save"
 msgstr "Speichern"
 
@@ -929,9 +937,9 @@ msgid "Edit helper"
 msgstr "Helfer bearbeiten"
 
 #: registration/templates/registration/admin/edit_helper.html:9
-#: registration/templates/registration/admin/helpers_for_job.html:54
-msgid "Add helper"
-msgstr "Helfer hinzufügen"
+#: registration/templates/registration/admin/helpers_for_job.html:32
+msgid "Add coordinator"
+msgstr "Koordinator hinzufügen"
 
 #: registration/templates/registration/admin/edit_helper.html:31
 msgid "Badge"
@@ -992,10 +1000,6 @@ msgstr "Gesperrt"
 #, python-format
 msgid "Helpers: %(jobname)s"
 msgstr "Helfer: %(jobname)s"
-
-#: registration/templates/registration/admin/helpers_for_job.html:32
-msgid "Add coordinator"
-msgstr "Koordinator hinzufügen"
 
 #: registration/templates/registration/admin/helpers_table.html:34
 msgid "Registration time"
@@ -1069,7 +1073,7 @@ msgstr "Größe"
 msgid "Number"
 msgstr "Anzahl"
 
-#: registration/templates/registration/form.html:7
+#: registration/templates/registration/form.html:5
 #: registration/templates/registration/invalid_link.html:7
 #: registration/templates/registration/not_active.html:7
 #: registration/templates/registration/registered.html:5
@@ -1077,18 +1081,6 @@ msgstr "Anzahl"
 #, python-format
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
-
-#: registration/templates/registration/form.html:23
-msgid "Jobs"
-msgstr "Aufgaben"
-
-#: registration/templates/registration/form.html:85
-msgid "Personal data"
-msgstr "Persönliche Daten"
-
-#: registration/templates/registration/form.html:105
-msgid "Register"
-msgstr "Anmelden"
 
 #: registration/templates/registration/index.html:13
 #: registration/templates/registration/index.html:30
@@ -1159,6 +1151,18 @@ msgstr ""
 "Du musst deine E-Mail Adresse bestätigen, indem du auf den Link klickst, den "
 "wir dir gerade geschickt haben."
 
+#: registration/templates/registration/registerform.html:8
+msgid "Jobs"
+msgstr "Aufgaben"
+
+#: registration/templates/registration/registerform.html:70
+msgid "Personal data"
+msgstr "Persönliche Daten"
+
+#: registration/templates/registration/registerform.html:90
+msgid "Register"
+msgstr "Anmelden"
+
 #: registration/templates/registration/validate.html:11
 msgid "Your mail address was already confirmed."
 msgstr "Deine E-Mail Adresse wurde bereits bestätigt."
@@ -1172,12 +1176,12 @@ msgstr "Du hast deine E-Mail Adresse bestätigt."
 msgid "Added user %(username)s"
 msgstr "Nutzer %(username)s hinzugefügt"
 
-#: registration/views/badge.py:321
+#: registration/views/badge.py:337
 #, python-format
 msgid "Badge already printed: %(name)s"
 msgstr "Bagde bereits gedruckt: %(name)s"
 
-#: registration/views/badge.py:327
+#: registration/views/badge.py:343
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
@@ -1192,12 +1196,12 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:143
+#: registration/views/helper.py:153
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:178
+#: registration/views/helper.py:189
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
@@ -1238,6 +1242,9 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Generate"
+#~ msgstr "Generieren"
 
 #~ msgid ""
 #~ "You cannot delete the helper from other shifts. The helper was not deleted"
