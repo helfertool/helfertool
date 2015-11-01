@@ -100,6 +100,10 @@ def generate_badges(request, event_url_name, job_pk, generate_all=False):
     try:
         pdf_filename = creator.generate()
     except BadgeCreatorError as e:
+        # remove temp files
+        creator.finish()
+
+        # return error message
         context = {'event': event,
                    'error': e.value,
                    'latex_output': e.get_latex_output()}
