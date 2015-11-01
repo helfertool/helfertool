@@ -16,7 +16,7 @@
 
         {% bootstrap_field form.shifts %}
 
-        {% if helper.shifts.count > 1 %}
+        {% if helper.shifts.count > 1 and not show_all_shifts %}
             <p>
                 {% trans "There are more shifts for this helper." %}
                 <a href="{% url 'delete_helper_all' event.url_name helper.pk shift.pk %}">

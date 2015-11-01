@@ -151,7 +151,8 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
     context = {'event': event,
                'helper': helper,
                'shift': shift,
-               'form': form}
+               'form': form,
+               'show_all_shifts': show_all_shifts}
     return render(request, 'registration/admin/delete_helper.html', context)
 
 
