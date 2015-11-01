@@ -5,8 +5,6 @@
 {% block admincontent %}
     <h2>{% trans "Statistics" %}</h2>
 
-    <h3>{% trans "Numbers" %}</h3>
-
     <table class="table">
         <tr>
             <th class="col-sm-4">{% trans "Helpers and coordinators" %}</th>
@@ -23,21 +21,4 @@
             </tr>
         {% endif %}
     </table>
-
-    {% if shirts %}
-        <h3>{% trans "T-Shirts" %}</h3>
-
-        <table class="table">
-            <tr>
-                <th class="col-sm-4">{% trans "Size" %}</th>
-                <th class="col-sm-8">{% trans "Number" %}</th>
-            </tr>
-            {% for size, num in shirts.items %}
-                <tr>
-                    <td>{{ size }}</td>
-                    <td>{{ num }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
 {% endblock %}

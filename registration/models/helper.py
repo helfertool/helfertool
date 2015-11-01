@@ -209,6 +209,13 @@ class Helper(models.Model):
             return False
         return getattr(self, 'job_set').count() > 0
 
+    @property
+    def first_shift(self):
+        shifts = self.shifts.order_by('begin')
+        if len(shifts) > 0:
+            return shifts[0]
+        return None
+
 
 @receiver(post_save, sender=Helper, dispatch_uid='helper_saved')
 def helper_saved(sender, instance, using, **kwargs):

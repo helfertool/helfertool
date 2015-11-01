@@ -1,0 +1,53 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "T-Shirts" %}</h2>
+
+    <h3>{% trans "Total" %}</h3>
+
+    <table class="table">
+        <tr>
+            {% for size, num in total_shirts.items %}
+                <th>{{ size }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for size, num in total_shirts.items %}
+                <td>{{ num }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <h3>{% trans "Helpers (without coordinators)" %}</h3>
+
+    {% for job,data in job_shirts.items %}
+        <h4>{{ job.name }}</h4>
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Shift" %}</th>
+                {% for size in size_names %}
+                    <th>{{ size }}</th>
+                {% endfor %}
+            </tr>
+
+            {% for shift,sizes_for_shift in data.shifts.items %}
+                <tr>
+                    <td>{{ shift.time }}</td>
+                    {% for size,num in sizes_for_shift.items %}
+                        <td>{{ num }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <th>{% trans "Total" %}</th>
+                {% for size,num in data.total.items %}
+                    <th>{{ num }}</th>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

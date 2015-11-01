@@ -170,6 +170,10 @@ urlpatterns = [
         views.statistics,
         name='statistics'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/shirts/$',
+        views.shirts,
+        name='shirts'),
+
     # badges
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
         views.configure_badges,

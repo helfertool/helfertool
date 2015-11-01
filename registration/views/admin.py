@@ -1,16 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from collections import OrderedDict
-
 from .utils import nopermission, is_involved
 
-from ..models import Event, Helper
+from ..models import Event
 from ..forms import UserCreationForm
 from ..templatetags.permissions import has_adduser_group, has_perm_group
 
@@ -94,28 +91,8 @@ def statistics(request, event_url_name):
     # number of vegetarians
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
-    # shirt sizes
-    if event.ask_shirt:
-        helper_shirts = event.helper_set.values('shirt').annotate(num=Count('shirt'))
-
-        # create data for template (iterate over all sizes in correct order)
-        shirts = OrderedDict()
-        for size, name in Helper.SHIRT_CHOICES:
-            num = 0
-
-            # get size for helpers
-            try:
-                num = helper_shirts.get(shirt=size)['num']
-            except Helper.DoesNotExist:
-                pass
-
-            shirts.update({name: num})
-    else:
-        shirts = None
-
     # render
     context = {'event': event,
-               'shirts': shirts,
                'num_helpers': num_helpers,
                'num_coordinators': num_coordinators,
                'num_vegetarians': num_vegetarians}

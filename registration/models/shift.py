@@ -1,11 +1,13 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.db.models.signals import pre_delete
-from django.dispatch import receiver
 from django.template.defaultfilters import date as date_f
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import localtime
 from django.utils.translation import ugettext_lazy as _
+
+from collections import OrderedDict
+
+from .helper import Helper
 
 
 @python_2_unicode_compatible
@@ -85,15 +87,19 @@ class Shift(models.Model):
 
         return int(round(float(self.num_helpers()) / self.number * 100.0, 0))
 
+    @property
+    def shirt_sizes(self):
+        # data structure
+        shirts = OrderedDict()
+        for size, name in Helper.SHIRT_CHOICES:
+            shirts.update({name: 0})
 
-#@receiver(pre_delete, sender=Shift, dispatch_uid='shift_delete')
-#def shift_delete(sender, instance, using, **kwargs):
-#    """ Delete helpers without shifts, when a shift is deleted.
-#
-#    This is a signal handler, that is called, when a shift is deleted. It
-#    deletes all helpers, that are only registered for this single shift.
-#    """
-#    # delete helpers, that have only one shift, when this shift is deleted
-#    for helper in instance.helper_set.all():
-#        if helper.shifts.count() == 1 and not helper.is_coordinator:
-#            helper.delete()
+        # collect all sizes, this must be the first shift of the helper
+        for helper in self.helper_set.all():
+            if helper.first_shift == self:
+                tmp = shirts[helper.get_shirt_display()]
+                shirts.update({helper.get_shirt_display(): tmp+1})
+            if not helper.first_shift:
+                print(str(helper))
+
+        return shirts
