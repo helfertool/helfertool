@@ -13,9 +13,7 @@
         <form action="" method="post">
             {% csrf_token %}
 
-            {% bootstrap_form form %}
-
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+            {% bootstrap_form form show_label=False %}
         </form>
     {% endif %}
 {% endblock %}
