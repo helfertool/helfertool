@@ -27,6 +27,10 @@ class RegisterForm(forms.ModelForm):
         """
         self.event = kwargs.pop('event')
         self.displayed_shifts = kwargs.pop('shifts')
+        try:
+            self.selected_shifts = kwargs.pop('selected_shifts')
+        except KeyError:
+            self.selected_shifts = []
         self.shifts = {}
 
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -55,6 +59,10 @@ class RegisterForm(forms.ModelForm):
             if shift.is_full() or (shift.blocked and not
                                    self.displayed_shifts):
                 self.fields[id].widget.attrs['disabled'] = True
+
+            # check button if this shift should be selected
+            if shift in self.selected_shifts:
+                self.fields[id].widget.attrs['checked'] = True
 
             # set class if infection instruction is needed for this shift
             if shift.job.infection_instruction:

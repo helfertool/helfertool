@@ -148,7 +148,7 @@ urlpatterns = [
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/'
         '(?P<job_pk>[0-9]+)/$',
-        views.add_helper,
+        views.add_coordinator,
         name='add_coordinator'),
 
     # export

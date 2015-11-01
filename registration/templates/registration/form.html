@@ -2,8 +2,6 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% load registerform_shifts %}
-
 {% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
 
 {% block content %}
@@ -17,117 +15,7 @@
 
     {{ event.text | safe }}
 
-    <form action="" method="post">
-        {% csrf_token %}
-
-        <h2>{% trans "Jobs" %}</h2>
-        {# list of all jobs and shifts #}
-
-        {% get_jobs form as jobs %}
-        {% for job in jobs %}
-            {% get_shifts form job as shifts %}
-
-            <h3>
-                {% if job.description %}
-                    <button type="button"
-                            class="btn btn-info info-expand"
-                            data-toggle="collapse"
-                            data-target="#job-{{ job.pk }}">
-                        {% bootstrap_icon "info-sign" %}
-                    </button>
-                {% endif %}
-                {{ job.name }}
-            </h3>
-
-            <div id="job-{{ job.pk }}" class="collapse">
-                <p>{{ job.description | safe }}</p>
-            </div>
-
-            <table class="shifts">
-                <tr>
-                    {% for day, shifts in shifts.items %}
-                        <th>{{ day }}</th>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    {% for day, shifts in shifts.items %}
-                        <td>
-                        {% for shift in shifts %}
-                            {# checkbox #}
-                            <label>
-                                {{ form | lookup_shift:shift.pk }}
-
-                                {# time #}
-                                {% if shift.is_full %}
-                                    <del>{{ shift.time_hours }}</del>
-                                {% elif shift.blocked and not form.displayed_shifts %}
-                                    <del>{{ shift.time_hours }}</del>
-                                {% else %}
-                                    {{ shift.time_hours }}
-                                {% endif %}
-                            </label>
-
-                            {# number of helpers #}
-                            {% if event.show_public_numbers %}
-                            <span class="numbers">
-                                ({{ shift.num_helpers }}/{{ shift.number }})
-                            </span>
-                            {% endif %}
-
-                            <br />
-                        {% endfor %}
-                        </td>
-                    {% endfor %}
-                </tr>
-            </table>
-        {% endfor %}
-
-        <h2>{% trans "Personal data" %}</h2>
-
-        {# personal data, nothing special... #}
-        <div class="row">
-            <div class="col-xs-12 col-lg-5">
-                {% bootstrap_field form.prename %}
-                {% bootstrap_field form.surname %}
-                {% bootstrap_field form.email %}
-                {% bootstrap_field form.phone %}
-                {% if event.ask_shirt %}
-                    {% bootstrap_field form.shirt %}
-                {% endif %}
-                {% bootstrap_field form.infection_instruction %}
-                {% if event.ask_vegetarian %}
-                    {% bootstrap_field form.vegetarian %}
-                {% endif %}
-                {% bootstrap_field form.comment %}
-            </div>
-        </div>
-
-        <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
-
-        <script>
-            function handle_infection_instruction()
-            {
-                var show_field = 0;
-
-                // iterate over all relevant checkboxes
-                $(".infection_instruction").each(function() {
-                    if($(this).prop('checked'))
-                    {
-                        show_field = 1;
-                        return false;
-                    }
-                })
-
-                // show or hide input field
-                if(show_field)
-                    $("#id_infection_instruction").parent().show()
-                else
-                    $("#id_infection_instruction").parent().hide()
-            }
-
-            handle_infection_instruction();
-        </script>
-    </form>
+    {% include "registration/registerform.html" with event=event form=form %}
 
     {{ event.imprint | safe }}
 {% endblock %}

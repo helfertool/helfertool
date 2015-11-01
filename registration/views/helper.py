@@ -7,9 +7,9 @@ from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
 
-from ..models import Event, Job
+from ..models import Event, Job, Shift
 from ..forms import HelperForm, HelperDeleteForm, BadgeForm, \
-    HelperDeleteCoordinatorForm
+    HelperDeleteCoordinatorForm, RegisterForm
 
 
 @login_required
@@ -82,31 +82,41 @@ def edit_helper(request, event_url_name, helper_pk, job_pk=None):
 
 
 @login_required
-def add_helper(request, event_url_name, shift_pk=None, job_pk=None):
-    """ Add helper or coordinator.
+def add_helper(request, event_url_name, shift_pk):
+    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
 
-    If shift is given, a helper is added. If job is given, a coordinator is
-    added.
-    """
-    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk,
-                                           job_pk=job_pk)
+    # check permission
+    if not shift.job.is_admin(request.user):
+        return nopermission(request)
 
-    # TODO: check if shift or job is given
+    # get all shifts of this job
+    all_shifts = Shift.objects.filter(job=shift.job)
 
-    if not job:
-        job = shift.job
+    form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
+                        selected_shifts = [shift, ])
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('helpers',
+                                            args=[event_url_name,
+                                                  shift.job.pk]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/add_helper.html', context)
+
+
+@login_required
+def add_coordinator(request, event_url_name, job_pk):
+    event, job, shift, helper = get_or_404(event_url_name, job_pk=job_pk)
 
     # check permission
     if not job.is_admin(request.user):
         return nopermission(request)
 
     # form
-    if job_pk:
-        # add coordinator
-        form = HelperForm(request.POST or None, job=job, event=event)
-    else:
-        # add helper
-        form = HelperForm(request.POST or None, shift=shift, event=event)
+    form = HelperForm(request.POST or None, job=job, event=event)
 
     if form.is_valid():
         form.save()
