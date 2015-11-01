@@ -11,6 +11,7 @@ from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm, RegisterBadgeForm
 from ..badges import BadgeCreator, BadgeCreatorError, warnings_for_job
+from ..utils import escape_filename
 
 
 def notactive(request):
@@ -111,7 +112,7 @@ def generate_badges(request, event_url_name, job_pk, generate_all=False):
                       context)
 
     # output
-    filename = "%s.pdf" % job.name
+    filename = escape_filename("%s.pdf" % job.name)
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
