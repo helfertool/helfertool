@@ -84,7 +84,10 @@ def generate_badges(request, event_url_name, job_pk):
 
     # add helpers and coordinators
     for h in job.helpers_and_coordinators():
-        creator.add_helper(h)
+        helpers_job = h.badge.get_job()
+        # print badge only if this is the primary job or the job is unambiguous
+        if not helpers_job or helpers_job == job:
+            creator.add_helper(h)
 
     # generate
     try:

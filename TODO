@@ -1,22 +1,14 @@
-* atomic validation if shift is full
-* Load Test (deactivate mail!)
-* bot protection
-
 * add helper to more shifts
 
 * badges
-  * escape for LaTeX
-  * shift (name for each shift, time,...?)
-  * for some jobs an upload of an image is possible
-  * delete_badge{permission, role, design}
-  * delete primary_job if helper is deleted from shift
-  * do not print badge if its not the primary job
+  * generate only not printed badges
 
 * job admin can see t-shirt size table of their job
 
 Low priority
 ============
 
+* bot protection
 * all vs. distinct
 * set width of table columns
 * Mail: link to registered page
@@ -27,6 +19,9 @@ Low priority
 * add errors to all forms
 
 * badges
+  * shift (name for each shift, time,...?)
+  * delete_badge{permission, role, design}
+  * for some jobs an upload of an image is possible
   * Background images optional, color instead
   * configure path to pdflatex in settings
   * timeout and other protection for subprocess call

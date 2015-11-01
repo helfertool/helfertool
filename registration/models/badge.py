@@ -258,6 +258,7 @@ class Badge(models.Model):
         help_text=_("Only necessary if this person has multiple jobs."),
         blank=True,
         null=True,
+        on_delete=models.SET_NULL,
     )
 
     custom_role = models.ForeignKey(
