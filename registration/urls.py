@@ -212,6 +212,12 @@ urlpatterns = [
         name='generate_badges'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
+        '(?P<job_pk>[0-9]+)/all/$',
+        views.generate_badges,
+        {'generate_all': True},
+        name='generate_all_badges'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
         '(?P<job_pk>[0-9]+)/warnings/$',
         views.badges_warnings,
         name='badges_warnings'),

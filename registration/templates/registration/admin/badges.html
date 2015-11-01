@@ -26,8 +26,14 @@
                 <tr>
                     <td>{{ job.name }}</td>
                     <td>
-                        <a href="{% url "generate_badges" event.url_name job.pk %}">
-                            {% trans "Generate" %}
+                        {% if event.badge_settings.barcodes %}
+                            <a href="{% url "generate_badges" event.url_name job.pk %}">
+                                {% trans "Unregistered badges" %}
+                            </a>
+                            <br />
+                        {% endif %}
+                        <a href="{% url "generate_all_badges" event.url_name job.pk %}">
+                            {% trans "All badges" %}
                         </a>
                     </td>
                     <td>

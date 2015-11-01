@@ -66,7 +66,7 @@ def badges_warnings(request, event_url_name, job_pk):
 
 
 @login_required
-def generate_badges(request, event_url_name, job_pk):
+def generate_badges(request, event_url_name, job_pk, generate_all=False):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
@@ -82,11 +82,18 @@ def generate_badges(request, event_url_name, job_pk):
     # badge creation
     creator = BadgeCreator(event.badge_settings)
 
+    # skip already printed badges?
+    skip_printed = event.badge_settings.barcodes and not generate_all
+
     # add helpers and coordinators
     for h in job.helpers_and_coordinators():
+        # skip if badge was printed already (and this behaviour is requested)
+        if skip_printed and h.badge.printed:
+            continue
+
         helpers_job = h.badge.get_job()
         # print badge only if this is the primary job or the job is unambiguous
-        if not helpers_job or helpers_job == job:
+        if (not helpers_job or helpers_job == job):
             creator.add_helper(h)
 
     # generate
@@ -302,6 +309,7 @@ def edit_badgedesign(request, event_url_name, design_pk=None):
                'form': form}
     return render(request, 'registration/admin/edit_badgedesign.html',
                   context)
+
 
 @login_required
 def register_badge(request, event_url_name):
