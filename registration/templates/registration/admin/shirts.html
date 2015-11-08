@@ -35,7 +35,7 @@
 
             {% for shift,sizes_for_shift in data.shifts.items %}
                 <tr>
-                    <td>{{ shift.time }}</td>
+                    <td>{{ shift.time }}{% if shift.name %}, {{ shift.name }}{%endif %}</td>
                     {% for size,num in sizes_for_shift.items %}
                         <td>{{ num }}</td>
                     {% endfor %}

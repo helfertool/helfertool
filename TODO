@@ -4,8 +4,6 @@
 * add helper to more shifts or as coordinator to other job
 * job admin can see t-shirt size table of their job
 
-* title for shift
-
 Low priority
 ============
 
@@ -50,3 +48,4 @@ After ESP
 * remove old uploaded files in media directory
 * latex_template: validation for .tex
 * copy event with job, shifts, settings, badge stuff but without admins and helpers
+* add ical file to confirmation mail

@@ -39,7 +39,13 @@
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
             <h4>{{ shift.time_hours }}
-                ({{ shift.num_helpers }} von {{ shift.number}})</h4>
+                {% blocktrans with current=shift.num_helpers total=shift.number %}
+                    ({{ current }} of {{ total }})
+                {% endblocktrans %}
+                {% if shift.name %}
+                    <br/ >{{ shift.name }}
+                {% endif %}
+            </h4>
 
             {% if shift.helper_set.count == 0 %}
                 <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>

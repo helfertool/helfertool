@@ -50,6 +50,13 @@ table.shifts span.numbers
 {
     font-size:80%;
     color:grey;
+    font-weight: normal;
+}
+
+table.shifts label
+{
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* icons (like xls or pdf) */

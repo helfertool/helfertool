@@ -20,6 +20,7 @@ class Shift(models.Model):
         :end: end of the shift
         :number: number of people
         :blocked: shift is blocked, if the job is public
+        :name: name of the shift (optional)
     """
     class Meta:
         ordering = ['job', 'begin', 'end']
@@ -27,6 +28,14 @@ class Shift(models.Model):
     job = models.ForeignKey(
         'Job',
     )
+
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_("Name (optional)"),
+        default="",
+        blank=True,
+    )
+
 
     begin = models.DateTimeField(
         verbose_name=_("Begin"),
@@ -49,8 +58,10 @@ class Shift(models.Model):
     )
 
     def __str__(self):
-        date = date_f(localtime(self.begin), 'DATETIME_FORMAT')
-        return "%s, %s" % (self.job.name, date)
+        if self.name:
+            return "%s, %s, %s" % (self.job.name, self.name, self.time())
+        else:
+            return "%s, %s" % (self.job.name, self.time())
 
     def time(self):
         """ Returns a string representation of the begin and end time.
