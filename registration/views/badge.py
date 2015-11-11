@@ -89,10 +89,10 @@ def generate_badges(request, event_url_name, job_pk=None, generate_all=False):
     # jobs that should be handled
     if job:
         jobs = [job, ]
-        filename = "%s.pdf" % job.name
+        filename = job.name
     else:
         jobs = event.job_set.all()
-        filename = "%s.pdf" % event.name
+        filename = event.name
 
     # add helpers and coordinators
     for j in jobs:
