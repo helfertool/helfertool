@@ -174,7 +174,7 @@ urlpatterns = [
         views.shirts,
         name='shirts'),
 
-    # badges
+    # badges configuration
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
         views.configure_badges,
         name='configure_badges'),
@@ -210,26 +210,42 @@ urlpatterns = [
         views.edit_badgedesign,
         name='new_badgedesign'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
-        '(?P<job_pk>[0-9]+)/$',
-        views.generate_badges,
-        name='generate_badges'),
+    # badge genration
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
-        '(?P<job_pk>[0-9]+)/all/$',
-        views.generate_badges,
-        {'generate_all': True},
-        name='generate_all_badges'),
+    # overview page
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/$',
+        views.badges,
+        name='badges'),
 
+    # show warnings
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
         '(?P<job_pk>[0-9]+)/warnings/$',
         views.badges_warnings,
         name='badges_warnings'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/',
-        views.badges,
-        name='badges'),
+    # generate for job
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
+        '(?P<job_pk>[0-9]+)/$',
+        views.generate_badges,
+        name='generate_job_badges'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
+        '(?P<job_pk>[0-9]+)/all/$',
+        views.generate_badges,
+        {'generate_all': True},
+        name='generate_all_job_badges'),
+
+    # generate for all jobs
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/alljobs/$',
+        views.generate_badges,
+        name='generate_badges'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/alljobs/all/$',
+        views.generate_badges,
+        {'generate_all': True},
+        name='generate_all_badges'),
+
+    # register badges
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/',
         views.register_badge,
         name='register_badge'),

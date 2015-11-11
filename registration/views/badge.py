@@ -67,7 +67,7 @@ def badges_warnings(request, event_url_name, job_pk):
 
 
 @login_required
-def generate_badges(request, event_url_name, job_pk, generate_all=False):
+def generate_badges(request, event_url_name, job_pk=None, generate_all=False):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
@@ -86,16 +86,25 @@ def generate_badges(request, event_url_name, job_pk, generate_all=False):
     # skip already printed badges?
     skip_printed = event.badge_settings.barcodes and not generate_all
 
-    # add helpers and coordinators
-    for h in job.helpers_and_coordinators():
-        # skip if badge was printed already (and this behaviour is requested)
-        if skip_printed and h.badge.printed:
-            continue
+    # jobs that should be handled
+    if job:
+        jobs = [job, ]
+        filename = "%s.pdf" % job.name
+    else:
+        jobs = event.job_set.all()
+        filename = "%s.pdf" % event.name
 
-        helpers_job = h.badge.get_job()
-        # print badge only if this is the primary job or the job is unambiguous
-        if (not helpers_job or helpers_job == job):
-            creator.add_helper(h)
+    # add helpers and coordinators
+    for j in jobs:
+        for h in j.helpers_and_coordinators():
+            # skip if badge was printed already (and this behaviour is requested)
+            if skip_printed and h.badge.printed:
+                continue
+
+            helpers_job = h.badge.get_job()
+            # print badge only if this is the primary job or the job is unambiguous
+            if (not helpers_job or helpers_job == j):
+                creator.add_helper(h)
 
     # generate
     try:
@@ -112,7 +121,7 @@ def generate_badges(request, event_url_name, job_pk, generate_all=False):
                       context)
 
     # output
-    filename = escape_filename("%s.pdf" % job.name)
+    filename = escape_filename("%s.pdf" % filename)
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
