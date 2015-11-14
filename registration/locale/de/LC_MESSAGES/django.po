@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 15:08+0100\n"
-"PO-Revision-Date: 2015-11-14 15:06+0100\n"
+"POT-Creation-Date: 2015-11-14 21:22+0100\n"
+"PO-Revision-Date: 2015-11-14 21:23+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -80,7 +80,7 @@ msgstr "Koordinatoren"
 
 #: registration/export/pdf.py:42 registration/models/badge.py:134
 #: registration/models/badge.py:167 registration/models/badge.py:189
-#: registration/models/job.py:33
+#: registration/models/job.py:34
 #: registration/templates/registration/admin/configure_badges.html:22
 #: registration/templates/registration/admin/configure_badges.html:62
 #: registration/templates/registration/admin/coordinators.html:16
@@ -326,7 +326,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:58 registration/templates/base.html:107
+#: registration/models/event.py:58 registration/templates/base.html:110
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -428,15 +428,15 @@ msgstr "Belehrung für Umgang mit Lebensmitteln"
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/job.py:38
+#: registration/models/job.py:39
 msgid "This job is visible publicly"
 msgstr "Diese Aufgabe ist öffentlich sichtbar"
 
-#: registration/models/job.py:43
+#: registration/models/job.py:44
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: registration/models/job.py:48
+#: registration/models/job.py:49
 #: registration/templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
@@ -540,9 +540,43 @@ msgstr "Login"
 msgid "Switch"
 msgstr "Switch"
 
-#: registration/templates/base.html:106
+#: registration/templates/base.html:107
 msgid "Privacy"
 msgstr "Datenschutz"
+
+#: registration/templates/base.html:113
+#: registration/templates/registration/about.html:5
+msgid "About this software"
+msgstr "Über diese Software"
+
+#: registration/templates/registration/about.html:8
+msgid "License"
+msgstr "Lizenz"
+
+#: registration/templates/registration/about.html:10
+#, python-format
+msgid ""
+"\n"
+"            This software was published under the <a %(a_license)s>AGPLv3</"
+"a>.\n"
+"            "
+msgstr ""
+"\n"
+"Diese Software wurde unter der <a %(a_license)s>AGPLv3</a> veröffentlicht."
+
+#: registration/templates/registration/about.html:16
+msgid "The source code can be found here:"
+msgstr "Der Quellcode kann hier gefunden werden:"
+
+#: registration/templates/registration/about.html:20
+msgid "Contact"
+msgstr "Kontakt"
+
+#: registration/templates/registration/about.html:23
+msgid "If you want to use this website for your event please contact: "
+msgstr ""
+"Wenn du diese Webseite für deine Veranstaltung nutzen willst, wende dich "
+"bitte an:"
 
 #: registration/templates/registration/admin/add_helper.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:58

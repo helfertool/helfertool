@@ -105,12 +105,12 @@
                 <p class="text-muted">
                     <a href="{% setting "PRIVACY_URL" %}" target="_blank">
                         {% trans "Privacy" %}
-                    </a>
-                    <a href="{% setting "CODE_URL" %}" target="_blank" style="text-decoration:none;">
-                        <img src="{% static "registration/img/agplv3.svg" %}" height="40px" />
-                    </a>
+                    </a> | 
                     <a href="{% setting "IMPRINT_URL" %}" target="_blank">
                         {% trans "Imprint" %}
+                    </a> | 
+                    <a href="{% url "about" %}" target="_blank">
+                        {% trans "About this software" %}
                     </a>
                 </p>
             </div>

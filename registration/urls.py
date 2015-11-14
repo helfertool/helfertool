@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -17,6 +18,11 @@ urlpatterns = [
         'django.contrib.auth.views.logout',
         {'next_page': '/'},
         name='logout'),
+
+    # about
+    url(r'^about/$',
+        TemplateView.as_view(template_name='registration/about.html'),
+        name='about'),
 
     # admin interface
     url(r'^admin/$',
