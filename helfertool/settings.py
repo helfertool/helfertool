@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 ADMINS = (('Admin Name', 'admin@localhost'), )
 
+CONTACT_MAIL = 'helfertool@localhost'
+
 PRIVACY_URL = 'https://fs.tum.de/datenschutz/'
 IMPRINT_URL = 'https://fs.tum.de/impressum/'
 
