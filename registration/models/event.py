@@ -12,6 +12,9 @@ from .badge import BadgeSettings, BadgeDefaults, Badge
 
 @python_2_unicode_compatible
 class Event(models.Model):
+    class Meta:
+        ordering = ['name', 'url_name']
+
     """ Event for registration.
 
     Columns:
