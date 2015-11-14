@@ -48,7 +48,7 @@ def table_of_helpers(elements, helpers, event):
     data = [header, ]
 
     for helper in helpers:
-        tmp = [par("%s %s" % (helper.prename, helper.surname)),
+        tmp = [par("%s %s" % (helper.firstname, helper.surname)),
                      par(helper.phone), ]
         if event.ask_shirt:
             tmp.append(par(helper.get_shirt_display()))

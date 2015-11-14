@@ -18,7 +18,7 @@ class Helper(models.Model):
 
     Columns:
         :shifts: all shifts of this person
-        :prename: the prename
+        :firstname: the firstname
         :surname: the surname
         :email: the e-mail address
         :phone: phone number
@@ -83,9 +83,9 @@ class Helper(models.Model):
         'Event',
     )
 
-    prename = models.CharField(
+    firstname = models.CharField(
         max_length=200,
-        verbose_name=_("Prename"),
+        verbose_name=_("First name"),
     )
 
     surname = models.CharField(
@@ -137,7 +137,7 @@ class Helper(models.Model):
     )
 
     def __str__(self):
-        return "%s %s" % (self.prename, self.surname)
+        return "%s %s" % (self.firstname, self.surname)
 
     def get_infection_instruction_short(self):
         """ Returns the short description for the infection_instruction
@@ -188,7 +188,7 @@ class Helper(models.Model):
     @property
     def full_name(self):
         """ Returns full name of helper """
-        return "%s %s" % (self.prename, self.surname)
+        return "%s %s" % (self.firstname, self.surname)
 
     @property
     def has_to_validate(self):

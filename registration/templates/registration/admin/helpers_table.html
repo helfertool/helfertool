@@ -17,7 +17,7 @@ coordinators. This is only important for the delete_helper view.
 <table class="table">
     <tr>
         <th></th>
-        <th>{% trans "Prename" %}</th>
+        <th>{% trans "First name" %}</th>
         <th>{% trans "Surname" %}</th>
         <th>{% trans "E-Mail" %}</th>
         <th>{% trans "Mobile phone" %}</th>
@@ -41,7 +41,7 @@ coordinators. This is only important for the delete_helper view.
                     <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>
                 {% endif %}
             </td>
-            <td>{{ helper.prename }}</td>
+            <td>{{ helper.firstname }}</td>
             <td>{{ helper.surname }}</td>
             <td>{{ helper.email }}</td>
             <td>{{ helper.phone }}</td>

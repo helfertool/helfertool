@@ -11,7 +11,7 @@
 
     <ul>
         {% for h in helpers %}
-            <li><a href="{% url 'edit_helper' event.url_name h.pk %}">{{ h.prename }} {{ h.surname }}</a></li>
+            <li><a href="{% url 'edit_helper' event.url_name h.pk %}">{{ h.firstname }} {{ h.surname }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

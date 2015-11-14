@@ -215,9 +215,9 @@ class Badge(models.Model):
         'Helper',
     )
 
-    prename = models.CharField(
+    firstname = models.CharField(
         max_length=200,
-        verbose_name=_("Other prename"),
+        verbose_name=_("Other firstname"),
         blank=True,
     )
 

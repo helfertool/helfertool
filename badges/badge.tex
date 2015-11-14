@@ -39,8 +39,8 @@
 %
 % Data for badge (do not change)
 %
-\newcommand*\badge@prename{Prename}
-\define@key{badge}{prename}{\renewcommand\badge@prename{#1}}
+\newcommand*\badge@firstname{First name}
+\define@key{badge}{firstname}{\renewcommand\badge@firstname{#1}}
 
 \newcommand*\badge@surname{Surname}
 \define@key{badge}{surname}{\renewcommand\badge@surname{#1}}
@@ -113,7 +113,7 @@
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
                 % name
-                \node[draw=none, text width=0.5\badgewidth] at (0.05,0.1) {\Large \badge@prename\ \badge@surname};
+                \node[draw=none, text width=0.5\badgewidth] at (0.05,0.1) {\Large \badge@firstname\ \badge@surname};
 
                 % job
                 \node at (0.05,0.5) {\badge@job};
@@ -147,7 +147,7 @@
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
                 % rotated name
-                \node[rotate=90, text width=\badgeheight, align=center] at (0.02,1) {\small \badge@prename\ \badge@surname};
+                \node[rotate=90, text width=\badgeheight, align=center] at (0.02,1) {\small \badge@firstname\ \badge@surname};
 
                 % food
                 \ifthenelse{\boolean{badge@perm-food}}
@@ -187,7 +187,7 @@
     %BADGEDATA%
     %\begin{tabular}{|l|l|}
     %    \hline
-    %    \badgefront[prename=Test1,%
+    %    \badgefront[firstname=Test1,%
     %        surname=User,%
     %        job=Bier,%
     %        shift="",%
@@ -200,7 +200,7 @@
     %        perm-food=true,%
     %        perm-finance=false] %
     %    & %
-    %    \badgefront[prename=Test1,%
+    %    \badgefront[firstname=Test1,%
     %        surname=User,%
     %        job=Bier,%
     %        shift="",%
@@ -220,7 +220,7 @@
 
     %\begin{tabular}{|l|l|}
     %    \hline
-    %    \badgeback[prename=Test1,%
+    %    \badgeback[firstname=Test1,%
     %        surname=User,%
     %        job=Bier,%
     %        shift="",%
@@ -234,7 +234,7 @@
     %        perm-finance=false,
     %        id=0000000001] %
     %    & %
-    %    \badgeback[prename=Test1,%
+    %    \badgeback[firstname=Test1,%
     %        surname=User,%
     %        job=Bier,%
     %        shift="",%

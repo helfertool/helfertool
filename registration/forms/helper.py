@@ -50,7 +50,7 @@ class HelperForm(forms.ModelForm):
 class HelperDeleteForm(forms.ModelForm):
     class Meta:
         model = Helper
-        fields = ['prename', 'surname', 'email', 'shifts', ]
+        fields = ['firstname', 'surname', 'email', 'shifts', ]
         widgets = {
             'shifts': forms.CheckboxSelectMultiple
         }
@@ -70,8 +70,8 @@ class HelperDeleteForm(forms.ModelForm):
             self.fields['shifts'].queryset = Shift.objects.filter(
                 pk=self.shift.pk)  # we need a queryset, not a Shift object
 
-        # make prename, surname and email readonly
-        for name in ('prename', 'surname', 'email'):
+        # make firstname, surname and email readonly
+        for name in ('firstname', 'surname', 'email'):
             self.fields[name].widget.attrs['readonly'] = True
 
     def clean(self):
@@ -96,15 +96,15 @@ class HelperDeleteForm(forms.ModelForm):
 class HelperDeleteCoordinatorForm(forms.ModelForm):
     class Meta:
         model = Helper
-        fields = ['prename', 'surname', 'email', ]
+        fields = ['firstname', 'surname', 'email', ]
 
     def __init__(self, *args, **kwargs):
         self.job = kwargs.pop('job')
 
         super(HelperDeleteCoordinatorForm, self).__init__(*args, **kwargs)
 
-        # make prename, surname and email readonly
-        for name in ('prename', 'surname', 'email'):
+        # make firstname, surname and email readonly
+        for name in ('firstname', 'surname', 'email'):
             self.fields[name].widget.attrs['readonly'] = True
 
     def delete(self):

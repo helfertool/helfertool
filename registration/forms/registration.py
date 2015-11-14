@@ -16,7 +16,7 @@ class RegisterForm(forms.ModelForm):
     """
     class Meta:
         model = Helper
-        fields = ['prename', 'surname', 'email', 'phone', 'shirt',
+        fields = ['firstname', 'surname', 'email', 'phone', 'shirt',
                   'vegetarian', 'infection_instruction', 'comment']
 
     def __init__(self, *args, **kwargs):

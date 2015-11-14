@@ -1,4 +1,4 @@
-{% load i18n %}{% blocktrans with prename=user.prename %}Hello {{ prename }},
+{% load i18n %}{% blocktrans with firstname=user.firstname %}Hello {{ firstname }},
 
 you registered for the following shifts:{% endblocktrans %}
 {% for shift in user.shifts.all %}

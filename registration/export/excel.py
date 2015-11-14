@@ -55,7 +55,7 @@ def xlsx(buffer, event, jobs):
         column = Iterator()
 
         # header
-        worksheet.write(0, column.next(), _("Prename"), bold)
+        worksheet.write(0, column.next(), _("First name"), bold)
         worksheet.write(0, column.next(), _("Surname"), bold)
         worksheet.write(0, column.next(), _("E-Mail"), bold)
         worksheet.set_column(0, column.get(), 30)
@@ -105,7 +105,7 @@ def add_helpers(worksheet, row, column, event, job, helpers):
         row.next()
         column.reset()
 
-        worksheet.write(row.get(), column.next(), helper.prename)
+        worksheet.write(row.get(), column.next(), helper.firstname)
         worksheet.write(row.get(), column.next(), helper.surname)
         worksheet.write(row.get(), column.next(), helper.email)
         worksheet.write(row.get(), column.next(), helper.phone)

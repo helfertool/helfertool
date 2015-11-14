@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 14:52+0100\n"
-"PO-Revision-Date: 2015-11-14 14:52+0100\n"
+"POT-Creation-Date: 2015-11-14 15:08+0100\n"
+"PO-Revision-Date: 2015-11-14 15:06+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,9 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.6\n"
 
-#: registration/export/excel.py:58 registration/models/helper.py:88
+#: registration/export/excel.py:58 registration/forms/user.py:33
+#: registration/models/helper.py:88
 #: registration/templates/registration/admin/helpers_table.html:20
-msgid "Prename"
+msgid "First name"
 msgstr "Vorname"
 
 #: registration/export/excel.py:59 registration/models/helper.py:93
@@ -189,10 +190,6 @@ msgstr "Dieser Nutzer existiert nicht."
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: registration/forms/user.py:33
-msgid "First name"
-msgstr "Vorname"
-
 #: registration/forms/user.py:35
 msgid "Last name"
 msgstr "Nachname"
@@ -264,8 +261,8 @@ msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
 #: registration/models/badge.py:220
-msgid "Other prename"
-msgstr "Anderer Vorname"
+msgid "Other firstname"
+msgstr "Other firstname"
 
 #: registration/models/badge.py:226
 msgid "Other surname"
@@ -1168,11 +1165,11 @@ msgstr "Zur Anmeldung gehen."
 #: registration/templates/registration/mail.txt:1
 #, python-format
 msgid ""
-"Hello %(prename)s,\n"
+"Hello %(firstname)s,\n"
 "\n"
 "you registered for the following shifts:"
 msgstr ""
-"Hallo %(prename)s,\n"
+"Hallo %(firstname)s,\n"
 "\n"
 "du hast dich für folgende Schichten angemeldet:"
 
@@ -1303,6 +1300,9 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Prename"
+#~ msgstr "Vorname"
 
 #~ msgid "Numbers"
 #~ msgstr "Zahlen"
