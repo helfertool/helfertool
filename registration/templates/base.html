@@ -103,8 +103,15 @@
         <footer class="footer">
             <div class="container">
                 <p class="text-muted">
-                    <a href="{% setting "PRIVACY_URL" %}">{% trans "Privacy" %}</a> | 
-                    <a href="{% setting "IMPRINT_URL" %}">{% trans "Imprint" %}</a>
+                    <a href="{% setting "PRIVACY_URL" %}" target="_blank">
+                        {% trans "Privacy" %}
+                    </a>
+                    <a href="{% setting "CODE_URL" %}" target="_blank" style="text-decoration:none;">
+                        <img src="{% static "registration/img/agplv3.svg" %}" height="40px" />
+                    </a>
+                    <a href="{% setting "IMPRINT_URL" %}" target="_blank">
+                        {% trans "Imprint" %}
+                    </a>
                 </p>
             </div>
         </footer>
