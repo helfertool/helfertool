@@ -39,9 +39,7 @@
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
             <h4>{{ shift.time_hours }}
-                {% blocktrans with current=shift.num_helpers total=shift.number %}
-                    ({{ current }} of {{ total }})
-                {% endblocktrans %}
+                {% blocktrans with current=shift.num_helpers total=shift.number %}({{ current }} of {{ total }}){% endblocktrans %}
                 {% if shift.name %}
                     <br/ >{{ shift.name }}
                 {% endif %}
