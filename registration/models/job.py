@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django_bleach.models import BleachField
 from collections import OrderedDict
 
 from .badge import BadgeDefaults
@@ -43,7 +44,7 @@ class Job(models.Model):
         verbose_name=_("Instruction for the handling of food necessary"),
     )
 
-    description = models.TextField(
+    description = BleachField(
         blank=True,
         verbose_name=_("Description"),
     )

@@ -39,6 +39,13 @@ IMPRINT_URL = 'https://fs.tum.de/impressum/'
 GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"
 
+# HTML sanitization for textfields
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'br', 'ul',
+                       'ol', 'li']
+BLEACH_ALLOWED_ATTRIBUTES = ['href', 'style']
+BLEACH_ALLOWED_STYLES = ['font-weight', 'text-decoration']
+BLEACH_STRIP_TAGS = True
+
 # badge creation
 BADGE_IMAGE_DIR = os.path.join(BASE_DIR, 'badgeupload')
 

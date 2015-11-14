@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
+from django_bleach.models import BleachField
 
 from .badge import BadgeSettings, BadgeDefaults, Badge
 
@@ -47,19 +47,19 @@ class Event(models.Model):
         verbose_name=_("Event name"),
     )
 
-    text = models.TextField(
+    text = BleachField(
         blank=True,
         verbose_name=_("Text before registration"),
         help_text=_("Displayed as first text of the registration form."),
     )
 
-    imprint = models.TextField(
+    imprint = BleachField(
         blank=True,
         verbose_name=_('Imprint'),
         help_text=_("Display at the bottom of the registration form."),
     )
 
-    registered = models.TextField(
+    registered = BleachField(
         blank=True,
         verbose_name=_("Text after registration"),
         help_text=_("Displayed after registration."),
