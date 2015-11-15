@@ -47,6 +47,9 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href', 'style']
 BLEACH_ALLOWED_STYLES = ['font-weight', 'text-decoration']
 BLEACH_STRIP_TAGS = True
 
+# badges: path to pdflatex
+BADGE_PDFLATEX = '/usr/bin/pdflatex'
+
 # badge creation
 BADGE_IMAGE_DIR = os.path.join(BASE_DIR, 'badgeupload')
 

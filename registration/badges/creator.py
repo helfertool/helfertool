@@ -136,7 +136,7 @@ class BadgeCreator:
 
         # call pdflatex
         try:
-            subprocess.check_output(["pdflatex", "-halt-on-error",
+            subprocess.check_output([settings.BADGE_PDFLATEX, "-halt-on-error",
                                      "-output-directory", self.dir,
                                      self.latex_filename])
         except subprocess.CalledProcessError as e:
