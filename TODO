@@ -59,7 +59,6 @@ Badges
 * Background images optional, color instead
 * timeout and other protection for subprocess call
 * Image for responsibles? (option)
-* latex_template: validation for .tex, maybe also for content
 * check security of pdflatex, set more options
 * versioning of badges (for registration/validation)
 * scale images on upload

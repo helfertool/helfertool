@@ -24,6 +24,7 @@ It is recommended to use virtualenv:
  * XlsxWriter
  * Pillow
  * reportlab
+ * python-magic
  * sphinx (only to build the documentation)
  * locustio (only for load test, Python 2 only at the moment)
 
