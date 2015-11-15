@@ -1,0 +1,19 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Add to shift" %}</h2>
+
+    {% if form.shifts %}
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            <input type="submit" value="{% trans "Add" %}" class="btn btn-default" />
+        </form>
+    {% else %}
+            <p class="text-muted">{% trans "There are no shifts left for which you have the permission to add helpers." %}</p>
+    {% endif %}
+{% endblock %}

@@ -9,7 +9,8 @@ from .utils import nopermission, get_or_404
 
 from ..models import Event, Job, Shift
 from ..forms import HelperForm, HelperDeleteForm, BadgeForm, \
-    HelperDeleteCoordinatorForm, RegisterForm
+    HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
+    HelperAddCoordinatorForm
 
 
 @login_required
@@ -127,6 +128,52 @@ def add_coordinator(request, event_url_name, job_pk):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/edit_helper.html', context)
+
+
+@login_required
+def add_helper_to_shift(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+
+    # check permission
+    if not event.is_involved(request.user):
+        return nopermission(request)
+
+    form = HelperAddShiftForm(request.POST or None, helper=helper,
+                              user=request.user)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('edit_helper',
+                                            args=[event_url_name, helper.pk]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/add_helper_to_shift.html',
+                  context)
+
+
+@login_required
+def add_helper_as_coordinator(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+
+    # check permission
+    if not event.is_involved(request.user):
+        return nopermission(request)
+
+    form = HelperAddCoordinatorForm(request.POST or None, helper=helper,
+                                    user=request.user)
+
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('edit_helper',
+                                            args=[event_url_name, helper.pk]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/add_helper_as_coordinator.html',
+                  context)
 
 
 @login_required

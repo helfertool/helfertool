@@ -5,7 +5,8 @@ from .event import edit_event, delete_event
 from .job import edit_job, delete_job
 from .shift import edit_shift, delete_shift
 from .helper import helpers, add_helper, edit_helper, delete_helper, \
-    add_coordinator, delete_coordinator
+    add_coordinator, delete_coordinator, add_helper_to_shift, \
+    add_helper_as_coordinator
 from .link import links, edit_link, delete_link
 from .badge import configure_badges, edit_badgedesign, edit_badgesettings, \
     edit_badgepermission, edit_badgerole, badges, generate_badges, \

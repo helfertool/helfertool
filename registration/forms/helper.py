@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import Helper, Shift
+from ..models import Helper, Shift, Job
 
 
 class HelperForm(forms.ModelForm):
@@ -45,6 +45,76 @@ class HelperForm(forms.ModelForm):
             self.job.coordinators.add(self.instance)
 
         return instance
+
+
+class HelperAddShiftForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.helper = kwargs.pop('helper')
+        self.user = kwargs.pop('user')
+
+        super(HelperAddShiftForm, self).__init__(*args, **kwargs)
+
+        event = self.helper.event
+
+        # field that contains all shifts if
+        #  - user is admin for shift/job
+        #  - helper is not already in this shift
+
+        # all administered shifts
+        administered_jobs = [job for job in event.job_set.all()
+                             if job.is_admin(self.user)]
+        shifts = Shift.objects.filter(job__event=event,
+                                      job__in=administered_jobs)
+
+        # exclude already taken shifts
+        shifts = shifts.exclude(id__in=self.helper.shifts.all())
+
+        # add field
+        self.fields['shifts'] = forms.ModelMultipleChoiceField(
+            widget=forms.CheckboxSelectMultiple,
+            queryset=shifts, required=True)
+
+    def save(self):
+        for shift in self.cleaned_data['shifts']:
+            self.helper.shifts.add(shift)
+        self.helper.save()
+
+
+class HelperAddCoordinatorForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.helper = kwargs.pop('helper')
+        self.user = kwargs.pop('user')
+
+        super(HelperAddCoordinatorForm, self).__init__(*args, **kwargs)
+
+        event = self.helper.event
+
+        # field that contains all jobs if
+        #  - user is admin for job
+        #  - helper is not already coordinator for this job
+
+        # all administered jobs
+        coordinated_jobs = self.helper.coordinated_jobs
+        jobs = [job.pk for job in event.job_set.all()
+                if job.is_admin(self.user) and not job in coordinated_jobs]
+
+        # we need a queryset
+        jobs = Job.objects.filter(pk__in=jobs)
+
+        print("!!!" + repr(jobs))
+
+        # exclude coordinated jobs
+        #jobs = jobs.exclude(id__in=self.helper.coordinated_jobs)
+
+        # add field
+        self.fields['jobs'] = forms.ModelMultipleChoiceField(
+            widget=forms.CheckboxSelectMultiple,
+            queryset=jobs, required=True)
+
+    def save(self):
+        for job in self.cleaned_data['jobs']:
+            job.coordinators.add(self.helper)
+            job.save()
 
 
 class HelperDeleteForm(forms.ModelForm):

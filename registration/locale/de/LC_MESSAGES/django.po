@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-14 21:22+0100\n"
-"PO-Revision-Date: 2015-11-14 21:23+0100\n"
+"POT-Creation-Date: 2015-11-15 16:24+0100\n"
+"PO-Revision-Date: 2015-11-15 16:26+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -115,7 +115,7 @@ msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 msgid "The shift is full already."
 msgstr "Die Schicht ist bereits voll."
 
-#: registration/forms/helper.py:83
+#: registration/forms/helper.py:153
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
@@ -583,16 +583,42 @@ msgstr ""
 msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
-#: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:73
-msgid "Add user"
-msgstr "Nutzer hinzufügen"
+#: registration/templates/registration/admin/add_helper_as_coordinator.html:6
+#: registration/templates/registration/admin/edit_helper.html:67
+msgid "Add as coordinator"
+msgstr "Als Koordinator hinzufügen"
 
+#: registration/templates/registration/admin/add_helper_as_coordinator.html:14
+#: registration/templates/registration/admin/add_helper_to_shift.html:14
 #: registration/templates/registration/admin/add_user.html:13
 #: registration/templates/registration/admin/permissions.html:35
 #: registration/templates/registration/admin/permissions.html:66
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: registration/templates/registration/admin/add_helper_as_coordinator.html:17
+msgid ""
+"There are no jobs left for which you have the permission to add coordinators."
+msgstr ""
+"Es gibt keine Aufgaben mehr, bei denen du die Berechtigung hast, "
+"Koordinatoren hinzuzufügen."
+
+#: registration/templates/registration/admin/add_helper_to_shift.html:6
+#: registration/templates/registration/admin/edit_helper.html:62
+msgid "Add to shift"
+msgstr "Zu Schicht hinzufügen"
+
+#: registration/templates/registration/admin/add_helper_to_shift.html:17
+msgid ""
+"There are no shifts left for which you have the permission to add helpers."
+msgstr ""
+"Es gibt keine Schichten mehr, bei denen du die Berechtigung hast, Helfer "
+"hinzuzufügen."
+
+#: registration/templates/registration/admin/add_user.html:6
+#: registration/templates/registration/admin/base.html:73
+msgid "Add user"
+msgstr "Nutzer hinzufügen"
 
 #: registration/templates/registration/admin/badges.html:6
 #: registration/templates/registration/admin/base.html:56
@@ -840,7 +866,7 @@ msgstr "Standards"
 #: registration/templates/registration/admin/edit_badgerole.html:13
 #: registration/templates/registration/admin/edit_badgesettings.html:19
 #: registration/templates/registration/admin/edit_event.html:18
-#: registration/templates/registration/admin/edit_helper.html:36
+#: registration/templates/registration/admin/edit_helper.html:88
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:23
@@ -865,6 +891,8 @@ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 #: registration/templates/registration/admin/delete_helper.html:29
 #: registration/templates/registration/admin/delete_job.html:38
 #: registration/templates/registration/admin/delete_shift.html:36
+#: registration/templates/registration/admin/edit_helper.html:32
+#: registration/templates/registration/admin/edit_helper.html:50
 #: registration/templates/registration/admin/helpers_table.html:68
 #: registration/templates/registration/admin/helpers_table.html:73
 #: registration/templates/registration/admin/jobs_and_shifts.html:29
@@ -938,7 +966,7 @@ msgid "Delete link"
 msgstr "Link löschen"
 
 #: registration/templates/registration/admin/delete_link.html:11
-#: registration/templates/registration/admin/edit_helper.html:22
+#: registration/templates/registration/admin/edit_helper.html:42
 #: registration/templates/registration/admin/links.html:13
 #: registration/templates/registration/registered.html:57
 msgid "Shifts"
@@ -1027,7 +1055,11 @@ msgstr "Helfer bearbeiten"
 msgid "Add coordinator"
 msgstr "Koordinator hinzufügen"
 
-#: registration/templates/registration/admin/edit_helper.html:31
+#: registration/templates/registration/admin/edit_helper.html:24
+msgid "Coordinator"
+msgstr "Koordinator"
+
+#: registration/templates/registration/admin/edit_helper.html:80
 msgid "Badge"
 msgstr "Badge"
 
@@ -1288,12 +1320,12 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:153
+#: registration/views/helper.py:200
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:189
+#: registration/views/helper.py:236
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""

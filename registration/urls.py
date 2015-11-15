@@ -157,6 +157,16 @@ urlpatterns = [
         views.add_coordinator,
         name='add_coordinator'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/add/shift/$',
+        views.add_helper_to_shift,
+        name='add_helper_to_shift'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/add/coordinator/$',
+        views.add_helper_as_coordinator,
+        name='add_helper_as_coordinator'),
+
     # export
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all/$',
         views.export,

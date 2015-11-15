@@ -1,8 +1,8 @@
 Important
 ==========
 
+* check/change redirect destinations on save
 * show duplicates, merge helpers
-* add helper to more shifts or as coordinator to other job
 * job admin can see t-shirt size table of their job
 
 Django things
