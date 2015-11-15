@@ -64,6 +64,7 @@ Badges
 * check security of pdflatex, set more options
 * edit_helper: show fields (e.g. tshirt) only if necessary
 * versioning of badges (for registration/validation)
+* scale images on upload
 
 File uploads
 ============
