@@ -110,7 +110,5 @@ class Shift(models.Model):
             if helper.first_shift == self:
                 tmp = shirts[helper.get_shirt_display()]
                 shirts.update({helper.get_shirt_display(): tmp+1})
-            if not helper.first_shift:
-                print(str(helper))
 
         return shirts

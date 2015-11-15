@@ -100,11 +100,6 @@ class HelperAddCoordinatorForm(forms.Form):
         # we need a queryset
         jobs = Job.objects.filter(pk__in=jobs)
 
-        print("!!!" + repr(jobs))
-
-        # exclude coordinated jobs
-        #jobs = jobs.exclude(id__in=self.helper.coordinated_jobs)
-
         # add field
         self.fields['jobs'] = forms.ModelMultipleChoiceField(
             widget=forms.CheckboxSelectMultiple,
