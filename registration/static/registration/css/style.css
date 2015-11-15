@@ -103,3 +103,22 @@ img#logo
         float:right;
     }
 }
+
+/* logos on about page */
+div.logos-about
+{
+    margin-top: 1em;
+}
+
+div.logos-about div
+{
+    margin-top:2em;
+}
+
+@media (max-width: 767px)
+{
+    div.logos-about
+    {
+        text-align: center;
+    }
+}
