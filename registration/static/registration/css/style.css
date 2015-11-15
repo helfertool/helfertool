@@ -53,10 +53,15 @@ table.shifts span.numbers
     font-weight: normal;
 }
 
+table.shifts span.name
+{
+    font-weight: normal;
+}
+
 table.shifts label
 {
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 /* icons (like xls or pdf) */
