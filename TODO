@@ -62,7 +62,6 @@ Badges
 * Image for responsibles? (option)
 * latex_template: validation for .tex, maybe also for content
 * check security of pdflatex, set more options
-* edit_helper: show fields (e.g. tshirt) only if necessary
 * versioning of badges (for registration/validation)
 * scale images on upload
 

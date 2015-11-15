@@ -148,6 +148,20 @@ class Helper(models.Model):
                 return item[1]
         return ""
 
+    @property
+    def needs_infection_instruction(self):
+        # check shifts
+        for shift in self.shifts.all():
+            if shift.job.infection_instruction:
+                return True
+
+        # check coordinated jobs
+        for job in self.coordinated_jobs:
+            if job.infection_instruction:
+                return True
+
+        return False
+
     def can_edit(self, user):
         # for helpers
         for shift in self.shifts.all():

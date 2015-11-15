@@ -13,21 +13,24 @@ class HelperForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')
 
-        self.shift = None
-        if 'shift' in kwargs:
-            self.shift = kwargs.pop('shift')
-
+        # if job is set, this helper will be added to this job as coordinator
         self.job = None
         if 'job' in kwargs:
             self.job = kwargs.pop('job')
 
         super(HelperForm, self).__init__(*args, **kwargs)
 
-    def clean(self):
-        super(HelperForm, self).clean()
+        # remove field for shirt?
+        if not self.related_event.ask_shirt:
+            self.fields.pop('shirt')
 
-        if self.shift and self.shift.is_full():
-            raise ValidationError(_("The shift is full already."))
+        # remove field for vegetarian food?
+        if not self.related_event.ask_vegetarian:
+            self.fields.pop('vegetarian')
+
+        # remove field for instruction for food handling
+        if not self.instance.needs_infection_instruction:
+            self.fields.pop('infection_instruction')
 
     def save(self, commit=True):
         instance = super(HelperForm, self).save(False)
@@ -36,10 +39,6 @@ class HelperForm(forms.ModelForm):
 
         if commit:
             instance.save()
-
-        if self.shift:
-            instance.shifts.add(self.shift)
-            self.save_m2m()
 
         if self.job:
             self.job.coordinators.add(self.instance)
