@@ -29,7 +29,7 @@ def shirts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # permission
-    if not event.is_admin(request.user):
+    if not event.is_involved(request.user):
         return nopermission(request)
 
     # check if shirt sizes are collected for this event
