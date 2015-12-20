@@ -180,6 +180,15 @@ class BadgeForm(forms.ModelForm):
 
         self.fields['primary_job'].queryset = jobs | coordinated_jobs
 
+        # restrict queryset of custom_role and custom_design
+        badge_settings = self.instance.helper.event.badgesettings
+
+        roles = BadgeRole.objects.filter(badge_settings=badge_settings)
+        self.fields['custom_role'].queryset = roles
+
+        designs = BadgeDesign.objects.filter(badge_settings=badge_settings)
+        self.fields['custom_design'].queryset = designs
+
     def clean_photo(self):
         file = self.cleaned_data['photo']
         if not is_image(file):
