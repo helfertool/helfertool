@@ -107,6 +107,11 @@ class Event(models.Model):
         verbose_name=_("Ask, if helper is vegetarian"),
     )
 
+    ask_full_age = models.BooleanField(
+        default=True,
+        verbose_name=_("Helpers have to confirm to be full age")
+    )
+
     show_public_numbers = models.BooleanField(
         default=True,
         verbose_name=_("Show number of helpers on registration page"),

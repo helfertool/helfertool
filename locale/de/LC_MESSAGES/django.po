@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-15 16:24+0100\n"
+"POT-Creation-Date: 2015-12-20 19:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: helfertool/settings.py:161
+#: helfertool/settings.py:164
 msgid "German"
 msgstr ""
 
-#: helfertool/settings.py:162
+#: helfertool/settings.py:165
 msgid "English"
 msgstr ""

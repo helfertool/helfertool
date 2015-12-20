@@ -43,6 +43,11 @@ class RegisterForm(forms.ModelForm):
         if not self.event.ask_vegetarian:
             self.fields.pop('vegetarian')
 
+        # add field for age?
+        if self.event.ask_full_age:
+            self.fields['full_age'] = forms.BooleanField(
+                label=_("I confirm to be full aged."), required=False)
+
         # get a list of all shifts
         if self.displayed_shifts:
             all_shifts = self.displayed_shifts
@@ -104,6 +109,12 @@ class RegisterForm(forms.ModelForm):
         TODO: improve performance: get shift only once from DB
         """
         super(RegisterForm, self).clean()
+
+        # check if helper if full age
+        if self.event.ask_full_age and not self.cleaned_data['full_age']:
+            raise ValidationError(_("You must be full aged. We are not "
+                                    "allowed to accept helpers that are under "
+                                    "18 years old."))
 
         number_of_shifts = 0
         infection_instruction_needed = False
