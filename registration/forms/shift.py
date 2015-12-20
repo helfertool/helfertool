@@ -22,6 +22,13 @@ class ShiftForm(forms.ModelForm):
     def clean(self):
         super(ShiftForm, self).clean()
 
+        # this should not be necessary, however it is
+        if not 'begin' in self.cleaned_data:
+            raise ValidationError(_("The begin of the shift must be set."))
+        if not 'end' in self.cleaned_data:
+            raise ValidationError(_("The end of the shift must be set."))
+
+        # check times
         if self.cleaned_data['begin'] > self.cleaned_data['end']:
             raise ValidationError(_("The begin of the shift must be before "
                                     "the end."))
