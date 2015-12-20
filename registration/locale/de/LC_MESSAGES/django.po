@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-20 19:19+0100\n"
-"PO-Revision-Date: 2015-12-20 19:20+0100\n"
+"POT-Creation-Date: 2015-12-20 20:09+0100\n"
+"PO-Revision-Date: 2015-12-20 20:09+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -21,6 +21,7 @@ msgstr ""
 #: registration/export/excel.py:58 registration/forms/user.py:33
 #: registration/models/helper.py:88
 #: registration/templates/registration/admin/helpers_table.html:20
+#: registration/templates/registration/change_user.html:15
 msgid "First name"
 msgstr "Vorname"
 
@@ -204,6 +205,7 @@ msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 #: registration/forms/user.py:9
 #: registration/templates/registration/admin/permissions.html:15
 #: registration/templates/registration/admin/permissions.html:46
+#: registration/templates/registration/change_user.html:27
 msgid "Username"
 msgstr "Benutzername"
 
@@ -212,10 +214,12 @@ msgid "The user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
 #: registration/forms/user.py:32
+#: registration/templates/registration/change_user.html:23
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
 #: registration/forms/user.py:35
+#: registration/templates/registration/change_user.html:19
 msgid "Last name"
 msgstr "Nachname"
 
@@ -351,7 +355,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:58 registration/templates/base.html:111
+#: registration/models/event.py:58 registration/templates/base.html:112
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -545,7 +549,7 @@ msgstr "Helferanmeldung"
 msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
-#: registration/templates/base.html:55 registration/templates/base.html:62
+#: registration/templates/base.html:55 registration/templates/base.html:63
 #: registration/templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
@@ -556,24 +560,29 @@ msgid "Admin"
 msgstr "Admin"
 
 #: registration/templates/base.html:59
+#: registration/templates/registration/change_user.html:7
+msgid "Account"
+msgstr "Account"
+
+#: registration/templates/base.html:60
 msgid "Logout"
 msgstr "Logout"
 
-#: registration/templates/base.html:61
+#: registration/templates/base.html:62
 #: registration/templates/registration/login.html:6
 #: registration/templates/registration/login.html:18
 msgid "Login"
 msgstr "Login"
 
-#: registration/templates/base.html:86
+#: registration/templates/base.html:87
 msgid "Switch"
 msgstr "Switch"
 
-#: registration/templates/base.html:108
+#: registration/templates/base.html:109
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/base.html:114
+#: registration/templates/base.html:115
 #: registration/templates/registration/about.html:5
 msgid "About this software"
 msgstr "Über diese Software"
@@ -790,6 +799,7 @@ msgstr "Neue Veranstaltung"
 #: registration/templates/registration/admin/configure_badges.html:24
 #: registration/templates/registration/admin/edit_badgesettings.html:23
 #: registration/templates/registration/admin/permissions.html:6
+#: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -899,6 +909,7 @@ msgstr "Standards"
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:23
+#: registration/templates/registration/change_user.html:62
 msgid "Save"
 msgstr "Speichern"
 
@@ -1186,6 +1197,8 @@ msgid "You have no permission to view this page!"
 msgstr "Du hast keine Berechtigung, um diese Seite anzusehen!"
 
 #: registration/templates/registration/admin/permissions.html:8
+#: registration/templates/registration/change_user.html:34
+#: registration/templates/registration/change_user.html:36
 msgid "Can add events"
 msgstr "Kann Veranstaltungen hinzufügen"
 
@@ -1194,6 +1207,8 @@ msgid "There are no users, that can add events."
 msgstr "Es gibt keine Nutzer, die Veranstaltungen hinzufügen können."
 
 #: registration/templates/registration/admin/permissions.html:39
+#: registration/templates/registration/change_user.html:42
+#: registration/templates/registration/change_user.html:44
 msgid "Can add users"
 msgstr "Kann Nutzer hinzufügen"
 
@@ -1225,6 +1240,14 @@ msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 #: registration/templates/registration/admin/statistics.html:19
 msgid "Vegetarians"
 msgstr "Vegetarier"
+
+#: registration/templates/registration/change_user.html:52
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: registration/templates/registration/change_user.html:67
+msgid "The password cannot be changed."
+msgstr "Das Passwort kann nicht geändert werden."
 
 #: registration/templates/registration/form.html:5
 #: registration/templates/registration/invalid_link.html:7
@@ -1395,6 +1418,13 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#: registration/views/user.py:17
+msgid "Changed password successfully"
+msgstr "Das Passwort wurde erfolgreich geändert"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
 
 #~ msgid "The shift is full already."
 #~ msgstr "Die Schicht ist bereits voll."

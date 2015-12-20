@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load permissions %}
+
+{% block content %}
+    <h2>{% trans "Account" %}</h2>
+
+    <h3>Daten</h3>
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            <table class="table">
+                <tr>
+                    <th>{% trans "First name" %}</th>
+                    <td>{{ request.user.first_name }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Last name" %}</th>
+                    <td>{{ request.user.last_name }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Email address" %}</th>
+                    <td>{{ request.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Username" %}</th>
+                    <td>{{ request.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Permissions" %}</th>
+                    <td>
+                        {% if user.is_superuser or user|has_addevent_group %}
+                            {% trans "Can add events" %}
+                        {% else %}
+                            <del>{% trans "Can add events" %}</del>
+                        {% endif %}
+
+                        <br />
+
+                        {% if user.is_superuser or user|has_adduser_group %}
+                            {% trans "Can add users" %}
+                        {% else %}
+                            <del>{% trans "Can add users" %}</del>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <h3>{% trans "Change password" %}</h3>
+
+    {% if pw_form %}
+        <div class="row">
+            <div class="col-xs-12 col-lg-5">
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    {% bootstrap_form pw_form %}
+
+                    <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">{% trans "The password cannot be changed." %}</p>
+    {% endif %}
+{% endblock %}

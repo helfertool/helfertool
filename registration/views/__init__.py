@@ -15,3 +15,4 @@ from .export import export
 from .permissions import permissions, delete_permission
 from .mail import mail
 from .shirts import shirts
+from .user import change_user

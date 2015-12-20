@@ -48,7 +48,7 @@ User management
 
 * search username with name and mail
 * new widget to select admins (enter username -> ajax -> suggestions)
-* change password, forgot password
+* forgot password
 
 Badges
 ======

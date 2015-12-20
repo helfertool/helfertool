@@ -2,20 +2,21 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
-    # login, logout
+    # authentication
     url(r'^login/$',
-        'django.contrib.auth.views.login',
+        auth_views.login,
         {'template_name': 'registration/login.html'},
         name='login'),
 
     url(r'^logout/$',
-        'django.contrib.auth.views.logout',
+        auth_views.logout,
         {'next_page': '/'},
         name='logout'),
 
@@ -36,6 +37,10 @@ urlpatterns = [
     url(r'^admin/user/$',
         views.add_user,
         name='add_user'),
+
+    url(r'^admin/account/$',
+        views.change_user,
+        name='change_user'),
 
     url(r'^admin/permissions/$',
         views.permissions,
