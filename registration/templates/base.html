@@ -50,7 +50,9 @@
                         {# login #}
                         {% if user.is_authenticated %}
                             <p class="navbar-text">
-                                {% blocktrans with username=user.first_name %}Hello {{ username }}!{% endblocktrans %}
+                                {% blocktrans trimmed with username=user.first_name %}
+                                    Hello {{ username }}!
+                                {% endblocktrans %}
                              </p>
                             <li><a href="{% url "index" %}">{% trans "Events" %}</a></li>
                             {% if user.is_superuser or user|has_perm_group %}

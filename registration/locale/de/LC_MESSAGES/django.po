@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-20 20:09+0100\n"
-"PO-Revision-Date: 2015-12-20 20:09+0100\n"
+"POT-Creation-Date: 2015-12-25 19:29+0100\n"
+"PO-Revision-Date: 2015-12-25 19:30+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -35,7 +35,7 @@ msgstr "Nachname"
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
 #: registration/templates/registration/admin/helpers_table.html:22
-#: registration/templates/registration/registered.html:20
+#: registration/templates/registration/registered.html:23
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -43,20 +43,20 @@ msgstr "E-Mail"
 #: registration/models/helper.py:102
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/admin/helpers_table.html:23
-#: registration/templates/registration/registered.html:24
+#: registration/templates/registration/registered.html:27
 msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:67 registration/export/pdf.py:45
 #: registration/models/helper.py:114
 #: registration/templates/registration/admin/helpers_table.html:25
-#: registration/templates/registration/registered.html:29
+#: registration/templates/registration/registered.html:32
 msgid "T-shirt"
 msgstr "T-Shirt"
 
 #: registration/export/excel.py:71 registration/models/helper.py:119
 #: registration/templates/registration/admin/helpers_table.html:28
-#: registration/templates/registration/registered.html:41
+#: registration/templates/registration/registered.html:44
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
@@ -68,13 +68,13 @@ msgstr "Gesundheitsbelehrung"
 #: registration/export/excel.py:78 registration/export/pdf.py:46
 #: registration/models/helper.py:108
 #: registration/templates/registration/admin/helpers_table.html:33
-#: registration/templates/registration/registered.html:46
+#: registration/templates/registration/registered.html:49
 msgid "Comment"
 msgstr "Kommentar"
 
 #: registration/export/excel.py:92 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
-#: registration/templates/registration/admin/helpers_for_job.html:22
+#: registration/templates/registration/admin/helpers_for_job.html:26
 #: registration/templates/registration/admin/statistics.html:14
 msgid "Coordinators"
 msgstr "Koordinatoren"
@@ -89,12 +89,12 @@ msgstr "Koordinatoren"
 #: registration/templates/registration/admin/jobs_and_shifts.html:45
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
-#: registration/templates/registration/registered.html:16
+#: registration/templates/registration/registered.html:19
 msgid "Name"
 msgstr "Name"
 
 #: registration/export/pdf.py:94
-#: registration/templates/registration/admin/helpers_for_job.html:49
+#: registration/templates/registration/admin/helpers_for_job.html:55
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
@@ -355,7 +355,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:58 registration/templates/base.html:112
+#: registration/models/event.py:58 registration/templates/base.html:114
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -453,7 +453,7 @@ msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
 #: registration/models/helper.py:127
-#: registration/templates/registration/registered.html:35
+#: registration/templates/registration/registered.html:38
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
@@ -549,40 +549,40 @@ msgstr "Helferanmeldung"
 msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
-#: registration/templates/base.html:55 registration/templates/base.html:63
+#: registration/templates/base.html:57 registration/templates/base.html:65
 #: registration/templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: registration/templates/base.html:57
+#: registration/templates/base.html:59
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: registration/templates/base.html:59
+#: registration/templates/base.html:61
 #: registration/templates/registration/change_user.html:7
 msgid "Account"
 msgstr "Account"
 
-#: registration/templates/base.html:60
+#: registration/templates/base.html:62
 msgid "Logout"
 msgstr "Logout"
 
-#: registration/templates/base.html:62
+#: registration/templates/base.html:64
 #: registration/templates/registration/login.html:6
 #: registration/templates/registration/login.html:18
 msgid "Login"
 msgstr "Login"
 
-#: registration/templates/base.html:87
+#: registration/templates/base.html:89
 msgid "Switch"
 msgstr "Switch"
 
-#: registration/templates/base.html:109
+#: registration/templates/base.html:111
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/base.html:115
+#: registration/templates/base.html:117
 #: registration/templates/registration/about.html:5
 msgid "About this software"
 msgstr "Über diese Software"
@@ -593,14 +593,9 @@ msgstr "Lizenz"
 
 #: registration/templates/registration/about.html:10
 #, python-format
-msgid ""
-"\n"
-"            This software was published under the <a %(a_license)s>AGPLv3</"
-"a>.\n"
-"            "
+msgid "This software was published under the <a %(a_license)s>AGPLv3+</a>."
 msgstr ""
-"\n"
-"Diese Software wurde unter der <a %(a_license)s>AGPLv3</a> veröffentlicht."
+"Diese Software wurde unter der <a %(a_license)s>AGPLv3+</a> veröffentlicht."
 
 #: registration/templates/registration/about.html:16
 msgid "The source code can be found here:"
@@ -617,7 +612,7 @@ msgstr ""
 "bitte an:"
 
 #: registration/templates/registration/admin/add_helper.html:6
-#: registration/templates/registration/admin/helpers_for_job.html:58
+#: registration/templates/registration/admin/helpers_for_job.html:64
 msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
@@ -686,16 +681,16 @@ msgid "All badges"
 msgstr "Alle Badges"
 
 #: registration/templates/registration/admin/badges.html:41
-#: registration/templates/registration/admin/badges.html:44
+#: registration/templates/registration/admin/badges.html:46
 #, python-format
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: registration/templates/registration/admin/badges.html:54
+#: registration/templates/registration/admin/badges.html:58
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: registration/templates/registration/admin/badges.html:59
+#: registration/templates/registration/admin/badges.html:63
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -914,7 +909,7 @@ msgid "Save"
 msgstr "Speichern"
 
 #: registration/templates/registration/admin/coordinators.html:12
-#: registration/templates/registration/admin/helpers_for_job.html:24
+#: registration/templates/registration/admin/helpers_for_job.html:28
 msgid "There are no coordinators for this job."
 msgstr "Es gibt keine Koordinatoren für diese Schicht."
 
@@ -927,7 +922,7 @@ msgstr "Koordinator löschen"
 msgid "Remove this coordinator from the job \"%(jobname)s\"?"
 msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 
-#: registration/templates/registration/admin/delete_coordinator.html:21
+#: registration/templates/registration/admin/delete_coordinator.html:23
 #: registration/templates/registration/admin/delete_helper.html:29
 #: registration/templates/registration/admin/delete_job.html:38
 #: registration/templates/registration/admin/delete_shift.html:36
@@ -973,7 +968,7 @@ msgid "There are more shifts for this helper."
 msgstr "Dieser Helfer ist noch für weitere Schichten angemeldet."
 
 #: registration/templates/registration/admin/delete_helper.html:23
-#: registration/templates/registration/admin/helpers.html:41
+#: registration/templates/registration/admin/helpers.html:45
 msgid "Show"
 msgstr "Anzeigen"
 
@@ -1008,7 +1003,7 @@ msgstr "Link löschen"
 #: registration/templates/registration/admin/delete_link.html:11
 #: registration/templates/registration/admin/edit_helper.html:42
 #: registration/templates/registration/admin/links.html:13
-#: registration/templates/registration/registered.html:57
+#: registration/templates/registration/registered.html:60
 msgid "Shifts"
 msgstr "Schichten"
 
@@ -1021,7 +1016,7 @@ msgid "Delete link!"
 msgstr "Link löschen!"
 
 #: registration/templates/registration/admin/delete_permission.html:6
-#: registration/templates/registration/admin/delete_permission.html:15
+#: registration/templates/registration/admin/delete_permission.html:17
 #: registration/templates/registration/admin/permissions.html:25
 #: registration/templates/registration/admin/permissions.html:56
 msgid "Delete permission"
@@ -1091,7 +1086,7 @@ msgid "Edit helper"
 msgstr "Helfer bearbeiten"
 
 #: registration/templates/registration/admin/edit_helper.html:9
-#: registration/templates/registration/admin/helpers_for_job.html:32
+#: registration/templates/registration/admin/helpers_for_job.html:36
 msgid "Add coordinator"
 msgstr "Koordinator hinzufügen"
 
@@ -1125,41 +1120,41 @@ msgstr "Schicht bearbeiten"
 msgid "New shift"
 msgstr "Neue Schicht"
 
-#: registration/templates/registration/admin/helpers.html:7
+#: registration/templates/registration/admin/helpers.html:8
 #, python-format
 msgid "Helpers for %(eventname)s"
 msgstr "Helfer für %(eventname)s"
 
-#: registration/templates/registration/admin/helpers.html:12
+#: registration/templates/registration/admin/helpers.html:16
 msgid "Overview over helpers"
 msgstr "Helferübersicht"
 
-#: registration/templates/registration/admin/helpers.html:18
-#: registration/templates/registration/admin/helpers_for_job.html:13
+#: registration/templates/registration/admin/helpers.html:22
+#: registration/templates/registration/admin/helpers_for_job.html:17
 msgid "Export"
 msgstr "Export"
 
-#: registration/templates/registration/admin/helpers.html:33
+#: registration/templates/registration/admin/helpers.html:37
 #: registration/templates/registration/admin/jobs_and_shifts.html:16
 msgid "Public"
 msgstr "Öffentlich"
 
-#: registration/templates/registration/admin/helpers.html:46
+#: registration/templates/registration/admin/helpers.html:50
 #, python-format
 msgid "Number of coordinators: %(number)s"
 msgstr "Anzahl der Koordinatoren: %(number)s"
 
-#: registration/templates/registration/admin/helpers.html:60
+#: registration/templates/registration/admin/helpers.html:66
 #: registration/templates/registration/admin/jobs_and_shifts.html:53
 msgid "Blocked"
 msgstr "Gesperrt"
 
-#: registration/templates/registration/admin/helpers_for_job.html:9
+#: registration/templates/registration/admin/helpers_for_job.html:10
 #, python-format
 msgid "Helpers: %(jobname)s"
 msgstr "Helfer: %(jobname)s"
 
-#: registration/templates/registration/admin/helpers_for_job.html:42
+#: registration/templates/registration/admin/helpers_for_job.html:46
 #, python-format
 msgid "(%(current)s of %(total)s)"
 msgstr "(%(current)s von %(total)s)"
@@ -1249,11 +1244,11 @@ msgstr "Passwort ändern"
 msgid "The password cannot be changed."
 msgstr "Das Passwort kann nicht geändert werden."
 
-#: registration/templates/registration/form.html:5
-#: registration/templates/registration/invalid_link.html:7
-#: registration/templates/registration/not_active.html:7
+#: registration/templates/registration/form.html:6
+#: registration/templates/registration/invalid_link.html:8
+#: registration/templates/registration/not_active.html:8
 #: registration/templates/registration/registered.html:5
-#: registration/templates/registration/validate.html:4
+#: registration/templates/registration/validate.html:5
 #, python-format
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
@@ -1272,11 +1267,11 @@ msgstr ""
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: registration/templates/registration/invalid_link.html:13
+#: registration/templates/registration/invalid_link.html:17
 msgid "This link is not valid."
 msgstr "Der Link ist ungültig."
 
-#: registration/templates/registration/invalid_link.html:19
+#: registration/templates/registration/invalid_link.html:23
 msgid "Go to the registration."
 msgstr "Zur Anmeldung gehen."
 
@@ -1311,15 +1306,15 @@ msgstr "Danke für deine Unterstützung!"
 msgid "Registration for %(eventname)s"
 msgstr "Helferanmeldung für %(eventname)s"
 
-#: registration/templates/registration/not_active.html:13
+#: registration/templates/registration/not_active.html:17
 msgid "The registration is not open."
 msgstr "Die Anmeldung ist nicht freigeschaltet."
 
-#: registration/templates/registration/registered.html:12
+#: registration/templates/registration/registered.html:15
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
 
-#: registration/templates/registration/registered.html:53
+#: registration/templates/registration/registered.html:56
 msgid ""
 "You have to confirm your mail address by clicking on a link we just sent to "
 "you."
@@ -1339,11 +1334,11 @@ msgstr "Persönliche Daten"
 msgid "Register"
 msgstr "Anmelden"
 
-#: registration/templates/registration/validate.html:11
+#: registration/templates/registration/validate.html:15
 msgid "Your mail address was already confirmed."
 msgstr "Deine E-Mail Adresse wurde bereits bestätigt."
 
-#: registration/templates/registration/validate.html:13
+#: registration/templates/registration/validate.html:17
 msgid "You confirmed your mail address."
 msgstr "Du hast deine E-Mail Adresse bestätigt."
 

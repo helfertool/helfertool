@@ -5,8 +5,8 @@
 
 {% block title %}
     {% if event %}
-        {% blocktrans with eventname=event.name trimmed %}
-        Manage {{ eventname }}
+        {% blocktrans trimmed with eventname=event.name %}
+            Manage {{ eventname }}
         {% endblocktrans %}
     {% else %}
         {% trans "Admin" %}

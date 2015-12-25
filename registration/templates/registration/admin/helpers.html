@@ -4,7 +4,11 @@
 {% load bootstrap3 %}
 {% load permissions %}
 
-{% block title %}{% blocktrans with eventname=event.name %}Helpers for {{ eventname }}{% endblocktrans %}{% endblock %}
+{% block title %}
+    {% blocktrans trimmed with eventname=event.name %}
+        Helpers for {{ eventname }}
+    {% endblocktrans %}
+{% endblock %}
 
 {% block admincontent %}
     {% is_admin event as admin %}
@@ -43,7 +47,9 @@
         {% endif %}
 
         <p>
-            {% blocktrans with number=job.coordinators.count%}Number of coordinators: {{ number }}{% endblocktrans %}
+            {% blocktrans trimmed with number=job.coordinators.count%}
+                Number of coordinators: {{ number }}
+            {% endblocktrans %}
         </p>
 
         <table class="shifts">

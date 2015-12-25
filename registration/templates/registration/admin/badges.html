@@ -38,10 +38,14 @@
                     </td>
                     <td>
                         {% if job.num_warnings == 0 %}
-                            {% blocktrans with num=job.num_warnings %}{{ num }} warnings{% endblocktrans %}
+                            {% blocktrans trimmed with num=job.num_warnings %}
+                                {{ num }} warnings
+                            {% endblocktrans %}
                         {% else %}
                             <a href="{% url 'badges_warnings' event.url_name job.pk %}">
-                                {% blocktrans with num=job.num_warnings %}{{ num }} warnings{% endblocktrans %}
+                                {% blocktrans trimmed with num=job.num_warnings %}
+                                    {{ num }} warnings
+                                {% endblocktrans %}
                             </a>
                         {% endif %}
                     </td>

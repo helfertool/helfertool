@@ -2,7 +2,11 @@
 {% load i18n %}
 {% load bootstrap3 %}
 
-{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
+{% block title %}
+    {% blocktrans trimmed %}
+        Register for {{ event }} as helper
+    {% endblocktrans %}
+{% endblock %}
 
 {% block content %}
     {% bootstrap_form_errors form %}

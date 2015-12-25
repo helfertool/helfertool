@@ -15,7 +15,9 @@
         {% bootstrap_field form.email %}
 
         <div class="alert alert-danger" role="alert">
-            {% blocktrans with jobname=job.name %}Remove this coordinator from the job "{{ jobname }}"?{% endblocktrans %}
+            {% blocktrans trimmed with jobname=job.name %}
+                Remove this coordinator from the job "{{ jobname }}"?
+            {% endblocktrans %}
         </div>
 
         <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />

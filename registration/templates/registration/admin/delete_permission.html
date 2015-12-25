@@ -6,7 +6,9 @@
     <h2>{% trans "Delete permission" %}</h2>
 
     <div class="alert alert-warning" role="alert">
-        {% blocktrans %}Delete permission for user {{ user }}?{% endblocktrans %}
+        {% blocktrans trimmed %}
+            Delete permission for user {{ user }}?
+        {% endblocktrans %}
     </div>
 
     <form action="" method="post">

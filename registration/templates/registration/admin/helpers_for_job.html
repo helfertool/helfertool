@@ -6,7 +6,11 @@
 {% block title %}{{ job.name }} - {{ event.name }}{% endblock %}
 
 {% block admincontent %}
-    <h2>{% blocktrans with jobname=job.name%}Helpers: {{ jobname }}{% endblocktrans %}</h2>
+    <h2>
+        {% blocktrans trimmed with jobname=job.name%}
+            Helpers: {{ jobname }}
+        {% endblocktrans %}
+    </h2>
 
     <p>
         {% bootstrap_icon "download-alt" %}
@@ -39,7 +43,9 @@
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
             <h4>{{ shift.time_hours }}
-                {% blocktrans with current=shift.num_helpers total=shift.number %}({{ current }} of {{ total }}){% endblocktrans %}
+                {% blocktrans trimmed with current=shift.num_helpers total=shift.number %}
+                    ({{ current }} of {{ total }})
+                {% endblocktrans %}
                 {% if shift.name %}
                     <br/ >{{ shift.name }}
                 {% endif %}

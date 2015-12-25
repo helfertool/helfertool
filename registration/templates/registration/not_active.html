@@ -4,7 +4,11 @@
 
 {% load registerform_shifts %}
 
-{% block title %}{% blocktrans %}Register for {{ event }} as helper{% endblocktrans %}{% endblock %}
+{% block title %}
+    {% blocktrans trimmed %}
+        Register for {{ event }} as helper
+    {% endblocktrans %}
+{% endblock %}
 
 {% block content %}
     <h1>{{ event }}</h1>
