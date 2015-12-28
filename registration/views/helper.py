@@ -10,7 +10,7 @@ from .utils import nopermission, get_or_404
 from ..models import Event, Job, Shift
 from ..forms import HelperForm, HelperDeleteForm, BadgeForm, \
     HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
-    HelperAddCoordinatorForm
+    HelperAddCoordinatorForm, HelperSearchForm
 
 
 @login_required
@@ -248,3 +248,27 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
                'form': form}
     return render(request, 'registration/admin/delete_coordinator.html',
                   context)
+
+@login_required
+def search_helper(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_involved(request.user):
+        return nopermission(request)
+
+    # form
+    form = HelperSearchForm(request.POST or None, event=event)
+    result = None
+    new_search=True
+
+    if form.is_valid():
+        result = form.get()
+        new_search=False
+
+    # render page
+    context = {'event': event,
+               'form': form,
+               'result': result,
+               'new_search': new_search}
+    return render(request, 'registration/admin/search_helper.html', context)

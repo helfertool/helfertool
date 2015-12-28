@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-28 17:09+0100\n"
-"PO-Revision-Date: 2015-12-28 17:09+0100\n"
+"POT-Creation-Date: 2015-12-28 18:51+0100\n"
+"PO-Revision-Date: 2015-12-28 18:51+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -121,10 +121,14 @@ msgstr ""
 msgid "This badge does not belong to this event."
 msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 
-#: registration/forms/helper.py:147
+#: registration/forms/helper.py:148
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
+
+#: registration/forms/helper.py:182
+msgid "Search term"
+msgstr "Suchbegriff"
 
 #: registration/forms/mail.py:24
 msgid "All helpers"
@@ -649,12 +653,12 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:104
+#: registration/templates/registration/admin/base.html:105
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
 #: registration/templates/registration/admin/badges.html:6
-#: registration/templates/registration/admin/base.html:89
+#: registration/templates/registration/admin/base.html:90
 msgid "Generate badges"
 msgstr "Badges generieren"
 
@@ -699,8 +703,8 @@ msgid "Generating badges failed"
 msgstr "Generieren der Badges fehlgeschlagen"
 
 #: registration/templates/registration/admin/badges_not_active.html:6
-#: registration/templates/registration/admin/base.html:86
-#: registration/templates/registration/admin/base.html:88
+#: registration/templates/registration/admin/base.html:87
+#: registration/templates/registration/admin/base.html:89
 msgid "Badges"
 msgstr "Badges"
 
@@ -762,40 +766,45 @@ msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
 #: registration/templates/registration/admin/base.html:68
+#: registration/templates/registration/admin/search_helper.html:6
+msgid "Search helper"
+msgstr "Helfer suchen"
+
+#: registration/templates/registration/admin/base.html:69
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:69
+#: registration/templates/registration/admin/base.html:70
 #: registration/templates/registration/admin/mail.html:6
 msgid "Send mails"
 msgstr "Mails senden"
 
-#: registration/templates/registration/admin/base.html:73
+#: registration/templates/registration/admin/base.html:74
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:76
+#: registration/templates/registration/admin/base.html:77
 msgid "Overview"
 msgstr "Übersicht"
 
-#: registration/templates/registration/admin/base.html:80
+#: registration/templates/registration/admin/base.html:81
 #: registration/templates/registration/admin/shirts.html:7
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:91
+#: registration/templates/registration/admin/base.html:92
 #: registration/templates/registration/admin/register_badge.html:6
 msgid "Register badge"
 msgstr "Badge registrieren"
 
-#: registration/templates/registration/admin/base.html:101
+#: registration/templates/registration/admin/base.html:102
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:107
+#: registration/templates/registration/admin/base.html:108
 #: registration/templates/registration/admin/configure_badges.html:24
 #: registration/templates/registration/admin/edit_badgesettings.html:23
 #: registration/templates/registration/admin/permissions.html:6
@@ -803,53 +812,53 @@ msgstr "Neue Veranstaltung"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:108
+#: registration/templates/registration/admin/base.html:109
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:125
+#: registration/templates/registration/admin/base.html:126
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:126
+#: registration/templates/registration/admin/base.html:127
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:127
+#: registration/templates/registration/admin/base.html:128
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:128
+#: registration/templates/registration/admin/base.html:129
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:129
+#: registration/templates/registration/admin/base.html:130
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:130
+#: registration/templates/registration/admin/base.html:131
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:131
+#: registration/templates/registration/admin/base.html:132
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:132
+#: registration/templates/registration/admin/base.html:133
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:133
+#: registration/templates/registration/admin/base.html:134
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:134
+#: registration/templates/registration/admin/base.html:135
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:135
+#: registration/templates/registration/admin/base.html:136
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -913,6 +922,7 @@ msgstr "Standards"
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:23
+#: registration/templates/registration/admin/search_helper.html:13
 #: registration/templates/registration/change_user.html:62
 msgid "Save"
 msgstr "Speichern"
@@ -1223,6 +1233,10 @@ msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
 #: registration/templates/registration/admin/register_badge.html:10
 msgid "Barcodes are not activated."
 msgstr "Barcodes sind nicht aktiviert."
+
+#: registration/templates/registration/admin/search_helper.html:18
+msgid "Result"
+msgstr "Ergebnis"
 
 #: registration/templates/registration/admin/shirts.html:11
 #: registration/templates/registration/admin/shirts.html:52

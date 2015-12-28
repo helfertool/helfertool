@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift, Job
@@ -173,3 +174,23 @@ class HelperDeleteCoordinatorForm(forms.ModelForm):
 
     def delete(self):
         self.job.coordinators.remove(self.instance)
+
+class HelperSearchForm(forms.Form):
+    pattern = forms.CharField(
+        min_length=2,
+        max_length=100,
+        label=_("Search term"),
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.event = kwargs.pop('event')
+
+        super(HelperSearchForm, self).__init__(*args, **kwargs)
+
+    def get(self):
+        p = self.cleaned_data['pattern']
+
+        return self.event.helper_set.filter(Q(firstname__icontains=p) |
+                                            Q(surname__icontains=p) |
+                                            Q(email__icontains=p) |
+                                            Q(phone__icontains=p))

@@ -128,6 +128,10 @@ urlpatterns = [
         views.helpers,
         name='helpers'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/search/$',
+        views.search_helper,
+        name='search_helper'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
         '(?P<helper_pk>[0-9a-f\-]+)/$',
         views.edit_helper,
