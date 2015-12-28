@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-28 16:53+0100\n"
-"PO-Revision-Date: 2015-12-28 16:55+0100\n"
+"POT-Creation-Date: 2015-12-28 17:09+0100\n"
+"PO-Revision-Date: 2015-12-28 17:09+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -1160,8 +1160,8 @@ msgstr "Gesperrt"
 
 #: registration/templates/registration/admin/helpers_for_job.html:10
 #, python-format
-msgid "Helpers: %(jobname)s"
-msgstr "Helfer: %(jobname)s"
+msgid "Helpers for %(jobname)s"
+msgstr "Helfer für %(jobname)s"
 
 #: registration/templates/registration/admin/helpers_for_job.html:46
 #, python-format

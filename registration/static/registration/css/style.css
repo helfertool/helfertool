@@ -124,7 +124,18 @@ div.logos-about div
 }
 
 /* menu in admin area */
-.nav-nested
+.sidebar h2
 {
-    margin-left: 20px;
+    font-size:110%;
+    font-weight: bold;
+}
+
+.sidebar li a
+{
+    padding: 0.5em;
+}
+
+.sidebar .nav-nested
+{
+    padding-left: 1.5em;
 }
