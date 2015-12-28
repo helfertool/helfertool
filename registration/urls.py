@@ -28,6 +28,11 @@ urlpatterns = [
         TemplateView.as_view(template_name='registration/about.html'),
         name='about'),
 
+    # account
+    url(r'^account/$',
+        views.change_user,
+        name='change_user'),
+
     # admin interface
     url(r'^admin/$',
         views.admin,
@@ -40,10 +45,6 @@ urlpatterns = [
     url(r'^admin/user/$',
         views.add_user,
         name='add_user'),
-
-    url(r'^admin/account/$',
-        views.change_user,
-        name='change_user'),
 
     url(r'^admin/permissions/$',
         views.permissions,

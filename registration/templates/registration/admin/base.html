@@ -17,13 +17,19 @@
     {% is_involved event as involved %}
     {% is_admin event as admin %}
 
-    <h1>{% trans "Administration" %}</h1>
+    <h1>
+        {% if event %}
+            {{ event.name }}
+        {% else %}
+            {% trans "Administration" %}
+        {% endif %}
+    </h1>
 
     <div class="row">
         <div class="col-md-3 wrap">
             {# for event #}
             {% if event and involved %}
-                <h2>{{ event.name }}</h2>
+                <h2>{% trans "General" %}</h2>
                 <ul class="nav nav-pills nav-stacked">
                     <li>
                         <a href="{% url 'form' event.url_name %}" target="_blank">
@@ -35,38 +41,61 @@
                     {% if admin %}
                         <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
                         <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
-                    {% endif %}
-
-                    <li><a href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a></li>
-                    <li><a href="{% url 'mail' event.url_name %}">{% trans "Send mails" %}</a></li>
-                    <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
-
-                    {% if admin %}
-                        <li><a href="{% url 'statistics' event.url_name %}">{% trans "Statistics" %}</a></li>
-                    {% endif %}
-
-                    {% if event.ask_shirt %}
-                        <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
-                    {% endif %}
-
-                    {% if admin %}
                         <li><a href="{% url 'links' event.url_name %}">{% trans "Links" %}</a></li>
                     {% endif %}
+                </ul>
 
-                    {% if admin and event.badges %}
-                        <li><a href="{% url 'configure_badges' event.url_name %}">{% trans "Configure badges" %}</a></li>
+                <h2>{% trans "Helpers" %}</h2>
+                <ul class="nav nav-pills nav-stacked">
+
+                    {# helpers #}
+                    <li>
+                        <a href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a>
+
+                        {# list of all (for user visible) jobs #}
+                        {% if request.resolver_match.url_name == "helpers" %}
+                            <ul class="nav nav-pills nav-stacked nav-nested">
+                            {% for job in event.job_set.all %}
+                                {% is_job_admin job as job_admin %}
+                                {% if job_admin %}
+                                    <li><a href="{% url 'helpers' event.url_name job.pk %}">{{ job.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+
+                    <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
+                    <li><a href="{% url 'mail' event.url_name %}">{% trans "Send mails" %}</a></li>
+                </ul>
+
+                {% if admin or event.ask_shirt %}
+                    <h2>{% trans "Statistics" %}</h2>
+                    <ul class="nav nav-pills nav-stacked">
+                        {% if admin %}
+                            <li><a href="{% url 'statistics' event.url_name %}">{% trans "Overview" %}</a></li>
+                        {% endif %}
+
+                        {% if event.ask_shirt %}
+                            <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+
+                {% if admin and event.badges %}
+                    <h2>{% trans "Badges" %}</h2>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="{% url 'configure_badges' event.url_name %}">{% trans "Badges" %}</a></li>
                         <li><a href="{% url 'badges' event.url_name %}">{% trans "Generate badges" %}</a></li>
-
                         {% if event.badge_settings.barcodes %}
                             <li><a href="{% url 'register_badge' event.url_name %}">{% trans "Register badge" %}</a></li>
                         {% endif %}
-                    {% endif %}
-                </ul>
-            {% endif %}
+                    </ul>
+                {% endif %}
 
             {# for superusers #}
-            {% if user.is_superuser or user|has_perm_group %}
-                <h2>{% trans "Common" %}</h2>
+            {% elif user.is_superuser or user|has_perm_group %}
+                <h2>{# for padding #}</h2>
                 <ul class="nav nav-pills nav-stacked">
                     {% if user.is_superuser or user|has_addevent_group %}
                         <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>

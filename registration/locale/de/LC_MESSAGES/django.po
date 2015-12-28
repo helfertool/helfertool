@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-25 19:29+0100\n"
-"PO-Revision-Date: 2015-12-25 19:30+0100\n"
+"POT-Creation-Date: 2015-12-28 16:53+0100\n"
+"PO-Revision-Date: 2015-12-28 16:55+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -649,12 +649,12 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:75
+#: registration/templates/registration/admin/base.html:104
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
 #: registration/templates/registration/admin/badges.html:6
-#: registration/templates/registration/admin/base.html:58
+#: registration/templates/registration/admin/base.html:89
 msgid "Generate badges"
 msgstr "Badges generieren"
 
@@ -699,6 +699,8 @@ msgid "Generating badges failed"
 msgstr "Generieren der Badges fehlgeschlagen"
 
 #: registration/templates/registration/admin/badges_not_active.html:6
+#: registration/templates/registration/admin/base.html:86
+#: registration/templates/registration/admin/base.html:88
 msgid "Badges"
 msgstr "Badges"
 
@@ -723,74 +725,77 @@ msgstr "Verwaltung %(eventname)s"
 msgid "Admin"
 msgstr "Admin"
 
-#: registration/templates/registration/admin/base.html:20
+#: registration/templates/registration/admin/base.html:24
 msgid "Administration"
 msgstr "Administration"
 
-#: registration/templates/registration/admin/base.html:31
+#: registration/templates/registration/admin/base.html:32
+msgid "General"
+msgstr "Allgemein"
+
+#: registration/templates/registration/admin/base.html:37
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
-#: registration/templates/registration/admin/base.html:36
+#: registration/templates/registration/admin/base.html:42
 #: registration/templates/registration/admin/edit_event.html:8
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
-#: registration/templates/registration/admin/base.html:37
+#: registration/templates/registration/admin/base.html:43
 #: registration/templates/registration/admin/jobs_and_shifts.html:6
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: registration/templates/registration/admin/base.html:40
+#: registration/templates/registration/admin/base.html:44
+#: registration/templates/registration/admin/links.html:6
+msgid "Links"
+msgstr "Links"
+
+#: registration/templates/registration/admin/base.html:48
+msgid "Helpers"
+msgstr "Helfer"
+
+#: registration/templates/registration/admin/base.html:53
 #: registration/templates/registration/admin/statistics.html:10
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:41
+#: registration/templates/registration/admin/base.html:68
+msgid "All coordinators"
+msgstr "Alle Koordinatoren"
+
+#: registration/templates/registration/admin/base.html:69
 #: registration/templates/registration/admin/mail.html:6
 msgid "Send mails"
 msgstr "Mails senden"
 
-#: registration/templates/registration/admin/base.html:42
-msgid "All coordinators"
-msgstr "Alle Koordinatoren"
-
-#: registration/templates/registration/admin/base.html:45
+#: registration/templates/registration/admin/base.html:73
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:49
+#: registration/templates/registration/admin/base.html:76
+msgid "Overview"
+msgstr "Übersicht"
+
+#: registration/templates/registration/admin/base.html:80
 #: registration/templates/registration/admin/shirts.html:7
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:53
-#: registration/templates/registration/admin/links.html:6
-msgid "Links"
-msgstr "Links"
-
-#: registration/templates/registration/admin/base.html:57
-#: registration/templates/registration/admin/configure_badges.html:7
-msgid "Configure badges"
-msgstr "Badges konfigurieren"
-
-#: registration/templates/registration/admin/base.html:61
+#: registration/templates/registration/admin/base.html:91
 #: registration/templates/registration/admin/register_badge.html:6
 msgid "Register badge"
 msgstr "Badge registrieren"
 
-#: registration/templates/registration/admin/base.html:69
-msgid "Common"
-msgstr "Allgemein"
-
-#: registration/templates/registration/admin/base.html:72
+#: registration/templates/registration/admin/base.html:101
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:78
+#: registration/templates/registration/admin/base.html:107
 #: registration/templates/registration/admin/configure_badges.html:24
 #: registration/templates/registration/admin/edit_badgesettings.html:23
 #: registration/templates/registration/admin/permissions.html:6
@@ -798,55 +803,59 @@ msgstr "Neue Veranstaltung"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:79
+#: registration/templates/registration/admin/base.html:108
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:96
+#: registration/templates/registration/admin/base.html:125
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:97
+#: registration/templates/registration/admin/base.html:126
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:98
+#: registration/templates/registration/admin/base.html:127
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:99
+#: registration/templates/registration/admin/base.html:128
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:100
+#: registration/templates/registration/admin/base.html:129
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:101
+#: registration/templates/registration/admin/base.html:130
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:102
+#: registration/templates/registration/admin/base.html:131
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:103
+#: registration/templates/registration/admin/base.html:132
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:104
+#: registration/templates/registration/admin/base.html:133
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:105
+#: registration/templates/registration/admin/base.html:134
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:106
+#: registration/templates/registration/admin/base.html:135
 msgid "Empty list"
 msgstr "Liste leer"
+
+#: registration/templates/registration/admin/configure_badges.html:7
+msgid "Configure badges"
+msgstr "Badges konfigurieren"
 
 #: registration/templates/registration/admin/configure_badges.html:11
 msgid "Edit template"
@@ -1342,6 +1351,10 @@ msgstr "Deine E-Mail Adresse wurde bereits bestätigt."
 msgid "You confirmed your mail address."
 msgstr "Du hast deine E-Mail Adresse bestätigt."
 
+#: registration/views/account.py:17
+msgid "Changed password successfully"
+msgstr "Das Passwort wurde erfolgreich geändert"
+
 #: registration/views/admin.py:56
 #, python-format
 msgid "Added user %(username)s"
@@ -1414,9 +1427,8 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
 
-#: registration/views/user.py:17
-msgid "Changed password successfully"
-msgstr "Das Passwort wurde erfolgreich geändert"
+#~ msgid "Common"
+#~ msgstr "Allgemein"
 
 #~ msgid "Settings"
 #~ msgstr "Einstellungen"
@@ -1435,9 +1447,6 @@ msgstr "Das Passwort wurde erfolgreich geändert"
 
 #~ msgid "Number"
 #~ msgstr "Anzahl"
-
-#~ msgid "Generate"
-#~ msgstr "Generieren"
 
 #~ msgid ""
 #~ "You cannot delete the helper from other shifts. The helper was not deleted"

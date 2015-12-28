@@ -122,3 +122,9 @@ div.logos-about div
         text-align: center;
     }
 }
+
+/* menu in admin area */
+.nav-nested
+{
+    margin-left: 20px;
+}
