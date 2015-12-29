@@ -193,7 +193,7 @@ class BadgeForm(forms.ModelForm):
 
     def clean_photo(self):
         file = self.cleaned_data['photo']
-        if not is_image(file):
+        if file and not is_image(file):
             raise ValidationError(_("The file is not an image."))
         return file
 
