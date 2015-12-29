@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-28 18:51+0100\n"
-"PO-Revision-Date: 2015-12-28 18:51+0100\n"
+"POT-Creation-Date: 2015-12-29 14:03+0100\n"
+"PO-Revision-Date: 2015-12-29 14:04+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -658,7 +658,6 @@ msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
 #: registration/templates/registration/admin/badges.html:6
-#: registration/templates/registration/admin/base.html:90
 msgid "Generate badges"
 msgstr "Badges generieren"
 
@@ -704,7 +703,6 @@ msgstr "Generieren der Badges fehlgeschlagen"
 
 #: registration/templates/registration/admin/badges_not_active.html:6
 #: registration/templates/registration/admin/base.html:87
-#: registration/templates/registration/admin/base.html:89
 msgid "Badges"
 msgstr "Badges"
 
@@ -794,10 +792,18 @@ msgstr "Übersicht"
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
+#: registration/templates/registration/admin/base.html:89
+msgid "Configure"
+msgstr "Konfigurieren"
+
+#: registration/templates/registration/admin/base.html:90
+msgid "Generate"
+msgstr "Generieren"
+
 #: registration/templates/registration/admin/base.html:92
-#: registration/templates/registration/admin/register_badge.html:6
-msgid "Register badge"
-msgstr "Badge registrieren"
+#: registration/templates/registration/registerform.html:96
+msgid "Register"
+msgstr "Anmelden"
 
 #: registration/templates/registration/admin/base.html:102
 #: registration/templates/registration/admin/edit_event.html:10
@@ -1230,6 +1236,10 @@ msgstr "Kann Nutzer hinzufügen"
 msgid "There are no users, that can add users."
 msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
 
+#: registration/templates/registration/admin/register_badge.html:6
+msgid "Register badge"
+msgstr "Badge registrieren"
+
 #: registration/templates/registration/admin/register_badge.html:10
 msgid "Barcodes are not activated."
 msgstr "Barcodes sind nicht aktiviert."
@@ -1352,10 +1362,6 @@ msgstr "Aufgaben"
 #: registration/templates/registration/registerform.html:73
 msgid "Personal data"
 msgstr "Persönliche Daten"
-
-#: registration/templates/registration/registerform.html:96
-msgid "Register"
-msgstr "Anmelden"
 
 #: registration/templates/registration/validate.html:15
 msgid "Your mail address was already confirmed."
