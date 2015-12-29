@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-29 18:07+0100\n"
+"POT-Creation-Date: 2015-12-29 18:40+0100\n"
 "PO-Revision-Date: 2015-12-29 14:04+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -596,17 +596,18 @@ msgid "Badges"
 msgstr "Badges"
 
 #: registration/templates/registration/admin/base.html:89
-msgid "Configure"
-msgstr "Konfigurieren"
+msgid "Configure badges"
+msgstr "Badges konfigurieren"
 
 #: registration/templates/registration/admin/base.html:90
-msgid "Generate"
-msgstr "Generieren"
+msgid "Generate badges"
+msgstr "Badges generieren"
 
 #: registration/templates/registration/admin/base.html:92
-#: registration/templates/registration/registerform.html:96
-msgid "Register"
-msgstr "Anmelden"
+#, fuzzy
+#| msgid "Register badge"
+msgid "Register badges"
+msgstr "Badge registrieren"
 
 #: registration/templates/registration/admin/base.html:102
 #: registration/templates/registration/admin/edit_event.html:10
@@ -1077,6 +1078,10 @@ msgstr "Aufgaben"
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
+#: registration/templates/registration/registerform.html:96
+msgid "Register"
+msgstr "Anmelden"
+
 #: registration/templates/registration/validate.html:15
 msgid "Your mail address was already confirmed."
 msgstr "Deine E-Mail Adresse wurde bereits bestätigt."
@@ -1150,6 +1155,12 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Configure"
+#~ msgstr "Konfigurieren"
+
+#~ msgid "Generate"
+#~ msgstr "Generieren"
 
 #~ msgid "File does not contain LaTeX code."
 #~ msgstr "Die Datei enthält keinen LaTeX Code."
@@ -1250,9 +1261,6 @@ msgstr "Schicht gelöscht"
 #~ msgid "Badge was printed already"
 #~ msgstr "Badge wurde bereits gedruckt"
 
-#~ msgid "Generate badges"
-#~ msgstr "Badges generieren"
-
 #~ msgid ""
 #~ "Some settings are missing to generate badges. Check the following "
 #~ "settings:"
@@ -1286,9 +1294,6 @@ msgstr "Schicht gelöscht"
 
 #~ msgid "There are no warnings."
 #~ msgstr "Es gibt keine Warnungen."
-
-#~ msgid "Configure badges"
-#~ msgstr "Badges konfigurieren"
 
 #~ msgid "Edit template"
 #~ msgstr "Template bearbeiten"
@@ -1343,9 +1348,6 @@ msgstr "Schicht gelöscht"
 
 #~ msgid "Add permission"
 #~ msgstr "Berechtigung hinzufügen"
-
-#~ msgid "Register badge"
-#~ msgstr "Badge registrieren"
 
 #~ msgid "Barcodes are not activated."
 #~ msgstr "Barcodes sind nicht aktiviert."

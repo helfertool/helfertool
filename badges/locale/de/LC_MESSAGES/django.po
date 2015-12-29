@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-29 18:07+0100\n"
-"PO-Revision-Date: 2015-12-29 18:17+0100\n"
+"POT-Creation-Date: 2015-12-29 18:40+0100\n"
+"PO-Revision-Date: 2015-12-29 18:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -33,7 +33,9 @@ msgstr "Ungültiger Barcode."
 
 #: badges/forms/badges.py:224
 msgid "This badge does not exist. Maybe it was deleted since printing."
-msgstr "Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken gelöscht."
+msgstr ""
+"Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken "
+"gelöscht."
 
 #: badges/forms/badges.py:229
 msgid "This badge does not belong to this event."
@@ -99,8 +101,11 @@ msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
 #: badges/models/badges.py:173
-msgid "This name is used for the LaTeX template, the prefix \"perm-\" is added."
-msgstr "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" hinzugefügt."
+msgid ""
+"This name is used for the LaTeX template, the prefix \"perm-\" is added."
+msgstr ""
+"Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
+"hinzugefügt."
 
 #: badges/models/badges.py:195
 msgid "This name is used for the LaTeX template."
@@ -155,8 +160,11 @@ msgid "Generate badges"
 msgstr "Badges generieren"
 
 #: badges/templates/badges/badges.html:10
-msgid "Some settings are missing to generate badges. Check the following settings:"
-msgstr "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe folgende Einstellungen:"
+msgid ""
+"Some settings are missing to generate badges. Check the following settings:"
+msgstr ""
+"Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
+"folgende Einstellungen:"
 
 #: badges/templates/badges/badges.html:20
 #: badges/templates/badges/configure_badges.html:94
@@ -282,8 +290,11 @@ msgid "Badge Settings"
 msgstr "Badge Einstellungen"
 
 #: badges/templates/badges/edit_badgesettings.html:9
-msgid "Changes of most of this settings require an update of the LaTeX template!"
-msgstr "Bei den meisten Änderungen in diesen Einstellungen muss auch das LaTeX Template angepasst werden!"
+msgid ""
+"Changes of most of this settings require an update of the LaTeX template!"
+msgstr ""
+"Bei den meisten Änderungen in diesen Einstellungen muss auch das LaTeX "
+"Template angepasst werden!"
 
 #: badges/templates/badges/edit_badgesettings.html:12
 msgid "Template"
@@ -298,8 +309,8 @@ msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 
 #: badges/templates/badges/register_badge.html:6
-msgid "Register badge"
-msgstr "Badge registrieren"
+msgid "Register badges"
+msgstr "Badges registrieren"
 
 #: badges/templates/badges/register_badge.html:10
 msgid "Barcodes are not activated."
@@ -336,8 +347,11 @@ msgstr "Badge registriert: %(name)s"
 #~ msgid "Number"
 #~ msgstr "Anzahl"
 
-#~ msgid "You cannot delete the helper from other shifts. The helper was not deleted"
-#~ msgstr "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde nicht gelöscht."
+#~ msgid ""
+#~ "You cannot delete the helper from other shifts. The helper was not deleted"
+#~ msgstr ""
+#~ "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde "
+#~ "nicht gelöscht."
 
 #~ msgid "Edit badge settings"
 #~ msgstr "Badge Einstellungen bearbeiten"
