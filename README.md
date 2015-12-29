@@ -8,6 +8,25 @@ It is recommended to use virtualenv:
 
     git clone git@gitlab.fs.tum.de:hertle/helfertool.git
 
+When migrating from a version before 5d40cfa you have to do some things
+manually:
+
+ * MAKE BACKUPS OF THE DATABASE
+ * Update to 2b9838c, migrate as usal
+ * Rename the tables listed in below manually (dbshell)
+ * Update to b12c754, make a fake migration
+ * Update to current version, migrate as usual
+
+    FROM                                  | TO
+    --------------------------------------|-------------------------------
+    registration_badge                    | badges_badge
+    registration_badgedefaults            | badges_badgedefaults
+    registration_badgedesign              | badges_badgedesign
+    registration_badgepermission          | badges_badgepermission
+    registration_badgerole                | badges_badgerole
+    registration_badgerole_permissions    | badges_badgerole_permissions
+    registration_badgesettings            | badges_badgesettings
+
 ## Dependencies
 
 ### Software
