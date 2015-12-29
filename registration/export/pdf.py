@@ -13,7 +13,7 @@ h1_style = getSampleStyleSheet()["Heading1"]
 h2_style = getSampleStyleSheet()["Heading2"]
 table_style = TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
                           ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-                          ('VALIGN', (0, 0), (1, 0), 'TOP'),
+                          ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                           ])
 
 margin = 1.5*cm
