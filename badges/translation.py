@@ -16,6 +16,7 @@ class BadgeRoleTranslationOptions(TranslationOptions):
 
 translator.register(BadgeRole, BadgeRoleTranslationOptions)
 
+
 class BadgeDesignTranslationOptions(TranslationOptions):
     fields = ('name', )
     required_languages = {'default': ('name',)}

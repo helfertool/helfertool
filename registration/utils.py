@@ -3,6 +3,7 @@ import sys
 
 import magic
 
+
 def escape_filename(filename):
     """Escape a filename so it includes only valid characters."""
     valid = "-_.() %s%s" % (string.ascii_letters, string.digits)

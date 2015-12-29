@@ -49,7 +49,7 @@ def table_of_helpers(elements, helpers, event):
 
     for helper in helpers:
         tmp = [par("%s %s" % (helper.firstname, helper.surname)),
-                     par(helper.phone), ]
+               par(helper.phone), ]
         if event.ask_shirt:
             tmp.append(par(helper.get_shirt_display()))
         tmp.append(par(helper.comment))

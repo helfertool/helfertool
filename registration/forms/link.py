@@ -26,7 +26,7 @@ class LinkForm(forms.ModelForm):
 
         # add event and creator
         instance.event = self.event
-        #if instance.creator is None:
+        # if instance.creator is None:
         instance.creator = self.creator  # FIXME
 
         if commit:

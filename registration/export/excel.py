@@ -5,6 +5,7 @@ import xlsxwriter
 
 from ..utils import u
 
+
 class Iterator():
     """ Returns ascending natural numbers beginning from 0. """
     def __init__(self):
@@ -28,12 +29,14 @@ class Iterator():
         The first call to next() after this returns 0. """
         self.__v = -1
 
+
 def cleanName(name):
     """ Cleans the name to be a valid sheet name in excel.
 
     The characters [ ] : * ? / \ are removed.
     """
     return re.sub(r'[\[\]:*?\\\/]', '', name)
+
 
 def xlsx(buffer, event, jobs):
     """ Exports the helpers for given jobs of an event as excel spreadsheet.
@@ -89,16 +92,21 @@ def xlsx(buffer, event, jobs):
 
         # coordinators
         if job.coordinators.count() > 0:
-            worksheet.merge_range(row.next(), 0, row.get(), last_column, _("Coordinators"), bold)
-            add_helpers(worksheet, row, column, event, job, job.coordinators.all())
+            worksheet.merge_range(row.next(), 0, row.get(), last_column,
+                                  _("Coordinators"), bold)
+            add_helpers(worksheet, row, column, event, job,
+                        job.coordinators.all())
 
         # show all shifts
         for shift in job.shift_set.order_by('begin'):
-            worksheet.merge_range(row.next(), 0, row.get(), last_column, shift.time(), bold)
-            add_helpers(worksheet, row, column, event, job, shift.helper_set.all())
+            worksheet.merge_range(row.next(), 0, row.get(),
+                                  last_column, shift.time(), bold)
+            add_helpers(worksheet, row, column, event, job,
+                        shift.helper_set.all())
 
     # close xlsx
     workbook.close()
+
 
 def add_helpers(worksheet, row, column, event, job, helpers):
     for helper in helpers:
@@ -110,9 +118,12 @@ def add_helpers(worksheet, row, column, event, job, helpers):
         worksheet.write(row.get(), column.next(), helper.email)
         worksheet.write(row.get(), column.next(), helper.phone)
         if event.ask_shirt:
-            worksheet.write(row.get(), column.next(), u(helper.get_shirt_display()))
+            worksheet.write(row.get(), column.next(),
+                            u(helper.get_shirt_display()))
         if event.ask_vegetarian:
-            worksheet.write(row.get(), column.next(), filters.yesno(helper.vegetarian))
+            worksheet.write(row.get(), column.next(),
+                            filters.yesno(helper.vegetarian))
         if job.infection_instruction:
-            worksheet.write(row.get(), column.next(), u(helper.get_infection_instruction_short()))
+            worksheet.write(row.get(), column.next(),
+                            u(helper.get_infection_instruction_short()))
         worksheet.write(row.get(), column.next(), helper.comment)

@@ -96,7 +96,7 @@ class HelperAddCoordinatorForm(forms.Form):
         # all administered jobs
         coordinated_jobs = self.helper.coordinated_jobs
         jobs = [job.pk for job in event.job_set.all()
-                if job.is_admin(self.user) and not job in coordinated_jobs]
+                if job.is_admin(self.user) and job not in coordinated_jobs]
 
         # we need a queryset
         jobs = Job.objects.filter(pk__in=jobs)
@@ -174,6 +174,7 @@ class HelperDeleteCoordinatorForm(forms.ModelForm):
 
     def delete(self):
         self.job.coordinators.remove(self.instance)
+
 
 class HelperSearchForm(forms.Form):
     pattern = forms.CharField(

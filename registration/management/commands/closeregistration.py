@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from registration.models import Event
 
+
 class Command(BaseCommand):
     help = 'Closes the registration for the specified events'
 

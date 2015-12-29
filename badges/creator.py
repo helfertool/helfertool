@@ -41,7 +41,7 @@ class BadgeCreator:
 
     def add_helper(self, helper):
         tmp = {'firstname': self._latex_escape(helper.badge.firstname or
-                                             helper.firstname),
+                                               helper.firstname),
                'surname': self._latex_escape(helper.badge.surname or
                                              helper.surname),
                'shift': self._latex_escape(helper.badge.shift)}

@@ -36,7 +36,6 @@ class Shift(models.Model):
         blank=True,
     )
 
-
     begin = models.DateTimeField(
         verbose_name=_("Begin"),
     )

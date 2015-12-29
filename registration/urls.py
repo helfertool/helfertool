@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.conf.urls import url, include
-from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
@@ -158,7 +157,8 @@ urlpatterns = [
         views.delete_coordinator,
         name='delete_coordinator'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/(?P<shift_pk>[0-9]+)/$',
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/'
+        '(?P<shift_pk>[0-9]+)/$',
         views.add_helper,
         name='add_helper'),
 

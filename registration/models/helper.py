@@ -244,6 +244,7 @@ def helper_saved(sender, instance, using, **kwargs):
         badge.helper = instance
         badge.save()
 
+
 def helper_deleted(sender, **kwargs):
     action = kwargs.pop('action')
     if action != "post_remove":
@@ -253,6 +254,7 @@ def helper_deleted(sender, **kwargs):
 
     if helper.shifts.count() == 0 and not helper.is_coordinator:
         helper.delete()
+
 
 def coordinator_deleted(sender, **kwargs):
     action = kwargs.pop('action')

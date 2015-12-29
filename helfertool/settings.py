@@ -60,41 +60,41 @@ BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 # for e-mail debugging
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 1025
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
 
 # Logging
-#LOGGING = {
-#    'version': 1,
-#    'disable_existing_loggers': False,
-#    'handlers': {
-#        'file': {
-#            'level': 'DEBUG',
-#            'class': 'logging.FileHandler',
-#            'filename': os.path.join(BASE_DIR, 'django.log'),
-#        },
-#        'mail_admins': {
-#            'level': 'ERROR',
-#            'class': 'django.utils.log.AdminEmailHandler',
-#        },
-#    },
-#    'loggers': {
-#        #'django.request': {
-#        #    'handlers': ['file'],
-#        #    'level': 'DEBUG',
-#        #    'propagate': True,
-#        #},
-#        'django.request': {
-#            'handlers': ['mail_admins'],
-#            'level': 'ERROR',
-#            'propagate': False,
-#        },
-#    },
-#}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(BASE_DIR, 'django.log'),
+#         },
+#         'mail_admins': {
+#             'level': 'ERROR',
+#             'class': 'django.utils.log.AdminEmailHandler',
+#         },
+#     },
+#     'loggers': {
+#         #'django.request': {
+#         #    'handlers': ['file'],
+#         #    'level': 'DEBUG',
+#         #    'propagate': True,
+#         #},
+#         'django.request': {
+#             'handlers': ['mail_admins'],
+#             'level': 'ERROR',
+#             'propagate': False,
+#         },
+#     },
+# }
 
 # Application definition
 

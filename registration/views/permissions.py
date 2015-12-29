@@ -65,7 +65,7 @@ def delete_permission(request, user_pk, groupname):
     user = get_object_or_404(User, pk=user_pk)
 
     # validate group (is only set in urls, so should be ok)
-    if not groupname in (settings.GROUP_ADDUSER, settings.GROUP_ADDEVENT):
+    if groupname not in (settings.GROUP_ADDUSER, settings.GROUP_ADDEVENT):
         raise Http404()
 
     # form

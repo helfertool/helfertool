@@ -121,7 +121,6 @@ class BadgeDesign(models.Model):
         :bg_back: Background picture of the back
     """
 
-
     def get_event(self):
         return self.badge_settings.event
 
@@ -298,7 +297,7 @@ class Badge(models.Model):
         jobs = []
 
         for shift in self.helper.shifts.all():
-            if not shift.job in jobs:
+            if shift.job not in jobs:
                 jobs.append(shift.job)
 
         # only one job -> done

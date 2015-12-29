@@ -96,7 +96,7 @@ def add_helper(request, event_url_name, shift_pk):
     all_shifts = Shift.objects.filter(job=shift.job)
 
     form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
-                        selected_shifts = [shift, ])
+                        selected_shifts=[shift, ])
 
     if form.is_valid():
         form.save()
@@ -251,6 +251,7 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
     return render(request, 'registration/admin/delete_coordinator.html',
                   context)
 
+
 @login_required
 def search_helper(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -262,11 +263,11 @@ def search_helper(request, event_url_name):
     # form
     form = HelperSearchForm(request.POST or None, event=event)
     result = None
-    new_search=True
+    new_search = True
 
     if form.is_valid():
         result = form.get()
-        new_search=False
+        new_search = False
 
     # render page
     context = {'event': event,

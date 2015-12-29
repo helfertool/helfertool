@@ -199,7 +199,9 @@ class BadgeForm(forms.ModelForm):
 
 
 class RegisterBadgeForm(forms.Form):
-    badge_id = forms.IntegerField(label='Barcode', widget=forms.TextInput(attrs={'autofocus': ''}))
+    badge_id = forms.IntegerField(label='Barcode',
+                                  widget=forms.TextInput(
+                                    attrs={'autofocus': ''}))
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event')

@@ -15,6 +15,7 @@ from registration.views.utils import nopermission, get_or_404, is_involved
 from registration.models import Event
 from registration.utils import escape_filename
 
+
 def notactive(request):
     return render(request, 'badges/badges_not_active.html')
 
@@ -98,12 +99,14 @@ def generate_badges(request, event_url_name, job_pk=None, generate_all=False):
     # add helpers and coordinators
     for j in jobs:
         for h in j.helpers_and_coordinators():
-            # skip if badge was printed already (and this behaviour is requested)
+            # skip if badge was printed already
+            # (and this behaviour is requested)
             if skip_printed and h.badge.printed:
                 continue
 
             helpers_job = h.badge.get_job()
-            # print badge only if this is the primary job or the job is unambiguous
+            # print badge only if this is the primary job or the job is
+            # unambiguous
             if (not helpers_job or helpers_job == j):
                 creator.add_helper(h)
 

@@ -3,6 +3,7 @@ from django.conf import settings
 
 register = template.Library()
 
+
 @register.simple_tag
 def setting(name):
     return getattr(settings, name, "")
