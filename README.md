@@ -14,7 +14,7 @@ manually:
  * MAKE BACKUPS OF THE DATABASE
  * Update to 2b9838c, migrate as usal
  * Rename the tables listed in below manually (dbshell)
- * Update to b12c754, make a fake migration
+ * Update to 20d89b9, make a fake migration
  * Update to current version, migrate as usual
 
     FROM                                  | TO
