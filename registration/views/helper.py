@@ -8,9 +8,11 @@ from django.utils.translation import ugettext as _
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Job, Shift
-from ..forms import HelperForm, HelperDeleteForm, BadgeForm, \
+from ..forms import HelperForm, HelperDeleteForm, \
     HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
     HelperAddCoordinatorForm, HelperSearchForm
+
+from badges.forms import BadgeForm
 
 
 @login_required

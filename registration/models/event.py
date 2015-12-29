@@ -7,7 +7,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 
-from .badge import BadgeSettings, BadgeDefaults, Badge
+from badges.models import BadgeSettings, BadgeDefaults, Badge
 
 
 @python_2_unicode_compatible
@@ -82,9 +82,9 @@ class Event(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Maximal overlapping of shifts"),
-        help_text = _("If two shifts overlap more than this value in minutes "
-                      "it is not possible to register for both shifts. Leave "
-                      "empty to disable this check."),
+        help_text=_("If two shifts overlap more than this value in minutes "
+                    "it is not possible to register for both shifts. Leave "
+                    "empty to disable this check."),
     )
 
     admins = models.ManyToManyField(
@@ -177,7 +177,7 @@ class Event(models.Model):
         # iterate over jobs
         for job in self.job_set.all():
             for c in job.coordinators.all():
-                if not c in result:
+                if c not in result:
                     result.append(c)
 
         return result
@@ -201,7 +201,9 @@ def event_saved(sender, instance, using, **kwargs):
 
         # badge defaults for jobs
         for job in instance.job_set.all():
-            if not job.badge_defaults:
+            try:
+                getattr(job, 'badge_defaults')
+            except:
                 defaults = BadgeDefaults()
                 defaults.save()
 

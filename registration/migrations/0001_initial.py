@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 from django.conf import settings
 import django.core.validators
-import registration.models.badge
+import badges.models.badges
 import uuid
 
 
@@ -40,8 +40,8 @@ class Migration(migrations.Migration):
                 ('name_de', models.CharField(null=True, verbose_name='Name', max_length=200)),
                 ('name_en', models.CharField(null=True, verbose_name='Name', max_length=200)),
                 ('font_color', models.CharField(help_text='E.g. #00ff00', verbose_name='Color for text', max_length=7, validators=[django.core.validators.RegexValidator('^#[a-fA-F0-9]{6}$')], default='#000000')),
-                ('bg_front', models.ImageField(verbose_name='Background image for front', upload_to=registration.models.badge._design_upload_path)),
-                ('bg_back', models.ImageField(verbose_name='Background image for back', upload_to=registration.models.badge._design_upload_path)),
+                ('bg_front', models.ImageField(verbose_name='Background image for front', upload_to=badges.models.badges._design_upload_path)),
+                ('bg_back', models.ImageField(verbose_name='Background image for back', upload_to=badges.models.badges._design_upload_path)),
             ],
         ),
         migrations.CreateModel(
@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
             name='BadgeSettings',
             fields=[
                 ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
-                ('latex_template', models.FileField(null=True, verbose_name='LaTeX template', upload_to=registration.models.badge._settings_upload_path)),
+                ('latex_template', models.FileField(null=True, verbose_name='LaTeX template', upload_to=badges.models.badges._settings_upload_path)),
                 ('rows', models.IntegerField(verbose_name='Number of rows on one page', validators=[django.core.validators.MinValueValidator(1)], default=5)),
                 ('columns', models.IntegerField(verbose_name='Number of columns on one page', validators=[django.core.validators.MinValueValidator(1)], default=2)),
                 ('defaults', models.OneToOneField(to='registration.BadgeDefaults')),

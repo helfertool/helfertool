@@ -16,7 +16,6 @@ Session.vim
 /doc/build/
 
 # upload directory
-/badgeupload/
 /media/
 
 # sqlite database

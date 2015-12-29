@@ -1,11 +1,12 @@
 from django.conf import settings
-from ..models import BadgePermission
 
 from tempfile import mkdtemp, mkstemp
 import os
 import subprocess
 import shutil
 import sys
+
+from .models import BadgePermission
 
 
 class BadgeCreatorError(Exception):
@@ -87,7 +88,7 @@ class BadgeCreator:
 
         # permissions
         all_permissions = BadgePermission.objects.filter(
-            badge_settings=self.settings).all()
+            badge_settings=self.settings.pk).all()
         selected_permissions = role.permissions
         for perm in all_permissions:
             if selected_permissions.filter(pk=perm.pk).exists():

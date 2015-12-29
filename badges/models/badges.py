@@ -21,7 +21,7 @@ class BadgeSettings(models.Model):
     """
 
     event = models.OneToOneField(
-        'Event'
+        'registration.Event'
     )
 
     defaults = models.OneToOneField(
@@ -212,7 +212,7 @@ def _badge_upload_path(instance, filename):
 
 class Badge(models.Model):
     helper = models.OneToOneField(
-        'Helper',
+        'registration.Helper',
     )
 
     firstname = models.CharField(
@@ -253,7 +253,7 @@ class Badge(models.Model):
     )
 
     primary_job = models.ForeignKey(
-        'Job',
+        'registration.Job',
         verbose_name=_("Primary job"),
         help_text=_("Only necessary if this person has multiple jobs."),
         blank=True,

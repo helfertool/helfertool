@@ -5,8 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 import magic
 
 from ..models import BadgeDesign, BadgeSettings, BadgePermission, BadgeRole, \
-    BadgeDefaults, Badge, Job
-from ..utils import is_image
+    BadgeDefaults, Badge
+
+from registration.models import Job
+from registration.utils import is_image
 
 
 class BadgeSettingsForm(forms.ModelForm):
@@ -40,9 +42,9 @@ class BadgeDefaultsForm(forms.ModelForm):
 
         # restrict roles to this event
         self.fields['role'].queryset = BadgeRole.objects.filter(
-            badge_settings=self.settings)
+            badge_settings=self.settings.pk)
         self.fields['design'].queryset = BadgeDesign.objects.filter(
-            badge_settings=self.settings)
+            badge_settings=self.settings.pk)
 
 
 class BadgeJobDefaultsForm(forms.Form):
@@ -53,9 +55,9 @@ class BadgeJobDefaultsForm(forms.Form):
 
         # available roles and designs
         roles = BadgeRole.objects.filter(
-            badge_settings=self.event.badge_settings)
+            badge_settings=self.event.badge_settings.pk)
         designs = BadgeDesign.objects.filter(
-            badge_settings=self.event.badge_settings)
+            badge_settings=self.event.badge_settings.pk)
 
         # add fields for each job
         for job in self.event.job_set.all():
@@ -149,7 +151,7 @@ class BadgeRoleForm(forms.ModelForm):
 
         # restrict permissions to this event
         self.fields['permissions'].queryset = BadgePermission.objects.filter(
-            badge_settings=self.settings)
+            badge_settings=self.settings.pk)
 
     def save(self, commit=True):
         instance = super(BadgeRoleForm, self).save(False)

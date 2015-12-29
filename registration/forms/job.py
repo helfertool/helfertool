@@ -1,6 +1,7 @@
 from django import forms
 
-from ..models import Job, BadgeRole
+from ..models import Job
+from badges.models import BadgeRole
 
 
 class JobForm(forms.ModelForm):

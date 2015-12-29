@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-29 14:03+0100\n"
+"POT-Creation-Date: 2015-12-29 18:07+0100\n"
 "PO-Revision-Date: 2015-12-29 14:04+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -79,13 +79,8 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:42 registration/models/badge.py:134
-#: registration/models/badge.py:167 registration/models/badge.py:189
-#: registration/models/job.py:34
-#: registration/templates/registration/admin/configure_badges.html:22
-#: registration/templates/registration/admin/configure_badges.html:62
+#: registration/export/pdf.py:42 registration/models/job.py:34
 #: registration/templates/registration/admin/coordinators.html:16
-#: registration/templates/registration/admin/edit_badgesettings.html:30
 #: registration/templates/registration/admin/jobs_and_shifts.html:45
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
@@ -97,29 +92,6 @@ msgstr "Name"
 #: registration/templates/registration/admin/helpers_for_job.html:55
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
-
-#: registration/forms/badge.py:23
-msgid "File does not contain LaTeX code."
-msgstr "Die Datei enthält keinen LaTeX Code."
-
-#: registration/forms/badge.py:94 registration/forms/badge.py:100
-#: registration/forms/badge.py:195
-msgid "The file is not an image."
-msgstr "Die Datei ist kein Bild."
-
-#: registration/forms/badge.py:216
-msgid "Invalid barcode."
-msgstr "Ungültiger Barcode."
-
-#: registration/forms/badge.py:222
-msgid "This badge does not exist. Maybe it was deleted since printing."
-msgstr ""
-"Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken "
-"gelöscht."
-
-#: registration/forms/badge.py:227
-msgid "This badge does not belong to this event."
-msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 
 #: registration/forms/helper.py:148
 #, python-format
@@ -226,118 +198,6 @@ msgstr "E-Mail Adresse"
 #: registration/templates/registration/change_user.html:19
 msgid "Last name"
 msgstr "Nachname"
-
-#: registration/models/badge.py:32
-#: registration/templates/registration/admin/badges.html:12
-msgid "LaTeX template"
-msgstr "LaTeX Template"
-
-#: registration/models/badge.py:39
-msgid "Number of rows on one page"
-msgstr "Anzahl der Zeilen auf einer Seite"
-
-#: registration/models/badge.py:45
-msgid "Number of columns on one page"
-msgstr "Anzahl der Spalten auf einer Seite"
-
-#: registration/models/badge.py:51
-msgid "Print barcodes on badges to avoid duplicates"
-msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
-
-#: registration/models/badge.py:57
-msgid "Role for coordinators"
-msgstr "Rolle für Koordinatoren"
-
-#: registration/models/badge.py:63
-msgid "Role for helpers"
-msgstr "Rolle für Helfer"
-
-#: registration/models/badge.py:94
-#: registration/templates/registration/admin/badges.html:13
-msgid "Default role"
-msgstr "Standard Rolle"
-
-#: registration/models/badge.py:102
-#: registration/templates/registration/admin/badges.html:14
-msgid "Default design"
-msgstr "Standard Design"
-
-#: registration/models/badge.py:141
-msgid "Color for text"
-msgstr "Textfarbe"
-
-#: registration/models/badge.py:142
-msgid "E.g. #00ff00"
-msgstr "z.B. #00ff00"
-
-#: registration/models/badge.py:146
-msgid "Background image for front"
-msgstr "Hintergrundbild für die Vorderseite"
-
-#: registration/models/badge.py:151
-msgid "Background image for back"
-msgstr "Hintergrundbild für die Rückseite"
-
-#: registration/models/badge.py:172 registration/models/badge.py:194
-msgid "Name for LaTeX template"
-msgstr "Name für LaTeX Template"
-
-#: registration/models/badge.py:173
-msgid ""
-"This name is used for the LaTeX template, the prefix \"perm-\" is added."
-msgstr ""
-"Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
-"hinzugefügt."
-
-#: registration/models/badge.py:195
-msgid "This name is used for the LaTeX template."
-msgstr "Dieser Name wird im LaTeX Template verwendet."
-
-#: registration/models/badge.py:220
-msgid "Other firstname"
-msgstr "Other firstname"
-
-#: registration/models/badge.py:226
-msgid "Other surname"
-msgstr "Anderer Nachname"
-
-#: registration/models/badge.py:232
-msgid "Other text for job"
-msgstr "Anderer Text für Aufgabe"
-
-#: registration/models/badge.py:238
-msgid "Other text for shift"
-msgstr "Anderer Text für Schicht"
-
-#: registration/models/badge.py:244
-msgid "Other text for role"
-msgstr "Anderer Text für Rolle"
-
-#: registration/models/badge.py:249
-msgid "Photo"
-msgstr "Foto"
-
-#: registration/models/badge.py:257
-msgid "Primary job"
-msgstr "Primäre Aufgabe"
-
-#: registration/models/badge.py:258
-msgid "Only necessary if this person has multiple jobs."
-msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
-
-#: registration/models/badge.py:269
-#: registration/templates/registration/admin/configure_badges.html:95
-msgid "Role"
-msgstr "Rolle"
-
-#: registration/models/badge.py:277
-#: registration/templates/registration/admin/configure_badges.html:96
-msgid "Design"
-msgstr "Design"
-
-#: registration/models/badge.py:282
-msgid "Badge was printed already"
-msgstr "Badge wurde bereits gedruckt"
 
 #: registration/models/event.py:41
 msgid "Name for URL"
@@ -657,67 +517,6 @@ msgstr ""
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: registration/templates/registration/admin/badges.html:6
-msgid "Generate badges"
-msgstr "Badges generieren"
-
-#: registration/templates/registration/admin/badges.html:10
-msgid ""
-"Some settings are missing to generate badges. Check the following settings:"
-msgstr ""
-"Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
-"folgende Einstellungen:"
-
-#: registration/templates/registration/admin/badges.html:20
-#: registration/templates/registration/admin/configure_badges.html:94
-#: registration/templates/registration/admin/delete_job.html:13
-#: registration/templates/registration/admin/delete_shift.html:13
-msgid "Job"
-msgstr "Aufgabe"
-
-#: registration/templates/registration/admin/badges.html:31
-msgid "Unregistered badges"
-msgstr "Nicht registrierte Badges"
-
-#: registration/templates/registration/admin/badges.html:36
-msgid "All badges"
-msgstr "Alle Badges"
-
-#: registration/templates/registration/admin/badges.html:41
-#: registration/templates/registration/admin/badges.html:46
-#, python-format
-msgid "%(num)s warnings"
-msgstr "%(num)s Warnungen"
-
-#: registration/templates/registration/admin/badges.html:58
-msgid "All unregistered badges"
-msgstr "Alle nicht registrierten Badges"
-
-#: registration/templates/registration/admin/badges.html:63
-msgid "Really all badges"
-msgstr "Wirklich alle Badges"
-
-#: registration/templates/registration/admin/badges_failed.html:6
-msgid "Generating badges failed"
-msgstr "Generieren der Badges fehlgeschlagen"
-
-#: registration/templates/registration/admin/badges_not_active.html:6
-#: registration/templates/registration/admin/base.html:87
-msgid "Badges"
-msgstr "Badges"
-
-#: registration/templates/registration/admin/badges_not_active.html:9
-msgid "The badge creation is not actived."
-msgstr "Die Generierung von Badges ist nicht aktiviert."
-
-#: registration/templates/registration/admin/badges_warnings.html:6
-msgid "Warnings for badge generation"
-msgstr "Warnungen für die Badge Generierung"
-
-#: registration/templates/registration/admin/badges_warnings.html:9
-msgid "There are no warnings."
-msgstr "Es gibt keine Warnungen."
-
 #: registration/templates/registration/admin/base.html:8
 #, python-format
 msgid "Manage %(eventname)s"
@@ -792,6 +591,10 @@ msgstr "Übersicht"
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
+#: registration/templates/registration/admin/base.html:87
+msgid "Badges"
+msgstr "Badges"
+
 #: registration/templates/registration/admin/base.html:89
 msgid "Configure"
 msgstr "Konfigurieren"
@@ -811,8 +614,6 @@ msgid "New event"
 msgstr "Neue Veranstaltung"
 
 #: registration/templates/registration/admin/base.html:108
-#: registration/templates/registration/admin/configure_badges.html:24
-#: registration/templates/registration/admin/edit_badgesettings.html:23
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
@@ -867,71 +668,6 @@ msgstr "Zeige {0} von {1}"
 #: registration/templates/registration/admin/base.html:136
 msgid "Empty list"
 msgstr "Liste leer"
-
-#: registration/templates/registration/admin/configure_badges.html:7
-msgid "Configure badges"
-msgstr "Badges konfigurieren"
-
-#: registration/templates/registration/admin/configure_badges.html:11
-msgid "Edit template"
-msgstr "Template bearbeiten"
-
-#: registration/templates/registration/admin/configure_badges.html:15
-msgid "Roles"
-msgstr "Rollen"
-
-#: registration/templates/registration/admin/configure_badges.html:18
-msgid "There are no roles."
-msgstr "Es gibt keine Rollen."
-
-#: registration/templates/registration/admin/configure_badges.html:23
-#: registration/templates/registration/admin/edit_badgesettings.html:31
-msgid "LaTeX Name"
-msgstr "LaTeX Name"
-
-#: registration/templates/registration/admin/configure_badges.html:41
-#: registration/templates/registration/admin/configure_badges.html:71
-#: registration/templates/registration/admin/edit_badgesettings.html:41
-#: registration/templates/registration/admin/helpers_table.html:62
-#: registration/templates/registration/admin/jobs_and_shifts.html:23
-#: registration/templates/registration/admin/jobs_and_shifts.html:63
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: registration/templates/registration/admin/configure_badges.html:51
-msgid "Add role"
-msgstr "Rolle hinzufügen"
-
-#: registration/templates/registration/admin/configure_badges.html:55
-msgid "Designs"
-msgstr "Designs"
-
-#: registration/templates/registration/admin/configure_badges.html:58
-msgid "There are no designs."
-msgstr "Es gibt keine Designs."
-
-#: registration/templates/registration/admin/configure_badges.html:81
-msgid "Add design"
-msgstr "Design hinzufügen"
-
-#: registration/templates/registration/admin/configure_badges.html:86
-msgid "Defaults"
-msgstr "Standards"
-
-#: registration/templates/registration/admin/configure_badges.html:117
-#: registration/templates/registration/admin/edit_badgedesign.html:13
-#: registration/templates/registration/admin/edit_badgepermission.html:13
-#: registration/templates/registration/admin/edit_badgerole.html:13
-#: registration/templates/registration/admin/edit_badgesettings.html:19
-#: registration/templates/registration/admin/edit_event.html:18
-#: registration/templates/registration/admin/edit_helper.html:88
-#: registration/templates/registration/admin/edit_job.html:19
-#: registration/templates/registration/admin/edit_link.html:13
-#: registration/templates/registration/admin/edit_shift.html:23
-#: registration/templates/registration/admin/search_helper.html:13
-#: registration/templates/registration/change_user.html:62
-msgid "Save"
-msgstr "Speichern"
 
 #: registration/templates/registration/admin/coordinators.html:12
 #: registration/templates/registration/admin/helpers_for_job.html:28
@@ -1005,6 +741,11 @@ msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
 msgid "Delete job"
 msgstr "Aufgabe löschen"
 
+#: registration/templates/registration/admin/delete_job.html:13
+#: registration/templates/registration/admin/delete_shift.html:13
+msgid "Job"
+msgstr "Aufgabe"
+
 #: registration/templates/registration/admin/delete_job.html:24
 msgid "There are shifts for this job. Remove it anyway?"
 msgstr "Es gibt Schichten für diese Aufgabe. Die Aufgabe trotzdem löschen?"
@@ -1065,40 +806,15 @@ msgstr ""
 msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
-#: registration/templates/registration/admin/edit_badgedesign.html:6
-msgid "Badge Design"
-msgstr "Badge Design"
-
-#: registration/templates/registration/admin/edit_badgepermission.html:6
-msgid "Badge Permission"
-msgstr "Badge Berechtigung"
-
-#: registration/templates/registration/admin/edit_badgerole.html:6
-msgid "Badge Role"
-msgstr "Badge Rolle"
-
-#: registration/templates/registration/admin/edit_badgesettings.html:6
-msgid "Badge Settings"
-msgstr "Badge Einstellungen"
-
-#: registration/templates/registration/admin/edit_badgesettings.html:9
-msgid ""
-"Changes of most of this settings require an update of the LaTeX template!"
-msgstr ""
-"Bei den meisten Änderungen in diesen Einstellungen muss auch das LaTeX "
-"Template angepasst werden!"
-
-#: registration/templates/registration/admin/edit_badgesettings.html:12
-msgid "Template"
-msgstr "Template"
-
-#: registration/templates/registration/admin/edit_badgesettings.html:26
-msgid "There are no permissions."
-msgstr "Es gibt keine Berechtigungen."
-
-#: registration/templates/registration/admin/edit_badgesettings.html:51
-msgid "Add permission"
-msgstr "Berechtigung hinzufügen"
+#: registration/templates/registration/admin/edit_event.html:18
+#: registration/templates/registration/admin/edit_helper.html:88
+#: registration/templates/registration/admin/edit_job.html:19
+#: registration/templates/registration/admin/edit_link.html:13
+#: registration/templates/registration/admin/edit_shift.html:23
+#: registration/templates/registration/admin/search_helper.html:13
+#: registration/templates/registration/change_user.html:62
+msgid "Save"
+msgstr "Speichern"
 
 #: registration/templates/registration/admin/edit_event.html:25
 msgid "You can delete this event including all jobs, shifts and helpers."
@@ -1188,6 +904,12 @@ msgstr "(%(current)s von %(total)s)"
 msgid "Registration time"
 msgstr "Anmeldezeit"
 
+#: registration/templates/registration/admin/helpers_table.html:62
+#: registration/templates/registration/admin/jobs_and_shifts.html:23
+#: registration/templates/registration/admin/jobs_and_shifts.html:63
+msgid "Edit"
+msgstr "Bearbeiten"
+
 #: registration/templates/registration/admin/jobs_and_shifts.html:39
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
@@ -1235,14 +957,6 @@ msgstr "Kann Nutzer hinzufügen"
 #: registration/templates/registration/admin/permissions.html:41
 msgid "There are no users, that can add users."
 msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
-
-#: registration/templates/registration/admin/register_badge.html:6
-msgid "Register badge"
-msgstr "Badge registrieren"
-
-#: registration/templates/registration/admin/register_badge.html:10
-msgid "Barcodes are not activated."
-msgstr "Barcodes sind nicht aktiviert."
 
 #: registration/templates/registration/admin/search_helper.html:18
 msgid "Result"
@@ -1380,16 +1094,6 @@ msgstr "Das Passwort wurde erfolgreich geändert"
 msgid "Added user %(username)s"
 msgstr "Nutzer %(username)s hinzugefügt"
 
-#: registration/views/badge.py:346
-#, python-format
-msgid "Badge already printed: %(name)s"
-msgstr "Bagde bereits gedruckt: %(name)s"
-
-#: registration/views/badge.py:352
-#, python-format
-msgid "Badge registered: %(name)s"
-msgstr "Badge registriert: %(name)s"
-
 #: registration/views/event.py:45
 #, python-format
 msgid "Event was created: %(event)s"
@@ -1400,12 +1104,12 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:200
+#: registration/views/helper.py:202
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:236
+#: registration/views/helper.py:238
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
@@ -1446,6 +1150,211 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:50
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "File does not contain LaTeX code."
+#~ msgstr "Die Datei enthält keinen LaTeX Code."
+
+#~ msgid "The file is not an image."
+#~ msgstr "Die Datei ist kein Bild."
+
+#~ msgid "Invalid barcode."
+#~ msgstr "Ungültiger Barcode."
+
+#~ msgid "This badge does not exist. Maybe it was deleted since printing."
+#~ msgstr ""
+#~ "Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem "
+#~ "Drucken gelöscht."
+
+#~ msgid "This badge does not belong to this event."
+#~ msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
+
+#~ msgid "LaTeX template"
+#~ msgstr "LaTeX Template"
+
+#~ msgid "Number of rows on one page"
+#~ msgstr "Anzahl der Zeilen auf einer Seite"
+
+#~ msgid "Number of columns on one page"
+#~ msgstr "Anzahl der Spalten auf einer Seite"
+
+#~ msgid "Print barcodes on badges to avoid duplicates"
+#~ msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
+
+#~ msgid "Role for coordinators"
+#~ msgstr "Rolle für Koordinatoren"
+
+#~ msgid "Role for helpers"
+#~ msgstr "Rolle für Helfer"
+
+#~ msgid "Default role"
+#~ msgstr "Standard Rolle"
+
+#~ msgid "Default design"
+#~ msgstr "Standard Design"
+
+#~ msgid "Color for text"
+#~ msgstr "Textfarbe"
+
+#~ msgid "E.g. #00ff00"
+#~ msgstr "z.B. #00ff00"
+
+#~ msgid "Background image for front"
+#~ msgstr "Hintergrundbild für die Vorderseite"
+
+#~ msgid "Background image for back"
+#~ msgstr "Hintergrundbild für die Rückseite"
+
+#~ msgid "Name for LaTeX template"
+#~ msgstr "Name für LaTeX Template"
+
+#~ msgid ""
+#~ "This name is used for the LaTeX template, the prefix \"perm-\" is added."
+#~ msgstr ""
+#~ "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-"
+#~ "\" hinzugefügt."
+
+#~ msgid "This name is used for the LaTeX template."
+#~ msgstr "Dieser Name wird im LaTeX Template verwendet."
+
+#~ msgid "Other firstname"
+#~ msgstr "Other firstname"
+
+#~ msgid "Other surname"
+#~ msgstr "Anderer Nachname"
+
+#~ msgid "Other text for job"
+#~ msgstr "Anderer Text für Aufgabe"
+
+#~ msgid "Other text for shift"
+#~ msgstr "Anderer Text für Schicht"
+
+#~ msgid "Other text for role"
+#~ msgstr "Anderer Text für Rolle"
+
+#~ msgid "Photo"
+#~ msgstr "Foto"
+
+#~ msgid "Primary job"
+#~ msgstr "Primäre Aufgabe"
+
+#~ msgid "Only necessary if this person has multiple jobs."
+#~ msgstr ""
+#~ "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
+
+#~ msgid "Role"
+#~ msgstr "Rolle"
+
+#~ msgid "Design"
+#~ msgstr "Design"
+
+#~ msgid "Badge was printed already"
+#~ msgstr "Badge wurde bereits gedruckt"
+
+#~ msgid "Generate badges"
+#~ msgstr "Badges generieren"
+
+#~ msgid ""
+#~ "Some settings are missing to generate badges. Check the following "
+#~ "settings:"
+#~ msgstr ""
+#~ "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
+#~ "folgende Einstellungen:"
+
+#~ msgid "Unregistered badges"
+#~ msgstr "Nicht registrierte Badges"
+
+#~ msgid "All badges"
+#~ msgstr "Alle Badges"
+
+#~ msgid "%(num)s warnings"
+#~ msgstr "%(num)s Warnungen"
+
+#~ msgid "All unregistered badges"
+#~ msgstr "Alle nicht registrierten Badges"
+
+#~ msgid "Really all badges"
+#~ msgstr "Wirklich alle Badges"
+
+#~ msgid "Generating badges failed"
+#~ msgstr "Generieren der Badges fehlgeschlagen"
+
+#~ msgid "The badge creation is not actived."
+#~ msgstr "Die Generierung von Badges ist nicht aktiviert."
+
+#~ msgid "Warnings for badge generation"
+#~ msgstr "Warnungen für die Badge Generierung"
+
+#~ msgid "There are no warnings."
+#~ msgstr "Es gibt keine Warnungen."
+
+#~ msgid "Configure badges"
+#~ msgstr "Badges konfigurieren"
+
+#~ msgid "Edit template"
+#~ msgstr "Template bearbeiten"
+
+#~ msgid "Roles"
+#~ msgstr "Rollen"
+
+#~ msgid "There are no roles."
+#~ msgstr "Es gibt keine Rollen."
+
+#~ msgid "LaTeX Name"
+#~ msgstr "LaTeX Name"
+
+#~ msgid "Add role"
+#~ msgstr "Rolle hinzufügen"
+
+#~ msgid "Designs"
+#~ msgstr "Designs"
+
+#~ msgid "There are no designs."
+#~ msgstr "Es gibt keine Designs."
+
+#~ msgid "Add design"
+#~ msgstr "Design hinzufügen"
+
+#~ msgid "Defaults"
+#~ msgstr "Standards"
+
+#~ msgid "Badge Design"
+#~ msgstr "Badge Design"
+
+#~ msgid "Badge Permission"
+#~ msgstr "Badge Berechtigung"
+
+#~ msgid "Badge Role"
+#~ msgstr "Badge Rolle"
+
+#~ msgid "Badge Settings"
+#~ msgstr "Badge Einstellungen"
+
+#~ msgid ""
+#~ "Changes of most of this settings require an update of the LaTeX template!"
+#~ msgstr ""
+#~ "Bei den meisten Änderungen in diesen Einstellungen muss auch das LaTeX "
+#~ "Template angepasst werden!"
+
+#~ msgid "Template"
+#~ msgstr "Template"
+
+#~ msgid "There are no permissions."
+#~ msgstr "Es gibt keine Berechtigungen."
+
+#~ msgid "Add permission"
+#~ msgstr "Berechtigung hinzufügen"
+
+#~ msgid "Register badge"
+#~ msgstr "Badge registrieren"
+
+#~ msgid "Barcodes are not activated."
+#~ msgstr "Barcodes sind nicht aktiviert."
+
+#~ msgid "Badge already printed: %(name)s"
+#~ msgstr "Bagde bereits gedruckt: %(name)s"
+
+#~ msgid "Badge registered: %(name)s"
+#~ msgstr "Badge registriert: %(name)s"
 
 #~ msgid "Common"
 #~ msgstr "Allgemein"

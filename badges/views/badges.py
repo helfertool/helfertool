@@ -5,17 +5,18 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .utils import nopermission, get_or_404, is_involved
-
-from ..models import Event, BadgeDesign, BadgePermission, BadgeRole
+from ..models import BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm, RegisterBadgeForm
-from ..badges import BadgeCreator, BadgeCreatorError, warnings_for_job
-from ..utils import escape_filename
+from ..creator import BadgeCreator, BadgeCreatorError
+from ..checks import warnings_for_job
 
+from registration.views.utils import nopermission, get_or_404, is_involved
+from registration.models import Event
+from registration.utils import escape_filename
 
 def notactive(request):
-    return render(request, 'registration/admin/badges_not_active.html')
+    return render(request, 'badges/badges_not_active.html')
 
 
 @login_required
@@ -41,7 +42,7 @@ def badges(request, event_url_name):
     context = {'event': event,
                'jobs': jobs,
                'possible': possible}
-    return render(request, 'registration/admin/badges.html', context)
+    return render(request, 'badges/badges.html', context)
 
 
 @login_required
@@ -63,7 +64,7 @@ def badges_warnings(request, event_url_name, job_pk):
     # render
     context = {'event': event,
                'helpers': helpers}
-    return render(request, 'registration/admin/badges_warnings.html', context)
+    return render(request, 'badges/badges_warnings.html', context)
 
 
 @login_required
@@ -117,7 +118,7 @@ def generate_badges(request, event_url_name, job_pk=None, generate_all=False):
         context = {'event': event,
                    'error': e.value,
                    'latex_output': e.get_latex_output()}
-        return render(request, 'registration/admin/badges_failed.html',
+        return render(request, 'badges/badges_failed.html',
                       context)
 
     # output
@@ -174,7 +175,7 @@ def configure_badges(request, event_url_name):
                'designs': designs,
                'defaults_form': defaults_form,
                'job_defaults_form': job_defaults_form}
-    return render(request, 'registration/admin/configure_badges.html', context)
+    return render(request, 'badges/configure_badges.html', context)
 
 
 @login_required
@@ -206,7 +207,7 @@ def edit_badgesettings(request, event_url_name):
     context = {'event': event,
                'form': form,
                'permissions': permissions}
-    return render(request, 'registration/admin/edit_badgesettings.html',
+    return render(request, 'badges/edit_badgesettings.html',
                   context)
 
 #
@@ -247,7 +248,7 @@ def edit_badgepermission(request, event_url_name, permission_pk=None):
 
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/admin/edit_badgepermission.html',
+    return render(request, 'badges/edit_badgepermission.html',
                   context)
 
 
@@ -284,7 +285,7 @@ def edit_badgerole(request, event_url_name, role_pk=None):
 
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/admin/edit_badgerole.html',
+    return render(request, 'badges/edit_badgerole.html',
                   context)
 
 
@@ -321,7 +322,7 @@ def edit_badgedesign(request, event_url_name, design_pk=None):
 
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/admin/edit_badgedesign.html',
+    return render(request, 'badges/edit_badgedesign.html',
                   context)
 
 
@@ -356,5 +357,5 @@ def register_badge(request, event_url_name):
 
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/admin/register_badge.html',
+    return render(request, 'badges/register_badge.html',
                   context)

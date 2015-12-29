@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 from collections import OrderedDict
 
-from .badge import BadgeDefaults
+from badges.models import BadgeDefaults
 
 
 @python_2_unicode_compatible
@@ -60,7 +60,7 @@ class Job(models.Model):
     )
 
     badge_defaults = models.OneToOneField(
-        'BadgeDefaults',
+        BadgeDefaults,
         blank=True,
         null=True,
     )

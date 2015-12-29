@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import registration.models.badge
+import badges.models.badges
 
 
 class Migration(migrations.Migration):
@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='badge',
             name='photo',
-            field=models.ImageField(upload_to=registration.models.badge._badge_upload_path, blank=True, verbose_name='Photo', null=True),
+            field=models.ImageField(upload_to=badges.models.badges._badge_upload_path, blank=True, verbose_name='Photo', null=True),
         ),
         migrations.AlterField(
             model_name='badge',
