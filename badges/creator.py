@@ -11,6 +11,8 @@ from .models import BadgePermission
 
 class BadgeCreatorError(Exception):
     def __init__(self, value, latex_output=None):
+        super(BadgeCreatorError, self).__init__(value)
+
         self.value = value
         self.latex_output = latex_output
 
@@ -25,8 +27,8 @@ class BadgeCreatorError(Exception):
 
 
 class BadgeCreator:
-    def __init__(self, settings):
-        self.settings = settings
+    def __init__(self, badgesettings):
+        self.settings = badgesettings
 
         self.columns = self.settings.columns
         self.rows = self.settings.rows
@@ -177,7 +179,7 @@ class BadgeCreator:
 
     def _create_badge_side(self, latex_command, helper_data):
         data = ",".join(["%s=%s" % (key, helper_data[key]) for key in
-                        helper_data])
+                         helper_data])
         template = r'\%s[%s]' % (latex_command, data)
 
         return template
@@ -213,7 +215,7 @@ class BadgeCreator:
             r = r + latex_row
 
             # add hline
-            r = r + '\hline' + "\n"
+            r = r + r'\hline' + "\n"
 
             # next row
             row = row + 1

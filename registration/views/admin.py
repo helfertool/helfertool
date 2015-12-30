@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from .utils import nopermission, is_involved
 
 from ..models import Event
-from ..forms import UserCreationForm
+from ..forms import CreateUserForm
 from ..templatetags.permissions import has_adduser_group, has_perm_group
 
 
@@ -49,7 +49,7 @@ def add_user(request):
         return nopermission(request)
 
     # form
-    form = UserCreationForm(request.POST or None)
+    form = CreateUserForm(request.POST or None)
 
     if form.is_valid():
         user = form.save()

@@ -44,6 +44,8 @@ manually:
  * Pillow
  * reportlab
  * python-magic
+ * pylint (only for developtment)
+ * pylint-django (only for development)
  * sphinx (only to build the documentation)
  * locustio (only for load test, Python 2 only at the moment)
 

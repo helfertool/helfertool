@@ -28,7 +28,7 @@ class UsernameForm(forms.Form):
         return self.instance
 
 
-class UserCreationForm(UserCreationForm):
+class CreateUserForm(UserCreationForm):
     email = forms.EmailField(label=_("Email address"), required=True)
     first_name = forms.CharField(label=_('First name'), max_length=30,
                                  required=True)
@@ -45,10 +45,10 @@ class UserCreationForm(UserCreationForm):
         if not self.cleaned_data['username'].startswith('@'):
             self.cleaned_data['username'] = '@' + self.cleaned_data['username']
 
-        return super(UserCreationForm, self).clean()
+        return super(CreateUserForm, self).clean()
 
     def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
+        user = super(CreateUserForm, self).save(commit=False)
 
         # change mail and name
         user.email = self.cleaned_data["email"]
