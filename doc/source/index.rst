@@ -11,14 +11,18 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   user/index
-   developer/index
+   user/new-event
+   user/jobs-and-shifts
+   user/access-control
+   user/links
+   user/badges/index
+
+..   developer/index
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+.. Indices and tables
+.. ==================
+..
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
