@@ -76,7 +76,7 @@ def edit_badgesettings(request, event_url_name):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('configure_badges',
+        return HttpResponseRedirect(reverse('badgesettings',
                                             args=[event.url_name, ]))
 
     # render
