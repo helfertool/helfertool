@@ -79,7 +79,9 @@ urlpatterns = [
         {'generate_all': True},
         name='generate_all_badges'),
 
+    #
     # register badges
+    #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/',
         views.register_badge,
         name='register_badge'),

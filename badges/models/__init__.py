@@ -1,2 +1,6 @@
-from .badges import BadgeSettings, BadgeDefaults, BadgeDesign, \
-    BadgePermission, BadgeRole, Badge
+from .badge import Badge
+from .defaults import BadgeDefaults
+from .design import BadgeDesign
+from .permission import BadgePermission
+from .role import BadgeRole
+from .settings import BadgeSettings
