@@ -3,9 +3,9 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import BadgeDesign, BadgeRole, Badge
+from ..utils import is_image
 
 from registration.models import Job
-from registration.utils import is_image
 
 
 class BadgeForm(forms.ModelForm):

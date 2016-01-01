@@ -1,8 +1,6 @@
 import string
 import sys
 
-import magic
-
 
 def escape_filename(filename):
     """Escape a filename so it includes only valid characters."""
@@ -18,10 +16,3 @@ if sys.version_info < (3,):
 else:
     def u(x):
         return str(x)
-
-# check if file is an image using libmagic
-def is_image(file):
-    filemime = magic.from_buffer(file.read(), mime=True)
-    file.seek(0)
-
-    return filemime.startswith(b'image/')

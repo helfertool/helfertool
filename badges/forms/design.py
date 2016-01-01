@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import BadgeDesign
 
-from registration.utils import is_image
+from ..utils import is_image
 
 
 class BadgeDesignForm(forms.ModelForm):
