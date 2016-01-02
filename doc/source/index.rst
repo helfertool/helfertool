@@ -9,13 +9,14 @@ Welcome!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    user/new-event
    user/jobs-and-shifts
    user/access-control
    user/links
    user/badges/index
+   user/faq/index
 
 ..   developer/index
 
