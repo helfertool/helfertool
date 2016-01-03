@@ -1,8 +1,6 @@
 FAQs
 ====
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 

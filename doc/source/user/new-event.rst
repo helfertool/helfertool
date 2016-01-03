@@ -1,3 +1,5 @@
+.. _new-event:
+
 Create a new event
 ==================
 
@@ -6,11 +8,13 @@ options. Here is a description of some to these:
 
 Name for URL:
     This is the name used in the URL for the registration.
-    You should not change it after the registration was opened or you sent a
-    link to someone.
 
     Example: if the name for the URL is *testevent* then the registration is
     available under http://helfen.fs.tum.de/testevent.
+
+    .. warning::
+        You should not change this value after the registration was opened or
+        you sent a link to someone.
 
 Event name:
     This is the displayed name of the event, you can change it whenever you
@@ -42,7 +46,8 @@ Admins:
 Registration possible:
     The event is visible publicly.
 
-    Note: The registration over links is possible even when this is not set.
+    .. note::
+        The registration over links is possible even when this is not set.
 
 Helpers have to confirm to be full age:
     There is a checkbox in the registration form for this. If someone does not

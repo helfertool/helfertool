@@ -1,8 +1,6 @@
 Badges
 ======
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 

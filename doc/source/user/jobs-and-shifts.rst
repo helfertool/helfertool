@@ -1,3 +1,5 @@
+.. _jobs-and-shifts:
+
 Manage jobs and shifts
 ======================
 
@@ -8,8 +10,8 @@ Jobs
 
 Each job has a name (e.g. Security). You can decide for each job if it should
 be visible publicly. If this is not set the registration is only possible
-with a link (TODO) or for logged in users with the appropriate permission
-(TODO).
+with a :ref:`link <links>` or for logged in users with
+:ref:`the appropriate permission <access-control>`.
 
 For some jobs is it necessary to have received some instructions for the
 handling of food ("Gesundheitsbelehrung") from a doctor. If this is necessary
@@ -17,7 +19,8 @@ for a job a person that wants to register for it is asked if he has this thing.
 
 You can and should add a description for each jobs.
 
-For the meaning of the job admins see TODO.
+.. seealso::
+    The meaning of job admins is explained in :ref:`access-control`.
 
 Shifts
 ------
