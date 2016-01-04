@@ -1,5 +1,6 @@
 .. _new-event:
 
+==================
 Create a new event
 ==================
 
@@ -23,7 +24,7 @@ Event name:
 E-Mail:
     This mail address is used as sender of the confirmation mails.
     It is possible that some people response to these mails when they want to
-    contact you. So you should make sure that mails sent to this address as
+    contact you. So you should make sure that mails sent to this address are
     read.
 
     Additionally a mail is sent to this address if someone gives a wrong mail

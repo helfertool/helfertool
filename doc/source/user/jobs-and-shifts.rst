@@ -1,10 +1,12 @@
 .. _jobs-and-shifts:
 
+======================
 Manage jobs and shifts
 ======================
 
 Only admins can add new jobs and shifts or change them.
 
+----
 Jobs
 ----
 
@@ -20,8 +22,9 @@ for a job a person that wants to register for it is asked if he has this thing.
 You can and should add a description for each jobs.
 
 .. seealso::
-    The meaning of job admins is explained in :ref:`access-control`.
+   The meaning of job admins is explained in :ref:`access-control`.
 
+------
 Shifts
 ------
 
@@ -32,7 +35,13 @@ Even if the jobs is visible publicly you can block some shifts. They are
 visible then but it is not possible to register with the public form. Again
 the registration is possible with a link or for logged in users.
 
+---------------------
 Coordinators for jobs
 ---------------------
 
-TODO
+Beside helpers there are coordinators for each job that do not have a shift.
+
+.. important::
+   The coordinators have nothing to do with user accounts in the system.
+   If someone is a coordinator for a job he has not automatically the access
+   rights to manage this job. Therefor you have to add an user as job admin.
