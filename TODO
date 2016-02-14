@@ -29,6 +29,7 @@ Registration
 * Mail: link to registered page
 * add ical file to confirmation mail
 * bot protection
+* reminder mail/SMS
 
 Admin area
 ==========
@@ -40,6 +41,7 @@ Admin area
 * mails
     * custom sender
     * attachments
+    * send to coordinators
 * different available shirt sizes per event
 * fixed tshirt sizes, mark all changes since certain date
 * copy event with job, shifts, settings, badge stuff but without admins and helpers
