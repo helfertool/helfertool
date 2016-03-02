@@ -74,6 +74,14 @@ class HelperAddShiftForm(forms.Form):
             widget=forms.CheckboxSelectMultiple,
             queryset=shifts, required=True)
 
+    def clean(self):
+        super(HelperAddShiftForm, self).clean()
+
+        for shift in self.cleaned_data['shifts']:
+            if shift.is_full():
+                raise ValidationError(_("This shift if already full: "
+                                        "%(shift)s") % {'shift': str(shift)})
+
     def save(self):
         for shift in self.cleaned_data['shifts']:
             self.helper.shifts.add(shift)

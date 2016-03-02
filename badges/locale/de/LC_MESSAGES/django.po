@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-29 18:40+0100\n"
+"POT-Creation-Date: 2016-03-02 16:02+0100\n"
 "PO-Revision-Date: 2015-12-29 18:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,142 +18,141 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.6\n"
 
-#: badges/forms/badges.py:25
-msgid "File does not contain LaTeX code."
-msgstr "Die Datei enthält keinen LaTeX Code."
-
-#: badges/forms/badges.py:96 badges/forms/badges.py:102
-#: badges/forms/badges.py:197
+#: badges/forms/badge.py:38 badges/forms/design.py:23 badges/forms/design.py:29
 msgid "The file is not an image."
 msgstr "Die Datei ist kein Bild."
 
-#: badges/forms/badges.py:218
+#: badges/forms/register.py:27
 msgid "Invalid barcode."
 msgstr "Ungültiger Barcode."
 
-#: badges/forms/badges.py:224
+#: badges/forms/register.py:33
 msgid "This badge does not exist. Maybe it was deleted since printing."
 msgstr ""
 "Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken "
 "gelöscht."
 
-#: badges/forms/badges.py:229
+#: badges/forms/register.py:38
 msgid "This badge does not belong to this event."
 msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 
-#: badges/models/badges.py:32 badges/templates/badges/badges.html:12
-msgid "LaTeX template"
-msgstr "LaTeX Template"
+#: badges/forms/settings.py:21
+msgid "File does not contain LaTeX code."
+msgstr "Die Datei enthält keinen LaTeX Code."
 
-#: badges/models/badges.py:39
-msgid "Number of rows on one page"
-msgstr "Anzahl der Zeilen auf einer Seite"
+#: badges/models/badge.py:19
+msgid "Other firstname"
+msgstr "Anderer Vorname"
 
-#: badges/models/badges.py:45
-msgid "Number of columns on one page"
-msgstr "Anzahl der Spalten auf einer Seite"
+#: badges/models/badge.py:25
+msgid "Other surname"
+msgstr "Anderer Nachname"
 
-#: badges/models/badges.py:51
-msgid "Print barcodes on badges to avoid duplicates"
-msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
+#: badges/models/badge.py:31
+msgid "Other text for job"
+msgstr "Anderer Text für Aufgabe"
 
-#: badges/models/badges.py:57
-msgid "Role for coordinators"
-msgstr "Rolle für Koordinatoren"
+#: badges/models/badge.py:37
+msgid "Other text for shift"
+msgstr "Anderer Text für Schicht"
 
-#: badges/models/badges.py:63
-msgid "Role for helpers"
-msgstr "Rolle für Helfer"
+#: badges/models/badge.py:43
+msgid "Other text for role"
+msgstr "Anderer Text für Rolle"
 
-#: badges/models/badges.py:94 badges/templates/badges/badges.html:13
+#: badges/models/badge.py:48
+msgid "Photo"
+msgstr "Foto"
+
+#: badges/models/badge.py:56
+msgid "Primary job"
+msgstr "Primäre Aufgabe"
+
+#: badges/models/badge.py:57
+msgid "Only necessary if this person has multiple jobs."
+msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
+
+#: badges/models/badge.py:68 badges/templates/badges/configure_badges.html:95
+msgid "Role"
+msgstr "Rolle"
+
+#: badges/models/badge.py:76 badges/templates/badges/configure_badges.html:96
+msgid "Design"
+msgstr "Design"
+
+#: badges/models/badge.py:81
+msgid "Badge was printed already"
+msgstr "Badge wurde bereits gedruckt"
+
+#: badges/models/defaults.py:11 badges/templates/badges/badges.html:13
 msgid "Default role"
 msgstr "Standard Rolle"
 
-#: badges/models/badges.py:102 badges/templates/badges/badges.html:14
+#: badges/models/defaults.py:19 badges/templates/badges/badges.html:14
 msgid "Default design"
 msgstr "Standard Design"
 
-#: badges/models/badges.py:134 badges/models/badges.py:167
-#: badges/models/badges.py:189 badges/templates/badges/configure_badges.html:22
+#: badges/models/design.py:37 badges/models/permission.py:16
+#: badges/models/role.py:17 badges/templates/badges/configure_badges.html:22
 #: badges/templates/badges/configure_badges.html:62
 #: badges/templates/badges/edit_badgesettings.html:30
 msgid "Name"
 msgstr "Name"
 
-#: badges/models/badges.py:141
+#: badges/models/design.py:44
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: badges/models/badges.py:142
+#: badges/models/design.py:45
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: badges/models/badges.py:146
+#: badges/models/design.py:49
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: badges/models/badges.py:151
+#: badges/models/design.py:54
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: badges/models/badges.py:172 badges/models/badges.py:194
+#: badges/models/permission.py:21 badges/models/role.py:22
 msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
-#: badges/models/badges.py:173
+#: badges/models/permission.py:22
 msgid ""
 "This name is used for the LaTeX template, the prefix \"perm-\" is added."
 msgstr ""
 "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
 "hinzugefügt."
 
-#: badges/models/badges.py:195
+#: badges/models/role.py:23
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: badges/models/badges.py:220
-msgid "Other firstname"
-msgstr "Anderer Vorname"
+#: badges/models/settings.py:31 badges/templates/badges/badges.html:12
+msgid "LaTeX template"
+msgstr "LaTeX Template"
 
-#: badges/models/badges.py:226
-msgid "Other surname"
-msgstr "Anderer Nachname"
+#: badges/models/settings.py:38
+msgid "Number of rows on one page"
+msgstr "Anzahl der Zeilen auf einer Seite"
 
-#: badges/models/badges.py:232
-msgid "Other text for job"
-msgstr "Anderer Text für Aufgabe"
+#: badges/models/settings.py:44
+msgid "Number of columns on one page"
+msgstr "Anzahl der Spalten auf einer Seite"
 
-#: badges/models/badges.py:238
-msgid "Other text for shift"
-msgstr "Anderer Text für Schicht"
+#: badges/models/settings.py:50
+msgid "Print barcodes on badges to avoid duplicates"
+msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
 
-#: badges/models/badges.py:244
-msgid "Other text for role"
-msgstr "Anderer Text für Rolle"
+#: badges/models/settings.py:56
+msgid "Role for coordinators"
+msgstr "Rolle für Koordinatoren"
 
-#: badges/models/badges.py:249
-msgid "Photo"
-msgstr "Foto"
-
-#: badges/models/badges.py:257
-msgid "Primary job"
-msgstr "Primäre Aufgabe"
-
-#: badges/models/badges.py:258
-msgid "Only necessary if this person has multiple jobs."
-msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
-
-#: badges/models/badges.py:269 badges/templates/badges/configure_badges.html:95
-msgid "Role"
-msgstr "Rolle"
-
-#: badges/models/badges.py:277 badges/templates/badges/configure_badges.html:96
-msgid "Design"
-msgstr "Design"
-
-#: badges/models/badges.py:282
-msgid "Badge was printed already"
-msgstr "Badge wurde bereits gedruckt"
+#: badges/models/settings.py:62
+msgid "Role for helpers"
+msgstr "Rolle für Helfer"
 
 #: badges/templates/badges/badges.html:6
 msgid "Generate badges"
@@ -316,12 +315,12 @@ msgstr "Badges registrieren"
 msgid "Barcodes are not activated."
 msgstr "Barcodes sind nicht aktiviert."
 
-#: badges/views/badges.py:347
+#: badges/views/register.py:32
 #, python-format
 msgid "Badge already printed: %(name)s"
 msgstr "Bagde bereits gedruckt: %(name)s"
 
-#: badges/views/badges.py:353
+#: badges/views/register.py:38
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
