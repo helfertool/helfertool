@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 16:02+0100\n"
-"PO-Revision-Date: 2016-03-02 16:02+0100\n"
+"POT-Creation-Date: 2016-03-05 22:19+0100\n"
+"PO-Revision-Date: 2016-03-05 22:19+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -30,7 +30,7 @@ msgstr "Vorname"
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:63 registration/models/event.py:70
+#: registration/export/excel.py:63 registration/models/event.py:75
 #: registration/models/helper.py:97
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
@@ -216,43 +216,51 @@ msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
+#: registration/models/event.py:51
+msgid "Date"
+msgstr "Datum"
+
 #: registration/models/event.py:52
+msgid "First day of event"
+msgstr "Erster Tag der Veranstaltung"
+
+#: registration/models/event.py:57
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models/event.py:53
+#: registration/models/event.py:58
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:58 registration/templates/base.html:115
+#: registration/models/event.py:63 registration/templates/base.html.py:115
 msgid "Imprint"
 msgstr "Impressum"
 
-#: registration/models/event.py:59
+#: registration/models/event.py:64
 msgid "Display at the bottom of the registration form."
 msgstr "Wird bei der Anmeldung unten angezeigt."
 
-#: registration/models/event.py:64
+#: registration/models/event.py:69
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models/event.py:65
+#: registration/models/event.py:70
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models/event.py:71
+#: registration/models/event.py:76
 msgid "Used as sender of e-mails."
 msgstr "Wird als Absender von E-Mail genutzt."
 
-#: registration/models/event.py:78
+#: registration/models/event.py:83
 msgid "Logo"
 msgstr "Logo"
 
-#: registration/models/event.py:84
+#: registration/models/event.py:89
 msgid "Maximal overlapping of shifts"
 msgstr "Maximale Überlappung von Schichten"
 
-#: registration/models/event.py:85
+#: registration/models/event.py:90
 msgid ""
 "If two shifts overlap more than this value in minutes it is not possible to "
 "register for both shifts. Leave empty to disable this check."
@@ -261,27 +269,27 @@ msgstr ""
 "man sich nicht für beide Schichten anmelden. Wenn das Feld leer ist, wird "
 "die Überlappung nicht geprüft."
 
-#: registration/models/event.py:97
+#: registration/models/event.py:102
 msgid "Registration possible"
 msgstr "Anmeldung möglich"
 
-#: registration/models/event.py:102
+#: registration/models/event.py:107
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:107
+#: registration/models/event.py:112
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models/event.py:112
+#: registration/models/event.py:117
 msgid "Helpers have to confirm to be full age"
 msgstr "Helfer müssen bestätigen, volljährig zu sein"
 
-#: registration/models/event.py:117
+#: registration/models/event.py:122
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:122
+#: registration/models/event.py:127
 msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
@@ -289,7 +297,7 @@ msgstr ""
 "Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
 "werden, der per E-Mail verschickt wird."
 
-#: registration/models/event.py:128
+#: registration/models/event.py:133
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
@@ -348,28 +356,28 @@ msgstr "Beschreibung"
 msgid "Usage"
 msgstr "Verwendung"
 
-#: registration/models/shift.py:34
+#: registration/models/shift.py:36
 msgid "Name (optional)"
 msgstr "Name (optional)"
 
-#: registration/models/shift.py:40
+#: registration/models/shift.py:42
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:43
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models/shift.py:44
+#: registration/models/shift.py:46
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "End"
 msgstr "Ende"
 
-#: registration/models/shift.py:49
+#: registration/models/shift.py:51
 #: registration/templates/registration/admin/jobs_and_shifts.html:46
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models/shift.py:55
+#: registration/models/shift.py:57
 msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
@@ -380,6 +388,17 @@ msgstr "Bad request"
 #: registration/templates/400.html:7
 msgid "Error 400"
 msgstr "Error 400"
+
+#: registration/templates/400.html:11 registration/templates/403.html.py:11
+#: registration/templates/404.html:11 registration/templates/500.html.py:13
+msgid "Show events"
+msgstr "Veranstaltungen anzeigen"
+
+#: registration/templates/400.html:15 registration/templates/403.html.py:15
+#: registration/templates/404.html:15 registration/templates/500.html.py:17
+#: registration/templates/registration/about.html:20
+msgid "Contact"
+msgstr "Kontakt"
 
 #: registration/templates/403.html:5
 msgid "Permission denied"
@@ -473,10 +492,6 @@ msgstr ""
 #: registration/templates/registration/about.html:16
 msgid "The source code can be found here:"
 msgstr "Der Quellcode kann hier gefunden werden:"
-
-#: registration/templates/registration/about.html:20
-msgid "Contact"
-msgstr "Kontakt"
 
 #: registration/templates/registration/about.html:23
 msgid "If you want to use this website for your event please contact: "
@@ -605,16 +620,16 @@ msgid "Badges"
 msgstr "Badges"
 
 #: registration/templates/registration/admin/base.html:89
-msgid "Configure badges"
-msgstr "Badges konfigurieren"
+msgid "Settings"
+msgstr "Einstellungen"
 
 #: registration/templates/registration/admin/base.html:90
-msgid "Generate badges"
-msgstr "Badges generieren"
+msgid "Generate"
+msgstr "Generieren"
 
 #: registration/templates/registration/admin/base.html:92
-msgid "Register badges"
-msgstr "Badges registrieren"
+msgid "Registration"
+msgstr "Registrierung"
 
 #: registration/templates/registration/admin/base.html:102
 #: registration/templates/registration/admin/edit_event.html:10
@@ -1009,7 +1024,7 @@ msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
 
 #: registration/templates/registration/index.html:13
-#: registration/templates/registration/index.html:30
+#: registration/templates/registration/index.html:33
 msgid "Manage"
 msgstr "Verwalten"
 
@@ -1163,11 +1178,17 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
 
+#~ msgid "Configure badges"
+#~ msgstr "Badges konfigurieren"
+
+#~ msgid "Generate badges"
+#~ msgstr "Badges generieren"
+
+#~ msgid "Register badges"
+#~ msgstr "Badges registrieren"
+
 #~ msgid "Configure"
 #~ msgstr "Konfigurieren"
-
-#~ msgid "Generate"
-#~ msgstr "Generieren"
 
 #~ msgid "File does not contain LaTeX code."
 #~ msgstr "Die Datei enthält keinen LaTeX Code."
@@ -1367,9 +1388,6 @@ msgstr "Schicht gelöscht"
 
 #~ msgid "Common"
 #~ msgstr "Allgemein"
-
-#~ msgid "Settings"
-#~ msgstr "Einstellungen"
 
 #~ msgid "Prename"
 #~ msgstr "Vorname"

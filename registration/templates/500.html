@@ -10,11 +10,11 @@
 
     <p style="margin-top:3em;">
         <a href="{% url "index" %}" class="btn btn-primary">
-            {% bootstrap_icon "th-list" %} Show events
+            {% bootstrap_icon "th-list" %} {% trans "Show events" %}
         </a>
         &nbsp;
         <a href="mailto:{% setting "CONTACT_MAIL" %}" class="btn btn-default">
-            <span class="glyphicon glyphicon-envelope"></span> Contact
+            <span class="glyphicon glyphicon-envelope"></span> {% trans "Contact" %}
         </a>
     </p>
 {% endblock %}
