@@ -8,4 +8,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         for helper in Helper.objects.all():
             if helper.shifts.count() == 0 and not helper.is_coordinator:
-                self.stdout.write('{}\t\t{}'.format(str(helper), helper.id))
+                self.stdout.write(str(helper.id))
