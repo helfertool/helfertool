@@ -3,6 +3,7 @@ Important
 
 * check/change redirect destinations on save
 * show duplicates, merge helpers
+* add event date -> default for shift times, sort and group events according date
 
 Django things
 =============
@@ -48,7 +49,6 @@ Admin area
 User management
 ===============
 
-* search username with name and mail
 * new widget to select admins (enter username -> ajax -> suggestions)
 * forgot password
 
