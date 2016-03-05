@@ -86,10 +86,10 @@
                 {% if admin and event.badges %}
                     <h2>{% trans "Badges" %}</h2>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{% url 'configure_badges' event.url_name %}">{% trans "Configure badges" %}</a></li>
-                        <li><a href="{% url 'badges' event.url_name %}">{% trans "Generate badges" %}</a></li>
+                        <li><a href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a></li>
+                        <li><a href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a></li>
                         {% if event.badge_settings.barcodes %}
-                            <li><a href="{% url 'register_badge' event.url_name %}">{% trans "Register badges" %}</a></li>
+                            <li><a href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a></li>
                         {% endif %}
                     </ul>
                 {% endif %}

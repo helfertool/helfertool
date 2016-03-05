@@ -4,11 +4,11 @@
 {% load badges %}
 
 {% block admincontent %}
-    <h2>{% trans "Configure badges" %}</h2>
+    <h2>{% trans "Badge settings" %}</h2>
 
     <p>
-        <a href="{% url 'badgesettings' event.url_name %}">
-            {% trans "Edit template" %}
+        <a href="{% url 'badges:settings_advanced' event.url_name %}">
+            {% trans "Advanced settings" %}
         </a>
     </p>
 
@@ -37,7 +37,7 @@
                         </ul>
                     </td>
                     <td>
-                        <a href="{% url 'edit_badgerole' event.url_name role.pk %}">
+                        <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
                             {% bootstrap_icon "pencil" %} {% trans "Edit" %}
                         </a>
                     </td>
@@ -47,7 +47,7 @@
     {% endif %}
 
     <p>
-        <a href="{% url 'new_badgerole' event.url_name %}">
+        <a href="{% url 'badges:new_role' event.url_name %}">
             {% bootstrap_icon "plus" %} {% trans "Add role" %}
         </a>
     </p>
@@ -67,7 +67,7 @@
                 <tr>
                     <td>{{ design.name }}</td>
                     <td>
-                        <a href="{% url 'edit_badgedesign' event.url_name design.pk %}">
+                        <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
                             {% bootstrap_icon "pencil" %} {% trans "Edit" %}
                         </a>
                     </td>
@@ -77,7 +77,7 @@
     {% endif %}
 
     <p>
-        <a href="{% url 'new_badgedesign' event.url_name %}">
+        <a href="{% url 'badges:new_design' event.url_name %}">
             {% bootstrap_icon "plus" %} {% trans "Add design" %}
         </a>
     </p>

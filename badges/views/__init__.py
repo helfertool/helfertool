@@ -1,4 +1,6 @@
-from .configure import configure_badges, edit_badgedesign, \
-    edit_badgesettings, edit_badgepermission, edit_badgerole
-from .generate import badges, generate_badges, badges_warnings
-from .register import register_badge
+from .settings import settings, settings_advanced
+from .permission import edit_permission
+from .role import edit_role
+from .design import edit_design
+from .generate import index, generate, warnings
+from .register import register

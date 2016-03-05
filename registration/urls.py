@@ -229,5 +229,5 @@ urlpatterns = [
         name='mail'),
 
     # badges
-    url(r'^', include('badges.urls')),
+    url(r'^', include('badges.urls', namespace='badges')),
 ]

@@ -45,11 +45,6 @@ class BadgeSettings(models.Model):
         validators=[MinValueValidator(1)],
     )
 
-    barcodes = models.BooleanField(
-        default=False,
-        verbose_name=_("Print barcodes on badges to avoid duplicates"),
-    )
-
     coordinator_title = models.CharField(
         max_length=200,
         default="",
@@ -60,6 +55,11 @@ class BadgeSettings(models.Model):
         max_length=200,
         default="",
         verbose_name=_("Role for helpers"),
+    )
+
+    barcodes = models.BooleanField(
+        default=False,
+        verbose_name=_("Print barcodes on badges to avoid duplicates"),
     )
 
     def save(self, *args, **kwargs):

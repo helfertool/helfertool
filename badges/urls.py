@@ -2,87 +2,96 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'badges'
 urlpatterns = [
     #
-    # configuration
+    # settings
     #
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/$',
+        views.settings,
+        name='settings'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
-        views.configure_badges,
-        name='configure_badges'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/advanced',
+        views.settings_advanced,
+        name='settings_advanced'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/',
-        views.edit_badgesettings,
-        name='badgesettings'),
-
+    #
+    # permission
+    #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/'
         '(?P<permission_pk>[0-9]+)/$',
-        views.edit_badgepermission,
-        name='edit_badgepermission'),
+        views.edit_permission,
+        name='edit_permission'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/add/',
-        views.edit_badgepermission,
-        name='new_badgepermission'),
+        views.edit_permission,
+        name='new_permission'),
 
+    #
+    # role
+    #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/'
         '(?P<role_pk>[0-9]+)/$',
-        views.edit_badgerole,
-        name='edit_badgerole'),
+        views.edit_role,
+        name='edit_role'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/add/',
-        views.edit_badgerole,
-        name='new_badgerole'),
+        views.edit_role,
+        name='new_role'),
 
+    #
+    # design
+    #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/'
         '(?P<design_pk>[0-9]+)/$',
-        views.edit_badgedesign,
-        name='edit_badgedesign'),
+        views.edit_design,
+        name='edit_design'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/',
-        views.edit_badgedesign,
-        name='new_badgedesign'),
+        views.edit_design,
+        name='new_design'),
 
     #
     # badge generation
     #
 
     # overview page
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/$',
-        views.badges,
-        name='badges'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
+        views.index,
+        name='index'),
 
-    # show warnings
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
-        '(?P<job_pk>[0-9]+)/warnings/$',
-        views.badges_warnings,
-        name='badges_warnings'),
+    # warnings
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/warnings/'
+        '(?P<job_pk>[0-9]+)$',
+        views.warnings,
+        name='warnings'),
 
     # generate for job
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
         '(?P<job_pk>[0-9]+)/$',
-        views.generate_badges,
-        name='generate_job_badges'),
+        views.generate,
+        name='generate_for_job'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/'
         '(?P<job_pk>[0-9]+)/all/$',
-        views.generate_badges,
+        views.generate,
         {'generate_all': True},
-        name='generate_all_job_badges'),
+        name='generate_all_for_job'),
 
     # generate for all jobs
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/alljobs/$',
-        views.generate_badges,
-        name='generate_badges'),
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/$',
+        views.generate,
+        name='generate'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/alljobs/all/$',
-        views.generate_badges,
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/all/$',
+        views.generate,
         {'generate_all': True},
-        name='generate_all_badges'),
+        name='generate_all'),
 
     #
     # register badges
     #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/',
-        views.register_badge,
-        name='register_badge'),
+        views.register,
+        name='register'),
 ]

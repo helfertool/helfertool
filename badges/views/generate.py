@@ -13,7 +13,7 @@ from .utils import notactive
 
 
 @login_required
-def badges(request, event_url_name):
+def index(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -35,11 +35,11 @@ def badges(request, event_url_name):
     context = {'event': event,
                'jobs': jobs,
                'possible': possible}
-    return render(request, 'badges/badges.html', context)
+    return render(request, 'badges/index.html', context)
 
 
 @login_required
-def badges_warnings(request, event_url_name, job_pk):
+def warnings(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
@@ -57,11 +57,11 @@ def badges_warnings(request, event_url_name, job_pk):
     # render
     context = {'event': event,
                'helpers': helpers}
-    return render(request, 'badges/badges_warnings.html', context)
+    return render(request, 'badges/warnings.html', context)
 
 
 @login_required
-def generate_badges(request, event_url_name, job_pk=None, generate_all=False):
+def generate(request, event_url_name, job_pk=None, generate_all=False):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
@@ -113,7 +113,7 @@ def generate_badges(request, event_url_name, job_pk=None, generate_all=False):
         context = {'event': event,
                    'error': e.value,
                    'latex_output': e.get_latex_output()}
-        return render(request, 'badges/badges_failed.html',
+        return render(request, 'badges/failed.html',
                       context)
 
     # output

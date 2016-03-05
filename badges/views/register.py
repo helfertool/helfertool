@@ -12,7 +12,7 @@ from .utils import notactive
 
 
 @login_required
-def register_badge(request, event_url_name):
+def register(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -42,5 +42,5 @@ def register_badge(request, event_url_name):
 
     context = {'event': event,
                'form': form}
-    return render(request, 'badges/register_badge.html',
+    return render(request, 'badges/register.html',
                   context)

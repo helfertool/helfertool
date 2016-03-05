@@ -27,12 +27,12 @@
                     <td>{{ job.name }}</td>
                     <td>
                         {% if event.badge_settings.barcodes %}
-                            <a href="{% url "generate_job_badges" event.url_name job.pk %}">
+                            <a href="{% url "badges:generate_for_job" event.url_name job.pk %}">
                                 {% trans "Unregistered badges" %}
                             </a>
                             <br />
                         {% endif %}
-                        <a href="{% url "generate_all_job_badges" event.url_name job.pk %}">
+                        <a href="{% url "badges:generate_all_for_job" event.url_name job.pk %}">
                             {% trans "All badges" %}
                         </a>
                     </td>
@@ -42,7 +42,7 @@
                                 {{ num }} warnings
                             {% endblocktrans %}
                         {% else %}
-                            <a href="{% url 'badges_warnings' event.url_name job.pk %}">
+                            <a href="{% url "badges:warnings" event.url_name job.pk %}">
                                 {% blocktrans trimmed with num=job.num_warnings %}
                                     {{ num }} warnings
                                 {% endblocktrans %}
@@ -54,12 +54,12 @@
         </table>
 
         {% if event.badge_settings.barcodes %}
-            <a href="{% url "generate_badges" event.url_name %}">
+            <a href="{% url "badges:generate" event.url_name %}">
                 {% trans "All unregistered badges" %}
             </a>
             <br />
         {% endif %}
-        <a href="{% url "generate_all_badges" event.url_name %}">
+        <a href="{% url "badges:generate_all" event.url_name %}">
             {% trans "Really all badges" %}
         </a>
     {% endif %}
