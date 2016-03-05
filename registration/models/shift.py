@@ -1,5 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 from django.template.defaultfilters import date as date_f
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import localtime
@@ -111,3 +113,11 @@ class Shift(models.Model):
                 shirts.update({helper.get_shirt_display(): tmp+1})
 
         return shirts
+
+@receiver(pre_delete, sender=Shift)
+def shift_deleted(sender, instance, using, **kwargs):
+    """
+    TODO: remove in django 1.10 since m2m_changed sends signal
+    """
+    for helper in instance.helper_set.all():
+        helper.shifts.remove(instance)

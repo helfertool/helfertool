@@ -199,6 +199,10 @@ class Helper(models.Model):
         send_mail(subject, text, event.email, [self.email],
                   fail_silently=False)
 
+    def check_delete(self):
+        if self.shifts.count() == 0 and not self.is_coordinator:
+            self.delete()
+
     @property
     def full_name(self):
         """ Returns full name of helper """
@@ -251,9 +255,7 @@ def helper_deleted(sender, **kwargs):
         return
 
     helper = kwargs.pop('instance')
-
-    if helper.shifts.count() == 0 and not helper.is_coordinator:
-        helper.delete()
+    helper.check_delete()
 
 
 def coordinator_deleted(sender, **kwargs):
@@ -267,9 +269,7 @@ def coordinator_deleted(sender, **kwargs):
     # iterate over all deleted helpers, this should be only one helper
     for helper_pk in pk_set:
         helper = model.objects.get(pk=helper_pk)
-
-        if helper.shifts.count() == 0 and not helper.is_coordinator:
-            helper.delete()
+        helper.check_delete()
 
 m2m_changed.connect(helper_deleted, sender=Helper.shifts.through)
 m2m_changed.connect(coordinator_deleted, sender=Job.coordinators.through)
