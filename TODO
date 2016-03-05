@@ -3,7 +3,6 @@ Important
 
 * check/change redirect destinations on save
 * show duplicates, merge helpers
-* fix U18 check for internal registration
 
 Django things
 =============

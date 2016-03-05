@@ -27,10 +27,9 @@ class RegisterForm(forms.ModelForm):
         """
         self.event = kwargs.pop('event')
         self.displayed_shifts = kwargs.pop('shifts')
-        try:
-            self.selected_shifts = kwargs.pop('selected_shifts')
-        except KeyError:
-            self.selected_shifts = []
+        self.selected_shifts = kwargs.pop('selected_shifts', [])
+        self.skip_full_age = kwargs.pop('skip_full_age', False)
+
         self.shifts = {}
 
         super(RegisterForm, self).__init__(*args, **kwargs)
@@ -44,7 +43,8 @@ class RegisterForm(forms.ModelForm):
             self.fields.pop('vegetarian')
 
         # add field for age?
-        if self.event.ask_full_age:
+        self.ask_full_age = self.event.ask_full_age and not self.skip_full_age
+        if self.ask_full_age:
             self.fields['full_age'] = forms.BooleanField(
                 label=_("I confirm to be full aged."), required=False)
 
@@ -111,7 +111,7 @@ class RegisterForm(forms.ModelForm):
         super(RegisterForm, self).clean()
 
         # check if helper if full age
-        if self.event.ask_full_age and not self.cleaned_data['full_age']:
+        if self.ask_full_age and not self.cleaned_data['full_age']:
             raise ValidationError(_("You must be full aged. We are not "
                                     "allowed to accept helpers that are under "
                                     "18 years old."))
