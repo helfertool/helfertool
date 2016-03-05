@@ -22,12 +22,12 @@
     {% if involved_events %}
         <h2>{% trans "Inactive" %}</h2>
 
-        {% regroup involved_events by date|date:"Y" as involved_events_list %}
+        {% regroup involved_events|dictsortreversed:"date" by date|date:"Y" as involved_events_list %}
 
-        {% for group in involved_events_list|dictsortreversed:"grouper" %}
+        {% for group in involved_events_list %}
             <h3>{{ group.grouper }}</h3>
             <ul>
-                {% for event in group.list %}
+                {% for event in group.list|dictsort:"name.lower" %}
                     <li>
                         <a href="{% url 'form' event.url_name %}">{{ event }}</a>
                         (<a href="{% url 'manage_event' event.url_name %}">{% trans "Manage" %}</a>)
