@@ -47,6 +47,11 @@ class Event(models.Model):
         verbose_name=_("Event name"),
     )
 
+    date = models.DateField(
+        verbose_name=_("Date"),
+        help_text=_("First day of event"),
+    )
+
     text = BleachField(
         blank=True,
         verbose_name=_("Text before registration"),
