@@ -110,6 +110,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'badges',
     'registration',
+#    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
