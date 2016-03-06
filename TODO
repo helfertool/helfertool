@@ -58,7 +58,6 @@ Badges
 * shift (name for each shift, time,...?)
 * delete_badge{permission, role, design}
 * for some jobs an upload of an image is possible
-* Background images optional, color instead
 * timeout and other protection for subprocess call
 * Image for responsibles? (option)
 * check security of pdflatex, set more options

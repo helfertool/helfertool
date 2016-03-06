@@ -64,13 +64,16 @@
 \define@key{badge}{id}{\renewcommand\badge@id{#1}}
 
 %
-% Badge text color (do not change)
+% Colors (do not change)
 %
 \newcommand*\badge@fontcolor{000000}
 \define@key{badge}{fontcolor}{\renewcommand\badge@fontcolor{#1}}
 
+\newcommand*\badge@bgcolor{FFFFFF}
+\define@key{badge}{bgcolor}{\renewcommand\badge@bgcolor{#1}}
+
 %
-% Badge text color (do not change)
+% Background images (do not change)
 %
 \newcommand*\badge@bgfront{}
 \define@key{badge}{bgfront}{\renewcommand\badge@bgfront{#1}}
@@ -105,10 +108,19 @@
     \begingroup%
     \setkeys{badge}{#1}%
         \definecolor{fontcolor}{HTML}{\badge@fontcolor}%
+        \definecolor{bgcolor}{HTML}{\badge@bgcolor}%
         \color{fontcolor}%
         \begin{tikzpicture}[x=1cm, y=1cm, inner sep=0, outer sep=0, anchor=north west]
-            % background
-            \node (bg) at (0,0) {\includegraphics[width=\badgewidth, height=\badgeheight]{\badge@bgfront}};
+            % background color, rectangle determines size of badge
+            \node (bg) at (0,0) [fill=bgcolor,minimum width=\badgewidth,minimum height=\badgeheight] {};
+
+            % background image
+            \ifthenelse{\equal{\badge@bgfront}{}}
+            {
+            }
+            {
+                \node at (0,0) {\includegraphics[width=\badgewidth, height=\badgeheight]{\badge@bgfront}};
+            }
 
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
@@ -139,10 +151,19 @@
     \begingroup%
     \setkeys{badge}{#1}%
         \definecolor{fontcolor}{HTML}{\badge@fontcolor}%
+        \definecolor{bgcolor}{HTML}{\badge@bgcolor}%
         \color{fontcolor}%
         \begin{tikzpicture}[x=1cm,y=1cm, inner sep=0, outer sep=0, anchor=north west]
-            % background
-            \node (bg) at (0,0) {\includegraphics[width=\badgewidth]{\badge@bgback}};
+            % background color, rectangle determines size of badge
+            \node (bg) at (0,0) [fill=bgcolor,minimum width=\badgewidth,minimum height=\badgeheight] {};
+
+            % background image
+            \ifthenelse{\equal{\badge@bgback}{}}
+            {
+            }
+            {
+                \node at (0,0) {\includegraphics[width=\badgewidth, height=\badgeheight]{\badge@bgback}};
+            }
 
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
@@ -180,74 +201,85 @@
     \endgroup%
 }
 
+%
 % Document
 %
 \begin{document}
     \centering
     %BADGEDATA%
-    %\begin{tabular}{|l|l|}
-    %    \hline
-    %    \badgefront[firstname=Test1,%
-    %        surname=User,%
-    %        job=Bier,%
-    %        shift="",%
-    %        role=Standleiter,%
-    %        photo=,%
-    %        roleid="",%
-    %        fontcolor=000000,%
-    %        bgfront=bg.png,%
-    %        bgback=bg_back.png,%
-    %        perm-food=true,%
-    %        perm-finance=false] %
-    %    & %
-    %    \badgefront[firstname=Test1,%
-    %        surname=User,%
-    %        job=Bier,%
-    %        shift="",%
-    %        role=Standleiter,%
-    %        photo=,%
-    %        roleid="",%
-    %        fontcolor=000000,%
-    %        bgfront=bg.png,%
-    %        bgback=bg_back.png,%
-    %        perm-food=true,%
-    %        perm-finance=false] %
-    %    \\
-    %    \hline
-    %\end{tabular}
 
-    %\pagebreak
+%
+% For testing
+%
 
-    %\begin{tabular}{|l|l|}
-    %    \hline
-    %    \badgeback[firstname=Test1,%
-    %        surname=User,%
-    %        job=Bier,%
-    %        shift="",%
-    %        role=Standleiter,%
-    %        photo=,%
-    %        roleid="",%
-    %        fontcolor=000000,%
-    %        bgfront=bg.png,%
-    %        bgback=bg_back.png,%
-    %        perm-food=true,%
-    %        perm-finance=false,
-    %        id=0000000001] %
-    %    & %
-    %    \badgeback[firstname=Test1,%
-    %        surname=User,%
-    %        job=Bier,%
-    %        shift="",%
-    %        role=Standleiter,%
-    %        photo=,%
-    %        roleid="",%
-    %        fontcolor=000000,%
-    %        bgfront=bg.png,%
-    %        bgback=bg_back.png,%
-    %        perm-food=true,%
-    %        perm-finance=false,%
-    %        id=0000000002] %
-    %    \\
-    %    \hline
-    %\end{tabular}
+%    \begin{tabular}{|l|l|}
+%        \hline
+%        \badgefront[
+%            surname=b,
+%            bgback=,
+%            job=Aufgabe\ A,
+%            perm-food=true,
+%            bgfront=,
+%            shift=,
+%            roleid=helper,
+%            firstname=a,
+%            photo=,
+%            bgcolor=FFFFFF,
+%            id=0000000010,
+%            fontcolor=000000,
+%            perm-finance=false,
+%            role=Helfer] &
+%        \badgefront[surname=b,
+%            bgback=,
+%            job=Aufgabe\ A,
+%            perm-food=true,
+%            bgfront=,
+%            shift=,
+%            roleid=helper,
+%            firstname=a,
+%            photo=,
+%            bgcolor=FFFFFF,
+%            id=0000000011,
+%            fontcolor=000000,
+%            perm-finance=false,
+%            role=Helfer] \\
+%        \hline
+%    \end{tabular}
+%
+%    \pagebreak
+%
+%    \begin{tabular}{|l|l|}
+%        \hline
+%        \badgeback[surname=b,
+%            bgback=,
+%            job=Aufgabe\ A,
+%            perm-food=true,
+%            bgfront=,
+%            shift=,
+%            roleid=helper,
+%            firstname=a,
+%            photo=,
+%            bgcolor=FFFFFF,
+%            id=0000000011,
+%            fontcolor=000000,
+%            perm-finance=false,
+%            role=Helfer] &
+%        \badgeback[surname=b,
+%            bgback=,
+%            job=Aufgabe\ A,
+%            perm-food=true,
+%            bgfront=,
+%            shift=,
+%            roleid=helper,
+%            firstname=a,
+%            photo=,
+%            bgcolor=FFFFFF,
+%            id=0000000010,
+%            fontcolor=000000,
+%            perm-finance=false,
+%            role=Helfer] \\
+%            \hline
+%    \end{tabular}
+%
+%    \pagebreak
 \end{document}

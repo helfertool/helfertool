@@ -74,9 +74,18 @@ class BadgeCreator:
 
         # design
         design = helper.badge.get_design()
-        tmp['bgfront'] = design.bg_front.path
-        tmp['bgback'] = design.bg_back.path
         tmp['fontcolor'] = self._latex_color(design.font_color)
+        tmp['bgcolor'] = self._latex_color(design.bg_color)
+
+        if design.bg_front:
+            tmp['bgfront'] = design.bg_front.path
+        else:
+            tmp['bgfront'] = ""
+
+        if design.bg_back:
+            tmp['bgback'] = design.bg_back.path
+        else:
+            tmp['bgback'] = ""
 
         # role
         role = helper.badge.get_role()

@@ -45,14 +45,26 @@ class BadgeDesign(models.Model):
         help_text=_("E.g. #00ff00"),
     )
 
+    bg_color = models.CharField(
+        max_length=7,
+        default="#FFFFFF",
+        validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
+        verbose_name=_("Background color"),
+        help_text=_("E.g. #00ff00"),
+    )
+
     bg_front = models.ImageField(
         verbose_name=_("Background image for front"),
         upload_to=_design_upload_path,
+        blank=True,
+        null=True,
     )
 
     bg_back = models.ImageField(
         verbose_name=_("Background image for back"),
         upload_to=_design_upload_path,
+        blank=True,
+        null=True,
     )
 
     def __str__(self):

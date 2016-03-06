@@ -19,13 +19,13 @@ class BadgeDesignForm(forms.ModelForm):
 
     def clean_bg_front(self):
         file = self.cleaned_data['bg_front']
-        if not is_image(file):
+        if file and not is_image(file):
             raise ValidationError(_("The file is not an image."))
         return file
 
     def clean_bg_back(self):
         file = self.cleaned_data['bg_back']
-        if not is_image(file):
+        if file and not is_image(file):
             raise ValidationError(_("The file is not an image."))
         return file
 
