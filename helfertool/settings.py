@@ -109,6 +109,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'badges',
+    'news',
     'registration',
 #    'debug_toolbar',
 )

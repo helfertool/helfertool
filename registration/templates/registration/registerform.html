@@ -101,6 +101,16 @@
                 </div>
             </div>
         {% endif %}
+
+        {% if form.ask_news %}
+            <div class="col-lg-12">
+                {% bootstrap_field form.news %}
+
+                <div class="well">
+                    {% include "registration/privacy_news.html" %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />

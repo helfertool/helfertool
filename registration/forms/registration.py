@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift
 
+from news.helper import news_add_email
+
 import itertools
 
 
@@ -52,6 +54,13 @@ class RegisterForm(forms.ModelForm):
         if self.ask_full_age:
             self.fields['full_age'] = forms.BooleanField(
                 label=_("I confirm to be full aged."), required=False)
+
+        # add field for notification about new events
+        self.ask_news = self.event.ask_news and not self.internal
+        if self.ask_news:
+            self.fields['news'] = forms.BooleanField(
+                label=_("I want to be informed about future events that are "
+                        "looking for helpers."), required=False)
 
         # get a list of all shifts
         if self.displayed_shifts:
@@ -196,5 +205,9 @@ class RegisterForm(forms.ModelForm):
 
         if commit:
             instance.save()
+
+        # add to news
+        if self.ask_news and self.cleaned_data['news']:
+            news_add_email(self.cleaned_data['email'])
 
         return instance

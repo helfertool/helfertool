@@ -122,6 +122,11 @@ class Event(models.Model):
         verbose_name=_("Helpers have to confirm to be full age")
     )
 
+    ask_news = models.BooleanField(
+        default=True,
+        verbose_name=_("Ask if helper wants to be notified about new events"),
+    )
+
     show_public_numbers = models.BooleanField(
         default=True,
         verbose_name=_("Show number of helpers on registration page"),
