@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db import models
@@ -71,7 +72,7 @@ class Event(models.Model):
     )
 
     email = models.EmailField(
-        default='party@fs.tum.de',
+        default=settings.CONTACT_MAIL,
         verbose_name=_("E-Mail"),
         help_text=_("Used as sender of e-mails."),
     )
