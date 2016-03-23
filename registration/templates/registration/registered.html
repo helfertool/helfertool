@@ -12,6 +12,12 @@
 
     {{ event.registered | safe }}
 
+    {% if data.has_to_validate %}
+        <div class="alert alert-info" role="alert">
+            {% trans "You have to confirm your mail address by clicking on a link we just sent to you." %}
+        </div>
+    {% endif %}
+
     <p>{% trans "You registered with the following information:" %}</p>
 
     <table class="table-condensed">
@@ -51,18 +57,23 @@
         </tr>
     </table>
 
-    {% if data.has_to_validate %}
-        <div class="alert alert-info" role="alert">
-            {% trans "You have to confirm your mail address by clicking on a link we just sent to you." %}
-        </div>
-    {% endif %}
-
     <h2>{% trans "Shifts" %}</h2>
     <ul class="list-group">
     {% for shift in data.shifts.all %}
         <li class="list-group-item">{{ shift }}</li>
     {% endfor %}
     </ul>
+
+    <h2>{% trans "Data privacy" %}</h2>
+    {% if data.privacy_statement %}
+        <p>{% trans "You agreed with the following data privacy statement." %}</p>
+    {% else %}
+        <p>{% trans "The following data privacy statement was sent to you and you did not disagree until now." %}</p>
+    {% endif %}
+
+    <div class="well">
+        {% include "registration/privacy.html" %}
+    </div>
 
     {{ event.imprint | safe }}
 {% endblock %}

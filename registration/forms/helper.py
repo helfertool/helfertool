@@ -9,7 +9,7 @@ from ..models import Helper, Shift, Job
 class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
-        exclude = ['event', 'shifts', ]
+        exclude = ['event', 'shifts', 'privacy_statement', ]
 
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')

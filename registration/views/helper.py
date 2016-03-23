@@ -96,7 +96,7 @@ def add_helper(request, event_url_name, shift_pk):
     all_shifts = Shift.objects.filter(job=shift.job)
 
     form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
-                        selected_shifts=[shift, ], skip_full_age=True)
+                        selected_shifts=[shift, ], internal=True)
 
     if form.is_valid():
         form.save()

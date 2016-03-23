@@ -29,7 +29,7 @@ class RegisterForm(forms.ModelForm):
         self.event = kwargs.pop('event')
         self.displayed_shifts = kwargs.pop('shifts')
         self.selected_shifts = kwargs.pop('selected_shifts', [])
-        self.skip_full_age = kwargs.pop('skip_full_age', False)
+        self.internal = kwargs.pop('internal', False)
 
         self.shifts = {}
 
@@ -43,8 +43,12 @@ class RegisterForm(forms.ModelForm):
         if not self.event.ask_vegetarian:
             self.fields.pop('vegetarian')
 
+        # remove field or privacy statement?
+        if self.internal:
+            self.fields.pop('privacy_statement')
+
         # add field for age?
-        self.ask_full_age = self.event.ask_full_age and not self.skip_full_age
+        self.ask_full_age = self.event.ask_full_age and not self.internal
         if self.ask_full_age:
             self.fields['full_age'] = forms.BooleanField(
                 label=_("I confirm to be full aged."), required=False)
@@ -118,7 +122,7 @@ class RegisterForm(forms.ModelForm):
                                     "18 years old."))
 
         # check if the data privacy statement was accepted
-        if not self.cleaned_data['privacy_statement']:
+        if not self.internal and not self.cleaned_data['privacy_statement']:
             raise ValidationError(_("You have to accept the data privacy statement."))
 
         number_of_shifts = 0
