@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-05 22:19+0100\n"
-"PO-Revision-Date: 2015-12-29 18:06+0100\n"
+"POT-Creation-Date: 2016-03-24 00:37+0100\n"
+"PO-Revision-Date: 2016-03-24 00:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,12 +16,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: helfertool/settings.py:166
+#: helfertool/settings.py:168
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:167
+#: helfertool/settings.py:169
 msgid "English"
 msgstr "Englisch"
+
+#: news/models/person.py:8
+msgid "E-Mail"
+msgstr "E-Mail"

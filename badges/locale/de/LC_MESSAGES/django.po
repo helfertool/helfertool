@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-05 22:19+0100\n"
+"POT-Creation-Date: 2016-03-24 00:37+0100\n"
 "PO-Revision-Date: 2016-03-05 22:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -103,15 +103,21 @@ msgstr "Name"
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: badges/models/design.py:45
+#: badges/models/design.py:45 badges/models/design.py:53
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: badges/models/design.py:49
+#: badges/models/design.py:52
+#, fuzzy
+#| msgid "Background image for back"
+msgid "Background color"
+msgstr "Hintergrundbild für die Rückseite"
+
+#: badges/models/design.py:57
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: badges/models/design.py:54
+#: badges/models/design.py:64
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
