@@ -17,7 +17,8 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = Helper
         fields = ['firstname', 'surname', 'email', 'phone', 'shirt',
-                  'vegetarian', 'infection_instruction', 'comment']
+                  'vegetarian', 'infection_instruction', 'comment',
+                  'privacy_statement']
 
     def __init__(self, *args, **kwargs):
         """ Customize the form.
@@ -115,6 +116,10 @@ class RegisterForm(forms.ModelForm):
             raise ValidationError(_("You must be full aged. We are not "
                                     "allowed to accept helpers that are under "
                                     "18 years old."))
+
+        # check if the data privacy statement was accepted
+        if not self.cleaned_data['privacy_statement']:
+            raise ValidationError(_("You have to accept the data privacy statement."))
 
         number_of_shifts = 0
         infection_instruction_needed = False

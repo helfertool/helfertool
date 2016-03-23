@@ -136,6 +136,11 @@ class Helper(models.Model):
         verbose_name=_("E-Mail address was confirmed"),
     )
 
+    privacy_statement = models.BooleanField(
+        default=False,
+        verbose_name=_("I agree with the following data privacy statement"),
+    )
+
     def __str__(self):
         return "%s %s" % (self.firstname, self.surname)
 

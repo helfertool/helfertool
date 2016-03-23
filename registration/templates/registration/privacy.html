@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load setting %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% if LANGUAGE_CODE == 'de' %}
+    <p>Ich bin damit einverstanden, dass meine Daten zu folgenden Zwecken erhoben, verarbeitet und genutzt werden:</p>
+
+    <ul>
+        <li>Erstellung von Helferlisten</li>
+        <li>Eventuell Erstellung von Ausweisen für die Veranstaltung</li>
+        <li>Zusenden von Informationen zur Veranstaltung per E-Mail</li>
+    </ul>
+
+    <p>
+    Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner Person unter Beachtung des Bayerischen Datenschutzgesetzes (BayDSG), erhoben, verarbeitet, genutzt und übermittelt werden.</p>
+
+    <p>
+    Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger Basis erfolgt. Ferner, dass ich mein Einverständnis mit der Folge, dass ich bei der Veranstaltung nicht als Helfer teilnehmen kann, verweigern bzw. jederzeit mit Wirkung für die Zukunft widerrufen kann. Meine Widerrufserklärung werde ich richten an:</p>
+
+    <p>
+    Fachschaft MPI<br />
+    Technische Universität München<br />
+    Boltzmannstraße 3<br />
+    95748 Garching<br />
+    E-Mail: <a href="mailto:{% setting "CONTACT_MAIL" %}">{% setting "CONTACT_MAIL" %}</a>
+    </p>
+
+    <p>
+    Im Fall des Widerrufs werden mit dem Zugang meiner Widerrufserklärung meine Daten gelöscht.
+    </p>
+{% else %}
+    <p>
+        TODO: englisch
+    </p>
+{% endif %}

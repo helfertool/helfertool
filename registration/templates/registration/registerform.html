@@ -90,6 +90,9 @@
             {% if form.ask_full_age %}
                 {% bootstrap_field form.full_age %}
             {% endif %}
+
+            {% bootstrap_field form.privacy_statement %}
+            {% include "registration/privacy.html" %}
         </div>
     </div>
 
