@@ -8,8 +8,10 @@
 
     <ul>
         <li>Erstellung von Helferlisten</li>
-        <li>Eventuell Erstellung von Ausweisen für die Veranstaltung</li>
-        <li>Zusenden von Informationen zur Veranstaltung per E-Mail</li>
+        <li>Zusenden von Informationen vor der Veranstaltung per E-Mail</li>
+        <li>Anruf bei dringenden und wichtigen Angelegenheiten</li>
+        <li>Ggf. Erstellung von Ausweisen für die Veranstaltung</li>
+        <li>Ggf. Einladung zum Helferfest nach der Veranstaltung</li>
     </ul>
 
     <p>
@@ -31,6 +33,36 @@
     </p>
 {% else %}
     <p>
-        TODO: englisch
+    With your permission, your data will be collected, processed, and used for the following purposes:
+    </p>
+
+    <ul>
+        <li>Generating lists of all helpers</li>
+        <li>Sending information before the event by e-mail</li>
+        <li>Phone call for urgent and important issues</li>
+        <li>If necessary generating identification badges for the event</li>
+        <li>If necessary invitation for the after party</li>
+    </ul>
+
+    <p>
+    Your personal data will be collected, processed, and used in the context of the aforementioned objectives in accordance with the Bavarian Data Protection Act (BayDSG).
+    </p>
+
+    <p>
+    The collection, processing, and use of your data take place on a voluntary basis.
+    Furthermore, you can revoke your consent at any time with the adverse consequence that you cannot participate in the event as helper.</p>
+
+    <p>Please send any notice of cancellation to:</p>
+
+    <p>
+    Fachschaft MPI<br />
+    Technische Universität München<br />
+    Boltzmannstraße 3<br />
+    85748 Garching<br />
+    E-Mail: <a href="mailto:{% setting "CONTACT_MAIL" %}">{% setting "CONTACT_MAIL" %}</a>
+    </p>
+
+    <p>
+    In the event of cancellation, your data will be deleted upon receipt of your notice.
     </p>
 {% endif %}
