@@ -11,6 +11,10 @@ from django_bleach.models import BleachField
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 
 
+def _default_mail():
+    return settings.CONTACT_MAIL
+
+
 @python_2_unicode_compatible
 class Event(models.Model):
     class Meta:
@@ -72,7 +76,7 @@ class Event(models.Model):
     )
 
     email = models.EmailField(
-        default=settings.CONTACT_MAIL,
+        default=_default_mail,
         verbose_name=_("E-Mail"),
         help_text=_("Used as sender of e-mails."),
     )
