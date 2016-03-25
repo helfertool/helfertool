@@ -261,7 +261,8 @@ def search_helper(request, event_url_name):
         return nopermission(request)
 
     # form
-    form = HelperSearchForm(request.POST or None, event=event)
+    form = HelperSearchForm(request.POST or None, event=event,
+                            user=request.user)
     result = None
     new_search = True
 

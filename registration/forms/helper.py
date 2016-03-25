@@ -193,13 +193,17 @@ class HelperSearchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event')
+        self.user = kwargs.pop('user')
 
         super(HelperSearchForm, self).__init__(*args, **kwargs)
 
     def get(self):
         p = self.cleaned_data['pattern']
 
-        return self.event.helper_set.filter(Q(firstname__icontains=p) |
+        data = self.event.helper_set.filter(Q(firstname__icontains=p) |
                                             Q(surname__icontains=p) |
                                             Q(email__icontains=p) |
                                             Q(phone__icontains=p))
+        data = filter(lambda h: h.can_edit(self.user), data)
+
+        return data
