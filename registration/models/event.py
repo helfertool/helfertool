@@ -216,9 +216,7 @@ def event_saved(sender, instance, using, **kwargs):
 
         # badge defaults for jobs
         for job in instance.job_set.all():
-            try:
-                getattr(job, 'badge_defaults')
-            except:
+            if not job.badge_defaults:
                 defaults = BadgeDefaults()
                 defaults.save()
 
