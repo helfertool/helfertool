@@ -128,3 +128,6 @@ class Badge(models.Model):
 
     def get_role(self):
         return self.custom_role or self._get_defaults('role')
+
+    def no_default_role(self):
+        return self._get_defaults('no_default_role')

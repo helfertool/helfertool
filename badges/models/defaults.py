@@ -18,3 +18,8 @@ class BadgeDefaults(models.Model):
         blank=True,
         verbose_name=_("Default design"),
     )
+
+    no_default_role = models.BooleanField(
+        default=False,
+        verbose_name=_("Do not print default roles on badges"),
+    )

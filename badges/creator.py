@@ -61,10 +61,13 @@ class BadgeCreator:
         # role
         if helper.badge.role:
             tmp['role'] = self._latex_escape(helper.badge.role)
-        elif helper.is_coordinator:
-            tmp['role'] = self._latex_escape(self.settings.coordinator_title)
+        elif not helper.badge.no_default_role():
+            if helper.is_coordinator:
+                tmp['role'] = self._latex_escape(self.settings.coordinator_title)
+            else:
+                tmp['role'] = self._latex_escape(self.settings.helper_title)
         else:
-            tmp['role'] = self._latex_escape(self.settings.helper_title)
+            tmp['role'] = ""
 
         # photo
         if helper.badge.photo:

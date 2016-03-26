@@ -94,6 +94,7 @@
                 <th>{% trans "Job" %}</th>
                 <th>{% trans "Role" %}</th>
                 <th>{% trans "Design" %}</th>
+                <th>{% trans "Print no default role" %}</th>
             </tr>
 
             {% for job in event.job_set.all %}
@@ -105,6 +106,10 @@
                     </td>
                     <td>
                         {% badge_job_design_field job_defaults_form job.pk as field %}
+                        {% bootstrap_field field show_label=False %}
+                    </td>
+                    <td>
+                        {% badge_job_no_def_role_field job_defaults_form job.pk as field %}
                         {% bootstrap_field field show_label=False %}
                     </td>
                 </tr>

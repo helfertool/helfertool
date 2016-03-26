@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import ugettext as _
 
 from ..models import BadgeDesign, BadgeRole, BadgeDefaults
 
@@ -40,10 +41,16 @@ class BadgeJobDefaultsForm(forms.Form):
             self.fields['job_%d_role' % job.pk] = forms.ModelChoiceField(
                 queryset=roles, required=False,
                 initial=job.badge_defaults.role)
+            self.fields['job_%d_no_def_role' % job.pk] = forms.BooleanField(
+                initial=job.badge_defaults.no_default_role,
+                required=False,
+                label=_("No default role"))
 
     def save(self):
         for job in self.event.job_set.all():
             job.badge_defaults.design = self.cleaned_data[
                 'job_%d_design' % job.pk]
             job.badge_defaults.role = self.cleaned_data['job_%d_role' % job.pk]
+            job.badge_defaults.no_default_role = \
+                self.cleaned_data['job_%d_no_def_role' % job.pk]
             job.badge_defaults.save()
