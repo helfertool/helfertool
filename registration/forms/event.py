@@ -9,6 +9,7 @@ class EventForm(forms.ModelForm):
         exclude = ['text', 'imprint', 'registered', 'badge_settings']
         widgets = {
             'admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
+            'date': forms.DateInput(attrs={'class': 'date'}),
         }
 
 
