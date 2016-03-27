@@ -68,6 +68,7 @@ class MailForm(forms.Form):
         self.fields['receiver'] = forms.MultipleChoiceField(
             choices=choices,
             label=_("Receivers"),
+            widget=forms.SelectMultiple(attrs={'class':'select2'}),
         )
 
         self.fields['sender'] = forms.ChoiceField(
