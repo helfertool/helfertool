@@ -4,29 +4,57 @@ from django.core.mail import EmailMessage
 
 from smtplib import SMTPException
 
-from ..models import Helper
-
 
 class MailForm(forms.Form):
     def __init__(self, *args, **kwargs):
         # get parameters
         self.event = kwargs.pop('event')
         self.user = kwargs.pop('user')
-        self.jobs = {}
+
+        # different select values
+
+        # send to helpers and coordinators
+        self.jobs_all = {}
+
+        # only coordinators
+        self.jobs_coordinators = {}
+
+        # single shifts
+        self.shifts = {}
 
         super(MailForm, self).__init__(*args, **kwargs)
 
         # get all allowed jobs
-        job_choices = [("", "---------")]
+        choices = []
 
         # admins can send mails to all helpers
         if self.event.is_admin(self.user):
-            job_choices.append(("all", _("All helpers")))
+            tmp = []
+            tmp.append(("all", _("All helpers and coordinators")))
+            tmp.append(("all-coords", _("All coordinators")))
+
+            choices.append((_("General"), tmp))
 
         for job in self.event.job_set.all():
             if job.is_admin(self.user):
-                job_choices.append(("job_%d" % job.pk, str(job)))
-                self.jobs["job_%d" % job.pk] = job
+                tmp = []
+
+                # helpers and coordinators
+                title = _("{}, Helpers and coordinators").format(job.name)
+                tmp.append(("job_%d_all" % job.pk, title))
+                self.jobs_all["job_%d_all" % job.pk] = job
+
+                # only coordinators
+                title = _("{}, Coordinators").format(job.name)
+                tmp.append(("job_%d_coords" % job.pk, title))
+                self.jobs_coordinators["job_%d_coords" % job.pk] = job
+
+                # shifts
+                for shift in job.shift_set.all():
+                    tmp.append(("shift_%d" % shift.pk, str(shift)))
+                    self.shifts["shift_%d" % shift.pk] = shift
+
+                choices.append((job.name, tmp))
 
         # sender
         senders = []
@@ -37,8 +65,8 @@ class MailForm(forms.Form):
         senders.append((self.user.email, self.user.email))
 
         # fields
-        self.fields['receiver'] = forms.ChoiceField(
-            choices=job_choices,
+        self.fields['receiver'] = forms.MultipleChoiceField(
+            choices=choices,
             label=_("Receivers"),
         )
 
@@ -70,8 +98,13 @@ class MailForm(forms.Form):
     def send_mail(self):
         subject = self.cleaned_data['subject']
         text = self.cleaned_data['text']
-        receiver_list = [h.email for h in self._get_helpers()]
         sender = self.cleaned_data['sender']
+
+        # get unique list of mail addresses
+        seen = set()
+        seen_add = seen.add  # performance FTW!
+        receiver_list = [h.email for h in self._get_helpers()
+                         if not (h.email in seen or seen_add(h.email))]
 
         # reply to and CC
         reply_to = []
@@ -92,12 +125,27 @@ class MailForm(forms.Form):
 
         try:
             mail.send(fail_silently=False)
-        except (SMTPException, ConnectionError):
+        except SMTPException:
             raise
 
     def _get_helpers(self):
-        receiver = self.cleaned_data['receiver']
-        if receiver == "all":
-            return self.event.helper_set.distinct()
-        else:
-            return self.jobs[receiver].helpers_and_coordinators()
+        receiver_list = self.cleaned_data['receiver']
+
+        tmp = []
+
+        for receiver in receiver_list:
+            if receiver == "all":
+                return self.event.helper_set.distinct()
+            elif receiver == "all-coords":
+                tmp.extend(self.event.all_coordinators)
+            # helpers and coordinators for job
+            elif receiver in self.jobs_all:
+                tmp.extend(self.jobs_all[receiver].helpers_and_coordinators())
+            # only coordinators for job
+            elif receiver in self.jobs_coordinators:
+                tmp.extend(self.jobs_coordinators[receiver].coordinators.all())
+            # single shifts
+            elif receiver in self.shifts:
+                tmp.extend(self.shifts[receiver].helper_set.all())
+
+        return tmp
