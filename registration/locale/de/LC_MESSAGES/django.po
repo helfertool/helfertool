@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 14:45+0200\n"
-"PO-Revision-Date: 2016-03-27 14:46+0200\n"
+"POT-Creation-Date: 2016-03-27 20:20+0200\n"
+"PO-Revision-Date: 2016-03-27 20:26+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -811,7 +811,7 @@ msgstr "Link löschen"
 #: registration/templates/registration/admin/delete_link.html:11
 #: registration/templates/registration/admin/edit_helper.html:42
 #: registration/templates/registration/admin/links.html:13
-#: registration/templates/registration/registered.html:60
+#: registration/templates/registration/registered.html:70
 msgid "Shifts"
 msgstr "Schichten"
 
@@ -1064,18 +1064,20 @@ msgstr "Der Link ist ungültig."
 msgid "Go to the registration."
 msgstr "Zur Anmeldung gehen."
 
-#: registration/templates/registration/mail.txt:1
+#: registration/templates/registration/mail/coordinator.txt:1
 #, python-format
 msgid ""
 "Hello %(firstname)s,\n"
 "\n"
-"you registered for the following shifts:"
+"you were registered for the following jobs:"
 msgstr ""
 "Hallo %(firstname)s,\n"
 "\n"
-"du hast dich für folgende Schichten angemeldet:"
+"du wurdest für folgende Aufgaben angemeldet:"
 
-#: registration/templates/registration/mail.txt:7
+#: registration/templates/registration/mail/coordinator.txt:7
+#: registration/templates/registration/mail/internal.txt:7
+#: registration/templates/registration/mail/public.txt:7
 #, python-format
 msgid ""
 "You have to confirm your mail address by clicking on the following link: "
@@ -1086,11 +1088,51 @@ msgstr ""
 "klickst: %(validate_url)s\n"
 "\n"
 
-#: registration/templates/registration/mail.txt:9
+#: registration/templates/registration/mail/coordinator.txt:9
+#: registration/templates/registration/mail/internal.txt:9
+#: registration/templates/registration/mail/public.txt:9
+#, python-format
+msgid "You can view your data here: %(registered_url)s"
+msgstr "Du kannst deine Daten hier ansehen: %(registered_url)s"
+
+#: registration/templates/registration/mail/coordinator.txt:11
+#: registration/templates/registration/mail/internal.txt:11
+msgid ""
+"Your data is used according to the following data privacy statement, if you "
+"do not agree with it please veto per e-mail."
+msgstr ""
+"Deine Daten werden entsprechend der folgenden Datenschutzerklärung genutzt, "
+"widerspreche bitte per E-Mail wenn du damit nicht einverstanden bist."
+
+#: registration/templates/registration/mail/coordinator.txt:14
+#: registration/templates/registration/mail/internal.txt:14
+#: registration/templates/registration/mail/public.txt:11
 msgid "Thanks for your support!"
 msgstr "Danke für deine Unterstützung!"
 
-#: registration/templates/registration/mail_subject.txt:1
+#: registration/templates/registration/mail/internal.txt:1
+#, python-format
+msgid ""
+"Hello %(firstname)s,\n"
+"\n"
+"you were registered for the following shifts:"
+msgstr ""
+"Hallo %(firstname)s,\n"
+"\n"
+"du wurdest für folgende Schichten angemeldet:"
+
+#: registration/templates/registration/mail/public.txt:1
+#, python-format
+msgid ""
+"Hello %(firstname)s,\n"
+"\n"
+"you registered for the following shifts:"
+msgstr ""
+"Hallo %(firstname)s,\n"
+"\n"
+"du hast dich für folgende Schichten angemeldet:"
+
+#: registration/templates/registration/mail/subject.txt:1
 #, python-format
 msgid "Registration for %(eventname)s"
 msgstr "Helferanmeldung für %(eventname)s"
@@ -1111,15 +1153,20 @@ msgstr ""
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
 
-#: registration/templates/registration/registered.html:67
+#: registration/templates/registration/registered.html:61
+#: registration/templates/registration/registerform.html:8
+msgid "Jobs"
+msgstr "Aufgaben"
+
+#: registration/templates/registration/registered.html:78
 msgid "Data privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/registration/registered.html:69
+#: registration/templates/registration/registered.html:80
 msgid "You agreed with the following data privacy statement."
 msgstr "Du hast der folgenden Datenschutzerklärung zugestimmt."
 
-#: registration/templates/registration/registered.html:71
+#: registration/templates/registration/registered.html:82
 msgid ""
 "The following data privacy statement was sent to you and you did not "
 "disagree until now."
@@ -1127,21 +1174,21 @@ msgstr ""
 "Die folgende Datenschutzerklärung wurde dir zugeschickt und du hast bis "
 "jetzt nicht widersprochen."
 
-#: registration/templates/registration/registered.html:79
+#: registration/templates/registration/registered.html:90
 msgid "You agreed that we will inform you about future events per email."
 msgstr ""
 "Du bist damit einverstanden, dass wir dich über weitere Veranstaltungen per "
 "E-Mail informieren."
 
-#: registration/templates/registration/registerform.html:8
-msgid "Jobs"
-msgstr "Aufgaben"
-
 #: registration/templates/registration/registerform.html:73
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
-#: registration/templates/registration/registerform.html:116
+#: registration/templates/registration/registerform.html:118
+msgid "Make sure that the helper is full age!"
+msgstr "Versichere dich, dass der Helfer volljährig ist!"
+
+#: registration/templates/registration/registerform.html:122
 msgid "Register"
 msgstr "Anmelden"
 
@@ -1172,12 +1219,12 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:202
+#: registration/views/helper.py:207
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:238
+#: registration/views/helper.py:243
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""

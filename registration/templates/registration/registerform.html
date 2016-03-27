@@ -97,7 +97,7 @@
                 {% bootstrap_field form.privacy_statement %}
 
                 <div class="well">
-                    {% include "registration/privacy.html" %}
+                    {% include "registration/privacy/statement.html" %}
                 </div>
             </div>
         {% endif %}
@@ -107,11 +107,17 @@
                 {% bootstrap_field form.news %}
 
                 <div class="well">
-                    {% include "registration/privacy_news.html" %}
+                    {% include "registration/privacy/news.html" %}
                 </div>
             </div>
         {% endif %}
     </div>
+
+    {% if form.internal and event.ask_full_age %}
+        <div class="alert alert-warning" role="alert">
+            {% trans "Make sure that the helper is full age!" %}
+        </div>
+    {% endif %}
 
     <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
 

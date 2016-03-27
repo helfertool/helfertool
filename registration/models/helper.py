@@ -180,26 +180,35 @@ class Helper(models.Model):
 
         return False
 
-    def send_mail(self, request):
+    def send_mail(self, request, internal):
         """ Send a confirmation e-mail to the registered helper.
 
         This e-mail contains a list of the shifts, the helper registered for.
         """
-        if self.shifts.count() == 0:
+        if self.shifts.count() == 0 and not self.is_coordinator:
             return
 
         event = self.event
         validate_url = request.build_absolute_uri(reverse('validate',
                                                           args=[event.url_name,
                                                                 self.id]))
+        registered_url = request.build_absolute_uri(reverse('registered',
+                                                    args=[event.url_name,
+                                                          self.id]))
 
-        subject_template = get_template('registration/mail_subject.txt')
+        subject_template = get_template('registration/mail/subject.txt')
         subject = subject_template.render({'event': event}).rstrip()
 
-        text_template = get_template('registration/mail.txt')
+        if self.is_coordinator:
+            text_template = get_template('registration/mail/coordinator.txt')
+        elif internal:
+            text_template = get_template('registration/mail/internal.txt')
+        else:
+            text_template = get_template('registration/mail/public.txt')
         text = text_template.render({'user': self,
                                      'event': event,
-                                     'validate_url': validate_url})
+                                     'validate_url': validate_url,
+                                     'registered_url': registered_url})
 
         send_mail(subject, text, event.email, [self.email],
                   fail_silently=False)

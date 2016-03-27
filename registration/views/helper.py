@@ -99,7 +99,9 @@ def add_helper(request, event_url_name, shift_pk):
                         selected_shifts=[shift, ], internal=True)
 
     if form.is_valid():
-        form.save()
+        helper = form.save()
+
+        helper.send_mail(request, internal=True)
         return HttpResponseRedirect(reverse('helpers',
                                             args=[event_url_name,
                                                   shift.job.pk]))
@@ -119,10 +121,13 @@ def add_coordinator(request, event_url_name, job_pk):
         return nopermission(request)
 
     # form
-    form = HelperForm(request.POST or None, job=job, event=event)
+    form = HelperForm(request.POST or None, job=job, event=event,
+                      new_coordinator=True)
 
     if form.is_valid():
-        form.save()
+        helper = form.save()
+
+        helper.send_mail(request, internal=True)
         return HttpResponseRedirect(reverse('helpers',
                                             args=[event_url_name, job.pk]))
 

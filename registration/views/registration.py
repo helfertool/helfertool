@@ -63,12 +63,7 @@ def form(request, event_url_name, link_pk=None):
     if form.is_valid():
         helper = form.save()
 
-        # if mail validation if necessary: helper is not validated
-        if event.mail_validation:
-            helper.validated = False
-            helper.save()
-
-        helper.send_mail(request)
+        helper.send_mail(request, internal=False)
         return HttpResponseRedirect(reverse('registered',
                                             args=[event.url_name, helper.pk]))
 

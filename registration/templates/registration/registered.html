@@ -57,12 +57,23 @@
         </tr>
     </table>
 
-    <h2>{% trans "Shifts" %}</h2>
-    <ul class="list-group">
-    {% for shift in data.shifts.all %}
-        <li class="list-group-item">{{ shift }}</li>
-    {% endfor %}
-    </ul>
+    {% if data.is_coordinator %}
+        <h2>{% trans "Jobs" %}</h2>
+        <ul class="list-group">
+        {% for job in data.coordinated_jobs %}
+            <li class="list-group-item">{{ job }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if data.shifts.exists %}
+        <h2>{% trans "Shifts" %}</h2>
+        <ul class="list-group">
+        {% for shift in data.shifts.all %}
+            <li class="list-group-item">{{ shift }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
 
     <h2>{% trans "Data privacy" %}</h2>
     {% if data.privacy_statement %}
@@ -72,14 +83,14 @@
     {% endif %}
 
     <div class="well">
-        {% include "registration/privacy.html" %}
+        {% include "registration/privacy/statement.html" %}
     </div>
 
     {% if news %}
         <p>{% trans "You agreed that we will inform you about future events per email." %}</p>
 
         <div class="well">
-            {% include "registration/privacy_news.html" %}
+            {% include "registration/privacy/news.html" %}
         </div>
     {% endif %}
 

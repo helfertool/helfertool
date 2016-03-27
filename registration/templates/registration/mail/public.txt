@@ -6,4 +6,6 @@ you registered for the following shifts:{% endblocktrans %}
 {% endfor %}
 {% if event.mail_validation %}{% blocktrans %}You have to confirm your mail address by clicking on the following link: {{ validate_url }}
 
-{% endblocktrans %}{% endif %}{% blocktrans %}Thanks for your support!{% endblocktrans %}
+{% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
+
+{% blocktrans %}Thanks for your support!{% endblocktrans %}

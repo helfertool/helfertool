@@ -195,6 +195,10 @@ class RegisterForm(forms.ModelForm):
 
         instance.event = self.event
 
+        # if mail validation if necessary: helper is not validated
+        if self.event.mail_validation:
+            instance.validated = False
+
         # must commit for m2m operations
         instance.save()
 

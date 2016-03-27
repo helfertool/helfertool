@@ -13,11 +13,8 @@ class HelperForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')
-
-        # if job is set, this helper will be added to this job as coordinator
-        self.job = None
-        if 'job' in kwargs:
-            self.job = kwargs.pop('job')
+        self.new_coordinator = kwargs.pop('new_coordinator', False)
+        self.job = kwargs.pop('job', None)
 
         super(HelperForm, self).__init__(*args, **kwargs)
 
@@ -37,6 +34,9 @@ class HelperForm(forms.ModelForm):
         instance = super(HelperForm, self).save(False)
 
         instance.event = self.related_event
+
+        if self.new_coordinator and self.related_event.mail_validation:
+            instance.validated = False
 
         if commit:
             instance.save()
@@ -114,7 +114,7 @@ class HelperAddCoordinatorForm(forms.Form):
             widget=forms.CheckboxSelectMultiple,
             queryset=jobs, required=True)
 
-    def save(self):
+    def save(self, commit=True):
         for job in self.cleaned_data['jobs']:
             job.coordinators.add(self.helper)
             job.save()
