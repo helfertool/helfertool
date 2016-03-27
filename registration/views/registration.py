@@ -8,6 +8,8 @@ from .utils import nopermission, get_or_404
 from ..models import Event, Link
 from ..forms import RegisterForm
 
+from news.helper import news_test_email
+
 
 def index(request):
     events = Event.objects.all()
@@ -78,8 +80,11 @@ def form(request, event_url_name, link_pk=None):
 def registered(request, event_url_name, helper_id):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
 
+    news = news_test_email(helper.email)
+
     context = {'event': event,
-               'data': helper}
+               'data': helper,
+               'news': news}
     return render(request, 'registration/registered.html', context)
 
 

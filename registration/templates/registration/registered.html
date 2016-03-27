@@ -75,5 +75,13 @@
         {% include "registration/privacy.html" %}
     </div>
 
+    {% if news %}
+        <p>{% trans "You agreed that we will inform you about future events per email." %}</p>
+
+        <div class="well">
+            {% include "registration/privacy_news.html" %}
+        </div>
+    {% endif %}
+
     {{ event.imprint | safe }}
 {% endblock %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-24 00:37+0100\n"
-"PO-Revision-Date: 2016-03-24 00:40+0100\n"
+"POT-Creation-Date: 2016-03-27 14:45+0200\n"
+"PO-Revision-Date: 2016-03-27 14:46+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -1126,6 +1126,12 @@ msgid ""
 msgstr ""
 "Die folgende Datenschutzerklärung wurde dir zugeschickt und du hast bis "
 "jetzt nicht widersprochen."
+
+#: registration/templates/registration/registered.html:79
+msgid "You agreed that we will inform you about future events per email."
+msgstr ""
+"Du bist damit einverstanden, dass wir dich über weitere Veranstaltungen per "
+"E-Mail informieren."
 
 #: registration/templates/registration/registerform.html:8
 msgid "Jobs"
