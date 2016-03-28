@@ -30,6 +30,10 @@ class HelperForm(forms.ModelForm):
         if not self.instance.needs_infection_instruction:
             self.fields.pop('infection_instruction')
 
+        # remove field for mail validation
+        if self.new_coordinator:
+            self.fields.pop('validated')
+
     def save(self, commit=True):
         instance = super(HelperForm, self).save(False)
 

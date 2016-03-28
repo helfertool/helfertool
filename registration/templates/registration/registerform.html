@@ -114,8 +114,14 @@
     </div>
 
     {% if form.internal and event.ask_full_age %}
+        <p>
+            <b>{% trans "Make sure that the helper is full age!" %}</b>
+        </p>
+    {% endif %}
+
+    {% if form.internal %}
         <div class="alert alert-warning" role="alert">
-            {% trans "Make sure that the helper is full age!" %}
+            <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
         </div>
     {% endif %}
 

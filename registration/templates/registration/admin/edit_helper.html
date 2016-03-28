@@ -3,10 +3,10 @@
 {% load bootstrap3 %}
 
 {% block admincontent %}
-    {% if helper %}
-        <h2>{% trans "Edit helper" %}</h2>
-    {% else %}
+    {% if form.new_coordinator %}
         <h2>{% trans "Add coordinator" %}</h2>
+    {% else %}
+        <h2>{% trans "Edit helper" %}</h2>
     {% endif %}
 
     <form action="" method="post" enctype="multipart/form-data">
@@ -82,6 +82,12 @@
 
             <div id="badge" class="collapse">
                 {% bootstrap_form badge_form %}
+            </div>
+        {% endif %}
+
+        {% if form.new_coordinator %}
+            <div class="alert alert-warning" role="alert">
+                <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
             </div>
         {% endif %}
 
