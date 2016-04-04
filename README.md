@@ -33,13 +33,15 @@ manually:
 
  * Python 2 or 3
  * pdflatex (from TeX Live)
+ * Redis or RabbitMQ
 
 ### Python modules
 
- * Django 1.8
+ * Django 1.9
  * django-modeltranslation
  * django-bootstrap3
  * django-bleach
+ * celery[redis] or celery[librabbitmq]
  * XlsxWriter
  * Pillow
  * reportlab
@@ -68,6 +70,9 @@ By default Django uses a SQLite database that can be generated using the
 following command inside the project directory:
 
     python manage.py migrate
+
+Since the software uses Celery you need one of supported message brokers, for
+development we use redis-server.
 
 Then a superuser should be created:
 

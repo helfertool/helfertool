@@ -48,11 +48,9 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href', 'style']
 BLEACH_ALLOWED_STYLES = ['font-weight', 'text-decoration']
 BLEACH_STRIP_TAGS = True
 
-# badges: path to pdflatex
+# Badges
 BADGE_PDFLATEX = '/usr/bin/pdflatex'
-
-# badge creation
-BADGE_IMAGE_DIR = os.path.join(BASE_DIR, 'badgeupload')
+BADGE_PHOTO_MAX_SIZE = 1000
 
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
@@ -157,6 +155,13 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Celery backend
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 
 # Internationalization

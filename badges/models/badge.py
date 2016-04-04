@@ -1,6 +1,9 @@
 from django.db import models
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 import posixpath
+
+from badges import tasks
 
 
 def _badge_upload_path(instance, filename):
@@ -80,6 +83,17 @@ class Badge(models.Model):
         default=False,
         verbose_name=_("Badge was printed already"),
     )
+
+    def __init__(self, *args, **kwargs):
+        super(Badge, self).__init__(*args, **kwargs)
+
+        self._old_photo = self.photo
+
+    def save(self, *args, **kwargs):
+        super(Badge, self).save(*args, **kwargs)
+
+        if self._old_photo != self.photo:
+            tasks.scale_badge_photo.delay(self.photo.path)
 
     def get_job(self):
         # use primary job if set
