@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 import posixpath
 
-from badges import tasks
+from .. import tasks
 
 
 def _badge_upload_path(instance, filename):
