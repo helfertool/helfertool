@@ -91,8 +91,10 @@
                 {% bootstrap_field form.full_age %}
             {% endif %}
         </div>
+    </div>
 
-        {% if not form.internal %}
+    {% if not form.internal %}
+        <div class="row">
             <div class="col-lg-12">
                 {% bootstrap_field form.privacy_statement %}
 
@@ -100,9 +102,11 @@
                     {% include "registration/privacy/statement.html" %}
                 </div>
             </div>
-        {% endif %}
+        </div>
+    {% endif %}
 
-        {% if form.ask_news %}
+    {% if form.ask_news %}
+        <div class="row">
             <div class="col-lg-12">
                 {% bootstrap_field form.news %}
 
@@ -110,22 +114,26 @@
                     {% include "registration/privacy/news.html" %}
                 </div>
             </div>
-        {% endif %}
-    </div>
-
-    {% if form.internal and event.ask_full_age %}
-        <p>
-            <b>{% trans "Make sure that the helper is full age!" %}</b>
-        </p>
-    {% endif %}
-
-    {% if form.internal %}
-        <div class="alert alert-warning" role="alert">
-            <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
         </div>
     {% endif %}
 
-    <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            {% if form.internal and event.ask_full_age %}
+                <p>
+                    <b>{% trans "Make sure that the helper is full age!" %}</b>
+                </p>
+            {% endif %}
+
+            {% if form.internal %}
+                <div class="alert alert-warning" role="alert">
+                    <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
+                </div>
+            {% endif %}
+
+            <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
+        </div>
+    </div>
 
     <script>
         function handle_infection_instruction()
