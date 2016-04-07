@@ -1,0 +1,11 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Download not available" %}</h2>
+
+    <div class="alert alert-danger" role="alert">
+        {% trans "Either the PDF is not ready yet or the generation failed." %}
+    </div>
+{% endblock %}

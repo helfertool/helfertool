@@ -9,9 +9,13 @@
         <pre>
             {{ latex_output }}
         </pre>
-    {% else %}
+    {% elif error %}
         <div class="alert alert-danger" role="alert">
             {{ error }}
+        </div>
+    {% else %}
+        <div class="alert alert-successs" role="alert">
+            {% trans "There is no error" %}
         </div>
     {% endif %}
 {% endblock %}

@@ -16,6 +16,38 @@
         </div>
     {% else %}
         <table class="table">
+            {% for task in tasks %}
+                <tr>
+                    <td>
+                        {% if task.finished %}
+                            {% bootstrap_icon "ok" %}
+                        {% elif task.error %}
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"></span>
+                        {% else %}
+                            {% bootstrap_icon "dashboard" %}
+                        {% endif %}
+
+                        &nbsp;
+
+                        {{ task.name }}
+                    </td>
+
+                    <td>
+                        {% if task.error %}
+                            <a href="{% url "badges:failed" event.url_name task.id %}">
+                                {% trans "Show errors" %}
+                            </a>
+                        {% elif task.finished %}
+                            <a href="{% url "badges:download" event.url_name task.id %}">
+                                {% trans "Download" %}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table class="table">
             <tr>
                 <th>{% trans "Job" %}</th>
                 <th></th>

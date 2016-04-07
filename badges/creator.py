@@ -6,8 +6,7 @@ import subprocess
 import shutil
 import sys
 
-from .models import BadgePermission
-
+import badges.models
 
 class BadgeCreatorError(Exception):
     def __init__(self, value, latex_output=None):
@@ -101,7 +100,7 @@ class BadgeCreator:
             tmp['id'] = ""
 
         # permissions
-        all_permissions = BadgePermission.objects.filter(
+        all_permissions = badges.models.BadgePermission.objects.filter(
             badge_settings=self.settings.pk).all()
         selected_permissions = role.permissions
         for perm in all_permissions:
@@ -158,10 +157,12 @@ class BadgeCreator:
             raise BadgeCreatorError("PDF generation failed", e.output)
 
         # return path to pdf
-        return "%s.pdf" % os.path.splitext(self.latex_filename)[0]
+        pdf_filename = "%s.pdf" % os.path.splitext(self.latex_filename)[0]
+        return self.dir, pdf_filename
 
     def finish(self):
-        shutil.rmtree(self.dir)
+        if os.path.isdir(self.dir):
+            shutil.rmtree(self.dir)
 
     def _get_latex(self):
         # whitespace, if code would be empty

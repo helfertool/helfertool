@@ -1,15 +1,56 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.utils.translation import ugettext as _
 
-from ..creator import BadgeCreator, BadgeCreatorError
+from celery.result import AsyncResult
+
+from datetime import datetime
+
 from ..checks import warnings_for_job
+from .. import tasks
+from ..creator import BadgeCreatorError
 
 from registration.views.utils import nopermission, get_or_404
 from registration.models import Event
 from registration.utils import escape_filename
 
 from .utils import notactive
+
+
+def create_task_dict(task_id, name):
+    tmp = {}
+    tmp['id'] = task_id
+    tmp['name'] = name
+
+    return tmp
+
+
+class BadgeTaskResult:
+    def __init__(self, task_id, name=None):
+        result = AsyncResult(task_id)
+
+        self.id = task_id
+        self.name = name
+
+        self.finished = result.successful()
+        self.error = result.failed()
+        self.expired = False
+        self.pdf = None
+        self.dl_filename = None
+
+        if result.successful():
+            pdf, dl_filename, clean_task_id = result.result
+
+            clean_result = AsyncResult(clean_task_id)
+            if clean_result.state == 'SUCCESS':
+                self.expired = True
+
+            self.pdf = pdf
+            self.dl_filename = dl_filename
 
 
 @login_required
@@ -32,9 +73,29 @@ def index(request, event_url_name):
     for job in jobs:
         job.num_warnings = len(warnings_for_job(job))
 
+    # recently started tasks
+    if 'badge_tasks' not in request.session:
+        request.session['badge_tasks'] = []
+
+    task_results = []
+    task_list_del = []
+    for task in request.session['badge_tasks']:
+        tmp = BadgeTaskResult(task['id'], task['name'])
+
+        # filter expired tasks
+        if tmp.expired:
+            task_list_del.append(task)
+        else:
+            task_results.append(tmp)
+
+    # remove expired filtered tasks
+    for task in task_list_del:
+        request.session['badge_tasks'].remove(task)
+
     context = {'event': event,
                'jobs': jobs,
-               'possible': possible}
+               'possible': possible,
+               'tasks': task_results}
     return render(request, 'badges/index.html', context)
 
 
@@ -74,59 +135,97 @@ def generate(request, event_url_name, job_pk=None, generate_all=False):
 
     # TODO: check if possible, show error page
 
-    # badge creation
-    creator = BadgeCreator(event.badge_settings)
-
     # skip already printed badges?
     skip_printed = event.badge_settings.barcodes and not generate_all
 
-    # jobs that should be handled
+    # start generation
+    result = tasks.generate_badges.delay(event.pk, job_pk, skip_printed)
+    messages.success(request, _("Badge generation was started"))
+
+    # name
+    name = None
     if job:
-        jobs = [job, ]
-        filename = job.name
+        if skip_printed:
+            name = _("{} (only unregistered)").format(job.name)
+        else:
+            name = _("{} (all)").format(job.name)
     else:
-        jobs = event.job_set.all()
-        filename = event.name
+        if skip_printed:
+            name = _("All unregistered badges")
+        else:
+            name = _("Really all badges")
 
-    # add helpers and coordinators
-    for j in jobs:
-        for h in j.helpers_and_coordinators():
-            # skip if badge was printed already
-            # (and this behaviour is requested)
-            if skip_printed and h.badge.printed:
-                continue
+    # add to session
+    if 'badge_tasks' not in request.session:
+        request.session['badge_tasks'] = []
 
-            helpers_job = h.badge.get_job()
-            # print badge only if this is the primary job or the job is
-            # unambiguous
-            if (not helpers_job or helpers_job == j):
-                creator.add_helper(h)
+    task = create_task_dict(result.task_id, name)
 
-    # generate
-    try:
-        pdf_filename = creator.generate()
-    except BadgeCreatorError as e:
-        # remove temp files
-        creator.finish()
+    request.session['badge_tasks'].insert(0, task)
+    request.session.modified = True
 
+    return HttpResponseRedirect(reverse('badges:index', args=[event.url_name]))
+
+@login_required
+def failed(request, event_url_name, task_id):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # get result
+    result = AsyncResult(task_id)
+
+    if result.failed():
+        exception = result.result
+
+        if isinstance(exception, BadgeCreatorError):
+            error = exception.value
+            latex_output = result.result.get_latex_output()
+        else:
+            raise exception
+
+    # return error message
+    context = {'event': event,
+               'error': exception.value,
+               'latex_output': exception.get_latex_output()}
+    return render(request, 'badges/failed.html',
+                  context)
+
+@login_required
+def download(request, event_url_name, task_id):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # get result
+    badge_task = BadgeTaskResult(task_id)
+
+    if badge_task.finished and not badge_task.expired:
+        # output
+        filename = escape_filename("%s.pdf" % badge_task.dl_filename)
+
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+
+        # send file
+        with open(badge_task.pdf, 'rb') as f:
+            response.write(f.read())
+
+        return response
+    else:
         # return error message
-        context = {'event': event,
-                   'error': e.value,
-                   'latex_output': e.get_latex_output()}
-        return render(request, 'badges/failed.html',
+        context = {'event': event}
+        return render(request, 'badges/download.html',
                       context)
-
-    # output
-    filename = escape_filename("%s.pdf" % filename)
-
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
-
-    # send file
-    with open(pdf_filename, 'rb') as f:
-        response.write(f.read())
-
-    # finish badge generation (delete files)
-    creator.finish()
-
-    return response

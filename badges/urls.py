@@ -88,6 +88,18 @@ urlpatterns = [
         {'generate_all': True},
         name='generate_all'),
 
+    # failed page
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/failed/'
+        '(?P<task_id>[a-z0-9\-]+)/$',
+        views.failed,
+        name='failed'),
+
+    # download badges
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/download/'
+        '(?P<task_id>[a-z0-9\-]+)/$',
+        views.download,
+        name='download'),
+
     #
     # register badges
     #

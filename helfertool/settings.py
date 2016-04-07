@@ -51,6 +51,9 @@ BLEACH_STRIP_TAGS = True
 # Badges
 BADGE_PDFLATEX = '/usr/bin/pdflatex'
 BADGE_PHOTO_MAX_SIZE = 1000
+BADGE_PDF_TIMEOUT = 60  # 30 minutes
+BADGE_RM_DELAY = 5 # 2 minutes
+#BADGE_PDF_TIMEOUT = 1800  # 30 minutes
 
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
@@ -159,9 +162,9 @@ DATABASES = {
 # Celery backend
 BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+#CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
+#CELERY_TASK_SERIALIZER = 'json'
+#CELERY_RESULT_SERIALIZER = 'json'
 
 
 # Internationalization
