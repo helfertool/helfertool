@@ -1,4 +1,4 @@
-from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -73,30 +73,48 @@ def index(request, event_url_name):
     for job in jobs:
         job.num_warnings = len(warnings_for_job(job))
 
+    context = {'event': event,
+               'jobs': jobs,
+               'possible': possible}
+    return render(request, 'badges/index.html', context)
+
+
+@login_required
+def tasklist(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # check if all necessary settings are done
+    possible = event.badge_settings.creation_possible()
+
     # recently started tasks
     if 'badge_tasks' not in request.session:
         request.session['badge_tasks'] = []
 
     task_results = []
-    task_list_del = []
+    task_list_new = []
     for task in request.session['badge_tasks']:
         tmp = BadgeTaskResult(task['id'], task['name'])
 
         # filter expired tasks
-        if tmp.expired:
-            task_list_del.append(task)
-        else:
+        if not tmp.expired:
+            task_list_new.append(task)
             task_results.append(tmp)
 
     # remove expired filtered tasks
-    for task in task_list_del:
-        request.session['badge_tasks'].remove(task)
+    request.session['badge_tasks'] = task_list_new[:settings.BADGE_LIST_ITMES]
+    task_results = task_results[:settings.BADGE_LIST_ITMES]
 
     context = {'event': event,
-               'jobs': jobs,
-               'possible': possible,
                'tasks': task_results}
-    return render(request, 'badges/index.html', context)
+    return render(request, 'badges/tasklist.html', context)
 
 
 @login_required
@@ -140,7 +158,6 @@ def generate(request, event_url_name, job_pk=None, generate_all=False):
 
     # start generation
     result = tasks.generate_badges.delay(event.pk, job_pk, skip_printed)
-    messages.success(request, _("Badge generation was started"))
 
     # name
     name = None

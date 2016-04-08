@@ -51,9 +51,10 @@ BLEACH_STRIP_TAGS = True
 # Badges
 BADGE_PDFLATEX = '/usr/bin/pdflatex'
 BADGE_PHOTO_MAX_SIZE = 1000
+
 BADGE_PDF_TIMEOUT = 30*60  # 30 minutes
 BADGE_RM_DELAY = 1*60 # 2 minutes
-#BADGE_PDF_TIMEOUT = 1800  # 30 minutes
+BADGE_LIST_ITMES = 5  # number of visible tasks
 
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"

@@ -60,6 +60,11 @@ urlpatterns = [
         views.index,
         name='index'),
 
+    # overview of generated badges (list of tasks)
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/tasklist/$',
+        views.tasklist,
+        name='tasklist'),
+
     # warnings
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/warnings/'
         '(?P<job_pk>[0-9]+)$',
