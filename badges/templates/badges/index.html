@@ -70,7 +70,7 @@
 
             setInterval(function() {
                 $("#tasks").load("{% url "badges:tasklist" event.url_name %}")
-            }, 1000);
+            }, 2000);
         </script>
     {% endif %}
 {% endblock %}
