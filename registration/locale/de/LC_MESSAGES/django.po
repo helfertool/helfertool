@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 13:38+0200\n"
-"PO-Revision-Date: 2016-03-28 13:40+0200\n"
+"POT-Creation-Date: 2016-04-09 13:28+0200\n"
+"PO-Revision-Date: 2016-04-09 13:28+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -260,7 +260,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:68 registration/templates/base.html.py:127
+#: registration/models/event.py:68 registration/templates/base.html.py:130
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -465,53 +465,53 @@ msgstr "Error 500"
 msgid "The admins were notified already."
 msgstr "Die Admins wurden bereits benachrichtigt."
 
-#: registration/templates/base.html:39
+#: registration/templates/base.html:42
 msgid "Registration for helpers"
 msgstr "Helferanmeldung"
 
-#: registration/templates/base.html:65
+#: registration/templates/base.html:68
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
-#: registration/templates/base.html:69 registration/templates/base.html:78
+#: registration/templates/base.html:72 registration/templates/base.html:81
 #: registration/templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: registration/templates/base.html:71
+#: registration/templates/base.html:74
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: registration/templates/base.html:73
+#: registration/templates/base.html:76
 #: registration/templates/registration/change_user.html:7
 msgid "Account"
 msgstr "Account"
 
-#: registration/templates/base.html:74
+#: registration/templates/base.html:77
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: registration/templates/base.html:75
+#: registration/templates/base.html:78
 msgid "Logout"
 msgstr "Logout"
 
-#: registration/templates/base.html:77
+#: registration/templates/base.html:80
 #: registration/templates/registration/login.html:6
 #: registration/templates/registration/login.html:18
 msgid "Login"
 msgstr "Login"
 
-#: registration/templates/base.html:102
+#: registration/templates/base.html:105
 msgid "Switch"
 msgstr "Switch"
 
-#: registration/templates/base.html:124
+#: registration/templates/base.html:127
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/base.html:130
+#: registration/templates/base.html:133
 #: registration/templates/registration/about.html:5
 msgid "About this software"
 msgstr "Über diese Software"
@@ -892,7 +892,7 @@ msgid "Badge"
 msgstr "Badge"
 
 #: registration/templates/registration/admin/edit_helper.html:90
-#: registration/templates/registration/registerform.html:124
+#: registration/templates/registration/registerform.html:130
 msgid "Note: after saving an e-mail will be sent to the given address."
 msgstr ""
 "Bitte beachten: Nach dem Speichern wird eine E-Mail an die angegeben Adresse "
@@ -1201,11 +1201,11 @@ msgstr ""
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
-#: registration/templates/registration/registerform.html:118
+#: registration/templates/registration/registerform.html:124
 msgid "Make sure that the helper is full age!"
 msgstr "Versichere dich, dass der Helfer volljährig ist!"
 
-#: registration/templates/registration/registerform.html:128
+#: registration/templates/registration/registerform.html:134
 msgid "Register"
 msgstr "Anmelden"
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 13:38+0200\n"
-"PO-Revision-Date: 2016-03-27 14:47+0200\n"
+"POT-Creation-Date: 2016-04-09 13:28+0200\n"
+"PO-Revision-Date: 2016-04-09 13:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -44,47 +44,47 @@ msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 msgid "File does not contain LaTeX code."
 msgstr "Die Datei enthält keinen LaTeX Code."
 
-#: badges/models/badge.py:19
+#: badges/models/badge.py:22
 msgid "Other firstname"
 msgstr "Anderer Vorname"
 
-#: badges/models/badge.py:25
+#: badges/models/badge.py:28
 msgid "Other surname"
 msgstr "Anderer Nachname"
 
-#: badges/models/badge.py:31
+#: badges/models/badge.py:34
 msgid "Other text for job"
 msgstr "Anderer Text für Aufgabe"
 
-#: badges/models/badge.py:37
+#: badges/models/badge.py:40
 msgid "Other text for shift"
 msgstr "Anderer Text für Schicht"
 
-#: badges/models/badge.py:43
+#: badges/models/badge.py:46
 msgid "Other text for role"
 msgstr "Anderer Text für Rolle"
 
-#: badges/models/badge.py:48
+#: badges/models/badge.py:51
 msgid "Photo"
 msgstr "Foto"
 
-#: badges/models/badge.py:56
+#: badges/models/badge.py:59
 msgid "Primary job"
 msgstr "Primäre Aufgabe"
 
-#: badges/models/badge.py:57
+#: badges/models/badge.py:60
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: badges/models/badge.py:68 badges/templates/badges/settings.html.py:95
+#: badges/models/badge.py:71 badges/templates/badges/settings.html.py:95
 msgid "Role"
 msgstr "Rolle"
 
-#: badges/models/badge.py:76 badges/templates/badges/settings.html.py:96
+#: badges/models/badge.py:79 badges/templates/badges/settings.html.py:96
 msgid "Design"
 msgstr "Design"
 
-#: badges/models/badge.py:81
+#: badges/models/badge.py:84
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
@@ -142,29 +142,43 @@ msgstr ""
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: badges/models/settings.py:31 badges/templates/badges/index.html.py:12
+#: badges/models/settings.py:32 badges/templates/badges/index.html.py:12
 msgid "LaTeX template"
 msgstr "LaTeX Template"
 
-#: badges/models/settings.py:38
+#: badges/models/settings.py:39
 msgid "Number of rows on one page"
 msgstr "Anzahl der Zeilen auf einer Seite"
 
-#: badges/models/settings.py:44
+#: badges/models/settings.py:45
 msgid "Number of columns on one page"
 msgstr "Anzahl der Spalten auf einer Seite"
 
-#: badges/models/settings.py:51
+#: badges/models/settings.py:53
+msgid "Language of badges"
+msgstr "Badge Sprache"
+
+#: badges/models/settings.py:59
 msgid "Role for coordinators"
 msgstr "Rolle für Koordinatoren"
 
-#: badges/models/settings.py:57
+#: badges/models/settings.py:65
 msgid "Role for helpers"
 msgstr "Rolle für Helfer"
 
-#: badges/models/settings.py:62
+#: badges/models/settings.py:70
 msgid "Print barcodes on badges to avoid duplicates"
 msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
+
+#: badges/templates/badges/download.html:6
+msgid "Download not available"
+msgstr "Download nicht verfügbar"
+
+#: badges/templates/badges/download.html:9
+msgid "Either the PDF is not ready yet or the generation failed."
+msgstr ""
+"Entweder ist die PDF Datei noch nicht verfügbar oder die Generierung ist "
+"fehlgeschlagen."
 
 #: badges/templates/badges/edit_design.html:6
 msgid "Badge Design"
@@ -190,6 +204,10 @@ msgstr "Badge Rolle"
 msgid "Generating badges failed"
 msgstr "Generieren der Badges fehlgeschlagen"
 
+#: badges/templates/badges/failed.html:18
+msgid "There is no error"
+msgstr "Es gibt keinen Fehler"
+
 #: badges/templates/badges/index.html:6
 msgid "Generate badges"
 msgstr "Badges generieren"
@@ -201,29 +219,29 @@ msgstr ""
 "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
 "folgende Einstellungen:"
 
-#: badges/templates/badges/index.html:20
+#: badges/templates/badges/index.html:22
 #: badges/templates/badges/settings.html:94
 msgid "Job"
 msgstr "Aufgabe"
 
-#: badges/templates/badges/index.html:31
+#: badges/templates/badges/index.html:33
 msgid "Unregistered badges"
 msgstr "Nicht registrierte Badges"
 
-#: badges/templates/badges/index.html:36
+#: badges/templates/badges/index.html:38
 msgid "All badges"
 msgstr "Alle Badges"
 
-#: badges/templates/badges/index.html:41 badges/templates/badges/index.html:46
+#: badges/templates/badges/index.html:43 badges/templates/badges/index.html:48
 #, python-format
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:58
+#: badges/templates/badges/index.html:60 badges/views/generate.py:180
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:63
+#: badges/templates/badges/index.html:65 badges/views/generate.py:182
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -322,6 +340,18 @@ msgstr "Es gibt keine Berechtigungen."
 msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 
+#: badges/templates/badges/tasklist.html:6
+msgid "Please login again."
+msgstr "Logge dich bitte wieder ein."
+
+#: badges/templates/badges/tasklist.html:27
+msgid "Show errors"
+msgstr "Fehler anzeigen"
+
+#: badges/templates/badges/tasklist.html:31
+msgid "Download"
+msgstr "Herunteladen"
+
 #: badges/templates/badges/warnings.html:6
 msgid "Warnings for badge generation"
 msgstr "Warnungen für die Badge Generierung"
@@ -329,6 +359,14 @@ msgstr "Warnungen für die Badge Generierung"
 #: badges/templates/badges/warnings.html:9
 msgid "There are no warnings."
 msgstr "Es gibt keine Warnungen."
+
+#: badges/views/generate.py:175
+msgid "{} (only unregistered)"
+msgstr "{} (nicht registrierte Badges)"
+
+#: badges/views/generate.py:177
+msgid "{} (all)"
+msgstr "{} (alle)"
 
 #: badges/views/register.py:32
 #, python-format
@@ -339,9 +377,6 @@ msgstr "Bagde bereits gedruckt: %(name)s"
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
-
-#~ msgid "Configure badges"
-#~ msgstr "Badges konfigurieren"
 
 #~ msgid "Edit template"
 #~ msgstr "Template bearbeiten"
