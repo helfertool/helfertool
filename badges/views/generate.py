@@ -21,10 +21,11 @@ from registration.utils import escape_filename
 from .utils import notactive
 
 
-def create_task_dict(task_id, name):
+def create_task_dict(task_id, name, event):
     tmp = {}
     tmp['id'] = task_id
     tmp['name'] = name
+    tmp['event'] = event.pk
 
     return tmp
 
@@ -79,9 +80,15 @@ def index(request, event_url_name):
     return render(request, 'badges/index.html', context)
 
 
-@login_required
 def tasklist(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
+
+    # do not return data if user is not authenticated
+    if not request.user.is_authenticated():
+        context = {'event': event,
+                   'tasks': None,
+                   'no_login': True}
+        return render(request, 'badges/tasklist.html', context)
 
     # check permission
     if not event.is_admin(request.user):
@@ -91,29 +98,31 @@ def tasklist(request, event_url_name):
     if not event.badges:
         return notactive(request)
 
-    # check if all necessary settings are done
-    possible = event.badge_settings.creation_possible()
-
     # recently started tasks
     if 'badge_tasks' not in request.session:
         request.session['badge_tasks'] = []
 
     task_results = []
-    task_list_new = []
+    task_list_del = []
+    counter = 0
     for task in request.session['badge_tasks']:
         tmp = BadgeTaskResult(task['id'], task['name'])
 
         # filter expired tasks
-        if not tmp.expired:
-            task_list_new.append(task)
+        if tmp.expired:
+            task_list_del.append(task)
+        elif task['event'] == event.pk:
             task_results.append(tmp)
+            counter += 1
 
     # remove expired filtered tasks
-    request.session['badge_tasks'] = task_list_new[:settings.BADGE_LIST_ITMES]
-    task_results = task_results[:settings.BADGE_LIST_ITMES]
+    for task in task_list_del:
+        request.session['badge_tasks'].delete(task)
+    request.session.modified = True
 
     context = {'event': event,
-               'tasks': task_results}
+               'tasks': task_results,
+               'no_login': False}
     return render(request, 'badges/tasklist.html', context)
 
 
@@ -176,7 +185,7 @@ def generate(request, event_url_name, job_pk=None, generate_all=False):
     if 'badge_tasks' not in request.session:
         request.session['badge_tasks'] = []
 
-    task = create_task_dict(result.task_id, name)
+    task = create_task_dict(result.task_id, name, event)
 
     request.session['badge_tasks'].insert(0, task)
     request.session.modified = True
@@ -225,6 +234,20 @@ def download(request, event_url_name, task_id):
     # check if badge system is active
     if not event.badges:
         return notactive(request)
+
+    # remove from list
+    if 'badge_tasks' not in request.session:
+        request.session['badge_tasks'] = []
+
+    del_task = None
+    for task in request.session['badge_tasks']:
+        if task['id'] == task_id:
+            del_task = task
+            break
+
+    request.session['badge_tasks'].remove(task)
+    request.session.modified = True
+    # TODO: files can be deleted also, happens through celery at the moment
 
     # get result
     badge_task = BadgeTaskResult(task_id)
