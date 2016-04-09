@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -43,6 +44,13 @@ class BadgeSettings(models.Model):
         default=2,
         verbose_name=_("Number of columns on one page"),
         validators=[MinValueValidator(1)],
+    )
+
+    language = models.CharField(
+        max_length=10,
+        choices=settings.LANGUAGES,
+        default=settings.BADGE_LANGUAGE_CODE,
+        verbose_name=_("Language of badges"),
     )
 
     coordinator_title = models.CharField(

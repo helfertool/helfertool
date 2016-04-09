@@ -117,7 +117,7 @@ def tasklist(request, event_url_name):
 
     # remove expired filtered tasks
     for task in task_list_del:
-        request.session['badge_tasks'].delete(task)
+        request.session['badge_tasks'].remove(task)
     request.session.modified = True
 
     context = {'event': event,

@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from celery import shared_task
 
 from django.conf import settings
+from django.utils import translation
 
 from PIL import Image
 
@@ -27,6 +28,10 @@ def generate_badges(event_pk, job_pk, skip_printed):
         job = registration.models.Job.objects.get(pk=job_pk)
     except registration.models.Job.DoesNotExist:
         job = None
+
+    # set language
+    prev_language = translation.get_language()
+    translation.activate(event.badgesettings.language)
 
     # badge creation
     creator = badges.creator.BadgeCreator(event.badge_settings)
@@ -57,6 +62,8 @@ def generate_badges(event_pk, job_pk, skip_printed):
     except Exception as e:
         creator.finish()
         raise e
+    finally:
+        translation.activate(prev_language)
 
     clean = cleanup.subtask((tmp_dir, ),
                             countdown=settings.BADGE_PDF_TIMEOUT)

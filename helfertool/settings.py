@@ -55,6 +55,8 @@ BADGE_PHOTO_MAX_SIZE = 1000
 BADGE_PDF_TIMEOUT = 30*60  # 30 minutes
 BADGE_RM_DELAY = 2*60 # 2 minutes
 
+BADGE_LANGUAGE_CODE = 'de'
+
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 
