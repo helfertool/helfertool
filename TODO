@@ -3,7 +3,8 @@ Important
 
 * check/change redirect destinations on save
 * show duplicates, merge helpers
-* add event date -> default for shift times, sort and group events according date
+* event date -> default for shift times
+* delete all helpers, keep statistics
 
 Django things
 =============
@@ -25,10 +26,11 @@ Design, JS
 Registration
 ============
 
-* ask for preferred language on registration
-* add ical file to confirmation mail
+* ask for preferred language on registration?
+* add ical file to confirmation mail (maybe not possible to send multiple
+  events in one mail, see ical branch)
 * bot protection
-* reminder mail/SMS
+* reminder mail/SMS? (needs update of privacy statement)
 
 Admin area
 ==========
@@ -36,10 +38,10 @@ Admin area
 * change order of jobs
 * sort helpers and coordinators
 * mails
-    * custom sender
-    * attachments
+    * custom sender?
+    * attachments?
 * different available shirt sizes per event
-* fixed tshirt sizes, mark all changes since certain date
+* fixed tshirt sizes, mark all changes since certain date?
 * copy event with job, shifts, settings, badge stuff but without admins and helpers
 
 User management
@@ -54,11 +56,11 @@ Badges
 * shift (name for each shift, time,...?)
 * delete_badge{permission, role, design}
 * for some jobs an upload of an image is possible
-* timeout and other protection for subprocess call
-* Image for responsibles? (option)
+* timeout and other protection for subprocess call (-> celery timeout)
+* Show missing images (image for coordinators or for all)
+* Badges only for coordinators?
 * check security of pdflatex, set more options
 * versioning of badges (for registration/validation)
-* scale images on upload
 
 File uploads
 ============
