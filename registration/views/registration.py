@@ -37,7 +37,7 @@ def form(request, event_url_name, link_pk=None):
         try:
             link = Link.objects.get(pk=link_pk)
             all_shifts = link.shifts.all()
-        except Link.DoesNotExist:
+        except (Link.DoesNotExist, ValueError):
             # show some message when link does not exist
             context = {'event': event}
             return render(request, 'registration/invalid_link.html', context)
