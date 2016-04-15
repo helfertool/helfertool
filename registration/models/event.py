@@ -104,7 +104,7 @@ class Event(models.Model):
 
     active = models.BooleanField(
         default=False,
-        verbose_name=_("Registration possible"),
+        verbose_name=_("Registration publicly visible"),
     )
 
     ask_shirt = models.BooleanField(
