@@ -1,4 +1,7 @@
 from django import forms
+from django.conf import settings
+
+from ckeditor.widgets import CKEditorWidget
 
 from ..models import Job
 from badges.models import BadgeRole
@@ -12,6 +15,13 @@ class JobForm(forms.ModelForm):
         widgets = {
             'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
         }
+
+        # According to the documentation django-modeltranslations copies the
+        # widget from the original field.
+        # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
+        # Therefore set it manually...
+        for lang, name in settings.LANGUAGES:
+            widgets["description_{}".format(lang)] = CKEditorWidget()
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event')

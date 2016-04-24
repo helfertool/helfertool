@@ -41,6 +41,7 @@ manually:
  * django-modeltranslation
  * django-bootstrap3
  * django-bleach
+ * django-ckeditor
  * celery[redis] or celery[librabbitmq]
  * XlsxWriter
  * Pillow

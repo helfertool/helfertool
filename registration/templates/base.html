@@ -37,6 +37,10 @@
         {# font awesome #}
         <link href="{% static "registration/vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" />
 
+        {# ckeditor #}
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+        <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+
         <link href="{% static "registration/css/style.css" %}" media="all" rel="stylesheet">
 
         <title>{% block title %}{% trans "Registration for helpers" %}{% endblock %}</title>

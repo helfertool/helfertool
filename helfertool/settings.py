@@ -41,13 +41,6 @@ DOCS_URL = '/docs/'
 GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"
 
-# HTML sanitization for textfields
-BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'br', 'ul',
-                       'ol', 'li']
-BLEACH_ALLOWED_ATTRIBUTES = ['href', 'style']
-BLEACH_ALLOWED_STYLES = ['font-weight', 'text-decoration']
-BLEACH_STRIP_TAGS = True
-
 # Badges
 BADGE_PDFLATEX = '/usr/bin/pdflatex'
 BADGE_PHOTO_MAX_SIZE = 1000
@@ -70,6 +63,26 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
+
+# HTML sanitization for text fields
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'br', 'ul',
+                       'ol', 'li']
+BLEACH_ALLOWED_ATTRIBUTES = ['href', 'style']
+BLEACH_ALLOWED_STYLES = ['font-weight', 'text-decoration']
+BLEACH_STRIP_TAGS = True
+
+# editor for text fields
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', ],
+            ['Link', 'Unlink'],
+            ['Source']
+        ],
+    }
+}
 
 # Logging
 # LOGGING = {
@@ -111,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
+    'ckeditor',
     'badges',
     'news',
     'registration',
