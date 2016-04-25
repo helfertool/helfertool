@@ -53,6 +53,7 @@ def xlsx(buffer, event, jobs):
     for job in jobs:
         worksheet = workbook.add_worksheet(cleanName(job.name))
         bold = workbook.add_format({'bold': True})
+        multiple_shifts = workbook.add_format({'bg_color': '#FF6600'})
 
         row = Iterator()
         column = Iterator()
@@ -95,35 +96,42 @@ def xlsx(buffer, event, jobs):
             worksheet.merge_range(row.next(), 0, row.get(), last_column,
                                   _("Coordinators"), bold)
             add_helpers(worksheet, row, column, event, job,
-                        job.coordinators.all())
+                        job.coordinators.all(), multiple_shifts)
 
         # show all shifts
         for shift in job.shift_set.order_by('begin'):
             worksheet.merge_range(row.next(), 0, row.get(),
                                   last_column, shift.time(), bold)
             add_helpers(worksheet, row, column, event, job,
-                        shift.helper_set.all())
+                        shift.helper_set.all(), multiple_shifts)
 
     # close xlsx
     workbook.close()
 
 
-def add_helpers(worksheet, row, column, event, job, helpers):
+def add_helpers(worksheet, row, column, event, job, helpers,
+                multiple_shifts_format):
     for helper in helpers:
         row.next()
         column.reset()
 
-        worksheet.write(row.get(), column.next(), helper.firstname)
-        worksheet.write(row.get(), column.next(), helper.surname)
-        worksheet.write(row.get(), column.next(), helper.email)
-        worksheet.write(row.get(), column.next(), helper.phone)
+        num_shifts = helper.shifts.count()
+        num_jobs = len(helper.coordinated_jobs)
+        format = None
+        if num_shifts + num_jobs > 1:
+            format = multiple_shifts_format
+
+        worksheet.write(row.get(), column.next(), helper.firstname, format)
+        worksheet.write(row.get(), column.next(), helper.surname, format)
+        worksheet.write(row.get(), column.next(), helper.email, format)
+        worksheet.write(row.get(), column.next(), helper.phone, format)
         if event.ask_shirt:
             worksheet.write(row.get(), column.next(),
-                            u(helper.get_shirt_display()))
+                            u(helper.get_shirt_display()), format)
         if event.ask_vegetarian:
             worksheet.write(row.get(), column.next(),
-                            filters.yesno(helper.vegetarian))
+                            filters.yesno(helper.vegetarian), format)
         if job.infection_instruction:
             worksheet.write(row.get(), column.next(),
-                            u(helper.get_infection_instruction_short()))
-        worksheet.write(row.get(), column.next(), helper.comment)
+                            u(helper.get_infection_instruction_short()), format)
+        worksheet.write(row.get(), column.next(), helper.comment, format)
