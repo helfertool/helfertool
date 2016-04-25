@@ -33,7 +33,7 @@ manually:
 
  * Python 2 or 3
  * pdflatex (from TeX Live)
- * Redis or RabbitMQ
+ * Redis or RabbitMQ (RabbitMQ is recommended)
 
 ### Python modules
 
@@ -42,7 +42,7 @@ manually:
  * django-bootstrap3
  * django-bleach
  * django-ckeditor
- * celery[redis] or celery[librabbitmq]
+ * celery[redis] or celery[amqp]
  * XlsxWriter
  * Pillow
  * reportlab
