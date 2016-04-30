@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'badges',
     'news',
+    'gifts',
     'registration',
 #    'debug_toolbar',
 )
