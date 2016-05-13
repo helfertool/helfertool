@@ -1,0 +1,11 @@
+Django
+django-modeltranslation
+django-bootstrap3
+django-bleach
+django-ckeditor
+celery
+amqp
+XlsxWriter
+Pillow
+reportlab
+python-magic

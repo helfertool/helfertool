@@ -1,0 +1,5 @@
+redis
+pylint
+pylint-django
+sphinx
+locustio

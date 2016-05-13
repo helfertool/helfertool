@@ -37,20 +37,7 @@ manually:
 
 ### Python modules
 
- * Django 1.9
- * django-modeltranslation
- * django-bootstrap3
- * django-bleach
- * django-ckeditor
- * celery[redis] or celery[amqp]
- * XlsxWriter
- * Pillow
- * reportlab
- * python-magic
- * pylint (only for developtment)
- * pylint-django (only for development)
- * sphinx (only to build the documentation)
- * locustio (only for load test, Python 2 only at the moment)
+See requirements and requirements.dev, install with pip install -r requirements.
 
 ### LaTeX packages
 

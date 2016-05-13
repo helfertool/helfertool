@@ -22,6 +22,7 @@ Design, JS
 * Datetimepickers for shift
   * begin < end
   * change end when begin is changed
+* accept="image/*" for image uploads
 
 Registration
 ============
