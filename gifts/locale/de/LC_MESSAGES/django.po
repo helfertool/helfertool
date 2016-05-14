@@ -7,22 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 15:45+0200\n"
-"PO-Revision-Date: 2016-05-14 15:45+0200\n"
+"POT-Creation-Date: 2016-05-14 23:10+0200\n"
+"PO-Revision-Date: 2016-05-14 23:12+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: gifts/models/deservedgiftset.py:19
 msgid "Helper got gift"
 msgstr "Helfer hat Geschenk erhalten"
 
-#: gifts/models/gift.py:8 gifts/models/set.py:11
+#: gifts/models/gift.py:12 gifts/models/set.py:15
+#: gifts/templates/gifts/list.html:11 gifts/templates/gifts/list.html:30
 msgid "Name"
 msgstr "Name"
 
@@ -38,6 +39,48 @@ msgstr "Pfand zurückgegeben"
 msgid "Deserved gifts"
 msgstr "Verdiente Geschenke"
 
-#: gifts/models/set.py:16
+#: gifts/models/includedgift.py:18
+msgid "Count"
+msgstr "Anzahl"
+
+#: gifts/models/set.py:20 gifts/templates/gifts/list.html:8
+#: gifts/templates/gifts/list.html:31 gifts/templates/gifts/not_active.html:6
 msgid "Gifts"
 msgstr "Geschenke"
+
+#: gifts/templates/gifts/edit_gift.html:6
+msgid "Gift"
+msgstr "Geschenk"
+
+#: gifts/templates/gifts/edit_gift.html:13
+#: gifts/templates/gifts/edit_gift_set.html:13
+msgid "Save"
+msgstr "Speichern"
+
+#: gifts/templates/gifts/edit_gift_set.html:6
+msgid "Gift set"
+msgstr "Geschenkset"
+
+#: gifts/templates/gifts/list.html:6
+msgid "Manage gifts"
+msgstr "Geschenke verwalten"
+
+#: gifts/templates/gifts/list.html:19 gifts/templates/gifts/list.html:46
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: gifts/templates/gifts/list.html:25
+msgid "Add gift"
+msgstr "Geschenk hinzufügen"
+
+#: gifts/templates/gifts/list.html:27
+msgid "Gift sets"
+msgstr "Geschenksets"
+
+#: gifts/templates/gifts/list.html:52
+msgid "Add gift set"
+msgstr "Geschenkset hinzufügen"
+
+#: gifts/templates/gifts/not_active.html:9
+msgid "The management of gifts is not actived."
+msgstr "Die Verwaltung von Geschenken ist nicht aktiviert."
