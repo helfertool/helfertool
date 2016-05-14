@@ -143,6 +143,11 @@ class Event(models.Model):
         verbose_name=_("Use badge creation"),
     )
 
+    gifts = models.BooleanField(
+        default=False,
+        verbose_name=_("Manage gifts for helpers"),
+    )
+
     def __str__(self):
         return self.name
 

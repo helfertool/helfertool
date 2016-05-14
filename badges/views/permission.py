@@ -32,7 +32,7 @@ def edit_permission(request, event_url_name, permission_pk=None):
 
         # check if permission belongs to event
         if permission not in event.badge_settings.badgepermission_set.all():
-            return Http404()
+            raise Http404()
 
     # form
     form = BadgePermissionForm(request.POST or None, instance=permission,

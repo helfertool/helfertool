@@ -32,7 +32,7 @@ def edit_role(request, event_url_name, role_pk=None):
 
         # check if permission belongs to event
         if role not in event.badge_settings.badgerole_set.all():
-            return Http404()
+            raise Http404()
 
     # form
     form = BadgeRoleForm(request.POST or None, instance=role,

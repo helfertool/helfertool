@@ -230,4 +230,7 @@ urlpatterns = [
 
     # badges
     url(r'^', include('badges.urls', namespace='badges')),
+
+    # gifts
+    url(r'^', include('gifts.urls', namespace="gifts")),
 ]

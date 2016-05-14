@@ -1,0 +1,54 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Manage gifts" %}</h2>
+
+    <h3>{% trans "Gifts" %}</h3>
+    <table class="table">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th></th>
+        </tr>
+
+        {% for gift in gifts %}
+            <tr>
+                <td>{{ gift.name }}</td>
+                <td>
+                    <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{% url "gifts:add_gift" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift" %}</a></p>
+
+    <h3>{% trans "Gift sets" %}</h3>
+    <table class="table">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Gifts" %}</th>
+            <th></th>
+        </tr>
+
+        {% for gift_set in gift_sets %}
+            <tr>
+                <td>{{ gift_set.name }}</td>
+                <td>
+                    <ul>
+                        {% for gift in gift_set.giftsetelement_set.all %}
+                            <li>{{ gift.count }} {{ gift.gift.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{% url "gifts:add_gift_set" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift set" %}</a></p>
+
+{% endblock %}

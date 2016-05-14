@@ -71,3 +71,20 @@ File uploads
     * event is deleted (everything)
     * helper is deleted (photo)
     * badge stuff
+
+Gifts
+=====
+Helper
+    X deposit (None if not paid)
+    X Deposit returned?
+
+    Got T-Shirt?
+
+    X ManyToMany -> GiftSet
+    X     through
+    X         shift
+    X         received
+
+Gift
+    Deposit per gift
+    Deposit per giftset

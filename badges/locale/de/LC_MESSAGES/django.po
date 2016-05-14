@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 21:22+0200\n"
-"PO-Revision-Date: 2016-04-09 13:33+0200\n"
+"POT-Creation-Date: 2016-05-14 15:45+0200\n"
+"PO-Revision-Date: 2016-05-14 15:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -76,11 +76,11 @@ msgstr "Primäre Aufgabe"
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: badges/models/badge.py:71 badges/templates/badges/settings.html.py:95
+#: badges/models/badge.py:71 badges/templates/badges/settings.html:95
 msgid "Role"
 msgstr "Rolle"
 
-#: badges/models/badge.py:79 badges/templates/badges/settings.html.py:96
+#: badges/models/badge.py:79 badges/templates/badges/settings.html:96
 msgid "Design"
 msgstr "Design"
 
@@ -88,11 +88,11 @@ msgstr "Design"
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
-#: badges/models/defaults.py:11 badges/templates/badges/index.html.py:13
+#: badges/models/defaults.py:11 badges/templates/badges/index.html:13
 msgid "Default role"
 msgstr "Standard Rolle"
 
-#: badges/models/defaults.py:19 badges/templates/badges/index.html.py:14
+#: badges/models/defaults.py:19 badges/templates/badges/index.html:14
 msgid "Default design"
 msgstr "Standard Design"
 
@@ -101,7 +101,7 @@ msgid "Do not print default roles on badges"
 msgstr "Keine Standard Rollen auf die Badges drucken"
 
 #: badges/models/design.py:37 badges/models/permission.py:16
-#: badges/models/role.py:17 badges/templates/badges/settings.html.py:22
+#: badges/models/role.py:17 badges/templates/badges/settings.html:22
 #: badges/templates/badges/settings.html:62
 #: badges/templates/badges/settings_advanced.html:30
 msgid "Name"
@@ -142,7 +142,7 @@ msgstr ""
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: badges/models/settings.py:32 badges/templates/badges/index.html.py:12
+#: badges/models/settings.py:32 badges/templates/badges/index.html:12
 msgid "LaTeX template"
 msgstr "LaTeX Template"
 

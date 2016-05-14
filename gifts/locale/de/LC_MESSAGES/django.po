@@ -9,23 +9,35 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-14 15:45+0200\n"
 "PO-Revision-Date: 2016-05-14 15:45+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: helfertool/settings.py:193
-msgid "German"
-msgstr "Deutsch"
+#: gifts/models/deservedgiftset.py:19
+msgid "Helper got gift"
+msgstr "Helfer hat Geschenk erhalten"
 
-#: helfertool/settings.py:194
-msgid "English"
-msgstr "Englisch"
+#: gifts/models/gift.py:8 gifts/models/set.py:11
+msgid "Name"
+msgstr "Name"
 
-#: news/models/person.py:8
-msgid "E-Mail"
-msgstr "E-Mail"
+#: gifts/models/helpersgifts.py:16
+msgid "Deposit"
+msgstr "Pfand"
+
+#: gifts/models/helpersgifts.py:24
+msgid "Deposit returned"
+msgstr "Pfand zurückgegeben"
+
+#: gifts/models/helpersgifts.py:30
+msgid "Deserved gifts"
+msgstr "Verdiente Geschenke"
+
+#: gifts/models/set.py:16
+msgid "Gifts"
+msgstr "Geschenke"

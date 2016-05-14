@@ -32,7 +32,7 @@ def edit_design(request, event_url_name, design_pk=None):
 
         # check if permission belongs to event
         if design not in event.badge_settings.badgedesign_set.all():
-            return Http404()
+            raise Http404()
 
     # form
     form = BadgeDesignForm(request.POST or None, request.FILES or None,

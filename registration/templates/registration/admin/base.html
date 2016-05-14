@@ -105,6 +105,13 @@
                     </ul>
                 {% endif %}
 
+                {% if admin and event.gifts %}
+                    <h2>{% trans "Gifts" %}</h2>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a></li>
+                    </ul>
+                {% endif %}
+
                 {% if admin and event.badges %}
                     <h2>{% trans "Badges" %}</h2>
                     <ul class="nav nav-pills nav-stacked">

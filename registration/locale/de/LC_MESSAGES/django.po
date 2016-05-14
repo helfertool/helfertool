@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-15 21:22+0200\n"
-"PO-Revision-Date: 2016-04-15 21:22+0200\n"
+"POT-Creation-Date: 2016-05-14 15:45+0200\n"
+"PO-Revision-Date: 2016-05-14 15:45+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: registration/export/excel.py:61 registration/forms/user.py:33
+#: registration/export/excel.py:62 registration/forms/user.py:33
 #: registration/models/helper.py:88
 #: registration/templates/registration/admin/helpers_table.html:20
 #: registration/templates/registration/change_user.html:15
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:62 registration/models/helper.py:93
+#: registration/export/excel.py:63 registration/models/helper.py:93
 #: registration/templates/registration/admin/helpers_table.html:21
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:63 registration/models/event.py:80
+#: registration/export/excel.py:64 registration/models/event.py:80
 #: registration/models/helper.py:97
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
@@ -39,7 +39,7 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:66 registration/export/pdf.py:42
+#: registration/export/excel.py:67 registration/export/pdf.py:42
 #: registration/models/helper.py:102
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/admin/helpers_table.html:23
@@ -47,32 +47,32 @@ msgstr "E-Mail"
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export/excel.py:70 registration/export/pdf.py:45
+#: registration/export/excel.py:71 registration/export/pdf.py:45
 #: registration/models/helper.py:114
 #: registration/templates/registration/admin/helpers_table.html:25
 #: registration/templates/registration/registered.html:38
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:74 registration/models/helper.py:119
+#: registration/export/excel.py:75 registration/models/helper.py:119
 #: registration/templates/registration/admin/helpers_table.html:28
 #: registration/templates/registration/registered.html:50
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: registration/export/excel.py:78
+#: registration/export/excel.py:79
 #: registration/templates/registration/admin/helpers_table.html:31
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export/excel.py:81 registration/export/pdf.py:46
+#: registration/export/excel.py:82 registration/export/pdf.py:46
 #: registration/models/helper.py:108
 #: registration/templates/registration/admin/helpers_table.html:33
 #: registration/templates/registration/registered.html:55
 msgid "Comment"
 msgstr "Kommentar"
 
-#: registration/export/excel.py:96 registration/export/pdf.py:81
+#: registration/export/excel.py:97 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:26
 #: registration/templates/registration/admin/statistics.html:14
@@ -112,12 +112,12 @@ msgid "All helpers and coordinators"
 msgstr "Alle Helfer und Koordinatoren"
 
 #: registration/forms/mail.py:34
-#: registration/templates/registration/admin/base.html:69
+#: registration/templates/registration/admin/base.html:91
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
 #: registration/forms/mail.py:36
-#: registration/templates/registration/admin/base.html:32
+#: registration/templates/registration/admin/base.html:54
 msgid "General"
 msgstr "Allgemein"
 
@@ -260,7 +260,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:68 registration/templates/base.html.py:130
+#: registration/models/event.py:68 registration/templates/base.html:117
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -333,6 +333,10 @@ msgstr ""
 #: registration/models/event.py:143
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
+
+#: registration/models/event.py:148
+msgid "Manage gifts for helpers"
+msgstr "Helfergeschenke verwalten"
 
 #: registration/models/helper.py:60
 msgid "I never got an instruction"
@@ -426,13 +430,13 @@ msgstr "Bad request"
 msgid "Error 400"
 msgstr "Error 400"
 
-#: registration/templates/400.html:11 registration/templates/403.html.py:11
-#: registration/templates/404.html:11 registration/templates/500.html.py:13
+#: registration/templates/400.html:11 registration/templates/403.html:11
+#: registration/templates/404.html:11 registration/templates/500.html:13
 msgid "Show events"
 msgstr "Veranstaltungen anzeigen"
 
-#: registration/templates/400.html:15 registration/templates/403.html.py:15
-#: registration/templates/404.html:15 registration/templates/500.html.py:17
+#: registration/templates/400.html:15 registration/templates/403.html:15
+#: registration/templates/404.html:15 registration/templates/500.html:17
 #: registration/templates/registration/about.html:20
 msgid "Contact"
 msgstr "Kontakt"
@@ -465,53 +469,53 @@ msgstr "Error 500"
 msgid "The admins were notified already."
 msgstr "Die Admins wurden bereits benachrichtigt."
 
-#: registration/templates/base.html:42
+#: registration/templates/base.html:29
 msgid "Registration for helpers"
 msgstr "Helferanmeldung"
 
-#: registration/templates/base.html:68
+#: registration/templates/base.html:55
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
-#: registration/templates/base.html:72 registration/templates/base.html:81
+#: registration/templates/base.html:59 registration/templates/base.html:68
 #: registration/templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: registration/templates/base.html:74
+#: registration/templates/base.html:61
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: registration/templates/base.html:76
+#: registration/templates/base.html:63
 #: registration/templates/registration/change_user.html:7
 msgid "Account"
 msgstr "Account"
 
-#: registration/templates/base.html:77
+#: registration/templates/base.html:64
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: registration/templates/base.html:78
+#: registration/templates/base.html:65
 msgid "Logout"
 msgstr "Logout"
 
-#: registration/templates/base.html:80
+#: registration/templates/base.html:67
 #: registration/templates/registration/login.html:6
 #: registration/templates/registration/login.html:18
 msgid "Login"
 msgstr "Login"
 
-#: registration/templates/base.html:105
+#: registration/templates/base.html:92
 msgid "Switch"
 msgstr "Switch"
 
-#: registration/templates/base.html:127
+#: registration/templates/base.html:114
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/base.html:133
+#: registration/templates/base.html:120
 #: registration/templates/registration/about.html:5
 msgid "About this software"
 msgstr "Über diese Software"
@@ -574,150 +578,150 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:105
+#: registration/templates/registration/admin/base.html:127
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: registration/templates/registration/admin/base.html:8
+#: registration/templates/registration/admin/base.html:30
 #, python-format
 msgid "Manage %(eventname)s"
 msgstr "Verwaltung %(eventname)s"
 
-#: registration/templates/registration/admin/base.html:12
+#: registration/templates/registration/admin/base.html:34
 msgid "Admin"
 msgstr "Admin"
 
-#: registration/templates/registration/admin/base.html:24
+#: registration/templates/registration/admin/base.html:46
 msgid "Administration"
 msgstr "Administration"
 
-#: registration/templates/registration/admin/base.html:37
+#: registration/templates/registration/admin/base.html:59
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
-#: registration/templates/registration/admin/base.html:42
+#: registration/templates/registration/admin/base.html:64
 #: registration/templates/registration/admin/edit_event.html:8
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
-#: registration/templates/registration/admin/base.html:43
+#: registration/templates/registration/admin/base.html:65
 #: registration/templates/registration/admin/jobs_and_shifts.html:6
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: registration/templates/registration/admin/base.html:44
+#: registration/templates/registration/admin/base.html:66
 #: registration/templates/registration/admin/links.html:6
 msgid "Links"
 msgstr "Links"
 
-#: registration/templates/registration/admin/base.html:48
+#: registration/templates/registration/admin/base.html:70
 msgid "Helpers"
 msgstr "Helfer"
 
-#: registration/templates/registration/admin/base.html:53
+#: registration/templates/registration/admin/base.html:75
 #: registration/templates/registration/admin/statistics.html:10
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:68
+#: registration/templates/registration/admin/base.html:90
 #: registration/templates/registration/admin/search_helper.html:6
 msgid "Search helper"
 msgstr "Helfer suchen"
 
-#: registration/templates/registration/admin/base.html:70
+#: registration/templates/registration/admin/base.html:92
 #: registration/templates/registration/admin/mail.html:6
 msgid "Send mails"
 msgstr "Mails senden"
 
-#: registration/templates/registration/admin/base.html:74
+#: registration/templates/registration/admin/base.html:96
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:77
+#: registration/templates/registration/admin/base.html:99
 msgid "Overview"
 msgstr "Übersicht"
 
-#: registration/templates/registration/admin/base.html:81
+#: registration/templates/registration/admin/base.html:103
 #: registration/templates/registration/admin/shirts.html:7
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:87
+#: registration/templates/registration/admin/base.html:109
 msgid "Badges"
 msgstr "Badges"
 
-#: registration/templates/registration/admin/base.html:89
+#: registration/templates/registration/admin/base.html:111
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: registration/templates/registration/admin/base.html:90
+#: registration/templates/registration/admin/base.html:112
 msgid "Generate"
 msgstr "Generieren"
 
-#: registration/templates/registration/admin/base.html:92
+#: registration/templates/registration/admin/base.html:114
 msgid "Registration"
 msgstr "Registrierung"
 
-#: registration/templates/registration/admin/base.html:102
+#: registration/templates/registration/admin/base.html:124
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:108
+#: registration/templates/registration/admin/base.html:130
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:109
+#: registration/templates/registration/admin/base.html:131
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:126
+#: registration/templates/registration/admin/base.html:148
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:127
+#: registration/templates/registration/admin/base.html:149
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:128
+#: registration/templates/registration/admin/base.html:150
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:129
+#: registration/templates/registration/admin/base.html:151
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:130
+#: registration/templates/registration/admin/base.html:152
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:131
+#: registration/templates/registration/admin/base.html:153
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:132
+#: registration/templates/registration/admin/base.html:154
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:133
+#: registration/templates/registration/admin/base.html:155
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:134
+#: registration/templates/registration/admin/base.html:156
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:135
+#: registration/templates/registration/admin/base.html:157
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:136
+#: registration/templates/registration/admin/base.html:158
 msgid "Empty list"
 msgstr "Liste leer"
 
