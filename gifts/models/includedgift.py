@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-class GiftSetElement(models.Model):
+class IncludedGift(models.Model):
     gift_set = models.ForeignKey(
         'GiftSet',
         on_delete = models.CASCADE,

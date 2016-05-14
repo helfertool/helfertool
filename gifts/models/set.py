@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from registration.models import Event
 
 from .gift import Gift
-from .setelement import GiftSetElement
+from .includedgift import IncludedGift
 
 
 @python_2_unicode_compatible
@@ -18,7 +18,7 @@ class GiftSet(models.Model):
     gifts = models.ManyToManyField(
         Gift,
         verbose_name=_("Gifts"),
-        through = GiftSetElement,
+        through = IncludedGift,
     )
 
     event = models.ForeignKey(

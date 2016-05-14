@@ -37,7 +37,7 @@
                 <td>{{ gift_set.name }}</td>
                 <td>
                     <ul>
-                        {% for gift in gift_set.giftsetelement_set.all %}
+                        {% for gift in gift_set.includedgift_set.all %}
                             <li>{{ gift.count }} {{ gift.gift.name }}</li>
                         {% endfor %}
                     </ul>

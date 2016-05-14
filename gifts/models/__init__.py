@@ -2,6 +2,7 @@ from django.db import models
 
 from .gift import Gift
 from .set import GiftSet
-from .setelement import GiftSetElement
+from .includedgift import IncludedGift
+
 from .helpersgifts import HelpersGifts
 from .deservedgiftset import DeservedGiftSet

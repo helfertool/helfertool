@@ -1,14 +1,14 @@
 from django.contrib import admin
 
-from .models import Gift, GiftSet, GiftSetElement, HelpersGifts, \
+from .models import Gift, GiftSet, IncludedGift, HelpersGifts, \
     DeservedGiftSet
 
-class GiftSetElementInline(admin.TabularInline):
-    model = GiftSetElement
+class IncludedGiftInline(admin.TabularInline):
+    model = IncludedGift
     extra = 1
 
 class GiftSetAdmin(admin.ModelAdmin):
-    inlines = (GiftSetElementInline, )
+    inlines = (IncludedGiftInline, )
 
 admin.site.register(Gift)
 admin.site.register(GiftSet, GiftSetAdmin)
