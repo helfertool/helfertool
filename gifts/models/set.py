@@ -28,3 +28,24 @@ class GiftSet(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_gift_num(self, gift):
+        try:
+            tmp = IncludedGift.objects.filter(gift_set=self, gift=gift)
+            return tmp.count
+        except (IncludedGift.DoesNotExist, MultipleObjectsReturned):
+            return 0
+
+    def set_gift_num(self, gift, num):
+        try:
+            tmp = IncludedGift.objects.get(gift_set=self, gift=gift)
+
+            if num == 0:
+                tmp.delete()
+            else:
+                tmp.count = num
+                tmp.save()
+        except IncludedGift.DoesNotExist:
+            if num:
+                IncludedGift.objects.create(gift_set=self, gift=gift,
+                                            count=num)

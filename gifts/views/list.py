@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
 from registration.views.utils import nopermission, is_involved
@@ -8,6 +9,7 @@ from ..models import Gift, GiftSet
 from .utils import notactive
 
 
+@login_required
 def list(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

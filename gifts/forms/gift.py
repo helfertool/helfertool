@@ -22,3 +22,11 @@ class GiftForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+class GiftDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Gift
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

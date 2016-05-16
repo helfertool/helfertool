@@ -22,6 +22,11 @@ urlpatterns = [
         views.edit_gift,
         name='edit_gift'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/gift/(?P<gift_pk>[0-9]+)/'
+         'delete/$',
+        views.delete_gift,
+        name='delete_gift'),
+
     #
     # edit gift sets
     #
@@ -33,4 +38,9 @@ urlpatterns = [
          '(?P<gift_set_pk>[0-9]+)/$',
         views.edit_gift_set,
         name='edit_gift_set'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/giftset/'
+         '(?P<gift_set_pk>[0-9]+)/delete/$',
+        views.delete_gift_set,
+        name='delete_gift_set'),
 ]

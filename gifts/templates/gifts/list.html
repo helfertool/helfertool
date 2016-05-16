@@ -16,7 +16,8 @@
             <tr>
                 <td>{{ gift.name }}</td>
                 <td>
-                    <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a>
+                    <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
+                    <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
                 </td>
             </tr>
         {% endfor %}
@@ -43,7 +44,8 @@
                     </ul>
                 </td>
                 <td>
-                    <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a>
+                    <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
+                    <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
                 </td>
             </tr>
         {% endfor %}

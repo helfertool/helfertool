@@ -4,6 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class IncludedGift(models.Model):
+    class Meta:
+        unique_together = ('gift_set', 'gift', )
+
     gift_set = models.ForeignKey(
         'GiftSet',
         on_delete = models.CASCADE,

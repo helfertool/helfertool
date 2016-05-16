@@ -1,2 +1,2 @@
-from .gift import GiftForm
-from .set import GiftSetForm
+from .gift import GiftForm, GiftDeleteForm
+from .set import GiftSetForm, GiftSetDeleteForm
