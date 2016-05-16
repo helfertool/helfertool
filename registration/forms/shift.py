@@ -19,6 +19,9 @@ class ShiftForm(forms.ModelForm):
 
         super(ShiftForm, self).__init__(*args, **kwargs)
 
+        if not self.job.event.gifts:
+            self.fields.pop('gifts')
+
     def clean(self):
         super(ShiftForm, self).clean()
 

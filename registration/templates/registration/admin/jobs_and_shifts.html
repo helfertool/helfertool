@@ -44,7 +44,9 @@
                     <th>{% trans "End" %}</th>
                     <th>{% trans "Name" %}</th>
                     <th>{% trans "Number of helpers" %}</th>
-                    <th>{% trans "Gifts" %}</th>
+                    {% if event.gifts %}
+                        <th>{% trans "Gifts" %}</th>
+                    {% endif %}
                     <th></th>
                 </tr>
                 {% for shift in job.shift_set.all %}
@@ -58,11 +60,13 @@
                         <td>{{ shift.end }}</td>
                         <td>{{ shift.name }}</td>
                         <td>{{ shift.number }}</td>
-                        <td>
-                            {% for gift in shift.gifts.all %}
-                                {{ gift.name }}<br/>
-                            {% endfor %}
-                        </td>
+                        {% if event.gifts %}
+                            <td>
+                                {% for gift in shift.gifts.all %}
+                                    {{ gift.name }}<br/>
+                                {% endfor %}
+                            </td>
+                        {% endif %}
                         <td>
                             <a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">
                                 {% bootstrap_icon "pencil" %}
