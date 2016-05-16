@@ -6,15 +6,18 @@ from ckeditor.widgets import CKEditorWidget
 from ..models import Job
 from badges.models import BadgeRole
 
+from .fields import UserSelectField
+
 
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['name', 'description', 'event', 'coordinators',
                    'badge_defaults', ]
-        widgets = {
-            'job_admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
+        field_classes = {
+            'admins': UserSelectField,
         }
+        widgets = {}
 
         # According to the documentation django-modeltranslations copies the
         # widget from the original field.

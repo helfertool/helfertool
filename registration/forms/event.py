@@ -5,13 +5,17 @@ from ckeditor.widgets import CKEditorWidget
 
 from ..models import Event
 
+from .fields import UserSelectField
+
 
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ['text', 'imprint', 'registered', 'badge_settings']
+        field_classes = {
+            'admins': UserSelectField,
+        }
         widgets = {
-            'admins': forms.SelectMultiple(attrs={'class': 'duallistbox'}),
             'date': forms.DateInput(attrs={'class': 'date'}),
             'text': CKEditorWidget(),
         }
