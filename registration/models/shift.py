@@ -12,6 +12,7 @@ from collections import OrderedDict
 from .helper import Helper
 
 
+
 @python_2_unicode_compatible
 class Shift(models.Model):
     """ A shift of one job.
@@ -56,6 +57,12 @@ class Shift(models.Model):
         default=False,
         verbose_name=_("If the job is publicly visible, "
                        "the shift is blocked."),
+    )
+
+    gifts = models.ManyToManyField(
+        'gifts.GiftSet',
+        verbose_name=_("Gifts"),
+        blank=True,
     )
 
     def __str__(self):

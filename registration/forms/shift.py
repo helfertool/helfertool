@@ -42,6 +42,8 @@ class ShiftForm(forms.ModelForm):
         if commit:
             instance.save()
 
+        self.save_m2m()  # save m2m, otherwise gifts is lost
+
         return instance
 
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-16 15:39+0200\n"
+"POT-Creation-Date: 2016-05-16 16:00+0200\n"
 "PO-Revision-Date: 2016-05-16 15:40+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -422,6 +422,11 @@ msgstr "Anzahl an Helfern"
 msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
+#: registration/models/shift.py:63
+#: registration/templates/registration/admin/base.html:109
+msgid "Gifts"
+msgstr "Geschenke"
+
 #: registration/templates/400.html:5
 msgid "Bad request"
 msgstr "Bad request"
@@ -647,10 +652,6 @@ msgstr "Übersicht"
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
-
-#: registration/templates/registration/admin/base.html:109
-msgid "Gifts"
-msgstr "Geschenke"
 
 #: registration/templates/registration/admin/base.html:111
 #: registration/templates/registration/admin/base.html:118
