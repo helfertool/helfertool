@@ -218,6 +218,11 @@ urlpatterns = [
         views.delete_link,
         name='delete_link'),
 
+    # duplicates
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/duplicates/$',
+        views.duplicates,
+        name='duplicates'),
+
     # use links
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/l/(?P<link_pk>[0-9a-f\-]+)/$',
         views.form,

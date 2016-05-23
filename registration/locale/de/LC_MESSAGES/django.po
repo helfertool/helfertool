@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-16 16:00+0200\n"
-"PO-Revision-Date: 2016-05-16 15:40+0200\n"
+"POT-Creation-Date: 2016-05-23 19:44+0200\n"
+"PO-Revision-Date: 2016-05-23 19:45+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -112,7 +112,7 @@ msgid "All helpers and coordinators"
 msgstr "Alle Helfer und Koordinatoren"
 
 #: registration/forms/mail.py:34
-#: registration/templates/registration/admin/base.html:91
+#: registration/templates/registration/admin/base.html:92
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
@@ -199,15 +199,15 @@ msgstr ""
 "Du hast Schichten ausgewählt, die sich um mehr als %(minutes)d Minuten "
 "überschneiden."
 
-#: registration/forms/shift.py:27
+#: registration/forms/shift.py:35
 msgid "The begin of the shift must be set."
 msgstr "Der Beginn der Schicht muss gesetzt sein."
 
-#: registration/forms/shift.py:29
+#: registration/forms/shift.py:37
 msgid "The end of the shift must be set."
 msgstr "Das Ende der Schicht muss gesetzt sein."
 
-#: registration/forms/shift.py:33
+#: registration/forms/shift.py:41
 msgid "The begin of the shift must be before the end."
 msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 
@@ -397,33 +397,34 @@ msgstr "Beschreibung"
 msgid "Usage"
 msgstr "Verwendung"
 
-#: registration/models/shift.py:36
+#: registration/models/shift.py:37
 msgid "Name (optional)"
 msgstr "Name (optional)"
 
-#: registration/models/shift.py:42
+#: registration/models/shift.py:43
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:43
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models/shift.py:46
+#: registration/models/shift.py:47
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "End"
 msgstr "Ende"
 
-#: registration/models/shift.py:51
+#: registration/models/shift.py:52
 #: registration/templates/registration/admin/jobs_and_shifts.html:46
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models/shift.py:57
+#: registration/models/shift.py:58
 msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
-#: registration/models/shift.py:63
-#: registration/templates/registration/admin/base.html:109
+#: registration/models/shift.py:64
+#: registration/templates/registration/admin/base.html:110
+#: registration/templates/registration/admin/jobs_and_shifts.html:48
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -583,7 +584,7 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:134
+#: registration/templates/registration/admin/base.html:135
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -633,101 +634,106 @@ msgstr "Helfer und Koordinatoren"
 msgid "Search helper"
 msgstr "Helfer suchen"
 
-#: registration/templates/registration/admin/base.html:92
+#: registration/templates/registration/admin/base.html:91
+#: registration/templates/registration/admin/duplicates.html:5
+msgid "Duplicates"
+msgstr "Duplikate"
+
+#: registration/templates/registration/admin/base.html:93
 #: registration/templates/registration/admin/mail.html:6
 msgid "Send mails"
 msgstr "Mails senden"
 
-#: registration/templates/registration/admin/base.html:96
+#: registration/templates/registration/admin/base.html:97
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:99
+#: registration/templates/registration/admin/base.html:100
 msgid "Overview"
 msgstr "Übersicht"
 
-#: registration/templates/registration/admin/base.html:103
+#: registration/templates/registration/admin/base.html:104
 #: registration/templates/registration/admin/shirts.html:7
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:111
-#: registration/templates/registration/admin/base.html:118
+#: registration/templates/registration/admin/base.html:112
+#: registration/templates/registration/admin/base.html:119
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: registration/templates/registration/admin/base.html:116
+#: registration/templates/registration/admin/base.html:117
 msgid "Badges"
 msgstr "Badges"
 
-#: registration/templates/registration/admin/base.html:119
+#: registration/templates/registration/admin/base.html:120
 msgid "Generate"
 msgstr "Generieren"
 
-#: registration/templates/registration/admin/base.html:121
+#: registration/templates/registration/admin/base.html:122
 msgid "Registration"
 msgstr "Registrierung"
 
-#: registration/templates/registration/admin/base.html:131
+#: registration/templates/registration/admin/base.html:132
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:137
+#: registration/templates/registration/admin/base.html:138
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:138
+#: registration/templates/registration/admin/base.html:139
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:155
+#: registration/templates/registration/admin/base.html:156
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:156
+#: registration/templates/registration/admin/base.html:157
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:157
+#: registration/templates/registration/admin/base.html:158
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:158
+#: registration/templates/registration/admin/base.html:159
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:159
+#: registration/templates/registration/admin/base.html:160
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:160
+#: registration/templates/registration/admin/base.html:161
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:161
+#: registration/templates/registration/admin/base.html:162
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:162
+#: registration/templates/registration/admin/base.html:163
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:163
+#: registration/templates/registration/admin/base.html:164
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:164
+#: registration/templates/registration/admin/base.html:165
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:165
+#: registration/templates/registration/admin/base.html:166
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -754,7 +760,7 @@ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 #: registration/templates/registration/admin/helpers_table.html:68
 #: registration/templates/registration/admin/helpers_table.html:73
 #: registration/templates/registration/admin/jobs_and_shifts.html:29
-#: registration/templates/registration/admin/jobs_and_shifts.html:67
+#: registration/templates/registration/admin/jobs_and_shifts.html:78
 msgid "Delete"
 msgstr "Löschen"
 
@@ -868,11 +874,19 @@ msgstr ""
 msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
+#: registration/templates/registration/admin/duplicates.html:8
+msgid ""
+"For this detection of helpers that are registered multiple times only the "
+"mail address is used."
+msgstr ""
+"Für diese Erkennung von mehrfach registrierten Helfern wird nur die E-Mail "
+"Adresse verwendet."
+
 #: registration/templates/registration/admin/edit_event.html:18
 #: registration/templates/registration/admin/edit_helper.html:94
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
-#: registration/templates/registration/admin/edit_shift.html:23
+#: registration/templates/registration/admin/edit_shift.html:31
 #: registration/templates/registration/admin/search_helper.html:13
 #: registration/templates/registration/change_user.html:62
 msgid "Save"
@@ -955,7 +969,7 @@ msgid "Number of coordinators: %(number)s"
 msgstr "Anzahl der Koordinatoren: %(number)s"
 
 #: registration/templates/registration/admin/helpers.html:66
-#: registration/templates/registration/admin/jobs_and_shifts.html:53
+#: registration/templates/registration/admin/jobs_and_shifts.html:56
 msgid "Blocked"
 msgstr "Gesperrt"
 
@@ -975,7 +989,7 @@ msgstr "Anmeldezeit"
 
 #: registration/templates/registration/admin/helpers_table.html:62
 #: registration/templates/registration/admin/jobs_and_shifts.html:23
-#: registration/templates/registration/admin/jobs_and_shifts.html:63
+#: registration/templates/registration/admin/jobs_and_shifts.html:73
 msgid "Edit"
 msgstr "Bearbeiten"
 

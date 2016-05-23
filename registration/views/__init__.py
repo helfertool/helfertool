@@ -13,3 +13,4 @@ from .permissions import permissions, delete_permission
 from .mail import mail
 from .shirts import shirts
 from .account import change_user
+from .duplicates import duplicates
