@@ -53,7 +53,7 @@ def xlsx(buffer, event, jobs):
     for job in jobs:
         worksheet = workbook.add_worksheet(cleanName(job.name))
         bold = workbook.add_format({'bold': True})
-        multiple_shifts = workbook.add_format({'bg_color': '#FF6600'})
+        multiple_shifts = workbook.add_format({'bg_color': '#fFFF99'})
 
         row = Iterator()
         column = Iterator()

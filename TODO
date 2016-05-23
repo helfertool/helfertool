@@ -78,8 +78,6 @@ Helper
     X deposit (None if not paid)
     X Deposit returned?
 
-    Got T-Shirt?
-
     X ManyToMany -> GiftSet
     X     through
     X         shift
@@ -88,3 +86,17 @@ Helper
 Gift
     Deposit per gift
     Deposit per giftset
+
+Pro Schicht in Tabelle Marken ausgegeben (Essen+Getränke)
+    unter der Tabelle Summe der gesamt Marken/ausgegebenen Marken (Essen+Getränke)
+        in Export-Tabelle: die Flags abbilden
+
+TUGARNIX
+========
+
+* detect duplicates
+* t-shirt
+    got t-shirt?
+    earned t-shirt?
+        number of shifts
+        number of hours
