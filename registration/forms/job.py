@@ -15,7 +15,7 @@ class JobForm(forms.ModelForm):
         exclude = ['name', 'description', 'event', 'coordinators',
                    'badge_defaults', ]
         field_classes = {
-            'admins': UserSelectField,
+            'job_admins': UserSelectField,
         }
         widgets = {}
 

@@ -4,11 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import Shift
 
+from .fields import DualListField
+
 
 class ShiftForm(forms.ModelForm):
     class Meta:
         model = Shift
         exclude = ['job', ]
+        field_classes = {
+            'gifts': DualListField,
+        }
         widgets = {
             'begin': forms.DateTimeInput(attrs={'class': 'datetime'}),
             'end': forms.DateTimeInput(attrs={'class': 'datetime'}),

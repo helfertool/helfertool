@@ -16,9 +16,17 @@
 
         <div class="row">
             <div class="col-xs-12 col-lg-5">
-                {% bootstrap_form form %}
+                {% bootstrap_field form.name %}
+                {% bootstrap_field form.begin %}
+                {% bootstrap_field form.end %}
+                {% bootstrap_field form.number %}
+                {% bootstrap_field form.blocked %}
             </div>
         </div>
+
+        {% if form.gifts %}
+            {% bootstrap_field form.gifts %}
+        {% endif %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
     </form>
