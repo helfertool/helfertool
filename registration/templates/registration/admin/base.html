@@ -88,7 +88,11 @@
                     </li>
 
                     <li><a href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a></li>
-                    <li><a href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a></li>
+
+                    {% if admin %}
+                        <li><a href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a></li>
+                    {% endif %}
+
                     <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
                     <li><a href="{% url 'mail' event.url_name %}">{% trans "Send mails" %}</a></li>
                 </ul>

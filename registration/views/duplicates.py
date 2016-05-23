@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .utils import nopermission
 
-from ..models import Event, Helper
+from ..models import Event
 
 
 @login_required
@@ -15,13 +15,13 @@ def duplicates(request, event_url_name):
     if not event.is_admin(request.user):
         return nopermission(request)
 
-    duplicates = Helper.objects.values('email').annotate(
+    duplicates = event.helper_set.values('email').annotate(
         email_count=Count('email')).exclude(email_count=1)
 
     duplicated_helpers = {}
 
     for dup in duplicates:
-        duplicated_helpers[dup['email']] = Helper.objects.filter(
+        duplicated_helpers[dup['email']] = event.helper_set.filter(
             email=dup['email'])
 
     # overview over jobs
