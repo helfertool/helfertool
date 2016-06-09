@@ -125,4 +125,17 @@
         {% endif %}
     </p>
 
+    {# gifts #}
+    {% if gifts_form %}
+        <h3>{% trans "Gifts" %}</h3>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% bootstrap_form gifts_form %}
+
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        </form>
+    {% endif %}
+
 {% endblock %}

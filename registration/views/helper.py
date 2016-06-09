@@ -13,6 +13,7 @@ from ..forms import HelperForm, HelperDeleteForm, \
     HelperAddCoordinatorForm, HelperSearchForm
 
 from badges.forms import BadgeForm
+from gifts.forms import HelpersGiftsForm
 
 
 @login_required
@@ -54,13 +55,27 @@ def view_helper(request, event_url_name, helper_pk):
         return nopermission(request)
 
     edit_badge = event.badges and event.is_admin(request.user)
+    edit_gifts = event.gifts and event.is_admin(request.user)
 
     return_to_job = request.session.get('job_pk', None)
+
+    gifts_form = None
+    if edit_gifts:
+        gifts_form = HelpersGiftsForm(request.POST or None,
+                                     instance=helper.gifts)
+
+        if gifts_form.is_valid():
+            gifts_form.save()
+
+            return HttpResponseRedirect(reverse('view_helper',
+                                                args=[event_url_name,
+                                                      helper.pk]))
 
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
-               'return_to_job': return_to_job}
+               'return_to_job': return_to_job,
+               'gifts_form': gifts_form,}
     return render(request, 'registration/admin/view_helper.html', context)
 
 

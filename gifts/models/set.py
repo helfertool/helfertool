@@ -2,8 +2,6 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from registration.models import Event
-
 from .gift import Gift
 from .includedgift import IncludedGift
 
@@ -22,7 +20,7 @@ class GiftSet(models.Model):
     )
 
     event = models.ForeignKey(
-        Event,
+        'registration.Event',
         on_delete = models.CASCADE,
     )
 

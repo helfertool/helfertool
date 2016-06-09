@@ -9,6 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 import uuid
 
 from badges.models import Badge
+from gifts.models import HelpersGifts
+
 from .job import Job
 
 
@@ -131,11 +133,6 @@ class Helper(models.Model):
         auto_now_add=True,
     )
 
-    got_shirt = models.BooleanField(
-        default=False,
-        verbose_name=_("Helper got her T-shirt"),
-    )
-
     validated = models.BooleanField(
         default=True,
         verbose_name=_("E-Mail address was confirmed"),
@@ -256,16 +253,21 @@ class Helper(models.Model):
 
 @receiver(post_save, sender=Helper, dispatch_uid='helper_saved')
 def helper_saved(sender, instance, using, **kwargs):
-    """ Add badge to helper if necessary.
+    """ Add badge and gifts to helper if necessary.
 
     This is a signal handler, that is called, when a helper is saved. It
     adds the badge if badge creation is enabled and it is not there already.
     """
-    if instance.event and instance.event.badges and \
-            not hasattr(instance, 'badge'):
-        badge = Badge()
-        badge.helper = instance
-        badge.save()
+    if instance.event:
+        if instance.event.badges and not hasattr(instance, 'badge'):
+            badge = Badge()
+            badge.helper = instance
+            badge.save()
+
+        if instance.event.gifts and not hasattr(instance, 'gifts'):
+            gifts = HelpersGifts()
+            gifts.helper = instance
+            gifts.save()
 
 
 def helper_deleted(sender, **kwargs):

@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
+from gifts.models import HelpersGifts
 
 
 def _default_mail():
@@ -205,7 +206,7 @@ class Event(models.Model):
 
 @receiver(post_save, sender=Event, dispatch_uid='event_saved')
 def event_saved(sender, instance, using, **kwargs):
-    """ Add badge settings if necessary.
+    """ Add badge settings, badges and gifts if necessary.
 
     This is a signal handler, that is called, when a event is saved. It
     adds the badge settings if badge creation is enabled and it is not
@@ -229,6 +230,7 @@ def event_saved(sender, instance, using, **kwargs):
                 job.save()
 
         # badge for coordinators
+        # TODO: should not be necessary?
         for coordinator in instance.all_coordinators:
             if not hasattr(coordinator, 'badge'):
                 badge = Badge()
@@ -241,3 +243,10 @@ def event_saved(sender, instance, using, **kwargs):
                 badge = Badge()
                 badge.helper = helper
                 badge.save()
+
+    if instance.gifts:
+        for helper in instance.helper_set.all():
+            if not hasattr(helper, 'gifts'):
+                gifts = HelpersGifts()
+                gifts.helper = helper
+                gifts.save()
