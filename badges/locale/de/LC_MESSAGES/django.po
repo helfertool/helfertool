@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-23 19:44+0200\n"
-"PO-Revision-Date: 2016-05-16 15:40+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-06-09 08:57+0200\n"
+"PO-Revision-Date: 2016-06-09 08:57+0200\n"
+"Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -167,6 +167,10 @@ msgid "Role for helpers"
 msgstr "Rolle für Helfer"
 
 #: badges/models/settings.py:70
+msgid "Badges only for coordinators"
+msgstr "Badges nur für Koordinatoren"
+
+#: badges/models/settings.py:75
 msgid "Print barcodes on badges to avoid duplicates"
 msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
 

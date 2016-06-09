@@ -65,6 +65,11 @@ class BadgeSettings(models.Model):
         verbose_name=_("Role for helpers"),
     )
 
+    only_coordinators = models.BooleanField(
+        default=False,
+        verbose_name=_("Badges only for coordinators"),
+    )
+
     barcodes = models.BooleanField(
         default=False,
         verbose_name=_("Print barcodes on badges to avoid duplicates"),

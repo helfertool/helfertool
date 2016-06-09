@@ -70,6 +70,10 @@ Now you can start the webserver for development:
 
     python manage.py runserver
 
+And start celery if you want to use the badge creation feature:
+
+    celery -A helfertool worker -c 2 --loglevel=info
+
 Now visit http://localhost:8000 with your browser.
 
 ## Deployment

@@ -56,6 +56,11 @@ def generate_badges(event_pk, job_pk, skip_printed):
             # print badge only if this is the primary job or the job is
             # unambiguous
             if (not helpers_job or helpers_job == j):
+                # skip helpers if this is requested
+                if event.badge_settings.only_coordinators and \
+                    not h.is_coordinator:
+                    continue
+
                 creator.add_helper(h)
     try:
         tmp_dir, pdf_filename = creator.generate()
