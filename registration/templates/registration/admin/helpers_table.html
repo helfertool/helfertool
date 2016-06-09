@@ -19,8 +19,6 @@ coordinators. This is only important for the delete_helper view.
         <th></th>
         <th>{% trans "First name" %}</th>
         <th>{% trans "Surname" %}</th>
-        <th>{% trans "E-Mail" %}</th>
-        <th>{% trans "Mobile phone" %}</th>
         {% if event.ask_shirt %}
         <th>{% trans "T-shirt" %}</th>
         {% endif %}
@@ -43,8 +41,6 @@ coordinators. This is only important for the delete_helper view.
             </td>
             <td>{{ helper.firstname }}</td>
             <td>{{ helper.surname }}</td>
-            <td>{{ helper.email }}</td>
-            <td>{{ helper.phone }}</td>
             {% if event.ask_shirt %}
             <td>{{ helper.get_shirt_display }}</td>
             {% endif %}
@@ -57,9 +53,9 @@ coordinators. This is only important for the delete_helper view.
             <td>{{ helper.comment }}</td>
             <td>{{ helper.timestamp }}</td>
             <td>
-                <a href="{% url 'edit_helper' event.url_name helper.pk job.pk %}">
-                    {% bootstrap_icon "pencil" %}
-                    {% trans "Edit" %}
+                <a href="{% url 'view_helper' event.url_name helper.pk %}">
+                    {% bootstrap_icon "search" %}
+                    {% trans "View" %}
                 </a><br />
 
                 {% if shift %}

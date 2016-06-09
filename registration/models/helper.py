@@ -131,6 +131,11 @@ class Helper(models.Model):
         auto_now_add=True,
     )
 
+    got_shirt = models.BooleanField(
+        default=False,
+        verbose_name=_("Helper got her T-shirt"),
+    )
+
     validated = models.BooleanField(
         default=True,
         verbose_name=_("E-Mail address was confirmed"),

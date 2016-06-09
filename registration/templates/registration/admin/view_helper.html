@@ -1,0 +1,128 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{{ helper.full_name }}</h2>
+
+    {% if return_to_job %}
+        <a href="{% url 'helpers' event.url_name return_to_job %}">
+            {% bootstrap_icon "arrow-left" %}
+            {% trans "Back to job" %}
+        </a>
+    {% endif %}
+
+    <h3>{% trans "Personal data" %}</h3>
+
+    <a href="{% url 'edit_helper' event.url_name helper.pk %}">
+        {% bootstrap_icon "pencil" %}
+        {% trans "Edit" %}
+    </a>
+
+    <table class="table-condensed">
+        <tr>
+            <th>{% trans "Name" %}: </th>
+            <td>{{ helper.firstname }} {{ helper.surname }}</td>
+        </tr>
+
+        <tr>
+            <th>{% trans "E-Mail" %}: </th>
+            <td>{{ helper.email }}</td>
+        </tr>
+
+        <tr>
+            <th>{% trans "Mobile phone" %}: </th>
+            <td>{{ helper.phone }}</td>
+        </tr>
+
+        {% if event.ask_shirt %}
+            <tr>
+                <th>{% trans "T-shirt" %}: </th>
+                <td>{{ helper.get_shirt_display }}</td>
+            </tr>
+        {% endif %}
+
+        {% if helper.infection_instruction %}
+            <tr>
+                <th>{% trans "Instruction for the handling of food" %}: </th>
+                <td>{{ helper.get_infection_instruction_display }}</td>
+            </tr>
+        {% endif %}
+
+        {% if event.ask_vegetarian %}
+            <tr>
+                <th>{% trans "Vegetarian" %}: </th>
+                <td>{{ helper.vegetarian | yesno }}</td>
+            </tr>
+        {% endif %}
+
+        <tr>
+            <th>{% trans "Comment" %}: </th>
+            <td>{{ helper.comment | default:"-" }}</td>
+        </tr>
+    </table>
+
+    {% if helper.has_to_validate %}
+        <p class="text-danger">
+            {% bootstrap_icon "remove" %} {% trans "Helper did not validate the mail address." %}
+        </p>
+    {% endif %}
+
+    {# coordinated jobs #}
+    {% if helper.is_coordinator %}
+        <h3>{% trans "Coordinator" %}</h3>
+        <table class="table">
+            {% for job in helper.coordinated_jobs %}
+                <tr>
+                    <td>{{ job.name }}</td>
+                    <td>
+                        <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
+                            {% bootstrap_icon "remove" %}
+                            {% trans "Delete" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {# shifts #}
+    {% if helper.shifts.count %}
+        <h3>{% trans "Shifts" %}</h3>
+        <table class="table">
+            {% for shift in helper.shifts.all %}
+                <tr>
+                    <td>{{ shift }}</td>
+                    <td>
+                        <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
+                            {% bootstrap_icon "remove" %}
+                            {% trans "Delete" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {# add as coordinator or helper #}
+    <p>
+        <a href="{% url 'add_helper_to_shift' event.url_name helper.pk %}">
+            {% bootstrap_icon "plus" %}
+            {% trans "Add to shift" %}
+        </a>
+        &nbsp;
+        <a href="{% url 'add_helper_as_coordinator' event.url_name helper.pk %}">
+            {% bootstrap_icon "plus" %}
+            {% trans "Add as coordinator" %}
+        </a>
+
+        {% if edit_badge %}
+            &nbsp;
+            <a href="{% url 'badges:edit_badge' event.url_name helper.pk %}">
+                {% bootstrap_icon "pencil" %}
+                {% trans "Edit badge" %}
+            </a>
+        {% endif %}
+    </p>
+
+{% endblock %}

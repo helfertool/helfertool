@@ -133,11 +133,11 @@ urlpatterns = [
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
         '(?P<helper_pk>[0-9a-f\-]+)/$',
-        views.edit_helper,
-        name='edit_helper'),
+        views.view_helper,
+        name='view_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/job/(?P<job_pk>[0-9]+)/$',
+        '(?P<helper_pk>[0-9a-f\-]+)/edit/$',
         views.edit_helper,
         name='edit_helper'),
 

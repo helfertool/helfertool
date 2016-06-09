@@ -16,6 +16,14 @@ urlpatterns = [
         name='settings_advanced'),
 
     #
+    # edit badge
+    #
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/badge/$',
+        views.edit_badge,
+        name='edit_badge'),
+
+    #
     # permission
     #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/'

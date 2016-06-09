@@ -19,10 +19,6 @@ from badges.forms import BadgeForm
 def helpers(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
-    # check permission
-    if not event.is_involved(request.user):
-        return nopermission(request)
-
     # helpers of one job
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
@@ -31,10 +27,19 @@ def helpers(request, event_url_name, job_pk=None):
         if not job.is_admin(request.user):
             return nopermission(request)
 
+        # set job to session, used after editing helper to return to this page
+        request.session['job_pk'] = job.pk
+
         # show list of helpers
         context = {'event': event, 'job': job}
         return render(request, 'registration/admin/helpers_for_job.html',
                       context)
+
+    # check permission
+    if not event.is_involved(request.user):
+        return nopermission(request)
+
+    request.session.pop('job_pk', None)
 
     # overview over jobs
     context = {'event': event}
@@ -42,45 +47,44 @@ def helpers(request, event_url_name, job_pk=None):
 
 
 @login_required
-def edit_helper(request, event_url_name, helper_pk, job_pk=None):
+def view_helper(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+
+    if not helper.can_edit(request.user):
+        return nopermission(request)
+
+    edit_badge = event.badges and event.is_admin(request.user)
+
+    return_to_job = request.session.get('job_pk', None)
+
+    context = {'event': event,
+               'helper': helper,
+               'edit_badge': edit_badge,
+               'return_to_job': return_to_job}
+    return render(request, 'registration/admin/view_helper.html', context)
+
+
+@login_required
+def edit_helper(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
     if not helper.can_edit(request.user):
         return nopermission(request)
 
-    # badges active and permission?
-    edit_badges = event.badges and event.is_admin(request.user)
-
     # forms
     form = HelperForm(request.POST or None, instance=helper, event=event)
-    badge_form = None
-    if edit_badges:
-        badge_form = BadgeForm(request.POST or None, request.FILES or None,
-                               instance=helper.badge,
-                               prefix='badge')
 
-    if form.is_valid() and (not edit_badges or
-                            (badge_form and badge_form.is_valid())):
+    if form.is_valid():
         form.save()
 
-        if edit_badges:
-            badge_form.save()
-
-        # check if job_pk is given -> redirect to helpers of this job
-        if job_pk:
-            return HttpResponseRedirect(reverse('helpers',
-                                                args=[event_url_name, job_pk]))
-        else:
-            # else redirect to helpers overview
-            return HttpResponseRedirect(reverse('helpers',
-                                                args=[event_url_name]))
+        return HttpResponseRedirect(reverse('view_helper',
+                                            args=[event_url_name, helper.pk]))
 
     # render page
     context = {'event': event,
                'helper': helper,
-               'form': form,
-               'badge_form': badge_form}
+               'form': form}
     return render(request, 'registration/admin/edit_helper.html', context)
 
 
