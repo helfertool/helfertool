@@ -1,0 +1,40 @@
+{% load i18n %}
+{% load bootstrap3 %}
+{% load gifts %}
+
+{# will be included by registration/admin/view_helper.html #}
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            {% bootstrap_field form.deposit %}
+            {% bootstrap_field form.deposit_returned %}
+            {% bootstrap_field form.got_shirt %}
+
+            {% if helper.shifts.count != 0 %}
+                <table class="shifts">
+                    {% for shift in helper.shifts.all|dictsort:"begin" %}
+                        <tr>
+                            <th>{{ shift }}</th>
+                            {% for gift_set in shift.gifts.all %}
+                                <td>
+                                    <ul>
+                                        {% for gift in gift_set.includedgift_set.all %}
+                                            <li>{{ gift.count }} {{ gift.gift.name }}</li>
+                                        {% endfor %}
+                                    </ul>
+
+                                    {{ form | lookup_deservedgiftset:gift_set.pk }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+</form>

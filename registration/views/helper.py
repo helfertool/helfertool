@@ -61,6 +61,8 @@ def view_helper(request, event_url_name, helper_pk):
 
     gifts_form = None
     if edit_gifts:
+        helper.gifts.update()
+
         gifts_form = HelpersGiftsForm(request.POST or None,
                                      instance=helper.gifts)
 

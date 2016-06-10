@@ -36,3 +36,29 @@ class HelpersGifts(models.Model):
         blank = True,
         through = DeservedGiftSet,
     )
+
+    def update(self):
+        # TODO: race conditions possible?
+
+        cur_gifts = DeservedGiftSet.objects.filter(helper=self)
+        shifts_delete = [(g.shift, g.gift_set) for g in cur_gifts.all()]
+        shifts_new = []
+
+        for shift in self.helper.shifts.all():
+            for gift in shift.gifts.all():
+                tmp = DeservedGiftSet.objects.filter(helper=self,
+                                                     gift_set=gift,
+                                                     shift=shift)
+
+                if tmp.exists():
+                    shifts_delete.remove((shift, gift))
+                else:
+                    shifts_new.append((shift, gift))
+
+        for delete in shifts_delete:
+            DeservedGiftSet.objects.filter(helper=self, shift=new[0],
+                                           gift_set=new[1]).delete()
+
+        for new in shifts_new:
+            DeservedGiftSet.objects.create(helper=self, shift=new[0],
+                                           gift_set=new[1])

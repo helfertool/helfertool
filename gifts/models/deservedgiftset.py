@@ -5,6 +5,9 @@ from .set import GiftSet
 
 
 class DeservedGiftSet(models.Model):
+    class Meta:
+        unique_together = ('helper', 'gift_set', 'shift', )
+
     helper = models.ForeignKey(
         'HelpersGifts',
         on_delete = models.CASCADE,
