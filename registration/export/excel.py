@@ -49,9 +49,24 @@ def xlsx(buffer, event, jobs):
     # create xlsx
     workbook = xlsxwriter.Workbook(buffer)
 
+    # duplicated worksheet names are not allowed
+    used_names = []
+
     # export jobs
     for job in jobs:
-        worksheet = workbook.add_worksheet(cleanName(job.name))
+        # find unique worksheet name
+        job_name = cleanName(job.name)
+        job_name_use = job_name
+
+        counter = 2
+        while job_name_use in used_names:
+            job_name_use = "{}{}".format(job_name, counter)
+            counter += 1
+
+        used_names.append(job_name_use)
+
+        # add things
+        worksheet = workbook.add_worksheet(job_name_use)
         bold = workbook.add_format({'bold': True})
         multiple_shifts = workbook.add_format({'bg_color': '#fFFF99'})
 
