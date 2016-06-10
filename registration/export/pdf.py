@@ -85,7 +85,7 @@ def pdf(buffer, event, jobs):
 
         # iterate over shifts
         for shift in job.shift_set.all():
-            heading = h2("%s" % shift.time())
+            heading = h2(shift.time_with_day())
             elements.append(heading)
 
             if shift.helper_set.count() > 0:

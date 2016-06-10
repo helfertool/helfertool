@@ -67,9 +67,10 @@ class Shift(models.Model):
 
     def __str__(self):
         if self.name:
-            return "%s, %s, %s" % (self.job.name, self.name, self.time())
+            return "%s, %s, %s" % (self.job.name, self.name,
+                                   self.time_with_day())
         else:
-            return "%s, %s" % (self.job.name, self.time())
+            return "%s, %s" % (self.job.name, self.time_with_day())
 
     def time(self):
         """ Returns a string representation of the begin and end time.
@@ -87,6 +88,14 @@ class Shift(models.Model):
         """
         return "%s - %s" % (date_f(localtime(self.begin), 'TIME_FORMAT'),
                             date_f(localtime(self.end), 'TIME_FORMAT'))
+
+    def time_with_day(self):
+        """ Returns a string representation of the day.
+
+        If the shift is on two days only the name of the first day is returned.
+        """
+        day = date_f(localtime(self.begin), "l")
+        return "{}, {}".format(day, self.time())
 
     def num_helpers(self):
         """ Returns the current number of helpers- """

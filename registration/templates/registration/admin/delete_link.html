@@ -12,7 +12,7 @@
 
         <ul>
             {% for shift in link.shifts.all %}
-                <li>{{ shift.job.name }}, {{ shift.time }}</li>
+                <li>{{ shift.job.name }}, {{ shift.time_with_day }}</li>
             {% endfor %}
         </ul>
 
