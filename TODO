@@ -72,16 +72,8 @@ File uploads
     * helper is deleted (photo)
     * badge stuff
 
-Gifts
-=====
-Helper
-    X deposit (None if not paid)
-    X Deposit returned?
-
-    X ManyToMany -> GiftSet
-    X     through
-    X         shift
-    X         received
+TUGARNIX
+========
 
 Gift
     Deposit per gift
@@ -91,10 +83,10 @@ Pro Schicht in Tabelle Marken ausgegeben (Essen+Getränke)
     unter der Tabelle Summe der gesamt Marken/ausgegebenen Marken (Essen+Getränke)
         in Export-Tabelle: die Flags abbilden
 
-TUGARNIX
-========
 
 * t-shirt
     earned t-shirt?
         number of shifts
         number of hours
+
+* xlsx bug

@@ -18,7 +18,7 @@
             <h3>{% trans "Result" %}</h3>
             <ul>
                 {% for helper in result %}
-                    <li><a href="{% url 'edit_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a></li>
+                    <li><a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
