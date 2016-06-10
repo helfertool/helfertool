@@ -2,6 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from gifts.models import GiftSet
+
 from ..models import Shift
 
 from .fields import DualListField
@@ -26,6 +28,9 @@ class ShiftForm(forms.ModelForm):
 
         if not self.job.event.gifts:
             self.fields.pop('gifts')
+        else:
+            self.fields['gifts'].queryset = GiftSet.objects.filter(
+                event=self.job.event)
 
     def clean(self):
         super(ShiftForm, self).clean()
