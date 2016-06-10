@@ -169,7 +169,7 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
 
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('edit_helper',
+        return HttpResponseRedirect(reverse('view_helper',
                                             args=[event_url_name, helper.pk]))
 
     # render page
@@ -192,7 +192,7 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
 
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('edit_helper',
+        return HttpResponseRedirect(reverse('view_helper',
                                             args=[event_url_name, helper.pk]))
 
     # render page
