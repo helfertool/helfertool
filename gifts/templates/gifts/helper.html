@@ -12,32 +12,45 @@
             {% bootstrap_field form.deposit %}
             {% bootstrap_field form.deposit_returned %}
             {% bootstrap_field form.got_shirt %}
+        </div>
 
-            {% if helper.shifts.count != 0 %}
+        {% if helper.shifts.count != 0 %}
+            <div class="col-lg-12">
                 <table class="shifts">
                     {% for shift in helper.shifts.all|dictsort:"begin" %}
                         <tr>
-                            <th>{{ shift }}</th>
+                            <th style="vertical-align:top;">{{ shift }}</th>
                             {% gifts_for_shift form shift as deserved_gifts %}
-                            {% for deserved_gift in deserved_gifts %}
-                                <td>
-                                    <ul>
-                                        {{ gift_set }}
-                                        {% for gift in deserved_gift.gift_set.includedgift_set.all %}
-                                            <li>{{ gift.count }} {{ gift.gift.name }}</li>
-                                        {% endfor %}
-                                    </ul>
 
-                                    {{ form | lookup_deservedgiftset:deserved_gift.pk }}
-                                    <label>
-                                        {% trans "Delivered" %}
-                                    </label>
+                            {% if deserved_gifts %}
+                                {% for deserved_gift in deserved_gifts %}
+                                    <td>
+                                        <div style="vertical-alignment:bottom!important;">
+                                            {{ form | lookup_deservedgiftset:deserved_gift.pk }}
+                                            <label>
+                                                {% trans "Delivered" %}
+                                            </label>
+                                        </div>
+
+                                        <ul>
+                                            {{ gift_set }}
+                                            {% for gift in deserved_gift.gift_set.includedgift_set.all %}
+                                                <li>{{ gift.count }} {{ gift.gift.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
+                                {% endfor %}
+                            {% else %}
+                                <td>
+                                    <span class="text-muted">{% trans "No gifts" %}</span>
                                 </td>
-                            {% endfor %}
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
+            </div>
 
+            <div class="col-xs-12 col-lg-5">
                 <table class="table">
                     <tr>
                         <th>{% trans "Gift" %}</th>
@@ -53,8 +66,8 @@
                         </tr>
                     {% endfor %}
                 </table>
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
     </div>
 
     <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
