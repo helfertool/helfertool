@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 08:57+0200\n"
-"PO-Revision-Date: 2016-06-09 08:57+0200\n"
+"POT-Creation-Date: 2016-06-11 22:08+0200\n"
+"PO-Revision-Date: 2016-06-11 22:10+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -184,10 +184,12 @@ msgstr ""
 "Entweder ist die PDF Datei noch nicht verfügbar oder die Generierung ist "
 "fehlgeschlagen."
 
-#: badges/templates/badges/edit_design.html:6
-msgid "Badge Design"
-msgstr "Badge Design"
+#: badges/templates/badges/edit_badge.html:6
+#, python-format
+msgid "Badge for %(name)s"
+msgstr "Badge für %(name)s"
 
+#: badges/templates/badges/edit_badge.html:17
 #: badges/templates/badges/edit_design.html:13
 #: badges/templates/badges/edit_permission.html:13
 #: badges/templates/badges/edit_role.html:13
@@ -195,6 +197,10 @@ msgstr "Badge Design"
 #: badges/templates/badges/settings_advanced.html:19
 msgid "Save"
 msgstr "Speichern"
+
+#: badges/templates/badges/edit_design.html:6
+msgid "Badge Design"
+msgstr "Badge Design"
 
 #: badges/templates/badges/edit_permission.html:6
 msgid "Badge Permission"

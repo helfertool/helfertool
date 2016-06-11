@@ -34,3 +34,6 @@ class HelpersGiftsForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+    def deservedgifts_for_shift(self, shift):
+        return self.instance.deservedgiftset_set.filter(shift=shift)

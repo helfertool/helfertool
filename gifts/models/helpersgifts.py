@@ -2,6 +2,8 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from collections import OrderedDict
+
 from .set import GiftSet
 from .deservedgiftset import DeservedGiftSet
 
@@ -62,3 +64,23 @@ class HelpersGifts(models.Model):
         for new in shifts_new:
             DeservedGiftSet.objects.create(helper=self, shift=new[0],
                                            gift_set=new[1])
+
+    def gifts_sum(self):
+        result = OrderedDict()
+
+        deserved_gift_sets = DeservedGiftSet.objects.filter(helper=self)
+
+        # TODO: maybe do one query for this?
+        for deserved_gift in deserved_gift_sets:
+            gift_set = deserved_gift.gift_set
+
+            for included_gift in gift_set.includedgift_set.all():
+                name = included_gift.gift.name
+                if name not in result:
+                    result[name] = {'given': 0, 'total': 0}
+
+                result[name]['total'] += included_gift.count
+                if deserved_gift.delivered:
+                    result[name]['given'] += included_gift.count
+
+        return result

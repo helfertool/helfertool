@@ -18,17 +18,38 @@
                     {% for shift in helper.shifts.all|dictsort:"begin" %}
                         <tr>
                             <th>{{ shift }}</th>
-                            {% for gift_set in shift.gifts.all %}
+                            {% gifts_for_shift form shift as deserved_gifts %}
+                            {% for deserved_gift in deserved_gifts %}
                                 <td>
                                     <ul>
-                                        {% for gift in gift_set.includedgift_set.all %}
+                                        {{ gift_set }}
+                                        {% for gift in deserved_gift.gift_set.includedgift_set.all %}
                                             <li>{{ gift.count }} {{ gift.gift.name }}</li>
                                         {% endfor %}
                                     </ul>
 
-                                    {{ form | lookup_deservedgiftset:gift_set.pk }}
+                                    {{ form | lookup_deservedgiftset:deserved_gift.pk }}
+                                    <label>
+                                        {% trans "Delivered" %}
+                                    </label>
                                 </td>
                             {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <table class="table">
+                    <tr>
+                        <th>{% trans "Gift" %}</th>
+                        <th>{% trans "Given" %}</th>
+                        <th>{% trans "Total" %}</th>
+                    </tr>
+
+                    {% for name,numbers in helper.gifts.gifts_sum.items %}
+                        <tr>
+                            <td>{{ name }}</td>
+                            <td>{{ numbers.given }}</td>
+                            <td>{{ numbers.total }}</td>
                         </tr>
                     {% endfor %}
                 </table>

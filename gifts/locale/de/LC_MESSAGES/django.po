@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-09 08:57+0200\n"
-"PO-Revision-Date: 2016-05-16 15:42+0200\n"
+"POT-Creation-Date: 2016-06-11 22:08+0200\n"
+"PO-Revision-Date: 2016-06-11 22:10+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,24 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: gifts/models/deservedgiftset.py:19
+#: gifts/forms/helpersgifts.py:20 gifts/templates/gifts/helper.html:33
+msgid "Delivered"
+msgstr "Ausgegeben"
+
+#: gifts/models/deservedgiftset.py:22
 msgid "Helper got gift"
 msgstr "Helfer hat Geschenk erhalten"
 
-#: gifts/models/gift.py:12 gifts/models/set.py:15
+#: gifts/models/gift.py:10 gifts/models/set.py:13
 #: gifts/templates/gifts/list.html:11 gifts/templates/gifts/list.html:31
 msgid "Name"
 msgstr "Name"
 
-#: gifts/models/helpersgifts.py:16
+#: gifts/models/helpersgifts.py:18
 msgid "Deposit"
 msgstr "Pfand"
 
-#: gifts/models/helpersgifts.py:24
+#: gifts/models/helpersgifts.py:26
 msgid "Deposit returned"
 msgstr "Pfand zurückgegeben"
 
-#: gifts/models/helpersgifts.py:30
+#: gifts/models/helpersgifts.py:32
+msgid "Helper got her T-shirt"
+msgstr "Helfer hat T-Shirt erhalten"
+
+#: gifts/models/helpersgifts.py:37
 msgid "Deserved gifts"
 msgstr "Verdiente Geschenke"
 
@@ -43,7 +51,7 @@ msgstr "Verdiente Geschenke"
 msgid "Count"
 msgstr "Anzahl"
 
-#: gifts/models/set.py:20 gifts/templates/gifts/list.html:8
+#: gifts/models/set.py:18 gifts/templates/gifts/list.html:8
 #: gifts/templates/gifts/list.html:32 gifts/templates/gifts/not_active.html:6
 msgid "Gifts"
 msgstr "Geschenke"
@@ -53,7 +61,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:43
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -90,8 +98,17 @@ msgstr "Willst du dieses Geschenkset löschen?"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
+#: gifts/templates/gifts/helper.html:60
 msgid "Save"
 msgstr "Speichern"
+
+#: gifts/templates/gifts/helper.html:44
+msgid "Given"
+msgstr "Ausgegeben"
+
+#: gifts/templates/gifts/helper.html:45
+msgid "Total"
+msgstr "Insgesamt"
 
 #: gifts/templates/gifts/list.html:6
 msgid "Manage gifts"
