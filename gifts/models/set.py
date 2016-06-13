@@ -29,7 +29,7 @@ class GiftSet(models.Model):
 
     def get_gift_num(self, gift):
         try:
-            tmp = IncludedGift.objects.filter(gift_set=self, gift=gift)
+            tmp = IncludedGift.objects.get(gift_set=self, gift=gift)
             return tmp.count
         except (IncludedGift.DoesNotExist, MultipleObjectsReturned):
             return 0
