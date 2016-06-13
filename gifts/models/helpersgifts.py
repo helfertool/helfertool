@@ -58,8 +58,8 @@ class HelpersGifts(models.Model):
                     shifts_new.append((shift, gift))
 
         for delete in shifts_delete:
-            DeservedGiftSet.objects.filter(helper=self, shift=new[0],
-                                           gift_set=new[1]).delete()
+            DeservedGiftSet.objects.filter(helper=self, shift=delete[0],
+                                           gift_set=delete[1]).delete()
 
         for new in shifts_new:
             DeservedGiftSet.objects.create(helper=self, shift=new[0],
