@@ -81,6 +81,9 @@ class HelperAddShiftForm(forms.Form):
     def clean(self):
         super(HelperAddShiftForm, self).clean()
 
+        if 'shifts' not in self.cleaned_data:
+            raise(_("No shifts selected"))
+
         for shift in self.cleaned_data['shifts']:
             if shift.is_full():
                 raise ValidationError(_("This shift if already full: "
