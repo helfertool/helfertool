@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift, Job
 
+from ..utils import u
+
 
 class HelperForm(forms.ModelForm):
     class Meta:
@@ -82,12 +84,12 @@ class HelperAddShiftForm(forms.Form):
         super(HelperAddShiftForm, self).clean()
 
         if 'shifts' not in self.cleaned_data:
-            raise(_("No shifts selected"))
+            raise ValidationError(_("No shifts selected"))
 
         for shift in self.cleaned_data['shifts']:
             if shift.is_full():
                 raise ValidationError(_("This shift if already full: "
-                                        "%(shift)s") % {'shift': str(shift)})
+                                        "%(shift)s") % {'shift': u(shift)})
 
     def save(self):
         for shift in self.cleaned_data['shifts']:
