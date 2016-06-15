@@ -43,4 +43,11 @@ urlpatterns = [
          '(?P<gift_set_pk>[0-9]+)/delete/$',
         views.delete_gift_set,
         name='delete_gift_set'),
+
+    #
+    # open deposits
+    #
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/deposit/$',
+        views.list_deposit,
+        name='list_deposit'),
 ]

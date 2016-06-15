@@ -114,6 +114,7 @@
                     <h2>{% trans "Gifts" %}</h2>
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a></li>
+                        <li><a href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a></li>
                     </ul>
                 {% endif %}
 
