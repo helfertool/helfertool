@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-15 13:58+0200\n"
-"PO-Revision-Date: 2016-06-15 13:58+0200\n"
+"POT-Creation-Date: 2016-06-25 18:30+0200\n"
+"PO-Revision-Date: 2016-06-25 18:32+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: registration/export/excel.py:77 registration/forms/user.py:33
 #: registration/models/helper.py:90
@@ -34,31 +34,27 @@ msgstr "Nachname"
 #: registration/models/helper.py:99
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
-#: registration/templates/registration/admin/view_helper.html:29
-#: registration/templates/registration/registered.html:29
+#: registration/templates/registration/helper_data.html:11
 msgid "E-Mail"
 msgstr "E-Mail"
 
 #: registration/export/excel.py:82 registration/export/pdf.py:42
 #: registration/models/helper.py:104
 #: registration/templates/registration/admin/coordinators.html:18
-#: registration/templates/registration/admin/view_helper.html:34
-#: registration/templates/registration/registered.html:33
+#: registration/templates/registration/helper_data.html:16
 msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:86 registration/export/pdf.py:45
 #: registration/models/helper.py:116
 #: registration/templates/registration/admin/helpers_table.html:23
-#: registration/templates/registration/admin/view_helper.html:40
-#: registration/templates/registration/registered.html:38
+#: registration/templates/registration/helper_data.html:22
 msgid "T-shirt"
 msgstr "T-Shirt"
 
 #: registration/export/excel.py:90 registration/models/helper.py:121
 #: registration/templates/registration/admin/helpers_table.html:26
-#: registration/templates/registration/admin/view_helper.html:54
-#: registration/templates/registration/registered.html:50
+#: registration/templates/registration/helper_data.html:36
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
@@ -70,8 +66,7 @@ msgstr "Gesundheitsbelehrung"
 #: registration/export/excel.py:97 registration/export/pdf.py:46
 #: registration/models/helper.py:110
 #: registration/templates/registration/admin/helpers_table.html:31
-#: registration/templates/registration/admin/view_helper.html:60
-#: registration/templates/registration/registered.html:55
+#: registration/templates/registration/helper_data.html:42
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -87,8 +82,7 @@ msgstr "Koordinatoren"
 #: registration/templates/registration/admin/jobs_and_shifts.html:45
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
-#: registration/templates/registration/admin/view_helper.html:24
-#: registration/templates/registration/registered.html:25
+#: registration/templates/registration/helper_data.html:6
 msgid "Name"
 msgstr "Name"
 
@@ -375,8 +369,7 @@ msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
 #: registration/models/helper.py:129
-#: registration/templates/registration/admin/view_helper.html:47
-#: registration/templates/registration/registered.html:44
+#: registration/templates/registration/helper_data.html:29
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
@@ -434,7 +427,7 @@ msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 #: registration/models/shift.py:64
 #: registration/templates/registration/admin/base.html:114
 #: registration/templates/registration/admin/jobs_and_shifts.html:48
-#: registration/templates/registration/admin/view_helper.html:130
+#: registration/templates/registration/admin/view_helper.html:89
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -562,7 +555,7 @@ msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:6
-#: registration/templates/registration/admin/view_helper.html:116
+#: registration/templates/registration/admin/view_helper.html:75
 msgid "Add as coordinator"
 msgstr "Als Koordinator hinzufügen"
 
@@ -582,7 +575,7 @@ msgstr ""
 "Koordinatoren hinzuzufügen."
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:6
-#: registration/templates/registration/admin/view_helper.html:111
+#: registration/templates/registration/admin/view_helper.html:70
 msgid "Add to shift"
 msgstr "Zu Schicht hinzufügen"
 
@@ -773,8 +766,8 @@ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 #: registration/templates/registration/admin/helpers_table.html:69
 #: registration/templates/registration/admin/jobs_and_shifts.html:29
 #: registration/templates/registration/admin/jobs_and_shifts.html:78
-#: registration/templates/registration/admin/view_helper.html:81
-#: registration/templates/registration/admin/view_helper.html:99
+#: registration/templates/registration/admin/view_helper.html:40
+#: registration/templates/registration/admin/view_helper.html:58
 msgid "Delete"
 msgstr "Löschen"
 
@@ -850,8 +843,8 @@ msgstr "Link löschen"
 
 #: registration/templates/registration/admin/delete_link.html:11
 #: registration/templates/registration/admin/links.html:13
-#: registration/templates/registration/admin/view_helper.html:91
-#: registration/templates/registration/registered.html:70
+#: registration/templates/registration/admin/view_helper.html:50
+#: registration/templates/registration/registered.html:35
 msgid "Shifts"
 msgstr "Schichten"
 
@@ -896,12 +889,16 @@ msgstr ""
 "Für diese Erkennung von mehrfach registrierten Helfern wird nur die E-Mail "
 "Adresse verwendet."
 
+#: registration/templates/registration/admin/duplicates.html:22
+#: registration/templates/registration/admin/merge.html:41
+msgid "Merge"
+msgstr "Zusammenfassen"
+
 #: registration/templates/registration/admin/edit_event.html:18
 #: registration/templates/registration/admin/edit_helper.html:23
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:31
-#: registration/templates/registration/admin/search_helper.html:13
 #: registration/templates/registration/change_user.html:62
 msgid "Save"
 msgstr "Speichern"
@@ -1018,6 +1015,27 @@ msgstr "Link hinzufügen"
 msgid "Send"
 msgstr "Senden"
 
+#: registration/templates/registration/admin/merge.html:6
+msgid "Merge duplicates"
+msgstr "Duplikate zusammenfassen"
+
+#: registration/templates/registration/admin/merge.html:12
+msgid "You have to select one data set, all other will be deleted."
+msgstr "Du musst einen Datensatz auswählen, alle anderen werden gelöscht."
+
+#: registration/templates/registration/admin/merge.html:15
+msgid "Overlapping shifts are not checked during merging."
+msgstr ""
+"Überlappende Schichten werden während dem Zusammenfassen nicht geprüft."
+
+#: registration/templates/registration/admin/merge.html:33
+msgid "Keep this data"
+msgstr "Diese Daten behalten"
+
+#: registration/templates/registration/admin/merge.html:45
+msgid "There are not duplicates for this mail address."
+msgstr "Es gibt keine Duplikate für diese E-Mail Adresse."
+
 #: registration/templates/registration/admin/nopermission.html:5
 msgid "No permission"
 msgstr "Kein Zugriff"
@@ -1045,6 +1063,10 @@ msgstr "Kann Nutzer hinzufügen"
 #: registration/templates/registration/admin/permissions.html:41
 msgid "There are no users, that can add users."
 msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
+
+#: registration/templates/registration/admin/search_helper.html:13
+msgid "Search"
+msgstr "Suchen"
 
 #: registration/templates/registration/admin/search_helper.html:18
 msgid "Result"
@@ -1080,15 +1102,15 @@ msgstr "Zurück zur Aufgabe"
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
-#: registration/templates/registration/admin/view_helper.html:67
+#: registration/templates/registration/admin/view_helper.html:26
 msgid "Helper did not validate the mail address."
 msgstr "Helfer hat die E-Mail Adresse nicht validiert"
 
-#: registration/templates/registration/admin/view_helper.html:73
+#: registration/templates/registration/admin/view_helper.html:32
 msgid "Coordinator"
 msgstr "Koordinator"
 
-#: registration/templates/registration/admin/view_helper.html:123
+#: registration/templates/registration/admin/view_helper.html:82
 msgid "Edit badge"
 msgstr "Badge bearbeiten"
 
@@ -1220,20 +1242,20 @@ msgstr ""
 msgid "You registered with the following information:"
 msgstr "Du hast folgende Daten angegeben:"
 
-#: registration/templates/registration/registered.html:61
+#: registration/templates/registration/registered.html:26
 #: registration/templates/registration/registerform.html:8
 msgid "Jobs"
 msgstr "Aufgaben"
 
-#: registration/templates/registration/registered.html:78
+#: registration/templates/registration/registered.html:43
 msgid "Data privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/registration/registered.html:80
+#: registration/templates/registration/registered.html:45
 msgid "You agreed with the following data privacy statement."
 msgstr "Du hast der folgenden Datenschutzerklärung zugestimmt."
 
-#: registration/templates/registration/registered.html:82
+#: registration/templates/registration/registered.html:47
 msgid ""
 "The following data privacy statement was sent to you and you did not "
 "disagree until now."
@@ -1241,7 +1263,7 @@ msgstr ""
 "Die folgende Datenschutzerklärung wurde dir zugeschickt und du hast bis "
 "jetzt nicht widersprochen."
 
-#: registration/templates/registration/registered.html:90
+#: registration/templates/registration/registered.html:55
 msgid "You agreed that we will inform you about future events per email."
 msgstr ""
 "Du bist damit einverstanden, dass wir dich über weitere Veranstaltungen per "
