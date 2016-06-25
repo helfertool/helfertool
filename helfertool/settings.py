@@ -61,7 +61,6 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 #EMAIL_PORT = 1025
 
 LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
 
 # HTML sanitization for text fields
