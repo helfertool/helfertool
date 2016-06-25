@@ -223,6 +223,10 @@ urlpatterns = [
         views.duplicates,
         name='duplicates'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/duplicates/merge/(?P<email>.+)/$',
+        views.merge,
+        name='merge'),
+
     # use links
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/l/(?P<link_pk>[0-9a-f\-]+)/$',
         views.form,
@@ -232,10 +236,4 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/mail/$',
         views.mail,
         name='mail'),
-
-    # badges
-    url(r'^', include('badges.urls', namespace='badges')),
-
-    # gifts
-    url(r'^', include('gifts.urls', namespace="gifts")),
 ]

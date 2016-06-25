@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load bootstrap3 %}
+
+<table class="table-condensed">
+    <tr>
+        <th>{% trans "Name" %}: </th>
+        <td>{{ helper.firstname }} {{ helper.surname }}</td>
+    </tr>
+
+    <tr>
+        <th>{% trans "E-Mail" %}: </th>
+        <td>{{ helper.email }}</td>
+    </tr>
+
+    <tr>
+        <th>{% trans "Mobile phone" %}: </th>
+        <td>{{ helper.phone }}</td>
+    </tr>
+
+    {% if event.ask_shirt %}
+        <tr>
+            <th>{% trans "T-shirt" %}: </th>
+            <td>{{ helper.get_shirt_display }}</td>
+        </tr>
+    {% endif %}
+
+    {% if helper.infection_instruction %}
+        <tr>
+            <th>{% trans "Instruction for the handling of food" %}: </th>
+            <td>{{ helper.get_infection_instruction_display }}</td>
+        </tr>
+    {% endif %}
+
+    {% if event.ask_vegetarian %}
+        <tr>
+            <th>{% trans "Vegetarian" %}: </th>
+            <td>{{ helper.vegetarian | yesno }}</td>
+        </tr>
+    {% endif %}
+
+    <tr>
+        <th>{% trans "Comment" %}: </th>
+        <td>{{ helper.comment | default:"-" }}</td>
+    </tr>
+</table>

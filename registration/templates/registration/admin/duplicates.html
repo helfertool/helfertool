@@ -8,12 +8,19 @@
         {% trans "For this detection of helpers that are registered multiple times only the mail address is used." %}
     </div>
 
-    {% for name, list in duplicated_helpers.items %}
-        <h3>{{ name }}</h3>
+    {% for mail, list in duplicated_helpers.items %}
+        <h3>{{ mail }}</h3>
         <ul>
             {% for helper in list %}
                 <li><a href="{% url "view_helper" event.url_name helper.pk %}">{{ helper.full_name }}</a></li>
             {% endfor %}
         </ul>
+
+        <p>
+            <a href="{% url "merge" event.url_name mail %}">
+                <i class="fa fa-compress" aria-hidden="true"></i>
+                {% trans "Merge" %}
+            </a>
+        </p>
     {% endfor %}
 {% endblock %}

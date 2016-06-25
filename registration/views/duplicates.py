@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.db.models import Count
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 from collections import OrderedDict
@@ -7,6 +9,7 @@ from collections import OrderedDict
 from .utils import nopermission
 
 from ..models import Event
+from ..forms import MergeDuplicatesForm
 
 
 @login_required
@@ -30,3 +33,27 @@ def duplicates(request, event_url_name):
     context = {'event': event,
                'duplicated_helpers': duplicated_helpers}
     return render(request, 'registration/admin/duplicates.html', context)
+
+
+def merge(request, event_url_name, email):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    helpers = event.helper_set.filter(email=email)
+
+    form = None
+
+    if helpers.count() > 1:
+        form = MergeDuplicatesForm(request.POST or None, helpers=helpers)
+
+        if form.is_valid():
+            h = form.merge()
+            return HttpResponseRedirect(reverse('view_helper',
+                                                args=[event_url_name, h.pk]))
+
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/merge.html', context)

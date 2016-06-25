@@ -20,42 +20,7 @@
 
     <p>{% trans "You registered with the following information:" %}</p>
 
-    <table class="table-condensed">
-        <tr>
-            <td>{% trans "Name" %}: </td>
-            <td>{{ data.firstname }} {{ data.surname }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "E-Mail" %}: </td>
-            <td>{{ data.email }}</td>
-        </tr>
-        <tr>
-            <td>{% trans "Mobile phone" %}: </td>
-            <td>{{ data.phone }}</td>
-        </tr>
-        {% if event.ask_shirt %}
-        <tr>
-            <td>{% trans "T-shirt" %}: </td>
-            <td>{{ data.get_shirt_display }}</td>
-        </tr>
-        {% endif %}
-        {% if data.infection_instruction %}
-        <tr>
-            <td>{% trans "Instruction for the handling of food" %}: </td>
-            <td>{{ data.get_infection_instruction_display }}</td>
-        </tr>
-        {% endif %}
-        {% if event.ask_vegetarian %}
-        <tr>
-            <td>{% trans "Vegetarian" %}: </td>
-            <td>{{ data.vegetarian | yesno }}</td>
-        </tr>
-        {% endif %}
-        <tr>
-            <td>{% trans "Comment" %}: </td>
-            <td>{{ data.comment | default:"-" }}</td>
-        </tr>
-    </table>
+    {% include "registration/helper_data.html" with helper=data %}
 
     {% if data.is_coordinator %}
         <h2>{% trans "Jobs" %}</h2>

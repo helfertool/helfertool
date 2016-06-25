@@ -1,0 +1,48 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Merge duplicates" %}</h2>
+
+    {% if form %}
+        <div class="alert alert-info" role="alert">
+            <ul>
+                <li>
+                    {% trans "You have to select one data set, all other will be deleted." %}
+                </li>
+                <li>
+                    {% trans "Overlapping shifts are not checked during merging." %}
+                </li>
+            </ul>
+        </div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {% bootstrap_form_errors form %}
+
+            {% for helper in form.helpers.field.queryset %}
+                <input id="helper_{{ forloop.counter0 }}"
+                       name="helpers"
+                       required="required"
+                       type="radio"
+                       value="{{ helper.pk }}"
+                />
+                <label for="helper_{{ forloop.counter0 }}">
+                    {% trans "Keep this data" %}
+                </label>
+
+                {% include "registration/helper_data.html" with helper=helper %}
+
+                <div style="margin-bottom: 2em;"></div>
+            {% endfor %}
+
+            <input type="submit" value="{% trans "Merge" %}" class="btn btn-default" />
+        </form>
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            {% trans "There are not duplicates for this mail address." %}
+        </div>
+    {% endif %}
+{% endblock %}
