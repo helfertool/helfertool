@@ -41,8 +41,8 @@ def list_deposit(request, event_url_name):
     if not event.gifts:
         return notactive(request)
 
-    helpers = Helper.objects.filter(gifts__deposit__isnull=False,
-                                    gifts__deposit_returned=False)
+    helpers = event.helper_set.filter(gifts__deposit__isnull=False,
+                                      gifts__deposit_returned=False)
 
     context = {'event': event,
                'helpers': helpers}
