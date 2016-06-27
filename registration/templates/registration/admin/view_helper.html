@@ -49,7 +49,7 @@
     {% if helper.shifts.count %}
         <h3>{% trans "Shifts" %}</h3>
         <table class="table">
-            {% for shift in helper.shifts.all %}
+            {% for shift in helper.shifts.all|dictsort:"begin" %}
                 <tr>
                     <td>{{ shift }}</td>
                     <td>
