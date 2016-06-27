@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import HelpersGifts, DeservedGiftSet
+from ..models import HelpersGifts
 
 
 class HelpersGiftsForm(forms.ModelForm):
@@ -12,23 +12,30 @@ class HelpersGiftsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(HelpersGiftsForm, self).__init__(*args, **kwargs)
 
-        self._gifts = {}
+        for giftset in self.instance.deservedgiftset_set.all():
+            delivered_id_str = "delivered_{}".format(giftset.pk)
+            present_id_str = "present_{}".format(giftset.pk)
 
-        for gifts in self.instance.deservedgiftset_set.all():
-            id_str = "gift_{}".format(gifts.pk)
+            self.fields[delivered_id_str] = forms.BooleanField(
+                label=_("Delivered"),
+                required=False,
+                initial=giftset.delivered)
 
-            self.fields[id_str] = forms.BooleanField(label=_("Delivered"),
-                                                     required=False,
-                                                     initial=gifts.delivered)
-            self._gifts[id_str] = gifts.pk
+            self.fields[present_id_str] = forms.BooleanField(
+                label=_("Present"),
+                required=False,
+                initial=giftset.present)
 
     def save(self, commit=True):
         instance = super(HelpersGiftsForm, self).save(False)
 
-        for id_str in self._gifts:
-            tmp = DeservedGiftSet.objects.get(pk=self._gifts[id_str])
-            tmp.delivered = self.cleaned_data[id_str]
-            tmp.save()
+        for giftset in self.instance.deservedgiftset_set.all():
+            delivered_id_str = "delivered_{}".format(giftset.pk)
+            present_id_str = "present_{}".format(giftset.pk)
+
+            giftset.delivered = self.cleaned_data[delivered_id_str]
+            giftset.present = self.cleaned_data[present_id_str]
+            giftset.save()
 
         if commit:
             instance.save()

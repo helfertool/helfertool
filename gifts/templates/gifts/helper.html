@@ -28,9 +28,16 @@
                                 {% for deserved_gift in deserved_gifts %}
                                     <td>
                                         <div style="vertical-alignment:bottom!important;">
-                                            {{ form | lookup_deservedgiftset:deserved_gift.pk }}
+                                            {{ form | lookup_deservedgiftset_delivered:deserved_gift.pk }}
                                             <label>
                                                 {% trans "Delivered" %}
+                                            </label>
+
+                                            <br />
+
+                                            {{ form | lookup_deservedgiftset_present:deserved_gift.pk }}
+                                            <label>
+                                                {% trans "Present" %}
                                             </label>
                                         </div>
 
