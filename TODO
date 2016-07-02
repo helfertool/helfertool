@@ -85,3 +85,11 @@ Export-Tabelle: die Flags abbilden
     earned t-shirt?
         number of shifts
         number of hours
+
+fix merge
+
+implement present flag better
+
+show all helpers of shift -> select if present and gift given
+
+flag: buy t-shirt
