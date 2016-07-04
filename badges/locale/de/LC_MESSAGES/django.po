@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-25 18:30+0200\n"
+"POT-Creation-Date: 2016-07-04 17:42+0200\n"
 "PO-Revision-Date: 2016-06-11 22:10+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "The file is not an image."
 msgstr "Die Datei ist kein Bild."
 
-#: badges/forms/defaults.py:47
+#: badges/forms/defaults.py:51
 msgid "No default role"
 msgstr "Keine Standard Rolle"
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "This badge does not belong to this event."
 msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 
-#: badges/forms/settings.py:21
+#: badges/forms/settings.py:28
 msgid "File does not contain LaTeX code."
 msgstr "Die Datei enthält keinen LaTeX Code."
 
@@ -76,11 +76,11 @@ msgstr "Primäre Aufgabe"
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: badges/models/badge.py:71 badges/templates/badges/settings.html:95
+#: badges/models/badge.py:71 badges/templates/badges/settings.html:110
 msgid "Role"
 msgstr "Rolle"
 
-#: badges/models/badge.py:79 badges/templates/badges/settings.html:96
+#: badges/models/badge.py:79 badges/templates/badges/settings.html:111
 msgid "Design"
 msgstr "Design"
 
@@ -102,8 +102,8 @@ msgstr "Keine Standard Rollen auf die Badges drucken"
 
 #: badges/models/design.py:37 badges/models/permission.py:16
 #: badges/models/role.py:17 badges/templates/badges/settings.html:22
-#: badges/templates/badges/settings.html:62
-#: badges/templates/badges/settings_advanced.html:30
+#: badges/templates/badges/settings.html:69
+#: badges/templates/badges/settings_advanced.html:32
 msgid "Name"
 msgstr "Name"
 
@@ -193,8 +193,8 @@ msgstr "Badge für %(name)s"
 #: badges/templates/badges/edit_design.html:13
 #: badges/templates/badges/edit_permission.html:13
 #: badges/templates/badges/edit_role.html:13
-#: badges/templates/badges/settings.html:122
-#: badges/templates/badges/settings_advanced.html:19
+#: badges/templates/badges/settings.html:138
+#: badges/templates/badges/settings_advanced.html:20
 msgid "Save"
 msgstr "Speichern"
 
@@ -230,7 +230,7 @@ msgstr ""
 "folgende Einstellungen:"
 
 #: badges/templates/badges/index.html:22
-#: badges/templates/badges/settings.html:94
+#: badges/templates/badges/settings.html:109
 msgid "Job"
 msgstr "Aufgabe"
 
@@ -247,11 +247,11 @@ msgstr "Alle Badges"
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:60 badges/views/generate.py:180
+#: badges/templates/badges/index.html:60 badges/views/generate.py:185
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:65 badges/views/generate.py:182
+#: badges/templates/badges/index.html:65 badges/views/generate.py:187
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -288,42 +288,42 @@ msgid "There are no roles."
 msgstr "Es gibt keine Rollen."
 
 #: badges/templates/badges/settings.html:23
-#: badges/templates/badges/settings_advanced.html:31
+#: badges/templates/badges/settings_advanced.html:33
 msgid "LaTeX Name"
 msgstr "LaTeX Name"
 
 #: badges/templates/badges/settings.html:24
-#: badges/templates/badges/settings_advanced.html:23
+#: badges/templates/badges/settings_advanced.html:25
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: badges/templates/badges/settings.html:41
-#: badges/templates/badges/settings.html:71
-#: badges/templates/badges/settings_advanced.html:41
+#: badges/templates/badges/settings.html:45
+#: badges/templates/badges/settings.html:83
+#: badges/templates/badges/settings_advanced.html:46
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: badges/templates/badges/settings.html:51
+#: badges/templates/badges/settings.html:57
 msgid "Add role"
 msgstr "Rolle hinzufügen"
 
-#: badges/templates/badges/settings.html:55
+#: badges/templates/badges/settings.html:62
 msgid "Designs"
 msgstr "Designs"
 
-#: badges/templates/badges/settings.html:58
+#: badges/templates/badges/settings.html:65
 msgid "There are no designs."
 msgstr "Es gibt keine Designs."
 
-#: badges/templates/badges/settings.html:81
+#: badges/templates/badges/settings.html:95
 msgid "Add design"
 msgstr "Design hinzufügen"
 
-#: badges/templates/badges/settings.html:86
+#: badges/templates/badges/settings.html:101
 msgid "Defaults"
 msgstr "Standards"
 
-#: badges/templates/badges/settings.html:97
+#: badges/templates/badges/settings.html:112
 msgid "Print no default role"
 msgstr "Keine Standard Rolle abdrucken"
 
@@ -342,11 +342,11 @@ msgstr ""
 msgid "Template"
 msgstr "Template"
 
-#: badges/templates/badges/settings_advanced.html:26
+#: badges/templates/badges/settings_advanced.html:28
 msgid "There are no permissions."
 msgstr "Es gibt keine Berechtigungen."
 
-#: badges/templates/badges/settings_advanced.html:51
+#: badges/templates/badges/settings_advanced.html:58
 msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 
@@ -370,20 +370,20 @@ msgstr "Warnungen für die Badge Generierung"
 msgid "There are no warnings."
 msgstr "Es gibt keine Warnungen."
 
-#: badges/views/generate.py:175
+#: badges/views/generate.py:180
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:177
+#: badges/views/generate.py:182
 msgid "{} (all)"
 msgstr "{} (alle)"
 
-#: badges/views/register.py:32
+#: badges/views/register.py:34
 #, python-format
 msgid "Badge already printed: %(name)s"
 msgstr "Bagde bereits gedruckt: %(name)s"
 
-#: badges/views/register.py:38
+#: badges/views/register.py:40
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"

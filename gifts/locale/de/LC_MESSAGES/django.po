@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-25 18:30+0200\n"
-"PO-Revision-Date: 2016-06-15 13:59+0200\n"
+"POT-Creation-Date: 2016-07-04 17:42+0200\n"
+"PO-Revision-Date: 2016-07-04 17:42+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,18 +16,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: gifts/forms/helpersgifts.py:20 gifts/templates/gifts/helper.html:33
 msgid "Delivered"
 msgstr "Ausgegeben"
+
+#: gifts/forms/helpersgifts.py:25 gifts/models/deservedgiftset.py:27
+#: gifts/templates/gifts/helper.html:40
+msgid "Present"
+msgstr "Anwesend"
 
 #: gifts/models/deservedgiftset.py:22
 msgid "Helper got gift"
 msgstr "Helfer hat Geschenk erhalten"
 
 #: gifts/models/gift.py:10 gifts/models/set.py:14
-#: gifts/templates/gifts/list.html:11 gifts/templates/gifts/list.html:31
+#: gifts/templates/gifts/list.html:11 gifts/templates/gifts/list.html:38
 #: gifts/templates/gifts/list_deposit.html:11
 msgid "Name"
 msgstr "Name"
@@ -53,7 +58,7 @@ msgid "Count"
 msgstr "Anzahl"
 
 #: gifts/models/set.py:19 gifts/templates/gifts/list.html:8
-#: gifts/templates/gifts/list.html:32 gifts/templates/gifts/not_active.html:6
+#: gifts/templates/gifts/list.html:39 gifts/templates/gifts/not_active.html:6
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -62,7 +67,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:58
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:65
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -76,7 +81,7 @@ msgstr "Willst du dieses Geschenk löschen?"
 
 #: gifts/templates/gifts/delete_gift.html:32
 #: gifts/templates/gifts/delete_gift_set.html:32
-#: gifts/templates/gifts/list.html:20 gifts/templates/gifts/list.html:48
+#: gifts/templates/gifts/list.html:24 gifts/templates/gifts/list.html:59
 msgid "Delete"
 msgstr "Löschen"
 
@@ -99,19 +104,19 @@ msgstr "Willst du dieses Geschenkset löschen?"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/helper.html:75
+#: gifts/templates/gifts/helper.html:82
 msgid "Save"
 msgstr "Speichern"
 
-#: gifts/templates/gifts/helper.html:47
+#: gifts/templates/gifts/helper.html:54
 msgid "No gifts"
 msgstr "Keine Geschenke"
 
-#: gifts/templates/gifts/helper.html:59
+#: gifts/templates/gifts/helper.html:66
 msgid "Given"
 msgstr "Ausgegeben"
 
-#: gifts/templates/gifts/helper.html:60
+#: gifts/templates/gifts/helper.html:67
 msgid "Total"
 msgstr "Insgesamt"
 
@@ -119,19 +124,19 @@ msgstr "Insgesamt"
 msgid "Manage gifts"
 msgstr "Geschenke verwalten"
 
-#: gifts/templates/gifts/list.html:19 gifts/templates/gifts/list.html:47
+#: gifts/templates/gifts/list.html:23 gifts/templates/gifts/list.html:58
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: gifts/templates/gifts/list.html:26
+#: gifts/templates/gifts/list.html:32
 msgid "Add gift"
 msgstr "Geschenk hinzufügen"
 
-#: gifts/templates/gifts/list.html:28
+#: gifts/templates/gifts/list.html:35
 msgid "Gift sets"
 msgstr "Geschenksets"
 
-#: gifts/templates/gifts/list.html:54
+#: gifts/templates/gifts/list.html:67
 msgid "Add gift set"
 msgstr "Geschenkset hinzufügen"
 
@@ -147,12 +152,12 @@ msgstr "Es muss kein Pfand mehr zurückgegeben werden."
 msgid "The management of gifts is not actived."
 msgstr "Die Verwaltung von Geschenken ist nicht aktiviert."
 
-#: gifts/views/gift.py:81
+#: gifts/views/gift.py:84
 #, python-format
 msgid "Gift deleted: %(name)s"
 msgstr "Geschenk gelöscht: %(name)s"
 
-#: gifts/views/set.py:77
+#: gifts/views/set.py:80
 #, python-format
 msgid "Gift set deleted: %(name)s"
 msgstr "Geschenkset gelöscht: %(name)s"
