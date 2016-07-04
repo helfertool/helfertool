@@ -16,6 +16,6 @@ def archived_not_available(function):
                               'registration/admin/archived_not_available.html',
                               context)
 
-        return function(*args, **kwargs)
+        return function(request, *args, **kwargs)
 
     return _decorated
