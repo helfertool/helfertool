@@ -29,7 +29,14 @@
             <ul>
                 {% for event in group.list|dictsort:"name.lower" %}
                     <li>
+                        {% if event.archived %}
+                            <s>
+                        {% endif %}
                         <a href="{% url 'form' event.url_name %}">{{ event }}</a>
+                        {% if event.archived %}
+                            </s>
+                        {% endif %}
+
                         (<a href="{% url 'manage_event' event.url_name %}">{% trans "Manage" %}</a>)
                     </li>
                 {% endfor %}
