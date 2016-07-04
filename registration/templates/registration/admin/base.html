@@ -39,6 +39,14 @@
     {% is_involved event as involved %}
     {% is_admin event as admin %}
 
+    {% if event and event.archived %}
+        <div class="alert alert-info" role="alert">
+            <p>
+                {% trans "This event is archived." %}
+            </p>
+        </div>
+    {% endif %}
+
     <h1>
         {% if event %}
             {{ event.name }}
@@ -75,7 +83,7 @@
                         <a href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a>
 
                         {# list of all (for user visible) jobs #}
-                        {% if request.resolver_match.url_name == "helpers" %}
+                        {% if request.resolver_match.url_name == "helpers" and not event.archived %}
                             <ul class="nav nav-pills nav-stacked nav-nested">
                             {% for job in event.job_set.all %}
                                 {% is_job_admin job as job_admin %}
@@ -87,34 +95,41 @@
                         {% endif %}
                     </li>
 
-                    <li><a href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a></li>
+                    {% if not event.archived %}
+                        <li><a href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a></li>
 
-                    {% if admin %}
-                        <li><a href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a></li>
+                        {% if admin %}
+                            <li><a href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a></li>
+                        {% endif %}
+
+                        <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
+                        <li><a href="{% url 'mail' event.url_name %}">{% trans "Send mails" %}</a></li>
                     {% endif %}
-
-                    <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
-                    <li><a href="{% url 'mail' event.url_name %}">{% trans "Send mails" %}</a></li>
                 </ul>
 
-                {% if admin or event.ask_shirt %}
-                    <h2>{% trans "Statistics" %}</h2>
-                    <ul class="nav nav-pills nav-stacked">
-                        {% if admin %}
-                            <li><a href="{% url 'statistics' event.url_name %}">{% trans "Overview" %}</a></li>
-                        {% endif %}
+                {% if not event.archived %}
+                    {% if admin or event.ask_shirt %}
+                        <h2>{% trans "Statistics" %}</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            {% if admin %}
+                                <li><a href="{% url 'statistics' event.url_name %}">{% trans "Overview" %}</a></li>
+                            {% endif %}
 
-                        {% if event.ask_shirt %}
-                            <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
-                        {% endif %}
-                    </ul>
+                            {% if event.ask_shirt %}
+                                <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
                 {% endif %}
 
                 {% if admin and event.gifts %}
                     <h2>{% trans "Gifts" %}</h2>
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a></li>
-                        <li><a href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a></li>
+
+                        {% if not event.archived %}
+                            <li><a href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a></li>
+                        {% endif %}
                     </ul>
                 {% endif %}
 
@@ -122,9 +137,11 @@
                     <h2>{% trans "Badges" %}</h2>
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a></li>
-                        <li><a href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a></li>
-                        {% if event.badge_settings.barcodes %}
-                            <li><a href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a></li>
+                        {% if not event.archived %}
+                            <li><a href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a></li>
+                            {% if event.badge_settings.barcodes %}
+                                <li><a href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a></li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 {% endif %}

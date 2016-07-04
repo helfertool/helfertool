@@ -16,7 +16,7 @@
     <h2>{% trans "Overview over helpers" %}</h2>
 
     {# export of all jobs #}
-    {% if admin %}
+    {% if admin and not event.archived %}
         <p>
             {% bootstrap_icon "download-alt" %}
             &nbsp;{% trans "Export" %}:
@@ -38,7 +38,7 @@
             {% endif %}
         </h3>
 
-        {% if job_admin %}
+        {% if job_admin and not event.archived%}
             <p>
                 <a href="{% url 'helpers' event.url_name job.pk %}">
                 {% bootstrap_icon "info-sign" %}
@@ -47,7 +47,7 @@
         {% endif %}
 
         <p>
-            {% blocktrans trimmed with number=job.coordinators.count%}
+            {% blocktrans trimmed with number=job.num_coordinators %}
                 Number of coordinators: {{ number }}
             {% endblocktrans %}
         </p>
@@ -69,7 +69,7 @@
                             {{ shift.time_hours }}
 
                             <span class="numbers">
-                                ({{ shift.num_helpers }}/{{ shift.number }})
+                                ({{ shift.num_helpers_archived }}/{{ shift.number }})
                             </span>
 
                             {% if shift.name %}

@@ -7,6 +7,7 @@ from collections import OrderedDict
 from .utils import nopermission
 
 from ..models import Event, Helper
+from ..decorators import archived_not_available
 
 
 class JobShirts:
@@ -25,6 +26,7 @@ def notactive(request):
 
 
 @login_required
+@archived_not_available
 def shirts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

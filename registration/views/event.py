@@ -7,8 +7,9 @@ from django.utils.translation import ugettext as _
 
 from .utils import is_admin, nopermission
 
+from ..decorators import archived_not_available
+from ..forms import EventForm, EventDeleteForm, EventArchiveForm
 from ..models import Event
-from ..forms import EventForm, EventDeleteForm
 from ..templatetags.permissions import has_addevent_group
 
 
@@ -84,3 +85,25 @@ def delete_event(request, event_url_name):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/delete_event.html', context)
+
+@login_required
+@archived_not_available
+def archive_event(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = EventArchiveForm(request.POST or None, instance=event)
+
+    if form.is_valid():
+        form.archive()
+        return HttpResponseRedirect(reverse('edit_event',
+                                            args=[event_url_name, ]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/archive_event.html', context)

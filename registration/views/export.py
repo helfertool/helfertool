@@ -10,9 +10,11 @@ from ..models import Event, Job
 from ..utils import escape_filename
 from ..export.excel import xlsx
 from ..export.pdf import pdf
+from ..decorators import archived_not_available
 
 
 @login_required
+@archived_not_available
 def export(request, event_url_name, type, job_pk=None):
     # check for valid export type
     if type not in ["excel", "pdf"]:

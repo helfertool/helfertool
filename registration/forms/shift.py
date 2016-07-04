@@ -12,7 +12,7 @@ from .fields import DualListField
 class ShiftForm(forms.ModelForm):
     class Meta:
         model = Shift
-        exclude = ['job', ]
+        exclude = ['job', 'archived_number', ]
         field_classes = {
             'gifts': DualListField,
         }

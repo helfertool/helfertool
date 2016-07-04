@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
+from registration.decorators import archived_not_available
 from registration.views.utils import nopermission
 from registration.models import Event, Helper
 
@@ -30,6 +31,7 @@ def list(request, event_url_name):
     return render(request, 'gifts/list.html', context)
 
 @login_required
+@archived_not_available
 def list_deposit(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

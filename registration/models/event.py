@@ -149,6 +149,11 @@ class Event(models.Model):
         verbose_name=_("Manage gifts for helpers"),
     )
 
+    archived = models.BooleanField(
+        default=False,
+        verbose_name=_("Event is archived"),
+    )
+
     def __str__(self):
         return self.name
 

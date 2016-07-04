@@ -10,9 +10,11 @@ from .utils import nopermission
 
 from ..models import Event
 from ..forms import MergeDuplicatesForm
+from ..decorators import archived_not_available
 
 
 @login_required
+@archived_not_available
 def duplicates(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -35,6 +37,8 @@ def duplicates(request, event_url_name):
     return render(request, 'registration/admin/duplicates.html', context)
 
 
+@login_required
+@archived_not_available
 def merge(request, event_url_name, email):
     event = get_object_or_404(Event, url_name=event_url_name)
 

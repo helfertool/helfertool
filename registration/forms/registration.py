@@ -124,6 +124,11 @@ class RegisterForm(forms.ModelForm):
         """
         super(RegisterForm, self).clean()
 
+        # check if event is archived -> block
+        if self.event.archived:
+            raise ValidationError(_("The registration is not possible since "
+                                    "the event is archived."))
+
         # check if helper if full age
         if self.ask_full_age and not self.cleaned_data['full_age']:
             raise ValidationError(_("You must be full aged. We are not "

@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 
 from ..forms import RegisterBadgeForm
 
+from registration.decorators import archived_not_available
 from registration.views.utils import nopermission
 from registration.models import Event
 
@@ -12,6 +13,7 @@ from .utils import notactive
 
 
 @login_required
+@archived_not_available
 def register(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

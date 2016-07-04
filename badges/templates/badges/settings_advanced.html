@@ -16,7 +16,9 @@
 
         {% bootstrap_form form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        {% if not event.archived %}
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        {% endif %}
     </form>
 
 
@@ -29,28 +31,34 @@
             <tr>
                 <th>{% trans "Name" %}</th>
                 <th>{% trans "LaTeX Name" %}</th>
-                <th></th>
+                {% if not event.archived %}
+                    <th></th>
+                {% endif %}
             </tr>
 
             {% for perm in permissions %}
                 <tr>
                     <td>{{ perm.name }}</td>
                     <td>{{ perm.latex_name }}</td>
-                    <td>
-                        <a href="{% url 'badges:edit_permission' event.url_name perm.pk %}">
-                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
-                        </a>
-                    </td>
+                    {% if not event.archived %}
+                        <td>
+                            <a href="{% url 'badges:edit_permission' event.url_name perm.pk %}">
+                                {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>
     {% endif %}
 
-    <p>
-        <a href="{% url 'badges:new_permission' event.url_name %}">
-            {% bootstrap_icon "plus" %} {% trans "Add permission" %}
-        </a>
-    </p>
+    {% if not event.archived %}
+        <p>
+            <a href="{% url 'badges:new_permission' event.url_name %}">
+                {% bootstrap_icon "plus" %} {% trans "Add permission" %}
+            </a>
+        </p>
+    {% endif %}
 
 {% endblock %}
 

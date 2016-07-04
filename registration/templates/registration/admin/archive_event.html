@@ -1,0 +1,45 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Archive event" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Event" %}</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "E-Mail" %}</th>
+                <td>{{ event.email }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Admins" %}</th>
+                <td>
+                    {% for admin in event.admins.all %}
+                        {% if admin.first_name and admin.last_name %}
+                            {{ admin.first_name }} {{ admin.last_name }} ({{ admin.username }})
+                        {% else %}
+                            {{ admin.username }}
+                        {% endif %}
+                        <br />
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+
+        <div class="alert alert-danger" role="alert">
+            <p><b>{% trans "Do you want to archive this event? This will delete all helpers and coordinators!" %}</b></p>
+
+            <p>{% trans "Only the number of registered helpers per shift and the number of coordinators are saved. All other data like shirt sizes are deleted irrevocably." %}</p>
+        </div>
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Yes, I want to archive this event and delete all personal data!" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}

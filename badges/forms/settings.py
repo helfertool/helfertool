@@ -12,6 +12,13 @@ class BadgeSettingsForm(forms.ModelForm):
         model = BadgeSettings
         exclude = ['event', 'defaults', ]
 
+    def __init__(self, *args, **kwargs):
+        super(BadgeSettingsForm, self).__init__(*args, **kwargs)
+
+        if self.instance.event.archived:
+            for field_id in self.fields:
+                self.fields[field_id].disabled = True
+
     def clean_latex_template(self):
         file = self.cleaned_data['latex_template']
 

@@ -22,7 +22,10 @@
                 <th>{% trans "Name" %}</th>
                 <th>{% trans "LaTeX Name" %}</th>
                 <th>{% trans "Permissions" %}</th>
-                <th></th>
+
+                {% if not event.archived %}
+                    <th></th>
+                {% endif %}
             </tr>
 
             {% for role in roles %}
@@ -36,21 +39,25 @@
                             {% endfor %}
                         </ul>
                     </td>
-                    <td>
-                        <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
-                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
-                        </a>
-                    </td>
+                    {% if not event.archived %}
+                        <td>
+                            <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
+                                {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>
     {% endif %}
 
-    <p>
-        <a href="{% url 'badges:new_role' event.url_name %}">
-            {% bootstrap_icon "plus" %} {% trans "Add role" %}
-        </a>
-    </p>
+    {% if not event.archived %}
+        <p>
+            <a href="{% url 'badges:new_role' event.url_name %}">
+                {% bootstrap_icon "plus" %} {% trans "Add role" %}
+            </a>
+        </p>
+    {% endif %}
 
     <h3>{% trans "Designs" %}</h3>
 
@@ -60,27 +67,35 @@
         <table class="table">
             <tr>
                 <th>{% trans "Name" %}</th>
-                <th></th>
+
+                {% if not event.archived %}
+                    <th></th>
+                {% endif %}
             </tr>
 
             {% for design in designs %}
                 <tr>
                     <td>{{ design.name }}</td>
-                    <td>
-                        <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
-                            {% bootstrap_icon "pencil" %} {% trans "Edit" %}
-                        </a>
-                    </td>
+
+                    {% if not event.archived %}
+                        <td>
+                            <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
+                                {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                            </a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>
     {% endif %}
 
-    <p>
-        <a href="{% url 'badges:new_design' event.url_name %}">
-            {% bootstrap_icon "plus" %} {% trans "Add design" %}
-        </a>
-    </p>
+    {% if not event.archived %}
+        <p>
+            <a href="{% url 'badges:new_design' event.url_name %}">
+                {% bootstrap_icon "plus" %} {% trans "Add design" %}
+            </a>
+        </p>
+    {% endif %}
 
 
     <h3>{% trans "Defaults" %}</h3>
@@ -119,6 +134,8 @@
         {% bootstrap_form_errors job_defaults_form %}
         {% bootstrap_form_errors job_defaults_form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        {% if not event.archived %}
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        {% endif %}
     </form>
 {% endblock %}

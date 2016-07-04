@@ -272,25 +272,24 @@ def helper_saved(sender, instance, using, **kwargs):
 
 def helper_deleted(sender, **kwargs):
     action = kwargs.pop('action')
-    if action != "post_remove":
-        return
 
-    helper = kwargs.pop('instance')
-    helper.check_delete()
+    if action == "post_remove":
+        helper = kwargs.pop('instance')
+        helper.check_delete()
 
 
 def coordinator_deleted(sender, **kwargs):
     action = kwargs.pop('action')
-    if action != "post_remove":
-        return
+    instance = kwargs.pop('instance')
 
-    pk_set = kwargs.pop('pk_set')
-    model = kwargs.pop('model')  # this is Helper
+    if action == "post_remove":
+        pk_set = kwargs.pop('pk_set')
+        model = kwargs.pop('model')  # this is Helper
 
-    # iterate over all deleted helpers, this should be only one helper
-    for helper_pk in pk_set:
-        helper = model.objects.get(pk=helper_pk)
-        helper.check_delete()
+        # iterate over all deleted helpers, this should be only one helper
+        for helper_pk in pk_set:
+            helper = model.objects.get(pk=helper_pk)
+            helper.check_delete()
 
 m2m_changed.connect(helper_deleted, sender=Helper.shifts.through)
 m2m_changed.connect(coordinator_deleted, sender=Job.coordinators.through)

@@ -9,6 +9,7 @@ from .utils import nopermission
 
 from ..models import Event, Link
 from ..forms import LinkForm, LinkDeleteForm
+from ..decorators import archived_not_available
 
 
 @login_required
@@ -28,6 +29,7 @@ def links(request, event_url_name):
 
 
 @login_required
+@archived_not_available
 def edit_link(request, event_url_name, link_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -58,6 +60,7 @@ def edit_link(request, event_url_name, link_pk=None):
 
 
 @login_required
+@archived_not_available
 def delete_link(request, event_url_name, link_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
     link = get_object_or_404(Link, pk=link_pk)

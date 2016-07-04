@@ -20,6 +20,10 @@ class BadgeDefaultsForm(forms.ModelForm):
         self.fields['design'].queryset = BadgeDesign.objects.filter(
             badge_settings=self.settings.pk)
 
+        if self.settings.event.archived:
+            for field_id in self.fields:
+                self.fields[field_id].disabled = True
+
 
 class BadgeJobDefaultsForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -45,6 +49,10 @@ class BadgeJobDefaultsForm(forms.Form):
                 initial=job.badge_defaults.no_default_role,
                 required=False,
                 label=_("No default role"))
+
+        if self.event.archived:
+            for field_id in self.fields:
+                self.fields[field_id].disabled = True
 
     def save(self):
         for job in self.event.job_set.all():

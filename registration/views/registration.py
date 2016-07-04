@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from .utils import nopermission, get_or_404
 
-from ..models import Event, Link
 from ..forms import RegisterForm
+from ..models import Event, Link
 
 from news.helper import news_test_email
 

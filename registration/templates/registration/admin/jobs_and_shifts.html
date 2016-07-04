@@ -5,10 +5,12 @@
 {% block admincontent %}
     <h2>{% trans "Jobs and shifts" %}</h2>
 
-    <p><a href="{% url 'new_job' event.url_name %}">
-        {% bootstrap_icon "plus" %}
-        {% trans "New job" %}
-    </a></p>
+    {% if not event.archived %}
+        <p><a href="{% url 'new_job' event.url_name %}">
+            {% bootstrap_icon "plus" %}
+            {% trans "New job" %}
+        </a></p>
+    {% endif %}
 
     {% for job in event.job_set.all %}
         <h3>{{ job.name }}
@@ -17,23 +19,25 @@
             {% endif %}
         </h3>
 
-        <p>
-            <a href="{% url 'edit_job' event.url_name job.pk %}">
-            {% bootstrap_icon "pencil" %}
-            {% trans "Edit" %}</a>
+        {% if not event.archived %}
+            <p>
+                <a href="{% url 'edit_job' event.url_name job.pk %}">
+                {% bootstrap_icon "pencil" %}
+                {% trans "Edit" %}</a>
 
-            &nbsp;
+                &nbsp;
 
-            <a href="{% url 'delete_job' event.url_name job.pk %}">
-            {% bootstrap_icon "remove" %}
-            {% trans "Delete" %}</a>
+                <a href="{% url 'delete_job' event.url_name job.pk %}">
+                {% bootstrap_icon "remove" %}
+                {% trans "Delete" %}</a>
 
-            &nbsp;
+                &nbsp;
 
-            <a href="{% url 'new_shift' event.url_name job.pk %}">
-            {% bootstrap_icon "plus" %}
-            {% trans "New shift" %}</a>
-        </p>
+                <a href="{% url 'new_shift' event.url_name job.pk %}">
+                {% bootstrap_icon "plus" %}
+                {% trans "New shift" %}</a>
+            </p>
+        {% endif %}
 
         {% if job.shift_set.count == 0 %}
             <p class="text-muted">{% trans "There are no shifts." %}</p>
@@ -47,7 +51,10 @@
                     {% if event.gifts %}
                         <th>{% trans "Gifts" %}</th>
                     {% endif %}
-                    <th></th>
+
+                    {% if not event.archived %}
+                        <th></th>
+                    {% endif %}
                 </tr>
                 {% for shift in job.shift_set.all %}
                     <tr>
@@ -67,17 +74,20 @@
                                 {% endfor %}
                             </td>
                         {% endif %}
-                        <td>
-                            <a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">
-                                {% bootstrap_icon "pencil" %}
-                                {% trans "Edit" %}
-                            </a>
-                            <br/>
-                            <a href="{% url 'delete_shift' event.url_name job.pk shift.pk %}">
-                                {% bootstrap_icon "remove" %}
-                                {% trans "Delete" %}
-                            </a>
-                        </td>
+
+                        {% if not event.archived %}
+                            <td>
+                                <a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">
+                                    {% bootstrap_icon "pencil" %}
+                                    {% trans "Edit" %}
+                                </a>
+                                <br/>
+                                <a href="{% url 'delete_shift' event.url_name job.pk shift.pk %}">
+                                    {% bootstrap_icon "remove" %}
+                                    {% trans "Delete" %}
+                                </a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </table>

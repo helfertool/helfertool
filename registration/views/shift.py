@@ -7,10 +7,12 @@ from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
 
+from ..decorators import archived_not_available
 from ..forms import ShiftForm, ShiftDeleteForm
 
 
 @login_required
+@archived_not_available
 def edit_shift(request, event_url_name, job_pk, shift_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, job_pk, shift_pk)
 
@@ -35,6 +37,7 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
 
 
 @login_required
+@archived_not_available
 def delete_shift(request, event_url_name, job_pk, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk, shift_pk)
 

@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
+from registration.decorators import archived_not_available
 from registration.views.utils import nopermission, is_involved
 from registration.models import Event
 
@@ -27,6 +28,7 @@ def _validate_gift_set(event, gift_set_pk):
 
 
 @login_required
+@archived_not_available
 def edit_gift_set(request, event_url_name, gift_set_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -56,6 +58,7 @@ def edit_gift_set(request, event_url_name, gift_set_pk=None):
 
 
 @login_required
+@archived_not_available
 def delete_gift_set(request, event_url_name, gift_set_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
 

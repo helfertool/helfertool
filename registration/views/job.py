@@ -7,11 +7,13 @@ from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
 
-from ..models import Event, Job
+from ..decorators import archived_not_available
 from ..forms import JobForm, JobDeleteForm
+from ..models import Event, Job
 
 
 @login_required
+@archived_not_available
 def edit_job(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -40,6 +42,7 @@ def edit_job(request, event_url_name, job_pk=None):
 
 
 @login_required
+@archived_not_available
 def delete_job(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 

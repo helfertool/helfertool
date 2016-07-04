@@ -13,7 +13,7 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['name', 'description', 'event', 'coordinators',
-                   'badge_defaults', ]
+                   'badge_defaults', 'archived_number_coordinators', ]
         field_classes = {
             'job_admins': UserSelectField,
         }

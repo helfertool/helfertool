@@ -13,7 +13,10 @@
                 <th>{% trans "Shifts" %}</th>
                 <th>{% trans "Usage" %}</th>
                 <th>{% trans "Creator" %}</th>
-                <th></th>
+
+                {% if not event.archived %}
+                    <th></th>
+                {% endif %}
             </tr>
 
             {% for link in links %}
@@ -27,20 +30,26 @@
                     </td>
                     <td>{{ link.usage }}</td>
                     <td>{{ link.creator.get_full_name | default:link.creator.username }}</td>
-                    <td>
-                        <a href="{% url "form_for_link" event.url_name link.id %}">{% bootstrap_icon "link" %} Link</a><br />
-                        <a href="{% url "edit_link" event.url_name link.id %}">{% bootstrap_icon "wrench" %} Edit</a><br />
-                        <a href="{% url "delete_link" event.url_name link.id %}">{% bootstrap_icon "remove" %} Delete</a>
-                    </td>
+
+                    {% if not event.archived %}
+                        <td>
+                            <a href="{% url "form_for_link" event.url_name link.id %}">{% bootstrap_icon "link" %} Link</a><br />
+                            <a href="{% url "edit_link" event.url_name link.id %}">{% bootstrap_icon "wrench" %} Edit</a><br />
+                            <a href="{% url "delete_link" event.url_name link.id %}">{% bootstrap_icon "remove" %} Delete</a>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>
     {% endif %}
 
-    <p>
-        <a href="{% url 'add_link' event.url_name %}">
-            {% bootstrap_icon "plus" %}
-            {% trans "Add link" %}
-        </a>
-   </p>
+    {% if not event.archived %}
+        <p>
+            <a href="{% url 'add_link' event.url_name %}">
+                {% bootstrap_icon "plus" %}
+                {% trans "Add link" %}
+            </a>
+       </p>
+    {% endif %}
+
 {% endblock %}

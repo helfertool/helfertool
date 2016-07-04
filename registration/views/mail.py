@@ -9,11 +9,13 @@ from smtplib import SMTPException
 
 from .utils import nopermission
 
-from ..models import Event
+from ..decorators import archived_not_available
 from ..forms import MailForm
+from ..models import Event
 
 
 @login_required
+@archived_not_available
 def mail(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

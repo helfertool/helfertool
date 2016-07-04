@@ -65,6 +65,11 @@ class Shift(models.Model):
         blank=True,
     )
 
+    archived_number = models.IntegerField(
+        default=0,
+        verbose_name=_("Number of registered helpers for archived event"),
+    )
+
     def __str__(self):
         if self.name:
             return "%s, %s, %s" % (self.job.name, self.name,
@@ -98,8 +103,17 @@ class Shift(models.Model):
         return "{}, {}".format(day, self.time())
 
     def num_helpers(self):
-        """ Returns the current number of helpers- """
+        """
+        Returns the current number of helpers, but 0 if event is archived.
+        """
         return self.helper_set.count()
+
+    def num_helpers_archived(self):
+        """ Returns the current number of helpers- """
+        if self.job.event.archived:
+            return self.archived_number
+        else:
+            return self.helper_set.count()
 
     def is_full(self):
         """ Check if the shift is full and return a boolean. """
@@ -113,7 +127,8 @@ class Shift(models.Model):
         if self.number == 0:
             return 0
 
-        return int(round(float(self.num_helpers()) / self.number * 100.0, 0))
+        num = self.num_helpers_archived()
+        return int(round(float(num) / self.number * 100.0, 0))
 
     @property
     def shirt_sizes(self):

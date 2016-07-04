@@ -7,6 +7,7 @@ from ..models import BadgeDesign, BadgePermission, BadgeRole
 from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
     BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm
 
+from registration.decorators import archived_not_available
 from registration.views.utils import nopermission, is_involved
 from registration.models import Event
 
@@ -14,6 +15,7 @@ from .utils import notactive
 
 
 @login_required
+@archived_not_available
 def edit_role(request, event_url_name, role_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 

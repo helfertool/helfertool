@@ -1,4 +1,4 @@
-from .event import EventForm, EventDeleteForm
+from .event import EventForm, EventDeleteForm, EventArchiveForm
 from .job import JobForm, JobDeleteForm
 from .shift import ShiftForm, ShiftDeleteForm
 from .helper import HelperForm, HelperDeleteForm, \

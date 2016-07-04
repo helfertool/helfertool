@@ -7,8 +7,9 @@ from django.utils.translation import ugettext as _
 
 from .utils import nopermission, is_involved
 
-from ..models import Event
+from ..decorators import archived_not_available
 from ..forms import CreateUserForm
+from ..models import Event
 from ..templatetags.permissions import has_adduser_group, has_perm_group
 
 
@@ -62,6 +63,7 @@ def add_user(request):
 
 
 @login_required
+@archived_not_available
 def coordinators(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -73,6 +75,7 @@ def coordinators(request, event_url_name):
 
 
 @login_required
+@archived_not_available
 def statistics(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -80,15 +83,13 @@ def statistics(request, event_url_name):
     if not event.is_admin(request.user):
         return nopermission(request)
 
-    # number of helpers
     num_helpers = event.helper_set.count()
 
-    # number of coordinators
     num_coordinators = 0
-    for job in event.job_set.all():
-        num_coordinators = num_coordinators + job.coordinators.count()
+    for helper in event.helper_set.all():
+        if helper.is_coordinator:
+            num_coordinators += 1
 
-    # number of vegetarians
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
     # render

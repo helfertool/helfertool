@@ -14,6 +14,7 @@ from ..checks import warnings_for_job
 from .. import tasks
 from ..creator import BadgeCreatorError
 
+from registration.decorators import archived_not_available
 from registration.views.utils import nopermission, get_or_404
 from registration.models import Event
 from registration.utils import escape_filename
@@ -55,6 +56,7 @@ class BadgeTaskResult:
 
 
 @login_required
+@archived_not_available
 def index(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -80,6 +82,7 @@ def index(request, event_url_name):
     return render(request, 'badges/index.html', context)
 
 
+@login_required
 def tasklist(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -127,6 +130,7 @@ def tasklist(request, event_url_name):
 
 
 @login_required
+@archived_not_available
 def warnings(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
@@ -149,6 +153,7 @@ def warnings(request, event_url_name, job_pk):
 
 
 @login_required
+@archived_not_available
 def generate(request, event_url_name, job_pk=None, generate_all=False):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
@@ -193,6 +198,7 @@ def generate(request, event_url_name, job_pk=None, generate_all=False):
     return HttpResponseRedirect(reverse('badges:index', args=[event.url_name]))
 
 @login_required
+@archived_not_available
 def failed(request, event_url_name, task_id):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -224,6 +230,7 @@ def failed(request, event_url_name, task_id):
                   context)
 
 @login_required
+@archived_not_available
 def download(request, event_url_name, task_id):
     event = get_object_or_404(Event, url_name=event_url_name)
 

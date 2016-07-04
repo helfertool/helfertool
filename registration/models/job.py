@@ -65,8 +65,20 @@ class Job(models.Model):
         null=True,
     )
 
+    archived_number_coordinators = models.IntegerField(
+        default=0,
+        verbose_name=_("Number of coordinators for archived event"),
+    )
+
     def __str__(self):
         return "%s" % self.name
+
+    @property
+    def num_coordinators(self):
+        if self.event.archived:
+            return self.archived_number_coordinators
+        else:
+            return self.coordinators.count()
 
     def is_admin(self, user):
         """ Check, if a user is admin of this job and returns a boolean.

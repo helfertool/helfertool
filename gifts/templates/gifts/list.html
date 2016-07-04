@@ -9,28 +9,37 @@
     <table class="table">
         <tr>
             <th>{% trans "Name" %}</th>
-            <th></th>
+            {% if not event.archived %}
+                <th></th>
+            {% endif %}
         </tr>
 
         {% for gift in gifts %}
             <tr>
                 <td>{{ gift.name }}</td>
-                <td>
-                    <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
-                    <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
-                </td>
+
+                {% if not event.archived %}
+                    <td>
+                        <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
+                        <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
 
-    <p><a href="{% url "gifts:add_gift" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift" %}</a></p>
+    {% if not event.archived %}
+        <p><a href="{% url "gifts:add_gift" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift" %}</a></p>
+    {% endif %}
 
     <h3>{% trans "Gift sets" %}</h3>
     <table class="table">
         <tr>
             <th>{% trans "Name" %}</th>
             <th>{% trans "Gifts" %}</th>
-            <th></th>
+            {% if not event.archived %}
+                <th></th>
+            {% endif %}
         </tr>
 
         {% for gift_set in gift_sets %}
@@ -43,14 +52,19 @@
                         {% endfor %}
                     </ul>
                 </td>
-                <td>
-                    <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
-                    <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
-                </td>
+
+                {% if not event.archived %}
+                    <td>
+                        <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
+                        <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>
 
-    <p><a href="{% url "gifts:add_gift_set" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift set" %}</a></p>
+    {% if not event.archived %}
+        <p><a href="{% url "gifts:add_gift_set" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift set" %}</a></p>
+    {% endif %}
 
 {% endblock %}
