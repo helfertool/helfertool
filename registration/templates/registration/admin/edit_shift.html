@@ -9,10 +9,12 @@
         <form action="{% url 'edit_shift' event.url_name job.pk shift.pk %}" method="post">
     {% else %}
         <h2>{% trans "New shift" %}</h2>
-
-        <form action="{% url 'new_shift' event.url_name job.pk %}" method="post">
     {% endif %}
+
+    <form action="" method="post">
         {% csrf_token %}
+
+        {% bootstrap_form_errors form %}
 
         <div class="row">
             <div class="col-xs-12 col-lg-5">
