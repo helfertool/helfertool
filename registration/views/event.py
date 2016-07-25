@@ -40,7 +40,8 @@ def edit_event(request, event_url_name=None):
 
         if not event_url_name:
             # event was created at the moment -> add user as admin
-            event.admins.add(request.user)
+            if not request.user.is_superuser:
+                event.admins.add(request.user)
             event.save()
 
             messages.success(request, _("Event was created: %(event)s") %
