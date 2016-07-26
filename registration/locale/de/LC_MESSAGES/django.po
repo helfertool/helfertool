@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-04 17:42+0200\n"
+"POT-Creation-Date: 2016-07-26 13:26+0200\n"
 "PO-Revision-Date: 2016-07-04 17:51+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -956,7 +956,7 @@ msgstr "Zusammenfassen"
 #: registration/templates/registration/admin/edit_helper.html:23
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
-#: registration/templates/registration/admin/edit_shift.html:31
+#: registration/templates/registration/admin/edit_shift.html:33
 #: registration/templates/registration/change_user.html:62
 msgid "Save"
 msgstr "Speichern"
@@ -1360,12 +1360,12 @@ msgstr "Das Passwort wurde erfolgreich geändert"
 msgid "Added user %(username)s"
 msgstr "Nutzer %(username)s hinzugefügt"
 
-#: registration/views/event.py:46
+#: registration/views/event.py:47
 #, python-format
 msgid "Event was created: %(event)s"
 msgstr "Veranstaltung wurde angelegt: %(event)s"
 
-#: registration/views/event.py:78
+#: registration/views/event.py:79
 #, python-format
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"

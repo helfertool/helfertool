@@ -186,7 +186,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'de'
 
 LANGUAGES = (
     ('de', _('German')),
