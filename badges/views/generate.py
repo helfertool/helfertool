@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
@@ -7,8 +6,6 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from celery.result import AsyncResult
-
-from datetime import datetime
 
 from ..checks import warnings_for_job
 from .. import tasks
@@ -197,6 +194,7 @@ def generate(request, event_url_name, job_pk=None, generate_all=False):
 
     return HttpResponseRedirect(reverse('badges:index', args=[event.url_name]))
 
+
 @login_required
 @archived_not_available
 def failed(request, event_url_name, task_id):
@@ -216,10 +214,7 @@ def failed(request, event_url_name, task_id):
     if result.failed():
         exception = result.result
 
-        if isinstance(exception, BadgeCreatorError):
-            error = exception.value
-            latex_output = result.result.get_latex_output()
-        else:
+        if not isinstance(exception, BadgeCreatorError):
             raise exception
 
     # return error message
@@ -228,6 +223,7 @@ def failed(request, event_url_name, task_id):
                'latex_output': exception.get_latex_output()}
     return render(request, 'badges/failed.html',
                   context)
+
 
 @login_required
 @archived_not_available
@@ -252,7 +248,7 @@ def download(request, event_url_name, task_id):
             del_task = task
             break
 
-    request.session['badge_tasks'].remove(task)
+    request.session['badge_tasks'].remove(del_task)
     request.session.modified = True
     # TODO: files can be deleted also, happens through celery at the moment
 
@@ -264,7 +260,8 @@ def download(request, event_url_name, task_id):
         filename = escape_filename("%s.pdf" % badge_task.dl_filename)
 
         response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+        response['Content-Disposition'] = 'attachment; filename="%s"' % \
+            filename
 
         # send file
         with open(badge_task.pdf, 'rb') as f:

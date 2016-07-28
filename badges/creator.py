@@ -8,6 +8,7 @@ import sys
 
 import badges.models
 
+
 class BadgeCreatorError(Exception):
     def __init__(self, value, latex_output=None):
         super(BadgeCreatorError, self).__init__(value)
@@ -62,7 +63,8 @@ class BadgeCreator:
             tmp['role'] = self._latex_escape(helper.badge.role)
         elif not helper.badge.no_default_role():
             if helper.is_coordinator:
-                tmp['role'] = self._latex_escape(self.settings.coordinator_title)
+                tmp['role'] = self._latex_escape(
+                    self.settings.coordinator_title)
             else:
                 tmp['role'] = self._latex_escape(self.settings.helper_title)
         else:

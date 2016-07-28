@@ -21,6 +21,7 @@ def scale_badge_photo(filepath):
                    settings.BADGE_PHOTO_MAX_SIZE))
     img.save(filepath)
 
+
 @shared_task
 def generate_badges(event_pk, job_pk, skip_printed):
     event = registration.models.Event.objects.get(pk=event_pk)
@@ -58,7 +59,7 @@ def generate_badges(event_pk, job_pk, skip_printed):
             if (not helpers_job or helpers_job == j):
                 # skip helpers if this is requested
                 if event.badge_settings.only_coordinators and \
-                    not h.is_coordinator:
+                        not h.is_coordinator:
                     continue
 
                 creator.add_helper(h)
@@ -76,12 +77,14 @@ def generate_badges(event_pk, job_pk, skip_printed):
 
     return pdf_filename, filename, cleanup_task.task_id
 
+
 @shared_task(bind=True)
 def cleanup(self, tmp_dir):
     # wait for BADGE_RM_DELAY seconds and then really delete the files
     rm = cleanup_rm.subtask((tmp_dir, ),
                             countdown=settings.BADGE_RM_DELAY)
-    cleanup_task = rm.delay()
+    rm.delay()
+
 
 @shared_task
 def cleanup_rm(tmp_dir):

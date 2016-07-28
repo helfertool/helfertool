@@ -46,7 +46,7 @@ BADGE_PDFLATEX = '/usr/bin/pdflatex'
 BADGE_PHOTO_MAX_SIZE = 1000
 
 BADGE_PDF_TIMEOUT = 30*60  # 30 minutes
-BADGE_RM_DELAY = 2*60 # 2 minutes
+BADGE_RM_DELAY = 2*60  # 2 minutes
 
 BADGE_LANGUAGE_CODE = 'de'
 
@@ -57,8 +57,8 @@ BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 # for e-mail debugging
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 1025
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -128,7 +128,7 @@ INSTALLED_APPS = (
     'news',
     'gifts',
     'registration',
-#    'debug_toolbar',
+    # 'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -178,9 +178,9 @@ DATABASES = {
 # Celery backend
 BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-#CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
-#CELERY_TASK_SERIALIZER = 'json'
-#CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
 
 
 # Internationalization
