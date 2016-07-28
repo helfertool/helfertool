@@ -1,16 +1,17 @@
 Important
 ==========
 
-* check/change redirect destinations on save
-* show duplicates, merge helpers
-* event date -> default for shift times
-* delete all helpers, keep statistics
+* fix merge
+* fix: "back to job"
+* implement present flag better
+
 
 Django things
 =============
 
 * all vs. distinct
 * add errors to all forms
+
 
 Design, JS
 ==========
@@ -24,14 +25,16 @@ Design, JS
   * change end when begin is changed
 * accept="image/*" for image uploads
 
+
 Registration
 ============
 
 * ask for preferred language on registration?
 * add ical file to confirmation mail (maybe not possible to send multiple
-  events in one mail, see ical branch)
-* bot protection
+  events in one mail, see ical branch -> add to registered page instead)
+* bot protection (seems not to be necessary until now)
 * reminder mail/SMS? (needs update of privacy statement)
+
 
 Admin area
 ==========
@@ -39,17 +42,23 @@ Admin area
 * change order of jobs
 * sort helpers and coordinators
 * mails
+    * keep history of mails
+    * drafts
+    * DMARC
     * custom sender?
     * attachments?
 * different available shirt sizes per event
 * fixed tshirt sizes, mark all changes since certain date?
 * copy event with job, shifts, settings, badge stuff but without admins and helpers
+* event date -> default for shift times
+
 
 User management
 ===============
 
 * new widget to select admins (enter username -> ajax -> suggestions)
 * forgot password
+
 
 Badges
 ======
@@ -59,9 +68,18 @@ Badges
 * for some jobs an upload of an image is possible
 * timeout and other protection for subprocess call (-> celery timeout)
 * Show missing images (image for coordinators or for all)
-* Badges only for coordinators?
-* check security of pdflatex, set more options
-* versioning of badges (for registration/validation)
+* Check security of pdflatex, set more options
+* Versioning of badges (for registration/validation)
+
+
+Gifts
+=====
+
+* add flags to excel export
+* condition for getting t-shirt (number of shifts or hours)
+* show all helpers of shift -> select if present and gift given
+* flag: buy t-shirt
+
 
 File uploads
 ============
@@ -71,27 +89,3 @@ File uploads
     * event is deleted (everything)
     * helper is deleted (photo)
     * badge stuff
-
-TUGARNIX
-========
-
-Gift
-    Deposit per gift
-    Deposit per giftset
-
-Export-Tabelle: die Flags abbilden
-
-* t-shirt
-    earned t-shirt?
-        number of shifts
-        number of hours
-
-fix merge
-
-implement present flag better
-
-show all helpers of shift -> select if present and gift given
-
-flag: buy t-shirt
-
-fix: "back to job"
