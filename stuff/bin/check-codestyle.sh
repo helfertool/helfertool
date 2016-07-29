@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODULES="helfertool registration badges"
+MODULES="helfertool registration badges news gifts"
 
 RED="\x1b[31m"
 GREEN="\x1b[32m"

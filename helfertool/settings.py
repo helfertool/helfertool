@@ -176,11 +176,17 @@ DATABASES = {
 }
 
 # Celery backend
-BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-# CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERIALIZER = 'json'
+# redis
+# BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# rabbitmq
+BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
+CELERY_RESULT_BACKEND = 'amqp://guest:guest@127.0.0.1/'
+
+CELERY_ACCEPT_CONTENT = ['json', ]  # do not use pickle
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 
 # Internationalization

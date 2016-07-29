@@ -1,4 +1,3 @@
-redis
 pylint
 pylint-django
 sphinx

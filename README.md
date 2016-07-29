@@ -60,7 +60,11 @@ following command inside the project directory:
     python manage.py migrate
 
 Since the software uses Celery you need one of supported message brokers, for
-development we use redis-server.
+development we use RabbitMQ with Docker:
+
+    docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq -p 5672:5672 rabbitmq
+
+Later a "docker start helfertool-rabbitmq" is enough to start RabbitMQ.
 
 Then a superuser should be created:
 
@@ -70,7 +74,7 @@ Now you can start the webserver for development:
 
     python manage.py runserver
 
-And start celery if you want to use the badge creation feature:
+And start celery:
 
     celery -A helfertool worker -c 2 --loglevel=info
 
