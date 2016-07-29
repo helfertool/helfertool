@@ -34,10 +34,18 @@ manually:
  * Python 2 or 3
  * pdflatex (from TeX Live)
  * Redis or RabbitMQ (RabbitMQ is recommended)
+ * DB software that is supported by Django (use SQLite for development)
 
 ### Python modules
 
-See requirements and requirements.dev, install with pip install -r requirements.
+The required Python modules are listed in the file requirements.txt, install
+it with pip:
+
+    pip install -r requirements.txt
+
+For development some more modules may be useful:
+
+    pip install -r requirements_dev.txt
 
 ### LaTeX packages
 
@@ -54,17 +62,29 @@ These packages are included in TeX Live and should be installed anyway.
 
 ## Run for development
 
+### Celery and RabbitMQ
+
+Since the software uses Celery you need one of supported message brokers, for
+development we use RabbitMQ with Docker (note: the RabbitMQ server listens on
+port 5672 to every incoming connection, you should configure a firewall):
+
+    docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
+        -p 5672:5672 rabbitmq
+
+To start the RabbitMQ server later:
+
+    docker start helfertool-rabbitmq
+
+And start celery:
+
+    celery -A helfertool worker -c 2 --loglevel=info
+
+### Django
+
 By default Django uses a SQLite database that can be generated using the
 following command inside the project directory:
 
     python manage.py migrate
-
-Since the software uses Celery you need one of supported message brokers, for
-development we use RabbitMQ with Docker:
-
-    docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq -p 5672:5672 rabbitmq
-
-Later a "docker start helfertool-rabbitmq" is enough to start RabbitMQ.
 
 Then a superuser should be created:
 
@@ -73,10 +93,6 @@ Then a superuser should be created:
 Now you can start the webserver for development:
 
     python manage.py runserver
-
-And start celery:
-
-    celery -A helfertool worker -c 2 --loglevel=info
 
 Now visit http://localhost:8000 with your browser.
 
@@ -107,7 +123,12 @@ In addition to the CLI of Django this software provides these commands:
 
 ## Using at to open the registration
 
+To open the registration for a event at a specific time, the at daemon can be
+used:
+
     at '13:55 10/18/2015'
+
+If you use a virtualenv you need a script like stuff/bin/open-registration.sh.
 
 # LICENSE
 
