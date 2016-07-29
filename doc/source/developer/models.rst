@@ -2,5 +2,5 @@
 Models
 ======
 
-.. automodule:: registration.models
-   :members:
+#.. automodule:: registration.models
+#   :members:

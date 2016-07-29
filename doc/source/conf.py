@@ -21,8 +21,11 @@ import os
 sys.path.insert(0, os.path.abspath('../../'))
 
 # Django
-from django.conf import settings
-settings.configure()
+#from django.conf import settings
+#settings.configure()
+#
+#import django
+#django.setup()
 
 # for git commit hash
 from sphinx.errors import SphinxError
@@ -52,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Helfertool'
-copyright = u'2015, Sven Hertle'
+copyright = u'2016, Sven Hertle'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -172,7 +175,7 @@ html_static_path = ['_static']
 #html_split_index = False
 
 # If true, links to the reST sources are added to the pages.
-#html_show_sourcelink = True
+html_show_sourcelink = False
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
 #html_show_sphinx = True

@@ -15,6 +15,7 @@ Welcome!
    user/access-control
    user/links
    user/badges/index
+   user/gifts
    user/faq/index
 
 ..   developer/index
