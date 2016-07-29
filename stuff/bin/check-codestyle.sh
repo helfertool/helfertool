@@ -11,7 +11,8 @@ PEP8_IGNORES="E121,E123,E126,E226,E24,E704"  # defaults
 PEP8_IGNORES="$PEP8_IGNORES,E402"
 
 # base directory
-basedir="$(dirname "$(dirname "$(readlink -f "$0")")")"
+basedir="$(dirname "$(dirname "$(dirname "$(readlink -f "$0")")")")"
+cd "$basedir"
 
 # modules given?
 if [ "$#" -gt "0" ] ; then
