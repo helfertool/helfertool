@@ -1,15 +1,30 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
+@python_2_unicode_compatible
 class SentMail(models.Model):
-    event = models.OneToOneField(
+    event = models.ForeignKey(
         'registration.Event'
+    )
+
+    user = models.ForeignKey(
+        User,
+    )
+
+    date = models.DateTimeField(
+        auto_now_add=True,
     )
 
     sender = models.EmailField()
 
-    cc = models.EmailField()
+    cc = models.EmailField(
+        blank=True,
+    )
 
-    response_to = models.EmailField()
+    response_to = models.EmailField(
+        blank=True,
+    )
 
     subject = models.CharField(
         max_length=200,
@@ -41,3 +56,10 @@ class SentMail(models.Model):
         'registration.Shift',
         blank=True,
     )
+
+    failed = models.BooleanField(
+        default=False,
+    )
+
+    def __str__(self):
+        return "%s - %s - %s" % (self.event, self.user, self.date)

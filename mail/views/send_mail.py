@@ -34,7 +34,8 @@ def send_mail(request, event_url_name):
             messages.error(request, _("Sending mails failed: %(error)s") %
                            {'error': str(e)})
 
-        return HttpResponseRedirect(reverse('mail', args=[event_url_name]))
+        return HttpResponseRedirect(reverse('mail:send',
+                                            args=[event_url_name]))
 
     # render page
     context = {'event': event,

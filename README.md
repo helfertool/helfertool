@@ -96,6 +96,18 @@ Now you can start the webserver for development:
 
 Now visit http://localhost:8000 with your browser.
 
+### Mails
+
+If you want to test the E-Mail part, you can start a SMTP debug server using
+this command:
+
+    python -m smtpd -n -c DebuggingServer localhost:1025
+
+Additionally uncomment the following lines in helfertool/settings.py:
+
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+
 ## Deployment
 
 There are a lot of possibilities to deploy a Django project. For

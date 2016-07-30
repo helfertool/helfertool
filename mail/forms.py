@@ -4,6 +4,8 @@ from django.core.mail import EmailMessage
 
 from smtplib import SMTPException
 
+from .models import SentMail
+
 
 class MailForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -68,7 +70,7 @@ class MailForm(forms.Form):
         self.fields['receiver'] = forms.MultipleChoiceField(
             choices=choices,
             label=_("Receivers"),
-            widget=forms.SelectMultiple(attrs={'class':'select2'}),
+            widget=forms.SelectMultiple(attrs={'class': 'select2'}),
         )
 
         self.fields['sender'] = forms.ChoiceField(
@@ -101,20 +103,33 @@ class MailForm(forms.Form):
         text = self.cleaned_data['text']
         sender = self.cleaned_data['sender']
 
+        # model for log
+        sentmail = SentMail.objects.create(
+            event=self.event,
+            user=self.user,
+            sender=sender,
+            subject=subject,
+            text=text,
+        )
+
         # get unique list of mail addresses
         seen = set()
         seen_add = seen.add  # performance FTW!
-        receiver_list = [h.email for h in self._get_helpers()
+        receiver_list = [h.email for h in self._get_helpers(sentmail)
                          if not (h.email in seen or seen_add(h.email))]
 
         # reply to and CC
         reply_to = []
         if self.cleaned_data['reply-to']:
             reply_to = [self.cleaned_data['reply-to'], ]
+            sentmail.reply_to = self.cleaned_data['reply-to']
 
         cc = []
         if self.cleaned_data['cc']:
             cc = [self.cleaned_data['cc'], ]
+            sentmail.cc = self.cleaned_data['cc']
+
+        sentmail.save()  # maybe cc or reply_to changed
 
         mail = EmailMessage(subject,
                             text,
@@ -126,27 +141,37 @@ class MailForm(forms.Form):
 
         try:
             mail.send(fail_silently=False)
-        except SMTPException:
+        except (SMTPException, ConnectionError):
+            sentmail.failed = True
+            sentmail.save()
             raise
 
-    def _get_helpers(self):
+    def _get_helpers(self, sentmail):
         receiver_list = self.cleaned_data['receiver']
 
         tmp = []
 
         for receiver in receiver_list:
             if receiver == "all":
+                sentmail.all_helpers_and_coordinators = True
                 return self.event.helper_set.distinct()
             elif receiver == "all-coords":
+                sentmail.all_coordinators = True
                 tmp.extend(self.event.all_coordinators)
             # helpers and coordinators for job
             elif receiver in self.jobs_all:
-                tmp.extend(self.jobs_all[receiver].helpers_and_coordinators())
+                job_obj = self.jobs_all[receiver]
+                sentmail.jobs_all.add(job_obj)
+                tmp.extend(job_obj.helpers_and_coordinators())
             # only coordinators for job
             elif receiver in self.jobs_coordinators:
-                tmp.extend(self.jobs_coordinators[receiver].coordinators.all())
+                job_obj = self.jobs_coordinators[receiver]
+                sentmail.jobs_only_coordinators.add(job_obj)
+                tmp.extend(job_obj.coordinators.all())
             # single shifts
             elif receiver in self.shifts:
-                tmp.extend(self.shifts[receiver].helper_set.all())
+                shift_obj = self.shifts[receiver]
+                sentmail.shifts.add(shift_obj)
+                tmp.extend(shift_obj.helper_set.all())
 
         return tmp
