@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'badges',
     'news',
     'gifts',
+    'mail',
     'registration',
     # 'debug_toolbar',
 )

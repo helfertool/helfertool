@@ -8,5 +8,4 @@ from .link import LinkForm, LinkDeleteForm
 from .registration import RegisterForm
 from .delete import DeleteForm
 from .user import UsernameForm, CreateUserForm
-from .mail import MailForm
 from .duplicates import MergeDuplicatesForm

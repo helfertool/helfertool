@@ -235,9 +235,4 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/l/(?P<link_pk>[0-9a-f\-]+)/$',
         views.form,
         name='form_for_link'),
-
-    # send mails
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/mail/$',
-        views.mail,
-        name='mail'),
 ]

@@ -7,16 +7,16 @@ from django.utils.translation import ugettext as _
 
 from smtplib import SMTPException
 
-from .utils import nopermission
+from registration.decorators import archived_not_available
+from registration.models import Event
+from registration.views.utils import nopermission
 
-from ..decorators import archived_not_available
 from ..forms import MailForm
-from ..models import Event
 
 
 @login_required
 @archived_not_available
-def mail(request, event_url_name):
+def send_mail(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
@@ -39,4 +39,4 @@ def mail(request, event_url_name):
     # render page
     context = {'event': event,
                'form': form}
-    return render(request, 'registration/admin/mail.html', context)
+    return render(request, 'mail/send_mail.html', context)
