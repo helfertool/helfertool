@@ -1,9 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
+
+from collections import OrderedDict
 
 from .utils import nopermission, is_involved
 
@@ -83,6 +86,7 @@ def statistics(request, event_url_name):
     if not event.is_admin(request.user):
         return nopermission(request)
 
+    # total number of helpers
     num_helpers = event.helper_set.count()
 
     num_coordinators = 0
@@ -92,9 +96,25 @@ def statistics(request, event_url_name):
 
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
+    # timeline
+    # replace with TruncDay when Django >= 1.10 is released
+    # https://code.djangoproject.com/ticket/26649#comment:2
+    timeline = event.helper_set \
+        .extra({'day': "date(timestamp)"}) \
+        .values('day') \
+        .annotate(count=Count('id')) \
+        .order_by('day')
+
+    timeline_sum = OrderedDict()
+    tmp = 0
+    for data in timeline:
+        tmp += data['count']
+        timeline_sum[data['day']] = tmp
+
     # render
     context = {'event': event,
                'num_helpers': num_helpers,
                'num_coordinators': num_coordinators,
-               'num_vegetarians': num_vegetarians}
+               'num_vegetarians': num_vegetarians,
+               'timeline': timeline_sum}
     return render(request, 'registration/admin/statistics.html', context)
