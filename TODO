@@ -42,8 +42,6 @@ Admin area
 * change order of jobs
 * sort helpers and coordinators
 * mails
-    * keep history of mails
-    * drafts
     * DMARC
     * custom sender?
     * attachments?
