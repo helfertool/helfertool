@@ -14,7 +14,7 @@
     <table class="table-condensed">
         <tr>
             <th>{% trans "Sent by" %}</th>
-            <td>{{ mail.user }}</td>
+            <td>{{ mail.user.get_full_name }}</td>
         </tr>
         <tr>
             <th>{% trans "Sender" %}</th>
