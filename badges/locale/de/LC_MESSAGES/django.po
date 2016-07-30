@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 13:26+0200\n"
-"PO-Revision-Date: 2016-06-11 22:10+0200\n"
+"POT-Creation-Date: 2016-07-30 16:21+0200\n"
+"PO-Revision-Date: 2016-07-30 16:21+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
 
 #: badges/forms/badge.py:38 badges/forms/design.py:23 badges/forms/design.py:29
 msgid "The file is not an image."
@@ -247,11 +247,11 @@ msgstr "Alle Badges"
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:60 badges/views/generate.py:185
+#: badges/templates/badges/index.html:60 badges/views/generate.py:182
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:65 badges/views/generate.py:187
+#: badges/templates/badges/index.html:65 badges/views/generate.py:184
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -370,11 +370,11 @@ msgstr "Warnungen für die Badge Generierung"
 msgid "There are no warnings."
 msgstr "Es gibt keine Warnungen."
 
-#: badges/views/generate.py:180
+#: badges/views/generate.py:177
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:182
+#: badges/views/generate.py:179
 msgid "{} (all)"
 msgstr "{} (alle)"
 

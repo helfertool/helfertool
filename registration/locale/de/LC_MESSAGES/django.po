@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 13:26+0200\n"
-"PO-Revision-Date: 2016-07-04 17:51+0200\n"
+"POT-Creation-Date: 2016-07-30 16:21+0200\n"
+"PO-Revision-Date: 2016-07-30 16:22+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -109,52 +109,6 @@ msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 #: registration/forms/helper.py:200
 msgid "Search term"
 msgstr "Suchbegriff"
-
-#: registration/forms/mail.py:33
-msgid "All helpers and coordinators"
-msgstr "Alle Helfer und Koordinatoren"
-
-#: registration/forms/mail.py:34
-#: registration/templates/registration/admin/base.html:105
-msgid "All coordinators"
-msgstr "Alle Koordinatoren"
-
-#: registration/forms/mail.py:36
-#: registration/templates/registration/admin/base.html:62
-msgid "General"
-msgstr "Allgemein"
-
-#: registration/forms/mail.py:43
-msgid "{}, Helpers and coordinators"
-msgstr "{}, Helfer und Koordinatoren"
-
-#: registration/forms/mail.py:48
-msgid "{}, Coordinators"
-msgstr "{}, Koordinatoren"
-
-#: registration/forms/mail.py:70
-msgid "Receivers"
-msgstr "Empfänger"
-
-#: registration/forms/mail.py:76
-msgid "Sender"
-msgstr "Absender"
-
-#: registration/forms/mail.py:80
-msgid "CC"
-msgstr "CC"
-
-#: registration/forms/mail.py:85
-msgid "Reply to"
-msgstr "Antwort an"
-
-#: registration/forms/mail.py:90
-msgid "Subject"
-msgstr "Betreff"
-
-#: registration/forms/mail.py:96
-msgid "Text"
-msgstr "Text"
 
 #: registration/forms/registration.py:56
 msgid "I confirm to be full aged."
@@ -438,7 +392,7 @@ msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
 #: registration/models/shift.py:64
-#: registration/templates/registration/admin/base.html:126
+#: registration/templates/registration/admin/base.html:131
 #: registration/templates/registration/admin/jobs_and_shifts.html:52
 #: registration/templates/registration/admin/view_helper.html:89
 msgid "Gifts"
@@ -604,7 +558,7 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:6
-#: registration/templates/registration/admin/base.html:157
+#: registration/templates/registration/admin/base.html:162
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -670,6 +624,10 @@ msgstr "Diese Veranstaltung wird archiviert."
 msgid "Administration"
 msgstr "Administration"
 
+#: registration/templates/registration/admin/base.html:62
+msgid "General"
+msgstr "Allgemein"
+
 #: registration/templates/registration/admin/base.html:67
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
@@ -708,105 +666,116 @@ msgstr "Helfer suchen"
 msgid "Duplicates"
 msgstr "Duplikate"
 
-#: registration/templates/registration/admin/base.html:106
-#: registration/templates/registration/admin/mail.html:6
-msgid "Send mails"
-msgstr "Mails senden"
+#: registration/templates/registration/admin/base.html:105
+msgid "All coordinators"
+msgstr "Alle Koordinatoren"
+
+#: registration/templates/registration/admin/base.html:110
+msgid "Mail"
+msgstr "E-Mail"
 
 #: registration/templates/registration/admin/base.html:112
+msgid "Send"
+msgstr "Senden"
+
+#: registration/templates/registration/admin/base.html:113
+msgid "All mails"
+msgstr "Alle E-Mails"
+
+#: registration/templates/registration/admin/base.html:117
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:115
+#: registration/templates/registration/admin/base.html:120
 msgid "Overview"
 msgstr "Übersicht"
 
-#: registration/templates/registration/admin/base.html:119
+#: registration/templates/registration/admin/base.html:124
 #: registration/templates/registration/admin/shirts.html:7
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:128
-#: registration/templates/registration/admin/base.html:139
+#: registration/templates/registration/admin/base.html:133
+#: registration/templates/registration/admin/base.html:144
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: registration/templates/registration/admin/base.html:131
+#: registration/templates/registration/admin/base.html:136
 msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
-#: registration/templates/registration/admin/base.html:137
+#: registration/templates/registration/admin/base.html:142
 msgid "Badges"
 msgstr "Badges"
 
-#: registration/templates/registration/admin/base.html:141
+#: registration/templates/registration/admin/base.html:146
 msgid "Generate"
 msgstr "Generieren"
 
-#: registration/templates/registration/admin/base.html:143
+#: registration/templates/registration/admin/base.html:148
 msgid "Registration"
 msgstr "Registrierung"
 
-#: registration/templates/registration/admin/base.html:154
+#: registration/templates/registration/admin/base.html:159
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:160
+#: registration/templates/registration/admin/base.html:165
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:161
+#: registration/templates/registration/admin/base.html:166
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:178
+#: registration/templates/registration/admin/base.html:183
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:179
+#: registration/templates/registration/admin/base.html:184
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:180
+#: registration/templates/registration/admin/base.html:185
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:181
+#: registration/templates/registration/admin/base.html:186
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:182
+#: registration/templates/registration/admin/base.html:187
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:183
+#: registration/templates/registration/admin/base.html:188
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:184
+#: registration/templates/registration/admin/base.html:189
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:185
+#: registration/templates/registration/admin/base.html:190
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:186
+#: registration/templates/registration/admin/base.html:191
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:187
+#: registration/templates/registration/admin/base.html:192
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:188
+#: registration/templates/registration/admin/base.html:193
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -1076,10 +1045,6 @@ msgstr "Ersteller"
 #: registration/templates/registration/admin/links.html:50
 msgid "Add link"
 msgstr "Link hinzufügen"
-
-#: registration/templates/registration/admin/mail.html:13
-msgid "Send"
-msgstr "Senden"
 
 #: registration/templates/registration/admin/merge.html:6
 msgid "Merge duplicates"
@@ -1389,15 +1354,6 @@ msgstr "Aufgabe gelöscht: %(name)s"
 msgid "Link deleted"
 msgstr "Link gelöscht"
 
-#: registration/views/mail.py:32
-msgid "Mail was sent successfully"
-msgstr "Die E-Mails wurden erfolgreich verschickt"
-
-#: registration/views/mail.py:34
-#, python-format
-msgid "Sending mails failed: %(error)s"
-msgstr "Die E-Mails konnten nicht verschickt werden: %(error)s"
-
 #: registration/views/permissions.py:37
 #, python-format
 msgid "%(username)s can add users now"
@@ -1416,6 +1372,39 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "All helpers and coordinators"
+#~ msgstr "Alle Helfer und Koordinatoren"
+
+#~ msgid "{}, Helpers and coordinators"
+#~ msgstr "{}, Helfer und Koordinatoren"
+
+#~ msgid "{}, Coordinators"
+#~ msgstr "{}, Koordinatoren"
+
+#~ msgid "Receivers"
+#~ msgstr "Empfänger"
+
+#~ msgid "Sender"
+#~ msgstr "Absender"
+
+#~ msgid "CC"
+#~ msgstr "CC"
+
+#~ msgid "Reply to"
+#~ msgstr "Antwort an"
+
+#~ msgid "Subject"
+#~ msgstr "Betreff"
+
+#~ msgid "Text"
+#~ msgstr "Text"
+
+#~ msgid "Mail was sent successfully"
+#~ msgstr "Die E-Mails wurden erfolgreich verschickt"
+
+#~ msgid "Sending mails failed: %(error)s"
+#~ msgstr "Die E-Mails konnten nicht verschickt werden: %(error)s"
 
 #~ msgid "Edit helper"
 #~ msgstr "Helfer bearbeiten"

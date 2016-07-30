@@ -57,8 +57,8 @@ BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 # for e-mail debugging
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 1025
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

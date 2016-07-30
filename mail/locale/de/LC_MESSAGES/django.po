@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-30 16:21+0200\n"
+"PO-Revision-Date: 2016-07-30 16:24+0200\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.8\n"
+
+#: mail/forms.py:35 mail/models.py:102
+msgid "All helpers and coordinators"
+msgstr "Alle Helfer und Koordinatoren"
+
+#: mail/forms.py:36 mail/models.py:106
+msgid "All coordinators"
+msgstr "Alle Koordinatoren"
+
+#: mail/forms.py:38
+msgid "General"
+msgstr "Allgemein"
+
+#: mail/forms.py:45 mail/models.py:109
+msgid "{}, Helpers and coordinators"
+msgstr "{}, Helfer und Koordinatoren"
+
+#: mail/forms.py:50 mail/models.py:112
+msgid "{}, Coordinators"
+msgstr "{}, Koordinatoren"
+
+#: mail/forms.py:72
+msgid "Receivers"
+msgstr "Empfänger"
+
+#: mail/forms.py:78 mail/templates/mail/show_mail.html:20
+msgid "Sender"
+msgstr "Sender"
+
+#: mail/forms.py:82 mail/templates/mail/show_mail.html:28
+msgid "CC"
+msgstr "CC"
+
+#: mail/forms.py:87 mail/templates/mail/show_mail.html:32
+msgid "Reply to"
+msgstr "Antwort an"
+
+#: mail/forms.py:92 mail/templates/mail/list_mails.html:11
+msgid "Subject"
+msgstr "Betreff"
+
+#: mail/forms.py:98
+msgid "Text"
+msgstr "Text"
+
+#: mail/templates/mail/list_mails.html:6
+msgid "All mails"
+msgstr "Alle E-Mails"
+
+#: mail/templates/mail/list_mails.html:12 mail/templates/mail/show_mail.html:36
+msgid "Receiver"
+msgstr "Empfänger"
+
+#: mail/templates/mail/list_mails.html:13 mail/templates/mail/show_mail.html:24
+msgid "Date"
+msgstr "Datum"
+
+#: mail/templates/mail/list_mails.html:35
+msgid "View"
+msgstr "Anzeigen"
+
+#: mail/templates/mail/send_mail.html:6
+msgid "Send mails"
+msgstr "E-Mails senden"
+
+#: mail/templates/mail/send_mail.html:13
+msgid "Send"
+msgstr "Senden"
+
+#: mail/templates/mail/show_mail.html:6
+msgid "Mail:"
+msgstr "E-Mail:"
+
+#: mail/templates/mail/show_mail.html:10
+msgid "This mail was not sent successfully."
+msgstr "Diese E-Mail konnte nicht erfolgreich verschickt werden."
+
+#: mail/templates/mail/show_mail.html:16
+msgid "Sent by"
+msgstr "Gesendet von"
+
+#: mail/views/send_mail.py:32
+msgid "Mail was sent successfully"
+msgstr "E-Mail erfolgreich verschickt"
+
+#: mail/views/send_mail.py:34
+#, python-format
+msgid "Sending mails failed: %(error)s"
+msgstr "Sender der E-Mails fehlgeschlagen: %(error)s"
