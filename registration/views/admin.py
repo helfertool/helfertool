@@ -86,30 +86,29 @@ def statistics(request, event_url_name):
     if not event.is_admin(request.user):
         return nopermission(request)
 
-    # total number of helpers
     num_helpers = event.helper_set.count()
 
     num_coordinators = 0
+    timeline = {}
     for helper in event.helper_set.all():
         if helper.is_coordinator:
             num_coordinators += 1
+        else:
+            day = helper.timestamp.strftime('%Y-%m-%d')
+            if day in timeline:
+                timeline[day] += 1
+            else:
+                timeline[day] = 1
 
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
-    # timeline
-    # replace with TruncDay when Django >= 1.10 is released
-    # https://code.djangoproject.com/ticket/26649#comment:2
-    timeline = event.helper_set \
-        .extra({'day': "date(timestamp)"}) \
-        .values('day') \
-        .annotate(count=Count('id')) \
-        .order_by('day')
-
+    # sum up timeline
+    timeline = OrderedDict(sorted(timeline.items()))
     timeline_sum = OrderedDict()
     tmp = 0
-    for data in timeline:
-        tmp += data['count']
-        timeline_sum[data['day']] = tmp
+    for day in timeline:
+        tmp += timeline[day]
+        timeline_sum[day] = tmp
 
     # render
     context = {'event': event,
