@@ -124,11 +124,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'ckeditor',
+    'registration',
     'badges',
     'news',
     'gifts',
     'mail',
-    'registration',
     # 'debug_toolbar',
 )
 
