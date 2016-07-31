@@ -34,6 +34,8 @@ Registration
   events in one mail, see ical branch -> add to registered page instead)
 * bot protection (seems not to be necessary until now)
 * reminder mail/SMS? (needs update of privacy statement)
+* show date and place for each event
+* somehow make the notes for a job more visible
 
 
 Admin area
@@ -77,6 +79,7 @@ Gifts
 * condition for getting t-shirt (number of shifts or hours)
 * show all helpers of shift -> select if present and gift given
 * flag: buy t-shirt
+* default gift sets
 
 
 File uploads
