@@ -6,6 +6,7 @@ from registration.views.utils import nopermission
 
 from ..models import SentMail
 
+
 @login_required
 def list_mails(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -15,7 +16,8 @@ def list_mails(request, event_url_name):
         return nopermission(request)
 
     all_sent_mails = SentMail.objects.filter(event=event)
-    sent_mails = filter(lambda s: s.can_see_mail(request.user), all_sent_mails)
+    sent_mails = list(filter(lambda s: s.can_see_mail(request.user),
+                             all_sent_mails))
 
     # render page
     context = {'event': event,

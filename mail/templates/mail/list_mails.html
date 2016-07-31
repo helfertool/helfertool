@@ -5,37 +5,41 @@
 {% block admincontent %}
     <h2>{% trans "All mails" %}</h2>
 
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>{% trans "Subject" %}</th>
-            <th>{% trans "Receiver" %}</th>
-            <th>{% trans "Date" %}</th>
-            <th></th>
-        </tr>
-        {% for mail in sent_mails %}
+    {% if sent_mails %}
+        <table class="table">
             <tr>
-                <td>
-                    {% if mail.failed %}
-                        <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
-                    {% endif %}
-                </td>
-                <td>{{ mail.subject }}</td>
-                <td>
-                    <ul>
-                        {% for tmp in mail.receiver_list %}
-                            <li>{{ tmp }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>{{ mail.date }}</td>
-                <td>
-                    <a href="{% url 'mail:show' event.url_name mail.pk %}">
-                        {% bootstrap_icon "search" %}
-                        {% trans "View" %}
-                    </a>
-                </td>
+                <th></th>
+                <th>{% trans "Subject" %}</th>
+                <th>{% trans "Receiver" %}</th>
+                <th>{% trans "Date" %}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for mail in sent_mails %}
+                <tr>
+                    <td>
+                        {% if mail.failed %}
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{ mail.subject }}</td>
+                    <td>
+                        <ul>
+                            {% for tmp in mail.receiver_list %}
+                                <li>{{ tmp }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>{{ mail.date }}</td>
+                    <td>
+                        <a href="{% url 'mail:show' event.url_name mail.pk %}">
+                            {% bootstrap_icon "search" %}
+                            {% trans "View" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "No mails were sent (or you are not allowed to see these mails)." %}</p>
+    {% endif %}
 {% endblock %}

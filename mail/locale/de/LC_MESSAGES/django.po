@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-30 21:08+0200\n"
-"PO-Revision-Date: 2016-07-30 16:28+0200\n"
+"POT-Creation-Date: 2016-07-31 14:35+0200\n"
+"PO-Revision-Date: 2016-07-31 14:36+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -54,7 +54,7 @@ msgstr "CC"
 msgid "Reply to"
 msgstr "Antwort an"
 
-#: mail/forms.py:92 mail/templates/mail/list_mails.html:11
+#: mail/forms.py:92 mail/templates/mail/list_mails.html:12
 msgid "Subject"
 msgstr "Betreff"
 
@@ -66,17 +66,21 @@ msgstr "Text"
 msgid "All mails"
 msgstr "Alle E-Mails"
 
-#: mail/templates/mail/list_mails.html:12 mail/templates/mail/show_mail.html:36
+#: mail/templates/mail/list_mails.html:13 mail/templates/mail/show_mail.html:36
 msgid "Receiver"
 msgstr "Empfänger"
 
-#: mail/templates/mail/list_mails.html:13 mail/templates/mail/show_mail.html:24
+#: mail/templates/mail/list_mails.html:14 mail/templates/mail/show_mail.html:24
 msgid "Date"
 msgstr "Datum"
 
-#: mail/templates/mail/list_mails.html:35
+#: mail/templates/mail/list_mails.html:36
 msgid "View"
 msgstr "Anzeigen"
+
+#: mail/templates/mail/list_mails.html:43
+msgid "No mails were sent (or you are not allowed to see these mails)."
+msgstr "Es wurden keine E-Mails verschickt (oder du kannst diese nicht sehen)."
 
 #: mail/templates/mail/send_mail.html:6
 msgid "Send mails"
