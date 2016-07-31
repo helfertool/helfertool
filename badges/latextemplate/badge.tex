@@ -1,3 +1,8 @@
+%
+% Unless you know what you do you should only change the parts that are marked
+% with "CHANGE".
+%
+
 \documentclass[a4paper,12pt]{article}
 \usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
@@ -83,6 +88,10 @@
 
 %
 % CHANGE: Insert your permissions here
+% If you add a permission with the name "foo" in the tool, you have to add
+% the following two lines with "perm-foo".
+% Remember to update or remove the following two sample permissions if you do
+% not use them.
 %
 \newboolean{badge@perm-finance}
 \define@key{badge}{perm-finance}{\setboolean{badge@perm-finance}{#1}}
@@ -97,11 +106,18 @@
 % Badge
 %
 
-% badge size
+%
+% CHANGE: Badge size
+% When changing these values you have most likely to update the number of
+% rows and columns in the advanced badge settings.
+%
 \newlength{\badgewidth}
 \setlength{\badgewidth}{8cm}
 \newlength{\badgeheight}
 \setlength{\badgeheight}{5cm}
+%
+% END CHANGE
+%
 
 % front
 \newcommand*\badgefront[1][]{%
@@ -124,6 +140,13 @@
 
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
+                %
+                % CHANGE: this is the content of the front side of the badge.
+                % All coordinates are relative to the badge size:
+                % (0, 0) is the top left corner
+                % (1, 1) is the bottom right corner
+                %
+
                 % name
                 \node[draw=none, text width=0.5\badgewidth] at (0.05,0.1) {\Large \badge@firstname\ \badge@surname};
 
@@ -141,6 +164,10 @@
                 {
                     \node at (0.6,0.05)  {\includegraphics[width=0.3\badgewidth]{\badge@photo}};
                 }
+
+                %
+                % END CHANGE
+                %
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
@@ -167,6 +194,10 @@
 
             % all coordinates are relative to background (0,0) to (1,1)
             \begin{scope}[shift={(bg.north west)}, x={(bg.north)}, y={(bg.west)}, scale=2]
+                %
+                % CHANGE: same again, but now the back side
+                %
+
                 % rotated name
                 \node[rotate=90, text width=\badgeheight, align=center] at (0.02,1) {\small \badge@firstname\ \badge@surname};
 
@@ -188,7 +219,7 @@
                     \node at (0.15,0.6) {\sout{Finanzbereich}};
                 }
 
-                % barcode
+                % barcode (change the position of the barcode if necessary of simply ignore it)
                 \ifthenelse{\equal{\badge@id}{}}
                 {
                 }
@@ -196,6 +227,10 @@
                     \fill [fill=white] (0.78,0) rectangle (1,1);
                     \node[rotate=90, text width=\badgeheight, align=center, color=black] at (0.82,1) {\barcode{\badge@id}};
                 }
+
+                %
+                % END CHANGE
+                %
             \end{scope}
         \end{tikzpicture}%
     \endgroup%
@@ -206,80 +241,82 @@
 %
 \begin{document}
     \centering
+    % The following line is replaced with the generated badge data, do not change it!
+
     %BADGEDATA%
 
 %
 % For testing
 %
 
-%    \begin{tabular}{|l|l|}
-%        \hline
-%        \badgefront[
-%            surname=b,
-%            bgback=,
-%            job=Aufgabe\ A,
-%            perm-food=true,
-%            bgfront=,
-%            shift=,
-%            roleid=helper,
-%            firstname=a,
-%            photo=,
-%            bgcolor=FFFFFF,
-%            id=0000000010,
-%            fontcolor=000000,
-%            perm-finance=false,
-%            role=Helfer] &
-%        \badgefront[surname=b,
-%            bgback=,
-%            job=Aufgabe\ A,
-%            perm-food=true,
-%            bgfront=,
-%            shift=,
-%            roleid=helper,
-%            firstname=a,
-%            photo=,
-%            bgcolor=FFFFFF,
-%            id=0000000011,
-%            fontcolor=000000,
-%            perm-finance=false,
-%            role=Helfer] \\
-%        \hline
-%    \end{tabular}
-%
-%    \pagebreak
-%
-%    \begin{tabular}{|l|l|}
-%        \hline
-%        \badgeback[surname=b,
-%            bgback=,
-%            job=Aufgabe\ A,
-%            perm-food=true,
-%            bgfront=,
-%            shift=,
-%            roleid=helper,
-%            firstname=a,
-%            photo=,
-%            bgcolor=FFFFFF,
-%            id=0000000011,
-%            fontcolor=000000,
-%            perm-finance=false,
-%            role=Helfer] &
-%        \badgeback[surname=b,
-%            bgback=,
-%            job=Aufgabe\ A,
-%            perm-food=true,
-%            bgfront=,
-%            shift=,
-%            roleid=helper,
-%            firstname=a,
-%            photo=,
-%            bgcolor=FFFFFF,
-%            id=0000000010,
-%            fontcolor=000000,
-%            perm-finance=false,
-%            role=Helfer] \\
-%            \hline
-%    \end{tabular}
-%
-%    \pagebreak
+    \begin{tabular}{|l|l|}
+        \hline
+        \badgefront[
+            surname=b,
+            bgback=,
+            job=Aufgabe\ A,
+            perm-food=true,
+            bgfront=,
+            shift=,
+            roleid=helper,
+            firstname=a,
+            photo=,
+            bgcolor=FFFFFF,
+            id=0000000010,
+            fontcolor=000000,
+            perm-finance=false,
+            role=Helfer] &
+        \badgefront[surname=b,
+            bgback=,
+            job=Aufgabe\ A,
+            perm-food=true,
+            bgfront=,
+            shift=,
+            roleid=helper,
+            firstname=a,
+            photo=,
+            bgcolor=FFFFFF,
+            id=0000000011,
+            fontcolor=000000,
+            perm-finance=false,
+            role=Helfer] \\
+        \hline
+    \end{tabular}
+
+    \pagebreak
+
+    \begin{tabular}{|l|l|}
+        \hline
+        \badgeback[surname=b,
+            bgback=,
+            job=Aufgabe\ A,
+            perm-food=true,
+            bgfront=,
+            shift=,
+            roleid=helper,
+            firstname=a,
+            photo=,
+            bgcolor=FFFFFF,
+            id=0000000011,
+            fontcolor=000000,
+            perm-finance=false,
+            role=Helfer] &
+        \badgeback[surname=b,
+            bgback=,
+            job=Aufgabe\ A,
+            perm-food=true,
+            bgfront=,
+            shift=,
+            roleid=helper,
+            firstname=a,
+            photo=,
+            bgcolor=FFFFFF,
+            id=0000000010,
+            fontcolor=000000,
+            perm-finance=false,
+            role=Helfer] \\
+            \hline
+    \end{tabular}
+
+    \pagebreak
 \end{document}
