@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-31 14:35+0200\n"
-"PO-Revision-Date: 2016-07-30 21:08+0200\n"
+"POT-Creation-Date: 2016-07-31 14:38+0200\n"
+"PO-Revision-Date: 2016-07-31 14:38+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -1127,6 +1127,10 @@ msgstr "Vegetarier"
 #: registration/templates/registration/admin/statistics.html:25
 msgid "Chronological development of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
+
+#: registration/templates/registration/admin/statistics.html:65
+msgid "No helpers are registered."
+msgstr "Es sind keine Helfer angemeldet."
 
 #: registration/templates/registration/admin/view_helper.html:11
 msgid "Back to job"

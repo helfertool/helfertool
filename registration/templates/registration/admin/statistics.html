@@ -24,40 +24,44 @@
 
     <h3>{% trans "Chronological development of registrations" %}</h3>
 
-    <div id="chart"></div>
+    {% if timeline %}
+        <div id="chart"></div>
 
-    <script>
-        var chart_data = [
-            {% for day,number in timeline.items %}
-                ["{{ day }}", {{ number }}],
-            {% endfor %}
-        ];
+        <script>
+            var chart_data = [
+                {% for day,number in timeline.items %}
+                    ["{{ day }}", {{ number }}],
+                {% endfor %}
+            ];
 
-        var chart_settings = {
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.DateAxisRenderer,
-                    tickOptions: {
-                        formatString: '%Y-%m-%d',
-                        show: false,
+            var chart_settings = {
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.DateAxisRenderer,
+                        tickOptions: {
+                            formatString: '%Y-%m-%d',
+                            show: false,
+                        },
                     },
                 },
-            },
-            cursor:{
-                show: true,
-                zoom:true,
-                showTooltip:false,
-            },
-            highlighter: {
-                show: true,
-            },
-            resetAxes: true,
-        };
+                cursor:{
+                    show: true,
+                    zoom:true,
+                    showTooltip:false,
+                },
+                highlighter: {
+                    show: true,
+                },
+                resetAxes: true,
+            };
 
-        var chart = $.jqplot('chart',  [chart_data], chart_settings);
+            var chart = $.jqplot('chart',  [chart_data], chart_settings);
 
-        $(window).resize(function() {
-            chart.replot();
-        });
-    </script>
+            $(window).resize(function() {
+                chart.replot();
+            });
+        </script>
+    {% else %}
+        <p class="text-muted">{% trans "No helpers are registered." %}</p>
+    {% endif %}
 {% endblock %}
