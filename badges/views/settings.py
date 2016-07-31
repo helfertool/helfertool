@@ -1,11 +1,10 @@
+from django.conf import settings as django_settings
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-from ..models import BadgeDesign, BadgePermission, BadgeRole
-from ..forms import BadgeSettingsForm, BadgeDesignForm, BadgePermissionForm, \
-    BadgeRoleForm, BadgeDefaultsForm, BadgeJobDefaultsForm
+from ..forms import BadgeSettingsForm, BadgeDefaultsForm, BadgeJobDefaultsForm
 
 from registration.views.utils import nopermission, is_involved
 from registration.models import Event
@@ -85,3 +84,26 @@ def settings_advanced(request, event_url_name):
                'permissions': permissions}
     return render(request, 'badges/settings_advanced.html',
                   context)
+
+
+@login_required
+def default_template(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # output
+    response = HttpResponse(content_type='application/x-tex')
+    response['Content-Disposition'] = 'attachment; filename="template.tex"'
+
+    # send file
+    with open(django_settings.BADGE_DEFAULT_TEMPLATE, 'rb') as f:
+        response.write(f.read())
+
+    return response

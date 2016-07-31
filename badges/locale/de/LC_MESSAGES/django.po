@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-31 14:38+0200\n"
-"PO-Revision-Date: 2016-07-31 14:38+0200\n"
+"POT-Creation-Date: 2016-07-31 15:29+0200\n"
+"PO-Revision-Date: 2016-07-31 15:29+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -103,7 +103,7 @@ msgstr "Keine Standard Rollen auf die Badges drucken"
 #: badges/models/design.py:37 badges/models/permission.py:16
 #: badges/models/role.py:17 badges/templates/badges/settings.html:22
 #: badges/templates/badges/settings.html:69
-#: badges/templates/badges/settings_advanced.html:32
+#: badges/templates/badges/settings_advanced.html:37
 msgid "Name"
 msgstr "Name"
 
@@ -194,7 +194,7 @@ msgstr "Badge für %(name)s"
 #: badges/templates/badges/edit_permission.html:13
 #: badges/templates/badges/edit_role.html:13
 #: badges/templates/badges/settings.html:138
-#: badges/templates/badges/settings_advanced.html:20
+#: badges/templates/badges/settings_advanced.html:25
 msgid "Save"
 msgstr "Speichern"
 
@@ -247,11 +247,11 @@ msgstr "Alle Badges"
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:60 badges/views/generate.py:182
+#: badges/templates/badges/index.html:60 badges/views/generate.py:181
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:65 badges/views/generate.py:184
+#: badges/templates/badges/index.html:65 badges/views/generate.py:183
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -288,18 +288,18 @@ msgid "There are no roles."
 msgstr "Es gibt keine Rollen."
 
 #: badges/templates/badges/settings.html:23
-#: badges/templates/badges/settings_advanced.html:33
+#: badges/templates/badges/settings_advanced.html:38
 msgid "LaTeX Name"
 msgstr "LaTeX Name"
 
 #: badges/templates/badges/settings.html:24
-#: badges/templates/badges/settings_advanced.html:25
+#: badges/templates/badges/settings_advanced.html:30
 msgid "Permissions"
 msgstr "Berechtigungen"
 
 #: badges/templates/badges/settings.html:45
 #: badges/templates/badges/settings.html:83
-#: badges/templates/badges/settings_advanced.html:46
+#: badges/templates/badges/settings_advanced.html:51
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -339,14 +339,23 @@ msgstr ""
 "Template angepasst werden!"
 
 #: badges/templates/badges/settings_advanced.html:12
+msgid "Here you can get the sample LaTeX template:"
+msgstr "Hier kannst du die Vorlage für das LaTeX Template bekommen:"
+
+#: badges/templates/badges/settings_advanced.html:13
+#: badges/templates/badges/tasklist.html:31
+msgid "Download"
+msgstr "Herunteladen"
+
+#: badges/templates/badges/settings_advanced.html:17
 msgid "Template"
 msgstr "Template"
 
-#: badges/templates/badges/settings_advanced.html:28
+#: badges/templates/badges/settings_advanced.html:33
 msgid "There are no permissions."
 msgstr "Es gibt keine Berechtigungen."
 
-#: badges/templates/badges/settings_advanced.html:58
+#: badges/templates/badges/settings_advanced.html:63
 msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 
@@ -358,10 +367,6 @@ msgstr "Logge dich bitte wieder ein."
 msgid "Show errors"
 msgstr "Fehler anzeigen"
 
-#: badges/templates/badges/tasklist.html:31
-msgid "Download"
-msgstr "Herunteladen"
-
 #: badges/templates/badges/warnings.html:6
 msgid "Warnings for badge generation"
 msgstr "Warnungen für die Badge Generierung"
@@ -370,11 +375,11 @@ msgstr "Warnungen für die Badge Generierung"
 msgid "There are no warnings."
 msgstr "Es gibt keine Warnungen."
 
-#: badges/views/generate.py:177
+#: badges/views/generate.py:176
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:179
+#: badges/views/generate.py:178
 msgid "{} (all)"
 msgstr "{} (alle)"
 

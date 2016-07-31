@@ -15,6 +15,10 @@ urlpatterns = [
         views.settings_advanced,
         name='settings_advanced'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/defaulttemplate',
+        views.default_template,
+        name='default_template'),
+
     #
     # edit badge
     #

@@ -6,7 +6,12 @@
     <h2>{% trans "Advanced badge settings" %}</h2>
 
     <div class="alert alert-warning" role="alert">
-        {% trans "Changes of most of this settings require an update of the LaTeX template!" %}
+        <p>{% trans "Changes of most of this settings require an update of the LaTeX template!" %}</p>
+
+        <p>
+            {% trans "Here you can get the sample LaTeX template:" %}
+            <a href="{% url 'badges:default_template' event.url_name %}">{% trans "Download" %}</a>
+        </p>
     </div>
 
     <h3>{% trans "Template" %}</h3>

@@ -50,6 +50,9 @@ BADGE_RM_DELAY = 2*60  # 2 minutes
 
 BADGE_LANGUAGE_CODE = 'de'
 
+BADGE_DEFAULT_TEMPLATE = os.path.join(BASE_DIR, 'badges', 'latextemplate',
+                                      'badge.tex')
+
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 

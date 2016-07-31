@@ -1,4 +1,4 @@
-from .settings import settings, settings_advanced
+from .settings import settings, settings_advanced, default_template
 from .permission import edit_permission
 from .role import edit_role
 from .design import edit_design
