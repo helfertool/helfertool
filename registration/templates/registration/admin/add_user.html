@@ -1,9 +1,17 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load setting %}
 
 {% block admincontent %}
     <h2>{% trans "Add user" %}</h2>
+
+    <div class="alert alert-warning">
+        <p>{% trans "The accounts from past events are still there, please do not add a new account if there is already an account." %}</p>
+
+        <p>{% trans "If you forgot the password to the old account, please write to:" %}
+            <a href="mailto:{% setting "CONTACT_MAIL" %}">{% setting "CONTACT_MAIL" %}</a></p>
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}

@@ -21,7 +21,7 @@
 
         <p>
             {% trans "If you want to use this website for your event please contact: " %}
-            <a href="mailto:helfertool@fs.tum.de">helfertool@fs.tum.de</a>
+            <a href="mailto:{% setting "CONTACT_MAIL" %}">{% setting "CONTACT_MAIL" %}</a>
         </p>
 
         {# logos #}

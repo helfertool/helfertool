@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-31 15:29+0200\n"
-"PO-Revision-Date: 2016-07-31 15:29+0200\n"
+"POT-Creation-Date: 2016-07-31 17:07+0200\n"
+"PO-Revision-Date: 2016-07-31 17:07+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -532,7 +532,7 @@ msgstr "Als Koordinator hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:14
 #: registration/templates/registration/admin/add_helper_to_shift.html:14
-#: registration/templates/registration/admin/add_user.html:13
+#: registration/templates/registration/admin/add_user.html:21
 #: registration/templates/registration/admin/permissions.html:35
 #: registration/templates/registration/admin/permissions.html:66
 msgid "Add"
@@ -557,10 +557,23 @@ msgstr ""
 "Es gibt keine Schichten mehr, bei denen du die Berechtigung hast, Helfer "
 "hinzuzufügen."
 
-#: registration/templates/registration/admin/add_user.html:6
+#: registration/templates/registration/admin/add_user.html:7
 #: registration/templates/registration/admin/base.html:170
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
+
+#: registration/templates/registration/admin/add_user.html:10
+msgid ""
+"The accounts from past events are still there, please do not add a new "
+"account if there is already an account."
+msgstr ""
+"Die Accounts von vergangenen Veranstaltungen sind immer noch da, bitte "
+"keinen neuen Account anlegen, wenn der alte Account noch existiert."
+
+#: registration/templates/registration/admin/add_user.html:12
+msgid "If you forgot the password to the old account, please write to:"
+msgstr ""
+"Wenn du das Passwort für den alten Account vergessen hast, schreibe bitte an:"
 
 #: registration/templates/registration/admin/archive_event.html:6
 #: registration/templates/registration/admin/edit_event.html:23
