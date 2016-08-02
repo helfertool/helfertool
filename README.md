@@ -12,7 +12,7 @@ It is recommended to use virtualenv:
 
 ### Software
 
- * Python 2 or 3
+ * Python 3
  * pdflatex (from TeX Live)
  * Redis or RabbitMQ (RabbitMQ is recommended)
  * DB software that is supported by Django (use SQLite for development)
