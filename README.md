@@ -84,7 +84,7 @@ this command:
 
     python -m smtpd -n -c DebuggingServer localhost:1025
 
-Additionally uncomment the following lines in helfertool/settings.py:
+Additionally uncomment the following lines in `helfertool/settings.py`:
 
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
@@ -96,6 +96,9 @@ helfen.fs.tum.de Apache2, uWSGI and MySQL are used. See here for the webserver
 part: https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/uwsgi/
 
 Instead of installing uwsgi with pip we used the Debian repository.
+
+The used uWSGI configuration is in `stuff/deployment/uwsgi.conf`. It uses
+Python 3.4 and automatically reloads Celery when uWSGI is touch-reloaded.
 
 
 # Command line interface
@@ -121,7 +124,7 @@ used:
 
     at '13:55 10/18/2015'
 
-If you use a virtualenv you need a script like stuff/bin/open-registration.sh.
+If you use a virtualenv you need a script like `stuff/bin/open-registration.sh`.
 
 # LICENSE
 
