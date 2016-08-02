@@ -11,10 +11,10 @@ import badges.models
 
 class BadgeCreatorError(Exception):
     def __init__(self, value, latex_output=None):
-        super(BadgeCreatorError, self).__init__(value)
-
         self.value = value
         self.latex_output = latex_output
+
+        Exception.__init__(self, value, latex_output)
 
     def is_latex_output(self):
         return self.latex_output is not None
