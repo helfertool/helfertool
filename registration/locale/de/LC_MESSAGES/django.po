@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-31 17:07+0200\n"
-"PO-Revision-Date: 2016-07-31 17:07+0200\n"
+"POT-Creation-Date: 2016-08-04 21:54+0200\n"
+"PO-Revision-Date: 2016-08-04 21:56+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -484,6 +484,7 @@ msgstr "Logout"
 #: registration/templates/base.html:67
 #: registration/templates/registration/login.html:6
 #: registration/templates/registration/login.html:18
+#: registration/templates/registration/login_banned.html:6
 msgid "Login"
 msgstr "Login"
 
@@ -1204,6 +1205,19 @@ msgstr "Der Link ist ungültig."
 #: registration/templates/registration/invalid_link.html:23
 msgid "Go to the registration."
 msgstr "Zur Anmeldung gehen."
+
+#: registration/templates/registration/login_banned.html:9
+msgid "Too many login attempts!"
+msgstr "Zu viele Login Versuche!"
+
+#: registration/templates/registration/login_banned.html:11
+#, python-format
+msgid ""
+"You tried to log in %(limit)s times with the wrong credentials, try again "
+"later."
+msgstr ""
+"Du hast versucht, dich %(limit)s mal mit falschen Zugangsdaten einzuloggen, "
+"versuche es später wieder."
 
 #: registration/templates/registration/mail/coordinator.txt:1
 #, python-format
