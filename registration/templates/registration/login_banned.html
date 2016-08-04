@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <h1>{% trans "Login" %}</h1>
+
+    <div class="alert alert-danger">
+        <p><b>{% trans "Too many login attempts!" %}</b></p>
+        <p>
+            {% blocktrans trimmed with limit=failure_limit %}
+                You tried to log in {{ limit }} times with the wrong credentials, try again later.
+            {% endblocktrans %}
+        </p>
+    </div>
+{% endblock %}

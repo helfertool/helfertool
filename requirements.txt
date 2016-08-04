@@ -3,6 +3,7 @@ django-modeltranslation
 django-bootstrap3
 django-bleach
 django-ckeditor
+django-axes
 celery
 amqp
 XlsxWriter

@@ -15,6 +15,8 @@ import os
 
 from django.utils.translation import ugettext_lazy as _
 
+from datetime import timedelta
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -86,6 +88,15 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# axes: restrict login failures
+AXES_LOGIN_FAILURE_LIMIT = 3
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_USE_USER_AGENT = False
+AXES_COOLOFF_TIME = timedelta(minutes=10)
+AXES_LOCKOUT_TEMPLATE = 'registration/login_banned.html'
+AXES_BEHIND_REVERSE_PROXY = False
+
+
 # Logging
 # LOGGING = {
 #     'version': 1,
@@ -125,6 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'axes',
     'bootstrap3',
     'ckeditor',
     'registration',
