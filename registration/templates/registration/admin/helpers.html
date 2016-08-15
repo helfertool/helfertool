@@ -21,10 +21,10 @@
             {% bootstrap_icon "download-alt" %}
             &nbsp;{% trans "Export" %}:
             &nbsp;<a href="{% url 'export' event.url_name 'excel' %}" class="icon">
-                <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
+                <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
             </a>
             &nbsp;<a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
-                <img src="{% static "registration/img/icon-pdf.svg" %}" class="icon" />
+                <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
             </a>
         </p>
     {% endif %}

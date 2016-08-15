@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "helfertool/base.html" %}
 {% load i18n bootstrap3 setting staticfiles %}
 
 {% block content %}
@@ -29,7 +29,7 @@
             {# AGPL #}
             <div class="col-sm-4">
                 <a {{ a_license }} style="text-decoration:none;">
-                    <img src="{% static "registration/img/agplv3.svg" %}"
+                    <img src="{% static "helfertool/img/agplv3.svg" %}"
                          alt="Licensed under AGPLv3."
                          title="Licensed under AGPLv3."
                          height="60px" />
@@ -39,7 +39,7 @@
             {# Django #}
             <div class="col-sm-4">
                 <a href="http://www.djangoproject.com/" target="_blank">
-                    <img src="{% static "registration/img/django.gif" %}"
+                    <img src="{% static "helfertool/img/django.gif" %}"
                          alt="Powered by Django."
                          title="Powered by Django." />
                 </a>
@@ -48,7 +48,7 @@
             {# Python #}
             <div class="col-sm-4">
                 <a href="http://www.python.org/" target="_blank">
-                    <img src="{% static "registration/img/python.svg" %}"
+                    <img src="{% static "helfertool/img/python.svg" %}"
                          alt="Powered by Python."
                          title="Powered by Python."
                          height="60px" />

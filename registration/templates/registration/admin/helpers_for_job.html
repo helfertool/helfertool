@@ -16,10 +16,10 @@
         {% bootstrap_icon "download-alt" %}
         &nbsp;{% trans "Export" %}:
         &nbsp;<a href="{% url 'jobexport' event.url_name 'excel' job.pk %}" class="icon">
-            <img src="{% static "registration/img/icon-xls.svg" %}" class="icon" />
+            <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
         </a>
         &nbsp;<a href="{% url 'jobexport' event.url_name 'pdf' job.pk %}" class="icon">
-            <img src="{% static "registration/img/icon-pdf.svg" %}" class="icon" />
+            <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
         </a>
     </p>
 

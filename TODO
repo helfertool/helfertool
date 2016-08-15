@@ -30,10 +30,7 @@ Registration
 ============
 
 * ask for preferred language on registration?
-* add ical file to confirmation mail (maybe not possible to send multiple
-  events in one mail, see ical branch -> add to registered page instead)
 * bot protection (seems not to be necessary until now)
-* reminder mail/SMS? (needs update of privacy statement)
 * show date and place for each event
 * somehow make the notes for a job more visible
 
