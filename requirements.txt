@@ -1,4 +1,4 @@
-Django
+Django<1.10
 django-modeltranslation
 django-bootstrap3
 django-bleach
