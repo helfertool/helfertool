@@ -68,6 +68,11 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
+# Bootstrap config
+BOOTSTRAP3 = {
+    'required_css_class': 'required',
+}
+
 # HTML sanitization for text fields
 BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'br', 'ul',
                        'ol', 'li']

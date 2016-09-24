@@ -16,7 +16,6 @@ Design, JS
 ==========
 
 * set width of table columns
-* modelform: mark optional fields
 * Number of helpers in shift: negative number can be selected, validation only on save
 * Javascript translation with Django
 * Datetimepickers for shift

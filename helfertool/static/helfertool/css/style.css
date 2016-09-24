@@ -141,3 +141,10 @@ div.logos-about div
 {
     padding-left: 1.5em;
 }
+
+/* required fields in form */
+.form-group.required > label::after
+{
+    content: "*";
+    color: red;
+}
