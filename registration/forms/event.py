@@ -34,7 +34,7 @@ class EventForm(forms.ModelForm):
 
         if self.instance.archived:
             for field_id in self.fields:
-                if field_id != "admins":
+                if field_id != "admins" and field_id != "url_name":
                     self.fields[field_id].disabled = True
 
 
