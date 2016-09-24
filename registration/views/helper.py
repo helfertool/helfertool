@@ -29,9 +29,6 @@ def helpers(request, event_url_name, job_pk=None):
         if not job.is_admin(request.user):
             return nopermission(request)
 
-        # set job to session, used after editing helper to return to this page
-        request.session['job_pk'] = job.pk
-
         # show list of helpers
         context = {'event': event, 'job': job}
         return render(request, 'registration/admin/helpers_for_job.html',
@@ -41,8 +38,6 @@ def helpers(request, event_url_name, job_pk=None):
     if not event.is_involved(request.user):
         return nopermission(request)
 
-    request.session.pop('job_pk', None)
-
     # overview over jobs
     context = {'event': event}
     return render(request, 'registration/admin/helpers.html', context)
@@ -50,15 +45,22 @@ def helpers(request, event_url_name, job_pk=None):
 
 @login_required
 def view_helper(request, event_url_name, helper_pk):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+    try:
+        return_to_job = int(request.GET.get('job', None))
+    except ValueError:
+        raise Http404
+    except TypeError:  # int(None) throws this
+        return_to_job = None
+
+    event, job, shift, helper = get_or_404(event_url_name,
+                                           job_pk=return_to_job,
+                                           helper_pk=helper_pk)
 
     if not helper.can_edit(request.user):
         return nopermission(request)
 
     edit_badge = event.badges and event.is_admin(request.user)
     edit_gifts = event.gifts and event.is_admin(request.user)
-
-    return_to_job = request.session.get('job_pk', None)
 
     gifts_form = None
     if edit_gifts:

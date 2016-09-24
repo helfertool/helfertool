@@ -53,7 +53,7 @@ coordinators. This is only important for the delete_helper view.
             <td>{{ helper.comment }}</td>
             <td>{{ helper.timestamp }}</td>
             <td>
-                <a href="{% url 'view_helper' event.url_name helper.pk %}">
+                <a href="{% url 'view_helper' event.url_name helper.pk %}?job={{ job.pk }}">
                     {% bootstrap_icon "search" %}
                     {% trans "View" %}
                 </a><br />
