@@ -17,6 +17,7 @@ class ShiftForm(forms.ModelForm):
             'gifts': DualListField,
         }
         widgets = {
+            'number': forms.NumberInput(attrs={'min': 0}),
             'begin': forms.DateTimeInput(attrs={'class': 'datetime'}),
             'end': forms.DateTimeInput(attrs={'class': 'datetime'}),
         }
