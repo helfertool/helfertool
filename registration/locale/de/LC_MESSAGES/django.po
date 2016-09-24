@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-04 21:54+0200\n"
-"PO-Revision-Date: 2016-08-04 21:56+0200\n"
+"PO-Revision-Date: 2016-09-24 19:37+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #: registration/export/excel.py:77 registration/forms/user.py:33
 #: registration/models/helper.py:90
@@ -632,7 +632,7 @@ msgstr "Admin"
 
 #: registration/templates/registration/admin/base.html:53
 msgid "This event is archived."
-msgstr "Diese Veranstaltung wird archiviert."
+msgstr "Diese Veranstaltung ist archiviert."
 
 #: registration/templates/registration/admin/base.html:62
 msgid "Administration"
