@@ -23,8 +23,8 @@ class BadgeSettingsForm(forms.ModelForm):
         file = self.cleaned_data['latex_template']
 
         # check mimetype with libmagic
-        filemime = magic.from_buffer(file.read(), mime=True)
-        if filemime != b'text/x-tex':
+        filemime = magic.from_buffer(file.read(1024), mime=True)
+        if filemime != 'text/x-tex':
             raise ValidationError(_("File does not contain LaTeX code."))
 
         # seek to begin (may be necessary for further use?)

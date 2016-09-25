@@ -9,4 +9,4 @@ amqp
 XlsxWriter
 Pillow
 reportlab
-python-magic
+python-magic>=0.4.12
