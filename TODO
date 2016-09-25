@@ -28,7 +28,6 @@ Registration
 
 * ask for preferred language on registration?
 * bot protection (seems not to be necessary until now)
-* show date and place for each event
 * somehow make the notes for a job more visible
 
 
@@ -51,7 +50,6 @@ User management
 ===============
 
 * new widget to select admins (enter username -> ajax -> suggestions)
-* forgot password
 
 
 Badges

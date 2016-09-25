@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'axes',
     'bootstrap3',
     'ckeditor',
+    'helfertool',
     'registration',
     'badges',
     'news',

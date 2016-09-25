@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 14:49+0200\n"
-"PO-Revision-Date: 2016-09-25 14:53+0200\n"
+"POT-Creation-Date: 2016-09-25 15:46+0200\n"
+"PO-Revision-Date: 2016-09-25 15:40+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.9\n"
 
-#: helfertool/settings.py:221
+#: helfertool/settings.py:222
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:222
+#: helfertool/settings.py:223
 msgid "English"
-msgstr "Englisch"
+msgstr "English"
 
 #: helfertool/templates/400.html:5
 msgid "Bad request"
@@ -122,12 +122,3 @@ msgstr "Impressum"
 #: helfertool/templates/helfertool/base.html:120
 msgid "About this software"
 msgstr "Über diese Software"
-
-#: news/models/person.py:8
-msgid "E-Mail"
-msgstr "E-Mail"
-
-#, fuzzy
-#~| msgid "E-Mail"
-#~ msgid "Mail:"
-#~ msgstr "E-Mail"
