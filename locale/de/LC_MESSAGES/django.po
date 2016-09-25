@@ -7,24 +7,121 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-04 21:54+0200\n"
-"PO-Revision-Date: 2016-07-31 15:29+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2016-09-25 14:49+0200\n"
+"PO-Revision-Date: 2016-09-25 14:53+0200\n"
+"Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 1.8.9\n"
 
-#: helfertool/settings.py:216
+#: helfertool/settings.py:221
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:217
+#: helfertool/settings.py:222
 msgid "English"
 msgstr "Englisch"
+
+#: helfertool/templates/400.html:5
+msgid "Bad request"
+msgstr "Bad request"
+
+#: helfertool/templates/400.html:7
+msgid "Error 400"
+msgstr "Error 400"
+
+#: helfertool/templates/400.html:11 helfertool/templates/403.html:11
+#: helfertool/templates/404.html:11 helfertool/templates/500.html:13
+msgid "Show events"
+msgstr "Veranstaltungen anzeigen"
+
+#: helfertool/templates/400.html:15 helfertool/templates/403.html:15
+#: helfertool/templates/404.html:15 helfertool/templates/500.html:17
+msgid "Contact"
+msgstr "Kontakt"
+
+#: helfertool/templates/403.html:5
+msgid "Permission denied"
+msgstr "Zugriff verweigert"
+
+#: helfertool/templates/403.html:7
+msgid "Error 403"
+msgstr "Error 403"
+
+#: helfertool/templates/404.html:5
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: helfertool/templates/404.html:7
+msgid "Error 404"
+msgstr "Error 404"
+
+#: helfertool/templates/500.html:5
+msgid "Internal server error"
+msgstr "Internal Server Error"
+
+#: helfertool/templates/500.html:7
+msgid "Error 500"
+msgstr "Error 500"
+
+#: helfertool/templates/500.html:9
+msgid "The admins were notified already."
+msgstr "Die Admins wurden bereits benachrichtigt."
+
+#: helfertool/templates/helfertool/base.html:29
+msgid "Registration for helpers"
+msgstr "Helferanmeldung"
+
+#: helfertool/templates/helfertool/base.html:55
+#, python-format
+msgid "Hello %(username)s!"
+msgstr "Hallo %(username)s!"
+
+#: helfertool/templates/helfertool/base.html:59
+#: helfertool/templates/helfertool/base.html:68
+msgid "Events"
+msgstr "Veranstaltungen"
+
+#: helfertool/templates/helfertool/base.html:61
+msgctxt "Admin interface"
+msgid "Admin"
+msgstr "Admin"
+
+#: helfertool/templates/helfertool/base.html:63
+msgid "Account"
+msgstr "Account"
+
+#: helfertool/templates/helfertool/base.html:64
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: helfertool/templates/helfertool/base.html:65
+msgid "Logout"
+msgstr "Logout"
+
+#: helfertool/templates/helfertool/base.html:67
+msgid "Login"
+msgstr "Login"
+
+#: helfertool/templates/helfertool/base.html:92
+msgid "Switch"
+msgstr "Switch"
+
+#: helfertool/templates/helfertool/base.html:114
+msgid "Privacy"
+msgstr "Datenschutz"
+
+#: helfertool/templates/helfertool/base.html:117
+msgid "Imprint"
+msgstr "Impressum"
+
+#: helfertool/templates/helfertool/base.html:120
+msgid "About this software"
+msgstr "Über diese Software"
 
 #: news/models/person.py:8
 msgid "E-Mail"

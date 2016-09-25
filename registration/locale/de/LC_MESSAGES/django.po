@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-04 21:54+0200\n"
+"POT-Creation-Date: 2016-09-25 14:49+0200\n"
 "PO-Revision-Date: 2016-09-24 19:37+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -160,15 +160,15 @@ msgstr ""
 "Du hast Schichten ausgewählt, die sich um mehr als %(minutes)d Minuten "
 "überschneiden."
 
-#: registration/forms/shift.py:40
+#: registration/forms/shift.py:41
 msgid "The begin of the shift must be set."
 msgstr "Der Beginn der Schicht muss gesetzt sein."
 
-#: registration/forms/shift.py:42
+#: registration/forms/shift.py:43
 msgid "The end of the shift must be set."
 msgstr "Das Ende der Schicht muss gesetzt sein."
 
-#: registration/forms/shift.py:46
+#: registration/forms/shift.py:47
 msgid "The begin of the shift must be before the end."
 msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 
@@ -221,7 +221,7 @@ msgstr "Text vor Anmeldung"
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:69 registration/templates/base.html:117
+#: registration/models/event.py:69
 msgid "Imprint"
 msgstr "Impressum"
 
@@ -402,101 +402,6 @@ msgstr "Geschenke"
 msgid "Number of registered helpers for archived event"
 msgstr "Anzahl der angemeldeten Helfer für archivierte Veranstaltung"
 
-#: registration/templates/400.html:5
-msgid "Bad request"
-msgstr "Bad request"
-
-#: registration/templates/400.html:7
-msgid "Error 400"
-msgstr "Error 400"
-
-#: registration/templates/400.html:11 registration/templates/403.html:11
-#: registration/templates/404.html:11 registration/templates/500.html:13
-msgid "Show events"
-msgstr "Veranstaltungen anzeigen"
-
-#: registration/templates/400.html:15 registration/templates/403.html:15
-#: registration/templates/404.html:15 registration/templates/500.html:17
-#: registration/templates/registration/about.html:20
-msgid "Contact"
-msgstr "Kontakt"
-
-#: registration/templates/403.html:5
-msgid "Permission denied"
-msgstr "Zugriff verweigert"
-
-#: registration/templates/403.html:7
-msgid "Error 403"
-msgstr "Error 403"
-
-#: registration/templates/404.html:5
-msgid "Page not found"
-msgstr "Seite nicht gefunden"
-
-#: registration/templates/404.html:7
-msgid "Error 404"
-msgstr "Error 404"
-
-#: registration/templates/500.html:5
-msgid "Internal server error"
-msgstr "Internal Server Error"
-
-#: registration/templates/500.html:7
-msgid "Error 500"
-msgstr "Error 500"
-
-#: registration/templates/500.html:9
-msgid "The admins were notified already."
-msgstr "Die Admins wurden bereits benachrichtigt."
-
-#: registration/templates/base.html:29
-msgid "Registration for helpers"
-msgstr "Helferanmeldung"
-
-#: registration/templates/base.html:55
-#, python-format
-msgid "Hello %(username)s!"
-msgstr "Hallo %(username)s!"
-
-#: registration/templates/base.html:59 registration/templates/base.html:68
-#: registration/templates/registration/index.html:5
-msgid "Events"
-msgstr "Veranstaltungen"
-
-#: registration/templates/base.html:61
-msgctxt "Admin interface"
-msgid "Admin"
-msgstr "Admin"
-
-#: registration/templates/base.html:63
-#: registration/templates/registration/change_user.html:7
-msgid "Account"
-msgstr "Account"
-
-#: registration/templates/base.html:64
-msgid "Documentation"
-msgstr "Dokumentation"
-
-#: registration/templates/base.html:65
-msgid "Logout"
-msgstr "Logout"
-
-#: registration/templates/base.html:67
-#: registration/templates/registration/login.html:6
-#: registration/templates/registration/login.html:18
-#: registration/templates/registration/login_banned.html:6
-msgid "Login"
-msgstr "Login"
-
-#: registration/templates/base.html:92
-msgid "Switch"
-msgstr "Switch"
-
-#: registration/templates/base.html:114
-msgid "Privacy"
-msgstr "Datenschutz"
-
-#: registration/templates/base.html:120
 #: registration/templates/registration/about.html:5
 msgid "About this software"
 msgstr "Über diese Software"
@@ -514,6 +419,10 @@ msgstr ""
 #: registration/templates/registration/about.html:16
 msgid "The source code can be found here:"
 msgstr "Der Quellcode kann hier gefunden werden:"
+
+#: registration/templates/registration/about.html:20
+msgid "Contact"
+msgstr "Kontakt"
 
 #: registration/templates/registration/about.html:23
 msgid "If you want to use this website for your event please contact: "
@@ -1167,6 +1076,10 @@ msgstr "Koordinator"
 msgid "Edit badge"
 msgstr "Badge bearbeiten"
 
+#: registration/templates/registration/change_user.html:7
+msgid "Account"
+msgstr "Account"
+
 #: registration/templates/registration/change_user.html:52
 msgid "Change password"
 msgstr "Passwort ändern"
@@ -1183,6 +1096,10 @@ msgstr "Das Passwort kann nicht geändert werden."
 #, python-format
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
+
+#: registration/templates/registration/index.html:5
+msgid "Events"
+msgstr "Veranstaltungen"
 
 #: registration/templates/registration/index.html:13
 #: registration/templates/registration/index.html:40
@@ -1205,6 +1122,12 @@ msgstr "Der Link ist ungültig."
 #: registration/templates/registration/invalid_link.html:23
 msgid "Go to the registration."
 msgstr "Zur Anmeldung gehen."
+
+#: registration/templates/registration/login.html:6
+#: registration/templates/registration/login.html:18
+#: registration/templates/registration/login_banned.html:6
+msgid "Login"
+msgstr "Login"
 
 #: registration/templates/registration/login_banned.html:9
 msgid "Too many login attempts!"
@@ -1370,12 +1293,12 @@ msgstr "Veranstaltung wurde angelegt: %(event)s"
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/helper.py:233
+#: registration/views/helper.py:235
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:269
+#: registration/views/helper.py:271
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
@@ -1407,6 +1330,58 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Bad request"
+#~ msgstr "Bad request"
+
+#~ msgid "Error 400"
+#~ msgstr "Error 400"
+
+#~ msgid "Show events"
+#~ msgstr "Veranstaltungen anzeigen"
+
+#~ msgid "Permission denied"
+#~ msgstr "Zugriff verweigert"
+
+#~ msgid "Error 403"
+#~ msgstr "Error 403"
+
+#~ msgid "Page not found"
+#~ msgstr "Seite nicht gefunden"
+
+#~ msgid "Error 404"
+#~ msgstr "Error 404"
+
+#~ msgid "Internal server error"
+#~ msgstr "Internal Server Error"
+
+#~ msgid "Error 500"
+#~ msgstr "Error 500"
+
+#~ msgid "The admins were notified already."
+#~ msgstr "Die Admins wurden bereits benachrichtigt."
+
+#~ msgid "Registration for helpers"
+#~ msgstr "Helferanmeldung"
+
+#~ msgid "Hello %(username)s!"
+#~ msgstr "Hallo %(username)s!"
+
+#~ msgctxt "Admin interface"
+#~ msgid "Admin"
+#~ msgstr "Admin"
+
+#~ msgid "Documentation"
+#~ msgstr "Dokumentation"
+
+#~ msgid "Logout"
+#~ msgstr "Logout"
+
+#~ msgid "Switch"
+#~ msgstr "Switch"
+
+#~ msgid "Privacy"
+#~ msgstr "Datenschutz"
 
 #~ msgid "All helpers and coordinators"
 #~ msgstr "Alle Helfer und Koordinatoren"
