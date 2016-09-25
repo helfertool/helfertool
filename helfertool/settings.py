@@ -232,11 +232,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files and media (CSS, JavaScript, Images)
-STATICFILES_DIRS = [
-    ('helfertool', os.path.join(BASE_DIR, 'helfertool', 'static', 'helfertool')),
-]
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'  # must end with '/' !
