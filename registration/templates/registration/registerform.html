@@ -75,20 +75,20 @@
     {# personal data, nothing special... #}
     <div class="row">
         <div class="col-xs-12 col-lg-5">
-            {% bootstrap_field form.firstname %}
-            {% bootstrap_field form.surname %}
-            {% bootstrap_field form.email %}
-            {% bootstrap_field form.phone %}
+            {% bootstrap_field form.firstname required_css_class='' %}
+            {% bootstrap_field form.surname required_css_class='' %}
+            {% bootstrap_field form.email required_css_class='' %}
+            {% bootstrap_field form.phone required_css_class='' %}
             {% if event.ask_shirt %}
-                {% bootstrap_field form.shirt %}
+                {% bootstrap_field form.shirt required_css_class='' %}
             {% endif %}
-            {% bootstrap_field form.infection_instruction %}
+            {% bootstrap_field form.infection_instruction required_css_class='' %}
             {% if event.ask_vegetarian %}
-                {% bootstrap_field form.vegetarian %}
+                {% bootstrap_field form.vegetarian required_css_class='' %}
             {% endif %}
-            {% bootstrap_field form.comment %}
+            {% bootstrap_field form.comment required_css_class='' %}
             {% if form.ask_full_age %}
-                {% bootstrap_field form.full_age %}
+                {% bootstrap_field form.full_age required_css_class='' %}
             {% endif %}
         </div>
     </div>
@@ -96,7 +96,7 @@
     {% if not form.internal %}
         <div class="row">
             <div class="col-lg-12">
-                {% bootstrap_field form.privacy_statement %}
+                {% bootstrap_field form.privacy_statement required_css_class='' %}
 
                 <div class="well">
                     {% include "registration/privacy/statement.html" %}
@@ -108,7 +108,7 @@
     {% if form.ask_news %}
         <div class="row">
             <div class="col-lg-12">
-                {% bootstrap_field form.news %}
+                {% bootstrap_field form.news required_css_class='' %}
 
                 <div class="well">
                     {% include "registration/privacy/news.html" %}
