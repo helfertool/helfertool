@@ -1,6 +1,7 @@
-Django<1.10
-django-modeltranslation
+Django
+django-modeltranslation>=0.12
 django-bootstrap3
+html5lib<0.99999999
 django-bleach
 django-ckeditor
 django-axes
