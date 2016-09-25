@@ -21,5 +21,7 @@
 
     {% include "registration/registerform.html" with event=event form=form %}
 
-    {{ event.imprint | safe }}
+    <div style="margin-top: 2em;">
+        {{ event.imprint | safe }}
+    </div>
 {% endblock %}
