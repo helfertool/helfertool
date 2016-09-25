@@ -78,7 +78,7 @@
 
 
                             <div class="progress">
-                                {% if shift.helpers_percent = 100 %}
+                                {% if shift.helpers_percent == 100 %}
                                     <div class="progress-bar progress-bar-success" role="progressbar"
                                 {% elif shift.helpers_percent < 50 %}
                                     <div class="progress-bar progress-bar-danger" role="progressbar"
