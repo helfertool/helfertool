@@ -27,6 +27,12 @@
 
                 &nbsp;
 
+                <a href="{% url 'duplicate_job' event.url_name job.pk %}">
+                {% bootstrap_icon "duplicate" %}
+                {% trans "Duplicate" %}</a>
+
+                &nbsp;
+
                 <a href="{% url 'delete_job' event.url_name job.pk %}">
                 {% bootstrap_icon "remove" %}
                 {% trans "Delete" %}</a>

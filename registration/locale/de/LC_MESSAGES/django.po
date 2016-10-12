@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-25 15:46+0200\n"
-"PO-Revision-Date: 2016-09-25 15:40+0200\n"
+"POT-Creation-Date: 2016-10-12 21:49+0200\n"
+"PO-Revision-Date: 2016-10-12 21:50+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -80,7 +80,7 @@ msgstr "Koordinatoren"
 
 #: registration/export/pdf.py:42 registration/models/job.py:34
 #: registration/templates/registration/admin/coordinators.html:16
-#: registration/templates/registration/admin/jobs_and_shifts.html:49
+#: registration/templates/registration/admin/jobs_and_shifts.html:55
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
 #: registration/templates/registration/helper_data.html:6
@@ -372,18 +372,18 @@ msgstr "Name (optional)"
 
 #: registration/models/shift.py:43
 #: registration/templates/registration/admin/delete_shift.html:17
-#: registration/templates/registration/admin/jobs_and_shifts.html:47
+#: registration/templates/registration/admin/jobs_and_shifts.html:53
 msgid "Begin"
 msgstr "Anfang"
 
 #: registration/models/shift.py:47
 #: registration/templates/registration/admin/delete_shift.html:21
-#: registration/templates/registration/admin/jobs_and_shifts.html:48
+#: registration/templates/registration/admin/jobs_and_shifts.html:54
 msgid "End"
 msgstr "Ende"
 
 #: registration/models/shift.py:52
-#: registration/templates/registration/admin/jobs_and_shifts.html:50
+#: registration/templates/registration/admin/jobs_and_shifts.html:56
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
@@ -393,7 +393,7 @@ msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
 #: registration/models/shift.py:64
 #: registration/templates/registration/admin/base.html:139
-#: registration/templates/registration/admin/jobs_and_shifts.html:52
+#: registration/templates/registration/admin/jobs_and_shifts.html:58
 #: registration/templates/registration/admin/view_helper.html:89
 msgid "Gifts"
 msgstr "Geschenke"
@@ -722,8 +722,8 @@ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 #: registration/templates/registration/admin/delete_shift.html:36
 #: registration/templates/registration/admin/helpers_table.html:64
 #: registration/templates/registration/admin/helpers_table.html:69
-#: registration/templates/registration/admin/jobs_and_shifts.html:32
-#: registration/templates/registration/admin/jobs_and_shifts.html:87
+#: registration/templates/registration/admin/jobs_and_shifts.html:38
+#: registration/templates/registration/admin/jobs_and_shifts.html:93
 #: registration/templates/registration/admin/view_helper.html:40
 #: registration/templates/registration/admin/view_helper.html:58
 msgid "Delete"
@@ -831,6 +831,15 @@ msgstr ""
 msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
+#: registration/templates/registration/admin/duplicate_job.html:6
+msgid "Duplicate job:"
+msgstr "Aufgabe duplizieren:"
+
+#: registration/templates/registration/admin/duplicate_job.html:13
+#: registration/templates/registration/admin/jobs_and_shifts.html:32
+msgid "Duplicate"
+msgstr "Duplizieren"
+
 #: registration/templates/registration/admin/duplicates.html:8
 msgid ""
 "For this detection of helpers that are registered multiple times only the "
@@ -892,7 +901,7 @@ msgid "Edit shift"
 msgstr "Schicht bearbeiten"
 
 #: registration/templates/registration/admin/edit_shift.html:11
-#: registration/templates/registration/admin/jobs_and_shifts.html:38
+#: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "New shift"
 msgstr "Neue Schicht"
 
@@ -921,7 +930,7 @@ msgid "Number of coordinators: %(number)s"
 msgstr "Anzahl der Koordinatoren: %(number)s"
 
 #: registration/templates/registration/admin/helpers.html:66
-#: registration/templates/registration/admin/jobs_and_shifts.html:63
+#: registration/templates/registration/admin/jobs_and_shifts.html:69
 msgid "Blocked"
 msgstr "Gesperrt"
 
@@ -948,12 +957,12 @@ msgid "View"
 msgstr "Anzeigen"
 
 #: registration/templates/registration/admin/jobs_and_shifts.html:26
-#: registration/templates/registration/admin/jobs_and_shifts.html:82
+#: registration/templates/registration/admin/jobs_and_shifts.html:88
 #: registration/templates/registration/admin/view_helper.html:19
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: registration/templates/registration/admin/jobs_and_shifts.html:43
+#: registration/templates/registration/admin/jobs_and_shifts.html:49
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
 
