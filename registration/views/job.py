@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from .utils import nopermission, get_or_404
 
 from ..decorators import archived_not_available
-from ..forms import JobForm, JobDeleteForm
+from ..forms import JobForm, JobDeleteForm, JobDuplicateForm
 from ..models import Event, Job
 
 
@@ -78,3 +78,26 @@ def delete_job(request, event_url_name, job_pk):
                'helpers_registered': helpers_registered,
                'form': form}
     return render(request, 'registration/admin/delete_job.html', context)
+
+@login_required
+@archived_not_available
+def duplicate_job(request, event_url_name, job_pk):
+    event, job, shift, helper = get_or_404(event_url_name, job_pk)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = JobDuplicateForm(request.POST or None, other_job=job)
+
+    if form.is_valid():
+        job = form.save()
+        return HttpResponseRedirect(reverse('jobs_and_shifts',
+                                            args=[event_url_name]))
+
+    # render page
+    context = {'event': event,
+               'job': job,
+               'form': form}
+    return render(request, 'registration/admin/duplicate_job.html', context)

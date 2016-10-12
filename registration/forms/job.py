@@ -12,6 +12,8 @@ from .fields import UserSelectField
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
+
+        # note: change also below in JobDuplicateForm
         exclude = ['name', 'description', 'event', 'coordinators',
                    'badge_defaults', 'archived_number_coordinators', ]
         field_classes = {
@@ -52,3 +54,18 @@ class JobDeleteForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
+class JobDuplicateForm(JobForm):
+    def __init__(self, *args, **kwargs):
+        self.other_job = kwargs.pop('other_job')
+        kwargs['event'] = self.other_job.event
+        super(JobDuplicateForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        super(JobDuplicateForm, self).save(commit=True)  # we have to save
+
+        for shift in self.other_job.shift_set.all():
+            new_shift = shift
+            new_shift.pk = None
+            new_shift.job = self.instance
+            new_shift.save()
