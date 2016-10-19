@@ -27,6 +27,8 @@ class MergeDuplicatesForm(forms.Form):
                 for job in helper.coordinated_jobs:
                     job.coordinators.add(remaining_helper)
 
+                # FIXME: merge gifts
+
                 helper.delete()
 
         return remaining_helper

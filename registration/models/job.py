@@ -5,7 +5,9 @@ from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
+
 from collections import OrderedDict
+from copy import deepcopy
 
 from badges.models import BadgeDefaults
 
@@ -135,6 +137,26 @@ class Job(models.Model):
                                          key=lambda s: s.begin)
 
         return ordered_shifts
+
+    def duplicate(self, new_event):
+        new_job = deepcopy(self)
+
+        new_job.pk = None
+        new_job.event = new_event
+        new_job.archived_number_coordinators = 0
+
+        # role and design will be updated from BadgeSettings.duplicate
+        new_job.badge_defaults = self.badge_defaults.duplicate()
+
+        new_job.save()
+
+        new_job.job_admins.clear()
+        new_job.coordinators.clear()
+
+        for shift in self.shift_set.all():
+            shift.duplicate(new_job)
+
+        return new_job
 
 
 @receiver(pre_save, sender=Job, dispatch_uid='job_pre_save')

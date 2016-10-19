@@ -82,6 +82,7 @@ class Event(models.Model):
         help_text=_("Used as sender of e-mails."),
     )
 
+    # note: there is code to duplicate the file in forms/event.py
     logo = models.ImageField(
         upload_to='logos',
         blank=True,

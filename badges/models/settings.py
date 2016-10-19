@@ -2,6 +2,9 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from copy import deepcopy
+
 import posixpath
 
 from .defaults import BadgeDefaults
@@ -95,3 +98,46 @@ class BadgeSettings(models.Model):
             return False
 
         return True
+
+    def duplicate(self, event):
+        # first duplicate the settings
+        new_settings = deepcopy(self)
+        new_settings.pk = None
+        new_settings.event = event
+
+        # role and design are from the old model until now
+        new_settings.defaults = self.defaults.duplicate()
+
+        # but we need the PK to update them, so save here
+        new_settings.save()
+
+
+        # new duplicate all roles, permissions and designs
+        # mapping: old pk -> new pk
+        permission_map = {}
+        role_map = {}
+        design_map = {}
+
+        for permission in self.badgepermission_set.all():
+            new_permission = permission.duplicate(new_settings)
+            permission_map[permission] = new_permission
+
+        for design in self.badgedesign_set.all():
+            new_design = design.duplicate(new_settings)
+            design_map[design] = new_design
+
+        for role in self.badgerole_set.all():
+            new_role = role.duplicate(new_settings, permission_map)
+            role_map[role] = new_role
+
+        # update role and design in new_settings.defaults
+        new_settings.defaults.update_after_dup(role_map, design_map)
+
+        # and now iterate all jobs and update the BadgeDefaults
+        for job in event.job_set.all():
+            if job.badge_defaults:
+                job.badge_defaults.update_after_dup(role_map, design_map)
+
+        return new_settings
+
+        # TODO: latex

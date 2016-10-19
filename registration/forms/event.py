@@ -1,7 +1,11 @@
 from django import forms
 from django.conf import settings
+from django.core.files.base import ContentFile
 
 from ckeditor.widgets import CKEditorWidget
+from copy import deepcopy
+
+import os
 
 from ..models import Event
 
@@ -46,6 +50,7 @@ class EventDeleteForm(forms.ModelForm):
     def delete(self):
         self.instance.delete()
 
+
 class EventArchiveForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -73,3 +78,52 @@ class EventArchiveForm(forms.ModelForm):
                 # trigger post_remove signal
                 for h in shift.helper_set.all():
                     h.shifts.remove(shift)
+
+
+class EventDuplicateForm(EventForm):
+    class Meta:
+        model = Event
+        fields = ['url_name', 'name', 'date']
+
+    def __init__(self, *args, **kwargs):
+        self.other_event = kwargs.pop('other_event')
+        self.user = kwargs.pop('user')
+
+        kwargs['instance'] = deepcopy(self.other_event)
+        kwargs['instance'].pk = None
+        super(EventDuplicateForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        self.instance.archived = False
+        self.instance.active = False
+
+        # prevent post_save hook from adding the needed objects
+        activate_badges = self.instance.badges
+        activate_gifts = self.instance.gifts
+        self.instance.badges = False
+        self.instance.gifts = False
+
+        # copy logo
+        if self.instance.logo:
+            new_logo = ContentFile(self.instance.logo.read())
+            new_logo.name = os.path.basename(self.instance.logo.name)
+            self.instance.logo = new_logo
+
+        super(EventDuplicateForm, self).save(commit=True)  # we have to save
+
+        # TODO: gifts, ...
+
+        # remove admins and add current user (done in save)
+        self.instance.admins.clear()
+        if not self.user.is_superuser:
+            self.instance.admins.add(self.user)
+
+        # copy jobs (and shifts)
+        for job in self.other_event.job_set.all():
+            job.duplicate(self.instance)
+
+        # badges
+        if activate_badges:
+            self.other_event.badge_settings.duplicate(self.instance)
+            self.instance.badges = True
+            self.instance.save()

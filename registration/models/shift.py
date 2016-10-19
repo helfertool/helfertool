@@ -8,6 +8,7 @@ from django.utils.timezone import localtime
 from django.utils.translation import ugettext_lazy as _
 
 from collections import OrderedDict
+from copy import deepcopy
 
 from .helper import Helper
 
@@ -144,6 +145,24 @@ class Shift(models.Model):
                 shirts.update({helper.get_shirt_display(): tmp+1})
 
         return shirts
+
+    def duplicate(self, new_job):
+        new_shift = deepcopy(self)
+        new_shift.pk = None
+        new_shift.job = new_job
+        new_shift.archived_number = 0
+
+        # move begin and end time according to diff in event dates
+        diff = new_job.event.date - self.job.event.date
+        new_shift.begin += diff
+        new_shift.end += diff
+
+        new_shift.save()
+
+        # TODO: gifts
+
+        return new_shift
+
 
 @receiver(pre_delete, sender=Shift)
 def shift_deleted(sender, instance, using, **kwargs):

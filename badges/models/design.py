@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 import posixpath
+from copy import deepcopy
 
 from .settings import BadgeSettings
 
@@ -69,3 +70,15 @@ class BadgeDesign(models.Model):
 
     def __str__(self):
         return self.name
+
+    def duplicate(self, settings):
+        new_design = deepcopy(self)
+
+        new_design.pk = None
+        new_design.badge_settings = settings
+
+        new_design.save()
+
+        return new_design
+
+        # TODO: bg_fron, bg_back

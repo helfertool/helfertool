@@ -89,6 +89,10 @@ urlpatterns = [
         views.archive_event,
         name='archive_event'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/duplicate/$',
+        views.duplicate_event,
+        name='duplicate_event'),
+
     # jobs
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$',
         views.jobs_and_shifts,

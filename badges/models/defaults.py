@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from copy import deepcopy
+
 
 class BadgeDefaults(models.Model):
     role = models.ForeignKey(
@@ -23,3 +25,19 @@ class BadgeDefaults(models.Model):
         default=False,
         verbose_name=_("Do not print default roles on badges"),
     )
+
+    def duplicate(self):
+        new_defaults = deepcopy(self)
+        new_defaults.pk = None
+        new_defaults.save()
+
+        # design and role are updates in BadgeSettings.duplicate later
+
+        return new_defaults
+
+    def update_after_dup(self, role_map, design_map):
+        if self.role:
+            self.role = role_map[self.role]
+        if self.design:
+            self.design = design_map[self.design]
+        self.save()
