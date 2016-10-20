@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-12 21:49+0200\n"
-"PO-Revision-Date: 2016-10-12 21:50+0200\n"
+"POT-Creation-Date: 2016-10-20 10:24+0200\n"
+"PO-Revision-Date: 2016-10-20 10:26+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -78,7 +78,7 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:42 registration/models/job.py:34
+#: registration/export/pdf.py:42 registration/models/job.py:36
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/jobs_and_shifts.html:55
 #: registration/templates/registration/admin/permissions.html:14
@@ -241,15 +241,15 @@ msgstr "Wird nach der Anmeldung angezeigt."
 msgid "Used as sender of e-mails."
 msgstr "Wird als Absender von E-Mail genutzt."
 
-#: registration/models/event.py:89
+#: registration/models/event.py:90
 msgid "Logo"
 msgstr "Logo"
 
-#: registration/models/event.py:95
+#: registration/models/event.py:96
 msgid "Maximal overlapping of shifts"
 msgstr "Maximale Überlappung von Schichten"
 
-#: registration/models/event.py:96
+#: registration/models/event.py:97
 msgid ""
 "If two shifts overlap more than this value in minutes it is not possible to "
 "register for both shifts. Leave empty to disable this check."
@@ -258,32 +258,32 @@ msgstr ""
 "man sich nicht für beide Schichten anmelden. Wenn das Feld leer ist, wird "
 "die Überlappung nicht geprüft."
 
-#: registration/models/event.py:108
+#: registration/models/event.py:109
 msgid "Registration publicly visible"
 msgstr "Anmeldung öffentlich sichtbar"
 
-#: registration/models/event.py:113
+#: registration/models/event.py:114
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:118
+#: registration/models/event.py:119
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models/event.py:123
+#: registration/models/event.py:124
 msgid "Helpers have to confirm to be full age"
 msgstr "Helfer müssen bestätigen, volljährig zu sein"
 
-#: registration/models/event.py:128
+#: registration/models/event.py:129
 msgid "Ask if helper wants to be notified about new events"
 msgstr ""
 "Fragen, ob der Helfer über weitere Veranstaltungen informiert werden möchte"
 
-#: registration/models/event.py:133
+#: registration/models/event.py:134
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:138
+#: registration/models/event.py:139
 msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
@@ -291,15 +291,15 @@ msgstr ""
 "Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
 "werden, der per E-Mail verschickt wird."
 
-#: registration/models/event.py:144
+#: registration/models/event.py:145
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
-#: registration/models/event.py:149
+#: registration/models/event.py:150
 msgid "Manage gifts for helpers"
 msgstr "Helfergeschenke verwalten"
 
-#: registration/models/event.py:154
+#: registration/models/event.py:155
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert."
 
@@ -344,20 +344,20 @@ msgstr "E-Mail Adresse wurde bestätigt"
 msgid "I agree with the following data privacy statement."
 msgstr "Ich stimme der folgenden Datenschutzerklärung zu."
 
-#: registration/models/job.py:39
+#: registration/models/job.py:41
 msgid "This job is visible publicly"
 msgstr "Diese Aufgabe ist öffentlich sichtbar"
 
-#: registration/models/job.py:44
+#: registration/models/job.py:46
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: registration/models/job.py:49
+#: registration/models/job.py:51
 #: registration/templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models/job.py:70
+#: registration/models/job.py:72
 msgid "Number of coordinators for archived event"
 msgstr "Anzahl der Koordinatoren für archivierte Veranstaltung"
 
@@ -366,39 +366,39 @@ msgstr "Anzahl der Koordinatoren für archivierte Veranstaltung"
 msgid "Usage"
 msgstr "Verwendung"
 
-#: registration/models/shift.py:37
+#: registration/models/shift.py:38
 msgid "Name (optional)"
 msgstr "Name (optional)"
 
-#: registration/models/shift.py:43
+#: registration/models/shift.py:44
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:53
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models/shift.py:47
+#: registration/models/shift.py:48
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:54
 msgid "End"
 msgstr "Ende"
 
-#: registration/models/shift.py:52
+#: registration/models/shift.py:53
 #: registration/templates/registration/admin/jobs_and_shifts.html:56
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models/shift.py:58
+#: registration/models/shift.py:59
 msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
-#: registration/models/shift.py:64
+#: registration/models/shift.py:65
 #: registration/templates/registration/admin/base.html:139
 #: registration/templates/registration/admin/jobs_and_shifts.html:58
 #: registration/templates/registration/admin/view_helper.html:89
 msgid "Gifts"
 msgstr "Geschenke"
 
-#: registration/models/shift.py:70
+#: registration/models/shift.py:71
 msgid "Number of registered helpers for archived event"
 msgstr "Anzahl der angemeldeten Helfer für archivierte Veranstaltung"
 
@@ -486,8 +486,8 @@ msgstr ""
 "Wenn du das Passwort für den alten Account vergessen hast, schreibe bitte an:"
 
 #: registration/templates/registration/admin/archive_event.html:6
-#: registration/templates/registration/admin/edit_event.html:23
-#: registration/templates/registration/admin/edit_event.html:31
+#: registration/templates/registration/admin/edit_event.html:37
+#: registration/templates/registration/admin/edit_event.html:45
 msgid "Archive event"
 msgstr "Veranstaltung archivieren"
 
@@ -510,7 +510,7 @@ msgstr ""
 "Koordinatoren gelöscht!"
 
 #: registration/templates/registration/admin/archive_event.html:38
-#: registration/templates/registration/admin/edit_event.html:27
+#: registration/templates/registration/admin/edit_event.html:41
 msgid ""
 "Only the number of registered helpers per shift and the number of "
 "coordinators are saved. All other data like shirt sizes are deleted "
@@ -730,8 +730,8 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: registration/templates/registration/admin/delete_event.html:6
-#: registration/templates/registration/admin/edit_event.html:39
-#: registration/templates/registration/admin/edit_event.html:45
+#: registration/templates/registration/admin/edit_event.html:53
+#: registration/templates/registration/admin/edit_event.html:59
 msgid "Delete event"
 msgstr "Veranstaltung löschen"
 
@@ -831,14 +831,50 @@ msgstr ""
 msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
-#: registration/templates/registration/admin/duplicate_job.html:6
-msgid "Duplicate job:"
-msgstr "Aufgabe duplizieren:"
+#: registration/templates/registration/admin/duplicate_event.html:6
+#: registration/templates/registration/admin/edit_event.html:23
+#: registration/templates/registration/admin/edit_event.html:29
+msgid "Duplicate event"
+msgstr "Veranstaltung duplizieren"
 
+#: registration/templates/registration/admin/duplicate_event.html:10
+msgid "All jobs, shifts and settings will be copied"
+msgstr "Alle Aufgaben, Schichten und Einstellungen werden kopiert"
+
+#: registration/templates/registration/admin/duplicate_event.html:11
+msgid "The registered helpers and coordinators will <b>not</b> be copied"
+msgstr "Die angemeldeten Helfer und Koordinatoren werden <b>nicht</b> kopiert"
+
+#: registration/templates/registration/admin/duplicate_event.html:12
+msgid "The admins for the event and all jobs will <b>not</b> be copied"
+msgstr ""
+"Die Administratoren für die Veranstaltung und alle Aufgaben werden <b>nicht</"
+"b> kopiert"
+
+#: registration/templates/registration/admin/duplicate_event.html:13
+msgid ""
+"The begin and end of the shifts are moved according to the given event date"
+msgstr ""
+"Der Beginn und das Ende der Schichten werden entsprechend des angegebenen "
+"Veranstaltungsdatums verschoben"
+
+#: registration/templates/registration/admin/duplicate_event.html:14
+msgid ""
+"If you want to use the same URL as for the last event, you first have to "
+"change the URL name of the old event"
+msgstr ""
+"Wenn du die gleiche URL wie bei der letzten Veranstaltung verwenden willst, "
+"muss du zuerst den Namen für die URL der alten Veranstaltung ändern"
+
+#: registration/templates/registration/admin/duplicate_event.html:23
 #: registration/templates/registration/admin/duplicate_job.html:13
 #: registration/templates/registration/admin/jobs_and_shifts.html:32
 msgid "Duplicate"
 msgstr "Duplizieren"
+
+#: registration/templates/registration/admin/duplicate_job.html:6
+msgid "Duplicate job:"
+msgstr "Aufgabe duplizieren:"
 
 #: registration/templates/registration/admin/duplicates.html:8
 msgid ""
@@ -863,6 +899,10 @@ msgid "Save"
 msgstr "Speichern"
 
 #: registration/templates/registration/admin/edit_event.html:25
+msgid "You can duplicate this event."
+msgstr "Du kannst diese Veranstaltung duplizieren."
+
+#: registration/templates/registration/admin/edit_event.html:39
 msgid ""
 "You can archive this event, this means that all coordinators and helpers are "
 "deleted."
@@ -870,7 +910,7 @@ msgstr ""
 "Du kannst diese Veranstaltung archivieren, das bedeutet, dass alle "
 "Koordinatoren und Helfer gelöscht werden."
 
-#: registration/templates/registration/admin/edit_event.html:41
+#: registration/templates/registration/admin/edit_event.html:55
 msgid "You can delete this event including all jobs, shifts and helpers."
 msgstr ""
 "Du kannst diese Veranstaltung mit allen Aufgaben, Schichten und Helfern "
@@ -1292,15 +1332,21 @@ msgstr "Das Passwort wurde erfolgreich geändert"
 msgid "Added user %(username)s"
 msgstr "Nutzer %(username)s hinzugefügt"
 
-#: registration/views/event.py:47
+#: registration/views/event.py:48
 #, python-format
 msgid "Event was created: %(event)s"
 msgstr "Veranstaltung wurde angelegt: %(event)s"
 
-#: registration/views/event.py:79
+#: registration/views/event.py:80
 #, python-format
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
+
+#: registration/views/event.py:127
+#, fuzzy, python-format
+#| msgid "Event was created: %(event)s"
+msgid "Event was duplicated: %(event)s"
+msgstr "Veranstaltung wurde angelegt: %(event)s"
 
 #: registration/views/helper.py:235
 #, python-format

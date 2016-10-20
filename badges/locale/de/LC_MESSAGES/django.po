@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-12 21:49+0200\n"
-"PO-Revision-Date: 2016-09-25 15:40+0200\n"
+"POT-Creation-Date: 2016-10-20 10:24+0200\n"
+"PO-Revision-Date: 2016-10-20 10:24+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -88,89 +88,89 @@ msgstr "Design"
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
-#: badges/models/defaults.py:11 badges/templates/badges/index.html:13
+#: badges/models/defaults.py:13 badges/templates/badges/index.html:13
 msgid "Default role"
 msgstr "Standard Rolle"
 
-#: badges/models/defaults.py:19 badges/templates/badges/index.html:14
+#: badges/models/defaults.py:21 badges/templates/badges/index.html:14
 msgid "Default design"
 msgstr "Standard Design"
 
-#: badges/models/defaults.py:24
+#: badges/models/defaults.py:26
 msgid "Do not print default roles on badges"
 msgstr "Keine Standard Rollen auf die Badges drucken"
 
-#: badges/models/design.py:37 badges/models/permission.py:16
-#: badges/models/role.py:17 badges/templates/badges/settings.html:22
+#: badges/models/design.py:42 badges/models/permission.py:18
+#: badges/models/role.py:19 badges/templates/badges/settings.html:22
 #: badges/templates/badges/settings.html:69
 #: badges/templates/badges/settings_advanced.html:37
 msgid "Name"
 msgstr "Name"
 
-#: badges/models/design.py:44
+#: badges/models/design.py:49
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: badges/models/design.py:45 badges/models/design.py:53
+#: badges/models/design.py:50 badges/models/design.py:58
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: badges/models/design.py:52
+#: badges/models/design.py:57
 msgid "Background color"
 msgstr "Hintergrundfarbe"
 
-#: badges/models/design.py:57
+#: badges/models/design.py:62
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: badges/models/design.py:64
+#: badges/models/design.py:69
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: badges/models/permission.py:21 badges/models/role.py:22
+#: badges/models/permission.py:23 badges/models/role.py:24
 msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
-#: badges/models/permission.py:22
+#: badges/models/permission.py:24
 msgid ""
 "This name is used for the LaTeX template, the prefix \"perm-\" is added."
 msgstr ""
 "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
 "hinzugefügt."
 
-#: badges/models/role.py:23
+#: badges/models/role.py:25
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: badges/models/settings.py:32 badges/templates/badges/index.html:12
+#: badges/models/settings.py:37 badges/templates/badges/index.html:12
 msgid "LaTeX template"
 msgstr "LaTeX Template"
 
-#: badges/models/settings.py:39
+#: badges/models/settings.py:44
 msgid "Number of rows on one page"
 msgstr "Anzahl der Zeilen auf einer Seite"
 
-#: badges/models/settings.py:45
+#: badges/models/settings.py:50
 msgid "Number of columns on one page"
 msgstr "Anzahl der Spalten auf einer Seite"
 
-#: badges/models/settings.py:53
+#: badges/models/settings.py:58
 msgid "Language of badges"
 msgstr "Badge Sprache"
 
-#: badges/models/settings.py:59
+#: badges/models/settings.py:64
 msgid "Role for coordinators"
 msgstr "Rolle für Koordinatoren"
 
-#: badges/models/settings.py:65
+#: badges/models/settings.py:70
 msgid "Role for helpers"
 msgstr "Rolle für Helfer"
 
-#: badges/models/settings.py:70
+#: badges/models/settings.py:75
 msgid "Badges only for coordinators"
 msgstr "Badges nur für Koordinatoren"
 
-#: badges/models/settings.py:75
+#: badges/models/settings.py:80
 msgid "Print barcodes on badges to avoid duplicates"
 msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
 

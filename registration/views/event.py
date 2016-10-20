@@ -124,6 +124,8 @@ def duplicate_event(request, event_url_name):
 
     if form.is_valid():
         form.save()
+        messages.success(request, _("Event was duplicated: %(event)s") %
+                         {'event': form['name'].value()})
         return HttpResponseRedirect(reverse('edit_event',
                                             args=[form['url_name'].value(), ]))
 

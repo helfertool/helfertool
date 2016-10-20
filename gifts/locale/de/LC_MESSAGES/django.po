@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-12 21:49+0200\n"
-"PO-Revision-Date: 2016-09-25 15:40+0200\n"
+"POT-Creation-Date: 2016-10-20 10:24+0200\n"
+"PO-Revision-Date: 2016-10-20 10:24+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -31,7 +31,7 @@ msgstr "Anwesend"
 msgid "Helper got gift"
 msgstr "Helfer hat Geschenk erhalten"
 
-#: gifts/models/gift.py:10 gifts/models/set.py:14
+#: gifts/models/gift.py:12 gifts/models/set.py:16
 #: gifts/templates/gifts/list.html:11 gifts/templates/gifts/list.html:38
 #: gifts/templates/gifts/list_deposit.html:11
 msgid "Name"
@@ -53,11 +53,11 @@ msgstr "Helfer hat T-Shirt erhalten"
 msgid "Deserved gifts"
 msgstr "Verdiente Geschenke"
 
-#: gifts/models/includedgift.py:21
+#: gifts/models/includedgift.py:23
 msgid "Count"
 msgstr "Anzahl"
 
-#: gifts/models/set.py:19 gifts/templates/gifts/list.html:8
+#: gifts/models/set.py:21 gifts/templates/gifts/list.html:8
 #: gifts/templates/gifts/list.html:39 gifts/templates/gifts/not_active.html:6
 msgid "Gifts"
 msgstr "Geschenke"

@@ -21,11 +21,11 @@
     {# duplicate #}
     {% if event %}
         <h3>{% trans "Duplicate event" %}</h3>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-info" role="alert">
             <p><b>{% trans "You can duplicate this event." %}</b></p>
 
             <p>
-                <a href="{% url 'duplicate_event' event.url_name %}" class="btn btn-success" role="button">
+                <a href="{% url 'duplicate_event' event.url_name %}" class="btn btn-info" role="button">
                     {% trans "Duplicate event" %}
                 </a>
             </p>
