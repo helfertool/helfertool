@@ -146,7 +146,7 @@ class Shift(models.Model):
 
         return shirts
 
-    def duplicate(self, new_job):
+    def duplicate(self, new_job, gift_set_mapping):
         new_shift = deepcopy(self)
         new_shift.pk = None
         new_shift.job = new_job
@@ -159,7 +159,8 @@ class Shift(models.Model):
 
         new_shift.save()
 
-        # TODO: gifts
+        for gift in self.gifts.all():
+            new_shift.gifts.add(gift_set_mapping[gift])
 
         return new_shift
 

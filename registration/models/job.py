@@ -138,7 +138,7 @@ class Job(models.Model):
 
         return ordered_shifts
 
-    def duplicate(self, new_event):
+    def duplicate(self, new_event, gift_set_mapping):
         new_job = deepcopy(self)
 
         new_job.pk = None
@@ -154,7 +154,7 @@ class Job(models.Model):
         new_job.coordinators.clear()
 
         for shift in self.shift_set.all():
-            shift.duplicate(new_job)
+            shift.duplicate(new_job, gift_set_mapping)
 
         return new_job
 

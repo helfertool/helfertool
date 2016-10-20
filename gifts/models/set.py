@@ -6,6 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from .gift import Gift
 from .includedgift import IncludedGift
 
+from copy import deepcopy
+
 
 @python_2_unicode_compatible
 class GiftSet(models.Model):
@@ -48,3 +50,15 @@ class GiftSet(models.Model):
             if num:
                 IncludedGift.objects.create(gift_set=self, gift=gift,
                                             count=num)
+
+    def duplicate(self, event, gift_mapping):
+        new_gift_set = deepcopy(self)
+        new_gift_set.pk = None
+        new_gift_set.event = event
+        new_gift_set.save()
+
+        # copy m2m field gifts
+        for included in IncludedGift.objects.filter(gift_set=self):
+            included.duplicate(new_gift_set, gift_mapping)
+
+        return new_gift_set

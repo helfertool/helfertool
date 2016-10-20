@@ -111,16 +111,31 @@ class EventDuplicateForm(EventForm):
 
         super(EventDuplicateForm, self).save(commit=True)  # we have to save
 
-        # TODO: gifts, ...
-
         # remove admins and add current user (done in save)
         self.instance.admins.clear()
         if not self.user.is_superuser:
             self.instance.admins.add(self.user)
 
+        # gifts
+        gift_mapping = {}
+        gift_set_mapping = {}
+        if activate_gifts:
+            # duplicate all gifts and build mapping
+            for gift in self.other_event.gift_set.all():
+                new_gift = gift.duplicate(self.instance)
+                gift_mapping[gift] = new_gift
+
+            # now duplicate gift sets
+            for gift_set in self.other_event.giftset_set.all():
+                new_gift_set = gift_set.duplicate(self.instance, gift_mapping)
+                gift_set_mapping[gift_set] = new_gift_set
+
+            self.instance.gifts = True
+            self.instance.save()
+
         # copy jobs (and shifts)
         for job in self.other_event.job_set.all():
-            job.duplicate(self.instance)
+            job.duplicate(self.instance, gift_set_mapping)
 
         # badges
         if activate_badges:

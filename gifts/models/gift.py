@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
+from copy import deepcopy
+
 
 @python_2_unicode_compatible
 class Gift(models.Model):
@@ -17,3 +19,11 @@ class Gift(models.Model):
 
     def __str__(self):
         return self.name
+
+    def duplicate(self, event):
+        new_gift = deepcopy(self)
+        new_gift.pk = None
+        new_gift.event = event
+        new_gift.save()
+
+        return new_gift
