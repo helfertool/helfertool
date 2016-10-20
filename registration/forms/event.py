@@ -91,10 +91,10 @@ class EventDuplicateForm(EventForm):
 
         kwargs['instance'] = deepcopy(self.other_event)
         kwargs['instance'].pk = None
+        kwargs['instance'].archived = False
         super(EventDuplicateForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        self.instance.archived = False
         self.instance.active = False
 
         # prevent post_save hook from adding the needed objects
