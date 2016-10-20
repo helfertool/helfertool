@@ -1,8 +1,12 @@
+from django.core.files.base import ContentFile
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
+import os
 import posixpath
+
 from copy import deepcopy
 
 from .settings import BadgeSettings
@@ -77,8 +81,13 @@ class BadgeDesign(models.Model):
         new_design.pk = None
         new_design.badge_settings = settings
 
+        for var in ('bg_front', 'bg_back'):
+            if getattr(self, var):
+                tmp = ContentFile(getattr(self, var).read())
+                tmp.name = os.path.basename(getattr(self, var).name)
+
+                setattr(new_design, var, tmp)
+
         new_design.save()
 
         return new_design
-
-        # TODO: bg_fron, bg_back

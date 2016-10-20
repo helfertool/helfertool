@@ -1,10 +1,12 @@
 from django.conf import settings
+from django.core.files.base import ContentFile
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from copy import deepcopy
 
+import os
 import posixpath
 
 from .defaults import BadgeDefaults
@@ -108,11 +110,16 @@ class BadgeSettings(models.Model):
         # role and design are from the old model until now
         new_settings.defaults = self.defaults.duplicate()
 
+        # copy latex file
+        if self.latex_template:
+            new_template = ContentFile(self.latex_template.read())
+            new_template.name = os.path.basename(self.latex_template.name)
+            new_settings.latex_template = new_template
+
         # but we need the PK to update them, so save here
         new_settings.save()
 
-
-        # new duplicate all roles, permissions and designs
+        # now duplicate all roles, permissions and designs
         # mapping: old pk -> new pk
         permission_map = {}
         role_map = {}
@@ -139,5 +146,3 @@ class BadgeSettings(models.Model):
                 job.badge_defaults.update_after_dup(role_map, design_map)
 
         return new_settings
-
-        # TODO: latex
