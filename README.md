@@ -60,6 +60,15 @@ And start celery:
 
     celery -A helfertool worker -c 2 --loglevel=info
 
+To update the RabbitMQ container later:
+
+    docker pull rabbitmq
+    docker stop helfertool-rabbitmq
+    docker rm helfertool-rabbitmq
+    docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
+        -p 5672:5672 rabbitmq
+
+
 ### Django
 
 By default Django uses a SQLite database that can be generated using the
