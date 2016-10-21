@@ -28,6 +28,12 @@ For development some more modules may be useful:
 
     pip install -r requirements_dev.txt
 
+Since you probably will not use SQLite in your live system you have to install
+the python module for your database:
+https://docs.djangoproject.com/en/dev/ref/databases/
+
+For MySQL we use mysqlclient which is also recommended by Django.
+
 ### LaTeX packages
 
 These packages or parts of LaTeX are necessary to use the default badge
