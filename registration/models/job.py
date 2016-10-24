@@ -146,7 +146,8 @@ class Job(models.Model):
         new_job.archived_number_coordinators = 0
 
         # role and design will be updated from BadgeSettings.duplicate
-        new_job.badge_defaults = self.badge_defaults.duplicate()
+        if self.event.badges:
+            new_job.badge_defaults = self.badge_defaults.duplicate()
 
         new_job.save()
 
