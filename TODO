@@ -3,6 +3,7 @@ Important
 
 * fix merge
 * implement present flag better
+* resend confirmation mail
 
 
 Django things
