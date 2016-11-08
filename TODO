@@ -84,3 +84,34 @@ File uploads
     * event is deleted (everything)
     * helper is deleted (photo)
     * badge stuff
+
+Inventory
+========
+
+Inventory
+    name
+    admins
+    multiple_assignments
+    barcode_min
+    barcode_max
+
+Item
+    inventory
+    name
+    barcode
+
+UsedItem
+    helper
+    item
+    timestamp
+    timestamp_returned
+
+Event
+    + use_inventory
+    + global_inventories
+
+Job
+    + inventories
+
+Helper
+    + used_items (through: UsedItem)

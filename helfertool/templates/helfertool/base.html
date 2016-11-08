@@ -61,7 +61,7 @@
                                 <li><a href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a></li>
                             {% endif %}
                             <li><a href="{% url "change_user" %}">{% trans "Account" %}</a></li>
-                            <li><a href="{% setting "DOCS_URL" %}">{% trans "Documentation" %}</a></li>
+                            <li><a href="{% url "help:create_issue" %}">{% trans "Support" %}</a></li>
                             <li><a href="{% url "logout" %}">{% trans "Logout" %}</a></li>
                         {% else %}
                             <li><a href="{% url "login" %}">{% trans "Login" %}</a></li>
