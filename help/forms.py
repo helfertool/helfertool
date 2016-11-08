@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.utils.translation import ugettext as _
 
 from .models import Issue
 
@@ -20,7 +21,8 @@ class IssueForm(forms.ModelForm):
 
         super(IssueForm, self).save(commit)
 
-        mail = EmailMessage("New issue: {}".format(
+        mail = EmailMessage("{}: {}".format(
+                                _("New issue"),
                                 self.instance.get_subject_display()),
                             self.instance.text,
                             settings.CONTACT_MAIL,      # from
