@@ -1,4 +1,5 @@
-from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import m2m_changed, post_save
@@ -6,6 +7,7 @@ from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
 import uuid
 
 from badges.models import Badge
@@ -212,8 +214,13 @@ class Helper(models.Model):
                                      'validate_url': validate_url,
                                      'registered_url': registered_url})
 
-        send_mail(subject, text, event.email, [self.email],
-                  fail_silently=False)
+        mail = EmailMessage(subject,
+                            text,
+                            settings.FROM_MAIL,
+                            [self.email, ],  # to
+                            reply_to=[event.email, ])
+
+        mail.send(fail_silently=False)
 
     def check_delete(self):
         if self.shifts.count() == 0 and not self.is_coordinator:

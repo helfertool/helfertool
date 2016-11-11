@@ -1,6 +1,7 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 from django.core.mail import EmailMessage
+from django.utils.translation import ugettext_lazy as _
 
 from smtplib import SMTPException
 
@@ -58,13 +59,14 @@ class MailForm(forms.Form):
 
                 choices.append((job.name, tmp))
 
-        # sender
-        senders = []
+        # reply to
+        reply_to = []
 
         if self.event.is_admin(self.user):
-            senders.append((self.event.email, self.event.email))
+            reply_to.append((self.event.email, self.event.email))
 
-        senders.append((self.user.email, self.user.email))
+        reply_to.append((self.user.email, self.user.email))
+        reply_to.append(("-", _("Custom")))
 
         # fields
         self.fields['receiver'] = forms.MultipleChoiceField(
@@ -73,18 +75,19 @@ class MailForm(forms.Form):
             widget=forms.SelectMultiple(attrs={'class': 'select2'}),
         )
 
-        self.fields['sender'] = forms.ChoiceField(
-            choices=senders,
-            label=_("Sender"),
+        self.fields['reply_to'] = forms.ChoiceField(
+            choices=reply_to,
+            label=_("Reply to"),
+        )
+
+        self.fields['custom_reply_to'] = forms.EmailField(
+            label=_("Custom reply to"),
+            help_text=_('Only used if "Custom" is selected above.'),
+            required=False,
         )
 
         self.fields['cc'] = forms.EmailField(
             label=_("CC"),
-            required=False,
-        )
-
-        self.fields['reply-to'] = forms.EmailField(
-            label=_("Reply to"),
             required=False,
         )
 
@@ -98,18 +101,30 @@ class MailForm(forms.Form):
             label=_("Text"),
         )
 
+    def clean(self):
+        cleaned_data = super(MailForm, self).clean()
+
+        if cleaned_data["reply_to"] == "-" and \
+                not cleaned_data["custom_reply_to"]:
+            raise forms.ValidationError(_("You must specify a custom reply "
+                                          "to address."))
+
     def send_mail(self):
         subject = self.cleaned_data['subject']
         text = self.cleaned_data['text']
-        sender = self.cleaned_data['sender']
+
+        reply_to = self.cleaned_data['reply_to']
+        if reply_to == "-":
+            reply_to = self.cleaned_data['custom_reply_to']
 
         # model for log
         sentmail = SentMail.objects.create(
             event=self.event,
             user=self.user,
-            sender=sender,
+            sender=settings.FROM_MAIL,
             subject=subject,
             text=text,
+            reply_to=reply_to,
         )
 
         # get unique list of mail addresses
@@ -118,25 +133,20 @@ class MailForm(forms.Form):
         receiver_list = [h.email for h in self._get_helpers(sentmail)
                          if not (h.email in seen or seen_add(h.email))]
 
-        # reply to and CC
-        reply_to = []
-        if self.cleaned_data['reply-to']:
-            reply_to = [self.cleaned_data['reply-to'], ]
-            sentmail.reply_to = self.cleaned_data['reply-to']
-
+        # CC
         cc = []
         if self.cleaned_data['cc']:
             cc = [self.cleaned_data['cc'], ]
             sentmail.cc = self.cleaned_data['cc']
 
-        sentmail.save()  # maybe cc or reply_to changed
+        sentmail.save()  # save changed CC and things done in _get_helpers
 
         mail = EmailMessage(subject,
                             text,
-                            sender,      # from
-                            [sender, ],  # to
+                            settings.FROM_MAIL,
+                            [reply_to, ],    # to
                             receiver_list,
-                            reply_to=reply_to,
+                            reply_to=[reply_to, ],
                             cc=cc)
 
         try:

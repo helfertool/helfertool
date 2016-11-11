@@ -33,6 +33,10 @@ ALLOWED_HOSTS = []
 
 ADMINS = (('Admin Name', 'admin@localhost'), )
 
+# sender of all mails (because of SPF, DKIM, DMARC)
+FROM_MAIL = 'helfertool@localhost'
+
+# mail shown on "About" page and for support requests
 CONTACT_MAIL = 'helfertool@localhost'
 
 PRIVACY_URL = 'https://fs.tum.de/datenschutz/'
@@ -62,8 +66,8 @@ BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 # for e-mail debugging
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 1025
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'

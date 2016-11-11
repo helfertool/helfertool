@@ -9,6 +9,8 @@ you were registered for the following jobs:{% endblocktrans %}
 {% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
 
 {% trans "Your data is used according to the following data privacy statement, if you do not agree with it please veto per e-mail." %}
-{% include "registration/privacy/statement.txt" %}
 
 {% blocktrans %}Thanks for your support!{% endblocktrans %}
+
+-- 
+{% include "registration/privacy/statement.txt" %}

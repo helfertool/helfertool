@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 23:17+0100\n"
-"PO-Revision-Date: 2016-11-08 18:00+0100\n"
+"POT-Creation-Date: 2016-11-11 11:04+0100\n"
+"PO-Revision-Date: 2016-11-11 11:06+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -19,19 +19,19 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 
 #: registration/export/excel.py:77 registration/forms/user.py:33
-#: registration/models/helper.py:90
+#: registration/models/helper.py:92
 #: registration/templates/registration/admin/helpers_table.html:20
 #: registration/templates/registration/change_user.html:15
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:78 registration/models/helper.py:95
+#: registration/export/excel.py:78 registration/models/helper.py:97
 #: registration/templates/registration/admin/helpers_table.html:21
 msgid "Surname"
 msgstr "Nachname"
 
 #: registration/export/excel.py:79 registration/models/event.py:81
-#: registration/models/helper.py:99
+#: registration/models/helper.py:101
 #: registration/templates/registration/admin/archive_event.html:17
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
@@ -40,20 +40,20 @@ msgid "E-Mail"
 msgstr "E-Mail"
 
 #: registration/export/excel.py:82 registration/export/pdf.py:42
-#: registration/models/helper.py:104
+#: registration/models/helper.py:106
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/helper_data.html:16
 msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:86 registration/export/pdf.py:45
-#: registration/models/helper.py:116
+#: registration/models/helper.py:118
 #: registration/templates/registration/admin/helpers_table.html:23
 #: registration/templates/registration/helper_data.html:22
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:90 registration/models/helper.py:121
+#: registration/export/excel.py:90 registration/models/helper.py:123
 #: registration/templates/registration/admin/helpers_table.html:26
 #: registration/templates/registration/helper_data.html:36
 msgid "Vegetarian"
@@ -65,7 +65,7 @@ msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
 #: registration/export/excel.py:97 registration/export/pdf.py:46
-#: registration/models/helper.py:110
+#: registration/models/helper.py:112
 #: registration/templates/registration/admin/helpers_table.html:31
 #: registration/templates/registration/helper_data.html:42
 msgid "Comment"
@@ -238,8 +238,8 @@ msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
 #: registration/models/event.py:82
-msgid "Used as sender of e-mails."
-msgstr "Wird als Absender von E-Mail genutzt."
+msgid "Used as Reply-to address for mails sent to helpers"
+msgstr "Wird als Antwortadresse für E-Mails an Helfer verwendet"
 
 #: registration/models/event.py:90
 msgid "Logo"
@@ -300,47 +300,51 @@ msgid "Manage gifts for helpers"
 msgstr "Helfergeschenke verwalten"
 
 #: registration/models/event.py:155
+msgid "Use the inventory functionality"
+msgstr "Die Inventar Funktion verwenden"
+
+#: registration/models/event.py:160
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert."
 
-#: registration/models/helper.py:62
+#: registration/models/helper.py:64
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: registration/models/helper.py:63
+#: registration/models/helper.py:65
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: registration/models/helper.py:64
+#: registration/models/helper.py:66
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: registration/models/helper.py:69
+#: registration/models/helper.py:71
 msgid "No"
 msgstr "Nein"
 
-#: registration/models/helper.py:70
+#: registration/models/helper.py:72
 msgid "Valid"
 msgstr "Gültig"
 
-#: registration/models/helper.py:71
+#: registration/models/helper.py:73
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models/helper.py:122
+#: registration/models/helper.py:124
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models/helper.py:129
+#: registration/models/helper.py:131
 #: registration/templates/registration/helper_data.html:29
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: registration/models/helper.py:138
+#: registration/models/helper.py:140
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/helper.py:143
+#: registration/models/helper.py:145
 msgid "I agree with the following data privacy statement."
 msgstr "Ich stimme der folgenden Datenschutzerklärung zu."
 
@@ -1231,8 +1235,8 @@ msgstr ""
 "Deine Daten werden entsprechend der folgenden Datenschutzerklärung genutzt, "
 "widerspreche bitte per E-Mail wenn du damit nicht einverstanden bist."
 
-#: registration/templates/registration/mail/coordinator.txt:14
-#: registration/templates/registration/mail/internal.txt:14
+#: registration/templates/registration/mail/coordinator.txt:13
+#: registration/templates/registration/mail/internal.txt:13
 #: registration/templates/registration/mail/public.txt:11
 msgid "Thanks for your support!"
 msgstr "Danke für deine Unterstützung!"
@@ -1384,6 +1388,9 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Used as sender of e-mails."
+#~ msgstr "Wird als Absender von E-Mail genutzt."
 
 #~ msgid "Bad request"
 #~ msgstr "Bad request"

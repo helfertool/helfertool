@@ -13,7 +13,7 @@ from gifts.models import HelpersGifts
 
 
 def _default_mail():
-    return settings.CONTACT_MAIL
+    return settings.FROM_MAIL
 
 
 @python_2_unicode_compatible
@@ -79,7 +79,7 @@ class Event(models.Model):
     email = models.EmailField(
         default=_default_mail,
         verbose_name=_("E-Mail"),
-        help_text=_("Used as sender of e-mails."),
+        help_text=_("Used as Reply-to address for mails sent to helpers"),
     )
 
     # note: there is code to duplicate the file in forms/event.py
@@ -148,6 +148,11 @@ class Event(models.Model):
     gifts = models.BooleanField(
         default=False,
         verbose_name=_("Manage gifts for helpers"),
+    )
+
+    inventory = models.BooleanField(
+        default=False,
+        verbose_name=_("Use the inventory functionality"),
     )
 
     archived = models.BooleanField(
