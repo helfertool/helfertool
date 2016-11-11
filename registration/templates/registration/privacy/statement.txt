@@ -1,42 +1,42 @@
 {% load i18n %}{% load setting %}{% get_current_language as LANGUAGE_CODE %}{% if LANGUAGE_CODE == 'de' %}
-    Ich bin damit einverstanden, dass meine Daten zu folgenden Zwecken erhoben, verarbeitet und genutzt werden:
+Ich bin damit einverstanden, dass meine Daten zu folgenden Zwecken erhoben, verarbeitet und genutzt werden:
 
-     * Erstellung von Helferlisten
-     * Zusenden von Informationen vor der Veranstaltung per E-Mail
-     * Anruf bei dringenden und wichtigen Angelegenheiten
-     * Ggf. Erstellung von Ausweisen für die Veranstaltung
-     * Ggf. Einladung zum Helferfest nach der Veranstaltung
+ * Erstellung von Helferlisten
+ * Zusenden von Informationen vor der Veranstaltung per E-Mail
+ * Anruf bei dringenden und wichtigen Angelegenheiten
+ * Ggf. Erstellung von Ausweisen für die Veranstaltung
+ * Ggf. Einladung zum Helferfest nach der Veranstaltung
 
-    Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner Person unter Beachtung des Bayerischen Datenschutzgesetzes (BayDSG), erhoben, verarbeitet, genutzt und übermittelt werden.
+Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner Person unter Beachtung des Bayerischen Datenschutzgesetzes (BayDSG), erhoben, verarbeitet, genutzt und übermittelt werden.
 
-    Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger Basis erfolgt. Ferner, dass ich mein Einverständnis mit der Folge, dass ich bei der Veranstaltung nicht als Helfer teilnehmen kann, verweigern bzw. jederzeit mit Wirkung für die Zukunft widerrufen kann. Meine Widerrufserklärung werde ich richten an:
+Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger Basis erfolgt. Ferner, dass ich mein Einverständnis mit der Folge, dass ich bei der Veranstaltung nicht als Helfer teilnehmen kann, verweigern bzw. jederzeit mit Wirkung für die Zukunft widerrufen kann. Meine Widerrufserklärung werde ich richten an:
 
-    Fachschaft MPI
-    Technische Universität München
-    Boltzmannstraße 3
-    85748 Garching
-    E-Mail: {% setting "CONTACT_MAIL" %}
+Fachschaft MPI
+Technische Universität München
+Boltzmannstraße 3
+85748 Garching
+E-Mail: {% setting "CONTACT_MAIL" %}
 
-    Im Fall des Widerrufs werden mit dem Zugang meiner Widerrufserklärung meine Daten gelöscht.{% else %}
-    With your permission, your data will be collected, processed, and used for the following purposes:
+Im Fall des Widerrufs werden mit dem Zugang meiner Widerrufserklärung meine Daten gelöscht.{% else %}
+With your permission, your data will be collected, processed, and used for the following purposes:
 
-     * Generating lists of all helpers
-     * Sending information before the event by e-mail
-     * Phone call for urgent and important issues
-     * If necessary generating identification badges for the event
-     * If necessary invitation for the after party
+ * Generating lists of all helpers
+ * Sending information before the event by e-mail
+ * Phone call for urgent and important issues
+ * If necessary generating identification badges for the event
+ * If necessary invitation for the after party
 
-    Your personal data will be collected, processed, and used in the context of the aforementioned objectives in accordance with the Bavarian Data Protection Act (BayDSG).
+Your personal data will be collected, processed, and used in the context of the aforementioned objectives in accordance with the Bavarian Data Protection Act (BayDSG).
 
-    The collection, processing, and use of your data take place on a voluntary basis.
-    Furthermore, you can revoke your consent at any time with the adverse consequence that you cannot participate in the event as helper.
+The collection, processing, and use of your data take place on a voluntary basis.
+Furthermore, you can revoke your consent at any time with the adverse consequence that you cannot participate in the event as helper.
 
-    Please send any notice of cancellation to:
+Please send any notice of cancellation to:
 
-    Fachschaft MPI
-    Technische Universität München
-    Boltzmannstraße 3
-    85748 Garching
-    E-Mail: {% setting "CONTACT_MAIL" %}
+Fachschaft MPI
+Technische Universität München
+Boltzmannstraße 3
+85748 Garching
+E-Mail: {% setting "CONTACT_MAIL" %}
 
-    In the event of cancellation, your data will be deleted upon receipt of your notice.{% endif %}
+In the event of cancellation, your data will be deleted upon receipt of your notice.{% endif %}
