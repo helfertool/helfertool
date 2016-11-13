@@ -20,5 +20,15 @@
             <a href="{# url 'inventory:take_back' event.url_name #}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
         {% endif %}
     </form>
+
+    {% if last_helper_name and last_item_name %}
+        <div class="alert alert-success">
+            <b>{{ last_item_name }}</b><br/>
+
+            {% blocktrans trimmed %}
+                Assigned to {{ last_helper_name }}
+            {% endblocktrans %}
+        </div>
+    {% endif %}
 {% endblock %}
 
