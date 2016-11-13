@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 11:04+0100\n"
-"PO-Revision-Date: 2016-11-11 11:06+0100\n"
+"POT-Creation-Date: 2016-11-14 00:31+0100\n"
+"PO-Revision-Date: 2016-11-14 00:31+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -30,7 +30,7 @@ msgstr "Vorname"
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:79 registration/models/event.py:81
+#: registration/export/excel.py:79 registration/models/event.py:82
 #: registration/models/helper.py:101
 #: registration/templates/registration/admin/archive_event.html:17
 #: registration/templates/registration/admin/coordinators.html:17
@@ -193,63 +193,63 @@ msgstr "E-Mail Adresse"
 msgid "Last name"
 msgstr "Nachname"
 
-#: registration/models/event.py:47
+#: registration/models/event.py:48
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: registration/models/event.py:48
+#: registration/models/event.py:49
 msgid "May contain the following chars: a-zA-Z0-9."
 msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9"
 
-#: registration/models/event.py:53
+#: registration/models/event.py:54
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: registration/models/event.py:57
+#: registration/models/event.py:58
 msgid "Date"
 msgstr "Datum"
 
-#: registration/models/event.py:58
+#: registration/models/event.py:59
 msgid "First day of event"
 msgstr "Erster Tag der Veranstaltung"
 
-#: registration/models/event.py:63
+#: registration/models/event.py:64
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models/event.py:64
+#: registration/models/event.py:65
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:69
+#: registration/models/event.py:70
 msgid "Imprint"
 msgstr "Impressum"
 
-#: registration/models/event.py:70
+#: registration/models/event.py:71
 msgid "Display at the bottom of the registration form."
 msgstr "Wird bei der Anmeldung unten angezeigt."
 
-#: registration/models/event.py:75
+#: registration/models/event.py:76
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models/event.py:76
+#: registration/models/event.py:77
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models/event.py:82
+#: registration/models/event.py:83
 msgid "Used as Reply-to address for mails sent to helpers"
 msgstr "Wird als Antwortadresse für E-Mails an Helfer verwendet"
 
-#: registration/models/event.py:90
+#: registration/models/event.py:91
 msgid "Logo"
 msgstr "Logo"
 
-#: registration/models/event.py:96
+#: registration/models/event.py:97
 msgid "Maximal overlapping of shifts"
 msgstr "Maximale Überlappung von Schichten"
 
-#: registration/models/event.py:97
+#: registration/models/event.py:98
 msgid ""
 "If two shifts overlap more than this value in minutes it is not possible to "
 "register for both shifts. Leave empty to disable this check."
@@ -258,32 +258,32 @@ msgstr ""
 "man sich nicht für beide Schichten anmelden. Wenn das Feld leer ist, wird "
 "die Überlappung nicht geprüft."
 
-#: registration/models/event.py:109
+#: registration/models/event.py:110
 msgid "Registration publicly visible"
 msgstr "Anmeldung öffentlich sichtbar"
 
-#: registration/models/event.py:114
+#: registration/models/event.py:115
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:119
+#: registration/models/event.py:120
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models/event.py:124
+#: registration/models/event.py:125
 msgid "Helpers have to confirm to be full age"
 msgstr "Helfer müssen bestätigen, volljährig zu sein"
 
-#: registration/models/event.py:129
+#: registration/models/event.py:130
 msgid "Ask if helper wants to be notified about new events"
 msgstr ""
 "Fragen, ob der Helfer über weitere Veranstaltungen informiert werden möchte"
 
-#: registration/models/event.py:134
+#: registration/models/event.py:135
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:139
+#: registration/models/event.py:140
 msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
@@ -291,19 +291,19 @@ msgstr ""
 "Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
 "werden, der per E-Mail verschickt wird."
 
-#: registration/models/event.py:145
+#: registration/models/event.py:146
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
-#: registration/models/event.py:150
+#: registration/models/event.py:151
 msgid "Manage gifts for helpers"
 msgstr "Helfergeschenke verwalten"
 
-#: registration/models/event.py:155
+#: registration/models/event.py:156
 msgid "Use the inventory functionality"
 msgstr "Die Inventar Funktion verwenden"
 
-#: registration/models/event.py:160
+#: registration/models/event.py:161
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert."
 
@@ -472,7 +472,7 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:7
-#: registration/templates/registration/admin/base.html:170
+#: registration/templates/registration/admin/base.html:177
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -645,64 +645,73 @@ msgstr "Generieren"
 msgid "Registration"
 msgstr "Registrierung"
 
-#: registration/templates/registration/admin/base.html:167
+#: registration/templates/registration/admin/base.html:163
+msgid "Inventory"
+msgstr "Inventar"
+
+#: registration/templates/registration/admin/base.html:165
+#: registration/templates/registration/registerform.html:134
+msgid "Register"
+msgstr "Anmelden"
+
+#: registration/templates/registration/admin/base.html:174
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:173
+#: registration/templates/registration/admin/base.html:180
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:174
+#: registration/templates/registration/admin/base.html:181
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:191
+#: registration/templates/registration/admin/base.html:198
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:192
+#: registration/templates/registration/admin/base.html:199
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:193
+#: registration/templates/registration/admin/base.html:200
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:194
+#: registration/templates/registration/admin/base.html:201
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:195
+#: registration/templates/registration/admin/base.html:202
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:196
+#: registration/templates/registration/admin/base.html:203
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:197
+#: registration/templates/registration/admin/base.html:204
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:198
+#: registration/templates/registration/admin/base.html:205
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:199
+#: registration/templates/registration/admin/base.html:206
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:200
+#: registration/templates/registration/admin/base.html:207
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:201
+#: registration/templates/registration/admin/base.html:208
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -1314,10 +1323,6 @@ msgstr ""
 #: registration/templates/registration/registerform.html:124
 msgid "Make sure that the helper is full age!"
 msgstr "Versichere dich, dass der Helfer volljährig ist!"
-
-#: registration/templates/registration/registerform.html:134
-msgid "Register"
-msgstr "Anmelden"
 
 #: registration/templates/registration/validate.html:15
 msgid "Your mail address was already confirmed."

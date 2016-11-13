@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from registration.models import Helper
+from .exceptions import AlreadyAssigned
 
 
 class Inventory(models.Model):
@@ -22,6 +22,9 @@ class Inventory(models.Model):
         verbose_name=_("Same item may be assigned to different helpers"),
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Item(models.Model):
     inventory = models.ForeignKey(
@@ -38,10 +41,30 @@ class Item(models.Model):
         verbose_name=_("Barcode"),
     )
 
+    def __str__(self):
+        return "{} ({})".format(self.name, self.inventory.name)
+
+    def add_to_helper(self, helper):
+        if not self.inventory.multiple_assignments:
+            other_uses = UsedItem.objects.filter(item=self,
+                                                 helper__event=helper.event,
+                                                 timestamp_returned=None)
+            if other_uses.exists():
+                raise AlreadyAssigned(other_uses[0].helper)
+
+        UsedItem.objects.create(helper=helper, item=self)
+
+    def is_available(self, event):
+        if not self.inventory.multiple_assignments:
+            return not UsedItem.objects.filter(item=self, helper__event=event,
+                                               timestamp_returned=None) \
+                                       .exists()
+        return True
+
 
 class UsedItem(models.Model):
     helper = models.ForeignKey(
-        Helper,
+        'registration.Helper',
     )
 
     item = models.ForeignKey(
@@ -53,5 +76,20 @@ class UsedItem(models.Model):
     )
 
     timestamp_returned = models.DateTimeField(
-        auto_now_add=True,
+        null=True,
+        blank=True,
     )
+
+
+class InventorySettings(models.Model):
+    event = models.OneToOneField(
+        'registration.Event'
+    )
+
+    available_inventory = models.ManyToManyField(
+        Inventory,
+        verbose_name=_("Available inventory"),
+    )
+
+    def __str__(self):
+        return self.event.name

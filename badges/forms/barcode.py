@@ -5,8 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import Badge
 
 
-class RegisterBadgeForm(forms.Form):
-    badge_id = forms.IntegerField(label='Barcode',
+class BadgeBarcodeForm(forms.Form):
+    badge_id = forms.IntegerField(label=_("Barcode"),
                                   widget=forms.TextInput(
                                     attrs={'autofocus': ''}))
 
@@ -15,10 +15,10 @@ class RegisterBadgeForm(forms.Form):
 
         self.badge = None
 
-        super(RegisterBadgeForm, self).__init__(*args, **kwargs)
+        super(BadgeBarcodeForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        super(RegisterBadgeForm, self).__init__()
+        super(BadgeBarcodeForm, self).__init__()
 
         id = self.cleaned_data.get('badge_id')
 

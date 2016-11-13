@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'', include('registration.urls')),
     url(r'', include('badges.urls')),
     url(r'', include('gifts.urls')),
+    url(r'', include('inventory.urls')),
     url(r'', include('mail.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

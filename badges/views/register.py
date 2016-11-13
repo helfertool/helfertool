@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from ..forms import RegisterBadgeForm
+from ..forms import BadgeBarcodeForm
 
 from registration.decorators import archived_not_available
 from registration.views.utils import nopermission
@@ -26,7 +26,7 @@ def register(request, event_url_name):
         return notactive(request)
 
     if event.badge_settings.barcodes:
-        form = RegisterBadgeForm(request.POST or None, event=event)
+        form = BadgeBarcodeForm(request.POST or None, event=event)
 
         if form.is_valid():
             if form.badge.printed:

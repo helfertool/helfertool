@@ -1,0 +1,24 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Scan item" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% if not_available %}
+            <div class="alert alert-danger">
+                {% trans "This item is already assigned to another helper." %}
+            </div>
+        {% endif %}
+
+        {% bootstrap_form form show_label=False %}
+
+        {% if not_available %}
+            <a href="{# url 'inventory:take_back' event.url_name #}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
+        {% endif %}
+    </form>
+{% endblock %}
+

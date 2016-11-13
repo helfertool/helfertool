@@ -10,6 +10,7 @@ from django_bleach.models import BleachField
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 from gifts.models import HelpersGifts
+from inventory.models import InventorySettings
 
 
 def _default_mail():
@@ -203,6 +204,13 @@ class Event(models.Model):
             return None
 
     @property
+    def inventory_settings(self):
+        try:
+            return self.inventorysettings
+        except AttributeError:
+            return None
+
+    @property
     def all_coordinators(self):
         result = []
 
@@ -261,3 +269,7 @@ def event_saved(sender, instance, using, **kwargs):
                 gifts = HelpersGifts()
                 gifts.helper = helper
                 gifts.save()
+
+    if instance.inventory:
+        if not instance.inventory_settings:
+            InventorySettings.objects.create(event=instance)
