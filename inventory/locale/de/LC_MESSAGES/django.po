@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 17:31+0100\n"
-"PO-Revision-Date: 2016-11-14 17:36+0100\n"
+"POT-Creation-Date: 2016-11-14 17:38+0100\n"
+"PO-Revision-Date: 2016-11-14 17:38+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -98,7 +98,7 @@ msgstr "Gegenstand zurücknehmen"
 
 #: inventory/templates/inventory/register_item.html:6
 msgid "Register: Scan item"
-msgstr "Eintragen: Gegenstand scanner"
+msgstr "Eintragen: Gegenstand scannen"
 
 #: inventory/templates/inventory/register_item.html:28
 #, python-format
@@ -111,7 +111,9 @@ msgstr "Zurück nehmen: Badge scannen"
 
 #: inventory/templates/inventory/take_back_badge.html:19
 msgid "This item is not assigned to this helper, but to another helper."
-msgstr "Der Gegenstand ist nicht für diesen Helfer eingetragen, aber für einen anderen."
+msgstr ""
+"Der Gegenstand ist nicht für diesen Helfer eingetragen, aber für einen "
+"anderen."
 
 #: inventory/templates/inventory/take_back_item.html:6
 msgid "Take back: Scan item"

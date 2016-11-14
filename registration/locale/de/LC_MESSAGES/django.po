@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 17:31+0100\n"
-"PO-Revision-Date: 2016-11-14 17:32+0100\n"
+"POT-Creation-Date: 2016-11-14 17:38+0100\n"
+"PO-Revision-Date: 2016-11-14 17:38+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -650,9 +650,9 @@ msgid "Inventory"
 msgstr "Inventar"
 
 #: registration/templates/registration/admin/base.html:165
-#: registration/templates/registration/registerform.html:134
+msgctxt "Register item and badge"
 msgid "Register"
-msgstr "Anmelden"
+msgstr "Eintragen"
 
 #: registration/templates/registration/admin/base.html:166
 msgid "Take back"
@@ -1331,6 +1331,10 @@ msgstr ""
 #: registration/templates/registration/registerform.html:124
 msgid "Make sure that the helper is full age!"
 msgstr "Versichere dich, dass der Helfer volljährig ist!"
+
+#: registration/templates/registration/registerform.html:134
+msgid "Register"
+msgstr "Anmelden"
 
 #: registration/templates/registration/validate.html:15
 msgid "Your mail address was already confirmed."
