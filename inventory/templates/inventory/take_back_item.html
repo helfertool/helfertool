@@ -18,9 +18,24 @@
     </form>
 
     {% if last_helper %}
-        <div class="alert alert-success">
-            <b>{{ last_helper.full_name }}</b><br/>
-        </div>
+        {% if last_helper_items %}
+            <div class="alert alert-info">
+                <b>{{ last_helper.full_name }}</b><br/>
+
+            {% trans "The helper still has these items:" %}
+            <ul>
+                {% for used_item in last_helper_items %}
+                    <li>{{ used_item.item.name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-success">
+                <b>{{ last_helper.full_name }}</b><br/>
+
+            {% trans "Everything returned!" %}
+        {% endif %}
+
+            </div>
     {% endif %}
 {% endblock %}
 

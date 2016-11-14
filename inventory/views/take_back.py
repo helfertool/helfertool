@@ -9,7 +9,7 @@ from badges.forms import BadgeBarcodeForm
 from .utils import notactive
 from ..exceptions import WrongHelper
 from ..forms import InventoryBarcodeForm
-from ..models import Item
+from ..models import Item, UsedItem
 
 
 @archived_not_available
@@ -24,8 +24,11 @@ def take_back_item(request, event_url_name):
     last_helper_pk = request.session.pop('inventory_helper_pk', None)
     try:
         last_helper = Helper.objects.get(pk=last_helper_pk)
+        last_helper_items = UsedItem.objects.filter(helper=last_helper,
+                                                    timestamp_returned=None)
     except Helper.DoesNotExist:
         last_helper = None
+        last_helper_items = None
 
     form = InventoryBarcodeForm(request.POST or None, event=event)
 
@@ -40,7 +43,8 @@ def take_back_item(request, event_url_name):
     context = {'event': event,
                'form': form,
                'not_in_use': not_in_use,
-               'last_helper': last_helper}
+               'last_helper': last_helper,
+               'last_helper_items': last_helper_items}
     return render(request, 'inventory/take_back_item.html',
                   context)
 
