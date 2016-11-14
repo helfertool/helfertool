@@ -3,7 +3,7 @@
 {% load bootstrap3 %}
 
 {% block admincontent %}
-    <h2>{% trans "Scan item" %}</h2>
+    <h2>{% trans "Register: Scan item" %}</h2>
 
     <form action="" method="post">
         {% csrf_token %}
@@ -17,7 +17,7 @@
         {% bootstrap_form form show_label=False %}
 
         {% if not_available %}
-            <a href="{# url 'inventory:take_back' event.url_name #}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
+            <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
         {% endif %}
     </form>
 

@@ -3,32 +3,32 @@
 {% load bootstrap3 %}
 
 {% block admincontent %}
-    <h2>{% trans "Register: Scan badge" %}</h2>
+    <h2>{% trans "Take back: Scan badge" %}</h2>
 
     {% if not form %}
         <div class="alert alert-danger">
             {% trans "You have to scan the item first." %}
         </div>
-        <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan item" %}</a>
+        <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan item" %}</a>
     {% else %}
         <form action="" method="post">
             {% csrf_token %}
 
-            {% if other_assigned_helper %}
+            {% if wrong_helper %}
                 <div class="alert alert-danger">
-                    {% trans "This item is already assigned to another helper." %}
+                    {% trans "This item is not assigned to this helper, but to another helper." %}
                 </div>
             {% endif %}
 
             {% bootstrap_form form show_label=False %}
         </form>
 
-        {% if form.errors or other_assigned_helper %}
+        {% if form.errors or wrong_helper %}
             <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan new item" %}</a>
         {% endif %}
 
-        {% if other_assigned_helper %}
-            <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
+        {% if wrong_helper %}
+            {# TODO #}
         {% endif %}
     {% endif %}
 {% endblock %}

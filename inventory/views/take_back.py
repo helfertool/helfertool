@@ -1,0 +1,79 @@
+from django.shortcuts import render, get_object_or_404, redirect
+
+
+from registration.decorators import archived_not_available, admin_required
+from registration.models import Event, Helper
+
+from badges.forms import BadgeBarcodeForm
+
+from .utils import notactive
+from ..exceptions import WrongHelper
+from ..forms import InventoryBarcodeForm
+from ..models import Item
+
+
+@archived_not_available
+@admin_required
+def take_back_item(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check if badge system is active
+    if not event.inventory:
+        return notactive(request)
+
+    last_helper_pk = request.session.pop('inventory_helper_pk', None)
+    try:
+        last_helper = Helper.objects.get(pk=last_helper_pk)
+    except Helper.DoesNotExist:
+        last_helper = None
+
+    form = InventoryBarcodeForm(request.POST or None, event=event)
+
+    not_in_use = False
+    if form.is_valid():
+        if form.item.is_in_use(event):
+            return redirect('inventory:take_back_badge', event_url_name,
+                            form.item.pk)
+        else:
+            not_in_use = True
+
+    context = {'event': event,
+               'form': form,
+               'not_in_use': not_in_use,
+               'last_helper': last_helper}
+    return render(request, 'inventory/take_back_item.html',
+                  context)
+
+
+@archived_not_available
+@admin_required
+def take_back_badge(request, event_url_name, item_pk):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check if badge system is active
+    if not event.inventory:
+        return notactive(request)
+
+    wrong_helper = False
+    try:
+        item = Item.objects.get(pk=item_pk)
+
+        form = BadgeBarcodeForm(request.POST or None, event=event)
+
+        if form.is_valid():
+            item.remove_from_helper(form.badge.helper)
+
+            request.session['inventory_helper_pk'] = \
+                str(form.badge.helper.pk)
+
+            return redirect('inventory:take_back', event_url_name)
+    except (KeyError, Item.DoesNotExist):
+        form = None
+    except WrongHelper as e:
+        wrong_helper = True
+
+    context = {'event': event,
+               'form': form,
+               'wrong_helper': wrong_helper}
+    return render(request, 'inventory/take_back_badge.html',
+                  context)

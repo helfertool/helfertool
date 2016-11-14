@@ -2,7 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from .exceptions import AlreadyAssigned
+from datetime import datetime
+
+from .exceptions import WrongHelper
 
 
 class Inventory(models.Model):
@@ -44,22 +46,32 @@ class Item(models.Model):
     def __str__(self):
         return "{} ({})".format(self.name, self.inventory.name)
 
-    def add_to_helper(self, helper):
+    def is_available(self, event):
         if not self.inventory.multiple_assignments:
-            other_uses = UsedItem.objects.filter(item=self,
-                                                 helper__event=helper.event,
-                                                 timestamp_returned=None)
-            if other_uses.exists():
-                raise AlreadyAssigned(other_uses[0].helper)
+            return not self.is_in_use(event)
+        return True
+
+    def is_in_use(self, event):
+        return UsedItem.objects.filter(item=self, helper__event=event,
+                                       timestamp_returned=None).exists()
+
+    def is_in_use_by_helper(self, helper):
+        return UsedItem.objects.filter(item=self, helper=helper,
+                                       timestamp_returned=None).exists()
+
+    def add_to_helper(self, helper):
+        if not self.is_available(helper.event):
+            raise AlreadyAssigned()
 
         UsedItem.objects.create(helper=helper, item=self)
 
-    def is_available(self, event):
-        if not self.inventory.multiple_assignments:
-            return not UsedItem.objects.filter(item=self, helper__event=event,
-                                               timestamp_returned=None) \
-                                       .exists()
-        return True
+    def remove_from_helper(self, helper):
+        if not self.is_in_use_by_helper(helper):
+            raise WrongHelper()
+
+        UsedItem.objects.filter(item=self, helper=helper,
+                                timestamp_returned=None) \
+                         .update(timestamp_returned=datetime.now())
 
 
 class UsedItem(models.Model):
