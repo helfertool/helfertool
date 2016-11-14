@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 00:31+0100\n"
-"PO-Revision-Date: 2016-11-14 00:31+0100\n"
+"POT-Creation-Date: 2016-11-14 17:31+0100\n"
+"PO-Revision-Date: 2016-11-14 17:32+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -472,7 +472,7 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:7
-#: registration/templates/registration/admin/base.html:177
+#: registration/templates/registration/admin/base.html:179
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -654,64 +654,72 @@ msgstr "Inventar"
 msgid "Register"
 msgstr "Anmelden"
 
-#: registration/templates/registration/admin/base.html:174
+#: registration/templates/registration/admin/base.html:166
+msgid "Take back"
+msgstr "Zurücknehmen"
+
+#: registration/templates/registration/admin/base.html:167
+msgid "List"
+msgstr "Liste"
+
+#: registration/templates/registration/admin/base.html:176
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:180
+#: registration/templates/registration/admin/base.html:182
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:181
+#: registration/templates/registration/admin/base.html:183
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:198
+#: registration/templates/registration/admin/base.html:200
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:199
+#: registration/templates/registration/admin/base.html:201
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:200
+#: registration/templates/registration/admin/base.html:202
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:201
+#: registration/templates/registration/admin/base.html:203
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:202
+#: registration/templates/registration/admin/base.html:204
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:203
+#: registration/templates/registration/admin/base.html:205
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:204
+#: registration/templates/registration/admin/base.html:206
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:205
+#: registration/templates/registration/admin/base.html:207
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:206
+#: registration/templates/registration/admin/base.html:208
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:207
+#: registration/templates/registration/admin/base.html:209
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:208
+#: registration/templates/registration/admin/base.html:210
 msgid "Empty list"
 msgstr "Liste leer"
 

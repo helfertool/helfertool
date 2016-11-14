@@ -8,18 +8,31 @@
     {% regroup used_items by item as item_groups %} {# TODO: sort by item #}
 
     <table class="table">
+        <tr>
+            <th>{% trans "Item" %}</th>
+            <th>{% trans "Status and log" %}</th>
+        </tr>
         {% for group in item_groups %}
             <tr>
-                <td>{{ group.grouper }}</td>
+                <td>{{ group.grouper.name }}</td>
 
                 <td>
                     <ul>
                         {% for use in group.list|dictsort:"timestamp" %} {# TODO: sort by date #}
                             <li>
                                 {% if use.timestamp_returned %}
-                                    {{ use.helper }}
+                                    {{ use.helper }}<br />
+                                    <span class="text-muted">
+                                        {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
+                                        {% trans "to" %}
+                                        {{ use.timestamp_returned|date:"SHORT_DATETIME_FORMAT" }}
+                                    </span>
                                 {% else %}
-                                    <b>{{ use.helper }}</b>
+                                    <b style="color:red;">{{ use.helper }}</b><br/>
+                                    <span style="color:red;">
+                                        {% trans "Since" %}
+                                        {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
+                                    </span>
                                 {% endif %}
                             </li>
                         {% endfor %}
