@@ -164,6 +164,7 @@
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="{% url 'inventory:register' event.url_name %}">{% trans "Register" %}</a></li>
                         <li><a href="{% url 'inventory:take_back' event.url_name %}">{% trans "Take back" %}</a></li>
+                        <li><a href="{% url 'inventory:list' event.url_name %}">{% trans "List" %}</a></li>
                     </ul>
                 {% endif %}
 

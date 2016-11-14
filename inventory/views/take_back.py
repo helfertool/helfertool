@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
 
-
 from registration.decorators import archived_not_available, admin_required
 from registration.models import Event, Helper
 

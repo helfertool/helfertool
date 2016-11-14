@@ -1,0 +1,31 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Inventory" %}</h2>
+
+    {% regroup used_items by item as item_groups %} {# TODO: sort by item #}
+
+    <table class="table">
+        {% for group in item_groups %}
+            <tr>
+                <td>{{ group.grouper }}</td>
+
+                <td>
+                    <ul>
+                        {% for use in group.list|dictsort:"timestamp" %} {# TODO: sort by date #}
+                            <li>
+                                {% if use.timestamp_returned %}
+                                    {{ use.helper }}
+                                {% else %}
+                                    <b>{{ use.helper }}</b>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

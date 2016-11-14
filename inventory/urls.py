@@ -17,4 +17,8 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/take_back/(?P<item_pk>[0-9]+)/$',
         views.take_back_badge,
         name='take_back_badge'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/list/$',
+        views.list,
+        name='list'),
 ]

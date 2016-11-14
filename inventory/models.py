@@ -75,6 +75,9 @@ class Item(models.Model):
 
 
 class UsedItem(models.Model):
+    class Meta:
+        ordering = ('item__inventory__name', 'item__name', 'timestamp')
+
     helper = models.ForeignKey(
         'registration.Helper',
     )
