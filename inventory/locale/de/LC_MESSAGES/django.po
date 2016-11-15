@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 17:38+0100\n"
-"PO-Revision-Date: 2016-11-14 17:38+0100\n"
+"POT-Creation-Date: 2016-11-15 23:03+0100\n"
+"PO-Revision-Date: 2016-11-15 23:05+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: inventory/forms.py:12 inventory/models.py:43
+#: inventory/forms.py:12 inventory/models.py:44
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -26,40 +26,57 @@ msgstr "Barcode"
 msgid "There is no item with this barcode for this event."
 msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
 
-#: inventory/models.py:13 inventory/models.py:38
+#: inventory/models.py:14 inventory/models.py:39
 msgid "Name"
 msgstr "Name"
 
-#: inventory/models.py:19
+#: inventory/models.py:20
 msgid "Administrators of inventory"
 msgstr "Verwalter des Inventars"
 
-#: inventory/models.py:24
+#: inventory/models.py:25
 msgid "Same item may be assigned to different helpers"
 msgstr "Gleicher Gegenstand darf mehreren Personen zugeordnet werden"
 
-#: inventory/models.py:106
+#: inventory/models.py:123
 msgid "Available inventory"
 msgstr "Verfügbares Inventar"
 
-#: inventory/templates/inventory/list.html:6
+#: inventory/templates/inventory/list.html:7
 #: inventory/templates/inventory/not_active.html:6
 msgid "Inventory"
 msgstr "Inventar"
 
-#: inventory/templates/inventory/list.html:12
+#: inventory/templates/inventory/list.html:13
 msgid "Item"
 msgstr "Gegenstand"
 
-#: inventory/templates/inventory/list.html:13
+#: inventory/templates/inventory/list.html:14
 msgid "Status and log"
 msgstr "Status und Log"
 
-#: inventory/templates/inventory/list.html:27
+#: inventory/templates/inventory/list.html:23
+msgid "Not in use"
+msgstr "Wird nicht verwendet"
+
+#: inventory/templates/inventory/list.html:26
+#, python-format
+msgid "%(num_uses)s times in use"
+msgstr "%(num_uses)s mal in Verwendung"
+
+#: inventory/templates/inventory/list.html:31
+msgid "In use"
+msgstr "Wird verwendet"
+
+#: inventory/templates/inventory/list.html:37
+msgid "Show log"
+msgstr "Zeige Log"
+
+#: inventory/templates/inventory/list.html:48
 msgid "to"
 msgstr "bis"
 
-#: inventory/templates/inventory/list.html:33
+#: inventory/templates/inventory/list.html:54
 msgid "Since"
 msgstr "Seit"
 
@@ -86,12 +103,12 @@ msgstr "Gegenstand scannen"
 msgid "This item is already assigned to another helper."
 msgstr "Dieser Gegenstand ist bereits einem anderen Helfer zugeordnet"
 
-#: inventory/templates/inventory/register_badge.html:27
-#: inventory/templates/inventory/take_back_badge.html:27
-msgid "Scan new item"
-msgstr "Neuen Gegenstand scannen"
+#: inventory/templates/inventory/register_badge.html:26
+#: inventory/templates/inventory/take_back_badge.html:26
+msgid "Scan other item"
+msgstr "Anderen Gegenstand scannen"
 
-#: inventory/templates/inventory/register_badge.html:31
+#: inventory/templates/inventory/register_badge.html:29
 #: inventory/templates/inventory/register_item.html:20
 msgid "Take item back"
 msgstr "Gegenstand zurücknehmen"
@@ -102,8 +119,12 @@ msgstr "Eintragen: Gegenstand scannen"
 
 #: inventory/templates/inventory/register_item.html:28
 #, python-format
-msgid "Assigned to %(last_helper_name)s"
-msgstr "Eingetragen für %(last_helper_name)s"
+msgid "Assigned to %(last_helper)s"
+msgstr "Eingetragen für %(last_helper)s"
+
+#: inventory/templates/inventory/register_item.html:34
+msgid "The helper now has these items:"
+msgstr "Der Helfer hat jetzt folgende Gegenstände:"
 
 #: inventory/templates/inventory/take_back_badge.html:6
 msgid "Take back: Scan badge"
@@ -114,6 +135,25 @@ msgid "This item is not assigned to this helper, but to another helper."
 msgstr ""
 "Der Gegenstand ist nicht für diesen Helfer eingetragen, aber für einen "
 "anderen."
+
+#: inventory/templates/inventory/take_back_badge.html:29
+msgid "Take back without badge"
+msgstr "Ohne Badge zurück nehmen"
+
+#: inventory/templates/inventory/take_back_error.html:6
+msgid "Error during taking back an item"
+msgstr "Fehler beim Zurücknehmen des Gegenstands"
+
+#: inventory/templates/inventory/take_back_error.html:10
+msgid ""
+"The item should only be assigned once, but multiple assignments are saved."
+msgstr ""
+"Der Gegenstand sollte nur einmal zugeordnet sein, aber es sind mehrere "
+"Zuordnungen gespeichert."
+
+#: inventory/templates/inventory/take_back_error.html:12
+msgid "The item is not assigned to any helper."
+msgstr "Dieser Gegenstand ist keinem Helfer zugeordnet."
 
 #: inventory/templates/inventory/take_back_item.html:6
 msgid "Take back: Scan item"
