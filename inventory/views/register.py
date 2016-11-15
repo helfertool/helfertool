@@ -2,14 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 
 from registration.decorators import archived_not_available, admin_required
-from registration.models import Event
+from registration.models import Event, Helper
 
 from badges.forms import BadgeBarcodeForm
 
 from .utils import notactive
 from ..exceptions import AlreadyAssigned
 from ..forms import InventoryBarcodeForm
-from ..models import Item
+from ..models import Item, UsedItem
 
 
 @archived_not_available
@@ -21,9 +21,18 @@ def register_item(request, event_url_name):
     if not event.inventory:
         return notactive(request)
 
-    last_helper_name = request.session.pop('inventory_helper_name', None)
+    # data from last registration
+    last_helper_pk = request.session.pop('inventory_helper_pk', None)
     last_item_name = request.session.pop('inventory_item_name', None)
+    try:
+        last_helper = Helper.objects.get(pk=last_helper_pk)
+        last_helper_items = UsedItem.objects.filter(helper=last_helper,
+                                                    timestamp_returned=None)
+    except Helper.DoesNotExist:
+        last_helper = None
+        last_helper_items = None
 
+    # form for new registration
     form = InventoryBarcodeForm(request.POST or None, event=event)
 
     not_available = False
@@ -37,7 +46,8 @@ def register_item(request, event_url_name):
     context = {'event': event,
                'form': form,
                'not_available': not_available,
-               'last_helper_name': last_helper_name,
+               'last_helper': last_helper,
+               'last_helper_items': last_helper_items,
                'last_item_name': last_item_name}
     return render(request, 'inventory/register_item.html',
                   context)
@@ -62,8 +72,7 @@ def register_badge(request, event_url_name, item_pk):
             item.add_to_helper(form.badge.helper)
 
             # update saved data in session
-            request.session['inventory_helper_name'] = \
-                form.badge.helper.full_name
+            request.session['inventory_helper_pk'] = str(form.badge.helper.pk)
             request.session['inventory_item_name'] = item.name
 
             return redirect('inventory:register', event_url_name)

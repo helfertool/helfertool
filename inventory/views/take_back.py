@@ -6,7 +6,7 @@ from registration.models import Event, Helper
 from badges.forms import BadgeBarcodeForm
 
 from .utils import notactive
-from ..exceptions import WrongHelper
+from ..exceptions import WrongHelper, InvalidMultipleAssignment, NotAssigned
 from ..forms import InventoryBarcodeForm
 from ..models import Item, UsedItem
 
@@ -58,6 +58,7 @@ def take_back_badge(request, event_url_name, item_pk):
         return notactive(request)
 
     wrong_helper = False
+    item = None
     try:
         item = Item.objects.get(pk=item_pk)
 
@@ -77,6 +78,37 @@ def take_back_badge(request, event_url_name, item_pk):
 
     context = {'event': event,
                'form': form,
+               'item': item,
                'wrong_helper': wrong_helper}
     return render(request, 'inventory/take_back_badge.html',
+                  context)
+
+
+@archived_not_available
+@admin_required
+def take_back_direct(request, event_url_name, item_pk):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check if badge system is active
+    if not event.inventory:
+        return notactive(request)
+
+    item = Item.objects.get(pk=item_pk)
+
+    try:
+        helper = item.get_exclusive_user(event)
+
+        item.remove_from_helper(helper)
+
+        request.session['inventory_helper_pk'] = str(helper.pk)
+
+        return redirect('inventory:take_back', event_url_name)
+    except InvalidMultipleAssignment:
+        error = 'multiple'
+    except NotAssigned:
+        error = 'noassignment'
+
+    context = {'event': event,
+               'error': error}
+    return render(request, 'inventory/take_back_error.html',
                   context)

@@ -21,13 +21,22 @@
         {% endif %}
     </form>
 
-    {% if last_helper_name and last_item_name %}
+    {% if last_helper and last_helper_items and last_item_name %}
         <div class="alert alert-success">
             <b>{{ last_item_name }}</b><br/>
 
-            {% blocktrans trimmed %}
-                Assigned to {{ last_helper_name }}
+            {% blocktrans trimmed with name as last_helper.full_name %}
+                Assigned to {{ last_helper }}
             {% endblocktrans %}
+
+            <br/><br/>
+
+            {% trans "The helper now has these items:" %}
+            <ul>
+                {% for used_item in last_helper_items %}
+                    <li>{{ used_item.item.name }}</li>
+                {% endfor %}
+            </ul>
         </div>
     {% endif %}
 {% endblock %}
