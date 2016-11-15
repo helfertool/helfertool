@@ -1,6 +1,7 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load useditemfilter %}
 
 {% block admincontent %}
     <h2>{% trans "Inventory" %}</h2>
@@ -9,34 +10,61 @@
 
     <table class="table">
         <tr>
-            <th>{% trans "Item" %}</th>
-            <th>{% trans "Status and log" %}</th>
+            <th style="width:30%">{% trans "Item" %}</th>
+            <th style="width:70%">{% trans "Status and log" %}</th>
         </tr>
         {% for group in item_groups %}
             <tr>
                 <td>{{ group.grouper.name }}</td>
 
                 <td>
-                    <ul>
-                        {% for use in group.list|dictsort:"timestamp" %} {# TODO: sort by date #}
-                            <li>
-                                {% if use.timestamp_returned %}
-                                    {{ use.helper }}<br />
-                                    <span class="text-muted">
-                                        {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
-                                        {% trans "to" %}
-                                        {{ use.timestamp_returned|date:"SHORT_DATETIME_FORMAT" }}
-                                    </span>
-                                {% else %}
-                                    <b style="color:red;">{{ use.helper }}</b><br/>
-                                    <span style="color:red;">
-                                        {% trans "Since" %}
-                                        {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
-                                    </span>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {% active_uses group.list as num_uses %}
+                    {% if group.grouper.inventory.multiple_assignments %}
+                        {% if num_uses > 0 %}
+                            <span style="color:red;">{% trans "In use" %}</span>
+                        {% else %}
+                            <span style="color:green;">{% trans "Available" %}</span>
+                        {% endif %}
+                    {% else %}
+                        {% if num_uses > 0 %}
+                            <span style="color:red;">
+                                {% blocktrans trimmed %}
+                                    {{ num_uses }} times in use
+                                {% endblocktrans %}
+                            </span>
+                        {% else %}
+                            <span style="color:green;">{% trans "Not in use" %}</span>
+                        {% endif %}
+                    {% endif %}
+
+                    <br/>
+
+                    <a data-toggle="collapse" href="#log-{{ group.grouper.pk }}">
+                        {% trans "Show log" %}
+                    </a>
+
+                    <div id="log-{{ group.grouper.pk }}" class="collapse">
+                        <ul>
+                            {% for use in group.list|dictsort:"timestamp" %}
+                                <li>
+                                    {% if use.timestamp_returned %}
+                                        {{ use.helper }}<br />
+                                        <span class="text-muted">
+                                            {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
+                                            {% trans "to" %}
+                                            {{ use.timestamp_returned|date:"SHORT_DATETIME_FORMAT" }}
+                                        </span>
+                                    {% else %}
+                                        <b style="color:red;">{{ use.helper }}</b><br/>
+                                        <span style="color:red;">
+                                            {% trans "Since" %}
+                                            {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
+                                        </span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
