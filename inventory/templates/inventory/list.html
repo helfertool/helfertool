@@ -21,12 +21,6 @@
                     {% active_uses group.list as num_uses %}
                     {% if group.grouper.inventory.multiple_assignments %}
                         {% if num_uses > 0 %}
-                            <span style="color:red;">{% trans "In use" %}</span>
-                        {% else %}
-                            <span style="color:green;">{% trans "Available" %}</span>
-                        {% endif %}
-                    {% else %}
-                        {% if num_uses > 0 %}
                             <span style="color:red;">
                                 {% blocktrans trimmed %}
                                     {{ num_uses }} times in use
@@ -34,6 +28,12 @@
                             </span>
                         {% else %}
                             <span style="color:green;">{% trans "Not in use" %}</span>
+                        {% endif %}
+                    {% else %}
+                        {% if num_uses > 0 %}
+                            <span style="color:red;">{% trans "In use" %}</span>
+                        {% else %}
+                            <span style="color:green;">{% trans "Available" %}</span>
                         {% endif %}
                     {% endif %}
 
