@@ -19,22 +19,16 @@
 
                 <td>
                     {% active_uses group.list as num_uses %}
-                    {% if group.grouper.inventory.multiple_assignments %}
-                        {% if num_uses > 0 %}
-                            <span style="color:red;">
-                                {% blocktrans trimmed %}
-                                    {{ num_uses }} times in use
-                                {% endblocktrans %}
-                            </span>
-                        {% else %}
-                            <span style="color:green;">{% trans "Not in use" %}</span>
-                        {% endif %}
+                    {% if num_uses == 0 %}
+                        <span style="color:green;">{% trans "Not in use" %}</span>
+                    {% elif group.grouper.inventory.multiple_assignments %}
+                        <span style="color:red;">
+                            {% blocktrans trimmed %}
+                                {{ num_uses }} times in use
+                            {% endblocktrans %}
+                        </span>
                     {% else %}
-                        {% if num_uses > 0 %}
-                            <span style="color:red;">{% trans "In use" %}</span>
-                        {% else %}
-                            <span style="color:green;">{% trans "Available" %}</span>
-                        {% endif %}
+                        <span style="color:red;">{% trans "In use" %}</span>
                     {% endif %}
 
                     <br/>

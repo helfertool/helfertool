@@ -23,9 +23,7 @@
             {% bootstrap_form form show_label=False %}
         </form>
 
-        {% if form.errors or wrong_helper %}
-            <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan new item" %}</a>
-        {% endif %}
+        <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan other item" %}</a>
 
         {% if not item.inventory.multiple_assignments %}
             <a href="{% url 'inventory:take_back_direct' event.url_name item.pk %}" class="btn btn-lg btn-warning">{% trans "Take back without badge" %}</a>
