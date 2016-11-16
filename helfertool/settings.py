@@ -251,7 +251,8 @@ BOWER_INSTALLED_APPS = (
     'jquery',
     'bootstrap',
     'bootstrap3-datetimepicker',
-    'select2'
+    'select2',
+    'font-awesome',
 )
 
 STATIC_URL = '/static/'
