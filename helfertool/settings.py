@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
+    'djangobower',
     'bootstrap3',
     'ckeditor',
     'helfertool',
@@ -237,6 +238,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Bower
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
+BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'bootstrap',
+    'bootstrap3-datetimepicker',
+    'select2'
+)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

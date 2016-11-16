@@ -2,8 +2,11 @@
 
 It is recommended to use virtualenv:
 
-    virtualenv helfertool
+    pyvenv helfertool
     cd helfertool
+
+    npm install bower
+
     . ./bin/activate
 
     git clone git@git.fs.tum.de:helfertool/helfertool.git
@@ -13,6 +16,7 @@ It is recommended to use virtualenv:
 ### Software
 
  * Python 3
+ * Bower (depends on node and npm)
  * pdflatex (from TeX Live)
  * Redis or RabbitMQ (RabbitMQ is recommended)
  * DB software that is supported by Django (use SQLite for development)

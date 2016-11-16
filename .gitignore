@@ -18,5 +18,9 @@ Session.vim
 # upload directory
 /media/
 
+# static files
+/components/
+/static/
+
 # sqlite database
 /db.sqlite3*
