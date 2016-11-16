@@ -1,19 +1,6 @@
 # Install
 
-It is recommended to use virtualenv:
-
-    pyvenv helfertool
-    cd helfertool
-
-    npm install bower
-
-    . ./bin/activate
-
-    git clone git@git.fs.tum.de:helfertool/helfertool.git
-
 ## Dependencies
-
-### Software
 
  * Python 3
  * Bower (depends on node and npm)
@@ -21,7 +8,22 @@ It is recommended to use virtualenv:
  * Redis or RabbitMQ (RabbitMQ is recommended)
  * DB software that is supported by Django (use SQLite for development)
 
-### Python modules
+## Setup environment
+
+It is recommended to use a Python virtual environment:
+
+    pyvenv helfertool
+    cd helfertool
+
+    npm install bower
+    # fix so that bower is found inside the virtualenv
+    ln -s "$(pwd)/node_modules/bower/bin/bower" "bin/bower"
+
+    . ./bin/activate
+
+    git clone git@git.fs.tum.de:helfertool/helfertool.git
+
+## Python modules
 
 The required Python modules are listed in the file requirements.txt, install
 it with pip:
@@ -38,7 +40,13 @@ https://docs.djangoproject.com/en/dev/ref/databases/
 
 For MySQL we use mysqlclient which is also recommended by Django.
 
-### LaTeX packages
+## Bower packages
+
+To install the necessary CSS and JS libraries, execute:
+
+   python manage.py bower install
+
+## LaTeX packages
 
 These packages or parts of LaTeX are necessary to use the default badge
 template:
@@ -51,13 +59,45 @@ template:
 
 These packages are included in TeX Live and should be installed anyway.
 
-## Run for development
+## Set secret key
 
-### Celery and RabbitMQ
+You have to set a secret key in the configuration file
+`helfertool/settings.py`:
 
-Since the software uses Celery you need one of supported message brokers, for
-development we use RabbitMQ with Docker (note: the RabbitMQ server listens on
-port 5672 to every incoming connection, you should configure a firewall):
+    SECRET_KEY = 'CHANGE-ME-AFTER-INSTALL'
+
+You can generate a new key using the script `./stuff/bin/gen-secret-key.py`.
+
+## Database
+
+The database configuration is done in `helfertool/settings.py`:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+Look at https://docs.djangoproject.com/en/dev/ref/databases/ for examples
+how to configure Django to use an other database.
+
+Now you should run the database migrations:
+
+    python manage.py migrate
+
+## Celery
+
+Since the software uses Celery you need one of supported message brokers, we
+use RabbitMQ for development and deployment.
+
+### Deployment
+For deployment we installed RabbitMQ using the package repository.
+
+### Development
+For development, RabbitMQ is installed using Docker (note: the RabbitMQ server
+listens on port 5672 to every incoming connection, you should configure a
+firewall):
 
     docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
@@ -65,10 +105,6 @@ port 5672 to every incoming connection, you should configure a firewall):
 To start the RabbitMQ server later:
 
     docker start helfertool-rabbitmq
-
-And start celery:
-
-    celery -A helfertool worker -c 2 --loglevel=info
 
 To update the RabbitMQ container later:
 
@@ -78,28 +114,27 @@ To update the RabbitMQ container later:
     docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
 
+### Configuration and start
 
-### Django
+Change the broker configuration in `helfertool/settings.py`.
 
-By default Django uses a SQLite database that can be generated using the
-following command inside the project directory:
+For RabbitMQ with the username "guest" and password "guest" the configuration
+should look like this:
 
-    python manage.py migrate
+    BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
+    CELERY_RESULT_BACKEND = 'amqp://guest:guest@127.0.0.1/'
 
-Then a superuser should be created:
+Now start celery:
 
-    python manage.py createsuperuser
+    celery -A helfertool worker -c 2 --loglevel=info
 
-Now you can start the webserver for development:
+## Mails
 
-    python manage.py runserver
+The Helfertool tries to send mails to localhost:25 with the default
+configuration.
 
-Now visit http://localhost:8000 with your browser.
-
-### Mails
-
-If you want to test the E-Mail part, you can start a SMTP debug server using
-this command:
+If you want to test the E-Mail part during development, you can start a
+SMTP debug server using this command:
 
     python -m smtpd -n -c DebuggingServer localhost:1025
 
@@ -108,7 +143,48 @@ Additionally uncomment the following lines in `helfertool/settings.py`:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
 
-## Deployment
+## Create superuser
+
+Now a superuser should be created:
+
+    python manage.py createsuperuser
+
+## Create git branch for local configuration
+
+To make further updates easier it is a good idea to put the changes in a new
+branch called "local" here:
+
+    git stash
+    git stash branch local
+    git commit -a -m "Modified configuration"
+
+You should not push this branch to any server since it contains you database
+password!
+
+At the end you should also make sure that the configuration is not readable
+for all users:
+
+    chmod 640 helfertool/settings.py
+
+# Run for development
+
+For development the following steps should be done:
+
+Start RabbitMQ:
+
+    docker start helfertool-rabbitmq
+
+Start celery:
+
+    celery -A helfertool worker -c 2 --loglevel=info
+
+Start the webserver for development:
+
+    python manage.py runserver
+
+Now visit http://localhost:8000 with your browser.
+
+# Deployment
 
 There are a lot of possibilities to deploy a Django project. For
 helfen.fs.tum.de Apache2, uWSGI and MySQL are used. See here for the webserver
@@ -119,6 +195,33 @@ Instead of installing uwsgi with pip we used the Debian repository.
 The used uWSGI configuration is in `stuff/deployment/uwsgi.conf`. It uses
 Python 3.4 and automatically reloads Celery when uWSGI is touch-reloaded.
 
+# Upgrades
+
+There are a few steps to update a instance of the helfertool, assuming you
+followed the steps above:
+
+    # entern virtual env
+    . ./bin/activate
+    cd helfertool
+
+    # update source code
+    git checkout master
+    git pull
+    git checkout local
+    git merge master
+
+    # make sure the configuration is not readable for all users
+    chmod 640 helfertool/settings.py
+
+    # update dependencies
+    pip install -r requirements.txt
+    python manage.py bower install
+
+    # install migrations
+    python manage.py migrate
+
+    # update static files
+    python manage.py collectstatic --noinput
 
 # Command line interface
 
