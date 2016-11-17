@@ -19,7 +19,7 @@
         {% trans "Edit" %}
     </a>
 
-    {% include "registration/helper_data.html" with helper=helper %}
+    {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.pk %}
 
     {% if helper.has_to_validate %}
         <p class="text-danger">

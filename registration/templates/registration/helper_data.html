@@ -42,4 +42,11 @@
         <th>{% trans "Comment" %}: </th>
         <td>{{ helper.comment | default:"-" }}</td>
     </tr>
+
+    {% if badge_barcode %}
+        <tr>
+            <th>{% trans "Badge Barcode" %}</th>
+            <td>{{ badge_barcode }}</td>
+        </tr>
+    {% endif %}
 </table>
