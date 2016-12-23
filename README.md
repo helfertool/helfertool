@@ -21,7 +21,7 @@ It is recommended to use a Python virtual environment:
 
     . ./bin/activate
 
-    git clone git@git.fs.tum.de:helfertool/helfertool.git
+    git clone https://github.com/helfertool/helfertool.git
 
 ## Python modules
 
