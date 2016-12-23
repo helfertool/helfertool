@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-15 23:03+0100\n"
-"PO-Revision-Date: 2016-11-15 23:03+0100\n"
+"POT-Creation-Date: 2016-12-23 16:34+0100\n"
+"PO-Revision-Date: 2016-12-23 16:35+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -421,8 +421,8 @@ msgstr ""
 "Diese Software wurde unter der <a %(a_license)s>AGPLv3+</a> veröffentlicht."
 
 #: registration/templates/registration/about.html:16
-msgid "The source code can be found here:"
-msgstr "Der Quellcode kann hier gefunden werden:"
+msgid "More information about this software can be found here:"
+msgstr "Mehr Informationen über diese Software gibt es hier:"
 
 #: registration/templates/registration/about.html:20
 msgid "Contact"
@@ -1167,6 +1167,10 @@ msgstr "Das Passwort kann nicht geändert werden."
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
 
+#: registration/templates/registration/helper_data.html:48
+msgid "Badge Barcode"
+msgstr "Badge Barcode"
+
 #: registration/templates/registration/index.html:5
 msgid "Events"
 msgstr "Veranstaltungen"
@@ -1405,6 +1409,9 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "The source code can be found here:"
+#~ msgstr "Der Quellcode kann hier gefunden werden:"
 
 #~ msgid "Used as sender of e-mails."
 #~ msgstr "Wird als Absender von E-Mail genutzt."
@@ -1680,9 +1687,6 @@ msgstr "Schicht gelöscht"
 
 #~ msgid "Badge Permission"
 #~ msgstr "Badge Berechtigung"
-
-#~ msgid "Badge Role"
-#~ msgstr "Badge Rolle"
 
 #~ msgid "Badge Settings"
 #~ msgstr "Badge Einstellungen"
