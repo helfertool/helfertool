@@ -41,7 +41,7 @@ CONTACT_MAIL = 'helfertool@localhost'
 
 PRIVACY_URL = 'https://fs.tum.de/datenschutz/'
 IMPRINT_URL = 'https://fs.tum.de/impressum/'
-CODE_URL = 'https://github.com/helfertool/helfertool.git'
+CODE_URL = 'https://github.com/helfertool/helfertool'
 DOCS_URL = '/docs/'
 
 GROUP_ADDUSER = "registration_adduser"

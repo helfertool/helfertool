@@ -44,7 +44,7 @@ For MySQL we use mysqlclient which is also recommended by Django.
 
 To install the necessary CSS and JS libraries, execute:
 
-   python manage.py bower install
+    python manage.py bower install
 
 ## LaTeX packages
 
@@ -88,8 +88,8 @@ Now you should run the database migrations:
 
 ## Celery
 
-Since the software uses Celery you need one of supported message brokers, we
-use RabbitMQ for development and deployment.
+Since the software uses Celery you need one of the supported message brokers,
+we use RabbitMQ for development and deployment.
 
 ### Deployment
 For deployment we installed RabbitMQ using the package repository.
