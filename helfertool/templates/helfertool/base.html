@@ -30,7 +30,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-custom">
             <div class="container">
                 {# button to show menu on small devices#}
                 <div class="navbar-header">
@@ -110,15 +110,11 @@
         <footer class="footer">
             <div class="container">
                 <p class="text-muted">
-                    <a href="{% setting "PRIVACY_URL" %}" target="_blank">
-                        {% trans "Privacy" %}
-                    </a> | 
-                    <a href="{% setting "IMPRINT_URL" %}" target="_blank">
-                        {% trans "Imprint" %}
-                    </a> | 
-                    <a href="{% url "about" %}">
-                        {% trans "About this software" %}
-                    </a>
+                    <a href="{% setting "PRIVACY_URL" %}" target="_blank">{% trans "Privacy" %}</a>
+                    |
+                    <a href="{% setting "IMPRINT_URL" %}" target="_blank">{% trans "Imprint" %}</a>
+                    |
+                    <a href="{% url "about" %}">{% trans "About this software" %}</a>
                 </p>
             </div>
         </footer>
