@@ -79,6 +79,7 @@ class MailForm(forms.Form):
             choices=reply_to,
             label=_("Reply to"),
         )
+        self.fields['reply_to'].widget.attrs['onChange'] = 'handle_reply_to()'
 
         self.fields['custom_reply_to'] = forms.EmailField(
             label=_("Custom reply to"),
