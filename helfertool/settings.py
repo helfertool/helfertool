@@ -31,6 +31,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# you should enable these options
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
 ADMINS = (('Admin Name', 'admin@localhost'), )
 
 # sender of all mails (because of SPF, DKIM, DMARC)

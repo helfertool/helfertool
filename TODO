@@ -89,12 +89,4 @@ File uploads
 Inventory
 ========
 
-Event
-    + use_inventory
-    + global_inventories
-
-Job
-    + inventories
-
-Helper
-    + used_items (through: UsedItem)
+* used inventory for single job
