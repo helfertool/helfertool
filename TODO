@@ -96,3 +96,4 @@ Deployment
 
 * configuration file for helfertool that is parsed in settings.py
 * settings in admin area?
+* helfertool script? Similar to sentry?
