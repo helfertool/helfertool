@@ -90,3 +90,9 @@ Inventory
 ========
 
 * used inventory for single job
+
+Deployment
+==========
+
+* configuration file for helfertool that is parsed in settings.py
+* settings in admin area?
