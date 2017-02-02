@@ -247,8 +247,9 @@ def download(request, event_url_name, task_id):
             del_task = task
             break
 
-    request.session['badge_tasks'].remove(del_task)
-    request.session.modified = True
+    if del_task:
+        request.session['badge_tasks'].remove(del_task)
+        request.session.modified = True
     # TODO: files can be deleted also, happens through celery at the moment
 
     # get result
