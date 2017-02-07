@@ -39,6 +39,9 @@ def cleanName(name):
 
 
 def escape(payload):
+    if not payload:
+        return ""
+
     # http://blog.zsec.uk/csv-dangers-mitigations/
     if payload[0] in ('@', '+', '-', '=', '|'):
         payload = payload.replace("|", "\|")
@@ -64,7 +67,7 @@ def xlsx(buffer, event, jobs):
     for job in jobs:
         # find unique worksheet name
         job_name = cleanName(job.name)
-        job_name_use = job_name
+        job_name_use = job_name[:20]  # worksheet name must be <= 31 chars
 
         counter = 2
         while job_name_use in used_names:
