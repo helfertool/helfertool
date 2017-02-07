@@ -38,6 +38,14 @@ def cleanName(name):
     return re.sub(r'[\[\]:*?\\\/]', '', name)
 
 
+def escape(payload):
+    # http://blog.zsec.uk/csv-dangers-mitigations/
+    if payload[0] in ('@', '+', '-', '=', '|'):
+        payload = payload.replace("|", "\|")
+        payload = "'" + payload + "'"
+    return payload
+
+
 def xlsx(buffer, event, jobs):
     """ Exports the helpers for given jobs of an event as excel spreadsheet.
 
@@ -136,17 +144,22 @@ def add_helpers(worksheet, row, column, event, job, helpers,
         if num_shifts + num_jobs > 1:
             format = multiple_shifts_format
 
-        worksheet.write(row.get(), column.next(), helper.firstname, format)
-        worksheet.write(row.get(), column.next(), helper.surname, format)
-        worksheet.write(row.get(), column.next(), helper.email, format)
-        worksheet.write(row.get(), column.next(), helper.phone, format)
+        worksheet.write(row.get(), column.next(), escape(helper.firstname),
+                        format)
+        worksheet.write(row.get(), column.next(), escape(helper.surname),
+                        format)
+        worksheet.write(row.get(), column.next(), escape(helper.email), format)
+        worksheet.write(row.get(), column.next(), escape(helper.phone), format)
         if event.ask_shirt:
             worksheet.write(row.get(), column.next(),
-                            u(helper.get_shirt_display()), format)
+                            escape(u(helper.get_shirt_display())), format)
         if event.ask_vegetarian:
             worksheet.write(row.get(), column.next(),
-                            filters.yesno(helper.vegetarian), format)
+                            escape(filters.yesno(helper.vegetarian)), format)
         if job.infection_instruction:
             worksheet.write(row.get(), column.next(),
-                            u(helper.get_infection_instruction_short()), format)
-        worksheet.write(row.get(), column.next(), helper.comment, format)
+                            escape(u(
+                                helper.get_infection_instruction_short())),
+                            format)
+        worksheet.write(row.get(), column.next(), escape(helper.comment),
+                        format)
