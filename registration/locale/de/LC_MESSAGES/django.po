@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 16:34+0100\n"
-"PO-Revision-Date: 2016-12-23 16:35+0100\n"
+"POT-Creation-Date: 2017-02-09 14:58+0100\n"
+"PO-Revision-Date: 2017-02-09 14:59+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: registration/export/excel.py:77 registration/forms/user.py:33
-#: registration/models/helper.py:92
+#: registration/export/excel.py:88 registration/forms/user.py:33
+#: registration/models/helper.py:94
 #: registration/templates/registration/admin/helpers_table.html:20
 #: registration/templates/registration/change_user.html:15
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:78 registration/models/helper.py:97
+#: registration/export/excel.py:89 registration/models/helper.py:99
 #: registration/templates/registration/admin/helpers_table.html:21
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:79 registration/models/event.py:82
-#: registration/models/helper.py:101
+#: registration/export/excel.py:90 registration/models/event.py:82
+#: registration/models/helper.py:103
 #: registration/templates/registration/admin/archive_event.html:17
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
@@ -39,39 +39,39 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:82 registration/export/pdf.py:42
-#: registration/models/helper.py:106
+#: registration/export/excel.py:93 registration/export/pdf.py:42
+#: registration/models/helper.py:108
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/helper_data.html:16
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export/excel.py:86 registration/export/pdf.py:45
-#: registration/models/helper.py:118
+#: registration/export/excel.py:97 registration/export/pdf.py:45
+#: registration/models/helper.py:120
 #: registration/templates/registration/admin/helpers_table.html:23
 #: registration/templates/registration/helper_data.html:22
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:90 registration/models/helper.py:123
+#: registration/export/excel.py:101 registration/models/helper.py:125
 #: registration/templates/registration/admin/helpers_table.html:26
 #: registration/templates/registration/helper_data.html:36
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: registration/export/excel.py:94
+#: registration/export/excel.py:105
 #: registration/templates/registration/admin/helpers_table.html:29
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export/excel.py:97 registration/export/pdf.py:46
-#: registration/models/helper.py:112
+#: registration/export/excel.py:108 registration/export/pdf.py:46
+#: registration/models/helper.py:114
 #: registration/templates/registration/admin/helpers_table.html:31
 #: registration/templates/registration/helper_data.html:42
 msgid "Comment"
 msgstr "Kommentar"
 
-#: registration/export/excel.py:112 registration/export/pdf.py:81
+#: registration/export/excel.py:123 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:26
 #: registration/templates/registration/admin/statistics.html:14
@@ -307,44 +307,84 @@ msgstr "Die Inventar Funktion verwenden"
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert."
 
-#: registration/models/helper.py:64
+#: registration/models/helper.py:49
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: registration/models/helper.py:50
+msgid "S"
+msgstr "S"
+
+#: registration/models/helper.py:51
+msgid "M"
+msgstr "M"
+
+#: registration/models/helper.py:52
+msgid "L"
+msgstr "L"
+
+#: registration/models/helper.py:53
+msgid "XL"
+msgstr "XL"
+
+#: registration/models/helper.py:54
+msgid "XXL"
+msgstr "XXL"
+
+#: registration/models/helper.py:55
+msgid "S (girly)"
+msgstr "S (girly)"
+
+#: registration/models/helper.py:56
+msgid "M (girly)"
+msgstr "M (girly)"
+
+#: registration/models/helper.py:57
+msgid "L (girly)"
+msgstr "L (girly)"
+
+#: registration/models/helper.py:58
+msgid "XL (girly)"
+msgstr "XL (girly)"
+
+#: registration/models/helper.py:66
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: registration/models/helper.py:65
+#: registration/models/helper.py:67
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: registration/models/helper.py:66
+#: registration/models/helper.py:68
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: registration/models/helper.py:71
+#: registration/models/helper.py:73
 msgid "No"
 msgstr "Nein"
 
-#: registration/models/helper.py:72
+#: registration/models/helper.py:74
 msgid "Valid"
 msgstr "Gültig"
 
-#: registration/models/helper.py:73
+#: registration/models/helper.py:75
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models/helper.py:124
+#: registration/models/helper.py:126
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models/helper.py:131
+#: registration/models/helper.py:133
 #: registration/templates/registration/helper_data.html:29
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: registration/models/helper.py:140
+#: registration/models/helper.py:142
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/helper.py:145
+#: registration/models/helper.py:147
 msgid "I agree with the following data privacy statement."
 msgstr "Ich stimme der folgenden Datenschutzerklärung zu."
 

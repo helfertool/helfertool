@@ -40,6 +40,9 @@ class RegisterForm(forms.ModelForm):
         # remove field for shirt?
         if not self.event.ask_shirt:
             self.fields.pop('shirt')
+        else:
+            self.fields['shirt'].choices = filter(lambda e: e[0] != 'UNKNOWN',
+                                                  self.fields['shirt'].choices)
 
         # remove field for vegetarian food?
         if not self.event.ask_vegetarian:

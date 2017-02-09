@@ -34,6 +34,7 @@ class Helper(models.Model):
         :validated: the validation link was clicked (if validation is enabled)
     """
 
+    SHIRT_UNKNOWN = 'UNKNOWN'
     SHIRT_S = 'S'
     SHIRT_M = 'M'
     SHIRT_L = 'L'
@@ -45,15 +46,16 @@ class Helper(models.Model):
     SHIRT_XL_GIRLY = 'XL_GIRLY'
 
     SHIRT_CHOICES = (
-        (SHIRT_S, 'S'),
-        (SHIRT_M, 'M'),
-        (SHIRT_L, 'L'),
-        (SHIRT_XL, 'XL'),
-        (SHIRT_XXL, 'XXL'),
-        (SHIRT_S_GIRLY, 'S (girly)'),
-        (SHIRT_M_GIRLY, 'M (girly)'),
-        (SHIRT_L_GIRLY, 'L (girly)'),
-        (SHIRT_XL_GIRLY, 'XL (girly)'),
+        (SHIRT_UNKNOWN, _('Unknown')),
+        (SHIRT_S, _('S')),
+        (SHIRT_M, _('M')),
+        (SHIRT_L, _('L')),
+        (SHIRT_XL, _('XL')),
+        (SHIRT_XXL, _('XXL')),
+        (SHIRT_S_GIRLY, _('S (girly)')),
+        (SHIRT_M_GIRLY, _('M (girly)')),
+        (SHIRT_L_GIRLY, _('L (girly)')),
+        (SHIRT_XL_GIRLY, _('XL (girly)')),
     )
 
     INSTRUCTION_NO = "No"
@@ -115,7 +117,7 @@ class Helper(models.Model):
     shirt = models.CharField(
         max_length=20,
         choices=SHIRT_CHOICES,
-        default=SHIRT_S, verbose_name=_("T-shirt"),
+        default=SHIRT_UNKNOWN, verbose_name=_("T-shirt"),
     )
 
     vegetarian = models.BooleanField(

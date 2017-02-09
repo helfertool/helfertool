@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-23 16:34+0100\n"
-"PO-Revision-Date: 2016-11-15 23:03+0100\n"
+"POT-Creation-Date: 2017-02-09 14:58+0100\n"
+"PO-Revision-Date: 2017-02-09 14:58+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -50,27 +50,27 @@ msgstr "Empfänger"
 msgid "Reply to"
 msgstr "Antwort an"
 
-#: mail/forms.py:84
+#: mail/forms.py:85
 msgid "Custom reply to"
 msgstr "Andere Antwortadresse"
 
-#: mail/forms.py:85
+#: mail/forms.py:86
 msgid "Only used if \"Custom\" is selected above."
 msgstr "Wird nur benutzt, wenn \"Andere Adresse\" oben ausgewählt ist."
 
-#: mail/forms.py:90 mail/templates/mail/show_mail.html:28
+#: mail/forms.py:91 mail/templates/mail/show_mail.html:28
 msgid "CC"
 msgstr "CC"
 
-#: mail/forms.py:95 mail/templates/mail/list_mails.html:12
+#: mail/forms.py:96 mail/templates/mail/list_mails.html:12
 msgid "Subject"
 msgstr "Betreff"
 
-#: mail/forms.py:101
+#: mail/forms.py:102
 msgid "Text"
 msgstr "Text"
 
-#: mail/forms.py:109
+#: mail/forms.py:110
 msgid "You must specify a custom reply to address."
 msgstr "Du musst eine andere Antwortadresse angeben"
 
