@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-09 14:58+0100\n"
-"PO-Revision-Date: 2017-02-09 14:59+0100\n"
+"POT-Creation-Date: 2017-02-09 16:19+0100\n"
+"PO-Revision-Date: 2017-02-09 16:20+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -110,21 +110,29 @@ msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 msgid "Search term"
 msgstr "Suchbegriff"
 
-#: registration/forms/registration.py:56
+#: registration/forms/registration.py:59
 msgid "I confirm to be full aged."
 msgstr "Ich bestätige volljährig zu sein."
 
-#: registration/forms/registration.py:62
+#: registration/forms/registration.py:65
 msgid "I want to be informed about future events that are looking for helpers."
 msgstr ""
 "Ich möchte über weitere Veranstaltungen, die nach Helfern suchen, informiert "
 "werden."
 
-#: registration/forms/registration.py:129
+#: registration/forms/registration.py:134
+msgid ""
+"The public registration for this event is disabled. Use the form in the "
+"admin interface."
+msgstr ""
+"Die öffentliche Anmeldung für diese Veranstaltung ist deaktiviert. Verwende "
+"das Formular im Admin Interface."
+
+#: registration/forms/registration.py:140
 msgid "The registration is not possible since the event is archived."
 msgstr "Die Anmeldung ist nicht möglich, da die Veranstaltung archiviert ist."
 
-#: registration/forms/registration.py:134
+#: registration/forms/registration.py:145
 msgid ""
 "You must be full aged. We are not allowed to accept helpers that are under "
 "18 years old."
@@ -132,28 +140,28 @@ msgstr ""
 "Du musst volljährig sein. Wir dürfen keine Helfer haben, die unter 18 Jahre "
 "alt sind."
 
-#: registration/forms/registration.py:140
+#: registration/forms/registration.py:151
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: registration/forms/registration.py:163
+#: registration/forms/registration.py:174
 msgid "You selected a full shift."
 msgstr "Du hast eine volle Schicht ausgewählt."
 
-#: registration/forms/registration.py:167
+#: registration/forms/registration.py:178
 msgid "You selected a blocked shift."
 msgstr "Du hast eine gesperrte Schicht ausgewählt."
 
-#: registration/forms/registration.py:171
+#: registration/forms/registration.py:182
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: registration/forms/registration.py:177
+#: registration/forms/registration.py:188
 msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: registration/forms/registration.py:194
+#: registration/forms/registration.py:205
 #, python-format
 msgid "Some of your shifts overlap more then %(minutes)d minutes."
 msgstr ""
@@ -584,6 +592,7 @@ msgid "Admin"
 msgstr "Admin"
 
 #: registration/templates/registration/admin/base.html:53
+#: registration/templates/registration/form.html:17
 msgid "This event is archived."
 msgstr "Diese Veranstaltung ist archiviert."
 
@@ -1206,6 +1215,10 @@ msgstr "Das Passwort kann nicht geändert werden."
 #, python-format
 msgid "Register for %(event)s as helper"
 msgstr "Helferanmeldung für %(event)s"
+
+#: registration/templates/registration/form.html:23
+msgid "This public registration is disabled."
+msgstr "Die öffentliche Anmeldung ist deaktiviert."
 
 #: registration/templates/registration/helper_data.html:48
 msgid "Badge Barcode"

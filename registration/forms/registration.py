@@ -127,6 +127,14 @@ class RegisterForm(forms.ModelForm):
         """
         super(RegisterForm, self).clean()
 
+        # Public registration is visible for involved users of the event.
+        # But it should not work for them if the public registration is not
+        # active.
+        if not self.internal and not self.event.active:
+            raise ValidationError(_("The public registration for this event "
+                                    "is disabled. Use the form in the admin "
+                                    "interface."))
+
         # check if event is archived -> block
         if self.event.archived:
             raise ValidationError(_("The registration is not possible since "

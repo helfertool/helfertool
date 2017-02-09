@@ -11,6 +11,20 @@
 {% block content %}
     {% bootstrap_form_errors form %}
 
+    {% if event.archived %}
+        <div class="alert alert-info" role="alert">
+            <p>
+                {% trans "This event is archived." %}
+            </p>
+        </div>
+    {% elif not event.active %}
+        <div class="alert alert-info" role="alert">
+            <p>
+                {% trans "This public registration is disabled." %}
+            </p>
+        </div>
+    {% endif %}
+
     {% if event.logo %}
         <img src="{{ MEDIA_URL }}{{ event.logo }}" id="logo" />
     {% endif %}
