@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 17:11+0100\n"
-"PO-Revision-Date: 2017-02-10 17:12+0100\n"
+"POT-Creation-Date: 2017-02-10 18:40+0100\n"
+"PO-Revision-Date: 2017-02-10 18:41+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -359,11 +359,11 @@ msgstr "Die Inventar Funktion verwenden"
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert."
 
-#: registration/models/event.py:196
+#: registration/models/event.py:197
 msgid "Available T-shirt sizes"
 msgstr "Verfügbare T-Shirt Größen"
 
-#: registration/models/event.py:218
+#: registration/models/event.py:219
 msgid "The following sizes are used and therefore cannot be removed: {}"
 msgstr ""
 "Die folgenden Größen werden verwendet und können daher nicht entfernt "
@@ -552,8 +552,8 @@ msgstr ""
 "Wenn du das Passwort für den alten Account vergessen hast, schreibe bitte an:"
 
 #: registration/templates/registration/admin/archive_event.html:6
-#: registration/templates/registration/admin/edit_event.html:37
-#: registration/templates/registration/admin/edit_event.html:45
+#: registration/templates/registration/admin/edit_event.html:44
+#: registration/templates/registration/admin/edit_event.html:52
 msgid "Archive event"
 msgstr "Veranstaltung archivieren"
 
@@ -576,7 +576,7 @@ msgstr ""
 "Koordinatoren gelöscht!"
 
 #: registration/templates/registration/admin/archive_event.html:38
-#: registration/templates/registration/admin/edit_event.html:41
+#: registration/templates/registration/admin/edit_event.html:48
 msgid ""
 "Only the number of registered helpers per shift and the number of "
 "coordinators are saved. All other data like shirt sizes are deleted "
@@ -814,8 +814,8 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: registration/templates/registration/admin/delete_event.html:6
-#: registration/templates/registration/admin/edit_event.html:53
-#: registration/templates/registration/admin/edit_event.html:59
+#: registration/templates/registration/admin/edit_event.html:60
+#: registration/templates/registration/admin/edit_event.html:66
 msgid "Delete event"
 msgstr "Veranstaltung löschen"
 
@@ -916,8 +916,8 @@ msgid "Remove this shift?"
 msgstr "Diese Schicht löschen?"
 
 #: registration/templates/registration/admin/duplicate_event.html:6
-#: registration/templates/registration/admin/edit_event.html:23
-#: registration/templates/registration/admin/edit_event.html:29
+#: registration/templates/registration/admin/edit_event.html:30
+#: registration/templates/registration/admin/edit_event.html:36
 msgid "Duplicate event"
 msgstr "Veranstaltung duplizieren"
 
@@ -974,6 +974,10 @@ msgid "Merge"
 msgstr "Zusammenfassen"
 
 #: registration/templates/registration/admin/edit_event.html:18
+msgid "Please correct the errors below."
+msgstr "Bitte korrigiere die Fehler unten."
+
+#: registration/templates/registration/admin/edit_event.html:25
 #: registration/templates/registration/admin/edit_helper.html:23
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
@@ -982,11 +986,11 @@ msgstr "Zusammenfassen"
 msgid "Save"
 msgstr "Speichern"
 
-#: registration/templates/registration/admin/edit_event.html:25
+#: registration/templates/registration/admin/edit_event.html:32
 msgid "You can duplicate this event."
 msgstr "Du kannst diese Veranstaltung duplizieren."
 
-#: registration/templates/registration/admin/edit_event.html:39
+#: registration/templates/registration/admin/edit_event.html:46
 msgid ""
 "You can archive this event, this means that all coordinators and helpers are "
 "deleted."
@@ -994,7 +998,7 @@ msgstr ""
 "Du kannst diese Veranstaltung archivieren, das bedeutet, dass alle "
 "Koordinatoren und Helfer gelöscht werden."
 
-#: registration/templates/registration/admin/edit_event.html:55
+#: registration/templates/registration/admin/edit_event.html:62
 msgid "You can delete this event including all jobs, shifts and helpers."
 msgstr ""
 "Du kannst diese Veranstaltung mit allen Aufgaben, Schichten und Helfern "
@@ -1160,15 +1164,15 @@ msgid "Result"
 msgstr "Ergebnis"
 
 #: registration/templates/registration/admin/shirts.html:11
-#: registration/templates/registration/admin/shirts.html:52
+#: registration/templates/registration/admin/shirts.html:54
 msgid "Total"
 msgstr "Insgesamt"
 
-#: registration/templates/registration/admin/shirts.html:27
+#: registration/templates/registration/admin/shirts.html:29
 msgid "Helpers (without coordinators)"
 msgstr "Helfer (ohne Koordinatoren)"
 
-#: registration/templates/registration/admin/shirts.html:36
+#: registration/templates/registration/admin/shirts.html:38
 msgid "Shift"
 msgstr "Schicht"
 

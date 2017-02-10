@@ -13,6 +13,13 @@
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+                {% trans "Please correct the errors below." %}
+            </div>
+        {% endif %}
+
+        {% bootstrap_form_errors form %}
         {% bootstrap_form form %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
