@@ -12,11 +12,13 @@
 
         <table class="table">
             <tr>
+                <th style="width: 10em;"></th>
                 {% for size, num in total_shirts.items %}
                     <th>{{ size }}</th>
                 {% endfor %}
             </tr>
             <tr>
+                <td></td>
                 {% for size, num in total_shirts.items %}
                     <td>{{ num }}</td>
                 {% endfor %}
@@ -33,9 +35,9 @@
 
             <table class="table">
                 <tr>
-                    <th>{% trans "Shift" %}</th>
+                    <th style="width: 10em;">{% trans "Shift" %}</th>
                     {% for size in size_names %}
-                        <th>{{ size }}</th>
+                        <th style="width: 4em;">{{ size }}</th>
                     {% endfor %}
                 </tr>
 
