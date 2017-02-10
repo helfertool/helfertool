@@ -13,6 +13,7 @@ import uuid
 from badges.models import Badge
 from gifts.models import HelpersGifts
 
+from .event import Event
 from .job import Job
 
 
@@ -33,30 +34,6 @@ class Helper(models.Model):
         :timestamp: time of registration
         :validated: the validation link was clicked (if validation is enabled)
     """
-
-    SHIRT_UNKNOWN = 'UNKNOWN'
-    SHIRT_S = 'S'
-    SHIRT_M = 'M'
-    SHIRT_L = 'L'
-    SHIRT_XL = 'XL'
-    SHIRT_XXL = 'XXL'
-    SHIRT_S_GIRLY = 'S_GIRLY'
-    SHIRT_M_GIRLY = 'M_GIRLY'
-    SHIRT_L_GIRLY = 'L_GIRLY'
-    SHIRT_XL_GIRLY = 'XL_GIRLY'
-
-    SHIRT_CHOICES = (
-        (SHIRT_UNKNOWN, _('Unknown')),
-        (SHIRT_S, _('S')),
-        (SHIRT_M, _('M')),
-        (SHIRT_L, _('L')),
-        (SHIRT_XL, _('XL')),
-        (SHIRT_XXL, _('XXL')),
-        (SHIRT_S_GIRLY, _('S (girly)')),
-        (SHIRT_M_GIRLY, _('M (girly)')),
-        (SHIRT_L_GIRLY, _('L (girly)')),
-        (SHIRT_XL_GIRLY, _('XL (girly)')),
-    )
 
     INSTRUCTION_NO = "No"
     INSTRUCTION_YES = "Yes"
@@ -116,8 +93,8 @@ class Helper(models.Model):
 
     shirt = models.CharField(
         max_length=20,
-        choices=SHIRT_CHOICES,
-        default=SHIRT_UNKNOWN, verbose_name=_("T-shirt"),
+        choices=Event.SHIRT_CHOICES,
+        default=Event.SHIRT_UNKNOWN, verbose_name=_("T-shirt"),
     )
 
     vegetarian = models.BooleanField(

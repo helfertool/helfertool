@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
@@ -7,6 +8,7 @@ from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
+from multiselectfield import MultiSelectField
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 from gifts.models import HelpersGifts
@@ -40,6 +42,32 @@ class Event(models.Model):
         :mail_validation: helper must validate his mail address by a link
         :badge: use the badge creation system
     """
+
+    SHIRT_UNKNOWN = 'UNKNOWN'
+    SHIRT_NO = 'NO'
+    SHIRT_S = 'S'
+    SHIRT_M = 'M'
+    SHIRT_L = 'L'
+    SHIRT_XL = 'XL'
+    SHIRT_XXL = 'XXL'
+    SHIRT_S_GIRLY = 'S_GIRLY'
+    SHIRT_M_GIRLY = 'M_GIRLY'
+    SHIRT_L_GIRLY = 'L_GIRLY'
+    SHIRT_XL_GIRLY = 'XL_GIRLY'
+
+    SHIRT_CHOICES = (
+        (SHIRT_UNKNOWN, _('Unknown')),
+        (SHIRT_NO, _('I do not want a T-Shirt')),
+        (SHIRT_S, _('S')),
+        (SHIRT_M, _('M')),
+        (SHIRT_L, _('L')),
+        (SHIRT_XL, _('XL')),
+        (SHIRT_XXL, _('XXL')),
+        (SHIRT_S_GIRLY, _('S (girly)')),
+        (SHIRT_M_GIRLY, _('M (girly)')),
+        (SHIRT_L_GIRLY, _('L (girly)')),
+        (SHIRT_XL_GIRLY, _('XL (girly)')),
+    )
 
     url_name = models.CharField(
         max_length=200,
@@ -161,8 +189,35 @@ class Event(models.Model):
         verbose_name=_("Event is archived"),
     )
 
+    shirt_sizes = MultiSelectField(
+        choices=filter(lambda e: e[0] != 'UNKNOWN', SHIRT_CHOICES),
+        default=list(filter(lambda e: e not in ('UNKNOWN', 'NO'),
+                       [e[0] for e in SHIRT_CHOICES])),
+        verbose_name=_("Available T-shirt sizes"),
+    )
+
     def __str__(self):
         return self.name
+
+    def clean(self):
+        # the shirt sizes of the helpers must be selected in shirt_sizes
+        # this means that it is not possible to disable a size as long one
+        # helper has selected this size
+        if self.ask_shirt:
+            not_removable = []
+
+            new_choices = self.get_shirt_choices()
+            for choice in Event.SHIRT_CHOICES:
+                if choice not in new_choices:
+                    if self.helper_set.filter(shirt=choice[0]).exists():
+                        not_removable.append(choice[1])
+
+            if not_removable:
+                sizes = ', '.join(map(str, not_removable))
+                raise ValidationError({'shirt_sizes':
+                                       _("The following sizes are used and "
+                                         "therefore cannot be removed: {}".
+                                         format(sizes))})
 
     def is_admin(self, user):
         """ Check, if a user is admin of this event and returns a boolean.
@@ -191,6 +246,16 @@ class Event(models.Model):
                 return True
 
         return False
+
+    def get_shirt_choices(self, internal=True):
+        choices = []
+
+        for shirt in Event.SHIRT_CHOICES:
+            if (shirt[0] == Event.SHIRT_UNKNOWN and internal) or \
+                    shirt[0] in self.shirt_sizes:
+                choices.append(shirt)
+
+        return choices
 
     @property
     def public_jobs(self):

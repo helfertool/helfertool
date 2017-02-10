@@ -41,6 +41,9 @@ class EventForm(forms.ModelForm):
                 if field_id != "admins" and field_id != "url_name":
                     self.fields[field_id].disabled = True
 
+        if not self.instance.ask_shirt:
+            self.fields.pop('shirt_sizes')
+
 
 class EventDeleteForm(forms.ModelForm):
     class Meta:

@@ -2,6 +2,7 @@ Django
 django-modeltranslation>=0.12
 django-bootstrap3
 django-bower
+django-multiselectfield
 html5lib<0.99999999
 django-bleach
 django-ckeditor

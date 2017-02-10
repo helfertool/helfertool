@@ -41,8 +41,8 @@ class RegisterForm(forms.ModelForm):
         if not self.event.ask_shirt:
             self.fields.pop('shirt')
         else:
-            self.fields['shirt'].choices = filter(lambda e: e[0] != 'UNKNOWN',
-                                                  self.fields['shirt'].choices)
+            self.fields['shirt'].choices = self.event.get_shirt_choices(
+                                            internal=self.internal)
 
         # remove field for vegetarian food?
         if not self.event.ask_vegetarian:
@@ -148,7 +148,8 @@ class RegisterForm(forms.ModelForm):
 
         # check if the data privacy statement was accepted
         if not self.internal and not self.cleaned_data['privacy_statement']:
-            raise ValidationError(_("You have to accept the data privacy statement."))
+            raise ValidationError(_("You have to accept the data privacy "
+                                    "statement."))
 
         number_of_shifts = 0
         infection_instruction_needed = False

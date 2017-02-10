@@ -135,7 +135,7 @@ class Shift(models.Model):
     def shirt_sizes(self):
         # data structure
         shirts = OrderedDict()
-        for size, name in Helper.SHIRT_CHOICES:
+        for size, name in self.job.event.get_shirt_choices():
             shirts.update({name: 0})
 
         # collect all sizes, this must be the first shift of the helper

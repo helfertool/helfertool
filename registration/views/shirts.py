@@ -11,12 +11,12 @@ from ..decorators import archived_not_available
 
 
 class JobShirts:
-    def __init__(self):
+    def __init__(self, shirt_choices):
         self.shifts = OrderedDict()
         self.total = OrderedDict()
         self.coordinators = OrderedDict()
 
-        for size, name in Helper.SHIRT_CHOICES:
+        for size, name in shirt_choices:
             self.total.update({name: 0})
             self.coordinators.update({name: 0})
 
@@ -29,6 +29,7 @@ def notactive(request):
 @archived_not_available
 def shirts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
+    shirt_choices = event.get_shirt_choices()
 
     # permission
     if not event.is_involved(request.user):
@@ -39,7 +40,7 @@ def shirts(request, event_url_name):
         return notactive(request)
 
     # size names
-    size_names = [name for size, name in Helper.SHIRT_CHOICES]
+    size_names = [name for size, name in shirt_choices]
 
     # shirt sizes
     helper_shirts = event.helper_set.values('shirt').annotate(
@@ -47,7 +48,7 @@ def shirts(request, event_url_name):
 
     # total numbers (iterate over all sizes in correct order)
     total_shirts = OrderedDict()
-    for size, name in Helper.SHIRT_CHOICES:
+    for size, name in shirt_choices:
         num = 0
 
         # get size for helpers
@@ -61,14 +62,14 @@ def shirts(request, event_url_name):
     # for each job
     job_shirts = OrderedDict()
     for job in event.job_set.all():
-        sizes_for_job = JobShirts()
+        sizes_for_job = JobShirts(shirt_choices)
         # for each shift
         for shift in job.shift_set.all():
             sizes_for_shift = shift.shirt_sizes
             sizes_for_job.shifts.update({shift: sizes_for_shift})
 
             # update total number
-            for size, name in Helper.SHIRT_CHOICES:
+            for size, name in shirt_choices:
                 num = sizes_for_job.total[name]
                 sizes_for_job.total.update({name: num+sizes_for_shift[name]})
         job_shirts.update({job: sizes_for_job})
