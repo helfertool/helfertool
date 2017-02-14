@@ -114,13 +114,15 @@
                     {% endif %}
                 </ul>
 
-                {% if not event.archived %}
-                    <h2>{% trans "Mail" %}</h2>
-                    <ul class="nav nav-pills nav-stacked">
+                <h2>{% trans "Mail" %}</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    {% if not event.archived %}
                         <li><a href="{% url 'mail:send' event.url_name %}">{% trans "Send" %}</a></li>
-                        <li><a href="{% url 'mail:list' event.url_name %}">{% trans "All mails" %}</a></li>
-                    </ul>
+                    {% endif %}
+                    <li><a href="{% url 'mail:list' event.url_name %}">{% trans "All mails" %}</a></li>
+                </ul>
 
+                {% if not event.archived %}
                     {% if admin or event.ask_shirt %}
                         <h2>{% trans "Statistics" %}</h2>
                         <ul class="nav nav-pills nav-stacked">
