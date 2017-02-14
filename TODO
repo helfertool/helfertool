@@ -27,7 +27,6 @@ Design, JS
 Registration
 ============
 
-* ask for preferred language on registration?
 * bot protection (seems not to be necessary until now)
 * somehow make the notes for a job more visible
 * edit mail template
@@ -39,13 +38,8 @@ Admin area
 * change order of jobs
 * sort helpers and coordinators
 * mails
-    * DMARC
-    * custom sender?
     * attachments?
     * show sent mails also when event is archived
-* different available shirt sizes per event
-* fixed tshirt sizes, mark all changes since certain date?
-* copy event with job, shifts, settings, badge stuff but without admins and helpers
 * event date -> default for shift times
 
 
@@ -90,6 +84,9 @@ Inventory
 ========
 
 * used inventory for single job
+* rework registration and take back of items
+  * first select user, then add/remove multiple items
+  * also without badge
 
 Deployment
 ==========
