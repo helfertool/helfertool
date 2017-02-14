@@ -4,6 +4,7 @@ Important
 * fix merge
 * implement present flag better
 * resend confirmation mail
+* allow empty mail addresses for internal registrations
 
 
 Django things
