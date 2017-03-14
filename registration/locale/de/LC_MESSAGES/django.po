@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 18:40+0100\n"
-"PO-Revision-Date: 2017-02-10 18:41+0100\n"
+"POT-Creation-Date: 2017-03-14 19:04+0100\n"
+"PO-Revision-Date: 2017-03-14 19:04+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -74,7 +74,7 @@ msgstr "Kommentar"
 #: registration/export/excel.py:123 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:26
-#: registration/templates/registration/admin/statistics.html:14
+#: registration/templates/registration/admin/statistics.html:18
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
@@ -458,7 +458,7 @@ msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
 #: registration/models/shift.py:65
-#: registration/templates/registration/admin/base.html:139
+#: registration/templates/registration/admin/base.html:141
 #: registration/templates/registration/admin/jobs_and_shifts.html:58
 #: registration/templates/registration/admin/view_helper.html:89
 msgid "Gifts"
@@ -534,7 +534,7 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:7
-#: registration/templates/registration/admin/base.html:179
+#: registration/templates/registration/admin/base.html:181
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -642,7 +642,7 @@ msgid "Helpers"
 msgstr "Helfer"
 
 #: registration/templates/registration/admin/base.html:91
-#: registration/templates/registration/admin/statistics.html:10
+#: registration/templates/registration/admin/statistics.html:14
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
@@ -660,7 +660,7 @@ msgstr "Duplikate"
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:118
+#: registration/templates/registration/admin/base.html:117
 msgid "Mail"
 msgstr "E-Mail"
 
@@ -668,121 +668,121 @@ msgstr "E-Mail"
 msgid "Send"
 msgstr "Senden"
 
-#: registration/templates/registration/admin/base.html:121
+#: registration/templates/registration/admin/base.html:122
 msgid "All mails"
 msgstr "Alle E-Mails"
 
-#: registration/templates/registration/admin/base.html:125
+#: registration/templates/registration/admin/base.html:127
 #: registration/templates/registration/admin/statistics.html:6
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:128
+#: registration/templates/registration/admin/base.html:130
 msgid "Overview"
 msgstr "Übersicht"
 
-#: registration/templates/registration/admin/base.html:132
+#: registration/templates/registration/admin/base.html:134
 #: registration/templates/registration/admin/shirts.html:7
 #: registration/templates/registration/admin/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:141
-#: registration/templates/registration/admin/base.html:152
+#: registration/templates/registration/admin/base.html:143
+#: registration/templates/registration/admin/base.html:154
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: registration/templates/registration/admin/base.html:144
+#: registration/templates/registration/admin/base.html:146
 msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
-#: registration/templates/registration/admin/base.html:150
+#: registration/templates/registration/admin/base.html:152
 msgid "Badges"
 msgstr "Badges"
 
-#: registration/templates/registration/admin/base.html:154
+#: registration/templates/registration/admin/base.html:156
 msgid "Generate"
 msgstr "Generieren"
 
-#: registration/templates/registration/admin/base.html:156
+#: registration/templates/registration/admin/base.html:158
 msgid "Registration"
 msgstr "Registrierung"
 
-#: registration/templates/registration/admin/base.html:163
+#: registration/templates/registration/admin/base.html:165
 msgid "Inventory"
 msgstr "Inventar"
 
-#: registration/templates/registration/admin/base.html:165
+#: registration/templates/registration/admin/base.html:167
 msgctxt "Register item and badge"
 msgid "Register"
 msgstr "Eintragen"
 
-#: registration/templates/registration/admin/base.html:166
+#: registration/templates/registration/admin/base.html:168
 msgid "Take back"
 msgstr "Zurücknehmen"
 
-#: registration/templates/registration/admin/base.html:167
+#: registration/templates/registration/admin/base.html:169
 msgid "List"
 msgstr "Liste"
 
-#: registration/templates/registration/admin/base.html:176
+#: registration/templates/registration/admin/base.html:178
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:182
+#: registration/templates/registration/admin/base.html:184
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:183
+#: registration/templates/registration/admin/base.html:185
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:200
+#: registration/templates/registration/admin/base.html:202
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:201
+#: registration/templates/registration/admin/base.html:203
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:202
+#: registration/templates/registration/admin/base.html:204
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:203
+#: registration/templates/registration/admin/base.html:205
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:204
+#: registration/templates/registration/admin/base.html:206
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:205
+#: registration/templates/registration/admin/base.html:207
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:206
+#: registration/templates/registration/admin/base.html:208
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:207
+#: registration/templates/registration/admin/base.html:209
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:208
+#: registration/templates/registration/admin/base.html:210
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:209
+#: registration/templates/registration/admin/base.html:211
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:210
+#: registration/templates/registration/admin/base.html:212
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -1180,15 +1180,19 @@ msgstr "Schicht"
 msgid "For this event no t-shirt sizes were collected."
 msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
-#: registration/templates/registration/admin/statistics.html:19
+#: registration/templates/registration/admin/statistics.html:10
+msgid "Number of shift slots"
+msgstr "Anzahl an Schichtslots"
+
+#: registration/templates/registration/admin/statistics.html:23
 msgid "Vegetarians"
 msgstr "Vegetarier"
 
-#: registration/templates/registration/admin/statistics.html:25
+#: registration/templates/registration/admin/statistics.html:29
 msgid "Chronological development of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
 
-#: registration/templates/registration/admin/statistics.html:65
+#: registration/templates/registration/admin/statistics.html:69
 msgid "No helpers are registered."
 msgstr "Es sind keine Helfer angemeldet."
 

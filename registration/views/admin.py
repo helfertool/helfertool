@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Count
+from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
@@ -12,7 +12,7 @@ from .utils import nopermission, is_involved
 
 from ..decorators import archived_not_available
 from ..forms import CreateUserForm
-from ..models import Event
+from ..models import Event, Shift
 from ..templatetags.permissions import has_adduser_group, has_perm_group
 
 
@@ -102,6 +102,9 @@ def statistics(request, event_url_name):
 
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
+    num_shift_slots = Shift.objects.filter(job__event=event).aggregate(
+        Sum('number'))['number__sum']
+
     # sum up timeline
     timeline = OrderedDict(sorted(timeline.items()))
     timeline_sum = OrderedDict()
@@ -115,5 +118,6 @@ def statistics(request, event_url_name):
                'num_helpers': num_helpers,
                'num_coordinators': num_coordinators,
                'num_vegetarians': num_vegetarians,
+               'num_shift_slots': num_shift_slots,
                'timeline': timeline_sum}
     return render(request, 'registration/admin/statistics.html', context)
