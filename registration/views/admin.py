@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Sum
+from django.db.models import Sum, ExpressionWrapper, F, fields
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
@@ -105,6 +105,12 @@ def statistics(request, event_url_name):
     num_shift_slots = Shift.objects.filter(job__event=event).aggregate(
         Sum('number'))['number__sum']
 
+    total_duration = ExpressionWrapper((F('end') - F('begin')) * F('number'),
+                                       output_field=fields.DurationField())
+    hours_total = Shift.objects.filter(job__event=event) \
+                       .annotate(duration=total_duration) \
+                       .aggregate(Sum('duration'))['duration__sum']
+
     # sum up timeline
     timeline = OrderedDict(sorted(timeline.items()))
     timeline_sum = OrderedDict()
@@ -119,5 +125,6 @@ def statistics(request, event_url_name):
                'num_coordinators': num_coordinators,
                'num_vegetarians': num_vegetarians,
                'num_shift_slots': num_shift_slots,
+               'hours_total': hours_total,
                'timeline': timeline_sum}
     return render(request, 'registration/admin/statistics.html', context)

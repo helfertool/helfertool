@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-14 19:04+0100\n"
-"PO-Revision-Date: 2017-03-14 19:04+0100\n"
+"POT-Creation-Date: 2017-03-16 18:33+0100\n"
+"PO-Revision-Date: 2017-03-16 18:33+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -74,7 +74,7 @@ msgstr "Kommentar"
 #: registration/export/excel.py:123 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:26
-#: registration/templates/registration/admin/statistics.html:18
+#: registration/templates/registration/admin/statistics.html:23
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
@@ -642,7 +642,7 @@ msgid "Helpers"
 msgstr "Helfer"
 
 #: registration/templates/registration/admin/base.html:91
-#: registration/templates/registration/admin/statistics.html:14
+#: registration/templates/registration/admin/statistics.html:19
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
@@ -673,7 +673,7 @@ msgid "All mails"
 msgstr "Alle E-Mails"
 
 #: registration/templates/registration/admin/base.html:127
-#: registration/templates/registration/admin/statistics.html:6
+#: registration/templates/registration/admin/statistics.html:7
 msgid "Statistics"
 msgstr "Statistik"
 
@@ -1180,19 +1180,27 @@ msgstr "Schicht"
 msgid "For this event no t-shirt sizes were collected."
 msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
-#: registration/templates/registration/admin/statistics.html:10
+#: registration/templates/registration/admin/statistics.html:11
 msgid "Number of shift slots"
 msgstr "Anzahl an Schichtslots"
 
-#: registration/templates/registration/admin/statistics.html:23
+#: registration/templates/registration/admin/statistics.html:15
+msgid "Total number of hours (also free slots)"
+msgstr "Gesamtzahl an Stunden (auch freie Slots)"
+
+#: registration/templates/registration/admin/statistics.html:16
+msgid "hours"
+msgstr "Stunden"
+
+#: registration/templates/registration/admin/statistics.html:28
 msgid "Vegetarians"
 msgstr "Vegetarier"
 
-#: registration/templates/registration/admin/statistics.html:29
+#: registration/templates/registration/admin/statistics.html:34
 msgid "Chronological development of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
 
-#: registration/templates/registration/admin/statistics.html:69
+#: registration/templates/registration/admin/statistics.html:74
 msgid "No helpers are registered."
 msgstr "Es sind keine Helfer angemeldet."
 
