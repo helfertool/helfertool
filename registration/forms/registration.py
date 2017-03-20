@@ -32,6 +32,7 @@ class RegisterForm(forms.ModelForm):
         self.displayed_shifts = kwargs.pop('shifts')
         self.selected_shifts = kwargs.pop('selected_shifts', [])
         self.internal = kwargs.pop('internal', False)
+        self.link = kwargs.pop('link', False)
 
         self.shifts = {}
 
@@ -130,7 +131,7 @@ class RegisterForm(forms.ModelForm):
         # Public registration is visible for involved users of the event.
         # But it should not work for them if the public registration is not
         # active.
-        if not self.internal and not self.event.active:
+        if not self.internal and not self.event.active and not self.link:
             raise ValidationError(_("The public registration for this event "
                                     "is disabled. Use the form in the admin "
                                     "interface."))

@@ -17,7 +17,7 @@
                 {% trans "This event is archived." %}
             </p>
         </div>
-    {% elif not event.active %}
+    {% elif not event.active and not form.link %}
         <div class="alert alert-info" role="alert">
             <p>
                 {% trans "This public registration is disabled." %}

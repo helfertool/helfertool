@@ -58,7 +58,8 @@ def form(request, event_url_name, link_pk=None):
             return nopermission(request)
 
     # handle form
-    form = RegisterForm(request.POST or None, event=event, shifts=all_shifts)
+    form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
+                        link=link is not None)
 
     if form.is_valid():
         helper = form.save()
