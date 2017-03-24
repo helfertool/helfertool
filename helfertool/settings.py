@@ -156,6 +156,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'helfertool',
     'registration',
+    'statistic',
     'badges',
     'news',
     'gifts',

@@ -132,11 +132,11 @@
                         <h2>{% trans "Statistics" %}</h2>
                         <ul class="nav nav-pills nav-stacked">
                             {% if admin %}
-                                <li><a href="{% url 'statistics' event.url_name %}">{% trans "Overview" %}</a></li>
+                                <li><a href="{% url 'statistic:overview' event.url_name %}">{% trans "Overview" %}</a></li>
                             {% endif %}
 
                             {% if event.ask_shirt %}
-                                <li><a href="{% url 'shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
+                                <li><a href="{% url 'statistic:shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
                             {% endif %}
                         </ul>
                     {% endif %}

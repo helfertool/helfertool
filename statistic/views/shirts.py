@@ -4,10 +4,10 @@ from django.shortcuts import render, get_object_or_404
 
 from collections import OrderedDict
 
-from .utils import nopermission
+from registration.views.utils import nopermission
 
-from ..models import Event, Helper
-from ..decorators import archived_not_available
+from registration.decorators import archived_not_available
+from registration.models import Event, Helper
 
 
 class JobShirts:
@@ -19,10 +19,6 @@ class JobShirts:
         for size, name in shirt_choices:
             self.total.update({name: 0})
             self.coordinators.update({name: 0})
-
-
-def notactive(request):
-    return render(request, 'registration/admin/shirts_not_active.html')
 
 
 @login_required
@@ -37,7 +33,8 @@ def shirts(request, event_url_name):
 
     # check if shirt sizes are collected for this event
     if not event.ask_shirt:
-        return notactive(request)
+        context = {'event': event}
+        return render(request, 'statistic/shirts_not_active.html', context)
 
     # size names
     size_names = [name for size, name in shirt_choices]
@@ -79,4 +76,4 @@ def shirts(request, event_url_name):
                'size_names': size_names,
                'total_shirts': total_shirts,
                'job_shirts': job_shirts}
-    return render(request, 'registration/admin/shirts.html', context)
+    return render(request, 'statistic/shirts.html', context)

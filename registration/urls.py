@@ -204,14 +204,6 @@ urlpatterns = [
         views.coordinators,
         name='coordinators'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/statistics/$',
-        views.statistics,
-        name='statistics'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/shirts/$',
-        views.shirts,
-        name='shirts'),
-
     # manage links
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/$',
         views.links,
