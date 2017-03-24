@@ -258,6 +258,7 @@ BOWER_INSTALLED_APPS = (
     'bootstrap-duallistbox',
     'select2',
     'font-awesome',
+    'chart.js',
 )
 
 STATIC_URL = '/static/'

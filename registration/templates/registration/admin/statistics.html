@@ -34,40 +34,36 @@
     <h3>{% trans "Chronological development of registrations" %}</h3>
 
     {% if timeline %}
-        <div id="chart"></div>
+        <canvas id="chart" width="400" height="200"></canvas>
 
         <script>
-            var chart_data = [
-                {% for day,number in timeline.items %}
-                    ["{{ day }}", {{ number }}],
-                {% endfor %}
-            ];
+            var ctx = $("#chart");
 
-            var chart_settings = {
-                axes: {
-                    xaxis: {
-                        renderer: $.jqplot.DateAxisRenderer,
-                        tickOptions: {
-                            formatString: '%Y-%m-%d',
-                            show: false,
-                        },
-                    },
-                },
-                cursor:{
-                    show: true,
-                    zoom:true,
-                    showTooltip:false,
-                },
-                highlighter: {
-                    show: true,
-                },
-                resetAxes: true,
+            var chart_data = {
+                datasets: [{
+                    label: "{% trans "Number of helpers" %}",
+                    data: [
+                        {% for day,number in timeline.items %}
+                            {
+                                x: "{{ day }}",
+                                y: {{ number }},
+                            },
+                        {% endfor %}
+                    ],
+                    lineTension: 0.2,
+                }]
             };
 
-            var chart = $.jqplot('chart',  [chart_data], chart_settings);
-
-            $(window).resize(function() {
-                chart.replot();
+            var chart = new Chart(ctx, {
+                type: 'line',
+                data: chart_data,
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                        }],
+                    },
+                },
             });
         </script>
     {% else %}
