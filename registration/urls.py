@@ -19,9 +19,6 @@ urlpatterns = [
         {'next_page': '/'},
         name='logout'),
 
-    # internationalization
-    url(r'^i18n/', include('django.conf.urls.i18n')),
-
     # about
     url(r'^about/$',
         TemplateView.as_view(template_name='registration/about.html'),
