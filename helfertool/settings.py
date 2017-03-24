@@ -255,6 +255,7 @@ BOWER_INSTALLED_APPS = (
     'jquery',
     'bootstrap',
     'bootstrap3-datetimepicker',
+    'bootstrap-duallistbox',
     'select2',
     'font-awesome',
 )
