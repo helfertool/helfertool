@@ -7,4 +7,8 @@ urlpatterns = [
     url(r'^admin/news$',
         views.send,
         name='send'),
+
+    url(r'^unsubscribe/(?P<email>.+)$',
+        views.unsubscribe,
+        name='unsubscribe'),
 ]

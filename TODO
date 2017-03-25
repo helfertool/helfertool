@@ -89,6 +89,12 @@ Inventory
 * rework registration and take back of items
   * first select user, then add/remove multiple items
   * also without badge
+* add interface to manage inventory settings of event
+
+News
+====
+
+* move send_mail to celery
 
 Deployment
 ==========

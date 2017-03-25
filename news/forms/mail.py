@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 from django.core.mail import send_mass_mail
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
@@ -10,6 +11,8 @@ from ..models import Person
 
 class MailForm(forms.Form):
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request')
+
         super(MailForm, self).__init__(*args, **kwargs)
 
         self.languages = self._get_languages()
@@ -62,32 +65,48 @@ class MailForm(forms.Form):
             # english may be set anyway
             append_english = False
 
-        # build mail
-        text = ""
+        # build mails
         prev_language = translation.get_language()
+        base_url = self.request.build_absolute_uri(reverse('index'))
 
-        if append_english:
-            text += render_to_string("news/mail/english.txt")
+        mails = []
+        for person in Person.objects.all():
+            text = ""
 
-        translation.activate(first_language)
-        text += render_to_string("news/mail/preface.txt")
-        text += self.cleaned_data.get("text")
-        text += render_to_string("news/mail/end.txt")
+            if append_english:
+                text += render_to_string("news/mail/english.txt")
 
-        if append_english:
-            translation.activate("en")
-            text += render_to_string("news/mail/preface.txt")
-            text += self.cleaned_data.get("text_en")
-            text += render_to_string("news/mail/end.txt")
+            text += self._mail_text_language(
+                first_language, self.cleaned_data.get("text"), person,
+                base_url)
 
-        translation.activate(prev_language)
+            if append_english:
+                text += self._mail_text_language(
+                    "en", self.cleaned_data.get("text_en"), person, base_url)
 
-        text = text.rstrip().lstrip()
+            translation.activate(prev_language)
 
-        # send mail
-        mails = [(subject, text, settings.FROM_MAIL, [p.email]) for p in
-                 Person.objects.all()]
+            text = text.rstrip().lstrip()
+
+            mails.append((subject, text, settings.FROM_MAIL, [person.email]))
+
+        # send mails
+        print(mails)
         send_mass_mail(mails)
+
+    def _mail_text_language(self, language, text, person, base_url):
+        unsubscribe_url = self.request.build_absolute_uri(
+            reverse('news:unsubscribe', args=[person.email]))
+
+        translation.activate(language)
+
+        tmp = ""
+        tmp += render_to_string("news/mail/preface.txt", {'url': base_url})
+        tmp += text
+        tmp += render_to_string("news/mail/end.txt",
+                                {'unsubscribe_url': unsubscribe_url})
+
+        return tmp
 
     def _get_languages(self):
         """

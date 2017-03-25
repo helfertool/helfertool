@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -21,7 +22,11 @@ def send(request):
     if not (request.user.is_superuser or has_sendnews_group(request.user)):
         return nopermission(request)
 
-    form = MailForm(request.POST or None)
+    base_url = request.build_absolute_uri(reverse('index'))
+    unsubscribe_url = request.build_absolute_uri(reverse('news:unsubscribe',
+                                                 args=[settings.FROM_MAIL]))
+
+    form = MailForm(request.POST or None, request=request)
     if form.is_valid():
         try:
             form.send_mail()
@@ -35,5 +40,7 @@ def send(request):
     num_recipients = Person.objects.count()
 
     context = {'num_recipients': num_recipients,
+               'url': base_url,
+               'unsubscribe_url': unsubscribe_url,
                'form': form}
     return render(request, 'news/send.html', context)
