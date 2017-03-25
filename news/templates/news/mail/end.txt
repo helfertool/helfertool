@@ -1,0 +1,4 @@
+{% load i18n %}
+{% blocktrans %}If you do not want to receive further mails, visit this page to unsubscribe: {{ unsubscribe_url }}
+
+Best regards!{% endblocktrans %}

@@ -54,6 +54,10 @@ urlpatterns = [
         views.delete_permission, {'groupname': settings.GROUP_ADDEVENT},
         name='delete_event_permission'),
 
+    url(r'^admin/permissions/(?P<user_pk>[0-9]+)/news/delete/$',
+        views.delete_permission, {'groupname': settings.GROUP_SENDNEWS},
+        name='delete_news_permission'),
+
     # registration
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$',
         views.form,

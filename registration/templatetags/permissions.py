@@ -22,9 +22,15 @@ def has_addevent_group(user):
 
 
 @register.filter
+def has_sendnews_group(user):
+    return has_group(user, settings.GROUP_SENDNEWS)
+
+
+@register.filter
 def has_perm_group(user):
     return has_group(user, settings.GROUP_ADDUSER) or \
-           has_group(user, settings.GROUP_ADDEVENT)
+           has_group(user, settings.GROUP_ADDEVENT) or \
+           has_group(user, settings.GROUP_SENDNEWS)
 
 # admins, involved, job_admins
 

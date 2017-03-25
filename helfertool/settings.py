@@ -50,6 +50,7 @@ DOCS_URL = '/docs/'
 
 GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"
+GROUP_SENDNEWS = "registration_sendnews"
 
 # Badges
 BADGE_PDFLATEX = '/usr/bin/pdflatex'
@@ -228,11 +229,15 @@ CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
+# this is the default language
+# it is also important when sending news mails (the text in this language will
+# be first, the other languages follow)
 LANGUAGE_CODE = 'de'
 
 LANGUAGES = (
     ('de', _('German')),
     ('en', _('English')),
+    #('es', _('Spanish')),   # only for tests
 )
 
 TIME_ZONE = 'Europe/Berlin'

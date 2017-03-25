@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'', include('gifts.urls')),
     url(r'', include('inventory.urls')),
     url(r'', include('mail.urls')),
+    url(r'', include('news.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -65,4 +65,34 @@
         {% bootstrap_form form_adduser show_label=False form_group_class="form-group pull-left"%}
         <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
     </form>
+
+    <h3>{% trans "Can send news" %}</h3>
+    {% if users_sendnews.count == 0 %}
+        <p class="text-muted">{% trans "There are no users, that can send news." %}</p>
+    {% else %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Username" %}</th>
+                <th></th>
+            </tr>
+            {% for u in users_sendnews %}
+                <tr>
+                    <td>{{ u.get_full_name }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>
+                        <a href="{% url 'delete_news_permission' u.pk %}">
+                        {% bootstrap_icon "remove" %}
+                        {% trans "Delete permission" %}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form_sendnews show_label=False form_group_class="form-group pull-left"%}
+        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+    </form>
 {% endblock %}

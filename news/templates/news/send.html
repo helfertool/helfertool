@@ -1,0 +1,79 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Send news" %}</h2>
+
+    <p>{% trans "Number of recipients:" %} {{ num_recipients }}</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form_errors form %}
+
+        {% bootstrap_field form.language %}
+        {% bootstrap_field form.english %}
+
+        {% bootstrap_field form.subject %}
+
+        <pre>{% include "news/mail/english.txt" %}</pre>
+
+        {% for lang, name in form.languages %}
+            {% language lang %}
+                <pre id="preface_{{ lang }}" class="mail_preface">{% include "news/mail/preface.txt" %}</pre>
+            {% endlanguage %}
+        {% endfor %}
+
+        {% bootstrap_field form.text show_label=False %}
+
+        {% for lang, name in form.languages %}
+            {% language lang %}
+                <pre id="end_{{ lang }}" class="mail_end">{% include "news/mail/end.txt" %}</pre>
+            {% endlanguage %}
+        {% endfor %}
+
+        <div id="block_en" style="margin-top:3em;">
+            <pre>{% include "news/mail/preface.txt" %}</pre>
+            {% bootstrap_field form.text_en show_label=False %}
+            <pre>{% include "news/mail/end.txt" %}</pre>
+        </div>
+
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
+    </form>
+
+    <script type="text/javascript">
+        function handle_lang()
+        {
+            var $lang = $("#id_language").val();
+
+            // preface and end of first text
+            $(".mail_preface").hide();
+            $(".mail_end").hide();
+
+            $("#preface_" + $lang).show();
+            $("#end_" + $lang).show();
+
+            // maybe disable second text
+            if($("#id_language").val() == "en") {
+                $("#id_english").parent().hide()
+                $("#block_en").hide()
+                $("#id_text_en").removeAttr('required');
+            }
+            else {
+                $("#id_english").parent().show()
+
+                if($("#id_english").prop('checked')) {
+                    $("#block_en").show()
+                    $("#id_text_en").setAttr('required', '');
+                }
+                else {
+                    $("#block_en").hide()
+                    $("#id_text_en").removeAttr('required');
+                }
+            }
+        }
+
+        handle_lang();
+    </script>
+{% endblock %}
