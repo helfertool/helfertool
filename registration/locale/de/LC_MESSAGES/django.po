@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 18:33+0100\n"
-"PO-Revision-Date: 2017-03-16 18:33+0100\n"
+"POT-Creation-Date: 2017-03-25 22:01+0100\n"
+"PO-Revision-Date: 2017-03-25 22:17+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -74,7 +74,6 @@ msgstr "Kommentar"
 #: registration/export/excel.py:123 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:26
-#: registration/templates/registration/admin/statistics.html:23
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
@@ -83,6 +82,7 @@ msgstr "Koordinatoren"
 #: registration/templates/registration/admin/jobs_and_shifts.html:55
 #: registration/templates/registration/admin/permissions.html:14
 #: registration/templates/registration/admin/permissions.html:45
+#: registration/templates/registration/admin/permissions.html:75
 #: registration/templates/registration/helper_data.html:6
 msgid "Name"
 msgstr "Name"
@@ -110,17 +110,17 @@ msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 msgid "Search term"
 msgstr "Suchbegriff"
 
-#: registration/forms/registration.py:59
+#: registration/forms/registration.py:60
 msgid "I confirm to be full aged."
 msgstr "Ich bestätige volljährig zu sein."
 
-#: registration/forms/registration.py:65
+#: registration/forms/registration.py:66
 msgid "I want to be informed about future events that are looking for helpers."
 msgstr ""
 "Ich möchte über weitere Veranstaltungen, die nach Helfern suchen, informiert "
 "werden."
 
-#: registration/forms/registration.py:134
+#: registration/forms/registration.py:135
 msgid ""
 "The public registration for this event is disabled. Use the form in the "
 "admin interface."
@@ -128,11 +128,11 @@ msgstr ""
 "Die öffentliche Anmeldung für diese Veranstaltung ist deaktiviert. Verwende "
 "das Formular im Admin Interface."
 
-#: registration/forms/registration.py:140
+#: registration/forms/registration.py:141
 msgid "The registration is not possible since the event is archived."
 msgstr "Die Anmeldung ist nicht möglich, da die Veranstaltung archiviert ist."
 
-#: registration/forms/registration.py:145
+#: registration/forms/registration.py:146
 msgid ""
 "You must be full aged. We are not allowed to accept helpers that are under "
 "18 years old."
@@ -140,28 +140,28 @@ msgstr ""
 "Du musst volljährig sein. Wir dürfen keine Helfer haben, die unter 18 Jahre "
 "alt sind."
 
-#: registration/forms/registration.py:151
+#: registration/forms/registration.py:152
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: registration/forms/registration.py:175
+#: registration/forms/registration.py:176
 msgid "You selected a full shift."
 msgstr "Du hast eine volle Schicht ausgewählt."
 
-#: registration/forms/registration.py:179
+#: registration/forms/registration.py:180
 msgid "You selected a blocked shift."
 msgstr "Du hast eine gesperrte Schicht ausgewählt."
 
-#: registration/forms/registration.py:183
+#: registration/forms/registration.py:184
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: registration/forms/registration.py:189
+#: registration/forms/registration.py:190
 msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: registration/forms/registration.py:206
+#: registration/forms/registration.py:207
 #, python-format
 msgid "Some of your shifts overlap more then %(minutes)d minutes."
 msgstr ""
@@ -183,6 +183,7 @@ msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 #: registration/forms/user.py:9
 #: registration/templates/registration/admin/permissions.html:15
 #: registration/templates/registration/admin/permissions.html:46
+#: registration/templates/registration/admin/permissions.html:76
 #: registration/templates/registration/change_user.html:27
 msgid "Username"
 msgstr "Benutzername"
@@ -458,7 +459,7 @@ msgid "If the job is publicly visible, the shift is blocked."
 msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 
 #: registration/models/shift.py:65
-#: registration/templates/registration/admin/base.html:141
+#: registration/templates/registration/admin/base.html:146
 #: registration/templates/registration/admin/jobs_and_shifts.html:58
 #: registration/templates/registration/admin/view_helper.html:89
 msgid "Gifts"
@@ -511,6 +512,7 @@ msgstr "Als Koordinator hinzufügen"
 #: registration/templates/registration/admin/add_user.html:21
 #: registration/templates/registration/admin/permissions.html:35
 #: registration/templates/registration/admin/permissions.html:66
+#: registration/templates/registration/admin/permissions.html:96
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -534,7 +536,7 @@ msgstr ""
 "hinzuzufügen."
 
 #: registration/templates/registration/admin/add_user.html:7
-#: registration/templates/registration/admin/base.html:181
+#: registration/templates/registration/admin/base.html:186
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
@@ -596,193 +598,193 @@ msgstr ""
 msgid "This page is not available since the event is archived."
 msgstr "Diese Seite ist nicht verfügbar da die Veranstaltung archiviert ist."
 
-#: registration/templates/registration/admin/base.html:38
+#: registration/templates/registration/admin/base.html:43
 #, python-format
 msgid "Manage %(eventname)s"
 msgstr "Verwaltung %(eventname)s"
 
-#: registration/templates/registration/admin/base.html:42
+#: registration/templates/registration/admin/base.html:47
 msgid "Admin"
 msgstr "Admin"
 
-#: registration/templates/registration/admin/base.html:53
+#: registration/templates/registration/admin/base.html:58
 #: registration/templates/registration/form.html:17
 msgid "This event is archived."
 msgstr "Diese Veranstaltung ist archiviert."
 
-#: registration/templates/registration/admin/base.html:62
+#: registration/templates/registration/admin/base.html:67
 msgid "Administration"
 msgstr "Administration"
 
-#: registration/templates/registration/admin/base.html:70
+#: registration/templates/registration/admin/base.html:75
 msgid "General"
 msgstr "Allgemein"
 
-#: registration/templates/registration/admin/base.html:75
+#: registration/templates/registration/admin/base.html:80
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
-#: registration/templates/registration/admin/base.html:80
+#: registration/templates/registration/admin/base.html:85
 #: registration/templates/registration/admin/edit_event.html:8
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
-#: registration/templates/registration/admin/base.html:81
+#: registration/templates/registration/admin/base.html:86
 #: registration/templates/registration/admin/jobs_and_shifts.html:6
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: registration/templates/registration/admin/base.html:82
+#: registration/templates/registration/admin/base.html:87
 #: registration/templates/registration/admin/links.html:6
 msgid "Links"
 msgstr "Links"
 
-#: registration/templates/registration/admin/base.html:86
+#: registration/templates/registration/admin/base.html:91
 msgid "Helpers"
 msgstr "Helfer"
 
-#: registration/templates/registration/admin/base.html:91
-#: registration/templates/registration/admin/statistics.html:19
+#: registration/templates/registration/admin/base.html:96
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:107
+#: registration/templates/registration/admin/base.html:112
 #: registration/templates/registration/admin/search_helper.html:6
 msgid "Search helper"
 msgstr "Helfer suchen"
 
-#: registration/templates/registration/admin/base.html:110
+#: registration/templates/registration/admin/base.html:115
 #: registration/templates/registration/admin/duplicates.html:5
 msgid "Duplicates"
 msgstr "Duplikate"
 
-#: registration/templates/registration/admin/base.html:113
+#: registration/templates/registration/admin/base.html:118
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: registration/templates/registration/admin/base.html:117
+#: registration/templates/registration/admin/base.html:122
 msgid "Mail"
 msgstr "E-Mail"
 
-#: registration/templates/registration/admin/base.html:120
+#: registration/templates/registration/admin/base.html:125
 msgid "Send"
 msgstr "Senden"
 
-#: registration/templates/registration/admin/base.html:122
+#: registration/templates/registration/admin/base.html:127
 msgid "All mails"
 msgstr "Alle E-Mails"
 
-#: registration/templates/registration/admin/base.html:127
-#: registration/templates/registration/admin/statistics.html:7
+#: registration/templates/registration/admin/base.html:132
 msgid "Statistics"
 msgstr "Statistik"
 
-#: registration/templates/registration/admin/base.html:130
+#: registration/templates/registration/admin/base.html:135
 msgid "Overview"
 msgstr "Übersicht"
 
-#: registration/templates/registration/admin/base.html:134
-#: registration/templates/registration/admin/shirts.html:7
-#: registration/templates/registration/admin/shirts_not_active.html:6
+#: registration/templates/registration/admin/base.html:139
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: registration/templates/registration/admin/base.html:143
-#: registration/templates/registration/admin/base.html:154
+#: registration/templates/registration/admin/base.html:148
+#: registration/templates/registration/admin/base.html:159
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: registration/templates/registration/admin/base.html:146
+#: registration/templates/registration/admin/base.html:151
 msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
-#: registration/templates/registration/admin/base.html:152
+#: registration/templates/registration/admin/base.html:157
 msgid "Badges"
 msgstr "Badges"
 
-#: registration/templates/registration/admin/base.html:156
+#: registration/templates/registration/admin/base.html:161
 msgid "Generate"
 msgstr "Generieren"
 
-#: registration/templates/registration/admin/base.html:158
+#: registration/templates/registration/admin/base.html:163
 msgid "Registration"
 msgstr "Registrierung"
 
-#: registration/templates/registration/admin/base.html:165
+#: registration/templates/registration/admin/base.html:170
 msgid "Inventory"
 msgstr "Inventar"
 
-#: registration/templates/registration/admin/base.html:167
+#: registration/templates/registration/admin/base.html:172
 msgctxt "Register item and badge"
 msgid "Register"
 msgstr "Eintragen"
 
-#: registration/templates/registration/admin/base.html:168
+#: registration/templates/registration/admin/base.html:173
 msgid "Take back"
 msgstr "Zurücknehmen"
 
-#: registration/templates/registration/admin/base.html:169
+#: registration/templates/registration/admin/base.html:174
 msgid "List"
 msgstr "Liste"
 
-#: registration/templates/registration/admin/base.html:178
+#: registration/templates/registration/admin/base.html:183
 #: registration/templates/registration/admin/edit_event.html:10
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: registration/templates/registration/admin/base.html:184
+#: registration/templates/registration/admin/base.html:189
+msgid "Send news"
+msgstr "Newsletter versenden"
+
+#: registration/templates/registration/admin/base.html:192
 #: registration/templates/registration/admin/permissions.html:6
 #: registration/templates/registration/change_user.html:31
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:185
+#: registration/templates/registration/admin/base.html:193
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:202
+#: registration/templates/registration/admin/base.html:210
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:203
+#: registration/templates/registration/admin/base.html:211
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:204
+#: registration/templates/registration/admin/base.html:212
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:205
+#: registration/templates/registration/admin/base.html:213
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:206
+#: registration/templates/registration/admin/base.html:214
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:207
+#: registration/templates/registration/admin/base.html:215
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:208
+#: registration/templates/registration/admin/base.html:216
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:209
+#: registration/templates/registration/admin/base.html:217
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:210
+#: registration/templates/registration/admin/base.html:218
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:211
+#: registration/templates/registration/admin/base.html:219
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:212
+#: registration/templates/registration/admin/base.html:220
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -894,6 +896,7 @@ msgstr "Link löschen!"
 #: registration/templates/registration/admin/delete_permission.html:17
 #: registration/templates/registration/admin/permissions.html:25
 #: registration/templates/registration/admin/permissions.html:56
+#: registration/templates/registration/admin/permissions.html:86
 msgid "Delete permission"
 msgstr "Berechtigung löschen"
 
@@ -1155,6 +1158,14 @@ msgstr "Kann Nutzer hinzufügen"
 msgid "There are no users, that can add users."
 msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
 
+#: registration/templates/registration/admin/permissions.html:69
+msgid "Can send news"
+msgstr "Kann Newsletter versenden"
+
+#: registration/templates/registration/admin/permissions.html:71
+msgid "There are no users, that can send news."
+msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
+
 #: registration/templates/registration/admin/search_helper.html:13
 msgid "Search"
 msgstr "Suchen"
@@ -1162,47 +1173,6 @@ msgstr "Suchen"
 #: registration/templates/registration/admin/search_helper.html:18
 msgid "Result"
 msgstr "Ergebnis"
-
-#: registration/templates/registration/admin/shirts.html:11
-#: registration/templates/registration/admin/shirts.html:54
-msgid "Total"
-msgstr "Insgesamt"
-
-#: registration/templates/registration/admin/shirts.html:29
-msgid "Helpers (without coordinators)"
-msgstr "Helfer (ohne Koordinatoren)"
-
-#: registration/templates/registration/admin/shirts.html:38
-msgid "Shift"
-msgstr "Schicht"
-
-#: registration/templates/registration/admin/shirts_not_active.html:9
-msgid "For this event no t-shirt sizes were collected."
-msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
-
-#: registration/templates/registration/admin/statistics.html:11
-msgid "Number of shift slots"
-msgstr "Anzahl an Schichtslots"
-
-#: registration/templates/registration/admin/statistics.html:15
-msgid "Total number of hours (also free slots)"
-msgstr "Gesamtzahl an Stunden (auch freie Slots)"
-
-#: registration/templates/registration/admin/statistics.html:16
-msgid "hours"
-msgstr "Stunden"
-
-#: registration/templates/registration/admin/statistics.html:28
-msgid "Vegetarians"
-msgstr "Vegetarier"
-
-#: registration/templates/registration/admin/statistics.html:34
-msgid "Chronological development of registrations"
-msgstr "Zeitliche Entwicklung der Anmeldungen"
-
-#: registration/templates/registration/admin/statistics.html:74
-msgid "No helpers are registered."
-msgstr "Es sind keine Helfer angemeldet."
 
 #: registration/templates/registration/admin/view_helper.html:11
 msgid "Back to job"
@@ -1474,17 +1444,22 @@ msgstr "Aufgabe gelöscht: %(name)s"
 msgid "Link deleted"
 msgstr "Link gelöscht"
 
-#: registration/views/permissions.py:37
+#: registration/views/permissions.py:41
 #, python-format
 msgid "%(username)s can add users now"
 msgstr "%(username)s kann jetzt Nutzer hinzufügen"
 
-#: registration/views/permissions.py:48
+#: registration/views/permissions.py:52
 #, python-format
 msgid "%(username)s can add events now"
 msgstr "%(username)s kann jetzt Veranstaltungen anlegen"
 
-#: registration/views/permissions.py:80
+#: registration/views/permissions.py:63
+#, python-format
+msgid "%(username)s can send news now"
+msgstr "%(username)s kann jetzt Newsletter versenden"
+
+#: registration/views/permissions.py:98
 #, python-format
 msgid "Removed permission for user %(username)s"
 msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
@@ -1492,6 +1467,36 @@ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Total"
+#~ msgstr "Insgesamt"
+
+#~ msgid "Helpers (without coordinators)"
+#~ msgstr "Helfer (ohne Koordinatoren)"
+
+#~ msgid "Shift"
+#~ msgstr "Schicht"
+
+#~ msgid "For this event no t-shirt sizes were collected."
+#~ msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
+
+#~ msgid "Number of shift slots"
+#~ msgstr "Anzahl an Schichtslots"
+
+#~ msgid "Total number of hours (also free slots)"
+#~ msgstr "Gesamtzahl an Stunden (auch freie Slots)"
+
+#~ msgid "hours"
+#~ msgstr "Stunden"
+
+#~ msgid "Vegetarians"
+#~ msgstr "Vegetarier"
+
+#~ msgid "Chronological development of registrations"
+#~ msgstr "Zeitliche Entwicklung der Anmeldungen"
+
+#~ msgid "No helpers are registered."
+#~ msgstr "Es sind keine Helfer angemeldet."
 
 #~ msgid "The source code can be found here:"
 #~ msgstr "Der Quellcode kann hier gefunden werden:"
@@ -1562,9 +1567,6 @@ msgstr "Schicht gelöscht"
 
 #~ msgid "Receivers"
 #~ msgstr "Empfänger"
-
-#~ msgid "Sender"
-#~ msgstr "Absender"
 
 #~ msgid "CC"
 #~ msgstr "CC"

@@ -34,9 +34,13 @@
         {% endfor %}
 
         <div id="block_en" style="margin-top:3em;">
-            <pre>{% include "news/mail/preface.txt" %}</pre>
+            {% language "en" %}
+                <pre>{% include "news/mail/preface.txt" %}</pre>
+            {% endlanguage %}
             {% bootstrap_field form.text_en show_label=False %}
-            <pre>{% include "news/mail/end.txt" %}</pre>
+            {% language "en" %}
+                <pre>{% include "news/mail/end.txt" %}</pre>
+            {% endlanguage %}
         </div>
 
         <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />

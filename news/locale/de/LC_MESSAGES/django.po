@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 18:33+0100\n"
-"PO-Revision-Date: 2017-02-10 17:11+0100\n"
+"POT-Creation-Date: 2017-03-25 22:01+0100\n"
+"PO-Revision-Date: 2017-03-25 22:18+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,6 +18,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
+#: news/forms/mail.py:14
+msgid "Language"
+msgstr "Sprache"
+
+#: news/forms/mail.py:19
+msgid "Add English text"
+msgstr "Englischen Text hinzufügen"
+
+#: news/forms/mail.py:26
+msgid "Subject"
+msgstr "Betreff"
+
+#: news/forms/mail.py:32
+msgid "Text"
+msgstr "Text"
+
+#: news/forms/mail.py:37
+msgid "English text"
+msgstr "Englischer Text"
+
 #: news/models/person.py:8
 msgid "E-Mail"
 msgstr "E-Mail"
+
+#: news/templates/news/mail/end.txt:2
+#, python-format
+msgid ""
+"If you do not want to receive further mails, visit this page to unsubscribe: "
+"%(unsubscribe_url)s\n"
+"\n"
+"Best regards!"
+msgstr ""
+"Wenn du keine weiteren E-Mails erhalten willst, trage dich auf dieser Seite "
+"aus: %(unsubscribe_url)s\n"
+"\n"
+"Viele Grüße!"
+
+#: news/templates/news/mail/preface.txt:1
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"you receive this mail because you registered as helper for an event on "
+"%(url)s and chose that you want to be informed about future events."
+msgstr ""
+"Hallo,\n"
+"\n"
+"du erhältst diese E-Mail weil du dich auf %(url)s für eine Veranstaltung als "
+"Helfer angemeldet hast und ausgewählt hast, dass du über weitere "
+"Veranstaltungen informiert werden möchtest."
+
+#: news/templates/news/send.html:6
+msgid "Send news"
+msgstr "Newsletter versenden"
+
+#: news/templates/news/send.html:8
+msgid "Number of recipients:"
+msgstr "Anzahl der Empfänger:"
+
+#: news/templates/news/send.html:42
+msgid "Send"
+msgstr "Senden"
+
+#: news/views/send.py:28
+msgid "Mail was sent successfully"
+msgstr "E-Mail erfolgreich verschickt"
+
+#: news/views/send.py:30
+#, python-format
+msgid "Sending mails failed: %(error)s"
+msgstr "Senden der E-Mails fehlgeschlagen: %(error)s"
