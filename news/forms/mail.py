@@ -71,28 +71,30 @@ class MailForm(forms.Form):
 
         mails = []
         for person in Person.objects.all():
-            text = ""
-
-            if append_english:
-                text += render_to_string("news/mail/english.txt")
-
-            text += self._mail_text_language(
-                first_language, self.cleaned_data.get("text"), person,
-                base_url)
-
-            if append_english:
-                text += self._mail_text_language(
-                    "en", self.cleaned_data.get("text_en"), person, base_url)
-
-            translation.activate(prev_language)
-
-            text = text.rstrip().lstrip()
-
+            text = self._mail_text(person, append_english, first_language,
+                                   base_url)
             mails.append((subject, text, settings.FROM_MAIL, [person.email]))
 
+        translation.activate(prev_language)
+
         # send mails
-        print(mails)
         send_mass_mail(mails)
+
+    def _mail_text(self, person, append_english, first_language, base_url):
+        text = ""
+
+        if append_english:
+            text += render_to_string("news/mail/english.txt")
+
+        text += self._mail_text_language(
+            first_language, self.cleaned_data.get("text"), person,
+            base_url)
+
+        if append_english:
+            text += self._mail_text_language(
+                "en", self.cleaned_data.get("text_en"), person, base_url)
+
+        return text.rstrip().lstrip()
 
     def _mail_text_language(self, language, text, person, base_url):
         unsubscribe_url = self.request.build_absolute_uri(
