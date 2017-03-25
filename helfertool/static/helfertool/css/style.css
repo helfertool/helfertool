@@ -17,8 +17,11 @@ a, a:hover, a:active, a:focus {
 .navbar-custom {
     background-color: white;
 
+    border: 0;
     border-bottom: 5px solid;
     border-color: #3aafb9;
+
+    border-radius: 0;
 }
 
 .navbar-custom li {
