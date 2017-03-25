@@ -1,3 +1,6 @@
-{% load i18n %}{% blocktrans %}Hello,
+{% load i18n %}
+{% blocktrans %}
+Hello,
 
-you receive this mail because you registered as helper for an event on {{ url }} and chose that you want to be informed about future events.{% endblocktrans %}
+you receive this mail because you registered as helper for an event on {{ url }} and chose that you want to be informed about future events.
+{% endblocktrans %}

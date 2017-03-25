@@ -195,3 +195,10 @@ div.logos-about div
     content: "*";
     color: red;
 }
+
+/* wrap text in pre */
+pre.wraptext
+{
+    white-space: pre-wrap;
+    word-break: keep-all;
+}

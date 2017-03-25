@@ -1,6 +1,7 @@
 Important
 ==========
 
+* clean: .get(...) instead of [...]
 * fix merge
 * implement present flag better
 * resend confirmation mail
