@@ -15,32 +15,37 @@
         {% bootstrap_field form.language %}
         {% bootstrap_field form.english %}
 
-        {% bootstrap_field form.subject %}
+        <div style="margin-top:4em;"></div>
 
-        <pre id="englishbelow" class="wraptext">{% include "news/mail/english.txt" %}</pre>
+        {% trans "Subject" as subject %}
+        {% bootstrap_field form.subject addon_before=subject show_label=False %}
 
-        {% for lang, name in form.languages %}
-            {% language lang %}
-                <pre id="preface_{{ lang }}" class="mail_preface wraptext">{% include "news/mail/preface.txt" %}</pre>
-            {% endlanguage %}
-        {% endfor %}
+        <div class="mailbody">
+            <pre id="englishbelow" class="wraptext">{% include "news/mail/english.txt" %}</pre>
 
-        {% bootstrap_field form.text show_label=False %}
+            {% for lang, name in form.languages %}
+                {% language lang %}
+                    <pre id="preface_{{ lang }}" class="mail_preface wraptext">{% include "news/mail/preface.txt" %}</pre>
+                {% endlanguage %}
+            {% endfor %}
 
-        {% for lang, name in form.languages %}
-            {% language lang %}
-                <pre id="end_{{ lang }}" class="mail_end wraptext">{% include "news/mail/end.txt" %}</pre>
-            {% endlanguage %}
-        {% endfor %}
+            {% bootstrap_field form.text show_label=False %}
 
-        <div id="block_en" style="margin-top:3em;">
-            {% language "en" %}
-                <pre class="wraptext">{% include "news/mail/preface.txt" %}</pre>
-            {% endlanguage %}
-            {% bootstrap_field form.text_en show_label=False %}
-            {% language "en" %}
-                <pre class="wraptext">{% include "news/mail/end.txt" %}</pre>
-            {% endlanguage %}
+            {% for lang, name in form.languages %}
+                {% language lang %}
+                    <pre id="end_{{ lang }}" class="mail_end wraptext">{% include "news/mail/end.txt" %}</pre>
+                {% endlanguage %}
+            {% endfor %}
+
+            <div id="block_en">
+                {% language "en" %}
+                    <pre class="wraptext">{% include "news/mail/preface.txt" %}</pre>
+                {% endlanguage %}
+                {% bootstrap_field form.text_en show_label=False %}
+                {% language "en" %}
+                    <pre class="wraptext">{% include "news/mail/end.txt" %}</pre>
+                {% endlanguage %}
+            </div>
         </div>
 
         <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
