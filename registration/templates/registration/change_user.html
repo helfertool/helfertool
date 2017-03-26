@@ -43,6 +43,14 @@
                         {% else %}
                             <del>{% trans "Can add users" %}</del>
                         {% endif %}
+
+                        <br />
+
+                        {% if user.is_superuser or user|has_sendnews_group %}
+                            {% trans "Can send news" %}
+                        {% else %}
+                            <del>{% trans "Can send news" %}</del>
+                        {% endif %}
                     </td>
                 </tr>
             </table>

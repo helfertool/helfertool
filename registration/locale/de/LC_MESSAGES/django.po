@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-26 17:34+0200\n"
-"PO-Revision-Date: 2017-03-26 17:35+0200\n"
+"POT-Creation-Date: 2017-03-26 17:40+0200\n"
+"PO-Revision-Date: 2017-03-26 17:41+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -985,7 +985,7 @@ msgstr "Bitte korrigiere die Fehler unten."
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:33
-#: registration/templates/registration/change_user.html:62
+#: registration/templates/registration/change_user.html:70
 msgid "Save"
 msgstr "Speichern"
 
@@ -1159,6 +1159,8 @@ msgid "There are no users, that can add users."
 msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
 
 #: registration/templates/registration/admin/permissions.html:69
+#: registration/templates/registration/change_user.html:50
+#: registration/templates/registration/change_user.html:52
 msgid "Can send news"
 msgstr "Kann Newsletter versenden"
 
@@ -1199,11 +1201,11 @@ msgstr "Badge bearbeiten"
 msgid "Account"
 msgstr "Account"
 
-#: registration/templates/registration/change_user.html:52
+#: registration/templates/registration/change_user.html:60
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: registration/templates/registration/change_user.html:67
+#: registration/templates/registration/change_user.html:75
 msgid "The password cannot be changed."
 msgstr "Das Passwort kann nicht geändert werden."
 
