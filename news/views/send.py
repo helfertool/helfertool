@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -21,8 +20,9 @@ def send(request):
         return nopermission(request)
 
     base_url = request.build_absolute_uri(reverse('index'))
-    unsubscribe_url = request.build_absolute_uri(reverse('news:unsubscribe',
-                                                 args=[settings.FROM_MAIL]))
+    unsubscribe_url = request.build_absolute_uri(
+        reverse('news:unsubscribe',
+                args=["1773a8dc-3cf4-497e-9a1c-25128cba768a"]))
 
     form = MailForm(request.POST or None, request=request)
     if form.is_valid():

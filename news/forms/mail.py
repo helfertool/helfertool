@@ -66,7 +66,7 @@ class MailForm(forms.Form):
 
         base_url = self.request.build_absolute_uri(reverse('index'))
         unsubscribe_url = self.request.build_absolute_uri(
-            reverse('news:unsubscribe', args=["EMAIL"]))
+            reverse('news:unsubscribe', args=[""]))
 
         tasks.send_news_mails.delay(first_language, append_english, subject,
                                     text, text_en, base_url, unsubscribe_url)

@@ -8,7 +8,10 @@ urlpatterns = [
         views.send,
         name='send'),
 
-    url(r'^unsubscribe/(?P<email>.+)$',
+    # empty tokens are allowed since this is used to generate the link once
+    # and add the specific tokens
+    # empty tokens are handled in the view with an 404
+    url(r'^unsubscribe/(?P<token>[0-9a-f\-]*)$',
         views.unsubscribe,
         name='unsubscribe'),
 ]

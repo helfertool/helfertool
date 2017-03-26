@@ -18,7 +18,7 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
         mails = []
         for person in Person.objects.all():
             text = ""
-            tmp_unsubscribe_url = unsubsribe_url.replace("EMAIL", person.email)
+            tmp_unsubscribe_url = unsubsribe_url + str(person.token)
 
             if append_english:
                 text += render_to_string("news/mail/english.txt")
@@ -37,6 +37,7 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
         translation.activate(prev_language)
 
         # send mails
+        print(mails)
         send_mass_mail(mails)
 
 
