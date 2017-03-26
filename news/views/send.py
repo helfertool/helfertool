@@ -27,7 +27,7 @@ def send(request):
     form = MailForm(request.POST or None, request=request)
     if form.is_valid():
         form.send_mail()
-        messages.success(request, _("Mail are being sent now."))
+        messages.success(request, _("Mails are being sent now."))
 
         return HttpResponseRedirect(reverse('news:send'))
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-25 23:46+0100\n"
-"PO-Revision-Date: 2017-03-26 00:43+0100\n"
+"POT-Creation-Date: 2017-03-26 15:10+0200\n"
+"PO-Revision-Date: 2017-03-26 15:11+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,31 +18,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: news/forms/mail.py:16
+#: news/forms/mail.py:19
 msgid "Language"
 msgstr "Sprache"
 
-#: news/forms/mail.py:21
+#: news/forms/mail.py:24
 msgid "Add English text"
 msgstr "Englischen Text hinzufügen"
 
-#: news/forms/mail.py:28
+#: news/forms/mail.py:31 news/templates/news/send.html:20
 msgid "Subject"
 msgstr "Betreff"
 
-#: news/forms/mail.py:34
+#: news/forms/mail.py:37
 msgid "Text"
 msgstr "Text"
 
-#: news/forms/mail.py:39
+#: news/forms/mail.py:42
 msgid "English text"
 msgstr "Englischer Text"
 
-#: news/forms/mail.py:49
+#: news/forms/mail.py:52
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
-#: news/models/person.py:8
+#: news/models/person.py:17
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -65,13 +65,13 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"Hello,\n"
+"Hello dear helpers,\n"
 "\n"
 "you receive this mail because you registered as helper for an event on "
 "%(url)s and chose that you want to be informed about future events.\n"
 msgstr ""
 "\n"
-"Hallo,\n"
+"Hallo liebe Helferinnen und Helfer,\n"
 "\n"
 "du erhältst diese E-Mail weil du dich auf %(url)s für eine Veranstaltung als "
 "Helfer angemeldet hast und ausgewählt hast, dass du über weitere "
@@ -85,15 +85,43 @@ msgstr "Newsletter versenden"
 msgid "Number of recipients:"
 msgstr "Anzahl der Empfänger:"
 
-#: news/templates/news/send.html:46
+#: news/templates/news/send.html:51
 msgid "Send"
 msgstr "Senden"
 
-#: news/views/send.py:28
-msgid "Mail was sent successfully"
-msgstr "E-Mail erfolgreich verschickt"
+#: news/templates/news/subscription_deleted.html:6
+msgid "Subscription deleted"
+msgstr "Abo gelöscht"
+
+#: news/templates/news/subscription_deleted.html:9
+msgid ""
+"You will not receive further mails. Thank you for your support in the past!"
+msgstr ""
+"Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
+"der Vergangenheit!"
+
+#: news/templates/news/unsubscribe.html:6
+#: news/templates/news/unsubscribe.html:17
+msgid "Unsubscribe"
+msgstr "Austragen"
+
+#: news/templates/news/unsubscribe.html:10
+#, python-format
+msgid "Do not send further mails about upcoming events to %(email)s?"
+msgstr ""
+"Keine weiteren E-Mails über bevorstehende Veranstaltungen an %(email)s "
+"senden?"
+
+#: news/templates/news/unsubscribe.html:21
+msgid "This mail address was already deleted."
+msgstr "Diese E-Mail Adresse wurde bereits gelöscht."
 
 #: news/views/send.py:30
-#, python-format
-msgid "Sending mails failed: %(error)s"
-msgstr "Senden der E-Mails fehlgeschlagen: %(error)s"
+msgid "Mails are being sent now."
+msgstr "E-Mails werden gerade verschickt."
+
+#~ msgid "Mail was sent successfully"
+#~ msgstr "E-Mail erfolgreich verschickt"
+
+#~ msgid "Sending mails failed: %(error)s"
+#~ msgstr "Senden der E-Mails fehlgeschlagen: %(error)s"
