@@ -8,7 +8,7 @@ import uuid
 @python_2_unicode_compatible
 class Person(models.Model):
     token = models.UUIDField(
-        unique=True,
+        primary_key=True,
         default=uuid.uuid4,
         editable=False,
     )
