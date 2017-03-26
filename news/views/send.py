@@ -6,8 +6,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
-from smtplib import SMTPException
-
 # TODO: move has_sendnews_group somewhere else
 from registration.templatetags.permissions import has_sendnews_group
 from registration.views.utils import nopermission
@@ -28,12 +26,8 @@ def send(request):
 
     form = MailForm(request.POST or None, request=request)
     if form.is_valid():
-        try:
-            form.send_mail()
-            messages.success(request, _("Mail was sent successfully"))
-        except (SMTPException, ConnectionError) as e:
-            messages.error(request, _("Sending mails failed: %(error)s") %
-                           {'error': str(e)})
+        form.send_mail()
+        messages.success(request, _("Mail are being sent now."))
 
         return HttpResponseRedirect(reverse('news:send'))
 

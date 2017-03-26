@@ -1,12 +1,9 @@
 from django import forms
 from django.conf import settings
-from django.core.mail import send_mass_mail
 from django.core.urlresolvers import reverse
-from django.template.loader import render_to_string
-from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import Person
+from .. import tasks
 
 
 class MailForm(forms.Form):
@@ -58,57 +55,21 @@ class MailForm(forms.Form):
 
     def send_mail(self):
         subject = self.cleaned_data.get('subject')
+        text = self.cleaned_data.get('text')
+        text_en = self.cleaned_data.get('text_en')
+
         first_language = self.cleaned_data.get('language')
         append_english = self.cleaned_data.get('english')
-
         if first_language == 'en':
             # english may be set anyway
             append_english = False
 
-        # build mails
-        prev_language = translation.get_language()
         base_url = self.request.build_absolute_uri(reverse('index'))
-
-        mails = []
-        for person in Person.objects.all():
-            text = self._mail_text(person, append_english, first_language,
-                                   base_url)
-            mails.append((subject, text, settings.FROM_MAIL, [person.email]))
-
-        translation.activate(prev_language)
-
-        # send mails
-        send_mass_mail(mails)
-
-    def _mail_text(self, person, append_english, first_language, base_url):
-        text = ""
-
-        if append_english:
-            text += render_to_string("news/mail/english.txt")
-
-        text += self._mail_text_language(
-            first_language, self.cleaned_data.get("text"), person,
-            base_url)
-
-        if append_english:
-            text += self._mail_text_language(
-                "en", self.cleaned_data.get("text_en"), person, base_url)
-
-        return text.rstrip().lstrip()
-
-    def _mail_text_language(self, language, text, person, base_url):
         unsubscribe_url = self.request.build_absolute_uri(
-            reverse('news:unsubscribe', args=[person.email]))
+            reverse('news:unsubscribe', args=["EMAIL"]))
 
-        translation.activate(language)
-
-        tmp = ""
-        tmp += render_to_string("news/mail/preface.txt", {'url': base_url})
-        tmp += text
-        tmp += render_to_string("news/mail/end.txt",
-                                {'unsubscribe_url': unsubscribe_url})
-
-        return tmp
+        tasks.send_news_mails.delay(first_language, append_english, subject,
+                                    text, text_en, base_url, unsubscribe_url)
 
     def _get_languages(self):
         """
