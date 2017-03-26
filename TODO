@@ -91,11 +91,6 @@ Inventory
   * also without badge
 * add interface to manage inventory settings of event
 
-News
-====
-
-* move send_mail to celery
-
 Deployment
 ==========
 

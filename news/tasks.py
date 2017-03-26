@@ -7,6 +7,8 @@ from django.utils import translation
 
 from celery import shared_task
 
+import time
+
 from .models import Person
 
 
@@ -38,7 +40,16 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
         translation.activate(prev_language)
 
         # send mails
-        send_mass_mail(mails)
+        batch = 0
+        while True:
+            mails_batch = mails[batch*settings.MAIL_BATCH_SIZE:
+                                (batch+1)*settings.MAIL_BATCH_SIZE]
+            if not mails_batch:
+                break
+
+            send_mass_mail(mails_batch)
+            time.sleep(settings.MAIL_BATCH_GAP)
+            batch += 1
 
 
 def _mail_text_language(language, text, url, unsubscribe_url):

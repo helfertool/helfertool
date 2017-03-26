@@ -64,6 +64,13 @@ BADGE_LANGUAGE_CODE = 'de'
 BADGE_DEFAULT_TEMPLATE = os.path.join(BASE_DIR, 'badges', 'latextemplate',
                                       'badge.tex')
 
+# News
+# number of mails sent during one connection
+MAIL_BATCH_SIZE = 200
+
+# time between two connections in seconds
+MAIL_BATCH_GAP = 5
+
 # copy generated latex code for badges to this file, disable with None
 BADGE_TEMPLATE_DEBUG_FILE = "/tmp/badge.tex"
 
