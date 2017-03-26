@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class Issue(models.Model):
     NEW_EVENT = 'newevent'
+    PROMOTE_EVENT = 'promoteevent'
     PERM_ADD_USER = 'permadduser'
     PERM_ADD_EVENT = 'permaddevent'
     FEATURE = 'feature'
@@ -12,6 +13,7 @@ class Issue(models.Model):
 
     SUBJECT_CHOICES = (
         (NEW_EVENT, _("New event")),
+        (PROMOTE_EVENT, _("Promote event")),
         (PERM_ADD_USER, _("Permission to add new users")),
         (PERM_ADD_EVENT, _("Permission to add new events")),
         (FEATURE, _("Feature request")),

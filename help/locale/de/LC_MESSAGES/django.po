@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-26 15:10+0200\n"
-"PO-Revision-Date: 2017-03-26 15:11+0200\n"
+"POT-Creation-Date: 2017-03-26 17:34+0200\n"
+"PO-Revision-Date: 2017-03-26 17:35+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,35 +22,39 @@ msgstr ""
 msgid "New issue"
 msgstr "Neue Anfrage"
 
-#: help/models.py:14
+#: help/models.py:15
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: help/models.py:15
+#: help/models.py:16
+msgid "Promote event"
+msgstr "Veranstaltung bewerben"
+
+#: help/models.py:17
 msgid "Permission to add new users"
 msgstr "Berechtigung zum Anlegen neuer Nutzer"
 
-#: help/models.py:16
+#: help/models.py:18
 msgid "Permission to add new events"
 msgstr "Berechtigung zum Anlegen neuer Veranstaltungen"
 
-#: help/models.py:17
+#: help/models.py:19
 msgid "Feature request"
 msgstr "Verbesserungsvorschlag"
 
-#: help/models.py:18
+#: help/models.py:20
 msgid "Bug report"
 msgstr "Fehlerbericht"
 
-#: help/models.py:19
+#: help/models.py:21
 msgid "Other topic"
 msgstr "Anderes Thema"
 
-#: help/models.py:33
+#: help/models.py:35
 msgid "Subject"
 msgstr "Thema"
 
-#: help/models.py:39
+#: help/models.py:41
 msgid "Text"
 msgstr "Text"
 
