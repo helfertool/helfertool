@@ -1,0 +1,26 @@
+{% extends "helfertool/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <h2>{% trans "Unsubscribe" %}</h2>
+
+    {% if person %}
+        <p>
+            {% blocktrans trimmed with email=person.email %}
+                Do not send further mails about upcoming events to {{ email }}?
+            {% endblocktrans %}
+        </p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" value="{% trans "Unsubscribe" %}" class="btn btn-default" />
+        </form>
+    {% else %}
+        <p>
+            {% blocktrans trimmed %}
+                This mail address was already deleted.
+            {% endblocktrans %}
+        </p>
+    {% endif %}
+{% endblock %}

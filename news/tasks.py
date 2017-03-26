@@ -37,7 +37,6 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
         translation.activate(prev_language)
 
         # send mails
-        print(mails)
         send_mass_mail(mails)
 
 

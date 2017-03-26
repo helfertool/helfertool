@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -14,4 +15,8 @@ urlpatterns = [
     url(r'^unsubscribe/(?P<token>[0-9a-f\-]*)$',
         views.unsubscribe,
         name='unsubscribe'),
+
+    url(r'^unsubscribe/done$',
+        TemplateView.as_view(template_name='news/subscription_deleted.html'),
+        name='subscription_deleted'),
 ]
