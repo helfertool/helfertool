@@ -17,22 +17,23 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
 
         mails = []
         for person in Person.objects.all():
-            text = ""
+            mail_text = ""
             tmp_unsubscribe_url = unsubsribe_url + str(person.token)
 
             if append_english:
-                text += render_to_string("news/mail/english.txt")
+                mail_text += render_to_string("news/mail/english.txt")
 
-            text += _mail_text_language(first_language, text, url,
-                                        tmp_unsubscribe_url)
+            mail_text += _mail_text_language(first_language, text, url,
+                                             tmp_unsubscribe_url)
 
             if append_english:
-                text += _mail_text_language("en", text_en, url,
-                                            tmp_unsubscribe_url)
+                mail_text += _mail_text_language("en", text_en, url,
+                                                 tmp_unsubscribe_url)
 
-            text = text.lstrip().rstrip()
+            mail_text = mail_text.lstrip().rstrip()
 
-            mails.append((subject, text, settings.FROM_MAIL, [person.email]))
+            mails.append((subject, mail_text, settings.FROM_MAIL,
+                          [person.email]))
 
         translation.activate(prev_language)
 

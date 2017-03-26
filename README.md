@@ -143,6 +143,9 @@ Additionally uncomment the following lines in `helfertool/settings.py`:
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
 
+The advantage of this method compared to the console backend from Django is,
+that you also see the mails sent in Celery tasks in the same window.
+
 ## Create superuser
 
 Now a superuser should be created:
