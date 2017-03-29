@@ -44,6 +44,11 @@ class Item(models.Model):
         verbose_name=_("Barcode"),
     )
 
+    comment = models.TextField(
+        blank=True,
+        verbose_name=_("Comment"),
+    )
+
     def __str__(self):
         return "{} ({})".format(self.name, self.inventory.name)
 
