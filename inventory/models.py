@@ -28,6 +28,9 @@ class Inventory(models.Model):
     def __str__(self):
         return self.name
 
+    def is_admin(self, user):
+        return user.is_superuser or user in self.admins
+
 
 class Item(models.Model):
     inventory = models.ForeignKey(

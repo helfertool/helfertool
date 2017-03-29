@@ -1,0 +1,35 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load inventory %}
+
+{% block admincontent %}
+    <h2>{% trans "Inventory" %}</h2>
+
+    <table class="table">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Admins" %}</th>
+            <th>{% trans "" %}</th>
+        </tr>
+        {% for inventory in inventories %}
+            <tr>
+                <td>{{ inventory.name }}</td>
+                <td>
+                    <ul>
+                        {% for admin in inventory.admins.all %}
+                            <li>{{ admin.get_full_name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    {% is_inventory_admin inventory as is_admin %}
+                    {% if is_admin %}
+                        TODO
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

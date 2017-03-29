@@ -2,6 +2,7 @@
 {% load i18n %}
 {% load bootstrap3 %}
 {% load permissions %}
+{% load inventory %}
 {% load staticfiles %}
 
 {% block adminheader %}
@@ -19,16 +20,6 @@
         {# select2 #}
         <link href="{% static "select2/dist/css/select2.min.css" %}" rel="stylesheet" />
         <script src="{% static "select2/dist/js/select2.min.js" %}"></script>
-
-        {# jqPlot #}
-        <!--
-        <link href="{% static "helfertool/vendor/jqplot/jquery.jqplot.min.css" %}" rel="stylesheet" />
-        <script src="{% static "helfertool/vendor/jqplot/jquery.jqplot.min.js" %}"></script>
-        <script src="{% static "helfertool/vendor/jqplot/plugins/jqplot.highlighter.js" %}"></script>
-        <script src="{% static "helfertool/vendor/jqplot/plugins/jqplot.cursor.js" %}"></script>
-        <script src="{% static "helfertool/vendor/jqplot/plugins/jqplot.dateAxisRenderer.js" %}"></script>
-        <script src="{% static "helfertool/vendor/jqplot/plugins/jqplot.barRenderer.js" %}"></script>
-        -->
 
         {# chart.js #}
         <script src="{% static "chart.js/dist/Chart.min.js" %}"></script>
@@ -187,6 +178,9 @@
                     {% endif %}
                     {% if user.is_superuser or user|has_sendnews_group %}
                         <li><a href="{% url 'news:send' %}">{% trans "Send news" %}</a></li>
+                    {% endif %}
+                    {% if user|is_inventory_admin_any %}
+                        <li><a href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a></li>
                     {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'permissions' %}">{% trans "Permissions" %}</a></li>

@@ -4,6 +4,7 @@ from . import views
 
 app_name = 'inventory'
 urlpatterns = [
+    # event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/register/$',
         views.register_item,
         name='register'),
@@ -22,6 +23,11 @@ urlpatterns = [
         name='take_back_direct'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/list/$',
-        views.list,
+        views.event_list,
         name='list'),
+
+    # admin
+    url(r'^admin/inventory/$',
+        views.inventory_list,
+        name='inventory_list'),
 ]

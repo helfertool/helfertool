@@ -9,7 +9,7 @@ from ..models import UsedItem
 
 @archived_not_available
 @admin_required
-def list(request, event_url_name):
+def event_list(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check if badge system is active
