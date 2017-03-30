@@ -46,3 +46,12 @@ class InventoryForm(forms.ModelForm):
         field_classes = {
             'admins': UserSelectField,
         }
+
+
+class InventoryDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Inventory
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

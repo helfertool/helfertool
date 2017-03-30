@@ -1,0 +1,26 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% load inventory %}
+
+{% block admincontent %}
+    <h2>{% trans "Inventory" %}: {{ inventory.name }}</h2>
+
+    <table class="table">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Barcode" %}</th>
+            <th>{% trans "Comment" %}</th>
+            <th></th>
+        </tr>
+        {% for item in inventory.item_set.all %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.barcode }}</td>
+                <td>{{ item.comment }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

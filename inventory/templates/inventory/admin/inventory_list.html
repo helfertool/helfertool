@@ -25,9 +25,24 @@
                 <td>
                     {% is_inventory_admin inventory as is_admin %}
                     {% if is_admin %}
+                        <a href="{% url "inventory:inventory_items" inventory.pk %}">
+                            {% bootstrap_icon "pencil" %}
+                            {% comment %}Translators: List verb{% endcomment %}
+                            {% trans "List" %}
+                        </a>
+
+                        <br />
+
                         <a href="{% url "inventory:edit_inventory" inventory.pk %}">
                             {% bootstrap_icon "pencil" %}
                             {% trans "Edit" %}
+                        </a>
+
+                        <br />
+
+                        <a href="{% url "inventory:delete_inventory" inventory.pk %}">
+                            {% bootstrap_icon "remove" %}
+                            {% trans "Löschen" %}
                         </a>
                     {% endif %}
                 </td>
