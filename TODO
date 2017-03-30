@@ -45,31 +45,26 @@ Admin area
 * event date -> default for shift times
 
 
-User management
-===============
-
-* new widget to select admins (enter username -> ajax -> suggestions)
-
-
 Badges
 ======
 
 * shift (name for each shift, time,...?)
 * delete_badge{permission, role, design}
-* for some jobs an upload of an image is possible
-* timeout and other protection for subprocess call (-> celery timeout)
+* add image upload to registration form for certain jobs
+* timeout for subprocess call (-> celery timeout)
 * Show missing images (image for coordinators or for all)
-* Check security of pdflatex, set more options
+* Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
 
 
 Gifts
 =====
 
+* flag: buy t-shirt
+* set present flag for complete shifts
 * add flags to excel export
 * condition for getting t-shirt (number of shifts or hours)
 * show all helpers of shift -> select if present and gift given
-* flag: buy t-shirt
 * default gift sets
 
 
@@ -90,6 +85,8 @@ Inventory
   * first select user, then add/remove multiple items
   * also without badge
 * add interface to manage inventory settings of event
+* modeltranslation for inventory and item names
+* delete item -> keep history for other events OR show warning on delete
 
 Deployment
 ==========
