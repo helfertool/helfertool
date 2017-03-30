@@ -179,7 +179,7 @@
                     {% if user.is_superuser or user|has_sendnews_group %}
                         <li><a href="{% url 'news:send' %}">{% trans "Send news" %}</a></li>
                     {% endif %}
-                    {% if user|is_inventory_admin_any %}
+                    {% if user.is_superuser or user|is_inventory_admin_any %}
                         <li><a href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a></li>
                     {% endif %}
                     {% if user.is_superuser %}
