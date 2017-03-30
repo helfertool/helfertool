@@ -31,6 +31,10 @@ urlpatterns = [
         views.inventory_list,
         name='inventory_list'),
 
+    url(r'^admin/inventory/new/$',
+        views.edit_inventory,
+        name='new_inventory'),
+
     url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/$',
         views.edit_inventory,
         name='edit_inventory'),
