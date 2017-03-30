@@ -25,7 +25,10 @@
                 <td>
                     {% is_inventory_admin inventory as is_admin %}
                     {% if is_admin %}
-                        TODO
+                        <a href="{% url "inventory:edit_inventory" inventory.pk %}">
+                            {% bootstrap_icon "pencil" %}
+                            {% trans "Edit" %}
+                        </a>
                     {% endif %}
                 </td>
             </tr>
