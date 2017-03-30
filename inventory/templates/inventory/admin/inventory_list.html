@@ -6,48 +6,56 @@
 {% block admincontent %}
     <h2>{% trans "Inventory" %}</h2>
 
-    <table class="table">
-        <tr>
-            <th>{% trans "Name" %}</th>
-            <th>{% trans "Admins" %}</th>
-            <th></th>
-        </tr>
-        {% for inventory in inventories %}
+    <p><a href="{% url 'inventory:new_inventory' %}">
+        {% bootstrap_icon "plus" %}
+        {% trans "New inventory" %}
+    </a></p>
+
+    {% if inventories %}
+        <table class="table">
             <tr>
-                <td>{{ inventory.name }}</td>
-                <td>
-                    <ul>
-                        {% for admin in inventory.admins.all %}
-                            <li>{{ admin.get_full_name }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    {% is_inventory_admin inventory as is_admin %}
-                    {% if is_admin %}
-                        <a href="{% url "inventory:inventory_items" inventory.pk %}">
-                            {% bootstrap_icon "pencil" %}
-                            {% comment %}Translators: List verb{% endcomment %}
-                            {% trans "List" %}
-                        </a>
-
-                        <br />
-
-                        <a href="{% url "inventory:edit_inventory" inventory.pk %}">
-                            {% bootstrap_icon "pencil" %}
-                            {% trans "Edit" %}
-                        </a>
-
-                        <br />
-
-                        <a href="{% url "inventory:delete_inventory" inventory.pk %}">
-                            {% bootstrap_icon "remove" %}
-                            {% trans "Löschen" %}
-                        </a>
-                    {% endif %}
-                </td>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Admins" %}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-    </table>
-{% endblock %}
+            {% for inventory in inventories %}
+                <tr>
+                    <td>{{ inventory.name }}</td>
+                    <td>
+                        <ul>
+                            {% for admin in inventory.admins.all %}
+                                <li>{{ admin.get_full_name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {% is_inventory_admin inventory as is_admin %}
+                        {% if is_admin %}
+                            <a href="{% url "inventory:inventory_items" inventory.pk %}">
+                                <i class="fa fa-list" aria-hidden="true"></i>
+                                {% comment %}Translators: List verb{% endcomment %}
+                                {% trans "List" %}
+                            </a>
 
+                            <br />
+
+                            <a href="{% url "inventory:edit_inventory" inventory.pk %}">
+                                {% bootstrap_icon "pencil" %}
+                                {% trans "Edit" %}
+                            </a>
+
+                            <br />
+
+                            <a href="{% url "inventory:delete_inventory" inventory.pk %}">
+                                {% bootstrap_icon "remove" %}
+                                {% trans "Delete" %}
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "There is no inventory." %}</p>
+    {% endif %}
+{% endblock %}

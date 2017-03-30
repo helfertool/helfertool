@@ -4,7 +4,7 @@ from . import views
 
 app_name = 'inventory'
 urlpatterns = [
-    # event
+    # pages for single event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/register/$',
         views.register_item,
         name='register'),
@@ -26,7 +26,7 @@ urlpatterns = [
         views.event_list,
         name='list'),
 
-    # admin
+    # inventory management
     url(r'^admin/inventory/$',
         views.inventory_list,
         name='inventory_list'),
@@ -46,4 +46,19 @@ urlpatterns = [
     url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/$',
         views.inventory_items,
         name='inventory_items'),
+
+    # item management
+    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/new/$',
+        views.edit_item,
+        name='new_item'),
+
+    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/'
+         '(?P<item_pk>[0-9]+)/$',
+        views.edit_item,
+        name='edit_item'),
+
+    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/'
+         '(?P<item_pk>[0-9]+)/delete/$',
+        views.delete_item,
+        name='delete_item'),
 ]

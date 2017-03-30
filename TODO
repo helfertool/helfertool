@@ -87,6 +87,8 @@ Inventory
 * add interface to manage inventory settings of event
 * modeltranslation for inventory and item names
 * delete item -> keep history for other events OR show warning on delete
+* make sure that barcodes are unique for all activated inventories of an event
+* edit item: unique_together leads to exception on same barcode
 
 Deployment
 ==========

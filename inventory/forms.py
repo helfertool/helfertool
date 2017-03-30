@@ -55,3 +55,33 @@ class InventoryDeleteForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        exclude = ['inventory', ]
+
+    def __init__(self, *args, **kwargs):
+        self.inventory = kwargs.pop('inventory')
+
+        super(ItemForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        instance = super(ItemForm, self).save(False)  # inventory is missing
+
+        instance.inventory = self.inventory
+
+        if commit:
+            instance.save()
+
+        return instance
+
+
+class ItemDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

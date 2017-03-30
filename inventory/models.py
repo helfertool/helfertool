@@ -9,6 +9,9 @@ from .exceptions import WrongHelper, InvalidMultipleAssignment, NotAssigned
 
 
 class Inventory(models.Model):
+    class Meta:
+        ordering = ['name']
+
     name = models.CharField(
         max_length=200,
         verbose_name=_("Name"),
@@ -33,6 +36,10 @@ class Inventory(models.Model):
 
 
 class Item(models.Model):
+    class Meta:
+        unique_together = ('inventory', 'barcode')
+        ordering = ['barcode']
+
     inventory = models.ForeignKey(
         Inventory,
     )

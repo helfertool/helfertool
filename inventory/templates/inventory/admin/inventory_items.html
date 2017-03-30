@@ -6,21 +6,42 @@
 {% block admincontent %}
     <h2>{% trans "Inventory" %}: {{ inventory.name }}</h2>
 
-    <table class="table">
-        <tr>
-            <th>{% trans "Name" %}</th>
-            <th>{% trans "Barcode" %}</th>
-            <th>{% trans "Comment" %}</th>
-            <th></th>
-        </tr>
-        {% for item in inventory.item_set.all %}
+    <p><a href="{% url 'inventory:new_item' inventory.pk %}">
+        {% bootstrap_icon "plus" %}
+        {% trans "New item" %}
+    </a></p>
+
+    {% if items %}
+        <table class="table">
             <tr>
-                <td>{{ item.name }}</td>
-                <td>{{ item.barcode }}</td>
-                <td>{{ item.comment }}</td>
-                <td></td>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Barcode" %}</th>
+                <th>{% trans "Comment" %}</th>
+                <th></th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.barcode }}</td>
+                    <td>{{ item.comment|truncatechars:20|linebreaks }}</td>
+                    <td>
+                        <a href="{% url "inventory:edit_item" inventory.pk item.pk %}">
+                            {% bootstrap_icon "pencil" %}
+                            {% trans "Edit" %}
+                        </a>
+
+                        <br />
+
+                        <a href="{% url "inventory:delete_item" inventory.pk item.pk %}">
+                            {% bootstrap_icon "remove" %}
+                            {% trans "Delete" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "There are no items." %}</p>
+    {% endif %}
 {% endblock %}
 
