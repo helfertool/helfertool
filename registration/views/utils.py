@@ -41,8 +41,12 @@ def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
         job = get_object_or_404(Job, pk=job_pk)
     if shift_pk:
         shift = get_object_or_404(Shift, pk=shift_pk)
-    if helper_pk:
-        helper = get_object_or_404(Helper, pk=helper_pk)
+
+    try:
+        if helper_pk:
+            helper = get_object_or_404(Helper, pk=helper_pk)
+    except ValueError:
+        raise Http404
 
     # sanity checks
     if event and job and job.event != event:

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-30 11:22+0200\n"
-"PO-Revision-Date: 2017-03-26 17:41+0200\n"
+"POT-Creation-Date: 2017-03-30 16:07+0200\n"
+"PO-Revision-Date: 2017-03-30 16:08+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -1367,14 +1367,18 @@ msgid "Jobs"
 msgstr "Aufgaben"
 
 #: registration/templates/registration/registered.html:43
+msgid "Download as iCal"
+msgstr "Als iCal herunterladen"
+
+#: registration/templates/registration/registered.html:47
 msgid "Data privacy"
 msgstr "Datenschutz"
 
-#: registration/templates/registration/registered.html:45
+#: registration/templates/registration/registered.html:49
 msgid "You agreed with the following data privacy statement."
 msgstr "Du hast der folgenden Datenschutzerklärung zugestimmt."
 
-#: registration/templates/registration/registered.html:47
+#: registration/templates/registration/registered.html:51
 msgid ""
 "The following data privacy statement was sent to you and you did not "
 "disagree until now."
@@ -1382,7 +1386,7 @@ msgstr ""
 "Die folgende Datenschutzerklärung wurde dir zugeschickt und du hast bis "
 "jetzt nicht widersprochen."
 
-#: registration/templates/registration/registered.html:55
+#: registration/templates/registration/registered.html:59
 msgid "You agreed that we will inform you about future events per email."
 msgstr ""
 "Du bist damit einverstanden, dass wir dich über weitere Veranstaltungen per "

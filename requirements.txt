@@ -7,6 +7,7 @@ html5lib==0.999999999
 django-bleach
 django-ckeditor
 django-axes
+django_ical
 celery
 amqp
 XlsxWriter

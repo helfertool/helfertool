@@ -38,6 +38,10 @@
             <li class="list-group-item">{{ shift }}</li>
         {% endfor %}
         </ul>
+
+        <a class="btn btn-default" href="{% url 'ical' event.url_name data.pk %}">
+            <i class="fa fa-calendar fa-lg"></i> {% trans "Download as iCal" %}
+        </a>
     {% endif %}
 
     <h2>{% trans "Data privacy" %}</h2>

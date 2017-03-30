@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
 from . import views
+from .feeds import HelperFeed
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -72,6 +73,11 @@ urlpatterns = [
         '(?P<helper_id>[a-z0-9\-]+)/$',
         views.validate,
         name='validate'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/ical/'
+        '(?P<helper_id>[a-z0-9\-]+)/$',
+        HelperFeed(),
+        name='ical'),
 
     # manage event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$',
