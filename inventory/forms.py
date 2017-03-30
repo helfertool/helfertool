@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from badges.models import Badge
 
-from .models import Item
+from .models import Item, Inventory
 
 
 class InventoryBarcodeForm(forms.Form):
@@ -36,3 +36,9 @@ class InventoryBarcodeForm(forms.Form):
         except Item.DoesNotExist:
             raise ValidationError(_("There is no item with this barcode for "
                                     "this event."))
+
+
+class InventoryForm(forms.ModelForm):
+    class Meta:
+        model = Inventory
+        exclude = []

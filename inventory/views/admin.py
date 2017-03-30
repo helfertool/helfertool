@@ -2,10 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from ..models import Inventory
-from ..decorators import inventory_admin_required
+from ..decorators import any_inventory_admin_required
 
 
-@inventory_admin_required
+@any_inventory_admin_required
 def inventory_list(request):
     inventories = Inventory.objects.all()
 

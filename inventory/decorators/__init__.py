@@ -1,1 +1,1 @@
-from .inventory import inventory_admin_required
+from .inventory import any_inventory_admin_required

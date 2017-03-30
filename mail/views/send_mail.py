@@ -11,7 +11,7 @@ from registration.decorators import archived_not_available
 from registration.models import Event
 from registration.views.utils import nopermission
 
-from ..forms import MailForm
+from ..forms import MailForm, MailFormError
 
 
 @login_required
@@ -30,7 +30,7 @@ def send_mail(request, event_url_name):
         try:
             form.send_mail()
             messages.success(request, _("Mail was sent successfully"))
-        except (SMTPException, ConnectionError) as e:
+        except (SMTPException, ConnectionError, MailFormError) as e:
             messages.error(request, _("Sending mails failed: %(error)s") %
                            {'error': str(e)})
 

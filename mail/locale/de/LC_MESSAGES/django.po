@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-26 17:40+0200\n"
-"PO-Revision-Date: 2017-03-26 17:41+0200\n"
+"POT-Creation-Date: 2017-03-30 11:22+0200\n"
+"PO-Revision-Date: 2017-03-30 11:22+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,61 +18,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: mail/forms.py:36 mail/models.py:102
+#: mail/forms.py:40 mail/models.py:102
 msgid "All helpers and coordinators"
 msgstr "Alle Helfer und Koordinatoren"
 
-#: mail/forms.py:37 mail/models.py:106
+#: mail/forms.py:41 mail/models.py:106
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: mail/forms.py:39
+#: mail/forms.py:43
 msgid "General"
 msgstr "Allgemein"
 
-#: mail/forms.py:46 mail/models.py:109
+#: mail/forms.py:50 mail/models.py:109
 msgid "{}, Helpers and coordinators"
 msgstr "{}, Helfer und Koordinatoren"
 
-#: mail/forms.py:51 mail/models.py:112
+#: mail/forms.py:55 mail/models.py:112
 msgid "{}, Coordinators"
 msgstr "{}, Koordinatoren"
 
-#: mail/forms.py:69
+#: mail/forms.py:73
 msgid "Custom"
 msgstr "Andere Adresse"
 
-#: mail/forms.py:74
+#: mail/forms.py:78
 msgid "Receivers"
 msgstr "Empfänger"
 
-#: mail/forms.py:80 mail/templates/mail/show_mail.html:32
+#: mail/forms.py:84 mail/templates/mail/show_mail.html:32
 msgid "Reply to"
 msgstr "Antwort an"
 
-#: mail/forms.py:85
+#: mail/forms.py:89
 msgid "Custom reply to"
 msgstr "Andere Antwortadresse"
 
-#: mail/forms.py:86
+#: mail/forms.py:90
 msgid "Only used if \"Custom\" is selected above."
 msgstr "Wird nur benutzt, wenn \"Andere Adresse\" oben ausgewählt ist."
 
-#: mail/forms.py:91 mail/templates/mail/show_mail.html:28
+#: mail/forms.py:95 mail/templates/mail/show_mail.html:28
 msgid "CC"
 msgstr "CC"
 
-#: mail/forms.py:96 mail/templates/mail/list_mails.html:12
+#: mail/forms.py:100 mail/templates/mail/list_mails.html:12
 msgid "Subject"
 msgstr "Betreff"
 
-#: mail/forms.py:102
+#: mail/forms.py:106
 msgid "Text"
 msgstr "Text"
 
-#: mail/forms.py:110
+#: mail/forms.py:114
 msgid "You must specify a custom reply to address."
 msgstr "Du musst eine andere Antwortadresse angeben"
+
+#: mail/forms.py:152
+msgid "There are no helpers or coordinators that would receive this mail."
+msgstr "Es gibt keine Helfer oder Koordinatoren, die diese E-Mail empfangen würden."
 
 #: mail/templates/mail/list_mails.html:6
 msgid "All mails"

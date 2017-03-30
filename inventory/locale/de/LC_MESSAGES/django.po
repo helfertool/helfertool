@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-26 17:40+0200\n"
-"PO-Revision-Date: 2017-03-26 17:41+0200\n"
+"POT-Creation-Date: 2017-03-30 11:22+0200\n"
+"PO-Revision-Date: 2017-03-30 11:23+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: inventory/forms.py:12 inventory/models.py:44
+#: inventory/forms.py:12 inventory/models.py:47
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -26,7 +26,8 @@ msgstr "Barcode"
 msgid "There is no item with this barcode for this event."
 msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
 
-#: inventory/models.py:14 inventory/models.py:39
+#: inventory/models.py:14 inventory/models.py:42
+#: inventory/templates/inventory/admin/inventory_list.html:11
 msgid "Name"
 msgstr "Name"
 
@@ -38,14 +39,23 @@ msgstr "Verwalter des Inventars"
 msgid "Same item may be assigned to different helpers"
 msgstr "Gleicher Gegenstand darf mehreren Personen zugeordnet werden"
 
-#: inventory/models.py:123
+#: inventory/models.py:52
+msgid "Comment"
+msgstr "Kommantar"
+
+#: inventory/models.py:131
 msgid "Available inventory"
 msgstr "Verfügbares Inventar"
 
+#: inventory/templates/inventory/admin/inventory_list.html:7
 #: inventory/templates/inventory/list.html:7
 #: inventory/templates/inventory/not_active.html:6
 msgid "Inventory"
 msgstr "Inventar"
+
+#: inventory/templates/inventory/admin/inventory_list.html:12
+msgid "Admins"
+msgstr "Admins"
 
 #: inventory/templates/inventory/list.html:13
 msgid "Item"

@@ -8,6 +8,10 @@ from smtplib import SMTPException
 from .models import SentMail
 
 
+class MailFormError(Exception):
+    pass
+
+
 class MailForm(forms.Form):
     def __init__(self, *args, **kwargs):
         # get parameters
@@ -141,6 +145,12 @@ class MailForm(forms.Form):
             sentmail.cc = self.cleaned_data['cc']
 
         sentmail.save()  # save changed CC and things done in _get_helpers
+
+        if not receiver_list:
+            sentmail.failed = True
+            sentmail.save()
+            raise MailFormError(_("There are no helpers or coordinators that "
+                                  "would receive this mail."))
 
         mail = EmailMessage(subject,
                             text,
