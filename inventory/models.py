@@ -32,7 +32,7 @@ class Inventory(models.Model):
         return self.name
 
     def is_admin(self, user):
-        return user.is_superuser or user in self.admins
+        return user.is_superuser or self.admins.filter(pk=user.pk).exists()
 
 
 class Item(models.Model):

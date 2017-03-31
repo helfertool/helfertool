@@ -3,6 +3,7 @@
 {% load setting %}
 {% load bootstrap3 %}
 {% load permissions %}
+{% load inventory %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -57,7 +58,7 @@
                                 {% endblocktrans %}
                              </p>
                             <li><a href="{% url "index" %}">{% trans "Events" %}</a></li>
-                            {% if user.is_superuser or user|has_perm_group %}
+                            {% if user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
                                 <li><a href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a></li>
                             {% endif %}
                             <li><a href="{% url "change_user" %}">{% trans "Account" %}</a></li>
