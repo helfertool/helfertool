@@ -4,13 +4,13 @@ from django.shortcuts import get_object_or_404
 from registration.views.utils import nopermission
 
 from ..models import Inventory
+from ..utils import is_inventory_admin
 
 
 def any_inventory_admin_required(function):
     @login_required
     def _decorated(request, *args, **kwargs):
-        if request.user.is_superuser or \
-                Inventory.objects.filter(admins__exact=request.user).exists():
+        if request.user.is_superuser or is_inventory_admin(request.user):
             return function(request, *args, **kwargs)
         return nopermission(request)
 

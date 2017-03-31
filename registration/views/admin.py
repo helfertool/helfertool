@@ -8,6 +8,8 @@ from django.utils.translation import ugettext as _
 
 from collections import OrderedDict
 
+from inventory.utils import is_inventory_admin
+
 from .utils import nopermission, is_involved
 
 from ..decorators import archived_not_available
@@ -20,7 +22,7 @@ from ..templatetags.permissions import has_adduser_group, has_perm_group
 def admin(request, event_url_name=None):
     # check permission
     if not (is_involved(request.user, event_url_name) or
-            has_perm_group(request.user)):
+            has_perm_group(request.user) or is_inventory_admin(request.user)):
         return nopermission(request)
 
     # get event

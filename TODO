@@ -37,6 +37,7 @@ Registration
 Admin area
 ==========
 
+* move admin/base.html and a lot of other things from registration to own app
 * change order of jobs
 * sort helpers and coordinators
 * mails

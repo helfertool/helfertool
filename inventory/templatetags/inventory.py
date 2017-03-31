@@ -1,6 +1,6 @@
 from django import template
 
-from ..models import Inventory
+from ..utils import is_inventory_admin as utils_inventory_admin
 
 register = template.Library()
 
@@ -23,4 +23,4 @@ def is_inventory_admin(context, inventory):
 
 @register.filter
 def is_inventory_admin_any(user):
-    return Inventory.objects.filter(admins__exact=user).exists()
+    return utils_inventory_admin(user)

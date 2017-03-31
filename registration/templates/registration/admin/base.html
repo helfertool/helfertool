@@ -167,7 +167,7 @@
                 {% endif %}
 
             {# for superusers #}
-            {% elif user.is_superuser or user|has_perm_group %}
+            {% elif user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
                 <h2>{# for padding #}</h2>
                 <ul class="nav nav-pills nav-stacked">
                     {% if user.is_superuser or user|has_addevent_group %}
