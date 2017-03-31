@@ -140,6 +140,9 @@
 
                         {% if not event.archived %}
                             <li><a href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a></li>
+                            {% if event.ask_shirt %}
+                                <li><a href="{% url 'gifts:list_shirts' event.url_name %}">{% trans "Missing T-shirts" %}</a></li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 {% endif %}

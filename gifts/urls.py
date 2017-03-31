@@ -50,4 +50,11 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/deposit/$',
         views.list_deposit,
         name='list_deposit'),
+
+    #
+    # shirts that need to be bought
+    #
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/shirts/$',
+        views.list_shirts,
+        name='list_shirts'),
 ]

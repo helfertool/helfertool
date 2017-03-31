@@ -1,0 +1,44 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Missing T-shirts" %}</h2>
+
+    {% if shirts_not_active %}
+        <div class="alert alert-danger" role="alert">
+            {% trans "For this event no t-shirt sizes were collected." %}
+        </div>
+    {% else %}
+        {% if helpers %}
+            <table class="table">
+                <tr>
+                    {% for size, num in num_shirts.items %}
+                        <th style="width: 4em;">{{ size }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for size, num in num_shirts.items %}
+                        <td>{{ num }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+
+            <table class="table">
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Size" %}</th>
+                </tr>
+
+                {% for h in helpers %}
+                    <tr>
+                        <td><a href="{% url "view_helper" event.url_name h.pk %}">{{ h.full_name }}</a></td>
+                        <td>{{ h.shirt }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p class="text-muted">{% trans "No T-shirts are missing." %}</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

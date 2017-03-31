@@ -32,6 +32,11 @@ class HelpersGifts(models.Model):
         verbose_name=_("Helper got her T-shirt"),
     )
 
+    buy_shirt = models.BooleanField(
+        default=False,
+        verbose_name=_("Buy a T-shirt for helper"),
+    )
+
     deserved_gifts = models.ManyToManyField(
         GiftSet,
         verbose_name = _("Deserved gifts"),

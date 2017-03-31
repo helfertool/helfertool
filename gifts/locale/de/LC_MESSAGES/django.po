@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 16:49+0200\n"
-"PO-Revision-Date: 2017-03-31 16:49+0200\n"
+"POT-Creation-Date: 2017-03-31 18:01+0200\n"
+"PO-Revision-Date: 2017-03-31 18:02+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: gifts/forms/helpersgifts.py:20 gifts/templates/gifts/helper.html:33
+#: gifts/forms/helpersgifts.py:20 gifts/templates/gifts/helper.html:34
 msgid "Delivered"
 msgstr "Ausgegeben"
 
 #: gifts/forms/helpersgifts.py:25 gifts/models/deservedgiftset.py:27
-#: gifts/templates/gifts/helper.html:40
+#: gifts/templates/gifts/helper.html:41
 msgid "Present"
 msgstr "Anwesend"
 
@@ -34,6 +34,7 @@ msgstr "Helfer hat Geschenk erhalten"
 #: gifts/models/gift.py:12 gifts/models/set.py:16
 #: gifts/templates/gifts/list.html:11 gifts/templates/gifts/list.html:38
 #: gifts/templates/gifts/list_deposit.html:11
+#: gifts/templates/gifts/list_shirts.html:29
 msgid "Name"
 msgstr "Name"
 
@@ -50,6 +51,10 @@ msgid "Helper got her T-shirt"
 msgstr "Helfer hat T-Shirt erhalten"
 
 #: gifts/models/helpersgifts.py:37
+msgid "Buy a T-shirt for helper"
+msgstr "T-Shirt für Helfer kaufen"
+
+#: gifts/models/helpersgifts.py:42
 msgid "Deserved gifts"
 msgstr "Verdiente Geschenke"
 
@@ -67,7 +72,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:65
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:66
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -104,19 +109,19 @@ msgstr "Willst du dieses Geschenkset löschen?"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/helper.html:82
+#: gifts/templates/gifts/helper.html:83
 msgid "Save"
 msgstr "Speichern"
 
-#: gifts/templates/gifts/helper.html:54
+#: gifts/templates/gifts/helper.html:55
 msgid "No gifts"
 msgstr "Keine Geschenke"
 
-#: gifts/templates/gifts/helper.html:66
+#: gifts/templates/gifts/helper.html:67
 msgid "Given"
 msgstr "Ausgegeben"
 
-#: gifts/templates/gifts/helper.html:67
+#: gifts/templates/gifts/helper.html:68
 msgid "Total"
 msgstr "Insgesamt"
 
@@ -147,6 +152,22 @@ msgstr "Gesammeltes Pfand"
 #: gifts/templates/gifts/list_deposit.html:23
 msgid "No deposit has to be returned."
 msgstr "Es muss kein Pfand mehr zurückgegeben werden."
+
+#: gifts/templates/gifts/list_shirts.html:6
+msgid "Missing T-shirts"
+msgstr "Fehlende T-Shirts"
+
+#: gifts/templates/gifts/list_shirts.html:10
+msgid "For this event no t-shirt sizes were collected."
+msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
+
+#: gifts/templates/gifts/list_shirts.html:30
+msgid "Size"
+msgstr "Größe"
+
+#: gifts/templates/gifts/list_shirts.html:41
+msgid "No T-shirts are missing."
+msgstr "Es fehlen keine T-Shirts."
 
 #: gifts/templates/gifts/not_active.html:9
 msgid "The management of gifts is not actived."
