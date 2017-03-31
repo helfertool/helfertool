@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 00:01+0200\n"
-"PO-Revision-Date: 2017-03-30 16:08+0200\n"
+"POT-Creation-Date: 2017-03-31 16:49+0200\n"
+"PO-Revision-Date: 2017-03-31 16:49+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -1412,7 +1412,7 @@ msgstr "Du hast deine E-Mail Adresse bestätigt."
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
-#: registration/views/admin.py:60
+#: registration/views/admin.py:62
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Nutzer %(username)s hinzugefügt"

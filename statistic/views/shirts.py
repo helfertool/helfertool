@@ -14,11 +14,9 @@ class JobShirts:
     def __init__(self, shirt_choices):
         self.shifts = OrderedDict()
         self.total = OrderedDict()
-        self.coordinators = OrderedDict()
 
         for size, name in shirt_choices:
             self.total.update({name: 0})
-            self.coordinators.update({name: 0})
 
 
 @login_required
@@ -40,21 +38,30 @@ def shirts(request, event_url_name):
     size_names = [name for size, name in shirt_choices]
 
     # shirt sizes
-    helper_shirts = event.helper_set.values('shirt').annotate(
+    total_shirts_query = event.helper_set.values('shirt').annotate(
+        num=Count('shirt'))
+    coordinator_shirts_query = event.all_coordinators.values('shirt').annotate(
         num=Count('shirt'))
 
     # total numbers (iterate over all sizes in correct order)
     total_shirts = OrderedDict()
+    coordinator_shirts = OrderedDict()
     for size, name in shirt_choices:
-        num = 0
+        num_total = 0
+        num_coordinator = 0
 
-        # get size for helpers
         try:
-            num = helper_shirts.get(shirt=size)['num']
+            num_total = total_shirts_query.get(shirt=size)['num']
         except Helper.DoesNotExist:
             pass
 
-        total_shirts.update({name: num})
+        try:
+            num_coordinator = coordinator_shirts_query.get(shirt=size)['num']
+        except Helper.DoesNotExist:
+            pass
+
+        total_shirts.update({name: num_total})
+        coordinator_shirts.update({name: num_coordinator})
 
     # for each job
     job_shirts = OrderedDict()
@@ -75,5 +82,6 @@ def shirts(request, event_url_name):
     context = {'event': event,
                'size_names': size_names,
                'total_shirts': total_shirts,
+               'coordinator_shirts': coordinator_shirts,
                'job_shirts': job_shirts}
     return render(request, 'statistic/shirts.html', context)

@@ -13,13 +13,19 @@
         <table class="table">
             <tr>
                 <th style="width: 10em;"></th>
-                {% for size, num in total_shirts.items %}
-                    <th>{{ size }}</th>
+                {% for size in size_names %}
+                    <th style="width: 4em;">{{ size }}</th>
                 {% endfor %}
             </tr>
             <tr>
-                <td></td>
+                <td>{% trans "Helpers and coordinators" %}</td>
                 {% for size, num in total_shirts.items %}
+                    <td>{{ num }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>{% trans "Coordinators" %}</td>
+                {% for size, num in coordinator_shirts.items %}
                     <td>{{ num }}</td>
                 {% endfor %}
             </tr>
@@ -27,6 +33,11 @@
     {% endif %}
 
     <h3>{% trans "Helpers (without coordinators)" %}</h3>
+
+    <div class="alert alert-info">
+        <strong>{% trans "Info:" %}</strong>
+        {% trans "The T-shirt of a helper is counted for the first shift." %}
+    </div>
 
     {% for job,data in job_shirts.items %}
         {% is_job_admin job as job_admin %}

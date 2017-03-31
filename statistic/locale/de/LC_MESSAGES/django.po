@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 00:01+0200\n"
-"PO-Revision-Date: 2017-03-26 17:41+0200\n"
+"POT-Creation-Date: 2017-03-31 16:49+0200\n"
+"PO-Revision-Date: 2017-03-31 16:49+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -35,10 +35,12 @@ msgid "hours"
 msgstr "Stunden"
 
 #: statistic/templates/statistic/overview.html:19
+#: statistic/templates/statistic/shirts.html:21
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
 #: statistic/templates/statistic/overview.html:23
+#: statistic/templates/statistic/shirts.html:27
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
@@ -64,15 +66,23 @@ msgid "T-Shirts"
 msgstr "T-Shirts"
 
 #: statistic/templates/statistic/shirts.html:11
-#: statistic/templates/statistic/shirts.html:54
+#: statistic/templates/statistic/shirts.html:65
 msgid "Total"
 msgstr "Insgesamt"
 
-#: statistic/templates/statistic/shirts.html:29
+#: statistic/templates/statistic/shirts.html:35
 msgid "Helpers (without coordinators)"
 msgstr "Helfer (ohne Koordinatoren)"
 
 #: statistic/templates/statistic/shirts.html:38
+msgid "Info:"
+msgstr "Hinweis:"
+
+#: statistic/templates/statistic/shirts.html:39
+msgid "The T-shirt of a helper is counted for the first shift."
+msgstr "Das T-Shirt eines Helfers wird zur ersten Schicht gezählt."
+
+#: statistic/templates/statistic/shirts.html:49
 msgid "Shift"
 msgstr "Schicht"
 

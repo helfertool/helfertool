@@ -278,15 +278,16 @@ class Event(models.Model):
 
     @property
     def all_coordinators(self):
-        result = []
+        return self.helper_set.filter(job__isnull=False)
+        #result = []
 
-        # iterate over jobs
-        for job in self.job_set.all():
-            for c in job.coordinators.all():
-                if c not in result:
-                    result.append(c)
+        ## iterate over jobs
+        #for job in self.job_set.all():
+        #    for c in job.coordinators.all():
+        #        if c not in result:
+        #            result.append(c)
 
-        return result
+        #return result
 
 
 @receiver(post_save, sender=Event, dispatch_uid='event_saved')
@@ -313,14 +314,6 @@ def event_saved(sender, instance, using, **kwargs):
 
                 job.badge_defaults = defaults
                 job.save()
-
-        # badge for coordinators
-        # TODO: should not be necessary?
-        for coordinator in instance.all_coordinators:
-            if not hasattr(coordinator, 'badge'):
-                badge = Badge()
-                badge.helper = coordinator
-                badge.save()
 
         # badge for helpers
         for helper in instance.helper_set.all():
