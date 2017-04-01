@@ -61,12 +61,10 @@ Badges
 Gifts
 =====
 
-* set present flag for complete shifts
+* show all helpers of shift -> select if present (and gift given?)
 * add flags to excel export
 * condition for getting t-shirt (number of shifts or hours)
-* show all helpers of shift -> select if present and gift given
 * default gift sets
-* disable got_shirt and buy_shirt is event.ask_shirt is not set
 
 
 File uploads

@@ -12,6 +12,10 @@ class HelpersGiftsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(HelpersGiftsForm, self).__init__(*args, **kwargs)
 
+        if not self.instance.helper.event.ask_shirt:
+            self.fields.pop('got_shirt')
+            self.fields.pop('buy_shirt')
+
         for giftset in self.instance.deservedgiftset_set.all():
             delivered_id_str = "delivered_{}".format(giftset.pk)
             present_id_str = "present_{}".format(giftset.pk)

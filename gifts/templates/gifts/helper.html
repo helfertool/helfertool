@@ -11,8 +11,11 @@
         <div class="col-xs-12 col-lg-5">
             {% bootstrap_field form.deposit %}
             {% bootstrap_field form.deposit_returned %}
-            {% bootstrap_field form.got_shirt %}
-            {% bootstrap_field form.buy_shirt %}
+
+            {% if helper.event.ask_shirt %}
+                {% bootstrap_field form.got_shirt %}
+                {% bootstrap_field form.buy_shirt %}
+            {% endif %}
         </div>
     </div>
 
