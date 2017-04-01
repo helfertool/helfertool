@@ -2,7 +2,6 @@ Important
 ==========
 
 * clean: .get(...) instead of [...]
-* fix merge
 * resend confirmation mail
 * allow empty mail addresses for internal registrations
 

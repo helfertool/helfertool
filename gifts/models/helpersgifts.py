@@ -105,3 +105,32 @@ class HelpersGifts(models.Model):
             self.accomplished_shifts.remove(shift)
         elif not current_present and present:
             self.accomplished_shifts.add(shift)
+
+    def merge(self, other_gifts):
+        # handle not returned deposit
+        if other_gifts.deposit:
+            # both have same state -> add
+            if self.deposit_returned == other_gifts.deposit_returned:
+                self.deposit += other_gifts.deposit
+            # other not returned -> overwrite own deposit
+            elif self.deposit_returned and not other_gifts.deposit_returned:
+                self.deposit = other_gifts.deposit
+                self.deposit_returned = False
+
+        # shirt flags
+        if other_gifts.got_shirt:
+            self.got_shirt = True
+
+        if other_gifts.buy_shirt:
+            self.buy_shirt = True
+
+        # deserved gifts
+        for gift in DeservedGiftSet.objects.filter(helper=other_gifts):
+            gift.helper = self
+            gift.save()
+
+        # accomplished shifts
+        for shift in other_gifts.accomplished_shifts.all():
+            self.set_present(shift, True)
+
+        self.save()
