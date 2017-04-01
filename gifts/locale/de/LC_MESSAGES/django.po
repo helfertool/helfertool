@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-31 18:01+0200\n"
+"POT-Creation-Date: 2017-04-01 22:36+0200\n"
 "PO-Revision-Date: 2017-03-31 18:02+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -18,12 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: gifts/forms/helpersgifts.py:20 gifts/templates/gifts/helper.html:34
+#: gifts/forms/helpersgifts.py:23 gifts/templates/gifts/helper.html:46
 msgid "Delivered"
 msgstr "Ausgegeben"
 
-#: gifts/forms/helpersgifts.py:25 gifts/models/deservedgiftset.py:27
-#: gifts/templates/gifts/helper.html:41
+#: gifts/forms/helpersgifts.py:30 gifts/templates/gifts/helper.html:35
 msgid "Present"
 msgstr "Anwesend"
 
@@ -72,7 +71,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:66
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:71
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -109,19 +108,19 @@ msgstr "Willst du dieses Geschenkset löschen?"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/helper.html:83
+#: gifts/templates/gifts/helper.html:88
 msgid "Save"
 msgstr "Speichern"
 
-#: gifts/templates/gifts/helper.html:55
+#: gifts/templates/gifts/helper.html:60
 msgid "No gifts"
 msgstr "Keine Geschenke"
 
-#: gifts/templates/gifts/helper.html:67
+#: gifts/templates/gifts/helper.html:72
 msgid "Given"
 msgstr "Ausgegeben"
 
-#: gifts/templates/gifts/helper.html:68
+#: gifts/templates/gifts/helper.html:73
 msgid "Total"
 msgstr "Insgesamt"
 

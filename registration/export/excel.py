@@ -49,7 +49,7 @@ def escape(payload):
     return payload
 
 
-def xlsx(buffer, event, jobs):
+def xlsx(buffer, event, jobs, date):
     """ Exports the helpers for given jobs of an event as excel spreadsheet.
 
     Parameter:
@@ -118,7 +118,7 @@ def xlsx(buffer, event, jobs):
         row.next()
 
         # coordinators
-        if job.coordinators.count() > 0:
+        if not date and job.coordinators.exists():
             worksheet.merge_range(row.next(), 0, row.get(), last_column,
                                   _("Coordinators"), bold)
             add_helpers(worksheet, row, column, event, job,
@@ -126,6 +126,9 @@ def xlsx(buffer, event, jobs):
 
         # show all shifts
         for shift in job.shift_set.order_by('begin'):
+            if date and shift.begin.date() != date:
+                continue
+
             worksheet.merge_range(row.next(), 0, row.get(),
                                   last_column, shift.time(), bold)
             add_helpers(worksheet, row, column, event, job,

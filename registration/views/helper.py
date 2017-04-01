@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models.functions import TruncDate
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
@@ -13,7 +14,6 @@ from ..forms import HelperForm, HelperDeleteForm, \
     HelperAddCoordinatorForm, HelperSearchForm
 from ..decorators import archived_not_available
 
-from badges.forms import BadgeForm
 from gifts.forms import HelpersGiftsForm
 
 
@@ -38,8 +38,14 @@ def helpers(request, event_url_name, job_pk=None):
     if not event.is_involved(request.user):
         return nopermission(request)
 
+    # list of days with shifts
+    days = Shift.objects.filter(job__event=event) \
+        .annotate(day=TruncDate('begin')).values_list('day', flat=True) \
+        .order_by('day').distinct()
+
     # overview over jobs
-    context = {'event': event}
+    context = {'event': event,
+               'days': days}
     return render(request, 'registration/admin/helpers.html', context)
 
 
@@ -67,7 +73,7 @@ def view_helper(request, event_url_name, helper_pk):
         helper.gifts.update()
 
         gifts_form = HelpersGiftsForm(request.POST or None,
-                                     instance=helper.gifts)
+                                      instance=helper.gifts)
 
         if gifts_form.is_valid():
             gifts_form.save()
@@ -80,7 +86,7 @@ def view_helper(request, event_url_name, helper_pk):
                'helper': helper,
                'edit_badge': edit_badge,
                'return_to_job': return_to_job,
-               'gifts_form': gifts_form,}
+               'gifts_form': gifts_form}
     return render(request, 'registration/admin/view_helper.html', context)
 
 

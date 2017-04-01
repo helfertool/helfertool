@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
+from django.utils.dateparse import parse_date
 
 from io import BytesIO
 
 from .utils import nopermission
 
-from ..models import Event, Job
+from ..models import Event, Job, Shift
 from ..utils import escape_filename
 from ..export.excel import xlsx
 from ..export.pdf import pdf
@@ -15,7 +16,7 @@ from ..decorators import archived_not_available
 
 @login_required
 @archived_not_available
-def export(request, event_url_name, type, job_pk=None):
+def export(request, event_url_name, type, job_pk=None, date_str=None):
     # check for valid export type
     if type not in ["excel", "pdf"]:
         raise Http404
@@ -41,6 +42,21 @@ def export(request, event_url_name, type, job_pk=None):
         jobs = event.job_set.all()
         filename = event.name
 
+    # parse date
+    date = None
+    if date_str:
+        try:
+            date = parse_date(date_str)
+        except ValueError:
+            raise Http404
+
+        # check if there are any shifts with this start date
+        if not Shift.objects.filter(job__in=jobs, begin__date=date).exists():
+            raise Http404
+
+        filename = "{} - {}_{:02d}_{:02d}".format(filename, date.year,
+                                                  date.month, date.day)
+
     # escape filename
     filename = escape_filename(filename)
 
@@ -52,11 +68,11 @@ def export(request, event_url_name, type, job_pk=None):
         filename = "%s.xlsx" % filename
         content_type = "application/vnd.openxmlformats-officedocument" \
                        ".spreadsheetml.sheet"
-        xlsx(buffer, event, jobs)
+        xlsx(buffer, event, jobs, date)
     elif type == 'pdf':
         filename = "%s.pdf" % filename
         content_type = 'application/pdf'
-        pdf(buffer, event, jobs)
+        pdf(buffer, event, jobs, date)
 
     # start http response
     response = HttpResponse(content_type=content_type)

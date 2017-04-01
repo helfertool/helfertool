@@ -19,14 +19,42 @@
     {% if admin and not event.archived %}
         <p>
             {% bootstrap_icon "download-alt" %}
-            &nbsp;{% trans "Export" %}:
-            &nbsp;<a href="{% url 'export' event.url_name 'excel' %}" class="icon">
+            &nbsp;
+            {% trans "Export" %}:
+            &nbsp;
+            <a href="{% url 'export' event.url_name 'excel' %}" class="icon">
                 <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
             </a>
-            &nbsp;<a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
+            &nbsp;
+            <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
                 <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
             </a>
+            &nbsp;
+            <a class="btn btn-sm btn-default" data-toggle="collapse" href="#exportdays">
+                {% trans "Export single days" %}
+            </a>
         </p>
+        <div id="exportdays" class="collapse">
+            <table class="table" style="width: auto;">
+                {% for day in days %}
+                    <tr>
+                        <th>{{ day }}</th>
+                        {% with day_str=day|date:"Y-m-d" %}
+                        <td>
+                            <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon">
+                                <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
+                                <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+                            </a>
+                        </td>
+                        {% endwith %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% endif %}
 
     {% for job in event.job_set.all %}

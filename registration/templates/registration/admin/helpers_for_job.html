@@ -14,11 +14,14 @@
 
     <p>
         {% bootstrap_icon "download-alt" %}
-        &nbsp;{% trans "Export" %}:
-        &nbsp;<a href="{% url 'jobexport' event.url_name 'excel' job.pk %}" class="icon">
+        &nbsp;
+        {% trans "Export" %}:
+        &nbsp;
+        <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon">
             <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
         </a>
-        &nbsp;<a href="{% url 'jobexport' event.url_name 'pdf' job.pk %}" class="icon">
+        &nbsp;
+        <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
             <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
         </a>
     </p>
@@ -40,6 +43,23 @@
     {# iterate over days #}
     {% for day, shifts in job.shifts_by_day.items %}
         <h3>{{ day }}</h3>
+
+        <p>
+            {% with day_str=day|date:"Y-m-d" %}
+                {% bootstrap_icon "download-alt" %}
+                &nbsp;
+                {% blocktrans with day=day %}Export for {{ day }}{% endblocktrans %}:
+                &nbsp;
+                <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon">
+                    <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+                </a>
+                &nbsp;
+                <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
+                    <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+                </a>
+            {% endwith %}
+        </p>
+
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
             <h4>{{ shift.time_hours }}

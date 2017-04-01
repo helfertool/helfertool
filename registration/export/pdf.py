@@ -62,7 +62,7 @@ def table_of_helpers(elements, helpers, event):
     add_table(elements, data, spaces)
 
 
-def pdf(buffer, event, jobs):
+def pdf(buffer, event, jobs, date):
     doc = SimpleDocTemplate(buffer, topMargin=margin, rightMargin=margin,
                             bottomMargin=margin, leftMargin=margin)
     doc.pagesize = A4
@@ -77,7 +77,7 @@ def pdf(buffer, event, jobs):
         elements.append(heading)
 
         # coordinators
-        if job.coordinators.count() > 0:
+        if not date and job.coordinators.exists():
             heading = h2(_("Coordinators"))
             elements.append(heading)
 
@@ -85,6 +85,9 @@ def pdf(buffer, event, jobs):
 
         # iterate over shifts
         for shift in job.shift_set.all():
+            if date and shift.begin.date() != date:
+                continue
+
             heading = h2(shift.time_with_day())
             elements.append(heading)
 

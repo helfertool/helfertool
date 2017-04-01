@@ -201,10 +201,20 @@ urlpatterns = [
         views.export,
         name='export'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all/'
+         '(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        views.export,
+        name='export_date'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/'
         '(?P<job_pk>[0-9]+)/$',
         views.export,
-        name='jobexport'),
+        name='export_job'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/'
+        '(?P<job_pk>[0-9]+)/(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        views.export,
+        name='export_job_date'),
 
     # summaries
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$',
