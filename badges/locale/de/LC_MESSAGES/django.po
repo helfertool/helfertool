@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-01 22:36+0200\n"
-"PO-Revision-Date: 2017-03-31 16:49+0200\n"
+"POT-Creation-Date: 2017-04-01 23:51+0200\n"
+"PO-Revision-Date: 2017-04-01 23:52+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -378,6 +378,18 @@ msgstr "Warnungen für die Badge Generierung"
 #: badges/templates/badges/warnings.html:9
 msgid "There are no warnings."
 msgstr "Es gibt keine Warnungen."
+
+#: badges/templates/badges/warnings.html:12
+msgid "Info:"
+msgstr "Hinweis:"
+
+#: badges/templates/badges/warnings.html:13
+msgid ""
+"The listed persons have more than one job, so you have to select the primary "
+"job in the badge settings."
+msgstr ""
+"Die aufgelisteten Personen haben mehr als eine Aufgabe, daher musst du in "
+"den Badge Einstellungen eine primäre Aufgabe auswählen."
 
 #: badges/views/generate.py:176
 msgid "{} (only unregistered)"
