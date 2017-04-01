@@ -5,7 +5,6 @@ from django.db import models
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.template.loader import get_template
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 import uuid
@@ -17,7 +16,6 @@ from .event import Event
 from .job import Job
 
 
-@python_2_unicode_compatible
 class Helper(models.Model):
     """ Helper in one or more shifts.
 
