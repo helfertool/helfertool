@@ -54,6 +54,10 @@ def export(request, event_url_name, type, job_pk=None, date_str=None):
         if not Shift.objects.filter(job__in=jobs, begin__date=date).exists():
             raise Http404
 
+        # if all jobs are shown, exclude all jobs without shifts on this day
+        if not job_pk:
+            jobs = jobs.filter(shift__begin__date=date)
+
         filename = "{} - {}_{:02d}_{:02d}".format(filename, date.year,
                                                   date.month, date.day)
 
