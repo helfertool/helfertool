@@ -1,7 +1,6 @@
 Important
 ==========
 
-* clean: .get(...) instead of [...]
 * resend confirmation mail
 * allow empty mail addresses for internal registrations
 

@@ -109,18 +109,18 @@ class MailForm(forms.Form):
     def clean(self):
         cleaned_data = super(MailForm, self).clean()
 
-        if cleaned_data["reply_to"] == "-" and \
-                not cleaned_data["custom_reply_to"]:
+        if cleaned_data.get("reply_to") == "-" and \
+                not cleaned_data.get("custom_reply_to"):
             raise forms.ValidationError(_("You must specify a custom reply "
                                           "to address."))
 
     def send_mail(self):
-        subject = self.cleaned_data['subject']
-        text = self.cleaned_data['text']
+        subject = self.cleaned_data.get('subject')
+        text = self.cleaned_data.get('text')
 
-        reply_to = self.cleaned_data['reply_to']
+        reply_to = self.cleaned_data.get('reply_to')
         if reply_to == "-":
-            reply_to = self.cleaned_data['custom_reply_to']
+            reply_to = self.cleaned_data.get('custom_reply_to')
 
         # model for log
         sentmail = SentMail.objects.create(
@@ -140,9 +140,9 @@ class MailForm(forms.Form):
 
         # CC
         cc = []
-        if self.cleaned_data['cc']:
-            cc = [self.cleaned_data['cc'], ]
-            sentmail.cc = self.cleaned_data['cc']
+        if self.cleaned_data.get('cc'):
+            cc = [self.cleaned_data.get('cc'), ]
+            sentmail.cc = self.cleaned_data.get('cc')
 
         sentmail.save()  # save changed CC and things done in _get_helpers
 
@@ -168,7 +168,7 @@ class MailForm(forms.Form):
             raise
 
     def _get_helpers(self, sentmail):
-        receiver_list = self.cleaned_data['receiver']
+        receiver_list = self.cleaned_data.get('receiver')
 
         tmp = []
 

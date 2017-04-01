@@ -89,13 +89,13 @@ class HelperAddShiftForm(forms.Form):
         if 'shifts' not in self.cleaned_data:
             raise ValidationError(_("No shifts selected"))
 
-        for shift in self.cleaned_data['shifts']:
+        for shift in self.cleaned_data.get('shifts'):
             if shift.is_full():
                 raise ValidationError(_("This shift if already full: "
                                         "%(shift)s") % {'shift': u(shift)})
 
     def save(self):
-        for shift in self.cleaned_data['shifts']:
+        for shift in self.cleaned_data.get('shifts'):
             self.helper.shifts.add(shift)
         self.helper.save()
 
@@ -127,7 +127,7 @@ class HelperAddCoordinatorForm(forms.Form):
             queryset=jobs, required=True)
 
     def save(self, commit=True):
-        for job in self.cleaned_data['jobs']:
+        for job in self.cleaned_data.get('jobs'):
             job.coordinators.add(self.helper)
             job.save()
 
@@ -170,11 +170,11 @@ class HelperDeleteForm(forms.ModelForm):
                                       % {'jobname': shift.job.name})
 
     def get_deleted_shifts(self):
-        return self.cleaned_data['shifts']
+        return self.cleaned_data.get('shifts')
 
     def delete(self):
         # delete all selected shifts
-        for shift in self.cleaned_data['shifts']:
+        for shift in self.cleaned_data.get('shifts'):
             self.instance.shifts.remove(shift)
 
 
@@ -210,7 +210,7 @@ class HelperSearchForm(forms.Form):
         super(HelperSearchForm, self).__init__(*args, **kwargs)
 
     def get(self):
-        p = self.cleaned_data['pattern']
+        p = self.cleaned_data.get('pattern')
 
         data = self.event.helper_set.filter(Q(firstname__icontains=p) |
                                             Q(surname__icontains=p) |

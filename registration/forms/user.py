@@ -42,8 +42,9 @@ class CreateUserForm(UserCreationForm):
 
     def clean(self):
         # add '@' to the beginning
-        if not self.cleaned_data['username'].startswith('@'):
-            self.cleaned_data['username'] = '@' + self.cleaned_data['username']
+        if not self.cleaned_data.get('username').startswith('@'):
+            self.cleaned_data['username'] = '@' + \
+                self.cleaned_data.get('username')
 
         return super(CreateUserForm, self).clean()
 
@@ -51,9 +52,9 @@ class CreateUserForm(UserCreationForm):
         user = super(CreateUserForm, self).save(commit=False)
 
         # change mail and name
-        user.email = self.cleaned_data["email"]
-        user.first_name = self.cleaned_data["first_name"]
-        user.last_name = self.cleaned_data["last_name"]
+        user.email = self.cleaned_data.get("email")
+        user.first_name = self.cleaned_data.get("first_name")
+        user.last_name = self.cleaned_data.get("last_name")
 
         if commit:
             user.save()

@@ -142,20 +142,21 @@ class RegisterForm(forms.ModelForm):
                                     "the event is archived."))
 
         # check if helper if full age
-        if self.ask_full_age and not self.cleaned_data['full_age']:
+        if self.ask_full_age and not self.cleaned_data.get('full_age'):
             raise ValidationError(_("You must be full aged. We are not "
                                     "allowed to accept helpers that are under "
                                     "18 years old."))
 
         # check if the data privacy statement was accepted
-        if not self.internal and not self.cleaned_data['privacy_statement']:
+        if not self.internal and not \
+                self.cleaned_data.get('privacy_statement'):
             raise ValidationError(_("You have to accept the data privacy "
                                     "statement."))
 
         number_of_shifts = 0
         infection_instruction_needed = False
 
-        selected_shifts = list(filter(lambda s: self.cleaned_data[s],
+        selected_shifts = list(filter(lambda s: self.cleaned_data.get(s),
                                       self.shifts))
 
         # iterate over all (selected) shifts
@@ -185,7 +186,7 @@ class RegisterForm(forms.ModelForm):
 
         # infection instruction needed but field not set?
         if (infection_instruction_needed and
-                self.cleaned_data['infection_instruction'] == ""):
+                self.cleaned_data.get('infection_instruction') == ""):
             self.add_error('infection_instruction',
                            _("You must specify, if you have a instruction for "
                              "the handling of food."))
@@ -221,7 +222,7 @@ class RegisterForm(forms.ModelForm):
         instance.save()
 
         for shift in self.shifts:
-            if self.cleaned_data[shift]:
+            if self.cleaned_data.get(shift):
                 new_shift = Shift.objects.get(pk=self.shifts[shift])
                 instance.shifts.add(new_shift)
 
@@ -229,7 +230,7 @@ class RegisterForm(forms.ModelForm):
             instance.save()
 
         # add to news
-        if self.ask_news and self.cleaned_data['news']:
-            news_add_email(self.cleaned_data['email'])
+        if self.ask_news and self.cleaned_data.get('news'):
+            news_add_email(self.cleaned_data.get('email'))
 
         return instance

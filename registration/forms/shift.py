@@ -43,7 +43,7 @@ class ShiftForm(forms.ModelForm):
             raise ValidationError(_("The end of the shift must be set."))
 
         # check times
-        if self.cleaned_data['begin'] > self.cleaned_data['end']:
+        if self.cleaned_data.get('begin') > self.cleaned_data.get('end'):
             raise ValidationError(_("The begin of the shift must be before "
                                     "the end."))
 
