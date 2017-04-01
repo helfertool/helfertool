@@ -25,9 +25,18 @@
                 <table class="shifts">
                     {% for shift in helper.shifts.all|dictsort:"begin" %}
                         <tr>
-                            <th style="vertical-align:top;">{{ shift }}</th>
-                            {% gifts_for_shift form shift as deserved_gifts %}
+                            <th style="vertical-align:top;">
+                                {{ shift }}
 
+                                <br /><br />
+
+                                {{ form | lookup_deservedgiftset_present:shift.pk }}
+                                <label>
+                                    {% trans "Present" %}
+                                </label>
+                            </th>
+
+                            {% gifts_for_shift form shift as deserved_gifts %}
                             {% if deserved_gifts %}
                                 {% for deserved_gift in deserved_gifts %}
                                     <td>
@@ -35,13 +44,6 @@
                                             {{ form | lookup_deservedgiftset_delivered:deserved_gift.pk }}
                                             <label>
                                                 {% trans "Delivered" %}
-                                            </label>
-
-                                            <br />
-
-                                            {{ form | lookup_deservedgiftset_present:deserved_gift.pk }}
-                                            <label>
-                                                {% trans "Present" %}
                                             </label>
                                         </div>
 

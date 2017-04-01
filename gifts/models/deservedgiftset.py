@@ -23,11 +23,6 @@ class DeservedGiftSet(models.Model):
         default = False,
     )
 
-    present = models.BooleanField(
-        verbose_name = _("Present"),
-        default = False,
-    )
-
     shift = models.ForeignKey(
         'registration.Shift',
         on_delete = models.CASCADE,

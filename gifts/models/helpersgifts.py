@@ -44,6 +44,11 @@ class HelpersGifts(models.Model):
         through = DeservedGiftSet,
     )
 
+    accomplished_shifts = models.ManyToManyField(
+        'registration.Shift',
+        blank = True,
+    )
+
     def update(self):
         # TODO: race conditions possible?
 
@@ -89,3 +94,14 @@ class HelpersGifts(models.Model):
                     result[name]['given'] += included_gift.count
 
         return result
+
+    def get_present(self, shift):
+        return self.accomplished_shifts.filter(pk=shift.pk).exists()
+
+    def set_present(self, shift, present):
+        current_present = self.get_present(shift)
+
+        if current_present and not present:
+            self.accomplished_shifts.remove(shift)
+        elif not current_present and present:
+            self.accomplished_shifts.add(shift)
