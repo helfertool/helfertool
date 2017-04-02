@@ -10,6 +10,7 @@ Django things
 
 * all vs. distinct
 * add errors to all forms
+* use redirect function
 
 
 Design, JS
@@ -58,7 +59,6 @@ Badges
 Gifts
 =====
 
-* show all helpers of shift -> select if present (and gift given?)
 * add flags to excel export
 * condition for getting t-shirt (number of shifts or hours)
 * default gift sets

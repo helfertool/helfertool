@@ -57,4 +57,12 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/shirts/$',
         views.list_shirts,
         name='list_shirts'),
+
+    #
+    # set present flag for complete shifts
+    #
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/present/'
+         '(?P<shift_pk>[0-9]+)/$',
+        views.set_present,
+        name='set_present'),
 ]

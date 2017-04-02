@@ -71,6 +71,15 @@
                 {% endif %}
             </h4>
 
+            {% if event.gifts %}
+            <p>
+                <a href="{% url "gifts:set_present" event.url_name shift.pk %}">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    {% trans "Set attendance for complete shift" %}
+                </a>
+            </p>
+            {% endif %}
+
             {% if shift.helper_set.count == 0 %}
                 <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
             {% else %}
