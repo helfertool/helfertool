@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-01 23:51+0200\n"
-"PO-Revision-Date: 2017-03-31 18:02+0200\n"
+"POT-Creation-Date: 2017-04-02 13:59+0200\n"
+"PO-Revision-Date: 2017-04-02 14:00+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -109,6 +109,7 @@ msgstr "Willst du dieses Geschenkset löschen?"
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
 #: gifts/templates/gifts/helper.html:88
+#: gifts/templates/gifts/set_present.html:20
 msgid "Save"
 msgstr "Speichern"
 
@@ -172,10 +173,22 @@ msgstr "Es fehlen keine T-Shirts."
 msgid "The management of gifts is not actived."
 msgstr "Die Verwaltung von Geschenken ist nicht aktiviert."
 
+#: gifts/templates/gifts/set_present.html:6
+msgid "Attendance for shift"
+msgstr "Anwesenheit für Schicht"
+
+#: gifts/templates/gifts/set_present.html:11
+msgid "Set all to attendant"
+msgstr "Alle auf anwesend setzen"
+
 #: gifts/views/gift.py:84
 #, python-format
 msgid "Gift deleted: %(name)s"
 msgstr "Geschenk gelöscht: %(name)s"
+
+#: gifts/views/present.py:34
+msgid "Attendance was saved"
+msgstr "Anwesenheit wurde gespeichert"
 
 #: gifts/views/set.py:80
 #, python-format

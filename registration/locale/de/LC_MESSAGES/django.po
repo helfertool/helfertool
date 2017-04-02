@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-01 23:51+0200\n"
-"PO-Revision-Date: 2017-04-01 22:36+0200\n"
+"POT-Creation-Date: 2017-04-02 13:59+0200\n"
+"PO-Revision-Date: 2017-04-02 14:00+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -88,7 +88,7 @@ msgid "Name"
 msgstr "Name"
 
 #: registration/export/pdf.py:97
-#: registration/templates/registration/admin/helpers_for_job.html:75
+#: registration/templates/registration/admin/helpers_for_job.html:84
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
@@ -498,7 +498,7 @@ msgstr ""
 "bitte an:"
 
 #: registration/templates/registration/admin/add_helper.html:6
-#: registration/templates/registration/admin/helpers_for_job.html:84
+#: registration/templates/registration/admin/helpers_for_job.html:93
 msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
@@ -1092,6 +1092,10 @@ msgstr "Export für den %(day)s"
 #, python-format
 msgid "(%(current)s of %(total)s)"
 msgstr "(%(current)s von %(total)s)"
+
+#: registration/templates/registration/admin/helpers_for_job.html:78
+msgid "Set attendance for complete shift"
+msgstr "Anwesenheit für komplette Schicht setzen"
 
 #: registration/templates/registration/admin/helpers_table.html:32
 msgid "Registration time"
