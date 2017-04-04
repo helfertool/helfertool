@@ -71,7 +71,7 @@
                 {% endif %}
             </h4>
 
-            {% if event.gifts %}
+            {% if event.gifts and is_admin %}
             <p>
                 <a href="{% url "gifts:set_present" event.url_name shift.pk %}">
                     <i class="fa fa-check-square-o" aria-hidden="true"></i>

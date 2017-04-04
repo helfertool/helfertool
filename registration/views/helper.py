@@ -29,8 +29,10 @@ def helpers(request, event_url_name, job_pk=None):
         if not job.is_admin(request.user):
             return nopermission(request)
 
+        is_admin = event.is_admin(request.user)
+
         # show list of helpers
-        context = {'event': event, 'job': job}
+        context = {'event': event, 'job': job, 'is_admin': is_admin}
         return render(request, 'registration/admin/helpers_for_job.html',
                       context)
 
