@@ -220,11 +220,11 @@ DATABASES = {
 
 # Celery backend
 # redis
-# BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
 # CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # rabbitmq
-BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
+CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
 CELERY_RESULT_BACKEND = 'amqp://guest:guest@127.0.0.1/'
 
 # we need pickle for exception handling
