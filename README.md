@@ -198,6 +198,11 @@ Instead of installing uwsgi with pip we used the Debian repository.
 The used uWSGI configuration is in `stuff/deployment/uwsgi.conf`. It uses
 Python 3.4 and automatically reloads Celery when uWSGI is touch-reloaded.
 
+You may have to change the value of `AXES_REVERSE_PROXY_HEADER` in
+`settings.py`, maybe `HTTP_X_FORWARDED_FOR` is correct for your setup.
+Otherwise django-axes blocks the IP 127.0.0.1 after a few invalid logins.
+The correct value depends on your webserver/reverse proxy.
+
 # Upgrades
 
 There are a few steps to update a instance of the helfertool, assuming you
