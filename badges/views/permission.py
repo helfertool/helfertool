@@ -43,7 +43,7 @@ def edit_permission(request, event_url_name, permission_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges:settings',
+        return HttpResponseRedirect(reverse('badges:settings_advanced',
                                             args=[event.url_name, ]))
 
     context = {'event': event,
