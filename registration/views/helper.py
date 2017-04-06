@@ -6,6 +6,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
+from smtplib import SMTPException
+
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Job, Shift
@@ -134,7 +136,12 @@ def add_helper(request, event_url_name, shift_pk):
     if form.is_valid():
         helper = form.save()
 
-        helper.send_mail(request, internal=True)
+        try:
+            helper.send_mail(request, internal=True)
+        except SMTPException:
+            messages.error(request, _("Sending the mail failed, but the "
+                                      "helper was saved."))
+
         return HttpResponseRedirect(reverse('helpers',
                                             args=[event_url_name,
                                                   shift.job.pk]))
@@ -161,7 +168,11 @@ def add_coordinator(request, event_url_name, job_pk):
     if form.is_valid():
         helper = form.save()
 
-        helper.send_mail(request, internal=True)
+        try:
+            helper.send_mail(request, internal=True)
+        except SMTPException:
+            messages.error(request, _("Sending the mail failed, but the "
+                                      "helper was saved."))
         return HttpResponseRedirect(reverse('helpers',
                                             args=[event_url_name, job.pk]))
 

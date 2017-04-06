@@ -1,7 +1,11 @@
 from django.conf import settings
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.translation import ugettext as _
+
+from smtplib import SMTPException
 
 from .utils import nopermission, get_or_404
 
@@ -64,7 +68,11 @@ def form(request, event_url_name, link_pk=None):
     if form.is_valid():
         helper = form.save()
 
-        helper.send_mail(request, internal=False)
+        try:
+            helper.send_mail(request, internal=False)
+        except SMTPException:
+            messages.error(request, _("Sending the mail failed, but the "
+                                      "registration was saved."))
         return HttpResponseRedirect(reverse('registered',
                                             args=[event.url_name, helper.pk]))
 
