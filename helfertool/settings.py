@@ -227,9 +227,6 @@ DATABASES = {
 CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
 CELERY_RESULT_BACKEND = 'amqp://guest:guest@127.0.0.1/'
 
-# we need pickle for exception handling
-# make sure that only authorized clients can access the broker by setting a
-# password for the connection!
 CELERY_ACCEPT_CONTENT = ['json', 'msgpack', 'yaml']
 
 
