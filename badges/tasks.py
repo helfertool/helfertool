@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
-from celery import shared_task
+from celery import shared_task, states
+from celery.exceptions import Ignore
 
 from django.conf import settings
 from django.utils import translation
@@ -22,8 +23,8 @@ def scale_badge_photo(filepath):
     img.save(filepath)
 
 
-@shared_task
-def generate_badges(event_pk, job_pk, skip_printed):
+@shared_task(bind=True, throws=(badges.creator.BadgeCreatorError, ))
+def generate_badges(self, event_pk, job_pk, skip_printed):
     event = registration.models.Event.objects.get(pk=event_pk)
     try:
         job = registration.models.Job.objects.get(pk=job_pk)
@@ -65,9 +66,12 @@ def generate_badges(event_pk, job_pk, skip_printed):
                 creator.add_helper(h)
     try:
         tmp_dir, pdf_filename = creator.generate()
-    except Exception as e:
+    except badges.creator.BadgeCreatorError as e:
         creator.finish()
-        raise e
+        self.update_state(state='CREATOR_ERROR',
+                          meta={'error': e.value,
+                                'latex_output': e.latex_output})
+        raise Ignore()
     finally:
         translation.activate(prev_language)
 
@@ -81,6 +85,7 @@ def generate_badges(event_pk, job_pk, skip_printed):
 @shared_task(bind=True)
 def cleanup(self, tmp_dir):
     # wait for BADGE_RM_DELAY seconds and then really delete the files
+    # TODO: directly call cleanup_rm from generate_badges
     rm = cleanup_rm.subtask((tmp_dir, ),
                             countdown=settings.BADGE_RM_DELAY)
     rm.delay()

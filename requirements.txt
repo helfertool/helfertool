@@ -8,6 +8,7 @@ django-bleach
 django-ckeditor
 django-axes
 django_ical
+django-celery-results
 celery
 amqp
 XlsxWriter

@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'axes',
     'djangobower',
     'bootstrap3',
@@ -225,12 +226,12 @@ DATABASES = {
 
 # rabbitmq
 CELERY_BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
-CELERY_RESULT_BACKEND = 'amqp://guest:guest@127.0.0.1/'
+CELERY_RESULT_BACKEND = 'django-db'
 
 # we need pickle for exception handling
 # make sure that only authorized clients can access the broker by setting a
 # password for the connection!
-CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+CELERY_ACCEPT_CONTENT = ['json', 'msgpack', 'yaml']
 
 
 # Internationalization

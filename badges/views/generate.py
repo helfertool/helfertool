@@ -35,7 +35,7 @@ class BadgeTaskResult:
         self.name = name
 
         self.finished = result.successful()
-        self.error = result.failed()
+        self.error = result.failed() or result.state == "CREATOR_ERROR"
         self.expired = False
         self.pdf = None
         self.dl_filename = None
@@ -210,16 +210,19 @@ def failed(request, event_url_name, task_id):
     # get result
     result = AsyncResult(task_id)
 
-    if result.failed():
-        exception = result.result
+    error = None
+    latex_output = None
 
-        if not isinstance(exception, BadgeCreatorError):
-            raise exception
+    if result.failed():
+        error = str(result.result)
+    elif result.state == "CREATOR_ERROR":
+        error = result.info['error']
+        latex_output = result.info['latex_output']
 
     # return error message
     context = {'event': event,
-               'error': exception.value,
-               'latex_output': exception.get_latex_output()}
+               'error': error,
+               'latex_output': latex_output}
     return render(request, 'badges/failed.html',
                   context)
 

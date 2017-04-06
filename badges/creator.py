@@ -16,12 +16,6 @@ class BadgeCreatorError(Exception):
 
         Exception.__init__(self, value, latex_output)
 
-    def is_latex_output(self):
-        return self.latex_output is not None
-
-    def get_latex_output(self):
-        return self.latex_output
-
     def __str__(self):
         return repr(self.value)
 
@@ -156,7 +150,8 @@ class BadgeCreator:
                                      "-output-directory", self.dir,
                                      self.latex_filename])
         except subprocess.CalledProcessError as e:
-            raise BadgeCreatorError("PDF generation failed", e.output)
+            raise BadgeCreatorError("PDF generation failed",
+                                    e.output.decode('utf8'))
 
         # return path to pdf
         pdf_filename = "%s.pdf" % os.path.splitext(self.latex_filename)[0]
