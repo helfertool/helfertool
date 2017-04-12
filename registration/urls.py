@@ -234,7 +234,7 @@ urlpatterns = [
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/beershirts/$',
         views.export_beershirtlist,
-        name='export_shirts'),
+        name='export_beershirts'),
 
 
     # summaries

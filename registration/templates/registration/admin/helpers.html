@@ -30,8 +30,28 @@
                 <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
             </a>
             &nbsp;
-            <a class="btn btn-sm btn-default" data-toggle="collapse" href="#exportdays">
+			<a class="btn btn-sm btn-default" data-toggle="collapse" href="#exportdays">
                 {% trans "Export single days" %}
+            </a>
+            &nbsp;
+             <a href="{% url 'export_helpers' event.url_name 'pdf' %}" >
+				 Helferliste
+            </a>
+            &nbsp;
+			<a href="{% url 'export_gifts' event.url_name 'pdf' %}" >
+				 Marken-Liste
+            </a>
+			&nbsp;
+            <a href="{% url 'export_entry' event.url_name 'pdf' %}" >
+				 Eintrittsliste
+            </a>
+            &nbsp; 
+            <a href="{% url 'export_shirts' event.url_name 'pdf' %}" >
+				 Vielhelfer-Shirts
+            </a>
+            &nbsp;
+			<a href="{% url 'export_beershirts' event.url_name 'pdf' %}" >
+				 Bierteam-Shirts
             </a>
         </p>
         <div id="exportdays" class="collapse">
