@@ -216,6 +216,27 @@ urlpatterns = [
         views.export,
         name='export_job_date'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/helpers/$',
+        views.export_helpers, # TODO
+        name='export_helpers'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/entry/$',
+        views.export_entry, 
+        name='export_entry'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/gifts/$',
+        views.export_giftlist,
+        name='export_gifts'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/shirts/$',
+        views.export_shirtlist,
+        name='export_shirts'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/beershirts/$',
+        views.export_beershirtlist,
+        name='export_shirts'),
+
+
     # summaries
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$',
         views.coordinators,

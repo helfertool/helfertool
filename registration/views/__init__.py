@@ -9,6 +9,7 @@ from .helper import helpers, add_helper, edit_helper, delete_helper, \
     add_helper_as_coordinator, search_helper, view_helper
 from .link import links, edit_link, delete_link
 from .export import export
+from .export_helpers import export_helpers, export_entry, export_giftlist, export_shirtlist, export_beershirtlist
 from .permissions import permissions, delete_permission
 from .account import change_user
 from .duplicates import duplicates, merge

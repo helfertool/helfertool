@@ -1,0 +1,31 @@
+{% load latex %}
+{% autoescape off %}
+
+\documentclass[a4paper,10pt]{scrartcl}
+%\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{tabularx}
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=1.3cm,right=1.3cm]{geometry}
+
+\title{Alle Helfer}
+\date{}
+
+\begin{document}
+\section*{Eintrittsliste}
+\noindent\begin{tabularx}{\textwidth}{|l|l|l}
+\hline
+Name & Vorname & Unterschrift \\
+\hline
+\hline
+{% for helper in event.helper_set.all  %}
+	{{ helper.surname |latex}} & {{ helper.firstname |latex}} & \\
+\hline
+{% endfor %}
+\end{tabularx}
+
+\end{document}
+{% endautoescape %}

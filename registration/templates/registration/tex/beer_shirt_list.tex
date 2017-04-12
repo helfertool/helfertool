@@ -1,0 +1,37 @@
+{% load latex %}
+{% autoescape off %}
+
+\documentclass[a4paper,10pt]{scrartcl}
+%\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{tabularx}
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=1.3cm,right=1.3cm]{geometry}
+
+\begin{document}
+\section*{Bierteam Shirts}
+
+\noindent\begin{tabularx}{\textwidth}{|l|l|l|l|l}
+\hline
+Name & Vorname & & Größe & Unterschrift \\
+\hline
+\hline
+{% for helper in event.helper_set.all %}
+{% with helper_gifts|bykey:helper.id as gift %}
+	{% if gift.beershirt > 0 %}
+		{{ helper.surname |latex}}
+		& {{ helper.firstname |latex}}
+		& {{ gift.beershirt |latex }}
+		& {{ helper.shirt |latex}}
+		& \\
+	\hline
+	{% endif %}
+{% endwith %}
+{% endfor %}
+\end{tabularx}
+
+\end{document}
+{% endautoescape %}

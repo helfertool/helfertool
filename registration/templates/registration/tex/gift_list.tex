@@ -1,0 +1,61 @@
+{% load latex %}
+{% autoescape off %}
+
+\documentclass[a4paper,10pt]{scrartcl}
+%\documentclass[a4paper,11pt]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{tabularx}
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=1.3cm,right=1.3cm]{geometry}
+
+\title{Alle Helfer}
+\date{}
+
+\begin{document}
+\section*{Markenliste}
+
+
+{% for job in event.job_set.all %}
+\subsection*{ {{ job.name |latex}} }
+
+{% for shift in job.shift_set.all %}
+\subsubsection*{ {{ shift.time_with_day |latex}} {{shift.name |latex }} }
+
+\noindent\begin{tabularx}{\textwidth}{|l|l|l|l|l|l|l}
+\hline
+Name & Vorname & Telefon & Email & B & E & Unterschrift \\
+\hline
+\hline
+{% with shift_gifts|bykey:shift.id as gift %}
+{% for helper in shift.helper_set.all %}
+	{{ helper.surname |latex}}
+	& {{ helper.firstname |latex}}
+	& {{ helper.phone |latex}}
+	& {{ helper.email |latex}}
+	& {{ gift.beer|latex }}
+	& {{ gift.food|latex }}
+%	& {{ gift.vhshirt |latex }}
+%	& {{ gift.beershirt |latex }}
+	& \\
+\hline
+{% endfor %}
+
+{% with missing_shifts|bykey:shift.id as m %}
+{% with ''|center:m as range %}
+{% for _ in range %}
+& & & & {{ gift.beer |latex}} & {{ gift.food |latex}} & \\
+\hline
+{% endfor %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+
+\end{tabularx}
+{% endfor %}
+{% endfor %}
+
+\end{document}
+{% endautoescape %}
