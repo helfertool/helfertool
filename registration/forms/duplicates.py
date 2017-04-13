@@ -27,7 +27,8 @@ class MergeDuplicatesForm(forms.Form):
                 for job in helper.coordinated_jobs:
                     job.coordinators.add(remaining_helper)
 
-                remaining_helper.gifts.merge(helper.gifts)
+                if remaining_helper.event.gifts:
+                    remaining_helper.gifts.merge(helper.gifts)
 
                 helper.delete()
 

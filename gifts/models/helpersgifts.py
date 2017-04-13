@@ -126,8 +126,26 @@ class HelpersGifts(models.Model):
 
         # deserved gifts
         for gift in DeservedGiftSet.objects.filter(helper=other_gifts):
-            gift.helper = self
-            gift.save()
+            # check if it exists for this helper and the same gift_set and
+            # shift already
+            own_deservedgiftset = DeservedGiftSet.objects.filter(
+                helper=self,
+                gift_set=gift.gift_set,
+                shift=gift.shift)
+
+            if own_deservedgiftset.exists():
+                # update "delivered" flag, delete other
+                own_obj = own_deservedgiftset.get()
+
+                if gift.delivered:
+                    own_obj.delivered = True
+                    own_obj.save()
+
+                gift.delete()
+            else:
+                # keep object, update foreign key
+                gift.helper = self
+                gift.save()
 
         # accomplished shifts
         for shift in other_gifts.accomplished_shifts.all():
