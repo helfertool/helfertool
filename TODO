@@ -48,7 +48,6 @@ Badges
 ======
 
 * shift (name for each shift, time,...?)
-* delete_badge{permission, role, design}
 * add image upload to registration form for certain jobs
 * timeout for subprocess call (-> celery timeout)
 * Show missing images (image for coordinators or for all)
