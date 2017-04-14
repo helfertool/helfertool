@@ -23,3 +23,12 @@ class BadgePermissionForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class BadgePermissionDeleteForm(forms.ModelForm):
+    class Meta:
+        model = BadgePermission
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

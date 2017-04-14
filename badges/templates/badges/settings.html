@@ -19,12 +19,12 @@
     {% else %}
         <table class="table">
             <tr>
-                <th>{% trans "Name" %}</th>
-                <th>{% trans "LaTeX Name" %}</th>
-                <th>{% trans "Permissions" %}</th>
+                <th style="width:30%">{% trans "Name" %}</th>
+                <th style="width:20%">{% trans "LaTeX Name" %}</th>
+                <th style="width:30%">{% trans "Permissions" %}</th>
 
                 {% if not event.archived %}
-                    <th></th>
+                    <th style="width:20%"></th>
                 {% endif %}
             </tr>
 
@@ -43,6 +43,10 @@
                         <td>
                             <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
                                 {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                            </a>
+                            <br />
+                            <a href="{% url 'badges:delete_role' event.url_name role.pk %}">
+                                {% bootstrap_icon "remove" %} {% trans "Delete" %}
                             </a>
                         </td>
                     {% endif %}
@@ -66,10 +70,10 @@
     {% else %}
         <table class="table">
             <tr>
-                <th>{% trans "Name" %}</th>
+                <th style="width:70%">{% trans "Name" %}</th>
 
                 {% if not event.archived %}
-                    <th></th>
+                    <th style="width:20%"></th>
                 {% endif %}
             </tr>
 
@@ -81,6 +85,10 @@
                         <td>
                             <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
                                 {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                            </a>
+                            <br/>
+                            <a href="{% url 'badges:delete_design' event.url_name design.pk %}">
+                                {% bootstrap_icon "remove" %} {% trans "Delete" %}
                             </a>
                         </td>
                     {% endif %}

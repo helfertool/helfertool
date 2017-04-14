@@ -50,6 +50,10 @@
                             <a href="{% url 'badges:edit_permission' event.url_name perm.pk %}">
                                 {% bootstrap_icon "pencil" %} {% trans "Edit" %}
                             </a>
+                            <br/>
+                            <a href="{% url 'badges:delete_permission' event.url_name perm.pk %}">
+                                {% bootstrap_icon "remove" %} {% trans "Delete" %}
+                            </a>
                         </td>
                     {% endif %}
                 </tr>

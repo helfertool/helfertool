@@ -1,0 +1,24 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete Badge Design" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <td>{{ design.name }}</td>
+            </tr>
+        </table>
+
+        <div class="alert alert-danger" role="alert">{% trans "Remove this badge design?" %}</div>
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}

@@ -39,6 +39,11 @@ urlpatterns = [
         views.edit_permission,
         name='new_permission'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/'
+        '(?P<permission_pk>[0-9]+)/delete/$',
+        views.delete_permission,
+        name='delete_permission'),
+
     #
     # role
     #
@@ -51,6 +56,11 @@ urlpatterns = [
         views.edit_role,
         name='new_role'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/'
+        '(?P<role_pk>[0-9]+)/delete/$',
+        views.delete_role,
+        name='delete_role'),
+
     #
     # design
     #
@@ -62,6 +72,11 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/',
         views.edit_design,
         name='new_design'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/'
+        '(?P<design_pk>[0-9]+)/delete/$',
+        views.delete_design,
+        name='delete_design'),
 
     #
     # badge generation

@@ -10,6 +10,7 @@ class BadgeDefaults(models.Model):
         related_name='+',  # no reverse accessor
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name=_("Default role"),
     )
 
@@ -18,6 +19,7 @@ class BadgeDefaults(models.Model):
         related_name='+',  # no reverse accessor
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         verbose_name=_("Default design"),
     )
 

@@ -32,3 +32,12 @@ class BadgeRoleForm(forms.ModelForm):
         self.save_m2m()
 
         return instance
+
+
+class BadgeRoleDeleteForm(forms.ModelForm):
+    class Meta:
+        model = BadgeRole
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

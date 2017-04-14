@@ -39,3 +39,12 @@ class BadgeDesignForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class BadgeDesignDeleteForm(forms.ModelForm):
+    class Meta:
+        model = BadgeDesign
+        fields = []
+
+    def delete(self):
+        self.instance.delete()
