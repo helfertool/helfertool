@@ -94,7 +94,7 @@ class Badge(models.Model):
     def save(self, *args, **kwargs):
         super(Badge, self).save(*args, **kwargs)
 
-        if self._old_photo != self.photo:
+        if self._old_photo != self.photo and self.photo:
             tasks.scale_badge_photo.delay(self.photo.path)
 
     def get_job(self):
