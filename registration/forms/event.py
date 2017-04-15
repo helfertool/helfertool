@@ -9,7 +9,7 @@ import os
 
 from ..models import Event
 
-from .fields import UserSelectField
+from .fields import UserSelectField, DatePickerField
 
 
 class EventForm(forms.ModelForm):
@@ -19,9 +19,9 @@ class EventForm(forms.ModelForm):
                    'archived', ]
         field_classes = {
             'admins': UserSelectField,
+            'date': DatePickerField,
         }
         widgets = {
-            'date': forms.DateInput(attrs={'class': 'date'}),
             'text': CKEditorWidget(),
         }
 
@@ -87,6 +87,9 @@ class EventDuplicateForm(EventForm):
     class Meta:
         model = Event
         fields = ['url_name', 'name', 'date']
+        field_classes = {
+            'date': DatePickerField,
+        }
 
     def __init__(self, *args, **kwargs):
         self.other_event = kwargs.pop('other_event')

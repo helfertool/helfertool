@@ -6,7 +6,7 @@ from gifts.models import GiftSet
 
 from ..models import Shift
 
-from .fields import DualListField
+from .fields import DualListField, DateTimePickerField
 
 
 class ShiftForm(forms.ModelForm):
@@ -15,11 +15,11 @@ class ShiftForm(forms.ModelForm):
         exclude = ['job', 'archived_number', ]
         field_classes = {
             'gifts': DualListField,
+            'begin': DateTimePickerField,
+            'end': DateTimePickerField,
         }
         widgets = {
             'number': forms.NumberInput(attrs={'min': 0}),
-            'begin': forms.DateTimeInput(attrs={'class': 'datetime'}),
-            'end': forms.DateTimeInput(attrs={'class': 'datetime'}),
         }
 
     def __init__(self, *args, **kwargs):

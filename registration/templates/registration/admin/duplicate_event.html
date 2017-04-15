@@ -22,5 +22,17 @@
 
         <input type="submit" value="{% trans "Duplicate" %}" class="btn btn-default" />
     </form>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.date').parent().datetimepicker({ locale: '{{ LANGUAGE_CODE }}',
+                {% if LANGUAGE_CODE == "en" %}
+                    format: 'YYYY-MM-DD',
+                {% elif LANGUAGE_CODE == "de" %}
+                    format: 'DD.MM.YYYY',
+                {% endif %}
+            });
+        });
+    </script>
 {% endblock %}
 

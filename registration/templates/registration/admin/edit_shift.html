@@ -35,7 +35,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $('.datetime').datetimepicker({ locale: '{{ LANGUAGE_CODE }}',
+            $('.datetime').parent().datetimepicker({ locale: '{{ LANGUAGE_CODE }}',
                 {% if LANGUAGE_CODE == "en" %}
                     format: 'YYYY-MM-DD HH:mm'
                 {% endif %}
