@@ -91,7 +91,7 @@ class BadgeCreator:
 
         # badge id
         if self.settings.barcodes:
-            tmp['id'] = "%010d" % helper.badge.id
+            tmp['id'] = "%010d" % helper.badge.barcode
         else:
             tmp['id'] = ""
 

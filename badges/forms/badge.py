@@ -11,7 +11,7 @@ from registration.models import Job
 class BadgeForm(forms.ModelForm):
     class Meta:
         model = Badge
-        exclude = ['helper', ]
+        exclude = ['helper', 'barcode']
 
     def __init__(self, *args, **kwargs):
         super(BadgeForm, self).__init__(*args, **kwargs)

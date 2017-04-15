@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.mail import mail_admins
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -214,7 +215,9 @@ def failed(request, event_url_name, task_id):
     latex_output = None
 
     if result.failed():
-        error = str(result.result)
+        error = _("Internal Server Error. The admins were notified.")
+        mail_admins("Badge generation error", str(result.result),
+                    fail_silently=True)
     elif result.state == "CREATOR_ERROR":
         error = result.info['error']
         latex_output = result.info['latex_output']

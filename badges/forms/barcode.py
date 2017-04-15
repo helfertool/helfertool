@@ -6,9 +6,9 @@ from ..models import Badge
 
 
 class BadgeBarcodeForm(forms.Form):
-    badge_id = forms.IntegerField(label=_("Barcode"),
-                                  widget=forms.TextInput(
-                                    attrs={'autofocus': ''}))
+    badge_barcode = forms.IntegerField(label=_("Barcode"),
+                                       widget=forms.TextInput(
+                                       attrs={'autofocus': ''}))
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event')
@@ -20,20 +20,17 @@ class BadgeBarcodeForm(forms.Form):
     def clean(self):
         super(BadgeBarcodeForm, self).__init__()
 
-        id = self.cleaned_data.get('badge_id')
+        barcode = self.cleaned_data.get('badge_barcode')
 
         # check if id is given
-        if not id:
+        if not barcode:
             raise ValidationError(_("Invalid barcode."))
 
         # check if badge exists
         try:
-            self.badge = Badge.objects.get(pk=id)
+            self.badge = Badge.objects.get(helper__event=self.event,
+                                           barcode=barcode)
         except Badge.DoesNotExist:
             raise ValidationError(_("This badge does not exist. "
-                                    "Maybe it was deleted since printing."))
-
-        # check if badge belongs to event
-        if self.badge.helper.event != self.event:
-            raise ValidationError(_("This badge does not belong to this "
-                                    "event."))
+                                    "Maybe it was deleted since printing or "
+                                    "does not belong to this event."))

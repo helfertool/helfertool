@@ -53,14 +53,13 @@ Badges
 * Show missing images (image for coordinators or for all)
 * Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
+* Make sure that (barcode, helper__event) is unique
 
 
 Gifts
 =====
 
 * add flags to excel export
-* condition for getting t-shirt (number of shifts or hours)
-* default gift sets
 
 
 File uploads
@@ -75,7 +74,6 @@ File uploads
 Inventory
 ========
 
-* used inventory for single job
 * rework registration and take back of items
   * first select user, then add/remove multiple items
   * also without badge
@@ -85,6 +83,7 @@ Inventory
 * make sure that barcodes are unique for all activated inventories of an event
 * edit item: unique_together leads to exception on same barcode
 * export PDF with barcodes
+* used inventory for single job?
 
 Deployment
 ==========
