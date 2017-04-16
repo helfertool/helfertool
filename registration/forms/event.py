@@ -20,6 +20,7 @@ class EventForm(forms.ModelForm):
         field_classes = {
             'admins': UserSelectField,
             'date': DatePickerField,
+            'changes_until': DatePickerField,
         }
         widgets = {
             'text': CKEditorWidget(),

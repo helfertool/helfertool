@@ -234,3 +234,17 @@ class RegisterForm(forms.ModelForm):
             news_add_email(self.cleaned_data.get('email'))
 
         return instance
+
+
+class DeregisterForm(forms.ModelForm):
+    class Meta:
+        model = Helper
+        fields = []
+
+    def __init__(self, *args, **kwargs):
+        self.shift = kwargs.pop('shift')
+
+        super(DeregisterForm, self).__init__(*args, **kwargs)
+
+    def delete(self):
+        self.instance.shifts.remove(self.shift)

@@ -1,0 +1,22 @@
+{% extends "helfertool/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% load registerform_shifts %}
+
+{% block title %}
+    {% blocktrans trimmed %}
+        Register for {{ event }} as helper
+    {% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ event }}</h1>
+
+    <div class="alert alert-danger" role="alert">
+        {% trans "You cannot change the data yourself." %}
+    </div>
+
+    {{ event.imprint | safe }}
+{% endblock %}
+

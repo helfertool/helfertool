@@ -9,6 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 from multiselectfield import MultiSelectField
 
+import datetime
+
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 from gifts.models import HelpersGifts
 from inventory.models import InventorySettings
@@ -134,6 +136,14 @@ class Event(models.Model):
     active = models.BooleanField(
         default=False,
         verbose_name=_("Registration publicly visible"),
+    )
+
+    changes_until = models.DateField(
+        verbose_name=_("Deregistration and changes possible until"),
+        help_text=_("Helpers can change their personal data and shifts until "
+                    "this date themselves. Leave emtpy to disable this."),
+        null=True,
+        blank=True,
     )
 
     ask_shirt = models.BooleanField(
@@ -277,15 +287,11 @@ class Event(models.Model):
     @property
     def all_coordinators(self):
         return self.helper_set.filter(job__isnull=False)
-        #result = []
 
-        ## iterate over jobs
-        #for job in self.job_set.all():
-        #    for c in job.coordinators.all():
-        #        if c not in result:
-        #            result.append(c)
-
-        #return result
+    @property
+    def changes_possible(self):
+        return self.changes_until is not None and \
+            datetime.date.today() <= self.changes_until
 
 
 @receiver(post_save, sender=Event, dispatch_uid='event_saved')

@@ -79,6 +79,20 @@ urlpatterns = [
         HelperFeed(),
         name='ical'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/update/'
+        '(?P<helper_id>[a-z0-9\-]+)/$',
+        views.update_personal,
+        name='update_personal'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/deregister/'
+        '(?P<helper_id>[a-z0-9\-]+)/(?P<shift_pk>[0-9]+)/$',
+        views.deregister,
+        name='deregister'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/deleted/',
+        views.deleted,
+        name='deleted'),
+
     # manage event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$',
         views.admin,

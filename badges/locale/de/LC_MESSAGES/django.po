@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-14 17:44+0200\n"
-"PO-Revision-Date: 2017-04-14 17:45+0200\n"
+"POT-Creation-Date: 2017-04-16 16:40+0200\n"
+"PO-Revision-Date: 2017-04-16 16:40+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "The file is not an image."
 msgstr "Die Datei ist kein Bild."
 
-#: badges/forms/barcode.py:9
+#: badges/forms/barcode.py:9 badges/models/badge.py:21
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -30,15 +30,13 @@ msgstr "Barcode"
 msgid "Invalid barcode."
 msgstr "Ungültiger Barcode."
 
-#: badges/forms/barcode.py:33
-msgid "This badge does not exist. Maybe it was deleted since printing."
+#: badges/forms/barcode.py:34
+msgid ""
+"This badge does not exist. Maybe it was deleted since printing or does not "
+"belong to this event."
 msgstr ""
 "Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken "
-"gelöscht."
-
-#: badges/forms/barcode.py:38
-msgid "This badge does not belong to this event."
-msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
+"gelöscht oder das Badge gehört nicht zu dieser Veranstaltung."
 
 #: badges/forms/defaults.py:51
 msgid "No default role"
@@ -48,47 +46,47 @@ msgstr "Keine Standard Rolle"
 msgid "File does not contain LaTeX code."
 msgstr "Die Datei enthält keinen LaTeX Code."
 
-#: badges/models/badge.py:22
+#: badges/models/badge.py:28
 msgid "Other firstname"
 msgstr "Anderer Vorname"
 
-#: badges/models/badge.py:28
+#: badges/models/badge.py:34
 msgid "Other surname"
 msgstr "Anderer Nachname"
 
-#: badges/models/badge.py:34
+#: badges/models/badge.py:40
 msgid "Other text for job"
 msgstr "Anderer Text für Aufgabe"
 
-#: badges/models/badge.py:40
+#: badges/models/badge.py:46
 msgid "Other text for shift"
 msgstr "Anderer Text für Schicht"
 
-#: badges/models/badge.py:46
+#: badges/models/badge.py:52
 msgid "Other text for role"
 msgstr "Anderer Text für Rolle"
 
-#: badges/models/badge.py:51
+#: badges/models/badge.py:57
 msgid "Photo"
 msgstr "Foto"
 
-#: badges/models/badge.py:59
+#: badges/models/badge.py:65
 msgid "Primary job"
 msgstr "Primäre Aufgabe"
 
-#: badges/models/badge.py:60
+#: badges/models/badge.py:66
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: badges/models/badge.py:72 badges/templates/badges/settings.html:118
+#: badges/models/badge.py:78 badges/templates/badges/settings.html:118
 msgid "Role"
 msgstr "Rolle"
 
-#: badges/models/badge.py:81 badges/templates/badges/settings.html:119
+#: badges/models/badge.py:87 badges/templates/badges/settings.html:119
 msgid "Design"
 msgstr "Design"
 
-#: badges/models/badge.py:86
+#: badges/models/badge.py:92
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
@@ -293,11 +291,11 @@ msgstr "Alle Badges"
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:60 badges/views/generate.py:181
+#: badges/templates/badges/index.html:60 badges/views/generate.py:182
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:65 badges/views/generate.py:183
+#: badges/templates/badges/index.html:65 badges/views/generate.py:184
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -428,13 +426,17 @@ msgstr ""
 "Die aufgelisteten Personen haben mehr als eine Aufgabe, daher musst du in "
 "den Badge Einstellungen eine primäre Aufgabe auswählen."
 
-#: badges/views/generate.py:176
+#: badges/views/generate.py:177
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:178
+#: badges/views/generate.py:179
 msgid "{} (all)"
 msgstr "{} (alle)"
+
+#: badges/views/generate.py:218
+msgid "Internal Server Error. The admins were notified."
+msgstr "Interner Fehler. Die Admins wurden benachrichtigt."
 
 #: badges/views/register.py:34
 #, python-format
@@ -445,6 +447,9 @@ msgstr "Bagde bereits gedruckt: %(name)s"
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
+
+#~ msgid "This badge does not belong to this event."
+#~ msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
 
 #~ msgid "Edit template"
 #~ msgstr "Template bearbeiten"

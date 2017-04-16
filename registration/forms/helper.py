@@ -15,8 +15,8 @@ class HelperForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')
-        self.new_coordinator = kwargs.pop('new_coordinator', False)
         self.job = kwargs.pop('job', None)
+        self.public = kwargs.pop('public', False)
 
         super(HelperForm, self).__init__(*args, **kwargs)
 
@@ -32,11 +32,13 @@ class HelperForm(forms.ModelForm):
             self.fields.pop('vegetarian')
 
         # remove field for instruction for food handling
-        if not self.instance.needs_infection_instruction:
+        if not self.instance.needs_infection_instruction and \
+                not (self.job and self.job.infection_instruction):
             self.fields.pop('infection_instruction')
 
-        # remove field for mail validation
-        if self.new_coordinator:
+        # remove field for mail validation if form is used to add new
+        # coordinator to a job
+        if self.job or self.public:
             self.fields.pop('validated')
 
     def save(self, commit=True):
@@ -44,7 +46,8 @@ class HelperForm(forms.ModelForm):
 
         instance.event = self.related_event
 
-        if self.new_coordinator and self.related_event.mail_validation:
+        # new coordinator for job needs to validate mail address
+        if self.job and self.related_event.mail_validation:
             instance.validated = False
 
         if commit:
@@ -147,7 +150,7 @@ class HelperDeleteForm(forms.ModelForm):
 
         super(HelperDeleteForm, self).__init__(*args, **kwargs)
 
-        # show only the one specified shift ot shifts, where the helper is
+        # show only the one specified shift or shifts, where the helper is
         # registered
         if self.show_all_shifts:
             self.fields['shifts'].queryset = self.instance.shifts

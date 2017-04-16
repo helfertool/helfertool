@@ -9,7 +9,7 @@ from smtplib import SMTPException
 
 from .utils import nopermission, get_or_404
 
-from ..forms import RegisterForm
+from ..forms import RegisterForm, DeregisterForm, HelperForm
 from ..models import Event, Link
 
 from news.helper import news_test_email
@@ -81,7 +81,7 @@ def form(request, event_url_name, link_pk=None):
     return render(request, 'registration/form.html', context)
 
 
-def registered(request, event_url_name, helper_id):
+def registered(request, event_url_name, helper_id=None):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
 
     news = news_test_email(helper.email)
@@ -109,3 +109,65 @@ def validate(request, event_url_name, helper_id):
     context = {'event': event,
                'already_validated': already_validated}
     return render(request, 'registration/validate.html', context)
+
+
+def deregister(request, event_url_name, helper_id, shift_pk):
+    event, job, shift, helper = get_or_404(event_url_name,
+                                           helper_pk=helper_id,
+                                           shift_pk=shift_pk)
+
+    if not event.changes_possible:
+        context = {'event': event}
+        return render(request, 'registration/changes_not_possible.html',
+                      context)
+
+    form = DeregisterForm(request.POST or None, instance=helper, shift=shift)
+
+    if form.is_valid():
+        form.delete()
+
+        if not helper.pk:
+            return HttpResponseRedirect(reverse('deleted',
+                                                args=[event.url_name]))
+
+        return HttpResponseRedirect(reverse('registered',
+                                            args=[event.url_name, helper.pk]))
+
+    context = {'event': event,
+               'helper': helper,
+               'shift': shift,
+               'form': form}
+    return render(request, 'registration/deregister.html', context)
+
+
+def deleted(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    context = {'event': event}
+    return render(request, 'registration/deleted.html', context)
+
+
+def update_personal(request, event_url_name, helper_id):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
+
+    if not event.changes_possible:
+        context = {'event': event}
+        return render(request, 'registration/changes_not_possible.html',
+                      context)
+
+    form = HelperForm(request.POST or None, instance=helper, event=event,
+                      public=True)
+
+    if form.is_valid():
+        form.save()
+
+        return HttpResponseRedirect(reverse('registered',
+                                            args=[event.url_name, helper.pk]))
+
+    news = news_test_email(helper.email)  # needed in template
+
+    context = {'event': event,
+               'data': helper,
+               'news': news,
+               'personal_data_form': form}
+    return render(request, 'registration/registered.html', context)

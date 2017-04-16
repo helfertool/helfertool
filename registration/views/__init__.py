@@ -1,4 +1,5 @@
-from .registration import index, form, registered, validate
+from .registration import index, form, registered, validate, deregister, \
+    deleted, update_personal
 
 from .admin import admin, jobs_and_shifts, add_user, coordinators
 from .event import edit_event, delete_event, archive_event, duplicate_event

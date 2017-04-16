@@ -24,7 +24,7 @@
         </tr>
     {% endif %}
 
-    {% if helper.infection_instruction %}
+    {% if helper.needs_infection_instruction %}
         <tr>
             <th>{% trans "Instruction for the handling of food" %}: </th>
             <td>{{ helper.get_infection_instruction_display }}</td>

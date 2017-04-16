@@ -162,8 +162,7 @@ def add_coordinator(request, event_url_name, job_pk):
         return nopermission(request)
 
     # form
-    form = HelperForm(request.POST or None, job=job, event=event,
-                      new_coordinator=True)
+    form = HelperForm(request.POST or None, job=job, event=event)
 
     if form.is_valid():
         helper = form.save()

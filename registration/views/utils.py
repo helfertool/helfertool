@@ -55,5 +55,8 @@ def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
     if job and shift and shift.job != job:
         raise Http404
 
+    if shift and helper and not helper.shifts.filter(pk=shift.pk).exists():
+        raise Http404
+
     # return data
     return event, job, shift, helper
