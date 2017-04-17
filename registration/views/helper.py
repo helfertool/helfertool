@@ -55,15 +55,7 @@ def helpers(request, event_url_name, job_pk=None):
 
 @login_required
 def view_helper(request, event_url_name, helper_pk):
-    try:
-        return_to_job = int(request.GET.get('job', None))
-    except ValueError:
-        raise Http404
-    except TypeError:  # int(None) throws this
-        return_to_job = None
-
     event, job, shift, helper = get_or_404(event_url_name,
-                                           job_pk=return_to_job,
                                            helper_pk=helper_pk)
 
     if not helper.can_edit(request.user):
@@ -91,7 +83,6 @@ def view_helper(request, event_url_name, helper_pk):
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
-               'return_to_job': return_to_job,
                'gifts_form': gifts_form,
                'resend_form': resend_form}
     return render(request, 'registration/admin/view_helper.html', context)

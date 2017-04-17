@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-17 14:37+0200\n"
+"POT-Creation-Date: 2017-04-17 14:41+0200\n"
 "PO-Revision-Date: 2017-04-17 14:32+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -474,7 +474,7 @@ msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 #: registration/models/shift.py:62
 #: registration/templates/registration/admin/base.html:137
 #: registration/templates/registration/admin/jobs_and_shifts.html:58
-#: registration/templates/registration/admin/view_helper.html:94
+#: registration/templates/registration/admin/view_helper.html:87
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -516,7 +516,7 @@ msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:6
-#: registration/templates/registration/admin/view_helper.html:80
+#: registration/templates/registration/admin/view_helper.html:73
 msgid "Add as coordinator"
 msgstr "Als Koordinator hinzufügen"
 
@@ -537,7 +537,7 @@ msgstr ""
 "Koordinatoren hinzuzufügen."
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:6
-#: registration/templates/registration/admin/view_helper.html:75
+#: registration/templates/registration/admin/view_helper.html:68
 msgid "Add to shift"
 msgstr "Zu Schicht hinzufügen"
 
@@ -829,8 +829,8 @@ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 #: registration/templates/registration/admin/helpers_table.html:69
 #: registration/templates/registration/admin/jobs_and_shifts.html:38
 #: registration/templates/registration/admin/jobs_and_shifts.html:93
-#: registration/templates/registration/admin/view_helper.html:45
-#: registration/templates/registration/admin/view_helper.html:63
+#: registration/templates/registration/admin/view_helper.html:38
+#: registration/templates/registration/admin/view_helper.html:56
 msgid "Delete"
 msgstr "Löschen"
 
@@ -898,7 +898,7 @@ msgstr "Link löschen"
 
 #: registration/templates/registration/admin/delete_link.html:11
 #: registration/templates/registration/admin/links.html:13
-#: registration/templates/registration/admin/view_helper.html:55
+#: registration/templates/registration/admin/view_helper.html:48
 #: registration/templates/registration/registered.html:69
 msgid "Shifts"
 msgstr "Schichten"
@@ -1122,7 +1122,7 @@ msgstr "Anzeigen"
 
 #: registration/templates/registration/admin/jobs_and_shifts.html:26
 #: registration/templates/registration/admin/jobs_and_shifts.html:88
-#: registration/templates/registration/admin/view_helper.html:19
+#: registration/templates/registration/admin/view_helper.html:12
 #: registration/templates/registration/registered.html:46
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -1214,28 +1214,24 @@ msgstr "Suchen"
 msgid "Result"
 msgstr "Ergebnis"
 
-#: registration/templates/registration/admin/view_helper.html:11
-msgid "Back to job"
-msgstr "Zurück zur Aufgabe"
-
-#: registration/templates/registration/admin/view_helper.html:15
+#: registration/templates/registration/admin/view_helper.html:8
 #: registration/templates/registration/registerform.html:73
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
-#: registration/templates/registration/admin/view_helper.html:24
+#: registration/templates/registration/admin/view_helper.html:17
 msgid "Resend confirmation mail"
 msgstr "Bestätigungsmail nochmal senden"
 
-#: registration/templates/registration/admin/view_helper.html:31
+#: registration/templates/registration/admin/view_helper.html:24
 msgid "Helper did not validate the mail address."
 msgstr "Helfer hat die E-Mail Adresse nicht validiert"
 
-#: registration/templates/registration/admin/view_helper.html:37
+#: registration/templates/registration/admin/view_helper.html:30
 msgid "Coordinator"
 msgstr "Koordinator"
 
-#: registration/templates/registration/admin/view_helper.html:87
+#: registration/templates/registration/admin/view_helper.html:80
 msgid "Edit badge"
 msgstr "Badge bearbeiten"
 
@@ -1513,22 +1509,22 @@ msgstr "Veranstaltung gelöscht: %(name)s"
 msgid "Event was duplicated: %(event)s"
 msgstr "Veranstaltung wurde kopiert: %(event)s"
 
-#: registration/views/helper.py:145 registration/views/helper.py:176
+#: registration/views/helper.py:136 registration/views/helper.py:167
 msgid "Sending the mail failed, but the helper was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, der Helfer wurde dennoch gespeichert."
 
-#: registration/views/helper.py:256
+#: registration/views/helper.py:247
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:292
+#: registration/views/helper.py:283
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
 
-#: registration/views/helper.py:349
+#: registration/views/helper.py:340
 msgid "Confirmation mail was sent"
 msgstr "Bestätigungsmail wurde gesendet"
 
@@ -1569,6 +1565,9 @@ msgstr ""
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Back to job"
+#~ msgstr "Zurück zur Aufgabe"
 
 #~ msgid "Total"
 #~ msgstr "Insgesamt"

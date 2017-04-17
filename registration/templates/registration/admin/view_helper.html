@@ -5,13 +5,6 @@
 {% block admincontent %}
     <h2>{{ helper.full_name }}</h2>
 
-    {% if return_to_job %}
-        <a href="{% url 'helpers' event.url_name return_to_job %}">
-            {% bootstrap_icon "arrow-left" %}
-            {% trans "Back to job" %}
-        </a>
-    {% endif %}
-
     <h3>{% trans "Personal data" %}</h3>
 
     <a href="{% url 'edit_helper' event.url_name helper.pk %}">
