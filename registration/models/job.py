@@ -4,6 +4,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
+from django.utils.timezone import localtime
 
 from collections import OrderedDict
 from copy import deepcopy
@@ -116,7 +117,7 @@ class Job(models.Model):
         # iterate over all shifts and group them by day
         # (itertools.groupby is strange...)
         for shift in shifts:
-            day = shift.begin.date()
+            day = localtime(shift.begin).date()
 
             # add to list
             if day in tmp_shifts:
