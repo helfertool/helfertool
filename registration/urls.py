@@ -210,6 +210,11 @@ urlpatterns = [
         views.add_helper_as_coordinator,
         name='add_helper_as_coordinator'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
+        '(?P<helper_pk>[0-9a-f\-]+)/resend/$',
+        views.resend_mail,
+        name='resend_mail'),
+
     # export
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all/$',
         views.export,

@@ -13,7 +13,7 @@ from .utils import nopermission, get_or_404
 from ..models import Event, Job, Shift
 from ..forms import HelperForm, HelperDeleteForm, \
     HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
-    HelperAddCoordinatorForm, HelperSearchForm
+    HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm
 from ..decorators import archived_not_available
 
 from gifts.forms import HelpersGiftsForm
@@ -72,6 +72,8 @@ def view_helper(request, event_url_name, helper_pk):
     edit_badge = event.badges and event.is_admin(request.user)
     edit_gifts = event.gifts and event.is_admin(request.user)
 
+    resend_form = HelperResendMailForm(helper=helper)
+
     gifts_form = None
     if edit_gifts:
         helper.gifts.update()
@@ -90,7 +92,8 @@ def view_helper(request, event_url_name, helper_pk):
                'helper': helper,
                'edit_badge': edit_badge,
                'return_to_job': return_to_job,
-               'gifts_form': gifts_form}
+               'gifts_form': gifts_form,
+               'resend_form': resend_form}
     return render(request, 'registration/admin/view_helper.html', context)
 
 
@@ -328,3 +331,27 @@ def search_helper(request, event_url_name):
                'result': result,
                'new_search': new_search}
     return render(request, 'registration/admin/search_helper.html', context)
+
+
+@login_required
+@archived_not_available
+def resend_mail(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+
+    if not helper.can_edit(request.user):
+        return nopermission(request)
+
+    form = HelperResendMailForm(request.POST or None, helper=helper)
+
+    if form.is_valid():
+        form.send(request)
+
+        messages.success(request, _("Confirmation mail was sent"))
+
+        return HttpResponseRedirect(reverse('view_helper',
+                                            args=[event_url_name, helper.pk]))
+
+    context = {'event': event,
+               'helper': helper,
+               'form': form}
+    return render(request, 'registration/admin/resend_mail.html', context)

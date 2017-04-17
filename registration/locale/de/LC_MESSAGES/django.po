@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-16 16:40+0200\n"
-"PO-Revision-Date: 2017-04-16 16:41+0200\n"
+"POT-Creation-Date: 2017-04-17 14:07+0200\n"
+"PO-Revision-Date: 2017-04-17 14:07+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -77,7 +77,7 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:42 registration/models/job.py:34
+#: registration/export/pdf.py:42 registration/models/job.py:35
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/jobs_and_shifts.html:55
 #: registration/templates/registration/admin/permissions.html:14
@@ -424,20 +424,20 @@ msgstr "E-Mail Adresse wurde bestätigt"
 msgid "I agree with the following data privacy statement."
 msgstr "Ich stimme der folgenden Datenschutzerklärung zu."
 
-#: registration/models/job.py:39
+#: registration/models/job.py:40
 msgid "This job is visible publicly"
 msgstr "Diese Aufgabe ist öffentlich sichtbar"
 
-#: registration/models/job.py:44
+#: registration/models/job.py:45
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: registration/models/job.py:49
+#: registration/models/job.py:50
 #: registration/templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models/job.py:70
+#: registration/models/job.py:71
 msgid "Number of coordinators for archived event"
 msgstr "Anzahl der Koordinatoren für archivierte Veranstaltung"
 
@@ -474,7 +474,7 @@ msgstr "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
 #: registration/models/shift.py:62
 #: registration/templates/registration/admin/base.html:137
 #: registration/templates/registration/admin/jobs_and_shifts.html:58
-#: registration/templates/registration/admin/view_helper.html:89
+#: registration/templates/registration/admin/view_helper.html:94
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -516,7 +516,7 @@ msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:6
-#: registration/templates/registration/admin/view_helper.html:75
+#: registration/templates/registration/admin/view_helper.html:80
 msgid "Add as coordinator"
 msgstr "Als Koordinator hinzufügen"
 
@@ -537,7 +537,7 @@ msgstr ""
 "Koordinatoren hinzuzufügen."
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:6
-#: registration/templates/registration/admin/view_helper.html:70
+#: registration/templates/registration/admin/view_helper.html:75
 msgid "Add to shift"
 msgstr "Zu Schicht hinzufügen"
 
@@ -679,6 +679,7 @@ msgid "Mail"
 msgstr "E-Mail"
 
 #: registration/templates/registration/admin/base.html:116
+#: registration/templates/registration/admin/resend_mail.html:18
 msgid "Send"
 msgstr "Senden"
 
@@ -828,8 +829,8 @@ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
 #: registration/templates/registration/admin/helpers_table.html:69
 #: registration/templates/registration/admin/jobs_and_shifts.html:38
 #: registration/templates/registration/admin/jobs_and_shifts.html:93
-#: registration/templates/registration/admin/view_helper.html:40
-#: registration/templates/registration/admin/view_helper.html:58
+#: registration/templates/registration/admin/view_helper.html:45
+#: registration/templates/registration/admin/view_helper.html:63
 msgid "Delete"
 msgstr "Löschen"
 
@@ -897,7 +898,7 @@ msgstr "Link löschen"
 
 #: registration/templates/registration/admin/delete_link.html:11
 #: registration/templates/registration/admin/links.html:13
-#: registration/templates/registration/admin/view_helper.html:50
+#: registration/templates/registration/admin/view_helper.html:55
 #: registration/templates/registration/registered.html:64
 msgid "Shifts"
 msgstr "Schichten"
@@ -1201,6 +1202,10 @@ msgstr "Kann Newsletter versenden"
 msgid "There are no users, that can send news."
 msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
 
+#: registration/templates/registration/admin/resend_mail.html:15
+msgid "Send confirmation mail again?"
+msgstr "Bestätigungsmail nochmal senden?"
+
 #: registration/templates/registration/admin/search_helper.html:13
 msgid "Search"
 msgstr "Suchen"
@@ -1218,15 +1223,19 @@ msgstr "Zurück zur Aufgabe"
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
-#: registration/templates/registration/admin/view_helper.html:26
+#: registration/templates/registration/admin/view_helper.html:24
+msgid "Resend confirmation mail"
+msgstr "Bestätigungsmail nochmal senden"
+
+#: registration/templates/registration/admin/view_helper.html:31
 msgid "Helper did not validate the mail address."
 msgstr "Helfer hat die E-Mail Adresse nicht validiert"
 
-#: registration/templates/registration/admin/view_helper.html:32
+#: registration/templates/registration/admin/view_helper.html:37
 msgid "Coordinator"
 msgstr "Koordinator"
 
-#: registration/templates/registration/admin/view_helper.html:82
+#: registration/templates/registration/admin/view_helper.html:87
 msgid "Edit badge"
 msgstr "Badge bearbeiten"
 
@@ -1497,20 +1506,24 @@ msgstr "Veranstaltung gelöscht: %(name)s"
 msgid "Event was duplicated: %(event)s"
 msgstr "Veranstaltung wurde kopiert: %(event)s"
 
-#: registration/views/helper.py:142 registration/views/helper.py:173
+#: registration/views/helper.py:145 registration/views/helper.py:176
 msgid "Sending the mail failed, but the helper was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, der Helfer wurde dennoch gespeichert."
 
-#: registration/views/helper.py:253
+#: registration/views/helper.py:256
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:289
+#: registration/views/helper.py:292
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
+
+#: registration/views/helper.py:349
+msgid "Confirmation mail was sent"
+msgstr "Bestätigungsmail wurde gesendet"
 
 #: registration/views/job.py:58
 #, python-format

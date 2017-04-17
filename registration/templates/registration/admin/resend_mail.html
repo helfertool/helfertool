@@ -1,0 +1,20 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block admincontent %}
+    <h2>{{ helper.full_name }}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+        {% bootstrap_form_errors form %}
+
+        <div class="alert alert-info">
+            {% trans "Send confirmation mail again?" %}
+        </div>
+
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
+    </form>
+{% endblock %}

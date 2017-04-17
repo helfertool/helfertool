@@ -222,3 +222,13 @@ class HelperSearchForm(forms.Form):
         data = filter(lambda h: h.can_edit(self.user), data)
 
         return data
+
+
+class HelperResendMailForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.helper = kwargs.pop('helper')
+
+        super(HelperResendMailForm, self).__init__(*args, **kwargs)
+
+    def send(self, request):
+        self.helper.send_mail(request, False)

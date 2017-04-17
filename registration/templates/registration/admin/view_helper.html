@@ -18,6 +18,11 @@
         {% bootstrap_icon "pencil" %}
         {% trans "Edit" %}
     </a>
+    &nbsp;
+    <a href="{% url 'resend_mail' event.url_name helper.pk %}">
+        {% bootstrap_icon "envelope" %}
+        {% trans "Resend confirmation mail" %}
+    </a>
 
     {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
 
