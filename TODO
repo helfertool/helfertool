@@ -1,12 +1,9 @@
-Change feature
-==============
-
-schicht hinzufügen
-mail: deadline fürs ändern einfügen
-
 Important
 ==========
 
+* change after registration
+    * add more shifts
+    * add deadline to mail
 * allow empty mail addresses for internal registrations
 
 
@@ -22,7 +19,8 @@ Design, JS
 ==========
 
 * set width of table columns
-* Javascript translation with Django
+* Move JS to own files / Javascript translation with Django
+    * make CSP header possible
 * Datetimepickers for shift
   * begin < end
   * change end when begin is changed
@@ -34,7 +32,7 @@ Registration
 
 * bot protection (seems not to be necessary until now)
 * somehow make the notes for a job more visible
-* edit mail template
+* edit mail template / add custom message to mails?
 
 
 Admin area
@@ -45,7 +43,6 @@ Admin area
 * sort helpers and coordinators
 * mails
     * attachments?
-    * show sent mails also when event is archived
 * event date -> default for shift times
 
 
@@ -86,7 +83,7 @@ Inventory
 * modeltranslation for inventory and item names
 * delete item -> keep history for other events OR show warning on delete
 * make sure that barcodes are unique for all activated inventories of an event
-* edit item: unique_together leads to exception on same barcode
+* edit item: unique_together leads to exception on same barcode, handle the exception
 * export PDF with barcodes
 * used inventory for single job?
 
