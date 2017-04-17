@@ -159,7 +159,7 @@ def update_personal(request, event_url_name, helper_id):
                       public=True)
 
     if form.is_valid():
-        form.save()
+        form.save(request=request)
 
         return HttpResponseRedirect(reverse('registered',
                                             args=[event.url_name, helper.pk]))

@@ -4,7 +4,7 @@ you were registered for the following shifts:{% endblocktrans %}
 {% for shift in user.shifts.all %}
  * {{ shift }}
 {% endfor %}
-{% if event.mail_validation %}{% blocktrans %}You have to confirm your mail address by clicking on the following link: {{ validate_url }}
+{% if user.has_to_validate %}{% blocktrans %}You have to confirm your mail address by clicking on the following link: {{ validate_url }}
 
 {% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
 

@@ -41,14 +41,24 @@ class HelperForm(forms.ModelForm):
         if self.job or self.public:
             self.fields.pop('validated')
 
-    def save(self, commit=True):
+        self.old_email = self.instance.email
+
+    def save(self, commit=True, request=None):
         instance = super(HelperForm, self).save(False)
 
         instance.event = self.related_event
 
-        # new coordinator for job needs to validate mail address
-        if self.job and self.related_event.mail_validation:
-            instance.validated = False
+        if self.related_event.mail_validation:
+            # new coordinator for job needs to validate mail address
+            if self.job:
+                instance.validated = False
+
+            # invalidate email if it was changed over public interface
+            if self.public and self.old_email != instance.email:
+                instance.validated = False
+                self.old_email = instance.email
+                if request:
+                    instance.send_mail(request, False)
 
         if commit:
             instance.save()
