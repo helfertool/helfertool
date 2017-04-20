@@ -27,7 +27,6 @@ def index(request):
     involved_events = [e for e in events if not e.active and e.involved]
 
     if (len(active_events) == 1):
-        print("redirecting to ", active_events[0].url_name)
         return redirect (form, event_url_name=active_events[0].url_name)
 
     context = {'active_events': active_events,
