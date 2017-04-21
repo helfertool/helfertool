@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
@@ -25,6 +24,13 @@ def index(request):
     # filter events, that are not active and where user is not admin
     active_events = [e for e in events if e.active]
     involved_events = [e for e in events if not e.active and e.involved]
+
+    # only one public event and no internal events -> redirect always
+    # but no redirect for logged in users when multiple events exist
+    if len(active_events) == 1 and \
+            (len(involved_events) == 0 and
+             not request.user.is_authenticated()):
+        return redirect(form, event_url_name=active_events[0].url_name)
 
     context = {'active_events': active_events,
                'involved_events': involved_events}
