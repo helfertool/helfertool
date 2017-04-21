@@ -25,11 +25,8 @@ def index(request):
     active_events = [e for e in events if e.active]
     involved_events = [e for e in events if not e.active and e.involved]
 
-    # only one public event and no internal events -> redirect always
-    # but no redirect for logged in users when multiple events exist
-    if len(active_events) == 1 and \
-            (len(involved_events) == 0 and
-             not request.user.is_authenticated()):
+    # only one public event and no internal events -> redirect
+    if len(active_events) == 1 and len(involved_events) == 0:
         return redirect(form, event_url_name=active_events[0].url_name)
 
     context = {'active_events': active_events,
