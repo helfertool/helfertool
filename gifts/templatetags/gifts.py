@@ -11,6 +11,6 @@ def lookup_deservedgiftset_delivered(h, key):
 def lookup_deservedgiftset_present(h, key):
     return h['present_' + str(key)]
 
-@register.assignment_tag
+@register.simple_tag
 def gifts_for_shift(form, shift):
     return form.deservedgifts_for_shift(shift)

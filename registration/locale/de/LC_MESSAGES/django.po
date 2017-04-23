@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-21 14:06+0200\n"
-"PO-Revision-Date: 2017-04-17 14:32+0200\n"
+"POT-Creation-Date: 2017-04-23 12:05+0200\n"
+"PO-Revision-Date: 2017-04-23 12:05+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -621,7 +621,7 @@ msgid "Admin"
 msgstr "Admin"
 
 #: registration/templates/registration/admin/base.html:49
-#: registration/templates/registration/form.html:17
+#: registration/templates/registration/form.html:18
 msgid "This event is archived."
 msgstr "Diese Veranstaltung ist archiviert."
 
@@ -1249,7 +1249,7 @@ msgstr "Das Passwort kann nicht geändert werden."
 
 #: registration/templates/registration/changes_not_possible.html:8
 #: registration/templates/registration/deleted.html:8
-#: registration/templates/registration/form.html:6
+#: registration/templates/registration/form.html:7
 #: registration/templates/registration/invalid_link.html:8
 #: registration/templates/registration/not_active.html:8
 #: registration/templates/registration/registered.html:6
@@ -1279,9 +1279,13 @@ msgstr "Schicht"
 msgid "Sign off"
 msgstr "Abmelden"
 
-#: registration/templates/registration/form.html:23
+#: registration/templates/registration/form.html:24
 msgid "This public registration is disabled."
 msgstr "Die öffentliche Anmeldung ist deaktiviert."
+
+#: registration/templates/registration/form.html:31
+msgid "Manage event"
+msgstr "Veranstaltung verwalten"
 
 #: registration/templates/registration/helper_data.html:48
 msgid "Badge Barcode"
@@ -1557,7 +1561,7 @@ msgstr "%(username)s kann jetzt Newsletter versenden"
 msgid "Removed permission for user %(username)s"
 msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 
-#: registration/views/registration.py:80
+#: registration/views/registration.py:77
 msgid "Sending the mail failed, but the registration was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Anmeldung wurde dennoch gespeichert."

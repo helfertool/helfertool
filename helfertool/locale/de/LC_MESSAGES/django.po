@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-21 14:06+0200\n"
+"POT-Creation-Date: 2017-04-23 12:05+0200\n"
 "PO-Revision-Date: 2017-04-21 14:07+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -82,51 +82,50 @@ msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
 #: helfertool/templates/helfertool/base.html:60
-#: helfertool/templates/helfertool/base.html:72
+#: helfertool/templates/helfertool/base.html:69
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: helfertool/templates/helfertool/base.html:63
-msgctxt "Admin interface"
-msgid "Manage"
-msgstr "Verwalten"
-
-#: helfertool/templates/helfertool/base.html:65
+#: helfertool/templates/helfertool/base.html:62
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: helfertool/templates/helfertool/base.html:67
+#: helfertool/templates/helfertool/base.html:64
 msgid "Account"
 msgstr "Account"
 
-#: helfertool/templates/helfertool/base.html:68
+#: helfertool/templates/helfertool/base.html:65
 msgid "Support"
 msgstr "Support"
 
-#: helfertool/templates/helfertool/base.html:69
+#: helfertool/templates/helfertool/base.html:66
 msgid "Logout"
 msgstr "Logout"
 
-#: helfertool/templates/helfertool/base.html:71
+#: helfertool/templates/helfertool/base.html:68
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:96
+#: helfertool/templates/helfertool/base.html:93
 msgid "Switch"
 msgstr "Switch"
 
-#: helfertool/templates/helfertool/base.html:117
+#: helfertool/templates/helfertool/base.html:114
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:119
+#: helfertool/templates/helfertool/base.html:116
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:121
+#: helfertool/templates/helfertool/base.html:118
 msgid "About this software"
 msgstr "Über diese Software"
+
+#~ msgctxt "Admin interface"
+#~ msgid "Manage"
+#~ msgstr "Verwalten"
 
 #~ msgid "Documentation"
 #~ msgstr "Dokumentation"

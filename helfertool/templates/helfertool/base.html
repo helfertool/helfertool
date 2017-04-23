@@ -59,10 +59,7 @@
                              </p>
                             <li><a href="{% url "index" %}">{% trans "Events" %}</a></li>
                             {% if user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
-								{% if event %}
-                                <li><a href="{% url 'manage_event' event_url_name=event.url_name %}">{% trans "Manage" context "Admin interface" %}</a></li>
-								{% endif %}
-								<li><a href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a></li>
+                                <li><a href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a></li>
                             {% endif %}
                             <li><a href="{% url "change_user" %}">{% trans "Account" %}</a></li>
                             <li><a href="{% url "help:create_issue" %}">{% trans "Support" %}</a></li>

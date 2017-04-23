@@ -35,7 +35,7 @@ def has_perm_group(user):
 # admins, involved, job_admins
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def is_admin(context, event):
     if not event:
         return False
@@ -43,7 +43,7 @@ def is_admin(context, event):
     return event.is_admin(context["user"])
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def is_involved(context, event):
     if not event:
         return False
@@ -51,7 +51,7 @@ def is_involved(context, event):
     return event.is_involved(context["user"])
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def is_job_admin(context, job):
     if not job:
         return False
