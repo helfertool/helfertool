@@ -62,7 +62,7 @@ def register_badge(request, event_url_name, item_pk):
     if not event.inventory:
         return notactive(request)
 
-    other_assigned_helper = None
+    already_assigned = False
     try:
         item = Item.objects.get(pk=item_pk)
 
@@ -79,10 +79,10 @@ def register_badge(request, event_url_name, item_pk):
     except (KeyError, Item.DoesNotExist):
         form = None
     except AlreadyAssigned as e:
-        other_assigned_helper = e.helper
+        already_assigned = True
 
     context = {'event': event,
                'form': form,
-               'other_assigned_helper': other_assigned_helper}
+               'already_assigned': already_assigned}
     return render(request, 'inventory/register_badge.html',
                   context)

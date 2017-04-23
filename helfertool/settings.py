@@ -241,7 +241,6 @@ LANGUAGE_CODE = 'de'
 LANGUAGES = (
     ('de', _('German')),
     ('en', _('English')),
-    #('es', _('Spanish')),   # only for tests
 )
 
 TIME_ZONE = 'Europe/Berlin'

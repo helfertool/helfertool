@@ -3,7 +3,7 @@ from django.forms import DateField, DateInput, DateTimeField, DateTimeInput
 
 class DatePickerField(DateField):
     def __init__(self, *args, **kwargs):
-        super(DateField, self).__init__(*args, **kwargs)
+        super(DatePickerField, self).__init__(*args, **kwargs)
 
         self.widget = DateInput(attrs={
             'class': 'date',
@@ -14,7 +14,7 @@ class DatePickerField(DateField):
 
 class DateTimePickerField(DateTimeField):
     def __init__(self, *args, **kwargs):
-        super(DateTimeField, self).__init__(*args, **kwargs)
+        super(DateTimePickerField, self).__init__(*args, **kwargs)
 
         self.widget = DateTimeInput(attrs={
             'class': 'datetime',

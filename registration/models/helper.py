@@ -264,7 +264,6 @@ def helper_deleted(sender, **kwargs):
 
 def coordinator_deleted(sender, **kwargs):
     action = kwargs.pop('action')
-    instance = kwargs.pop('instance')
 
     if action == "post_remove":
         pk_set = kwargs.pop('pk_set')
@@ -274,6 +273,7 @@ def coordinator_deleted(sender, **kwargs):
         for helper_pk in pk_set:
             helper = model.objects.get(pk=helper_pk)
             helper.check_delete()
+
 
 m2m_changed.connect(helper_deleted, sender=Helper.shifts.through)
 m2m_changed.connect(coordinator_deleted, sender=Job.coordinators.through)

@@ -105,6 +105,7 @@ class Badge(models.Model):
             self.save()
 
         if self._old_photo != self.photo and self.photo:
+            # pylint: disable=no-member
             tasks.scale_badge_photo.delay(self.photo.path)
             self._old_photo = self.photo  # do not run task multiple times
 

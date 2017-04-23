@@ -23,7 +23,7 @@ urlpatterns = [
         name='edit_gift'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/gift/(?P<gift_pk>[0-9]+)/'
-         'delete/$',
+        'delete/$',
         views.delete_gift,
         name='delete_gift'),
 
@@ -35,12 +35,12 @@ urlpatterns = [
         name='add_gift_set'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/giftset/'
-         '(?P<gift_set_pk>[0-9]+)/$',
+        '(?P<gift_set_pk>[0-9]+)/$',
         views.edit_gift_set,
         name='edit_gift_set'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/giftset/'
-         '(?P<gift_set_pk>[0-9]+)/delete/$',
+        '(?P<gift_set_pk>[0-9]+)/delete/$',
         views.delete_gift_set,
         name='delete_gift_set'),
 
@@ -62,7 +62,7 @@ urlpatterns = [
     # set present flag for complete shifts
     #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/gifts/present/'
-         '(?P<shift_pk>[0-9]+)/$',
+        '(?P<shift_pk>[0-9]+)/$',
         views.set_present,
         name='set_present'),
 ]

@@ -4,7 +4,6 @@ from django.conf import settings
 from ckeditor.widgets import CKEditorWidget
 
 from ..models import Job
-from badges.models import BadgeRole
 
 from .fields import UserSelectField
 
@@ -54,6 +53,7 @@ class JobDeleteForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
 
 class JobDuplicateForm(JobForm):
     def __init__(self, *args, **kwargs):

@@ -21,6 +21,7 @@ def is_inventory_admin(context, inventory):
 
     return inventory.is_admin(context["user"])
 
+
 @register.filter
 def is_inventory_admin_any(user):
     return utils_inventory_admin(user)

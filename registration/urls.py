@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import url
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
@@ -131,7 +131,8 @@ urlpatterns = [
         views.delete_job,
         name='delete_job'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/duplicate/$',
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/'
+        'duplicate/$',
         views.duplicate_job,
         name='duplicate_job'),
 
@@ -221,7 +222,7 @@ urlpatterns = [
         name='export'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<type>[a-z]+)/all/'
-         '(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        '(?P<date_str>\d{4}-\d{2}-\d{2})/$',
         views.export,
         name='export_date'),
 

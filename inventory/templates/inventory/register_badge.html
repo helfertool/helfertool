@@ -14,7 +14,7 @@
         <form action="" method="post">
             {% csrf_token %}
 
-            {% if other_assigned_helper %}
+            {% if already_assigned %}
                 <div class="alert alert-danger">
                     {% trans "This item is already assigned to another helper." %}
                 </div>
@@ -24,9 +24,5 @@
         </form>
 
         <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan other item" %}</a>
-
-        {% if other_assigned_helper %}
-            <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
-        {% endif %}
     {% endif %}
 {% endblock %}

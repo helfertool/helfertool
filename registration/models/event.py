@@ -200,7 +200,7 @@ class Event(models.Model):
     shirt_sizes = MultiSelectField(
         choices=filter(lambda e: e[0] != 'UNKNOWN', SHIRT_CHOICES),
         default=list(filter(lambda e: e not in ('UNKNOWN', 'NO'),
-                       [e[0] for e in SHIRT_CHOICES])),
+                     [e[0] for e in SHIRT_CHOICES])),
         max_length=250,
         verbose_name=_("Available T-shirt sizes"),
     )

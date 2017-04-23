@@ -173,5 +173,6 @@ def job_pre_save(sender, instance, using, **kwargs):
 
         instance.badge_defaults = defaults
 
+
 # moving the import down here fixes a problem with a circular import
 from .helper import Helper

@@ -79,6 +79,7 @@ def delete_job(request, event_url_name, job_pk):
                'form': form}
     return render(request, 'registration/admin/delete_job.html', context)
 
+
 @login_required
 @archived_not_available
 def duplicate_job(request, event_url_name, job_pk):

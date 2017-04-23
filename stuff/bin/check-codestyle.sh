@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODULES="helfertool registration badges news gifts"
+MODULES="helfertool registration badges news gifts help mail inventory statistic"
 
 RED="\x1b[31m"
 GREEN="\x1b[32m"
@@ -27,11 +27,11 @@ for m in $modules ; do
     echo -ne "${GREEN}Checking module: $m${RESET}\t\t"
 
     # PEP8
-    pep_output="$(pep8 --exclude migrations --count --ignore $PEP8_IGNORES $m 2>&1)"
-    pep_errors="$(echo "$pep_output" | tail -n 1)"
-    pep_output="$(echo "$pep_output" | head -n -1)"
+    pep_output="$(pep8 --exclude migrations --ignore $PEP8_IGNORES $m 2>&1)"
     if [ -z "$pep_output" ] ; then
         pep_errors="0"
+    else
+        pep_errors="$(echo "$pep_output" | wc -l)"
     fi
 
     # pylint
@@ -52,7 +52,7 @@ for m in $modules ; do
     # PEP8 output
     if ! [ -z "$pep_output" ] ; then
         echo -e "${BLUE}PEP8${RESET}"
-        echo "$pep_output" | head -n -1
+        echo "$pep_output"
     fi
 
     # pylint

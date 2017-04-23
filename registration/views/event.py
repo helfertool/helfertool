@@ -88,6 +88,7 @@ def delete_event(request, event_url_name):
                'form': form}
     return render(request, 'registration/admin/delete_event.html', context)
 
+
 @login_required
 @archived_not_available
 def archive_event(request, event_url_name):
@@ -109,6 +110,7 @@ def archive_event(request, event_url_name):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/archive_event.html', context)
+
 
 @login_required
 def duplicate_event(request, event_url_name):

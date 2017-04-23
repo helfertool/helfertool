@@ -3,13 +3,12 @@ from django.core.urlresolvers import reverse
 
 from django_ical.views import ICalFeed
 
-from .models import Event, Helper
 from .views.utils import get_or_404
 
 
 class HelperFeed(ICalFeed):
     timezone = settings.TIME_ZONE
-    product_id =  "-//helfertool.org//Helfertool"
+    product_id = "-//helfertool.org//Helfertool"
 
     def get_object(self, request, event_url_name, helper_id):
         event, job, shift, helper = get_or_404(event_url_name,

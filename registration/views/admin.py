@@ -1,12 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Sum, ExpressionWrapper, F, fields
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
-
-from collections import OrderedDict
 
 from inventory.utils import is_inventory_admin
 
@@ -14,7 +11,7 @@ from .utils import nopermission, is_involved
 
 from ..decorators import archived_not_available
 from ..forms import CreateUserForm
-from ..models import Event, Shift
+from ..models import Event
 from ..templatetags.permissions import has_adduser_group, has_perm_group
 
 

@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from datetime import datetime
 
-from .exceptions import WrongHelper, InvalidMultipleAssignment, NotAssigned
+from .exceptions import WrongHelper, InvalidMultipleAssignment, NotAssigned, \
+    AlreadyAssigned
 
 
 class Inventory(models.Model):

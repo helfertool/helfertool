@@ -6,6 +6,7 @@ from registration.views.utils import nopermission
 
 from ..models import SentMail
 
+
 @login_required
 def show_mail(request, event_url_name, mail_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
