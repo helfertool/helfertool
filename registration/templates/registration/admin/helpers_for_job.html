@@ -96,4 +96,19 @@
            {% endif %}
         {% endfor %}
     {% endfor %}
+
+    <script type="text/javascript">
+        $(function () {
+            $(".table").DataTable({
+                "paging": false,
+                "searching": false,
+                "info": false,
+                "columnDefs": [
+                    { "orderable": false, "targets": 0 },
+                    { "orderable": false, "targets": 7 },
+                ],
+                "sorting": [[6, 'asc']],
+            });
+        });
+    </script>
 {% endblock %}

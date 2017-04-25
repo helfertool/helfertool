@@ -268,6 +268,8 @@ BOWER_INSTALLED_APPS = (
     'select2',
     'font-awesome',
     'chart.js',
+    'datatables.net',
+    'datatables.net-bs',
 )
 
 STATIC_URL = '/static/'

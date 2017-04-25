@@ -15,61 +15,65 @@ coordinators. This is only important for the delete_helper view.
 {% endcomment %}
 
 <table class="table">
-    <tr>
-        <th></th>
-        <th>{% trans "First name" %}</th>
-        <th>{% trans "Surname" %}</th>
-        {% if event.ask_shirt %}
-        <th>{% trans "T-shirt" %}</th>
-        {% endif %}
-        {% if event.ask_vegetarian %}
-        <th>{% trans "Vegetarian" %}</th>
-        {% endif %}
-        {% if job.infection_instruction %}
-        <th>{% trans "Food handling" %}</th>
-        {% endif %}
-        <th>{% trans "Comment" %}</th>
-        <th>{% trans "Registration time" %}</th>
-        <th></th>
-    </tr>
-    {% for helper in helpers|dictsort:"timestamp" %}
+    <thead>
         <tr>
-            <td>
-                {% if helper.has_to_validate %}
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>
-                {% endif %}
-            </td>
-            <td>{{ helper.firstname }}</td>
-            <td>{{ helper.surname }}</td>
+            <th></th>
+            <th>{% trans "First name" %}</th>
+            <th>{% trans "Surname" %}</th>
             {% if event.ask_shirt %}
-            <td>{{ helper.get_shirt_display }}</td>
+            <th>{% trans "T-shirt" %}</th>
             {% endif %}
             {% if event.ask_vegetarian %}
-            <td>{{ helper.vegetarian | yesno }}</td>
+            <th>{% trans "Vegetarian" %}</th>
             {% endif %}
             {% if job.infection_instruction %}
-            <td>{{ helper.get_infection_instruction_short }}</td>
+            <th>{% trans "Food handling" %}</th>
             {% endif %}
-            <td>{{ helper.comment }}</td>
-            <td>{{ helper.timestamp }}</td>
-            <td>
-                <a href="{% url 'view_helper' event.url_name helper.pk %}">
-                    {% bootstrap_icon "search" %}
-                    {% trans "View" %}
-                </a><br />
-
-                {% if shift %}
-                    <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
-                        {% bootstrap_icon "remove" %}
-                        {% trans "Delete" %}
-                    </a>
-                {% else %}
-                    <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
-                        {% bootstrap_icon "remove" %}
-                        {% trans "Delete" %}
-                    </a>
-                {% endif %}
-            </td>
+            <th>{% trans "Comment" %}</th>
+            <th>{% trans "Registration time" %}</th>
+            <th></th>
         </tr>
-    {% endfor %}
+    </thead>
+    <tbody>
+        {% for helper in helpers|dictsort:"timestamp" %}
+            <tr>
+                <td>
+                    {% if helper.has_to_validate %}
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>
+                    {% endif %}
+                </td>
+                <td>{{ helper.firstname }}</td>
+                <td>{{ helper.surname }}</td>
+                {% if event.ask_shirt %}
+                <td>{{ helper.get_shirt_display }}</td>
+                {% endif %}
+                {% if event.ask_vegetarian %}
+                <td>{{ helper.vegetarian | yesno }}</td>
+                {% endif %}
+                {% if job.infection_instruction %}
+                <td>{{ helper.get_infection_instruction_short }}</td>
+                {% endif %}
+                <td>{{ helper.comment }}</td>
+                <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
+                <td>
+                    <a href="{% url 'view_helper' event.url_name helper.pk %}">
+                        {% bootstrap_icon "search" %}
+                        {% trans "View" %}
+                    </a><br />
+
+                    {% if shift %}
+                        <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
+                            {% bootstrap_icon "remove" %}
+                            {% trans "Delete" %}
+                        </a>
+                    {% else %}
+                        <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
+                            {% bootstrap_icon "remove" %}
+                            {% trans "Delete" %}
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
 </table>
