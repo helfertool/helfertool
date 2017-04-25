@@ -33,7 +33,7 @@
                     {% trans "Keep this data" %}
                 </label>
 
-                {% include "registration/helper_data.html" with helper=helper %}
+                {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
 
                 <div style="margin-bottom: 2em;"></div>
             {% endfor %}
