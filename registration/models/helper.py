@@ -32,6 +32,8 @@ class Helper(models.Model):
         :timestamp: time of registration
         :validated: the validation link was clicked (if validation is enabled)
     """
+    class Meta:
+        ordering = ['event', 'surname', 'firstname']
 
     INSTRUCTION_NO = "No"
     INSTRUCTION_YES = "Yes"
