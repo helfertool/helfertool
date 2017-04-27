@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Sum, ExpressionWrapper, F, fields
+from django.db.models import Sum, Count, ExpressionWrapper, F, fields
 from django.shortcuts import render, get_object_or_404
 
 from collections import OrderedDict
@@ -38,6 +38,13 @@ def overview(request, event_url_name):
     num_shift_slots = Shift.objects.filter(job__event=event).aggregate(
         Sum('number'))['number__sum']
 
+    empty_slots_expr = ExpressionWrapper(F('number') - F('num_helpers'),
+                                         output_field=fields.IntegerField())
+    num_empty_shift_slots = Shift.objects.filter(job__event=event) \
+                            .annotate(num_helpers=Count('helper')) \
+                            .annotate(empty_slots=empty_slots_expr) \
+                            .aggregate(Sum('empty_slots'))['empty_slots__sum']
+
     total_duration = ExpressionWrapper((F('end') - F('begin')) * F('number'),
                                        output_field=fields.DurationField())
     hours_total = Shift.objects.filter(job__event=event) \
@@ -58,6 +65,7 @@ def overview(request, event_url_name):
                'num_coordinators': num_coordinators,
                'num_vegetarians': num_vegetarians,
                'num_shift_slots': num_shift_slots,
+               'num_empty_shift_slots': num_empty_shift_slots,
                'hours_total': hours_total,
                'timeline': timeline_sum}
     return render(request, 'statistic/overview.html', context)

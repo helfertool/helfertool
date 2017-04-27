@@ -9,11 +9,17 @@
     <table class="table">
         <tr>
             <th>{% trans "Number of shift slots" %}</th>
-            <td>{{ num_shift_slots }}</td>
+            <td>{{ num_shift_slots | default:"-" }}</td>
         </tr>
         <tr>
             <th>{% trans "Total number of hours (also free slots)" %}</th>
-            <td>{{ hours_total | duration_hours }} {% trans "hours" %}</td>
+            <td>
+                {% if hours_total %}
+                    {{ hours_total | duration_hours }} {% trans "hours" %}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
         </tr>
         <tr>
             <th class="col-sm-4">{% trans "Helpers and coordinators" %}</th>
@@ -29,6 +35,10 @@
                 <td>{{ num_vegetarians }}</td>
             </tr>
         {% endif %}
+        <tr>
+            <th>{% trans "Number of empty shift slots" %}</th>
+            <td>{{ num_empty_shift_slots | default:"-" }}</td>
+        </tr>
     </table>
 
     <h3>{% trans "Chronological development of registrations" %}</h3>

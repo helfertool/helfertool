@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 12:05+0200\n"
-"PO-Revision-Date: 2017-04-16 16:40+0200\n"
+"POT-Creation-Date: 2017-04-27 14:07+0200\n"
+"PO-Revision-Date: 2017-04-27 14:07+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -30,33 +30,37 @@ msgstr "Anzahl an Schichtslots"
 msgid "Total number of hours (also free slots)"
 msgstr "Gesamtzahl an Stunden (auch freie Slots)"
 
-#: statistic/templates/statistic/overview.html:16
+#: statistic/templates/statistic/overview.html:18
 msgid "hours"
 msgstr "Stunden"
 
-#: statistic/templates/statistic/overview.html:19
+#: statistic/templates/statistic/overview.html:25
 #: statistic/templates/statistic/shirts.html:21
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
-#: statistic/templates/statistic/overview.html:23
+#: statistic/templates/statistic/overview.html:29
 #: statistic/templates/statistic/shirts.html:27
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: statistic/templates/statistic/overview.html:28
+#: statistic/templates/statistic/overview.html:34
 msgid "Vegetarians"
 msgstr "Vegetarier"
 
-#: statistic/templates/statistic/overview.html:34
+#: statistic/templates/statistic/overview.html:39
+msgid "Number of empty shift slots"
+msgstr "Anzahl an leeren Schichtslots"
+
+#: statistic/templates/statistic/overview.html:44
 msgid "Chronological development of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
 
-#: statistic/templates/statistic/overview.html:44
+#: statistic/templates/statistic/overview.html:54
 msgid "Number of helpers"
 msgstr "Anzahl Helfer"
 
-#: statistic/templates/statistic/overview.html:70
+#: statistic/templates/statistic/overview.html:80
 msgid "No helpers are registered."
 msgstr "Es sind keine Helfer angemeldet."
 
