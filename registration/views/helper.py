@@ -313,6 +313,13 @@ def search_helper(request, event_url_name):
     new_search = True
 
     if form.is_valid():
+        # input was barcode -> redirect
+        helper = form.check_barcode()
+        if helper:
+            return HttpResponseRedirect(reverse(
+                'view_helper', args=[event_url_name, helper.pk]))
+
+        # else show results
         result = form.get()
         new_search = False
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 14:07+0200\n"
-"PO-Revision-Date: 2017-04-23 12:05+0200\n"
+"POT-Creation-Date: 2017-05-01 11:04+0200\n"
+"PO-Revision-Date: 2017-05-01 11:05+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -93,21 +93,21 @@ msgstr "Name"
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
-#: registration/forms/helper.py:103
+#: registration/forms/helper.py:104
 msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
 
-#: registration/forms/helper.py:107
+#: registration/forms/helper.py:108
 #, python-format
 msgid "This shift if already full: %(shift)s"
 msgstr "Die Schicht ist bereits voll: %(shift)s"
 
-#: registration/forms/helper.py:181
+#: registration/forms/helper.py:182
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 
-#: registration/forms/helper.py:216
+#: registration/forms/helper.py:217
 msgid "Search term"
 msgstr "Suchbegriff"
 
@@ -1206,11 +1206,15 @@ msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
 msgid "Send confirmation mail again?"
 msgstr "Bestätigungsmail nochmal senden?"
 
-#: registration/templates/registration/admin/search_helper.html:13
+#: registration/templates/registration/admin/search_helper.html:15
+msgid "You can also enter/scan a badge barcode."
+msgstr "Du kannst auch Badge Barcodes eingeben/scannen."
+
+#: registration/templates/registration/admin/search_helper.html:19
 msgid "Search"
 msgstr "Suchen"
 
-#: registration/templates/registration/admin/search_helper.html:18
+#: registration/templates/registration/admin/search_helper.html:24
 msgid "Result"
 msgstr "Ergebnis"
 
@@ -1528,7 +1532,7 @@ msgstr "Helfer gelöscht: %(name)s"
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
 
-#: registration/views/helper.py:340
+#: registration/views/helper.py:347
 msgid "Confirmation mail was sent"
 msgstr "Bestätigungsmail wurde gesendet"
 

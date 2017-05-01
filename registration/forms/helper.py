@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift, Job
+from badges.models import Badge
 
 from ..utils import u
 
@@ -214,6 +215,7 @@ class HelperSearchForm(forms.Form):
         min_length=2,
         max_length=100,
         label=_("Search term"),
+        widget=forms.TextInput(attrs={'autofocus': ''}),
     )
 
     def __init__(self, *args, **kwargs):
@@ -221,6 +223,28 @@ class HelperSearchForm(forms.Form):
         self.user = kwargs.pop('user')
 
         super(HelperSearchForm, self).__init__(*args, **kwargs)
+
+    def check_barcode(self):
+        if not self.event.badges:
+            return None
+
+        p = self.cleaned_data.get('pattern')
+
+        try:
+            barcode = int(p)
+        except ValueError:
+            return None
+
+        try:
+            badge = Badge.objects.get(helper__event=self.event,
+                                      barcode=barcode)
+        except Badge.DoesNotExist:
+            return None
+
+        if badge.helper.can_edit(self.user):
+            return badge.helper
+
+        return None
 
     def get(self):
         p = self.cleaned_data.get('pattern')

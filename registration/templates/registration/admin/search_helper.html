@@ -10,6 +10,12 @@
 
         {% bootstrap_form form %}
 
+        {% if event.badges %}
+            <p class="text-muted">
+                {% trans "You can also enter/scan a badge barcode." %}
+            </p>
+        {% endif %}
+
         <input type="submit" value="{% trans "Search" %}" class="btn btn-default" />
     </form>
 
