@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-01 11:04+0200\n"
-"PO-Revision-Date: 2017-04-16 16:40+0200\n"
+"PO-Revision-Date: 2017-05-03 17:18+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -76,8 +76,7 @@ msgstr "Du musst eine andere Antwortadresse angeben"
 
 #: mail/forms.py:152
 msgid "There are no helpers or coordinators that would receive this mail."
-msgstr ""
-"Es gibt keine Helfer oder Koordinatoren, die diese E-Mail empfangen würden."
+msgstr "Es gibt keine Helfer oder Koordinatoren, die diese E-Mail empfangen würden."
 
 #: mail/templates/mail/list_mails.html:6
 msgid "All mails"
