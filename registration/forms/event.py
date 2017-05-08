@@ -42,7 +42,8 @@ class EventForm(forms.ModelForm):
                 if field_id != "admins" and field_id != "url_name":
                     self.fields[field_id].disabled = True
 
-        if not self.instance.ask_shirt:
+        if not self.instance.ask_shirt and 'shirt_sizes' in self.fields:
+            # 'shirt_sizes' is not in fields for EventDuplicateForm
             self.fields.pop('shirt_sizes')
 
 
