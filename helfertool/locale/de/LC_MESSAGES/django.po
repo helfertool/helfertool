@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 11:04+0200\n"
+"POT-Creation-Date: 2017-05-09 17:33+0200\n"
 "PO-Revision-Date: 2017-05-03 17:18+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -72,54 +72,54 @@ msgstr "Error 500"
 msgid "The admins were notified already."
 msgstr "Die Admins wurden bereits benachrichtigt."
 
-#: helfertool/templates/helfertool/base.html:30
+#: helfertool/templates/helfertool/base.html:31
 msgid "Registration for helpers"
 msgstr "Helferanmeldung"
 
-#: helfertool/templates/helfertool/base.html:56
+#: helfertool/templates/helfertool/base.html:57
 #, python-format
 msgid "Hello %(username)s!"
 msgstr "Hallo %(username)s!"
 
-#: helfertool/templates/helfertool/base.html:60
-#: helfertool/templates/helfertool/base.html:69
+#: helfertool/templates/helfertool/base.html:61
+#: helfertool/templates/helfertool/base.html:70
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: helfertool/templates/helfertool/base.html:62
+#: helfertool/templates/helfertool/base.html:63
 msgctxt "Admin interface"
 msgid "Admin"
 msgstr "Admin"
 
-#: helfertool/templates/helfertool/base.html:64
+#: helfertool/templates/helfertool/base.html:65
 msgid "Account"
 msgstr "Account"
 
-#: helfertool/templates/helfertool/base.html:65
+#: helfertool/templates/helfertool/base.html:66
 msgid "Support"
 msgstr "Support"
 
-#: helfertool/templates/helfertool/base.html:66
+#: helfertool/templates/helfertool/base.html:67
 msgid "Logout"
 msgstr "Logout"
 
-#: helfertool/templates/helfertool/base.html:68
+#: helfertool/templates/helfertool/base.html:69
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:93
+#: helfertool/templates/helfertool/base.html:94
 msgid "Switch"
 msgstr "Switch"
 
-#: helfertool/templates/helfertool/base.html:114
+#: helfertool/templates/helfertool/base.html:115
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:116
+#: helfertool/templates/helfertool/base.html:117
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:118
+#: helfertool/templates/helfertool/base.html:119
 msgid "About this software"
 msgstr "Über diese Software"
 

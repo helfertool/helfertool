@@ -117,6 +117,11 @@ class EventDuplicateForm(EventForm):
             new_logo.name = os.path.basename(self.instance.logo.name)
             self.instance.logo = new_logo
 
+        if self.instance.logo_social:
+            new_logo_social = ContentFile(self.instance.logo_social.read())
+            new_logo_social.name = os.path.basename(self.instance.logo_social.name)
+            self.instance.logo_social = new_logo_social
+
         super(EventDuplicateForm, self).save(commit=True)  # we have to save
 
         # remove admins and add current user (done in save)

@@ -119,6 +119,15 @@ class Event(models.Model):
         verbose_name=_("Logo"),
     )
 
+    # note: there is code to duplicate the file in forms/event.py
+    logo_social = models.ImageField(
+        upload_to='logos',
+        blank=True,
+        null=True,
+        verbose_name=_("Logo for Facebook"),
+        help_text=_("Best results with 1052 x 548 px."),
+    )
+
     max_overlapping = models.IntegerField(
         null=True,
         blank=True,

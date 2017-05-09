@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 11:04+0200\n"
-"PO-Revision-Date: 2017-05-03 17:18+0200\n"
+"POT-Creation-Date: 2017-05-09 17:33+0200\n"
+"PO-Revision-Date: 2017-05-09 17:33+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -299,11 +299,19 @@ msgstr "Wird als Antwortadresse für E-Mails an Helfer verwendet"
 msgid "Logo"
 msgstr "Logo"
 
-#: registration/models/event.py:125
+#: registration/models/event.py:127
+msgid "Logo for Facebook"
+msgstr "Logo für Facebook"
+
+#: registration/models/event.py:128
+msgid "Best results with 1052 x 548 px."
+msgstr "Bestes Ergebnis mit 1052 x 548 px."
+
+#: registration/models/event.py:134
 msgid "Maximal overlapping of shifts"
 msgstr "Maximale Überlappung von Schichten"
 
-#: registration/models/event.py:126
+#: registration/models/event.py:135
 msgid ""
 "If two shifts overlap more than this value in minutes it is not possible to "
 "register for both shifts. Leave empty to disable this check."
@@ -312,15 +320,15 @@ msgstr ""
 "man sich nicht für beide Schichten anmelden. Wenn das Feld leer ist, wird "
 "die Überlappung nicht geprüft."
 
-#: registration/models/event.py:138
+#: registration/models/event.py:147
 msgid "Registration publicly visible"
 msgstr "Anmeldung öffentlich sichtbar"
 
-#: registration/models/event.py:142
+#: registration/models/event.py:151
 msgid "Deregistration and changes possible until"
 msgstr "Abmeldung und Änderungen möglich bis"
 
-#: registration/models/event.py:143
+#: registration/models/event.py:152
 msgid ""
 "Helpers can change their personal data and shifts until this date "
 "themselves. Leave emtpy to disable this."
@@ -328,28 +336,28 @@ msgstr ""
 "Helfer können ihre persönlichen Daten und Schichten bis zu diesem Datum "
 "selbst bearbeiten. Leer lassen, um dies zu deaktivieren."
 
-#: registration/models/event.py:151
+#: registration/models/event.py:160
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:156
+#: registration/models/event.py:165
 msgid "Ask, if helper is vegetarian"
 msgstr "Fragen, ob der Helfer Vegetarier ist"
 
-#: registration/models/event.py:161
+#: registration/models/event.py:170
 msgid "Helpers have to confirm to be full age"
 msgstr "Helfer müssen bestätigen, volljährig zu sein"
 
-#: registration/models/event.py:166
+#: registration/models/event.py:175
 msgid "Ask if helper wants to be notified about new events"
 msgstr ""
 "Fragen, ob der Helfer über weitere Veranstaltungen informiert werden möchte"
 
-#: registration/models/event.py:171
+#: registration/models/event.py:180
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:176
+#: registration/models/event.py:185
 msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
@@ -357,27 +365,27 @@ msgstr ""
 "Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
 "werden, der per E-Mail verschickt wird."
 
-#: registration/models/event.py:182
+#: registration/models/event.py:191
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
-#: registration/models/event.py:187
+#: registration/models/event.py:196
 msgid "Manage gifts for helpers"
 msgstr "Helfergeschenke verwalten"
 
-#: registration/models/event.py:192
+#: registration/models/event.py:201
 msgid "Use the inventory functionality"
 msgstr "Die Inventar Funktion verwenden"
 
-#: registration/models/event.py:197
+#: registration/models/event.py:206
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert."
 
-#: registration/models/event.py:205
+#: registration/models/event.py:214
 msgid "Available T-shirt sizes"
 msgstr "Verfügbare T-Shirt Größen"
 
-#: registration/models/event.py:227
+#: registration/models/event.py:236
 msgid "The following sizes are used and therefore cannot be removed: {}"
 msgstr ""
 "Die folgenden Größen werden verwendet und können daher nicht entfernt "
@@ -621,7 +629,7 @@ msgid "Admin"
 msgstr "Admin"
 
 #: registration/templates/registration/admin/base.html:54
-#: registration/templates/registration/form.html:18
+#: registration/templates/registration/form.html:30
 msgid "This event is archived."
 msgstr "Diese Veranstaltung ist archiviert."
 
@@ -1254,6 +1262,7 @@ msgstr "Das Passwort kann nicht geändert werden."
 #: registration/templates/registration/changes_not_possible.html:8
 #: registration/templates/registration/deleted.html:8
 #: registration/templates/registration/form.html:7
+#: registration/templates/registration/form.html:20
 #: registration/templates/registration/invalid_link.html:8
 #: registration/templates/registration/not_active.html:8
 #: registration/templates/registration/registered.html:6
@@ -1283,11 +1292,11 @@ msgstr "Schicht"
 msgid "Sign off"
 msgstr "Abmelden"
 
-#: registration/templates/registration/form.html:24
+#: registration/templates/registration/form.html:36
 msgid "This public registration is disabled."
 msgstr "Die öffentliche Anmeldung ist deaktiviert."
 
-#: registration/templates/registration/form.html:31
+#: registration/templates/registration/form.html:43
 msgid "Manage event"
 msgstr "Veranstaltung verwalten"
 
