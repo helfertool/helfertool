@@ -50,6 +50,7 @@ class Event(models.Model):
     SHIRT_L = 'L'
     SHIRT_XL = 'XL'
     SHIRT_XXL = 'XXL'
+    SHIRT_3XL = '3XL'
     SHIRT_S_GIRLY = 'S_GIRLY'
     SHIRT_M_GIRLY = 'M_GIRLY'
     SHIRT_L_GIRLY = 'L_GIRLY'
@@ -63,6 +64,7 @@ class Event(models.Model):
         (SHIRT_L, _('L')),
         (SHIRT_XL, _('XL')),
         (SHIRT_XXL, _('XXL')),
+        (SHIRT_3XL, _('3XL')),
         (SHIRT_S_GIRLY, _('S (girly)')),
         (SHIRT_M_GIRLY, _('M (girly)')),
         (SHIRT_L_GIRLY, _('L (girly)')),
