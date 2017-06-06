@@ -114,7 +114,7 @@ class BadgeCreator:
         try:
             f = self.settings.latex_template
             f.open('r')
-            template = f.read().decode('utf-8')
+            template = f.read()
             f.close()
         except IOError as e:
             raise BadgeCreatorError("Cannot open file \"%s\": %s" %

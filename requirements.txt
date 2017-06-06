@@ -1,4 +1,4 @@
-Django>=1.10
+Django>=1.11
 django-modeltranslation>=0.12
 django-bootstrap3
 django-bower
