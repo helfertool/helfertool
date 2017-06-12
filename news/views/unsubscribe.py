@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -15,7 +16,7 @@ def unsubscribe(request, token):
         person = Person.objects.get(token=token)
     except Person.DoesNotExist:
         return render(request, 'news/unsubscribe.html')
-    except ValueError:
+    except ValidationError:
         raise Http404()
 
     form = UnsubscribeForm(request.POST or None)

@@ -19,8 +19,8 @@
 
     {% if event.active %}
         <p>
-            <a href="{% url "form" event.url_name %}">
-                {% trans "Go to the registration." %}
+            <a href="{% url "form" event.url_name %}" class="btn btn-primary">
+                {% trans "Go to the registration" %}
             </a>
         </p>
     {% endif %}

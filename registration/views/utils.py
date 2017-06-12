@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 
@@ -45,7 +46,7 @@ def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
     try:
         if helper_pk:
             helper = get_object_or_404(Helper, pk=helper_pk)
-    except ValueError:
+    except ValidationError:
         raise Http404
 
     # sanity checks
