@@ -33,7 +33,7 @@
                 {% for h in helpers %}
                     <tr>
                         <td><a href="{% url "view_helper" event.url_name h.pk %}">{{ h.full_name }}</a></td>
-                        <td>{{ h.shirt }}</td>
+                        <td>{{ h.get_shirt_display }}</td>
                     </tr>
                 {% endfor %}
             </table>
