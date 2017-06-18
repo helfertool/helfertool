@@ -22,9 +22,21 @@
                 {% bootstrap_field form.begin %}
                 {% bootstrap_field form.end %}
                 {% bootstrap_field form.number %}
-                {% bootstrap_field form.blocked %}
             </div>
         </div>
+
+        <label>{% trans "Settings for public jobs" %}</label>
+
+        <div class="text-muted">
+            {% blocktrans trimmed %}
+                The following two settings are only relevant for public jobs.
+                When a shift is hidden, it is not necessary to block it additionally.
+                The registration over a link is always possible.
+            {% endblocktrans %}
+        </div>
+
+        {% bootstrap_field form.blocked %}
+        {% bootstrap_field form.hidden %}
 
         {% if form.gifts %}
             {% bootstrap_field form.gifts %}

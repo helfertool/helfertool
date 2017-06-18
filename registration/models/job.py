@@ -99,7 +99,7 @@ class Job(models.Model):
         coordinators = self.coordinators.distinct()
         return helpers | coordinators
 
-    def shifts_by_day(self, shifts=None):
+    def shifts_by_day(self, shifts=None, show_hidden=True):
         """ Returns all shifts grouped sorted by day and sorted by time.
 
         The result is a dict with date objects as keys. Each item of the
@@ -107,12 +107,18 @@ class Job(models.Model):
 
         :param shifts: list of shifts, must be shifts of this job (optional)
         :type shifts: list of Shift objects
+
+        :param show_hidden: list hidden shifts
+        :type show_hidden: boolean
         """
         tmp_shifts = dict()
 
         # no shifts are given -> use all shifts of this job
         if not shifts:
-            shifts = self.shift_set.all()
+            if show_hidden:
+                shifts = self.shift_set.all()
+            else:
+                shifts = self.shift_set.filter(hidden=False)
 
         # iterate over all shifts and group them by day
         # (itertools.groupby is strange...)

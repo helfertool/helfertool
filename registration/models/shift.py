@@ -21,6 +21,7 @@ class Shift(models.Model):
         :end: end of the shift
         :number: number of people
         :blocked: shift is blocked, if the job is public
+        :hidden: shift is not displayed publicly
         :name: name of the shift (optional)
     """
     class Meta:
@@ -53,8 +54,12 @@ class Shift(models.Model):
 
     blocked = models.BooleanField(
         default=False,
-        verbose_name=_("If the job is publicly visible, "
-                       "the shift is blocked."),
+        verbose_name=_("The shift is blocked and displayed as full."),
+    )
+
+    hidden = models.BooleanField(
+        default=False,
+        verbose_name=_("The shift is not visible."),
     )
 
     gifts = models.ManyToManyField(

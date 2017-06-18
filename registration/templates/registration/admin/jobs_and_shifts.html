@@ -65,7 +65,9 @@
                 {% for shift in job.shift_set.all %}
                     <tr>
                         <td>
-                            {% if shift.blocked %}
+                            {% if shift.hidden %}
+                                <span class="glyphicon glyphicon-eye-close" title="{% trans "Hidden" %}" aria-hidden="true"></span>
+                            {% elif shift.blocked %}
                                 <span class="glyphicon glyphicon-lock" title="{% trans "Blocked" %}" aria-hidden="true"></span>
                             {% endif %}
                             {{ shift.begin }}

@@ -90,7 +90,9 @@
                 {% for day, shifts in job.shifts_by_day.items %}
                     <td>
                         {% for shift in shifts %}
-                            {% if shift.blocked %}
+                            {% if shift.hidden %}
+                                <span class="glyphicon glyphicon-eye-close" title="{% trans "Hidden" %}" aria-hidden="true"></span>
+                            {% elif shift.blocked %}
                                 <span class="glyphicon glyphicon-lock" title="{% trans "Blocked" %}" aria-hidden="true"></span>
                             {% endif %}
 

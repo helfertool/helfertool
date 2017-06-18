@@ -70,7 +70,8 @@ class RegisterForm(forms.ModelForm):
         if self.displayed_shifts:
             all_shifts = self.displayed_shifts
         else:
-            all_shifts = Shift.objects.filter(job__event=self.event)
+            all_shifts = Shift.objects.filter(job__event=self.event,
+                                              hidden=False)
 
         # add fields for shifts
         for shift in all_shifts:
@@ -113,7 +114,7 @@ class RegisterForm(forms.ModelForm):
             shifts = self.displayed_shifts.filter(job=job)
             return job.shifts_by_day(shifts)
         else:
-            return job.shifts_by_day()
+            return job.shifts_by_day(show_hidden=self.internal or self.link)
 
     def clean(self):
         """ Custom validation of shifts and other fields.
