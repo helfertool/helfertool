@@ -110,6 +110,11 @@ table.shifts label
     vertical-align: top;
 }
 
+table.shifts label del
+{
+    font-weight: normal;
+}
+
 /* icons (like xls or pdf) */
 a.icon
 {
