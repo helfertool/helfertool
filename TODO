@@ -5,7 +5,6 @@ Important
     * add more shifts
     * add deadline to mail
 * allow empty mail addresses for internal registrations
-* hide shifts
 
 
 Django things

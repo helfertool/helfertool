@@ -76,6 +76,8 @@ def view_helper(request, event_url_name, helper_pk):
         if gifts_form.is_valid():
             gifts_form.save()
 
+            messages.success(request, _("Gifts were saved."))
+
             return HttpResponseRedirect(reverse('view_helper',
                                                 args=[event_url_name,
                                                       helper.pk]))
