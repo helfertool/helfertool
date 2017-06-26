@@ -1,0 +1,29 @@
+version: '2'
+
+networks:
+  default:
+
+volumes:
+  helfertool:
+  rabbitmq:
+
+services:
+  helfertool:
+    image: maxklock/helfertool
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - helfertool:/app/helfertool
+    networks:
+      - default
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      - default
