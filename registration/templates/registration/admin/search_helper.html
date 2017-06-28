@@ -24,7 +24,12 @@
             <h3>{% trans "Result" %}</h3>
             <ul>
                 {% for helper in result %}
-                    <li><a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a></li>
+                    <li>
+                        <a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a>
+                        {% if event.badges and event.badge_settings.barcodes and event.inventory %}
+                            ({% trans "Barcode" %}: {{ helper.badge.barcode }})
+                        {% endif %}
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
