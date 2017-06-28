@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 12:08+0200\n"
-"PO-Revision-Date: 2017-05-03 17:18+0200\n"
+"POT-Creation-Date: 2017-06-28 16:48+0200\n"
+"PO-Revision-Date: 2017-06-28 16:48+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -139,19 +139,20 @@ msgstr "Wird nicht verwendet"
 msgid "%(num_uses)s times in use"
 msgstr "%(num_uses)s mal in Verwendung"
 
-#: inventory/templates/inventory/list.html:31
-msgid "In use"
-msgstr "Wird verwendet"
+#: inventory/templates/inventory/list.html:33
+#, python-format
+msgid "In use: %(helper)s"
+msgstr "In Verwendung: %(helper)s"
 
-#: inventory/templates/inventory/list.html:37
+#: inventory/templates/inventory/list.html:43
 msgid "Show log"
 msgstr "Zeige Log"
 
-#: inventory/templates/inventory/list.html:48
+#: inventory/templates/inventory/list.html:54
 msgid "to"
 msgstr "bis"
 
-#: inventory/templates/inventory/list.html:54
+#: inventory/templates/inventory/list.html:60
 msgid "Since"
 msgstr "Seit"
 
@@ -244,3 +245,6 @@ msgstr "Der Helfer hat noch folgende Gegenstände:"
 #: inventory/templates/inventory/take_back_item.html:35
 msgid "Everything returned!"
 msgstr "Alles zurück gegeben!"
+
+#~ msgid "In use"
+#~ msgstr "Wird verwendet"

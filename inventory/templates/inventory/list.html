@@ -28,7 +28,13 @@
                             {% endblocktrans %}
                         </span>
                     {% else %}
-                        <span style="color:red;">{% trans "In use" %}</span>
+                        <span style="color:red;">
+                        {% with group.list|last as last %}
+                            {% blocktrans trimmed with helper=last.helper%}
+                                In use: {{ helper }}
+                            {% endblocktrans %}
+                        {% endwith %}
+                        </span>
                     {% endif %}
 
                     <br/>
