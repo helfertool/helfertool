@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum, Count, ExpressionWrapper, F, fields
+from django.db.utils import OperationalError
 from django.shortcuts import render, get_object_or_404
 
 from collections import OrderedDict
@@ -47,9 +48,12 @@ def overview(request, event_url_name):
 
     total_duration = ExpressionWrapper((F('end') - F('begin')) * F('number'),
                                        output_field=fields.DurationField())
-    hours_total = Shift.objects.filter(job__event=event) \
-                       .annotate(duration=total_duration) \
-                       .aggregate(Sum('duration'))['duration__sum']
+    try:
+        hours_total = Shift.objects.filter(job__event=event) \
+                           .annotate(duration=total_duration) \
+                           .aggregate(Sum('duration'))['duration__sum']
+    except (OperationalError, OverflowError):
+        hours_total = None
 
     # sum up timeline
     timeline = OrderedDict(sorted(timeline.items()))
