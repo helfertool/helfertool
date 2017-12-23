@@ -43,6 +43,7 @@ class Item(models.Model):
 
     inventory = models.ForeignKey(
         Inventory,
+        on_delete=models.CASCADE,
     )
 
     name = models.CharField(
@@ -113,10 +114,12 @@ class UsedItem(models.Model):
 
     helper = models.ForeignKey(
         'registration.Helper',
+        on_delete=models.CASCADE,
     )
 
     item = models.ForeignKey(
         Item,
+        on_delete=models.CASCADE,
     )
 
     timestamp = models.DateTimeField(
@@ -131,7 +134,8 @@ class UsedItem(models.Model):
 
 class InventorySettings(models.Model):
     event = models.OneToOneField(
-        'registration.Event'
+        'registration.Event',
+        on_delete=models.CASCADE,
     )
 
     available_inventory = models.ManyToManyField(

@@ -24,6 +24,7 @@ class Issue(models.Model):
 
     sender = models.ForeignKey(
         User,
+        on_delete=models.CASCADE,
     )
 
     date = models.DateTimeField(
@@ -46,6 +47,7 @@ class Issue(models.Model):
         User,
         null=True,
         related_name='+',
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

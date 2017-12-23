@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^djangoadmin/', include(admin.site.urls)),
+    url(r'^djangoadmin/', admin.site.urls),
 
     url(r'^i18n/', include('django.conf.urls.i18n')),
 

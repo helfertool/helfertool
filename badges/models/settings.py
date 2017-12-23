@@ -26,11 +26,13 @@ class BadgeSettings(models.Model):
     """
 
     event = models.OneToOneField(
-        'registration.Event'
+        'registration.Event',
+        on_delete=models.CASCADE,
     )
 
     defaults = models.OneToOneField(
-        'BadgeDefaults'
+        'BadgeDefaults',
+        on_delete=models.CASCADE,
     )
 
     latex_template = models.FileField(

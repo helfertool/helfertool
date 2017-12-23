@@ -9,11 +9,13 @@ class SentMail(models.Model):
         ordering = ['-date', ]
 
     event = models.ForeignKey(
-        'registration.Event'
+        'registration.Event',
+        on_delete=models.CASCADE,
     )
 
     user = models.ForeignKey(
         User,
+        on_delete=models.CASCADE,
     )
 
     date = models.DateTimeField(

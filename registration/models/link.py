@@ -21,6 +21,7 @@ class Link(models.Model):
 
     event = models.ForeignKey(
         'Event',
+        on_delete=models.CASCADE,
     )
 
     shifts = models.ManyToManyField(
@@ -29,6 +30,7 @@ class Link(models.Model):
 
     creator = models.ForeignKey(
         User,
+        on_delete=models.CASCADE,
     )
 
     usage = models.CharField(

@@ -12,6 +12,7 @@ class HelpersGifts(models.Model):
     helper = models.OneToOneField(
         'registration.Helper',
         related_name = 'gifts',
+        on_delete=models.CASCADE,
     )
 
     deposit = models.IntegerField(

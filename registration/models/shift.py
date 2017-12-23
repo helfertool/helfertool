@@ -29,6 +29,7 @@ class Shift(models.Model):
 
     job = models.ForeignKey(
         'Job',
+        on_delete=models.CASCADE,
     )
 
     name = models.CharField(

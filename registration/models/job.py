@@ -28,6 +28,7 @@ class Job(models.Model):
 
     event = models.ForeignKey(
         'Event',
+        on_delete=models.CASCADE,
     )
 
     name = models.CharField(
@@ -64,6 +65,7 @@ class Job(models.Model):
         BadgeDefaults,
         blank=True,
         null=True,
+        on_delete=models.CASCADE,
     )
 
     archived_number_coordinators = models.IntegerField(

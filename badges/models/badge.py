@@ -15,6 +15,7 @@ def _badge_upload_path(instance, filename):
 class Badge(models.Model):
     helper = models.OneToOneField(
         'registration.Helper',
+        on_delete=models.CASCADE,
     )
 
     barcode = models.PositiveIntegerField(

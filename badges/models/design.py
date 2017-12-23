@@ -35,6 +35,7 @@ class BadgeDesign(models.Model):
 
     badge_settings = models.ForeignKey(
         BadgeSettings,
+        on_delete=models.CASCADE,
     )
 
     name = models.CharField(

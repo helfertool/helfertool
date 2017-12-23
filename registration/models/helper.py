@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
@@ -64,6 +64,7 @@ class Helper(models.Model):
 
     event = models.ForeignKey(
         'Event',
+        on_delete=models.CASCADE,
     )
 
     firstname = models.CharField(
