@@ -11,17 +11,17 @@ class IncludedGift(models.Model):
 
     gift_set = models.ForeignKey(
         'GiftSet',
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
     )
 
     gift = models.ForeignKey(
         'Gift',
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
     )
 
     count = models.IntegerField(
-        verbose_name = _("Count"),
-        default = 1,
+        verbose_name=_("Count"),
+        default=1,
         validators=[MinValueValidator(1)],
     )
 

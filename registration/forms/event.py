@@ -119,7 +119,8 @@ class EventDuplicateForm(EventForm):
 
         if self.instance.logo_social:
             new_logo_social = ContentFile(self.instance.logo_social.read())
-            new_logo_social.name = os.path.basename(self.instance.logo_social.name)
+            new_logo_social.name = os.path.basename(
+                self.instance.logo_social.name)
             self.instance.logo_social = new_logo_social
 
         super(EventDuplicateForm, self).save(commit=True)  # we have to save

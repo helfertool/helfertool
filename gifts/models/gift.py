@@ -8,13 +8,13 @@ from copy import deepcopy
 @python_2_unicode_compatible
 class Gift(models.Model):
     name = models.CharField(
-        max_length = 200,
+        max_length=200,
         verbose_name=_("Name"),
     )
 
     event = models.ForeignKey(
         'registration.Event',
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

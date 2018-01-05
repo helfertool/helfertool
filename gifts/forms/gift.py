@@ -23,6 +23,7 @@ class GiftForm(forms.ModelForm):
 
         return instance
 
+
 class GiftDeleteForm(forms.ModelForm):
     class Meta:
         model = Gift

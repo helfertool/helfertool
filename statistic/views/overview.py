@@ -42,9 +42,9 @@ def overview(request, event_url_name):
     empty_slots_expr = ExpressionWrapper(F('number') - F('num_helpers'),
                                          output_field=fields.IntegerField())
     num_empty_shift_slots = Shift.objects.filter(job__event=event) \
-                            .annotate(num_helpers=Count('helper')) \
-                            .annotate(empty_slots=empty_slots_expr) \
-                            .aggregate(Sum('empty_slots'))['empty_slots__sum']
+        .annotate(num_helpers=Count('helper')) \
+        .annotate(empty_slots=empty_slots_expr) \
+        .aggregate(Sum('empty_slots'))['empty_slots__sum']
 
     total_duration = ExpressionWrapper((F('end') - F('begin')) * F('number'),
                                        output_field=fields.DurationField())

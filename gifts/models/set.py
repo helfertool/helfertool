@@ -12,19 +12,19 @@ from copy import deepcopy
 @python_2_unicode_compatible
 class GiftSet(models.Model):
     name = models.CharField(
-        max_length = 200,
+        max_length=200,
         verbose_name=_("Name"),
     )
 
     gifts = models.ManyToManyField(
         Gift,
         verbose_name=_("Gifts"),
-        through = IncludedGift,
+        through=IncludedGift,
     )
 
     event = models.ForeignKey(
         'registration.Event',
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

@@ -36,7 +36,6 @@ class HelpersGiftsForm(forms.ModelForm):
 
         for giftset in self.instance.deservedgiftset_set.all():
             delivered_id_str = "delivered_{}".format(giftset.pk)
-            #present_id_str = "present_{}".format(giftset.pk)
 
             giftset.delivered = self.cleaned_data[delivered_id_str]
             giftset.save()

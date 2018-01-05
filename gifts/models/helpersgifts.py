@@ -11,21 +11,21 @@ from .deservedgiftset import DeservedGiftSet
 class HelpersGifts(models.Model):
     helper = models.OneToOneField(
         'registration.Helper',
-        related_name = 'gifts',
+        related_name='gifts',
         on_delete=models.CASCADE,
     )
 
     deposit = models.IntegerField(
-        verbose_name = _("Deposit"),
-        default = None,
-        null = True,
-        blank = True,
+        verbose_name=_("Deposit"),
+        default=None,
+        null=True,
+        blank=True,
         validators=[MinValueValidator(1)],
     )
 
     deposit_returned = models.BooleanField(
-        verbose_name = _("Deposit returned"),
-        default = False,
+        verbose_name=_("Deposit returned"),
+        default=False,
     )
 
     got_shirt = models.BooleanField(
@@ -40,14 +40,14 @@ class HelpersGifts(models.Model):
 
     deserved_gifts = models.ManyToManyField(
         GiftSet,
-        verbose_name = _("Deserved gifts"),
-        blank = True,
-        through = DeservedGiftSet,
+        verbose_name=_("Deserved gifts"),
+        blank=True,
+        through=DeservedGiftSet,
     )
 
     accomplished_shifts = models.ManyToManyField(
         'registration.Shift',
-        blank = True,
+        blank=True,
     )
 
     def update(self):
