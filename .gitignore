@@ -12,9 +12,6 @@ Session.vim
 *.log
 *.pot
 
-# sphinx
-/doc/build/
-
 # upload directory
 /media/
 
