@@ -1,100 +1,25 @@
+Helfertool is a Python3 and Django based tool that allows to manage the
+volunteers or staff for an event.
+
+See <https://www.helfertool.org> for more information.
+
 # Install
 
-## Dependencies
+Please have a look at the
+[deployment guide](https://docs.helfertool.org/deploy/index.html)
+in our documentation.
 
- * Python 3
- * Bower (depends on node and npm)
- * pdflatex (from TeX Live)
- * Redis or RabbitMQ (RabbitMQ is recommended)
- * DB software that is supported by Django (use SQLite for development)
+# Environment for development
 
-## Setup environment
+Most of the steps are described in the
+[deployment guide](https://docs.helfertool.org/deploy/index.html),
+you can skip the installation and configuration of a webserver.
 
-It is recommended to use a Python virtual environment:
-
-    pyvenv helfertool
-    cd helfertool
-
-    npm install bower
-    # fix so that bower is found inside the virtualenv
-    ln -s "$(pwd)/node_modules/bower/bin/bower" "bin/bower"
-
-    . ./bin/activate
-
-    git clone https://github.com/helfertool/helfertool.git
-
-## Python modules
-
-The required Python modules are listed in the file requirements.txt, install
-it with pip:
-
-    pip install -r requirements.txt
-
-For development some more modules may be useful:
-
-    pip install -r requirements_dev.txt
-
-Since you probably will not use SQLite in your live system you have to install
-the python module for your database:
-https://docs.djangoproject.com/en/dev/ref/databases/
-
-For MySQL we use mysqlclient which is also recommended by Django.
-
-## Bower packages
-
-To install the necessary CSS and JS libraries, execute:
-
-    python manage.py bower install
-
-## LaTeX packages
-
-These packages or parts of LaTeX are necessary to use the default badge
-template:
-
- * TikZ
- * grffile
- * ifthen
- * ulem
- * makebarcode
-
-These packages are included in TeX Live and should be installed anyway.
-
-## Set secret key
-
-You have to set a secret key in the configuration file
-`helfertool/settings.py`:
-
-    SECRET_KEY = 'CHANGE-ME-AFTER-INSTALL'
-
-You can generate a new key using the script `./stuff/bin/gen-secret-key.py`.
-
-## Database
-
-The database configuration is done in `helfertool/settings.py`:
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-
-Look at https://docs.djangoproject.com/en/dev/ref/databases/ for examples
-how to configure Django to use an other database.
-
-Now you should run the database migrations:
-
-    python manage.py migrate
+There are some differences to the deployment guide that should make life
+easier for you:
 
 ## Celery
 
-Since the software uses Celery you need one of the supported message brokers,
-we use RabbitMQ for development and deployment.
-
-### Deployment
-For deployment we installed RabbitMQ using the package repository.
-
-### Development
 For development, RabbitMQ is installed using Docker (note: the RabbitMQ server
 listens on port 5672 to every incoming connection, you should configure a
 firewall):
@@ -113,8 +38,6 @@ To update the RabbitMQ container later:
     docker rm helfertool-rabbitmq
     docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
-
-### Configuration and start
 
 Change the broker configuration in `helfertool/settings.py`.
 
@@ -146,40 +69,7 @@ Additionally uncomment the following lines in `helfertool/settings.py`:
 The advantage of this method compared to the console backend from Django is,
 that you also see the mails sent in Celery tasks in the same window.
 
-## Create superuser
-
-Now a superuser should be created:
-
-    python manage.py createsuperuser
-
-## Create git branch for local configuration
-
-To make further updates easier it is a good idea to put the changes in a new
-branch called "local" here:
-
-    git stash
-    git stash branch local
-    git commit -a -m "Modified configuration"
-
-You should not push this branch to any server since it contains you database
-password!
-
-At the end you should also make sure that the configuration is not readable
-for all users:
-
-    chmod 640 helfertool/settings.py
-
-# Run for development
-
-For development the following steps should be done:
-
-Start RabbitMQ:
-
-    docker start helfertool-rabbitmq
-
-Start celery:
-
-    celery -A helfertool worker -c 2 --loglevel=info
+## Runserver
 
 Start the webserver for development:
 
@@ -187,78 +77,9 @@ Start the webserver for development:
 
 Now visit http://localhost:8000 with your browser.
 
-# Deployment
-
-There are a lot of possibilities to deploy a Django project. For
-helfen.fs.tum.de Apache2, uWSGI and MySQL are used. See here for the webserver
-part: https://docs.djangoproject.com/en/dev/howto/deployment/wsgi/uwsgi/
-
-Instead of installing uwsgi with pip we used the Debian repository.
-
-The used uWSGI configuration is in `stuff/deployment/uwsgi.conf`. It uses
-Python 3.4 and automatically reloads Celery when uWSGI is touch-reloaded.
-
-You may have to change the value of `AXES_REVERSE_PROXY_HEADER` in
-`settings.py`, maybe `HTTP_X_FORWARDED_FOR` is correct for your setup.
-Otherwise django-axes blocks the IP 127.0.0.1 after a few invalid logins.
-The correct value depends on your webserver/reverse proxy.
-
-# Upgrades
-
-There are a few steps to update a instance of the helfertool, assuming you
-followed the steps above:
-
-    # entern virtual env
-    . ./bin/activate
-    cd helfertool
-
-    # update source code
-    git checkout master
-    git pull
-    git checkout local
-    git merge master
-
-    # make sure the configuration is not readable for all users
-    chmod 640 helfertool/settings.py
-
-    # update dependencies
-    pip install -r requirements.txt
-    python manage.py bower install
-
-    # install migrations
-    python manage.py migrate
-
-    # update static files
-    python manage.py collectstatic --noinput
-
-# Command line interface
-
-In addition to the CLI of Django this software provides these commands:
-
-## openregistration
-
-    python manage.py openregistration test
-
-*test* is the URL name.
-
-## closeregistration
-
-    python manage.py closeregistration test
-
-*test* is the URL name.
-
-## Using at to open the registration
-
-To open the registration for a event at a specific time, the at daemon can be
-used:
-
-    at '13:55 10/18/2015'
-
-If you use a virtualenv you need a script like `stuff/bin/open-registration.sh`.
-
 # LICENSE
 
-Copyright (C) 2015  Sven Hertle
+Copyright (C) 2018  Sven Hertle
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
