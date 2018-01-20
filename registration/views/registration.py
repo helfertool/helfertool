@@ -74,7 +74,7 @@ def form(request, event_url_name, link_pk=None):
 
         try:
             helper.send_mail(request, internal=False)
-        except SMTPException:
+        except (SMTPException, ConnectionError):
             messages.error(request, _("Sending the mail failed, but the "
                                       "registration was saved."))
         return HttpResponseRedirect(reverse('registered',

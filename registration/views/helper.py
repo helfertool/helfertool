@@ -134,7 +134,7 @@ def add_helper(request, event_url_name, shift_pk):
 
         try:
             helper.send_mail(request, internal=True)
-        except SMTPException:
+        except (SMTPException, ConnectionError):
             messages.error(request, _("Sending the mail failed, but the "
                                       "helper was saved."))
 
@@ -165,7 +165,7 @@ def add_coordinator(request, event_url_name, job_pk):
 
         try:
             helper.send_mail(request, internal=True)
-        except SMTPException:
+        except (SMTPException, ConnectionError):
             messages.error(request, _("Sending the mail failed, but the "
                                       "helper was saved."))
         return HttpResponseRedirect(reverse('helpers',
