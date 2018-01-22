@@ -1,5 +1,7 @@
 from django import forms
 
+from ..models import Duplicate
+
 
 class MergeDuplicatesForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -29,6 +31,9 @@ class MergeDuplicatesForm(forms.Form):
 
                 if remaining_helper.event.gifts:
                     remaining_helper.gifts.merge(helper.gifts)
+
+                Duplicate.objects.create(deleted=helper.id,
+                                         existing=remaining_helper)
 
                 helper.delete()
 

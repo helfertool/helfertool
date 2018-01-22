@@ -86,7 +86,8 @@ def form(request, event_url_name, link_pk=None):
 
 
 def registered(request, event_url_name, helper_id=None):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id,
+                                           handle_duplicates=True)
 
     news = news_test_email(helper.email)
 
@@ -97,7 +98,8 @@ def registered(request, event_url_name, helper_id=None):
 
 
 def validate(request, event_url_name, helper_id):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id,
+                                           handle_duplicates=True)
 
     # 404 if validation is not used
     if not event.mail_validation:

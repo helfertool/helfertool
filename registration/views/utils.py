@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
 
-from ..models import Event, Job, Helper, Shift
+from ..models import Event, Job, Helper, Shift, Duplicate
 
 
 def nopermission(request):
@@ -30,7 +30,7 @@ def is_admin(user, event_url_name=None):
 
 
 def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
-               helper_pk=None):
+               helper_pk=None, handle_duplicates=False):
 
     # default values
     event, job, shift, helper = None, None, None, None
@@ -45,8 +45,17 @@ def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
 
     try:
         if helper_pk:
+            # check if the current helper_pk belongs to a deleted duplicate
+            if handle_duplicates:
+                try:
+                    helper_pk = Duplicate.objects.get(deleted=helper_pk) \
+                                         .existing.pk
+                except Duplicate.DoesNotExist:
+                    pass
+
+            # and now get helper
             helper = get_object_or_404(Helper, pk=helper_pk)
-    except ValidationError:
+    except ValidationError:  # handle misformed uuid
         raise Http404
 
     # sanity checks
