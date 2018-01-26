@@ -1,5 +1,5 @@
-Django>=1.11,<2.0
-django-modeltranslation>=0.12
+Django>=1.11
+django-modeltranslation>=0.12.2
 django-bootstrap3
 django-bower
 django-multiselectfield
