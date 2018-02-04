@@ -39,7 +39,7 @@ To update the RabbitMQ container later:
     docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
 
-Change the broker configuration in `helfertool/settings.py`.
+Change the broker configuration in `helfertool/settings_local.py`.
 
 For RabbitMQ with the username "guest" and password "guest" the configuration
 should look like this:
@@ -61,7 +61,7 @@ SMTP debug server using this command:
 
     python -m smtpd -n -c DebuggingServer localhost:1025
 
-Additionally uncomment the following lines in `helfertool/settings.py`:
+Additionally uncomment the following lines in `helfertool/settings_local.py`:
 
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
