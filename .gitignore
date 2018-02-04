@@ -21,3 +21,6 @@ Session.vim
 
 # sqlite database
 /db.sqlite3*
+
+# local config
+/helfertool/settings_local.py
