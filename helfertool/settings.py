@@ -167,7 +167,7 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 BOWER_INSTALLED_APPS = (
     'jquery',
-    'bootstrap',
+    'bootstrap#<4.0.0',
     'bootstrap3-datetimepicker',
     'bootstrap-duallistbox',
     'select2',
