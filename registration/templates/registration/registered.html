@@ -43,7 +43,7 @@
 
         {% if event.changes_possible %}
             <p style="margin-left: 1em;"><a href="{% url 'update_personal' event.url_name data.pk %}">
-                <i class="fa fa-pencil"></i> {% trans "Edit" %}
+                <i class="fas fa-edit"></i> {% trans "Edit" %}
             </a></p>
         {% endif %}
     {% endif %}
@@ -89,7 +89,7 @@
         {% endcomment %}
 
         <a class="btn btn-default" href="{% url 'ical' event.url_name data.pk %}">
-            <i class="fa fa-calendar fa-lg"></i> {% trans "Download as iCal" %}
+            <i class="far fa-calendar-alt fa-lg"></i> {% trans "Download as iCal" %}
         </a>
     {% endif %}
 

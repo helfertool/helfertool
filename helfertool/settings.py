@@ -89,7 +89,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
-    'djangobower',
     'bootstrap3',
     'ckeditor',
     'helfertool',
@@ -155,27 +154,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Bower
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
-)
-
-BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
-
-BOWER_INSTALLED_APPS = (
-    'jquery',
-    'bootstrap#<4.0.0',
-    'bootstrap3-datetimepicker',
-    'bootstrap-duallistbox',
-    'select2',
-    'font-awesome',
-    'chart.js',
-    'datatables.net',
-    'datatables.net-bs',
-)
 
 # file directories
 STATIC_URL = '/static/'
