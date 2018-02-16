@@ -19,11 +19,6 @@ SECRET_KEY = 'CHANGE-ME-AFTER-INSTALL'
 DEBUG = False
 ALLOWED_HOSTS = []
 
-# cookie security
-if not DEBUG:
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-
 # recipients for error messages
 ADMINS = (('Admin Name', 'admin@localhost'), )
 

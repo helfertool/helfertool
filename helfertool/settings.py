@@ -46,6 +46,13 @@ AXES_USE_USER_AGENT = False
 AXES_LOCKOUT_TEMPLATE = 'registration/login_banned.html'
 AXES_BEHIND_REVERSE_PROXY = True
 
+# cookie security
+if not DEBUG:
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SECURE = True
+
 # file permissions for newly uploaded files
 FILE_UPLOAD_PERMISSIONS = 0o640
 
