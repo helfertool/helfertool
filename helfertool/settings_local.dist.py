@@ -20,6 +20,7 @@ ADMINS = (('Admin Name', 'admin@localhost'), )
 
 # prepend character to local usernames (useful for LDAP/AD integration with
 # local accounts parallely)
+# This has to be a valid character for the username!
 LOCAL_USER_CHAR = None
 
 # directories for static and media files
