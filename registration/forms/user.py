@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -41,10 +42,12 @@ class CreateUserForm(UserCreationForm):
                   "password2")
 
     def clean(self):
-        # add '@' to the beginning
-        if not self.cleaned_data.get('username').startswith('@'):
-            self.cleaned_data['username'] = '@' + \
-                self.cleaned_data.get('username')
+        # add LOCAL_USER_CHAR to the beginning
+        char = settings.LOCAL_USER_CHAR
+        if char:
+            if not self.cleaned_data.get('username').startswith(char):
+                self.cleaned_data['username'] = char + \
+                    self.cleaned_data.get('username')
 
         return super(CreateUserForm, self).clean()
 

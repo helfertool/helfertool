@@ -8,10 +8,6 @@ from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#
-# Security
-#
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'CHANGE-ME-AFTER-INSTALL'
 
@@ -21,6 +17,10 @@ ALLOWED_HOSTS = []
 
 # recipients for error messages
 ADMINS = (('Admin Name', 'admin@localhost'), )
+
+# prepend character to local usernames (useful for LDAP/AD integration with
+# local accounts parallely)
+LOCAL_USER_CHAR = None
 
 # directories for static and media files
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
