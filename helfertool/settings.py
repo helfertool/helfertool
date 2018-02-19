@@ -41,10 +41,20 @@ GROUP_ADDEVENT = "registration_addevent"
 GROUP_SENDNEWS = "registration_sendnews"
 
 # axes settings (relevant settings are in settings_local.py)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'axes_cache': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
 AXES_LOCK_OUT_AT_FAILURE = True
 AXES_USE_USER_AGENT = False
 AXES_LOCKOUT_TEMPLATE = 'registration/login_banned.html'
 AXES_BEHIND_REVERSE_PROXY = True
+AXES_CACHE = 'axes_cache'
 
 # cookie security
 if not DEBUG:
