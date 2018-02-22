@@ -108,7 +108,6 @@ INSTALLED_APPS = (
     'axes',
     'bootstrap3',
     'ckeditor',
-    'helfertool',
     'registration',
     'statistic',
     'badges',
@@ -117,6 +116,7 @@ INSTALLED_APPS = (
     'inventory',
     'mail',
     'help',
+    'helfertool',
 )
 
 MIDDLEWARE_CLASSES = (
