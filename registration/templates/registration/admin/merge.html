@@ -22,20 +22,154 @@
 
             {% bootstrap_form_errors form %}
 
-            {% for helper in form.helpers.field.queryset %}
-                <input id="helper_{{ forloop.counter0 }}"
-                       name="helpers"
-                       required="required"
-                       type="radio"
+            {% for helper in form.helpers %}
+            <table clas="table-condensed">
+                <tr>
+                    <th>{% trans "Name" %}: </th>
+                    <td>
+                        <input id="helper_name_{{ forloop.counter0}}"
+                               name="helper_name"
+                               type="radio"
+                               required="required"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_name_{{ forloop.counter0}}">
+                            {{ helper.firstname }} {{ helper.surname }}
+                        </label>
+                        </td>
+                </tr>
+
+                <tr>
+                    <th>{% trans "E-Mail" %}: </th>
+                    <td>
+                        <input id="helper_email_{{ forloop.counter0}}"
+                               name="helper_email"
+                               type="radio"
+                               required="required"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_email_{{ forloop.counter0}}">
+                            {{ helper.email }}
+                        </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>{% trans "Mobile phone" %}: </th>
+                    <td>
+                        <input id="helper_phone_{{ forloop.counter0}}"
+                               name="helper_phone"
+                               type="radio"
+                               required="required"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_phone_{{ forloop.counter0}}">
+                            {{ helper.phone }}
+                        </label>
+                    </td>
+                </tr>
+
+                {% if event.ask_shirt %}
+                <tr>
+                    <th>{% trans "T-shirt" %}: </th>
+                    <td>
+                        <input id="helper_shirt_{{ forloop.counter0}}"
+                               name="helper_shirt"
+                               type="radio"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_shirt_{{ forloop.counter0}}">
+                            {{ helper.get_shirt_display }}
+                        </label>
+                    </td>
+                </tr>
+                {% endif %}
+
+                {% if helper.needs_infection_instruction %}
+                <tr>
+                    <th>{% trans "Instruction for the handling of food" %}: </th>
+                    <td>
+                        <input id="helper_infection_instruction_{{ forloop.counter0}}"
+                               name="helper_infection_instruction"
+                               type="radio"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_infection_instruction_{{ forloop.counter0}}">
+                            {{ helper.get_infection_instruction_display }}
+                        </label>
+                    </td>
+                </tr>
+                {% endif %}
+
+                {% if event.ask_vegetarian %}
+                <tr>
+                    <th>{% trans "Vegetarian" %}: </th>
+                    <td>
+                        <input id="helper_vegetarian_{{ forloop.counter0}}"
+                               name="helper_vegetarian"
+                               type="radio"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_vegetarian_{{ forloop.counter0}}">
+                            {{ helper.vegetarian | yesno }}
+                        </label>
+                    </td>
+                </tr>
+                {% endif %}
+
+                <tr>
+                    <th>{% trans "Comment" %}: </th>
+                    <td>
+                        <input id="helper_comment_{{ forloop.counter0}}"
+                               name="helper_comment"
+                               type="radio"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_comment_{{ forloop.counter0}}">
+                            {{ helper.comment | default:"-" }}
+                        </label>
+                    </td>
+                </tr>
+
+                {% if badge_barcode %}
+                <tr>
+                    <th>{% trans "Badge Barcode" %}</th>
+                    <td>
+                        <input id="helper_barcode_{{ forloop.counter0}}"
+                               name="helper_barcode"
+                               type="radio"
+                               value="{{ helper.pk }}"
+                        />
+                        <label for="helper_barcode_{{ forloop.counter0}}">
+                        {{ badge_barcode }}
+                        </label>
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+           <input id="helper_shifts_{{ forloop.counter0 }}"
+                   name="helper_shifts"
+                   type="checkbox"
+                   value="{{ helper.pk }}"
+            />
+            <label for="helper_shifts_{{ forloop.counter0 }}">
+                {% trans "Merge these shifts" %}
+            </label>
+            <ul>
+                {% for shift in helper.shifts.all|dictsort:"begin" %}
+                <li>{{ shift }}</li>
+                {% endfor %}
+            </ul
+            <p>
+                <input id="helper_delete_{{ forloop.counter0 }}"
+                       name="helper_delete"
+                       type="checkbox"
                        value="{{ helper.pk }}"
-                />
-                <label for="helper_{{ forloop.counter0 }}">
-                    {% trans "Keep this data" %}
+                /><label for="helper_delete_{{ forloop.counter0 }}">
+                    {% trans "This is one of the duplicates. Do not keep him" %}
                 </label>
-
-                {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
-
-                <div style="margin-bottom: 2em;"></div>
+            </p>
+            <div style="margin-bottom: 2em;"></div>
             {% endfor %}
 
             <input type="submit" value="{% trans "Merge" %}" class="btn btn-default" />
