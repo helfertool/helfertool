@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 16:48+0200\n"
+"POT-Creation-Date: 2018-02-28 19:54+0100\n"
 "PO-Revision-Date: 2017-06-28 16:48+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: registration/export/excel.py:88 registration/forms/user.py:33
-#: registration/models/helper.py:71
+#: registration/export/excel.py:88 registration/forms/user.py:34
+#: registration/models/helper.py:72
 #: registration/templates/registration/admin/helpers_table.html:21
 #: registration/templates/registration/change_user.html:15
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:89 registration/models/helper.py:76
+#: registration/export/excel.py:89 registration/models/helper.py:77
 #: registration/templates/registration/admin/helpers_table.html:22
 msgid "Surname"
 msgstr "Nachname"
 
 #: registration/export/excel.py:90 registration/models/event.py:112
-#: registration/models/helper.py:80
+#: registration/models/helper.py:81
 #: registration/templates/registration/admin/archive_event.html:17
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/delete_event.html:17
@@ -40,20 +40,20 @@ msgid "E-Mail"
 msgstr "E-Mail"
 
 #: registration/export/excel.py:93 registration/export/pdf.py:42
-#: registration/models/helper.py:85
+#: registration/models/helper.py:86
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/helper_data.html:16
 msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:97 registration/export/pdf.py:45
-#: registration/models/helper.py:97
+#: registration/models/helper.py:98
 #: registration/templates/registration/admin/helpers_table.html:24
 #: registration/templates/registration/helper_data.html:22
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:101 registration/models/helper.py:102
+#: registration/export/excel.py:101 registration/models/helper.py:103
 #: registration/templates/registration/admin/helpers_table.html:27
 #: registration/templates/registration/helper_data.html:36
 msgid "Vegetarian"
@@ -65,7 +65,7 @@ msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
 #: registration/export/excel.py:108 registration/export/pdf.py:46
-#: registration/models/helper.py:91
+#: registration/models/helper.py:92
 #: registration/templates/registration/admin/helpers_table.html:32
 #: registration/templates/registration/helper_data.html:42
 msgid "Comment"
@@ -77,7 +77,7 @@ msgstr "Kommentar"
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
-#: registration/export/pdf.py:42 registration/models/job.py:35
+#: registration/export/pdf.py:42 registration/models/job.py:36
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/jobs_and_shifts.html:55
 #: registration/templates/registration/admin/permissions.html:14
@@ -181,7 +181,7 @@ msgstr "Das Ende der Schicht muss gesetzt sein."
 msgid "The begin of the shift must be before the end."
 msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 
-#: registration/forms/user.py:9
+#: registration/forms/user.py:10
 #: registration/templates/registration/admin/permissions.html:15
 #: registration/templates/registration/admin/permissions.html:46
 #: registration/templates/registration/admin/permissions.html:76
@@ -189,16 +189,16 @@ msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
 msgid "Username"
 msgstr "Benutzername"
 
-#: registration/forms/user.py:25
+#: registration/forms/user.py:26
 msgid "The user does not exist."
 msgstr "Dieser Nutzer existiert nicht."
 
-#: registration/forms/user.py:32
+#: registration/forms/user.py:33
 #: registration/templates/registration/change_user.html:23
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: registration/forms/user.py:35
+#: registration/forms/user.py:36
 #: registration/templates/registration/change_user.html:19
 msgid "Last name"
 msgstr "Nachname"
@@ -419,82 +419,82 @@ msgstr "Gültig"
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models/helper.py:103
+#: registration/models/helper.py:104
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models/helper.py:110
+#: registration/models/helper.py:111
 #: registration/templates/registration/helper_data.html:29
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: registration/models/helper.py:119
+#: registration/models/helper.py:120
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/helper.py:124
+#: registration/models/helper.py:125
 msgid "I agree with the following data privacy statement."
 msgstr "Ich stimme der folgenden Datenschutzerklärung zu."
 
-#: registration/models/job.py:40
+#: registration/models/job.py:41
 msgid "This job is visible publicly"
 msgstr "Diese Aufgabe ist öffentlich sichtbar"
 
-#: registration/models/job.py:45
+#: registration/models/job.py:46
 msgid "Instruction for the handling of food necessary"
 msgstr "Belehrung für Umgang mit Lebensmitteln notwendig"
 
-#: registration/models/job.py:50
+#: registration/models/job.py:51
 #: registration/templates/registration/admin/delete_job.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: registration/models/job.py:71
+#: registration/models/job.py:73
 msgid "Number of coordinators for archived event"
 msgstr "Anzahl der Koordinatoren für archivierte Veranstaltung"
 
-#: registration/models/link.py:37
+#: registration/models/link.py:39
 #: registration/templates/registration/admin/links.html:14
 msgid "Usage"
 msgstr "Verwendung"
 
-#: registration/models/shift.py:36
+#: registration/models/shift.py:37
 msgid "Name (optional)"
 msgstr "Name (optional)"
 
-#: registration/models/shift.py:42
+#: registration/models/shift.py:43
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:53
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models/shift.py:46
+#: registration/models/shift.py:47
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:54
 msgid "End"
 msgstr "Ende"
 
-#: registration/models/shift.py:51
+#: registration/models/shift.py:52
 #: registration/templates/registration/admin/jobs_and_shifts.html:56
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models/shift.py:57
+#: registration/models/shift.py:58
 msgid "The shift is blocked and displayed as full."
 msgstr "Diese Schicht ist gesperrt und wird als voll angezeigt."
 
-#: registration/models/shift.py:62
+#: registration/models/shift.py:63
 msgid "The shift is not visible."
 msgstr "Diese Schicht ist nicht sichtbar."
 
-#: registration/models/shift.py:67
+#: registration/models/shift.py:68
 #: registration/templates/registration/admin/base.html:142
 #: registration/templates/registration/admin/jobs_and_shifts.html:58
 #: registration/templates/registration/admin/view_helper.html:87
 msgid "Gifts"
 msgstr "Geschenke"
 
-#: registration/models/shift.py:73
+#: registration/models/shift.py:74
 msgid "Number of registered helpers for archived event"
 msgstr "Anzahl der angemeldeten Helfer für archivierte Veranstaltung"
 
@@ -773,53 +773,53 @@ msgstr "Newsletter versenden"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: registration/templates/registration/admin/base.html:195
+#: registration/templates/registration/admin/base.html:196
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: registration/templates/registration/admin/base.html:212
+#: registration/templates/registration/admin/base.html:214
 msgid "Non-selected"
 msgstr "Nicht ausgewählt"
 
-#: registration/templates/registration/admin/base.html:213
+#: registration/templates/registration/admin/base.html:215
 msgid "Selected"
 msgstr "Ausgewählt"
 
-#: registration/templates/registration/admin/base.html:214
+#: registration/templates/registration/admin/base.html:216
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: registration/templates/registration/admin/base.html:215
+#: registration/templates/registration/admin/base.html:217
 msgid "Filter"
 msgstr "Filter"
 
-#: registration/templates/registration/admin/base.html:216
+#: registration/templates/registration/admin/base.html:218
 msgid "Move selected"
 msgstr "Ausgewählte verschieben"
 
-#: registration/templates/registration/admin/base.html:217
+#: registration/templates/registration/admin/base.html:219
 msgid "Move all"
 msgstr "Alles verschieben"
 
-#: registration/templates/registration/admin/base.html:218
+#: registration/templates/registration/admin/base.html:220
 msgid "Remove selected"
 msgstr "Ausgewählte entfernen"
 
-#: registration/templates/registration/admin/base.html:219
+#: registration/templates/registration/admin/base.html:221
 msgid "Remove all"
 msgstr "Alles entfernen"
 
-#: registration/templates/registration/admin/base.html:220
+#: registration/templates/registration/admin/base.html:222
 #, python-brace-format
 msgid "Showing all {0}"
 msgstr "Zeige alle {0}"
 
-#: registration/templates/registration/admin/base.html:221
+#: registration/templates/registration/admin/base.html:223
 #, python-brace-format
 msgid "Filtered {0} from {1}"
 msgstr "Zeige {0} von {1}"
 
-#: registration/templates/registration/admin/base.html:222
+#: registration/templates/registration/admin/base.html:224
 msgid "Empty list"
 msgstr "Liste leer"
 
@@ -1483,7 +1483,7 @@ msgid ""
 "page (we have sent you the link to this page by e-mail)."
 msgstr ""
 "Du kannst deine gewählten Schichten und persönlichen Daten bis zum %(date)s "
-"auf dieser Seite ändern (wir haben wir den Link zu dieser Seite per E-Mail "
+"auf dieser Seite ändern (wir haben dir den Link zu dieser Seite per E-Mail "
 "geschickt)."
 
 #: registration/templates/registration/registered.html:60

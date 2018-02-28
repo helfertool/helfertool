@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 16:48+0200\n"
+"POT-Creation-Date: 2018-02-28 19:54+0100\n"
 "PO-Revision-Date: 2017-05-03 17:18+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: helfertool/settings.py:242
+#: helfertool/settings.py:163
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:243
+#: helfertool/settings.py:164
 msgid "English"
 msgstr "English"
 

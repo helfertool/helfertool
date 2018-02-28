@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 16:48+0200\n"
+"POT-Creation-Date: 2018-02-28 19:54+0100\n"
 "PO-Revision-Date: 2017-05-03 17:18+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -37,23 +37,23 @@ msgstr "Helfer hat Geschenk erhalten"
 msgid "Name"
 msgstr "Name"
 
-#: gifts/models/helpersgifts.py:18 gifts/templates/gifts/list_deposit.html:12
+#: gifts/models/helpersgifts.py:19 gifts/templates/gifts/list_deposit.html:12
 msgid "Deposit"
 msgstr "Pfand"
 
-#: gifts/models/helpersgifts.py:26
+#: gifts/models/helpersgifts.py:27
 msgid "Deposit returned"
 msgstr "Pfand zurückgegeben"
 
-#: gifts/models/helpersgifts.py:32
+#: gifts/models/helpersgifts.py:33
 msgid "Helper got her T-shirt"
 msgstr "Helfer hat T-Shirt erhalten"
 
-#: gifts/models/helpersgifts.py:37
+#: gifts/models/helpersgifts.py:38
 msgid "Buy a T-shirt for helper"
 msgstr "T-Shirt für Helfer kaufen"
 
-#: gifts/models/helpersgifts.py:42
+#: gifts/models/helpersgifts.py:43
 msgid "Deserved gifts"
 msgstr "Verdiente Geschenke"
 
