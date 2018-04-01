@@ -43,6 +43,11 @@
         <td>{{ helper.comment | default:"-" }}</td>
     </tr>
 
+    <tr>
+        <th>{% trans "Registration time" %}: </th>
+        <td>{{ helper.timestamp }}</td>
+    </tr>
+
     {% if badge_barcode %}
         <tr>
             <th>{% trans "Badge Barcode" %}</th>
