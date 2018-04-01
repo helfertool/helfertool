@@ -258,4 +258,4 @@ class BadgeCreator:
         string = string.replace(r'^', r'\textasciicircum ')
         string = string.replace(r'\\', r'\textbackslash ')
 
-        return string
+        return '{' + string + '}'
