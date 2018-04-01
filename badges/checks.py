@@ -3,6 +3,8 @@ def warnings_for_job(job):
 
     for helper in job.helpers_and_coordinators():
         if helper.badge.is_ambiguous():
-            result.append(helper)
+            if helper.is_coordinator or \
+                    not job.event.badge_settings.only_coordinators:
+                result.append(helper)
 
     return result
