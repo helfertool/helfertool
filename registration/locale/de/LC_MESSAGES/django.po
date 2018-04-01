@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-28 19:54+0100\n"
+"POT-Creation-Date: 2018-04-01 15:47+0200\n"
 "PO-Revision-Date: 2017-06-28 16:48+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -1148,6 +1148,7 @@ msgid "Set attendance for complete shift"
 msgstr "Anwesenheit für komplette Schicht setzen"
 
 #: registration/templates/registration/admin/helpers_table.html:33
+#: registration/templates/registration/helper_data.html:47
 msgid "Registration time"
 msgstr "Anmeldezeit"
 
@@ -1331,7 +1332,7 @@ msgstr "Die öffentliche Anmeldung ist deaktiviert."
 msgid "Manage event"
 msgstr "Veranstaltung verwalten"
 
-#: registration/templates/registration/helper_data.html:48
+#: registration/templates/registration/helper_data.html:53
 msgid "Badge Barcode"
 msgstr "Badge Barcode"
 

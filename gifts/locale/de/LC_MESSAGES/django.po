@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-28 19:54+0100\n"
-"PO-Revision-Date: 2017-05-03 17:18+0200\n"
+"POT-Creation-Date: 2018-04-01 15:47+0200\n"
+"PO-Revision-Date: 2018-04-01 15:48+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: gifts/forms/helpersgifts.py:23 gifts/templates/gifts/helper.html:46
 msgid "Delivered"
@@ -150,6 +150,10 @@ msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
 #: gifts/templates/gifts/list_deposit.html:23
+msgid "Sum"
+msgstr "Summe"
+
+#: gifts/templates/gifts/list_deposit.html:28
 msgid "No deposit has to be returned."
 msgstr "Es muss kein Pfand mehr zurückgegeben werden."
 

@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.shortcuts import render, get_object_or_404
 
 from collections import OrderedDict
@@ -50,8 +50,15 @@ def list_deposit(request, event_url_name):
     helpers = event.helper_set.filter(gifts__deposit__isnull=False,
                                       gifts__deposit_returned=False)
 
+    if helpers:
+        deposit_sum = helpers.annotate(total=Sum('gifts__deposit')) \
+                             .first().total
+    else:
+        deposit_sum = None
+
     context = {'event': event,
-               'helpers': helpers}
+               'helpers': helpers,
+               'deposit_sum': deposit_sum}
     return render(request, 'gifts/list_deposit.html', context)
 
 

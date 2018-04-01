@@ -18,6 +18,11 @@
                     <td>{{ h.gifts.deposit }} &euro;</td>
                 </tr>
             {% endfor %}
+
+            <tr>
+                <th>{% trans "Sum" %}</th>
+                <th>{{ deposit_sum }} &euro;</th>
+            </tr>
         </table>
     {% else %}
         <p class="text-muted">{% trans "No deposit has to be returned." %}</p>
