@@ -33,8 +33,13 @@ def helpers(request, event_url_name, job_pk=None):
 
         is_admin = event.is_admin(request.user)
 
+        shifts_by_day = job.shifts_by_day().items()
+
         # show list of helpers
-        context = {'event': event, 'job': job, 'is_admin': is_admin}
+        context = {'event': event,
+                   'job': job,
+                   'shifts_by_day': shifts_by_day,
+                   'is_admin': is_admin}
         return render(request, 'registration/admin/helpers_for_job.html',
                       context)
 

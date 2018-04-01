@@ -12,6 +12,7 @@
         {% endblocktrans %}
     </h2>
 
+    {# export #}
     <p>
         {% bootstrap_icon "download-alt" %}
         &nbsp;
@@ -26,6 +27,17 @@
         </a>
     </p>
 
+    {# jump labels #}
+    {% if shifts_by_day %}
+        <p>
+            <i class="fas fa-link"></i>
+            {% for day, shifts in shifts_by_day %}
+                <a href="#{{ day | date:"Ymd" }}">{{ day }}</a>&nbsp;
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    {# coordinators #}
     <h3>{% trans "Coordinators" %}</h3>
     {% if job.coordinators.count == 0 %}
         <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
@@ -41,8 +53,8 @@
    </p>
 
     {# iterate over days #}
-    {% for day, shifts in job.shifts_by_day.items %}
-        <h3>{{ day }}</h3>
+    {% for day, shifts in shifts_by_day %}
+        <h3 id="{{ day | date:"Ymd" }}">{{ day }}</h3>
 
         <p>
             {% with day_str=day|date:"Y-m-d" %}
