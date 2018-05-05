@@ -112,7 +112,7 @@ class HelpersGifts(models.Model):
         if other_gifts.deposit:
             # both have same state -> add
             if self.deposit_returned == other_gifts.deposit_returned:
-                self.deposit += other_gifts.deposit
+                self.deposit = (self.deposit or 0) + other_gifts.deposit
             # other not returned -> overwrite own deposit
             elif self.deposit_returned and not other_gifts.deposit_returned:
                 self.deposit = other_gifts.deposit
