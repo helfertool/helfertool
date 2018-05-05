@@ -5,6 +5,7 @@ Important
     * add more shifts
     * add deadline to mail
 * allow empty mail addresses for internal registrations
+* change order of jobs
 
 
 Django things
@@ -33,16 +34,14 @@ Registration
 * bot protection (seems not to be necessary until now)
 * somehow make the notes for a job more visible
 * edit mail template / add custom message to mails?
+* duplicate shifts
 
 
 Admin area
 ==========
 
 * move admin/base.html and a lot of other things from registration to own app
-* change order of jobs
-* sort helpers and coordinators
-* mails
-    * attachments?
+* mails: attachments?
 * event date -> default for shift times
 
 
@@ -55,7 +54,6 @@ Badges
 * Show missing images (image for coordinators or for all)
 * Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
-* Make sure that (barcode, helper__event) is unique
 
 
 Gifts
@@ -90,6 +88,4 @@ Inventory
 Deployment
 ==========
 
-* configuration file for helfertool that is parsed in settings.py
 * settings in admin area?
-* helfertool script? Similar to sentry?

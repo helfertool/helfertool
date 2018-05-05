@@ -51,8 +51,7 @@ def list_deposit(request, event_url_name):
                                       gifts__deposit_returned=False)
 
     if helpers:
-        deposit_sum = helpers.annotate(total=Sum('gifts__deposit')) \
-                             .first().total
+        deposit_sum = helpers.aggregate(total=Sum('gifts__deposit'))['total']
     else:
         deposit_sum = None
 
