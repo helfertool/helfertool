@@ -24,14 +24,14 @@ ADMINS = (('Admin Name', 'admin@localhost'), )
 LOCAL_USER_CHAR = None
 
 # directories for static and media files
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 
 # Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../db.sqlite3'),
     }
 }
 
@@ -86,32 +86,3 @@ MAIL_BATCH_SIZE = 200
 
 # time between two connections in seconds
 MAIL_BATCH_GAP = 5
-
-# Logging
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename': os.path.join(BASE_DIR, 'django.log'),
-#         },
-#         'mail_admins': {
-#             'level': 'ERROR',
-#             'class': 'django.utils.log.AdminEmailHandler',
-#         },
-#     },
-#     'loggers': {
-#         #'django.request': {
-#         #    'handlers': ['file'],
-#         #    'level': 'DEBUG',
-#         #    'propagate': True,
-#         #},
-#         'django.request': {
-#             'handlers': ['mail_admins'],
-#             'level': 'ERROR',
-#             'propagate': False,
-#         },
-#     },
-# }

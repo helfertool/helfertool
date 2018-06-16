@@ -1,11 +1,12 @@
 Django>=1.11,<2.0
-django-modeltranslation>=0.12.2
+django-modeltranslation
 django-bootstrap3
 django-multiselectfield
 django-bleach
 django-ckeditor
 django-axes
 django_ical
+django-auth-ldap
 celery
 amqp
 XlsxWriter
