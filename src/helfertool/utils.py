@@ -6,7 +6,7 @@ def dict_get(data, default, *keys):
         for key in keys:
             data = data[key]
         return data
-    except KeyError:
+    except (KeyError, TypeError):
         return default
 
 

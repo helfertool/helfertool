@@ -67,7 +67,7 @@ DATABASES = {
         'PASSWORD': dict_get(config, None, 'database', 'password'),
         'HOST': dict_get(config, None, 'database', 'host'),
         'PORT': dict_get(config, None, 'database', 'port'),
-        'OPTIONS': dict_get(config, None, 'database', 'options'),
+        'OPTIONS': dict_get(config, [], 'database', 'options'),
     }
 }
 
@@ -149,7 +149,7 @@ ADMINS = [(mail, mail) for mail in dict_get(config, [], 'logging', 'mails')]
 
 # security
 DEBUG = dict_get(config, False, 'security', 'debug')
-SECRET_KEY = dict_get(config, None, 'security', 'secret')
+SECRET_KEY = dict_get(config, 'CHANGEME', 'security', 'secret')
 ALLOWED_HOSTS = dict_get(config, [], 'security', 'allowed_hosts')
 
 # cookie security
