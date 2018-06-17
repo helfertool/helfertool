@@ -1,46 +1,165 @@
 """
 Django settings for Helfertool.
-
-These are the default settings, do not change this file.
-Copy settings_local.dist.py to settings_local.py and make changes there!
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os, sys
-
-from django.utils.translation import ugettext_lazy as _
+import os
+import sys
+import yaml
 
 from datetime import timedelta
+from django.utils.translation import ugettext_lazy as _
+
+from .utils import dict_get, build_path
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-######################
-#                    #
-# Import local files #
-#                    #
-######################
+# import configuration file
+config_file = os.environ.get('HELFERTOOL_CONFIG_FILE',
+                             os.path.join(BASE_DIR, 'helfertool.yaml'))
 
 try:
-    from .settings_local import *
-except ImportError:
-    print("Local configuration missing!")
-    print("")
-    print("Please copy helfertool/settings_local.dist.py to "
-          "helfertool/settings_local.py and adapt to your needs.")
+    with open(config_file, 'r') as f:
+        config = yaml.load(f)
+except FileNotFoundError:
+    print("Configuration file not found: {}".format(config_file))
+    sys.exit(1)
+except IOError:
+    print("Cannot read configuration file: {}".format(config_file))
+    sys.exit(1)
+except yaml.parser.ParserError as e:
+    print("Syntax error in configuration file:")
+    print()
+    print(e)
     sys.exit(1)
 
-######################################################################
-#                                                                    #
-# Django and internal stuff (override only if you know what you do!) #
-#                                                                    #
-######################################################################
+# directories for static and media files
+STATIC_ROOT = build_path(dict_get(config, 'static', 'files', 'static'),
+                         BASE_DIR)
+MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'),
+                        BASE_DIR)
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
-# internal group names
-GROUP_ADDUSER = "registration_adduser"
-GROUP_ADDEVENT = "registration_addevent"
-GROUP_SENDNEWS = "registration_sendnews"
+# file permissions for newly uploaded files
+FILE_UPLOAD_PERMISSIONS = 0o640
 
-# axes settings (relevant settings are in settings_local.py)
+# internationalization
+LANGUAGE_CODE = dict_get(config, 'de', 'language', 'default')
+
+TIME_ZONE = dict_get(config, 'Europe/Berlin', 'language', 'timezone')
+
+LANGUAGES = (
+    ('de', _('German')),
+    ('en', _('English')),
+)
+
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.' + dict_get(config, 'sqlite3',
+                                                   'database', 'backend'),
+        'NAME': dict_get(config, 'db.sqlite3', 'database', 'name'),
+        'USER': dict_get(config, None, 'database', 'user'),
+        'PASSWORD': dict_get(config, None, 'database', 'password'),
+        'HOST': dict_get(config, None, 'database', 'host'),
+        'PORT': dict_get(config, None, 'database', 'port'),
+        'OPTIONS': dict_get(config, None, 'database', 'options'),
+    }
+}
+
+# build correct relative path for sqlite (if necessary)
+if DATABASES['default']['ENGINE'] == 'sqlite3':
+    DATABASES['default']['NAME'] = build_path(DATABASES['default']['NAME'],
+                                              BASE_DIR)
+
+# rabbitmq
+CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}/{}'.format(
+    dict_get(config, 'guest', 'rabbitmq', 'user'),
+    dict_get(config, 'guest', 'rabbitmq', 'password'),
+    dict_get(config, 'localhost', 'rabbitmq', 'host'),
+    dict_get(config, '5672', 'rabbitmq', 'port'),
+    dict_get(config, '', 'rabbitmq', 'vhost'),
+)
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
+CELERY_ACCEPT_CONTENT = ['json', 'msgpack', 'yaml']
+
+# mail
+EMAIL_HOST = dict_get(config, 'localhost', 'mail', 'host')
+EMAIL_PORT = dict_get(config, 25, 'mail', 'port')
+EMAIL_HOST_USER = dict_get(config, None, 'mail', 'user')
+EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'password')
+EMAIL_USE_TLS = dict_get(config, False, 'mail', 'tls')
+
+# sender of all mails (because of SPF, DKIM, DMARC)
+FROM_MAIL = dict_get(config, 'helfertool@localhost', 'mail', 'sender_address')
+
+# newsletter: number of mails sent during one connection and time between
+MAIL_BATCH_SIZE = dict_get(config, 200, 'mail', 'batch_size')
+MAIL_BATCH_GAP = dict_get(config, 5, 'mail', 'batch_gap')
+
+# authentication
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
+LOCAL_USER_CHAR = dict_get(config, None, 'authentication', 'local_user_char')
+
+# LDAP
+ldap_config = dict_get(config, None, 'authentication', 'ldap')
+if ldap_config:
+    import ldap
+    from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
+
+    AUTH_LDAP_SERVER_URI = dict_get(ldap_config, 'ldaps://localhost', 'server', 'host')
+    AUTH_LDAP_BIND_DN = dict_get(ldap_config, None, 'server', 'bind_dn')
+    AUTH_LDAP_BIND_PASSWORD = dict_get(ldap_config, None, 'server', 'bind_password')
+
+    AUTH_LDAP_USER_DN_TEMPLATE = dict_get(ldap_config, None, 'schema',
+                                          'user_dn_template')
+    AUTH_LDAP_USER_ATTR_MAP = {
+        'first_name': dict_get(ldap_config, 'givenName', 'schema', 'first_name_attr'),
+        'last_name': dict_get(ldap_config, 'sn', 'schema', 'last_name_attr'),
+        'email': dict_get(ldap_config, 'mail', 'schema', 'email_attr'),
+    }
+
+    AUTH_LDAP_USER_FLAGS_BY_GROUP = {}
+
+    ldap_group_login = dict_get(ldap_config, None, 'groups', 'login')
+    if ldap_group_login:
+        AUTH_LDAP_USER_FLAGS_BY_GROUP['is_active'] = ldap_group_login
+
+    ldap_group_admin = dict_get(ldap_config, None, 'groups', 'admin')
+    if ldap_group_admin:
+        AUTH_LDAP_USER_FLAGS_BY_GROUP['is_staff'] = ldap_group_admin
+        AUTH_LDAP_USER_FLAGS_BY_GROUP['is_superuser'] = ldap_group_admin
+
+    AUTH_LDAP_MIRROR_GROUPS = False
+
+    AUTHENTICATION_BACKENDS = (
+        'django_auth_ldap.backend.LDAPBackend',
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
+# logging
+ADMINS = [(mail, mail) for mail in dict_get(config, [], 'logging', 'mails')]
+
+# security
+DEBUG = dict_get(config, False, 'security', 'debug')
+SECRET_KEY = dict_get(config, None, 'security', 'secret')
+ALLOWED_HOSTS = dict_get(config, [], 'security', 'allowed_hosts')
+
+# cookie security
+if not DEBUG:
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SECURE = True
+
+# axes
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -50,25 +169,54 @@ CACHES = {
     }
 }
 
+AXES_LOGIN_FAILURE_LIMIT = dict_get(config, 3, 'security', 'lockout', 'limit')
+AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, 'security',
+                                               'lockout', 'time'))
+AXES_REVERSE_PROXY_HEADER = dict_get(config, 'REMOTE_ADDR', 'security',
+                                     'lockout', 'proxy_header')
+
 AXES_LOCK_OUT_AT_FAILURE = True
 AXES_USE_USER_AGENT = False
 AXES_LOCKOUT_TEMPLATE = 'registration/login_banned.html'
 AXES_BEHIND_REVERSE_PROXY = True
 AXES_CACHE = 'axes_cache'
 
-# cookie security
-if not DEBUG:
-    CSRF_COOKIE_HTTPONLY = True
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SECURE = True
+# external URLs
+PRIVACY_URL = dict_get(config, 'https://app.helfertool.org/datenschutz/',
+                       'customization', 'urls', 'privacy')
+IMPRINT_URL = dict_get(config, 'https://app.helfertool.org/impressum/',
+                       'customization', 'urls', 'imprint')
+DOCS_URL = dict_get(config, 'https://docs.helfertool.org',
+                    'customization', 'urls', 'docs')
+WEBSITE_URL = 'https://www.helfertool.org'
 
-# file permissions for newly uploaded files
-FILE_UPLOAD_PERMISSIONS = 0o640
+# mail address for "About this software" page and support requests
+CONTACT_MAIL = dict_get(config, 'helfertool@localhost', 'customization',
+                        'contact_address')
 
-# auth
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+# badges
+BADGE_PDFLATEX = dict_get(config, '/usr/bin/pdflatex', 'badges', 'pdflatex')
+BADGE_PHOTO_MAX_SIZE = dict_get(config, 1000, 'badges', 'photo_max_size')
+
+BADGE_PDF_TIMEOUT = 60 * dict_get(config, 30, 'badges', 'pdf_timeout')
+BADGE_RM_DELAY = 60 * dict_get(config, 2, 'badges', 'rm_delay')
+
+BADGE_DEFAULT_TEMPLATE = build_path(
+    dict_get(config, 'src/badges/latextemplate/badge.tex', 'badges', 'template'),
+    BASE_DIR)
+
+# copy generated latex code for badges to this file, disable with None
+if DEBUG:
+    BADGE_TEMPLATE_DEBUG_FILE = build_path('badge_debugging.tex', BASE_DIR)
+else:
+    BADGE_TEMPLATE_DEBUG_FILE = None
+
+BADGE_LANGUAGE_CODE = dict_get(config, 'de', 'language', 'badges')
+
+# internal group names
+GROUP_ADDUSER = "registration_adduser"
+GROUP_ADDEVENT = "registration_addevent"
+GROUP_SENDNEWS = "registration_sendnews"
 
 # Bootstrap config
 BOOTSTRAP3 = {
@@ -95,8 +243,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# Application definition
-
+# application definition
 INSTALLED_APPS = (
     'modeltranslation',
     'django.contrib.admin',
@@ -151,27 +298,3 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'helfertool.wsgi.application'
-
-# Internationalization
-
-# this is the default language
-# it is also important when sending news mails (the text in this language will
-# be first, the other languages follow)
-LANGUAGE_CODE = 'de'
-
-LANGUAGES = (
-    ('de', _('German')),
-    ('en', _('English')),
-)
-
-TIME_ZONE = 'Europe/Berlin'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-# file directories
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'  # must end with '/' !

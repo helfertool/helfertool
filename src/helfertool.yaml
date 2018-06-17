@@ -16,22 +16,30 @@ language:
     # Language used for badges
     badges: "de"
 
+    # Timezone
+    timezone: "Europe/Berlin"
+
 # Database connection
 database:
-    # Database backend. Possible values: mysql, postgresql, sqlite
-    backend: mysql
+    # PostgreSQL
+    #backend: "sqlite3"
+    #name: "db.sqlite3"
 
-    # Name of the database
-    # For SQLite, this is the file location
-    dbname: "helfertool"
+    # MySQL
+    #backend: "mysql"
+    #name: "helfertool"
+    #user: "helfertool"
+    #password: "<PASSWORD>"
+    #host: 127.0.0.1
+    #port: 3306
 
-    # Login credentials
-    user: "helfertool"
-    password: null
-
-    # Hostname and port, host can also be the path of a socket
-    host: 127.0.0.1
-    port: null
+    # PostgreSQL
+    #backend: "postgresql"
+    #name: "helfertool"
+    #user: "helfertool"
+    #password: "<PASSWORD>"
+    #host: 127.0.0.1
+    #port: 5432
 
     # Additional options like an init_command
     # Refer to the Django documentation for further options
@@ -45,11 +53,11 @@ rabbitmq:
 
     # Login credentials
     user: "helfertool"
-    password: null
+    password: "<PASSWORD>"
 
     # Hostname and port
     host: 127.0.0.1
-    port: null
+    port: 5672
 
 # Mail server and settings
 mail:
@@ -66,9 +74,8 @@ mail:
     # Batch size if a high amount of mails is sent
     # This is currently only used for the newsletter, the other mails are sent
     # with all addresses in BCC!
-    batch:
-        size: 200
-        gap: 5
+    batch_size: 200
+    batch_gap: 5
 
 # Authentication settings
 authentication:
@@ -83,14 +90,14 @@ authentication:
         # LDAP schema and attributes
         schema:
             user_dn_template: "uid=%(user)s,ou=People,dc=helfertool,dc=org"
-            first_name_attr: "givenName",
-            last_name_attr: "sn",
+            first_name_attr: "givenName"
+            last_name_attr: "sn"
             email_attr: "mail"
 
         # Permissions based on groups
         groups:
-            login: null,
-            admin: "cn=admins,ou=Group,dc=helfertool,dc=org",
+            login: null
+            admin: "cn=admins,ou=Group,dc=helfertool,dc=org"
 
 
     # Prepend character to all locally created users
@@ -103,7 +110,7 @@ authentication:
 logging:
     # Sent mails on internal server errors
     mails:
-        - Example Admin: root@localhost
+        - root@localhost
 
 # Security settings
 security:
@@ -142,7 +149,7 @@ customization:
         # Link to documentation (usually no change necessary)
         docs: "https://docs.helfertool.org"
 
-    # Contact address for "About this software" page
+    # Contact address for "About this software" page and support requests
     contact_address: "helfertool@localhost"
 
 # Badge settings
@@ -151,7 +158,8 @@ bagdes:
     pdflatex: "/usr/bin/pdflatex"
 
     # Alternative default template, path to tex file
-    template: null
+    # Relative paths again are relative to the git directory
+    template: "src/badges/latextemplate/badge.tex"
 
     # Maximum photo size in kb
     photo_max_size: 1000
