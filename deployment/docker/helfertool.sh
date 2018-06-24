@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # prepare environment
 cd /helfertool/src
 mkdir -p /data/media
@@ -17,6 +19,14 @@ elif [ "$1" = "newadmin" ] ; then
     # create new superuser
     python3 manage.py createsuperuser
 
+# command: reload
+elif [ "$1" = "reload" ] ; then
+    # reload uwsgi and celery
+    touch /helfertool/uwsgi_reload
+
+    if [ -f "/helfertool/celery.pid" ] ; then
+        kill -HUP $(cat /helfertool/celery.pid)
+    fi
 # command: run
 elif [ "$1" = "run" ] ; then
     # input parameters
@@ -41,6 +51,6 @@ elif [ "$1" = "run" ] ; then
 
 # help message
 else
-    echo "Commands: init, newadmin, run"
+    echo "Commands: init, newadmin, reload, run"
     exit 1
 fi
