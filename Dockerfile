@@ -9,7 +9,7 @@ RUN apt-get update && \
     useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool
 
 COPY src /helfertool/src
-COPY deployment/docker/start-helfertool.sh /helfertool/start.sh
+COPY deployment/docker/helfertool.sh /usr/local/bin/helfertool
 COPY deployment/docker/uwsgi.conf /helfertool/uwsgi.conf
 COPY deployment/docker/supervisord.conf /helfertool/supervisord.conf
 COPY deployment/docker/nginx.conf /helfertool/nginx.conf
@@ -21,11 +21,12 @@ RUN cd /helfertool/src/ && \
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py collectstatic --noinput && \
     # fix permissions
     chown -R helfertool:helfertool /helfertool /data /var/lib/nginx /var/log/nginx /usr/share/nginx && \
-    chmod +x /helfertool/start.sh
+    chmod +x /usr/local/bin/helfertool
 
 USER helfertool
 
-VOLUME ["/data"]
+VOLUME ["/data", "/config"]
 EXPOSE 8000
 
-ENTRYPOINT ["/helfertool/start.sh"]
+ENTRYPOINT ["/usr/local/bin/helfertool"]
+CMD ["run"]
