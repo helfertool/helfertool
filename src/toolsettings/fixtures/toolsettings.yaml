@@ -1,0 +1,136 @@
+# About
+-   model: toolsettings.htmlsetting
+    pk: 1
+    fields:
+        key: about
+        value: ''
+        value_de: '<p>Wenn du diese Webseite f&uuml;r deine Veranstaltung nutzen willst, wende dich bitte an: <a href="mailto:helfertool@localhost">helfertool@localhost</a></p>'
+        value_en: '<p>If you want to use this website for your event please contact: <a href="mailto:helfertool@localhost">helfertool@localhost</a></p>'
+
+# Privacy (HTML)
+-   model: toolsettings.htmlsetting
+    pk: 4
+    fields:
+        key: privacy
+        value: ''
+        value_de: >
+            <p>Ich bin damit einverstanden, dass meine Daten zu folgenden Zwecken erhoben, verarbeitet und genutzt werden:</p>
+
+            <ul>
+                <li>Erstellung von Helferlisten</li>
+                <li>Zusenden von Informationen vor der Veranstaltung per E-Mail</li>
+                <li>Anruf bei dringenden und wichtigen Angelegenheiten</li>
+                <li>Ggf. Erstellung von Ausweisen für die Veranstaltung</li>
+                <li>Ggf. Einladung zum Helferfest nach der Veranstaltung</li>
+            </ul>
+
+            <p>Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner
+            Person unter Beachtung des Bundesdatenschutzgesetzes (BDSG), erhoben, verarbeitet, genutzt und \ übermittelt werden.</p>
+
+            <p>Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger
+            Basis erfolgt. Ferner, dass ich mein Einverständnis mit der Folge, dass ich bei der Veranstaltung nicht als Helfer
+            teilnehmen kann, verweigern bzw. jederzeit mit Wirkung für die Zukunft widerrufen kann.
+            Meine Widerrufserklärung werde ich richten an:</p>
+
+            <p><em>Organisation<br>
+            Straße<br>
+            Stadt<br>
+            E-Mail: <a href="mailto:helfertool@localhost">helfertool@localhost</a></em></p>
+
+            <p>Im Fall des Widerrufs werden mit dem Zugang meiner Widerrufserklärung meine Daten gelöscht.</p>
+        value_en: >
+            <p>With your permission, your data will be collected, processed, and used for the following purposes:</p>
+
+            <ul>
+                <li>Generating lists of all helpers</li>
+                <li>Sending information before the event by e-mail</li>
+                <li>Phone call for urgent and important issues</li>
+                <li>If necessary generating identification badges for the event</li>
+                <li>If necessary invitation for the after party</li>
+            </ul>
+
+            <p>Your personal data will be collected, processed, and used in the context of the aforementioned objectives in
+            accordance with the Federal Data Protection Act (BDSG).</p>
+
+            <p>The collection, processing, and use of your data take place on a voluntary basis. Furthermore, you can revoke
+            your consent at any time with the adverse consequence that you cannot participate in the event as helper.</p>
+
+            <p>Please send any notice of cancellation to:</p>
+
+            <p><em>Organization<br>
+            Street<br>
+            City<br>
+            E-Mail: <a href="mailto:helfertool@localhost">helfertool@localhost</a></em></p>
+
+            <p>In the event of cancellation, your data will be deleted upon receipt of your notice.</p>
+
+# Privacy (Text for mail)
+-   model: toolsettings.textsetting
+    pk: 1
+    fields:
+        key: privacy
+        value: ''
+        value_de: >
+            Ich bin damit einverstanden, dass meine Daten zu folgenden Zwecken erhoben, verarbeitet und genutzt werden:
+
+             * Erstellung von Helferlisten
+             * Zusenden von Informationen vor der Veranstaltung per E-Mail
+             * Anruf bei dringenden und wichtigen Angelegenheiten
+             * Ggf. Erstellung von Ausweisen für die Veranstaltung
+             * Ggf. Einladung zum Helferfest nach der Veranstaltung
+
+            Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner Person unter Beachtung des Bundesdatenschutzgesetzes (BDSG), erhoben, verarbeitet, genutzt und übermittelt werden.
+
+
+            Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger Basis erfolgt. Ferner, dass ich mein Einverständnis mit der Folge, dass ich bei der Veranstaltung nicht als Helfer teilnehmen kann, verweigern bzw. jederzeit mit Wirkung für die Zukunft widerrufen kann. Meine Widerrufserklärung werde ich richten an:
+
+             Organisation
+             Straße
+             Stadt
+             E-Mail: helfertool@localhost
+
+            Im Fall des Widerrufs werden mit dem Zugang meiner Widerrufserklärung meine Daten gelöscht.
+        value_en: >
+            With your permission, your data will be collected, processed, and used for the following purposes:
+
+             * Generating lists of all helpers
+             * Sending information before the event by e-mail
+             * Phone call for urgent and important issues
+             * If necessary generating identification badges for the event
+             * If necessary invitation for the after party
+
+            Your personal data will be collected, processed, and used in the context of the aforementioned objectives
+            in accordance with the Federal Data Protection Act (BDSG).
+
+
+            The collection, processing, and use of your data take place on a voluntary basis.
+            Furthermore, you can revoke your consent at any time with the adverse consequence that you cannot
+            participate in the event as helper.
+
+            Please send any notice of cancellation to:
+
+             Organization
+             Street
+             City
+             E-Mail: helfertool@localhost
+
+            In the event of cancellation, your data will be deleted upon receipt of your notice.
+
+# Privacy statement for newsletter (HTML)
+-   model: toolsettings.htmlsetting
+    pk: 5
+    fields:
+        key: privacy_newsletter
+        value: ''
+        value_de: >
+            <p>Ich bin damit einverstanden, dass meine E-Mail Adresse gespeichert wird, um mich über
+            neue Veranstaltungen zu informieren. Des weiteren bin ich damit einverstanden, dass gezielte
+            Helferaufrufe für Veranstaltungen der studentischen Vertretung an diese Adresse gesendet werden.</p>
+
+            <p>Dem Senden weiterer E-Mails kann jederzeit widersprochen werden.</p>
+        value_en: >
+            <p>With your permission your email address is collected to inform you about new events.
+            Furthermore specific calls for participation as helper for events of the Student Representatives
+            will be sent to this email address.</p>
+
+            <p>It is possible to veto the sending of further emails anytime.</p>
