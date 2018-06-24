@@ -9,7 +9,7 @@
 
 # Privacy (HTML)
 -   model: toolsettings.htmlsetting
-    pk: 4
+    pk: 2
     fields:
         key: privacy
         value: ''
@@ -118,7 +118,7 @@
 
 # Privacy statement for newsletter (HTML)
 -   model: toolsettings.htmlsetting
-    pk: 5
+    pk: 3
     fields:
         key: privacy_newsletter
         value: ''
