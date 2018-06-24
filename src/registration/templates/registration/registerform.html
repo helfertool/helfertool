@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load bootstrap3 %}
 {% load registerform_shifts %}
+{% load toolsettings %}
 
 <form action="" method="post">
     {% csrf_token %}
@@ -105,7 +106,7 @@
                 {% bootstrap_field form.privacy_statement required_css_class='' %}
 
                 <div class="well">
-                    {% include "registration/privacy/statement.html" %}
+                    {% htmlsetting "privacy" %}
                 </div>
             </div>
         </div>
@@ -117,7 +118,7 @@
                 {% bootstrap_field form.news required_css_class='' %}
 
                 <div class="well">
-                    {% include "registration/privacy/news.html" %}
+                    {% htmlsetting "privacy_newsletter" %}
                 </div>
             </div>
         </div>

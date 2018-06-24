@@ -34,6 +34,8 @@ Design, JS
   * begin < end
   * change end when begin is changed
 * accept="image/*" for image uploads
+* django-compressor
+* Simple theme customizing
 
 
 Registration
@@ -43,6 +45,7 @@ Registration
 * somehow make the notes for a job more visible
 * edit mail template / add custom message to mails?
 * duplicate shifts
+* dynamic fields
 
 
 Admin area
@@ -68,6 +71,7 @@ Gifts
 =====
 
 * add flags to excel export
+* ask for gift selection during registration
 
 
 File uploads
@@ -92,8 +96,3 @@ Inventory
 * edit item: unique_together leads to exception on same barcode, handle the exception
 * export PDF with barcodes
 * used inventory for single job?
-
-Deployment
-==========
-
-* settings in admin area?

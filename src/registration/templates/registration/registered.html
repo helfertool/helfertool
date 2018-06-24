@@ -1,6 +1,7 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load toolsettings %}
 
 {% block title %}
     {% blocktrans trimmed %}
@@ -101,14 +102,14 @@
     {% endif %}
 
     <div class="well">
-        {% include "registration/privacy/statement.html" %}
+        {% htmlsetting "privacy" %}
     </div>
 
     {% if news %}
         <p>{% trans "You agreed that we will inform you about future events per email." %}</p>
 
         <div class="well">
-            {% include "registration/privacy/news.html" %}
+            {% htmlsetting "privacy_newsletter" %}
         </div>
     {% endif %}
 

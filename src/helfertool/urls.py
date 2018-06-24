@@ -5,8 +5,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^djangoadmin/', admin.site.urls),
-
     url(r'^i18n/', include('django.conf.urls.i18n')),
+
+    url(r'^admin/settings/', include('toolsettings.urls')),
 
     url(r'', include('help.urls')),
     url(r'', include('news.urls')),

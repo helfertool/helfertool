@@ -72,7 +72,7 @@ DATABASES = {
 }
 
 # build correct relative path for sqlite (if necessary)
-if DATABASES['default']['ENGINE'] == 'sqlite3':
+if 'sqlite3' in DATABASES['default']['ENGINE']:
     DATABASES['default']['NAME'] = build_path(DATABASES['default']['NAME'],
                                               BASE_DIR)
 
@@ -263,6 +263,7 @@ INSTALLED_APPS = (
     'inventory',
     'mail',
     'help',
+    'toolsettings',
     'helfertool',
 )
 

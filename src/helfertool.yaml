@@ -19,9 +19,9 @@ language:
 
 # Database connection
 database:
-    # PostgreSQL
-    #backend: "sqlite3"
-    #name: "db.sqlite3"
+    # SQLite
+    backend: "sqlite3"
+    name: "db.sqlite3"
 
     # MySQL
     #backend: "mysql"
@@ -41,17 +41,17 @@ database:
 
     # Additional options like an init_command
     # Refer to the Django documentation for further options
-    options:
-        init_command: "SET sql_mode='STRICT_TRANS_TABLES';"
+    #options:
+    #    init_command: "SET sql_mode='STRICT_TRANS_TABLES';"
 
 # RabbitMQ connection
 rabbitmq:
     # Name of the vHost
-    vhost: "helfertool"
+    vhost: ""
 
     # Login credentials
-    user: "helfertool"
-    password: "<PASSWORD>"
+    user: "guest"
+    password: "guest"
 
     # Hostname and port
     host: 127.0.0.1
@@ -78,24 +78,24 @@ mail:
 # Authentication settings
 authentication:
     # Get users from LDAP
-    ldap:
-        # Connection details
-        server:
-            host: "ldaps://ldap.helfertool.org"
-            bind_dn: "cn=helfertool,ou=Roles,dc=helfertool,dc=org"
-            bind_password: null
+    #ldap:
+    #    # Connection details
+    #    server:
+    #        host: "ldaps://ldap.helfertool.org"
+    #        bind_dn: "cn=helfertool,ou=Roles,dc=helfertool,dc=org"
+    #        bind_password: null
 
-        # LDAP schema and attributes
-        schema:
-            user_dn_template: "uid=%(user)s,ou=People,dc=helfertool,dc=org"
-            first_name_attr: "givenName"
-            last_name_attr: "sn"
-            email_attr: "mail"
+    #    # LDAP schema and attributes
+    #    schema:
+    #        user_dn_template: "uid=%(user)s,ou=People,dc=helfertool,dc=org"
+    #        first_name_attr: "givenName"
+    #        last_name_attr: "sn"
+    #        email_attr: "mail"
 
-        # Permissions based on groups
-        groups:
-            login: null
-            admin: "cn=admins,ou=Group,dc=helfertool,dc=org"
+    #    # Permissions based on groups
+    #    groups:
+    #        login: null
+    #        admin: "cn=admins,ou=Group,dc=helfertool,dc=org"
 
 
     # Prepend character to all locally created users
@@ -113,15 +113,15 @@ logging:
 # Security settings
 security:
     # Do not activate debugging in productive environments!
-    debug: false
+    debug: true
 
     # Unique and secret key
     secret: "foobar"
 
     # URLs that are used for the software
     allowed_hosts:
-        - "app.helfertool.org"
-        - "www.app.helfertool.org"
+    #    - "app.helfertool.org"
+    #    - "www.app.helfertool.org"
 
     # Account lockout
     lockout:
@@ -139,7 +139,7 @@ customization:
     # There are some external links that should/can be changed
     urls:
         # Imprint with contact details
-        imprint: "https://app.helfertool.org/datenschutz/"
+        imprint: "https://app.helfertool.org/impressum/"
 
         # Privacy statement
         privacy: "https://app.helfertool.org/datenschutz/"

@@ -1,4 +1,4 @@
-{% load i18n %}{% blocktrans with firstname=user.firstname %}Hello {{ firstname }},
+{% load i18n toolsettings %}{% blocktrans with firstname=user.firstname %}Hello {{ firstname }},
 
 you were registered for the following shifts:{% endblocktrans %}
 {% for shift in user.shifts.all %}
@@ -13,4 +13,4 @@ you were registered for the following shifts:{% endblocktrans %}
 {% blocktrans %}Thanks for your support!{% endblocktrans %}
 
 -- 
-{% include "registration/privacy/statement.txt" %}
+{% textsetting "privacy" %}

@@ -192,6 +192,7 @@
                     {% endif %}
                     {% if user.is_superuser %}
                         <li><a href="{% url 'permissions' %}">{% trans "Permissions" %}</a></li>
+                        <li><a href="{% url 'toolsettings:index' %}">{% trans "Settings" %}</a></li>
                         {% if user.is_staff %}
                             <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
                         {% endif %}
