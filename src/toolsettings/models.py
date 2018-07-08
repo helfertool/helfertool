@@ -13,7 +13,7 @@ class AbstractSetting(models.Model):
 
     key = models.CharField(
         max_length=200,
-        unique=True,
+        primary_key=True,
         validators=[RegexValidator('^[a-zA-Z0-9]+$')],
         verbose_name=_("Key"),
     )
