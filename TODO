@@ -4,11 +4,11 @@ Docker
 * Update docs
 * Update deployment/manual
 * Update/sort stuff
-* disable access logs inside container, move logs to /log
 * commands
     docker build -t helfertool .
     docker run --name helfertool -v /tmp/helfertool/data:/data -v /tmp/helfertool/config:/config -p8000:8000 helfertool
     docker exec -i -t helfertool helfertool init
+* django logging
 
 Important
 ==========
