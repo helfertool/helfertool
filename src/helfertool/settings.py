@@ -111,17 +111,17 @@ LOCAL_USER_CHAR = dict_get(config, None, 'authentication', 'local_user_char')
 # LDAP
 ldap_config = dict_get(config, None, 'authentication', 'ldap')
 if ldap_config:
-    import ldap
-    from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
-
-    AUTH_LDAP_SERVER_URI = dict_get(ldap_config, 'ldaps://localhost', 'server', 'host')
+    AUTH_LDAP_SERVER_URI = dict_get(ldap_config, 'ldaps://localhost', 'server',
+                                    'host')
     AUTH_LDAP_BIND_DN = dict_get(ldap_config, None, 'server', 'bind_dn')
-    AUTH_LDAP_BIND_PASSWORD = dict_get(ldap_config, None, 'server', 'bind_password')
+    AUTH_LDAP_BIND_PASSWORD = dict_get(ldap_config, None, 'server',
+                                       'bind_password')
 
     AUTH_LDAP_USER_DN_TEMPLATE = dict_get(ldap_config, None, 'schema',
                                           'user_dn_template')
     AUTH_LDAP_USER_ATTR_MAP = {
-        'first_name': dict_get(ldap_config, 'givenName', 'schema', 'first_name_attr'),
+        'first_name': dict_get(ldap_config, 'givenName', 'schema',
+                               'first_name_attr'),
         'last_name': dict_get(ldap_config, 'sn', 'schema', 'last_name_attr'),
         'email': dict_get(ldap_config, 'mail', 'schema', 'email_attr'),
     }
@@ -202,7 +202,8 @@ BADGE_PDF_TIMEOUT = 60 * dict_get(config, 30, 'badges', 'pdf_timeout')
 BADGE_RM_DELAY = 60 * dict_get(config, 2, 'badges', 'rm_delay')
 
 BADGE_DEFAULT_TEMPLATE = build_path(
-    dict_get(config, 'src/badges/latextemplate/badge.tex', 'badges', 'template'),
+    dict_get(config, 'src/badges/latextemplate/badge.tex', 'badges',
+             'template'),
     BASE_DIR)
 
 # copy generated latex code for badges to this file, disable with None

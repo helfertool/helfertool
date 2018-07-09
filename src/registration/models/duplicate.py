@@ -4,6 +4,7 @@ import uuid
 
 from .helper import Helper
 
+
 class Duplicate(models.Model):
     """ Duplicated helper that was deleted.
 
