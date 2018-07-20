@@ -1,6 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+set -Eeo pipefail
+
+# set default id/gid and drop privileges
+: ${USERID:=1000}
+: ${GROUPID:=1000}
+
+if [ "$(id -u)" = "0" ] ; then
+    chown -R $USERID:$GROUPID /var/lib/nginx /var/log/nginx /usr/share/nginx
+    exec gosu $USERID "$BASH_SOURCE" "$@"
+fi
 
 # prepare environment
 cd /helfertool/src
@@ -28,6 +37,10 @@ elif [ "$1" = "reload" ] ; then
     if [ -f "/helfertool/celery.pid" ] ; then
         kill -HUP $(cat /helfertool/celery.pid)
     fi
+# command: manage
+elif [ "$1" = "init" ] ; then
+    shift
+    python3 manage.py $@
 # command: run
 elif [ "$1" = "run" ] ; then
     # input parameters
@@ -52,6 +65,6 @@ elif [ "$1" = "run" ] ; then
 
 # help message
 else
-    echo "Commands: init, createadmin, reload, run"
+    echo "Commands: init, createadmin, reload, run, manage"
     exit 1
 fi

@@ -12,15 +12,9 @@ Session.vim
 *.log
 *.pot
 
-# upload directory
+# upload directory and static files
 /media/
-
-# static files
-/components/
 /static/
 
 # sqlite database
 /db.sqlite3*
-
-# local config
-/helfertool/settings_local.py

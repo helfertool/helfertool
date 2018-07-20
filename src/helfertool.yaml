@@ -147,7 +147,7 @@ customization:
         # Link to documentation (usually no change necessary)
         docs: "https://docs.helfertool.org"
 
-    # Contact address for "About this software" page and support requests
+    # Contact address for support requests
     contact_address: "helfertool@localhost"
 
 # Badge settings
