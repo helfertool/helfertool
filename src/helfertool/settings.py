@@ -67,7 +67,7 @@ DATABASES = {
         'PASSWORD': dict_get(config, None, 'database', 'password'),
         'HOST': dict_get(config, None, 'database', 'host'),
         'PORT': dict_get(config, None, 'database', 'port'),
-        'OPTIONS': dict_get(config, [], 'database', 'options'),
+        'OPTIONS': dict_get(config, {}, 'database', 'options'),
     }
 }
 
