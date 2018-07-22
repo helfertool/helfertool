@@ -6,9 +6,14 @@ set -Eeo pipefail
 : ${USERID:=1000}
 : ${GROUPID:=1000}
 
+if [ "$USERID" = "0" ] ; then
+    echo "Running as root is not recommended. Exiting."
+    exit 1
+fi
+
 if [ "$(id -u)" = "0" ] ; then
     chown -R $USERID:$GROUPID /var/lib/nginx /var/log/nginx /usr/share/nginx
-    exec gosu $USERID "$BASH_SOURCE" "$@"
+    exec gosu $USERID:$GROUPID "$BASH_SOURCE" "$@"
 fi
 
 # prepare environment
