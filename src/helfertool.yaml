@@ -84,14 +84,22 @@ authentication:
     #        host: "ldaps://ldap.helfertool.org"
     #        bind_dn: "cn=helfertool,ou=Roles,dc=helfertool,dc=org"
     #        bind_password: null
-
+    #
     #    # LDAP schema and attributes
     #    schema:
+    #        # User definition
     #        user_dn_template: "uid=%(user)s,ou=People,dc=helfertool,dc=org"
     #        first_name_attr: "givenName"
     #        last_name_attr: "sn"
     #        email_attr: "mail"
-
+    #
+    #        # Group definition
+    #        # See https://django-auth-ldap.readthedocs.io/en/latest/groups.html?highlight=AUTH_LDAP_GROUP_TYPE#types-of-groups
+    #        # for a list of all posible values for group_type
+    #        group_type: "GroupOfNamesType"
+    #        group_base_dn: "ou=Groups,dc=helfertool,dc=org"
+    #        group_object_class: "groupOfNames"
+    #
     #    # Permissions based on groups
     #    groups:
     #        login: null

@@ -111,6 +111,9 @@ LOCAL_USER_CHAR = dict_get(config, None, 'authentication', 'local_user_char')
 # LDAP
 ldap_config = dict_get(config, None, 'authentication', 'ldap')
 if ldap_config:
+    import django_auth_ldap.config
+    import ldap
+
     AUTH_LDAP_SERVER_URI = dict_get(ldap_config, 'ldaps://localhost', 'server',
                                     'host')
     AUTH_LDAP_BIND_DN = dict_get(ldap_config, None, 'server', 'bind_dn')
@@ -126,6 +129,18 @@ if ldap_config:
         'email': dict_get(ldap_config, 'mail', 'schema', 'email_attr'),
     }
 
+    group_type_name = dict_get(ldap_config, 'GroupOfNamesType', 'schema',
+                               'group_type')
+    AUTH_LDAP_GROUP_TYPE = getattr(django_auth_ldap.config, group_type_name)
+
+    AUTH_LDAP_GROUP_SEARCH = django_auth_ldap.config.LDAPSearch(
+        dict_get(ldap_config, None, 'schema', 'group_base_dn'),
+        ldap.SCOPE_SUBTREE,
+        "(objectClass={})".format(dict_get(ldap_config, 'groupOfNames',
+                                           'schema', 'group_base_dn'))
+    )
+    AUTH_LDAP_MIRROR_GROUPS = False
+
     AUTH_LDAP_USER_FLAGS_BY_GROUP = {}
 
     ldap_group_login = dict_get(ldap_config, None, 'groups', 'login')
@@ -136,8 +151,6 @@ if ldap_config:
     if ldap_group_admin:
         AUTH_LDAP_USER_FLAGS_BY_GROUP['is_staff'] = ldap_group_admin
         AUTH_LDAP_USER_FLAGS_BY_GROUP['is_superuser'] = ldap_group_admin
-
-    AUTH_LDAP_MIRROR_GROUPS = False
 
     AUTHENTICATION_BACKENDS = (
         'django_auth_ldap.backend.LDAPBackend',

@@ -22,6 +22,7 @@ RUN cd /helfertool/src/ && \
     pip3 install -r requirements.txt mysqlclient psycopg2-binary && \
     # copy static files
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py collectstatic --noinput && \
+    chmod -R go+rX /helfertool/static && \
     # fix permissions
     chmod +x /usr/local/bin/helfertool
 
