@@ -12,7 +12,7 @@ if [ "$USERID" = "0" ] ; then
 fi
 
 if [ "$(id -u)" = "0" ] ; then
-    chown -R $USERID:$GROUPID /var/lib/nginx /var/log/nginx /usr/share/nginx
+    chown -R $USERID:$GROUPID /var/lib/nginx /var/log/nginx /usr/share/nginx /helfertool/run
     exec gosu $USERID:$GROUPID "$BASH_SOURCE" "$@"
 fi
 

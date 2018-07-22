@@ -5,9 +5,11 @@ RUN apt-get update && \
         libldap2-dev libsasl2-dev libmariadbclient-dev \
         texlive-latex-extra texlive-fonts-recommended texlive-lang-german && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir /data && \
-    useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 1000
+    rm -rf /var/lib/apt/lists/* /usr/share/doc/* && \
+    # add user, some directories and fix owners
+    useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 1000 && \
+    mkdir /data /helfertool/run && \
+    chown -R helfertool:helfertool /data /helfertool/run
 
 COPY src /helfertool/src
 COPY deployment/docker/helfertool.sh /usr/local/bin/helfertool
@@ -21,8 +23,8 @@ RUN cd /helfertool/src/ && \
     # copy static files
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py collectstatic --noinput && \
     # fix permissions
-    chown -R helfertool:helfertool /data && \
     chmod +x /usr/local/bin/helfertool
+
 
 VOLUME ["/data", "/config"]
 EXPOSE 8000

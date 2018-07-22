@@ -2,10 +2,7 @@ Docker
 ======
 
 * Update docs
-* Update deployment/manual
-* commands
-    docker run --name helfertool -v /tmp/helfertool/data:/data -v /tmp/helfertool/config:/config -p8000:8000 helfertool
-    docker exec -i -t helfertool helfertool init
+* Update deployment/manual (src directory)
 * django logging
 
 Important
