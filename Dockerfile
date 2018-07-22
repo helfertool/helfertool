@@ -19,7 +19,7 @@ COPY deployment/docker/nginx.conf /helfertool/nginx.conf
 
 RUN cd /helfertool/src/ && \
     # install python libs
-    pip3 install -r requirements.txt mysqlclient psycopg2-binary && \
+    pip3 install -r requirements.txt mysqlclient psycopg2-binary uwsgitop && \
     # copy static files
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py collectstatic --noinput && \
     chmod -R go+rX /helfertool/static && \
