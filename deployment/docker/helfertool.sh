@@ -37,7 +37,7 @@ elif [ "$1" = "createadmin" ] ; then
 # command: reload
 elif [ "$1" = "reload" ] ; then
     # reload uwsgi and celery
-    touch /helfertool/uwsgi_reload
+    touch /helfertool/run/uwsgi_reload
 
     if [ -f "/helfertool/celery.pid" ] ; then
         kill -HUP $(cat /helfertool/celery.pid)
