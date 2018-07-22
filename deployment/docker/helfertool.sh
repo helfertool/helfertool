@@ -43,7 +43,7 @@ elif [ "$1" = "reload" ] ; then
         kill -HUP $(cat /helfertool/celery.pid)
     fi
 # command: manage
-elif [ "$1" = "init" ] ; then
+elif [ "$1" = "manage" ] ; then
     shift
     python3 manage.py $@
 # command: run
