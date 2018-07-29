@@ -2,8 +2,10 @@ Docker
 ======
 
 * Update docs
-* Update deployment/manual (src directory)
 * django logging
+* allowed_hosts
+* check if proxy ip thing is working
+* axes settings
 
 Important
 ==========
