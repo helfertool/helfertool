@@ -4,8 +4,9 @@ Docker
 * Update docs
 * django logging
 * allowed_hosts
-* check if proxy ip thing is working
-* axes settings
+* PostgreSQL related things
+    * case insensitive query for URL name
+    * order by id
 
 Important
 ==========
