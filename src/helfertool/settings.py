@@ -187,17 +187,18 @@ CACHES = {
     }
 }
 
-AXES_LOGIN_FAILURE_LIMIT = dict_get(config, 3, 'security', 'lockout', 'limit')
+AXES_CACHE = 'axes_cache'
+
+AXES_FAILURE_LIMIT = dict_get(config, 3, 'security', 'lockout', 'limit')
 AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, 'security',
                                                'lockout', 'time'))
-AXES_REVERSE_PROXY_HEADER = dict_get(config, 'REMOTE_ADDR', 'security',
-                                     'lockout', 'proxy_header')
 
+# lock based on username, not IP or user agent
 AXES_LOCK_OUT_AT_FAILURE = True
+AXES_ONLY_USER_FAILURES = True
 AXES_USE_USER_AGENT = False
+
 AXES_LOCKOUT_TEMPLATE = 'registration/login_banned.html'
-AXES_BEHIND_REVERSE_PROXY = True
-AXES_CACHE = 'axes_cache'
 
 # external URLs
 PRIVACY_URL = dict_get(config, 'https://app.helfertool.org/datenschutz/',

@@ -139,9 +139,6 @@ security:
         # Lockout duration in minutes
         time: 10
 
-        # HTTP header containing the IP address of the real user
-        proxy_header: "REMOTE_ADDR"
-
 # Custom URLs, mail addresses, ...
 customization:
     # There are some external links that should/can be changed
