@@ -170,7 +170,10 @@ DEBUG = dict_get(config, False, 'security', 'debug')
 SECRET_KEY = dict_get(config, 'CHANGEME', 'security', 'secret')
 ALLOWED_HOSTS = dict_get(config, [], 'security', 'allowed_hosts')
 
-USE_X_FORWARDED_HOST = dict_get(config, False, 'security', 'behind_proxy')
+# use X-Forwarded-* headers
+if dict_get(config, False, 'security', 'behind_proxy'):
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # cookie security
 if not DEBUG:

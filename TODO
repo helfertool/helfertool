@@ -5,6 +5,10 @@ Docker/Deployment
 * django logging
 * Fix badge creation in container
 * Deployment validation page
+    * X-Forward-* Header
+    * DB/RabbitMQ/Mail connection
+    * Init was run?
+    * LDAP
 
 Important
 ==========
