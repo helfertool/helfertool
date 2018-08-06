@@ -5,9 +5,6 @@ Docker
 * django logging
 * allowed_hosts
 * URL in mails
-* PostgreSQL related things
-    * case insensitive query for URL name
-    * order by id
 * Fix badge creation in container
 
 Important

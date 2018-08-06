@@ -25,6 +25,8 @@ class Job(models.Model):
         :public: job is visible publicly
         :badge_design: badge design for this job
     """
+    class Meta:
+        ordering = ['pk']
 
     event = models.ForeignKey(
         'Event',
