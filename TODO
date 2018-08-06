@@ -1,12 +1,10 @@
-Docker
-======
+Docker/Deployment
+=================
 
 * Update docs
 * django logging
-* allowed_hosts
-* URL in mails
 * Fix badge creation in container
-* rework nginx config (sendfile, tcp options, ...)
+* Deployment validation page
 
 Important
 ==========

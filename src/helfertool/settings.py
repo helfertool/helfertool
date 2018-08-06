@@ -170,6 +170,8 @@ DEBUG = dict_get(config, False, 'security', 'debug')
 SECRET_KEY = dict_get(config, 'CHANGEME', 'security', 'secret')
 ALLOWED_HOSTS = dict_get(config, [], 'security', 'allowed_hosts')
 
+USE_X_FORWARDED_HOST = dict_get(config, false, 'security', 'behind_proxy')
+
 # cookie security
 if not DEBUG:
     CSRF_COOKIE_HTTPONLY = True
