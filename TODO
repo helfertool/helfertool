@@ -6,6 +6,7 @@ Docker
 * allowed_hosts
 * URL in mails
 * Fix badge creation in container
+* rework nginx config (sendfile, tcp options, ...)
 
 Important
 ==========
