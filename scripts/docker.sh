@@ -9,6 +9,9 @@ cd "$basedir"
 # build
 if [ "$1" == "build" ] ; then
     docker build -t helfertool/helfertool .
+# cleanbuild
+elif [ "$1" == "cleanbuild" ] ; then
+    docker build --no-cache -t helfertool/helfertool .
 # push
 elif [ "$1" == "push" ] ; then
     docker push helfertool/helfertool
