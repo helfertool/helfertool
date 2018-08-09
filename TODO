@@ -2,17 +2,23 @@ Docker/Deployment
 =================
 
 * Update docs
-* django logging
+* django + celery logging
 * Fix badge creation in container
 * Deployment validation page
     * X-Forward-* Header
     * DB/RabbitMQ/Mail connection
     * Init was run?
     * LDAP
+* check file permissions for uploaded files
+* config: badges typo
 
 Important
 ==========
 
+* ask for gift selection during registration
+* rework badge creation
+    * The AMQP result backend is scheduled for deprecation in version 4.0 and removal in version v5.0. Please use RPC backend or a persistent backend.
+    * cleanup
 * change after registration
     * add more shifts
     * add deadline to mail
@@ -69,13 +75,13 @@ Badges
 * Show missing images (image for coordinators or for all)
 * Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
+* Logging for creator error
 
 
 Gifts
 =====
 
 * add flags to excel export
-* ask for gift selection during registration
 
 
 File uploads

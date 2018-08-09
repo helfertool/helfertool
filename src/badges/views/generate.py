@@ -9,7 +9,6 @@ from celery.result import AsyncResult
 
 from ..checks import warnings_for_job
 from .. import tasks
-from ..creator import BadgeCreatorError
 
 from registration.decorators import archived_not_available
 from registration.views.utils import nopermission, get_or_404
@@ -104,7 +103,6 @@ def tasklist(request, event_url_name):
 
     task_results = []
     task_list_del = []
-    counter = 0
     for task in request.session['badge_tasks']:
         tmp = BadgeTaskResult(task['id'], task['name'])
 
@@ -113,7 +111,6 @@ def tasklist(request, event_url_name):
             task_list_del.append(task)
         elif task['event'] == event.pk:
             task_results.append(tmp)
-            counter += 1
 
     # remove expired filtered tasks
     for task in task_list_del:

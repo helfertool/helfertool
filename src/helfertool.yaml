@@ -160,7 +160,7 @@ customization:
     contact_address: "helfertool@localhost"
 
 # Badge settings
-bagdes:
+badges:
     # Path to pdflatex binary
     pdflatex: "/usr/bin/pdflatex"
 
