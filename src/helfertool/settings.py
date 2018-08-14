@@ -40,8 +40,9 @@ MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'),
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-# file permissions for newly uploaded files
+# file permissions for newly uploaded files and directories
 FILE_UPLOAD_PERMISSIONS = 0o640
+FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o750
 
 # internationalization
 LANGUAGE_CODE = dict_get(config, 'de', 'language', 'default')
