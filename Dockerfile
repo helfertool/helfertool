@@ -1,6 +1,6 @@
 FROM debian:stretch
 
-ENV PYTHONIOENCODING=utf-8
+ENV LANG=C.UTF-8
 
 RUN apt-get update && \
     apt-get install -y python3 python3-pip uwsgi uwsgi-plugin-python3 nginx supervisor gosu \

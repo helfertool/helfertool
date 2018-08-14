@@ -10,7 +10,7 @@ Docker/Deployment
     * Init was run?
     * LDAP
 * check file permissions for uploaded files
-* config: badges typo
+* uwsgi config: remove helfertool user and group?
 
 Important
 ==========
@@ -76,6 +76,7 @@ Badges
 * Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
 * Logging for creator error
+* AJAX reload: timeout and redirect to login
 
 
 Gifts
