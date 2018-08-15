@@ -7,6 +7,9 @@ from django.utils.translation import ugettext as _
 
 from smtplib import SMTPException
 
+import logging
+logger = logging.getLogger("helfertool")
+
 from registration.decorators import archived_not_available
 from registration.models import Event
 from registration.views.utils import nopermission
@@ -30,10 +33,21 @@ def send_mail(request, event_url_name):
         try:
             form.send_mail()
             messages.success(request, _("Mail was sent successfully"))
-        except (SMTPException, ConnectionError, MailFormError) as e:
-            messages.error(request, _("Sending mails failed: %(error)s") %
-                           {'error': str(e)})
 
+            logger.info("mail sent", extra={
+                'user': request.user,
+                'event': event,
+                'subject': form.cleaned_data['subject'],
+            })
+        except (SMTPException, ConnectionError, MailFormError) as e:
+            messages.error(request, _("Sending mails failed"))
+
+            logger.error("mail error", extra={
+                'user': request.user,
+                'event': event,
+                'subject': form.cleaned_data['subject'],
+                'error': str(e),
+            })
         return HttpResponseRedirect(reverse('mail:send',
                                             args=[event_url_name]))
 

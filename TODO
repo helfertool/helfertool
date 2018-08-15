@@ -3,6 +3,7 @@ Docker/Deployment
 
 * Update docs
 * django + celery logging
+    Done: mail
 * Deployment validation page
     * X-Forward-* Header
     * DB/RabbitMQ/Mail connection

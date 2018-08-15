@@ -6,8 +6,9 @@ import os
 import sys
 import yaml
 
-from datetime import timedelta
 from django.utils.translation import ugettext_lazy as _
+
+from datetime import timedelta
 
 from .utils import dict_get, build_path
 
@@ -163,9 +164,6 @@ if ldap_config:
         'django.contrib.auth.backends.ModelBackend',
     )
 
-# logging
-ADMINS = [(mail, mail) for mail in dict_get(config, [], 'logging', 'mails')]
-
 # security
 DEBUG = dict_get(config, False, 'security', 'debug')
 SECRET_KEY = dict_get(config, 'CHANGEME', 'security', 'secret')
@@ -182,6 +180,39 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SECURE = True
+
+# logging
+ADMINS = [(mail, mail) for mail in dict_get(config, [], 'logging', 'mails')]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'helfertool': {
+            '()': 'helfertool.log.HelfertoolFormatter',
+        },
+    },
+    'handlers': {
+        'helfertool_console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+            'formatter': 'helfertool',
+            'level': 'INFO',
+        },
+    },
+    'loggers': {
+        'helfertool': {
+            'handlers': ['helfertool_console'],
+            'level': 'INFO',
+        },
+    },
+}
+
 
 # axes
 CACHES = {
