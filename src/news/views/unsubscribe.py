@@ -4,6 +4,9 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
+import logging
+logger = logging.getLogger("helfertool")
+
 from ..models import Person
 from ..forms import UnsubscribeForm
 
@@ -21,7 +24,12 @@ def unsubscribe(request, token):
 
     form = UnsubscribeForm(request.POST or None)
     if form.is_valid():
+        logger.info("newsletter unsubscribe", extra={
+            'email': person.email,
+        })
+
         person.delete()
+
         return HttpResponseRedirect(reverse('news:subscription_deleted'))
 
     context = {'person': person}

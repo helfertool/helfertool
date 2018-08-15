@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
+import logging
+logger = logging.getLogger("helfertool")
+
 # TODO: move has_sendnews_group somewhere else
 from registration.templatetags.permissions import has_sendnews_group
 from registration.views.utils import nopermission
@@ -28,6 +31,11 @@ def send(request):
     if form.is_valid():
         form.send_mail()
         messages.success(request, _("Mails are being sent now."))
+
+        logger.info("newsletter sent", extra={
+            'user': request.user,
+            'subject': form.cleaned_data['subject'],
+        })
 
         return HttpResponseRedirect(reverse('news:send'))
 
