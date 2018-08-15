@@ -193,21 +193,34 @@ LOGGING = {
         },
     },
     'formatters': {
-        'helfertool': {
+        'helfertool_console': {
             '()': 'helfertool.log.HelfertoolFormatter',
+            'format': '[%(asctime)s] %(levelname)s %(message)s (%(extras)s)',
+            'datefmt': '%d/%b/%Y %H:%M:%S'
+        },
+        'helfertool_syslog': {
+            '()': 'helfertool.log.HelfertoolFormatter',
+            'format': '%(name)s %(levelname)s %(message)s (%(extras)s)',
         },
     },
     'handlers': {
         'helfertool_console': {
             'class': 'logging.StreamHandler',
             'filters': ['require_debug_true'],
-            'formatter': 'helfertool',
+            'formatter': 'helfertool_console',
             'level': 'INFO',
         },
+        #'helfertool_syslog': {
+        #    'class': 'logging.handlers.SysLogHandler',
+        #    'formatter': 'helfertool_syslog',
+        #    'level': 'INFO',
+        #    'address': ('192.168.56.4', 5140),
+        #}
     },
     'loggers': {
         'helfertool': {
             'handlers': ['helfertool_console'],
+            #'handlers': ['helfertool_console', 'helfertool_syslog'],
             'level': 'INFO',
         },
     },

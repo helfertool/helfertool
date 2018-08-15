@@ -24,7 +24,6 @@ def get_extra_attrs(record):
     """
     Extracts all extra attributes from the log record and additionally:
 
-    * adds the "levelname" as "level"
     * replaces "event" by "event_url" and "event_pk"
     """
     result = {}
@@ -32,9 +31,6 @@ def get_extra_attrs(record):
     for k, v in record.__dict__.items():
         if k not in SKIP_ATTRS:
             result[k] = v
-
-    # log level
-    result["level"] = record.levelname
 
     # event
     if hasattr(record, 'event'):
@@ -46,10 +42,11 @@ def get_extra_attrs(record):
 
 class HelfertoolFormatter(logging.Formatter):
     def format(self, record):
-        time = self.formatTime(record)
+        if not hasattr(record, 'extras'):
+            extras = get_extra_attrs(record)
+            extras = ["{}=\"{}\"".format(k, v) for k, v in extras.items()]
+            extras = ' '.join(extras)
 
-        extras = get_extra_attrs(record)
-        extras = ["{}={}".format(k, v) for k, v in extras.items()]
-        extras = ', '.join(extras)
+            setattr(record, 'extras', extras)
 
-        return "{} {} ({})".format(time, record.msg, extras)
+        return super().format(record)
