@@ -1,9 +1,10 @@
-# Location of uploaded files and static files.
+# Location of uploaded files, static files and temporary files.
 # Relative paths are relative to the git directory, absolute paths
 # are also possible.
 files:
     static: "static"
     media: "media"
+    tmp: "/tmp"
 
 # Language settings
 # Possible values: de, en

@@ -31,7 +31,7 @@ class BadgeCreator:
         self.helpers = []
 
         # create temporary files
-        self.dir = mkdtemp()
+        self.dir = mkdtemp(dir=settings.TMP_ROOT, prefix="badges_")
         self.latex_file, self.latex_filename = mkstemp(suffix='.tex',
                                                        dir=self.dir)
 
@@ -127,13 +127,7 @@ class BadgeCreator:
         # write code
         try:
             f = os.fdopen(self.latex_file, 'w')
-
-            # ...
-            if sys.version_info < (3,):
-                f.write(latex.encode('utf8'))
-            else:
-                f.write(latex)
-
+            f.write(latex)
             f.close()
         except IOError as e:
             raise BadgeCreatorError("Cannot write to file \"%s\": %s" %

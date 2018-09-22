@@ -41,9 +41,14 @@ MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'),
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+# directory for temporary files (badges, file uploads)
+TMP_ROOT = build_path(dict_get(config, '/tmp', 'files', 'tmp'),
+                      BASE_DIR)
+
 # file permissions for newly uploaded files and directories
 FILE_UPLOAD_PERMISSIONS = 0o640
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o750
+FILE_UPLOAD_TEMP_DIR = TMP_ROOT
 
 # internationalization
 LANGUAGE_CODE = dict_get(config, 'de', 'language', 'default')
