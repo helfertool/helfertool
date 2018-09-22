@@ -18,7 +18,7 @@ fi
 
 # prepare environment
 cd /helfertool/src
-mkdir -p /data/media
+mkdir -p /data/media /data/tmp
 export HELFERTOOL_CONFIG_FILE="/config/helfertool.yaml"
 
 # command: init
@@ -39,8 +39,8 @@ elif [ "$1" = "reload" ] ; then
     # reload uwsgi and celery
     touch /helfertool/run/uwsgi_reload
 
-    if [ -f "/helfertool/celery.pid" ] ; then
-        kill -HUP $(cat /helfertool/celery.pid)
+    if [ -f "/helfertool/run/celery.pid" ] ; then
+        kill -HUP $(cat /helfertool/run/celery.pid)
     fi
 # command: manage
 elif [ "$1" = "manage" ] ; then

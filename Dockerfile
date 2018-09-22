@@ -3,15 +3,16 @@ FROM debian:stretch
 ENV LANG=C.UTF-8
 
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip uwsgi uwsgi-plugin-python3 nginx supervisor gosu \
+    apt-get install -y python3 python3-pip uwsgi uwsgi-plugin-python3 \
+        nginx supervisor gosu rsyslog \
         libldap2-dev libsasl2-dev libmariadbclient-dev \
         texlive-latex-extra texlive-fonts-recommended texlive-lang-german && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc/* && \
     # add user, some directories and fix owners
     useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 1000 && \
-    mkdir /data /helfertool/run && \
-    chown -R helfertool:helfertool /data /helfertool/run
+    mkdir /data /log /helfertool/run && \
+    chown -R helfertool:helfertool /data /log /helfertool/run
 
 COPY src /helfertool/src
 COPY deployment/docker/helfertool.sh /usr/local/bin/helfertool
@@ -29,7 +30,7 @@ RUN cd /helfertool/src/ && \
     chmod +x /usr/local/bin/helfertool
 
 
-VOLUME ["/data", "/config"]
+VOLUME ["/config", "/data", "/log"]
 EXPOSE 8000
 
 ENTRYPOINT ["/usr/local/bin/helfertool"]
