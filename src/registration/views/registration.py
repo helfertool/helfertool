@@ -18,13 +18,17 @@ from news.helper import news_test_email
 def index(request):
     events = Event.objects.all()
 
-    # check is user is admin
-    for e in events:
-        e.involved = e.is_involved(request.user)
-
-    # filter events, that are not active and where user is not admin
+    # public events
     active_events = [e for e in events if e.active]
-    involved_events = [e for e in events if not e.active and e.involved]
+
+    # inactive events that are visible for current user
+    involved_events = []
+    if not request.user.is_anonymous:
+        for e in events:
+            e.involved = e.is_involved(request.user)
+
+            if e.involved and not e.active:
+                involved_events.append(e)
 
     # only one public event and no internal events -> redirect
     if events.count() == 1 and active_events:
