@@ -1,24 +1,12 @@
 from django.conf import settings
 from django.conf.urls import url
 from django.views.generic import TemplateView
-from django.contrib.auth import views as auth_views
 
 from . import views
 from .feeds import HelperFeed
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-
-    # authentication
-    url(r'^login/$',
-        auth_views.login,
-        {'template_name': 'registration/login.html'},
-        name='login'),
-
-    url(r'^logout/$',
-        auth_views.logout,
-        {'next_page': '/'},
-        name='logout'),
 
     # about
     url(r'^about/$',

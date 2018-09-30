@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('infection_instruction', models.CharField(choices=[('No', 'I never got an instruction'), ('Yes', 'I have a valid instruction'), ('Refresh', 'I got a instruction by a doctor, it must be refreshed')], max_length=20, blank=True, verbose_name='Instruction for the handling of food')),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
                 ('validated', models.BooleanField(default=True, verbose_name='E-Mail address was confirmed')),
-                ('event', models.ForeignKey(to='registration.Event')),
+                ('event', models.ForeignKey(to='registration.Event', on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -76,9 +76,9 @@ class Migration(migrations.Migration):
                 ('description', django_bleach.models.BleachField(blank=True, verbose_name='Description')),
                 ('description_de', django_bleach.models.BleachField(null=True, blank=True, verbose_name='Description')),
                 ('description_en', django_bleach.models.BleachField(null=True, blank=True, verbose_name='Description')),
-                ('badge_defaults', models.OneToOneField(null=True, to='badges.BadgeDefaults', blank=True)),
+                ('badge_defaults', models.OneToOneField(null=True, to='badges.BadgeDefaults', blank=True, on_delete=models.CASCADE)),
                 ('coordinators', models.ManyToManyField(blank=True, to='registration.Helper')),
-                ('event', models.ForeignKey(to='registration.Event')),
+                ('event', models.ForeignKey(to='registration.Event', on_delete=models.CASCADE)),
                 ('job_admins', models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -87,8 +87,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, serialize=False, primary_key=True, editable=False)),
                 ('usage', models.CharField(max_length=200, blank=True, verbose_name='Usage')),
-                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('event', models.ForeignKey(to='registration.Event')),
+                ('creator', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('event', models.ForeignKey(to='registration.Event', on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                 ('end', models.DateTimeField(verbose_name='End')),
                 ('number', models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0)], verbose_name='Number of helpers')),
                 ('blocked', models.BooleanField(default=False, verbose_name='If the job is publicly visible, the shift is blocked.')),
-                ('job', models.ForeignKey(to='registration.Job')),
+                ('job', models.ForeignKey(to='registration.Job', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['job', 'begin', 'end'],

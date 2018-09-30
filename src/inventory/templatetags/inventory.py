@@ -5,7 +5,7 @@ from ..utils import is_inventory_admin as utils_inventory_admin
 register = template.Library()
 
 
-@register.assignment_tag
+@register.simple_tag
 def active_uses(useditems):
     count = 0
     for tmp in useditems:

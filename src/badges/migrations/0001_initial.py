@@ -75,7 +75,7 @@ class Migration(migrations.Migration):
                 ('barcodes', models.BooleanField(default=False, verbose_name='Print barcodes on badges to avoid duplicates')),
                 ('coordinator_title', models.CharField(default='', max_length=200, verbose_name='Role for coordinators')),
                 ('helper_title', models.CharField(default='', max_length=200, verbose_name='Role for helpers')),
-                ('defaults', models.OneToOneField(to='badges.BadgeDefaults')),
+                ('defaults', models.OneToOneField(to='badges.BadgeDefaults', on_delete=models.CASCADE)),
             ],
         ),
     ]
