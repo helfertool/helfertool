@@ -8,7 +8,7 @@ cd "$basedir"
 
 # build
 if [ "$1" == "build" ] ; then
-    docker build --no-cache -t helfertool/helfertool .
+    docker build --no-cache --pull -t helfertool/helfertool .
 # build
 elif [ "$1" == "fastbuild" ] ; then
     docker build -t helfertool/helfertool .
