@@ -19,6 +19,7 @@ COPY deployment/docker/helfertool.sh /usr/local/bin/helfertool
 COPY deployment/docker/uwsgi.conf /helfertool/uwsgi.conf
 COPY deployment/docker/supervisord.conf /helfertool/supervisord.conf
 COPY deployment/docker/nginx.conf /helfertool/nginx.conf
+COPY deployment/docker/rsyslog.conf /helfertool/rsyslog.conf
 
 RUN cd /helfertool/src/ && \
     # install python libs

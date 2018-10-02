@@ -215,21 +215,27 @@ LOGGING = {
             'formatter': 'helfertool_console',
             'level': 'INFO',
         },
-        #'helfertool_syslog': {
-        #    'class': 'logging.handlers.SysLogHandler',
-        #    'formatter': 'helfertool_syslog',
-        #    'level': 'INFO',
-        #    'address': ('192.168.56.4', 5140),
-        #}
     },
     'loggers': {
         'helfertool': {
             'handlers': ['helfertool_console'],
-            #'handlers': ['helfertool_console', 'helfertool_syslog'],
             'level': 'INFO',
         },
     },
 }
+
+syslog_config = dict_get(config, None, 'logging', 'syslog')
+if syslog_config:
+    LOGGING['handlers']['helfertool_syslog'] = {
+        'class': 'logging.handlers.SysLogHandler',
+        'formatter': 'helfertool_syslog',
+        'level': dict_get(syslog_config, 'INFO', 'level'),
+        'facility': dict_get(syslog_config, 'local7', 'facility'),
+        'address': (dict_get(syslog_config, 'localhost', 'server'),
+                    dict_get(syslog_config, 514, 'port')),
+    }
+
+    LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog')
 
 
 # axes

@@ -42,10 +42,18 @@ elif [ "$1" = "reload" ] ; then
     if [ -f "/helfertool/run/celery.pid" ] ; then
         kill -HUP $(cat /helfertool/run/celery.pid)
     fi
+
+# command: postrotate
+elif [ "$1" = "postrotate" ] ; then
+    if [ -f "/helfertool/run/rsyslog.pid" ] ; then
+        kill -HUP $(cat /helfertool/run/rsyslog.pid)
+    fi
+
 # command: manage
 elif [ "$1" = "manage" ] ; then
     shift
     python3 manage.py $@
+
 # command: run
 elif [ "$1" = "run" ] ; then
     # input parameters

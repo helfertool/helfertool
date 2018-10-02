@@ -119,6 +119,18 @@ logging:
     mails:
         - root@localhost
 
+    # Syslog logging
+    #syslog:
+    #    # Log level that will be sent to syslog: INFO, WARNING, ERROR
+    #    level: 'INFO'
+    #
+    #    # Server and port
+    #    server: 'localhost'
+    #    port: 514
+    #
+    #    # Syslog facility to use
+    #    facility: 'local7'
+
 # Security settings
 security:
     # Do not activate debugging in productive environments!
