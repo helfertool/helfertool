@@ -26,7 +26,6 @@ if [ "$1" = "init" ] ; then
     # initialise database with default settings
     python3 manage.py migrate --noinput
     python3 manage.py loaddata toolsettings
-    python3 manage.py createsuperuser
 
 # command: createadmin
 elif [ "$1" = "createadmin" ] ; then
@@ -78,6 +77,6 @@ elif [ "$1" = "run" ] ; then
 
 # help message
 else
-    echo "Commands: init, createadmin, reload, run, manage"
+    echo "Commands: init, createadmin, reload, postrotate, run, manage"
     exit 1
 fi
