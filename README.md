@@ -20,9 +20,8 @@ easier for you:
 
 ## Celery
 
-For development, RabbitMQ is installed using Docker (note: the RabbitMQ server
-listens on port 5672 to every incoming connection, you should configure a
-firewall):
+RabbitMQ can be installed using Docker (note: the RabbitMQ server listens
+on port 5672 to every incoming connection, you should configure a firewall):
 
     docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
@@ -39,7 +38,7 @@ To update the RabbitMQ container later:
     docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
 
-Change the broker configuration in `helfertool/settings_local.py`.
+Change the broker configuration in `src/helfertool/settings_local.py`.
 
 For RabbitMQ with the username "guest" and password "guest" the configuration
 should look like this:
@@ -61,7 +60,7 @@ SMTP debug server using this command:
 
     python -m smtpd -n -c DebuggingServer localhost:1025
 
-Additionally uncomment the following lines in `helfertool/settings_local.py`:
+Additionally uncomment the following lines in `src/helfertool/settings_local.py`:
 
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
@@ -73,6 +72,7 @@ that you also see the mails sent in Celery tasks in the same window.
 
 Start the webserver for development:
 
+    cd src
     python manage.py runserver
 
 Now visit http://localhost:8000 with your browser.

@@ -1,0 +1,16 @@
+django>=1.11,<2.0
+django-auth-ldap
+django-axes
+django-bleach
+django-bootstrap3
+django-ckeditor
+django-modeltranslation
+django-multiselectfield
+django_ical
+amqp
+celery
+pillow
+python-magic
+pyyaml
+reportlab
+xlsxwriter

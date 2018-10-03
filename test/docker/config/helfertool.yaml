@@ -1,0 +1,12 @@
+database:
+    backend: "sqlite3"
+    name: "/data/db.sqlite3"
+
+security:
+    debug: False
+    allowed_hosts:
+        - "localhost"
+
+logging:
+    syslog:
+        port: 5140

@@ -1,0 +1,169 @@
+{% load i18n %}
+{% load bootstrap3 %}
+{% load registerform_shifts %}
+{% load toolsettings %}
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <h2>{% trans "Jobs" %}</h2>
+    {# list of all jobs and shifts #}
+
+    {% get_jobs form as jobs %}
+    {% for job in jobs %}
+        {% get_shifts form job as shifts %}
+
+        <h3>
+            {% if job.description %}
+                <button type="button"
+                        class="btn info-expand"
+                        data-toggle="collapse"
+                        data-target="#job-{{ job.pk }}">
+                    {% bootstrap_icon "info-sign" %}
+                </button>
+            {% endif %}
+            {{ job.name }}
+        </h3>
+
+        <div id="job-{{ job.pk }}" class="collapse">
+            <p>{{ job.description | safe }}</p>
+        </div>
+
+        <table class="shifts">
+            <tr>
+                {% for day, shifts in shifts.items %}
+                    <th>{{ day }}</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for day, shifts in shifts.items %}
+                    <td>
+                    {% for shift in shifts %}
+                        {# checkbox #}
+                        {{ form | lookup_shift:shift.pk }}
+                        <label>
+                            {# time #}
+                            {% if shift.is_full %}
+                                <del>{{ shift.time_hours }}</del>
+                            {% elif shift.blocked and not form.displayed_shifts %}
+                                <del>{{ shift.time_hours }}</del>
+                            {% else %}
+                                {{ shift.time_hours }}
+                            {% endif %}
+
+                            {# number of helpers #}
+                            {% if event.show_public_numbers %}
+                                {% if shift.blocked and not form.displayed_shifts %}
+                                    <span class="numbers">
+                                        ({{ shift.number }}/{{ shift.number }})
+                                    </span>
+                                {% else %}
+                                    <span class="numbers">
+                                        ({{ shift.num_helpers }}/{{ shift.number }})
+                                    </span>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if shift.name %}
+                                <br /><span class="name">{{ shift.name }}</span>
+                            {% endif %}
+                        </label>
+
+                        <br />
+                    {% endfor %}
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+    {% endfor %}
+
+    <h2>{% trans "Personal data" %}</h2>
+
+    {# personal data, nothing special... #}
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            {% bootstrap_field form.firstname required_css_class='' %}
+            {% bootstrap_field form.surname required_css_class='' %}
+            {% bootstrap_field form.email required_css_class='' %}
+            {% bootstrap_field form.phone required_css_class='' %}
+            {% if event.ask_shirt %}
+                {% bootstrap_field form.shirt required_css_class='' %}
+            {% endif %}
+            {% bootstrap_field form.infection_instruction required_css_class='' %}
+            {% if event.ask_vegetarian %}
+                {% bootstrap_field form.vegetarian required_css_class='' %}
+            {% endif %}
+            {% bootstrap_field form.comment required_css_class='' %}
+            {% if form.ask_full_age %}
+                {% bootstrap_field form.full_age required_css_class='' %}
+            {% endif %}
+        </div>
+    </div>
+
+    {% if not form.internal %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% bootstrap_field form.privacy_statement required_css_class='' %}
+
+                <div class="well">
+                    {% htmlsetting "privacy" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if form.ask_news %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% bootstrap_field form.news required_css_class='' %}
+
+                <div class="well">
+                    {% htmlsetting "privacy_newsletter" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            {% if form.internal and event.ask_full_age %}
+                <p>
+                    <b>{% trans "Make sure that the helper is full age!" %}</b>
+                </p>
+            {% endif %}
+
+            {% if form.internal %}
+                <div class="alert alert-warning" role="alert">
+                    <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
+                </div>
+            {% endif %}
+
+            <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
+        </div>
+    </div>
+
+    <script>
+        function handle_infection_instruction()
+        {
+            var show_field = 0;
+
+            // iterate over all relevant checkboxes
+            $(".infection_instruction").each(function() {
+                if($(this).prop('checked'))
+                {
+                    show_field = 1;
+                    return false;
+                }
+            })
+
+            // show or hide input field
+            if(show_field)
+                $("#id_infection_instruction").parent().show()
+            else
+                $("#id_infection_instruction").parent().hide()
+        }
+
+        handle_infection_instruction();
+    </script>
+</form>
+

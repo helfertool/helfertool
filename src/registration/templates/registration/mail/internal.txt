@@ -1,0 +1,16 @@
+{% load i18n toolsettings %}{% blocktrans with firstname=user.firstname %}Hello {{ firstname }},
+
+you were registered for the following shifts:{% endblocktrans %}
+{% for shift in user.shifts.all %}
+ * {{ shift }}
+{% endfor %}
+{% if user.has_to_validate %}{% blocktrans %}You have to confirm your mail address by clicking on the following link: {{ validate_url }}
+
+{% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
+
+{% trans "Your data is used according to the following data privacy statement, if you do not agree with it please veto per e-mail." %}
+
+{% blocktrans %}Thanks for your support!{% endblocktrans %}
+
+-- 
+{% textsetting "privacy" %}

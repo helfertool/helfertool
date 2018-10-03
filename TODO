@@ -1,6 +1,23 @@
+Docker/Deployment
+=================
+
+* Update docs
+* uwsgi: disable-logging = True
+* django + celery logging
+    Done: mail, news
+* Deployment validation page
+    * X-Forward-* Header
+    * DB/RabbitMQ/Mail connection
+    * Init was run?
+    * LDAP
+
 Important
 ==========
 
+* ask for gift selection during registration
+* rework badge creation
+    * The AMQP result backend is scheduled for deprecation in version 4.0 and removal in version v5.0. Please use RPC backend or a persistent backend.
+    * cleanup
 * change after registration
     * add more shifts
     * add deadline to mail
@@ -26,6 +43,8 @@ Design, JS
   * begin < end
   * change end when begin is changed
 * accept="image/*" for image uploads
+* django-compressor
+* Simple theme customizing
 
 
 Registration
@@ -35,6 +54,7 @@ Registration
 * somehow make the notes for a job more visible
 * edit mail template / add custom message to mails?
 * duplicate shifts
+* dynamic fields
 
 
 Admin area
@@ -54,6 +74,8 @@ Badges
 * Show missing images (image for coordinators or for all)
 * Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
+* Logging for creator error
+* AJAX reload: timeout and redirect to login
 
 
 Gifts
@@ -84,8 +106,3 @@ Inventory
 * edit item: unique_together leads to exception on same barcode, handle the exception
 * export PDF with barcodes
 * used inventory for single job?
-
-Deployment
-==========
-
-* settings in admin area?
