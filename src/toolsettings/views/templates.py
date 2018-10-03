@@ -3,6 +3,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+import logging
+logger = logging.getLogger("helfertool")
+
 from registration.views.utils import nopermission
 
 from ..forms import HTMLSettingForm, TextSettingForm
@@ -21,6 +24,12 @@ def template_about(request):
 
     if form.is_valid():
         form.save()
+
+        logger.info("settings changed", extra={
+            'changed': 'templates_about',
+            'user': request.user,
+        })
+
         return HttpResponseRedirect(reverse('toolsettings:index'))
 
     # render page
@@ -55,6 +64,12 @@ def template_privacy(request):
         form_privacy.save()
         form_privacy_text.save()
         form_news.save()
+
+        logger.info("settings changed", extra={
+            'changed': 'templates_privacy',
+            'user': request.user,
+        })
+
         return HttpResponseRedirect(reverse('toolsettings:index'))
 
     # render page

@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
+import logging
+logger = logging.getLogger("helfertool")
+
 from .utils import is_admin, nopermission
 
 from ..decorators import archived_not_available
@@ -45,8 +48,20 @@ def edit_event(request, event_url_name=None):
                 event.admins.add(request.user)
             event.save()
 
+            logger.info("event created", extra={
+                'user': request.user,
+                'event': event,
+                'source_url': None,
+                'source_pk': None,
+            })
+
             messages.success(request, _("Event was created: %(event)s") %
                              {'event': event.name})
+        else:
+            logger.info("event changed", extra={
+                'user': request.user,
+                'event': event,
+            })
 
         # redirect to this page, so reload does not send the form data again
         # if the event was created, this redirects to the event settings
@@ -77,6 +92,12 @@ def delete_event(request, event_url_name):
 
     if form.is_valid():
         form.delete()
+
+        logger.info("event deleted", extra={
+            'user': request.user,
+            'event': event,
+        })
+
         messages.success(request, _("Event deleted: %(name)s") %
                          {'name': event.name})
 
@@ -103,6 +124,12 @@ def archive_event(request, event_url_name):
 
     if form.is_valid():
         form.archive()
+
+        logger.info("event archived", extra={
+            'user': request.user,
+            'event': event,
+        })
+
         return HttpResponseRedirect(reverse('edit_event',
                                             args=[event_url_name, ]))
 
@@ -126,6 +153,14 @@ def duplicate_event(request, event_url_name):
 
     if form.is_valid():
         form.save()
+
+        logger.info("event created", extra={
+            'user': request.user,
+            'event': form.instance,
+            'source_url': event.url_name,
+            'source_pk': event.pk,
+        })
+
         messages.success(request, _("Event was duplicated: %(event)s") %
                          {'event': form['name'].value()})
         return HttpResponseRedirect(reverse('edit_event',

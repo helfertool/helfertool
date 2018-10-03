@@ -16,7 +16,7 @@ SKIP_ATTRS = (
     'thread', 'threadName',
 
     # custom things
-    'event',
+    'event', 'job',
 )
 
 
@@ -25,6 +25,7 @@ def get_extra_attrs(record):
     Extracts all extra attributes from the log record and additionally:
 
     * replaces "event" by "event_url" and "event_pk"
+    * replaces "job" by "job_name" and "job_pk"
     """
     result = {}
 
@@ -36,6 +37,11 @@ def get_extra_attrs(record):
     if hasattr(record, 'event'):
         result["event_url"] = record.event.url_name
         result["event_pk"] = record.event.pk
+
+    # job
+    if hasattr(record, 'job') and record.job:
+        result["job_name"] = record.job.name
+        result["job_pk"] = record.job.pk
 
     return result
 

@@ -5,6 +5,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 def change_user(request):
@@ -15,6 +18,11 @@ def change_user(request):
         if pw_form.is_valid():
             pw_form.save()
             update_session_auth_hash(request, pw_form.user)
+
+            logger.info("password changed", extra={
+                'user': request.user,
+            })
+
             messages.success(request, _("Changed password successfully"))
     else:
         # user from LDAP

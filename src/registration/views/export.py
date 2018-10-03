@@ -3,6 +3,9 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.utils.dateparse import parse_date
 
+import logging
+logger = logging.getLogger("helfertool")
+
 from io import BytesIO
 
 from .utils import nopermission
@@ -16,9 +19,9 @@ from ..decorators import archived_not_available
 
 @login_required
 @archived_not_available
-def export(request, event_url_name, type, job_pk=None, date_str=None):
+def export(request, event_url_name, filetype, job_pk=None, date_str=None):
     # check for valid export type
-    if type not in ["excel", "pdf"]:
+    if filetype not in ["excel", "pdf"]:
         raise Http404
 
     # get event
@@ -33,6 +36,7 @@ def export(request, event_url_name, type, job_pk=None, date_str=None):
             return nopermission(request)
 
         jobs = [job, ]
+        job_for_log = job
         filename = "%s - %s" % (event.name, job.name)
     else:
         # check permission
@@ -40,6 +44,7 @@ def export(request, event_url_name, type, job_pk=None, date_str=None):
             return nopermission(request)
 
         jobs = event.job_set.all()
+        job_for_log = None
         filename = event.name
 
     # parse date
@@ -68,15 +73,25 @@ def export(request, event_url_name, type, job_pk=None, date_str=None):
     buffer = BytesIO()
 
     # do filetype specific stuff
-    if type == 'excel':
+    if filetype == 'excel':
         filename = "%s.xlsx" % filename
         content_type = "application/vnd.openxmlformats-officedocument" \
                        ".spreadsheetml.sheet"
         xlsx(buffer, event, jobs, date)
-    elif type == 'pdf':
+    elif filetype == 'pdf':
         filename = "%s.pdf" % filename
         content_type = 'application/pdf'
         pdf(buffer, event, jobs, date)
+
+    # log
+    logger.info("export", extra={
+        'user': request.user,
+        'event': event,
+        'job': job_for_log,
+        'type': filetype,
+        'file': filename,
+        'date': date_str,
+    })
 
     # start http response
     response = HttpResponse(content_type=content_type)
