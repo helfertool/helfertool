@@ -1,10 +1,8 @@
 Docker/Deployment
 =================
 
-* Update docs
 * uwsgi: disable-logging = True
 * django + celery logging
-    Done: mail, news
 * Deployment validation page
     * X-Forward-* Header
     * DB/RabbitMQ/Mail connection
