@@ -137,7 +137,7 @@ security:
     debug: true
 
     # Unique and secret key
-    secret: "foobar"
+    secret: "change_this_for_production"
 
     # URLs that are used for the software
     allowed_hosts:
