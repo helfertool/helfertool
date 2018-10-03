@@ -6,45 +6,36 @@ See <https://www.helfertool.org> for more information.
 # Install
 
 Please have a look at the
-[deployment guide](https://docs.helfertool.org/deploy/index.html)
+[admin guide](https://docs.helfertool.org/admin/index.html)
 in our documentation.
 
 # Environment for development
 
-Most of the steps are described in the
-[deployment guide](https://docs.helfertool.org/deploy/index.html),
-you can skip the installation and configuration of a webserver.
+A Python virtual environment should be used for development, the necessary
+Python libraries are listed in ``src/requirements.txt``.
 
-There are some differences to the deployment guide that should make life
-easier for you:
+## Runserver
 
-## Celery
+Start the webserver for development:
+
+    cd src
+    python manage.py runserver
+
+Now visit http://localhost:8000 with your browser.
+
+
+## Celery and RabbitMQ
+
+When working on a part of the Helfertool that uses Celery, a RabbitMQ instance
+needs to be started:
 
 RabbitMQ can be installed using Docker (note: the RabbitMQ server listens
 on port 5672 to every incoming connection, you should configure a firewall):
 
-    docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
+    docker run -d --rm --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
         -p 5672:5672 rabbitmq
 
-To start the RabbitMQ server later:
-
-    docker start helfertool-rabbitmq
-
-To update the RabbitMQ container later:
-
-    docker pull rabbitmq
-    docker stop helfertool-rabbitmq
-    docker rm helfertool-rabbitmq
-    docker run -d --hostname helfertool-rabbitmq --name helfertool-rabbitmq \
-        -p 5672:5672 rabbitmq
-
-Change the broker configuration in `src/helfertool/settings_local.py`.
-
-For RabbitMQ with the username "guest" and password "guest" the configuration
-should look like this:
-
-    BROKER_URL = 'amqp://guest:guest@127.0.0.1/'
-    CELERY_RESULT_BACKEND = 'amqp://guest:guest@127.0.0.1/'
+The default settings in ``helfertool.yaml`` do not need to be changed.
 
 Now start celery:
 
@@ -60,22 +51,10 @@ SMTP debug server using this command:
 
     python -m smtpd -n -c DebuggingServer localhost:1025
 
-Additionally uncomment the following lines in `src/helfertool/settings_local.py`:
-
-    EMAIL_HOST = 'localhost'
-    EMAIL_PORT = 1025
+Additionally set the SMTP port to 1025 in ``helfertool.yaml``:
 
 The advantage of this method compared to the console backend from Django is,
 that you also see the mails sent in Celery tasks in the same window.
-
-## Runserver
-
-Start the webserver for development:
-
-    cd src
-    python manage.py runserver
-
-Now visit http://localhost:8000 with your browser.
 
 # LICENSE
 
