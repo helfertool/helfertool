@@ -83,7 +83,7 @@ def tasklist(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # do not return data if user is not authenticated
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         context = {'event': event,
                    'tasks': None,
                    'no_login': True}
