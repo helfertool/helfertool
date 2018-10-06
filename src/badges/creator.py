@@ -250,6 +250,6 @@ class BadgeCreator:
         string = string.replace(r'}', r'\}')
         string = string.replace(r'~', r'\textasciitilde ')
         string = string.replace(r'^', r'\textasciicircum ')
-        string = string.replace(r'\\', r'\textbackslash ')
+        string = string.replace('\\', r'\textbackslash ')
 
         return '{' + string + '}'
