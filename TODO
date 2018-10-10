@@ -1,7 +1,6 @@
 Docker/Deployment
 =================
 
-* uwsgi: disable-logging = True
 * django + celery logging
 * Deployment validation page
     * X-Forward-* Header
