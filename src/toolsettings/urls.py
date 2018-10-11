@@ -17,4 +17,8 @@ urlpatterns = [
     url(r'^templates/privacy/$',
         views.template_privacy,
         name='template_privacy'),
+
+    url(r'^check/$',
+        views.check,
+        name='check'),
 ]

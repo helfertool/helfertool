@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-01 15:47+0200\n"
-"PO-Revision-Date: 2017-05-03 17:18+0200\n"
+"POT-Creation-Date: 2018-10-11 03:21+0200\n"
+"PO-Revision-Date: 2018-10-11 03:23+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -116,7 +116,7 @@ msgstr ""
 msgid "This mail address was already deleted."
 msgstr "Diese E-Mail Adresse wurde bereits gelöscht."
 
-#: news/views/send.py:30
+#: news/views/send.py:33
 msgid "Mails are being sent now."
 msgstr "E-Mails werden gerade verschickt."
 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-01 15:47+0200\n"
-"PO-Revision-Date: 2017-05-03 17:18+0200\n"
+"POT-Creation-Date: 2018-10-11 03:21+0200\n"
+"PO-Revision-Date: 2018-10-11 03:23+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -76,8 +76,7 @@ msgstr "Du musst eine andere Antwortadresse angeben"
 
 #: mail/forms.py:152
 msgid "There are no helpers or coordinators that would receive this mail."
-msgstr ""
-"Es gibt keine Helfer oder Koordinatoren, die diese E-Mail empfangen würden."
+msgstr "Es gibt keine Helfer oder Koordinatoren, die diese E-Mail empfangen würden."
 
 #: mail/templates/mail/list_mails.html:6
 msgid "All mails"
@@ -123,11 +122,10 @@ msgstr "Gesendet von"
 msgid "Sender"
 msgstr "Absender"
 
-#: mail/views/send_mail.py:32
+#: mail/views/send_mail.py:35
 msgid "Mail was sent successfully"
 msgstr "E-Mail erfolgreich verschickt"
 
-#: mail/views/send_mail.py:34
-#, python-format
-msgid "Sending mails failed: %(error)s"
-msgstr "Senden der E-Mails fehlgeschlagen: %(error)s"
+#: mail/views/send_mail.py:43
+msgid "Sending mails failed"
+msgstr "Senden der E-Mails fehlgeschlagen"

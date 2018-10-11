@@ -2,11 +2,6 @@ Docker/Deployment
 =================
 
 * django + celery logging
-* Deployment validation page
-    * X-Forward-* Header
-    * DB/RabbitMQ/Mail connection
-    * Init was run?
-    * LDAP
 
 Important
 ==========

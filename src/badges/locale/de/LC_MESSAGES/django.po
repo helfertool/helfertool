@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-01 15:47+0200\n"
-"PO-Revision-Date: 2017-05-03 17:19+0200\n"
+"POT-Creation-Date: 2018-10-11 03:21+0200\n"
+"PO-Revision-Date: 2018-10-11 03:23+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -291,11 +291,11 @@ msgstr "Alle Badges"
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:60 badges/views/generate.py:182
+#: badges/templates/badges/index.html:60 badges/views/generate.py:179
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:65 badges/views/generate.py:184
+#: badges/templates/badges/index.html:65 badges/views/generate.py:181
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -426,15 +426,15 @@ msgstr ""
 "Die aufgelisteten Personen haben mehr als eine Aufgabe, daher musst du in "
 "den Badge Einstellungen eine primäre Aufgabe auswählen."
 
-#: badges/views/generate.py:177
+#: badges/views/generate.py:174
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:179
+#: badges/views/generate.py:176
 msgid "{} (all)"
 msgstr "{} (alle)"
 
-#: badges/views/generate.py:218
+#: badges/views/generate.py:215
 msgid "Internal Server Error. The admins were notified."
 msgstr "Interner Fehler. Die Admins wurden benachrichtigt."
 

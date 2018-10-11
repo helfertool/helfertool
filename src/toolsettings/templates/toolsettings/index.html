@@ -8,4 +8,9 @@
         <li><a href="{% url "toolsettings:template_privacy" %}">{% trans "Privacy" %}</a></li>
         <li><a href="{% url "toolsettings:template_about" %}">{% trans "About this software" %}</a></li>
     </ul>
+
+    <h2>{% trans "Other" %}</h2>
+    <ul>
+        <li><a href="{% url "toolsettings:check" %}">{% trans "Check installation" %}</a></li>
+    </ul>
 {% endblock %}
