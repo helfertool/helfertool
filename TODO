@@ -1,8 +1,3 @@
-Docker/Deployment
-=================
-
-* django + celery logging
-
 Important
 ==========
 
@@ -15,6 +10,7 @@ Important
     * add deadline to mail
 * allow empty mail addresses for internal registrations
 * change order of jobs
+* django + celery logging
 
 
 Django things
