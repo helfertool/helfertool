@@ -2,8 +2,9 @@ django>=1.11,<2.0
 django-auth-ldap
 django-axes
 django-bleach
-django-bootstrap3
+django-bootstrap4
 django-ckeditor
+django-icons
 django-modeltranslation
 django-multiselectfield
 django_ical

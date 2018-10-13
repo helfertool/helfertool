@@ -1,13 +1,12 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Jobs and shifts" %}</h2>
 
     {% if not event.archived %}
         <p><a href="{% url 'new_job' event.url_name %}">
-            {% bootstrap_icon "plus" %}
+            {% icon "plus" %}
             {% trans "New job" %}
         </a></p>
     {% endif %}
@@ -22,25 +21,25 @@
         {% if not event.archived %}
             <p>
                 <a href="{% url 'edit_job' event.url_name job.pk %}">
-                {% bootstrap_icon "pencil" %}
+                {% icon "pencil" %}
                 {% trans "Edit" %}</a>
 
                 &nbsp;
 
                 <a href="{% url 'duplicate_job' event.url_name job.pk %}">
-                {% bootstrap_icon "duplicate" %}
+                {% icon "copy" %}
                 {% trans "Duplicate" %}</a>
 
                 &nbsp;
 
                 <a href="{% url 'delete_job' event.url_name job.pk %}">
-                {% bootstrap_icon "remove" %}
+                {% icon "trash-alt" %}
                 {% trans "Delete" %}</a>
 
                 &nbsp;
 
                 <a href="{% url 'new_shift' event.url_name job.pk %}">
-                {% bootstrap_icon "plus" %}
+                {% icon "plus" %}
                 {% trans "New shift" %}</a>
             </p>
         {% endif %}
@@ -86,12 +85,12 @@
                         {% if not event.archived %}
                             <td>
                                 <a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">
-                                    {% bootstrap_icon "pencil" %}
+                                    {% icon "pencil" %}
                                     {% trans "Edit" %}
                                 </a>
                                 <br/>
                                 <a href="{% url 'delete_shift' event.url_name job.pk shift.pk %}">
-                                    {% bootstrap_icon "remove" %}
+                                    {% icon "trash-alt" %}
                                     {% trans "Delete" %}
                                 </a>
                             </td>

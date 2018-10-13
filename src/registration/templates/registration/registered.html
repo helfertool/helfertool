@@ -1,6 +1,6 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load toolsettings %}
 
 {% block title %}
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
         </form>
 
         <p></p>
@@ -89,7 +89,7 @@
         {% endif %}
         {% endcomment %}
 
-        <a class="btn btn-default" href="{% url 'ical' event.url_name data.pk %}">
+        <a class="btn btn-outline-primary" href="{% url 'ical' event.url_name data.pk %}">
             <i class="far fa-calendar-alt fa-lg"></i> {% trans "Download as iCal" %}
         </a>
     {% endif %}

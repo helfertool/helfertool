@@ -1,13 +1,13 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Attendance for shift" %}</h2>
     <h3>{{ shift }}</h3>
 
     <p>
-        <a class="btn btn-default" onclick="set_all(); return false;">
+        <a class="btn btn-outline-primary" onclick="set_all(); return false;">
             {% trans "Set all to attendant" %}
         </a>
     </p>

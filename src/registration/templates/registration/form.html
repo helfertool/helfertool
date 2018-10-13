@@ -1,6 +1,6 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load permissions %}
 
 {% block title %}
@@ -32,15 +32,13 @@
         </div>
     {% elif not event.active and not form.link %}
         <div class="alert alert-info" role="alert">
-            <p>
-                {% trans "This public registration is disabled." %}
-            </p>
+            {% trans "This public registration is disabled." %}
         </div>
     {% endif %}
 
     {% is_involved event as involved %}
     {% if involved %}
-        <p><a href="{% url 'manage_event' event_url_name=event.url_name %}" class="btn btn-primary">{% trans "Manage event" %}</a></p>
+        <p><a href="{% url 'manage_event' event_url_name=event.url_name %}" class="btn btn-outline-primary">{% trans "Manage event" %}</a></p>
     {% endif %}
 
     {% if event.logo %}

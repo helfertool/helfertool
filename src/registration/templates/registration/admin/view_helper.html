@@ -1,6 +1,5 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{{ helper.full_name }}</h2>
@@ -8,12 +7,12 @@
     <h3>{% trans "Personal data" %}</h3>
 
     <a href="{% url 'edit_helper' event.url_name helper.pk %}">
-        {% bootstrap_icon "pencil" %}
+        {% icon "edit" %}
         {% trans "Edit" %}
     </a>
     &nbsp;
     <a href="{% url 'resend_mail' event.url_name helper.pk %}">
-        {% bootstrap_icon "envelope" %}
+        {% icon "envelope" %}
         {% trans "Resend confirmation mail" %}
     </a>
 
@@ -21,7 +20,7 @@
 
     {% if helper.has_to_validate %}
         <p class="text-danger">
-            {% bootstrap_icon "remove" %} {% trans "Helper did not validate the mail address." %}
+            {% icon "times" %} {% trans "Helper did not validate the mail address." %}
         </p>
     {% endif %}
 
@@ -34,7 +33,7 @@
                     <td>{{ job.name }}</td>
                     <td>
                         <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
-                            {% bootstrap_icon "remove" %}
+                            {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
                     </td>
@@ -52,7 +51,7 @@
                     <td>{{ shift }}</td>
                     <td>
                         <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
-                            {% bootstrap_icon "remove" %}
+                            {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
                     </td>
@@ -64,19 +63,19 @@
     {# add as coordinator or helper #}
     <p>
         <a href="{% url 'add_helper_to_shift' event.url_name helper.pk %}">
-            {% bootstrap_icon "plus" %}
+            {% icon "plus" %}
             {% trans "Add to shift" %}
         </a>
         &nbsp;
         <a href="{% url 'add_helper_as_coordinator' event.url_name helper.pk %}">
-            {% bootstrap_icon "plus" %}
+            {% icon "plus" %}
             {% trans "Add as coordinator" %}
         </a>
 
         {% if edit_badge %}
             &nbsp;
             <a href="{% url 'badges:edit_badge' event.url_name helper.pk %}">
-                {% bootstrap_icon "pencil" %}
+                {% icon "pencil" %}
                 {% trans "Edit badge" %}
             </a>
         {% endif %}

@@ -1,6 +1,5 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Manage gifts" %}</h2>
@@ -20,8 +19,8 @@
 
                 {% if not event.archived %}
                     <td>
-                        <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
-                        <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
+                        <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% icon "pencil" %} {% trans "Edit" %}</a><br/>
+                        <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
                     </td>
                 {% endif %}
             </tr>
@@ -29,7 +28,7 @@
     </table>
 
     {% if not event.archived %}
-        <p><a href="{% url "gifts:add_gift" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift" %}</a></p>
+        <p><a href="{% url "gifts:add_gift" event.url_name %}">{% icon "plus" %} {% trans "Add gift" %}</a></p>
     {% endif %}
 
     <h3>{% trans "Gift sets" %}</h3>
@@ -55,8 +54,8 @@
 
                 {% if not event.archived %}
                     <td>
-                        <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "pencil" %} {% trans "Edit" %}</a><br/>
-                        <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% bootstrap_icon "remove" %} {% trans "Delete" %}</a>
+                        <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% icon "pencil" %} {% trans "Edit" %}</a><br/>
+                        <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
                     </td>
                 {% endif %}
             </tr>
@@ -64,7 +63,7 @@
     </table>
 
     {% if not event.archived %}
-        <p><a href="{% url "gifts:add_gift_set" event.url_name %}">{% bootstrap_icon "plus" %} {% trans "Add gift set" %}</a></p>
+        <p><a href="{% url "gifts:add_gift_set" event.url_name %}">{% icon "plus" %} {% trans "Add gift set" %}</a></p>
     {% endif %}
 
 {% endblock %}

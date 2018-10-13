@@ -1,6 +1,6 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Merge duplicates" %}</h2>
@@ -38,7 +38,7 @@
                 <div style="margin-bottom: 2em;"></div>
             {% endfor %}
 
-            <input type="submit" value="{% trans "Merge" %}" class="btn btn-default" />
+            <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary" />
         </form>
     {% else %}
         <div class="alert alert-warning" role="alert">

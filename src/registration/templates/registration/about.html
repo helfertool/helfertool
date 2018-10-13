@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap3 setting staticfiles toolsettings %}
+{% load i18n bootstrap4 setting staticfiles toolsettings %}
 
 {% block content %}
     <h1>{% trans "About this software" %}</h1>
@@ -10,12 +10,12 @@
         <h2>{% trans "License" %}</h2>
         <p>
             {% blocktrans trimmed %}
-                This software was published under the <a {{ a_license }}>AGPLv3+</a>.
+                The Helfertool was published under the <a {{ a_license }}>AGPLv3+</a>.
             {% endblocktrans %}
         </p>
 
         <p>
-            {% trans "More information about this software can be found here:" %}
+            {% trans "More information about the Helfertool can be found here:" %}
             <a href="{% setting "WEBSITE_URL" %}" target="_blank">{% setting "WEBSITE_URL" %}</a>
         </p>
 

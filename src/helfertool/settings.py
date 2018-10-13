@@ -300,7 +300,7 @@ GROUP_ADDEVENT = "registration_addevent"
 GROUP_SENDNEWS = "registration_sendnews"
 
 # Bootstrap config
-BOOTSTRAP3 = {
+BOOTSTRAP4 = {
     'required_css_class': 'required',
 }
 
@@ -334,7 +334,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
-    'bootstrap3',
+    'bootstrap4',
+    'django_icons',
     'ckeditor',
     'registration',
     'statistic',

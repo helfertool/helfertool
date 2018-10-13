@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% comment %}
 required parameters:
@@ -57,18 +56,18 @@ coordinators. This is only important for the delete_helper view.
                 <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
                 <td>
                     <a href="{% url 'view_helper' event.url_name helper.pk %}">
-                        {% bootstrap_icon "search" %}
+                        {% icon "search" %}
                         {% trans "View" %}
                     </a><br />
 
                     {% if shift %}
                         <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
-                            {% bootstrap_icon "remove" %}
+                            {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
                     {% else %}
                         <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
-                            {% bootstrap_icon "remove" %}
+                            {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
                     {% endif %}

@@ -1,13 +1,11 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
-{% load inventory %}
+{% load i18n bootstrap4 icons inventory %}
 
 {% block admincontent %}
     <h2>{% trans "Inventory" %}: {{ inventory.name }}</h2>
 
     <p><a href="{% url 'inventory:new_item' inventory.pk %}">
-        {% bootstrap_icon "plus" %}
+        {% icon "plus" %}
         {% trans "New item" %}
     </a></p>
 
@@ -26,14 +24,14 @@
                     <td>{{ item.comment|truncatechars:20|linebreaks }}</td>
                     <td>
                         <a href="{% url "inventory:edit_item" inventory.pk item.pk %}">
-                            {% bootstrap_icon "pencil" %}
+                            {% icon "pencil" %}
                             {% trans "Edit" %}
                         </a>
 
                         <br />
 
                         <a href="{% url "inventory:delete_item" inventory.pk item.pk %}">
-                            {% bootstrap_icon "remove" %}
+                            {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
                     </td>

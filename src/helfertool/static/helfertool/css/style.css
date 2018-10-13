@@ -10,7 +10,7 @@ body {
 }
 
 a, a:hover, a:active, a:focus {
-    color: #297d84;
+    color: #1ea082;
 }
 
 /* main menu */
@@ -21,7 +21,7 @@ a, a:hover, a:active, a:focus {
     border-left: 0;
     border-right: 0;
     border-bottom: 5px solid;
-    border-color: #3aafb9;
+    border-color: #1ea082;
 
     border-radius: 0;
 }
@@ -31,23 +31,9 @@ a, a:hover, a:active, a:focus {
     padding-right: 0.2em;
 }
 
-.navbar-custom p {
-    color: black;
-    text-align: center;
-}
-
-.navbar-custom li a {
-    color: black;
-    text-align: center;
-}
-
-.navbar-custom li a:hover, .navbar-custom .active a {
-    background-color: #3aafb9;
-    color:white;
-}
-
-.navbar-custom .navbar-toggle .icon-bar {
-    background-color: #3aafb9;
+/* main content container */
+.container-main {
+    margin-top: 1.5em;
 }
 
 /* footer */
@@ -56,15 +42,16 @@ a, a:hover, a:active, a:focus {
     position: absolute;
     bottom: 0;
     width: 100%;
+
     /* Set the fixed height of the footer here */
     height:40px;
-    background-color: #3aafb9;
+    background-color: #1ea082;
     text-align:center;
 }
 
 .footer .text-muted {
-    margin: 10px 0;
-    color: white;
+    margin: 8px 0;
+    color: white!important;
 }
 
 .footer a, .footer a:hover, .footer a:active, .footer a:focus {
@@ -113,6 +100,11 @@ table.shifts label
 table.shifts label del
 {
     font-weight: normal;
+}
+
+/* cards with privacy statements */
+.privacycard {
+    margin-bottom: 1.5em;
 }
 
 /* icons (like xls or pdf) */
@@ -200,7 +192,7 @@ div.logos-about div
 .form-group.required > label::after
 {
     content: "*";
-    color: red;
+    color: #1ea082;
 }
 
 /* wrap text in pre */

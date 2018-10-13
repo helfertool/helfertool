@@ -1,6 +1,6 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load setting %}
 
 {% block admincontent %}
@@ -18,6 +18,6 @@
 
         {% bootstrap_form form %}
 
-        <input type="submit" value="{% trans "Add" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Add" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}

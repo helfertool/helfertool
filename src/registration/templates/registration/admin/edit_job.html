@@ -1,6 +1,6 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     {% if job %}
@@ -16,6 +16,6 @@
 
         {% bootstrap_form form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}

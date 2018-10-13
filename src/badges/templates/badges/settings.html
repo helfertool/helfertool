@@ -1,7 +1,5 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
-{% load badges %}
+{% load i18n bootstrap4 icons badges %}
 
 {% block admincontent %}
     <h2>{% trans "Badge settings" %}</h2>
@@ -42,11 +40,11 @@
                     {% if not event.archived %}
                         <td>
                             <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
-                                {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                                {% icon "pencil" %} {% trans "Edit" %}
                             </a>
                             <br />
                             <a href="{% url 'badges:delete_role' event.url_name role.pk %}">
-                                {% bootstrap_icon "remove" %} {% trans "Delete" %}
+                                {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
                         </td>
                     {% endif %}
@@ -58,7 +56,7 @@
     {% if not event.archived %}
         <p>
             <a href="{% url 'badges:new_role' event.url_name %}">
-                {% bootstrap_icon "plus" %} {% trans "Add role" %}
+                {% icon "plus" %} {% trans "Add role" %}
             </a>
         </p>
     {% endif %}
@@ -84,11 +82,11 @@
                     {% if not event.archived %}
                         <td>
                             <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
-                                {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                                {% icon "pencil" %} {% trans "Edit" %}
                             </a>
                             <br/>
                             <a href="{% url 'badges:delete_design' event.url_name design.pk %}">
-                                {% bootstrap_icon "remove" %} {% trans "Delete" %}
+                                {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
                         </td>
                     {% endif %}
@@ -100,7 +98,7 @@
     {% if not event.archived %}
         <p>
             <a href="{% url 'badges:new_design' event.url_name %}">
-                {% bootstrap_icon "plus" %} {% trans "Add design" %}
+                {% icon "plus" %} {% trans "Add design" %}
             </a>
         </p>
     {% endif %}
@@ -143,7 +141,7 @@
         {% bootstrap_form_errors job_defaults_form %}
 
         {% if not event.archived %}
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
         {% endif %}
     </form>
 {% endblock %}

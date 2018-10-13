@@ -1,6 +1,5 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "All mails" %}</h2>
@@ -32,7 +31,7 @@
                     <td>{{ mail.date }}</td>
                     <td>
                         <a href="{% url 'mail:show' event.url_name mail.pk %}">
-                            {% bootstrap_icon "search" %}
+                            {% icon "search" %}
                             {% trans "View" %}
                         </a>
                     </td>

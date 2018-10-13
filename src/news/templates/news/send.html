@@ -1,6 +1,6 @@
 {% extends "registration/admin/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Send news" %}</h2>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
     </form>
 
     <script type="text/javascript">

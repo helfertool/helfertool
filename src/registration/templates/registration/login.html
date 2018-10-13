@@ -1,6 +1,6 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block content %}
     <h1>{% trans "Login" %}</h1>
@@ -15,6 +15,6 @@
         </div>
 
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="{% trans "Login" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Login" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}

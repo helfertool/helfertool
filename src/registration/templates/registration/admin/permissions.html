@@ -1,6 +1,5 @@
 {% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Permissions" %}</h2>
@@ -21,7 +20,7 @@
                     <td>{{ u.username }}</td>
                     <td>
                         <a href="{% url 'delete_event_permission' u.pk %}">
-                        {% bootstrap_icon "remove" %}
+                        {% icon "trash-alt" %}
                         {% trans "Delete permission" %}</a>
                     </td>
                 </tr>
@@ -52,7 +51,7 @@
                     <td>{{ u.username }}</td>
                     <td>
                         <a href="{% url 'delete_user_permission' u.pk %}">
-                        {% bootstrap_icon "remove" %}
+                        {% icon "trash-alt" %}
                         {% trans "Delete permission" %}</a>
                     </td>
                 </tr>
@@ -82,7 +81,7 @@
                     <td>{{ u.username }}</td>
                     <td>
                         <a href="{% url 'delete_news_permission' u.pk %}">
-                        {% bootstrap_icon "remove" %}
+                        {% icon "trash-alt" %}
                         {% trans "Delete permission" %}</a>
                     </td>
                 </tr>

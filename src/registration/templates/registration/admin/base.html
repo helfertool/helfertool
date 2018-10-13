@@ -1,9 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
-{% load permissions %}
-{% load inventory %}
-{% load staticfiles %}
+{% load i18n bootstrap4 icons permissions inventory staticfiles %}
 
 {% block adminheader %}
         {# moment.js #}
@@ -50,9 +46,7 @@
 
     {% if event and event.archived %}
         <div class="alert alert-info" role="alert">
-            <p>
-                {% trans "This event is archived." %}
-            </p>
+            {% trans "This event is archived." %}
         </div>
     {% endif %}
 
@@ -69,35 +63,43 @@
             {# for event #}
             {% if event and involved %}
                 <h2>{% trans "General" %}</h2>
-                <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="{% url 'form' event.url_name %}" target="_blank">
-                            {% bootstrap_icon "share-alt" %}
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'form' event.url_name %}" target="_blank">
+                            {% icon "external-link-alt" %}
                             {% trans "Go to registration" %}
                         </a>
                     </li>
 
                     {% if admin %}
-                        <li><a href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a></li>
-                        <li><a href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a></li>
-                        <li><a href="{% url 'links' event.url_name %}">{% trans "Links" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'links' event.url_name %}">{% trans "Links" %}</a>
+                        </li>
                     {% endif %}
                 </ul>
 
                 <h2>{% trans "Helpers" %}</h2>
-                <ul class="nav nav-pills nav-stacked">
-
-                    {# helpers #}
-                    <li>
-                        <a href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a>
 
                         {# list of all (for user visible) jobs #}
                         {% if request.resolver_match.url_name == "helpers" and not event.archived %}
-                            <ul class="nav nav-pills nav-stacked nav-nested">
+                            <ul class="nav flex-column">
                             {% for job in event.job_set.all %}
                                 {% is_job_admin job as job_admin %}
                                 {% if job_admin %}
-                                    <li><a href="{% url 'helpers' event.url_name job.pk %}">{{ job.name }}</a></li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'helpers' event.url_name job.pk %}">{{ job.name }}</a>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                             </ul>
@@ -105,34 +107,49 @@
                     </li>
 
                     {% if not event.archived %}
-                        <li><a href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a>
+                        </li>
 
                         {% if admin %}
-                            <li><a href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a>
+                            </li>
                         {% endif %}
 
-                        <li><a href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a>
+                        </li>
                     {% endif %}
                 </ul>
 
                 <h2>{% trans "Mail" %}</h2>
-                <ul class="nav nav-pills nav-stacked">
+                <ul class="nav flex-column">
                     {% if not event.archived %}
-                        <li><a href="{% url 'mail:send' event.url_name %}">{% trans "Send" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'mail:send' event.url_name %}">{% trans "Send" %}</a>
+                        </li>
                     {% endif %}
-                    <li><a href="{% url 'mail:list' event.url_name %}">{% trans "All mails" %}</a></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mail:list' event.url_name %}">{% trans "All mails" %}</a>
+                    </li>
                 </ul>
 
                 {% if not event.archived %}
                     {% if admin or event.ask_shirt %}
                         <h2>{% trans "Statistics" %}</h2>
-                        <ul class="nav nav-pills nav-stacked">
+                        <ul class="nav flex-column">
                             {% if admin %}
-                                <li><a href="{% url 'statistic:overview' event.url_name %}">{% trans "Overview" %}</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'statistic:overview' event.url_name %}">{% trans "Overview" %}</a>
+                                </li>
                             {% endif %}
 
                             {% if event.ask_shirt %}
-                                <li><a href="{% url 'statistic:shirts' event.url_name %}">{% trans "T-Shirts" %}</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'statistic:shirts' event.url_name %}">{% trans "T-Shirts" %}</a>
+                                </li>
                             {% endif %}
                         </ul>
                     {% endif %}
@@ -140,13 +157,20 @@
 
                 {% if admin and event.gifts %}
                     <h2>{% trans "Gifts" %}</h2>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a></li>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a>
+                        </li>
 
                         {% if not event.archived %}
-                            <li><a href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a>
+                            </li>
+
                             {% if event.ask_shirt %}
-                                <li><a href="{% url 'gifts:list_shirts' event.url_name %}">{% trans "Missing T-shirts" %}</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'gifts:list_shirts' event.url_name %}">{% trans "Missing T-shirts" %}</a>
+                                </li>
                             {% endif %}
                         {% endif %}
                     </ul>
@@ -154,12 +178,20 @@
 
                 {% if admin and event.badges %}
                     <h2>{% trans "Badges" %}</h2>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a></li>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a>
+                        </li>
+
                         {% if not event.archived %}
-                            <li><a href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a>
+                            </li>
+
                             {% if event.badge_settings.barcodes %}
-                                <li><a href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a>
+                                </li>
                             {% endif %}
                         {% endif %}
                     </ul>
@@ -167,35 +199,57 @@
 
                 {% if admin and event.inventory and not event.archived %}
                     <h2>{% trans "Inventory" %}</h2>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{% url 'inventory:register' event.url_name %}">{% trans "Register" context "Register item and badge" %}</a></li>
-                        <li><a href="{% url 'inventory:take_back' event.url_name %}">{% trans "Take back" %}</a></li>
-                        <li><a href="{% url 'inventory:list' event.url_name %}">{% trans "List" %}</a></li>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:register' event.url_name %}">{% trans "Register" context "Register item and badge" %}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:take_back' event.url_name %}">{% trans "Take back" %}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:list' event.url_name %}">{% trans "List" %}</a>
+                        </li>
                     </ul>
                 {% endif %}
 
             {# for superusers #}
             {% elif user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
                 <h2>{# for padding #}</h2>
-                <ul class="nav nav-pills nav-stacked">
+                <ul class="nav flex-column">
                     {% if user.is_superuser or user|has_addevent_group %}
-                        <li><a href="{% url 'new_event' %}">{% trans "New event" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'new_event' %}">{% trans "New event" %}</a>
+                        </li>
                     {% endif %}
+
                     {% if user.is_superuser or user|has_adduser_group %}
-                        <li><a href="{% url 'add_user' %}">{% trans "Add user" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_user' %}">{% trans "Add user" %}</a>
+                        </li>
                     {% endif %}
+
                     {% if user.is_superuser or user|has_sendnews_group %}
-                        <li><a href="{% url 'news:send' %}">{% trans "Send news" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'news:send' %}">{% trans "Send news" %}</a>
+                        </li>
                     {% endif %}
+
                     {% if user.is_superuser or user|is_inventory_admin_any %}
-                        <li><a href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a>
+                        </li>
                     {% endif %}
+
                     {% if user.is_superuser %}
-                        <li><a href="{% url 'permissions' %}">{% trans "Permissions" %}</a></li>
-                        <li><a href="{% url 'toolsettings:index' %}">{% trans "Settings" %}</a></li>
-                        {% if user.is_staff %}
-                            <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
-                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'permissions' %}">{% trans "Permissions" %}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'toolsettings:index' %}">{% trans "Settings" %}</a>
+                        </li>
                     {% endif %}
                 </ul>
             {% endif %}
