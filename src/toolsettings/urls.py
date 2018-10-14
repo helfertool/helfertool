@@ -18,6 +18,10 @@ urlpatterns = [
         views.template_privacy,
         name='template_privacy'),
 
+    url(r'^templates/login/$',
+        views.template_login,
+        name='template_login'),
+
     url(r'^check/$',
         views.check,
         name='check'),

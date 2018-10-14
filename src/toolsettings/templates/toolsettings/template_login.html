@@ -1,0 +1,15 @@
+{% extends "registration/admin/base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Tempate: Login page" %}</h2>
+
+    <form action="{% url 'toolsettings:template_login' %}" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}

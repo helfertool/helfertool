@@ -1,9 +1,10 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 toolsettings %}
 
 {% block content %}
     <h1>{% trans "Login" %}</h1>
+
+    {% htmlsetting "login" %}
 
     <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
         {% csrf_token %}
