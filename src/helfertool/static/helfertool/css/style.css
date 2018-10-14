@@ -13,6 +13,47 @@ a, a:hover, a:active, a:focus {
     color: #1ea082;
 }
 
+h1, h2, h3, h4 {
+    margin-top: 0.5em;
+}
+
+/* buttons (copied from bootstrap with adapted colors) */
+.btn-outline-primary {
+    color: #1ea082;
+    border-color: #1ea082;
+}
+
+.btn-outline-primary:hover {
+    background-color: #1ea082;
+    border-color: #1ea082;
+}
+
+.btn-outline-primary:focus, .btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(30, 160, 130, 0.5)
+}
+
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #1ea082;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+    background-color: #1ea082;
+    border-color: #1ea082;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(30, 160, 130, 0.5)
+}
+
+/* alerts (copied from bootstrap with adapterd colors */
+.alert-info {
+    color: #1ea082;
+    background-color: #fff;
+    border-color: #1ea082;
+}
+
 /* main menu */
 .navbar-custom {
     background-color: white;
@@ -26,9 +67,17 @@ a, a:hover, a:active, a:focus {
     border-radius: 0;
 }
 
-.navbar-custom li {
+.navbar-custom .nav-item {
     padding-left: 0.2em;
     padding-right: 0.2em;
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 1);
+}
+
+.navbar-custom .navbar-nav .nav-link:hover, .navbar-custom .navbar-nav .nav-link:active, .navbar-custom .navbar-nav .nav-link:focus {
+    color: rgba(0, 0, 0, 0.7);
 }
 
 /* main content container */
@@ -69,8 +118,11 @@ table.shifts
 
 table.shifts th
 {
-    color:white;
-    background-color: #3aafb9;
+    color: #1ea082;
+
+    border: 1px solid #1ea082;
+    border-radius: 0.25rem;
+
     padding:5px;
 }
 
@@ -122,11 +174,18 @@ img.icon
 /* info button for job description */
 .info-expand
 {
-    padding:3px 6px 3px 6px;
-    vertical-align: top;
+    vertical-align: middle;
 
-    background-color: #3aafb9;
-    color: white!important;
+    width: 30px;
+    height: 30px;
+
+    margin-left: 5px;
+}
+
+/* contact information below event */
+.contact
+{
+    margin-top: 3em;
 }
 
 /* wrap words */

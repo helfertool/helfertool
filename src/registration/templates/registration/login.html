@@ -9,8 +9,12 @@
         {% csrf_token %}
 
         <div class="row">
-            <div class="col-xs-12 col-lg-5">
-                {% bootstrap_form form required_css_class='' %}
+            <div class="col-lg-12">
+                {% bootstrap_form_errors form %}
+            </div>
+            <div class="col-xs-12 col-lg-6">
+                {% bootstrap_field form.username required_css_class='' %}
+                {% bootstrap_field form.password required_css_class='' %}
             </div>
         </div>
 

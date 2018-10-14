@@ -1,7 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
-{% load toolsettings %}
+{% load i18n bootstrap4 icons toolsettings %}
 
 {% block title %}
     {% blocktrans trimmed %}
@@ -12,24 +10,24 @@
 {% block content %}
     <h1>{{ event }}</h1>
 
-    {{ event.registered | safe }}
-
     {% if data.has_to_validate %}
-        <div class="alert alert-warning" role="alert">
+        <div class="alert alert-info" role="alert">
             {% trans "You have to confirm your mail address by clicking on a link we sent to you." %}
         </div>
     {% endif %}
 
-    <p>{% trans "You registered with the following information:" %}</p>
+    {{ event.registered | safe }}
+
+    <h2>{% trans "Personal data" %}</h2>
 
     {% if personal_data_form %}
         <form action="" method="post" accept-charset="utf-8">
             {% csrf_token %}
             <div class="row">
-                <div class="col-xs-12 col-lg-5">
+                <div class="col-lg-12">
                     {% bootstrap_form personal_data_form required_css_class='' %}
 
-                    <div class="alert alert-warning" role="alert">
+                    <div class="alert alert-info" role="alert">
                         {% trans "If you change your mail address a confirmation mail will be sent to the new address." %}
                     </div>
                 </div>
@@ -59,27 +57,31 @@
 
     {% if data.is_coordinator %}
         <h2>{% trans "Jobs" %}</h2>
-        <ul class="list-group">
-        {% for job in data.coordinated_jobs %}
-            <li class="list-group-item">{{ job }}</li>
-        {% endfor %}
-        </ul>
+        <p>
+            <ul class="list-group list-group-flush">
+            {% for job in data.coordinated_jobs %}
+                <li class="list-group-item">{{ job }}</li>
+            {% endfor %}
+            </ul>
+        </p>
     {% endif %}
 
     {% if data.shifts.exists %}
         <h2>{% trans "Shifts" %}</h2>
 
-        <ul class="list-group">
-        {% for shift in data.shifts.all %}
-            <li class="list-group-item">
-                {{ shift }}
+        <p>
+            <ul class="list-group list-group-flush">
+            {% for shift in data.shifts.all %}
+                <li class="list-group-item">
+                    {{ shift }}
 
-                {% if event.changes_possible %}
-                    <a href="{% url 'deregister' event.url_name data.pk shift.pk %}" class="pull-right">{% trans "Sign off" %}</a>
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
+                    {% if event.changes_possible %}
+                        <a href="{% url 'deregister' event.url_name data.pk shift.pk %}" class="float-right">{% icon "sign-out-alt" %} {% trans "Sign off" %}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        <p>
 
         {% comment %}
         {% if event.changes_possible %}
@@ -89,29 +91,13 @@
         {% endif %}
         {% endcomment %}
 
-        <a class="btn btn-outline-primary" href="{% url 'ical' event.url_name data.pk %}">
-            <i class="far fa-calendar-alt fa-lg"></i> {% trans "Download as iCal" %}
-        </a>
+        <p>
+            <a class="btn btn-outline-primary" href="{% url 'ical' event.url_name data.pk %}">
+                <i class="far fa-calendar-alt fa-lg"></i> {% trans "Add to calendar (iCal)" %}
+            </a>
+        </p>
     {% endif %}
 
-    <h2>{% trans "Data privacy" %}</h2>
-    {% if data.privacy_statement %}
-        <p>{% trans "You agreed with the following data privacy statement." %}</p>
-    {% else %}
-        <p>{% trans "The following data privacy statement was sent to you and you did not disagree until now." %}</p>
-    {% endif %}
-
-    <div class="well">
-        {% htmlsetting "privacy" %}
-    </div>
-
-    {% if news %}
-        <p>{% trans "You agreed that we will inform you about future events per email." %}</p>
-
-        <div class="well">
-            {% htmlsetting "privacy_newsletter" %}
-        </div>
-    {% endif %}
-
+    <h2>{% trans "Contact" %}</h2>
     {{ event.imprint | safe }}
 {% endblock %}

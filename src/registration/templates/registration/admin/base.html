@@ -93,7 +93,7 @@
 
                         {# list of all (for user visible) jobs #}
                         {% if request.resolver_match.url_name == "helpers" and not event.archived %}
-                            <ul class="nav flex-column">
+                            <ul class="nav flex-column nav-nested">
                             {% for job in event.job_set.all %}
                                 {% is_job_admin job as job_admin %}
                                 {% if job_admin %}

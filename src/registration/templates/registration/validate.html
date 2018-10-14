@@ -10,13 +10,16 @@
 {% block content %}
     <h1>{{ event }}</h1>
 
-    <p>
+    <div class="alert alert-info" role="alert">
         {% if already_validated %}
-            {% trans "Your mail address was already confirmed." %}
+            {% trans "Thank you! Your mail address was already confirmed." %}
         {% else %}
-            {% trans "You confirmed your mail address." %}
+            {% trans "Thank you! You confirmed your mail address." %}
         {% endif %}
-    </p>
+    </div>
 
-    {{ event.imprint | safe }}
+    <div class="contact">
+        <p><b>{% trans "Contact" %}</b></p>
+        {{ event.imprint | safe }}
+    </div>
 {% endblock %}

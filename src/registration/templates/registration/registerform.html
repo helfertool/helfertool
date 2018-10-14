@@ -1,4 +1,4 @@
-{% load i18n bootstrap4 icons registerform_shifts toolsettings %}
+{% load i18n bootstrap4 icons static registerform_shifts toolsettings %}
 
 <form action="" method="post">
     {% csrf_token %}
@@ -11,15 +11,15 @@
         {% get_shifts form job as shifts %}
 
         <h3>
+            {{ job.name }}
             {% if job.description %}
                 <button type="button"
-                        class="btn info-expand"
+                        class="btn btn-outline-primary btn-sm info-expand"
                         data-toggle="collapse"
                         data-target="#job-{{ job.pk }}">
                     {% icon "info" %}
                 </button>
             {% endif %}
-            {{ job.name }}
         </h3>
 
         <div id="job-{{ job.pk }}" class="collapse">
@@ -78,19 +78,44 @@
 
     {# personal data, nothing special... #}
     <div class="row">
-        <div class="col-xs-12 col-lg-5">
+        <div class="col-lg-6">
             {% bootstrap_field form.firstname required_css_class='' %}
+        </div>
+        <div class="col-lg-6">
             {% bootstrap_field form.surname required_css_class='' %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
             {% bootstrap_field form.email required_css_class='' %}
+        </div>
+        <div class="col-lg-6">
             {% bootstrap_field form.phone required_css_class='' %}
-            {% if event.ask_shirt %}
+        </div>
+    </div>
+
+    <div class="row">
+        {% if event.ask_shirt %}
+            <div class="col-lg-6">
                 {% bootstrap_field form.shirt required_css_class='' %}
-            {% endif %}
-            {% bootstrap_field form.infection_instruction required_css_class='' %}
-            {% if event.ask_vegetarian %}
+            </div>
+        {% endif %}
+
+        {% if event.ask_vegetarian %}
+            <div class="col-lg-6">
+                <label>{% trans "Vegetarian" %}</label>
                 {% bootstrap_field form.vegetarian required_css_class='' %}
-            {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+            <div class="col-lg-12">
+            {% bootstrap_field form.infection_instruction required_css_class='' %}
+
             {% bootstrap_field form.comment required_css_class='' %}
+
             {% if form.ask_full_age %}
                 {% bootstrap_field form.full_age required_css_class='' %}
             {% endif %}
@@ -122,6 +147,7 @@
     {% if form.ask_news %}
         <div class="row">
             <div class="col-lg-12">
+                <p><b>{% trans "We would like to inform you about futher events!" %}</b></p>
                 {# render manually since bootstrap_field seems to be broken and does not accept documented parameters... #}
                 <div class="form-group">
                     <div class="form-check">
@@ -142,45 +168,24 @@
     {% endif %}
 
     <div class="row">
-        <div class="col-xs-12 col-lg-5">
-            {% if form.internal and event.ask_full_age %}
-                <p>
-                    <b>{% trans "Make sure that the helper is full age!" %}</b>
-                </p>
-            {% endif %}
+        <div class="col-log-12">
 
             {% if form.internal %}
                 <div class="alert alert-warning" role="alert">
-                    <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
-                </div>
-            {% endif %}
+                    {% trans "Note: after saving an e-mail will be sent to the given address." %}
 
-            <input type="submit" value="{% trans "Register" %}" class="btn btn-outline-primary" />
+                    {% if form.internal and event.ask_full_age %}
+                        <br/><br/><b>{% trans "Make sure that the helper is full age!" %}</b>
+                    {% endif %}
+                </div>
+
+                <input type="submit" value="{% trans "Register" %}" class="btn btn-outline-primary" />
+            {% else %}
+                <input type="submit" value="{% trans "Register" %}" class="btn btn-lg btn-outline-primary" />
+            {% endif %}
         </div>
     </div>
 
-    <script>
-        function handle_infection_instruction()
-        {
-            var show_field = 0;
-
-            // iterate over all relevant checkboxes
-            $(".infection_instruction").each(function() {
-                if($(this).prop('checked'))
-                {
-                    show_field = 1;
-                    return false;
-                }
-            })
-
-            // show or hide input field
-            if(show_field)
-                $("#id_infection_instruction").parent().show()
-            else
-                $("#id_infection_instruction").parent().hide()
-        }
-
-        handle_infection_instruction();
-    </script>
+    <script src="{% static "helfertool/js/infection_instruction.js" %}"></script>
 </form>
 

@@ -6,11 +6,12 @@
     <h1>{% trans "Login" %}</h1>
 
     <div class="alert alert-danger">
-        <p><b>{% trans "Too many login attempts!" %}</b></p>
-        <p>
-            {% blocktrans trimmed with limit=failure_limit %}
-                You tried to log in {{ limit }} times with the wrong credentials, try again later.
-            {% endblocktrans %}
-        </p>
+        <b>{% trans "Too many login attempts!" %}</b>
+
+        <br/><br/>
+
+        {% blocktrans trimmed with limit=failure_limit %}
+            You tried to log in {{ limit }} times with the wrong credentials, try again later.
+        {% endblocktrans %}
     </div>
 {% endblock %}
