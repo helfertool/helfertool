@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-11 03:21+0200\n"
-"PO-Revision-Date: 2018-10-11 03:23+0200\n"
+"POT-Creation-Date: 2018-10-14 21:17+0200\n"
+"PO-Revision-Date: 2018-10-14 21:17+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: inventory/forms.py:13 inventory/models.py:56
 #: inventory/templates/inventory/admin/delete_item.html:21
-#: inventory/templates/inventory/admin/inventory_items.html:18
+#: inventory/templates/inventory/admin/inventory_items.html:16
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -31,8 +31,8 @@ msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
 #: inventory/models.py:18 inventory/models.py:51
 #: inventory/templates/inventory/admin/delete_inventory.html:13
 #: inventory/templates/inventory/admin/delete_item.html:17
-#: inventory/templates/inventory/admin/inventory_items.html:17
-#: inventory/templates/inventory/admin/inventory_list.html:17
+#: inventory/templates/inventory/admin/inventory_items.html:15
+#: inventory/templates/inventory/admin/inventory_list.html:15
 msgid "Name"
 msgstr "Name"
 
@@ -45,7 +45,7 @@ msgid "Same item may be assigned to different helpers"
 msgstr "Gleicher Gegenstand darf mehreren Personen zugeordnet werden"
 
 #: inventory/models.py:61
-#: inventory/templates/inventory/admin/inventory_items.html:19
+#: inventory/templates/inventory/admin/inventory_items.html:17
 msgid "Comment"
 msgstr "Kommantar"
 
@@ -58,7 +58,7 @@ msgid "Delete inventory"
 msgstr "Inventar löschen"
 
 #: inventory/templates/inventory/admin/delete_inventory.html:17
-#: inventory/templates/inventory/admin/inventory_list.html:18
+#: inventory/templates/inventory/admin/inventory_list.html:16
 msgid "Admins"
 msgstr "Admins"
 
@@ -68,8 +68,8 @@ msgstr "Willst du dieses Inventar löschen?"
 
 #: inventory/templates/inventory/admin/delete_inventory.html:32
 #: inventory/templates/inventory/admin/delete_item.html:32
-#: inventory/templates/inventory/admin/inventory_items.html:37
-#: inventory/templates/inventory/admin/inventory_list.html:51
+#: inventory/templates/inventory/admin/inventory_items.html:35
+#: inventory/templates/inventory/admin/inventory_list.html:49
 msgid "Delete"
 msgstr "Löschen"
 
@@ -79,8 +79,8 @@ msgstr "Gegenstand löschen"
 
 #: inventory/templates/inventory/admin/delete_item.html:13
 #: inventory/templates/inventory/admin/edit_inventory.html:6
-#: inventory/templates/inventory/admin/inventory_items.html:7
-#: inventory/templates/inventory/admin/inventory_list.html:7
+#: inventory/templates/inventory/admin/inventory_items.html:5
+#: inventory/templates/inventory/admin/inventory_list.html:5
 #: inventory/templates/inventory/list.html:7
 #: inventory/templates/inventory/not_active.html:6
 msgid "Inventory"
@@ -100,29 +100,29 @@ msgstr "Speichern"
 msgid "Item"
 msgstr "Gegenstand"
 
-#: inventory/templates/inventory/admin/inventory_items.html:11
+#: inventory/templates/inventory/admin/inventory_items.html:9
 msgid "New item"
 msgstr "Neuer Gegenstand"
 
-#: inventory/templates/inventory/admin/inventory_items.html:30
-#: inventory/templates/inventory/admin/inventory_list.html:44
+#: inventory/templates/inventory/admin/inventory_items.html:28
+#: inventory/templates/inventory/admin/inventory_list.html:42
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: inventory/templates/inventory/admin/inventory_items.html:44
+#: inventory/templates/inventory/admin/inventory_items.html:42
 msgid "There are no items."
 msgstr "Es gibt keine Gegenstände"
 
-#: inventory/templates/inventory/admin/inventory_list.html:11
+#: inventory/templates/inventory/admin/inventory_list.html:9
 msgid "New inventory"
 msgstr "Neues Inventar"
 
 #. Translators: List verb
-#: inventory/templates/inventory/admin/inventory_list.html:37
+#: inventory/templates/inventory/admin/inventory_list.html:35
 msgid "List"
 msgstr "Auflisten"
 
-#: inventory/templates/inventory/admin/inventory_list.html:59
+#: inventory/templates/inventory/admin/inventory_list.html:57
 msgid "There is no inventory."
 msgstr "Es gibt kein Inventar."
 
