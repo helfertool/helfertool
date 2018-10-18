@@ -2,6 +2,8 @@ html
 {
     position: relative;
     min-height: 100%;
+
+    font-size: 15px;
 }
 
 body {
@@ -274,4 +276,15 @@ div.mailbody pre
 {
     background-color: transparent;
     border: 0;
+}
+
+/* datatables */
+.datatables-icon::before
+{
+    background-color: #1ea082!important;
+}
+
+tr.child ul.dtr-details
+{
+    padding-left: 40px!important;
 }

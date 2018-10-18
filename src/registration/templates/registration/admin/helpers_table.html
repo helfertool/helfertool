@@ -16,31 +16,49 @@ coordinators. This is only important for the delete_helper view.
 <table class="table">
     <thead>
         <tr>
-            <th class="nosort"></th>
-            <th>{% trans "First name" %}</th>
-            <th>{% trans "Surname" %}</th>
+            <th class="nosort" data-priority="1"></th>
+
+            <th data-priority="1">
+                {% trans "First name" %}
+            </th>
+
+            <th data-priority="1">
+                {% trans "Surname" %}
+            </th>
+
             {% if event.ask_shirt %}
-            <th>{% trans "T-shirt" %}</th>
+            <th data-priority="5">
+                {% trans "T-shirt" %}
+            </th>
             {% endif %}
+
             {% if event.ask_vegetarian %}
-            <th>{% trans "Vegetarian" %}</th>
+            <th data-priority="6">
+                {% trans "Vegetarian" %}
+            </th>
             {% endif %}
+
             {% if job.infection_instruction %}
-            <th>{% trans "Food handling" %}</th>
+            <th data-priority="4">
+                {% trans "Food handling" %}
+            </th>
             {% endif %}
-            <th>{% trans "Comment" %}</th>
-            <th>{% trans "Registration time" %}</th>
-            <th class="nosort"></th>
+
+            <th data-priority="2">
+                {% trans "Comment" %}
+            </th>
+
+            <th data-priority="3">
+                {% trans "Registration time" %}
+            </th>
+
+            <th class="nosort" data-priority="1"></th>
         </tr>
     </thead>
     <tbody>
         {% for helper in helpers|dictsort:"timestamp" %}
             <tr>
-                <td>
-                    {% if helper.has_to_validate %}
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>
-                    {% endif %}
-                </td>
+                <td class="datatables-icon"></td>
                 <td>{{ helper.firstname }}</td>
                 <td>{{ helper.surname }}</td>
                 {% if event.ask_shirt %}
@@ -58,7 +76,9 @@ coordinators. This is only important for the delete_helper view.
                     <a href="{% url 'view_helper' event.url_name helper.pk %}">
                         {% icon "search" %}
                         {% trans "View" %}
-                    </a><br />
+                    </a>
+
+                    <br />
 
                     {% if shift %}
                         <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
@@ -70,6 +90,12 @@ coordinators. This is only important for the delete_helper view.
                             {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
+                    {% endif %}
+
+                    <br />
+
+                    {% if helper.has_to_validate %}
+                        <span class="text-danger">{% icon "times" %} {% trans "Not validated" %}</span>
                     {% endif %}
                 </td>
             </tr>

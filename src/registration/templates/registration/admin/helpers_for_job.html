@@ -107,17 +107,5 @@
         {% endfor %}
     {% endfor %}
 
-    <script type="text/javascript">
-        $(function () {
-            $(".table").DataTable({
-                "paging": false,
-                "searching": false,
-                "info": false,
-                "columnDefs": [
-                    { "orderable": false, "targets": "nosort" },
-                ],
-                "sorting": [[2, 'asc'], [1, 'asc']],
-            });
-        });
-    </script>
+    <script src="{% static "helfertool/js/helpers_table.js" %}"></script>
 {% endblock %}
