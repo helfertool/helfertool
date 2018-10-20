@@ -9,8 +9,8 @@ import os
 
 from toolsettings.forms import UserSelectWidget
 
+from .fields import DatePicker
 from ..models import Event
-from .fields import DatePickerField
 
 
 class EventForm(forms.ModelForm):
@@ -18,13 +18,10 @@ class EventForm(forms.ModelForm):
         model = Event
         exclude = ['text', 'imprint', 'registered', 'badge_settings',
                    'archived', ]
-        field_classes = {
-            'date': DatePickerField,
-            'changes_until': DatePickerField,
-        }
         widgets = {
             'admins': UserSelectWidget,
-            'text': CKEditorWidget(),
+            'text': CKEditorWidget,
+            'date': DatePicker,
         }
 
         # According to the documentation django-modeltranslations copies the
@@ -90,8 +87,8 @@ class EventDuplicateForm(EventForm):
     class Meta:
         model = Event
         fields = ['url_name', 'name', 'date']
-        field_classes = {
-            'date': DatePickerField,
+        widgets = {
+            'date': DatePicker,
         }
 
     def __init__(self, *args, **kwargs):

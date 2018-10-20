@@ -1,1 +1,1 @@
-from .date import DatePickerField, DateTimePickerField
+from .date import DatePicker, DateTimePicker
