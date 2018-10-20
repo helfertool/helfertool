@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.widgets import CKEditorWidget
 
-from .models import HTMLSetting, TextSetting
+from ..models import HTMLSetting, TextSetting
 
 
 class HTMLSettingForm(forms.ModelForm):

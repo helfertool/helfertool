@@ -2,10 +2,10 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Item, Inventory
-
 from badges.models import Badge
-from registration.forms.fields import UserSelectField
+from toolsettings.forms import UserSelectWidget
+
+from .models import Item, Inventory
 
 
 class InventoryBarcodeForm(forms.Form):
@@ -43,8 +43,8 @@ class InventoryForm(forms.ModelForm):
     class Meta:
         model = Inventory
         exclude = []
-        field_classes = {
-            'admins': UserSelectField,
+        widgets = {
+            'admins': UserSelectWidget,
         }
 
 

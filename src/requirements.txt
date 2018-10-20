@@ -8,6 +8,7 @@ django-icons
 django-modeltranslation
 django-multiselectfield
 django_ical
+django_select2
 amqp
 celery
 pillow

@@ -324,6 +324,11 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# django-select2 config
+SELECT2_JS = ''
+SELECT2_CSS = ''
+SELECT2_I18N_PATH = '/static/helfertool/vendor/select2/js/i18n'
+
 # application definition
 INSTALLED_APPS = (
     'modeltranslation',
@@ -336,6 +341,7 @@ INSTALLED_APPS = (
     'axes',
     'bootstrap4',
     'django_icons',
+    'django_select2',
     'ckeditor',
     'registration',
     'statistic',

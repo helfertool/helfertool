@@ -22,6 +22,8 @@
         {# font awesome #}
         <script src="{% static "helfertool/vendor/fontawesome/js/all.min.js" %}"></script>
 
+        {{ form.media.css }}
+
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
@@ -124,5 +126,7 @@
                 </p>
             </div>
         </footer>
+
+        {{ form.media.js }}
     </body>
 </html>

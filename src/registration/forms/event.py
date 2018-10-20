@@ -7,9 +7,10 @@ from copy import deepcopy
 
 import os
 
-from ..models import Event
+from toolsettings.forms import UserSelectWidget
 
-from .fields import UserSelectField, DatePickerField
+from ..models import Event
+from .fields import DatePickerField
 
 
 class EventForm(forms.ModelForm):
@@ -18,11 +19,11 @@ class EventForm(forms.ModelForm):
         exclude = ['text', 'imprint', 'registered', 'badge_settings',
                    'archived', ]
         field_classes = {
-            'admins': UserSelectField,
             'date': DatePickerField,
             'changes_until': DatePickerField,
         }
         widgets = {
+            'admins': UserSelectWidget,
             'text': CKEditorWidget(),
         }
 
