@@ -89,17 +89,17 @@ class Event(models.Model):
         SHIRT_XL_GIRLY,
     )
 
+    name = models.CharField(
+        max_length=200,
+        verbose_name=_("Event name"),
+    )
+
     url_name = models.CharField(
         max_length=200,
         unique=True,
         validators=[RegexValidator('^[a-zA-Z0-9]+$')],
         verbose_name=_("Name for URL"),
         help_text=_("May contain the following chars: a-zA-Z0-9."),
-    )
-
-    name = models.CharField(
-        max_length=200,
-        verbose_name=_("Event name"),
     )
 
     date = models.DateField(

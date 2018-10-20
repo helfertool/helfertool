@@ -14,7 +14,7 @@
                         <li class="list-group-item">
                             <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
-                            <span class="badge badge-info ml-2">
+                            <span class="badge badge-dark-outline ml-2">
                                 {% if event.days > 1 %}
                                     {% blocktrans with date=event.date days=event.days trimmed %}
                                         {{ date }}, {{ days }} days
@@ -59,7 +59,7 @@
                             <li class="list-group-item">
                                 <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
-                                <span class="badge badge-info ml-2">
+                                <span class="badge badge-dark-outline ml-2">
                                     {% if event.days > 1 %}
                                         {% blocktrans with date=event.date days=event.days trimmed %}
                                             {{ date }}, {{ days }} days

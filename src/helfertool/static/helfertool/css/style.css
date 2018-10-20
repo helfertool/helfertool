@@ -57,10 +57,15 @@ h1, h2, h3, h4 {
 }
 
 /* badges (copied from bootstrap with adapted colors */
-.badge-info {
-  color: #1ea082;
-  background-color: #fff;
-  border: 1px solid #1ea082;
+.badge-dark-outline {
+    color: #343a40;
+    background-color: #fff;
+    border: 1px solid #343a40;
+}
+
+/* list items */
+.list-group-item {
+    border: 1px solid #1ea082;
 }
 
 /* main menu */
