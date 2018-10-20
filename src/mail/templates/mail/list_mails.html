@@ -17,7 +17,7 @@
                 <tr>
                     <td>
                         {% if mail.failed %}
-                            <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+                            <span class="text-danger">{% icon "exclamation-triangle" %}</span>
                         {% endif %}
                     </td>
                     <td>{{ mail.subject }}</td>

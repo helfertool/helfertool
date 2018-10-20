@@ -33,7 +33,7 @@
                     {% if not event.archived %}
                         <td>
                             <a href="{% url "form_for_link" event.url_name link.id %}">{% icon "link" %} Link</a><br />
-                            <a href="{% url "edit_link" event.url_name link.id %}">{% icon "pencil" %} Edit</a><br />
+                            <a href="{% url "edit_link" event.url_name link.id %}">{% icon "pencil-alt" %} Edit</a><br />
                             <a href="{% url "delete_link" event.url_name link.id %}">{% icon "trash-alt" %} Delete</a>
                         </td>
                     {% endif %}

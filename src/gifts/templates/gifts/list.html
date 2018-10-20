@@ -19,7 +19,7 @@
 
                 {% if not event.archived %}
                     <td>
-                        <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% icon "pencil" %} {% trans "Edit" %}</a><br/>
+                        <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% icon "pencil-alt" %} {% trans "Edit" %}</a><br/>
                         <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
                     </td>
                 {% endif %}
@@ -54,7 +54,7 @@
 
                 {% if not event.archived %}
                     <td>
-                        <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% icon "pencil" %} {% trans "Edit" %}</a><br/>
+                        <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% icon "pencil-alt" %} {% trans "Edit" %}</a><br/>
                         <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
                     </td>
                 {% endif %}

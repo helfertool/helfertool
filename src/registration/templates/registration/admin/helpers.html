@@ -57,9 +57,13 @@
     {% for job in event.job_set.all %}
         {% is_job_admin job as job_admin %}
 
-        <h3>{{ job.name }}
+        <h3>
+            {{ job.name }}
+
             {% if job.public %}
-                <span class="glyphicon glyphicon-eye-open" title="{% trans "Public" %}" aria-hidden="true"></span>
+                <span class="badge badge-outline-dark">
+                    {% icon "eye" %} {% trans "Public" %}
+                </span>
             {% endif %}
         </h3>
 
@@ -88,9 +92,9 @@
                     <td>
                         {% for shift in shifts %}
                             {% if shift.hidden %}
-                                <span class="glyphicon glyphicon-eye-close" title="{% trans "Hidden" %}" aria-hidden="true"></span>
+                                {% icon "eye-slash" %}
                             {% elif shift.blocked %}
-                                <span class="glyphicon glyphicon-lock" title="{% trans "Blocked" %}" aria-hidden="true"></span>
+                                {% icon "lock" %}
                             {% endif %}
 
                             {{ shift.time_hours }}

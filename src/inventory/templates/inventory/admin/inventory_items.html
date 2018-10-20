@@ -24,7 +24,7 @@
                     <td>{{ item.comment|truncatechars:20|linebreaks }}</td>
                     <td>
                         <a href="{% url "inventory:edit_item" inventory.pk item.pk %}">
-                            {% icon "pencil" %}
+                            {% icon "pencil-alt" %}
                             {% trans "Edit" %}
                         </a>
 

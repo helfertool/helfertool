@@ -30,7 +30,7 @@
                         {% is_inventory_admin inventory as is_admin %}
                         {% if is_admin %}
                             <a href="{% url "inventory:inventory_items" inventory.pk %}">
-                                <i class="fa fa-list" aria-hidden="true"></i>
+                                {% icon "list" %}
                                 {% comment %}Translators: List verb{% endcomment %}
                                 {% trans "List" %}
                             </a>
@@ -38,7 +38,7 @@
                             <br />
 
                             <a href="{% url "inventory:edit_inventory" inventory.pk %}">
-                                {% icon "pencil" %}
+                                {% icon "pencil-alt" %}
                                 {% trans "Edit" %}
                             </a>
 

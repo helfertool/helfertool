@@ -12,16 +12,20 @@
     {% endif %}
 
     {% for job in event.job_set.all %}
-        <h3>{{ job.name }}
+        <h3>
+            {{ job.name }}
+
             {% if job.public %}
-                <span class="glyphicon glyphicon-eye-open" title="{% trans "Public" %}" aria-hidden="true"></span>
+                <span class="badge badge-outline-dark">
+                    {% icon "eye" %} {% trans "Public" %}
+                </span>
             {% endif %}
         </h3>
 
         {% if not event.archived %}
             <p>
                 <a href="{% url 'edit_job' event.url_name job.pk %}">
-                {% icon "pencil" %}
+                {% icon "pencil-alt" %}
                 {% trans "Edit" %}</a>
 
                 &nbsp;
@@ -65,9 +69,9 @@
                     <tr>
                         <td>
                             {% if shift.hidden %}
-                                <span class="glyphicon glyphicon-eye-close" title="{% trans "Hidden" %}" aria-hidden="true"></span>
+                                {% icon "eye-slash" %}
                             {% elif shift.blocked %}
-                                <span class="glyphicon glyphicon-lock" title="{% trans "Blocked" %}" aria-hidden="true"></span>
+                                {% icon "lock" %}
                             {% endif %}
                             {{ shift.begin }}
                         </td>
@@ -85,7 +89,7 @@
                         {% if not event.archived %}
                             <td>
                                 <a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">
-                                    {% icon "pencil" %}
+                                    {% icon "pencil-alt" %}
                                     {% trans "Edit" %}
                                 </a>
                                 <br/>

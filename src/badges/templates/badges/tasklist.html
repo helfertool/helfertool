@@ -10,7 +10,7 @@
                     {% if task.finished %}
                         {% icon "check" %}
                     {% elif task.error %}
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"></span>
+                        <span class="text-danger">{% icon "exclamation-triangle" %}</span>
                     {% else %}
                         <i class="fa fa-spinner fa-pulse"></i>
                     {% endif %}

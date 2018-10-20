@@ -57,7 +57,7 @@ h1, h2, h3, h4 {
 }
 
 /* badges (copied from bootstrap with adapted colors */
-.badge-dark-outline {
+.badge-outline-dark {
     color: #343a40;
     background-color: #fff;
     border: 1px solid #343a40;

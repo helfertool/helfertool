@@ -47,7 +47,7 @@
                     {% if not event.archived %}
                         <td>
                             <a href="{% url 'badges:edit_permission' event.url_name perm.pk %}">
-                                {% icon "pencil" %} {% trans "Edit" %}
+                                {% icon "pencil-alt" %} {% trans "Edit" %}
                             </a>
                             <br/>
                             <a href="{% url 'badges:delete_permission' event.url_name perm.pk %}">
