@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator
+from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -107,6 +107,13 @@ class Event(models.Model):
         help_text=_("First day of event"),
     )
 
+    days = models.IntegerField(
+        default=1,
+        verbose_name=_("Number of days"),
+        help_text=_("Displayed on the main page"),
+        validators=[MinValueValidator(0)],
+    )
+
     text = BleachField(
         blank=True,
         verbose_name=_("Text before registration"),
@@ -115,8 +122,8 @@ class Event(models.Model):
 
     imprint = BleachField(
         blank=True,
-        verbose_name=_('Imprint'),
-        help_text=_("Display at the bottom of the registration form."),
+        verbose_name=_('Contact'),
+        help_text=_("Displayed at the bottom of all pages for the event."),
     )
 
     registered = BleachField(

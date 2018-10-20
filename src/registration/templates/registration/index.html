@@ -14,9 +14,19 @@
                         <li class="list-group-item">
                             <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
+                            <span class="badge badge-info ml-2">
+                                {% if event.days > 1 %}
+                                    {% blocktrans with date=event.date days=event.days trimmed %}
+                                        {{ date }}, {{ days }} days
+                                    {% endblocktrans %}
+                                {% else %}
+                                    {{ event.date }}
+                                {% endif %}
+                            </span>
+
                             {% if event.involved %}
                                 <a href="{% url 'manage_event' event.url_name %}" class="float-right">
-                                    {% icon "hammer" %}
+                                    {% icon "cog" %}
                                     {% trans "Manage" %}
                                 </a>
                             {% endif %}
@@ -48,12 +58,23 @@
                         {% for event in group.list|dictsort:"name.lower" %}
                             <li class="list-group-item">
                                 <a href="{% url 'form' event.url_name %}">{{ event }}</a>
+
+                                <span class="badge badge-info ml-2">
+                                    {% if event.days > 1 %}
+                                        {% blocktrans with date=event.date days=event.days trimmed %}
+                                            {{ date }}, {{ days }} days
+                                        {% endblocktrans %}
+                                    {% else %}
+                                        {{ event.date }}
+                                    {% endif %}
+                                </span>
+
                                 {% if event.archived %}
-                                    <span class="badge badge-dark">{% trans "archived" %}</span>
+                                    <span class="badge badge-dark">{% icon "archive" %} {% trans "archived" %}</span>
                                 {% endif %}
 
                                 <a href="{% url 'manage_event' event.url_name %}" class="float-right">
-                                    {% icon "hammer" %}
+                                    {% icon "cog" %}
                                     {% trans "Manage" %}
                                 </a>
                             </li>

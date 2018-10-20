@@ -49,11 +49,18 @@ h1, h2, h3, h4 {
     box-shadow: 0 0 0 0.2rem rgba(30, 160, 130, 0.5)
 }
 
-/* alerts (copied from bootstrap with adapterd colors */
+/* alerts (copied from bootstrap with adapted colors */
 .alert-info {
     color: #1ea082;
     background-color: #fff;
     border-color: #1ea082;
+}
+
+/* badges (copied from bootstrap with adapted colors */
+.badge-info {
+  color: #1ea082;
+  background-color: #fff;
+  border: 1px solid #1ea082;
 }
 
 /* main menu */
