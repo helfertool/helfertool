@@ -12,6 +12,13 @@
                 <ul class="list-group">
                     {% for event in active_events %}
                         <li class="list-group-item">
+                            {% if event.involved %}
+                                <a href="{% url 'manage_event' event.url_name %}" class="float-right">
+                                    {% icon "cog" %}
+                                    {% trans "Manage" %}
+                                </a>
+                            {% endif %}
+
                             <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                             <span class="badge badge-outline-dark ml-2">
@@ -23,13 +30,6 @@
                                     {{ event.date }}
                                 {% endif %}
                             </span>
-
-                            {% if event.involved %}
-                                <a href="{% url 'manage_event' event.url_name %}" class="float-right">
-                                    {% icon "cog" %}
-                                    {% trans "Manage" %}
-                                </a>
-                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
@@ -52,11 +52,16 @@
             {% regroup involved_events|dictsortreversed:"date" by date|date:"Y" as involved_events_list %}
 
             {% for group in involved_events_list %}
-                <div class="col-6">
+                <div class="col-lg-6 col-xs-12">
                     <h3>{{ group.grouper }}</h3>
                     <ul class="list-group">
                         {% for event in group.list|dictsort:"name.lower" %}
                             <li class="list-group-item">
+                                <a href="{% url 'manage_event' event.url_name %}" class="float-right">
+                                    {% icon "cog" %}
+                                    {% trans "Manage" %}
+                                </a>
+
                                 <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
                                 <span class="badge badge-outline-dark ml-2">
@@ -72,11 +77,6 @@
                                 {% if event.archived %}
                                     <span class="badge badge-dark">{% icon "archive" %} {% trans "archived" %}</span>
                                 {% endif %}
-
-                                <a href="{% url 'manage_event' event.url_name %}" class="float-right">
-                                    {% icon "cog" %}
-                                    {% trans "Manage" %}
-                                </a>
                             </li>
                         {% endfor %}
                     </ul>
