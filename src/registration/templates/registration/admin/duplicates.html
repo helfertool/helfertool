@@ -1,5 +1,5 @@
-{% extends "registration/admin/base.html" %}
-{% load i18n %}
+{% extends "helfertool/admin.html" %}
+{% load i18n icons %}
 
 {% block admincontent %}
     <h2>{% trans "Duplicates" %}</h2>
@@ -18,8 +18,7 @@
 
         <p>
             <a href="{% url "merge" event.url_name mail %}">
-                <i class="fa fa-compress" aria-hidden="true"></i>
-                {% trans "Merge" %}
+                {% icon "compress" %} {% trans "Merge" %}
             </a>
         </p>
     {% endfor %}

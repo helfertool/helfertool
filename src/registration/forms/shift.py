@@ -2,11 +2,12 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
+from django_select2.forms import Select2MultipleWidget
+
 from gifts.models import GiftSet
 
+from .fields import DateTimePicker
 from ..models import Shift
-
-from .fields import DualListField, DateTimePickerField
 
 
 class ShiftForm(forms.ModelForm):
@@ -14,12 +15,14 @@ class ShiftForm(forms.ModelForm):
         model = Shift
         exclude = ['job', 'archived_number', ]
         field_classes = {
-            'gifts': DualListField,
-            'begin': DateTimePickerField,
-            'end': DateTimePickerField,
+            'begin': forms.SplitDateTimeField,
+            'end': forms.SplitDateTimeField,
         }
         widgets = {
+            'gifts': Select2MultipleWidget,
             'number': forms.NumberInput(attrs={'min': 0}),
+            'begin': DateTimePicker,
+            'end': DateTimePicker,
         }
 
     def __init__(self, *args, **kwargs):

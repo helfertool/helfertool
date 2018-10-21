@@ -1,0 +1,112 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Check installation" %}</h2>
+
+    <h3>{% trans "Helfertool" %}</h3>
+
+    <table class="table">
+        <tr>
+            <th style="width: 25%">{% trans "Templates" %} </th>
+            <td style="width: 75%">
+                {% if templates_ok %}
+                    <i class="fas fa-check"></i>
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    <h3>{% trans "External services" %}</h3>
+
+
+    <table class="table">
+        <tr>
+            <th style="width: 25%">{% trans "Mail" %} </th>
+            <td style="width: 75%">
+                {% if mail_ok %}
+                    <i class="fas fa-check"></i>
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 25%">{% trans "RabbitMQ" %} </th>
+            <td style="width: 75%">
+                {% if celery_broker_ok %}
+                    <i class="fas fa-check"></i>
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 25%">{% trans "LDAP" %} </th>
+            <td style="width: 75%">
+                {% if ldap_configured %}
+                    {% if ldap_ok %}
+                        <i class="fas fa-check"></i>
+                    {% else %}
+                        <i class="fas fa-times" style="color:red;"></i>
+                    {% endif %}
+                {% else %}
+                    <i class="fas fa-minus"></i>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+    <h3>{% trans "Header" %}</h3>
+
+    <table class="table">
+        <tr>
+            <th style="width: 25%">Host</th>
+            <td style="width: 75%">
+                {% if header_host %}
+                    {{ header_host }}
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 25%">X-Real-IP</th>
+            <td style="width: 75%">
+                {% if header_x_real_ip %}
+                    {{ header_x_real_ip }}
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 25%">X-Forwarded-For</th>
+            <td style="width: 75%">
+                {% if header_x_forwarded_for %}
+                    {{ header_x_forwarded_for }}
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th style="width: 25%">X-Forwarded-Proto</th>
+            <td style="width: 75%">
+                {% if header_x_forwarded_proto %}
+                    {{ header_x_forwarded_proto }}
+                {% else %}
+                    <i class="fas fa-times" style="color:red;"></i>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+{% endblock %}

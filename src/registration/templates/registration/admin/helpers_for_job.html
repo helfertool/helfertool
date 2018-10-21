@@ -1,9 +1,5 @@
-{% extends "registration/admin/base.html" %}
-{% load staticfiles %}
-{% load i18n %}
-{% load bootstrap3 %}
-
-{% block title %}{{ job.name }} - {{ event.name }}{% endblock %}
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons staticfiles %}
 
 {% block admincontent %}
     <h2>
@@ -14,16 +10,16 @@
 
     {# export #}
     <p>
-        {% bootstrap_icon "download-alt" %}
+        {% icon "file-download" %}
         &nbsp;
-        {% trans "Export" %}:
+        <b>{% trans "Export" %}:</b>
         &nbsp;
         <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon">
-            <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+            <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
         </a>
         &nbsp;
         <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
-            <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+            <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
         </a>
     </p>
 
@@ -47,7 +43,7 @@
 
     <p>
         <a href="{% url 'add_coordinator' event.url_name job.pk %}">
-            {% bootstrap_icon "plus" %}
+            {% icon "plus" %}
             {% trans "Add coordinator" %}
         </a>
    </p>
@@ -58,16 +54,16 @@
 
         <p>
             {% with day_str=day|date:"Y-m-d" %}
-                {% bootstrap_icon "download-alt" %}
+                {% icon "file-download" %}
                 &nbsp;
                 {% blocktrans with day=day %}Export for {{ day }}{% endblocktrans %}:
                 &nbsp;
                 <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon">
-                    <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
                 </a>
                 &nbsp;
                 <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
-                    <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
                 </a>
             {% endwith %}
         </p>
@@ -86,8 +82,7 @@
             {% if event.gifts and is_admin %}
             <p>
                 <a href="{% url "gifts:set_present" event.url_name shift.pk %}">
-                    <i class="fa fa-check-square" aria-hidden="true"></i>
-                    {% trans "Set attendance for complete shift" %}
+                    {% icon "check-square" %} {% trans "Set attendance for complete shift" %}
                 </a>
             </p>
             {% endif %}
@@ -101,7 +96,7 @@
             {% if not shift.is_full %}
                 <p>
                     <a href="{% url 'add_helper' event.url_name shift.pk %}">
-                        {% bootstrap_icon "plus" %}
+                        {% icon "plus" %}
                         {% trans "Add helper" %}
                     </a>
                </p>
@@ -109,17 +104,5 @@
         {% endfor %}
     {% endfor %}
 
-    <script type="text/javascript">
-        $(function () {
-            $(".table").DataTable({
-                "paging": false,
-                "searching": false,
-                "info": false,
-                "columnDefs": [
-                    { "orderable": false, "targets": "nosort" },
-                ],
-                "sorting": [[2, 'asc'], [1, 'asc']],
-            });
-        });
-    </script>
+    <script src="{% static "helfertool/js/helpers_table.js" %}"></script>
 {% endblock %}

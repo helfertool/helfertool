@@ -3,9 +3,9 @@ from django.conf import settings
 
 from ckeditor.widgets import CKEditorWidget
 
-from ..models import Job
+from toolsettings.forms import UserSelectWidget
 
-from .fields import UserSelectField
+from ..models import Job
 
 
 class JobForm(forms.ModelForm):
@@ -15,10 +15,9 @@ class JobForm(forms.ModelForm):
         # note: change also below in JobDuplicateForm
         exclude = ['name', 'description', 'event', 'coordinators',
                    'badge_defaults', 'archived_number_coordinators', ]
-        field_classes = {
-            'job_admins': UserSelectField,
+        widgets = {
+            'job_admins': UserSelectWidget,
         }
-        widgets = {}
 
         # According to the documentation django-modeltranslations copies the
         # widget from the original field.

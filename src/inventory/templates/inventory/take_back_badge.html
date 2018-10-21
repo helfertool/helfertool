@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Take back: Scan badge" %}</h2>
@@ -9,7 +9,7 @@
         <div class="alert alert-danger">
             {% trans "You have to scan the item first." %}
         </div>
-        <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan item" %}</a>
+        <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-outline-primary">{% trans "Scan item" %}</a>
     {% else %}
         <form action="" method="post">
             {% csrf_token %}
@@ -23,10 +23,10 @@
             {% bootstrap_form form show_label=False %}
         </form>
 
-        <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan other item" %}</a>
+        <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-outline-primary">{% trans "Scan other item" %}</a>
 
         {% if not item.inventory.multiple_assignments %}
-            <a href="{% url 'inventory:take_back_direct' event.url_name item.pk %}" class="btn btn-lg btn-warning">{% trans "Take back without badge" %}</a>
+            <a href="{% url 'inventory:take_back_direct' event.url_name item.pk %}" class="btn btn-outline-danger">{% trans "Take back without badge" %}</a>
         {% endif %}
 
     {% endif %}

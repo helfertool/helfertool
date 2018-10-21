@@ -1,30 +1,33 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 {% load registerform_shifts %}
 
 {% block title %}
-    {% blocktrans trimmed %}
-        Register for {{ event }} as helper
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
     {% endblocktrans %}
 {% endblock %}
 
 {% block content %}
     <h1>{{ event }}</h1>
 
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-info" role="alert">
         {% trans "This link is not valid." %}
     </div>
 
     {% if event.active %}
         <p>
-            <a href="{% url "form" event.url_name %}" class="btn btn-primary">
-                {% trans "Go to the registration" %}
+            <a href="{% url "form" event.url_name %}" class="btn btn-outline-primary">
+                {% icon "external-link-alt" %}
+                {% trans "Go to public registration" %}
             </a>
         </p>
     {% endif %}
 
-    {{ event.imprint | safe }}
+    <div class="contact">
+        <p><b>{% trans "Contact" %}</b></p>
+        {{ event.imprint | safe }}
+    </div>
 {% endblock %}
 

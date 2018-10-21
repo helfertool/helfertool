@@ -1,20 +1,19 @@
-{% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Advanced badge settings" %}</h2>
 
-    <div class="alert alert-warning" role="alert">
-        <p>{% trans "Changes of most of this settings require an update of the LaTeX template!" %}</p>
-
-        <p>
-            {% trans "Here you can get the sample LaTeX template:" %}
-            <a href="{% url 'badges:default_template' event.url_name %}">{% trans "Download" %}</a>
-        </p>
+    <div class="alert alert-info" role="alert">
+        {% trans "Changes of most of this settings require an update of the LaTeX template!" %}
     </div>
 
     <h3>{% trans "Template" %}</h3>
+
+    <p>
+        {% trans "Here you can get the sample LaTeX template:" %}
+        <a href="{% url 'badges:default_template' event.url_name %}">{% trans "Download" %}</a>
+    </p>
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -22,7 +21,7 @@
         {% bootstrap_form form %}
 
         {% if not event.archived %}
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
         {% endif %}
     </form>
 
@@ -48,11 +47,11 @@
                     {% if not event.archived %}
                         <td>
                             <a href="{% url 'badges:edit_permission' event.url_name perm.pk %}">
-                                {% bootstrap_icon "pencil" %} {% trans "Edit" %}
+                                {% icon "pencil-alt" %} {% trans "Edit" %}
                             </a>
                             <br/>
                             <a href="{% url 'badges:delete_permission' event.url_name perm.pk %}">
-                                {% bootstrap_icon "remove" %} {% trans "Delete" %}
+                                {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
                         </td>
                     {% endif %}
@@ -64,7 +63,7 @@
     {% if not event.archived %}
         <p>
             <a href="{% url 'badges:new_permission' event.url_name %}">
-                {% bootstrap_icon "plus" %} {% trans "Add permission" %}
+                {% icon "plus" %} {% trans "Add permission" %}
             </a>
         </p>
     {% endif %}

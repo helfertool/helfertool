@@ -1,12 +1,12 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load permissions %}
 
 {% block content %}
-    <h2>{% trans "Account" %}</h2>
+    <h1>{% trans "Account" %}</h1>
 
-    <h3>Daten</h3>
+    <h2>{% trans "Data" %}</h2>
 
     <div class="row">
         <div class="col-xs-12 col-lg-5">
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <h3>{% trans "Change password" %}</h3>
+    <h2>{% trans "Change password" %}</h2>
 
     {% if pw_form %}
         <div class="row">
@@ -67,7 +67,7 @@
 
                     {% bootstrap_form pw_form %}
 
-                    <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+                    <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
                 </form>
             </div>
         </div>

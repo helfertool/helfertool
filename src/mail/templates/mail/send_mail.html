@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Send mails" %}</h2>
@@ -10,12 +10,10 @@
 
         {% bootstrap_form form %}
 
-        <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
     </form>
 
     <script type="text/javascript">
-        $('.select2').select2();
-
         function handle_reply_to()
         {
             if($("#id_reply_to").val() == "-")

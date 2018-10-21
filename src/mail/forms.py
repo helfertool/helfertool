@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.utils.translation import ugettext_lazy as _
 
+from django_select2.forms import Select2MultipleWidget
 from smtplib import SMTPException
 
 from .models import SentMail
@@ -76,7 +77,7 @@ class MailForm(forms.Form):
         self.fields['receiver'] = forms.MultipleChoiceField(
             choices=choices,
             label=_("Receivers"),
-            widget=forms.SelectMultiple(attrs={'class': 'select2'}),
+            widget=Select2MultipleWidget,
         )
 
         self.fields['reply_to'] = forms.ChoiceField(

@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load setting %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load permissions %}
 {% load inventory %}
 
@@ -15,83 +15,92 @@
         {# jquery #}
         <script src="{% static "helfertool/vendor/jquery/jquery.min.js" %}"></script>
 
-        {# bootstrap3 #}
-        <link href="{% static  "helfertool/vendor/bootstrap3/css/bootstrap.min.css" %}" media="all" rel="stylesheet">
-        <link href="{% static  "helfertool/vendor/bootstrap3/css/bootstrap-theme.min.css" %}" media="all" rel="stylesheet">
-        <script src="{% static "helfertool/vendor/bootstrap3/js/bootstrap.min.js" %}"></script>
+        {# bootstrap4 #}
+        <link href="{% static  "helfertool/vendor/bootstrap4/css/bootstrap.min.css" %}" media="all" rel="stylesheet">
+        <script src="{% static "helfertool/vendor/bootstrap4/js/bootstrap.bundle.min.js" %}"></script>
 
         {# font awesome #}
-        <script src="{% static "helfertool/vendor/fontawesome/js/fontawesome-all.min.js" %}"></script>
+        <script src="{% static "helfertool/vendor/fontawesome/js/all.min.js" %}"></script>
+
+        {# custom css #}
+        <link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">
+
+        {{ form.media.css }}
 
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
-        <link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">
+        <title>{% block title %}{% trans "Helfertool" %}{% endblock %}</title>
 
-        <title>{% block title %}{% trans "Registration for helpers" %}{% endblock %}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{% static "helfertool/img/logo/icon.png" %}">
     </head>
 
     <body>
-        <nav class="navbar navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
             <div class="container">
-                {# button to show menu on small devices#}
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed"
-                            data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
+                <a class="navbar-brand" href="#">
+                    <img src="{% static "helfertool/img/logo/logo.svg" %}" height="20" alt="" class="navbar-logo">
+                </a>
 
+                {# button to show menu on small devices#}
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcontent" aria-controls="navbarcontent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 {# menu content #}
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    {# on the right #}
-                    <ul class="nav navbar-nav navbar-left">
-                        {# login #}
+                <div class="navbar-collapse collapse" id="navbarcontent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url "index" %}">{% trans "Events" %}</a>
+                        </li>
+
                         {% if user.is_authenticated %}
-                            <p class="navbar-text">
-                                {% blocktrans trimmed with username=user.first_name %}
-                                    Hello {{ username }}!
-                                {% endblocktrans %}
-                             </p>
-                            <li><a href="{% url "index" %}">{% trans "Events" %}</a></li>
+                            {# logged in #}
                             {% if user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
-                                <li><a href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a>
+                                </li>
                             {% endif %}
-                            <li><a href="{% url "change_user" %}">{% trans "Account" %}</a></li>
-                            <li><a href="{% url "help:create_issue" %}">{% trans "Support" %}</a></li>
-                            <li><a href="{% url "logout" %}">{% trans "Logout" %}</a></li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "change_user" %}">{% trans "Account" %}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "help:create_issue" %}">{% trans "Support" %}</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "logout" %}">{% trans "Logout" %}</a>
+                            </li>
                         {% else %}
-                            <li><a href="{% url "login" %}">{% trans "Login" %}</a></li>
-                            <li><a href="{% url "index" %}">{% trans "Events" %}</a></li>
+                            {# not logged in #}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "login" %}">{% trans "Login" %}</a>
+                            </li>
                         {% endif %}
                         {# end login #}
                     </ul>
 
                     {# language chooser #}
-                    <form action="{% url 'set_language' %}" method="post" class="navbar-form navbar-right" role="form">
-                        <div class="form-group">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}" />
+                    <form action="{% url 'set_language' %}" method="post" role="form" class="form-inline">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
 
-                            <select name="language" onchange="this.form.submit()" class="form-control">
-                            {% get_current_language as LANGUAGE_CODE %}
-                            {% get_available_languages as LANGUAGES %}
-                            {% get_language_info_list for LANGUAGES as languages %}
+                        <select name="language" onchange="this.form.submit()" class="form-control mr-sm-2">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
 
-                            {% for language in languages %}
-                                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                                    {{ language.name_local }}
-                                </option>
-                            {% endfor %}
-                            </select>
-                        </div>
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                                {{ language.name_local }}
+                            </option>
+                        {% endfor %}
+                        </select>
+
                         <noscript>
-                            <button type="submit" class="btn btn-default">{% trans "Switch" %}</button>
+                            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">{% trans "Switch" %}</button>
                         </noscript>
                     </form>
                     {# end language chooser #}
@@ -99,7 +108,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container container-main">
             {# messages #}
             {% if messages %}
                 {% bootstrap_messages messages %}
@@ -120,5 +129,7 @@
                 </p>
             </div>
         </footer>
+
+        {{ form.media.js }}
     </body>
 </html>

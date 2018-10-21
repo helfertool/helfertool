@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     {% if shift %}
@@ -42,16 +42,6 @@
             {% bootstrap_field form.gifts %}
         {% endif %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
-
-    <script type="text/javascript">
-        $(function () {
-            $('.datetime').parent().datetimepicker({ locale: '{{ LANGUAGE_CODE }}',
-                {% if LANGUAGE_CODE == "en" %}
-                    format: 'YYYY-MM-DD HH:mm'
-                {% endif %}
-            });
-        });
-    </script>
 {% endblock %}

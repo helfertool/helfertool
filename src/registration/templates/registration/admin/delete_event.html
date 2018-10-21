@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete event" %}</h2>
@@ -12,6 +12,10 @@
             <tr>
                 <th>{% trans "Event" %}</th>
                 <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <td>{{ event.date }}</td>
             </tr>
             <tr>
                 <th>{% trans "E-Mail" %}</th>
@@ -38,6 +42,6 @@
 
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Yes, I want to delete the complete event!" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Yes, I want to delete the complete event!" %}" class="btn btn-outline-danger" />
     </form>
 {% endblock %}

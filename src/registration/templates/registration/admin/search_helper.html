@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Search helper" %}</h2>
@@ -16,7 +16,7 @@
             </p>
         {% endif %}
 
-        <input type="submit" value="{% trans "Search" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Search" %}" class="btn btn-outline-primary" />
     </form>
 
     {% if not new_search %}

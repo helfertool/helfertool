@@ -1,23 +1,29 @@
-from django.forms import DateField, DateInput, DateTimeField, DateTimeInput
+from django import forms
 
+class DatePicker(forms.DateInput):
+    input_type = 'date'
 
-class DatePickerField(DateField):
-    def __init__(self, *args, **kwargs):
-        super(DatePickerField, self).__init__(*args, **kwargs)
+    def __init__(self):
+        super(DatePicker, self).__init__(format='%Y-%m-%d')
 
-        self.widget = DateInput(attrs={
-            'class': 'date',
-            'addon_before': '<span class="glyphicon glyphicon-calendar">'
-                            '</span>'
-        })
+class DateTimePicker(forms.SplitDateTimeWidget):
+    def __init__(self):
+        # TODO: use this for django >= 2.0 and delete code below
+        #super(DateTimePicker, self).__init__(
+        #    date_format='%Y-%m-%d',
+        #    date_attrs={'type': 'date'},
+        #    time_format='%H:%M',
+        #    time_attrs={'type': 'time'},
+        #)
 
-
-class DateTimePickerField(DateTimeField):
-    def __init__(self, *args, **kwargs):
-        super(DateTimePickerField, self).__init__(*args, **kwargs)
-
-        self.widget = DateTimeInput(attrs={
-            'class': 'datetime',
-            'addon_before': '<span class="glyphicon glyphicon-calendar">'
-                            '</span>'
-        })
+        widgets = (
+            forms.DateInput(
+                format='%Y-%m-%d',
+                attrs={'type': 'date'},
+            ),
+            forms.TimeInput(
+                format='%H:%M',
+                attrs={'type': 'time'},
+            ),
+        )
+        super(forms.SplitDateTimeWidget, self).__init__(widgets, None)

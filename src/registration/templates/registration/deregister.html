@@ -1,6 +1,12 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
+
+{% block title %}
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
+    {% endblocktrans %}
+{% endblock %}
 
 {% block content %}
     <h1>{% trans "Sign off from shift" %}</h1>
@@ -18,6 +24,6 @@
         </table>
         {% csrf_token %}
 
-        <input type="submit" value="{% trans "Sign off" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Sign off" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}

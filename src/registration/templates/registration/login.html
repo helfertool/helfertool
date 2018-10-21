@@ -1,20 +1,25 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 toolsettings %}
 
 {% block content %}
     <h1>{% trans "Login" %}</h1>
+
+    {% htmlsetting "login" %}
 
     <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
         {% csrf_token %}
 
         <div class="row">
-            <div class="col-xs-12 col-lg-5">
-                {% bootstrap_form form required_css_class='' %}
+            <div class="col-lg-12">
+                {% bootstrap_form_errors form %}
+            </div>
+            <div class="col-xs-12 col-lg-6">
+                {% bootstrap_field form.username required_css_class='' %}
+                {% bootstrap_field form.password required_css_class='' %}
             </div>
         </div>
 
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="{% trans "Login" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Login" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}

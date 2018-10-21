@@ -1,18 +1,18 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap3 setting %}
+{% load i18n bootstrap4 icons setting %}
 
 {% block content %}
     <h1>{% trans "Permission denied" %}</h1>
 
     <p class="text-muted">{% trans "Error 403" %}</p>
 
-    <p style="margin-top:3em;">
-        <a href="{% url "index" %}" class="btn btn-primary">
-            {% bootstrap_icon "th-list" %} {% trans "Show events" %}
+    <p class="mt-4">
+        <a href="{% url "index" %}" class="btn btn-outline-primary">
+            {% icon "list" %} {% trans "Show events" %}
         </a>
         &nbsp;
-        <a href="mailto:{% setting "CONTACT_MAIL" %}" class="btn btn-default">
-            <span class="glyphicon glyphicon-envelope"></span> {% trans "Contact" %}
+        <a href="mailto:{% setting "CONTACT_MAIL" %}" class="btn btn-outline-primary">
+            {% icon "envelope" %} {% trans "Contact" %}
         </a>
     </p>
 {% endblock %}

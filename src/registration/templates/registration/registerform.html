@@ -1,7 +1,4 @@
-{% load i18n %}
-{% load bootstrap3 %}
-{% load registerform_shifts %}
-{% load toolsettings %}
+{% load i18n bootstrap4 icons static registerform_shifts toolsettings %}
 
 <form action="" method="post">
     {% csrf_token %}
@@ -14,15 +11,15 @@
         {% get_shifts form job as shifts %}
 
         <h3>
+            {{ job.name }}
             {% if job.description %}
                 <button type="button"
-                        class="btn info-expand"
+                        class="btn btn-outline-primary btn-sm info-expand"
                         data-toggle="collapse"
                         data-target="#job-{{ job.pk }}">
-                    {% bootstrap_icon "info-sign" %}
+                    {% icon "info" %}
                 </button>
             {% endif %}
-            {{ job.name }}
         </h3>
 
         <div id="job-{{ job.pk }}" class="collapse">
@@ -54,12 +51,12 @@
                             {# number of helpers #}
                             {% if event.show_public_numbers %}
                                 {% if shift.blocked and not form.displayed_shifts %}
-                                    <span class="numbers">
-                                        ({{ shift.number }}/{{ shift.number }})
+                                    <span class="badge badge-outline-dark">
+                                        {{ shift.number }}/{{ shift.number }}
                                     </span>
                                 {% else %}
-                                    <span class="numbers">
-                                        ({{ shift.num_helpers }}/{{ shift.number }})
+                                    <span class="badge badge-outline-dark">
+                                        {{ shift.num_helpers }}/{{ shift.number }}
                                     </span>
                                 {% endif %}
                             {% endif %}
@@ -81,19 +78,44 @@
 
     {# personal data, nothing special... #}
     <div class="row">
-        <div class="col-xs-12 col-lg-5">
+        <div class="col-lg-6">
             {% bootstrap_field form.firstname required_css_class='' %}
+        </div>
+        <div class="col-lg-6">
             {% bootstrap_field form.surname required_css_class='' %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
             {% bootstrap_field form.email required_css_class='' %}
+        </div>
+        <div class="col-lg-6">
             {% bootstrap_field form.phone required_css_class='' %}
-            {% if event.ask_shirt %}
+        </div>
+    </div>
+
+    <div class="row">
+        {% if event.ask_shirt %}
+            <div class="col-lg-6">
                 {% bootstrap_field form.shirt required_css_class='' %}
-            {% endif %}
-            {% bootstrap_field form.infection_instruction required_css_class='' %}
-            {% if event.ask_vegetarian %}
+            </div>
+        {% endif %}
+
+        {% if event.ask_vegetarian %}
+            <div class="col-lg-6">
+                <label>{% trans "Food" %}</label>
                 {% bootstrap_field form.vegetarian required_css_class='' %}
-            {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+            <div class="col-lg-12">
+            {% bootstrap_field form.infection_instruction required_css_class='' %}
+
             {% bootstrap_field form.comment required_css_class='' %}
+
             {% if form.ask_full_age %}
                 {% bootstrap_field form.full_age required_css_class='' %}
             {% endif %}
@@ -102,11 +124,14 @@
 
     {% if not form.internal %}
         <div class="row">
-            <div class="col-lg-12">
-                {% bootstrap_field form.privacy_statement required_css_class='' %}
+            <div class="col-12">
+                {% bootstrap_field form.privacy_statement %}
 
-                <div class="well">
-                    {% htmlsetting "privacy" %}
+                <div class="card collapse mb-4" id="privacy">
+                    <h5 class="card-header">{% trans "Privacy statement" %}</h5>
+                    <div class="card-body">
+                        {% htmlsetting "privacy" %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,55 +140,38 @@
     {% if form.ask_news %}
         <div class="row">
             <div class="col-lg-12">
-                {% bootstrap_field form.news required_css_class='' %}
+                <p><b>{% trans "We would like to inform you about futher events!" %}</b></p>
+                {% bootstrap_field form.news %}
 
-                <div class="well">
-                    {% htmlsetting "privacy_newsletter" %}
+                <div class="card collapse mb-4" id="privacy_newsletter">
+                    <h5 class="card-header">{% trans "Privacy statement for newsletter" %}</h5>
+                    <div class="card-body">
+                        {% htmlsetting "privacy_newsletter" %}
+                    </div>
                 </div>
             </div>
         </div>
     {% endif %}
 
     <div class="row">
-        <div class="col-xs-12 col-lg-5">
-            {% if form.internal and event.ask_full_age %}
-                <p>
-                    <b>{% trans "Make sure that the helper is full age!" %}</b>
-                </p>
-            {% endif %}
+        <div class="col-log-12">
 
             {% if form.internal %}
                 <div class="alert alert-warning" role="alert">
-                    <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
-                </div>
-            {% endif %}
+                    {% trans "Note: after saving an e-mail will be sent to the given address." %}
 
-            <input type="submit" value="{% trans "Register" %}" class="btn btn-default" />
+                    {% if form.internal and event.ask_full_age %}
+                        <br/><br/><b>{% trans "Make sure that the helper is full age!" %}</b>
+                    {% endif %}
+                </div>
+
+                <input type="submit" value="{% trans "Register" %}" class="btn btn-outline-primary" />
+            {% else %}
+                <input type="submit" value="{% trans "Register" %}" class="btn btn-lg btn-outline-primary mt-2" />
+            {% endif %}
         </div>
     </div>
 
-    <script>
-        function handle_infection_instruction()
-        {
-            var show_field = 0;
-
-            // iterate over all relevant checkboxes
-            $(".infection_instruction").each(function() {
-                if($(this).prop('checked'))
-                {
-                    show_field = 1;
-                    return false;
-                }
-            })
-
-            // show or hide input field
-            if(show_field)
-                $("#id_infection_instruction").parent().show()
-            else
-                $("#id_infection_instruction").parent().hide()
-        }
-
-        handle_infection_instruction();
-    </script>
+    <script src="{% static "helfertool/js/infection_instruction.js" %}"></script>
 </form>
 

@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete item" %}</h2>
@@ -23,12 +23,8 @@
             </tr>
         </table>
 
-        <div class="alert alert-danger" role="alert">
-            {% trans "Do you want to remove this item?" %}
-        </div>
-
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Delete item" %}" class="btn btn-outline-danger" />
     </form>
 {% endblock %}

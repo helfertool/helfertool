@@ -2,6 +2,8 @@ html
 {
     position: relative;
     min-height: 100%;
+
+    font-size: 15px;
 }
 
 body {
@@ -10,7 +12,75 @@ body {
 }
 
 a, a:hover, a:active, a:focus {
-    color: #297d84;
+    color: #1ea082;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0.5em;
+}
+
+/* buttons (copied from bootstrap with adapted colors) */
+.btn-outline-primary {
+    color: #1ea082;
+    border-color: #1ea082;
+}
+
+.btn-outline-primary:hover {
+    background-color: #1ea082;
+    border-color: #1ea082;
+}
+
+.btn-outline-primary:focus, .btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(30, 160, 130, 0.5)
+}
+
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+    color: #1ea082;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+    background-color: #1ea082;
+    border-color: #1ea082;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(30, 160, 130, 0.5)
+}
+
+/* alerts (copied from bootstrap with adapted colors */
+.alert-info {
+    color: #1ea082;
+    background-color: #fff;
+    border-color: #1ea082;
+}
+
+.alert-danger {
+    color: #dc3545;
+    background-color: #fff;
+    border-color: #dc3545;
+}
+
+/* badges (copied from bootstrap with adapted colors */
+.badge-outline-dark {
+    color: #343a40;
+    background-color: #fff;
+    border: 1px solid #343a40;
+}
+
+/* validated input fields and labels (copied from bootstrap with adapted colors */
+.custom-select.is-valid, .form-control.is-valid, .was-validated .custom-select:valid, .was-validated .form-control:valid {
+    border-color: #1ea082;
+}
+
+.form-check-input.is-valid ~ .form-check-label, .was-validated .form-check-input:valid ~ .form-check-label {
+    color: #1ea082;
+}
+
+/* list items */
+.list-group-item {
+    border: 1px solid #1ea082;
 }
 
 /* main menu */
@@ -21,33 +91,31 @@ a, a:hover, a:active, a:focus {
     border-left: 0;
     border-right: 0;
     border-bottom: 5px solid;
-    border-color: #3aafb9;
+    border-color: #1ea082;
 
     border-radius: 0;
 }
 
-.navbar-custom li {
+.navbar-custom .nav-item {
     padding-left: 0.2em;
     padding-right: 0.2em;
 }
 
-.navbar-custom p {
-    color: black;
-    text-align: center;
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 1);
 }
 
-.navbar-custom li a {
-    color: black;
-    text-align: center;
+.navbar-custom .navbar-nav .nav-link:hover, .navbar-custom .navbar-nav .nav-link:active, .navbar-custom .navbar-nav .nav-link:focus {
+    color: rgba(0, 0, 0, 0.7);
 }
 
-.navbar-custom li a:hover, .navbar-custom .active a {
-    background-color: #3aafb9;
-    color:white;
+.navbar-logo {
+    margin-bottom: 5px;
 }
 
-.navbar-custom .navbar-toggle .icon-bar {
-    background-color: #3aafb9;
+/* main content container */
+.container-main {
+    margin-top: 1.5em;
 }
 
 /* footer */
@@ -56,15 +124,16 @@ a, a:hover, a:active, a:focus {
     position: absolute;
     bottom: 0;
     width: 100%;
+
     /* Set the fixed height of the footer here */
     height:40px;
-    background-color: #3aafb9;
+    background-color: #1ea082;
     text-align:center;
 }
 
 .footer .text-muted {
-    margin: 10px 0;
-    color: white;
+    margin: 8px 0;
+    color: white!important;
 }
 
 .footer a, .footer a:hover, .footer a:active, .footer a:focus {
@@ -82,21 +151,17 @@ table.shifts
 
 table.shifts th
 {
-    color:white;
-    background-color: #3aafb9;
+    color: #1ea082;
+
+    border: 1px solid #1ea082;
+    border-radius: 0.25rem;
+
     padding:5px;
 }
 
 table.shifts td
 {
     vertical-align: top;
-}
-
-table.shifts span.numbers
-{
-    font-size:80%;
-    color:grey;
-    font-weight: normal;
 }
 
 table.shifts span.name
@@ -130,11 +195,18 @@ img.icon
 /* info button for job description */
 .info-expand
 {
-    padding:3px 6px 3px 6px;
-    vertical-align: top;
+    vertical-align: middle;
 
-    background-color: #3aafb9;
-    color: white!important;
+    width: 30px;
+    height: 30px;
+
+    margin-left: 5px;
+}
+
+/* contact information below event */
+.contact
+{
+    margin-top: 3em;
 }
 
 /* wrap words */
@@ -200,7 +272,7 @@ div.logos-about div
 .form-group.required > label::after
 {
     content: "*";
-    color: red;
+    color: #1ea082;
 }
 
 /* wrap text in pre */
@@ -223,4 +295,15 @@ div.mailbody pre
 {
     background-color: transparent;
     border: 0;
+}
+
+/* datatables */
+.datatables-icon::before
+{
+    background-color: #1ea082!important;
+}
+
+tr.child ul.dtr-details
+{
+    padding-left: 40px!important;
 }

@@ -1,6 +1,5 @@
-{% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Links" %}</h2>
@@ -33,9 +32,9 @@
 
                     {% if not event.archived %}
                         <td>
-                            <a href="{% url "form_for_link" event.url_name link.id %}">{% bootstrap_icon "link" %} Link</a><br />
-                            <a href="{% url "edit_link" event.url_name link.id %}">{% bootstrap_icon "wrench" %} Edit</a><br />
-                            <a href="{% url "delete_link" event.url_name link.id %}">{% bootstrap_icon "remove" %} Delete</a>
+                            <a href="{% url "form_for_link" event.url_name link.id %}">{% icon "link" %} Link</a><br />
+                            <a href="{% url "edit_link" event.url_name link.id %}">{% icon "pencil-alt" %} Edit</a><br />
+                            <a href="{% url "delete_link" event.url_name link.id %}">{% icon "trash-alt" %} Delete</a>
                         </td>
                     {% endif %}
                 </tr>
@@ -46,7 +45,7 @@
     {% if not event.archived %}
         <p>
             <a href="{% url 'add_link' event.url_name %}">
-                {% bootstrap_icon "plus" %}
+                {% icon "plus" %}
                 {% trans "Add link" %}
             </a>
        </p>

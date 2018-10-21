@@ -245,7 +245,11 @@ CACHES = {
     },
     'axes_cache': {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    }
+    },
+    'select2': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'select2_cache',
+    },
 }
 
 AXES_CACHE = 'axes_cache'
@@ -300,7 +304,7 @@ GROUP_ADDEVENT = "registration_addevent"
 GROUP_SENDNEWS = "registration_sendnews"
 
 # Bootstrap config
-BOOTSTRAP3 = {
+BOOTSTRAP4 = {
     'required_css_class': 'required',
 }
 
@@ -324,6 +328,12 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+# django-select2 config
+SELECT2_JS = ''
+SELECT2_CSS = ''
+SELECT2_I18N_PATH = '/static/helfertool/vendor/select2/js/i18n'
+SELECT2_CACHE_BACKEND = 'select2'
+
 # application definition
 INSTALLED_APPS = (
     'modeltranslation',
@@ -334,7 +344,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'axes',
-    'bootstrap3',
+    'bootstrap4',
+    'django_icons',
+    'django_select2',
     'ckeditor',
     'registration',
     'statistic',

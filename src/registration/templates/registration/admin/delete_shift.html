@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete shift" %}</h2>
@@ -25,14 +25,12 @@
 
         {% if shift.helper_set.count != 0 %}
             <div class="alert alert-danger" role="alert">
-                {% trans "There are registered helpers for this shift. Remove it anyway?" %}
+                {% trans "There are registered helpers for this shift!" %}
             </div>
-        {% else %}
-            <div class="alert alert-warning" role="alert">{% trans "Remove this shift?" %}</div>
         {% endif %}
 
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Delete shift" %}" class="btn btn-outline-danger" />
     </form>
 {% endblock %}

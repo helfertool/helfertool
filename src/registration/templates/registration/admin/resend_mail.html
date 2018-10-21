@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{{ helper.full_name }}</h2>
@@ -15,6 +15,6 @@
             {% trans "Send confirmation mail again?" %}
         </div>
 
-        <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}

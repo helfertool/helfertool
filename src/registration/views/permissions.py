@@ -102,6 +102,6 @@ def delete_permission(request, user_pk, groupname):
         return HttpResponseRedirect(reverse('permissions'))
 
     context = {'form': form,
-               'user': user}
+               'deluser': user}
     return render(request, 'registration/admin/delete_permission.html',
                   context)

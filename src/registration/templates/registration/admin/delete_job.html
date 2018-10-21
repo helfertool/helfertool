@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete job" %}</h2>
@@ -15,26 +15,23 @@
             </tr>
             <tr>
                 <th>{% trans "Description" %}</th>
-                <td>{{ job.description }}</td>
+                <td>{{ job.description|safe }}</td>
             </tr>
         </table>
 
-        {% if job.shift_set.count != 0 %}
-            <div class="alert alert-danger" role="alert">
-                {% trans "There are shifts for this job. Remove it anyway?" %}
-            </div>
-        {% else %}
-            <div class="alert alert-warning" role="alert">{% trans "Remove this job?" %}</div>
-        {% endif %}
 
         {% if helpers_registered %}
             <div class="alert alert-danger" role="alert">
-                {% trans "There are registered helpers for some of the shifts. Remove this job with all shifts and helpers?" %}
+                {% trans "There are registered helpers for some of the shifts!" %}
+            </div>
+        {% elif job.shift_set.count != 0 %}
+            <div class="alert alert-danger" role="alert">
+                {% trans "There are shifts for this job." %}
             </div>
         {% endif %}
 
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Delete job" %}" class="btn btn-outline-danger" />
     </form>
 {% endblock %}

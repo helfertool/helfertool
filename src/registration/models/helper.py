@@ -122,7 +122,7 @@ class Helper(models.Model):
 
     privacy_statement = models.BooleanField(
         default=False,
-        verbose_name=_("I agree with the following data privacy statement."),
+        verbose_name=_("I agree with the data privacy statement."),
     )
 
     def __str__(self):

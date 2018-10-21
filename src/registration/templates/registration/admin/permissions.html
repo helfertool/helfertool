@@ -1,6 +1,5 @@
-{% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Permissions" %}</h2>
@@ -21,7 +20,7 @@
                     <td>{{ u.username }}</td>
                     <td>
                         <a href="{% url 'delete_event_permission' u.pk %}">
-                        {% bootstrap_icon "remove" %}
+                        {% icon "trash-alt" %}
                         {% trans "Delete permission" %}</a>
                     </td>
                 </tr>
@@ -31,8 +30,16 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form_addevent show_label=False form_group_class="form-group pull-left"%}
-        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+
+        <div class="row">
+            <div class="col-6">
+                {% bootstrap_form form_addevent show_label=False %}
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-outline-primary">{% trans "Add" %}</button>
+            </div>
+        </div>
     </form>
 
 
@@ -52,7 +59,7 @@
                     <td>{{ u.username }}</td>
                     <td>
                         <a href="{% url 'delete_user_permission' u.pk %}">
-                        {% bootstrap_icon "remove" %}
+                        {% icon "trash-alt" %}
                         {% trans "Delete permission" %}</a>
                     </td>
                 </tr>
@@ -62,8 +69,16 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form_adduser show_label=False form_group_class="form-group pull-left"%}
-        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+
+        <div class="row">
+            <div class="col-6">
+                {% bootstrap_form form_adduser show_label=False %}
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-outline-primary">{% trans "Add" %}</button>
+            </div>
+        </div>
     </form>
 
     <h3>{% trans "Can send news" %}</h3>
@@ -82,7 +97,7 @@
                     <td>{{ u.username }}</td>
                     <td>
                         <a href="{% url 'delete_news_permission' u.pk %}">
-                        {% bootstrap_icon "remove" %}
+                        {% icon "trash-alt" %}
                         {% trans "Delete permission" %}</a>
                     </td>
                 </tr>
@@ -92,7 +107,15 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form_sendnews show_label=False form_group_class="form-group pull-left"%}
-        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+
+        <div class="row">
+            <div class="col-6">
+                {% bootstrap_form form_sendnews show_label=False %}
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-outline-primary">{% trans "Add" %}</button>
+            </div>
+        </div>
     </form>
 {% endblock %}

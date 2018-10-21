@@ -7,9 +7,10 @@ from copy import deepcopy
 
 import os
 
-from ..models import Event
+from toolsettings.forms import UserSelectWidget
 
-from .fields import UserSelectField, DatePickerField
+from .fields import DatePicker
+from ..models import Event
 
 
 class EventForm(forms.ModelForm):
@@ -17,13 +18,10 @@ class EventForm(forms.ModelForm):
         model = Event
         exclude = ['text', 'imprint', 'registered', 'badge_settings',
                    'archived', ]
-        field_classes = {
-            'admins': UserSelectField,
-            'date': DatePickerField,
-            'changes_until': DatePickerField,
-        }
         widgets = {
-            'text': CKEditorWidget(),
+            'admins': UserSelectWidget,
+            'text': CKEditorWidget,
+            'date': DatePicker,
         }
 
         # According to the documentation django-modeltranslations copies the
@@ -88,9 +86,9 @@ class EventArchiveForm(forms.ModelForm):
 class EventDuplicateForm(EventForm):
     class Meta:
         model = Event
-        fields = ['url_name', 'name', 'date']
-        field_classes = {
-            'date': DatePickerField,
+        fields = ['name', 'url_name', 'date']
+        widgets = {
+            'date': DatePicker,
         }
 
     def __init__(self, *args, **kwargs):

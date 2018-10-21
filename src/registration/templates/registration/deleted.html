@@ -1,21 +1,24 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% load registerform_shifts %}
 
 {% block title %}
-    {% blocktrans trimmed %}
-        Register for {{ event }} as helper
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
     {% endblocktrans %}
 {% endblock %}
 
 {% block content %}
     <h1>{{ event }}</h1>
 
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-info" role="alert">
         {% trans "You signed off from all shifts." %}
     </div>
 
-    {{ event.imprint | safe }}
+    <div class="contact">
+        <p><b>{% trans "Contact" %}</b></p>
+        {{ event.imprint | safe }}
+    </div>
 {% endblock %}

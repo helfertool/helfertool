@@ -1,11 +1,22 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Templates" %}</h2>
     <ul>
         <li><a href="{% url "toolsettings:template_privacy" %}">{% trans "Privacy" %}</a></li>
         <li><a href="{% url "toolsettings:template_about" %}">{% trans "About this software" %}</a></li>
+        <li><a href="{% url "toolsettings:template_login" %}">{% trans "Login page" %}</a></li>
+        <li><a href="{% url "toolsettings:template_add_user" %}">{% trans "Add user" %}</a></li>
+    </ul>
+
+    <h2>{% trans "Other" %}</h2>
+    <ul>
+        <li><a href="{% url "toolsettings:check" %}">{% trans "Check installation" %}</a></li>
+
+        {% if user.is_staff %}
+            <li><a href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a></li>
+        {% endif %}
     </ul>
 {% endblock %}

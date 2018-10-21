@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete coordinator" %}</h2>
@@ -10,16 +10,21 @@
 
         {% bootstrap_form_errors form %}
 
-        {% bootstrap_field form.firstname %}
-        {% bootstrap_field form.surname %}
-        {% bootstrap_field form.email %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <td>{{ helper.full_name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Mail" %}</th>
+                <td>{{ helper.email }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Job" %}</th>
+                <td>{{ job.name }}</td>
+            </tr>
+        </table>
 
-        <div class="alert alert-danger" role="alert">
-            {% blocktrans trimmed with jobname=job.name %}
-                Remove this coordinator from the job "{{ jobname }}"?
-            {% endblocktrans %}
-        </div>
-
-        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Remove coordinator from this job" %}" class="btn btn-outline-danger" />
     </form>
 {% endblock %}

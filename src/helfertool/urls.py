@@ -11,6 +11,9 @@ urlpatterns = [
     # internationalization
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
+    # django-select2
+    url(r'^select2/', include('django_select2.urls')),
+
     # authentication
     url(r'^login/$',
         auth_views.LoginView.as_view(template_name='registration/login.html'),

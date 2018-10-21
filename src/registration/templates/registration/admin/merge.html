@@ -1,20 +1,17 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Merge duplicates" %}</h2>
 
     {% if form %}
         <div class="alert alert-info" role="alert">
-            <ul>
-                <li>
-                    {% trans "You have to select one data set, all other will be deleted." %}
-                </li>
-                <li>
-                    {% trans "Overlapping shifts are not checked during merging." %}
-                </li>
-            </ul>
+            {% trans "You have to select one data set, all other will be deleted." %}
+
+            <br/><br/>
+
+            {% trans "Overlapping shifts are not checked during merging." %}
         </div>
 
         <form action="" method="post">
@@ -38,7 +35,7 @@
                 <div style="margin-bottom: 2em;"></div>
             {% endfor %}
 
-            <input type="submit" value="{% trans "Merge" %}" class="btn btn-default" />
+            <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary" />
         </form>
     {% else %}
         <div class="alert alert-warning" role="alert">

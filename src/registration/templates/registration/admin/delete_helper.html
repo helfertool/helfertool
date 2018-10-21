@@ -1,6 +1,6 @@
-{% extends "registration/admin/base.html" %}
+{% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete helper" %}</h2>
@@ -10,11 +10,22 @@
 
         {% bootstrap_form_errors form %}
 
-        {% bootstrap_field form.firstname %}
-        {% bootstrap_field form.surname %}
-        {% bootstrap_field form.email %}
-
-        {% bootstrap_field form.shifts %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <td>{{ helper.full_name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Mail" %}</th>
+                <td>{{ helper.email }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Shifts" %}</th>
+                <td>
+                    {% bootstrap_field form.shifts show_label=False %}
+                </td>
+            </tr>
+        </table>
 
         {% if helper.shifts.count > 1 and not show_all_shifts %}
             <p>

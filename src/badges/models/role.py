@@ -29,6 +29,7 @@ class BadgeRole(models.Model):
     permissions = models.ManyToManyField(
         BadgePermission,
         blank=True,
+        verbose_name=_("Permissions"),
     )
 
     def __str__(self):

@@ -1,6 +1,6 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% block content %}
     <h2>{% trans "Unsubscribe" %}</h2>
@@ -14,7 +14,7 @@
 
         <form action="" method="post">
             {% csrf_token %}
-            <input type="submit" value="{% trans "Unsubscribe" %}" class="btn btn-default" />
+            <input type="submit" value="{% trans "Unsubscribe" %}" class="btn btn-outline-primary" />
         </form>
     {% else %}
         <p>

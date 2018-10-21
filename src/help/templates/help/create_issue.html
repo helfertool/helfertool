@@ -1,10 +1,10 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load setting %}
 
 {% block content %}
-    <h2>{% trans "Create issue" %}</h2>
+    <h1>{% trans "Create issue" %}</h1>
 
     {% setting "DOCS_URL" as docs_url %}
 
@@ -19,7 +19,7 @@
 
         {% bootstrap_form form %}
 
-        <input type="submit" value="{% trans "Send" %}" class="btn btn-default" />
+        <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
     </form>
 {% endblock %}
 

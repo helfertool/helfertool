@@ -1,13 +1,11 @@
-{% extends "registration/admin/base.html" %}
-{% load i18n %}
-{% load bootstrap3 %}
-{% load inventory %}
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons inventory %}
 
 {% block admincontent %}
     <h2>{% trans "Inventory" %}</h2>
 
     <p><a href="{% url 'inventory:new_inventory' %}">
-        {% bootstrap_icon "plus" %}
+        {% icon "plus" %}
         {% trans "New inventory" %}
     </a></p>
 
@@ -32,7 +30,7 @@
                         {% is_inventory_admin inventory as is_admin %}
                         {% if is_admin %}
                             <a href="{% url "inventory:inventory_items" inventory.pk %}">
-                                <i class="fa fa-list" aria-hidden="true"></i>
+                                {% icon "list" %}
                                 {% comment %}Translators: List verb{% endcomment %}
                                 {% trans "List" %}
                             </a>
@@ -40,14 +38,14 @@
                             <br />
 
                             <a href="{% url "inventory:edit_inventory" inventory.pk %}">
-                                {% bootstrap_icon "pencil" %}
+                                {% icon "pencil-alt" %}
                                 {% trans "Edit" %}
                             </a>
 
                             <br />
 
                             <a href="{% url "inventory:delete_inventory" inventory.pk %}">
-                                {% bootstrap_icon "remove" %}
+                                {% icon "trash-alt" %}
                                 {% trans "Delete" %}
                             </a>
                         {% endif %}

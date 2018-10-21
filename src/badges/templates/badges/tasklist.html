@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load bootstrap3 %}
+{% load i18n bootstrap4 icons %}
 
 <table class="table">
     {% if no_login %}
@@ -9,9 +8,9 @@
             <tr>
                 <td>
                     {% if task.finished %}
-                        {% bootstrap_icon "ok" %}
+                        {% icon "check" %}
                     {% elif task.error %}
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="color:red;"></span>
+                        <span class="text-danger">{% icon "exclamation-triangle" %}</span>
                     {% else %}
                         <i class="fa fa-spinner fa-pulse"></i>
                     {% endif %}

@@ -91,5 +91,6 @@ def delete_gift(request, event_url_name, gift_pk):
     # render page
     context = {'gift': gift,
                'gift_sets': gift_sets,
-               'form': form}
+               'form': form,
+               'event': event}
     return render(request, 'gifts/delete_gift.html', context)
