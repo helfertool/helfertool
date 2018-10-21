@@ -30,8 +30,16 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form_addevent show_label=False form_group_class="form-group pull-left"%}
-        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+
+        <div class="row">
+            <div class="col-6">
+                {% bootstrap_form form_addevent show_label=False %}
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-outline-primary">{% trans "Add" %}</button>
+            </div>
+        </div>
     </form>
 
 
@@ -61,8 +69,16 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form_adduser show_label=False form_group_class="form-group pull-left"%}
-        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+
+        <div class="row">
+            <div class="col-6">
+                {% bootstrap_form form_adduser show_label=False %}
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-outline-primary">{% trans "Add" %}</button>
+            </div>
+        </div>
     </form>
 
     <h3>{% trans "Can send news" %}</h3>
@@ -91,7 +107,15 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form_sendnews show_label=False form_group_class="form-group pull-left"%}
-        <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+
+        <div class="row">
+            <div class="col-6">
+                {% bootstrap_form form_sendnews show_label=False %}
+            </div>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-outline-primary">{% trans "Add" %}</button>
+            </div>
+        </div>
     </form>
 {% endblock %}

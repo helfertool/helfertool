@@ -2,6 +2,12 @@
 {% load i18n %}
 {% load bootstrap4 %}
 
+{% block title %}
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
+    {% endblocktrans %}
+{% endblock %}
+
 {% block content %}
     <h1>{% trans "Sign off from shift" %}</h1>
 

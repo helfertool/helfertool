@@ -11,7 +11,7 @@
         </div>
     {% endif %}
 
-    <table class="table-condensed">
+    <table class="table">
         <tr>
             <th>{% trans "Sent by" %}</th>
             <td>{{ mail.user.get_full_name }}</td>
@@ -44,5 +44,7 @@
         </tr>
     </table>
 
-    <pre style="margin-top:2em;" class="wraptext">{{ mail.text | linebreaks }}</pre>
+    <div class="wraptext mailbody">
+        {{ mail.text | linebreaks }}
+    </pre>
 {% endblock %}

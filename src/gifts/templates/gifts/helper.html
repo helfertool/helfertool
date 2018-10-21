@@ -65,23 +65,25 @@
                 </table>
             </div>
 
-            <div class="col-xs-12 col-lg-5">
-                <table class="table">
-                    <tr>
-                        <th>{% trans "Gift" %}</th>
-                        <th>{% trans "Given" %}</th>
-                        <th>{% trans "Total" %}</th>
-                    </tr>
-
-                    {% for name,numbers in helper.gifts.gifts_sum.items %}
+            {% if helper.gifts.gifts_sum.items %}
+                <div class="col-xs-12 col-lg-5">
+                    <table class="table">
                         <tr>
-                            <td>{{ name }}</td>
-                            <td>{{ numbers.given }}</td>
-                            <td>{{ numbers.total }}</td>
+                            <th>{% trans "Gift" %}</th>
+                            <th>{% trans "Given" %}</th>
+                            <th>{% trans "Total" %}</th>
                         </tr>
-                    {% endfor %}
-                </table>
-            </div>
+
+                        {% for name,numbers in helper.gifts.gifts_sum.items %}
+                            <tr>
+                                <td>{{ name }}</td>
+                                <td>{{ numbers.given }}</td>
+                                <td>{{ numbers.total }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% endif %}
         {% endif %}
     </div>
 

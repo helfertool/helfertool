@@ -23,12 +23,8 @@
             </tr>
         </table>
 
-        <div class="alert alert-danger" role="alert">
-            {% trans "Do you want to remove this inventory?" %}
-        </div>
-
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+        <input type="submit" value="{% trans "Delete inventory" %}" class="btn btn-outline-danger" />
     </form>
 {% endblock %}

@@ -20,15 +20,15 @@
                 <td>
                     {% active_uses group.list as num_uses %}
                     {% if num_uses == 0 %}
-                        <span style="color:green;">{% trans "Not in use" %}</span>
+                        {% trans "Not in use" %}
                     {% elif group.grouper.inventory.multiple_assignments %}
-                        <span style="color:red;">
+                        <span class="text-danger">
                             {% blocktrans trimmed %}
                                 {{ num_uses }} times in use
                             {% endblocktrans %}
                         </span>
                     {% else %}
-                        <span style="color:red;">
+                        <span class="text-danger">
                         {% with group.list|last as last %}
                             {% blocktrans trimmed with helper=last.helper%}
                                 In use: {{ helper }}
@@ -55,8 +55,8 @@
                                             {{ use.timestamp_returned|date:"SHORT_DATETIME_FORMAT" }}
                                         </span>
                                     {% else %}
-                                        <b style="color:red;">{{ use.helper }}</b><br/>
-                                        <span style="color:red;">
+                                        <span class="text-danger">
+                                            <b>{{ use.helper }}</b><br/>
                                             {% trans "Since" %}
                                             {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
                                         </span>

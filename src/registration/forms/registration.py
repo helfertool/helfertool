@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift
@@ -52,6 +53,14 @@ class RegisterForm(forms.ModelForm):
         # remove field or privacy statement?
         if self.internal:
             self.fields.pop('privacy_statement')
+        else:
+            # add link to show privacy statement after label
+            privacy_label = format_html(
+                '{} (<a href="" data-toggle="collapse" data-target="#privacy">{}</a>)',
+                self.fields['privacy_statement'].label,
+                _("Show"),
+            )
+            self.fields['privacy_statement'].label = privacy_label
 
         # add field for age?
         self.ask_full_age = self.event.ask_full_age and not self.internal
@@ -62,9 +71,12 @@ class RegisterForm(forms.ModelForm):
         # add field for notification about new events
         self.ask_news = self.event.ask_news and not self.internal
         if self.ask_news:
-            self.fields['news'] = forms.BooleanField(
-                label=_("I want to be informed about future events that are "
-                        "looking for helpers."), required=False)
+            news_label = format_html(
+                '{} (<a href="" data-toggle="collapse" data-target="#privacy_newsletter">{}</a>)',
+                _("I want to be informed about future events that are looking for helpers."),
+                _("show privacy statement"),
+            )
+            self.fields['news'] = forms.BooleanField(label=news_label, required=False)
 
         # get a list of all shifts
         if self.displayed_shifts:
@@ -144,15 +156,15 @@ class RegisterForm(forms.ModelForm):
 
         # check if helper if full age
         if self.ask_full_age and not self.cleaned_data.get('full_age'):
-            raise ValidationError(_("You must be full aged. We are not "
-                                    "allowed to accept helpers that are under "
-                                    "18 years old."))
+            self.add_error('full_age', _("You must be full aged. We are not "
+                                         "allowed to accept helpers that are "
+                                         "under 18 years old."))
 
         # check if the data privacy statement was accepted
         if not self.internal and not \
                 self.cleaned_data.get('privacy_statement'):
-            raise ValidationError(_("You have to accept the data privacy "
-                                    "statement."))
+            self.add_error('privacy_statement',
+                           _("You have to accept the data privacy statement."))
 
         number_of_shifts = 0
         infection_instruction_needed = False

@@ -149,7 +149,7 @@ class HelperAddCoordinatorForm(forms.Form):
 class HelperDeleteForm(forms.ModelForm):
     class Meta:
         model = Helper
-        fields = ['firstname', 'surname', 'email', 'shifts', ]
+        fields = ['shifts', ]
         widgets = {
             'shifts': forms.CheckboxSelectMultiple
         }
@@ -168,10 +168,6 @@ class HelperDeleteForm(forms.ModelForm):
         else:
             self.fields['shifts'].queryset = Shift.objects.filter(
                 pk=self.shift.pk)  # we need a queryset, not a Shift object
-
-        # make firstname, surname and email readonly
-        for name in ('firstname', 'surname', 'email'):
-            self.fields[name].widget.attrs['readonly'] = True
 
     def clean(self):
         super(HelperDeleteForm, self).clean()
@@ -195,16 +191,12 @@ class HelperDeleteForm(forms.ModelForm):
 class HelperDeleteCoordinatorForm(forms.ModelForm):
     class Meta:
         model = Helper
-        fields = ['firstname', 'surname', 'email', ]
+        fields = []
 
     def __init__(self, *args, **kwargs):
         self.job = kwargs.pop('job')
 
         super(HelperDeleteCoordinatorForm, self).__init__(*args, **kwargs)
-
-        # make firstname, surname and email readonly
-        for name in ('firstname', 'surname', 'email'):
-            self.fields[name].widget.attrs['readonly'] = True
 
     def delete(self):
         self.job.coordinators.remove(self.instance)

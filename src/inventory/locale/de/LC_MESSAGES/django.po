@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 21:17+0200\n"
+"POT-Creation-Date: 2018-10-21 19:01+0200\n"
 "PO-Revision-Date: 2018-10-14 21:17+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -54,6 +54,7 @@ msgid "Available inventory"
 msgstr "Verfügbares Inventar"
 
 #: inventory/templates/inventory/admin/delete_inventory.html:6
+#: inventory/templates/inventory/admin/delete_inventory.html:28
 msgid "Delete inventory"
 msgstr "Inventar löschen"
 
@@ -62,18 +63,8 @@ msgstr "Inventar löschen"
 msgid "Admins"
 msgstr "Admins"
 
-#: inventory/templates/inventory/admin/delete_inventory.html:27
-msgid "Do you want to remove this inventory?"
-msgstr "Willst du dieses Inventar löschen?"
-
-#: inventory/templates/inventory/admin/delete_inventory.html:32
-#: inventory/templates/inventory/admin/delete_item.html:32
-#: inventory/templates/inventory/admin/inventory_items.html:35
-#: inventory/templates/inventory/admin/inventory_list.html:49
-msgid "Delete"
-msgstr "Löschen"
-
 #: inventory/templates/inventory/admin/delete_item.html:6
+#: inventory/templates/inventory/admin/delete_item.html:28
 msgid "Delete item"
 msgstr "Gegenstand löschen"
 
@@ -85,10 +76,6 @@ msgstr "Gegenstand löschen"
 #: inventory/templates/inventory/not_active.html:6
 msgid "Inventory"
 msgstr "Inventar"
-
-#: inventory/templates/inventory/admin/delete_item.html:27
-msgid "Do you want to remove this item?"
-msgstr "Willst du diesen Gegenstand löschen?"
 
 #: inventory/templates/inventory/admin/edit_inventory.html:13
 #: inventory/templates/inventory/admin/edit_item.html:13
@@ -108,6 +95,11 @@ msgstr "Neuer Gegenstand"
 #: inventory/templates/inventory/admin/inventory_list.html:42
 msgid "Edit"
 msgstr "Bearbeiten"
+
+#: inventory/templates/inventory/admin/inventory_items.html:35
+#: inventory/templates/inventory/admin/inventory_list.html:49
+msgid "Delete"
+msgstr "Löschen"
 
 #: inventory/templates/inventory/admin/inventory_items.html:42
 msgid "There are no items."
@@ -245,6 +237,12 @@ msgstr "Der Helfer hat noch folgende Gegenstände:"
 #: inventory/templates/inventory/take_back_item.html:35
 msgid "Everything returned!"
 msgstr "Alles zurück gegeben!"
+
+#~ msgid "Do you want to remove this inventory?"
+#~ msgstr "Willst du dieses Inventar löschen?"
+
+#~ msgid "Do you want to remove this item?"
+#~ msgstr "Willst du diesen Gegenstand löschen?"
 
 #~ msgid "In use"
 #~ msgstr "Wird verwendet"

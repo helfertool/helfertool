@@ -7,14 +7,11 @@
 
     {% if form %}
         <div class="alert alert-info" role="alert">
-            <ul>
-                <li>
-                    {% trans "You have to select one data set, all other will be deleted." %}
-                </li>
-                <li>
-                    {% trans "Overlapping shifts are not checked during merging." %}
-                </li>
-            </ul>
+            {% trans "You have to select one data set, all other will be deleted." %}
+
+            <br/><br/>
+
+            {% trans "Overlapping shifts are not checked during merging." %}
         </div>
 
         <form action="" method="post">

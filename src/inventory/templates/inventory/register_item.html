@@ -17,12 +17,12 @@
         {% bootstrap_form form show_label=False %}
 
         {% if not_available %}
-            <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-lg btn-warning">{% trans "Take item back" %}</a>
+            <a href="{% url 'inventory:take_back' event.url_name %}" class="btn btn-outline-danger">{% trans "Take item back" %}</a>
         {% endif %}
     </form>
 
     {% if last_helper and last_helper_items and last_item_name %}
-        <div class="alert alert-success">
+        <div class="alert alert-info">
             <b>{{ last_item_name }}</b><br/>
 
             {% blocktrans trimmed with name as last_helper.full_name %}

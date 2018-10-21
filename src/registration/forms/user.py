@@ -40,6 +40,11 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ("username", "email", "first_name", "last_name", "password1",
                   "password2")
+        widgets = {
+            "username": forms.TextInput(attrs={
+                'addon_before': settings.LOCAL_USER_CHAR or '',
+            }),
+        }
 
     def clean(self):
         # add LOCAL_USER_CHAR to the beginning

@@ -1,13 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Attendance for shift" %}</h2>
     <h3>{{ shift }}</h3>
 
     <p>
-        <a class="btn btn-outline-primary" onclick="set_all(); return false;">
+        <a class="btn btn-sm btn-outline-primary" onclick="set_all(); return false;" href="">
             {% trans "Set all to attendant" %}
         </a>
     </p>
@@ -17,7 +16,7 @@
 
         {% bootstrap_form form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-primary" />
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
 
     <script type="text/javascript">

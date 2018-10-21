@@ -12,6 +12,9 @@ from ..forms import HTMLSettingForm, TextSettingForm
 from ..models import HTMLSetting, TextSetting
 
 
+# TODO: refactor to remove duplicated code
+
+
 @login_required
 def template_about(request):
     # must be superuser
@@ -102,3 +105,28 @@ def template_login(request):
     # render page
     context = {'form': form}
     return render(request, 'toolsettings/template_login.html', context)
+
+
+@login_required
+def template_add_user(request):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    # form
+    obj, c = HTMLSetting.objects.get_or_create(key='add_user')
+    form = HTMLSettingForm(request.POST or None, instance=obj)
+
+    if form.is_valid():
+        form.save()
+
+        logger.info("settings changed", extra={
+            'changed': 'templates_add_user',
+            'user': request.user,
+        })
+
+        return HttpResponseRedirect(reverse('toolsettings:index'))
+
+    # render page
+    context = {'form': form}
+    return render(request, 'toolsettings/template_add_user.html', context)

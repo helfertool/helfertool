@@ -9,7 +9,7 @@
         <div class="alert alert-danger">
             {% trans "You have to scan the item first." %}
         </div>
-        <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan item" %}</a>
+        <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-outline-primary">{% trans "Scan item" %}</a>
     {% else %}
         <form action="" method="post">
             {% csrf_token %}
@@ -23,6 +23,6 @@
             {% bootstrap_form form show_label=False %}
         </form>
 
-        <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-lg btn-info">{% trans "Scan other item" %}</a>
+        <a href="{% url 'inventory:register' event.url_name %}" class="btn btn-outline-primary">{% trans "Scan other item" %}</a>
     {% endif %}
 {% endblock %}

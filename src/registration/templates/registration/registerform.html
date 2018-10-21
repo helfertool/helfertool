@@ -51,12 +51,12 @@
                             {# number of helpers #}
                             {% if event.show_public_numbers %}
                                 {% if shift.blocked and not form.displayed_shifts %}
-                                    <span class="numbers">
-                                        ({{ shift.number }}/{{ shift.number }})
+                                    <span class="badge badge-outline-dark">
+                                        {{ shift.number }}/{{ shift.number }}
                                     </span>
                                 {% else %}
-                                    <span class="numbers">
-                                        ({{ shift.num_helpers }}/{{ shift.number }})
+                                    <span class="badge badge-outline-dark">
+                                        {{ shift.num_helpers }}/{{ shift.number }}
                                     </span>
                                 {% endif %}
                             {% endif %}
@@ -124,17 +124,10 @@
 
     {% if not form.internal %}
         <div class="row">
-            <div class="col-lg-12">
-                {# render manually since bootstrap_field seems to be broken and does not accept documented parameters... #}
-                <div class="form-group">
-                    <div class="form-check">
-                        <input type="checkbox" name="privacy_statement" id="{{ form.privacy_statement.id_for_label }}" class="form-check-input" />
-                        {{ form.privacy_statement.label_tag }}
-                        (<a href="" data-toggle="collapse" data-target="#privacy">{% trans "show" %}</a>)
-                    </div>
-                </div>
+            <div class="col-12">
+                {% bootstrap_field form.privacy_statement %}
 
-                <div class="card collapse privacycard" id="privacy">
+                <div class="card collapse mb-4" id="privacy">
                     <h5 class="card-header">{% trans "Privacy statement" %}</h5>
                     <div class="card-body">
                         {% htmlsetting "privacy" %}
@@ -148,16 +141,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <p><b>{% trans "We would like to inform you about futher events!" %}</b></p>
-                {# render manually since bootstrap_field seems to be broken and does not accept documented parameters... #}
-                <div class="form-group">
-                    <div class="form-check">
-                        <input type="checkbox" name="news" id="{{ form.news.id_for_label }}" class="form-check-input" />
-                        {{ form.news.label_tag }}
-                        (<a href="" data-toggle="collapse" data-target="#privacy_newsletter">{% trans "show privacy statement" %}</a>)
-                    </div>
-                </div>
+                {% bootstrap_field form.news %}
 
-                <div class="card collapse privacycard" id="privacy_newsletter">
+                <div class="card collapse mb-4" id="privacy_newsletter">
                     <h5 class="card-header">{% trans "Privacy statement for newsletter" %}</h5>
                     <div class="card-body">
                         {% htmlsetting "privacy_newsletter" %}
@@ -181,7 +167,7 @@
 
                 <input type="submit" value="{% trans "Register" %}" class="btn btn-outline-primary" />
             {% else %}
-                <input type="submit" value="{% trans "Register" %}" class="btn btn-lg btn-outline-primary" />
+                <input type="submit" value="{% trans "Register" %}" class="btn btn-lg btn-outline-primary mt-2" />
             {% endif %}
         </div>
     </div>

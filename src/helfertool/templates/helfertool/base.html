@@ -22,21 +22,24 @@
         {# font awesome #}
         <script src="{% static "helfertool/vendor/fontawesome/js/all.min.js" %}"></script>
 
+        {# custom css #}
+        <link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">
+
         {{ form.media.css }}
 
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
-        <link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">
+        <title>{% block title %}{% trans "Helfertool" %}{% endblock %}</title>
 
-        <title>{% block title %}{% trans "Registration for helpers" %}{% endblock %}</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{% static "helfertool/img/logo/icon.png" %}">
     </head>
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="{% static "helfertool/img/logo.svg" %}" height="20" alt="" style="margin-bottom: 5px;">
+                    <img src="{% static "helfertool/img/logo/logo.svg" %}" height="20" alt="" class="navbar-logo">
                 </a>
 
                 {# button to show menu on small devices#}

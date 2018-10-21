@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 21:17+0200\n"
+"POT-Creation-Date: 2018-10-21 19:01+0200\n"
 "PO-Revision-Date: 2018-10-14 21:17+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -147,6 +147,12 @@ msgstr ""
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
+#: badges/models/role.py:32 badges/templates/badges/delete_role.html:17
+#: badges/templates/badges/settings.html:22
+#: badges/templates/badges/settings_advanced.html:29
+msgid "Permissions"
+msgstr "Berechtigungen"
+
 #: badges/models/settings.py:39 badges/templates/badges/index.html:12
 msgid "LaTeX template"
 msgstr "LaTeX Template"
@@ -207,12 +213,6 @@ msgstr "Diese Badge Berechtigung löschen?"
 #: badges/templates/badges/delete_role.html:6
 msgid "Delete Badge Role"
 msgstr "Badge Rolle löschen"
-
-#: badges/templates/badges/delete_role.html:17
-#: badges/templates/badges/settings.html:22
-#: badges/templates/badges/settings_advanced.html:29
-msgid "Permissions"
-msgstr "Berechtigungen"
 
 #: badges/templates/badges/delete_role.html:28
 msgid "Remove this badge role?"
@@ -378,17 +378,17 @@ msgstr ""
 "Template angepasst werden!"
 
 #: badges/templates/badges/settings_advanced.html:11
+msgid "Template"
+msgstr "Template"
+
+#: badges/templates/badges/settings_advanced.html:14
 msgid "Here you can get the sample LaTeX template:"
 msgstr "Hier kannst du die Vorlage für das LaTeX Template bekommen:"
 
-#: badges/templates/badges/settings_advanced.html:12
+#: badges/templates/badges/settings_advanced.html:15
 #: badges/templates/badges/tasklist.html:30
 msgid "Download"
 msgstr "Herunterladen"
-
-#: badges/templates/badges/settings_advanced.html:16
-msgid "Template"
-msgstr "Template"
 
 #: badges/templates/badges/settings_advanced.html:32
 msgid "There are no permissions."

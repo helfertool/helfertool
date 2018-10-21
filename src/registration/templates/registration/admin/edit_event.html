@@ -29,13 +29,13 @@
     {% if event %}
         <h3>{% trans "Duplicate event" %}</h3>
         <div class="alert alert-info" role="alert">
-            <p><b>{% trans "You can duplicate this event." %}</b></p>
+            <b>{% trans "You can duplicate this event." %}</b>
 
-            <p>
-                <a href="{% url 'duplicate_event' event.url_name %}" class="btn btn-info" role="button">
-                    {% trans "Duplicate event" %}
-                </a>
-            </p>
+            <br/>
+
+            <a href="{% url 'duplicate_event' event.url_name %}" class="btn btn-outline-primary mt-3" role="button">
+                {% trans "Duplicate event" %}
+            </a>
         </div>
     {% endif %}
 
@@ -43,15 +43,17 @@
     {% if event and not event.archived %}
         <h3>{% trans "Archive event" %}</h3>
         <div class="alert alert-danger" role="alert">
-            <p><b>{% trans "You can archive this event, this means that all coordinators and helpers are deleted." %}</b></p>
+            <b>{% trans "You can archive this event, this means that all coordinators and helpers are deleted." %}</b>
 
-            <p>{% trans "Only the number of registered helpers per shift and the number of coordinators are saved. All other data like shirt sizes are deleted irrevocably." %}</p>
+            <br/>
 
-            <p>
-                <a href="{% url 'archive_event' event.url_name %}" class="btn btn-danger" role="button">
-                    {% trans "Archive event" %}
-                </a>
-            </p>
+            {% trans "Only the number of registered helpers per shift and the number of coordinators are saved. All other data like shirt sizes are deleted irrevocably." %}
+
+            <br/>
+
+            <a href="{% url 'archive_event' event.url_name %}" class="btn btn-outline-danger mt-3" role="button">
+                {% trans "Archive event" %}
+            </a>
         </div>
     {% endif %}
 
@@ -59,13 +61,13 @@
     {% if event %}
         <h3>{% trans "Delete event" %}</h3>
         <div class="alert alert-danger" role="alert">
-            <p><b>{% trans "You can delete this event including all jobs, shifts and helpers." %}</b></p>
+            <b>{% trans "You can delete this event including all jobs, shifts and helpers." %}</b>
 
-            <p>
-                <a href="{% url 'delete_event' event.url_name %}" class="btn btn-danger" role="button">
-                    {% trans "Delete event" %}
-                </a>
-            </p>
+            <br/>
+
+            <a href="{% url 'delete_event' event.url_name %}" class="btn btn-outline-danger mt-3" role="button">
+                {% trans "Delete event" %}
+            </a>
         </div>
     {% endif %}
 {% endblock %}

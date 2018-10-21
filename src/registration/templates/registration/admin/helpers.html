@@ -1,12 +1,6 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n bootstrap4 icons staticfiles permissions %}
 
-{% block title %}
-    {% blocktrans trimmed with eventname=event.name %}
-        Helpers for {{ eventname }}
-    {% endblocktrans %}
-{% endblock %}
-
 {% block admincontent %}
     {% is_admin event as admin %}
 
@@ -17,14 +11,14 @@
         <p>
             {% icon "file-download" %}
             &nbsp;
-            {% trans "Export" %}:
+            <b>{% trans "Export" %}:</b>
             &nbsp;
             <a href="{% url 'export' event.url_name 'excel' %}" class="icon">
-                <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
             </a>
             &nbsp;
             <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
-                <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
             </a>
             &nbsp;
             <a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#exportdays">
@@ -32,19 +26,19 @@
             </a>
         </p>
         <div id="exportdays" class="collapse">
-            <table class="table" style="width: auto;">
+            <table class="table table-sm" style="width: auto;">
                 {% for day in days %}
                     <tr>
                         <th>{{ day }}</th>
                         {% with day_str=day|date:"Y-m-d" %}
                         <td>
                             <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon">
-                                <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+                                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
                             </a>
                         </td>
                         <td>
                             <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
-                                <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+                                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
                             </a>
                         </td>
                         {% endwith %}
@@ -70,7 +64,7 @@
         {% if job_admin and not event.archived%}
             <p>
                 <a href="{% url 'helpers' event.url_name job.pk %}">
-                {% icon "info" %}
+                {% icon "info-circle" %}
                 {% trans "Show" %}</a>
             </p>
         {% endif %}
@@ -99,8 +93,8 @@
 
                             {{ shift.time_hours }}
 
-                            <span class="numbers">
-                                ({{ shift.num_helpers_archived }}/{{ shift.number }})
+                            <span class="badge badge-outline-dark mb-1">
+                                {{ shift.num_helpers_archived }}/{{ shift.number }}
                             </span>
 
                             {% if shift.name %}
@@ -108,13 +102,13 @@
                             {% endif %}
 
 
-                            <div class="progress">
+                            <div class="progress mb-2">
                                 {% if shift.helpers_percent == 100 %}
-                                    <div class="progress-bar progress-bar-success" role="progressbar"
+                                    <div class="progress-bar bg-success" role="progressbar"
                                 {% elif shift.helpers_percent < 50 %}
-                                    <div class="progress-bar progress-bar-danger" role="progressbar"
+                                    <div class="progress-bar bg-danger" role="progressbar"
                                 {% else %}
-                                    <div class="progress-bar" role="progressbar"
+                                    <div class="progress-bar bg-warning" role="progressbar"
                                 {% endif %}
                                      aria-valuenow="{{ shift.helpers_percent }}"
                                      aria-valuemin="0" aria-valuemax="100"

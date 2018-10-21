@@ -73,6 +73,7 @@ elif [ "$1" = "run" ] ; then
 
     # run migrations and go
     python3 manage.py migrate --noinput
+    python3 manage.py createcachetable
     exec supervisord --nodaemon --configuration /helfertool/supervisord.conf
 
 # help message

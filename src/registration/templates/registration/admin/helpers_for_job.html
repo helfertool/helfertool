@@ -1,8 +1,6 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n bootstrap4 icons staticfiles %}
 
-{% block title %}{{ job.name }} - {{ event.name }}{% endblock %}
-
 {% block admincontent %}
     <h2>
         {% blocktrans trimmed with jobname=job.name%}
@@ -14,14 +12,14 @@
     <p>
         {% icon "file-download" %}
         &nbsp;
-        {% trans "Export" %}:
+        <b>{% trans "Export" %}:</b>
         &nbsp;
         <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon">
-            <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+            <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
         </a>
         &nbsp;
         <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
-            <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+            <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
         </a>
     </p>
 
@@ -61,11 +59,11 @@
                 {% blocktrans with day=day %}Export for {{ day }}{% endblocktrans %}:
                 &nbsp;
                 <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon">
-                    <img src="{% static "helfertool/img/icon-xls.svg" %}" class="icon" />
+                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
                 </a>
                 &nbsp;
                 <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
-                    <img src="{% static "helfertool/img/icon-pdf.svg" %}" class="icon" />
+                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
                 </a>
             {% endwith %}
         </p>

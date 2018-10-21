@@ -1,57 +1,45 @@
-Important
-==========
+Prio
+====
 
-* ask for gift selection during registration
+* allow empty mail addresses for internal registrations
 * rework badge creation
     * The AMQP result backend is scheduled for deprecation in version 4.0 and removal in version v5.0. Please use RPC backend or a persistent backend.
     * cleanup
 * change after registration
     * add more shifts
     * add deadline to mail
-* allow empty mail addresses for internal registrations
 * change order of jobs
 * django + celery logging
-
-
-Django things
-=============
-
-* all vs. distinct
-* add errors to all forms
-* use redirect function
-
+* ask for gift selection during registration
+* fix cleanup for file uploads (see below)
 
 Design, JS
 ==========
 
 * set width of table columns
-* Move JS to own files / Javascript translation with Django
-    * make CSP header possible
-* Datetimepickers for shift
-  * begin < end
+* date and time selection
   * change end when begin is changed
 * accept="image/*" for image uploads
-* django-compressor
-* Simple theme customizing
-
+* Rework edit_event view
+* Use AJAX for UserSelectWidget
+* Use UserSelectWidget on permissions page
+* Remove inline CSS from unavailable.html -> set better CSP
+* Rework language changer in navbar
+* Alerts for messages: outline, colors
+* Field/widget for shifts -> use for internal views and public registration
 
 Registration
 ============
 
-* bot protection (seems not to be necessary until now)
-* somehow make the notes for a job more visible
 * edit mail template / add custom message to mails?
 * duplicate shifts
 * dynamic fields
 
-
 Admin area
 ==========
 
-* move admin/base.html and a lot of other things from registration to own app
-* mails: attachments?
+* move a lot of other things from registration to own app
 * event date -> default for shift times
-
 
 Badges
 ======
@@ -62,15 +50,12 @@ Badges
 * Show missing images (image for coordinators or for all)
 * Check security of pdflatex, set more options (write documentation for mpost problem)
 * Versioning of badges (for registration/validation)
-* Logging for creator error
 * AJAX reload: timeout and redirect to login
-
 
 Gifts
 =====
 
 * add flags to excel export
-
 
 File uploads
 ============

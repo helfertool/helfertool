@@ -134,3 +134,21 @@
             will be sent to this email address.</p>
 
             <p>It is possible to veto the sending of further emails anytime.</p>
+
+# Login page (HTML)
+-   model: toolsettings.htmlsetting
+    pk: 4
+    fields:
+        key: login
+        value: ''
+        value_de: ''
+        value_en: ''
+
+# Add user (HTML)
+-   model: toolsettings.htmlsetting
+    pk: 5
+    fields:
+        key: add_user
+        value: ''
+        value_de: ''
+        value_en: ''

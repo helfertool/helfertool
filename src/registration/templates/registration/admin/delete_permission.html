@@ -1,12 +1,11 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Delete permission" %}</h2>
 
-    <div class="alert alert-warning" role="alert">
-        {% blocktrans trimmed %}
+    <div class="alert alert-danger" role="alert">
+        {% blocktrans trimmed with username=deluser%}
             Delete permission for user {{ user }}?
         {% endblocktrans %}
     </div>
@@ -14,6 +13,6 @@
     <form action="" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-critical">{% trans "Delete permission" %}</button>
+        <button type="submit" class="btn btn-outline-danger">{% trans "Delete permission" %}</button>
     </form>
 {% endblock %}

@@ -21,7 +21,7 @@ def check(request):
     # templates
     templates_ok = True
 
-    for html_setting in ('about', 'privacy', 'privacy_newsletter'):
+    for html_setting in ('about', 'privacy', 'privacy_newsletter', 'login', 'add_user'):
         try:
             HTMLSetting.objects.get(key=html_setting)
         except HTMLSetting.DoesNotExist:

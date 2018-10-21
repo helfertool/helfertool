@@ -86,7 +86,7 @@ class EventArchiveForm(forms.ModelForm):
 class EventDuplicateForm(EventForm):
     class Meta:
         model = Event
-        fields = ['url_name', 'name', 'date']
+        fields = ['name', 'url_name', 'date']
         widgets = {
             'date': DatePicker,
         }

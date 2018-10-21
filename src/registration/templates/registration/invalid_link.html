@@ -4,8 +4,8 @@
 {% load registerform_shifts %}
 
 {% block title %}
-    {% blocktrans trimmed %}
-        Register for {{ event }} as helper
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
     {% endblocktrans %}
 {% endblock %}
 
