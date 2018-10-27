@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from celery import shared_task, states
+from celery import shared_task
 from celery.exceptions import Ignore
 
 from django.conf import settings
@@ -75,23 +75,14 @@ def generate_badges(self, event_pk, job_pk, skip_printed):
     finally:
         translation.activate(prev_language)
 
-    clean = cleanup.subtask((tmp_dir, ),
-                            countdown=settings.BADGE_PDF_TIMEOUT)
+    timeout = countdown=settings.BADGE_PDF_TIMEOUT + settings.BADGE_RM_DELAY
+    clean = cleanup.subtask((tmp_dir, ), countdown=timeout)
     cleanup_task = clean.delay()
 
     return pdf_filename, filename, cleanup_task.task_id
 
 
-@shared_task(bind=True)
-def cleanup(self, tmp_dir):
-    # wait for BADGE_RM_DELAY seconds and then really delete the files
-    # TODO: directly call cleanup_rm from generate_badges
-    rm = cleanup_rm.subtask((tmp_dir, ),
-                            countdown=settings.BADGE_RM_DELAY)
-    rm.delay()
-
-
 @shared_task
-def cleanup_rm(tmp_dir):
+def cleanup(tmp_dir):
     if os.path.isdir(tmp_dir):
         shutil.rmtree(tmp_dir)

@@ -93,8 +93,6 @@ CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}/{}'.format(
 )
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
-CELERY_ACCEPT_CONTENT = ['json', 'msgpack', 'yaml']
-
 # mail
 EMAIL_HOST = dict_get(config, 'localhost', 'mail', 'host')
 EMAIL_PORT = dict_get(config, 25, 'mail', 'port')
