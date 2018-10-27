@@ -21,7 +21,9 @@
 
                             <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
-                            <span class="badge badge-outline-dark ml-2">
+                            <br />
+
+                            <span class="badge badge-outline-dark">
                                 {% if event.days > 1 %}
                                     {% blocktrans with date=event.date days=event.days trimmed %}
                                         {{ date }}, {{ days }} days
@@ -64,7 +66,9 @@
 
                                 <a href="{% url 'form' event.url_name %}">{{ event }}</a>
 
-                                <span class="badge badge-outline-dark ml-2">
+                                <br />
+
+                                <span class="badge badge-outline-dark">
                                     {% if event.days > 1 %}
                                         {% blocktrans with date=event.date days=event.days trimmed %}
                                             {{ date }}, {{ days }} days
