@@ -1,4 +1,6 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
+
 
 class DatePicker(forms.DateInput):
     input_type = 'date'
@@ -19,11 +21,13 @@ class DateTimePicker(forms.SplitDateTimeWidget):
         widgets = (
             forms.DateInput(
                 format='%Y-%m-%d',
-                attrs={'type': 'date'},
+                attrs={'type': 'date',
+                       'placeholder': _("Date (YYYY-MM-DD)")},
             ),
             forms.TimeInput(
                 format='%H:%M',
-                attrs={'type': 'time'},
+                attrs={'type': 'time',
+                       'placeholder': _("Time (HH:MM)")},
             ),
         )
         super(forms.SplitDateTimeWidget, self).__init__(widgets, None)

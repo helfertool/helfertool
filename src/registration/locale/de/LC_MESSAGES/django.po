@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-21 19:01+0200\n"
-"PO-Revision-Date: 2018-10-21 19:09+0200\n"
+"POT-Creation-Date: 2018-10-29 20:03+0100\n"
+"PO-Revision-Date: 2018-10-29 20:03+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: registration/export/excel.py:88 registration/forms/user.py:34
 #: registration/models/helper.py:72
@@ -94,6 +94,14 @@ msgstr "Name"
 #: registration/templates/registration/admin/helpers_for_job.html:91
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
+
+#: registration/forms/fields/date.py:25
+msgid "Date (YYYY-MM-DD)"
+msgstr "Datum (JJJJ-MM-TT)"
+
+#: registration/forms/fields/date.py:30
+msgid "Time (HH:MM)"
+msgstr "Uhrzeit (HH:MM)"
 
 #: registration/forms/helper.py:104
 msgid "No shifts selected"
@@ -1180,27 +1188,27 @@ msgstr "Badge Barcode"
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: registration/templates/registration/index.html:19
+#: registration/templates/registration/index.html:18
 #: registration/templates/registration/index.html:64
+msgid "Manage"
+msgstr "Verwalten"
+
+#: registration/templates/registration/index.html:28
+#: registration/templates/registration/index.html:73
 #, python-format
 msgid "%(date)s, %(days)s days"
 msgstr "%(date)s, %(days)s Tage"
 
-#: registration/templates/registration/index.html:30
-#: registration/templates/registration/index.html:78
-msgid "Manage"
-msgstr "Verwalten"
-
-#: registration/templates/registration/index.html:40
+#: registration/templates/registration/index.html:42
 msgid "At the moment there is no event you can register for."
 msgstr ""
 "Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
 
-#: registration/templates/registration/index.html:49
+#: registration/templates/registration/index.html:51
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: registration/templates/registration/index.html:73
+#: registration/templates/registration/index.html:82
 msgid "archived"
 msgstr "archiviert"
 
