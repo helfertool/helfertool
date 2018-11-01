@@ -53,7 +53,7 @@ def check(request):
     # ldap
     if 'django_auth_ldap.backend.LDAPBackend' in settings.AUTHENTICATION_BACKENDS:
         ldap_configured = True
-        ldap_ok = False
+        ldap_ok = True
         try:
             ldap_conn = ldap.initialize(settings.AUTH_LDAP_SERVER_URI)
             ldap_conn.simple_bind_s(settings.AUTH_LDAP_BIND_DN,
