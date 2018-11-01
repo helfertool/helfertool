@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-29 20:03+0100\n"
-"PO-Revision-Date: 2018-10-29 20:03+0100\n"
+"POT-Creation-Date: 2018-11-01 18:48+0100\n"
+"PO-Revision-Date: 2018-11-01 18:48+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2\n"
 
 #: registration/export/excel.py:88 registration/forms/user.py:34
 #: registration/models/helper.py:72
@@ -753,8 +753,8 @@ msgstr "Berechtigung löschen"
 
 #: registration/templates/registration/admin/delete_permission.html:8
 #, python-format
-msgid "Delete permission for user %(user)s?"
-msgstr "Berechtigung für den Nutzer %(user)s löschen?"
+msgid "Delete permission for user %(username)s?"
+msgstr "Berechtigung für den Nutzer %(username)s löschen?"
 
 #: registration/templates/registration/admin/delete_shift.html:6
 #: registration/templates/registration/admin/delete_shift.html:34
