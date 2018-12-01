@@ -22,5 +22,10 @@ class Person(models.Model):
         auto_now_add=True,
     )
 
+    withevent = models.BooleanField(
+        default=True,
+        verbose_name=_("Helper subscribed during registration for event"),
+    )
+
     def __str__(self):
         return self.email

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 18:48+0100\n"
-"PO-Revision-Date: 2018-11-01 18:48+0100\n"
+"POT-Creation-Date: 2018-12-01 15:45+0100\n"
+"PO-Revision-Date: 2018-12-01 15:46+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -1188,27 +1188,35 @@ msgstr "Badge Barcode"
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: registration/templates/registration/index.html:18
-#: registration/templates/registration/index.html:64
+#: registration/templates/registration/index.html:20
+#: registration/templates/registration/index.html:79
 msgid "Manage"
 msgstr "Verwalten"
 
-#: registration/templates/registration/index.html:28
-#: registration/templates/registration/index.html:73
+#: registration/templates/registration/index.html:30
+#: registration/templates/registration/index.html:88
 #, python-format
 msgid "%(date)s, %(days)s days"
 msgstr "%(date)s, %(days)s Tage"
 
-#: registration/templates/registration/index.html:42
+#: registration/templates/registration/index.html:44
 msgid "At the moment there is no event you can register for."
 msgstr ""
 "Es gibt gerade keine Veranstaltungen, bei denen die Anmeldung möglich ist."
 
-#: registration/templates/registration/index.html:51
+#: registration/templates/registration/index.html:52
+msgid "Stay informed about future events!"
+msgstr "Bleibe über zukünftige Veranstaltungen auf dem Laufenden!"
+
+#: registration/templates/registration/index.html:58
+msgid "Subscribe to our newsletter"
+msgstr "Abonniere unseren Newsletter"
+
+#: registration/templates/registration/index.html:66
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: registration/templates/registration/index.html:82
+#: registration/templates/registration/index.html:97
 msgid "archived"
 msgstr "archiviert"
 

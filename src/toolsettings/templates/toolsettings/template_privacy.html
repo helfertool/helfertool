@@ -14,8 +14,11 @@
         <h3>{% trans "Event (Plaintext for mail)" %}</h3>
         {% bootstrap_form form_privacy_text %}
 
-        <h3>{% trans "Newsletter" %}</h3>
+        <h3>{% trans "Newsletter (together with event registration)" %}</h3>
         {% bootstrap_form form_news %}
+
+        <h3>{% trans "Newsletter (subscription without event registration)" %}</h3>
+        {% bootstrap_form form_news_subscribe %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>

@@ -30,7 +30,7 @@ def unsubscribe(request, token):
 
         person.delete()
 
-        return HttpResponseRedirect(reverse('news:subscription_deleted'))
+        return HttpResponseRedirect(reverse('news:unsubscribe_done'))
 
     context = {'person': person}
     return render(request, 'news/unsubscribe.html', context)

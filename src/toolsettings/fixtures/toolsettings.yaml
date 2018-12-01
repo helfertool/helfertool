@@ -25,7 +25,7 @@
             </ul>
 
             <p>Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner
-            Person unter Beachtung des Bundesdatenschutzgesetzes (BDSG), erhoben, verarbeitet, genutzt und \ übermittelt werden.</p>
+            Person unter Beachtung des Bundesdatenschutzgesetzes (BDSG), erhoben, verarbeitet, genutzt und übermittelt werden.</p>
 
             <p>Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger
             Basis erfolgt. Ferner, dass ich mein Einverständnis mit der Folge, dass ich bei der Veranstaltung nicht als Helfer
@@ -116,7 +116,7 @@
 
             In the event of cancellation, your data will be deleted upon receipt of your notice.
 
-# Privacy statement for newsletter (HTML)
+# Privacy statement for newsletter together with event (HTML)
 -   model: toolsettings.htmlsetting
     pk: 3
     fields:
@@ -152,3 +152,51 @@
         value: ''
         value_de: ''
         value_en: ''
+
+# Privacy statement for newsletter subscription without event (HTML)
+-   model: toolsettings.htmlsetting
+    pk: 6
+    fields:
+        key: privacy_newsletter_subscribe
+        value: ''
+        value_de: >
+            <p>Ich bin damit einverstanden, dass meine E-Mail Adresse gespeichert wird, um mich über
+            neue Veranstaltungen zu informieren. Des weiteren bin ich damit einverstanden, dass gezielte
+            Helferaufrufe für Veranstaltungen der studentischen Vertretung an diese Adresse gesendet werden.</p>
+
+            <p>Dem Senden weiterer E-Mails kann jederzeit widersprochen werden.</p>
+
+            <p>Ich bin darauf hingewiesen worden, dass die im Rahmen der vorstehend genannten Zwecke erhobenen persönlichen Daten meiner
+            Person unter Beachtung des Bundesdatenschutzgesetzes (BDSG), erhoben, verarbeitet, genutzt und übermittelt werden.</p>
+
+            <p>Ich bin zudem darauf hingewiesen worden, dass die Erhebung, Verarbeitung und Nutzung meiner Daten auf freiwilliger
+            Basis erfolgt. Ferner, dass ich mein Einverständnis verweigern bzw. jederzeit mit Wirkung für die Zukunft widerrufen kann.
+            Meine Widerrufserklärung werde ich richten an:</p>
+
+            <p><em>Organisation<br>
+            Straße<br>
+            Stadt<br>
+            E-Mail: <a href="mailto:helfertool@localhost">helfertool@localhost</a></em></p>
+
+            <p>Im Fall des Widerrufs werden mit dem Zugang meiner Widerrufserklärung meine Daten gelöscht.</p>
+        value_en: >
+            <p>With your permission your email address is collected to inform you about new events.
+            Furthermore specific calls for participation as helper for events of the Student Representatives
+            will be sent to this email address.</p>
+
+            <p>It is possible to veto the sending of further emails anytime.</p>
+
+            <p>Your personal data will be collected, processed, and used in the context of the aforementioned objectives in
+            accordance with the Federal Data Protection Act (BDSG).</p>
+
+            <p>The collection, processing, and use of your data take place on a voluntary basis. Furthermore, you can revoke
+            your consent at any time.</p>
+
+            <p>Please send any notice of cancellation to:</p>
+
+            <p><em>Organization<br>
+            Street<br>
+            City<br>
+            E-Mail: <a href="mailto:helfertool@localhost">helfertool@localhost</a></em></p>
+
+            <p>In the event of cancellation, your data will be deleted upon receipt of your notice.</p>

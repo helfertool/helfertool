@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 18:48+0100\n"
-"PO-Revision-Date: 2018-10-29 20:03+0100\n"
+"POT-Creation-Date: 2018-12-01 15:45+0100\n"
+"PO-Revision-Date: 2018-12-01 15:12+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2\n"
 
 #: news/forms/mail.py:19
 msgid "Language"
@@ -42,9 +42,30 @@ msgstr "Englischer Text"
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
+#: news/forms/subscribe.py:17
+msgid "You subscribed already to the newsletter."
+msgstr "Du hast den Newsletter bereits abonniert."
+
+#: news/forms/subscribe.py:22
+msgid "I agree with the data privacy statement."
+msgstr "Ich stimme der Datenschutzerklärung zu."
+
+#: news/forms/subscribe.py:23
+msgid "Show"
+msgstr "Anzeigen"
+
+#: news/forms/subscribe.py:25
+msgid "You have to accept the data privacy statement."
+msgstr "Du musst die Datenschutzerklärung akzeptieren."
+
 #: news/models/person.py:17
 msgid "E-Mail"
 msgstr "E-Mail"
+
+#: news/models/person.py:27
+msgid "Helper subscribed during registration for event"
+msgstr ""
+"Helfer hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
 
 #: news/templates/news/mail/end.txt:2
 #, python-format
@@ -89,21 +110,29 @@ msgstr "Anzahl der Empfänger:"
 msgid "Send"
 msgstr "Senden"
 
-#: news/templates/news/subscription_deleted.html:6
-msgid "Subscription deleted"
-msgstr "Abo gelöscht"
+#: news/templates/news/subscribe.html:5
+msgid "Subscribe to newsletter"
+msgstr "Newsletter abonnieren"
 
-#: news/templates/news/subscription_deleted.html:9
-msgid ""
-"You will not receive further mails. Thank you for your support in the past!"
-msgstr ""
-"Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
-"der Vergangenheit!"
+#: news/templates/news/subscribe.html:23
+msgid "Privacy statement"
+msgstr "Datenschutzerklärung"
+
+#: news/templates/news/subscribe.html:31
+msgid "Subscribe"
+msgstr "Eintragen"
+
+#: news/templates/news/subscribe_done.html:6
+msgid "Subscribed to newsletter"
+msgstr "Newsletter abonniert"
+
+#: news/templates/news/subscribe_done.html:9
+msgid "Thank you! We will notify you about future events."
+msgstr "Danke! Wir werden dich über zukünftige Veranstaltungen informieren."
 
 #: news/templates/news/unsubscribe.html:6
-#: news/templates/news/unsubscribe.html:17
-msgid "Unsubscribe"
-msgstr "Austragen"
+msgid "Unsubscribe from newsletter"
+msgstr "Vom Newsletter abmelden"
 
 #: news/templates/news/unsubscribe.html:10
 #, python-format
@@ -112,9 +141,24 @@ msgstr ""
 "Keine weiteren E-Mails über bevorstehende Veranstaltungen an %(email)s "
 "senden?"
 
+#: news/templates/news/unsubscribe.html:17
+msgid "Unsubscribe"
+msgstr "Austragen"
+
 #: news/templates/news/unsubscribe.html:21
 msgid "This mail address was already deleted."
 msgstr "Diese E-Mail Adresse wurde bereits gelöscht."
+
+#: news/templates/news/unsubscribe_done.html:6
+msgid "Subscription deleted"
+msgstr "Abo gelöscht"
+
+#: news/templates/news/unsubscribe_done.html:9
+msgid ""
+"You will not receive further mails. Thank you for your support in the past!"
+msgstr ""
+"Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
+"der Vergangenheit!"
 
 #: news/views/send.py:33
 msgid "Mails are being sent now."

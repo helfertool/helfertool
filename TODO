@@ -4,7 +4,6 @@ Prio
 * allow empty mail addresses for internal registrations
 * rework badge creation
     * The AMQP result backend is scheduled for deprecation in version 4.0 and removal in version v5.0. Please use RPC backend or a persistent backend.
-    * cleanup
 * change after registration
     * add more shifts
     * add deadline to mail
@@ -12,6 +11,8 @@ Prio
 * django + celery logging
 * ask for gift selection during registration
 * fix cleanup for file uploads (see below)
+* fix bug with deleted helpers/coordinators
+* fix bug with ckeditor in privacy templates page
 
 Design, JS
 ==========

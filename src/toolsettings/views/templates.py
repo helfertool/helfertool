@@ -62,11 +62,18 @@ def template_privacy(request):
                                 instance=obj_news,
                                 prefix='news')
 
+    obj_news_subscribe, c = HTMLSetting.objects.get_or_create(
+        key='privacy_newsletter_subscribe')
+    form_news_subscribe = HTMLSettingForm(request.POST or None,
+                                          instance=obj_news_subscribe,
+                                          prefix='news_subscribe')
+
     if form_privacy.is_valid() and form_privacy_text.is_valid() \
-            and form_news.is_valid():
+            and form_news.is_valid() and form_news_subscribe.is_valid():
         form_privacy.save()
         form_privacy_text.save()
         form_news.save()
+        form_news_subscribe.save()
 
         logger.info("settings changed", extra={
             'changed': 'templates_privacy',
@@ -78,7 +85,8 @@ def template_privacy(request):
     # render page
     context = {'form_privacy': form_privacy,
                'form_privacy_text': form_privacy_text,
-               'form_news': form_news}
+               'form_news': form_news,
+               'form_news_subscribe': form_news_subscribe}
     return render(request, 'toolsettings/template_privacy.html', context)
 
 

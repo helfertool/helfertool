@@ -6,9 +6,11 @@
         <div class="col-lg-12">
             <h1>{% trans "Events" %}</h1>
         </div>
+    </div>
 
+    <div class="row">
         {% if active_events %}
-            <div class="col-lg-6 col-xs-12">
+            <div class="col-lg-6 col-xs-12 mb-5">
                 <ul class="list-group">
                     {% for event in active_events %}
                         <li class="list-group-item">
@@ -37,12 +39,25 @@
                 </ul>
             </div>
         {% else %}
-            <div class="col-lg-12">
+            <div class="col-lg-12 mb-3">
                 <div class="alert alert-info" role="alert">
                     {% trans "At the moment there is no event you can register for." %}
                 </div>
             </div>
         {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <b>{% trans "Stay informed about future events!" %}</b>
+
+            <br />
+
+            <a href="{% url "news:subscribe" %}" class="btn btn-outline-primary mt-1">
+                {% icon "envelope" %}
+                {% trans "Subscribe to our newsletter" %}
+            </a>
+        </div>
     </div>
 
     {% if involved_events %}

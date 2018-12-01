@@ -1,0 +1,33 @@
+{% extends "helfertool/base.html" %}
+{% load bootstrap4 i18n toolsettings %}
+
+{% block content %}
+    <h2>{% trans "Subscribe to newsletter" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                {% bootstrap_form_errors form %}
+
+                {% bootstrap_field form.email show_label=False %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                {% bootstrap_field form.privacy_statement %}
+
+                <div class="card collapse mb-4" id="privacy">
+                    <h5 class="card-header">{% trans "Privacy statement" %}</h5>
+                    <div class="card-body">
+                        {% htmlsetting "privacy_newsletter_subscribe" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="submit" value="{% trans "Subscribe" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}

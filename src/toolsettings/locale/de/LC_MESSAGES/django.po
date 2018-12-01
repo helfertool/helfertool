@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-01 18:48+0100\n"
-"PO-Revision-Date: 2018-10-29 20:03+0100\n"
+"POT-Creation-Date: 2018-12-01 15:45+0100\n"
+"PO-Revision-Date: 2018-12-01 15:09+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2\n"
 
 #: toolsettings/models.py:18
 msgid "Key"
@@ -95,7 +95,7 @@ msgstr "Template: Über diese Software"
 #: toolsettings/templates/toolsettings/template_about.html:13
 #: toolsettings/templates/toolsettings/template_add_user.html:13
 #: toolsettings/templates/toolsettings/template_login.html:13
-#: toolsettings/templates/toolsettings/template_privacy.html:20
+#: toolsettings/templates/toolsettings/template_privacy.html:23
 msgid "Save"
 msgstr "Speichern"
 
@@ -120,5 +120,12 @@ msgid "Event (Plaintext for mail)"
 msgstr "Veranstaltung (Plaintext für E-Mail)"
 
 #: toolsettings/templates/toolsettings/template_privacy.html:17
-msgid "Newsletter"
-msgstr "Newsletter"
+msgid "Newsletter (together with event registration)"
+msgstr "Newsletter (beim Anmelden zu einer Veranstaltung)"
+
+#: toolsettings/templates/toolsettings/template_privacy.html:20
+msgid "Newsletter (subscription without event registration)"
+msgstr "Newsletter (Abonnement ohne Anmeldung zu einer Veranstaltung)"
+
+#~ msgid "Newsletter"
+#~ msgstr "Newsletter"
