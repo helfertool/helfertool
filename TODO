@@ -12,7 +12,6 @@ Prio
 * ask for gift selection during registration
 * fix cleanup for file uploads (see below)
 * fix bug with deleted helpers/coordinators
-* fix bug with ckeditor in privacy templates page
 
 Design, JS
 ==========
