@@ -196,7 +196,7 @@ class Helper(models.Model):
 
         mail = EmailMessage(subject,
                             text,
-                            settings.FROM_MAIL,
+                            settings.DEFAULT_FROM_MAIL,
                             [self.email, ],  # to
                             reply_to=[event.email, ])
 

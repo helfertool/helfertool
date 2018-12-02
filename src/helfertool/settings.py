@@ -101,7 +101,7 @@ EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'password')
 EMAIL_USE_TLS = dict_get(config, False, 'mail', 'tls')
 
 # sender of all mails (because of SPF, DKIM, DMARC)
-FROM_MAIL = dict_get(config, 'helfertool@localhost', 'mail', 'sender_address')
+DEFAULT_FROM_MAIL = dict_get(config, 'helfertool@localhost', 'mail', 'sender_address')
 
 # newsletter: number of mails sent during one connection and time between
 MAIL_BATCH_SIZE = dict_get(config, 200, 'mail', 'batch_size')

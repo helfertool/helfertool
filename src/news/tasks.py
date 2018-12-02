@@ -34,7 +34,7 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
 
             mail_text = mail_text.lstrip().rstrip()
 
-            mails.append((subject, mail_text, settings.FROM_MAIL,
+            mails.append((subject, mail_text, settings.DEFAULT_FROM_MAIL,
                           [person.email]))
 
         translation.activate(prev_language)

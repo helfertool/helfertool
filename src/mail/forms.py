@@ -127,7 +127,7 @@ class MailForm(forms.Form):
         sentmail = SentMail.objects.create(
             event=self.event,
             user=self.user,
-            sender=settings.FROM_MAIL,
+            sender=settings.DEFAULT_FROM_MAIL,
             subject=subject,
             text=text,
             reply_to=reply_to,
@@ -155,7 +155,7 @@ class MailForm(forms.Form):
 
         mail = EmailMessage(subject,
                             text,
-                            settings.FROM_MAIL,
+                            settings.DEFAULT_FROM_MAIL,
                             [reply_to, ],    # to
                             receiver_list,
                             reply_to=[reply_to, ],

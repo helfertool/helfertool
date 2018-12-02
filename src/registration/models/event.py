@@ -17,7 +17,7 @@ from inventory.models import InventorySettings
 
 
 def _default_mail():
-    return settings.FROM_MAIL
+    return settings.DEFAULT_FROM_MAIL
 
 
 class Event(models.Model):
