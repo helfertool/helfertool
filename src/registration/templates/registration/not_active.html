@@ -17,9 +17,10 @@
         {% trans "The registration is not open." %}
     </div>
 
-    <div class="contact">
-        <p><b>{% trans "Contact" %}</b></p>
-        {{ event.imprint | safe }}
-    </div>
+    {% if event.imprint %}
+        <div class="contact">
+            <p><b>{% trans "Contact" %}</b></p>
+            {{ event.imprint | safe }}
+        </div>
+    {% endif %}
 {% endblock %}
-

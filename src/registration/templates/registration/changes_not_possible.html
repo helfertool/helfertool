@@ -17,9 +17,10 @@
         {% trans "You cannot change the data yourself." %}
     </div>
 
-    <div class="contact">
-        <p><b>{% trans "Contact" %}</b></p>
-        {{ event.imprint | safe }}
-    </div>
+    {% if event.imprint %}
+        <div class="contact">
+            <p><b>{% trans "Contact" %}</b></p>
+            {{ event.imprint | safe }}
+        </div>
+    {% endif %}
 {% endblock %}
-
