@@ -14,7 +14,7 @@ from .models import Person
 
 @shared_task
 def send_news_mails(first_language, append_english, subject, text, text_en,
-                    url, unsubsribe_url):
+                    unsubsribe_url):
         prev_language = translation.get_language()
 
         mails = []
@@ -25,11 +25,11 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
             if append_english:
                 mail_text += render_to_string("news/mail/english.txt")
 
-            mail_text += _mail_text_language(first_language, text, url,
+            mail_text += _mail_text_language(first_language, text,
                                              tmp_unsubscribe_url)
 
             if append_english:
-                mail_text += _mail_text_language("en", text_en, url,
+                mail_text += _mail_text_language("en", text_en,
                                                  tmp_unsubscribe_url)
 
             mail_text = mail_text.lstrip().rstrip()
@@ -52,11 +52,11 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
             batch += 1
 
 
-def _mail_text_language(language, text, url, unsubscribe_url):
+def _mail_text_language(language, text, unsubscribe_url):
     translation.activate(language)
 
     tmp = ""
-    tmp += render_to_string("news/mail/preface.txt", {'url': url})
+    tmp += render_to_string("news/mail/preface.txt")
     tmp += text
     tmp += render_to_string("news/mail/end.txt",
                             {'unsubscribe_url': unsubscribe_url})

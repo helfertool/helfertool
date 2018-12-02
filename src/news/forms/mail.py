@@ -64,12 +64,11 @@ class MailForm(forms.Form):
             # english may be set anyway
             append_english = False
 
-        base_url = self.request.build_absolute_uri(reverse('index'))
         unsubscribe_url = self.request.build_absolute_uri(
             reverse('news:unsubscribe', args=[""]))
 
         tasks.send_news_mails.delay(first_language, append_english, subject,
-                                    text, text_en, base_url, unsubscribe_url)
+                                    text, text_en, unsubscribe_url)
 
     def _get_languages(self):
         """
