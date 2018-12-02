@@ -327,9 +327,6 @@ CKEDITOR_CONFIGS = {
 }
 
 # django-select2 config
-SELECT2_JS = ''
-SELECT2_CSS = ''
-SELECT2_I18N_PATH = '/static/helfertool/vendor/select2/js/i18n'
 SELECT2_CACHE_BACKEND = 'select2'
 
 # application definition

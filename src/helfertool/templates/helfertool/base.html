@@ -25,8 +25,6 @@
         {# custom css #}
         <link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">
 
-        {{ form.media.css }}
-
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
@@ -129,7 +127,5 @@
                 </p>
             </div>
         </footer>
-
-        {{ form.media.js }}
     </body>
 </html>
