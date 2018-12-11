@@ -54,6 +54,13 @@ def overview(request, event_url_name):
                            .aggregate(Sum('duration'))['duration__sum']
     except (OperationalError, OverflowError):
         hours_total = None
+    except Exception as e:
+        # handle psycopg2.DataError without importing psycopg2
+        # happens on overflow with postgresql
+        if 'psycopg2.DataError' in str(e.__class__):
+            hours_total = None
+        else:
+            raise e
 
     # sum up timeline
     timeline = OrderedDict(sorted(timeline.items()))
