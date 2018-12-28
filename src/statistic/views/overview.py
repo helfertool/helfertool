@@ -57,7 +57,7 @@ def overview(request, event_url_name):
     except Exception as e:
         # handle psycopg2.DataError without importing psycopg2
         # happens on overflow with postgresql
-        if 'psycopg2.DataError' in str(e.__class__):
+        if 'DataError' in str(e.__class__):
             hours_total = None
         else:
             raise e
