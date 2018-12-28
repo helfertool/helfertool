@@ -46,7 +46,7 @@ else
     echo -e "test\t\tRun docker container with test data"
     echo
     echo -e "push\t\tPush container for current branch to docker hub"
-    echo -e "publishdev\tPush current container as \"latest\" to docker hub"
+    echo -e "pushlatest\tPush current container as \"latest\" to docker hub"
 
     exit 1
 fi
