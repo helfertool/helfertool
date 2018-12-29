@@ -101,7 +101,8 @@ EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'password')
 EMAIL_USE_TLS = dict_get(config, False, 'mail', 'tls')
 
 # sender of all mails (because of SPF, DKIM, DMARC)
-DEFAULT_FROM_MAIL = dict_get(config, 'helfertool@localhost', 'mail', 'sender_address')
+DEFAULT_FROM_MAIL = dict_get(config, 'helfertool@localhost', 'mail',
+                             'sender_address')
 
 # newsletter: number of mails sent during one connection and time between
 MAIL_BATCH_SIZE = dict_get(config, 200, 'mail', 'batch_size')
@@ -143,7 +144,7 @@ if ldap_config:
 
     AUTH_LDAP_GROUP_SEARCH = django_auth_ldap.config.LDAPSearch(
         dict_get(ldap_config, None, 'schema', 'group_base_dn'),
-        ldap.SCOPE_SUBTREE,
+        ldap.SCOPE_SUBTREE,  # pylint: disable=E1101
         "(objectClass={})".format(dict_get(ldap_config, 'groupOfNames',
                                            'schema', 'group_base_dn'))
     )

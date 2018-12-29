@@ -75,8 +75,7 @@ def generate_badges(self, event_pk, job_pk, skip_printed):
     finally:
         translation.activate(prev_language)
 
-    timeout = countdown=settings.BADGE_PDF_TIMEOUT + settings.BADGE_RM_DELAY
-    clean = cleanup.subtask((tmp_dir, ), countdown=timeout)
+    clean = cleanup.subtask((tmp_dir, ), countdown=settings.BADGE_PDF_TIMEOUT + settings.BADGE_RM_DELAY)
     cleanup_task = clean.delay()
 
     return pdf_filename, filename, cleanup_task.task_id

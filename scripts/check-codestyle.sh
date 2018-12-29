@@ -9,6 +9,7 @@ RESET="\x1b[0m"
 
 PEP8_IGNORES="E121,E123,E126,E226,E24,E704"  # defaults
 PEP8_IGNORES="$PEP8_IGNORES,E402"
+PEP8_LINE_LENGTH=120
 
 # base directory
 basedir="$(dirname "$(dirname "$(readlink -f "$0")")")/src"
@@ -27,7 +28,7 @@ for m in $modules ; do
     echo -ne "${GREEN}Checking module: $m${RESET}\t\t"
 
     # PEP8
-    pep_output="$(pep8 --exclude migrations --ignore $PEP8_IGNORES $m 2>&1)"
+    pep_output="$(pep8 --exclude migrations --ignore $PEP8_IGNORES --max-line-length=$PEP8_LINE_LENGTH $m 2>&1)"
     if [ -z "$pep_output" ] ; then
         pep_errors="0"
     else

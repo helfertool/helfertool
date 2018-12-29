@@ -56,6 +56,16 @@ Additionally set the SMTP port to 1025 in ``helfertool.yaml``:
 The advantage of this method compared to the console backend from Django is,
 that you also see the mails sent in Celery tasks in the same window.
 
+# Code style
+
+To run pylint and pep8 for all modules, run:
+
+    ./scripts/check-codestyle.sh
+
+The modules from `src/requirements_dev.txt` need to be installed for that.
+
+The maximum line length is 120 characters, not 80.
+
 # LICENSE
 
 Copyright (C) 2018  Sven Hertle

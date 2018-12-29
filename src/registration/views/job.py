@@ -93,7 +93,7 @@ def duplicate_job(request, event_url_name, job_pk):
     form = JobDuplicateForm(request.POST or None, other_job=job)
 
     if form.is_valid():
-        job = form.save()
+        form.save()
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 
