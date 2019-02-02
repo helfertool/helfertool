@@ -1,0 +1,14 @@
+{% extends "helfertool/base.html" %}
+{% load i18n bootstrap4 %}
+
+{% block content %}
+    <h1>{{ form.instance.agreement.name }}</h1>
+
+    {{ form.instance.agreement.text|safe }}
+
+    <form action="{% url "account:handle_user_agreement" form.instance.agreement.pk %}" method="post">
+        {% csrf_token %}
+
+        <input type="submit" value="{% trans "Agree" %}" class="btn btn-outline-primary mt-3" />
+    </form>
+{% endblock %}

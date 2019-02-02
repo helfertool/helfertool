@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 import logging
@@ -24,9 +24,11 @@ def change_user(request):
             })
 
             messages.success(request, _("Changed password successfully"))
+
+            return redirect('account:change_user')
     else:
         # user from LDAP
         pw_form = None
 
     context = {'pw_form': pw_form}
-    return render(request, 'registration/change_user.html', context)
+    return render(request, 'account/change_user.html', context)

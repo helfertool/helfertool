@@ -25,6 +25,7 @@ urlpatterns = [
 
     # apps
     url(r'^admin/settings/', include('toolsettings.urls')),
+    url(r'^account/', include('account.urls')),
 
     url(r'', include('help.urls')),
     url(r'', include('news.urls')),
