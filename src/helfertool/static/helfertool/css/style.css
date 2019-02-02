@@ -25,12 +25,12 @@ h1, h2, h3, h4 {
     border-color: #1ea082;
 }
 
-.btn-outline-primary:hover {
+.btn-outline-primary:not(:disabled):not(.disabled):hover {
     background-color: #1ea082;
     border-color: #1ea082;
 }
 
-.btn-outline-primary:focus, .btn-outline-primary.focus {
+.btn-outline-primary:not(:disabled):not(.disabled):focus, .btn-outline-primary:not(:disabled):not(.disabled).focus {
     box-shadow: 0 0 0 0.2rem rgba(30, 160, 130, 0.5)
 }
 

@@ -5,10 +5,19 @@
     <h2>{% trans "Jobs and shifts" %}</h2>
 
     {% if not event.archived %}
-        <p><a href="{% url 'new_job' event.url_name %}">
-            {% icon "plus" %}
-            {% trans "New job" %}
-        </a></p>
+        <p>
+            <a href="{% url 'new_job' event.url_name %}">
+                {% icon "plus" %}
+                {% trans "New job" %}
+            </a>
+
+            &nbsp;
+
+            <a href="{% url 'sort_job' event.url_name %}">
+                {% icon "sort" %}
+                {% trans "Sort jobs" %}
+            </a>
+        </p>
     {% endif %}
 
     {% for job in event.job_set.all %}

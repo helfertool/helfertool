@@ -7,7 +7,6 @@ Prio
 * change after registration
     * add more shifts
     * add deadline to mail
-* change order of jobs
 * django + celery logging
 * ask for gift selection during registration
 * fix cleanup for file uploads (see below)
@@ -34,6 +33,7 @@ Registration
 * edit mail template / add custom message to mails?
 * duplicate shifts
 * dynamic fields
+* index for job: order and pk
 
 Admin area
 ==========

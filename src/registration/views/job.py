@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from .utils import nopermission, get_or_404
 
 from ..decorators import archived_not_available
-from ..forms import JobForm, JobDeleteForm, JobDuplicateForm
+from ..forms import JobForm, JobDeleteForm, JobDuplicateForm, JobSortForm
 from ..models import Event, Job
 
 
@@ -102,3 +102,26 @@ def duplicate_job(request, event_url_name, job_pk):
                'job': job,
                'form': form}
     return render(request, 'registration/admin/duplicate_job.html', context)
+
+
+@login_required
+@archived_not_available
+def sort_job(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = JobSortForm(request.POST or None, event=event)
+
+    if form.is_valid():
+        job = form.save()
+        return HttpResponseRedirect(reverse('jobs_and_shifts',
+                                            args=[event_url_name]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/sort_job.html', context)

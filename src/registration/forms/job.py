@@ -14,7 +14,8 @@ class JobForm(forms.ModelForm):
 
         # note: change also below in JobDuplicateForm
         exclude = ['name', 'description', 'event', 'coordinators',
-                   'badge_defaults', 'archived_number_coordinators', ]
+                   'badge_defaults', 'archived_number_coordinators',
+                   'order', ]
         widgets = {
             'job_admins': UserSelectWidget,
         }
@@ -68,3 +69,28 @@ class JobDuplicateForm(JobForm):
             new_shift.pk = None
             new_shift.job = self.instance
             new_shift.save()
+
+
+class JobSortForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self._event = kwargs.pop('event')
+
+        super().__init__(*args, **kwargs)
+
+        counter = self._event.job_set.count()
+        for job in self._event.job_set.all():
+            field_id = 'order_job_%s' % job.pk
+
+            self.fields[field_id] = forms.IntegerField(min_value=0, initial=counter)
+            self.fields[field_id].widget = forms.HiddenInput()
+
+            counter -= 1
+
+    def save(self):
+        cleaned_data = super().clean()
+
+        for job in self._event.job_set.all():
+            field_id = 'order_job_%s' % job.pk
+            job.order = cleaned_data.get(field_id)
+            print("!!!" + str(job.pk) + " " + str(job.order))
+            job.save()

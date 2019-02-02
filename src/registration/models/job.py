@@ -26,7 +26,7 @@ class Job(models.Model):
         :badge_design: badge design for this job
     """
     class Meta:
-        ordering = ['pk']
+        ordering = ['-order', 'pk']
 
     event = models.ForeignKey(
         'Event',
@@ -74,6 +74,11 @@ class Job(models.Model):
     archived_number_coordinators = models.IntegerField(
         default=0,
         verbose_name=_("Number of coordinators for archived event"),
+    )
+
+    order = models.PositiveIntegerField(
+        default=0,
+        verbose_name=_("Order, highest number on top"),
     )
 
     def __str__(self):

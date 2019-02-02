@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-02 12:09+0100\n"
-"PO-Revision-Date: 2018-12-01 15:46+0100\n"
+"POT-Creation-Date: 2019-02-02 17:51+0100\n"
+"PO-Revision-Date: 2019-02-02 17:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: registration/export/excel.py:88 registration/forms/user.py:34
 #: registration/models/helper.py:72
@@ -81,7 +81,7 @@ msgstr "Koordinatoren"
 #: registration/templates/registration/admin/coordinators.html:16
 #: registration/templates/registration/admin/delete_coordinator.html:15
 #: registration/templates/registration/admin/delete_helper.html:15
-#: registration/templates/registration/admin/jobs_and_shifts.html:58
+#: registration/templates/registration/admin/jobs_and_shifts.html:67
 #: registration/templates/registration/admin/permissions.html:13
 #: registration/templates/registration/admin/permissions.html:52
 #: registration/templates/registration/admin/permissions.html:90
@@ -95,11 +95,11 @@ msgstr "Name"
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
-#: registration/forms/fields/date.py:25
+#: registration/forms/fields/date.py:26
 msgid "Date (YYYY-MM-DD)"
 msgstr "Datum (JJJJ-MM-TT)"
 
-#: registration/forms/fields/date.py:30
+#: registration/forms/fields/date.py:31
 msgid "Time (HH:MM)"
 msgstr "Uhrzeit (HH:MM)"
 
@@ -322,13 +322,13 @@ msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
 #: registration/models/event.py:125
-#: registration/templates/registration/changes_not_possible.html:21
-#: registration/templates/registration/deleted.html:21
-#: registration/templates/registration/form.html:56
-#: registration/templates/registration/invalid_link.html:29
-#: registration/templates/registration/not_active.html:21
+#: registration/templates/registration/changes_not_possible.html:22
+#: registration/templates/registration/deleted.html:22
+#: registration/templates/registration/form.html:57
+#: registration/templates/registration/invalid_link.html:30
+#: registration/templates/registration/not_active.html:22
 #: registration/templates/registration/registered.html:102
-#: registration/templates/registration/validate.html:22
+#: registration/templates/registration/validate.html:23
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -506,6 +506,10 @@ msgstr "Admins für diese Aufgabe"
 msgid "Number of coordinators for archived event"
 msgstr "Anzahl der Koordinatoren für archivierte Veranstaltung"
 
+#: registration/models/job.py:81
+msgid "Order, highest number on top"
+msgstr "Reihenfolge, höchste Nummer oben"
+
 #: registration/models/link.py:39
 #: registration/templates/registration/admin/links.html:13
 msgid "Usage"
@@ -517,18 +521,18 @@ msgstr "Name (optional)"
 
 #: registration/models/shift.py:43
 #: registration/templates/registration/admin/delete_shift.html:17
-#: registration/templates/registration/admin/jobs_and_shifts.html:56
+#: registration/templates/registration/admin/jobs_and_shifts.html:65
 msgid "Begin"
 msgstr "Anfang"
 
 #: registration/models/shift.py:47
 #: registration/templates/registration/admin/delete_shift.html:21
-#: registration/templates/registration/admin/jobs_and_shifts.html:57
+#: registration/templates/registration/admin/jobs_and_shifts.html:66
 msgid "End"
 msgstr "Ende"
 
 #: registration/models/shift.py:52
-#: registration/templates/registration/admin/jobs_and_shifts.html:59
+#: registration/templates/registration/admin/jobs_and_shifts.html:68
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
@@ -541,7 +545,7 @@ msgid "The shift is not visible."
 msgstr "Diese Schicht ist nicht sichtbar."
 
 #: registration/models/shift.py:68
-#: registration/templates/registration/admin/jobs_and_shifts.html:61
+#: registration/templates/registration/admin/jobs_and_shifts.html:70
 #: registration/templates/registration/admin/view_helper.html:86
 msgid "Gifts"
 msgstr "Geschenke"
@@ -718,8 +722,8 @@ msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
 #: registration/templates/registration/admin/delete_helper.html:40
 #: registration/templates/registration/admin/helpers_table.html:86
 #: registration/templates/registration/admin/helpers_table.html:91
-#: registration/templates/registration/admin/jobs_and_shifts.html:41
-#: registration/templates/registration/admin/jobs_and_shifts.html:98
+#: registration/templates/registration/admin/jobs_and_shifts.html:50
+#: registration/templates/registration/admin/jobs_and_shifts.html:107
 #: registration/templates/registration/admin/view_helper.html:37
 #: registration/templates/registration/admin/view_helper.html:55
 msgid "Delete"
@@ -802,7 +806,7 @@ msgstr ""
 
 #: registration/templates/registration/admin/duplicate_event.html:23
 #: registration/templates/registration/admin/duplicate_job.html:13
-#: registration/templates/registration/admin/jobs_and_shifts.html:35
+#: registration/templates/registration/admin/jobs_and_shifts.html:44
 msgid "Duplicate"
 msgstr "Duplizieren"
 
@@ -844,6 +848,7 @@ msgstr "Bitte korrigiere die Fehler unten."
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:45
+#: registration/templates/registration/admin/sort_job.html:44
 #: registration/templates/registration/change_user.html:70
 #: registration/templates/registration/registered.html:36
 msgid "Save"
@@ -879,7 +884,7 @@ msgid "Edit job"
 msgstr "Aufgabe bearbeiten"
 
 #: registration/templates/registration/admin/edit_job.html:11
-#: registration/templates/registration/admin/jobs_and_shifts.html:10
+#: registration/templates/registration/admin/jobs_and_shifts.html:11
 msgid "New job"
 msgstr "Neue Aufgabe"
 
@@ -892,7 +897,7 @@ msgid "Edit shift"
 msgstr "Schicht bearbeiten"
 
 #: registration/templates/registration/admin/edit_shift.html:11
-#: registration/templates/registration/admin/jobs_and_shifts.html:47
+#: registration/templates/registration/admin/jobs_and_shifts.html:56
 msgid "New shift"
 msgstr "Neue Schicht"
 
@@ -924,7 +929,7 @@ msgid "Export single days"
 msgstr "Einzelne Tage exportieren"
 
 #: registration/templates/registration/admin/helpers.html:59
-#: registration/templates/registration/admin/jobs_and_shifts.html:20
+#: registration/templates/registration/admin/jobs_and_shifts.html:29
 msgid "Public"
 msgstr "Öffentlich"
 
@@ -973,14 +978,19 @@ msgstr "Nicht validiert"
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: registration/templates/registration/admin/jobs_and_shifts.html:29
-#: registration/templates/registration/admin/jobs_and_shifts.html:93
+#: registration/templates/registration/admin/jobs_and_shifts.html:18
+#: registration/templates/registration/admin/sort_job.html:5
+msgid "Sort jobs"
+msgstr "Aufgaben sortieren"
+
+#: registration/templates/registration/admin/jobs_and_shifts.html:38
+#: registration/templates/registration/admin/jobs_and_shifts.html:102
 #: registration/templates/registration/admin/view_helper.html:11
 #: registration/templates/registration/registered.html:45
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: registration/templates/registration/admin/jobs_and_shifts.html:52
+#: registration/templates/registration/admin/jobs_and_shifts.html:61
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
 

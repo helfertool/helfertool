@@ -111,6 +111,10 @@ urlpatterns = [
         views.edit_job,
         name='new_job'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/sort/$',
+        views.sort_job,
+        name='sort_job'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/edit/$',
         views.edit_job,
         name='edit_job'),
