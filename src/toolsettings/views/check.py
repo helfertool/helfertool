@@ -39,7 +39,7 @@ def check(request):
         mail_conn = mail.get_connection()
         if isinstance(mail_conn, EmailBackend):
             mail_conn.open()
-    except ConnectionRefusedError:
+    except (ConnectionRefusedError, OSError):
         mail_ok = False
 
     # celery
