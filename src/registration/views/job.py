@@ -117,7 +117,7 @@ def sort_job(request, event_url_name):
     form = JobSortForm(request.POST or None, event=event)
 
     if form.is_valid():
-        job = form.save()
+        form.save()
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 

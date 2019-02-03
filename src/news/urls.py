@@ -5,7 +5,7 @@ from . import views
 
 app_name = 'news'
 urlpatterns = [
-    url(r'^admin/news/$',
+    url(r'^manage/news/$',
         views.send,
         name='send'),
 

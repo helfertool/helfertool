@@ -1,18 +1,13 @@
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.utils.translation import ugettext as _
 
+from account.templatetags.permissions import has_perm_group
 from inventory.utils import is_inventory_admin
 
 from .utils import nopermission, is_involved
 
 from ..decorators import archived_not_available
-from ..forms import CreateUserForm
 from ..models import Event
-from ..templatetags.permissions import has_adduser_group, has_perm_group
 
 
 @login_required
@@ -43,25 +38,6 @@ def jobs_and_shifts(request, event_url_name):
     # list all jobs and shifts
     context = {'event': event}
     return render(request, 'registration/admin/jobs_and_shifts.html', context)
-
-
-@login_required
-def add_user(request):
-    # check permission
-    if not (request.user.is_superuser or has_adduser_group(request.user)):
-        return nopermission(request)
-
-    # form
-    form = CreateUserForm(request.POST or None)
-
-    if form.is_valid():
-        user = form.save()
-        messages.success(request, _("Added user %(username)s" %
-                         {'username': user}))
-        return HttpResponseRedirect(reverse('add_user'))
-
-    context = {'form': form}
-    return render(request, 'registration/admin/add_user.html', context)
 
 
 @login_required

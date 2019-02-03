@@ -30,37 +30,37 @@ urlpatterns = [
         name='list'),
 
     # inventory management
-    url(r'^admin/inventory/$',
+    url(r'^manage/inventory/$',
         views.inventory_list,
         name='inventory_list'),
 
-    url(r'^admin/inventory/new/$',
+    url(r'^manage/inventory/new/$',
         views.edit_inventory,
         name='new_inventory'),
 
-    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/$',
+    url(r'^manage/inventory/(?P<inventory_pk>[0-9]+)/$',
         views.edit_inventory,
         name='edit_inventory'),
 
-    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/delete$',
+    url(r'^manage/inventory/(?P<inventory_pk>[0-9]+)/delete$',
         views.delete_inventory,
         name='delete_inventory'),
 
-    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/$',
+    url(r'^manage/inventory/(?P<inventory_pk>[0-9]+)/items/$',
         views.inventory_items,
         name='inventory_items'),
 
     # item management
-    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/new/$',
+    url(r'^manage/inventory/(?P<inventory_pk>[0-9]+)/items/new/$',
         views.edit_item,
         name='new_item'),
 
-    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/'
+    url(r'^manage/inventory/(?P<inventory_pk>[0-9]+)/items/'
         '(?P<item_pk>[0-9]+)/$',
         views.edit_item,
         name='edit_item'),
 
-    url(r'^admin/inventory/(?P<inventory_pk>[0-9]+)/items/'
+    url(r'^manage/inventory/(?P<inventory_pk>[0-9]+)/items/'
         '(?P<item_pk>[0-9]+)/delete/$',
         views.delete_item,
         name='delete_item'),

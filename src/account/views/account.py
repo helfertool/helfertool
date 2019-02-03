@@ -5,8 +5,32 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
+from registration.views.utils import nopermission
+
+from ..forms import CreateUserForm
+from ..templatetags.permissions import has_adduser_group
+
 import logging
 logger = logging.getLogger("helfertool")
+
+
+@login_required
+def add_user(request):
+    # check permission
+    if not (request.user.is_superuser or has_adduser_group(request.user)):
+        return nopermission(request)
+
+    # form
+    form = CreateUserForm(request.POST or None)
+
+    if form.is_valid():
+        user = form.save()
+        messages.success(request, _("Added user %(username)s" %
+                         {'username': user}))
+        return redirect('account:add_user')
+
+    context = {'form': form}
+    return render(request, 'account/add_user.html', context)
 
 
 @login_required

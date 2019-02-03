@@ -1,0 +1,168 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-03 11:48+0100\n"
+"PO-Revision-Date: 2019-02-03 12:01+0100\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.1\n"
+
+#: account/forms/account.py:10 account/templates/account/change_user.html:27
+#: account/templates/account/permissions.html:14
+#: account/templates/account/permissions.html:53
+#: account/templates/account/permissions.html:91
+msgid "Username"
+msgstr "Benutzername"
+
+#: account/forms/account.py:26
+msgid "The user does not exist."
+msgstr "Der Benutzer existiert nicht."
+
+#: account/forms/account.py:33 account/templates/account/change_user.html:23
+msgid "Email address"
+msgstr "E-Mail Adresse"
+
+#: account/forms/account.py:34 account/templates/account/change_user.html:15
+msgid "First name"
+msgstr "Vorname"
+
+#: account/forms/account.py:36 account/templates/account/change_user.html:19
+msgid "Last name"
+msgstr "Nachname"
+
+#: account/models/agreement.py:10 account/templates/account/permissions.html:13
+#: account/templates/account/permissions.html:52
+#: account/templates/account/permissions.html:90
+msgid "Name"
+msgstr "Name"
+
+#: account/models/agreement.py:14
+msgid "Text"
+msgstr "Text"
+
+#: account/models/agreement.py:18
+msgid "Begin date"
+msgstr "Startdatum"
+
+#: account/templates/account/add_user.html:5
+msgid "Add user"
+msgstr "Nutzer hinzufügen"
+
+#: account/templates/account/add_user.html:14
+#: account/templates/account/permissions.html:40
+#: account/templates/account/permissions.html:79
+#: account/templates/account/permissions.html:117
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: account/templates/account/change_user.html:7
+msgid "Account"
+msgstr "Account"
+
+#: account/templates/account/change_user.html:9
+msgid "Data"
+msgstr "Daten"
+
+#: account/templates/account/change_user.html:31
+#: account/templates/account/permissions.html:5
+msgid "Permissions"
+msgstr "Berechtigungen"
+
+#: account/templates/account/change_user.html:34
+#: account/templates/account/change_user.html:36
+#: account/templates/account/permissions.html:7
+msgid "Can add events"
+msgstr "Kann Veranstaltungen hinzufügen"
+
+#: account/templates/account/change_user.html:42
+#: account/templates/account/change_user.html:44
+#: account/templates/account/permissions.html:46
+msgid "Can add users"
+msgstr "Kann Nutzer hinzufügen"
+
+#: account/templates/account/change_user.html:50
+#: account/templates/account/change_user.html:52
+#: account/templates/account/permissions.html:84
+msgid "Can send news"
+msgstr "Kann Newsletter versenden"
+
+#: account/templates/account/change_user.html:60
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: account/templates/account/change_user.html:70
+msgid "Save"
+msgstr "Sichern"
+
+#: account/templates/account/change_user.html:75
+msgid "The password cannot be changed."
+msgstr "Das Passwort kann nicht geändert werden."
+
+#: account/templates/account/delete_permission.html:5
+#: account/templates/account/delete_permission.html:16
+#: account/templates/account/permissions.html:24
+#: account/templates/account/permissions.html:63
+#: account/templates/account/permissions.html:101
+msgid "Delete permission"
+msgstr "Berechtigung löschen"
+
+#: account/templates/account/delete_permission.html:8
+#, python-format
+msgid "Delete permission for user %(username)s?"
+msgstr "Berechtigung für den Nutzer %(username)s löschen?"
+
+#: account/templates/account/handle_user_agreement.html:12
+msgid "Agree"
+msgstr "Zustimmen"
+
+#: account/templates/account/permissions.html:9
+msgid "There are no users, that can add events."
+msgstr "Es gibt keine Nutzer, die Veranstaltungen hinzufügen können."
+
+#: account/templates/account/permissions.html:48
+msgid "There are no users, that can add users."
+msgstr "Es gibt keine Nutzer, die Benutzer hinzufügen können."
+
+#: account/templates/account/permissions.html:86
+msgid "There are no users, that can send news."
+msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
+
+#: account/views/account.py:28
+#, python-format
+msgid "Added user %(username)s"
+msgstr "Benutzer %(username)s hinzugefügt"
+
+#: account/views/account.py:50
+msgid "Changed password successfully"
+msgstr "Das Passwort wurde erfolgreich geändert"
+
+#: account/views/permissions.py:41
+#, python-format
+msgid "%(username)s can add users now"
+msgstr "%(username)s kann jetzt Nutzer hinzufügen"
+
+#: account/views/permissions.py:52
+#, python-format
+msgid "%(username)s can add events now"
+msgstr "%(username)s kann jetzt Veranstaltungen hinzufügen"
+
+#: account/views/permissions.py:63
+#, python-format
+msgid "%(username)s can send news now"
+msgstr "%(username)s kann jetzt Newsletter versenden"
+
+#: account/views/permissions.py:98
+#, python-format
+msgid "Removed permission for user %(username)s"
+msgstr "Berechtigung für den Nutzer %(username)s gelöscht"

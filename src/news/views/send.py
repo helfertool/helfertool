@@ -8,8 +8,7 @@ from django.utils.translation import ugettext as _
 import logging
 logger = logging.getLogger("helfertool")
 
-# TODO: move has_sendnews_group somewhere else
-from registration.templatetags.permissions import has_sendnews_group
+from account.templatetags.permissions import has_sendnews_group
 from registration.views.utils import nopermission
 
 from ..models import Person

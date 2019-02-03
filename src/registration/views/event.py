@@ -8,13 +8,13 @@ from django.utils.translation import ugettext as _
 import logging
 logger = logging.getLogger("helfertool")
 
+from account.templatetags.permissions import has_addevent_group
+
 from .utils import is_admin, nopermission
 
 from ..decorators import archived_not_available
-from ..forms import EventForm, EventDeleteForm, EventArchiveForm, \
-    EventDuplicateForm
+from ..forms import EventForm, EventDeleteForm, EventArchiveForm, EventDuplicateForm
 from ..models import Event
-from ..templatetags.permissions import has_addevent_group
 
 
 @login_required

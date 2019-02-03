@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-02 17:51+0100\n"
-"PO-Revision-Date: 2019-02-02 17:53+0100\n"
+"POT-Creation-Date: 2019-02-03 11:48+0100\n"
+"PO-Revision-Date: 2019-02-03 11:54+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,10 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: registration/export/excel.py:88 registration/forms/user.py:34
-#: registration/models/helper.py:72
+#: registration/export/excel.py:88 registration/models/helper.py:72
 #: registration/templates/registration/admin/helpers_table.html:22
-#: registration/templates/registration/change_user.html:15
 msgid "First name"
 msgstr "Vorname"
 
@@ -82,9 +80,6 @@ msgstr "Koordinatoren"
 #: registration/templates/registration/admin/delete_coordinator.html:15
 #: registration/templates/registration/admin/delete_helper.html:15
 #: registration/templates/registration/admin/jobs_and_shifts.html:67
-#: registration/templates/registration/admin/permissions.html:13
-#: registration/templates/registration/admin/permissions.html:52
-#: registration/templates/registration/admin/permissions.html:90
 #: registration/templates/registration/deregister.html:17
 #: registration/templates/registration/helper_data.html:6
 msgid "Name"
@@ -200,28 +195,6 @@ msgstr "Das Ende der Schicht muss gesetzt sein."
 #: registration/forms/shift.py:50
 msgid "The begin of the shift must be before the end."
 msgstr "Der Beginn der Schicht muss vor dem Ende liegen."
-
-#: registration/forms/user.py:10
-#: registration/templates/registration/admin/permissions.html:14
-#: registration/templates/registration/admin/permissions.html:53
-#: registration/templates/registration/admin/permissions.html:91
-#: registration/templates/registration/change_user.html:27
-msgid "Username"
-msgstr "Benutzername"
-
-#: registration/forms/user.py:26
-msgid "The user does not exist."
-msgstr "Dieser Nutzer existiert nicht."
-
-#: registration/forms/user.py:33
-#: registration/templates/registration/change_user.html:23
-msgid "Email address"
-msgstr "E-Mail Adresse"
-
-#: registration/forms/user.py:36
-#: registration/templates/registration/change_user.html:19
-msgid "Last name"
-msgstr "Nachname"
 
 #: registration/models/event.py:63
 msgid "Unknown"
@@ -584,10 +557,6 @@ msgstr "Als Koordinator hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:14
 #: registration/templates/registration/admin/add_helper_to_shift.html:14
-#: registration/templates/registration/admin/add_user.html:14
-#: registration/templates/registration/admin/permissions.html:40
-#: registration/templates/registration/admin/permissions.html:79
-#: registration/templates/registration/admin/permissions.html:117
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -609,10 +578,6 @@ msgid ""
 msgstr ""
 "Es gibt keine Schichten mehr, bei denen du die Berechtigung hast, Helfer "
 "hinzuzufügen."
-
-#: registration/templates/registration/admin/add_user.html:5
-msgid "Add user"
-msgstr "Nutzer hinzufügen"
 
 #: registration/templates/registration/admin/archive_event.html:6
 #: registration/templates/registration/admin/edit_event.html:44
@@ -747,19 +712,6 @@ msgstr "Es gibt Schichten für diese Aufgabe."
 msgid "Delete link"
 msgstr "Link löschen"
 
-#: registration/templates/registration/admin/delete_permission.html:5
-#: registration/templates/registration/admin/delete_permission.html:16
-#: registration/templates/registration/admin/permissions.html:24
-#: registration/templates/registration/admin/permissions.html:63
-#: registration/templates/registration/admin/permissions.html:101
-msgid "Delete permission"
-msgstr "Berechtigung löschen"
-
-#: registration/templates/registration/admin/delete_permission.html:8
-#, python-format
-msgid "Delete permission for user %(username)s?"
-msgstr "Berechtigung für den Nutzer %(username)s löschen?"
-
 #: registration/templates/registration/admin/delete_shift.html:6
 #: registration/templates/registration/admin/delete_shift.html:34
 msgid "Delete shift"
@@ -849,7 +801,6 @@ msgstr "Bitte korrigiere die Fehler unten."
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:45
 #: registration/templates/registration/admin/sort_job.html:44
-#: registration/templates/registration/change_user.html:70
 #: registration/templates/registration/registered.html:36
 msgid "Save"
 msgstr "Speichern"
@@ -1039,41 +990,6 @@ msgstr "Kein Zugriff"
 msgid "You have no permission to view this page!"
 msgstr "Du hast keine Berechtigung, um diese Seite anzusehen!"
 
-#: registration/templates/registration/admin/permissions.html:5
-#: registration/templates/registration/change_user.html:31
-msgid "Permissions"
-msgstr "Berechtigungen"
-
-#: registration/templates/registration/admin/permissions.html:7
-#: registration/templates/registration/change_user.html:34
-#: registration/templates/registration/change_user.html:36
-msgid "Can add events"
-msgstr "Kann Veranstaltungen hinzufügen"
-
-#: registration/templates/registration/admin/permissions.html:9
-msgid "There are no users, that can add events."
-msgstr "Es gibt keine Nutzer, die Veranstaltungen hinzufügen können."
-
-#: registration/templates/registration/admin/permissions.html:46
-#: registration/templates/registration/change_user.html:42
-#: registration/templates/registration/change_user.html:44
-msgid "Can add users"
-msgstr "Kann Nutzer hinzufügen"
-
-#: registration/templates/registration/admin/permissions.html:48
-msgid "There are no users, that can add users."
-msgstr "Es gibt keine Nutzer, die Nutzer hinzufügen können."
-
-#: registration/templates/registration/admin/permissions.html:84
-#: registration/templates/registration/change_user.html:50
-#: registration/templates/registration/change_user.html:52
-msgid "Can send news"
-msgstr "Kann Newsletter versenden"
-
-#: registration/templates/registration/admin/permissions.html:86
-msgid "There are no users, that can send news."
-msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
-
 #: registration/templates/registration/admin/resend_mail.html:15
 msgid "Send confirmation mail again?"
 msgstr "Bestätigungsmail nochmal senden?"
@@ -1123,22 +1039,6 @@ msgstr "Koordinator"
 #: registration/templates/registration/admin/view_helper.html:79
 msgid "Edit badge"
 msgstr "Badge bearbeiten"
-
-#: registration/templates/registration/change_user.html:7
-msgid "Account"
-msgstr "Account"
-
-#: registration/templates/registration/change_user.html:9
-msgid "Data"
-msgstr "Daten"
-
-#: registration/templates/registration/change_user.html:60
-msgid "Change password"
-msgstr "Passwort ändern"
-
-#: registration/templates/registration/change_user.html:75
-msgid "The password cannot be changed."
-msgstr "Das Passwort kann nicht geändert werden."
 
 #: registration/templates/registration/changes_not_possible.html:8
 #: registration/templates/registration/deleted.html:8
@@ -1401,15 +1301,6 @@ msgstr "Danke! Deine E-Mail Adresse wurde bereits bestätigt."
 msgid "Thank you! You confirmed your mail address."
 msgstr "Danke! Du hast deine E-Mail Adresse bestätigt."
 
-#: registration/views/account.py:26
-msgid "Changed password successfully"
-msgstr "Das Passwort wurde erfolgreich geändert"
-
-#: registration/views/admin.py:59
-#, python-format
-msgid "Added user %(username)s"
-msgstr "Nutzer %(username)s hinzugefügt"
-
 #: registration/views/event.py:58
 #, python-format
 msgid "Event was created: %(event)s"
@@ -1457,26 +1348,6 @@ msgstr "Aufgabe gelöscht: %(name)s"
 msgid "Link deleted"
 msgstr "Link gelöscht"
 
-#: registration/views/permissions.py:41
-#, python-format
-msgid "%(username)s can add users now"
-msgstr "%(username)s kann jetzt Nutzer hinzufügen"
-
-#: registration/views/permissions.py:52
-#, python-format
-msgid "%(username)s can add events now"
-msgstr "%(username)s kann jetzt Veranstaltungen anlegen"
-
-#: registration/views/permissions.py:63
-#, python-format
-msgid "%(username)s can send news now"
-msgstr "%(username)s kann jetzt Newsletter versenden"
-
-#: registration/views/permissions.py:98
-#, python-format
-msgid "Removed permission for user %(username)s"
-msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
-
 #: registration/views/registration.py:82
 msgid "Sending the mail failed, but the registration was saved."
 msgstr ""
@@ -1485,579 +1356,3 @@ msgstr ""
 #: registration/views/shift.py:53
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
-
-#~ msgid "Imprint"
-#~ msgstr "Impressum"
-
-#~ msgid ""
-#~ "The accounts from past events are still there, please do not add a new "
-#~ "account if there is already an account."
-#~ msgstr ""
-#~ "Die Accounts von vergangenen Veranstaltungen sind immer noch da, bitte "
-#~ "keinen neuen Account anlegen, wenn der alte Account noch existiert."
-
-#~ msgid "If you forgot the password to the old account, please write to:"
-#~ msgstr ""
-#~ "Wenn du das Passwort für den alten Account vergessen hast, schreibe bitte "
-#~ "an:"
-
-#~ msgid "Manage %(eventname)s"
-#~ msgstr "Verwaltung %(eventname)s"
-
-#~ msgid "Admin"
-#~ msgstr "Admin"
-
-#~ msgid "Administration"
-#~ msgstr "Administration"
-
-#~ msgid "General"
-#~ msgstr "Allgemein"
-
-#~ msgid "Go to registration"
-#~ msgstr "Zur Anmeldung"
-
-#~ msgid "Helpers"
-#~ msgstr "Helfer"
-
-#~ msgid "Helpers and coordinators"
-#~ msgstr "Helfer und Koordinatoren"
-
-#~ msgid "All coordinators"
-#~ msgstr "Alle Koordinatoren"
-
-#~ msgid "All mails"
-#~ msgstr "Alle E-Mails"
-
-#~ msgid "Statistics"
-#~ msgstr "Statistik"
-
-#~ msgid "Overview"
-#~ msgstr "Übersicht"
-
-#~ msgid "T-Shirts"
-#~ msgstr "T-Shirts"
-
-#~ msgid "Settings"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Collected deposit"
-#~ msgstr "Gesammeltes Pfand"
-
-#~ msgid "Missing T-shirts"
-#~ msgstr "Fehlende T-Shirts"
-
-#~ msgid "Badges"
-#~ msgstr "Badges"
-
-#~ msgid "Generate"
-#~ msgstr "Generieren"
-
-#~ msgid "Registration"
-#~ msgstr "Registrierung"
-
-#~ msgid "Inventory"
-#~ msgstr "Inventar"
-
-#~ msgctxt "Register item and badge"
-#~ msgid "Register"
-#~ msgstr "Eintragen"
-
-#~ msgid "Take back"
-#~ msgstr "Zurücknehmen"
-
-#~ msgid "List"
-#~ msgstr "Liste"
-
-#~ msgid "Send news"
-#~ msgstr "Newsletter versenden"
-
-#~ msgid "Non-selected"
-#~ msgstr "Nicht ausgewählt"
-
-#~ msgid "Selected"
-#~ msgstr "Ausgewählt"
-
-#~ msgid "Show all"
-#~ msgstr "Alle anzeigen"
-
-#~ msgid "Filter"
-#~ msgstr "Filter"
-
-#~ msgid "Move selected"
-#~ msgstr "Ausgewählte verschieben"
-
-#~ msgid "Move all"
-#~ msgstr "Alles verschieben"
-
-#~ msgid "Remove selected"
-#~ msgstr "Ausgewählte entfernen"
-
-#~ msgid "Remove all"
-#~ msgstr "Alles entfernen"
-
-#~ msgid "Showing all {0}"
-#~ msgstr "Zeige alle {0}"
-
-#~ msgid "Filtered {0} from {1}"
-#~ msgstr "Zeige {0} von {1}"
-
-#~ msgid "Empty list"
-#~ msgstr "Liste leer"
-
-#~ msgid "Remove this coordinator from the job \"%(jobname)s\"?"
-#~ msgstr "Den Koordinator aus der Aufabe \"%(jobname)s\" löschen?"
-
-#~ msgid "There are shifts for this job. Remove it anyway?"
-#~ msgstr "Es gibt Schichten für diese Aufgabe. Die Aufgabe trotzdem löschen?"
-
-#~ msgid ""
-#~ "There are registered helpers for some of the shifts. Remove this job with "
-#~ "all shifts and helpers?"
-#~ msgstr ""
-#~ "Für manche Schichten sind Helfer registriert. Die Aufgabe mit den "
-#~ "Schichten und Helfern trotzdem löschen?"
-
-#~ msgid "Do you want to delete this link?"
-#~ msgstr "Willst du den Link löschen?"
-
-#~ msgid "Delete link!"
-#~ msgstr "Link löschen!"
-
-#~ msgid "Remove this shift?"
-#~ msgstr "Diese Schicht löschen?"
-
-#~ msgid "Hidden"
-#~ msgstr "Versteckt"
-
-#~ msgid "Blocked"
-#~ msgstr "Gesperrt"
-
-#~ msgid "show"
-#~ msgstr "anzeigen"
-
-#~ msgid "Django Admin Interface"
-#~ msgstr "Django Admin Interface"
-
-#~ msgid "Go to the registration"
-#~ msgstr "Zur Anmeldung gehen"
-
-#~ msgid "You registered with the following information:"
-#~ msgstr "Du hast folgende Daten angegeben:"
-
-#~ msgid "Download as iCal"
-#~ msgstr "Als iCal herunterladen"
-
-#~ msgid "Data privacy"
-#~ msgstr "Datenschutz"
-
-#~ msgid "You agreed with the following data privacy statement."
-#~ msgstr "Du hast der folgenden Datenschutzerklärung zugestimmt."
-
-#~ msgid ""
-#~ "The following data privacy statement was sent to you and you did not "
-#~ "disagree until now."
-#~ msgstr ""
-#~ "Die folgende Datenschutzerklärung wurde dir zugeschickt und du hast bis "
-#~ "jetzt nicht widersprochen."
-
-#~ msgid "If you want to use this website for your event please contact: "
-#~ msgstr ""
-#~ "Wenn du diese Webseite für deine Veranstaltung nutzen willst, wende dich "
-#~ "bitte an:"
-
-#~ msgid "If the job is publicly visible, the shift is blocked."
-#~ msgstr ""
-#~ "Wenn die Aufgabe öffentlich sichtbar ist, ist diese Schicht gesperrt."
-
-#~ msgid "Back to job"
-#~ msgstr "Zurück zur Aufgabe"
-
-#~ msgid "Total"
-#~ msgstr "Insgesamt"
-
-#~ msgid "Helpers (without coordinators)"
-#~ msgstr "Helfer (ohne Koordinatoren)"
-
-#~ msgid "For this event no t-shirt sizes were collected."
-#~ msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
-
-#~ msgid "Number of shift slots"
-#~ msgstr "Anzahl an Schichtslots"
-
-#~ msgid "Total number of hours (also free slots)"
-#~ msgstr "Gesamtzahl an Stunden (auch freie Slots)"
-
-#~ msgid "hours"
-#~ msgstr "Stunden"
-
-#~ msgid "Vegetarians"
-#~ msgstr "Vegetarier"
-
-#~ msgid "Chronological development of registrations"
-#~ msgstr "Zeitliche Entwicklung der Anmeldungen"
-
-#~ msgid "No helpers are registered."
-#~ msgstr "Es sind keine Helfer angemeldet."
-
-#~ msgid "The source code can be found here:"
-#~ msgstr "Der Quellcode kann hier gefunden werden:"
-
-#~ msgid "Used as sender of e-mails."
-#~ msgstr "Wird als Absender von E-Mail genutzt."
-
-#~ msgid "Bad request"
-#~ msgstr "Bad request"
-
-#~ msgid "Error 400"
-#~ msgstr "Error 400"
-
-#~ msgid "Show events"
-#~ msgstr "Veranstaltungen anzeigen"
-
-#~ msgid "Permission denied"
-#~ msgstr "Zugriff verweigert"
-
-#~ msgid "Error 403"
-#~ msgstr "Error 403"
-
-#~ msgid "Page not found"
-#~ msgstr "Seite nicht gefunden"
-
-#~ msgid "Error 404"
-#~ msgstr "Error 404"
-
-#~ msgid "Internal server error"
-#~ msgstr "Internal Server Error"
-
-#~ msgid "Error 500"
-#~ msgstr "Error 500"
-
-#~ msgid "The admins were notified already."
-#~ msgstr "Die Admins wurden bereits benachrichtigt."
-
-#~ msgid "Registration for helpers"
-#~ msgstr "Helferanmeldung"
-
-#~ msgid "Hello %(username)s!"
-#~ msgstr "Hallo %(username)s!"
-
-#~ msgctxt "Admin interface"
-#~ msgid "Admin"
-#~ msgstr "Admin"
-
-#~ msgid "Documentation"
-#~ msgstr "Dokumentation"
-
-#~ msgid "Logout"
-#~ msgstr "Logout"
-
-#~ msgid "Switch"
-#~ msgstr "Switch"
-
-#~ msgid "Privacy"
-#~ msgstr "Datenschutz"
-
-#~ msgid "All helpers and coordinators"
-#~ msgstr "Alle Helfer und Koordinatoren"
-
-#~ msgid "{}, Helpers and coordinators"
-#~ msgstr "{}, Helfer und Koordinatoren"
-
-#~ msgid "{}, Coordinators"
-#~ msgstr "{}, Koordinatoren"
-
-#~ msgid "Receivers"
-#~ msgstr "Empfänger"
-
-#~ msgid "CC"
-#~ msgstr "CC"
-
-#~ msgid "Reply to"
-#~ msgstr "Antwort an"
-
-#~ msgid "Subject"
-#~ msgstr "Betreff"
-
-#~ msgid "Text"
-#~ msgstr "Text"
-
-#~ msgid "Mail was sent successfully"
-#~ msgstr "Die E-Mails wurden erfolgreich verschickt"
-
-#~ msgid "Sending mails failed: %(error)s"
-#~ msgstr "Die E-Mails konnten nicht verschickt werden: %(error)s"
-
-#~ msgid "Edit helper"
-#~ msgstr "Helfer bearbeiten"
-
-#~ msgid "Badge"
-#~ msgstr "Badge"
-
-#~ msgid "All helpers"
-#~ msgstr "Alle Helfer"
-
-#~ msgid "Configure badges"
-#~ msgstr "Badges konfigurieren"
-
-#~ msgid "Generate badges"
-#~ msgstr "Badges generieren"
-
-#~ msgid "Register badges"
-#~ msgstr "Badges registrieren"
-
-#~ msgid "Configure"
-#~ msgstr "Konfigurieren"
-
-#~ msgid "File does not contain LaTeX code."
-#~ msgstr "Die Datei enthält keinen LaTeX Code."
-
-#~ msgid "Invalid barcode."
-#~ msgstr "Ungültiger Barcode."
-
-#~ msgid "This badge does not exist. Maybe it was deleted since printing."
-#~ msgstr ""
-#~ "Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem "
-#~ "Drucken gelöscht."
-
-#~ msgid "This badge does not belong to this event."
-#~ msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
-
-#~ msgid "LaTeX template"
-#~ msgstr "LaTeX Template"
-
-#~ msgid "Number of rows on one page"
-#~ msgstr "Anzahl der Zeilen auf einer Seite"
-
-#~ msgid "Number of columns on one page"
-#~ msgstr "Anzahl der Spalten auf einer Seite"
-
-#~ msgid "Print barcodes on badges to avoid duplicates"
-#~ msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
-
-#~ msgid "Role for coordinators"
-#~ msgstr "Rolle für Koordinatoren"
-
-#~ msgid "Role for helpers"
-#~ msgstr "Rolle für Helfer"
-
-#~ msgid "Default role"
-#~ msgstr "Standard Rolle"
-
-#~ msgid "Default design"
-#~ msgstr "Standard Design"
-
-#~ msgid "Color for text"
-#~ msgstr "Textfarbe"
-
-#~ msgid "E.g. #00ff00"
-#~ msgstr "z.B. #00ff00"
-
-#~ msgid "Background image for front"
-#~ msgstr "Hintergrundbild für die Vorderseite"
-
-#~ msgid "Background image for back"
-#~ msgstr "Hintergrundbild für die Rückseite"
-
-#~ msgid "Name for LaTeX template"
-#~ msgstr "Name für LaTeX Template"
-
-#~ msgid ""
-#~ "This name is used for the LaTeX template, the prefix \"perm-\" is added."
-#~ msgstr ""
-#~ "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-"
-#~ "\" hinzugefügt."
-
-#~ msgid "This name is used for the LaTeX template."
-#~ msgstr "Dieser Name wird im LaTeX Template verwendet."
-
-#~ msgid "Other firstname"
-#~ msgstr "Other firstname"
-
-#~ msgid "Other surname"
-#~ msgstr "Anderer Nachname"
-
-#~ msgid "Other text for job"
-#~ msgstr "Anderer Text für Aufgabe"
-
-#~ msgid "Other text for shift"
-#~ msgstr "Anderer Text für Schicht"
-
-#~ msgid "Other text for role"
-#~ msgstr "Anderer Text für Rolle"
-
-#~ msgid "Photo"
-#~ msgstr "Foto"
-
-#~ msgid "Primary job"
-#~ msgstr "Primäre Aufgabe"
-
-#~ msgid "Only necessary if this person has multiple jobs."
-#~ msgstr ""
-#~ "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
-
-#~ msgid "Role"
-#~ msgstr "Rolle"
-
-#~ msgid "Design"
-#~ msgstr "Design"
-
-#~ msgid "Badge was printed already"
-#~ msgstr "Badge wurde bereits gedruckt"
-
-#~ msgid ""
-#~ "Some settings are missing to generate badges. Check the following "
-#~ "settings:"
-#~ msgstr ""
-#~ "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
-#~ "folgende Einstellungen:"
-
-#~ msgid "Unregistered badges"
-#~ msgstr "Nicht registrierte Badges"
-
-#~ msgid "All badges"
-#~ msgstr "Alle Badges"
-
-#~ msgid "%(num)s warnings"
-#~ msgstr "%(num)s Warnungen"
-
-#~ msgid "All unregistered badges"
-#~ msgstr "Alle nicht registrierten Badges"
-
-#~ msgid "Really all badges"
-#~ msgstr "Wirklich alle Badges"
-
-#~ msgid "Generating badges failed"
-#~ msgstr "Generieren der Badges fehlgeschlagen"
-
-#~ msgid "The badge creation is not actived."
-#~ msgstr "Die Generierung von Badges ist nicht aktiviert."
-
-#~ msgid "Warnings for badge generation"
-#~ msgstr "Warnungen für die Badge Generierung"
-
-#~ msgid "There are no warnings."
-#~ msgstr "Es gibt keine Warnungen."
-
-#~ msgid "Edit template"
-#~ msgstr "Template bearbeiten"
-
-#~ msgid "Roles"
-#~ msgstr "Rollen"
-
-#~ msgid "There are no roles."
-#~ msgstr "Es gibt keine Rollen."
-
-#~ msgid "LaTeX Name"
-#~ msgstr "LaTeX Name"
-
-#~ msgid "Add role"
-#~ msgstr "Rolle hinzufügen"
-
-#~ msgid "Designs"
-#~ msgstr "Designs"
-
-#~ msgid "There are no designs."
-#~ msgstr "Es gibt keine Designs."
-
-#~ msgid "Add design"
-#~ msgstr "Design hinzufügen"
-
-#~ msgid "Defaults"
-#~ msgstr "Standards"
-
-#~ msgid "Badge Design"
-#~ msgstr "Badge Design"
-
-#~ msgid "Badge Permission"
-#~ msgstr "Badge Berechtigung"
-
-#~ msgid "Badge Settings"
-#~ msgstr "Badge Einstellungen"
-
-#~ msgid ""
-#~ "Changes of most of this settings require an update of the LaTeX template!"
-#~ msgstr ""
-#~ "Bei den meisten Änderungen in diesen Einstellungen muss auch das LaTeX "
-#~ "Template angepasst werden!"
-
-#~ msgid "Template"
-#~ msgstr "Template"
-
-#~ msgid "There are no permissions."
-#~ msgstr "Es gibt keine Berechtigungen."
-
-#~ msgid "Add permission"
-#~ msgstr "Berechtigung hinzufügen"
-
-#~ msgid "Barcodes are not activated."
-#~ msgstr "Barcodes sind nicht aktiviert."
-
-#~ msgid "Badge already printed: %(name)s"
-#~ msgstr "Bagde bereits gedruckt: %(name)s"
-
-#~ msgid "Badge registered: %(name)s"
-#~ msgstr "Badge registriert: %(name)s"
-
-#~ msgid "Common"
-#~ msgstr "Allgemein"
-
-#~ msgid "Prename"
-#~ msgstr "Vorname"
-
-#~ msgid "Numbers"
-#~ msgstr "Zahlen"
-
-#~ msgid "Size"
-#~ msgstr "Größe"
-
-#~ msgid "Number"
-#~ msgstr "Anzahl"
-
-#~ msgid ""
-#~ "You cannot delete the helper from other shifts. The helper was not deleted"
-#~ msgstr ""
-#~ "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde "
-#~ "nicht gelöscht."
-
-#~ msgid "Edit badge settings"
-#~ msgstr "Badge Einstellungen bearbeiten"
-
-#~ msgid "Registered helpers"
-#~ msgstr "Angemeldete Helfer"
-
-#~ msgid "Default role for all helpers"
-#~ msgstr "Standard Rolle für alle Helfer"
-
-#~ msgid "Default role for this job"
-#~ msgstr "Standard Rolle für diese Aufgabe"
-
-#~ msgid "Design and roles for jobs"
-#~ msgstr "Design und Rollen für Aufgaben"
-
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "Change"
-#~ msgstr "Ändern"
-
-#~ msgid "Details"
-#~ msgstr "Details"
-
-#, fuzzy
-#~| msgid "No permission"
-#~ msgid "Remove permission"
-#~ msgstr "Kein Zugriff"
-
-#~ msgid "Reset"
-#~ msgstr "Reset"
-
-#~ msgid "Vegetarian food"
-#~ msgstr "Vegetarisches Essen"
-
-#~ msgid "Jobs of %(eventname)s"
-#~ msgstr "Schichten von %(eventname)s"
-
-#, fuzzy
-#~| msgid "Surname"
-#~ msgid "Vorname"
-#~ msgstr "Nachname"

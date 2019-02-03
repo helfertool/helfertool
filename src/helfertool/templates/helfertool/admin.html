@@ -213,18 +213,13 @@
                 {% endif %}
 
             {# for superusers #}
-            {% elif user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
-                <h2>{# for padding #}</h2>
+            {% else %}
+                {% if user.is_superuser or has_addevent_group or has_sendnews_group or user|is_inventory_admin_any %}
+                <h2>{% trans "General" %}</h2>
                 <ul class="nav flex-column">
                     {% if user.is_superuser or user|has_addevent_group %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'new_event' %}">{% trans "New event" %}</a>
-                        </li>
-                    {% endif %}
-
-                    {% if user.is_superuser or user|has_adduser_group %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'add_user' %}">{% trans "Add user" %}</a>
                         </li>
                     {% endif %}
 
@@ -242,14 +237,28 @@
 
                     {% if user.is_superuser %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'permissions' %}">{% trans "Permissions" %}</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'toolsettings:index' %}">{% trans "Settings" %}</a>
                         </li>
                     {% endif %}
                 </ul>
+                {% endif %}
+
+                {% if user.is_superuser or user|has_adduser_group %}
+                    <h2>{% trans "User management" %}</h2>
+                    <ul class="nav flex-column">
+                        {% if user.is_superuser or user|has_adduser_group %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account:add_user' %}">{% trans "Add user" %}</a>
+                            </li>
+                        {% endif %}
+
+                        {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'account:permissions' %}">{% trans "Permissions" %}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
             {% endif %}
         </div>
         <div class="col-md-9">

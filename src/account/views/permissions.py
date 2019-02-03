@@ -2,14 +2,14 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .utils import nopermission
+from registration.views.utils import nopermission
+from registration.forms import DeleteForm  # FIXME
 
-from ..forms import UsernameForm, DeleteForm
+from ..forms import UsernameForm
 
 
 @login_required
@@ -40,6 +40,7 @@ def permissions(request):
             user.groups.add(group)
             messages.success(request, _("%(username)s can add users now") %
                              {'username': user})
+            return redirect('account:permissions')
 
     # form for addevent
     form_addevent = UsernameForm(request.POST or None, prefix='addevent')
@@ -51,6 +52,7 @@ def permissions(request):
             user.groups.add(group)
             messages.success(request, _("%(username)s can add events now") %
                              {'username': user})
+            return redirect('account:permissions')
 
     # form for sendnews
     form_sendnews = UsernameForm(request.POST or None, prefix='sendnews')
@@ -62,6 +64,7 @@ def permissions(request):
             user.groups.add(group)
             messages.success(request, _("%(username)s can send news now") %
                              {'username': user})
+            return redirect('account:permissions')
 
     context = {'users_adduser': users_adduser,
                'users_addevent': users_addevent,
@@ -69,7 +72,7 @@ def permissions(request):
                'form_adduser': form_adduser,
                'form_addevent': form_addevent,
                'form_sendnews': form_sendnews}
-    return render(request, 'registration/admin/permissions.html', context)
+    return render(request, 'account/permissions.html', context)
 
 
 @login_required
@@ -99,9 +102,9 @@ def delete_permission(request, user_pk, groupname):
                          % {'username': user})
 
         # redirect to overview over permissions
-        return HttpResponseRedirect(reverse('permissions'))
+        return redirect('account:permissions')
 
     context = {'form': form,
                'deluser': user}
-    return render(request, 'registration/admin/delete_permission.html',
+    return render(request, 'account/delete_permission.html',
                   context)

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-02 17:51+0100\n"
-"PO-Revision-Date: 2018-10-29 20:03+0100\n"
+"POT-Creation-Date: 2019-02-03 11:48+0100\n"
+"PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: inventory/forms.py:13 inventory/models.py:56
 #: inventory/templates/inventory/admin/delete_item.html:21
@@ -237,12 +237,3 @@ msgstr "Der Helfer hat noch folgende Gegenstände:"
 #: inventory/templates/inventory/take_back_item.html:35
 msgid "Everything returned!"
 msgstr "Alles zurück gegeben!"
-
-#~ msgid "Do you want to remove this inventory?"
-#~ msgstr "Willst du dieses Inventar löschen?"
-
-#~ msgid "Do you want to remove this item?"
-#~ msgstr "Willst du diesen Gegenstand löschen?"
-
-#~ msgid "In use"
-#~ msgstr "Wird verwendet"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-02 17:51+0100\n"
-"PO-Revision-Date: 2018-10-29 20:03+0100\n"
+"POT-Creation-Date: 2019-02-03 11:48+0100\n"
+"PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: badges/forms/badge.py:38 badges/forms/design.py:23 badges/forms/design.py:29
 msgid "The file is not an image."
@@ -447,74 +447,3 @@ msgstr "Bagde bereits gedruckt: %(name)s"
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
-
-#~ msgid "This badge does not belong to this event."
-#~ msgstr "Dieses Badge gehört nicht zu dieser Veranstaltung."
-
-#~ msgid "Edit template"
-#~ msgstr "Template bearbeiten"
-
-#~ msgid "Common"
-#~ msgstr "Allgemein"
-
-#~ msgid "Settings"
-#~ msgstr "Einstellungen"
-
-#~ msgid "The shift is full already."
-#~ msgstr "Die Schicht ist bereits voll."
-
-#~ msgid "Prename"
-#~ msgstr "Vorname"
-
-#~ msgid "Numbers"
-#~ msgstr "Zahlen"
-
-#~ msgid "Size"
-#~ msgstr "Größe"
-
-#~ msgid "Number"
-#~ msgstr "Anzahl"
-
-#~ msgid ""
-#~ "You cannot delete the helper from other shifts. The helper was not deleted"
-#~ msgstr ""
-#~ "Du kannst keine Helfer aus anderen Schichten löschen. Der Helfer wurde "
-#~ "nicht gelöscht."
-
-#~ msgid "Registered helpers"
-#~ msgstr "Angemeldete Helfer"
-
-#~ msgid "Default role for all helpers"
-#~ msgstr "Standard Rolle für alle Helfer"
-
-#~ msgid "Default role for this job"
-#~ msgstr "Standard Rolle für diese Aufgabe"
-
-#~ msgid "Design and roles for jobs"
-#~ msgstr "Design und Rollen für Aufgaben"
-
-#~ msgid "Edit default badge"
-#~ msgstr "Standard Design bearbeiten"
-
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "Change"
-#~ msgstr "Ändern"
-
-#~ msgid "Details"
-#~ msgstr "Details"
-
-#~ msgid "Reset"
-#~ msgstr "Reset"
-
-#~ msgid "Vegetarian food"
-#~ msgstr "Vegetarisches Essen"
-
-#~ msgid "Jobs of %(eventname)s"
-#~ msgstr "Schichten von %(eventname)s"
-
-#, fuzzy
-#~| msgid "Surname"
-#~ msgid "Vorname"
-#~ msgstr "Nachname"

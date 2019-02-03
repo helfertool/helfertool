@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-02 17:51+0100\n"
-"PO-Revision-Date: 2018-10-29 20:03+0100\n"
+"POT-Creation-Date: 2019-02-03 11:48+0100\n"
+"PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: helfertool/settings.py:59
 msgid "German"
@@ -90,6 +90,7 @@ msgid "Administration"
 msgstr "Administration"
 
 #: helfertool/templates/helfertool/admin.html:63
+#: helfertool/templates/helfertool/admin.html:218
 msgid "General"
 msgstr "Allgemein"
 
@@ -159,7 +160,7 @@ msgstr "Geschenke"
 
 #: helfertool/templates/helfertool/admin.html:160
 #: helfertool/templates/helfertool/admin.html:181
-#: helfertool/templates/helfertool/admin.html:249
+#: helfertool/templates/helfertool/admin.html:240
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -184,7 +185,7 @@ msgid "Registration"
 msgstr "Registrierung"
 
 #: helfertool/templates/helfertool/admin.html:199
-#: helfertool/templates/helfertool/admin.html:239
+#: helfertool/templates/helfertool/admin.html:234
 msgid "Inventory"
 msgstr "Inventar"
 
@@ -201,19 +202,23 @@ msgstr "Zurücknehmen"
 msgid "List"
 msgstr "Liste"
 
-#: helfertool/templates/helfertool/admin.html:221
+#: helfertool/templates/helfertool/admin.html:222
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: helfertool/templates/helfertool/admin.html:227
-msgid "Add user"
-msgstr "Nutzer hinzufügen"
-
-#: helfertool/templates/helfertool/admin.html:233
+#: helfertool/templates/helfertool/admin.html:228
 msgid "Send news"
 msgstr "Newsletter versenden"
 
-#: helfertool/templates/helfertool/admin.html:245
+#: helfertool/templates/helfertool/admin.html:247
+msgid "User management"
+msgstr "Benutzerverwaltung"
+
+#: helfertool/templates/helfertool/admin.html:251
+msgid "Add user"
+msgstr "Nutzer hinzufügen"
+
+#: helfertool/templates/helfertool/admin.html:257
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -261,10 +266,3 @@ msgstr "Impressum"
 #: helfertool/templates/helfertool/base.html:126
 msgid "About this software"
 msgstr "Über diese Software"
-
-#~ msgctxt "Admin interface"
-#~ msgid "Manage"
-#~ msgstr "Verwalten"
-
-#~ msgid "Documentation"
-#~ msgstr "Dokumentation"
