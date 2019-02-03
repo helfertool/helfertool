@@ -4,7 +4,9 @@
 {% block content %}
     <h1>{{ form.instance.agreement.name }}</h1>
 
-    {{ form.instance.agreement.text|safe }}
+    <div class="mt-4">
+        {{ form.instance.agreement.text|safe }}
+    </div>
 
     <form action="{% url "account:handle_user_agreement" form.instance.agreement.pk %}" method="post">
         {% csrf_token %}
