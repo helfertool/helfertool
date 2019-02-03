@@ -110,7 +110,7 @@ MAIL_BATCH_GAP = dict_get(config, 5, 'mail', 'batch_gap')
 
 # authentication
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/manage/account/agreements/'
+LOGIN_REDIRECT_URL = '/manage/account/check/'
 
 LOCAL_USER_CHAR = dict_get(config, None, 'authentication', 'local_user_char')
 

@@ -7,5 +7,4 @@ from .helper import HelperForm, HelperDeleteForm, \
     HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm
 from .link import LinkForm, LinkDeleteForm
 from .registration import RegisterForm, DeregisterForm
-from .delete import DeleteForm
 from .duplicates import MergeDuplicatesForm

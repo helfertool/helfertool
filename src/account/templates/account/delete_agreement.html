@@ -1,0 +1,19 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete user agreement" %}</h2>
+
+    <div class="alert alert-danger" role="alert">
+        {% blocktrans trimmed with name=agreement.name%}
+            Delete user agreement {{ name }}?
+        {% endblocktrans %}
+    </div>
+
+    <form action="{% url 'account:delete_agreement' agreement.pk %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-outline-danger">{% trans "Delete user agreement" %}</button>
+    </form>
+{% endblock %}

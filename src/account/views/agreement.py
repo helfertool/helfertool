@@ -1,15 +1,22 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 
 import datetime
 
+from registration.views.utils import nopermission
+
 from ..models import Agreement, UserAgreement
-from ..forms import UserAgreementForm
+from ..forms import AgreementForm, UserAgreementForm, DeleteForm
 
 
 @login_required
 def check_user_agreement(request):
-    agreements = Agreement.objects.filter(begin__gte=datetime.datetime.today())
+    today = datetime.datetime.today().date()
+
+    agreements = Agreement.objects.filter(
+        Q(start__lte=today) & (Q(end=None) | Q(end__gte=today)),
+    )
 
     for agreement in agreements:
         user_agreement, created = UserAgreement.objects.get_or_create(
@@ -33,7 +40,7 @@ def handle_user_agreement(request, agreement_pk):
     )
 
     # already agreed -> back to check page
-    if user_agreement.agreed:
+    if user_agreement.agreed or not agreement.in_timeframe:
         return redirect('account:check_user_agreement')
 
     # ask for agreement
@@ -46,3 +53,60 @@ def handle_user_agreement(request, agreement_pk):
 
     context = {'form': form}
     return render(request, 'account/handle_user_agreement.html', context)
+
+
+@login_required
+def list_agreements(request):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    agreements = Agreement.objects.all()
+
+    context = {'agreements': agreements}
+    return render(request, 'account/list_agreements.html',
+                  context)
+
+@login_required
+def edit_agreement(request, agreement_pk=None):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+
+    # get job, if available
+    agreement = None
+    if agreement_pk:
+        agreement = get_object_or_404(Agreement, pk=agreement_pk)
+
+    # form
+    form = AgreementForm(request.POST or None, instance=agreement)
+
+    if form.is_valid():
+        form.save()
+        return redirect("account:list_agreements")
+
+    # render page
+    context = {"form": form,
+               "agreement": agreement}
+    return render(request, 'account/edit_agreement.html', context)
+
+
+@login_required
+def delete_agreement(request, agreement_pk):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    # form
+    form = DeleteForm(request.POST or None)
+    agreement = get_object_or_404(Agreement, pk=agreement_pk)
+
+    if form.is_valid():
+        agreement.delete()
+        return redirect("account:list_agreements")
+
+    # render page
+    context = {"form": form,
+               "agreement": agreement}
+    return render(request, 'account/delete_agreement.html', context)

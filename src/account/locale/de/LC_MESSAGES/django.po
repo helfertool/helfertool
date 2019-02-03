@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 11:48+0100\n"
-"PO-Revision-Date: 2019-02-03 12:01+0100\n"
+"POT-Creation-Date: 2019-02-03 14:14+0100\n"
+"PO-Revision-Date: 2019-02-03 14:14+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.2.1\n"
 
 #: account/forms/account.py:10 account/templates/account/change_user.html:27
@@ -41,19 +41,31 @@ msgstr "Vorname"
 msgid "Last name"
 msgstr "Nachname"
 
-#: account/models/agreement.py:10 account/templates/account/permissions.html:13
+#: account/models/agreement.py:13
+#: account/templates/account/list_agreements.html:15
+#: account/templates/account/permissions.html:13
 #: account/templates/account/permissions.html:52
 #: account/templates/account/permissions.html:90
 msgid "Name"
 msgstr "Name"
 
-#: account/models/agreement.py:14
+#: account/models/agreement.py:17
 msgid "Text"
 msgstr "Text"
 
-#: account/models/agreement.py:18
-msgid "Begin date"
+#: account/models/agreement.py:21
+#: account/templates/account/list_agreements.html:16
+msgid "Start date"
 msgstr "Startdatum"
+
+#: account/models/agreement.py:25
+#: account/templates/account/list_agreements.html:17
+msgid "End date"
+msgstr "Enddatum"
+
+#: account/models/agreement.py:32
+msgid "End date must be after start date."
+msgstr "Enddatum muss nach Startdatum liegen."
 
 #: account/templates/account/add_user.html:5
 msgid "Add user"
@@ -102,12 +114,23 @@ msgid "Change password"
 msgstr "Passwort ändern"
 
 #: account/templates/account/change_user.html:70
+#: account/templates/account/edit_agreement.html:20
 msgid "Save"
 msgstr "Sichern"
 
 #: account/templates/account/change_user.html:75
 msgid "The password cannot be changed."
 msgstr "Das Passwort kann nicht geändert werden."
+
+#: account/templates/account/delete_agreement.html:6
+#: account/templates/account/delete_agreement.html:17
+msgid "Delete user agreement"
+msgstr "Nutzervereinbarung löschen"
+
+#: account/templates/account/delete_agreement.html:9
+#, python-format
+msgid "Delete user agreement %(name)s?"
+msgstr "Nutzervereinbarung %(name)s löschen?"
 
 #: account/templates/account/delete_permission.html:5
 #: account/templates/account/delete_permission.html:16
@@ -122,9 +145,34 @@ msgstr "Berechtigung löschen"
 msgid "Delete permission for user %(username)s?"
 msgstr "Berechtigung für den Nutzer %(username)s löschen?"
 
+#: account/templates/account/edit_agreement.html:7
+msgid "Edit user agreement"
+msgstr "Nutzervereinbarung bearbeiten"
+
+#: account/templates/account/edit_agreement.html:11
+#: account/templates/account/list_agreements.html:9
+msgid "New user agreement"
+msgstr "Neue Nutzervereinbarung"
+
 #: account/templates/account/handle_user_agreement.html:12
-msgid "Agree"
-msgstr "Zustimmen"
+msgid "I got it!"
+msgstr "Verstanden!"
+
+#: account/templates/account/list_agreements.html:5
+msgid "User agreements"
+msgstr "Nutzervereinbarungen"
+
+#: account/templates/account/list_agreements.html:28
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: account/templates/account/list_agreements.html:35
+msgid "Delete"
+msgstr "Löschen"
+
+#: account/templates/account/list_agreements.html:42
+msgid "There are no user agreements."
+msgstr "Es gibt keine Nutzervereinbarungen."
 
 #: account/templates/account/permissions.html:9
 msgid "There are no users, that can add events."
@@ -147,7 +195,7 @@ msgstr "Benutzer %(username)s hinzugefügt"
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
-#: account/views/permissions.py:41
+#: account/views/permissions.py:40
 #, python-format
 msgid "%(username)s can add users now"
 msgstr "%(username)s kann jetzt Nutzer hinzufügen"
@@ -157,12 +205,15 @@ msgstr "%(username)s kann jetzt Nutzer hinzufügen"
 msgid "%(username)s can add events now"
 msgstr "%(username)s kann jetzt Veranstaltungen hinzufügen"
 
-#: account/views/permissions.py:63
+#: account/views/permissions.py:64
 #, python-format
 msgid "%(username)s can send news now"
 msgstr "%(username)s kann jetzt Newsletter versenden"
 
-#: account/views/permissions.py:98
+#: account/views/permissions.py:100
 #, python-format
 msgid "Removed permission for user %(username)s"
 msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
+
+#~ msgid "Agree"
+#~ msgstr "Zustimmen"

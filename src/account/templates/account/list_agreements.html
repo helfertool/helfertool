@@ -1,0 +1,44 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons inventory %}
+
+{% block admincontent %}
+    <h2>{% trans "User agreements" %}</h2>
+
+    <p><a href="{% url 'account:new_agreement' %}">
+        {% icon "plus" %}
+        {% trans "New user agreement" %}
+    </a></p>
+
+    {% if agreements %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "Start date" %}</th>
+                <th>{% trans "End date" %}</th>
+                <th></th>
+            </tr>
+            {% for agreement in agreements %}
+                <tr>
+                    <td>{{ agreement.name }}</td>
+                    <td>{{ agreement.start }}</td>
+                    <td>{{ agreement.end|default:"-" }}</td>
+                    <td>
+                        <a href="{% url "account:edit_agreement" agreement.pk %}">
+                            {% icon "pencil-alt" %}
+                            {% trans "Edit" %}
+                        </a>
+
+                        <br />
+
+                        <a href="{% url "account:delete_agreement" agreement.pk %}">
+                            {% icon "trash-alt" %}
+                            {% trans "Delete" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "There are no user agreements." %}</p>
+    {% endif %}
+{% endblock %}

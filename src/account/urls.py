@@ -32,11 +32,27 @@ urlpatterns = [
         name='delete_news_permission'),
 
     # agreements
-    url(r'^agreements/$',
+    url(r'^check/$',
         views.check_user_agreement,
         name='check_user_agreement'),
 
-    url(r'^agreements/(?P<agreement_pk>[0-9]+)/$',
+    url(r'^check/(?P<agreement_pk>[0-9]+)/$',
         views.handle_user_agreement,
         name='handle_user_agreement'),
+
+    url(r'^agreements/$',
+        views.list_agreements,
+        name='list_agreements'),
+
+    url(r'^agreements/new/$',
+        views.edit_agreement,
+        name='new_agreement'),
+
+    url(r'^agreements/(?P<agreement_pk>[0-9]+)/$',
+        views.edit_agreement,
+        name='edit_agreement'),
+
+    url(r'^agreements/(?P<agreement_pk>[0-9]+)/delete/$',
+        views.delete_agreement,
+        name='delete_agreement'),
 ]

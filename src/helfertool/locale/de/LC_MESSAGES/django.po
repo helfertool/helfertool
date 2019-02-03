@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 11:48+0100\n"
-"PO-Revision-Date: 2019-02-03 11:53+0100\n"
+"POT-Creation-Date: 2019-02-03 14:14+0100\n"
+"PO-Revision-Date: 2019-02-03 14:10+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -221,6 +221,10 @@ msgstr "Nutzer hinzufügen"
 #: helfertool/templates/helfertool/admin.html:257
 msgid "Permissions"
 msgstr "Berechtigungen"
+
+#: helfertool/templates/helfertool/admin.html:261
+msgid "User agreements"
+msgstr "Nutzervereinbarungen"
 
 #: helfertool/templates/helfertool/base.html:31
 msgid "Helfertool"

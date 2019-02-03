@@ -1,7 +1,10 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
+
+import datetime
 
 
 class Agreement(models.Model):
@@ -14,12 +17,28 @@ class Agreement(models.Model):
         verbose_name=_("Text"),
     )
 
-    begin = models.DateField(
-        verbose_name=_("Begin date"),
+    start = models.DateField(
+        verbose_name=_("Start date"),
     )
 
+    end = models.DateField(
+        verbose_name=_("End date"),
+        blank=True,
+        null=True,
+    )
+
+    def clean(self):
+        if self.end and self.start > self.end:
+            raise ValidationError(_("End date must be after start date."))
+
+    @property
+    def in_timeframe(self):
+        today = datetime.datetime.today().date()
+
+        return self.start <= today and (self.end is None or today <= self.end)
+
     def __str__(self):
-        return "{} ({})".format(self.name, self.begin)
+        return "{} ({})".format(self.name, self.start)
 
 
 class UserAgreement(models.Model):
