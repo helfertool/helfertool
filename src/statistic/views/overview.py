@@ -3,8 +3,6 @@ from django.db.models import Sum, Count, ExpressionWrapper, F, fields
 from django.db.utils import OperationalError
 from django.shortcuts import render, get_object_or_404
 
-from collections import OrderedDict
-
 from registration.decorators import archived_not_available
 from registration.models import Event, Shift
 
@@ -22,17 +20,7 @@ def overview(request, event_url_name):
 
     num_helpers = event.helper_set.count()
 
-    num_coordinators = 0
-    timeline = {}
-    for helper in event.helper_set.all():
-        if helper.is_coordinator:
-            num_coordinators += 1
-        else:
-            day = helper.timestamp.strftime('%Y-%m-%d')
-            if day in timeline:
-                timeline[day] += 1
-            else:
-                timeline[day] = 1
+    num_coordinators = event.all_coordinators.count()
 
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
 
@@ -62,14 +50,6 @@ def overview(request, event_url_name):
         else:
             raise e
 
-    # sum up timeline
-    timeline = OrderedDict(sorted(timeline.items()))
-    timeline_sum = OrderedDict()
-    tmp = 0
-    for day in timeline:
-        tmp += timeline[day]
-        timeline_sum[day] = tmp
-
     # render
     context = {'event': event,
                'num_helpers': num_helpers,
@@ -77,6 +57,5 @@ def overview(request, event_url_name):
                'num_vegetarians': num_vegetarians,
                'num_shift_slots': num_shift_slots,
                'num_empty_shift_slots': num_empty_shift_slots,
-               'hours_total': hours_total,
-               'timeline': timeline_sum}
+               'hours_total': hours_total}
     return render(request, 'statistic/overview.html', context)

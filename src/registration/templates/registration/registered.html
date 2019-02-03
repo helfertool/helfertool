@@ -41,7 +41,7 @@
         {% include "registration/helper_data.html" with helper=data %}
 
         {% if event.changes_possible %}
-            <p style="margin-left: 1em;"><a href="{% url 'update_personal' event.url_name data.pk %}">
+            <p><a href="{% url 'update_personal' event.url_name data.pk %}">
                 <i class="fas fa-edit"></i> {% trans "Edit" %}
             </a></p>
         {% endif %}

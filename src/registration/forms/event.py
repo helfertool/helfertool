@@ -22,6 +22,7 @@ class EventForm(forms.ModelForm):
             'admins': UserSelectWidget,
             'text': CKEditorWidget,
             'date': DatePicker,
+            'changes_until': DatePicker,
         }
 
         # According to the documentation django-modeltranslations copies the

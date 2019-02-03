@@ -1,6 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 staticfiles %}
 
 {% block admincontent %}
     <h2>{% trans "Send news" %}</h2>
@@ -12,10 +11,10 @@
 
         {% bootstrap_form_errors form %}
 
-        {% bootstrap_field form.language %}
-        {% bootstrap_field form.english %}
-
-        <div style="margin-top:4em;"></div>
+        <div class="mb-5">
+            {% bootstrap_field form.language %}
+            {% bootstrap_field form.english %}
+        </div>
 
         {% trans "Subject" as subject %}
         {% bootstrap_field form.subject addon_before=subject show_label=False %}
@@ -51,41 +50,5 @@
         <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
     </form>
 
-    <script type="text/javascript">
-        function handle_lang()
-        {
-            var $lang = $("#id_language").val();
-
-            // preface and end of first text
-            $(".mail_preface").hide();
-            $(".mail_end").hide();
-
-            $("#preface_" + $lang).show();
-            $("#end_" + $lang).show();
-
-            // maybe disable second text
-            if($("#id_language").val() == "en") {
-                $("#englishbelow").hide()
-                $("#id_english").parent().hide()
-                $("#block_en").hide()
-                $("#id_text_en").removeAttr('required');
-            }
-            else {
-                $("#id_english").parent().show()
-
-                if($("#id_english").prop('checked')) {
-                    $("#englishbelow").show()
-                    $("#block_en").show()
-                    $("#id_text_en").setAttr('required', '');
-                }
-                else {
-                    $("#englishbelow").hide()
-                    $("#block_en").hide()
-                    $("#id_text_en").removeAttr('required');
-                }
-            }
-        }
-
-        handle_lang();
-    </script>
+    <script src="{% static "helfertool/js/news.js" %}"></script>
 {% endblock %}

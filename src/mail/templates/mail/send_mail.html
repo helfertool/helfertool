@@ -1,6 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 staticfiles %}
 
 {% block admincontent %}
     <h2>{% trans "Send mails" %}</h2>
@@ -13,15 +12,5 @@
         <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
     </form>
 
-    <script type="text/javascript">
-        function handle_reply_to()
-        {
-            if($("#id_reply_to").val() == "-")
-                $("#id_custom_reply_to").parent().show()
-            else
-                $("#id_custom_reply_to").parent().hide()
-        }
-
-        handle_reply_to();
-    </script>
+    <script src="{% static "helfertool/js/mail_reply_to.js" %}"></script>
 {% endblock %}

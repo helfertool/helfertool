@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # django admin interface
-    url(r'^djangoadmin/', admin.site.urls),
+    url(r'^manage/django/', admin.site.urls),
 
     # internationalization
     url(r'^i18n/', include('django.conf.urls.i18n')),

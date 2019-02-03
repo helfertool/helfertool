@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 14:14+0100\n"
+"POT-Creation-Date: 2019-02-03 17:08+0100\n"
 "PO-Revision-Date: 2019-02-03 14:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -154,7 +154,7 @@ msgstr "Nutzervereinbarung bearbeiten"
 msgid "New user agreement"
 msgstr "Neue Nutzervereinbarung"
 
-#: account/templates/account/handle_user_agreement.html:12
+#: account/templates/account/handle_user_agreement.html:14
 msgid "I got it!"
 msgstr "Verstanden!"
 

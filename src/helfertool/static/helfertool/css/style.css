@@ -188,7 +188,7 @@ a.icon
 
 img.icon
 {
-    width:20px;
+    width:2em;
     vertical-align: middle;
 }
 
@@ -306,4 +306,16 @@ div.mailbody pre
 tr.child ul.dtr-details
 {
     padding-left: 40px!important;
+}
+
+/* table with shirt sizes */
+.width-10em
+{
+    width: 10em;
+}
+
+/* table for pdf/excel export of single days */
+.width-auto
+{
+    width: auto;
 }

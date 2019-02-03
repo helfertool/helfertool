@@ -16,29 +16,26 @@
         <p class="text-muted">{% trans "There are no roles." %}</p>
     {% else %}
         <table class="table">
-            <tr>
-                <th style="width:30%">{% trans "Name" %}</th>
-                <th style="width:20%">{% trans "LaTeX Name" %}</th>
-                <th style="width:30%">{% trans "Permissions" %}</th>
-
-                {% if not event.archived %}
-                    <th style="width:20%"></th>
-                {% endif %}
+            <tr class="d-flex">
+                <th class="col-3">{% trans "Name" %}</th>
+                <th class="col-3">{% trans "LaTeX Name" %}</th>
+                <th class="col-4">{% trans "Permissions" %}</th>
+                <th class="col-2"></th>
             </tr>
 
             {% for role in roles %}
-                <tr>
-                    <td>{{ role.name }}</td>
-                    <td>{{ role.latex_name }}</td>
-                    <td>
+                <tr class="d-flex">
+                    <td class="col-3">{{ role.name }}</td>
+                    <td class="col-3">{{ role.latex_name }}</td>
+                    <td class="col-4">
                         <ul>
                             {% for perm in role.permissions.all %}
                                 <li>{{ perm.name }}</li>
                             {% endfor %}
                         </ul>
                     </td>
-                    {% if not event.archived %}
-                        <td>
+                    <td class="col-2">
+                        {% if not event.archived %}
                             <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
                                 {% icon "pencil-alt" %} {% trans "Edit" %}
                             </a>
@@ -46,8 +43,8 @@
                             <a href="{% url 'badges:delete_role' event.url_name role.pk %}">
                                 {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
-                        </td>
-                    {% endif %}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
@@ -67,20 +64,17 @@
         <p class="text-muted">{% trans "There are no designs." %}</p>
     {% else %}
         <table class="table">
-            <tr>
-                <th style="width:70%">{% trans "Name" %}</th>
-
-                {% if not event.archived %}
-                    <th style="width:20%"></th>
-                {% endif %}
+            <tr class="d-flex">
+                <th class="col-10">{% trans "Name" %}</th>
+                <th class="col-2"></th>
             </tr>
 
             {% for design in designs %}
-                <tr>
-                    <td>{{ design.name }}</td>
+                <tr class="d-flex">
+                    <td class="col-10">{{ design.name }}</td>
 
-                    {% if not event.archived %}
-                        <td>
+                    <td class="col-2">
+                        {% if not event.archived %}
                             <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
                                 {% icon "pencil-alt" %} {% trans "Edit" %}
                             </a>
@@ -88,8 +82,8 @@
                             <a href="{% url 'badges:delete_design' event.url_name design.pk %}">
                                 {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
-                        </td>
-                    {% endif %}
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
@@ -111,25 +105,25 @@
         {% bootstrap_form defaults_form %}
 
         <table class="table">
-            <tr>
-                <th>{% trans "Job" %}</th>
-                <th>{% trans "Role" %}</th>
-                <th>{% trans "Design" %}</th>
-                <th>{% trans "Print no default role" %}</th>
+            <tr class="d-flex">
+                <th class="col-3">{% trans "Job" %}</th>
+                <th class="col-3">{% trans "Role" %}</th>
+                <th class="col-3">{% trans "Design" %}</th>
+                <th class="col-3">{% trans "Print no default role" %}</th>
             </tr>
 
             {% for job in event.job_set.all %}
-                <tr>
-                    <td>{{ job.name }}</td>
-                    <td>
+                <tr class="d-flex">
+                    <td class="col-3">{{ job.name }}</td>
+                    <td class="col-3">
                         {% badge_job_role_field job_defaults_form job.pk as field %}
                         {% bootstrap_field field show_label=False %}
                     </td>
-                    <td>
+                    <td class="col-3">
                         {% badge_job_design_field job_defaults_form job.pk as field %}
                         {% bootstrap_field field show_label=False %}
                     </td>
-                    <td>
+                    <td class="col-3">
                         {% badge_job_no_def_role_field job_defaults_form job.pk as field %}
                         {% bootstrap_field field show_label=False %}
                     </td>

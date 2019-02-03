@@ -1,6 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 staticfiles %}
 
 {% block admincontent %}
     <h2>{% trans "Generate badges" %}</h2>
@@ -15,7 +14,7 @@
             </ul>
         </div>
     {% else %}
-        <div id="tasks"></div>
+        <div id="tasks" data-url="{% url "badges:tasklist" event.url_name %}"></div>
 
         <table class="table">
             <tr>
@@ -65,12 +64,6 @@
             {% trans "Really all badges" %}
         </a>
 
-        <script>
-            $( "#tasks" ).load("{% url "badges:tasklist" event.url_name %}");
-
-            setInterval(function() {
-                $("#tasks").load("{% url "badges:tasklist" event.url_name %}")
-            }, 2000);
-        </script>
+        <script src="{% static "helfertool/js/badges_tasks.js" %}"></script>
     {% endif %}
 {% endblock %}

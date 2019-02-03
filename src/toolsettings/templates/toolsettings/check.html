@@ -1,6 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "Check installation" %}</h2>
@@ -8,13 +7,13 @@
     <h3>{% trans "Helfertool" %}</h3>
 
     <table class="table">
-        <tr>
-            <th style="width: 25%">{% trans "Templates" %} </th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">{% trans "Templates" %} </th>
+            <td class="col-9">
                 {% if templates_ok %}
                     <i class="fas fa-check"></i>
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>
@@ -24,36 +23,36 @@
 
 
     <table class="table">
-        <tr>
-            <th style="width: 25%">{% trans "Mail" %} </th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">{% trans "Mail" %} </th>
+            <td class="col-9">
                 {% if mail_ok %}
                     <i class="fas fa-check"></i>
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>
 
-        <tr>
-            <th style="width: 25%">{% trans "RabbitMQ" %} </th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">{% trans "RabbitMQ" %} </th>
+            <td class="col-9">
                 {% if celery_broker_ok %}
                     <i class="fas fa-check"></i>
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>
 
-        <tr>
-            <th style="width: 25%">{% trans "LDAP" %} </th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">{% trans "LDAP" %} </th>
+            <td class="col-9">
                 {% if ldap_configured %}
                     {% if ldap_ok %}
                         <i class="fas fa-check"></i>
                     {% else %}
-                        <i class="fas fa-times" style="color:red;"></i>
+                        <i class="fas fa-times text-danger"></i>
                     {% endif %}
                 {% else %}
                     <i class="fas fa-minus"></i>
@@ -65,46 +64,46 @@
     <h3>{% trans "Header" %}</h3>
 
     <table class="table">
-        <tr>
-            <th style="width: 25%">Host</th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">Host</th>
+            <td class="col-9">
                 {% if header_host %}
                     {{ header_host }}
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>
 
-        <tr>
-            <th style="width: 25%">X-Real-IP</th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">X-Real-IP</th>
+            <td class="col-9">
                 {% if header_x_real_ip %}
                     {{ header_x_real_ip }}
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>
 
-        <tr>
-            <th style="width: 25%">X-Forwarded-For</th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">X-Forwarded-For</th>
+            <td class="col-9">
                 {% if header_x_forwarded_for %}
                     {{ header_x_forwarded_for }}
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>
 
-        <tr>
-            <th style="width: 25%">X-Forwarded-Proto</th>
-            <td style="width: 75%">
+        <tr class="d-flex">
+            <th class="col-3">X-Forwarded-Proto</th>
+            <td class="col-9">
                 {% if header_x_forwarded_proto %}
                     {{ header_x_forwarded_proto }}
                 {% else %}
-                    <i class="fas fa-times" style="color:red;"></i>
+                    <i class="fas fa-times text-danger"></i>
                 {% endif %}
             </td>
         </tr>

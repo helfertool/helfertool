@@ -31,11 +31,9 @@
                 </label>
 
                 {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
-
-                <div style="margin-bottom: 2em;"></div>
             {% endfor %}
 
-            <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary" />
+            <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary mt-3" />
         </form>
     {% else %}
         <div class="alert alert-warning" role="alert">

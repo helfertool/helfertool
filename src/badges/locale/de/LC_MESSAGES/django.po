@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 14:14+0100\n"
+"POT-Creation-Date: 2019-02-03 17:08+0100\n"
 "PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -78,11 +78,11 @@ msgstr "Primäre Aufgabe"
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: badges/models/badge.py:79 badges/templates/badges/settings.html:116
+#: badges/models/badge.py:79 badges/templates/badges/settings.html:110
 msgid "Role"
 msgstr "Rolle"
 
-#: badges/models/badge.py:88 badges/templates/badges/settings.html:117
+#: badges/models/badge.py:88 badges/templates/badges/settings.html:111
 msgid "Design"
 msgstr "Design"
 
@@ -107,7 +107,7 @@ msgstr "Keine Standard Rollen auf die Badges drucken"
 #: badges/templates/badges/delete_permission.html:13
 #: badges/templates/badges/delete_role.html:13
 #: badges/templates/badges/settings.html:20
-#: badges/templates/badges/settings.html:71
+#: badges/templates/badges/settings.html:68
 #: badges/templates/badges/settings_advanced.html:36
 msgid "Name"
 msgstr "Name"
@@ -196,9 +196,9 @@ msgstr "Dieses Badge Design löschen?"
 #: badges/templates/badges/delete_design.html:22
 #: badges/templates/badges/delete_permission.html:22
 #: badges/templates/badges/delete_role.html:32
-#: badges/templates/badges/settings.html:47
-#: badges/templates/badges/settings.html:89
-#: badges/templates/badges/settings_advanced.html:54
+#: badges/templates/badges/settings.html:44
+#: badges/templates/badges/settings.html:83
+#: badges/templates/badges/settings_advanced.html:52
 msgid "Delete"
 msgstr "Löschen"
 
@@ -237,7 +237,7 @@ msgstr "Badge für %(name)s"
 #: badges/templates/badges/edit_design.html:13
 #: badges/templates/badges/edit_permission.html:13
 #: badges/templates/badges/edit_role.html:13
-#: badges/templates/badges/settings.html:144
+#: badges/templates/badges/settings.html:138
 #: badges/templates/badges/settings_advanced.html:24
 msgid "Save"
 msgstr "Speichern"
@@ -274,7 +274,7 @@ msgstr ""
 "folgende Einstellungen:"
 
 #: badges/templates/badges/index.html:22
-#: badges/templates/badges/settings.html:115
+#: badges/templates/badges/settings.html:109
 msgid "Job"
 msgstr "Aufgabe"
 
@@ -336,33 +336,33 @@ msgstr "Es gibt keine Rollen."
 msgid "LaTeX Name"
 msgstr "LaTeX Name"
 
-#: badges/templates/badges/settings.html:43
-#: badges/templates/badges/settings.html:85
-#: badges/templates/badges/settings_advanced.html:50
+#: badges/templates/badges/settings.html:40
+#: badges/templates/badges/settings.html:79
+#: badges/templates/badges/settings_advanced.html:48
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: badges/templates/badges/settings.html:59
+#: badges/templates/badges/settings.html:56
 msgid "Add role"
 msgstr "Rolle hinzufügen"
 
-#: badges/templates/badges/settings.html:64
+#: badges/templates/badges/settings.html:61
 msgid "Designs"
 msgstr "Designs"
 
-#: badges/templates/badges/settings.html:67
+#: badges/templates/badges/settings.html:64
 msgid "There are no designs."
 msgstr "Es gibt keine Designs."
 
-#: badges/templates/badges/settings.html:101
+#: badges/templates/badges/settings.html:95
 msgid "Add design"
 msgstr "Design hinzufügen"
 
-#: badges/templates/badges/settings.html:107
+#: badges/templates/badges/settings.html:101
 msgid "Defaults"
 msgstr "Standards"
 
-#: badges/templates/badges/settings.html:118
+#: badges/templates/badges/settings.html:112
 msgid "Print no default role"
 msgstr "Keine Standard Rolle abdrucken"
 
@@ -394,7 +394,7 @@ msgstr "Herunterladen"
 msgid "There are no permissions."
 msgstr "Es gibt keine Berechtigungen."
 
-#: badges/templates/badges/settings_advanced.html:66
+#: badges/templates/badges/settings_advanced.html:64
 msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 

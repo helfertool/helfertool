@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 14:14+0100\n"
+"POT-Creation-Date: 2019-02-03 17:08+0100\n"
 "PO-Revision-Date: 2019-02-03 11:52+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -30,37 +30,37 @@ msgstr "HTML"
 msgid "Text"
 msgstr "Text"
 
-#: toolsettings/templates/toolsettings/check.html:6
+#: toolsettings/templates/toolsettings/check.html:5
 #: toolsettings/templates/toolsettings/index.html:16
 msgid "Check installation"
 msgstr "Installation überprüfen"
 
-#: toolsettings/templates/toolsettings/check.html:8
+#: toolsettings/templates/toolsettings/check.html:7
 msgid "Helfertool"
 msgstr "Helfertool"
 
-#: toolsettings/templates/toolsettings/check.html:12
+#: toolsettings/templates/toolsettings/check.html:11
 #: toolsettings/templates/toolsettings/index.html:6
 msgid "Templates"
 msgstr "Templates"
 
-#: toolsettings/templates/toolsettings/check.html:23
+#: toolsettings/templates/toolsettings/check.html:22
 msgid "External services"
 msgstr "Externe Dienste"
 
-#: toolsettings/templates/toolsettings/check.html:28
+#: toolsettings/templates/toolsettings/check.html:27
 msgid "Mail"
 msgstr "E-Mail"
 
-#: toolsettings/templates/toolsettings/check.html:39
+#: toolsettings/templates/toolsettings/check.html:38
 msgid "RabbitMQ"
 msgstr "RabbitMQ"
 
-#: toolsettings/templates/toolsettings/check.html:50
+#: toolsettings/templates/toolsettings/check.html:49
 msgid "LDAP"
 msgstr "LDAP"
 
-#: toolsettings/templates/toolsettings/check.html:65
+#: toolsettings/templates/toolsettings/check.html:64
 msgid "Header"
 msgstr "Header"
 

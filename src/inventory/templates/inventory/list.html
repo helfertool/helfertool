@@ -9,15 +9,15 @@
     {% regroup used_items by item as item_groups %} {# TODO: sort by item #}
 
     <table class="table">
-        <tr>
-            <th style="width:30%">{% trans "Item" %}</th>
-            <th style="width:70%">{% trans "Status and log" %}</th>
+        <tr class="d-flex">
+            <th class="col-4">{% trans "Item" %}</th>
+            <th class="col-8">{% trans "Status and log" %}</th>
         </tr>
         {% for group in item_groups %}
-            <tr>
-                <td>{{ group.grouper.name }}</td>
+            <tr class="d-flex">
+                <td class="col-4">{{ group.grouper.name }}</td>
 
-                <td>
+                <td class="col-8">
                     {% active_uses group.list as num_uses %}
                     {% if num_uses == 0 %}
                         {% trans "Not in use" %}

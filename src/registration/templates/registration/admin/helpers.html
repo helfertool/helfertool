@@ -10,42 +10,55 @@
     {% if admin and not event.archived %}
         <p>
             {% icon "file-download" %}
-            &nbsp;
             <b>{% trans "Export" %}:</b>
-            &nbsp;
-            <a href="{% url 'export' event.url_name 'excel' %}" class="icon">
-                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
-            </a>
-            &nbsp;
-            <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
-                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
-            </a>
-            &nbsp;
+        </p>
+
+        <table class="table table-sm table-borderless mb-0">
+            <tr>
+                <td class="col-2 align-middle">
+                    {% trans "All days" %}
+                </td>
+
+                <td class="col-10">
+                    <a href="{% url 'export' event.url_name 'excel' %}" class="icon mr-2">
+                        <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+                    </a>
+
+                    <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
+                        <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+
+        <div id="exportdays" class="collapse">
+            <table class="table table-sm table-borderless mt-0">
+                    {% for day in days %}
+                        {% with day_str=day|date:"Y-m-d" %}
+                        <tr>
+                            <td class="col-2 align-middle">
+                                {{ day }}
+                            </td>
+
+                            <td class="col-10">
+                                <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon mr-2">
+                                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+                                </a>
+                                <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
+                                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+                                </a>
+                            </td>
+                        </tr>
+                        {% endwith %}
+                    {% endfor %}
+            </table>
+        </div>
+
+        <p class="mt-3 mb-4">
             <a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#exportdays">
                 {% trans "Export single days" %}
             </a>
         </p>
-        <div id="exportdays" class="collapse">
-            <table class="table table-sm" style="width: auto;">
-                {% for day in days %}
-                    <tr>
-                        <th>{{ day }}</th>
-                        {% with day_str=day|date:"Y-m-d" %}
-                        <td>
-                            <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon">
-                                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
-                                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
-                            </a>
-                        </td>
-                        {% endwith %}
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
     {% endif %}
 
     {% for job in event.job_set.all %}

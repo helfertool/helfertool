@@ -12,9 +12,9 @@
 
         <table class="table">
             <tr>
-                <th style="width: 10em;"></th>
+                <th class="width-10em"></th>
                 {% for size in size_names %}
-                    <th style="width: 4em;">{{ size }}</th>
+                    <th>{{ size }}</th>
                 {% endfor %}
             </tr>
             <tr>
@@ -46,9 +46,9 @@
 
             <table class="table">
                 <tr>
-                    <th style="width: 10em;">{% trans "Shift" %}</th>
+                    <th class="width-10em">{% trans "Shift" %}</th>
                     {% for size in size_names %}
-                        <th style="width: 4em;">{{ size }}</th>
+                        <th>{{ size }}</th>
                     {% endfor %}
                 </tr>
 

@@ -1,7 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
-{% load duration %}
+{% load i18n bootstrap4 staticfiles duration %}
 
 {% block admincontent %}
     <h2>{% trans "Statistics" %}</h2>
@@ -43,40 +41,8 @@
 
     <h3>{% trans "Chronological development of registrations" %}</h3>
 
-    {% if timeline %}
-        <canvas id="chart" width="400" height="200"></canvas>
+    <canvas class="chart" width="400" height="200" data-url="{% url 'statistic:chart_timeline' event.url_name %}" data-empty="overview_empty"></canvas>
+    <p id="overview_empty" class="text-muted d-none">{% trans "No helpers are registered." %}</p>
 
-        <script>
-            var ctx = $("#chart");
-
-            var chart_data = {
-                datasets: [{
-                    label: "{% trans "Number of helpers" %}",
-                    data: [
-                        {% for day,number in timeline.items %}
-                            {
-                                x: "{{ day }}",
-                                y: {{ number }},
-                            },
-                        {% endfor %}
-                    ],
-                    lineTension: 0.2,
-                }]
-            };
-
-            var chart = new Chart(ctx, {
-                type: 'line',
-                data: chart_data,
-                options: {
-                    scales: {
-                        xAxes: [{
-                            type: 'time',
-                        }],
-                    },
-                },
-            });
-        </script>
-    {% else %}
-        <p class="text-muted">{% trans "No helpers are registered." %}</p>
-    {% endif %}
+    <script src="{% static "helfertool/js/chart.js" %}"></script>
 {% endblock %}

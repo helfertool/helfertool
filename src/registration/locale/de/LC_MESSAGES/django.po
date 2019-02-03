@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 14:14+0100\n"
-"PO-Revision-Date: 2019-02-03 11:54+0100\n"
+"POT-Creation-Date: 2019-02-03 17:08+0100\n"
+"PO-Revision-Date: 2019-02-03 17:08+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -118,7 +118,7 @@ msgstr "Suchbegriff"
 
 #: registration/forms/registration.py:61
 #: registration/templates/registration/admin/delete_helper.html:34
-#: registration/templates/registration/admin/helpers.html:68
+#: registration/templates/registration/admin/helpers.html:81
 msgid "Show"
 msgstr "Anzeigen"
 
@@ -779,7 +779,7 @@ msgstr ""
 "Adresse verwendet."
 
 #: registration/templates/registration/admin/duplicates.html:21
-#: registration/templates/registration/admin/merge.html:38
+#: registration/templates/registration/admin/merge.html:36
 msgid "Merge"
 msgstr "Zusammenfassen"
 
@@ -870,21 +870,25 @@ msgstr ""
 msgid "Overview over helpers"
 msgstr "Helferübersicht"
 
-#: registration/templates/registration/admin/helpers.html:14
+#: registration/templates/registration/admin/helpers.html:13
 #: registration/templates/registration/admin/helpers_for_job.html:15
 msgid "Export"
 msgstr "Export"
 
-#: registration/templates/registration/admin/helpers.html:25
+#: registration/templates/registration/admin/helpers.html:19
+msgid "All days"
+msgstr "Alle Tage"
+
+#: registration/templates/registration/admin/helpers.html:59
 msgid "Export single days"
 msgstr "Einzelne Tage exportieren"
 
-#: registration/templates/registration/admin/helpers.html:59
+#: registration/templates/registration/admin/helpers.html:72
 #: registration/templates/registration/admin/jobs_and_shifts.html:29
 msgid "Public"
 msgstr "Öffentlich"
 
-#: registration/templates/registration/admin/helpers.html:73
+#: registration/templates/registration/admin/helpers.html:86
 #, python-format
 msgid "Number of coordinators: %(number)s"
 msgstr "Anzahl der Koordinatoren: %(number)s"
@@ -978,7 +982,7 @@ msgstr ""
 msgid "Keep this data"
 msgstr "Diese Daten behalten"
 
-#: registration/templates/registration/admin/merge.html:42
+#: registration/templates/registration/admin/merge.html:40
 msgid "There are not duplicates for this mail address."
 msgstr "Es gibt keine Duplikate für diese E-Mail Adresse."
 
