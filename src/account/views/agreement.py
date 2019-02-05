@@ -9,6 +9,9 @@ from registration.views.utils import nopermission
 from ..models import Agreement, UserAgreement
 from ..forms import AgreementForm, UserAgreementForm, DeleteForm
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 def check_user_agreement(request):
@@ -49,6 +52,13 @@ def handle_user_agreement(request, agreement_pk):
     if form.is_valid():
         form.instance.agreed = datetime.datetime.now()
         form.save()
+
+        logger.info("useragreement accepted", extra={
+            'user': request.user,
+            'agreement': agreement.name,
+            'agreement_pk': agreement.pk,
+        })
+
         return redirect('account:check_user_agreement')
 
     context = {'form': form}
@@ -84,6 +94,19 @@ def edit_agreement(request, agreement_pk=None):
 
     if form.is_valid():
         form.save()
+
+        if agreement:
+            logmsg = "useragreement changed"
+        else:
+            logmsg = "useragreement created"
+            agreement = form.instance
+
+        logger.info(logmsg, extra={
+            'user': request.user,
+            'agreement': agreement.name,
+            'agreement_pk': agreement.pk,
+        })
+
         return redirect("account:list_agreements")
 
     # render page
@@ -103,7 +126,14 @@ def delete_agreement(request, agreement_pk):
     agreement = get_object_or_404(Agreement, pk=agreement_pk)
 
     if form.is_valid():
+        logger.info("useragreement deleted", extra={
+            'user': request.user,
+            'agreement': agreement.name,
+            'agreement_pk': agreement.pk,
+        })
+
         agreement.delete()
+
         return redirect("account:list_agreements")
 
     # render page

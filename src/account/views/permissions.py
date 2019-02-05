@@ -10,6 +10,28 @@ from registration.views.utils import nopermission
 
 from ..forms import UsernameForm, DeleteForm
 
+import logging
+logger = logging.getLogger("helfertool")
+
+logging_group_map = {
+    settings.GROUP_ADDUSER: "adduser",
+    settings.GROUP_ADDEVENT: "addevent",
+    settings.GROUP_SENDNEWS: "sendnews",
+}
+
+
+def _grant_permission(user, groupname, request, message):
+    group, created = Group.objects.get_or_create(name=groupname)
+    user.groups.add(group)
+
+    messages.success(request, message % {'username': user})
+
+    logger.info("permission granted", extra={
+        'user': request.user,
+        'permission': logging_group_map[groupname],
+        'changed_user': user,
+    })
+
 
 @login_required
 def permissions(request):
@@ -34,11 +56,8 @@ def permissions(request):
     if form_adduser.is_valid():
         user = form_adduser.get_user()
         if user:
-            group, created = Group.objects.get_or_create(
-                name=settings.GROUP_ADDUSER)
-            user.groups.add(group)
-            messages.success(request, _("%(username)s can add users now") %
-                             {'username': user})
+            _grant_permission(user, settings.GROUP_ADDUSER, request,
+                              _("%(username)s can add users now"))
             return redirect('account:permissions')
 
     # form for addevent
@@ -46,11 +65,8 @@ def permissions(request):
     if form_addevent.is_valid():
         user = form_addevent.get_user()
         if user:
-            group, created = Group.objects.get_or_create(
-                name=settings.GROUP_ADDEVENT)
-            user.groups.add(group)
-            messages.success(request, _("%(username)s can add events now") %
-                             {'username': user})
+            _grant_permission(user, settings.GROUP_ADDEVENT, request,
+                              _("%(username)s can add events now"))
             return redirect('account:permissions')
 
     # form for sendnews
@@ -58,11 +74,8 @@ def permissions(request):
     if form_sendnews.is_valid():
         user = form_sendnews.get_user()
         if user:
-            group, created = Group.objects.get_or_create(
-                name=settings.GROUP_SENDNEWS)
-            user.groups.add(group)
-            messages.success(request, _("%(username)s can send news now") %
-                             {'username': user})
+            _grant_permission(user, settings.GROUP_SENDNEWS, request,
+                              _("%(username)s can send news now"))
             return redirect('account:permissions')
 
     context = {'users_adduser': users_adduser,
@@ -99,6 +112,13 @@ def delete_permission(request, user_pk, groupname):
         # notification
         messages.success(request, _("Removed permission for user %(username)s")
                          % {'username': user})
+
+        # logging
+        logger.info("permission revoked", extra={
+            'user': request.user,
+            'permission': logging_group_map[groupname],
+            'changed_user': user,
+        })
 
         # redirect to overview over permissions
         return redirect('account:permissions')

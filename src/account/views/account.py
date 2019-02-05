@@ -25,8 +25,15 @@ def add_user(request):
 
     if form.is_valid():
         user = form.save()
+
         messages.success(request, _("Added user %(username)s" %
                          {'username': user}))
+
+        logger.info("user created", extra={
+            'user': request.user,
+            'added_user': user.username,
+        })
+
         return redirect('account:add_user')
 
     context = {'form': form}
