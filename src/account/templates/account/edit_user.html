@@ -1,0 +1,28 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Edit user" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form_errors form %}
+
+        <h3>{% trans "Personal data" %}</h3>
+        {% bootstrap_field form.first_name %}
+        {% bootstrap_field form.last_name %}
+        {% bootstrap_field form.email %}
+
+        <h3>{% trans "Account status" %}</h3>
+        {% bootstrap_field form.is_active %}
+
+        <h3>{% trans "Permissions" %}</h3>
+        {% bootstrap_field form.is_superuser %}
+        {% bootstrap_field form.perm_addevent %}
+        {% bootstrap_field form.perm_adduser %}
+        {% bootstrap_field form.perm_sendnews %}
+
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}

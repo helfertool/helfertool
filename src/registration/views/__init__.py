@@ -1,7 +1,7 @@
 from .registration import index, form, registered, validate, deregister, \
     deleted, update_personal
 
-from .admin import admin, jobs_and_shifts, coordinators
+from .admin import admin, manage_event, jobs_and_shifts, coordinators
 from .event import edit_event, delete_event, archive_event, duplicate_event
 from .job import edit_job, delete_job, duplicate_job, sort_job
 from .shift import edit_shift, delete_shift

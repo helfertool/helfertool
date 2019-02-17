@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 17:08+0100\n"
+"POT-Creation-Date: 2019-02-17 17:53+0100\n"
 "PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -26,7 +26,7 @@ msgstr "Sprache"
 msgid "Add English text"
 msgstr "Englischen Text hinzufügen"
 
-#: news/forms/mail.py:31 news/templates/news/send.html:20
+#: news/forms/mail.py:31 news/templates/news/send.html:19
 msgid "Subject"
 msgstr "Betreff"
 
@@ -90,15 +90,15 @@ msgstr ""
 "\n"
 "Hallo liebe Helferinnen und Helfer,\n"
 
-#: news/templates/news/send.html:6
+#: news/templates/news/send.html:5
 msgid "Send news"
 msgstr "Newsletter versenden"
 
-#: news/templates/news/send.html:8
+#: news/templates/news/send.html:7
 msgid "Number of recipients:"
 msgstr "Anzahl der Empfänger:"
 
-#: news/templates/news/send.html:51
+#: news/templates/news/send.html:50
 msgid "Send"
 msgstr "Senden"
 

@@ -11,18 +11,18 @@ from ..models import Event
 
 
 @login_required
-def admin(request, event_url_name=None):
-    # check permission
-    if not (is_involved(request.user, event_url_name) or has_perm_group(request.user)
-            or is_inventory_admin(request.user)):
+def admin(request):
+    context = {'event': None}
+    return render(request, 'registration/admin/index.html', context)
+
+
+@login_required
+def manage_event(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    if not event.is_involved(request.user):
         return nopermission(request)
 
-    # get event
-    event = None
-    if event_url_name:
-        event = get_object_or_404(Event, url_name=event_url_name)
-
-    # response
     context = {'event': event}
     return render(request, 'registration/admin/index.html', context)
 

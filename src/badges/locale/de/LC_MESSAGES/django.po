@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 17:08+0100\n"
+"POT-Creation-Date: 2019-02-17 17:53+0100\n"
 "PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -90,11 +90,11 @@ msgstr "Design"
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
-#: badges/models/defaults.py:14 badges/templates/badges/index.html:13
+#: badges/models/defaults.py:14 badges/templates/badges/index.html:12
 msgid "Default role"
 msgstr "Standard Rolle"
 
-#: badges/models/defaults.py:23 badges/templates/badges/index.html:14
+#: badges/models/defaults.py:23 badges/templates/badges/index.html:13
 msgid "Default design"
 msgstr "Standard Design"
 
@@ -153,7 +153,7 @@ msgstr "Dieser Name wird im LaTeX Template verwendet."
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: badges/models/settings.py:39 badges/templates/badges/index.html:12
+#: badges/models/settings.py:39 badges/templates/badges/index.html:11
 msgid "LaTeX template"
 msgstr "LaTeX Template"
 
@@ -262,40 +262,40 @@ msgstr "Generieren der Badges fehlgeschlagen"
 msgid "There is no error"
 msgstr "Es gibt keinen Fehler"
 
-#: badges/templates/badges/index.html:6
+#: badges/templates/badges/index.html:5
 msgid "Generate badges"
 msgstr "Badges generieren"
 
-#: badges/templates/badges/index.html:10
+#: badges/templates/badges/index.html:9
 msgid ""
 "Some settings are missing to generate badges. Check the following settings:"
 msgstr ""
 "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
 "folgende Einstellungen:"
 
-#: badges/templates/badges/index.html:22
+#: badges/templates/badges/index.html:21
 #: badges/templates/badges/settings.html:109
 msgid "Job"
 msgstr "Aufgabe"
 
-#: badges/templates/badges/index.html:33
+#: badges/templates/badges/index.html:32
 msgid "Unregistered badges"
 msgstr "Nicht registrierte Badges"
 
-#: badges/templates/badges/index.html:38
+#: badges/templates/badges/index.html:37
 msgid "All badges"
 msgstr "Alle Badges"
 
-#: badges/templates/badges/index.html:43 badges/templates/badges/index.html:48
+#: badges/templates/badges/index.html:42 badges/templates/badges/index.html:47
 #, python-format
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:60 badges/views/generate.py:179
+#: badges/templates/badges/index.html:59 badges/views/generate.py:179
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:65 badges/views/generate.py:181
+#: badges/templates/badges/index.html:64 badges/views/generate.py:181
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 

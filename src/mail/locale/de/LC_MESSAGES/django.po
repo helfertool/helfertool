@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 17:08+0100\n"
+"POT-Creation-Date: 2019-02-17 17:53+0100\n"
 "PO-Revision-Date: 2018-10-29 20:03+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -99,11 +99,11 @@ msgstr "Anzeigen"
 msgid "No mails were sent (or you are not allowed to see these mails)."
 msgstr "Es wurden keine E-Mails verschickt (oder du kannst diese nicht sehen)."
 
-#: mail/templates/mail/send_mail.html:6
+#: mail/templates/mail/send_mail.html:5
 msgid "Send mails"
 msgstr "E-Mails senden"
 
-#: mail/templates/mail/send_mail.html:13
+#: mail/templates/mail/send_mail.html:12
 msgid "Send"
 msgstr "Senden"
 

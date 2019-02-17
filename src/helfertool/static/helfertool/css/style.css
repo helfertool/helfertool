@@ -78,6 +78,16 @@ h1, h2, h3, h4 {
     color: #1ea082;
 }
 
+/* pagination (copied from bootstrap with adapted colors */
+.page-link, .page-link:hover, .page-link:active, .page-link:focus {
+    color: #1ea082;
+}
+
+.page-item.active .page-link {
+    background-color: #1ea082;
+    border-color: #1ea082;
+}
+
 /* list items */
 .list-group-item {
     border: 1px solid #1ea082;

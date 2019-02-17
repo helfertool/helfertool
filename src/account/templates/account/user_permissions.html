@@ -1,0 +1,24 @@
+{% load i18n icons permissions %}
+
+{% if not user.is_active %}
+    <span class="text-danger">
+        {% icon "ban" %} {% trans "Disabled" %}<br/>
+    </span>
+{% endif %}
+
+{% if user.is_superuser %}
+    {% icon "users-cog" %} {% trans "Administrator" %}<br/>
+{% endif %}
+
+{% if user|has_addevent_group %}
+    {% icon "calendar-plus" %} {% trans "Add events" %}<br />
+{% endif %}
+
+
+{% if user|has_adduser_group %}
+    {% icon "user" %} {% trans "Add users" %}<br />
+{% endif %}
+
+{% if user|has_sendnews_group %}
+    {% icon "mail-bulk" %} {% trans "Send newsletter" %}<br />
+{% endif %}

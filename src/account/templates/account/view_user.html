@@ -1,0 +1,58 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons permissions %}
+
+{% block admincontent %}
+    {% if changed_user.get_full_name %}
+        <h2>{{ changed_user.get_full_name }}</h2>
+    {% else %}
+        <h2>{{ changed_user.username }}</h2>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-xs-12 col-lg-5">
+            <table class="table">
+                <tr>
+                    <th>{% trans "Username" %}</th>
+                    <td>{{ changed_user.username }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Email address" %}</th>
+                    <td>{{ changed_user.email }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Details" %}</th>
+                    <td>
+                        {% include "account/user_permissions.html" with user=changed_user %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    {% if user.is_superuser %}
+        <p>
+            <a href="{% url "account:edit_user" changed_user.pk %}">
+                {% icon "pencil-alt" %}
+                {% trans "Edit" %}
+            </a>
+        </p>
+    {% endif %}
+
+    <h3>{% trans "Change password" %}</h3>
+
+    {% if pw_form %}
+        <div class="row">
+            <div class="col-xs-12 col-lg-5">
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    {% bootstrap_form pw_form %}
+
+                    <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">{% trans "The password cannot be changed." %}</p>
+    {% endif %}
+{% endblock %}

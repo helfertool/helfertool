@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 17:08+0100\n"
-"PO-Revision-Date: 2019-02-03 14:14+0100\n"
+"POT-Creation-Date: 2019-02-17 17:53+0100\n"
+"PO-Revision-Date: 2019-02-17 17:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,34 +18,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: account/forms/account.py:10 account/templates/account/change_user.html:27
-#: account/templates/account/permissions.html:14
-#: account/templates/account/permissions.html:53
-#: account/templates/account/permissions.html:91
-msgid "Username"
-msgstr "Benutzername"
+#: account/forms/account.py:87 account/templates/account/list_users.html:34
+#: account/templates/account/user_permissions.html:10
+msgid "Administrator"
+msgstr "Administrator"
 
-#: account/forms/account.py:26
-msgid "The user does not exist."
-msgstr "Der Benutzer existiert nicht."
+#: account/forms/account.py:94 account/templates/account/list_users.html:42
+#: account/templates/account/user_permissions.html:19
+msgid "Add users"
+msgstr "Nutzer hinzufügen"
 
-#: account/forms/account.py:33 account/templates/account/change_user.html:23
-msgid "Email address"
-msgstr "E-Mail Adresse"
+#: account/forms/account.py:102 account/templates/account/list_users.html:38
+#: account/templates/account/user_permissions.html:14
+msgid "Add events"
+msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:34 account/templates/account/change_user.html:15
-msgid "First name"
-msgstr "Vorname"
-
-#: account/forms/account.py:36 account/templates/account/change_user.html:19
-msgid "Last name"
-msgstr "Nachname"
+#: account/forms/account.py:110 account/templates/account/list_users.html:46
+#: account/templates/account/user_permissions.html:23
+msgid "Send newsletter"
+msgstr "Newsletter versenden"
 
 #: account/models/agreement.py:13
 #: account/templates/account/list_agreements.html:15
-#: account/templates/account/permissions.html:13
-#: account/templates/account/permissions.html:52
-#: account/templates/account/permissions.html:90
+#: account/templates/account/list_users.html:53
 msgid "Name"
 msgstr "Name"
 
@@ -72,55 +67,8 @@ msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
 #: account/templates/account/add_user.html:14
-#: account/templates/account/permissions.html:40
-#: account/templates/account/permissions.html:79
-#: account/templates/account/permissions.html:117
 msgid "Add"
 msgstr "Hinzufügen"
-
-#: account/templates/account/change_user.html:7
-msgid "Account"
-msgstr "Account"
-
-#: account/templates/account/change_user.html:9
-msgid "Data"
-msgstr "Daten"
-
-#: account/templates/account/change_user.html:31
-#: account/templates/account/permissions.html:5
-msgid "Permissions"
-msgstr "Berechtigungen"
-
-#: account/templates/account/change_user.html:34
-#: account/templates/account/change_user.html:36
-#: account/templates/account/permissions.html:7
-msgid "Can add events"
-msgstr "Kann Veranstaltungen hinzufügen"
-
-#: account/templates/account/change_user.html:42
-#: account/templates/account/change_user.html:44
-#: account/templates/account/permissions.html:46
-msgid "Can add users"
-msgstr "Kann Nutzer hinzufügen"
-
-#: account/templates/account/change_user.html:50
-#: account/templates/account/change_user.html:52
-#: account/templates/account/permissions.html:84
-msgid "Can send news"
-msgstr "Kann Newsletter versenden"
-
-#: account/templates/account/change_user.html:60
-msgid "Change password"
-msgstr "Passwort ändern"
-
-#: account/templates/account/change_user.html:70
-#: account/templates/account/edit_agreement.html:20
-msgid "Save"
-msgstr "Sichern"
-
-#: account/templates/account/change_user.html:75
-msgid "The password cannot be changed."
-msgstr "Das Passwort kann nicht geändert werden."
 
 #: account/templates/account/delete_agreement.html:6
 #: account/templates/account/delete_agreement.html:17
@@ -132,19 +80,6 @@ msgstr "Nutzervereinbarung löschen"
 msgid "Delete user agreement %(name)s?"
 msgstr "Nutzervereinbarung %(name)s löschen?"
 
-#: account/templates/account/delete_permission.html:5
-#: account/templates/account/delete_permission.html:16
-#: account/templates/account/permissions.html:24
-#: account/templates/account/permissions.html:63
-#: account/templates/account/permissions.html:101
-msgid "Delete permission"
-msgstr "Berechtigung löschen"
-
-#: account/templates/account/delete_permission.html:8
-#, python-format
-msgid "Delete permission for user %(username)s?"
-msgstr "Berechtigung für den Nutzer %(username)s löschen?"
-
 #: account/templates/account/edit_agreement.html:7
 msgid "Edit user agreement"
 msgstr "Nutzervereinbarung bearbeiten"
@@ -153,6 +88,28 @@ msgstr "Nutzervereinbarung bearbeiten"
 #: account/templates/account/list_agreements.html:9
 msgid "New user agreement"
 msgstr "Neue Nutzervereinbarung"
+
+#: account/templates/account/edit_agreement.html:20
+#: account/templates/account/edit_user.html:26
+#: account/templates/account/view_user.html:51
+msgid "Save"
+msgstr "Sichern"
+
+#: account/templates/account/edit_user.html:5
+msgid "Edit user"
+msgstr "Nutzer bearbeiten"
+
+#: account/templates/account/edit_user.html:12
+msgid "Personal data"
+msgstr "Persönliche Daten"
+
+#: account/templates/account/edit_user.html:17
+msgid "Account status"
+msgstr "Account Status"
+
+#: account/templates/account/edit_user.html:20
+msgid "Permissions"
+msgstr "Berechtigungen"
 
 #: account/templates/account/handle_user_agreement.html:14
 msgid "I got it!"
@@ -163,6 +120,7 @@ msgid "User agreements"
 msgstr "Nutzervereinbarungen"
 
 #: account/templates/account/list_agreements.html:28
+#: account/templates/account/view_user.html:36
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -174,46 +132,123 @@ msgstr "Löschen"
 msgid "There are no user agreements."
 msgstr "Es gibt keine Nutzervereinbarungen."
 
-#: account/templates/account/permissions.html:9
-msgid "There are no users, that can add events."
-msgstr "Es gibt keine Nutzer, die Veranstaltungen hinzufügen können."
+#: account/templates/account/list_users.html:5
+msgid "Users"
+msgstr "Benutzer"
 
-#: account/templates/account/permissions.html:48
-msgid "There are no users, that can add users."
-msgstr "Es gibt keine Nutzer, die Benutzer hinzufügen können."
+#: account/templates/account/list_users.html:12
+#: account/templates/account/list_users.html:18
+msgid "Search"
+msgstr "Suchen"
 
-#: account/templates/account/permissions.html:86
-msgid "There are no users, that can send news."
-msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
+#: account/templates/account/list_users.html:23
+msgid "Filter:"
+msgstr "Filter:"
 
-#: account/views/account.py:28
+#: account/templates/account/list_users.html:26
+msgid "No filter"
+msgstr "Kein Filter"
+
+#: account/templates/account/list_users.html:30
+#: account/templates/account/user_permissions.html:5
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+#: account/templates/account/list_users.html:54
+#: account/templates/account/view_user.html:23
+msgid "Details"
+msgstr "Details"
+
+#: account/templates/account/list_users.html:55
+msgid "Last login"
+msgstr "Letzter Login"
+
+#: account/templates/account/list_users.html:81
+#, python-format
+msgid "%(last_login)s ago"
+msgstr "Vor %(last_login)s"
+
+#: account/templates/account/list_users.html:85
+msgid "Never"
+msgstr "Nie"
+
+#: account/templates/account/list_users.html:116
+msgid "No users found."
+msgstr "Keine Benutzer gefunden."
+
+#: account/templates/account/view_user.html:15
+msgid "Username"
+msgstr "Benutzername"
+
+#: account/templates/account/view_user.html:19
+msgid "Email address"
+msgstr "E-Mail Adresse"
+
+#: account/templates/account/view_user.html:41
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: account/templates/account/view_user.html:56
+msgid "The password cannot be changed."
+msgstr "Das Passwort kann nicht geändert werden."
+
+#: account/views/account.py:33
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Benutzer %(username)s hinzugefügt"
 
-#: account/views/account.py:50
+#: account/views/account.py:79
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
-#: account/views/permissions.py:40
-#, python-format
-msgid "%(username)s can add users now"
-msgstr "%(username)s kann jetzt Nutzer hinzufügen"
+#~ msgctxt "No filter"
+#~ msgid "None"
+#~ msgstr "Kein Filter"
 
-#: account/views/permissions.py:52
-#, python-format
-msgid "%(username)s can add events now"
-msgstr "%(username)s kann jetzt Veranstaltungen hinzufügen"
+#~ msgid "The user does not exist."
+#~ msgstr "Der Benutzer existiert nicht."
 
-#: account/views/permissions.py:64
-#, python-format
-msgid "%(username)s can send news now"
-msgstr "%(username)s kann jetzt Newsletter versenden"
+#~ msgid "First name"
+#~ msgstr "Vorname"
 
-#: account/views/permissions.py:100
-#, python-format
-msgid "Removed permission for user %(username)s"
-msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
+#~ msgid "Last name"
+#~ msgstr "Nachname"
+
+#~ msgid "Data"
+#~ msgstr "Daten"
+
+#~ msgid "Can add users"
+#~ msgstr "Kann Nutzer hinzufügen"
+
+#~ msgid "Can send news"
+#~ msgstr "Kann Newsletter versenden"
+
+#~ msgid "Delete permission"
+#~ msgstr "Berechtigung löschen"
+
+#~ msgid "Delete permission for user %(username)s?"
+#~ msgstr "Berechtigung für den Nutzer %(username)s löschen?"
+
+#~ msgid "There are no users, that can add events."
+#~ msgstr "Es gibt keine Nutzer, die Veranstaltungen hinzufügen können."
+
+#~ msgid "There are no users, that can add users."
+#~ msgstr "Es gibt keine Nutzer, die Benutzer hinzufügen können."
+
+#~ msgid "There are no users, that can send news."
+#~ msgstr "Es gibt keine Nutzer, die Newsletter versenden können."
+
+#~ msgid "%(username)s can add users now"
+#~ msgstr "%(username)s kann jetzt Nutzer hinzufügen"
+
+#~ msgid "%(username)s can add events now"
+#~ msgstr "%(username)s kann jetzt Veranstaltungen hinzufügen"
+
+#~ msgid "%(username)s can send news now"
+#~ msgstr "%(username)s kann jetzt Newsletter versenden"
+
+#~ msgid "Removed permission for user %(username)s"
+#~ msgstr "Berechtigung für den Nutzer %(username)s gelöscht"
 
 #~ msgid "Agree"
 #~ msgstr "Zustimmen"

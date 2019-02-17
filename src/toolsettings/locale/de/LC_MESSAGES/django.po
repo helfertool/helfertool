@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 17:08+0100\n"
+"POT-Creation-Date: 2019-02-17 17:53+0100\n"
 "PO-Revision-Date: 2019-02-03 11:52+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -31,7 +31,6 @@ msgid "Text"
 msgstr "Text"
 
 #: toolsettings/templates/toolsettings/check.html:5
-#: toolsettings/templates/toolsettings/index.html:16
 msgid "Check installation"
 msgstr "Installation überprüfen"
 
@@ -40,7 +39,7 @@ msgid "Helfertool"
 msgstr "Helfertool"
 
 #: toolsettings/templates/toolsettings/check.html:11
-#: toolsettings/templates/toolsettings/index.html:6
+#: toolsettings/templates/toolsettings/templates.html:5
 msgid "Templates"
 msgstr "Templates"
 
@@ -63,30 +62,6 @@ msgstr "LDAP"
 #: toolsettings/templates/toolsettings/check.html:64
 msgid "Header"
 msgstr "Header"
-
-#: toolsettings/templates/toolsettings/index.html:8
-msgid "Privacy"
-msgstr "Datenschutz"
-
-#: toolsettings/templates/toolsettings/index.html:9
-msgid "About this software"
-msgstr "Über diese Software"
-
-#: toolsettings/templates/toolsettings/index.html:10
-msgid "Login page"
-msgstr "Login Seite"
-
-#: toolsettings/templates/toolsettings/index.html:11
-msgid "Add user"
-msgstr "Nutzer hinzufügen"
-
-#: toolsettings/templates/toolsettings/index.html:14
-msgid "Other"
-msgstr "Sonstiges"
-
-#: toolsettings/templates/toolsettings/index.html:19
-msgid "Django Admin Interface"
-msgstr "Django Admin Interface"
 
 #: toolsettings/templates/toolsettings/template_about.html:6
 msgid "Template: About this software"
@@ -126,3 +101,25 @@ msgstr "Newsletter (beim Anmelden zu einer Veranstaltung)"
 #: toolsettings/templates/toolsettings/template_privacy.html:20
 msgid "Newsletter (subscription without event registration)"
 msgstr "Newsletter (Abonnement ohne Anmeldung zu einer Veranstaltung)"
+
+#: toolsettings/templates/toolsettings/templates.html:7
+msgid "Privacy"
+msgstr "Datenschutz"
+
+#: toolsettings/templates/toolsettings/templates.html:8
+msgid "About this software"
+msgstr "Über diese Software"
+
+#: toolsettings/templates/toolsettings/templates.html:9
+msgid "Login page"
+msgstr "Login Seite"
+
+#: toolsettings/templates/toolsettings/templates.html:10
+msgid "Add user"
+msgstr "Nutzer hinzufügen"
+
+#~ msgid "Other"
+#~ msgstr "Sonstiges"
+
+#~ msgid "Django Admin Interface"
+#~ msgstr "Django Admin Interface"

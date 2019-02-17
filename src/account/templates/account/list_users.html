@@ -1,0 +1,118 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons permissions %}
+
+{% block admincontent %}
+    <h2>{% trans "Users" %}</h2>
+
+    <form action="{% url "account:list_users" %}" method="GET" class="form-inline">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                    <span class="input-group-text">{% icon "search" %}</span>
+            </div>
+            <input type="text" name="search" value="{{ search }}" placeholder="{% trans "Search" %}" />
+        </div>
+
+        <input type="hidden" name="filter" value="{{ filter }}" />
+
+        <div class="input-group ml-2">
+            <input type="submit" value="{% trans "Search" %}" class="btn btn-sm btn-outline-primary" />
+        </div>
+    </form>
+
+    <p class="mt-3">
+        {% trans "Filter:" %}
+
+        <a href="?page={{ users.number }}&search={{ search }}&filter=" class="btn btn-sm btn-outline-primary {% if filter == "" %}active{% endif %}">
+            {% trans "No filter" %}
+        </a>
+
+        <a href="?page={{ users.number }}&search={{ search }}&filter=disabled" class="btn btn-sm btn-outline-primary {% if filter == "disabled" %}active{% endif %}">
+            {% trans "Disabled" %}
+        </a>
+
+        <a href="?page={{ users.number }}&search={{ search }}&filter=admin" class="btn btn-sm btn-outline-primary {% if filter == "admin" %}active{% endif %}">
+            {% trans "Administrator" %}
+        </a>
+
+        <a href="?page={{ users.number }}&search={{ search }}&filter=addevent" class="btn btn-sm btn-outline-primary {% if filter == "addevent" %}active{% endif %}">
+            {% trans "Add events" %}
+        </a>
+
+        <a href="?page={{ users.number }}&search={{ search }}&filter=adduser" class="btn btn-sm btn-outline-primary {% if filter == "adduser" %}active{% endif %}">
+            {% trans "Add users" %}
+        </a>
+
+        <a href="?page={{ users.number }}&search={{ search }}&filter=sendnews" class="btn btn-sm btn-outline-primary {% if filter == "sendnews" %}active{% endif %}">
+            {% trans "Send newsletter" %}
+        </a>
+    </p>
+
+    {% if users %}
+        <table class="table mt-3">
+            <tr>
+                <th class="col-4">{% trans "Name" %}</th>
+                <th class="col-4">{% trans "Details" %}</th>
+                <th class="col-4">{% trans "Last login" %}</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td class="col-4">
+                        {% if user.get_full_name %}
+                            <a href="{% url "account:view_user" user.pk %}">
+                                {{ user.get_full_name }}
+                            </a>
+
+                            <span class="text-muted">
+                                {{ user.username }}
+                            </span>
+                        {% else %}
+                            <a href="{% url "account:view_user" user.pk %}">
+                                {{ user.username }}
+                            </a>
+                        {% endif %}
+                    </td>
+
+                    <td class="col-4">
+                        {% include "account/user_permissions.html" with user=user %}
+                    </td>
+
+                    <td class="col-2">
+                        {% if user.last_login %}
+                            {% blocktrans trimmed with last_login=user.last_login|timesince %}
+                                {{ last_login }} ago
+                            {% endblocktrans %}
+                        {% else %}
+                            {% trans "Never" %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if users.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ users.previous_page_number }}&search={{ search }}&filter={{ filter }}">{% icon "caret-left" %}</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="">{% icon "caret-left" %}</a></li>
+                {% endif %}
+
+                {% for p in users.paginator.page_range %}
+                    {% if p == users.number %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ p }}&search={{ search }}&filter={{ filter }}">{{ p }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ p }}&search={{ search }}&filter={{ filter }}">{{ p }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if users.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ users.next_page_number }}&search={{ search }}&filter={{ filter }}">{% icon "caret-right" %}</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="">{% icon "caret-right" %}</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <p class="text-muted">{% trans "No users found." %}</p>
+    {% endif %}
+{% endblock %}

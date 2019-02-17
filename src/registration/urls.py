@@ -57,7 +57,7 @@ urlpatterns = [
 
     # manage event
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$',
-        views.admin,
+        views.manage_event,
         name='manage_event'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$',

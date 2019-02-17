@@ -16,6 +16,16 @@ from ..models import HTMLSetting, TextSetting
 
 
 @login_required
+def templates(request):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    context = {}
+    return render(request, 'toolsettings/templates.html', context)
+
+
+@login_required
 def template_about(request):
     # must be superuser
     if not request.user.is_superuser:

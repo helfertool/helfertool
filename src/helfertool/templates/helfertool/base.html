@@ -54,18 +54,8 @@
 
                         {% if user.is_authenticated %}
                             {# logged in #}
-                            {% if user.is_superuser or user|has_perm_group or user|is_inventory_admin_any %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url "admin" %}">{% trans "Admin" context "Admin interface" %}</a>
-                                </li>
-                            {% endif %}
-
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url "account:change_user" %}">{% trans "Account" %}</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url "help:create_issue" %}">{% trans "Support" %}</a>
+                                <a class="nav-link" href="{% url "admin" %}">{% trans "Administration" context "Admin interface" %}</a>
                             </li>
 
                             <li class="nav-item">

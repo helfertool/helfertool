@@ -7,29 +7,24 @@ app_name = 'account'
 urlpatterns = [
     # account
     url(r'^$',
-        views.change_user,
-        name='change_user'),
+        views.view_user,
+        name='view_user'),
+
+    url(r'^(?P<user_pk>[0-9]+)/$',
+        views.view_user,
+        name='view_user'),
+
+    url(r'^(?P<user_pk>[0-9]+)/edit/$',
+        views.edit_user,
+        name='edit_user'),
 
     url(r'^new/$',
         views.add_user,
         name='add_user'),
 
-    # permissions
-    url(r'^permissions/$',
-        views.permissions,
-        name='permissions'),
-
-    url(r'^permissions/(?P<user_pk>[0-9]+)/user/delete/$',
-        views.delete_permission, {'groupname': settings.GROUP_ADDUSER},
-        name='delete_user_permission'),
-
-    url(r'^permissions/(?P<user_pk>[0-9]+)/event/delete/$',
-        views.delete_permission, {'groupname': settings.GROUP_ADDEVENT},
-        name='delete_event_permission'),
-
-    url(r'^permissions/(?P<user_pk>[0-9]+)/news/delete/$',
-        views.delete_permission, {'groupname': settings.GROUP_SENDNEWS},
-        name='delete_news_permission'),
+    url(r'^list/$',
+        views.list_users,
+        name='list_users'),
 
     # agreements
     url(r'^check/$',

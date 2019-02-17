@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-03 17:08+0100\n"
-"PO-Revision-Date: 2019-02-03 14:10+0100\n"
+"POT-Creation-Date: 2019-02-17 17:53+0100\n"
+"PO-Revision-Date: 2019-02-17 17:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -90,7 +90,7 @@ msgid "Administration"
 msgstr "Administration"
 
 #: helfertool/templates/helfertool/admin.html:63
-#: helfertool/templates/helfertool/admin.html:218
+#: helfertool/templates/helfertool/admin.html:217
 msgid "General"
 msgstr "Allgemein"
 
@@ -160,7 +160,7 @@ msgstr "Geschenke"
 
 #: helfertool/templates/helfertool/admin.html:160
 #: helfertool/templates/helfertool/admin.html:181
-#: helfertool/templates/helfertool/admin.html:240
+#: helfertool/templates/helfertool/admin.html:268
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -185,7 +185,7 @@ msgid "Registration"
 msgstr "Registrierung"
 
 #: helfertool/templates/helfertool/admin.html:199
-#: helfertool/templates/helfertool/admin.html:234
+#: helfertool/templates/helfertool/admin.html:237
 msgid "Inventory"
 msgstr "Inventar"
 
@@ -202,13 +202,21 @@ msgstr "Zurücknehmen"
 msgid "List"
 msgstr "Liste"
 
-#: helfertool/templates/helfertool/admin.html:222
+#: helfertool/templates/helfertool/admin.html:220
+msgid "My account"
+msgstr "Mein Account"
+
+#: helfertool/templates/helfertool/admin.html:225
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: helfertool/templates/helfertool/admin.html:228
+#: helfertool/templates/helfertool/admin.html:231
 msgid "Send news"
 msgstr "Newsletter versenden"
+
+#: helfertool/templates/helfertool/admin.html:242
+msgid "Support"
+msgstr "Support"
 
 #: helfertool/templates/helfertool/admin.html:247
 msgid "User management"
@@ -219,12 +227,24 @@ msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
 #: helfertool/templates/helfertool/admin.html:257
-msgid "Permissions"
-msgstr "Berechtigungen"
+msgid "All users"
+msgstr "Alle Nutzer"
 
 #: helfertool/templates/helfertool/admin.html:261
 msgid "User agreements"
 msgstr "Nutzervereinbarungen"
+
+#: helfertool/templates/helfertool/admin.html:272
+msgid "Templates"
+msgstr "Templates"
+
+#: helfertool/templates/helfertool/admin.html:276
+msgid "Check installation"
+msgstr "Installation überprüfen"
+
+#: helfertool/templates/helfertool/admin.html:281
+msgid "Django Admin Interface"
+msgstr "Django Admin Interface"
 
 #: helfertool/templates/helfertool/base.html:31
 msgid "Helfertool"
@@ -234,39 +254,41 @@ msgstr "Helfertool"
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: helfertool/templates/helfertool/base.html:59
+#: helfertool/templates/helfertool/base.html:58
 msgctxt "Admin interface"
-msgid "Admin"
-msgstr "Admin"
+msgid "Administration"
+msgstr "Verwaltung"
 
-#: helfertool/templates/helfertool/base.html:64
-msgid "Account"
-msgstr "Account"
-
-#: helfertool/templates/helfertool/base.html:68
-msgid "Support"
-msgstr "Support"
-
-#: helfertool/templates/helfertool/base.html:72
+#: helfertool/templates/helfertool/base.html:62
 msgid "Logout"
 msgstr "Logout"
 
-#: helfertool/templates/helfertool/base.html:77
+#: helfertool/templates/helfertool/base.html:67
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:101
+#: helfertool/templates/helfertool/base.html:91
 msgid "Switch"
 msgstr "Switch"
 
-#: helfertool/templates/helfertool/base.html:122
+#: helfertool/templates/helfertool/base.html:112
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:124
+#: helfertool/templates/helfertool/base.html:114
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:126
+#: helfertool/templates/helfertool/base.html:116
 msgid "About this software"
 msgstr "Über diese Software"
+
+#~ msgid "Show users"
+#~ msgstr "Nutzer anzeigen"
+
+#~ msgid "Permissions"
+#~ msgstr "Berechtigungen"
+
+#~ msgctxt "Admin interface"
+#~ msgid "Admin"
+#~ msgstr "Admin"
