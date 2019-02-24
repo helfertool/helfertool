@@ -151,7 +151,7 @@ def list_users(request):
     # paginate
     # TODO: update after django 2 migration
     # https://docs.djangoproject.com/en/2.1/topics/pagination/#using-paginator-in-a-view
-    paginator = Paginator(all_users, 25)
+    paginator = Paginator(all_users, 50)
     page = request.GET.get('page')
     try:
         users = paginator.page(page)

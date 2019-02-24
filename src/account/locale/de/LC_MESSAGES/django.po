@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-17 17:53+0100\n"
-"PO-Revision-Date: 2019-02-17 17:51+0100\n"
+"POT-Creation-Date: 2019-02-24 20:14+0100\n"
+"PO-Revision-Date: 2019-02-24 20:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -163,16 +163,7 @@ msgstr "Details"
 msgid "Last login"
 msgstr "Letzter Login"
 
-#: account/templates/account/list_users.html:81
-#, python-format
-msgid "%(last_login)s ago"
-msgstr "Vor %(last_login)s"
-
-#: account/templates/account/list_users.html:85
-msgid "Never"
-msgstr "Nie"
-
-#: account/templates/account/list_users.html:116
+#: account/templates/account/list_users.html:110
 msgid "No users found."
 msgstr "Keine Benutzer gefunden."
 
@@ -192,6 +183,23 @@ msgstr "Passwort ändern"
 msgid "The password cannot be changed."
 msgstr "Das Passwort kann nicht geändert werden."
 
+#: account/templatetags/lastlogin.py:15
+msgid "Never"
+msgstr "Nie"
+
+#: account/templatetags/lastlogin.py:21
+msgid "Today"
+msgstr "Heute"
+
+#: account/templatetags/lastlogin.py:23
+msgid "Yesterday"
+msgstr "Gestern"
+
+#: account/templatetags/lastlogin.py:26
+#, python-brace-format
+msgid "{last_login_ago} ago"
+msgstr "Vor {last_login_ago}"
+
 #: account/views/account.py:33
 #, python-format
 msgid "Added user %(username)s"
@@ -200,6 +208,11 @@ msgstr "Benutzer %(username)s hinzugefügt"
 #: account/views/account.py:79
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
+
+#, fuzzy
+#~| msgid "%(last_login)s ago"
+#~ msgid "%(last_login)s"
+#~ msgstr "Vor %(last_login)s"
 
 #~ msgctxt "No filter"
 #~ msgid "None"
