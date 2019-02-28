@@ -6,132 +6,138 @@
 
     <h2>{% trans "Overview over helpers" %}</h2>
 
-    {# export of all jobs #}
-    {% if admin and not event.archived %}
-        <p>
-            {% icon "file-download" %}
-            <b>{% trans "Export" %}:</b>
-        </p>
-
-        <table class="table table-sm table-borderless mb-0">
-            <tr>
-                <td class="col-2 align-middle">
-                    {% trans "All days" %}
-                </td>
-
-                <td class="col-10">
-                    <a href="{% url 'export' event.url_name 'excel' %}" class="icon mr-2">
-                        <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
-                    </a>
-
-                    <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
-                        <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
-                    </a>
-                </td>
-            </tr>
-        </table>
-
-        <div id="exportdays" class="collapse">
-            <table class="table table-sm table-borderless mt-0">
-                    {% for day in days %}
-                        {% with day_str=day|date:"Y-m-d" %}
-                        <tr>
-                            <td class="col-2 align-middle">
-                                {{ day }}
-                            </td>
-
-                            <td class="col-10">
-                                <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon mr-2">
-                                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
-                                </a>
-                                <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
-                                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
-                                </a>
-                            </td>
-                        </tr>
-                        {% endwith %}
-                    {% endfor %}
-            </table>
-        </div>
-
-        <p class="mt-3 mb-4">
-            <a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#exportdays">
-                {% trans "Export single days" %}
-            </a>
-        </p>
-    {% endif %}
-
-    {% for job in event.job_set.all %}
-        {% is_job_admin job as job_admin %}
-
-        <h3>
-            {{ job.name }}
-
-            {% if job.public %}
-                <span class="badge badge-outline-dark">
-                    {% icon "eye" %} {% trans "Public" %}
-                </span>
-            {% endif %}
-        </h3>
-
-        {% if job_admin and not event.archived%}
+    {% if not event.job_set.exists %}
+        <p class="text-muted">{% trans "There are no jobs and shifts." %}</p>
+    {% else %}
+        {# export of all jobs #}
+        {% if admin and not event.archived %}
             <p>
-                <a href="{% url 'helpers' event.url_name job.pk %}">
-                {% icon "info-circle" %}
-                {% trans "Show" %}</a>
+                {% icon "file-download" %}
+                <b>{% trans "Export" %}:</b>
             </p>
+
+            <table>
+                <tr>
+                    <td class="align-middle width-10em">
+                        {% trans "All days" %}
+                    </td>
+
+                    <td>
+                        <a href="{% url 'export' event.url_name 'excel' %}" class="icon mr-2">
+                            <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+                        </a>
+
+                        <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
+                            <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+            {% if days %}
+                <div id="exportdays" class="collapse">
+                    <table>
+                        {% for day in days %}
+                            {% with day_str=day|date:"Y-m-d" %}
+                            <tr>
+                                <td class="align-middle width-10em">
+                                    {{ day }}
+                                </td>
+
+                                <td>
+                                    <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon mr-2">
+                                        <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+                                    </a>
+                                    <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
+                                        <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endwith %}
+                        {% endfor %}
+                    </table>
+                </div>
+
+                <p class="mt-3 mb-4">
+                    <a class="btn btn-sm btn-outline-primary" data-toggle="collapse" href="#exportdays">
+                        {% trans "Export single days" %}
+                    </a>
+                </p>
+            {% endif %}
         {% endif %}
 
-        <p>
-            {% blocktrans trimmed with number=job.num_coordinators %}
-                Number of coordinators: {{ number }}
-            {% endblocktrans %}
-        </p>
+        {% for job in event.job_set.all %}
+            {% is_job_admin job as job_admin %}
 
-        <table class="shifts">
-            <tr>
-                {% for day, shifts in job.shifts_by_day.items %}
-                    <th>{{ day }}</th>
-                {% endfor %}
-            </tr>
-            <tr>
-                {% for day, shifts in job.shifts_by_day.items %}
-                    <td>
-                        {% for shift in shifts %}
-                            {% if shift.hidden %}
-                                {% icon "eye-slash" %}
-                            {% elif shift.blocked %}
-                                {% icon "lock" %}
-                            {% endif %}
+            <h3>
+                {{ job.name }}
 
-                            {{ shift.time_hours }}
+                {% if job.public %}
+                    <span class="badge badge-outline-dark">
+                        {% icon "eye" %} {% trans "Public" %}
+                    </span>
+                {% endif %}
+            </h3>
 
-                            <span class="badge badge-outline-dark mb-1">
-                                {{ shift.num_helpers_archived }}/{{ shift.number }}
-                            </span>
+            {% if job_admin and not event.archived%}
+                <p>
+                    <a href="{% url 'helpers' event.url_name job.pk %}">
+                    {% icon "info-circle" %}
+                    {% trans "Show" %}</a>
+                </p>
+            {% endif %}
 
-                            {% if shift.name %}
-                                <br />{{ shift.name }}
-                            {% endif %}
+            <p>
+                {% blocktrans trimmed with number=job.num_coordinators %}
+                    Number of coordinators: {{ number }}
+                {% endblocktrans %}
+            </p>
 
-
-                            <div class="progress mb-2">
-                                {% if shift.helpers_percent == 100 %}
-                                    <div class="progress-bar bg-success" role="progressbar"
-                                {% elif shift.helpers_percent < 50 %}
-                                    <div class="progress-bar bg-danger" role="progressbar"
-                                {% else %}
-                                    <div class="progress-bar bg-warning" role="progressbar"
+            <table class="shifts">
+                <tr>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for day, shifts in job.shifts_by_day.items %}
+                        <td>
+                            {% for shift in shifts %}
+                                {% if shift.hidden %}
+                                    {% icon "eye-slash" %}
+                                {% elif shift.blocked %}
+                                    {% icon "lock" %}
                                 {% endif %}
-                                     aria-valuenow="{{ shift.helpers_percent }}"
-                                     aria-valuemin="0" aria-valuemax="100"
-                                     style="width: {{ shift.helpers_percent }}%;">
+
+                                {{ shift.time_hours }}
+
+                                <span class="badge badge-outline-dark mb-1">
+                                    {{ shift.num_helpers_archived }}/{{ shift.number }}
+                                </span>
+
+                                {% if shift.name %}
+                                    <br />{{ shift.name }}
+                                {% endif %}
+
+
+                                <div class="progress mb-2">
+                                    {% if shift.helpers_percent == 100 %}
+                                        <div class="progress-bar bg-success" role="progressbar"
+                                    {% elif shift.helpers_percent < 50 %}
+                                        <div class="progress-bar bg-danger" role="progressbar"
+                                    {% else %}
+                                        <div class="progress-bar bg-warning" role="progressbar"
+                                    {% endif %}
+                                         aria-valuenow="{{ shift.helpers_percent }}"
+                                         aria-valuemin="0" aria-valuemax="100"
+                                         style="width: {{ shift.helpers_percent }}%;">
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </td>
-                {% endfor %}
-            </tr>
-        </table>
-    {% endfor %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
