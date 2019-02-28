@@ -1,7 +1,7 @@
 from django import template
-from django.utils.text import format_lazy as _
 from django.utils.timesince import timesince
 from django.utils.timezone import is_aware, utc
+from django.utils.translation import gettext_lazy as _
 
 import datetime
 
@@ -23,7 +23,7 @@ def lastlogin(user):
         return _("Yesterday")
     else:
         last_login_ago = timesince(login_date, now_date)
-        return _("{last_login_ago} ago", last_login_ago=last_login_ago)
+        return _("%(last_login_ago)s ago") % {"last_login_ago": last_login_ago}
 
 
 def _to_date(timestamp):
