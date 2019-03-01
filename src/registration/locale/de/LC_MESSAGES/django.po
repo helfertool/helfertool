@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 20:17+0100\n"
+"POT-Creation-Date: 2019-03-01 17:46+0100\n"
 "PO-Revision-Date: 2019-02-03 17:08+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -71,7 +71,7 @@ msgstr "Kommentar"
 
 #: registration/export/excel.py:123 registration/export/pdf.py:81
 #: registration/templates/registration/admin/coordinators.html:6
-#: registration/templates/registration/admin/helpers_for_job.html:37
+#: registration/templates/registration/admin/helpers_for_job.html:34
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
@@ -86,7 +86,7 @@ msgid "Name"
 msgstr "Name"
 
 #: registration/export/pdf.py:97
-#: registration/templates/registration/admin/helpers_for_job.html:91
+#: registration/templates/registration/admin/helpers_for_job.html:85
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
@@ -118,7 +118,7 @@ msgstr "Suchbegriff"
 
 #: registration/forms/registration.py:61
 #: registration/templates/registration/admin/delete_helper.html:34
-#: registration/templates/registration/admin/helpers.html:81
+#: registration/templates/registration/admin/helpers.html:86
 msgid "Show"
 msgstr "Anzeigen"
 
@@ -546,7 +546,7 @@ msgid "More information about the Helfertool can be found here:"
 msgstr "Mehr Informationen über das Helfertool gibt es hier:"
 
 #: registration/templates/registration/admin/add_helper.html:6
-#: registration/templates/registration/admin/helpers_for_job.html:100
+#: registration/templates/registration/admin/helpers_for_job.html:94
 msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
@@ -625,7 +625,7 @@ msgid "This page is not available since the event is archived."
 msgstr "Diese Seite ist nicht verfügbar da die Veranstaltung archiviert ist."
 
 #: registration/templates/registration/admin/coordinators.html:12
-#: registration/templates/registration/admin/helpers_for_job.html:39
+#: registration/templates/registration/admin/helpers_for_job.html:36
 msgid "There are no coordinators for this job."
 msgstr "Es gibt keine Koordinatoren für diese Schicht."
 
@@ -870,25 +870,31 @@ msgstr ""
 msgid "Overview over helpers"
 msgstr "Helferübersicht"
 
-#: registration/templates/registration/admin/helpers.html:13
-#: registration/templates/registration/admin/helpers_for_job.html:15
+#: registration/templates/registration/admin/helpers.html:10
+#, fuzzy
+#| msgid "There are no shifts."
+msgid "There are no jobs and shifts."
+msgstr "Es gibt keine Schichten."
+
+#: registration/templates/registration/admin/helpers.html:16
+#: registration/templates/registration/admin/helpers_for_job.html:14
 msgid "Export"
 msgstr "Export"
 
-#: registration/templates/registration/admin/helpers.html:19
+#: registration/templates/registration/admin/helpers.html:22
 msgid "All days"
 msgstr "Alle Tage"
 
-#: registration/templates/registration/admin/helpers.html:59
+#: registration/templates/registration/admin/helpers.html:63
 msgid "Export single days"
 msgstr "Einzelne Tage exportieren"
 
-#: registration/templates/registration/admin/helpers.html:72
+#: registration/templates/registration/admin/helpers.html:77
 #: registration/templates/registration/admin/jobs_and_shifts.html:29
 msgid "Public"
 msgstr "Öffentlich"
 
-#: registration/templates/registration/admin/helpers.html:86
+#: registration/templates/registration/admin/helpers.html:91
 #, python-format
 msgid "Number of coordinators: %(number)s"
 msgstr "Anzahl der Koordinatoren: %(number)s"
@@ -898,21 +904,21 @@ msgstr "Anzahl der Koordinatoren: %(number)s"
 msgid "Helpers for %(jobname)s"
 msgstr "Helfer für %(jobname)s"
 
-#: registration/templates/registration/admin/helpers_for_job.html:47
+#: registration/templates/registration/admin/helpers_for_job.html:44
 msgid "Add coordinator"
 msgstr "Koordinator hinzufügen"
 
-#: registration/templates/registration/admin/helpers_for_job.html:59
+#: registration/templates/registration/admin/helpers_for_job.html:55
 #, python-format
 msgid "Export for %(day)s"
 msgstr "Export für den %(day)s"
 
-#: registration/templates/registration/admin/helpers_for_job.html:74
+#: registration/templates/registration/admin/helpers_for_job.html:68
 #, python-format
 msgid "(%(current)s of %(total)s)"
 msgstr "(%(current)s von %(total)s)"
 
-#: registration/templates/registration/admin/helpers_for_job.html:85
+#: registration/templates/registration/admin/helpers_for_job.html:79
 msgid "Set attendance for complete shift"
 msgstr "Anwesenheit für komplette Schicht setzen"
 

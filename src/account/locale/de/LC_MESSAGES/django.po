@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-28 20:17+0100\n"
-"PO-Revision-Date: 2019-02-28 20:18+0100\n"
+"POT-Creation-Date: 2019-03-01 17:46+0100\n"
+"PO-Revision-Date: 2019-03-01 17:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,22 +18,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: account/forms/account.py:87 account/templates/account/list_users.html:34
+#: account/forms/account.py:98 account/forms/account.py:106
+msgid "Managed by LDAP group"
+msgstr "Durch LDAP Gruppe verwaltet"
+
+#: account/forms/account.py:102 account/templates/account/list_users.html:34
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
 msgstr "Administrator"
 
-#: account/forms/account.py:94 account/templates/account/list_users.html:42
+#: account/forms/account.py:112 account/templates/account/list_users.html:42
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
 msgstr "Nutzer hinzufügen"
 
-#: account/forms/account.py:102 account/templates/account/list_users.html:38
+#: account/forms/account.py:120 account/templates/account/list_users.html:38
 #: account/templates/account/user_permissions.html:14
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:110 account/templates/account/list_users.html:46
+#: account/forms/account.py:128 account/templates/account/list_users.html:46
 #: account/templates/account/user_permissions.html:23
 msgid "Send newsletter"
 msgstr "Newsletter versenden"

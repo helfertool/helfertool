@@ -21,7 +21,6 @@ Design, JS
 * accept="image/*" for image uploads
 * Rework edit_event view
 * Use AJAX for UserSelectWidget
-* Use UserSelectWidget on permissions page
 * Remove inline CSS from unavailable.html -> set better CSP
 * Rework language changer in navbar
 * Alerts for messages: outline, colors
