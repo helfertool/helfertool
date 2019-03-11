@@ -182,8 +182,10 @@ if dict_get(config, False, 'security', 'behind_proxy'):
 if not DEBUG:
     CSRF_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_SAMESITE = "Strict"
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = "Strict"
 
 # logging
 ADMINS = [(mail, mail) for mail in dict_get(config, [], 'logging', 'mails')]
