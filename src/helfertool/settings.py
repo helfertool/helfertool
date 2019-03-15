@@ -20,7 +20,7 @@ config_file = os.environ.get('HELFERTOOL_CONFIG_FILE',
 
 try:
     with open(config_file, 'r') as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.SafeLoader)
 except FileNotFoundError:
     print("Configuration file not found: {}".format(config_file))
     sys.exit(1)
