@@ -92,6 +92,7 @@ CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}/{}'.format(
     dict_get(config, '', 'rabbitmq', 'vhost'),
 )
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_BROKER_POOL_LIMIT = None
 
 # mail
 EMAIL_HOST = dict_get(config, 'localhost', 'mail', 'host')
