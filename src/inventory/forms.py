@@ -2,7 +2,6 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from badges.models import Badge
 from toolsettings.forms import UserSelectWidget
 
 from .models import Item, Inventory
@@ -66,6 +65,19 @@ class ItemForm(forms.ModelForm):
         self.inventory = kwargs.pop('inventory')
 
         super(ItemForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        # check that barcode is unique for this inventory (not done by default since inventory is excluded)
+        try:
+            existing = Item.objects.get(barcode=cleaned_data["barcode"], inventory=self.inventory)
+            if not self.instance.pk or existing.pk != self.instance.pk:
+                raise ValidationError(_("Item with this barcode already exists in this inventory"))
+        except Item.DoesNotExist:
+            pass
+
+        return cleaned_data
 
     def save(self, commit=True):
         instance = super(ItemForm, self).save(False)  # inventory is missing

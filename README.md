@@ -14,6 +14,13 @@ in our documentation.
 A Python virtual environment should be used for development, the necessary
 Python libraries are listed in ``src/requirements.txt``.
 
+## Database
+
+To create the SQLite database for testing, run:
+
+    python manage.py migrate
+    python manage.py createcachetable
+
 ## Runserver
 
 Start the webserver for development:
