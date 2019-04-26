@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-01 17:46+0100\n"
-"PO-Revision-Date: 2019-02-03 17:08+0100\n"
+"POT-Creation-Date: 2019-04-26 19:51+0200\n"
+"PO-Revision-Date: 2019-04-26 19:52+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -871,10 +871,8 @@ msgid "Overview over helpers"
 msgstr "Helferübersicht"
 
 #: registration/templates/registration/admin/helpers.html:10
-#, fuzzy
-#| msgid "There are no shifts."
 msgid "There are no jobs and shifts."
-msgstr "Es gibt keine Schichten."
+msgstr "Es gibt keine Aufgaben und Schichten."
 
 #: registration/templates/registration/admin/helpers.html:16
 #: registration/templates/registration/admin/helpers_for_job.html:14
