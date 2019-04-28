@@ -7,6 +7,9 @@ import uuid
 
 @python_2_unicode_compatible
 class Person(models.Model):
+    class Meta:
+        ordering = ['timestamp', ]
+
     token = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,

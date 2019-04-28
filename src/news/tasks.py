@@ -1,12 +1,13 @@
 from __future__ import absolute_import
 
-from django.core.mail import send_mass_mail
+from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils import translation
 
 from celery import shared_task
 
+import smtplib
 import time
 
 from .models import Person
@@ -17,8 +18,9 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
                     unsubsribe_url):
         prev_language = translation.get_language()
 
-        mails = []
+        count = 0
         for person in Person.objects.all():
+            # build mail text
             mail_text = ""
             tmp_unsubscribe_url = unsubsribe_url + str(person.token)
 
@@ -34,22 +36,20 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
 
             mail_text = mail_text.lstrip().rstrip()
 
-            mails.append((subject, mail_text, settings.DEFAULT_FROM_MAIL,
-                          [person.email]))
+            # send mail
+            try:
+                send_mail(subject, mail_text, settings.DEFAULT_FROM_MAIL, [person.email])
+            except smtplib.SMTPRecipientsRefused:
+                pass
+
+            count += 1
+
+            # wait a bit after a batch of mails
+            if count >= settings.MAIL_BATCH_SIZE:
+                count = 0
+                time.sleep(settings.MAIL_BATCH_GAP)
 
         translation.activate(prev_language)
-
-        # send mails
-        batch = 0
-        while True:
-            mails_batch = mails[batch*settings.MAIL_BATCH_SIZE:
-                                (batch+1)*settings.MAIL_BATCH_SIZE]
-            if not mails_batch:
-                break
-
-            send_mass_mail(mails_batch)
-            time.sleep(settings.MAIL_BATCH_GAP)
-            batch += 1
 
 
 def _mail_text_language(language, text, unsubscribe_url):
