@@ -3,6 +3,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+import re
+
 from .. import tasks
 
 
@@ -66,6 +68,8 @@ class MailForm(forms.Form):
 
         unsubscribe_url = self.request.build_absolute_uri(
             reverse('news:unsubscribe', args=[""]))
+        # since args is empty, the URL ends with // (this is a dirty trick to get the base URL for unsubscribe)
+        unsubscribe_url = re.sub("//$", "/", unsubscribe_url)
 
         tasks.send_news_mails.delay(first_language, append_english, subject,
                                     text, text_en, unsubscribe_url)
