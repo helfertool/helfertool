@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-26 19:51+0200\n"
+"POT-Creation-Date: 2019-05-11 10:19+0200\n"
 "PO-Revision-Date: 2019-04-26 19:51+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -30,8 +30,7 @@ msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
 
 #: inventory/forms.py:76
 msgid "Item with this barcode already exists in this inventory"
-msgstr ""
-"Es gibt bereits einen Gegenstand mit diesem Barcode in diesem Inventar"
+msgstr "Es gibt bereits einen Gegenstand mit diesem Barcode in diesem Inventar"
 
 #: inventory/models.py:18 inventory/models.py:51
 #: inventory/templates/inventory/admin/delete_inventory.html:13

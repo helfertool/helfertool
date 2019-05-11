@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-26 19:51+0200\n"
+"POT-Creation-Date: 2019-05-11 10:19+0200\n"
 "PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -18,27 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: news/forms/mail.py:19
+#: news/forms/mail.py:21
 msgid "Language"
 msgstr "Sprache"
 
-#: news/forms/mail.py:24
+#: news/forms/mail.py:26
 msgid "Add English text"
 msgstr "Englischen Text hinzufügen"
 
-#: news/forms/mail.py:31 news/templates/news/send.html:19
+#: news/forms/mail.py:33 news/templates/news/send.html:19
 msgid "Subject"
 msgstr "Betreff"
 
-#: news/forms/mail.py:37
+#: news/forms/mail.py:39
 msgid "Text"
 msgstr "Text"
 
-#: news/forms/mail.py:42
+#: news/forms/mail.py:44
 msgid "English text"
 msgstr "Englischer Text"
 
-#: news/forms/mail.py:52
+#: news/forms/mail.py:54
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
@@ -58,11 +58,11 @@ msgstr "Anzeigen"
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: news/models/person.py:17
+#: news/models/person.py:20
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: news/models/person.py:27
+#: news/models/person.py:30
 msgid "Helper subscribed during registration for event"
 msgstr ""
 "Helfer hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
