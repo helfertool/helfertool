@@ -1,6 +1,6 @@
 from .event import EventForm, EventDeleteForm, EventArchiveForm, \
     EventDuplicateForm
-from .job import JobForm, JobDeleteForm, JobDuplicateForm, JobSortForm
+from .job import JobForm, JobDeleteForm, JobDuplicateForm, JobDuplicateDayForm, JobSortForm
 from .shift import ShiftForm, ShiftDeleteForm
 from .helper import HelperForm, HelperDeleteForm, \
     HelperDeleteCoordinatorForm, HelperAddShiftForm, \

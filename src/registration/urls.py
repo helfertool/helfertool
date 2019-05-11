@@ -102,6 +102,11 @@ urlpatterns = [
         views.duplicate_job,
         name='duplicate_job'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/'
+        'duplicate/day/$',
+        views.duplicate_job_day,
+        name='duplicate_job_day'),
+
     # shifts
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
         '(?P<shift_pk>[0-9]+)/$',

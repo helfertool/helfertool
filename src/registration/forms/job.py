@@ -1,10 +1,14 @@
 from django import forms
 from django.conf import settings
+from django.utils import formats
+from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.widgets import CKEditorWidget
+from datetime import datetime
 
 from toolsettings.forms import UserSelectWidget
 
+from .fields import DatePicker
 from ..models import Job
 
 
@@ -65,10 +69,47 @@ class JobDuplicateForm(JobForm):
         super(JobDuplicateForm, self).save(commit=True)  # we have to save
 
         for shift in self.other_job.shift_set.all():
-            new_shift = shift
-            new_shift.pk = None
-            new_shift.job = self.instance
-            new_shift.save()
+            shift.duplicate(new_job=self.instance)
+
+
+class JobDuplicateDayForm(forms.Form):
+    old_date = forms.ChoiceField(
+        label=_("Date to copy from"),
+    )
+
+    new_date = forms.DateField(
+        label=_("New date"),
+        widget=DatePicker,
+    )
+
+    def __init__(self, *args, **kwargs):
+        self.job = kwargs.pop('job')
+        super(JobDuplicateDayForm, self).__init__(*args, **kwargs)
+
+        # get a list of all days where a shifts begins
+        day_with_shifts = []
+        for shift in self.job.shift_set.all():
+            day = shift.date()
+            if day not in day_with_shifts:
+                day_with_shifts.append(day)
+
+        # and set choices for field
+        old_date_choices = []
+        for day in sorted(day_with_shifts):
+            day_str = str(day)
+            day_localized = formats.date_format(day, "SHORT_DATE_FORMAT")
+            old_date_choices.append((day_str, day_localized))
+
+        self.fields['old_date'].choices = old_date_choices
+
+    def save(self):
+        cleaned_data = super().clean()
+
+        old_date = datetime.strptime(cleaned_data.get("old_date"), "%Y-%m-%d").date()
+        new_date = cleaned_data.get('new_date')
+
+        for shift in self.job.shift_set.filter(begin__date=old_date):
+            shift.duplicate(new_date=new_date)
 
 
 class JobSortForm(forms.Form):
@@ -92,5 +133,4 @@ class JobSortForm(forms.Form):
         for job in self._event.job_set.all():
             field_id = 'order_job_%s' % job.pk
             job.order = cleaned_data.get(field_id)
-            print("!!!" + str(job.pk) + " " + str(job.order))
             job.save()

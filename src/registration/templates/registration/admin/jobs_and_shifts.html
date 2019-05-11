@@ -45,6 +45,12 @@
 
                 &nbsp;
 
+                <a href="{% url 'duplicate_job_day' event.url_name job.pk %}">
+                {% icon "copy" %}
+                {% trans "Duplicate one day" %}</a>
+
+                &nbsp;
+
                 <a href="{% url 'delete_job' event.url_name job.pk %}">
                 {% icon "trash-alt" %}
                 {% trans "Delete" %}</a>
