@@ -20,6 +20,7 @@ def index(request):
 
     # public events
     active_events = [e for e in events if e.active]
+    active_events = sorted(active_events, key=lambda e: e.date)
 
     # inactive events that are visible for current user
     involved_events = []
