@@ -5,6 +5,10 @@ from . import views
 app_name = 'inventory'
 urlpatterns = [
     # pages for single event
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/settings/$',
+        views.event_settings,
+        name='event_settings'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/register/$',
         views.register_item,
         name='register'),

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 10:19+0200\n"
-"PO-Revision-Date: 2019-05-11 10:20+0200\n"
+"POT-Creation-Date: 2019-05-25 13:59+0200\n"
+"PO-Revision-Date: 2019-05-25 14:00+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: registration/export/excel.py:88 registration/models/helper.py:72
 #: registration/templates/registration/admin/helpers_table.html:22
@@ -776,10 +776,8 @@ msgid "Duplicate job:"
 msgstr "Aufgabe duplizieren:"
 
 #: registration/templates/registration/admin/duplicate_job_day.html:6
-#, fuzzy
-#| msgid "Duplicate job:"
 msgid "Duplicate one day of job:"
-msgstr "Aufgabe duplizieren:"
+msgstr "Einen Tag der Aufgabe duplizieren:"
 
 #: registration/templates/registration/admin/duplicates.html:5
 msgid "Duplicates"
@@ -965,10 +963,8 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: registration/templates/registration/admin/jobs_and_shifts.html:50
-#, fuzzy
-#| msgid "Duplicate job:"
 msgid "Duplicate one day"
-msgstr "Aufgabe duplizieren:"
+msgstr "Einen Tag der Aufgabe duplizieren"
 
 #: registration/templates/registration/admin/jobs_and_shifts.html:67
 msgid "There are no shifts."

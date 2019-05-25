@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-11 10:19+0200\n"
-"PO-Revision-Date: 2019-04-26 19:51+0200\n"
+"POT-Creation-Date: 2019-05-25 13:59+0200\n"
+"PO-Revision-Date: 2019-05-25 14:00+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: inventory/forms.py:12 inventory/models.py:56
+#: inventory/forms/admin.py:45
+msgid "Item with this barcode already exists in this inventory"
+msgstr "Es gibt bereits einen Gegenstand mit diesem Barcode in diesem Inventar"
+
+#: inventory/forms/barcode.py:10 inventory/models.py:56
 #: inventory/templates/inventory/admin/delete_item.html:21
 #: inventory/templates/inventory/admin/inventory_items.html:16
 msgid "Barcode"
 msgstr "Barcode"
 
-#: inventory/forms.py:37
+#: inventory/forms/barcode.py:35
 msgid "There is no item with this barcode for this event."
 msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
-
-#: inventory/forms.py:76
-msgid "Item with this barcode already exists in this inventory"
-msgstr "Es gibt bereits einen Gegenstand mit diesem Barcode in diesem Inventar"
 
 #: inventory/models.py:18 inventory/models.py:51
 #: inventory/templates/inventory/admin/delete_inventory.html:13
@@ -83,6 +83,7 @@ msgstr "Inventar"
 
 #: inventory/templates/inventory/admin/edit_inventory.html:13
 #: inventory/templates/inventory/admin/edit_item.html:13
+#: inventory/templates/inventory/event_settings.html:13
 msgid "Save"
 msgstr "Speichern"
 
@@ -121,6 +122,10 @@ msgstr "Auflisten"
 #: inventory/templates/inventory/admin/inventory_list.html:57
 msgid "There is no inventory."
 msgstr "Es gibt kein Inventar."
+
+#: inventory/templates/inventory/event_settings.html:6
+msgid "Inventory settings"
+msgstr "Inventar Einstellungen"
 
 #: inventory/templates/inventory/list.html:14
 msgid "Status and log"

@@ -199,6 +199,10 @@
                     <h2>{% trans "Inventory" %}</h2>
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:event_settings' event.url_name %}">{% trans "Settings" %}</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'inventory:register' event.url_name %}">{% trans "Register" context "Register item and badge" %}</a>
                         </li>
 
