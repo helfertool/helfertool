@@ -156,6 +156,9 @@ security:
         # Lockout duration in minutes
         time: 10
 
+    # Minimal password length (for local accounts)
+    password_length: 12
+
 # Custom URLs, mail addresses, ...
 customization:
     # There are some external links that should/can be changed

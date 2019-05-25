@@ -173,6 +173,26 @@ if ldap_config:
 
 AUTHENTICATION_BACKENDS.append('django.contrib.auth.backends.ModelBackend')
 
+# password policy
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': dict_get(config, 12, 'security', 'password_length'),
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
 # security
 DEBUG = dict_get(config, False, 'security', 'debug')
 SECRET_KEY = dict_get(config, 'CHANGEME', 'security', 'secret')
