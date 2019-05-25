@@ -47,6 +47,11 @@ def get_extra_attrs(record):
 
 
 class HelfertoolFormatter(logging.Formatter):
+    """
+    Customer formatter that outputs log lines like this:
+
+    INFO user created (user="hertle" added_user="foo")
+    """
     def format(self, record):
         if not hasattr(record, 'extras'):
             extras = get_extra_attrs(record)
