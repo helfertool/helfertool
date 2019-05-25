@@ -14,13 +14,16 @@ from ..models import Gift, GiftSet
 
 from .utils import notactive
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 def _validate_gift(event, gift_pk):
     # get gift
     if gift_pk:
         gift = get_object_or_404(Gift, pk=gift_pk)
 
-        # check if permission belongs to event
+        # check if gift belongs to event
         if gift.event != event:
             raise Http404()
 
@@ -47,7 +50,17 @@ def edit_gift(request, event_url_name, gift_pk=None):
     form = GiftForm(request.POST or None, instance=gift, event=event)
 
     if form.is_valid():
-        form.save()
+        gift = form.save()
+
+        log_msg = "gift created"
+        if gift_pk:
+            log_msg = "gift changed"
+        logger.info(log_msg, extra={
+            'user': request.user,
+            'event': event,
+            'gift_pk': gift.pk,
+            'gift': gift.name,
+        })
 
         return HttpResponseRedirect(reverse('gifts:list',
                                             args=[event.url_name, ]))
@@ -83,6 +96,13 @@ def delete_gift(request, event_url_name, gift_pk):
         form.delete()
         messages.success(request, _("Gift deleted: %(name)s") %
                          {'name': gift.name})
+
+        logger.info("gift deleted", extra={
+            'user': request.user,
+            'event': event,
+            'gift_pk': gift_pk,
+            'gift': gift.name,
+        })
 
         # redirect to shift
         return HttpResponseRedirect(reverse('gifts:list',

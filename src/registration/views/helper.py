@@ -18,6 +18,9 @@ from ..decorators import archived_not_available
 
 from gifts.forms import HelpersGiftsForm
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 def helpers(request, event_url_name, job_pk=None):
@@ -109,6 +112,12 @@ def edit_helper(request, event_url_name, helper_pk):
     if form.is_valid():
         form.save()
 
+        logger.info("helper changed", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+        })
+
         return HttpResponseRedirect(reverse('view_helper',
                                             args=[event_url_name, helper.pk]))
 
@@ -136,6 +145,12 @@ def add_helper(request, event_url_name, shift_pk):
 
     if form.is_valid():
         helper = form.save()
+
+        logger.info("helper created", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+        })
 
         try:
             helper.send_mail(request, internal=True)
@@ -168,6 +183,13 @@ def add_coordinator(request, event_url_name, job_pk):
     if form.is_valid():
         helper = form.save()
 
+        logger.info("helper created", extra={
+            'user': request.user,
+            'event': event,
+            'job': job,
+            'helper': helper,
+        })
+
         try:
             helper.send_mail(request, internal=True)
         except (SMTPException, ConnectionError):
@@ -196,6 +218,14 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
 
     if form.is_valid():
         form.save()
+
+        # TODO: add shifts
+        logger.info("helper newshift", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+        })
+
         return HttpResponseRedirect(reverse('view_helper',
                                             args=[event_url_name, helper.pk]))
 
@@ -220,6 +250,14 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
 
     if form.is_valid():
         form.save()
+
+        # TODO: add job
+        logger.info("helper newjob", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+        })
+
         return HttpResponseRedirect(reverse('view_helper',
                                             args=[event_url_name, helper.pk]))
 
@@ -254,6 +292,14 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
         messages.success(request, _("Helper deleted: %(name)s") %
                          {'name': helper.full_name})
 
+        # TODO: only single shift or completely?
+        logger.info("helper deleted", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+            'helper_pk': helper.pk,
+        })
+
         # redirect to shift
         return HttpResponseRedirect(reverse('helpers', args=[event_url_name,
                                                              shift.job.pk]))
@@ -287,6 +333,15 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
 
     if form.is_valid():
         form.delete()
+
+        # TODO: only one job or completely?
+        logger.info("helper deleted", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+            'helper_pk': helper.pk,
+        })
+
         messages.success(request, _("Coordinator %(name)s from job "
                                     "\"%(jobname)s\"") %
                          {'name': helper.full_name, 'jobname': job.name})
@@ -350,6 +405,12 @@ def resend_mail(request, event_url_name, helper_pk):
 
     if form.is_valid():
         form.send(request)
+
+        logger.info("helper confirmationmail", extra={
+            'user': request.user,
+            'event': event,
+            'helper': helper,
+        })
 
         messages.success(request, _("Confirmation mail was sent"))
 

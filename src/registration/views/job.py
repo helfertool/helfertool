@@ -11,6 +11,9 @@ from ..decorators import archived_not_available
 from ..forms import JobForm, JobDeleteForm, JobDuplicateForm, JobDuplicateDayForm, JobSortForm
 from ..models import Event, Job
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 @archived_not_available
@@ -31,6 +34,16 @@ def edit_job(request, event_url_name, job_pk=None):
 
     if form.is_valid():
         job = form.save()
+
+        log_msg = "job created"
+        if job_pk:
+            log_msg = "job changed"
+        logger.info(log_msg, extra={
+            'user': request.user,
+            'event': event,
+            'job': job,
+        })
+
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 
@@ -57,6 +70,13 @@ def delete_job(request, event_url_name, job_pk):
         form.delete()
         messages.success(request, _("Job deleted: %(name)s") %
                          {'name': job.name})
+
+        logger.info("job deleted", extra={
+            'user': request.user,
+            'event': event,
+            'job': job,
+            'job_pk': job_pk,
+        })
 
         # redirect to shift
         return HttpResponseRedirect(reverse('jobs_and_shifts',
@@ -93,7 +113,15 @@ def duplicate_job(request, event_url_name, job_pk):
     form = JobDuplicateForm(request.POST or None, other_job=job)
 
     if form.is_valid():
-        form.save()
+        new_job = form.save()
+
+        logger.info("job created", extra={
+            'user': request.user,
+            'event': event,
+            'job': new_job,
+            'duplicated_from': job,
+        })
+
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 
@@ -117,7 +145,15 @@ def duplicate_job_day(request, event_url_name, job_pk):
     form = JobDuplicateDayForm(request.POST or None, job=job)
 
     if form.is_valid():
-        form.save()
+        new_shifts = form.save()
+
+        for shift in new_shifts:
+            logger.info("shift created", extra={
+                'user': request.user,
+                'event': event,
+                'shift': shift,
+            })
+
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 
@@ -142,6 +178,12 @@ def sort_job(request, event_url_name):
 
     if form.is_valid():
         form.save()
+
+        logger.info("job sorted", extra={
+            'user': request.user,
+            'event': event,
+        })
+
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 

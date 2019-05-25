@@ -71,6 +71,8 @@ class JobDuplicateForm(JobForm):
         for shift in self.other_job.shift_set.all():
             shift.duplicate(new_job=self.instance)
 
+        return self.instance
+
 
 class JobDuplicateDayForm(forms.Form):
     old_date = forms.ChoiceField(
@@ -108,8 +110,11 @@ class JobDuplicateDayForm(forms.Form):
         old_date = datetime.strptime(cleaned_data.get("old_date"), "%Y-%m-%d").date()
         new_date = cleaned_data.get('new_date')
 
-        for shift in self.job.shift_set.filter(begin__date=old_date):
+        shifts = self.job.shift_set.filter(begin__date=old_date)
+        for shift in shifts:
             shift.duplicate(new_date=new_date)
+
+        return shifts
 
 
 class JobSortForm(forms.Form):

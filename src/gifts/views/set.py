@@ -14,6 +14,9 @@ from ..models import GiftSet
 
 from .utils import notactive
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 def _validate_gift_set(event, gift_set_pk):
     if gift_set_pk:
@@ -46,7 +49,17 @@ def edit_gift_set(request, event_url_name, gift_set_pk=None):
     form = GiftSetForm(request.POST or None, instance=gift_set, event=event)
 
     if form.is_valid():
-        form.save()
+        gift_set = form.save()
+
+        log_msg = "giftset created"
+        if gift_set_pk:
+            log_msg = "giftset changed"
+        logger.info(log_msg, extra={
+            'user': request.user,
+            'event': event,
+            'giftset_pk': gift_set.pk,
+            'giftset': gift_set.name,
+        })
 
         return HttpResponseRedirect(reverse('gifts:list',
                                             args=[event.url_name, ]))
@@ -79,6 +92,13 @@ def delete_gift_set(request, event_url_name, gift_set_pk):
         form.delete()
         messages.success(request, _("Gift set deleted: %(name)s") %
                          {'name': gift_set.name})
+
+        logger.info("giftset deleted", extra={
+            'user': request.user,
+            'event': event,
+            'giftset_pk': gift_set_pk,
+            'giftset': gift_set.name,
+        })
 
         # redirect to shift
         return HttpResponseRedirect(reverse('gifts:list',

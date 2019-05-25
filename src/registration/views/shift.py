@@ -10,6 +10,9 @@ from .utils import nopermission, get_or_404
 from ..decorators import archived_not_available
 from ..forms import ShiftForm, ShiftDeleteForm
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 @archived_not_available
@@ -24,7 +27,17 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
     form = ShiftForm(request.POST or None, instance=shift, job=job)
 
     if form.is_valid():
-        job = form.save()
+        shift = form.save()
+
+        log_msg = "shift created"
+        if shift_pk:
+            log_msg = "shift changed"
+        logger.info(log_msg, extra={
+            'user': request.user,
+            'event': event,
+            'shift': shift,
+        })
+
         return HttpResponseRedirect(reverse('jobs_and_shifts',
                                             args=[event_url_name]))
 
@@ -51,6 +64,13 @@ def delete_shift(request, event_url_name, job_pk, shift_pk):
     if form.is_valid():
         form.delete()
         messages.success(request, _("Shift deleted"))
+
+        logger.info("shift deleted", extra={
+            'user': request.user,
+            'event': event,
+            'shift': shift,
+            'shift_pk': shift_pk,
+        })
 
         # redirect to shift
         return HttpResponseRedirect(reverse('jobs_and_shifts',

@@ -11,6 +11,9 @@ from ..models import Event, Link
 from ..forms import LinkForm, LinkDeleteForm
 from ..decorators import archived_not_available
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 def links(request, event_url_name):
@@ -51,6 +54,16 @@ def edit_link(request, event_url_name, link_pk=None):
 
     if form.is_valid():
         link = form.save()
+
+        log_msg = "link created"
+        if link_pk:
+            log_msg = "link changed"
+        logger.info(log_msg, extra={
+            'user': request.user,
+            'event': event,
+            'link': link.id,
+        })
+
         return HttpResponseRedirect(reverse('links', args=[event_url_name]))
 
     # render page
@@ -79,6 +92,12 @@ def delete_link(request, event_url_name, link_pk):
     if form.is_valid():
         form.delete()
         messages.success(request, _("Link deleted"))
+
+        logger.info("link deleted", extra={
+            'user': request.user,
+            'event': event,
+            'link': link_pk,
+        })
 
         # redirect to shift
         return HttpResponseRedirect(reverse('links', args=[event_url_name]))

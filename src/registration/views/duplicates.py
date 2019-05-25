@@ -12,6 +12,9 @@ from ..models import Event
 from ..forms import MergeDuplicatesForm
 from ..decorators import archived_not_available
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 @login_required
 @archived_not_available
@@ -55,6 +58,13 @@ def merge(request, event_url_name, email):
 
         if form.is_valid():
             h = form.merge()
+
+            logger.info("helper merged", extra={
+                'user': request.user,
+                'helper': h,
+                'helper_pk': h.pk,
+            })
+
             return HttpResponseRedirect(reverse('view_helper',
                                                 args=[event_url_name, h.pk]))
 

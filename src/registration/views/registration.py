@@ -14,6 +14,9 @@ from ..models import Event, Link
 
 from news.helper import news_test_email
 
+import logging
+logger = logging.getLogger("helfertool")
+
 
 def index(request):
     events = Event.objects.all()
@@ -77,6 +80,12 @@ def form(request, event_url_name, link_pk=None):
     if form.is_valid():
         helper = form.save()
 
+        logger.info("helper registered", extra={
+            'event': event,
+            'helper': helper,
+            'withlink': link_pk is not None,
+        })
+
         try:
             helper.send_mail(request, internal=False)
         except (SMTPException, ConnectionError):
@@ -117,6 +126,11 @@ def validate(request, event_url_name, helper_id):
     helper.validated = True
     helper.save()
 
+    logger.info("helper validated", extra={
+        'event': event,
+        'helper': helper,
+    })
+
     context = {'event': event,
                'already_validated': already_validated}
     return render(request, 'registration/validate.html', context)
@@ -136,6 +150,12 @@ def deregister(request, event_url_name, helper_id, shift_pk):
 
     if form.is_valid():
         form.delete()
+
+        logger.info("helper deregistered", extra={
+            'event': event,
+            'helper': helper,
+            "helper_pk": helper_id,
+        })
 
         if not helper.pk:
             return HttpResponseRedirect(reverse('deleted',
@@ -171,6 +191,12 @@ def update_personal(request, event_url_name, helper_id):
 
     if form.is_valid():
         form.save(request=request)
+
+        logger.info("helper dataupdated", extra={
+            'event': event,
+            'helper': helper,
+            "helper_pk": helper_id,
+        })
 
         return HttpResponseRedirect(reverse('registered',
                                             args=[event.url_name, helper.pk]))

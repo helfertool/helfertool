@@ -16,8 +16,14 @@ SKIP_ATTRS = (
     'thread', 'threadName',
 
     # custom things
-    'event', 'job',
+    'event', 'job', 'shift', 'helper',
 )
+
+
+def add_entry(data, key, value):
+    if key not in data:
+        data[key] = value
+    return data
 
 
 def get_extra_attrs(record):
@@ -26,6 +32,8 @@ def get_extra_attrs(record):
 
     * replaces "event" by "event_url" and "event_pk"
     * replaces "job" by "job_name" and "job_pk"
+    * replaces "shift" by "shift_name" and "shift_pk"
+    * replaces "helper" by "helper_name" and "helper_pk"
     """
     result = {}
 
@@ -35,13 +43,23 @@ def get_extra_attrs(record):
 
     # event
     if hasattr(record, 'event'):
-        result["event_url"] = record.event.url_name
-        result["event_pk"] = record.event.pk
+        result = add_entry(result, "event_url", record.event.url_name)
+        result = add_entry(result, "event_pk", record.event.pk)
 
     # job
     if hasattr(record, 'job') and record.job:
-        result["job_name"] = record.job.name
-        result["job_pk"] = record.job.pk
+        result = add_entry(result, "job_name", record.job.name)
+        result = add_entry(result, "job_pk", record.job.pk)
+
+    # shift
+    if hasattr(record, 'shift') and record.shift:
+        result = add_entry(result, "shift_name", str(record.shift))
+        result = add_entry(result, "shift_pk", record.shift.pk)
+
+    # helper
+    if hasattr(record, 'helper') and record.helper:
+        result = add_entry(result, "helper_name", record.helper.full_name)
+        result = add_entry(result, "helper_pk", record.helper.pk)
 
     return result
 
