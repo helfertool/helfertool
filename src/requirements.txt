@@ -1,6 +1,6 @@
 django==2.2.*
 django-auth-ldap
-django-axes
+django-axes<5.0.0
 django-bleach
 django-bootstrap4
 django-ckeditor

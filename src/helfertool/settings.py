@@ -164,9 +164,7 @@ if ldap_config:
         AUTH_LDAP_USER_FLAGS_BY_GROUP['is_superuser'] = ldap_group_admin
 
 # django auth backends
-AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesBackend',
-]
+AUTHENTICATION_BACKENDS = []
 
 if ldap_config:
     AUTHENTICATION_BACKENDS.append('django_auth_ldap.backend.LDAPBackend')
@@ -392,7 +390,6 @@ MIDDLEWARE = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'axes.middleware.AxesMiddleware',  # should be last one
 )
 
 ROOT_URLCONF = 'helfertool.urls'
