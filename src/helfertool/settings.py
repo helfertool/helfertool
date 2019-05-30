@@ -38,20 +38,22 @@ is_docker = dict_get(config, False, 'docker')
 
 # directories for static and media files
 if is_docker:
-    STATIC_ROOT = "/data/media"
-    MEDIA_ROOT = "/data/tmp"
+    STATIC_ROOT = "static"
+    MEDIA_ROOT = "/data/media"
+    TMP_ROOT = "/data/tmp"
 else:
     STATIC_ROOT = build_path(dict_get(config, 'static', 'files', 'static'),
                              BASE_DIR)
     MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'),
                             BASE_DIR)
 
+    # directory for temporary files (badges, file uploads)
+    TMP_ROOT = build_path(dict_get(config, '/tmp', 'files', 'tmp'),
+                          BASE_DIR)
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-# directory for temporary files (badges, file uploads)
-TMP_ROOT = build_path(dict_get(config, '/tmp', 'files', 'tmp'),
-                      BASE_DIR)
 
 # file permissions for newly uploaded files and directories
 FILE_UPLOAD_PERMISSIONS = 0o640
