@@ -7,6 +7,4 @@ security:
     allowed_hosts:
         - "localhost"
 
-logging:
-    syslog:
-        port: 5140
+docker: true
