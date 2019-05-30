@@ -297,7 +297,7 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
             'user': request.user,
             'event': event,
             'helper': helper,
-            'helper_pk': helper.pk,
+            'helper_pk': helper_pk,
         })
 
         # redirect to shift
@@ -339,7 +339,7 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
             'user': request.user,
             'event': event,
             'helper': helper,
-            'helper_pk': helper.pk,
+            'helper_pk': helper_pk,
         })
 
         messages.success(request, _("Coordinator %(name)s from job "
