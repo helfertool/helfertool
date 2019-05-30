@@ -66,9 +66,9 @@ def xlsx(buffer, event, jobs, date):
     # export jobs
     for job in jobs:
         # find unique worksheet name
-        job_name = cleanName(job.name)
-        job_name_use = job_name[:20]  # worksheet name must be <= 31 chars
+        job_name = cleanName(job.name)[:20] # worksheet name must be <= 31 chars
 
+        job_name_use = job_name
         counter = 2
         while job_name_use in used_names:
             job_name_use = "{}{}".format(job_name, counter)
