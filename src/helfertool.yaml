@@ -193,3 +193,6 @@ badges:
     # Time until files are really deleted after cleanup was triggered
     # in minutes
     rm_delay: 2
+
+# Deployed in docker image?
+docker: false
