@@ -10,7 +10,6 @@ Prio
 * django + celery logging
 * ask for gift selection during registration
 * fix cleanup for file uploads (see below)
-* fix bug with deleted helpers/coordinators
 
 Design, JS
 ==========

@@ -11,24 +11,9 @@ class DatePicker(forms.DateInput):
 
 class DateTimePicker(forms.SplitDateTimeWidget):
     def __init__(self):
-        # TODO: use this for django >= 2.0 and delete code below
-        # super(DateTimePicker, self).__init__(
-        #     date_format='%Y-%m-%d',
-        #     date_attrs={'type': 'date'},
-        #     time_format='%H:%M',
-        #     time_attrs={'type': 'time'},
-        # )
-
-        widgets = (
-            forms.DateInput(
-                format='%Y-%m-%d',
-                attrs={'type': 'date',
-                       'placeholder': _("Date (YYYY-MM-DD)")},
-            ),
-            forms.TimeInput(
-                format='%H:%M',
-                attrs={'type': 'time',
-                       'placeholder': _("Time (HH:MM)")},
-            ),
+        super(DateTimePicker, self).__init__(
+            date_format='%Y-%m-%d',
+            date_attrs={'type': 'date'},
+            time_format='%H:%M',
+            time_attrs={'type': 'time'},
         )
-        super(forms.SplitDateTimeWidget, self).__init__(widgets, None)

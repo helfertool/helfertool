@@ -197,8 +197,6 @@ class Shift(models.Model):
 
 @receiver(pre_delete, sender=Shift)
 def shift_deleted(sender, instance, using, **kwargs):
-    """
-    TODO: remove in django 1.10 since m2m_changed sends signal
-    """
+    # m2m_changed does not trigger here, so remote the helpers before the shift is deleted
     for helper in instance.helper_set.all():
         helper.shifts.remove(instance)
