@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 13:59+0200\n"
+"POT-Creation-Date: 2019-06-09 21:40+0200\n"
 "PO-Revision-Date: 2019-05-25 14:00+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -90,14 +90,6 @@ msgstr "Name"
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
-#: registration/forms/fields/date.py:26
-msgid "Date (YYYY-MM-DD)"
-msgstr "Datum (JJJJ-MM-TT)"
-
-#: registration/forms/fields/date.py:31
-msgid "Time (HH:MM)"
-msgstr "Uhrzeit (HH:MM)"
-
 #: registration/forms/helper.py:104
 msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
@@ -116,11 +108,11 @@ msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 msgid "Search term"
 msgstr "Suchbegriff"
 
-#: registration/forms/job.py:77
+#: registration/forms/job.py:79
 msgid "Date to copy from"
 msgstr "Datum, von dem kopiert werden soll"
 
-#: registration/forms/job.py:81
+#: registration/forms/job.py:83
 msgid "New date"
 msgstr "Neues Datum"
 
@@ -1341,43 +1333,49 @@ msgstr "Veranstaltung gelöscht: %(name)s"
 msgid "Event was duplicated: %(event)s"
 msgstr "Veranstaltung wurde kopiert: %(event)s"
 
-#: registration/views/helper.py:84
+#: registration/views/helper.py:87
 msgid "Gifts were saved."
 msgstr "Geschenke wurden gespeichert."
 
-#: registration/views/helper.py:143 registration/views/helper.py:174
+#: registration/views/helper.py:158 registration/views/helper.py:196
 msgid "Sending the mail failed, but the helper was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, der Helfer wurde dennoch gespeichert."
 
-#: registration/views/helper.py:254
+#: registration/views/helper.py:292
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:290
+#: registration/views/helper.py:345
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
 
-#: registration/views/helper.py:354
+#: registration/views/helper.py:415
 msgid "Confirmation mail was sent"
 msgstr "Bestätigungsmail wurde gesendet"
 
-#: registration/views/job.py:58
+#: registration/views/job.py:71
 #, python-format
 msgid "Job deleted: %(name)s"
 msgstr "Aufgabe gelöscht: %(name)s"
 
-#: registration/views/link.py:81
+#: registration/views/link.py:94
 msgid "Link deleted"
 msgstr "Link gelöscht"
 
-#: registration/views/registration.py:83
+#: registration/views/registration.py:92
 msgid "Sending the mail failed, but the registration was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Anmeldung wurde dennoch gespeichert."
 
-#: registration/views/shift.py:53
+#: registration/views/shift.py:66
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Date (YYYY-MM-DD)"
+#~ msgstr "Datum (JJJJ-MM-TT)"
+
+#~ msgid "Time (HH:MM)"
+#~ msgstr "Uhrzeit (HH:MM)"

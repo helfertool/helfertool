@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 13:59+0200\n"
-"PO-Revision-Date: 2019-02-03 11:53+0100\n"
+"POT-Creation-Date: 2019-06-09 21:40+0200\n"
+"PO-Revision-Date: 2019-06-09 21:41+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -42,6 +42,14 @@ msgstr "Englischer Text"
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
+#: news/forms/remove.py:9 news/models/person.py:20
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: news/forms/remove.py:18
+msgid "Unknown e-mail address"
+msgstr "Unbekannte E-Mail Adresse"
+
 #: news/forms/subscribe.py:17
 msgid "You subscribed already to the newsletter."
 msgstr "Du hast den Newsletter bereits abonniert."
@@ -57,10 +65,6 @@ msgstr "Anzeigen"
 #: news/forms/subscribe.py:25
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
-
-#: news/models/person.py:20
-msgid "E-Mail"
-msgstr "E-Mail"
 
 #: news/models/person.py:30
 msgid "Helper subscribed during registration for event"
@@ -89,6 +93,14 @@ msgid ""
 msgstr ""
 "\n"
 "Hallo liebe Helferinnen und Helfer,\n"
+
+#: news/templates/news/remove.html:5
+msgid "Remove recipient"
+msgstr "Empfänger entfernen"
+
+#: news/templates/news/remove.html:12
+msgid "Remove"
+msgstr "Entfernen"
 
 #: news/templates/news/send.html:5
 msgid "Send news"
@@ -151,6 +163,10 @@ msgid ""
 msgstr ""
 "Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
 "der Vergangenheit!"
+
+#: news/views/remove.py:24
+msgid "Recipient removed."
+msgstr "Empfänger entfernt."
 
 #: news/views/send.py:32
 msgid "Mails are being sent now."

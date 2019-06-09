@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 13:59+0200\n"
+"POT-Creation-Date: 2019-06-09 21:40+0200\n"
 "PO-Revision-Date: 2019-02-03 11:53+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -177,7 +177,7 @@ msgstr "Anwesenheit für Schicht"
 msgid "Set all to attendant"
 msgstr "Alle auf anwesend setzen"
 
-#: gifts/views/gift.py:84
+#: gifts/views/gift.py:97
 #, python-format
 msgid "Gift deleted: %(name)s"
 msgstr "Geschenk gelöscht: %(name)s"
@@ -186,7 +186,7 @@ msgstr "Geschenk gelöscht: %(name)s"
 msgid "Attendance was saved"
 msgstr "Anwesenheit wurde gespeichert"
 
-#: gifts/views/set.py:80
+#: gifts/views/set.py:93
 #, python-format
 msgid "Gift set deleted: %(name)s"
 msgstr "Geschenkset gelöscht: %(name)s"

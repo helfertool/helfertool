@@ -5,10 +5,16 @@ from . import views
 
 app_name = 'news'
 urlpatterns = [
+    # management
     url(r'^manage/news/$',
         views.send,
         name='send'),
 
+    url(r'^manage/news/remove/$',
+        views.remove,
+        name='remove'),
+
+    # subscribe and unsubcribe
     url(r'^subscribe/$',
         views.subscribe,
         name='subscribe'),

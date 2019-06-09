@@ -1,0 +1,14 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 staticfiles %}
+
+{% block admincontent %}
+    <h2>{% trans "Remove recipient" %}</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Remove" %}" class="btn btn-danger" />
+    </form>
+{% endblock %}
