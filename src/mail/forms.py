@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import Select2MultipleWidget
 from smtplib import SMTPException
 
-from .models import SentMail
+from .models import SentMail, MailDelivery
 
 
 class MailFormError(Exception):
@@ -116,6 +116,7 @@ class MailForm(forms.Form):
                                           "to address."))
 
     def send_mail(self):
+        # basic parameters
         subject = self.cleaned_data.get('subject')
         text = self.cleaned_data.get('text')
 
@@ -133,19 +134,25 @@ class MailForm(forms.Form):
             reply_to=reply_to,
         )
 
-        # get unique list of mail addresses
-        seen = set()
-        seen_add = seen.add  # performance FTW!
-        receiver_list = [h.email for h in self._get_helpers(sentmail)
-                         if not (h.email in seen or seen_add(h.email))]
-
         # CC
         cc = []
         if self.cleaned_data.get('cc'):
             cc = [self.cleaned_data.get('cc'), ]
             sentmail.cc = self.cleaned_data.get('cc')
 
-        sentmail.save()  # save changed CC and things done in _get_helpers
+        # get the helpers that should receive the mail
+        helpers = self._get_helpers(sentmail)
+
+        # create mail delivery entry for tracking and a unique list of mail addresses
+        receiver_list = []
+        for h in helpers:
+            MailDelivery.objects.create(helper=h, sentmail=sentmail)
+
+            if h.email not in receiver_list:
+                receiver_list.append(h.email)
+
+        # save changed CC and things done in _get_helpers
+        sentmail.save()
 
         if not receiver_list:
             sentmail.failed = True

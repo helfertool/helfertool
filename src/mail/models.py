@@ -67,8 +67,13 @@ class SentMail(models.Model):
         default=False,
     )
 
+    helper_tracking = models.ManyToManyField(
+        'registration.Helper',
+        through='MailDelivery',
+    )
+
     def __str__(self):
-        return "%s - %s - %s" % (self.event, self.user, self.date)
+        return "%s - %s" % (self.event, self.subject)
 
     def can_see_mail(self, user):
         if not self.event.is_involved(user):
@@ -117,3 +122,25 @@ class SentMail(models.Model):
             tmp.append(str(shift))
 
         return tmp
+
+
+class MailDelivery(models.Model):
+    helper = models.ForeignKey(
+        'registration.Helper',
+        on_delete=models.CASCADE,
+    )
+
+    sentmail = models.ForeignKey(
+        'SentMail',
+        on_delete=models.CASCADE,
+    )
+
+    failed = models.CharField(
+        blank=True,
+        null=True,
+        default=None,
+        max_length=512,
+    )
+
+    def __str__(self):
+        return "%s - %s" % (self.sentmail, self.helper.email)

@@ -31,6 +31,8 @@ class Helper(models.Model):
         :infection_instruction: status of the instruction for food handling
         :timestamp: time of registration
         :validated: the validation link was clicked (if validation is enabled)
+        :mail_failed: a "undelivered" report returned for the registration mail
+        :privacy_statement: the privacy statement was accepted
     """
     class Meta:
         ordering = ['event', 'surname', 'firstname']
@@ -95,7 +97,8 @@ class Helper(models.Model):
     shirt = models.CharField(
         max_length=20,
         choices=Event.SHIRT_CHOICES,
-        default=Event.SHIRT_UNKNOWN, verbose_name=_("T-shirt"),
+        default=Event.SHIRT_UNKNOWN,
+        verbose_name=_("T-shirt"),
     )
 
     vegetarian = models.BooleanField(
@@ -118,6 +121,13 @@ class Helper(models.Model):
     validated = models.BooleanField(
         default=True,
         verbose_name=_("E-Mail address was confirmed"),
+    )
+
+    mail_failed = models.CharField(
+        blank=True,
+        null=True,
+        default=None,
+        max_length=512,
     )
 
     privacy_statement = models.BooleanField(
