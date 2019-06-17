@@ -11,6 +11,7 @@ import uuid
 
 from badges.models import Badge
 from gifts.models import HelpersGifts
+from mail.tracking import new_tracking_registration
 
 from .event import Event
 from .job import Job
@@ -204,11 +205,14 @@ class Helper(models.Model):
                                      'validate_url': validate_url,
                                      'registered_url': registered_url})
 
+        tracking_header = new_tracking_registration(self)
+
         mail = EmailMessage(subject,
                             text,
                             settings.DEFAULT_FROM_MAIL,
                             [self.email, ],  # to
-                            reply_to=[event.email, ])
+                            reply_to=[event.email, ],
+                            headers=tracking_header)
 
         mail.send(fail_silently=False)
 

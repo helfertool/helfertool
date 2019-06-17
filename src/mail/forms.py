@@ -7,6 +7,7 @@ from django_select2.forms import Select2MultipleWidget
 from smtplib import SMTPException
 
 from .models import SentMail, MailDelivery
+from .tracking import new_tracking_event
 
 
 class MailFormError(Exception):
@@ -140,6 +141,10 @@ class MailForm(forms.Form):
             cc = [self.cleaned_data.get('cc'), ]
             sentmail.cc = self.cleaned_data.get('cc')
 
+        # tracking id
+        tracking_uuid, tracking_header = new_tracking_event()
+        sentmail.tracking_uuid = tracking_uuid
+
         # get the helpers that should receive the mail
         helpers = self._get_helpers(sentmail)
 
@@ -151,7 +156,7 @@ class MailForm(forms.Form):
             if h.email not in receiver_list:
                 receiver_list.append(h.email)
 
-        # save changed CC and things done in _get_helpers
+        # save changed cc, tracking_uuid and things done in _get_helpers
         sentmail.save()
 
         if not receiver_list:
@@ -166,7 +171,8 @@ class MailForm(forms.Form):
                             [reply_to, ],    # to
                             receiver_list,
                             reply_to=[reply_to, ],
-                            cc=cc)
+                            cc=cc,
+                            headers=tracking_header)
 
         try:
             mail.send(fail_silently=False)

@@ -67,7 +67,12 @@ class SentMail(models.Model):
         default=False,
     )
 
-    helper_tracking = models.ManyToManyField(
+    tracking_uuid = models.fields.UUIDField(
+        null=True,
+        blank=True,
+    )
+
+    tracking_helper = models.ManyToManyField(
         'registration.Helper',
         through='MailDelivery',
     )

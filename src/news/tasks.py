@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils import translation
@@ -9,6 +9,8 @@ from celery import shared_task
 
 import smtplib
 import time
+
+from mail.tracking import new_tracking_news
 
 from .models import Person
 
@@ -36,9 +38,16 @@ def send_news_mails(first_language, append_english, subject, text, text_en,
 
             mail_text = mail_text.lstrip().rstrip()
 
+            tracking_header = new_tracking_news(person)
+
             # send mail
             try:
-                send_mail(subject, mail_text, settings.DEFAULT_FROM_MAIL, [person.email])
+                mail = EmailMessage(subject,
+                                    mail_text,
+                                    settings.DEFAULT_FROM_MAIL,
+                                    [person.email, ],
+                                    headers=tracking_header)
+                mail.send(fail_silently=False)
             except smtplib.SMTPRecipientsRefused:
                 pass
 
