@@ -12,7 +12,7 @@ from ..utils import u
 class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
-        exclude = ['event', 'shifts', 'privacy_statement', ]
+        exclude = ['event', 'shifts', 'privacy_statement', 'mail_failed']
 
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')
