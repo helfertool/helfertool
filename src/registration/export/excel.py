@@ -90,8 +90,9 @@ def xlsx(buffer, event, jobs, date):
         worksheet.write(0, column.next(), _("E-Mail"), bold)
         worksheet.set_column(0, column.get(), 30)
 
-        worksheet.write(0, column.next(), _("Mobile phone"), bold)
-        worksheet.set_column(column.get(), column.get(), 20)
+        if event.ask_phone:
+            worksheet.write(0, column.next(), _("Mobile phone"), bold)
+            worksheet.set_column(column.get(), column.get(), 20)
 
         if event.ask_shirt:
             worksheet.write(0, column.next(), _("T-shirt"), bold)
@@ -155,7 +156,8 @@ def add_helpers(worksheet, row, column, event, job, helpers,
         worksheet.write(row.get(), column.next(), escape(helper.surname),
                         format)
         worksheet.write(row.get(), column.next(), escape(helper.email), format)
-        worksheet.write(row.get(), column.next(), escape(helper.phone), format)
+        if event.ask_phone:
+            worksheet.write(row.get(), column.next(), escape(helper.phone), format)
         if event.ask_shirt:
             worksheet.write(row.get(), column.next(),
                             escape(u(helper.get_shirt_display())), format)

@@ -87,12 +87,18 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6">
-            {% bootstrap_field form.email required_css_class='' %}
-        </div>
-        <div class="col-lg-6">
-            {% bootstrap_field form.phone required_css_class='' %}
-        </div>
+        {% if event.ask_phone %}
+            <div class="col-lg-6">
+                {% bootstrap_field form.email required_css_class='' %}
+            </div>
+            <div class="col-lg-6">
+                {% bootstrap_field form.phone required_css_class='' %}
+            </div>
+	{% else %}
+            <div class="col-lg-12">
+                {% bootstrap_field form.email required_css_class='' %}
+            </div>
+	{% endif %}
     </div>
 
     <div class="row">

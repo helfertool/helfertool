@@ -39,6 +39,10 @@ class RegisterForm(forms.ModelForm):
 
         super(RegisterForm, self).__init__(*args, **kwargs)
 
+        # remove field for phone number
+        if not self.event.ask_phone:
+            self.fields.pop('phone')
+
         # remove field for shirt?
         if not self.event.ask_shirt:
             self.fields.pop('shirt')

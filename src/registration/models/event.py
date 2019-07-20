@@ -36,6 +36,7 @@ class Event(models.Model):
         :active: is the registration opened?
         :admins: list of admins of this event, they can see and edit everything
         :ask_shirt: ask for the t-shirt size during registration
+        :ask_phone: ask for the mobile phone number during registration
         :ask_vegetarian: ask, if the helper is vegetarian
         :show_public_numbers: show the number of current and maximal helpers on
                              the registration page
@@ -180,6 +181,11 @@ class Event(models.Model):
                     "this date themselves. Leave emtpy to disable this."),
         null=True,
         blank=True,
+    )
+
+    ask_phone = models.BooleanField(
+        default=True,
+        verbose_name=_("Ask for phone number"),
     )
 
     ask_shirt = models.BooleanField(

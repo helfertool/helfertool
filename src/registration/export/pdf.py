@@ -39,26 +39,29 @@ def add_table(elements, data, widths):
 
 def table_of_helpers(elements, helpers, event):
     # table
-    header = [par(_("Name")), par(_("Mobile phone")), ]
-
+    header = [par(_("Name")), ]
+    spaces = [6, ]
+    if event.ask_phone:
+        header.append(par(_("Mobile phone")))
+        spaces.append(4)
     if event.ask_shirt:
         header.append(par(_("T-shirt")))
+        spaces.append(2.5)
     header.append(par(_("Comment")))
+    spaces.append(17 - sum(spaces))  # 17cm are the total possible width, adjust the comment column to fill that
 
     data = [header, ]
 
     for helper in helpers:
-        tmp = [par("%s %s" % (helper.firstname, helper.surname)),
-               par(helper.phone), ]
+        tmp = [par("%s %s" % (helper.firstname, helper.surname)), ]
+        if event.ask_phone:
+            tmp.append(par(helper.phone))
         if event.ask_shirt:
             tmp.append(par(helper.get_shirt_display()))
         tmp.append(par(helper.comment))
         data.append(tmp)
 
-    if event.ask_shirt:
-        spaces = [6*cm, 4*cm, 2*cm, 5*cm]
-    else:
-        spaces = [6*cm, 4*cm, 7*cm]
+    spaces = [s * cm for s in spaces]
     add_table(elements, data, spaces)
 
 

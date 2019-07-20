@@ -12,10 +12,12 @@
         <td>{{ helper.email }}</td>
     </tr>
 
-    <tr>
-        <th>{% trans "Mobile phone" %}: </th>
-        <td>{{ helper.phone }}</td>
-    </tr>
+    {% if event.ask_phone %}
+        <tr>
+            <th>{% trans "Mobile phone" %}: </th>
+            <td>{{ helper.phone }}</td>
+        </tr>
+    {% endif %}
 
     {% if event.ask_shirt %}
         <tr>

@@ -21,6 +21,10 @@ class HelperForm(forms.ModelForm):
 
         super(HelperForm, self).__init__(*args, **kwargs)
 
+        # remove field for phone number
+        if not self.related_event.ask_phone:
+            self.fields.pop('phone')
+
         # remove field for shirt?
         if not self.related_event.ask_shirt:
             self.fields.pop('shirt')
