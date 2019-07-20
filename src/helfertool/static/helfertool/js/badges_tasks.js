@@ -1,8 +1,23 @@
+var counter = 0;
+var timer;
+
 function reload_tasklist()
 {
-    var url = $("#tasks").data("url");
-    $("#tasks").load(url);
+    if(counter < 600)  // stop reloading after 20 minutes
+    {
+        var url = $("#tasks").data("url");
+        $("#tasks").load(url);
+
+        counter++;
+    }
+    else
+    {
+        $("#tasks").addClass("d-none")
+        $("#tasks-reload").removeClass("d-none")
+
+        clearInterval(timer);
+    }
 }
 
 reload_tasklist();
-setInterval(reload_tasklist, 2000);
+timer = setInterval(reload_tasklist, 2000);

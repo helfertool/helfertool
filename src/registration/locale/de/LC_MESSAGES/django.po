@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 11:55+0200\n"
+"POT-Creation-Date: 2019-07-20 12:48+0200\n"
 "PO-Revision-Date: 2019-07-20 17:56+0800\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -1235,6 +1235,16 @@ msgstr ""
 "\n"
 "du wurdest für folgende Schichten angemeldet:"
 
+#: registration/templates/registration/mail/internal.txt:9
+#: registration/templates/registration/mail/public.txt:9
+#, python-format
+msgid ""
+"You can view your data here and change it or deregister until "
+"%(changes_until)s: %(registered_url)s"
+msgstr ""
+"Du kannst deine Daten hier ansehen und diese bis zum %(changes_until)s "
+"ändern oder dich abmelden: %(registered_url)s"
+
 #: registration/templates/registration/mail/public.txt:1
 #, python-format
 msgid ""
@@ -1245,15 +1255,6 @@ msgstr ""
 "Hallo %(firstname)s,\n"
 "\n"
 "du hast dich für folgende Schichten angemeldet:"
-
-#: registration/templates/registration/mail/public.txt:9
-#, python-format
-msgid ""
-"You can view your data here and change it or deregister until "
-"%(changes_until)s: %(registered_url)s"
-msgstr ""
-"Du kannst deine Daten hier ansehen und diese bis zum %(changes_until)s "
-"ändern oder dich abmelden: %(registered_url)s"
 
 #: registration/templates/registration/mail/subject.txt:1
 #, python-format

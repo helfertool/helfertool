@@ -78,7 +78,6 @@ def index(request, event_url_name):
     return render(request, 'badges/index.html', context)
 
 
-@login_required
 def tasklist(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

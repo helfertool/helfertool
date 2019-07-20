@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 11:55+0200\n"
-"PO-Revision-Date: 2019-02-03 11:53+0100\n"
+"POT-Creation-Date: 2019-07-20 12:48+0200\n"
+"PO-Revision-Date: 2019-07-20 18:49+0800\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -273,29 +273,33 @@ msgstr ""
 "Es fehlen notwendige Einstellungen, um die Badges zu generieren. Prüfe "
 "folgende Einstellungen:"
 
-#: badges/templates/badges/index.html:21
+#: badges/templates/badges/index.html:19
+msgid "Please reload the page (due to inactivity)."
+msgstr "Bitte lade die Seite neu (wegen Inaktivität)."
+
+#: badges/templates/badges/index.html:24
 #: badges/templates/badges/settings.html:109
 msgid "Job"
 msgstr "Aufgabe"
 
-#: badges/templates/badges/index.html:32
+#: badges/templates/badges/index.html:35
 msgid "Unregistered badges"
 msgstr "Nicht registrierte Badges"
 
-#: badges/templates/badges/index.html:37
+#: badges/templates/badges/index.html:40
 msgid "All badges"
 msgstr "Alle Badges"
 
-#: badges/templates/badges/index.html:42 badges/templates/badges/index.html:47
+#: badges/templates/badges/index.html:45 badges/templates/badges/index.html:50
 #, python-format
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:59 badges/views/generate.py:179
+#: badges/templates/badges/index.html:62 badges/views/generate.py:178
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:64 badges/views/generate.py:181
+#: badges/templates/badges/index.html:67 badges/views/generate.py:180
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -426,15 +430,15 @@ msgstr ""
 "Die aufgelisteten Personen haben mehr als eine Aufgabe, daher musst du in "
 "den Badge Einstellungen eine primäre Aufgabe auswählen."
 
-#: badges/views/generate.py:174
+#: badges/views/generate.py:173
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:176
+#: badges/views/generate.py:175
 msgid "{} (all)"
 msgstr "{} (alle)"
 
-#: badges/views/generate.py:215
+#: badges/views/generate.py:214
 msgid "Internal Server Error. The admins were notified."
 msgstr "Interner Fehler. Die Admins wurden benachrichtigt."
 
