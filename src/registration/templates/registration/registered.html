@@ -45,14 +45,14 @@
                 <i class="fas fa-edit"></i> {% trans "Edit" %}
             </a></p>
         {% endif %}
-    {% endif %}
 
-    {% if event.changes_possible %}
-        <div class="alert alert-info" role="alert">
-            {% blocktrans with date=event.changes_until trimmed %}
-                You can change your selected shifts and personal data until {{ date }} on this page (we have sent you the link to this page by e-mail).
-            {% endblocktrans %}
-        </div>
+        {% if event.changes_possible %}
+            <div class="alert alert-info" role="alert">
+                {% blocktrans with date=event.changes_until trimmed %}
+                    You can change your selected shifts and personal data until {{ date }} on this page (we have sent you the link to this page by e-mail).
+                {% endblocktrans %}
+            </div>
+        {% endif %}
     {% endif %}
 
     {% if data.is_coordinator %}

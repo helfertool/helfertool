@@ -6,7 +6,7 @@ you were registered for the following shifts:{% endblocktrans %}
 {% endfor %}
 {% if user.has_to_validate %}{% blocktrans %}You have to confirm your mail address by clicking on the following link: {{ validate_url }}
 
-{% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
+{% endblocktrans %}{% endif %}{% if event.changes_possible %}{% blocktrans with changes_until=event.changes_until %}You can view your data here and change it or deregister until {{ changes_until }}: {{ registered_url }}{%endblocktrans%}{% else %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}{% endif %}
 
 {% trans "Your data is used according to the following data privacy statement, if you do not agree with it please veto per e-mail." %}
 

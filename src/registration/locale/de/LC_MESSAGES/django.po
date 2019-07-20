@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 11:20+0200\n"
-"PO-Revision-Date: 2019-07-20 17:21+0800\n"
+"POT-Creation-Date: 2019-07-20 11:55+0200\n"
+"PO-Revision-Date: 2019-07-20 17:56+0800\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -300,7 +300,7 @@ msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 #: registration/templates/registration/form.html:57
 #: registration/templates/registration/invalid_link.html:30
 #: registration/templates/registration/not_active.html:22
-#: registration/templates/registration/registered.html:102
+#: registration/templates/registration/registered.html:104
 #: registration/templates/registration/validate.html:23
 msgid "Contact"
 msgstr "Kontakt"
@@ -1246,6 +1246,15 @@ msgstr ""
 "\n"
 "du hast dich für folgende Schichten angemeldet:"
 
+#: registration/templates/registration/mail/public.txt:9
+#, python-format
+msgid ""
+"You can view your data here and change it or deregister until "
+"%(changes_until)s: %(registered_url)s"
+msgstr ""
+"Du kannst deine Daten hier ansehen und diese bis zum %(changes_until)s "
+"ändern oder dich abmelden: %(registered_url)s"
+
 #: registration/templates/registration/mail/subject.txt:1
 #, python-format
 msgid "Registration for %(eventname)s"
@@ -1270,7 +1279,7 @@ msgstr ""
 "Wenn du deine E-Mail Adresse änderst wird eine Bestätigungsmail an die neue "
 "Adresse geschickt."
 
-#: registration/templates/registration/registered.html:52
+#: registration/templates/registration/registered.html:51
 #, python-format
 msgid ""
 "You can change your selected shifts and personal data until %(date)s on this "

@@ -4,23 +4,19 @@ Prio
 * allow empty mail addresses for internal registrations
 * rework badge creation
     * The AMQP result backend is scheduled for deprecation in version 4.0 and removal in version v5.0. Please use RPC backend or a persistent backend.
-* change after registration
-    * add more shifts
-    * add deadline to mail
 * django + celery logging
-* ask for gift selection during registration
 * fix cleanup for file uploads (see below)
 
-Design, JS
-==========
+UI
+==
 
 * set width of table columns
 * date and time selection
   * change end when begin is changed
+  * default for shift times: event date
 * accept="image/*" for image uploads
 * Rework edit_event view
-* Use AJAX for UserSelectWidget
-* Remove inline CSS from unavailable.html -> set better CSP
+* Remove inline CSS from helper overview and unavailable.html -> set better CSP
 * Rework language changer in navbar
 * Alerts for messages: outline, colors
 * Field/widget for shifts -> use for internal views and public registration
@@ -29,15 +25,10 @@ Registration
 ============
 
 * edit mail template / add custom message to mails?
-* duplicate shifts
 * dynamic fields
 * index for job: order and pk
-
-Admin area
-==========
-
-* move a lot of other things from registration to own app
-* event date -> default for shift times
+* registration mail to helper in english and german
+* change after registration: add more shifts
 
 Badges
 ======
@@ -54,6 +45,7 @@ Gifts
 =====
 
 * add flags to excel export
+* ask for gift selection during registration
 
 File uploads
 ============
