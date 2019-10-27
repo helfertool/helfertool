@@ -6,6 +6,7 @@ from axes.utils import get_client_ip
 import logging
 logger = logging.getLogger("helfertool")
 
+
 @receiver(user_logged_in)
 def user_logged_in_logger(sender, request, user, **kwargs):
     ip_address = get_client_ip(request)
@@ -14,6 +15,7 @@ def user_logged_in_logger(sender, request, user, **kwargs):
         'user': user,
         'ip': ip_address,
     })
+
 
 @receiver(user_login_failed)
 def user_login_failed_logger(sender, credentials, request, **kwargs):

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODULES="helfertool registration badges news gifts help mail inventory statistic toolsettings account"
+MODULES="account badges gifts helfertool help inventory mail news registration statistic toolsettings"
 
 RED="\x1b[31m"
 GREEN="\x1b[32m"
@@ -28,7 +28,7 @@ for m in $modules ; do
     echo -ne "${GREEN}Checking module: $m${RESET}\t\t"
 
     # PEP8
-    pep_output="$(pep8 --exclude migrations --ignore $PEP8_IGNORES --max-line-length=$PEP8_LINE_LENGTH $m 2>&1)"
+    pep_output="$(flake8 --exclude migrations,__init__.py --ignore $PEP8_IGNORES --max-line-length=$PEP8_LINE_LENGTH $m 2>&1)"
     if [ -z "$pep_output" ] ; then
         pep_errors="0"
     else

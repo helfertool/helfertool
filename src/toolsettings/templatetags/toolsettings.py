@@ -1,6 +1,4 @@
 from django import template
-from django.conf import settings
-from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 
 from ..models import HTMLSetting, TextSetting

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 14:01+0100\n"
-"PO-Revision-Date: 2019-10-27 14:01+0100\n"
+"POT-Creation-Date: 2019-10-27 17:01+0100\n"
+"PO-Revision-Date: 2019-10-27 16:48+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: registration/export/excel.py:88 registration/models/helper.py:75
+#: registration/export/excel.py:86 registration/models/helper.py:75
 #: registration/templates/registration/admin/helpers_table.html:22
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:89 registration/models/helper.py:80
+#: registration/export/excel.py:87 registration/models/helper.py:80
 #: registration/templates/registration/admin/helpers_table.html:26
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:90 registration/models/event.py:138
+#: registration/export/excel.py:88 registration/models/event.py:138
 #: registration/models/helper.py:84
 #: registration/templates/registration/admin/archive_event.html:21
 #: registration/templates/registration/admin/coordinators.html:17
@@ -37,39 +37,39 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:94 registration/export/pdf.py:45
+#: registration/export/excel.py:92 registration/export/pdf.py:45
 #: registration/models/helper.py:89
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/helper_data.html:17
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export/excel.py:98 registration/export/pdf.py:48
+#: registration/export/excel.py:96 registration/export/pdf.py:48
 #: registration/models/helper.py:102
 #: registration/templates/registration/admin/helpers_table.html:31
 #: registration/templates/registration/helper_data.html:24
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:102 registration/models/helper.py:107
+#: registration/export/excel.py:100 registration/models/helper.py:107
 #: registration/templates/registration/admin/helpers_table.html:37
 #: registration/templates/registration/helper_data.html:38
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: registration/export/excel.py:106
+#: registration/export/excel.py:104
 #: registration/templates/registration/admin/helpers_table.html:43
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export/excel.py:109 registration/export/pdf.py:50
+#: registration/export/excel.py:107 registration/export/pdf.py:50
 #: registration/models/helper.py:95
 #: registration/templates/registration/admin/helpers_table.html:48
 #: registration/templates/registration/helper_data.html:44
 msgid "Comment"
 msgstr "Kommentar"
 
-#: registration/export/excel.py:124 registration/export/pdf.py:84
+#: registration/export/excel.py:122 registration/export/pdf.py:84
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:34
 msgid "Coordinators"
@@ -90,25 +90,24 @@ msgstr "Name"
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
-#: registration/forms/helper.py:108
+#: registration/forms/helper.py:106
 msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
 
-#: registration/forms/helper.py:112
-#, python-format
-msgid "This shift if already full: %(shift)s"
-msgstr "Die Schicht ist bereits voll: %(shift)s"
+#: registration/forms/helper.py:110
+msgid "This shift if already full: {}"
+msgstr "Die Schicht ist bereits voll: {}"
 
-#: registration/forms/helper.py:183
+#: registration/forms/helper.py:180
 msgid "No shift selected"
 msgstr "Keine Schicht ausgewählt"
 
-#: registration/forms/helper.py:188
+#: registration/forms/helper.py:185
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 
-#: registration/forms/helper.py:219
+#: registration/forms/helper.py:216
 msgid "Search term"
 msgstr "Suchbegriff"
 
@@ -176,12 +175,12 @@ msgstr "Du hast eine gesperrte Schicht ausgewählt."
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: registration/forms/registration.py:208
+#: registration/forms/registration.py:207
 msgid "You must specify, if you have a instruction for the handling of food."
 msgstr ""
 "Du musst angeben, ob du eine Belehrung im Umgang mit Lebensmitteln hast."
 
-#: registration/forms/registration.py:225
+#: registration/forms/registration.py:223
 #, python-format
 msgid "Some of your shifts overlap more then %(minutes)d minutes."
 msgstr ""

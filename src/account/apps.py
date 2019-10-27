@@ -5,4 +5,4 @@ class AccountConfig(AppConfig):
     name = 'account'
 
     def ready(self):
-        from . import signals
+        from . import signals  # noqa: F401

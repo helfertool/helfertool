@@ -1,8 +1,6 @@
-from django.core.exceptions import ValidationError
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
-from django.utils.translation import ugettext as _
 
 import logging
 logger = logging.getLogger("helfertool")

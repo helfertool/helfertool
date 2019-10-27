@@ -77,12 +77,12 @@ def list_agreements(request):
     return render(request, 'account/list_agreements.html',
                   context)
 
+
 @login_required
 def edit_agreement(request, agreement_pk=None):
     # must be superuser
     if not request.user.is_superuser:
         return nopermission(request)
-
 
     # get job, if available
     agreement = None

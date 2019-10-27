@@ -4,7 +4,6 @@ from tempfile import mkdtemp, mkstemp
 import os
 import subprocess
 import shutil
-import sys
 
 import badges.models
 

@@ -78,7 +78,7 @@ def register_badge(request, event_url_name, item_pk):
             return redirect('inventory:register', event_url_name)
     except (KeyError, Item.DoesNotExist):
         form = None
-    except AlreadyAssigned as e:
+    except AlreadyAssigned:
         already_assigned = True
 
     context = {'event': event,

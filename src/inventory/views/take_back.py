@@ -73,7 +73,7 @@ def take_back_badge(request, event_url_name, item_pk):
             return redirect('inventory:take_back', event_url_name)
     except (KeyError, Item.DoesNotExist):
         form = None
-    except WrongHelper as e:
+    except WrongHelper:
         wrong_helper = True
 
     context = {'event': event,

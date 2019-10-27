@@ -6,8 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from ..models import Helper, Shift, Job
 from badges.models import Badge
 
-from ..utils import u
-
 
 class HelperForm(forms.ModelForm):
     class Meta:
@@ -109,8 +107,7 @@ class HelperAddShiftForm(forms.Form):
 
         for shift in self.cleaned_data.get('shifts'):
             if shift.is_full():
-                raise ValidationError(_("This shift if already full: "
-                                        "%(shift)s") % {'shift': u(shift)})
+                raise ValidationError(_("This shift if already full: {}".format(shift)))
 
     def save(self):
         for shift in self.cleaned_data.get('shifts'):
@@ -172,9 +169,9 @@ class HelperDeleteForm(forms.ModelForm):
         else:
             self.fields['shifts'].queryset = Shift.objects.filter(
                 pk=self.shift.pk)  # we need a queryset, not a Shift object
-        
+
         self.fields['shifts'].required = False  # show customized error message in clean
-        
+
     def clean(self):
         super(HelperDeleteForm, self).clean()
 

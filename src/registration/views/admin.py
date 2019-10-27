@@ -1,10 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
-from account.templatetags.permissions import has_perm_group
-from inventory.utils import is_inventory_admin
-
-from .utils import nopermission, is_involved
+from .utils import nopermission
 
 from ..decorators import archived_not_available
 from ..models import Event

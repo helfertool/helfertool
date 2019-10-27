@@ -3,8 +3,6 @@ from django.conf import settings
 
 from ckeditor.widgets import CKEditorWidget
 
-import datetime
-
 from registration.forms.fields import DatePicker
 
 from ..models import Agreement, UserAgreement

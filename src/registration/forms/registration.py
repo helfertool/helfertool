@@ -202,11 +202,9 @@ class RegisterForm(forms.ModelForm):
             raise ValidationError(_("You must select at least one shift."))
 
         # infection instruction needed but field not set?
-        if (infection_instruction_needed and
-                self.cleaned_data.get('infection_instruction') == ""):
+        if (infection_instruction_needed and self.cleaned_data.get('infection_instruction') == ""):
             self.add_error('infection_instruction',
-                           _("You must specify, if you have a instruction for "
-                             "the handling of food."))
+                           _("You must specify, if you have a instruction for the handling of food."))
 
         # check for overlapping shifts
         if self.event.max_overlapping:

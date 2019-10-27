@@ -58,7 +58,7 @@ def check(request):
             ldap_conn = ldap.initialize(settings.AUTH_LDAP_SERVER_URI)
             ldap_conn.simple_bind_s(settings.AUTH_LDAP_BIND_DN,
                                     settings.AUTH_LDAP_BIND_PASSWORD)
-        except ldap.LDAPError:
+        except ldap.LDAPError:  # noqa: E1101
             ldap_ok = False
     else:
         ldap_configured = False
