@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 13:06+0100\n"
-"PO-Revision-Date: 2019-10-27 13:06+0100\n"
+"POT-Creation-Date: 2019-10-27 14:01+0100\n"
+"PO-Revision-Date: 2019-10-27 14:01+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -99,12 +99,16 @@ msgstr "Keine Schichten ausgewählt"
 msgid "This shift if already full: %(shift)s"
 msgstr "Die Schicht ist bereits voll: %(shift)s"
 
-#: registration/forms/helper.py:182
+#: registration/forms/helper.py:183
+msgid "No shift selected"
+msgstr "Keine Schicht ausgewählt"
+
+#: registration/forms/helper.py:188
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keinen Helfer aus der Aufgabe \"%(jobname)s\" löschen"
 
-#: registration/forms/helper.py:213
+#: registration/forms/helper.py:219
 msgid "Search term"
 msgstr "Suchbegriff"
 

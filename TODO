@@ -14,8 +14,7 @@ UI
 * date and time selection
   * change end when begin is changed
   * default for shift times: event date
-* accept="image/*" for image uploads
-* Rework edit_event view
+* rework file upload: accept="image/*" for image uploads + less ugly
 * Remove inline CSS from helper overview and unavailable.html -> set better CSP
 * Rework language changer in navbar
 * Alerts for messages: outline, colors

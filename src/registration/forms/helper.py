@@ -172,9 +172,15 @@ class HelperDeleteForm(forms.ModelForm):
         else:
             self.fields['shifts'].queryset = Shift.objects.filter(
                 pk=self.shift.pk)  # we need a queryset, not a Shift object
-
+        
+        self.fields['shifts'].required = False  # show customized error message in clean
+        
     def clean(self):
         super(HelperDeleteForm, self).clean()
+
+        # check if shifts selected
+        if len(self.get_deleted_shifts()) == 0:
+            raise ValidationError(_("No shift selected"))
 
         # check if user is admin for all shifts that will be deleted
         for shift in self.get_deleted_shifts():
