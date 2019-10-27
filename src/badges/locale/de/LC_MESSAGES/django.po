@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 12:48+0200\n"
+"POT-Creation-Date: 2019-10-27 13:06+0100\n"
 "PO-Revision-Date: 2019-07-20 18:49+0800\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -102,8 +102,8 @@ msgstr "Standard Design"
 msgid "Do not print default roles on badges"
 msgstr "Keine Standard Rollen auf die Badges drucken"
 
-#: badges/models/design.py:43 badges/models/permission.py:19
-#: badges/models/role.py:20 badges/templates/badges/delete_design.html:13
+#: badges/models/design.py:41 badges/models/permission.py:17
+#: badges/models/role.py:18 badges/templates/badges/delete_design.html:13
 #: badges/templates/badges/delete_permission.html:13
 #: badges/templates/badges/delete_role.html:13
 #: badges/templates/badges/settings.html:20
@@ -112,42 +112,42 @@ msgstr "Keine Standard Rollen auf die Badges drucken"
 msgid "Name"
 msgstr "Name"
 
-#: badges/models/design.py:50
+#: badges/models/design.py:48
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: badges/models/design.py:51 badges/models/design.py:59
+#: badges/models/design.py:49 badges/models/design.py:57
 msgid "E.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: badges/models/design.py:58
+#: badges/models/design.py:56
 msgid "Background color"
 msgstr "Hintergrundfarbe"
 
-#: badges/models/design.py:63
+#: badges/models/design.py:61
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: badges/models/design.py:70
+#: badges/models/design.py:68
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
-#: badges/models/permission.py:24 badges/models/role.py:25
+#: badges/models/permission.py:22 badges/models/role.py:23
 msgid "Name for LaTeX template"
 msgstr "Name für LaTeX Template"
 
-#: badges/models/permission.py:25
+#: badges/models/permission.py:23
 msgid ""
 "This name is used for the LaTeX template, the prefix \"perm-\" is added."
 msgstr ""
 "Dieser Name wird im LaTeX Template verwendet, es wird das Präfix \"perm-\" "
 "hinzugefügt."
 
-#: badges/models/role.py:26
+#: badges/models/role.py:24
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: badges/models/role.py:32 badges/templates/badges/delete_role.html:17
+#: badges/models/role.py:30 badges/templates/badges/delete_role.html:17
 #: badges/templates/badges/settings.html:22
 #: badges/templates/badges/settings_advanced.html:29
 msgid "Permissions"

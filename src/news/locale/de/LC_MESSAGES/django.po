@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-20 12:48+0200\n"
+"POT-Creation-Date: 2019-10-27 13:06+0100\n"
 "PO-Revision-Date: 2019-06-09 21:41+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr "Englischer Text"
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
-#: news/forms/remove.py:9 news/models/person.py:20
+#: news/forms/remove.py:9 news/models/person.py:18
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -66,7 +66,7 @@ msgstr "Anzeigen"
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: news/models/person.py:30
+#: news/models/person.py:28
 msgid "Helper subscribed during registration for event"
 msgstr ""
 "Helfer hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
