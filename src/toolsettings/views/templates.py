@@ -43,7 +43,7 @@ def template_about(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:index'))
+        return HttpResponseRedirect(reverse('toolsettings:templates'))
 
     # render page
     context = {'form': form}
@@ -90,7 +90,7 @@ def template_privacy(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:index'))
+        return HttpResponseRedirect(reverse('toolsettings:templates'))
 
     # render page
     context = {'form_privacy': form_privacy,
@@ -118,7 +118,7 @@ def template_login(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:index'))
+        return HttpResponseRedirect(reverse('toolsettings:templates'))
 
     # render page
     context = {'form': form}
@@ -143,7 +143,7 @@ def template_add_user(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:index'))
+        return HttpResponseRedirect(reverse('toolsettings:templates'))
 
     # render page
     context = {'form': form}
