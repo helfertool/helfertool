@@ -24,3 +24,6 @@ Session.vim
 /db.sqlite3*
 /badge_debugging.tex
 /test/docker/data/db.sqlite3
+
+# directory with stuff ;)
+/stuff/

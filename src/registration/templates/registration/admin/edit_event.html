@@ -1,6 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 translation %}
 
 {% block admincontent %}
     {# edit/new #}
@@ -18,9 +17,72 @@
                 {% trans "Please correct the errors below." %}
             </div>
         {% endif %}
+        
+        <h3>{% trans "General" %}</h3>
+        {% bootstrap_field form.name %}
+        {% bootstrap_field form.url_name %}
+        {% bootstrap_field form.date %}
+        {% bootstrap_field form.days %}
+        {% bootstrap_field form.email %}
+        {% bootstrap_field form.admins %}
+        
+        <h3>{% trans "Anmeldung" %}</h3>
+        {% bootstrap_field form.active %}
+        {% bootstrap_field form.mail_validation %}
+        {% bootstrap_field form.show_public_numbers %}
+        {% bootstrap_field form.changes_until %}
+        {% bootstrap_field form.max_overlapping %}
 
-        {% bootstrap_form_errors form %}
-        {% bootstrap_form form %}
+        <h3>{% trans "Texts" %}</h3>
+        {% get_available_languages as languages %}
+        <ul class="nav nav-tabs" id="texts" role="tablist">
+            {% for lang, name in languages %}
+                <li class="nav-item">
+                    <a class="nav-link {% if forloop.first %}active{% endif %}"
+                       id="texts-{{ lang }}" href="#{{ lang }}" data-toggle="tab" role="tab"
+                       aria-controls="{{ lang }}" aria-selected="true">{{ name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content" id="texts-content">
+            {% for lang, name in languages %}
+                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ lang }}" role="tabpanel" aria-labelledby="texts-{{ lang }}">
+                    {% translated_field form "text" lang as field %}
+                    {% bootstrap_field field %}
+        
+                    {% translated_field form "imprint" lang as field %}
+                    {% bootstrap_field field %}
+        
+                    {% translated_field form "registered" lang as field %}
+                    {% bootstrap_field field %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <h3>{% trans "Logos" %}</h3>
+        {% bootstrap_field form.logo %}
+        {% bootstrap_field form.logo_social %}
+
+        <h3>{% trans "Requestes helper data" %}</h3>
+        {% bootstrap_field form.ask_full_age %}
+        {% bootstrap_field form.ask_news %}
+        {% bootstrap_field form.ask_vegetarian %}
+        {% bootstrap_field form.ask_phone %}
+        {% bootstrap_field form.ask_shirt %}
+
+        {% if event.ask_shirt %}
+            {% bootstrap_field form.shirt_sizes %}
+
+            {# render errors for this field manually since they do not appear otherwise #}
+            {% for text in form.shirt_sizes.errors %}
+                <div class="text-danger">{{ text }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <h3>{% trans "Features" %}</h3>
+        {% bootstrap_field form.badges %}
+        {% bootstrap_field form.gifts %}
+        {% bootstrap_field form.inventory %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
