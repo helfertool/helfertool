@@ -11,13 +11,19 @@ in our documentation.
 
 # Environment for development
 
-A Python virtual environment should be used for development, the necessary
-Python libraries are listed in ``src/requirements.txt``.
+A Python virtual environment should be used for development:
+
+    python3 -m venv venv
+
+The necessary Python libraries are listed in ``src/requirements.txt``:
+
+    pip install -r src/requirements.txt
 
 ## Database
 
 To create the SQLite database for testing, run:
 
+    cd src
     python manage.py migrate
     python manage.py createcachetable
 
@@ -46,6 +52,7 @@ The default settings in ``helfertool.yaml`` do not need to be changed.
 
 Now start celery:
 
+    cd src
     celery -A helfertool worker -c 2 --loglevel=info
 
 ## Mails
@@ -75,7 +82,7 @@ The maximum line length is 120 characters, not 80.
 
 # LICENSE
 
-Copyright (C) 2018  Sven Hertle
+Copyright (C) 2019  Sven Hertle
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as

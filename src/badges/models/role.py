@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from copy import deepcopy
@@ -8,7 +7,6 @@ from .settings import BadgeSettings
 from .permission import BadgePermission
 
 
-@python_2_unicode_compatible
 class BadgeRole(models.Model):
     badge_settings = models.ForeignKey(
         BadgeSettings,

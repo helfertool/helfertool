@@ -1,7 +1,6 @@
 from django.core.files.base import ContentFile
 from django.core.validators import RegexValidator
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 import os
@@ -18,7 +17,6 @@ def _design_upload_path(instance, filename):
     return posixpath.join('badges', event, 'backgrounds', filename)
 
 
-@python_2_unicode_compatible
 class BadgeDesign(models.Model):
     """ Design of a badge (for an event or job)
 

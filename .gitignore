@@ -6,11 +6,15 @@ Session.vim
 .netrwhist
 *~
 
+# VS code
+.vscode
+
 # python/django
 *.pyc
 *.pyo
 *.log
 *.pot
+/venv/
 
 # upload directory and static files
 /media/
