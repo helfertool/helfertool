@@ -157,11 +157,11 @@ def add_helpers(worksheet, row, column, event, job, helpers,
         if event.ask_phone:
             worksheet.write(row.get(), column.next(), escape(helper.phone), format)
         if event.ask_shirt:
-            worksheet.write(row.get(), column.next(), escape(helper.get_shirt_display()), format)
+            worksheet.write(row.get(), column.next(), escape(str(helper.get_shirt_display())), format)
         if event.ask_vegetarian:
             worksheet.write(row.get(), column.next(),
                             escape(filters.yesno(helper.vegetarian)), format)
         if job.infection_instruction:
-            worksheet.write(row.get(), column.next(), escape(helper.get_infection_instruction_short()), format)
+            worksheet.write(row.get(), column.next(), escape(str(helper.get_infection_instruction_short())), format)
         worksheet.write(row.get(), column.next(), escape(helper.comment),
                         format)
