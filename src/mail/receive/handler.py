@@ -24,7 +24,7 @@ class MailHandler:
         self._receiver = MailReceiver()
         self._forwarder = MailForwarder()
 
-    def run(self):
+    def run(self, do_forward=True):
         """
         Handle new mails and forward unhandled mails to another address.
         """
@@ -49,7 +49,7 @@ class MailHandler:
                         msg_handled = False
                         break  # will be the same for the other delivery notifications
 
-            if not msg_handled:
+            if not msg_handled and do_forward:
                 self._forward(msg)
 
         self._receiver.close()
