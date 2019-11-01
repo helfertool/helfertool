@@ -60,15 +60,37 @@ rabbitmq:
 
 # Mail server and settings
 mail:
-    # Connection to mail server
-    host: "localhost"
-    port: 25
-    user: null
-    password: null
-    tls: false
+    # Connection to mail server for sending
+    send:
+        host: "localhost"
+        port: 25
+        user: null
+        password: null
+        tls: false
+        starttls: false
 
-    # Sender address for all mails
+    # Connection to mail server for receiving
+    #receive:
+    #    host: "localhost"
+    #    port: 993
+    #    user: "helfertool"
+    #    password: "<PASSWORD>"
+    #    tls: true
+    #    starttls: false
+    #
+    #    # The IMAP folder that should be checked for new mails
+    #    folder: "INBOX"
+    #
+    #    # Time between checks (in seconds)
+    #    interval: 300
+
+    # Sender address and display name for all outgoing mails
     sender_address: "helfertool@localhost"
+    sender_name: "Helfertool"
+
+    # Forward received mails that are not handled automatically to this address (with this display name)
+    #forward_unhandled_address: "helfertool@localhost"
+    #forward_unhandled_name: "Helfertool"
 
     # Batch size if a high amount of mails is sent
     # This is currently only used for the newsletter, the other mails are sent

@@ -23,6 +23,7 @@ Session.vim
 # sqlite database and debugging files
 /db.sqlite3*
 /badge_debugging.tex
+/src/celerybeat-schedule.db
 /test/docker/data/db.sqlite3
 
 # directory with stuff ;)

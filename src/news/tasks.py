@@ -41,7 +41,7 @@ def send_news_mails(first_language, append_english, subject, text, text_en, unsu
         try:
             mail = EmailMessage(subject,
                                 mail_text,
-                                settings.DEFAULT_FROM_MAIL,
+                                settings.EMAIL_SENDER_ADDRESS,
                                 [person.email, ],
                                 headers=tracking_header)
             mail.send(fail_silently=False)

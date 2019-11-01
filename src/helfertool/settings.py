@@ -105,15 +105,54 @@ CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_BROKER_POOL_LIMIT = None
 
 # mail
-EMAIL_HOST = dict_get(config, 'localhost', 'mail', 'host')
-EMAIL_PORT = dict_get(config, 25, 'mail', 'port')
-EMAIL_HOST_USER = dict_get(config, None, 'mail', 'user')
-EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'password')
-EMAIL_USE_TLS = dict_get(config, False, 'mail', 'tls')
+if dict_get(config, None, 'mail', 'host') is None:
+    # new config format: sending and receiving mails separated
+
+    # send
+    EMAIL_HOST = dict_get(config, 'localhost', 'mail', 'send', 'host')
+    EMAIL_PORT = dict_get(config, 25, 'mail', 'send', 'port')
+    EMAIL_HOST_USER = dict_get(config, None, 'mail', 'send', 'user')
+    EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'send', 'password')
+    EMAIL_USE_SSL = dict_get(config, False, 'mail', 'send', 'tls')
+    EMAIL_USE_TLS = dict_get(config, False, 'mail', 'send', 'starttls')
+
+    if EMAIL_USE_SSL and EMAIL_USE_TLS:
+        print("Mail settings for sending invalid: TLS and STARTTLS are mutually exclusive")
+        sys.exit(1)
+
+    # receive
+    RECEIVE_EMAIL_HOST = dict_get(config, None, 'mail', 'receive', 'host')
+    RECEIVE_EMAIL_PORT = dict_get(config, None, 'mail', 'receive', 'port')
+    RECEIVE_EMAIL_HOST_USER = dict_get(config, None, 'mail', 'receive', 'user')
+    RECEIVE_EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'receive', 'password')
+    RECEIVE_EMAIL_USE_SSL = dict_get(config, False, 'mail', 'receive', 'tls')
+    RECEIVE_EMAIL_USE_TLS = dict_get(config, False, 'mail', 'receive', 'starttls')
+
+    RECEIVE_EMAIL_FOLDER = dict_get(config, 'INBOX', 'mail', 'receive', 'folder')
+    RECEIVE_INTERVAL = dict_get(config, 300, 'mail', 'receive', 'interval')
+
+    if RECEIVE_EMAIL_USE_SSL and RECEIVE_EMAIL_USE_TLS:
+        print("Mail settings for receiving invalid: TLS and STARTTLS are mutually exclusive")
+        sys.exit(1)
+else:
+    # old config format
+    EMAIL_HOST = dict_get(config, 'localhost', 'mail', 'host')
+    EMAIL_PORT = dict_get(config, 25, 'mail', 'port')
+    EMAIL_HOST_USER = dict_get(config, None, 'mail', 'user')
+    EMAIL_HOST_PASSWORD = dict_get(config, None, 'mail', 'password')
+    EMAIL_USE_TLS = dict_get(config, False, 'mail', 'tls')
 
 # sender of all mails (because of SPF, DKIM, DMARC)
-DEFAULT_FROM_MAIL = dict_get(config, 'helfertool@localhost', 'mail',
-                             'sender_address')
+# the display name defaults to the mail address
+EMAIL_SENDER_ADDRESS = dict_get(config, 'helfertool@localhost', 'mail', 'sender_address')
+EMAIL_SENDER_NAME = dict_get(config, EMAIL_SENDER_ADDRESS, 'mail', 'sender_name')
+
+SERVER_EMAIL = EMAIL_SENDER_ADDRESS  # for error messages
+
+# forward mails that were not handled automatically to this address
+# the display name defaults to the mail address
+FORWARD_UNHANDLED_ADDRESS = dict_get(config, None, 'mail', 'forward_unhandled_address')
+FORWARD_UNHANDLED_NAME = dict_get(config, FORWARD_UNHANDLED_ADDRESS, 'mail', 'forward_unhandled_name')
 
 # newsletter: number of mails sent during one connection and time between
 MAIL_BATCH_SIZE = dict_get(config, 200, 'mail', 'batch_size')
@@ -294,6 +333,10 @@ CACHES = {
     'select2': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'select2_cache',
+    },
+    'locks': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'locks_cache',
     },
 }
 

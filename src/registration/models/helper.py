@@ -209,7 +209,7 @@ class Helper(models.Model):
 
         mail = EmailMessage(subject,
                             text,
-                            settings.DEFAULT_FROM_MAIL,
+                            settings.EMAIL_SENDER_ADDRESS,
                             [self.email, ],  # to
                             reply_to=[event.email, ],
                             headers=tracking_header)

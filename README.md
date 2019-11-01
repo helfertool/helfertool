@@ -53,7 +53,10 @@ The default settings in ``helfertool.yaml`` do not need to be changed.
 Now start celery:
 
     cd src
-    celery -A helfertool worker -c 2 --loglevel=info
+    celery -A helfertool worker --loglevel=info -B
+
+The celery worker here has the celery beat service included (``-B``).
+This is not recommended for production (see [celery documentation](https://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html#id7))!
 
 ## Mails
 

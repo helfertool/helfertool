@@ -20,9 +20,10 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {0!r}'.format(self.request))
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    from mail.tasks import receive_mails
+    sender.add_periodic_task(settings.RECEIVE_INTERVAL, receive_mails.s(), name='receive mails')
 
 
 @task_failure.connect
