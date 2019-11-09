@@ -16,6 +16,11 @@ class MailForwarder:
     def __init__(self):
         self._connection = None
 
+        self._own_addresses = [
+            settings.EMAIL_SENDER_ADDRESS.lower(),
+            settings.FORWARD_UNHANDLED_ADDRESS.lower(),
+        ]
+
     def connect(self):
         """
         Connect to SMTP server.
@@ -82,20 +87,21 @@ class MailForwarder:
 
         # rewrite headers (source: https://gitlab.com/mailman/mailman/blob/master/src/mailman/handlers/dmarc.py)
 
-        # get from name and address
-        all_froms = email.utils.getaddresses(msg.get_all('from', []))
-        froms = [email for email in all_froms if '@' in email[1]]  # remove invalid things
+        # get original From name and address -> there is only one From address allowed
+        froms = self._cleaned_getaddresses(msg, 'from', keep_own=True)
         if len(froms) > 0:
             original_from_name, original_from_address = froms[0]
         else:
             original_from_name = original_from_address = None
 
-        # To: internal address
-        to = (settings.FORWARD_UNHANDLED_NAME, settings.FORWARD_UNHANDLED_ADDRESS)
-        msg.replace_header("To", email.utils.formataddr(to))
+        # get original TO, CC and Reply-To names and addresses
+        # both own addresses are removed from the lists, so only external addresses are in there
+        original_to = self._cleaned_getaddresses(msg, 'to')
+        original_cc = self._cleaned_getaddresses(msg, 'cc')
+        original_reply_to = self._cleaned_getaddresses(msg, 'reply-to')
 
-        # From: ... via ... <...@...>
-        new_from_name = original_from_name or original_from_address
+        # Change From: ... via ... <...@...>
+        new_from_name = original_from_name or original_from_address or "Unknown"
         new_from_name_suffix = " via {}".format(settings.FORWARD_UNHANDLED_NAME)
         if new_from_name.endswith(new_from_name_suffix):
             # "via ..." suffix already there -> do not add it again
@@ -105,22 +111,70 @@ class MailForwarder:
 
         msg.replace_header("From", email.utils.formataddr((new_from, settings.FORWARD_UNHANDLED_ADDRESS)))
 
-        # Reply-to: original reply-to + original from + public address
-        reply_to = email.utils.getaddresses(msg.get_all("reply-to", []))
-        reply_to_addresses = [a[1] for a in reply_to]
+        # Change To: internal forwarding address + original to (without own addresses)
+        new_to = [(settings.FORWARD_UNHANDLED_NAME, settings.FORWARD_UNHANDLED_ADDRESS)]
+        self._merge_addr_list(new_to, original_to)
+        msg.replace_header("To", self._format_addr_header(new_to))
 
-        if settings.EMAIL_SENDER_ADDRESS not in reply_to_addresses:
-            reply_to.append((settings.EMAIL_SENDER_NAME, settings.EMAIL_SENDER_ADDRESS))
-            reply_to_addresses.append(settings.EMAIL_SENDER_ADDRESS)
+        # CC is not touched (it is only informational)
 
-        if original_from_address not in reply_to_addresses:
-            reply_to.append((original_from_name, original_from_address))
-            reply_to_addresses.append(original_from_address)
+        # Change Reply-To: public address + original reply-to + original from + original to + original CC
+        # the own addresses are already filtered out of the original headers, so only the public address is added here
+        new_reply_to = [(settings.EMAIL_SENDER_NAME, settings.EMAIL_SENDER_ADDRESS), ]
+        self._merge_addr_list(new_reply_to, original_reply_to)
+        self._merge_addr(new_reply_to, original_from_name, original_from_address)
+        self._merge_addr_list(new_reply_to, original_to)
+        self._merge_addr_list(new_reply_to, original_cc)
 
         if "reply-to" in msg:
-            msg.replace_header("reply-to", ", ".join([email.utils.formataddr(a) for a in reply_to]))
+            msg.replace_header("reply-to", self._format_addr_header(new_reply_to))
         else:
-            msg.add_header("reply-to", ", ".join([email.utils.formataddr(a) for a in reply_to]))
+            msg.add_header("reply-to", self._format_addr_header(new_reply_to))
 
         # send mail
-        self._connection.sendmail(settings.FORWARD_UNHANDLED_ADDRESS, settings.FORWARD_UNHANDLED_ADDRESS, msg.as_string())
+        self._connection.sendmail(settings.FORWARD_UNHANDLED_ADDRESS, settings.FORWARD_UNHANDLED_ADDRESS,
+                                  msg.as_string())
+
+    def _cleaned_getaddresses(self, msg, header, keep_own=False):
+        addresses = email.utils.getaddresses(msg.get_all(header, []))
+
+        valid_addresses = []
+        for addr in addresses:
+            # addr is tuple of name and address
+
+            # remove invalid things
+            if '@' not in addr[1]:
+                continue
+
+            # remove own addresses
+            if keep_own is False and addr[1].lower() in self._own_addresses:
+                continue
+
+            # otherwise: add
+            valid_addresses.append(addr)
+
+        return valid_addresses
+    
+    def _merge_addr(self, addresses, new_name, new_mail):
+        # new name and mail None -> abort
+        if not new_name and not new_mail:
+            return
+
+        # new name None -> use mail
+        if not new_name:
+            new_name = new_mail
+        
+        # already in there -> abort
+        for _, mail in addresses:
+            if mail.lower() == new_mail.lower():
+                return
+        
+        # add
+        addresses.append((new_name, new_mail))
+    
+    def _merge_addr_list(self, addresses, new_addresses):
+        for new_name, new_mail in new_addresses:
+            self._merge_addr(addresses, new_name, new_mail)
+    
+    def _format_addr_header(self, addresses):
+        return ", ".join([email.utils.formataddr(addr) for addr in addresses])
