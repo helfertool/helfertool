@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 17:01+0100\n"
+"POT-Creation-Date: 2020-02-23 13:27+0100\n"
 "PO-Revision-Date: 2019-10-27 16:48+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
@@ -1186,25 +1186,6 @@ msgstr "Der Link ist ungültig."
 msgid "Go to public registration"
 msgstr "Zur öffentlichen Anmeldung gehen"
 
-#: registration/templates/registration/login.html:5
-#: registration/templates/registration/login.html:23
-#: registration/templates/registration/login_banned.html:6
-msgid "Login"
-msgstr "Login"
-
-#: registration/templates/registration/login_banned.html:9
-msgid "Too many login attempts!"
-msgstr "Zu viele Login Versuche!"
-
-#: registration/templates/registration/login_banned.html:13
-#, python-format
-msgid ""
-"You tried to log in %(limit)s times with the wrong credentials, try again "
-"later."
-msgstr ""
-"Du hast versucht, dich %(limit)s mal mit falschen Zugangsdaten einzuloggen, "
-"versuche es später wieder."
-
 #: registration/templates/registration/mail/coordinator.txt:1
 #, python-format
 msgid ""
@@ -1414,6 +1395,19 @@ msgstr ""
 #: registration/views/shift.py:66
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Login"
+#~ msgstr "Login"
+
+#~ msgid "Too many login attempts!"
+#~ msgstr "Zu viele Login Versuche!"
+
+#~ msgid ""
+#~ "You tried to log in %(limit)s times with the wrong credentials, try again "
+#~ "later."
+#~ msgstr ""
+#~ "Du hast versucht, dich %(limit)s mal mit falschen Zugangsdaten "
+#~ "einzuloggen, versuche es später wieder."
 
 #~ msgid "Date (YYYY-MM-DD)"
 #~ msgstr "Datum (JJJJ-MM-TT)"

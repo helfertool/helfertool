@@ -1,0 +1,11 @@
+{% extends "helfertool/base.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <h1>{% trans "Login" %}</h1>
+
+    <div class="alert alert-danger" role="alert">
+        {% trans "You are not allowed to login." %}
+    </div>
+{% endblock %}

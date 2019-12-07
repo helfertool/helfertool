@@ -3,6 +3,8 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     # django admin interface
@@ -16,7 +18,7 @@ urlpatterns = [
 
     # authentication
     url(r'^login/$',
-        auth_views.LoginView.as_view(template_name='registration/login.html'),
+        auth_views.LoginView.as_view(template_name='helfertool/login.html'),
         name='login'),
 
     url(r'^logout/$',
@@ -26,7 +28,19 @@ urlpatterns = [
     # apps
     url(r'^manage/settings/', include('toolsettings.urls')),
     url(r'^manage/account/', include('account.urls')),
+]
 
+# add oidc urls if enabled
+if settings.OIDC_CUSTOM_PROVIDER_NAME is not None:
+    urlpatterns += [
+        url(r'^oidc/', include('mozilla_django_oidc.urls')),
+        url(r'^oidc/failed$',
+            TemplateView.as_view(template_name='helfertool/login_oidc_failed.html'),
+            name='oidc_failed'),
+    ]
+
+# this is placed at the end to prevent that event names overwrite other urls
+urlpatterns += [
     url(r'', include('help.urls')),
     url(r'', include('news.urls')),
     url(r'', include('registration.urls')),
@@ -35,4 +49,8 @@ urlpatterns = [
     url(r'', include('gifts.urls')),
     url(r'', include('inventory.urls')),
     url(r'', include('mail.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# for development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
