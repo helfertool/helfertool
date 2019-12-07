@@ -1,6 +1,6 @@
 django==2.2.*
 django-auth-ldap
-django-axes<5.0.0
+django-axes
 django-bleach
 django-bootstrap4
 django-ckeditor
@@ -11,6 +11,7 @@ django_ical
 django_select2
 amqp
 celery
+mozilla-django-oidc
 pillow
 python-magic
 pyyaml
