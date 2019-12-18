@@ -3,8 +3,12 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{{ helper.full_name }}</h2>
-
+    {% if helper %}
+        <h2>{{ helper.full_name }}</h2>
+    {% else %}
+        <h2>{% trans "Add new coordinator" %}</h2>
+    {% endif %}
+    
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -14,9 +18,13 @@
             </div>
         </div>
 
-        {% if form.new_coordinator %}
-            <div class="alert alert-warning" role="alert">
-                <b>{% trans "Note: after saving an e-mail will be sent to the given address." %}</b>
+        {% if helper %}
+            <div class="alert alert-info" role="alert">
+                {% trans "Note: if you change the mail address a confirmation mail will be sent to the new address." %}
+            </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                {% trans "Note: after saving an e-mail will be sent to the given address." %}
             </div>
         {% endif %}
 

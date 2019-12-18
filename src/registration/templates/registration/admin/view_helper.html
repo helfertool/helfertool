@@ -18,8 +18,16 @@
 
     {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
 
-    {% if helper.has_to_validate %}
-        <p class="text-danger">
+    {% if helper.mail_failed %}
+        <p>
+            <span class="text-danger">
+                {% icon "times" %} {% trans "Mail delivery failed" %}
+            </span>
+            (<a href="" data-toggle="collapse" data-target="#mail_error">{% trans "Details" %}</a>)
+        </p>
+        <pre class="wraptext text-danger collapse" id="mail_error">{{ helper.mail_failed }}</pre>
+    {% elif helper.has_to_validate %}
+        <p class="text-warning">
             {% icon "times" %} {% trans "Helper did not validate the mail address." %}
         </p>
     {% endif %}

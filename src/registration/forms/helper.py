@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
@@ -39,14 +40,16 @@ class HelperForm(forms.ModelForm):
                 not (self.job and self.job.infection_instruction):
             self.fields.pop('infection_instruction')
 
-        # remove field for mail validation if form is used to add new
-        # coordinator to a job
+        # remove field for mail validation if
+        # 1) form is used to add new coordinator to a job
+        # 2) is public
         if self.job or self.public:
             self.fields.pop('validated')
-
+        
+        # store old mail address for comparison
         self.old_email = self.instance.email
 
-    def save(self, commit=True, request=None):
+    def save(self, commit=True):
         instance = super(HelperForm, self).save(False)
 
         instance.event = self.related_event
@@ -56,12 +59,10 @@ class HelperForm(forms.ModelForm):
             if self.job:
                 instance.validated = False
 
-            # invalidate email if it was changed over public interface
-            if self.public and self.old_email != instance.email:
+            # invalidate email if it was changed. sending out the new mail is done in the view
+            if self.old_email != instance.email:
                 instance.validated = False
-                self.old_email = instance.email
-                if request:
-                    instance.send_mail(request, False)
+                instance.mail_failed = None
 
         if commit:
             instance.save()
@@ -70,6 +71,10 @@ class HelperForm(forms.ModelForm):
             self.job.coordinators.add(self.instance)
 
         return instance
+
+    @property
+    def email_has_changed(self):
+        return self.old_email != self.instance.email
 
 
 class HelperAddShiftForm(forms.Form):
@@ -258,10 +263,4 @@ class HelperSearchForm(forms.Form):
 
 
 class HelperResendMailForm(forms.Form):
-    def __init__(self, *args, **kwargs):
-        self.helper = kwargs.pop('helper')
-
-        super(HelperResendMailForm, self).__init__(*args, **kwargs)
-
-    def send(self, request):
-        self.helper.send_mail(request, False)
+    pass
