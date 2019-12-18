@@ -7,6 +7,11 @@ from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
 
+from smtplib import SMTPException
+
+import logging
+logger = logging.getLogger("helfertool")
+
 import uuid
 
 from badges.models import Badge
@@ -180,17 +185,16 @@ class Helper(models.Model):
 
         This e-mail contains a list of the shifts, the helper registered for.
         """
+        # safety check ;)
         if self.shifts.count() == 0 and not self.is_coordinator:
             return
 
+        # generate URLs
         event = self.event
-        validate_url = request.build_absolute_uri(reverse('validate',
-                                                          args=[event.url_name,
-                                                                self.id]))
-        registered_url = request.build_absolute_uri(reverse('registered',
-                                                    args=[event.url_name,
-                                                          self.id]))
+        validate_url = request.build_absolute_uri(reverse('validate', args=[event.url_name, self.id]))
+        registered_url = request.build_absolute_uri(reverse('registered', args=[event.url_name, self.id]))
 
+        # generate subject and text from templates
         subject_template = get_template('registration/mail/subject.txt')
         subject = subject_template.render({'event': event}).rstrip()
 
@@ -205,8 +209,10 @@ class Helper(models.Model):
                                      'validate_url': validate_url,
                                      'registered_url': registered_url})
 
+        # header for mail tracking
         tracking_header = new_tracking_registration(self)
 
+        # sent it and handle errors
         mail = EmailMessage(subject,
                             text,
                             settings.EMAIL_SENDER_ADDRESS,
@@ -214,7 +220,20 @@ class Helper(models.Model):
                             reply_to=[event.email, ],
                             headers=tracking_header)
 
-        mail.send(fail_silently=False)
+        try:
+            mail.send(fail_silently=False)
+            return True
+        except (SMTPException, ConnectionError) as e:
+            self.mail_failed = "Local server error"
+            self.save()
+
+            logger.error("helper mailerror", extra={
+                'event': event,
+                'helper': self,
+                'error': str(e),
+            })
+
+            return False
 
     def check_delete(self):
         if self.shifts.count() == 0 and not self.is_coordinator:

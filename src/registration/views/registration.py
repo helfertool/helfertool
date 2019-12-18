@@ -5,8 +5,6 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext as _
 
-from smtplib import SMTPException
-
 from .utils import nopermission, get_or_404
 
 from ..forms import RegisterForm, DeregisterForm, HelperForm
@@ -86,13 +84,10 @@ def form(request, event_url_name, link_pk=None):
             'withlink': link_pk is not None,
         })
 
-        try:
-            helper.send_mail(request, internal=False)
-        except (SMTPException, ConnectionError):
-            messages.error(request, _("Sending the mail failed, but the "
-                                      "registration was saved."))
-        return HttpResponseRedirect(reverse('registered',
-                                            args=[event.url_name, helper.pk]))
+        if not helper.send_mail(request, internal=False):
+            messages.error(request, _("Sending the mail failed, but the registration was saved."))
+
+        return HttpResponseRedirect(reverse('registered', args=[event.url_name, helper.pk]))
 
     context = {'event': event,
                'form': form}
@@ -190,13 +185,17 @@ def update_personal(request, event_url_name, helper_id):
                       public=True)
 
     if form.is_valid():
-        form.save(request=request)
+        form.save()
 
         logger.info("helper dataupdated", extra={
             'event': event,
             'helper': helper,
             "helper_pk": helper_id,
         })
+
+        if form.email_has_changed:
+            if not helper.send_mail(request, internal=False):
+                messages.error(request, _("Sending the mail failed, but the change was saved."))
 
         return HttpResponseRedirect(reverse('registered',
                                             args=[event.url_name, helper.pk]))
