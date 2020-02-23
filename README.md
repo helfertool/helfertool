@@ -14,6 +14,7 @@ in our documentation.
 A Python virtual environment should be used for development:
 
     python3 -m venv venv
+    . ./venv/bin/activate
 
 The necessary Python libraries are listed in ``src/requirements.txt``:
 
@@ -35,7 +36,6 @@ Start the webserver for development:
     python manage.py runserver
 
 Now visit http://localhost:8000 with your browser.
-
 
 ## Celery and RabbitMQ
 
@@ -85,7 +85,7 @@ The maximum line length is 120 characters, not 80.
 
 # LICENSE
 
-Copyright (C) 2019  Sven Hertle
+Copyright (C) 2020  Sven Hertle
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
