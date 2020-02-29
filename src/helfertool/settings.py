@@ -104,6 +104,21 @@ CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}/{}'.format(
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_BROKER_POOL_LIMIT = None
 
+# caches
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'select2': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'select2_cache',
+    },
+    'locks': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'locks_cache',
+    },
+}
+
 # mail
 if dict_get(config, None, 'mail', 'host') is None:
     # new config format: sending and receiving mails separated
@@ -212,11 +227,45 @@ if ldap_config:
         AUTH_LDAP_USER_FLAGS_BY_GROUP['is_staff'] = ldap_group_admin
         AUTH_LDAP_USER_FLAGS_BY_GROUP['is_superuser'] = ldap_group_admin
 
+# OpenID Connect
+oidc_config = dict_get(config, None, 'authentication', 'oidc')
+OIDC_CUSTOM_PROVIDER_NAME = None  # used to check if enabled or not
+if oidc_config:
+    # name for identity provider displayed on login page (custom paremeter, not from lib)
+    OIDC_CUSTOM_PROVIDER_NAME = dict_get(oidc_config, "OpenID Connect", 'provider_name')
+
+    # provider
+    OIDC_RP_SIGN_ALGO = 'RS256'
+    OIDC_OP_JWKS_ENDPOINT = dict_get(oidc_config, None, 'provider', 'jwks_uri')
+
+    OIDC_RP_CLIENT_ID = dict_get(oidc_config, None, 'provider', 'client_id')
+    OIDC_RP_CLIENT_SECRET = dict_get(oidc_config, None, 'provider', 'client_secret')
+
+    OIDC_OP_AUTHORIZATION_ENDPOINT = dict_get(oidc_config, None, 'provider', 'authorization_endpoint')
+    OIDC_OP_TOKEN_ENDPOINT = dict_get(oidc_config, None, 'provider', 'token_endpoint')
+    OIDC_OP_USER_ENDPOINT = dict_get(oidc_config, None, 'provider', 'user_endpoint')
+
+    OIDC_RP_SCOPES = "openid email profile"  # also ask for profile -> given_name and family_name
+
+    # username is mail address
+    OIDC_USERNAME_ALGO = "helfertool.oidc.generate_username"
+
+    LOGIN_REDIRECT_URL_FAILURE = "/oidc/failed"
+
+    # claims for is_active and is_admin
+    OIDC_CUSTOM_CLAIM_LOGIN = dict_get(oidc_config, None, 'claims', 'login')
+    OIDC_CUSTOM_CLAIM_ADMIN = dict_get(oidc_config, None, 'claims', 'admin')
+
 # django auth backends
-AUTHENTICATION_BACKENDS = []
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesBackend',
+]
 
 if ldap_config:
     AUTHENTICATION_BACKENDS.append('django_auth_ldap.backend.LDAPBackend')
+
+if oidc_config:
+    AUTHENTICATION_BACKENDS.append('helfertool.oidc.CustomOIDCAuthenticationBackend')
 
 AUTHENTICATION_BACKENDS.append('django.contrib.auth.backends.ModelBackend')
 
@@ -239,6 +288,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# axes: user lockout based on username, not IP or user agent
+AXES_LOCK_OUT_AT_FAILURE = True
+AXES_ONLY_USER_FAILURES = True
+AXES_USE_USER_AGENT = False
+
+AXES_FAILURE_LIMIT = dict_get(config, 3, 'security', 'lockout', 'limit')
+AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, 'security',
+                                               'lockout', 'time'))
+
+AXES_LOCKOUT_TEMPLATE = 'helfertool/login_banned.html'
+AXES_DISABLE_ACCESS_LOG = True
+if OIDC_CUSTOM_PROVIDER_NAME is not None:
+    AXES_WHITELIST_CALLABLE = "helfertool.oidc.axes_whitelist"
 
 # security
 DEBUG = dict_get(config, False, 'security', 'debug')
@@ -321,38 +383,6 @@ if is_docker:
 
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog_docker')
 
-
-# axes
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    },
-    'axes_cache': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-    },
-    'select2': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'select2_cache',
-    },
-    'locks': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'locks_cache',
-    },
-}
-
-AXES_CACHE = 'axes_cache'
-
-AXES_FAILURE_LIMIT = dict_get(config, 3, 'security', 'lockout', 'limit')
-AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, 'security',
-                                               'lockout', 'time'))
-
-# lock based on username, not IP or user agent
-AXES_LOCK_OUT_AT_FAILURE = True
-AXES_ONLY_USER_FAILURES = True
-AXES_USE_USER_AGENT = False
-
-AXES_LOCKOUT_TEMPLATE = 'registration/login_banned.html'
-
 # external URLs
 PRIVACY_URL = dict_get(config, 'https://app.helfertool.org/datenschutz/',
                        'customization', 'urls', 'privacy')
@@ -428,6 +458,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mozilla_django_oidc',
     'axes',
     'bootstrap4',
     'django_icons',
@@ -446,7 +477,8 @@ INSTALLED_APPS = (
     'helfertool',
 )
 
-MIDDLEWARE = (
+# middleware
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -454,8 +486,14 @@ MIDDLEWARE = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+]
 
+if oidc_config:
+    MIDDLEWARE.append('mozilla_django_oidc.middleware.SessionRefresh')
+
+MIDDLEWARE.append('axes.middleware.AxesMiddleware')  # axes should be the last one
+
+# urls and templates
 ROOT_URLCONF = 'helfertool.urls'
 
 TEMPLATES = [

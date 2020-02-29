@@ -1,10 +1,21 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 toolsettings %}
+{% load i18n bootstrap4 toolsettings setting %}
 
 {% block content %}
     <h1>{% trans "Login" %}</h1>
 
     {% htmlsetting "login" %}
+
+    {% setting "OIDC_CUSTOM_PROVIDER_NAME" as OIDC_CUSTOM_PROVIDER_NAME %}
+    {% if OIDC_CUSTOM_PROVIDER_NAME %}
+        <a href="{% url 'oidc_authentication_init' %}" class="btn btn-outline-primary">
+            {% blocktrans with name=OIDC_CUSTOM_PROVIDER_NAME trimmed %}
+                Login with {{ name }}
+            {% endblocktrans %}
+        </a>
+
+        <h3 class="pt-md-3">{% trans "Local account" %}</h3>
+    {% endif %}
 
     <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
         {% csrf_token %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-27 17:01+0100\n"
-"PO-Revision-Date: 2019-06-09 21:38+0200\n"
+"POT-Creation-Date: 2020-02-23 13:27+0100\n"
+"PO-Revision-Date: 2020-02-23 13:29+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: helfertool/settings.py:69
 msgid "German"
@@ -273,6 +273,10 @@ msgid "Logout"
 msgstr "Logout"
 
 #: helfertool/templates/helfertool/base.html:67
+#: helfertool/templates/helfertool/login.html:5
+#: helfertool/templates/helfertool/login.html:34
+#: helfertool/templates/helfertool/login_banned.html:6
+#: helfertool/templates/helfertool/login_oidc_failed.html:6
 msgid "Login"
 msgstr "Login"
 
@@ -291,6 +295,32 @@ msgstr "Impressum"
 #: helfertool/templates/helfertool/base.html:116
 msgid "About this software"
 msgstr "Über diese Software"
+
+#: helfertool/templates/helfertool/login.html:12
+#, python-format
+msgid "Login with %(name)s"
+msgstr "Mit %(name)s einloggen"
+
+#: helfertool/templates/helfertool/login.html:17
+msgid "Local account"
+msgstr "Lokaler Account"
+
+#: helfertool/templates/helfertool/login_banned.html:9
+msgid "Too many login attempts!"
+msgstr "Zu viele Login Versuche!"
+
+#: helfertool/templates/helfertool/login_banned.html:13
+#, python-format
+msgid ""
+"You tried to log in %(limit)s times with the wrong credentials, try again "
+"later."
+msgstr ""
+"Du hast versucht, dich %(limit)s mal mit falschen Zugangsdaten "
+"einzuloggen, versuche es später wieder."
+
+#: helfertool/templates/helfertool/login_oidc_failed.html:9
+msgid "You are not allowed to login."
+msgstr "Du darfst dich nicht einloggen."
 
 #~ msgid "Show users"
 #~ msgstr "Nutzer anzeigen"

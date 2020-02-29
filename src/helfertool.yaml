@@ -129,6 +129,46 @@ authentication:
     #        admin: "cn=admins,ou=Group,dc=helfertool,dc=org"
 
 
+    ## Get users over OpenID Connect
+    #oidc:
+    #    # Name of the provider (only for login view)
+    #    provider_name: "OpenID Connect"
+    #
+    #    # Provider details
+    #    provider:
+    #        # Endpoint URLs
+    #        authorization_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/auth"
+    #        token_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/token"
+    #        user_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo"
+    #
+    #        # URI to get JWKS
+    #        jwks_uri: "http://localhost:8080/auth/realms/test/protocol/openid-connect/certs"
+    #
+    #        # Client ID and secret
+    #        client_id: "helfertool"
+    #        client_secret: "<SECRET>"
+    #
+    #    # Permissions based on claims
+    #    claims:
+    #        # There are two types to handle claims
+    #        # 1) direct: the claim is directly compared
+    #        # 2) member: the claim is a list and it is checked if the specified value is included (useful for groups/roles)
+    #        login:
+    #            #compare: "direct"
+    #            #name: "helfertool_login"
+    #            #value: true
+    #            compare: "member"
+    #            name: "roles"
+    #            value: "helfertool_login"
+    #
+    #        admin:
+    #            #compare: "direct"
+    #            #name: "helfertool_admin"
+    #            #value: true
+    #            compare: "member"
+    #            name: "roles"
+    #            value: "helfertool_admin"
+
     # Prepend character to all locally created users
     # This is useful if you have for example users from LDAP but also local
     # users. The additional character like '@' is used to prevent identical
