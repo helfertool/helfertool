@@ -9,7 +9,7 @@ required parameters:
 optional:
     shift
 
-Ff shift is missing this template assumes that the printed helpers are
+If shift is missing this template assumes that the printed helpers are
 coordinators. This is only important for the delete_helper view.
 {% endcomment %}
 
@@ -94,8 +94,10 @@ coordinators. This is only important for the delete_helper view.
 
                     <br />
 
-                    {% if helper.has_to_validate %}
-                        <span class="text-danger">{% icon "times" %} {% trans "Not validated" %}</span>
+                    {% if helper.mail_failed %}
+                        <span class="text-danger">{% icon "times" %} {% trans "Mail not delivered" %}</span>
+                    {% elif helper.has_to_validate %}
+                        <span class="text-warning">{% icon "times" %} {% trans "Not validated" %}</span>
                     {% endif %}
                 </td>
             </tr>

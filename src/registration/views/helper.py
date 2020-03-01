@@ -6,8 +6,6 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from smtplib import SMTPException
-
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Job, Shift
@@ -72,8 +70,6 @@ def view_helper(request, event_url_name, helper_pk):
     edit_badge = event.badges and event.is_admin(request.user)
     edit_gifts = event.gifts and event.is_admin(request.user)
 
-    resend_form = HelperResendMailForm(helper=helper)
-
     gifts_form = None
     if edit_gifts:
         helper.gifts.update()
@@ -93,8 +89,7 @@ def view_helper(request, event_url_name, helper_pk):
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
-               'gifts_form': gifts_form,
-               'resend_form': resend_form}
+               'gifts_form': gifts_form}
     return render(request, 'registration/admin/view_helper.html', context)
 
 
@@ -118,8 +113,12 @@ def edit_helper(request, event_url_name, helper_pk):
             'helper': helper,
         })
 
-        return HttpResponseRedirect(reverse('view_helper',
-                                            args=[event_url_name, helper.pk]))
+        if form.email_has_changed:
+            # we do not know here if it was an internal registration or not, so send the public version
+            if not helper.send_mail(request, internal=False):
+                messages.error(request, _("Sending the mail failed, but the helper was saved."))
+
+        return HttpResponseRedirect(reverse('view_helper', args=[event_url_name, helper.pk]))
 
     # render page
     context = {'event': event,
@@ -152,15 +151,10 @@ def add_helper(request, event_url_name, shift_pk):
             'helper': helper,
         })
 
-        try:
-            helper.send_mail(request, internal=True)
-        except (SMTPException, ConnectionError):
-            messages.error(request, _("Sending the mail failed, but the "
-                                      "helper was saved."))
+        if not helper.send_mail(request, internal=True):
+            messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return HttpResponseRedirect(reverse('helpers',
-                                            args=[event_url_name,
-                                                  shift.job.pk]))
+        return HttpResponseRedirect(reverse('helpers', args=[event_url_name, shift.job.pk]))
 
     # render page
     context = {'event': event,
@@ -190,13 +184,10 @@ def add_coordinator(request, event_url_name, job_pk):
             'helper': helper,
         })
 
-        try:
-            helper.send_mail(request, internal=True)
-        except (SMTPException, ConnectionError):
-            messages.error(request, _("Sending the mail failed, but the "
-                                      "helper was saved."))
-        return HttpResponseRedirect(reverse('helpers',
-                                            args=[event_url_name, job.pk]))
+        if not helper.send_mail(request, internal=True):
+            messages.error(request, _("Sending the mail failed, but the coordinator was saved."))
+
+        return HttpResponseRedirect(reverse('helpers', args=[event_url_name, job.pk]))
 
     # render page
     context = {'event': event,
@@ -401,21 +392,25 @@ def resend_mail(request, event_url_name, helper_pk):
     if not helper.can_edit(request.user):
         return nopermission(request)
 
-    form = HelperResendMailForm(request.POST or None, helper=helper)
+    form = HelperResendMailForm(request.POST or None)
 
     if form.is_valid():
-        form.send(request)
-
         logger.info("helper confirmationmail", extra={
             'user': request.user,
             'event': event,
             'helper': helper,
         })
 
-        messages.success(request, _("Confirmation mail was sent"))
+        if helper.send_mail(request, internal=False):
+            messages.success(request, _("Confirmation mail was sent"))
 
-        return HttpResponseRedirect(reverse('view_helper',
-                                            args=[event_url_name, helper.pk]))
+            # clear error message about undelivered mail
+            helper.mail_failed = None
+            helper.save()
+        else:
+            messages.error(request, _("Sending the mail failed."))
+
+        return HttpResponseRedirect(reverse('view_helper', args=[event_url_name, helper.pk]))
 
     context = {'event': event,
                'helper': helper,
