@@ -96,6 +96,13 @@
             </div>
         </nav>
 
+        {% setting "ANNOUNCEMENT_TEXT" as announcement %}
+        {% if announcement %}
+            <div class="container-fluid announcement">
+                {{ announcement }}
+            </div>
+        {% endif %}
+
         <div class="container container-main">
             {# messages #}
             {% if messages %}

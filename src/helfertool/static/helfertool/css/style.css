@@ -123,6 +123,15 @@ h1, h2, h3, h4 {
     margin-bottom: 5px;
 }
 
+/* announcement */
+.announcement {
+    background-color: #1ea082;
+    color: white;
+
+    text-align: center;
+    padding-bottom: 5px;
+}
+
 /* main content container */
 .container-main {
     margin-top: 1.5em;

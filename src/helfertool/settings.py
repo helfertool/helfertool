@@ -383,6 +383,9 @@ if is_docker:
 
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog_docker')
 
+# announcement on every page
+ANNOUNCEMENT_TEXT = dict_get(config, None, 'announcement')
+
 # external URLs
 PRIVACY_URL = dict_get(config, 'https://app.helfertool.org/datenschutz/',
                        'customization', 'urls', 'privacy')
