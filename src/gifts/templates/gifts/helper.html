@@ -50,7 +50,7 @@
                                         <ul>
                                             {{ gift_set }}
                                             {% for gift in deserved_gift.gift_set.includedgift_set.all %}
-                                                <li>{{ gift.count }} {{ gift.gift.name }}</li>
+                                                <li>{{ gift.count | floatformat }} {{ gift.gift.name }}</li>
                                             {% endfor %}
                                         </ul>
                                     </td>
@@ -77,8 +77,8 @@
                         {% for name,numbers in helper.gifts.gifts_sum.items %}
                             <tr>
                                 <td>{{ name }}</td>
-                                <td>{{ numbers.given }}</td>
-                                <td>{{ numbers.total }}</td>
+                                <td>{{ numbers.given | floatformat }}</td>
+                                <td>{{ numbers.total | floatformat }}</td>
                             </tr>
                         {% endfor %}
                     </table>

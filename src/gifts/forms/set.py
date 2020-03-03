@@ -24,10 +24,10 @@ class GiftSetForm(forms.ModelForm):
             if self.instance:
                 number = self.instance.get_gift_num(gift)
 
-            self.fields[id] = forms.IntegerField(label=gift.name,
-                                                 required=False,
-                                                 min_value=0,
-                                                 initial=number)
+            self.fields[id] = forms.FloatField(label=gift.name,
+                                               required=False,
+                                               min_value=0,
+                                               initial=number)
 
     def save(self, commit=True):
         instance = super(GiftSetForm, self).save(False)
