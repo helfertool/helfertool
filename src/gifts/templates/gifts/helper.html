@@ -31,7 +31,7 @@
                                 <br /><br />
 
                                 {{ form | lookup_deservedgiftset_present:shift.pk }}
-                                <label>
+                                <label for="id_present_{{ shift.pk }}">
                                     {% trans "Present" %}
                                 </label>
                             </th>
@@ -42,7 +42,7 @@
                                     <td>
                                         <div class="align-top">
                                             {{ form | lookup_deservedgiftset_delivered:deserved_gift.pk }}
-                                            <label>
+                                            <label for="id_delivered_{{ deserved_gift.pk }}">
                                                 {% trans "Delivered" %}
                                             </label>
                                         </div>
