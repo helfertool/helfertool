@@ -38,7 +38,7 @@
                     {% for shift in shifts %}
                         {# checkbox #}
                         {{ form | lookup_shift:shift.pk }}
-                        <label>
+                        <label for="id_shift_{{ shift.pk }}">
                             {# time #}
                             {% if shift.is_full %}
                                 <del>{{ shift.time_hours }}</del>
