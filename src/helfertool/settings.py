@@ -432,8 +432,8 @@ BOOTSTRAP4 = {
 # HTML sanitization for text fields
 BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'br', 'ul',
                        'ol', 'li']
-BLEACH_ALLOWED_ATTRIBUTES = ['href', 'style']
-BLEACH_ALLOWED_STYLES = ['font-weight', 'text-decoration']
+BLEACH_ALLOWED_ATTRIBUTES = ['href', ]
+BLEACH_ALLOWED_STYLES = []
 BLEACH_STRIP_TAGS = True
 
 # editor for text fields
@@ -442,7 +442,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', ],
+            ['NumberedList', 'BulletedList', '-', ],
             ['Link', 'Unlink'],
             ['Source']
         ],
