@@ -31,8 +31,19 @@ class BadgeCreator:
 
         # create temporary files
         self.dir = mkdtemp(dir=settings.TMP_ROOT, prefix="badges_")
-        self.latex_file, self.latex_filename = mkstemp(suffix='.tex',
+        self.latex_file, self.latex_file_path = mkstemp(suffix='.tex',
                                                        dir=self.dir)
+
+        # we copy the photos and background images to the temporary directory
+        # pdflatex is only allowed to include files from there
+        self.dir_photos = os.path.join(self.dir, 'photos')
+        os.mkdir(self.dir_photos, mode=0o700)
+
+        self.dir_backgrounds = os.path.join(self.dir, 'backgrounds')
+        os.mkdir(self.dir_backgrounds, mode=0o700)
+
+        # prevent that the same file is copied multiple times
+        self._copied_files = []
 
     def add_helper(self, helper):
         tmp = {'firstname': self._latex_escape(helper.badge.firstname or helper.firstname),
@@ -63,7 +74,7 @@ class BadgeCreator:
 
         # photo
         if helper.badge.photo:
-            tmp['photo'] = helper.badge.photo.path
+            tmp['photo'] = self._copy_photo(helper.badge.photo.path)
         else:
             tmp['photo'] = ''
 
@@ -73,12 +84,12 @@ class BadgeCreator:
         tmp['bgcolor'] = self._latex_color(design.bg_color)
 
         if design.bg_front:
-            tmp['bgfront'] = design.bg_front.path
+            tmp['bgfront'] = self._copy_background(design.bg_front.path)
         else:
             tmp['bgfront'] = ""
 
         if design.bg_back:
-            tmp['bgback'] = design.bg_back.path
+            tmp['bgback'] = self._copy_background(design.bg_back.path)
         else:
             tmp['bgback'] = ""
 
@@ -128,24 +139,32 @@ class BadgeCreator:
             f.close()
         except IOError as e:
             raise BadgeCreatorError("Cannot write to file \"%s\": %s" %
-                                    (self.latex_filename, str(e)))
+                                    (self.latex_file_path, str(e)))
 
         # debug
         if settings.BADGE_TEMPLATE_DEBUG_FILE:
-            shutil.copyfile(self.latex_filename,
+            shutil.copyfile(self.latex_file_path,
                             settings.BADGE_TEMPLATE_DEBUG_FILE)
 
         # call pdflatex
         try:
-            subprocess.check_output([settings.BADGE_PDFLATEX, "-halt-on-error",
+            # only allow read in the directory of the tex file (and write, but this is default)
+            env = os.environ
+            env["openin_any"] = "p"
+            env["openout_any"] = "p"
+
+            subprocess.check_output([settings.BADGE_PDFLATEX,
+                                     "-halt-on-error",
+                                     "-no-shell-escape",
                                      "-output-directory", self.dir,
-                                     self.latex_filename])
+                                     os.path.basename(self.latex_file_path)],
+                                    cwd=self.dir)
         except subprocess.CalledProcessError as e:
             raise BadgeCreatorError("PDF generation failed",
                                     e.output.decode('utf8'))
 
         # return path to pdf
-        pdf_filename = "%s.pdf" % os.path.splitext(self.latex_filename)[0]
+        pdf_filename = "%s.pdf" % os.path.splitext(self.latex_file_path)[0]
         return self.dir, pdf_filename
 
     def finish(self):
@@ -250,3 +269,19 @@ class BadgeCreator:
         string = string.replace(r'^', r'\textasciicircum ')
 
         return '{' + string + '}'
+
+    def _copy_photo(self, src_path):
+        return self._copy_file(src_path, self.dir_photos)
+
+    def _copy_background(self, src_path):
+        return self._copy_file(src_path, self.dir_backgrounds)
+
+    def _copy_file(self, src_path, dest_folder):
+        filename = os.path.basename(src_path)
+        dest_path = os.path.join(dest_folder, filename)
+
+        if src_path not in self._copied_files:
+            shutil.copyfile(src_path, dest_path)
+            self._copied_files.append(src_path)
+
+        return os.path.relpath(dest_path, self.dir)
