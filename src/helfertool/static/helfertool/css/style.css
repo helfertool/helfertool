@@ -338,3 +338,26 @@ tr.child ul.dtr-details
 {
     width: auto;
 }
+
+/* progress bar for number of helpers (5% steps, necessary for CSP) */
+.percent-0 { width: 0%; }
+.percent-1 { width: 5%; }
+.percent-2 { width: 10%; }
+.percent-3 { width: 15%; }
+.percent-4 { width: 20%; }
+.percent-5 { width: 25%; }
+.percent-6 { width: 30%; }
+.percent-7 { width: 35%; }
+.percent-8 { width: 40%; }
+.percent-9 { width: 45%; }
+.percent-10 { width: 50%; }
+.percent-11 { width: 55%; }
+.percent-12 { width: 60%; }
+.percent-13 { width: 65%; }
+.percent-14 { width: 70%; }
+.percent-15 { width: 75%; }
+.percent-16 { width: 80%; }
+.percent-17 { width: 85%; }
+.percent-18 { width: 90%; }
+.percent-19 { width: 95%; }
+.percent-20 { width: 100%; }
