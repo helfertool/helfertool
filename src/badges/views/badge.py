@@ -6,6 +6,7 @@ from django.shortcuts import render
 from ..forms import BadgeForm
 
 from registration.views.utils import nopermission, get_or_404
+from registration.permissions import has_access, ACCESS_BADGES_EDIT_HELPER
 
 from .utils import notactive
 
@@ -15,7 +16,7 @@ def edit_badge(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT_HELPER):
         return nopermission(request)
 
     # check if badge system is active

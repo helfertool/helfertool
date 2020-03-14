@@ -1,0 +1,220 @@
+{% load i18n icons permissions %}
+
+{% has_access event "ACCESS_INVOLVED" as involved %}
+{% if involved %}
+    {% has_access event "ACCESS_EVENT_EDIT" as user_event_edit %}
+    {% has_access event "ACCESS_EVENT_EDIT_JOBS" as user_event_edit_jobs %}
+    {% has_access event "ACCESS_EVENT_EDIT_LINKS" as user_event_edit_links %}
+    {% has_access event "ACCESS_EVENT_EDIT_DUPLICATES" as user_event_edit_duplicates %}
+    {% has_access_event_or_job event "ACCESS_EVENT_VIEW_COORDINATORS" "ACCESS_EVENT_VIEW_COORDINATORS" as user_event_view_coordinators %}
+    {% has_access_event_or_job event "ACCESS_MAILS_SEND" "ACCESS_JOB_SEND_MAILS" as user_mails_send %}
+    {% has_access_event_or_job event "ACCESS_MAILS_VIEW" "ACCESS_JOB_VIEW_MAILS" as user_mails_view %}
+    {% has_access event "ACCESS_GIFTS_EDIT" as user_gifts_edit %}
+    {% has_access event "ACCESS_GIFTS_HANDLE" as user_gifts_handle %}
+    {% has_access event "ACCESS_BADGES_EDIT" as user_badges_edit %}
+    {% has_access event "ACCESS_BADGES_GENERATE" as user_badges_generate %}
+    {% has_access event "ACCESS_PREREQUISITES_VIEW" as user_prerequisites_view %}
+    {% has_access event "ACCESS_INVENTORY_EDIT" as user_inventory_edit %}
+    {% has_access event "ACCESS_INVENTORY_HANDLE" as user_inventory_handle %}
+    {% has_access event "ACCESS_STATISTICS_VIEW" as user_statistics_view %}
+    {% has_access_event_or_job event "ACCESS_STATISTICS_VIEW" "ACCESS_JOB_VIEW_STATISTICS" as user_statistics_shirts %}
+
+    <h2>{% trans "General" %}</h2>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'form' event.url_name %}" target="_blank">
+                {% icon "external-link-alt" %}
+                {% trans "Go to registration" %}
+            </a>
+        </li>
+
+        {% if user_event_edit %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'edit_event_admins' event.url_name %}">{% trans "Event permissions" %}</a>
+            </li>
+        {% endif %}
+
+        {% if user_event_edit_jobs %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a>
+            </li>
+        {% endif %}
+
+        {% if user_event_edit_links %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'links' event.url_name %}">{% trans "Links" %}</a>
+            </li>
+        {% endif %}
+    </ul>
+
+    <h2>{% trans "Helpers" %}</h2>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a>
+
+            {# list of all (for user visible) jobs #}
+            {% if not event.archived %}
+            {% if request.resolver_match.url_name == "helpers" or request.resolver_match.url_name == "helpers_for_job" %}
+                <ul class="nav flex-column nav-nested">
+                {% for job in event.job_set.all %}
+                    {% has_access job "ACCESS_JOB_VIEW_HELPERS" as job_visible %}
+                    {% if job_visible %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'helpers_for_job' event.url_name job.pk %}">{{ job.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endif %}
+        </li>
+
+        {% if not event.archived %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a>
+            </li>
+
+            {% if user_event_edit_duplicates %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'vacant_shifts' event.url_name %}">{% trans "Vacant shifts" %}</a>
+            </li>
+
+            {% if user_event_view_coordinators %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+    </ul>
+
+    {% if user_mails_send or user_mails_view %}
+    <h2>{% trans "Mail" %}</h2>
+    <ul class="nav flex-column">
+        {% if user_mails_send and not event.archived %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mail:send' event.url_name %}">{% trans "Send" %}</a>
+            </li>
+        {% endif %}
+
+        {% if user_mails_view %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'mail:list' event.url_name %}">{% trans "All mails" %}</a>
+        </li>
+        {% endif %}
+    </ul>
+    {% endif %}
+
+    {% if not event.archived %}
+    {% if user_statistics_view or user_statistics_shirts %}
+        <h2>{% trans "Statistics" %}</h2>
+        <ul class="nav flex-column">
+            {% if user_statistics_view %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'statistic:overview' event.url_name %}">{% trans "Overview" %}</a>
+            </li>
+            {% endif %}
+
+            {% if event.ask_shirt and user_statistics_shirts %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'statistic:shirts' event.url_name %}">{% trans "T-Shirts" %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+    {% endif %}
+
+    {% if event.gifts %}
+    {% if user_gifts_edit or user_gifts_handle %}
+        <h2>{% trans "Gifts and attendance" %}</h2>
+        <ul class="nav flex-column">
+            {% if user_gifts_edit %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a>
+            </li>
+            {% endif %}
+
+            {% if user_gifts_handle and not event.archived %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a>
+                </li>
+
+                {% if event.ask_shirt %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'gifts:list_shirts' event.url_name %}">{% trans "Missing T-shirts" %}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    {% endif %}
+    {% endif %}
+
+    {% if event.badges %}
+    {% if user_badges_edit or user_badges_generate %}
+        <h2>{% trans "Badges" %}</h2>
+        <ul class="nav flex-column">
+            {% if user_badges_edit %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a>
+            </li>
+            {% endif %}
+
+            {% if user_badges_generate and not event.archived %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a>
+                </li>
+
+                {% if event.badge_settings.barcodes %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    {% endif %}
+    {% endif %}
+
+    {% if event.prerequisites and user_prerequisites_view%}
+        <h2>{% trans "Prerequisites" %}</h2>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'prerequisites:view_prerequisites' event.url_name %}">{% trans "Settings and lists" %}</a>
+            </li>
+        </ul>
+    {% endif %}
+
+    {% if event.inventory and not event.archived %}
+    {% if user_inventory_edit or user_inventory_handle %}
+        <h2>{% trans "Inventory" %}</h2>
+        <ul class="nav flex-column">
+            {% if user_inventory_edit %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inventory:event_settings' event.url_name %}">{% trans "Settings" %}</a>
+            </li>
+            {% endif %}
+
+            {% if user_inventory_handle %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inventory:register' event.url_name %}">{% trans "Register" context "Register item and badge" %}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inventory:take_back' event.url_name %}">{% trans "Take back" %}</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'inventory:list' event.url_name %}">{% trans "List" %}</a>
+            </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+    {% endif %}
+{% endif %}

@@ -9,6 +9,8 @@ from .utils import nopermission, get_or_404
 
 from ..forms import RegisterForm, DeregisterForm, HelperForm
 from ..models import Event, Link
+from ..permissions import has_access, ACCESS_INVOLVED
+
 
 from news.helper import news_test_email
 
@@ -26,11 +28,11 @@ def index(request):
     # inactive events that are visible for current user
     involved_events = []
     if not request.user.is_anonymous:
-        for e in events:
-            e.involved = e.is_involved(request.user)
+        for event in events:
+            event.involved = has_access(request.user, event, ACCESS_INVOLVED)
 
-            if e.involved and not e.active:
-                involved_events.append(e)
+            if event.involved and not event.active:
+                involved_events.append(event)
 
     # only one public event and no internal events -> redirect
     if events.count() == 1 and active_events:
@@ -61,6 +63,7 @@ def form(request, event_url_name, link_pk=None):
             raise Http404()
 
     # check permission
+    user_is_involved = has_access(request.user, event, ACCESS_INVOLVED)
     if not event.active and not link:
         # not logged in -> show message
         if not request.user.is_authenticated:
@@ -68,7 +71,7 @@ def form(request, event_url_name, link_pk=None):
             context = {'event': event}
             return render(request, 'registration/not_active.html', context)
         # logged in -> check permission
-        elif not event.is_involved(request.user):
+        elif not user_is_involved:
             return nopermission(request)
 
     # handle form
@@ -90,7 +93,8 @@ def form(request, event_url_name, link_pk=None):
         return HttpResponseRedirect(reverse('registered', args=[event.url_name, helper.pk]))
 
     context = {'event': event,
-               'form': form}
+               'form': form,
+               'user_is_involved': user_is_involved}
     return render(request, 'registration/form.html', context)
 
 

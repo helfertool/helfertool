@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
-
-from registration.decorators import archived_not_available, admin_required
+from registration.decorators import archived_not_available
 from registration.models import Event, Helper
+from registration.permissions import has_access, ACCESS_INVENTORY_HANDLE
+from registration.views.utils import nopermission
 
 from badges.forms import BadgeBarcodeForm
 
@@ -12,10 +14,14 @@ from ..forms import InventoryBarcodeForm
 from ..models import Item, UsedItem
 
 
+@login_required
 @archived_not_available
-@admin_required
 def register_item(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not has_access(request.user, event, ACCESS_INVENTORY_HANDLE):
+        return nopermission(request)
 
     # check if badge system is active
     if not event.inventory:
@@ -53,10 +59,14 @@ def register_item(request, event_url_name):
                   context)
 
 
+@login_required
 @archived_not_available
-@admin_required
 def register_badge(request, event_url_name, item_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not has_access(request.user, event, ACCESS_INVENTORY_HANDLE):
+        return nopermission(request)
 
     # check if badge system is active
     if not event.inventory:

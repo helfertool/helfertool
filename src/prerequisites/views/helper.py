@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from registration.decorators import archived_not_available
 from registration.models import Event, Helper
 from registration.views.utils import nopermission
+from registration.permissions import has_access, ACCESS_PREREQUISITES_VIEW
 
 from .utils import notactive
 
@@ -21,7 +22,7 @@ def view_helpers_prerequisite(request, event_url_name, prerequisite_pk):
         return notactive(request)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_PREREQUISITES_VIEW):
         return nopermission(request)
 
     prerequisite = get_object_or_404(Prerequisite, pk=prerequisite_pk)

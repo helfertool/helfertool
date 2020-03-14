@@ -169,6 +169,7 @@ class Event(models.Model):
     admins = models.ManyToManyField(
         User,
         blank=True,
+        through='registration.EventAdminRoles'
     )
 
     active = models.BooleanField(
@@ -274,34 +275,6 @@ class Event(models.Model):
                                        _("The following sizes are used and "
                                          "therefore cannot be removed: {}".
                                          format(sizes))})
-
-    def is_admin(self, user):
-        """ Check, if a user is admin of this event and returns a boolean.
-
-        A superuser is also admin of an event.
-
-        :param user: the user
-        :type user: :class:`django.contrib.auth.models.User`
-
-        :returns: True or False
-        """
-        return user.is_superuser or self.admins.filter(pk=user.pk).exists()
-
-    def is_involved(self, user):
-        """ Check if is_admin is fulfilled or the user is admin of a job.
-
-        :param user: the user
-        :type user: :class:`django.contrib.auth.models.User`
-        """
-        if self.is_admin(user):
-            return True
-
-        # iterate over all jobs
-        for job in self.job_set.all():
-            if job.job_admins.filter(pk=user.pk).exists():
-                return True
-
-        return False
 
     def get_shirt_choices(self, internal=True):
         choices = []

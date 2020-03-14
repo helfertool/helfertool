@@ -12,7 +12,7 @@ from django.utils.translation import ugettext as _
 from registration.views.utils import nopermission
 
 from ..forms import CreateUserForm, EditUserForm
-from ..templatetags.permissions import has_adduser_group
+from ..templatetags.globalpermissions import has_adduser_group
 
 import logging
 logger = logging.getLogger("helfertool")

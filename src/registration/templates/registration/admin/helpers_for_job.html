@@ -1,5 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons staticfiles %}
+{% load i18n bootstrap4 icons staticfiles permissions %}
 
 {% block admincontent %}
     <h2>
@@ -8,17 +8,23 @@
         {% endblocktrans %}
     </h2>
 
+    {% has_access job "ACCESS_EVENT_EXPORT_HELPERS" as user_event_export_helpers %}
+    {% has_access job "ACCESS_JOB_EDIT_HELPERS" as user_job_edit_helpers %}
+    {% has_access job "ACCESS_HELPER_VIEW" as user_helper_view %}
+
     {# export #}
-    <p>
-        {% icon "file-download" %}
-        <b class="mr-2">{% trans "Export" %}:</b>
-        <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon mr-2">
-            <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
-        </a>
-        <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
-            <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
-        </a>
-    </p>
+    {% if user_event_export_helpers %}
+        <p>
+            {% icon "file-download" %}
+            <b class="mr-2">{% trans "Export" %}:</b>
+            <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon mr-2">
+                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+            </a>
+            <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
+                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+            </a>
+        </p>
+    {% endif %}
 
     {# jump labels #}
     {% if shifts_by_day %}
@@ -35,15 +41,17 @@
     {% if job.coordinators.count == 0 %}
         <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
     {% else %}
-        {% include "registration/admin/helpers_table.html" with event=event job=job helpers=job.coordinators.all %}
+        {% include "registration/admin/helpers_table.html" with event=event job=job helpers=job.coordinators.all can_view=user_helper_view can_delete=user_job_edit_helpers %}
     {% endif %}
 
+    {% if user_job_edit_helpers %}
     <p>
         <a href="{% url 'add_coordinator' event.url_name job.pk %}">
             {% icon "plus" %}
             {% trans "Add coordinator" %}
         </a>
-   </p>
+    </p>
+    {% endif %}
 
     {# iterate over days #}
     {% for day, shifts in shifts_by_day %}
@@ -73,7 +81,7 @@
                 {% endif %}
             </h4>
 
-            {% if event.gifts and is_admin %}
+            {% if event.gifts and user_manages_attendance %}
             <p>
                 <a href="{% url "gifts:set_present" event.url_name shift.pk %}">
                     {% icon "check-square" %} {% trans "Set attendance for complete shift" %}
@@ -84,10 +92,10 @@
             {% if shift.helper_set.count == 0 %}
                 <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
             {% else %}
-                {% include "registration/admin/helpers_table.html" with event=event job=job shift=shift helpers=shift.helper_set.all %}
+                {% include "registration/admin/helpers_table.html" with event=event job=job shift=shift helpers=shift.helper_set.all can_view=user_helper_view can_delete=user_job_edit_helpers %}
             {% endif %}
 
-            {% if not shift.is_full %}
+            {% if not shift.is_full and user_job_edit_helpers %}
                 <p>
                     <a href="{% url 'add_helper' event.url_name shift.pk %}">
                         {% icon "plus" %}

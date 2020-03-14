@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 22:36+0200\n"
+"POT-Creation-Date: 2020-04-05 16:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -295,11 +295,11 @@ msgstr "Alle Badges"
 msgid "%(num)s warnings"
 msgstr "%(num)s Warnungen"
 
-#: badges/templates/badges/index.html:62 badges/views/generate.py:178
+#: badges/templates/badges/index.html:62 badges/views/generate.py:179
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:67 badges/views/generate.py:180
+#: badges/templates/badges/index.html:67 badges/views/generate.py:181
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -430,24 +430,24 @@ msgstr ""
 "Die aufgelisteten Personen haben mehr als eine Aufgabe, daher musst du in "
 "den Badge Einstellungen eine primäre Aufgabe auswählen."
 
-#: badges/views/generate.py:173
+#: badges/views/generate.py:174
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:175
+#: badges/views/generate.py:176
 msgid "{} (all)"
 msgstr "{} (alle)"
 
-#: badges/views/generate.py:214
+#: badges/views/generate.py:215
 msgid "Internal Server Error. The admins were notified."
 msgstr "Interner Fehler. Die Admins wurden benachrichtigt."
 
-#: badges/views/register.py:34
+#: badges/views/register.py:35
 #, python-format
 msgid "Badge already printed: %(name)s"
 msgstr "Bagde bereits gedruckt: %(name)s"
 
-#: badges/views/register.py:40
+#: badges/views/register.py:41
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"

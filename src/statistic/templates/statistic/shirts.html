@@ -1,13 +1,10 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
-{% load permissions %}
+{% load i18n bootstrap4 %}
 
 {% block admincontent %}
     <h2>{% trans "T-Shirts" %}</h2>
 
-    {% is_admin event as admin %}
-    {% if admin %}
+    {% if total_shirts %}
         <h3>{% trans "Total" %}</h3>
 
         <table class="table">
@@ -32,16 +29,15 @@
         </table>
     {% endif %}
 
-    <h3>{% trans "Helpers (without coordinators)" %}</h3>
+    {% if job_shirts %}
+        <h3>{% trans "Helpers (without coordinators)" %}</h3>
 
-    <div class="alert alert-info">
-        <strong>{% trans "Info:" %}</strong>
-        {% trans "The T-shirt of a helper is counted for the first shift." %}
-    </div>
+        <div class="alert alert-info">
+            <strong>{% trans "Info:" %}</strong>
+            {% trans "The T-shirt of a helper is counted for the first shift." %}
+        </div>
 
-    {% for job,data in job_shirts.items %}
-        {% is_job_admin job as job_admin %}
-        {% if job_admin %}
+        {% for job,data in job_shirts.items %}
             <h4>{{ job.name }}</h4>
 
             <table class="table">
@@ -68,6 +64,6 @@
                     {% endfor %}
                 </tr>
             </table>
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift, Job
+from ..permissions import has_access, ACCESS_HELPER_VIEW, ACCESS_JOB_EDIT_HELPERS
 from badges.models import Badge
 
 
@@ -92,7 +93,7 @@ class HelperAddShiftForm(forms.Form):
 
         # all administered shifts
         administered_jobs = [job for job in event.job_set.all()
-                             if job.is_admin(self.user)]
+                             if has_access(self.user, job, ACCESS_JOB_EDIT_HELPERS)]
         shifts = Shift.objects.filter(job__event=event,
                                       job__in=administered_jobs)
 
@@ -136,7 +137,7 @@ class HelperAddCoordinatorForm(forms.Form):
         # all administered jobs
         coordinated_jobs = self.helper.coordinated_jobs
         jobs = [job.pk for job in event.job_set.all()
-                if job.is_admin(self.user) and job not in coordinated_jobs]
+                if has_access(self.user, job, ACCESS_JOB_EDIT_HELPERS) and job not in coordinated_jobs]
 
         # we need a queryset
         jobs = Job.objects.filter(pk__in=jobs)
@@ -186,7 +187,7 @@ class HelperDeleteForm(forms.ModelForm):
 
         # check if user is admin for all shifts that will be deleted
         for shift in self.get_deleted_shifts():
-            if not shift.job.is_admin(self.user):
+            if not has_access(self.user, shift.job, ACCESS_JOB_EDIT_HELPERS):
                 raise ValidationError(_("You are not allowed to delete a "
                                         "helper from the job \"%(jobname)s\"")
                                       % {'jobname': shift.job.name})
@@ -245,7 +246,7 @@ class HelperSearchForm(forms.Form):
         except Badge.DoesNotExist:
             return None
 
-        if badge.helper.can_edit(self.user):
+        if has_access(self.user, badge.helper, ACCESS_HELPER_VIEW):
             return badge.helper
 
         return None
@@ -257,7 +258,7 @@ class HelperSearchForm(forms.Form):
                                             Q(surname__icontains=p) |
                                             Q(email__icontains=p) |
                                             Q(phone__icontains=p))
-        data = filter(lambda h: h.can_edit(self.user), data)
+        data = filter(lambda h: has_access(self.user, h, ACCESS_HELPER_VIEW), data)
 
         return data
 
