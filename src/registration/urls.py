@@ -64,6 +64,10 @@ urlpatterns = [
         views.edit_event,
         name='edit_event'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/admins/$',
+        views.edit_event_admins,
+        name='edit_event_admins'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/delete/$',
         views.delete_event,
         name='delete_event'),
@@ -129,8 +133,8 @@ urlpatterns = [
         name='helpers'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/job/(?P<job_pk>[0-9]+)/$',
-        views.helpers,
-        name='helpers'),
+        views.helpers_for_job,
+        name='helpers_for_job'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/search/$',
         views.search_helper,

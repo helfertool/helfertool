@@ -11,6 +11,7 @@ from .utils import nopermission
 from ..models import Event
 from ..forms import MergeDuplicatesForm
 from ..decorators import archived_not_available
+from ..permissions import has_access, ACCESS_EVENT_EDIT_DUPLICATES
 
 import logging
 logger = logging.getLogger("helfertool")
@@ -22,7 +23,7 @@ def duplicates(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_DUPLICATES):
         return nopermission(request)
 
     duplicates = event.helper_set.values('email').annotate(
@@ -45,7 +46,7 @@ def merge(request, event_url_name, email):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_DUPLICATES):
         return nopermission(request)
 
     helpers = event.helper_set.filter(email=email)

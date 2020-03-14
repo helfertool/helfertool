@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 icons permissions %}
+{% load i18n bootstrap4 icons globalpermissions %}
 
 {% block title %}
     {% blocktrans trimmed with eventname=event.name %}
@@ -32,8 +32,7 @@
         </div>
     {% endif %}
 
-    {% is_involved event as involved %}
-    {% if involved %}
+    {% if user_is_involved %}
         <p>
             <a href="{% url 'manage_event' event_url_name=event.url_name %}" class="btn btn-outline-primary">
                 {% icon "cog" %}

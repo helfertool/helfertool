@@ -5,6 +5,8 @@ required parameters:
     event
     job
     helpers
+    can_view
+    can_delete
 
 optional:
     shift
@@ -73,26 +75,29 @@ coordinators. This is only important for the delete_helper view.
                 <td>{{ helper.comment }}</td>
                 <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
                 <td>
+                    {% if can_view %}
                     <a href="{% url 'view_helper' event.url_name helper.pk %}">
                         {% icon "search" %}
                         {% trans "View" %}
                     </a>
-
                     <br />
-
-                    {% if shift %}
-                        <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
-                            {% icon "trash-alt" %}
-                            {% trans "Delete" %}
-                        </a>
-                    {% else %}
-                        <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
-                            {% icon "trash-alt" %}
-                            {% trans "Delete" %}
-                        </a>
                     {% endif %}
 
-                    <br />
+                    {% if can_delete %}
+                        {% if shift %}
+                            <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
+                                {% icon "trash-alt" %}
+                                {% trans "Delete" %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
+                                {% icon "trash-alt" %}
+                                {% trans "Delete" %}
+                            </a>
+                        {% endif %}
+                        <br />
+                    {% endif %}
+
 
                     {% if helper.mail_failed %}
                         <span class="text-danger">{% icon "times" %} {% trans "Mail not delivered" %}</span><br />

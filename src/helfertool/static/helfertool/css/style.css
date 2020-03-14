@@ -56,10 +56,20 @@ h1, h2, h3, h4 {
     border-color: #1ea082;
 }
 
+.alert-warning {
+    color: #ffc107;
+    background-color: #fff;
+    border-color: #ffc107;
+}
+
 .alert-danger {
     color: #dc3545;
     background-color: #fff;
     border-color: #dc3545;
+}
+
+.alert a {
+    text-decoration: underline;
 }
 
 /* badges (copied from bootstrap with adapted colors */

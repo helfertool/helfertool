@@ -1,32 +1,32 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 icons permissions inventory staticfiles %}
+{% load staticfiles i18n %}
 
 {% block adminheader %}
-        {# select2 #}
-        <link href="{% static "helfertool/vendor/select2/css/select2.min.css" %}" rel="stylesheet" />
-        <script src="{% static "helfertool/vendor/select2/js/select2.min.js" %}"></script>
-        {% get_current_language as LANGUAGE_CODE %}
-        <script src="{% static "helfertool/vendor/select2/js/i18n/" %}{{ LANGUAGE_CODE }}.js"></script>
+    {# select2 #}
+    <link href="{% static "helfertool/vendor/select2/css/select2.min.css" %}" rel="stylesheet" />
+    <script src="{% static "helfertool/vendor/select2/js/select2.min.js" %}"></script>
+    {% get_current_language as LANGUAGE_CODE %}
+    <script src="{% static "helfertool/vendor/select2/js/i18n/" %}{{ LANGUAGE_CODE }}.js"></script>
 
-        {# django-select2 #}
-        <script src="{% static "django_select2/django_select2.js" %}"></script>
+    {# django-select2 #}
+    <script src="{% static "django_select2/django_select2.js" %}"></script>
 
-        {# ckeditor #}
-        <script src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-        <script src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+    {# ckeditor #}
+    <script src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
-        {# chart.js #}
-        <script src="{% static "helfertool/vendor/momentjs/moment.min.js" %}"></script>
-        <script src="{% static "helfertool/vendor/chart.js/Chart.min.js" %}"></script>
-        <link href="{% static "helfertool/vendor/chart.js/Chart.min.css" %}" rel="stylesheet" />
+    {# chart.js #}
+    <script src="{% static "helfertool/vendor/momentjs/moment.min.js" %}"></script>
+    <script src="{% static "helfertool/vendor/chart.js/Chart.min.js" %}"></script>
+    <link href="{% static "helfertool/vendor/chart.js/Chart.min.css" %}" rel="stylesheet" />
 
-        {# datatables #}
-        <link href="{% static "helfertool/vendor/datatables/css/dataTables.bootstrap4.min.css" %}" rel="stylesheet">
-        <link href="{% static "helfertool/vendor/datatables/css/responsive.bootstrap4.min.css" %}" rel="stylesheet">
-        <script src="{% static "helfertool/vendor/datatables/js/jquery.dataTables.min.js" %}"></script>
-        <script src="{% static "helfertool/vendor/datatables/js/dataTables.bootstrap4.min.js" %}"></script>
-        <script src="{% static "helfertool/vendor/datatables/js/dataTables.responsive.min.js" %}"></script>
-        <script src="{% static "helfertool/vendor/datatables/js/responsive.bootstrap4.min.js" %}"></script>
+    {# datatables #}
+    <link href="{% static "helfertool/vendor/datatables/css/dataTables.bootstrap4.min.css" %}" rel="stylesheet">
+    <link href="{% static "helfertool/vendor/datatables/css/responsive.bootstrap4.min.css" %}" rel="stylesheet">
+    <script src="{% static "helfertool/vendor/datatables/js/jquery.dataTables.min.js" %}"></script>
+    <script src="{% static "helfertool/vendor/datatables/js/dataTables.bootstrap4.min.js" %}"></script>
+    <script src="{% static "helfertool/vendor/datatables/js/dataTables.responsive.min.js" %}"></script>
+    <script src="{% static "helfertool/vendor/datatables/js/responsive.bootstrap4.min.js" %}"></script>
 {% endblock %}
 
 {% block title %}
@@ -40,9 +40,6 @@
 {% endblock %}
 
 {% block content %}
-    {% is_involved event as involved %}
-    {% is_admin event as admin %}
-
     {% if event and event.archived %}
         <div class="alert alert-info" role="alert">
             {% trans "This event is archived." %}
@@ -59,253 +56,10 @@
 
     <div class="row">
         <div class="col-md-3 wrap sidebar">
-            {# for event #}
-            {% if event and involved %}
-                <h2>{% trans "General" %}</h2>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'form' event.url_name %}" target="_blank">
-                            {% icon "external-link-alt" %}
-                            {% trans "Go to registration" %}
-                        </a>
-                    </li>
-
-                    {% if admin %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'edit_event' event.url_name %}">{% trans "Edit event" %}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a>
-                        </li>
-
-                        {% if event.prerequisites %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'prerequisites:view_prerequisites' event.url_name %}">{% trans "Prerequisites" %}</a>
-                        </li>
-                        {% endif %}
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'links' event.url_name %}">{% trans "Links" %}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-
-                <h2>{% trans "Helpers" %}</h2>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'helpers' event.url_name %}">{% trans "Helpers and coordinators" %}</a>
-
-                        {# list of all (for user visible) jobs #}
-                        {% if request.resolver_match.url_name == "helpers" and not event.archived %}
-                            <ul class="nav flex-column nav-nested">
-                            {% for job in event.job_set.all %}
-                                {% is_job_admin job as job_admin %}
-                                {% if job_admin %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'helpers' event.url_name job.pk %}">{{ job.name }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                            </ul>
-                        {% endif %}
-                    </li>
-
-                    {% if not event.archived %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a>
-                        </li>
-
-                        {% if admin %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a>
-                            </li>
-                        {% endif %}
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'vacant_shifts' event.url_name %}">{% trans "Vacant shifts" %}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a>
-                        </li>
-                    {% endif %}
-                </ul>
-
-                <h2>{% trans "Mail" %}</h2>
-                <ul class="nav flex-column">
-                    {% if not event.archived %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'mail:send' event.url_name %}">{% trans "Send" %}</a>
-                        </li>
-                    {% endif %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mail:list' event.url_name %}">{% trans "All mails" %}</a>
-                    </li>
-                </ul>
-
-                {% if not event.archived %}
-                    {% if admin or event.ask_shirt %}
-                        <h2>{% trans "Statistics" %}</h2>
-                        <ul class="nav flex-column">
-                            {% if admin %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'statistic:overview' event.url_name %}">{% trans "Overview" %}</a>
-                                </li>
-                            {% endif %}
-
-                            {% if event.ask_shirt %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'statistic:shirts' event.url_name %}">{% trans "T-Shirts" %}</a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    {% endif %}
-                {% endif %}
-
-                {% if admin and event.gifts %}
-                    <h2>{% trans "Gifts and attendance" %}</h2>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'gifts:list' event.url_name %}">{% trans "Settings" %}</a>
-                        </li>
-
-                        {% if not event.archived %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a>
-                            </li>
-
-                            {% if event.ask_shirt %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'gifts:list_shirts' event.url_name %}">{% trans "Missing T-shirts" %}</a>
-                                </li>
-                            {% endif %}
-                        {% endif %}
-                    </ul>
-                {% endif %}
-
-                {% if admin and event.badges %}
-                    <h2>{% trans "Badges" %}</h2>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a>
-                        </li>
-
-                        {% if not event.archived %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'badges:index' event.url_name %}">{% trans "Generate" %}</a>
-                            </li>
-
-                            {% if event.badge_settings.barcodes %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a>
-                                </li>
-                            {% endif %}
-                        {% endif %}
-                    </ul>
-                {% endif %}
-
-                {% if admin and event.inventory and not event.archived %}
-                    <h2>{% trans "Inventory" %}</h2>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inventory:event_settings' event.url_name %}">{% trans "Settings" %}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inventory:register' event.url_name %}">{% trans "Register" context "Register item and badge" %}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inventory:take_back' event.url_name %}">{% trans "Take back" %}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inventory:list' event.url_name %}">{% trans "List" %}</a>
-                        </li>
-                    </ul>
-                {% endif %}
-
-            {# for superusers #}
+            {% if event %}
+                {% include "helfertool/admin_event_menu.html" %}
             {% else %}
-                <h2>{% trans "General" %}</h2>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "account:view_user" %}">{% trans "My account" %}</a>
-                    </li>
-
-                    {% if user.is_superuser or user|has_addevent_group %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'new_event' %}">{% trans "New event" %}</a>
-                        </li>
-                    {% endif %}
-
-                    {% if user.is_superuser or user|is_inventory_admin_any %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a>
-                        </li>
-                    {% endif %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "help:create_issue" %}">{% trans "Support" %}</a>
-                    </li>
-                </ul>
-
-                {% if user.is_superuser or user|has_adduser_group %}
-                    <h2>{% trans "User management" %}</h2>
-                    <ul class="nav flex-column">
-                        {% if user.is_superuser or user|has_adduser_group %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'account:add_user' %}">{% trans "Add user" %}</a>
-                            </li>
-                        {% endif %}
-
-                        {% if user.is_superuser %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'account:list_users' %}">{% trans "All users" %}</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'account:list_agreements' %}">{% trans "User agreements" %}</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
-
-                {% if user.is_superuser or user|has_sendnews_group %}
-                    <h2>{% trans "Newsletter" %}</h2>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'news:send' %}">{% trans "Send news" %}</a>
-                        </li>
-                        {% if user.is_superuser %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'news:remove' %}">{% trans "Remove recipient" %}</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
-
-                {% if user.is_superuser %}
-                    <h2>{% trans "Settings" %}</h2>
-
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "toolsettings:templates" %}">{% trans "Templates" %}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "toolsettings:check" %}">{% trans "Check installation" %}</a>
-                        </li>
-
-                        {% if user.is_staff %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                {% endif %}
+                {% include "helfertool/admin_general_menu.html" %}
             {% endif %}
         </div>
         <div class="col-md-9">

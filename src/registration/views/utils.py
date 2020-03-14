@@ -9,26 +9,6 @@ def nopermission(request):
     return render(request, 'registration/admin/nopermission.html')
 
 
-def is_involved(user, event_url_name=None, admin_required=False):
-    if user.is_superuser:
-        return True
-
-    try:
-        event = Event.objects.get(url_name=event_url_name)
-        if admin_required:
-            return event.is_admin(user)
-        else:
-            return event.is_involved(user)
-    except Event.DoesNotExist:
-        pass
-
-    return False
-
-
-def is_admin(user, event_url_name=None):
-    return is_involved(user, event_url_name, admin_required=True)
-
-
 def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
                helper_pk=None, handle_duplicates=False):
 

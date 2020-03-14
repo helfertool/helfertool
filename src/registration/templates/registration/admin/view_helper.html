@@ -1,7 +1,9 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n bootstrap4 icons permissions %}
 
 {% block admincontent %}
+    {% has_access helper "ACCESS_HELPER_EDIT" as user_helper_edit %}
+
     <h2>{{ helper.full_name }}</h2>
 
     {% if helper.has_missed_shift %}
@@ -12,15 +14,21 @@
 
     <h3>{% trans "Personal data" %}</h3>
 
+    {% if user_helper_edit %}
     <a href="{% url 'edit_helper' event.url_name helper.pk %}">
         {% icon "edit" %}
         {% trans "Edit" %}
     </a>
     &nbsp;
+    {% endif %}
+
+    {% has_access helper "ACCESS_HELPER_RESEND" as user_helper_resend %}
+    {% if user_helper_resend %}
     <a href="{% url 'resend_mail' event.url_name helper.pk %}">
         {% icon "envelope" %}
         {% trans "Resend confirmation mail" %}
     </a>
+    {% endif %}
 
     {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
 
@@ -43,13 +51,16 @@
         <h3>{% trans "Coordinator" %}</h3>
         <table class="table">
             {% for job in helper.coordinated_jobs %}
+                {% has_access job "ACCESS_JOB_EDIT_HELPERS" as user_job_edit_helpers %}
                 <tr>
                     <td>{{ job.name }}</td>
                     <td>
+                        {% if user_job_edit_helpers %}
                         <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}">
                             {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
@@ -64,10 +75,13 @@
                 <tr>
                     <td>{{ shift }}</td>
                     <td>
+                        {% has_access shift.job "ACCESS_JOB_EDIT_HELPERS" as user_job_edit_helpers %}
+                        {% if user_job_edit_helpers %}
                         <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}">
                             {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
@@ -76,6 +90,8 @@
 
     {# add as coordinator or helper #}
     <p>
+        {% has_access_event_or_job event "" "ACCESS_JOB_EDIT_HELPERS" as user_any_job_edit_helpers %}
+        {% if user_any_job_edit_helpers %}
         <a href="{% url 'add_helper_to_shift' event.url_name helper.pk %}">
             {% icon "plus" %}
             {% trans "Add to shift" %}
@@ -85,6 +101,7 @@
             {% icon "plus" %}
             {% trans "Add as coordinator" %}
         </a>
+        {% endif %}
 
         {% if edit_badge %}
             &nbsp;

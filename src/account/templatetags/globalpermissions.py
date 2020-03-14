@@ -31,29 +31,3 @@ def has_perm_group(user):
     return has_group(user, settings.GROUP_ADDUSER) or \
            has_group(user, settings.GROUP_ADDEVENT) or \
            has_group(user, settings.GROUP_SENDNEWS)
-
-# admins, involved, job_admins
-
-
-@register.simple_tag(takes_context=True)
-def is_admin(context, event):
-    if not event:
-        return False
-
-    return event.is_admin(context["user"])
-
-
-@register.simple_tag(takes_context=True)
-def is_involved(context, event):
-    if not event:
-        return False
-
-    return event.is_involved(context["user"])
-
-
-@register.simple_tag(takes_context=True)
-def is_job_admin(context, job):
-    if not job:
-        return False
-
-    return job.is_admin(context["user"])

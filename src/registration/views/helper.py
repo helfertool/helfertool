@@ -13,6 +13,9 @@ from ..forms import HelperForm, HelperDeleteForm, \
     HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
     HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm
 from ..decorators import archived_not_available
+from ..permissions import has_access, has_access_event_or_job, ACCESS_INVOLVED, ACCESS_JOB_EDIT_HELPERS, \
+    ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_VIEW, ACCESS_HELPER_RESEND, \
+    ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE, ACCESS_EVENT_EXPORT_HELPERS, ACCESS_PREREQUISITES_HANDLE
 
 from gifts.forms import HelpersGiftsForm
 from prerequisites.forms import HelperPrerequisiteForm
@@ -22,32 +25,14 @@ logger = logging.getLogger("helfertool")
 
 
 @login_required
-def helpers(request, event_url_name, job_pk=None):
+def helpers(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
-    # helpers of one job
-    if job_pk:
-        job = get_object_or_404(Job, pk=job_pk)
-
-        # check permission
-        if not job.is_admin(request.user):
-            return nopermission(request)
-
-        is_admin = event.is_admin(request.user)
-
-        shifts_by_day = job.shifts_by_day().items()
-
-        # show list of helpers
-        context = {'event': event,
-                   'job': job,
-                   'shifts_by_day': shifts_by_day,
-                   'is_admin': is_admin}
-        return render(request, 'registration/admin/helpers_for_job.html',
-                      context)
-
     # check permission
-    if not event.is_involved(request.user):
+    if not has_access(request.user, event, ACCESS_INVOLVED):
         return nopermission(request)
+    
+    user_can_export = has_access(request.user, event, ACCESS_EVENT_EXPORT_HELPERS)
 
     # list of days with shifts
     days = Shift.objects.filter(job__event=event) \
@@ -56,22 +41,42 @@ def helpers(request, event_url_name, job_pk=None):
 
     # overview over jobs
     context = {'event': event,
-               'days': days}
+               'days': days,
+               'user_can_export': user_can_export}
     return render(request, 'registration/admin/helpers.html', context)
 
 
 @login_required
-def view_helper(request, event_url_name, helper_pk):
-    event, job, shift, helper = get_or_404(event_url_name,
-                                           helper_pk=helper_pk)
+def helpers_for_job(request, event_url_name, job_pk):
+    event, job, shift, helper = get_or_404(event_url_name, job_pk=job_pk)
 
-    if not helper.can_edit(request.user):
+    # check permission
+    if not has_access(request.user, job, ACCESS_JOB_VIEW_HELPERS):
         return nopermission(request)
 
-    # permission for features
-    edit_badge = event.badges and event.is_admin(request.user)
-    edit_gifts = event.gifts and event.is_admin(request.user)
-    edit_prerequisites = event.prerequisites and event.is_admin(request.user)
+    user_manages_attendance = has_access(request.user, event, ACCESS_GIFTS_HANDLE)
+
+    shifts_by_day = job.shifts_by_day().items()
+
+    # show list of helpers
+    context = {'event': event,
+                'job': job,
+                'shifts_by_day': shifts_by_day,
+                'user_manages_attendance': user_manages_attendance}
+    return render(request, 'registration/admin/helpers_for_job.html',
+                    context)
+
+@login_required
+def view_helper(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+
+    # check permissions
+    if not has_access(request.user, helper, ACCESS_HELPER_VIEW):
+        return nopermission(request)
+
+    edit_badge = event.badges and has_access(request.user, event, ACCESS_BADGES_EDIT_HELPER)
+    edit_gifts = event.gifts and has_access(request.user, event, ACCESS_GIFTS_HANDLE)
+    edit_prerequisites = event.prerequisites and has_access(request.user, event, ACCESS_PREREQUISITES_HANDLE)
 
     # we have multiple forms. all of them need to be valid in order to save them
     forms_valid = True
@@ -123,7 +128,7 @@ def edit_helper(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not helper.can_edit(request.user):
+    if not has_access(request.user, helper, ACCESS_HELPER_EDIT):
         return nopermission(request)
 
     # forms
@@ -158,7 +163,7 @@ def add_helper(request, event_url_name, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
 
     # check permission
-    if not shift.job.is_admin(request.user):
+    if not has_access(request.user, shift.job, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     # get all shifts of this job
@@ -179,7 +184,7 @@ def add_helper(request, event_url_name, shift_pk):
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return HttpResponseRedirect(reverse('helpers', args=[event_url_name, shift.job.pk]))
+        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, shift.job.pk]))
 
     # render page
     context = {'event': event,
@@ -193,7 +198,7 @@ def add_coordinator(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk=job_pk)
 
     # check permission
-    if not job.is_admin(request.user):
+    if not has_access(request.user, job, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     # form
@@ -212,7 +217,7 @@ def add_coordinator(request, event_url_name, job_pk):
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the coordinator was saved."))
 
-        return HttpResponseRedirect(reverse('helpers', args=[event_url_name, job.pk]))
+        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, job.pk]))
 
     # render page
     context = {'event': event,
@@ -226,7 +231,7 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not event.is_involved(request.user):
+    if not has_access_event_or_job(request.user, event, None, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     form = HelperAddShiftForm(request.POST or None, helper=helper,
@@ -258,7 +263,7 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not event.is_involved(request.user):
+    if not has_access_event_or_job(request.user, event, None, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     form = HelperAddCoordinatorForm(request.POST or None, helper=helper,
@@ -287,16 +292,14 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
 @login_required
 def delete_helper(request, event_url_name, helper_pk, shift_pk,
                   show_all_shifts=False):
-    event, job, shift, helper = get_or_404(event_url_name,
-                                           shift_pk=shift_pk,
-                                           helper_pk=helper_pk)
+    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk, helper_pk=helper_pk)
 
     # additional plausibility checks
     if shift not in helper.shifts.all():
         raise Http404
 
     # check permission
-    if not helper.can_edit(request.user):
+    if not has_access(request.user, shift.job, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     # form
@@ -317,8 +320,7 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
         })
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('helpers', args=[event_url_name,
-                                                             shift.job.pk]))
+        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, shift.job.pk]))
 
     # render page
     context = {'event': event,
@@ -336,7 +338,7 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
                                            helper_pk=helper_pk)
 
     # check permission
-    if not job.is_admin(request.user):
+    if not has_access(request.user, job, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     # additional plausibility checks
@@ -363,8 +365,7 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
                          {'name': helper.full_name, 'jobname': job.name})
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('helpers', args=[event_url_name,
-                                                             job.pk]))
+        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, job.pk]))
 
     # render page
     context = {'event': event,
@@ -381,7 +382,7 @@ def search_helper(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_involved(request.user):
+    if not has_access(request.user, event, ACCESS_INVOLVED):
         return nopermission(request)
 
     # form
@@ -414,7 +415,7 @@ def search_helper(request, event_url_name):
 def resend_mail(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
-    if not helper.can_edit(request.user):
+    if not has_access(request.user, helper, ACCESS_HELPER_RESEND):
         return nopermission(request)
 
     form = HelperResendMailForm(request.POST or None)

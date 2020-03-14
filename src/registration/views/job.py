@@ -10,6 +10,7 @@ from .utils import nopermission, get_or_404
 from ..decorators import archived_not_available
 from ..forms import JobForm, JobDeleteForm, JobDuplicateForm, JobDuplicateDayForm, JobSortForm
 from ..models import Event, Job
+from ..permissions import has_access, ACCESS_EVENT_EDIT_JOBS, ACCESS_JOB_EDIT
 
 import logging
 logger = logging.getLogger("helfertool")
@@ -20,14 +21,18 @@ logger = logging.getLogger("helfertool")
 def edit_job(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
-    # check permission
-    if not event.is_admin(request.user):
-        return nopermission(request)
-
-    # get job, if available
+    # get job, if available and check permission
     job = None
     if job_pk:
         job = get_object_or_404(Job, pk=job_pk)
+
+        # job exists -> ACCESS_JOB_EDIT
+        if not has_access(request.user, job, ACCESS_JOB_EDIT):
+            return nopermission(request)
+    else:
+        # newly created -> ACCESS_EVENT_EDIT_JOBS
+        if not has_access(request.user, event, ACCESS_EVENT_EDIT_JOBS):
+            return nopermission(request)
 
     # form
     form = JobForm(request.POST or None, instance=job, event=event)
@@ -60,7 +65,7 @@ def delete_job(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_JOBS):
         return nopermission(request)
 
     # form
@@ -106,7 +111,7 @@ def duplicate_job(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_JOBS):
         return nopermission(request)
 
     # form
@@ -138,7 +143,7 @@ def duplicate_job_day(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, job, ACCESS_JOB_EDIT):
         return nopermission(request)
 
     # form
@@ -170,7 +175,7 @@ def sort_job(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_JOBS):
         return nopermission(request)
 
     # form

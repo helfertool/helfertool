@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _
 
-from ..templatetags.permissions import has_adduser_group, has_addevent_group, has_sendnews_group
+from ..templatetags.globalpermissions import has_adduser_group, has_addevent_group, has_sendnews_group
 
 import logging
 logger = logging.getLogger("helfertool")

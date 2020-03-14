@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Event, Job, Shift, Helper, Duplicate, HelperShift
+from .models import Event, EventAdminRoles, Job, Shift, Helper, Duplicate, HelperShift
 
 
 class HelperAdmin(admin.ModelAdmin):
@@ -8,6 +8,7 @@ class HelperAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event)
+admin.site.register(EventAdminRoles)
 admin.site.register(Job)
 admin.site.register(Shift)
 admin.site.register(Helper, HelperAdmin)

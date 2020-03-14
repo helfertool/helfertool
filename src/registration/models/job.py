@@ -98,19 +98,6 @@ class Job(models.Model):
         else:
             return self.coordinators.count()
 
-    def is_admin(self, user):
-        """ Check, if a user is admin of this job and returns a boolean.
-
-        Superusers and admins of the event are also admins of a shift.
-
-        :param user: the user
-        :type user: :class:`django.contrib.auth.models.User`
-
-        :returns: True or False
-        """
-        return self.event.is_admin(user) or \
-            self.job_admins.filter(pk=user.pk).exists()
-
     def helpers_and_coordinators(self):
         helpers = Helper.objects.filter(shifts__job=self).distinct()
         coordinators = self.coordinators.distinct()

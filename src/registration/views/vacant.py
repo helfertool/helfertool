@@ -7,6 +7,7 @@ from .utils import nopermission
 
 from ..models import Event, Shift
 from ..decorators import archived_not_available
+from ..permissions import has_access, ACCESS_INVOLVED
 
 
 @login_required
@@ -15,7 +16,7 @@ def vacant_shifts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_INVOLVED):
         return nopermission(request)
 
     # first, get all days
