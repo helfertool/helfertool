@@ -5,7 +5,11 @@
 {% block admincontent %}
     <h2>{% trans "Merge duplicates" %}</h2>
 
-    {% if form %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {% trans "You cannot merge helpers of which multiple have the same shift." %}
+        </div>
+    {% elif form %}
         <div class="alert alert-info" role="alert">
             {% trans "You have to select one data set, all other will be deleted." %}
 
