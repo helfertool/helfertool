@@ -31,8 +31,7 @@ def duplicates(request, event_url_name):
     duplicated_helpers = OrderedDict()
 
     for dup in duplicates:
-        duplicated_helpers[dup['email']] = event.helper_set.filter(
-            email=dup['email'])
+        duplicated_helpers[dup['email']] = event.helper_set.filter(email=dup['email'])
 
     # overview over jobs
     context = {'event': event,
@@ -52,22 +51,29 @@ def merge(request, event_url_name, email):
     helpers = event.helper_set.filter(email=email)
 
     form = None
+    error = False
 
     if helpers.count() > 1:
         form = MergeDuplicatesForm(request.POST or None, helpers=helpers)
 
-        if form.is_valid():
-            h = form.merge()
+        if not form.check_merge_possible():
+            error = True
+        elif form.is_valid():
+            try:
+                h = form.merge()
 
-            logger.info("helper merged", extra={
-                'user': request.user,
-                'helper': h,
-                'helper_pk': h.pk,
-            })
+                logger.info("helper merged", extra={
+                    'user': request.user,
+                    'helper': h,
+                    'helper_pk': h.pk,
+                })
 
-            return HttpResponseRedirect(reverse('view_helper',
-                                                args=[event_url_name, h.pk]))
+                return HttpResponseRedirect(reverse('view_helper',
+                                                    args=[event_url_name, h.pk]))
+            except ValueError:
+                error = True
 
     context = {'event': event,
-               'form': form}
+               'form': form,
+               'error': error}
     return render(request, 'registration/admin/merge.html', context)

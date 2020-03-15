@@ -137,6 +137,9 @@ class EventDuplicateForm(EventForm):
         gift_mapping = {}
         gift_set_mapping = {}
         if activate_gifts:
+            # duplicate gift settings
+            self.other_event.gift_settings.duplicate(self.instance)
+
             # duplicate all gifts and build mapping
             for gift in self.other_event.gift_set.all():
                 new_gift = gift.duplicate(self.instance)
