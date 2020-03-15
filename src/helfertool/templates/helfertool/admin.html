@@ -117,6 +117,10 @@
                         {% endif %}
 
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'vacant_shifts' event.url_name %}">{% trans "Vacant shifts" %}</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a>
                         </li>
                     {% endif %}
