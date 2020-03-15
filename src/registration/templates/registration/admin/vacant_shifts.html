@@ -1,0 +1,52 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons %}
+
+{% block admincontent %}
+    <h2>{% trans "Vacant shifts" %}</h2>
+
+    {% if no_shifts %}
+        <p class="text-muted">{% trans "There are no shifts." %}</p>
+    {% elif not vacant_days %}
+        <div class="alert alert-info">
+            {% trans "Congratulations! No vacant shifts." %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            {% trans "The vacant shifts are grouped by day here, so it is easier to get an overview." %}
+        </div>
+
+        {% for day,jobs in vacant_days.items %}
+            {% with day_str=day|date:"Y-m-d" %}
+                <h3>{{ day }}</h3>
+                    {% for job,shifts in jobs.items %}
+                        <h4>{{ job }}</h4>
+                        <table class="table">
+                            <tr>
+                                <th width="30%">{% trans "Status" %}</th>
+                                <th width="20%">{% trans "Time" %}</th>
+                                <th width="30%">{% trans "Name" %}</th>
+                                <th width="20%">{% trans "Missing / Total" %}</th>
+                            </tr>
+                            {% for shift in shifts %}
+                                <tr>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success percent-{{ shift.helpers_percent_5percent }}" role="progressbar"
+                                            aria-valuenow="{{ shift.helpers_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+
+                                            <div class="progress-bar percent-{{ shift.helpers_percent_vacant_5percent }}
+                                            {% if shift.helpers_percent > 50 %}bg-warning{% else %}bg-danger{% endif %}"
+                                            role="progressbar" aria-valuenow="{{ shift.helpers_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                    <td>{{ shift.time_hours }}</td>
+                                    <td>{{ shift.name }}</td>
+                                    <td>{{ shift.num_vacant }} / {{ shift.number }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endfor %}
+            {% endwith %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

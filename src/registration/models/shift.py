@@ -140,8 +140,21 @@ class Shift(models.Model):
         return int(round(float(num) / self.number * 100.0, 0))
 
     def helpers_percent_5percent(self):
+        """
+        Returns the percentage of registered helpers in 5% steps.
+        So the returned value is between 0 and 20 (including both values).
+
+        This is used to generate the CSS class names defined in style.css.
+        Therefore, inline CSS can be avoided.
+        """
         percent = self.helpers_percent()
         return math.ceil(percent / 5)
+
+    def helpers_percent_vacant_5percent(self):
+        """
+        Same as `helpers_percent_5percent`, but for the missing helpers.
+        """
+        return 20 - self.helpers_percent_5percent()
 
     @property
     def shirt_sizes(self):

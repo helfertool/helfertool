@@ -11,3 +11,4 @@ from .helper import helpers, add_helper, edit_helper, delete_helper, \
 from .link import links, edit_link, delete_link
 from .export import export
 from .duplicates import duplicates, merge
+from .vacant import vacant_shifts
