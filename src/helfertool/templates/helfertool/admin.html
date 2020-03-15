@@ -104,8 +104,13 @@
                             </ul>
                         {% endif %}
                     </li>
-
+                    
                     {% if not event.archived %}
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'jobs_and_shifts_vacant' event.url_name %}">{% trans "Vacant Jobs and shifts" %}</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a>
                         </li>
