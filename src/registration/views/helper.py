@@ -15,6 +15,7 @@ from ..forms import HelperForm, HelperDeleteForm, \
 from ..decorators import archived_not_available
 
 from gifts.forms import HelpersGiftsForm
+from prerequisites.forms import HelperPrerequisiteForm
 
 import logging
 logger = logging.getLogger("helfertool")
@@ -64,12 +65,18 @@ def view_helper(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name,
                                            helper_pk=helper_pk)
 
+    # Permissions for features
     if not helper.can_edit(request.user):
         return nopermission(request)
 
     edit_badge = event.badges and event.is_admin(request.user)
     edit_gifts = event.gifts and event.is_admin(request.user)
+    edit_prerequisites = event.is_admin(request.user)
 
+    # mail resending
+    resend_form = HelperResendMailForm(helper=helper)
+
+    # gift editing
     gifts_form = None
     if edit_gifts:
         helper.gifts.update()
@@ -78,18 +85,34 @@ def view_helper(request, event_url_name, helper_pk):
                                       instance=helper.gifts)
 
         if gifts_form.is_valid():
-            gifts_form.save()
+            instance = gifts_form.save()
 
             messages.success(request, _("Gifts were saved."))
 
-            return HttpResponseRedirect(reverse('view_helper',
-                                                args=[event_url_name,
-                                                      helper.pk]))
+            gifts_form = HelpersGiftsForm(None, instance=instance)
 
+    # prerequisite editing
+    prerequisites_form = None
+    if edit_prerequisites:
+
+        prerequisites_form = HelperPrerequisiteForm(request.POST or None,
+                                                    helper=helper)
+
+        if prerequisites_form.is_valid():
+            instance = prerequisites_form.save()
+
+            messages.success(request, _("Prerequisites were saved."))
+
+            prerequisites_form = HelperPrerequisiteForm(None, helper=helper)
+
+    # render page
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
-               'gifts_form': gifts_form}
+               'gifts_form': gifts_form,
+               'resend_form': resend_form,
+               'prerequisites_form': prerequisites_form}
+
     return render(request, 'registration/admin/view_helper.html', context)
 
 

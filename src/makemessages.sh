@@ -1,3 +1,3 @@
 #!/bin/sh
 
-python manage.py makemessages -i manage.py -l de
+python3 manage.py makemessages -i manage.py -l de

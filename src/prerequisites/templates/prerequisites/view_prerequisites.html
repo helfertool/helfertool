@@ -1,0 +1,48 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons %}
+
+{% block admincontent %}
+    <h2>{% trans "Prerequisites" %}</h2>
+
+    <p><a href="{% url 'prerequisites:new_prerequisite' event.url_name %}">
+        {% icon "plus" %}
+        {% trans "New prerequisite" %}
+    </a></p>
+
+    {% if prerequisites %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th></th>
+            </tr>
+            {% for prerequisite in prerequisites %}
+                <tr>
+                    <td>{{ prerequisite.name }}</td>
+                    <td>
+                            <a href="{% url "prerequisites:view_helpers_prerequisite" event.url_name prerequisite.pk %}">
+                                {% icon "eye" %}
+                                {% trans "Helpers" %}
+                            </a>
+
+                            <br />
+
+                            <a href="{% url "prerequisites:edit_prerequisite" event.url_name prerequisite.pk %}">
+                                {% icon "pencil-alt" %}
+                                {% trans "Edit" %}
+                            </a>
+
+                            <br />
+
+                            <a href="{% url "prerequisites:delete_prerequisite" event.url_name prerequisite.pk %}">
+                                {% icon "trash-alt" %}
+                                {% trans "Delete" %}
+                            </a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "There are no prerequisites." %}</p>
+    {% endif %}
+{% endblock %}

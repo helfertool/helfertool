@@ -9,6 +9,7 @@ from collections import OrderedDict
 from copy import deepcopy
 
 from badges.models import BadgeDefaults
+from prerequisites.models import Prerequisite
 
 
 class Job(models.Model):
@@ -23,6 +24,7 @@ class Job(models.Model):
         :job_admins: users, that can see and edit the helpers
         :public: job is visible publicly
         :badge_design: badge design for this job
+        :prerequisites: Prerequisites for this job
     """
     class Meta:
         ordering = ['-order', 'pk']
@@ -78,6 +80,12 @@ class Job(models.Model):
     order = models.PositiveIntegerField(
         default=0,
         verbose_name=_("Order, highest number on top"),
+    )
+
+    prerequisites = models.ManyToManyField(
+        Prerequisite,
+        blank=True,
+        verbose_name=_("Prerequisites for this job"),
     )
 
     def __str__(self):
