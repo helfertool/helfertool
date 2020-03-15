@@ -6,7 +6,7 @@
     <h3>{{ shift }}</h3>
 
     <p>
-        <a class="btn btn-sm btn-outline-primary" onclick="set_all(); return false;" href="">
+        <a class="btn btn-sm btn-outline-primary" onclick="set_all(2); return false;" href="">
             {% trans "Set all to attendant" %}
         </a>
     </p>
@@ -14,7 +14,43 @@
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        <table id="set_present" class="table table-hover">
+            <thead>
+            <tr>
+                {% if event.gift_settings.enable_automatic_availability %}
+                    <th scope="col" width="2em"><a onclick="set_all(1);">{% trans "Auto" %}</a></th>
+                {% endif %}
+                <th scope="col" width="2em"><a onclick="set_all(2);">{% trans "Present" %}</a></th>
+                <th scope="col" width="2em"><a onclick="set_all(3);">{% trans "Absent" %}</a></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for id, field in form.fields.items %}
+                <tr>
+                    {% if event.gift_settings.enable_automatic_availability %}
+                        <td><input type="radio"
+                                   name="{{ id }}"
+                                   id="{{ id }}_auto"
+                                   value="auto"
+                                   {% if field.initial == "auto" or field.initial == "" %}checked="checked" {% endif %}/></td>
+                    {% endif %}
+                    <td><input type="radio"
+                               name="{{ id }}"
+                               id="{{ id }}_present"
+                               value="present"
+                               {%  if field.initial == "present" %}checked="checked" {% endif %}/></td>
+                    <td><input type="radio"
+                               name="{{ id }}"
+                               id="{{ id }}_absent"
+                               value="absent"
+                               {% if field.initial == "absent" %}checked="checked" {% endif  %}/></td>
+                    <td>{{ field.label }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% bootstrap_form_errors form %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>

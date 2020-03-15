@@ -4,6 +4,12 @@
 {% block admincontent %}
     <h2>{{ helper.full_name }}</h2>
 
+    {% if helper.has_missed_shift %}
+        <div class="alert alert-warning">
+            {% blocktrans %}This helper has been marked as absent for some of his shifts in the past at this event (see below).{% endblocktrans %}
+        </div>
+    {% endif %}
+
     <h3>{% trans "Personal data" %}</h3>
 
     <a href="{% url 'edit_helper' event.url_name helper.pk %}">

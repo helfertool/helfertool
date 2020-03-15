@@ -24,12 +24,26 @@ class HelpersGiftsForm(forms.ModelForm):
                 required=False,
                 initial=giftset.delivered)
 
-        for shift in self.instance.helper.shifts.all():
+        CHOICES = [('auto', _('Auto')),
+                   ('present', _('Present')),
+                   ('absent', _('Absent'))]
+
+        for helpershift in self.instance.helper.helpershift_set.all():
+            shift = helpershift.shift
             present_id_str = "present_{}".format(shift.pk)
-            self.fields[present_id_str] = forms.BooleanField(
-                label=_("Present"),
-                required=False,
-                initial=self.instance.get_present(shift))
+
+            if helpershift.present:
+                initial = "present"
+            else:
+                if helpershift.manual_presence:
+                    initial = "absent"
+                else:
+                    initial = "auto"
+
+            self.fields[present_id_str] = forms.ChoiceField(
+                initial=initial,
+                choices=CHOICES,
+                widget=forms.RadioSelect)
 
     def save(self, commit=True):
         instance = super(HelpersGiftsForm, self).save(False)
@@ -43,9 +57,17 @@ class HelpersGiftsForm(forms.ModelForm):
         # must commit for m2m operations
         instance.save()
 
-        for shift in self.instance.helper.shifts.all():
+        for helpershift in self.instance.helper.helpershift_set.all():
+            shift = helpershift.shift
             present_id_str = "present_{}".format(shift.pk)
-            instance.set_present(shift, self.cleaned_data[present_id_str])
+            present = self.cleaned_data.get(present_id_str)
+
+            if present == 'present':
+                instance.set_present(shift, True)
+            elif present == 'absent':
+                instance.set_present(shift, False)
+            elif present == 'auto':
+                instance.set_present(shift, None)
 
         return instance
 

@@ -13,6 +13,7 @@ import datetime
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 from gifts.models import HelpersGifts
+from gifts.models.giftsettings import GiftSettings
 from inventory.models import InventorySettings
 
 
@@ -326,6 +327,13 @@ class Event(models.Model):
             return None
 
     @property
+    def gift_settings(self):
+        try:
+            return self.giftsettings
+        except AttributeError:
+            return None
+
+    @property
     def all_coordinators(self):
         return self.helper_set.filter(job__isnull=False)
 
@@ -368,6 +376,9 @@ def event_saved(sender, instance, using, **kwargs):
                 badge.save()
 
     if instance.gifts:
+        if not instance.gift_settings:
+            GiftSettings.objects.create(event=instance)
+
         for helper in instance.helper_set.all():
             if not hasattr(helper, 'gifts'):
                 gifts = HelpersGifts()

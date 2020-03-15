@@ -4,6 +4,15 @@
 {% block admincontent %}
     <h2>{% trans "Manage gifts" %}</h2>
 
+    <h3>{% trans "Settings" %}</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+    </form>
+
     <h3>{% trans "Gifts" %}</h3>
     <table class="table">
         <tr>

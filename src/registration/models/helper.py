@@ -20,6 +20,7 @@ from mail.tracking import new_tracking_registration
 
 from .event import Event
 from .job import Job
+from .helpershift import HelperShift
 
 
 class Helper(models.Model):
@@ -40,6 +41,7 @@ class Helper(models.Model):
         :mail_failed: a "undelivered" report returned for the registration mail
         :privacy_statement: the privacy statement was accepted
     """
+
     class Meta:
         ordering = ['event', 'surname', 'firstname']
 
@@ -68,10 +70,11 @@ class Helper(models.Model):
 
     shifts = models.ManyToManyField(
         'Shift',
+        through=HelperShift
     )
 
     event = models.ForeignKey(
-        'Event',
+        Event,
         on_delete=models.CASCADE,
     )
 
@@ -238,6 +241,12 @@ class Helper(models.Model):
     def check_delete(self):
         if self.shifts.count() == 0 and not self.is_coordinator:
             self.delete()
+
+    def has_missed_shift(self, shift=None):
+        if shift is None:
+            return self.helpershift_set.filter(present=False, manual_presence=True).exists()
+        else:
+            return self.helpershift_set.filter(present=False, manual_presence=True, shift=shift).exists()
 
     @property
     def full_name(self):

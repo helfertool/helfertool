@@ -1,5 +1,3 @@
-function set_all() {
-    $('input[type=checkbox]').each(function() {
-        this.checked = true;
-    });
+function set_all(index) {
+    $('#set_present tbody tr td:nth-child(' + index + ') input').prop('checked', true)
 }
