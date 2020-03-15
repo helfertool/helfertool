@@ -73,9 +73,6 @@ def view_helper(request, event_url_name, helper_pk):
     edit_gifts = event.gifts and event.is_admin(request.user)
     edit_prerequisites = event.is_admin(request.user)
 
-    # mail resending
-    resend_form = HelperResendMailForm(helper=helper)
-
     # gift editing
     gifts_form = None
     if edit_gifts:
@@ -110,7 +107,6 @@ def view_helper(request, event_url_name, helper_pk):
                'helper': helper,
                'edit_badge': edit_badge,
                'gifts_form': gifts_form,
-               'resend_form': resend_form,
                'prerequisites_form': prerequisites_form}
 
     return render(request, 'registration/admin/view_helper.html', context)

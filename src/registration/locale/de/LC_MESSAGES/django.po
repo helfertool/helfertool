@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
 #: registration/export/excel.py:86 registration/models/helper.py:80
@@ -397,6 +398,8 @@ msgid ""
 "Registrations for public shifts must be validated by a link that is sent per "
 "mail"
 msgstr ""
+"Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
+"werden, der per E-Mail verschickt wird"
 
 #: registration/models/event.py:224
 msgid "Use badge creation"

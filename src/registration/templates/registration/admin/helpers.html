@@ -122,15 +122,14 @@
 
                                 <div class="progress mb-2">
                                     {% if shift.helpers_percent == 100 %}
-                                        <div class="progress-bar bg-success" role="progressbar"
+                                        <div class="progress-bar bg-success percent-{{ shift.helpers_percent_5percent }}" role="progressbar"
                                     {% elif shift.helpers_percent < 50 %}
-                                        <div class="progress-bar bg-danger" role="progressbar"
+                                        <div class="progress-bar bg-danger percent-{{ shift.helpers_percent_5percent }}" role="progressbar"
                                     {% else %}
-                                        <div class="progress-bar bg-warning" role="progressbar"
+                                        <div class="progress-bar bg-warning percent-{{ shift.helpers_percent_5percent }}" role="progressbar"
                                     {% endif %}
                                          aria-valuenow="{{ shift.helpers_percent }}"
-                                         aria-valuemin="0" aria-valuemax="100"
-                                         style="width: {{ shift.helpers_percent }}%;">
+                                         aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
                             {% endfor %}

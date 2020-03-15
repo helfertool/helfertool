@@ -9,6 +9,8 @@ from django.utils.translation import ugettext_lazy as _
 from collections import OrderedDict
 from copy import deepcopy
 
+import math
+
 
 class Shift(models.Model):
     """ A shift of one job.
@@ -135,6 +137,10 @@ class Shift(models.Model):
 
         num = self.num_helpers_archived()
         return int(round(float(num) / self.number * 100.0, 0))
+
+    def helpers_percent_5percent(self):
+        percent = self.helpers_percent()
+        return math.ceil(percent / 5)
 
     @property
     def shirt_sizes(self):

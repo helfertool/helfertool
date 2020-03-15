@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
 #: helfertool/settings.py:69
@@ -243,7 +244,7 @@ msgid "My account"
 msgstr "Mein Account"
 
 #: helfertool/templates/helfertool/admin.html:230
-#: helfertool/templates/helfertool/admin.html:233
+#: helfertool/templates/helfertool/admin.html:23
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
