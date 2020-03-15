@@ -7,11 +7,14 @@ from collections import OrderedDict
 from registration.decorators import archived_not_available
 from registration.views.utils import nopermission
 from registration.models import Event, Helper
+from ..forms.giftsettings import GiftSettingsForm
 
 from ..models import Gift, GiftSet
 
 from .utils import notactive
 
+import logging
+logger = logging.getLogger("helfertool")
 
 @login_required
 def list(request, event_url_name):
@@ -25,12 +28,27 @@ def list(request, event_url_name):
     if not event.gifts:
         return notactive(request)
 
+    # manage gift settings
+    form = GiftSettingsForm(request.POST or None,
+                            instance=event.giftsettings)
+
+    if form.is_valid():
+        gift = form.save()
+
+        log_msg = "gift settings changed"
+        logger.info(log_msg, extra={
+            'user': request.user,
+            'event': event,
+        })
+
+    # grab gifts and giftsets
     gifts = Gift.objects.filter(event=event)
     gift_sets = GiftSet.objects.filter(event=event)
 
     context = {'event': event,
                'gifts': gifts,
-               'gift_sets': gift_sets}
+               'gift_sets': gift_sets,
+               'form': form}
     return render(request, 'gifts/list.html', context)
 
 

@@ -1,11 +1,13 @@
 from django.core.validators import MinValueValidator
-from django.db import models
+from django.db import models, transaction
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from collections import OrderedDict
 
 from .set import GiftSet
 from .deservedgiftset import DeservedGiftSet
+from registration.models.helpershift import HelperShift
 
 
 class HelpersGifts(models.Model):
@@ -45,28 +47,47 @@ class HelpersGifts(models.Model):
         through=DeservedGiftSet,
     )
 
-    accomplished_shifts = models.ManyToManyField(
-        'registration.Shift',
-        blank=True,
-    )
-
+    @transaction.atomic
     def update(self):
-        # TODO: race conditions possible?
+        """
+        Update the consistency of the database:
+        - remove deservedgifts if the helper is not present
+        - add deservedgifts if the helper is present
+        - update shifts to present, if the end was in the past.
 
+        :return: None
+        """
+        # TODO: race conditions possible?
         cur_gifts = DeservedGiftSet.objects.filter(helper=self)
         shifts_delete = [(g.shift, g.gift_set) for g in cur_gifts.all()]
         shifts_new = []
 
-        for shift in self.helper.shifts.all():
+        for helpershift in self.helper.helpershift_set.all():
+            shift = helpershift.shift
+
+            if self.helper.event.gift_settings \
+                and self.helper.event.gift_settings.enable_automatic_availability\
+                and not helpershift.manual_presence\
+                and timezone.now() > shift.end:
+                # shift has ended in the past
+                helpershift.present = True
+                helpershift.manual_presence = False
+                helpershift.save()
+
             for gift in shift.gifts.all():
                 tmp = DeservedGiftSet.objects.filter(helper=self,
                                                      gift_set=gift,
                                                      shift=shift)
 
-                if tmp.exists():
+                if tmp.exists() and helpershift.present:
                     shifts_delete.remove((shift, gift))
-                else:
+                elif helpershift.present:
                     shifts_new.append((shift, gift))
+                else:
+                    # 1) the helper is new and not marked as present yet.
+                    # 2) the helper has previously earned the gift, but is now marked
+                    #    as absent -> delete this deserved gift
+                    pass
 
         for delete in shifts_delete:
             DeservedGiftSet.objects.filter(helper=self, shift=delete[0],
@@ -77,6 +98,11 @@ class HelpersGifts(models.Model):
                                            gift_set=new[1])
 
     def gifts_sum(self):
+        """
+        Returns the sum of all deserved gifts (gifts where the helper was marked
+        present.
+        :return dict {<giftname> : {'given': <int>, 'total': <int>, 'missing':<int>} }
+        """
         result = OrderedDict()
 
         deserved_gift_sets = DeservedGiftSet.objects.filter(helper=self)
@@ -94,18 +120,31 @@ class HelpersGifts(models.Model):
                 if deserved_gift.delivered:
                     result[name]['given'] += included_gift.count
 
+        for name in result.keys():
+            result[name]['missing'] = result[name]['total'] - result[name]['given']
+
         return result
 
     def get_present(self, shift):
-        return self.accomplished_shifts.filter(pk=shift.pk).exists()
+        helpershift = self.helper.helpershift_set.filter(shift=shift).values_list(named=True)
+        return helpershift.exists() and helpershift[0].present
 
     def set_present(self, shift, present):
-        current_present = self.get_present(shift)
+        """
+        TODO: Uptate deservedgiftset
+        :param shift:
+        :param present:
+        :return:
+        """
+        helpershift = HelperShift.objects.filter(helper=self.helper, shift=shift)
 
-        if current_present and not present:
-            self.accomplished_shifts.remove(shift)
-        elif not current_present and present:
-            self.accomplished_shifts.add(shift)
+        if present is None:
+            helpershift.update(manual_presence=False)
+            helpershift.update(present=timezone.now() > shift.end)
+            return
+
+        helpershift.update(manual_presence=True)
+        helpershift.update(present=present)
 
     def merge(self, other_gifts):
         # handle not returned deposit
@@ -147,9 +186,5 @@ class HelpersGifts(models.Model):
                 # keep object, update foreign key
                 gift.helper = self
                 gift.save()
-
-        # accomplished shifts
-        for shift in other_gifts.accomplished_shifts.all():
-            self.set_present(shift, True)
 
         self.save()

@@ -4,3 +4,4 @@ from .includedgift import IncludedGift
 
 from .helpersgifts import HelpersGifts
 from .deservedgiftset import DeservedGiftSet
+from .giftsettings import GiftSettings

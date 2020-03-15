@@ -57,7 +57,7 @@ coordinators. This is only important for the delete_helper view.
     </thead>
     <tbody>
         {% for helper in helpers|dictsort:"timestamp" %}
-            <tr>
+            <tr {% if helper.has_missed_shift %}class="bg-warning"{% endif %}>
                 <td class="datatables-icon"></td>
                 <td>{{ helper.firstname }}</td>
                 <td>{{ helper.surname }}</td>

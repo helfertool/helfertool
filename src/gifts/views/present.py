@@ -18,6 +18,9 @@ from ..forms import PresentForm
 def set_present(request, event_url_name, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
 
+    if helper and helper.helpersgift:
+        helper.helpersgift.update()
+
     # check permission
     if not event.is_admin(request.user):
         return nopermission(request)
