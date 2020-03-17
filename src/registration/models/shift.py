@@ -180,13 +180,13 @@ class Shift(models.Model):
 
         # maybe just the date is changed
         if new_date:
-            new_shift.begin = new_shift.begin.replace(year=new_date.year)
-            new_shift.begin = new_shift.begin.replace(month=new_date.month)
-            new_shift.begin = new_shift.begin.replace(day=new_date.day)
+            new_shift.begin = localtime(new_shift.begin).replace(year=new_date.year)
+            new_shift.begin = localtime(new_shift.begin).replace(month=new_date.month)
+            new_shift.begin = localtime(new_shift.begin).replace(day=new_date.day)
 
-            new_shift.end = new_shift.end.replace(year=new_date.year)
-            new_shift.end = new_shift.end.replace(month=new_date.month)
-            new_shift.end = new_shift.end.replace(day=new_date.day)
+            new_shift.end = localtime(new_shift.end).replace(year=new_date.year)
+            new_shift.end = localtime(new_shift.end).replace(month=new_date.month)
+            new_shift.end = localtime(new_shift.end).replace(day=new_date.day)
 
         # now save that
         new_shift.save()
