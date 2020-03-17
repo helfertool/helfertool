@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from collections import OrderedDict
 from copy import deepcopy
+from datetime import datetime
 
 import math
 
@@ -180,13 +181,21 @@ class Shift(models.Model):
 
         # maybe just the date is changed
         if new_date:
-            new_shift.begin = new_shift.begin.replace(year=new_date.year)
-            new_shift.begin = new_shift.begin.replace(month=new_date.month)
-            new_shift.begin = new_shift.begin.replace(day=new_date.day)
+            old_begin_localtime = localtime(self.begin)
+            old_end_localtime = localtime(self.end)
 
-            new_shift.end = new_shift.end.replace(year=new_date.year)
-            new_shift.end = new_shift.end.replace(month=new_date.month)
-            new_shift.end = new_shift.end.replace(day=new_date.day)
+            # move date alone without time
+            diff_days = new_date - old_begin_localtime.date()
+
+            new_begin_date = old_begin_localtime.date() + diff_days
+            new_end_date = old_end_localtime.date() + diff_days
+
+            # set time separately (10 am should always be 10 am, also when a time change is between old and new date)
+            begin_time = old_begin_localtime.time()
+            end_time = old_end_localtime.time()
+
+            new_shift.begin = datetime.combine(new_begin_date, begin_time)
+            new_shift.end = datetime.combine(new_end_date, end_time)
 
         # now save that
         new_shift.save()
