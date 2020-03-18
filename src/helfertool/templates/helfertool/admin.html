@@ -104,13 +104,8 @@
                             </ul>
                         {% endif %}
                     </li>
-                    
-                    {% if not event.archived %}
-                    
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'jobs_and_shifts_vacant' event.url_name %}">{% trans "Vacant Jobs and shifts" %}</a>
-                        </li>
 
+                    {% if not event.archived %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'search_helper' event.url_name %}">{% trans "Search helper" %}</a>
                         </li>
@@ -120,6 +115,10 @@
                                 <a class="nav-link" href="{% url 'duplicates' event.url_name %}">{% trans "Duplicates" %}</a>
                             </li>
                         {% endif %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'vacant_shifts' event.url_name %}">{% trans "Vacant shifts" %}</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'coordinators' event.url_name %}">{% trans "All coordinators" %}</a>
