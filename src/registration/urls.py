@@ -107,6 +107,11 @@ urlpatterns = [
         views.duplicate_job_day,
         name='duplicate_job_day'),
 
+    # vacant
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/vacant/$',
+        views.vacant_shifts,
+        name='jobs_and_shifts_vacant'),
+
     # shifts
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
         '(?P<shift_pk>[0-9]+)/$',
