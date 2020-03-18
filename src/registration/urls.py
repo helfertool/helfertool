@@ -207,6 +207,11 @@ urlpatterns = [
         views.export,
         name='export_job_date'),
 
+    # vacant shifts
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/vacant/$',
+        views.vacant_shifts,
+        name='vacant_shifts'),
+
     # summaries
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/coordinators/$',
         views.coordinators,

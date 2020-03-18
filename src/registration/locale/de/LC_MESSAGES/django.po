@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-01 14:20+0100\n"
-"PO-Revision-Date: 2020-03-01 14:24+0100\n"
+"POT-Creation-Date: 2020-03-18 20:37+0100\n"
+"PO-Revision-Date: 2020-03-18 20:40+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -80,6 +80,7 @@ msgstr "Koordinatoren"
 #: registration/templates/registration/admin/delete_coordinator.html:15
 #: registration/templates/registration/admin/delete_helper.html:15
 #: registration/templates/registration/admin/jobs_and_shifts.html:73
+#: registration/templates/registration/admin/vacant_shifts.html:27
 #: registration/templates/registration/deregister.html:17
 #: registration/templates/registration/helper_data.html:6
 msgid "Name"
@@ -495,42 +496,42 @@ msgstr "Reihenfolge, höchste Nummer oben"
 msgid "Usage"
 msgstr "Verwendung"
 
-#: registration/models/shift.py:35
+#: registration/models/shift.py:38
 msgid "Name (optional)"
 msgstr "Name (optional)"
 
-#: registration/models/shift.py:41
+#: registration/models/shift.py:44
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:71
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models/shift.py:45
+#: registration/models/shift.py:48
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:72
 msgid "End"
 msgstr "Ende"
 
-#: registration/models/shift.py:50
+#: registration/models/shift.py:53
 #: registration/templates/registration/admin/jobs_and_shifts.html:74
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models/shift.py:56
+#: registration/models/shift.py:59
 msgid "The shift is blocked and displayed as full."
 msgstr "Diese Schicht ist gesperrt und wird als voll angezeigt."
 
-#: registration/models/shift.py:61
+#: registration/models/shift.py:64
 msgid "The shift is not visible."
 msgstr "Diese Schicht ist nicht sichtbar."
 
-#: registration/models/shift.py:66
+#: registration/models/shift.py:69
 #: registration/templates/registration/admin/jobs_and_shifts.html:76
 #: registration/templates/registration/admin/view_helper.html:94
 msgid "Gifts"
 msgstr "Geschenke"
 
-#: registration/models/shift.py:72
+#: registration/models/shift.py:75
 msgid "Number of registered helpers for archived event"
 msgstr "Anzahl der angemeldeten Helfer für archivierte Veranstaltung"
 
@@ -1006,6 +1007,7 @@ msgid "Duplicate one day"
 msgstr "Einen Tag der Aufgabe duplizieren"
 
 #: registration/templates/registration/admin/jobs_and_shifts.html:67
+#: registration/templates/registration/admin/vacant_shifts.html:8
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
 
@@ -1081,6 +1083,34 @@ msgstr "Ergebnis"
 #: registration/templates/registration/admin/search_helper.html:30
 msgid "Barcode"
 msgstr "Barcode"
+
+#: registration/templates/registration/admin/vacant_shifts.html:5
+msgid "Vacant shifts"
+msgstr "Unbesetzte Schichten"
+
+#: registration/templates/registration/admin/vacant_shifts.html:11
+msgid "Congratulations! No vacant shifts."
+msgstr "Glückwunsch! Keine unbesetzten Schichten."
+
+#: registration/templates/registration/admin/vacant_shifts.html:15
+msgid ""
+"The vacant shifts are grouped by day here, so it is easier to get an "
+"overview."
+msgstr ""
+"Die unbesetzten Schichten sind nach Tag gruppiert, um einen einfacheren "
+"Überblick zu bekommen."
+
+#: registration/templates/registration/admin/vacant_shifts.html:25
+msgid "Status"
+msgstr "Status"
+
+#: registration/templates/registration/admin/vacant_shifts.html:26
+msgid "Time"
+msgstr "Zeit"
+
+#: registration/templates/registration/admin/vacant_shifts.html:28
+msgid "Missing / Total"
+msgstr "Unbesetzt / Insgesamt"
 
 #: registration/templates/registration/admin/view_helper.html:7
 #: registration/templates/registration/registered.html:21
