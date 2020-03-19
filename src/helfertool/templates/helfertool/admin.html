@@ -76,12 +76,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'prerequisites:view_prerequisites' event.url_name %}">{% trans "Prerequisites" %}</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a>
                         </li>
+
+                        {% if event.prerequisites %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'prerequisites:view_prerequisites' event.url_name %}">{% trans "Prerequisites" %}</a>
+                        </li>
+                        {% endif %}
 
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'links' event.url_name %}">{% trans "Links" %}</a>

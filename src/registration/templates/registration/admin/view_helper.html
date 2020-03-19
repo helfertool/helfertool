@@ -97,16 +97,17 @@
             {% if prerequisites_form.has_items %}
                 <h3>{% trans "Prerequisites" %}</h3>
 
-                {% include "prerequisites/helper.html" with form=prerequisites_form helper=helper%}
+                {% include "prerequisites/helper.html" with form=prerequisites_form helper=helper %}
             {% endif %}
 
             {# gifts #}
             {% if gifts_form %}
                 <h3>{% trans "Gifts" %}</h3>
 
-                {% include "gifts/helper.html" with form=gifts_form helper=helper%}
+                {% include "gifts/helper.html" with form=gifts_form helper=helper %}
             {% endif %}
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary mt-2" />
         </form>
     {% endif %}
 

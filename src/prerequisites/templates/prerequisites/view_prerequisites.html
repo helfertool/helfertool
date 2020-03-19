@@ -4,23 +4,28 @@
 {% block admincontent %}
     <h2>{% trans "Prerequisites" %}</h2>
 
+    {% if not event.archived %}
     <p><a href="{% url 'prerequisites:new_prerequisite' event.url_name %}">
         {% icon "plus" %}
         {% trans "New prerequisite" %}
     </a></p>
+    {% endif %}
 
     {% if prerequisites %}
         <table class="table">
             <tr>
-                <th>{% trans "Name" %}</th>
-                <th></th>
+                <th width="30%">{% trans "Name" %}</th>
+                <th width="45%">{% trans "Description" %}</th>
+                <th width="25%"></th>
             </tr>
             {% for prerequisite in prerequisites %}
                 <tr>
                     <td>{{ prerequisite.name }}</td>
+                    <td>{{ prerequisite.description|truncatechars_html:60|safe }}</td>
                     <td>
+                        {% if not event.archived %}
                             <a href="{% url "prerequisites:view_helpers_prerequisite" event.url_name prerequisite.pk %}">
-                                {% icon "eye" %}
+                                {% icon "list" %}
                                 {% trans "Helpers" %}
                             </a>
 
@@ -37,7 +42,7 @@
                                 {% icon "trash-alt" %}
                                 {% trans "Delete" %}
                             </a>
-
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

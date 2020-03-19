@@ -5,14 +5,15 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django_bleach.models import BleachField
 
+from copy import deepcopy
+
 
 class Prerequisite(models.Model):
     """
     Prerequisite for one or many jobs
 
     Columns:
-        :name: Name (in all internal views)
-        :long_name: Name that is visible for helpers
+        :name: Name
         :description: Description
         :helper_can_set: Helpers can specify at registration whether they have this prerequisite
     """
@@ -28,13 +29,7 @@ class Prerequisite(models.Model):
     name = models.CharField(
         max_length=200,
         verbose_name=_("Name"),
-        help_text="The prerequisite's name in all internal views"
-    )
-
-    long_name = models.CharField(
-        max_length=200,
-        verbose_name=_("Registration name"),
-        help_text="Name displayed for helpers at registration"
+        help_text=_("The prerequisite's name in all internal views")
     )
 
     description = BleachField(
@@ -42,10 +37,49 @@ class Prerequisite(models.Model):
         verbose_name=_("Description"),
     )
 
-    helper_can_set = models.BooleanField(
-        default=False,
-        verbose_name=_("Helpers can specify this prerequisite at registration"),
-    )
+    def check_helper(self, helper):
+        """
+        Checks whether helper fulfills this prerequisite or not.
+
+        Returns bool.
+        """
+        if self.event != helper.event:
+            raise ValueError("Helper and requirement do not belong to same event")
+
+        try:
+            fulfilled = FulfilledPrerequisite.objects.get(prerequisite=self, helper=helper)
+            return fulfilled.has_prerequisite
+        except FulfilledPrerequisite.DoesNotExist:
+            return False
+    
+    def set_helper(self, helper, state):
+        """
+        Change state, whether helper fulfills this prerequisite or not.
+        """
+        if self.event != helper.event:
+            raise ValueError("Helper and requirement do not belong to same event")
+
+        try:
+            fulfilled = FulfilledPrerequisite.objects.get(prerequisite=self, helper=helper)
+            fulfilled.has_prerequisite = state
+            fulfilled.save()
+        except FulfilledPrerequisite.DoesNotExist:
+            FulfilledPrerequisite.objects.create(
+                prerequisite=self,
+                helper=helper,
+                has_prerequisite=state
+            )
+    
+    def duplicate(self, event):
+        new_prerequisite = deepcopy(self)
+        new_prerequisite.pk = None
+        new_prerequisite.event = event
+        new_prerequisite.save()
+
+        return new_prerequisite
+
+    def __str__(self):
+        return self.name
 
 
 class FulfilledPrerequisite(models.Model):
@@ -55,9 +89,6 @@ class FulfilledPrerequisite(models.Model):
     Columns:
         :has_prerequisite: The helper fulfils this prerequisite
     """
-
-    class Meta:
-        pass
 
     prerequisite = models.ForeignKey(
         'prerequisites.Prerequisite',
@@ -71,5 +102,8 @@ class FulfilledPrerequisite(models.Model):
 
     has_prerequisite = models.BooleanField(
         default=False,
-        verbose_name=_("Helper fulfils this prerequisite")
+        verbose_name=_("Helper fulfils this prerequisite"),
     )
+
+    def __str__(self):
+        return "{} - {}".format(self.prerequisite, self.helper)

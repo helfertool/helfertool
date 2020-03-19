@@ -1,20 +1,17 @@
-{% load i18n %}
-{% load bootstrap4 %}
-{% load prerequisites %}
+{% load i18n bootstrap4 icons prerequisites %}
 
 {# will be included by registration/admin/view_helper.html #}
 
-{#% bootstrap_form form %#}
+{% if form.has_unfilfilled %}
+    <p class="text-danger">
+        {% icon "times" %} {% trans "Helper does not fulfil all prerequisites (for now)." %}
+    </p>
+{% endif %}
 
 <div class="list-group">
     {% for field in form %}
-        <label for="id_{{ field.name }}"
-            {% if not field.value %}
-                class="list-group-item list-group-item-action list-group-item-warning"
-            {% else %}
-                class="list-group-item list-group-item-action"
-            {% endif %}>
-                {% bootstrap_field field form_group_class="" %}
-        </label>
+        <li class="list-group-item">
+            {% bootstrap_field field form_group_class="" %}
+        </li>
     {% endfor %}
 </div>

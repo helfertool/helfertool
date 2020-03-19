@@ -4,7 +4,7 @@ from .models import Prerequisite
 
 
 class PrerequisiteTranslationOptions(TranslationOptions):
-    fields = ('long_name', 'description', )
+    fields = ('name', 'description', )
 
 
 translator.register(Prerequisite, PrerequisiteTranslationOptions)

@@ -2,29 +2,28 @@
 {% load i18n bootstrap4 icons prerequisites staticfiles %}
 
 {% block admincontent %}
-    <h2>{% blocktrans with prerequisite=prerequisite.name %}Helpers that need {{ prerequisite }}{% endblocktrans %}  </h2>
+    <h2>{% trans "Helpers with prerequisite:" %} {{ prerequisite.name }}</h2>
+
+    {{ prerequisite.description|safe }}
 
     {% if helpers %}
         <table class="table">
             <thead>
                 <tr>
-                    <th class="nosort" data-priority="1"></th>
-                    <th data-priority="1">{% trans "First name" %}</th>
-                    <th data-priority="1">{% trans "Surname" %}</th>
-                    <th data-priority="3">{% trans "Comment" %}</th>
-                    <th data-priority="2">{% trans "Registration time" %}</th>
-                    <th data-priority="1">{% trans "Fulfilled" %}</th>
-                    <th class="nosort" data-priority="1"></th>
+                    <th>{% trans "First name" %}</th>
+                    <th>{% trans "Surname" %}</th>
+                    <th>{% trans "Registration time" %}</th>
+                    <th>{% trans "Fulfilled" %}</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             {% for helper in helpers|dictsort:"surname" %}
                 <tr>
-                    <td class="datatables-icon"></td>
                     <td>{{ helper.firstname }}</td>
                     <td>{{ helper.surname }}</td>
-                    <td>{{ helper.comment }}</td>
                     <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
+
                     {% helper_has_fulfilled_prerequisite helper prerequisite as fulfilled %}
                     <td data-order="{{ fulfilled }}" >
                         {% if fulfilled %}
@@ -38,18 +37,12 @@
                             {% icon "eye" %}
                             {% trans "View" %}
                         </a>
-
-                        {% if helper.has_to_validate %}
-                        <br/><span class="text-danger">{% icon "times" %} {% trans "Not validated" %}</span>
-                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p class="text-muted">{% trans "There are no prerequisites." %}</p>
+        <p class="text-muted">{% trans "There are helpers registered that need this prerequisite." %}</p>
     {% endif %}
-
-    <script src="{% static "helfertool/js/helpers_table.js" %}"></script>
 {% endblock %}
