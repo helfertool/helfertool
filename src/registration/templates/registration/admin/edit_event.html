@@ -101,6 +101,21 @@
         </div>
     {% endif %}
 
+    {# move #}
+    {% if event %}
+        <h3>{% trans "Move event" %}</h3>
+        <div class="alert alert-info" role="alert">
+            <b>{% trans "You can move this event." %}</b>
+
+            <br/>
+
+            <a href="{% url 'move_event' event.url_name %}" class="btn btn-outline-primary mt-3" role="button">
+                {% trans "Move event" %}
+            </a>
+        </div>
+    {% endif %}
+
+
     {# archive #}
     {% if event and not event.archived %}
         <h3>{% trans "Archive event" %}</h3>

@@ -1,6 +1,8 @@
 from django import forms
 from django.conf import settings
 from django.core.files.base import ContentFile
+from django.utils.translation import ugettext_lazy as _
+from django.utils.timezone import localtime
 
 from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
@@ -8,6 +10,7 @@ from copy import deepcopy
 import os
 
 from toolsettings.forms import UserSelectWidget
+from datetime import datetime
 
 from .fields import DatePicker
 from ..models import Event
@@ -154,4 +157,48 @@ class EventDuplicateForm(EventForm):
         if activate_badges:
             self.other_event.badge_settings.duplicate(self.instance)
             self.instance.badges = True
+            self.instance.save()
+
+        
+class EventMoveForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = []
+    new_date = forms.DateField(
+        label=_("New date"),
+        widget=DatePicker,
+    )
+
+    def move(self):
+        
+        cleaned_data = super().clean()
+        self.new_date = cleaned_data.get('new_date')
+        if (self.instance.date != self.new_date):
+            diff = self.new_date - self.instance.date
+            # change date of every shift
+            for job in self.instance.job_set.all():
+                for shift in job.shift_set.all():
+                    
+                    old_begin_localtime = localtime(shift.begin)
+                    old_end_localtime = localtime(shift.end)
+                    
+                    
+                    new_begin_date = old_begin_localtime.date() + diff
+                    new_end_date = old_end_localtime.date() + diff
+
+                    begin_time = old_begin_localtime.time()
+                    end_time = old_end_localtime.time()
+
+                    shift.begin = datetime.combine(new_begin_date, begin_time)
+                    shift.end = datetime.combine(new_end_date, end_time)
+                    
+                    shift.save()
+
+            # change event date
+            self.instance.date = self.new_date
+
+             # change 'changes_until' if set
+            if (self.instance.changes_until):
+                self.instance.changes_until += diff
+
             self.instance.save()

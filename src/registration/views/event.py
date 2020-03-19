@@ -13,7 +13,7 @@ from account.templatetags.permissions import has_addevent_group
 from .utils import is_admin, nopermission
 
 from ..decorators import archived_not_available
-from ..forms import EventForm, EventDeleteForm, EventArchiveForm, EventDuplicateForm
+from ..forms import EventForm, EventDeleteForm, EventArchiveForm, EventDuplicateForm, EventMoveForm
 from ..models import Event
 
 
@@ -170,3 +170,37 @@ def duplicate_event(request, event_url_name):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/duplicate_event.html', context)
+
+
+@login_required
+@archived_not_available
+def move_event(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not event.is_admin(request.user):
+        return nopermission(request)
+
+    # form
+    form = EventMoveForm(request.POST or None, instance=event)
+
+    if form.is_valid():
+        form.move()
+
+        logger.info("event moved", extra={
+            'user': request.user,
+            'event': event,
+            'new_date': form.new_date,
+        })
+        
+        messages.success(request, _("Event was moved: %(event)s") %
+                             {'event': event.name})
+
+        return HttpResponseRedirect(reverse('edit_event',
+                                            args=[event_url_name, ]))
+
+    # render page
+    context = {'event': event,
+               'form': form}
+    return render(request, 'registration/admin/move_event.html', context)
+

@@ -76,6 +76,10 @@ urlpatterns = [
         views.duplicate_event,
         name='duplicate_event'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/move/$',
+        views.move_event,
+        name='move_event'),
+
     # jobs
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/$',
         views.jobs_and_shifts,

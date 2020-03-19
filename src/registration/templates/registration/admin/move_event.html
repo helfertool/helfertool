@@ -1,0 +1,46 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Move event" %}</h2>
+
+    <div class="alert alert-info" role="alert">
+        {% trans "The following dates <b>will be changed</b>:" %}
+        <ul>
+            <li>{% trans "Event date" %}</li>
+            <li>{% trans "Deregistration and changes possible until date (<i>if set</i>)" %}</li>
+            <li>{% trans "Starting date of every shift" %}</li>
+            <li>{% trans "Ending date of every shift" %}</li>
+        </ul>
+
+        {% trans "The following things will <b>remain unchanged</b>:" %}
+        <ul>
+            <li>{% trans "All settings (jobs, shifts, texts, etc.)" %}</li>
+            <li>{% trans "All registered people (helpers, coordinators, etc.)" %}</li>
+            <li>{% trans "Sign up date of helpers" %}</li>
+        </ul>
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table class="table">
+            <tr>
+                <th>{% trans "Event" %}</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "URL" %}</th>
+                <td>{{ event.url_name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <td>{{ event.date }}</td>
+            </tr>
+        </table>
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Move" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}
