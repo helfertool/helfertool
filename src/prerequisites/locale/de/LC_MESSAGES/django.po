@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-15 13:51+0100\n"
+"POT-Creation-Date: 2020-03-19 19:44+0100\n"
 "PO-Revision-Date: 2020-03-15 14:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,25 +18,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: prerequisites/models.py:21
+#: prerequisites/models.py:30
 #: prerequisites/templates/prerequisites/view_prerequisites.html:15
 msgid "Name"
 msgstr "Name"
 
-#: prerequisites/models.py:27
+#: prerequisites/models.py:36
 msgid "Registration name"
 msgstr "Name bei Anmeldung"
 
-#: prerequisites/models.py:33
+#: prerequisites/models.py:42
 #: prerequisites/templates/prerequisites/delete_prerequisite.html:17
 msgid "Description"
 msgstr "Beschreibung"
 
-#: prerequisites/models.py:38
+#: prerequisites/models.py:47
 msgid "Helpers can specify this prerequisite at registration"
 msgstr "Helfer können diese Voraussetzung bei der Registrierung angeben"
 
-#: prerequisites/models.py:59
+#: prerequisites/models.py:74
 msgid "Helper fulfils this prerequisite"
 msgstr "Helfer erfüllt diese Voraussetzung"
 
@@ -116,7 +116,7 @@ msgstr "Bearbeiten"
 msgid "Delete"
 msgstr "Löschen"
 
-#: prerequisites/views.py:80
+#: prerequisites/views.py:81
 #, python-format
 msgid "Prerequisite deleted: %(name)s"
 msgstr "Voraussetzung gelöscht: %(name)s"
