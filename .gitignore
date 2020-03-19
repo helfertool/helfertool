@@ -9,6 +9,9 @@ Session.vim
 # VS code
 .vscode
 
+# PyCharm
+.idea
+
 # python/django
 *.pyc
 *.pyo

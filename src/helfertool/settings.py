@@ -478,6 +478,7 @@ INSTALLED_APPS = (
     'account.apps.AccountConfig',
     'toolsettings.apps.ToolsettingsConfig',
     'helfertool',
+    'prerequisites.apps.PrerequisitesConfig'
 )
 
 # middleware

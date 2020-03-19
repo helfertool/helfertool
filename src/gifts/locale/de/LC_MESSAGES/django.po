@@ -7,22 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-18 20:37+0100\n"
-"PO-Revision-Date: 2019-02-03 11:53+0100\n"
-"Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"Language: de\n"
+"X-Generator: Poedit 2.3\n"
 
-#: gifts/forms/helpersgifts.py:23 gifts/templates/gifts/helper.html:46
+#: gifts/forms/helpersgifts.py:23 gifts/templates/gifts/helper.html:43
 msgid "Delivered"
 msgstr "Ausgegeben"
 
-#: gifts/forms/helpersgifts.py:30 gifts/templates/gifts/helper.html:35
+#: gifts/forms/helpersgifts.py:30 gifts/templates/gifts/helper.html:32
 msgid "Present"
 msgstr "Anwesend"
 
@@ -71,7 +70,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:72
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:69
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -100,20 +99,19 @@ msgstr "Beinhaltete Geschenke"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/helper.html:90
 #: gifts/templates/gifts/set_present.html:19
 msgid "Save"
 msgstr "Speichern"
 
-#: gifts/templates/gifts/helper.html:60
+#: gifts/templates/gifts/helper.html:57
 msgid "No gifts"
 msgstr "Keine Geschenke"
 
-#: gifts/templates/gifts/helper.html:73
+#: gifts/templates/gifts/helper.html:70
 msgid "Given"
 msgstr "Ausgegeben"
 
-#: gifts/templates/gifts/helper.html:74
+#: gifts/templates/gifts/helper.html:71
 msgid "Total"
 msgstr "Insgesamt"
 

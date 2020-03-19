@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
-from toolsettings.forms import UserSelectWidget
+from toolsettings.forms import UserSelectWidget, PrerequisiteSelectWidget
 
 from .fields import DatePicker
 from ..models import Job
@@ -22,6 +22,7 @@ class JobForm(forms.ModelForm):
                    'order', ]
         widgets = {
             'job_admins': UserSelectWidget,
+            'prerequisites': PrerequisiteSelectWidget,
         }
 
         # According to the documentation django-modeltranslations copies the
