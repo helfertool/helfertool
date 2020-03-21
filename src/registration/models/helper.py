@@ -17,6 +17,7 @@ import uuid
 from badges.models import Badge
 from gifts.models import HelpersGifts
 from mail.tracking import new_tracking_registration
+from prerequisites.models import Prerequisite
 
 from .event import Event
 from .job import Job
@@ -39,6 +40,7 @@ class Helper(models.Model):
         :validated: the validation link was clicked (if validation is enabled)
         :mail_failed: a "undelivered" report returned for the registration mail
         :privacy_statement: the privacy statement was accepted
+        :prerequisites: This helper's prerequisites
     """
     class Meta:
         ordering = ['event', 'surname', 'firstname']
@@ -139,6 +141,11 @@ class Helper(models.Model):
     privacy_statement = models.BooleanField(
         default=False,
         verbose_name=_("I agree with the data privacy statement."),
+    )
+
+    prerequisites = models.ManyToManyField(
+        Prerequisite,
+        through='prerequisites.FulfilledPrerequisite',
     )
 
     def __str__(self):

@@ -7,7 +7,7 @@ from ..models import HelpersGifts
 class HelpersGiftsForm(forms.ModelForm):
     class Meta:
         model = HelpersGifts
-        exclude = ['helper', 'deserved_gifts', ]
+        exclude = ['helper', 'deserved_gifts']
 
     def __init__(self, *args, **kwargs):
         super(HelpersGiftsForm, self).__init__(*args, **kwargs)

@@ -107,8 +107,12 @@ class EventDuplicateForm(EventForm):
         # prevent post_save hook from adding the needed objects
         activate_badges = self.instance.badges
         activate_gifts = self.instance.gifts
+        activate_inventory = self.instance.inventory
+        activate_prerequisites = self.instance.prerequisites
         self.instance.badges = False
         self.instance.gifts = False
+        self.instance.inventory = False
+        self.instance.prerequisites = False
 
         # copy logo
         if self.instance.logo:
@@ -145,13 +149,29 @@ class EventDuplicateForm(EventForm):
 
             self.instance.gifts = True
             self.instance.save()
+        
+        # prerequisites
+        prerequisite_mapping = {}
+        if activate_prerequisites:
+            for prerequisite in self.other_event.prerequisite_set.all():
+                new_prerequisite = prerequisite.duplicate(self.instance)
+                prerequisite_mapping[prerequisite] = new_prerequisite
+
+            self.instance.prerequisites = True
+            self.instance.save()
 
         # copy jobs (and shifts)
         for job in self.other_event.job_set.all():
-            job.duplicate(self.instance, gift_set_mapping)
+            job.duplicate(self.instance, gift_set_mapping, prerequisite_mapping)
 
         # badges
         if activate_badges:
             self.other_event.badge_settings.duplicate(self.instance)
             self.instance.badges = True
+            self.instance.save()
+
+        # inventory
+        if activate_inventory:
+            self.other_event.inventory_settings.duplicate(self.instance)
+            self.instance.inventory = True
             self.instance.save()

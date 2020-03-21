@@ -4,88 +4,79 @@
 
 {# will be included by registration/admin/view_helper.html #}
 
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+<div class="row">
+    <div class="col-xs-12 col-lg-5">
+        {% bootstrap_field form.deposit %}
+        {% bootstrap_field form.deposit_returned %}
 
-    <div class="row">
-        <div class="col-xs-12 col-lg-5">
-            {% bootstrap_field form.deposit %}
-            {% bootstrap_field form.deposit_returned %}
-
-            {% if helper.event.ask_shirt %}
-                {% bootstrap_field form.got_shirt %}
-                {% bootstrap_field form.buy_shirt %}
-            {% endif %}
-        </div>
+        {% if helper.event.ask_shirt %}
+            {% bootstrap_field form.got_shirt %}
+            {% bootstrap_field form.buy_shirt %}
+        {% endif %}
     </div>
+</div>
 
-    <div class="row">
-        {% if helper.shifts.count != 0 %}
-            <div class="col-lg-12">
-                <table class="shifts">
-                    {% for shift in helper.shifts.all|dictsort:"begin" %}
-                        <tr>
-                            <th class="align-top">
-                                {{ shift }}
+<div class="row">
+    {% if helper.shifts.count != 0 %}
+        <div class="col-lg-12">
+            <table class="shifts">
+                {% for shift in helper.shifts.all|dictsort:"begin" %}
+                    <tr>
+                        <th class="align-top">
+                            {{ shift }}
+                            {{ form | lookup_deservedgiftset_present:shift.pk }}
+                            <label for="id_gifts-present_{{ shift.pk }}">
+                                {% trans "Present" %}
+                            </label>
+                        </th>
 
-                                <br /><br />
-
-                                {{ form | lookup_deservedgiftset_present:shift.pk }}
-                                <label for="id_present_{{ shift.pk }}">
-                                    {% trans "Present" %}
-                                </label>
-                            </th>
-
-                            {% gifts_for_shift form shift as deserved_gifts %}
-                            {% if deserved_gifts %}
-                                {% for deserved_gift in deserved_gifts %}
-                                    <td>
-                                        <div class="align-top">
-                                            {{ form | lookup_deservedgiftset_delivered:deserved_gift.pk }}
-                                            <label for="id_delivered_{{ deserved_gift.pk }}">
-                                                {% trans "Delivered" %}
-                                            </label>
-                                        </div>
-
-                                        <ul>
-                                            {{ gift_set }}
-                                            {% for gift in deserved_gift.gift_set.includedgift_set.all %}
-                                                <li>{{ gift.count }} {{ gift.gift.name }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </td>
-                                {% endfor %}
-                            {% else %}
+                        {% gifts_for_shift form shift as deserved_gifts %}
+                        {% if deserved_gifts %}
+                            {% for deserved_gift in deserved_gifts %}
                                 <td>
-                                    <span class="text-muted">{% trans "No gifts" %}</span>
+                                    <div class="align-top">
+                                        {{ form | lookup_deservedgiftset_delivered:deserved_gift.pk }}
+                                        <label for="id_gifts-delivered_{{ deserved_gift.pk }}">
+                                            {% trans "Delivered" %}
+                                        </label>
+                                    </div>
+
+                                    <ul>
+                                        {{ gift_set }}
+                                        {% for gift in deserved_gift.gift_set.includedgift_set.all %}
+                                            <li>{{ gift.count }} {{ gift.gift.name }}</li>
+                                        {% endfor %}
+                                    </ul>
                                 </td>
-                            {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <td>
+                                <span class="text-muted">{% trans "No gifts" %}</span>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        {% if helper.gifts.gifts_sum.items %}
+            <div class="col-xs-12 col-lg-5">
+                <table class="table">
+                    <tr>
+                        <th>{% trans "Gift" %}</th>
+                        <th>{% trans "Given" %}</th>
+                        <th>{% trans "Total" %}</th>
+                    </tr>
+
+                    {% for name,numbers in helper.gifts.gifts_sum.items %}
+                        <tr>
+                            <td>{{ name }}</td>
+                            <td>{{ numbers.given }}</td>
+                            <td>{{ numbers.total }}</td>
                         </tr>
                     {% endfor %}
                 </table>
             </div>
-
-            {% if helper.gifts.gifts_sum.items %}
-                <div class="col-xs-12 col-lg-5">
-                    <table class="table">
-                        <tr>
-                            <th>{% trans "Gift" %}</th>
-                            <th>{% trans "Given" %}</th>
-                            <th>{% trans "Total" %}</th>
-                        </tr>
-
-                        {% for name,numbers in helper.gifts.gifts_sum.items %}
-                            <tr>
-                                <td>{{ name }}</td>
-                                <td>{{ numbers.given }}</td>
-                                <td>{{ numbers.total }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            {% endif %}
         {% endif %}
-    </div>
-
-    <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
-</form>
+    {% endif %}
+</div>
