@@ -1,5 +1,4 @@
 from django import template
-from prerequisites.models import FulfilledPrerequisite
 
 register = template.Library()
 

@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 
 from registration.decorators import archived_not_available
-from registration.models import Event, Helper
+from registration.models import Event
 from registration.views.utils import nopermission
 
 from .utils import notactive
@@ -75,7 +75,7 @@ def view_prerequisites(request, event_url_name):
     # check permission
     if not event.is_admin(request.user):
         return nopermission(request)
-    
+
     prerequisites = Prerequisite.objects.filter(event=event)
 
     context = {'event': event,

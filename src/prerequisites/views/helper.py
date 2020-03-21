@@ -1,8 +1,6 @@
 from django.http import Http404
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import render, get_object_or_404
 
 from registration.decorators import archived_not_available
 from registration.models import Event, Helper
@@ -10,7 +8,6 @@ from registration.views.utils import nopermission
 
 from .utils import notactive
 
-from ..forms import PrerequisiteForm, PrerequisiteDeleteForm
 from ..models import Prerequisite
 
 

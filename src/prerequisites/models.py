@@ -1,8 +1,5 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django_bleach.models import BleachField
 
 from copy import deepcopy
@@ -18,9 +15,6 @@ class Prerequisite(models.Model):
         :helper_can_set: Helpers can specify at registration whether they have this prerequisite
     """
 
-    class Meta:
-        unique_together = ('event', 'name', )
-
     event = models.ForeignKey(
         'registration.Event',
         on_delete=models.CASCADE,
@@ -29,7 +23,6 @@ class Prerequisite(models.Model):
     name = models.CharField(
         max_length=200,
         verbose_name=_("Name"),
-        help_text=_("The prerequisite's name in all internal views")
     )
 
     description = BleachField(
@@ -51,7 +44,7 @@ class Prerequisite(models.Model):
             return fulfilled.has_prerequisite
         except FulfilledPrerequisite.DoesNotExist:
             return False
-    
+
     def set_helper(self, helper, state):
         """
         Change state, whether helper fulfills this prerequisite or not.
@@ -69,7 +62,7 @@ class Prerequisite(models.Model):
                 helper=helper,
                 has_prerequisite=state
             )
-    
+
     def duplicate(self, event):
         new_prerequisite = deepcopy(self)
         new_prerequisite.pk = None

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 from ckeditor.widgets import CKEditorWidget
 
-from ..models import Prerequisite, FulfilledPrerequisite
+from ..models import Prerequisite
 
 
 class PrerequisiteForm(forms.ModelForm):
@@ -38,16 +38,6 @@ class PrerequisiteForm(forms.ModelForm):
             instance.save()
 
         return instance
-
-    def clean(self):
-        cleaned_data = super(PrerequisiteForm, self).clean()
-
-        # when object is newly created, check that name is unique
-        if self.instance.pk is None and \
-            Prerequisite.objects.filter(event=self.event, name=cleaned_data["name"]).exists():
-            raise forms.ValidationError(_("Prerequisite already exists."))
-
-        return cleaned_data
 
 
 class PrerequisiteDeleteForm(forms.ModelForm):

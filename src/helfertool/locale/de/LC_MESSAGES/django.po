@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-19 19:44+0100\n"
+"POT-Creation-Date: 2020-03-21 23:39+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -90,7 +90,7 @@ msgid "Administration"
 msgstr "Administration"
 
 #: helfertool/templates/helfertool/admin.html:64
-#: helfertool/templates/helfertool/admin.html:230
+#: helfertool/templates/helfertool/admin.html:232
 msgid "General"
 msgstr "Allgemein"
 
@@ -103,163 +103,163 @@ msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
 #: helfertool/templates/helfertool/admin.html:79
-msgid "Prerequisites"
-msgstr "Voraussetzungen"
-
-#: helfertool/templates/helfertool/admin.html:83
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: helfertool/templates/helfertool/admin.html:87
+#: helfertool/templates/helfertool/admin.html:84
+msgid "Prerequisites"
+msgstr "Voraussetzungen"
+
+#: helfertool/templates/helfertool/admin.html:89
 msgid "Links"
 msgstr "Links"
 
-#: helfertool/templates/helfertool/admin.html:92
+#: helfertool/templates/helfertool/admin.html:94
 msgid "Helpers"
 msgstr "Helfer"
 
-#: helfertool/templates/helfertool/admin.html:95
+#: helfertool/templates/helfertool/admin.html:97
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
-#: helfertool/templates/helfertool/admin.html:114
+#: helfertool/templates/helfertool/admin.html:116
 msgid "Search helper"
 msgstr "Helfer suchen"
 
-#: helfertool/templates/helfertool/admin.html:119
+#: helfertool/templates/helfertool/admin.html:121
 msgid "Duplicates"
 msgstr "Duplikate"
 
-#: helfertool/templates/helfertool/admin.html:124
+#: helfertool/templates/helfertool/admin.html:126
 msgid "Vacant shifts"
 msgstr "Unbesetzte Schichten"
 
-#: helfertool/templates/helfertool/admin.html:128
+#: helfertool/templates/helfertool/admin.html:130
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: helfertool/templates/helfertool/admin.html:133
+#: helfertool/templates/helfertool/admin.html:135
 msgid "Mail"
 msgstr "E-Mail"
 
-#: helfertool/templates/helfertool/admin.html:137
+#: helfertool/templates/helfertool/admin.html:139
 msgid "Send"
 msgstr "Senden"
 
-#: helfertool/templates/helfertool/admin.html:142
+#: helfertool/templates/helfertool/admin.html:144
 msgid "All mails"
 msgstr "Alle E-Mails"
 
-#: helfertool/templates/helfertool/admin.html:148
+#: helfertool/templates/helfertool/admin.html:150
 msgid "Statistics"
 msgstr "Statistik"
 
-#: helfertool/templates/helfertool/admin.html:152
+#: helfertool/templates/helfertool/admin.html:154
 msgid "Overview"
 msgstr "Übersicht"
 
-#: helfertool/templates/helfertool/admin.html:158
+#: helfertool/templates/helfertool/admin.html:160
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: helfertool/templates/helfertool/admin.html:166
+#: helfertool/templates/helfertool/admin.html:168
 msgid "Gifts"
 msgstr "Geschenke"
 
-#: helfertool/templates/helfertool/admin.html:169
-#: helfertool/templates/helfertool/admin.html:190
-#: helfertool/templates/helfertool/admin.html:211
-#: helfertool/templates/helfertool/admin.html:289
+#: helfertool/templates/helfertool/admin.html:171
+#: helfertool/templates/helfertool/admin.html:192
+#: helfertool/templates/helfertool/admin.html:213
+#: helfertool/templates/helfertool/admin.html:291
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: helfertool/templates/helfertool/admin.html:174
+#: helfertool/templates/helfertool/admin.html:176
 msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
-#: helfertool/templates/helfertool/admin.html:179
+#: helfertool/templates/helfertool/admin.html:181
 msgid "Missing T-shirts"
 msgstr "Fehlende T-Shirts"
 
-#: helfertool/templates/helfertool/admin.html:187
+#: helfertool/templates/helfertool/admin.html:189
 msgid "Badges"
 msgstr "Badges"
 
-#: helfertool/templates/helfertool/admin.html:195
+#: helfertool/templates/helfertool/admin.html:197
 msgid "Generate"
 msgstr "Generieren"
 
-#: helfertool/templates/helfertool/admin.html:200
+#: helfertool/templates/helfertool/admin.html:202
 msgid "Registration"
 msgstr "Registrierung"
 
-#: helfertool/templates/helfertool/admin.html:208
-#: helfertool/templates/helfertool/admin.html:244
+#: helfertool/templates/helfertool/admin.html:210
+#: helfertool/templates/helfertool/admin.html:246
 msgid "Inventory"
 msgstr "Inventar"
 
-#: helfertool/templates/helfertool/admin.html:215
+#: helfertool/templates/helfertool/admin.html:217
 msgctxt "Register item and badge"
 msgid "Register"
 msgstr "Eintragen"
 
-#: helfertool/templates/helfertool/admin.html:219
+#: helfertool/templates/helfertool/admin.html:221
 msgid "Take back"
 msgstr "Zurücknehmen"
 
-#: helfertool/templates/helfertool/admin.html:223
+#: helfertool/templates/helfertool/admin.html:225
 msgid "List"
 msgstr "Liste"
 
-#: helfertool/templates/helfertool/admin.html:233
+#: helfertool/templates/helfertool/admin.html:235
 msgid "My account"
 msgstr "Mein Account"
 
-#: helfertool/templates/helfertool/admin.html:238
+#: helfertool/templates/helfertool/admin.html:240
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: helfertool/templates/helfertool/admin.html:249
+#: helfertool/templates/helfertool/admin.html:251
 msgid "Support"
 msgstr "Support"
 
-#: helfertool/templates/helfertool/admin.html:254
+#: helfertool/templates/helfertool/admin.html:256
 msgid "User management"
 msgstr "Benutzerverwaltung"
 
-#: helfertool/templates/helfertool/admin.html:258
+#: helfertool/templates/helfertool/admin.html:260
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: helfertool/templates/helfertool/admin.html:264
+#: helfertool/templates/helfertool/admin.html:266
 msgid "All users"
 msgstr "Alle Nutzer"
 
-#: helfertool/templates/helfertool/admin.html:268
+#: helfertool/templates/helfertool/admin.html:270
 msgid "User agreements"
 msgstr "Nutzervereinbarungen"
 
-#: helfertool/templates/helfertool/admin.html:275
+#: helfertool/templates/helfertool/admin.html:277
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: helfertool/templates/helfertool/admin.html:278
+#: helfertool/templates/helfertool/admin.html:280
 msgid "Send news"
 msgstr "Newsletter versenden"
 
-#: helfertool/templates/helfertool/admin.html:282
+#: helfertool/templates/helfertool/admin.html:284
 msgid "Remove recipient"
 msgstr "Empfänger entfernen"
 
-#: helfertool/templates/helfertool/admin.html:293
+#: helfertool/templates/helfertool/admin.html:295
 msgid "Templates"
 msgstr "Templates"
 
-#: helfertool/templates/helfertool/admin.html:297
+#: helfertool/templates/helfertool/admin.html:299
 msgid "Check installation"
 msgstr "Installation überprüfen"
 
-#: helfertool/templates/helfertool/admin.html:302
+#: helfertool/templates/helfertool/admin.html:304
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 

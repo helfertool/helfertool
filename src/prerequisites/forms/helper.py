@@ -1,8 +1,5 @@
 from django import forms
-from django.conf import settings
-from django.utils.translation import ugettext as _
 
-from ..models import Prerequisite, FulfilledPrerequisite
 from ..utils import prerequisites_for_helper
 
 import logging
