@@ -146,6 +146,7 @@ class Helper(models.Model):
     prerequisites = models.ManyToManyField(
         Prerequisite,
         through='prerequisites.FulfilledPrerequisite',
+        blank=True,
     )
 
     def __str__(self):

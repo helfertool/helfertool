@@ -11,7 +11,7 @@ from badges.models import Badge
 class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
-        exclude = ['event', 'shifts', 'privacy_statement', 'mail_failed', 'has_prerequisites']
+        exclude = ['event', 'shifts', 'privacy_statement', 'mail_failed', 'prerequisites']
 
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')

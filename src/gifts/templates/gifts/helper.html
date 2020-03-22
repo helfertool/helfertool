@@ -24,6 +24,9 @@
                     <tr>
                         <th class="align-top">
                             {{ shift }}
+
+                            <br /><br />
+
                             {{ form | lookup_deservedgiftset_present:shift.pk }}
                             <label for="id_gifts-present_{{ shift.pk }}">
                                 {% trans "Present" %}
