@@ -7,31 +7,31 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2020-03-22 12:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "X-Generator: Poedit 2.2.4\n"
 
-#: gifts/forms/helpersgifts.py:23 gifts/templates/gifts/helper.html:85
+#: gifts/forms/helpersgifts.py:23 gifts/templates/gifts/helper.html:82
 msgid "Delivered"
 msgstr "Ausgegeben"
 
-#: gifts/forms/helpersgifts.py:27 gifts/templates/gifts/helper.html:49
+#: gifts/forms/helpersgifts.py:27 gifts/templates/gifts/helper.html:46
 #: gifts/templates/gifts/set_present.html:21
 msgid "Auto"
 msgstr "Auto"
 
-#: gifts/forms/helpersgifts.py:28 gifts/templates/gifts/helper.html:61
+#: gifts/forms/helpersgifts.py:28 gifts/templates/gifts/helper.html:58
 #: gifts/templates/gifts/set_present.html:23
 msgid "Present"
 msgstr "Anwesend"
 
-#: gifts/forms/helpersgifts.py:29 gifts/templates/gifts/helper.html:72
+#: gifts/forms/helpersgifts.py:29 gifts/templates/gifts/helper.html:69
 #: gifts/templates/gifts/set_present.html:24
 msgid "Absent"
 msgstr "Abwesend"
@@ -92,7 +92,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:111
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:108
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -121,28 +121,27 @@ msgstr "Beinhaltete Geschenke"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/helper.html:145 gifts/templates/gifts/list.html:13
-#: gifts/templates/gifts/set_present.html:55
+#: gifts/templates/gifts/list.html:13 gifts/templates/gifts/set_present.html:55
 msgid "Save"
 msgstr "Speichern"
 
-#: gifts/templates/gifts/helper.html:99
+#: gifts/templates/gifts/helper.html:96
 msgid "No gifts"
 msgstr "Keine Geschenke"
 
-#: gifts/templates/gifts/helper.html:112
+#: gifts/templates/gifts/helper.html:109
 msgid "Given"
 msgstr "Ausgegeben"
 
-#: gifts/templates/gifts/helper.html:113
+#: gifts/templates/gifts/helper.html:110
 msgid "Total"
 msgstr "Insgesamt"
 
-#: gifts/templates/gifts/helper.html:115
+#: gifts/templates/gifts/helper.html:112
 msgid "Pending"
 msgstr "Ausstehend"
 
-#: gifts/templates/gifts/helper.html:135
+#: gifts/templates/gifts/helper.html:132
 msgid "All Delivered"
 msgstr "Ausgegeben"
 
@@ -215,7 +214,7 @@ msgstr "Alle auf anwesend setzen"
 msgid "Gift deleted: %(name)s"
 msgstr "Geschenk gelöscht: %(name)s"
 
-#: gifts/views/present.py:35
+#: gifts/views/present.py:37
 msgid "Attendance was saved"
 msgstr "Anwesenheit wurde gespeichert"
 

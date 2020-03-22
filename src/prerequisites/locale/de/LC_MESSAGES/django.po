@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-21 23:39+0100\n"
+"POT-Creation-Date: 2020-03-22 12:59+0100\n"
 "PO-Revision-Date: 2020-03-21 23:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,22 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: prerequisites/forms/prerequisite.py:48
-msgid "Prerequisite already exists."
-msgstr "Voraussetzung existiert bereits."
-
-#: prerequisites/models.py:31
+#: prerequisites/models.py:25
 #: prerequisites/templates/prerequisites/view_prerequisites.html:17
 msgid "Name"
 msgstr "Name"
 
-#: prerequisites/models.py:36
+#: prerequisites/models.py:30
 #: prerequisites/templates/prerequisites/delete_prerequisite.html:17
 #: prerequisites/templates/prerequisites/view_prerequisites.html:18
 msgid "Description"
 msgstr "Beschreibung"
 
-#: prerequisites/models.py:104
+#: prerequisites/models.py:98
 msgid "Helper fulfils this prerequisite"
 msgstr "Helfer erfüllt diese Voraussetzung"
 
@@ -98,7 +94,8 @@ msgstr "Anzeigen"
 
 #: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:46
 msgid "There are no helpers registered that need this prerequisite."
-msgstr "Es sind keine Helfer angemeldet, die diese Voraussetzung erfüllen müssen."
+msgstr ""
+"Es sind keine Helfer angemeldet, die diese Voraussetzung erfüllen müssen."
 
 #: prerequisites/templates/prerequisites/view_prerequisites.html:29
 msgid "Helpers"
@@ -120,6 +117,9 @@ msgstr "Es gibt keine Voraussetzungen."
 #, python-format
 msgid "Prerequisite deleted: %(name)s"
 msgstr "Voraussetzung gelöscht: %(name)s"
+
+#~ msgid "Prerequisite already exists."
+#~ msgstr "Voraussetzung existiert bereits."
 
 #~ msgid "Registration name"
 #~ msgstr "Name bei Anmeldung"
