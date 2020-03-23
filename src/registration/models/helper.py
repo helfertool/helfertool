@@ -21,6 +21,7 @@ from prerequisites.models import Prerequisite
 
 from .event import Event
 from .job import Job
+from .helpershift import HelperShift
 
 
 class Helper(models.Model):
@@ -70,6 +71,7 @@ class Helper(models.Model):
 
     shifts = models.ManyToManyField(
         'Shift',
+        through=HelperShift,
     )
 
     event = models.ForeignKey(
@@ -124,6 +126,7 @@ class Helper(models.Model):
 
     timestamp = models.DateTimeField(
         auto_now_add=True,
+        verbose_name=_("Registration time for the helper")
     )
 
     validated = models.BooleanField(
