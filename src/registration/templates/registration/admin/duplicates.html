@@ -12,7 +12,14 @@
         <h3>{{ mail }}</h3>
         <ul>
             {% for helper in list %}
-                <li><a href="{% url "view_helper" event.url_name helper.pk %}">{{ helper.full_name }}</a></li>
+                <li>
+                    <a href="{% url "view_helper" event.url_name helper.pk %}">{{ helper.full_name }}</a>
+                    {% if helper.internal_comment %}
+                        <div class="text-secondary">
+                            {{ helper.internal_comment | linebreaksbr }}
+                        </div>
+                    {% endif %}
+                </li>
             {% endfor %}
         </ul>
 

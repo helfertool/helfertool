@@ -19,6 +19,12 @@
                 <th>{% trans "Mail" %}</th>
                 <td>{{ helper.email }}</td>
             </tr>
+            {% if helper.internal_comment %}
+            <tr>
+                <th>{% trans "Comment" %}</th>
+                <td>{{ helper.internal_comment }}</td>
+            </tr>
+            {% endif %}
             <tr>
                 <th>{% trans "Shifts" %}</th>
                 <td>

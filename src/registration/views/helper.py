@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
+from ..forms.helper import HelperCommentForm
 
 from ..models import Event, Job, Shift
 from ..forms import HelperForm, HelperDeleteForm, \
@@ -76,6 +77,13 @@ def view_helper(request, event_url_name, helper_pk):
     # we have multiple forms. all of them need to be valid in order to save them
     forms_valid = True
 
+    # internal comment
+    helper_form = HelperCommentForm(request.POST or None,
+                                    instance=helper)
+    if not helper_form.is_valid():
+        forms_valid = False
+
+
     # gift editing
     gifts_form = None
     if edit_gifts:
@@ -97,14 +105,17 @@ def view_helper(request, event_url_name, helper_pk):
         
         if not prerequisites_form.is_valid():
             forms_valid = False
-    
+
     # the forms are valid and we have at least one form -> save and redirect
-    if forms_valid and (gifts_form or prerequisites_form):
+    if forms_valid and (gifts_form or prerequisites_form or helper_form):
         if gifts_form and gifts_form.is_valid():
             gifts_form.save()
 
         if prerequisites_form and prerequisites_form.is_valid():
             prerequisites_form.save(request)
+
+        if helper_form and helper_form.is_valid():
+            helper_form.save()
 
         messages.success(request, _("Changes were saved."))
         return redirect('view_helper', event_url_name=event.url_name, helper_pk=helper.pk)
@@ -114,8 +125,9 @@ def view_helper(request, event_url_name, helper_pk):
                'helper': helper,
                'edit_badge': edit_badge,
                'gifts_form': gifts_form,
-               'prerequisites_form': prerequisites_form}
-
+               'prerequisites_form': prerequisites_form,
+               'helper_form': helper_form,
+    }
     return render(request, 'registration/admin/view_helper.html', context)
 
 
