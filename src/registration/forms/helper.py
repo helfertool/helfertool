@@ -263,4 +263,27 @@ class HelperSearchForm(forms.Form):
 
 
 class HelperResendMailForm(forms.Form):
-    pass
+    def __init__(self, *args, **kwargs):
+        self.helper = kwargs.pop('helper')
+
+        super(HelperResendMailForm, self).__init__(*args, **kwargs)
+
+    def send(self, request):
+        self.helper.send_mail(request, False)
+
+
+class HelperCommentForm(forms.ModelForm):
+    class Meta:
+        model = Helper
+        fields = ['internal_comment', ]
+
+    def __init__(self, *args, **kwargs):
+        super(HelperCommentForm, self).__init__(*args, **kwargs)
+
+        self.fields['internal_comment'].widget.attrs['rows'] = 3
+
+    def clean(self):
+        retval = super(HelperCommentForm, self).clean()
+        self.cleaned_data['internal_comment'] = self.cleaned_data['internal_comment'].strip()
+
+        return retval

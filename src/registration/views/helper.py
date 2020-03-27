@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
+from ..forms.helper import HelperCommentForm
 
 from ..models import Event, Job, Shift
 from ..forms import HelperForm, HelperDeleteForm, \
@@ -78,18 +79,25 @@ def view_helper(request, event_url_name, helper_pk):
                                       instance=helper.gifts)
 
         if gifts_form.is_valid():
-            gifts_form.save()
+            instance = gifts_form.save()
+            if helper.gifts != instance:
+                messages.success(request, _("Gifts were saved."))
 
-            messages.success(request, _("Gifts were saved."))
+            gifts_form = HelpersGiftsForm(None, instance=instance)
 
-            return HttpResponseRedirect(reverse('view_helper',
-                                                args=[event_url_name,
-                                                      helper.pk]))
+    helper_form = HelperCommentForm(request.POST or None,
+                                    instance=helper)
+    if helper_form.is_valid():
+        instance = helper_form.save()
+        helper_form = HelperCommentForm(None, instance=instance)
 
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
-               'gifts_form': gifts_form}
+               'gifts_form': gifts_form,
+               'resend_form': resend_form,
+               'helper_form': helper_form,
+    }
     return render(request, 'registration/admin/view_helper.html', context)
 
 

@@ -100,6 +100,11 @@ class Helper(models.Model):
         verbose_name=_("Comment"),
     )
 
+    internal_comment = models.TextField(
+        blank=True,
+        verbose_name=_("Internal comment"),
+    )
+
     shirt = models.CharField(
         max_length=20,
         choices=Event.SHIRT_CHOICES,

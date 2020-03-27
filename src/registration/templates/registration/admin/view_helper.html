@@ -32,6 +32,15 @@
         </p>
     {% endif %}
 
+    <h3>{% trans "Internal Comment" %}</h3>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_field helper_form.internal_comment %}
+        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+    </form>
+
     {# coordinated jobs #}
     {% if helper.is_coordinator %}
         <h3>{% trans "Coordinator" %}</h3>

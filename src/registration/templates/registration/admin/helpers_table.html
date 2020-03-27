@@ -27,28 +27,32 @@ coordinators. This is only important for the delete_helper view.
             </th>
 
             {% if event.ask_shirt %}
-            <th data-priority="5">
+            <th data-priority="6">
                 {% trans "T-shirt" %}
             </th>
             {% endif %}
 
             {% if event.ask_vegetarian %}
-            <th data-priority="6">
+            <th data-priority="7">
                 {% trans "Vegetarian" %}
             </th>
             {% endif %}
 
             {% if job.infection_instruction %}
-            <th data-priority="4">
+            <th data-priority="5">
                 {% trans "Food handling" %}
             </th>
             {% endif %}
 
-            <th data-priority="2">
+            <th data-priority="3">
                 {% trans "Comment" %}
             </th>
 
-            <th data-priority="3">
+            <th data-priority="2">
+                {% trans "Internal Comment" %}
+            </th>
+
+            <th data-priority="4">
                 {% trans "Registration time" %}
             </th>
 
@@ -71,6 +75,7 @@ coordinators. This is only important for the delete_helper view.
                 <td>{{ helper.get_infection_instruction_short }}</td>
                 {% endif %}
                 <td>{{ helper.comment }}</td>
+                <td>{{ helper.internal_comment | linebreaksbr }}</td>
                 <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
                 <td>
                     <a href="{% url 'view_helper' event.url_name helper.pk %}">

@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load bootstrap4 %}
 {% load gifts %}
+{% load icons %}
 
 {# will be included by registration/admin/view_helper.html #}
 
@@ -34,6 +35,12 @@
                                 <label for="id_present_{{ shift.pk }}">
                                     {% trans "Present" %}
                                 </label>
+                                <div class="float-right">
+                                    <a href="{% url 'helpers' event.url_name shift.job.pk %}">
+                                        {% icon "search" %}
+                                        {% trans "View" %}
+                                    </a>
+                                </div>
                             </th>
 
                             {% gifts_for_shift form shift as deserved_gifts %}
