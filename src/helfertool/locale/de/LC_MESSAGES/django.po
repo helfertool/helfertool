@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-01 14:20+0100\n"
+"POT-Creation-Date: 2020-03-27 15:07+0100\n"
 "PO-Revision-Date: 2020-02-23 13:29+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
@@ -284,15 +284,15 @@ msgstr "Login"
 msgid "Switch"
 msgstr "Switch"
 
-#: helfertool/templates/helfertool/base.html:112
+#: helfertool/templates/helfertool/base.html:119
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:114
+#: helfertool/templates/helfertool/base.html:121
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:116
+#: helfertool/templates/helfertool/base.html:123
 msgid "About this software"
 msgstr "Über diese Software"
 

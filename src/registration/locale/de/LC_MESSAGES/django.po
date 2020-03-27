@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-01 14:20+0100\n"
-"PO-Revision-Date: 2020-03-01 14:24+0100\n"
+"POT-Creation-Date: 2020-03-27 15:07+0100\n"
+"PO-Revision-Date: 2020-03-27 15:09+0100\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: German <hertle@fs.tum.de>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 
 #: registration/export/excel.py:86 registration/models/helper.py:80
 #: registration/templates/registration/admin/helpers_table.html:22
@@ -45,13 +45,13 @@ msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:96 registration/export/pdf.py:48
-#: registration/models/helper.py:107
+#: registration/models/helper.py:112
 #: registration/templates/registration/admin/helpers_table.html:31
 #: registration/templates/registration/helper_data.html:24
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:100 registration/models/helper.py:112
+#: registration/export/excel.py:100 registration/models/helper.py:117
 #: registration/templates/registration/admin/helpers_table.html:37
 #: registration/templates/registration/helper_data.html:38
 msgid "Vegetarian"
@@ -64,6 +64,7 @@ msgstr "Gesundheitsbelehrung"
 
 #: registration/export/excel.py:107 registration/export/pdf.py:50
 #: registration/models/helper.py:100
+#: registration/templates/registration/admin/delete_helper.html:24
 #: registration/templates/registration/admin/helpers_table.html:48
 #: registration/templates/registration/helper_data.html:44
 msgid "Comment"
@@ -120,7 +121,7 @@ msgid "New date"
 msgstr "Neues Datum"
 
 #: registration/forms/registration.py:65
-#: registration/templates/registration/admin/delete_helper.html:34
+#: registration/templates/registration/admin/delete_helper.html:40
 #: registration/templates/registration/admin/helpers.html:86
 msgid "Show"
 msgstr "Anzeigen"
@@ -448,20 +449,24 @@ msgstr "Gültig"
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models/helper.py:113
+#: registration/models/helper.py:105
+msgid "Internal comment"
+msgstr "Internes Kommentar"
+
+#: registration/models/helper.py:118
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models/helper.py:120
+#: registration/models/helper.py:125
 #: registration/templates/registration/helper_data.html:31
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: registration/models/helper.py:129
+#: registration/models/helper.py:134
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/helper.py:141
+#: registration/models/helper.py:146
 msgid "I agree with the data privacy statement."
 msgstr "Ich stimme der Datenschutzerklärung zu."
 
@@ -495,42 +500,42 @@ msgstr "Reihenfolge, höchste Nummer oben"
 msgid "Usage"
 msgstr "Verwendung"
 
-#: registration/models/shift.py:35
+#: registration/models/shift.py:37
 msgid "Name (optional)"
 msgstr "Name (optional)"
 
-#: registration/models/shift.py:41
+#: registration/models/shift.py:43
 #: registration/templates/registration/admin/delete_shift.html:17
 #: registration/templates/registration/admin/jobs_and_shifts.html:71
 msgid "Begin"
 msgstr "Anfang"
 
-#: registration/models/shift.py:45
+#: registration/models/shift.py:47
 #: registration/templates/registration/admin/delete_shift.html:21
 #: registration/templates/registration/admin/jobs_and_shifts.html:72
 msgid "End"
 msgstr "Ende"
 
-#: registration/models/shift.py:50
+#: registration/models/shift.py:52
 #: registration/templates/registration/admin/jobs_and_shifts.html:74
 msgid "Number of helpers"
 msgstr "Anzahl an Helfern"
 
-#: registration/models/shift.py:56
+#: registration/models/shift.py:58
 msgid "The shift is blocked and displayed as full."
 msgstr "Diese Schicht ist gesperrt und wird als voll angezeigt."
 
-#: registration/models/shift.py:61
+#: registration/models/shift.py:63
 msgid "The shift is not visible."
 msgstr "Diese Schicht ist nicht sichtbar."
 
-#: registration/models/shift.py:66
+#: registration/models/shift.py:68
 #: registration/templates/registration/admin/jobs_and_shifts.html:76
-#: registration/templates/registration/admin/view_helper.html:94
+#: registration/templates/registration/admin/view_helper.html:103
 msgid "Gifts"
 msgstr "Geschenke"
 
-#: registration/models/shift.py:72
+#: registration/models/shift.py:74
 msgid "Number of registered helpers for archived event"
 msgstr "Anzahl der angemeldeten Helfer für archivierte Veranstaltung"
 
@@ -558,7 +563,7 @@ msgid "Add helper"
 msgstr "Helfer hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:6
-#: registration/templates/registration/admin/view_helper.html:80
+#: registration/templates/registration/admin/view_helper.html:89
 msgid "Add as coordinator"
 msgstr "Als Koordinator hinzufügen"
 
@@ -575,7 +580,7 @@ msgstr ""
 "Koordinatoren hinzuzufügen."
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:6
-#: registration/templates/registration/admin/view_helper.html:75
+#: registration/templates/registration/admin/view_helper.html:84
 msgid "Add to shift"
 msgstr "Zu Schicht hinzufügen"
 
@@ -675,29 +680,29 @@ msgstr "Ja, ich will die komplette Veranstaltung löschen!"
 msgid "Delete helper"
 msgstr "Helfer löschen"
 
-#: registration/templates/registration/admin/delete_helper.html:23
+#: registration/templates/registration/admin/delete_helper.html:29
 #: registration/templates/registration/admin/delete_link.html:11
 #: registration/templates/registration/admin/links.html:12
-#: registration/templates/registration/admin/view_helper.html:55
+#: registration/templates/registration/admin/view_helper.html:64
 #: registration/templates/registration/registered.html:70
 msgid "Shifts"
 msgstr "Schichten"
 
-#: registration/templates/registration/admin/delete_helper.html:32
+#: registration/templates/registration/admin/delete_helper.html:38
 msgid "There are more shifts for this helper."
 msgstr "Dieser Helfer ist noch für weitere Schichten angemeldet."
 
-#: registration/templates/registration/admin/delete_helper.html:38
+#: registration/templates/registration/admin/delete_helper.html:44
 msgid "Remove the helper from all selected shifts?"
 msgstr "Den Helfer aus allen ausgewählten Schichten entfernen?"
 
-#: registration/templates/registration/admin/delete_helper.html:40
-#: registration/templates/registration/admin/helpers_table.html:86
+#: registration/templates/registration/admin/delete_helper.html:46
 #: registration/templates/registration/admin/helpers_table.html:91
+#: registration/templates/registration/admin/helpers_table.html:96
 #: registration/templates/registration/admin/jobs_and_shifts.html:56
 #: registration/templates/registration/admin/jobs_and_shifts.html:113
-#: registration/templates/registration/admin/view_helper.html:45
-#: registration/templates/registration/admin/view_helper.html:63
+#: registration/templates/registration/admin/view_helper.html:54
+#: registration/templates/registration/admin/view_helper.html:72
 msgid "Delete"
 msgstr "Löschen"
 
@@ -790,7 +795,7 @@ msgstr ""
 "Für diese Erkennung von mehrfach registrierten Helfern wird nur die E-Mail "
 "Adresse verwendet."
 
-#: registration/templates/registration/admin/duplicates.html:21
+#: registration/templates/registration/admin/duplicates.html:28
 #: registration/templates/registration/admin/merge.html:36
 msgid "Merge"
 msgstr "Zusammenfassen"
@@ -837,6 +842,7 @@ msgstr "Features"
 #: registration/templates/registration/admin/edit_link.html:13
 #: registration/templates/registration/admin/edit_shift.html:45
 #: registration/templates/registration/admin/sort_job.html:44
+#: registration/templates/registration/admin/view_helper.html:41
 #: registration/templates/registration/registered.html:36
 msgid "Save"
 msgstr "Speichern"
@@ -969,19 +975,24 @@ msgid "Set attendance for complete shift"
 msgstr "Anwesenheit für komplette Schicht setzen"
 
 #: registration/templates/registration/admin/helpers_table.html:52
+#: registration/templates/registration/admin/view_helper.html:35
+msgid "Internal Comment"
+msgstr "internes Kommentar"
+
+#: registration/templates/registration/admin/helpers_table.html:56
 #: registration/templates/registration/helper_data.html:49
 msgid "Registration time"
 msgstr "Anmeldezeit"
 
-#: registration/templates/registration/admin/helpers_table.html:78
+#: registration/templates/registration/admin/helpers_table.html:83
 msgid "View"
 msgstr "Anzeigen"
 
-#: registration/templates/registration/admin/helpers_table.html:98
+#: registration/templates/registration/admin/helpers_table.html:103
 msgid "Mail not delivered"
 msgstr "E-Mail nicht zugestellt"
 
-#: registration/templates/registration/admin/helpers_table.html:100
+#: registration/templates/registration/admin/helpers_table.html:105
 msgid "Not validated"
 msgstr "Nicht validiert"
 
@@ -1104,11 +1115,11 @@ msgstr "Details"
 msgid "Helper did not validate the mail address."
 msgstr "Helfer hat die E-Mail Adresse nicht validiert."
 
-#: registration/templates/registration/admin/view_helper.html:37
+#: registration/templates/registration/admin/view_helper.html:46
 msgid "Coordinator"
 msgstr "Koordinator"
 
-#: registration/templates/registration/admin/view_helper.html:87
+#: registration/templates/registration/admin/view_helper.html:96
 msgid "Edit badge"
 msgstr "Badge bearbeiten"
 
@@ -1379,36 +1390,36 @@ msgstr "Veranstaltung gelöscht: %(name)s"
 msgid "Event was duplicated: %(event)s"
 msgstr "Veranstaltung wurde kopiert: %(event)s"
 
-#: registration/views/helper.py:83
+#: registration/views/helper.py:84
 msgid "Gifts were saved."
 msgstr "Geschenke wurden gespeichert."
 
-#: registration/views/helper.py:119 registration/views/helper.py:155
+#: registration/views/helper.py:127 registration/views/helper.py:163
 msgid "Sending the mail failed, but the helper was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, der Helfer wurde dennoch gespeichert."
 
-#: registration/views/helper.py:188
+#: registration/views/helper.py:196
 msgid "Sending the mail failed, but the coordinator was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, aber der Koordinator wurde dennoch "
 "gespeichert."
 
-#: registration/views/helper.py:283
+#: registration/views/helper.py:291
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:336
+#: registration/views/helper.py:344
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
 
-#: registration/views/helper.py:405
+#: registration/views/helper.py:413
 msgid "Confirmation mail was sent"
 msgstr "Bestätigungsmail wurde gesendet"
 
-#: registration/views/helper.py:411
+#: registration/views/helper.py:419
 msgid "Sending the mail failed."
 msgstr "Senden der E-Mail fehlgeschlagen."
 
