@@ -95,9 +95,13 @@ coordinators. This is only important for the delete_helper view.
                     <br />
 
                     {% if helper.mail_failed %}
-                        <span class="text-danger">{% icon "times" %} {% trans "Mail not delivered" %}</span>
+                        <span class="text-danger">{% icon "times" %} {% trans "Mail not delivered" %}</span><br />
                     {% elif helper.has_to_validate %}
-                        <span class="text-warning">{% icon "times" %} {% trans "Not validated" %}</span>
+                        <span class="text-warning">{% icon "times" %} {% trans "Not validated" %}</span><br />
+                    {% endif %}
+
+                    {% if helper.has_missed_shift %}
+                        <span class="text-danger">{% icon "times" %} {% trans "Absent for some of the shifts" %}</span>
                     {% endif %}
                 </td>
             </tr>

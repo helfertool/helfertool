@@ -327,6 +327,12 @@ tr.child ul.dtr-details
     padding-left: 40px!important;
 }
 
+/* PresenceField widget: list inline */
+ul.presence li {
+    display: inline;
+    margin-right: 1em;
+}
+
 /* table with shirt sizes */
 .width-10em
 {

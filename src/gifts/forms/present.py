@@ -1,5 +1,6 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+
+from .fields import PresenceField
 
 
 class PresentForm(forms.Form):
@@ -8,17 +9,21 @@ class PresentForm(forms.Form):
 
         super(PresentForm, self).__init__(*args, **kwargs)
 
-        for helper in self.shift.helper_set.all():
-            id_str = "helper_{}".format(helper.pk)
+        automatic_availability = self.shift.job.event.giftsettings.enable_automatic_availability
 
-            self.fields[id_str] = forms.BooleanField(
-                label=_(helper.full_name),
-                required=False,
-                initial=helper.gifts.get_present(self.shift))
+        for helpershift in self.shift.helpershift_set.all():
+            # first, trigger the auto update
+            helpershift.helper.gifts.update()
+
+            # then add field
+            id_str = "helper_{}".format(helpershift.helper.pk)
+
+            self.fields[id_str] = PresenceField(
+                automatic_availability=automatic_availability,
+                helpershift=helpershift)
 
     def save(self):
-        for helper in self.shift.helper_set.all():
-            id_str = "helper_{}".format(helper.pk)
-
+        for helpershift in self.shift.helpershift_set.all():
+            id_str = "helper_{}".format(helpershift.helper.pk)
             present = self.cleaned_data.get(id_str)
-            helper.gifts.set_present(self.shift, present)
+            helpershift.helper.gifts.set_present(helpershift.shift, present)

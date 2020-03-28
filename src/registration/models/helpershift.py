@@ -43,5 +43,8 @@ class HelperShift(models.Model):
     manual_presence = models.BooleanField(
         default=False,
         editable=False,
-        help_text="presence was manually set"
+        verbose_name=_("Presence was manually set"),
     )
+
+    def __str__(self):
+        return "{} - {} - {}".format(self.helper.event, self.helper, self.shift)

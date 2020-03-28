@@ -1,23 +1,42 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 staticfiles %}
+{% load i18n bootstrap4 icons staticfiles %}
 
 {% block admincontent %}
     <h2>{% trans "Attendance for shift" %}</h2>
     <h3>{{ shift }}</h3>
 
-    <p>
-        <a class="btn btn-sm btn-outline-primary" onclick="set_all(); return false;" href="">
-            {% trans "Set all to attendant" %}
-        </a>
-    </p>
+    {% if form.visible_fields %}
+        <p>
+            <a class="btn btn-sm btn-outline-primary" onclick="set_all('auto'); return false;" href="">
+                {% icon "clock" %} {% trans "Set all to auto" %}
+            </a>
+            <a class="btn btn-sm btn-outline-primary" onclick="set_all('present'); return false;" href="">
+                {% icon "check" %} {% trans "Set all to present" %}
+            </a>
+            <a class="btn btn-sm btn-outline-primary" onclick="set_all('absent'); return false;" href="">
+                {% icon "times" %} {% trans "Set all to absent" %}
+            </a>
+        </p>
 
-    <form action="" method="post">
-        {% csrf_token %}
+        <form action="" method="post">
+            {% csrf_token %}
 
-        {% bootstrap_form form %}
+            <table class="table">
+                {% for field in form.visible_fields %}
+                <tr>
+                    <td width="50%">{{ field }}</td>
+                    <td width="50%">{{ field.label }}</td>
+                </tr>
+                {% endfor %}
+            </table>
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
-    </form>
+            {% bootstrap_form_errors form %}
 
-    <script src="{% static "helfertool/js/set_present.js" %}"></script>
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        </form>
+    {% else %}
+        <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
+    {% endif %}
+
+    <script src="{% static "helfertool/js/gifts.js" %}"></script>
 {% endblock %}
