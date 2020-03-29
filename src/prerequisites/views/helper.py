@@ -30,7 +30,7 @@ def view_helpers_prerequisite(request, event_url_name, prerequisite_pk):
         raise Http404
 
     # find all helpers that need this prerequisite
-    helpers = Helper.objects.filter(shifts__job__prerequisites=prerequisite)
+    helpers = Helper.objects.filter(shifts__job__prerequisites=prerequisite).distinct()
 
     # render page
     context = {'event': event,
