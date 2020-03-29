@@ -1,9 +1,11 @@
 ![Helfertool](https://raw.githubusercontent.com/helfertool/graphics/master/logo/logo_with_text.png)
 
 Helfertool is a Python3 and Django based tool that allows to manage the
-volunteers or staff for an event.
+volunteers or staff for an event. See <https://www.helfertool.org> for more information.
 
-See <https://www.helfertool.org> for more information.
+We have a Matrix room now to discuss development and administration of the Helfertool: [#helfertool:matrix.org](https://matrix.to/#/#helfertool:matrix.org)
+
+[![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#helfertool:matrix.org)
 
 # Install
 
