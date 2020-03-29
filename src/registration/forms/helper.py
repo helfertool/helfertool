@@ -1,7 +1,10 @@
 from django import forms
 from django.contrib import messages
+from django.contrib.postgres.search import TrigramSimilarity
 from django.core.exceptions import ValidationError
+from django.db import connection
 from django.db.models import Q
+from django.db.models.functions import Greatest
 from django.utils.translation import ugettext_lazy as _
 
 from ..models import Helper, Shift, Job
@@ -45,7 +48,7 @@ class HelperForm(forms.ModelForm):
         # 2) is public
         if self.job or self.public:
             self.fields.pop('validated')
-        
+
         # store old mail address for comparison
         self.old_email = self.instance.email
 
@@ -253,10 +256,26 @@ class HelperSearchForm(forms.Form):
     def get(self):
         p = self.cleaned_data.get('pattern')
 
-        data = self.event.helper_set.filter(Q(firstname__icontains=p) |
-                                            Q(surname__icontains=p) |
-                                            Q(email__icontains=p) |
-                                            Q(phone__icontains=p))
+        if connection.vendor == 'postgresql':
+            # proper databases support fuzzy-matching
+            # The similarity threshold of 0.3 was selected based on a name database of
+            # ~4000 western european names and the gut feel when a good match was actually found
+            data = self.event.helper_set.annotate(
+                similarity_fn=TrigramSimilarity('firstname', p),
+                similarity_sn=TrigramSimilarity('surname', p),
+            ).annotate(
+                similarity=Greatest('similarity_fn', 'similarity_sn'),
+            ).filter(
+                Q(similarity__gte=0.3) |
+                Q(email__icontains=p) |
+                Q(phone__icontains=p)
+            ).order_by('-similarity')
+        else:
+            # as a fallback use traditional direct-matching
+            data = self.event.helper_set.filter(Q(firstname__icontains=p) |
+                                                Q(surname__icontains=p) |
+                                                Q(email__icontains=p) |
+                                                Q(phone__icontains=p))
         data = filter(lambda h: h.can_edit(self.user), data)
 
         return data

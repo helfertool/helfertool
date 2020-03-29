@@ -13,6 +13,7 @@ amqp
 celery
 mozilla-django-oidc
 pillow
+psycopg2
 python-magic
 pyyaml
 reportlab
