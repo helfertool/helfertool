@@ -7,7 +7,7 @@
 
     <form action="" method="post">
         {% csrf_token %}
-
+        <p>{% blocktrans %}You can use first name, surname, email or phone number of the helper.{% endblocktrans %}</p>
         {% bootstrap_form form %}
 
         {% if event.badges %}
@@ -25,7 +25,12 @@
             <ul>
                 {% for helper in result %}
                     <li>
-                        <a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a>
+                        <a href="{% url 'view_helper' event.url_name helper.pk %}">
+                            {{ helper.full_name }}
+                        </a>
+                        {# THIS IS DEBUG!!!! #}
+                        (DEBUG likelihoods firstname: {{ helper.similarity_fn }} surname: {{ helper.similarity_sn }})
+                        {# END OF DEBUG #}
                         {% if event.badges and event.badge_settings.barcodes and event.inventory %}
                             ({% trans "Barcode" %}: {{ helper.badge.barcode }})
                         {% endif %}
