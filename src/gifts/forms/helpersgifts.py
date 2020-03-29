@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .fields import PresenceField
 from ..models import HelpersGifts
+from registration.models.helpershift import HelperShift
 
 
 class HelpersGiftsForm(forms.ModelForm):
@@ -24,10 +25,16 @@ class HelpersGiftsForm(forms.ModelForm):
         for giftset in self.instance.deservedgiftset_set.all():
             delivered_id_str = "delivered_{}".format(giftset.pk)
 
+
+            helpershift = HelperShift.objects.get(helper=self.instance.helper, shift=giftset.shift)
+            missed_shift = not helpershift.present and helpershift.manual_presence
+
             self.fields[delivered_id_str] = forms.BooleanField(
                 label=_("Delivered"),
                 required=False,
-                initial=giftset.delivered)
+                initial=giftset.delivered,
+                disabled=missed_shift)
+
 
         # presence fields per shift
         for helpershift in self.instance.helper.helpershift_set.all():
@@ -54,6 +61,8 @@ class HelpersGiftsForm(forms.ModelForm):
 
             instance.set_present(helpershift.shift, present)
 
+        # and finally store the other flags
+        instance = super(HelpersGiftsForm, self).save(True)
         return instance
 
     def deservedgifts_for_shift(self, shift):

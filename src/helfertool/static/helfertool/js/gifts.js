@@ -1,14 +1,23 @@
-function all_gifts_delivered() {
+function all_gifts_delivered(element, include_deposit) {
     // It it is not set, set all checkboxes to their originial value.
-    delivery_state=$("#set_all_pending_gifts").prop("checked");
+    delivery_state=$(element).prop("checked");
+
+    // decode wether to include boxes with deposit
+    if (include_deposit) {
+        boxes = $('.delivery');
+    } else {
+        boxes = $('.delivery.nodeposit');
+    }
 
     // If the "All delivered" checkbox is checked, set all other checkboxes.
     if(delivery_state) {
-        $(".delivery input[type=checkbox]").prop("checked", true);
+        boxes.each(function(index) {
+            $(this).children("input[type=checkbox]:not([disabled])").prop("checked", true);
+        });
     } else {
-        $(".delivery").each(function(index) {
+        boxes.each(function(index) {
             value=$(this).data("original");
-            $(this).children("input[type=checkbox]").prop("checked", value=="True");
+            $(this).children("input[type=checkbox]:not([disabled])").prop("checked", value=="True");
         });
     }
 }

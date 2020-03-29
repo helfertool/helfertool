@@ -91,7 +91,7 @@ class HelpersGifts(models.Model):
         """
         Returns the sum of all deserved gifts (gifts where the helper was marked
         present.
-        :return dict {<giftname> : {'given': <int>, 'total': <int>, 'missing':<int>} }
+        :return dict {"<giftname>" : {'total': <int>, 'given': <int>, 'earned': <int>, 'pending_with_deposit': <int>, 'pending': <int>} }
         """
         result = OrderedDict()
 
@@ -99,18 +99,36 @@ class HelpersGifts(models.Model):
         for deserved_gift in DeservedGiftSet.objects.filter(helper=self):
             gift_set = deserved_gift.gift_set
 
+            helpershift = HelperShift.objects.get(helper=self.helper, shift=deserved_gift.shift)
+            present_at_shift = helpershift.present
+            pending_auto = not helpershift.manual_presence
+
+            delivered_gifts = deserved_gift.delivered
+
             for included_gift in gift_set.includedgift_set.all():
                 name = included_gift.gift.name
+                count = included_gift.count
                 if name not in result:
-                    result[name] = {'given': 0, 'total': 0}
+                    result[name] = {'total': 0, 
+                                    'given': 0, 
+                                    'earned': 0,
+                                    'pending': 0, 
+                                    'pending_with_deposit': 0,
+                    }
 
-                result[name]['total'] += included_gift.count
-                if deserved_gift.delivered:
-                    result[name]['given'] += included_gift.count
+                if present_at_shift or pending_auto:
+                    result[name]['total'] += count
 
-        for name in result.keys():
-            result[name]['missing'] = result[name]['total'] - result[name]['given']
-
+                if present_at_shift:
+                    result[name]['earned'] += count
+                    if delivered_gifts:
+                        result[name]['given'] += count
+                    else:
+                        result[name]['pending_with_deposit'] += count
+                        result[name]['pending'] += count
+                elif pending_auto and not delivered_gifts:
+                    # helper was not manually set to not present
+                    result[name]['pending_with_deposit'] += count
         return result
 
     def set_present(self, shift, present):

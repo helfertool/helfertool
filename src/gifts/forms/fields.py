@@ -61,11 +61,11 @@ class PresenceField(ChoiceField):
             choices=choices,
             initial=initial,
             label=helpershift.helper.full_name,
+            required=False
         )
 
     def clean(self, value):
         cleaned_value = super(PresenceField, self).clean(value)
-
         if cleaned_value == self.PRESENCE_PRESENT:
             return True
         if cleaned_value == self.PRESENCE_ABSENT:
