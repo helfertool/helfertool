@@ -211,6 +211,28 @@ img.icon
     vertical-align: middle;
 }
 
+/* Shift availibility options */
+/* *-transition does not work in IE -> no animation for you. */
+.shifts .notcolliding {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    opacity: 1;
+}
+
+.shifts .colliding, .shifts .full {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+
+.shifts .full .time {
+    text-decoration: line-through
+}
+
 /* info button for job description */
 .info-expand
 {

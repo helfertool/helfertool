@@ -99,6 +99,12 @@ class RegisterForm(forms.ModelForm):
             if shift.is_full() or (shift.blocked and not
                                    self.displayed_shifts):
                 self.fields[id].widget.attrs['disabled'] = True
+            else:
+                # else set it up for automatic disabling
+                self.fields[id].widget.attrs['class'] = "shift_registration"
+                self.fields[id].widget.attrs['data-start'] = int(shift.begin.timestamp())
+                self.fields[id].widget.attrs['data-end'] = int(shift.end.timestamp())
+
 
             # check button if this shift should be selected
             if shift in self.selected_shifts:
