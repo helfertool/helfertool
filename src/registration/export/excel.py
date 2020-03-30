@@ -1,31 +1,73 @@
 from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
 import re
-import xlsxwriter
+import openpyxl
 
+class CellIterator():
+    def __init__(self, worksheet):
+        self.__cols = 1
+        self.__rows = 1
+        self.worksheet = worksheet
 
-class Iterator():
-    """ Returns ascending natural numbers beginning from 0. """
-    def __init__(self):
-        self.__v = -1
+    def right(self) -> str:
+        self.__cols += 1
+        return self.get()
 
-    def next(self):
-        """ Returns the next number beginning from 0. """
-        self.__v += 1
-        return self.__v
+    def down(self, column_return=True) -> str:
+        self.__rows += 1
+        if column_return:
+            self.column_return()
+        return self.get()
 
-    def get(self):
-        """ Returns the current number.
+    def column_return(self) -> str:
+        self.__cols = 1
+        return self.get()
 
-        get() should only be used after next() to get the same number again.
-        """
-        return self.__v
+    @property
+    def column(self) -> str:
+        colnum = self.__cols
+        colstr = ''
 
-    def reset(self):
-        """ Resets the counter.
+        while colnum != 0:
+            colstr += chr((colnum % 26) + ord('A') - 1)
+            colnum = colnum // 26
+        return colstr
 
-        The first call to next() after this returns 0. """
-        self.__v = -1
+    @property
+    def colint(self) -> int:
+        return self.__cols
+
+    @property
+    def row(self) -> int:
+        return self.__rows
+
+    def get(self) -> str:
+        return "%s%i"%(self.column, self.row)
+
+    @property
+    def cell(self) -> openpyxl.cell.Cell:
+        return self.worksheet.cell(self.__rows, self.__cols)
+
+    def write(self, data : object, style=None):
+        self.cell.value = data
+
+        if style is not None:
+            if not isinstance(style, (list, tuple)):
+                style = [style]
+
+            for s in style:
+                if isinstance(s, openpyxl.styles.Font):
+                    self.cell.font = s
+                elif isinstance(s, openpyxl.styles.PatternFill):
+                    self.cell.fill = s
+                elif isinstance(s, openpyxl.styles.Border):
+                    self.cell.border = s
+                elif isinstance(s, openpyxl.styles.Alignment):
+                    self.cell.alignment = s
+                elif isinstance(s, openpyxl.styles.Protection):
+                    self.cell.protection = s
+
+        return self
 
 
 def cleanName(name):
@@ -46,8 +88,7 @@ def escape(payload):
         payload = "'" + payload + "'"
     return payload
 
-
-def xlsx(buffer, event, jobs, date):
+def xlsx_helpers_in_job(buffer : str, event, jobs, date):
     """ Exports the helpers for given jobs of an event as excel spreadsheet.
 
     Parameter:
@@ -56,14 +97,24 @@ def xlsx(buffer, event, jobs, date):
         jobs:   a list of all exported jobs
     """
     # create xlsx
-    workbook = xlsxwriter.Workbook(buffer)
+    workbook = openpyxl.Workbook()
+
+    # remove the default created worksheet
+    workbook.remove(workbook.active)
 
     # duplicated worksheet names are not allowed
     used_names = []
 
+    # styles
+    bold = openpyxl.styles.Font(bold=True)
+    multiple_shifts = openpyxl.styles.PatternFill(
+        start_color='FFFFFF99',
+        end_color='FFfFFF99',
+        fill_type='solid')
+
+
     # export jobs
     for job in jobs:
-        # find unique worksheet name
         job_name = cleanName(job.name)[:20]  # worksheet name must be <= 31 chars
 
         job_name_use = job_name
@@ -74,53 +125,51 @@ def xlsx(buffer, event, jobs, date):
 
         used_names.append(job_name_use)
 
-        # add things
-        worksheet = workbook.add_worksheet(job_name_use)
-        bold = workbook.add_format({'bold': True})
-        multiple_shifts = workbook.add_format({'bg_color': '#fFFF99'})
+        worksheet = workbook.create_sheet(title=job_name_use)
+        iterator = CellIterator(worksheet)
 
-        row = Iterator()
-        column = Iterator()
+        worksheet.column_dimensions[iterator.column].width = 30
+        iterator.write(_("First name"), bold).right()
 
-        # header
-        worksheet.write(0, column.next(), _("First name"), bold)
-        worksheet.write(0, column.next(), _("Surname"), bold)
-        worksheet.write(0, column.next(), _("E-Mail"), bold)
-        worksheet.set_column(0, column.get(), 30)
+        worksheet.column_dimensions[iterator.column].width = 30
+        iterator.write(_("Surname"), bold).right()
+
+        worksheet.column_dimensions[iterator.column].width = 30
+        iterator.write(_("E-Mail"), bold).right()
 
         if event.ask_phone:
-            worksheet.write(0, column.next(), _("Mobile phone"), bold)
-            worksheet.set_column(column.get(), column.get(), 20)
+            worksheet.column_dimensions[iterator.column].width = 20
+            iterator.write(_("Mobile phone"), bold).right()
 
         if event.ask_shirt:
-            worksheet.write(0, column.next(), _("T-shirt"), bold)
-            worksheet.set_column(column.get(), column.get(), 10)
+            worksheet.column_dimensions[iterator.column].width = 10
+            iterator.write(_("T-shirt"), bold).right()
 
         if event.ask_vegetarian:
-            worksheet.write(0, column.next(), _("Vegetarian"), bold)
-            worksheet.set_column(column.get(), column.get(), 13)
+            worksheet.column_dimensions[iterator.column].width = 13
+            iterator.write(_("Vegetarian"), bold).right()
 
         if job.infection_instruction:
-            worksheet.write(0, column.next(), _("Food handling"), bold)
-            worksheet.set_column(column.get(), column.get(), 20)
+            worksheet.column_dimensions[iterator.column].width = 50
+            iterator.write(_("Food handling"), bold).right()
 
-        worksheet.write(0, column.next(), _("Comment"), bold)
-        worksheet.set_column(column.get(), column.get(), 50)
+        worksheet.column_dimensions[iterator.column].width = 50
+        iterator.write(_("Comment"), bold).right()
+        last_column = iterator.colint - 1
 
-        # last column, needed for merge later
-        last_column = column.get()
+        iterator.column_return()
+        worksheet.freeze_panes = iterator.get()
 
-        # freeze header
-        worksheet.freeze_panes(1, 0)
+        iterator.down()
 
-        # skip first row
-        row.next()
-
-        # coordinators
+        # Add coordinators
         if not date and job.coordinators.exists():
-            worksheet.merge_range(row.next(), 0, row.get(), last_column,
-                                  _("Coordinators"), bold)
-            add_helpers(worksheet, row, column, event, job,
+            worksheet.merge_cells(start_row=iterator.row, start_column=1,
+                                  end_row=iterator.row, end_column=last_column)
+
+            iterator.write(_("Coordinators"), bold)
+            iterator.down()
+            add_helpers(worksheet, iterator, event, job,
                         job.coordinators.all(), multiple_shifts)
 
         # show all shifts
@@ -128,40 +177,36 @@ def xlsx(buffer, event, jobs, date):
             if date and shift.begin.date() != date:
                 continue
 
-            worksheet.merge_range(row.next(), 0, row.get(),
-                                  last_column, shift.time(), bold)
-            add_helpers(worksheet, row, column, event, job,
+            worksheet.merge_cells(start_row=iterator.row, start_column=1,
+                                  end_row=iterator.row, end_column=last_column)
+            iterator.write(shift.time(), bold)
+            iterator.down()
+
+            add_helpers(worksheet, iterator, event, job,
                         shift.helper_set.all(), multiple_shifts)
 
-    # close xlsx
-    workbook.close()
+    workbook.save(buffer)
 
 
-def add_helpers(worksheet, row, column, event, job, helpers,
-                multiple_shifts_format):
+def add_helpers(worksheet, iterator, event, job, helpers, multiple_shifts_format):
     for helper in helpers:
-        row.next()
-        column.reset()
-
         num_shifts = helper.shifts.count()
         num_jobs = len(helper.coordinated_jobs)
-        format = None
+        fmt = None
         if num_shifts + num_jobs > 1:
-            format = multiple_shifts_format
+            fmt = multiple_shifts_format
 
-        worksheet.write(row.get(), column.next(), escape(helper.firstname),
-                        format)
-        worksheet.write(row.get(), column.next(), escape(helper.surname),
-                        format)
-        worksheet.write(row.get(), column.next(), escape(helper.email), format)
-        if event.ask_phone:
-            worksheet.write(row.get(), column.next(), escape(helper.phone), format)
+        iterator.write(escape(helper.firstname), fmt).right()
+        iterator.write(escape(helper.surname), fmt).right()
+        iterator.write(escape(helper.email), fmt).right()
+        iterator.write(escape(helper.phone), fmt).right()
+
         if event.ask_shirt:
-            worksheet.write(row.get(), column.next(), escape(str(helper.get_shirt_display())), format)
+            iterator.write(escape(str(helper.get_shirt_display())), fmt).right()
         if event.ask_vegetarian:
-            worksheet.write(row.get(), column.next(),
-                            escape(filters.yesno(helper.vegetarian)), format)
+            iterator.write(escape(filters.yesno(helper.vegetarian)), fmt).right()
         if job.infection_instruction:
-            worksheet.write(row.get(), column.next(), escape(str(helper.get_infection_instruction_short())), format)
-        worksheet.write(row.get(), column.next(), escape(helper.comment),
-                        format)
+            iterator.write(escape(str(helper.get_infection_instruction_short())), fmt).right()
+
+        iterator.write(escape(helper.comment), fmt)
+        iterator.down()

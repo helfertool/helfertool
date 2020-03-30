@@ -12,8 +12,8 @@ django_select2
 amqp
 celery
 mozilla-django-oidc
+openpyxl
 pillow
 python-magic
 pyyaml
 reportlab
-xlsxwriter

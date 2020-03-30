@@ -12,7 +12,7 @@ from .utils import nopermission
 
 from ..models import Event, Job, Shift
 from ..utils import escape_filename
-from ..export.excel import xlsx
+from ..export.excel import xlsx_helpers_in_job
 from ..export.pdf import pdf
 from ..decorators import archived_not_available
 
@@ -77,7 +77,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         filename = "%s.xlsx" % filename
         content_type = "application/vnd.openxmlformats-officedocument" \
                        ".spreadsheetml.sheet"
-        xlsx(buffer, event, jobs, date)
+        xlsx_helpers_in_job(buffer, event, jobs, date)
     elif filetype == 'pdf':
         filename = "%s.pdf" % filename
         content_type = 'application/pdf'
