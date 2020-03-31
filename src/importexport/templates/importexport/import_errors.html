@@ -1,0 +1,23 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Import Errors" %}</h2>
+    <div>
+    {% trans "Import failed due to the following errors"%}:
+    </div>
+    {% for error in errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endfor %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Upload" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}

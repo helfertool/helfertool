@@ -23,11 +23,11 @@
                     </td>
 
                     <td>
-                        <a href="{% url 'export' event.url_name 'excel' %}" class="icon mr-2">
+                        <a href="{% url 'importexport:export_helper' event.url_name 'excel' %}" class="icon mr-2">
                             <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
                         </a>
 
-                        <a href="{% url 'export' event.url_name 'pdf' %}" class="icon">
+                        <a href="{% url 'importexport:export_helper' event.url_name 'pdf' %}" class="icon">
                             <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
                         </a>
                     </td>
@@ -45,10 +45,10 @@
                                 </td>
 
                                 <td>
-                                    <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="icon mr-2">
+                                    <a href="{% url 'importexport:export_date' event.url_name 'excel' day_str %}" class="icon mr-2">
                                         <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
                                     </a>
-                                    <a href="{% url 'export_date' event.url_name 'pdf' day_str %}" class="icon">
+                                    <a href="{% url 'importexport:export_date' event.url_name 'pdf' day_str %}" class="icon">
                                         <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
                                     </a>
                                 </td>

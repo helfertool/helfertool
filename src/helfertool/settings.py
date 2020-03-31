@@ -478,6 +478,7 @@ INSTALLED_APPS = (
     'account.apps.AccountConfig',
     'toolsettings.apps.ToolsettingsConfig',
     'prerequisites.apps.PrerequisitesConfig',
+    'importexport.apps.ImportExportConfig',
     'helfertool',
 )
 

@@ -1,0 +1,124 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+{% load icons %}
+
+
+{% block admincontent %}
+    <h2>{% trans "Import Report" %}</h2>
+    <p>
+        <a href="{% url 'importexport:import_job_template' event.url_name %}">
+            {% icon "file-import" %}
+            {% trans "Import next" %}
+        </a>
+    </p>
+    <div class="alert alert-info" role="alert">
+        {% blocktrans trimmed %}
+        Please remove this file now. Repeated imports of the same file will result in unexpected behaviour.
+        <br />
+        If you need to change something, export the job again.
+        {% endblocktrans %}
+    </div>
+    <h3>{{ job.name }}</h3>
+    <table class="table">
+        <tr>
+            <th>{% trans "Begin" %}</th>
+            <th>{% trans "End" %}</th>
+            <th>{% trans "Number of Helpers" %}</th>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Hidden (Y/N)" %}</th>
+            <th>{% trans "Displayed as full (Y/N)" %}</th>
+            <th>{% trans "Giftsets" %}</th>
+            <th></th>
+        </tr>
+        {% for shift in existing %}
+            <tr>
+                <td{{ shift.begin_changed   | yesno:" class=\"bg-info\", "|safe }}>
+                    {{ shift.begin }}
+                    {% if shift.begin_changed %}
+                        <br />
+                        <span class="text-secondary">{{shift.begin_old}}</span>
+                    {% endif %}
+                </td>
+                <td{{ shift.end_changed     | yesno:" class=\"bg-info\", "|safe }}>
+                    {{ shift.end }}
+                    {% if shift.end_changed %}
+                        <br />
+                        <span class="text-secondary">{{shift.end_old}}</span>
+                    {% endif %}
+                </td>
+                <td{{ shift.number_changed  | yesno:" class=\"bg-info\", "|safe }}>
+                    {{ shift.number }}
+                    {% if shift.number_changed %}
+                        <br />
+                        <span class="text-secondary">{{shift.number_old}}</span>
+                    {% endif %}
+                </td>
+                <td{{ shift.name_changed    | yesno:" class=\"bg-info\", "|safe }}>
+                    {{ shift.name }}
+                    {% if shift.name_changed %}
+                        <br />
+                        <span class="text-secondary">{{shift.name_old}}</span>
+                    {% endif %}
+                </td>
+                <td{{ shift.hidden_changed  | yesno:" class=\"bg-info\", "|safe }}>
+                    {{ shift.hidden | yesno }}
+                    {% if shift.hidden_changed %}
+                        <br />
+                        <span class="text-secondary">{{shift.hidden_old  | yesno}}</span>
+                    {% endif %}
+                </td>
+                <td{{ shift.blocked_changed | yesno:" class=\"bg-info\", "|safe }}>
+                    {{ shift.blocked | yesno }}
+                    {% if shift.blocked_changed %}
+                        <br />
+                        <span class="text-secondary">{{shift.blocked_old | yesno}}</span>
+                    {% endif %}
+                </td>
+                <td{{ shift.giftset_changed | yesno:" class=\"bg-info\", "|safe }}>
+                    {% for gift_set in shift.giftsets %}
+                        <p><a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}" target="_blank">
+                            {{ gift_set.name }}
+                        </a></p>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_shift' event.url_name job.pk shift.id %}" target=”_blank”>
+                        {% icon "pencil-alt" %}
+                        {% trans "Edit" %}
+                    </a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        {% if new %}
+            <tr><th>{% trans "New" %}</th></tr>
+            {% for shift in new %}
+                <tr class="bg-info">
+                    <td>{{ shift.begin }}</td>
+                    <td>{{ shift.end }}</td>
+                    <td>{{ shift.number }}</td>
+                    <td>{{ shift.name }}</td>
+                    <td>{{ shift.hidden | yesno }}</td>
+                    <td>{{ shift.blocked | yesno }}</td>
+                    <td>
+                    {% for gift_set in shift.giftsets %}
+                        <p><a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}" target="_blank">
+                            {{ gift_set.name }}
+                        </a></p>
+                    {% endfor %}
+                    </td>
+                    <td>
+                        {#<a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}" target=”_blank”>#}
+                            {% icon "pencil-alt" %}
+                            {% icon "plus" %}
+                            {% trans "Edit" %}
+                        {#</a>#}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+
+    </table>
+
+{% endblock %}

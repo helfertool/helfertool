@@ -1,94 +1,11 @@
 from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
-import re
 import openpyxl
 
-class CellIterator():
-    def __init__(self, worksheet):
-        self.__cols = 1
-        self.__rows = 1
-        self.worksheet = worksheet
-
-    def right(self) -> str:
-        self.__cols += 1
-        return self.get()
-
-    def down(self, column_return=True) -> str:
-        self.__rows += 1
-        if column_return:
-            self.column_return()
-        return self.get()
-
-    def column_return(self) -> str:
-        self.__cols = 1
-        return self.get()
-
-    @property
-    def column(self) -> str:
-        colnum = self.__cols
-        colstr = ''
-
-        while colnum != 0:
-            colstr += chr((colnum % 26) + ord('A') - 1)
-            colnum = colnum // 26
-        return colstr
-
-    @property
-    def colint(self) -> int:
-        return self.__cols
-
-    @property
-    def row(self) -> int:
-        return self.__rows
-
-    def get(self) -> str:
-        return "%s%i"%(self.column, self.row)
-
-    @property
-    def cell(self) -> openpyxl.cell.Cell:
-        return self.worksheet.cell(self.__rows, self.__cols)
-
-    def write(self, data : object, style=None):
-        self.cell.value = data
-
-        if style is not None:
-            if not isinstance(style, (list, tuple)):
-                style = [style]
-
-            for s in style:
-                if isinstance(s, openpyxl.styles.Font):
-                    self.cell.font = s
-                elif isinstance(s, openpyxl.styles.PatternFill):
-                    self.cell.fill = s
-                elif isinstance(s, openpyxl.styles.Border):
-                    self.cell.border = s
-                elif isinstance(s, openpyxl.styles.Alignment):
-                    self.cell.alignment = s
-                elif isinstance(s, openpyxl.styles.Protection):
-                    self.cell.protection = s
-
-        return self
+from .xlsxutils import CellIterator, cleanName, escape
 
 
-def cleanName(name):
-    """ Cleans the name to be a valid sheet name in excel.
-
-    The characters [ ] : * ? / \ are removed.
-    """
-    return re.sub(r'[\[\]:*?\\\/]', '', name)
-
-
-def escape(payload):
-    if not payload:
-        return ""
-
-    # http://blog.zsec.uk/csv-dangers-mitigations/
-    if payload[0] in ('@', '+', '-', '=', '|'):
-        payload = payload.replace("|", "\|")
-        payload = "'" + payload + "'"
-    return payload
-
-def xlsx_helpers_in_job(buffer : str, event, jobs, date):
+def xlsx_helpers_in_job(buffer, event, jobs, date):
     """ Exports the helpers for given jobs of an event as excel spreadsheet.
 
     Parameter:
@@ -111,7 +28,6 @@ def xlsx_helpers_in_job(buffer : str, event, jobs, date):
         start_color='FFFFFF99',
         end_color='FFfFFF99',
         fill_type='solid')
-
 
     # export jobs
     for job in jobs:

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODULES="account badges gifts helfertool help inventory mail news prerequisites registration statistic toolsettings"
+MODULES="account badges gifts helfertool help importexport inventory mail news prerequisites registration statistic toolsettings"
 
 RED="\x1b[31m"
 GREEN="\x1b[32m"

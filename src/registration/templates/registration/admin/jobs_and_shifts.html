@@ -17,6 +17,13 @@
                 {% icon "sort" %}
                 {% trans "Sort jobs" %}
             </a>
+
+            &nbsp;
+
+            <a href="{% url 'importexport:import_job_template' event.url_name %}">
+                {% icon "file-import" %}
+                {% trans "Import template" %}
+            </a>
         </p>
     {% endif %}
 
@@ -42,6 +49,18 @@
                 <a href="{% url 'duplicate_job' event.url_name job.pk %}">
                 {% icon "copy" %}
                 {% trans "Duplicate" %}</a>
+
+                &nbsp;
+
+                <a href="{% url 'importexport:export_job_template' event.url_name job.pk %}">
+                {% icon "file-export" %}
+                {% trans "Export" %}</a>
+
+                &nbsp;
+
+                <a href="{% url 'importexport:import_job_template' event.url_name %}">
+                {% icon "file-import" %}
+                {% trans "Import" %}</a>
 
                 &nbsp;
 
