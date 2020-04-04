@@ -26,7 +26,7 @@ get_release_series()
     # sanity check: is the version.txt file the same?
     file_version="$(cat src/version.txt)"
     if [ "$version" != "$file_version" ] ; then
-        echo "Version from git and version.txt inconsistent!"
+        echo "Version from git and version.txt inconsistent!" >&2
         exit 1
     fi
 
