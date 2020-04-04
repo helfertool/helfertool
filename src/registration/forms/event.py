@@ -108,9 +108,11 @@ class EventDuplicateForm(EventForm):
         activate_badges = self.instance.badges
         activate_gifts = self.instance.gifts
         activate_prerequisites = self.instance.prerequisites
+        activate_inventory = self.instance.inventory
         self.instance.badges = False
         self.instance.gifts = False
         self.instance.prerequisites = False
+        self.instance.inventory = False
 
         # copy logo
         if self.instance.logo:
@@ -166,4 +168,10 @@ class EventDuplicateForm(EventForm):
         if activate_badges:
             self.other_event.badge_settings.duplicate(self.instance)
             self.instance.badges = True
+            self.instance.save()
+
+        # inventory
+        if activate_inventory:
+            self.other_event.inventory_settings.duplicate(self.instance)
+            self.instance.inventory = True
             self.instance.save()
