@@ -15,3 +15,15 @@ def build_path(path, base_dir):
         return path
     else:
         return os.path.join(base_dir, '..', path)
+
+
+def get_version(path):
+    """
+    Read the version from specified file or return `unknown`.
+    """
+    try:
+        with open(path) as f:
+            version = f.readlines()
+            return version[0].strip() or "unknown"
+    except (IOError, IndexError):
+        return "unknown"

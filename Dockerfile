@@ -1,5 +1,7 @@
 FROM debian:buster
 
+ARG CONTAINER_VERSION="unknown"
+
 ENV LANG=C.UTF-8
 
 RUN apt-get update && \
@@ -13,6 +15,8 @@ RUN apt-get update && \
     useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 1000 && \
     mkdir /data /log /helfertool/run && \
     chown -R helfertool:helfertool /data /log /helfertool/run
+
+RUN echo $CONTAINER_VERSION > /helfertool/container_version
 
 COPY src /helfertool/src
 COPY deployment/docker/helfertool.sh /usr/local/bin/helfertool

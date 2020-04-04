@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from datetime import timedelta
 
-from .utils import dict_get, build_path
+from .utils import dict_get, build_path, get_version
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -35,6 +35,12 @@ except yaml.parser.ParserError as e:
 
 # check if docker deployment
 is_docker = dict_get(config, False, 'docker')
+
+# versioning
+HELFERTOOL_VERSION=get_version(os.path.join(BASE_DIR, 'version.txt'))
+HELFERTOOL_CONTAINER_VERSION=None
+if is_docker:
+    HELFERTOOL_CONTAINER_VERSION=get_version('/helfertool/container_version')
 
 # directories for static and media files
 if is_docker:

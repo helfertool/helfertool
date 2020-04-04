@@ -8,6 +8,15 @@
 
     <table class="table">
         <tr class="d-flex">
+            <th class="col-3">{% trans "Version" %} </th>
+            <td class="col-9">
+                {{ version }}
+                {% if container_version %}
+                    ({% trans "Container:" %} {{ container_version }})
+                {% endif %}
+            </td>
+        </tr>
+        <tr class="d-flex">
             <th class="col-3">{% trans "Templates" %} </th>
             <td class="col-9">
                 {% if templates_ok %}

@@ -74,6 +74,9 @@ def check(request):
     header_x_forwarded_proto = request.META.get('HTTP_X_FORWARDED_PROTO')
 
     context = {
+        'version': settings.HELFERTOOL_VERSION,
+        'container_version': settings.HELFERTOOL_CONTAINER_VERSION,
+
         'templates_ok': templates_ok,
         'mail_ok': mail_ok,
         'celery_broker_ok': celery_broker_ok,
