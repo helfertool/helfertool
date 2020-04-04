@@ -21,12 +21,12 @@ docker_prevent_push=0
 # get version from git and do sanity check with version.txt, returns release series
 get_release_series()
 {
-    version="$(git describe | sed 's/^v//g')"
+    version="$(git describe --abbrev=0 | sed 's/^v//g')"
 
     # sanity check: is the version.txt file the same?
     file_version="$(cat src/version.txt)"
     if [ "$version" != "$file_version" ] ; then
-        echo "Version from git and version.txt inconsistent!"
+        echo "Version from git and version.txt inconsistent!" >&2
         exit 1
     fi
 
