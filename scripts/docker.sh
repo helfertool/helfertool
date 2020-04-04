@@ -86,13 +86,13 @@ elif [ "$action" = "test" ] ; then
         "$docker_name:$docker_tag"
 elif [ "$action" = "push" ] ; then
     # push
-    if [ "$docker_prevent_push" == "1" ] ; then
+    if [ "$docker_prevent_push" = "1" ] ; then
         exit 1
     fi
 
     docker push "$docker_name:$docker_tag"
 
-    if [ "$docker_update_latest" == "1" ] ; then
+    if [ "$docker_update_latest" = "1" ] ; then
         docker tag "$docker_name:$docker_tag" "$docker_name:latest"
         docker push "$docker_name:latest"
     fi
