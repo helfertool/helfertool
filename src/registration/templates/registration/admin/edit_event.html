@@ -17,7 +17,7 @@
                 {% trans "Please correct the errors below." %}
             </div>
         {% endif %}
-        
+
         <h3>{% trans "General" %}</h3>
         {% bootstrap_field form.name %}
         {% bootstrap_field form.url_name %}
@@ -25,7 +25,7 @@
         {% bootstrap_field form.days %}
         {% bootstrap_field form.email %}
         {% bootstrap_field form.admins %}
-        
+
         <h3>{% trans "Registration" %}</h3>
         {% bootstrap_field form.active %}
         {% bootstrap_field form.mail_validation %}
@@ -49,10 +49,10 @@
                 <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ lang }}" role="tabpanel" aria-labelledby="texts-{{ lang }}">
                     {% translated_field form "text" lang as field %}
                     {% bootstrap_field field %}
-        
+
                     {% translated_field form "imprint" lang as field %}
                     {% bootstrap_field field %}
-        
+
                     {% translated_field form "registered" lang as field %}
                     {% bootstrap_field field %}
                 </div>
@@ -82,6 +82,7 @@
         <h3>{% trans "Features" %}</h3>
         {% bootstrap_field form.badges %}
         {% bootstrap_field form.gifts %}
+        {% bootstrap_field form.prerequisites %}
         {% bootstrap_field form.inventory %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />

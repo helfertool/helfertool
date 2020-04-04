@@ -1,0 +1,48 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n bootstrap4 icons prerequisites staticfiles %}
+
+{% block admincontent %}
+    <h2>{% trans "Helpers with prerequisite:" %} {{ prerequisite.name }}</h2>
+
+    {{ prerequisite.description|safe }}
+
+    {% if helpers %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{% trans "First name" %}</th>
+                    <th>{% trans "Surname" %}</th>
+                    <th>{% trans "Registration time" %}</th>
+                    <th>{% trans "Fulfilled" %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for helper in helpers|dictsort:"surname" %}
+                <tr>
+                    <td>{{ helper.firstname }}</td>
+                    <td>{{ helper.surname }}</td>
+                    <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
+
+                    {% helper_has_fulfilled_prerequisite helper prerequisite as fulfilled %}
+                    <td data-order="{{ fulfilled }}" >
+                        {% if fulfilled %}
+                            <span class="text-success">{% icon "check" %}</span>
+                        {% else %}
+                            <span class="text-danger">{% icon "times" %}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url "view_helper" event.url_name helper.pk %}">
+                            {% icon "eye" %}
+                            {% trans "View" %}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "There are no helpers registered that need this prerequisite." %}</p>
+    {% endif %}
+{% endblock %}

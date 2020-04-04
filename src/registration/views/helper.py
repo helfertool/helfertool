@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models.functions import TruncDate
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
@@ -15,6 +15,7 @@ from ..forms import HelperForm, HelperDeleteForm, \
 from ..decorators import archived_not_available
 
 from gifts.forms import HelpersGiftsForm
+from prerequisites.forms import HelperPrerequisiteForm
 
 import logging
 logger = logging.getLogger("helfertool")
@@ -67,29 +68,53 @@ def view_helper(request, event_url_name, helper_pk):
     if not helper.can_edit(request.user):
         return nopermission(request)
 
+    # permission for features
     edit_badge = event.badges and event.is_admin(request.user)
     edit_gifts = event.gifts and event.is_admin(request.user)
+    edit_prerequisites = event.prerequisites and event.is_admin(request.user)
 
+    # we have multiple forms. all of them need to be valid in order to save them
+    forms_valid = True
+
+    # gift editing
     gifts_form = None
     if edit_gifts:
         helper.gifts.update()
 
         gifts_form = HelpersGiftsForm(request.POST or None,
-                                      instance=helper.gifts)
+                                      instance=helper.gifts,
+                                      prefix="gifts")
 
-        if gifts_form.is_valid():
+        if not gifts_form.is_valid():
+            forms_valid = False
+
+    # prerequisite editing
+    prerequisites_form = None
+    if edit_prerequisites:
+        prerequisites_form = HelperPrerequisiteForm(request.POST or None,
+                                                    helper=helper,
+                                                    prefix="prerequisites")
+
+        if not prerequisites_form.is_valid():
+            forms_valid = False
+
+    # the forms are valid and we have at least one form -> save and redirect
+    if forms_valid and (gifts_form or prerequisites_form):
+        if gifts_form and gifts_form.is_valid():
             gifts_form.save()
 
-            messages.success(request, _("Gifts were saved."))
+        if prerequisites_form and prerequisites_form.is_valid():
+            prerequisites_form.save(request)
 
-            return HttpResponseRedirect(reverse('view_helper',
-                                                args=[event_url_name,
-                                                      helper.pk]))
+        messages.success(request, _("Changes were saved."))
+        return redirect('view_helper', event_url_name=event.url_name, helper_pk=helper.pk)
 
+    # render page
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
-               'gifts_form': gifts_form}
+               'gifts_form': gifts_form,
+               'prerequisites_form': prerequisites_form}
     return render(request, 'registration/admin/view_helper.html', context)
 
 

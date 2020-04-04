@@ -9,6 +9,7 @@ from collections import OrderedDict
 from copy import deepcopy
 
 from badges.models import BadgeDefaults
+from prerequisites.models import Prerequisite
 
 
 class Job(models.Model):
@@ -23,6 +24,7 @@ class Job(models.Model):
         :job_admins: users, that can see and edit the helpers
         :public: job is visible publicly
         :badge_design: badge design for this job
+        :prerequisites: Prerequisites for this job
     """
     class Meta:
         ordering = ['-order', 'pk']
@@ -78,6 +80,12 @@ class Job(models.Model):
     order = models.PositiveIntegerField(
         default=0,
         verbose_name=_("Order, highest number on top"),
+    )
+
+    prerequisites = models.ManyToManyField(
+        Prerequisite,
+        blank=True,
+        verbose_name=_("Prerequisites for this job"),
     )
 
     def __str__(self):
@@ -152,7 +160,7 @@ class Job(models.Model):
 
         return ordered_shifts
 
-    def duplicate(self, new_event, gift_set_mapping):
+    def duplicate(self, new_event, gift_set_mapping, prerequisite_mapping):
         new_job = deepcopy(self)
 
         new_job.pk = None
@@ -164,10 +172,15 @@ class Job(models.Model):
             new_job.badge_defaults = self.badge_defaults.duplicate()
 
         new_job.save()
+        # get the new prerequisites
+        for prerequisite in self.prerequisites.all():
+            new_job.prerequisites.add(prerequisite_mapping[prerequisite])
 
+        # clear admins and coordinators
         new_job.job_admins.clear()
         new_job.coordinators.clear()
 
+        # copy the shifts
         for shift in self.shift_set.all():
             shift.duplicate(new_job=new_job, gift_set_mapping=gift_set_mapping)
 

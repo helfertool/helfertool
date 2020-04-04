@@ -1,0 +1,17 @@
+{% load i18n bootstrap4 icons prerequisites %}
+
+{# will be included by registration/admin/view_helper.html #}
+
+{% if form.has_unfilfilled %}
+    <p class="text-danger">
+        {% icon "times" %} {% trans "Helper does not fulfil all prerequisites (for now)." %}
+    </p>
+{% endif %}
+
+<div class="list-group">
+    {% for field in form %}
+        <li class="list-group-item">
+            {% bootstrap_field field form_group_class="" %}
+        </li>
+    {% endfor %}
+</div>
