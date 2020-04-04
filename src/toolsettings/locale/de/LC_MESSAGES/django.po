@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-18 20:37+0100\n"
-"PO-Revision-Date: 2019-02-03 11:52+0100\n"
+"POT-Creation-Date: 2020-04-04 21:22+0200\n"
+"PO-Revision-Date: 2020-04-04 21:24+0200\n"
 "Last-Translator: Sven Hertle <hertle@fs.tum.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #: toolsettings/models.py:18
 msgid "Key"
@@ -39,27 +39,35 @@ msgid "Helfertool"
 msgstr "Helfertool"
 
 #: toolsettings/templates/toolsettings/check.html:11
+msgid "Version"
+msgstr "Version"
+
+#: toolsettings/templates/toolsettings/check.html:15
+msgid "Container:"
+msgstr "Container:"
+
+#: toolsettings/templates/toolsettings/check.html:20
 #: toolsettings/templates/toolsettings/templates.html:5
 msgid "Templates"
 msgstr "Templates"
 
-#: toolsettings/templates/toolsettings/check.html:22
+#: toolsettings/templates/toolsettings/check.html:31
 msgid "External services"
 msgstr "Externe Dienste"
 
-#: toolsettings/templates/toolsettings/check.html:27
+#: toolsettings/templates/toolsettings/check.html:36
 msgid "Mail"
 msgstr "E-Mail"
 
-#: toolsettings/templates/toolsettings/check.html:38
+#: toolsettings/templates/toolsettings/check.html:47
 msgid "RabbitMQ"
 msgstr "RabbitMQ"
 
-#: toolsettings/templates/toolsettings/check.html:49
+#: toolsettings/templates/toolsettings/check.html:58
 msgid "LDAP"
 msgstr "LDAP"
 
-#: toolsettings/templates/toolsettings/check.html:64
+#: toolsettings/templates/toolsettings/check.html:73
 msgid "Header"
 msgstr "Header"
 

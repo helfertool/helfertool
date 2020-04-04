@@ -7,6 +7,8 @@ from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
 from toolsettings.forms import UserSelectWidget
+from prerequisites.forms import PrerequisiteSelectWidget
+from prerequisites.models import Prerequisite
 
 from .fields import DatePicker
 from ..models import Job
@@ -22,6 +24,7 @@ class JobForm(forms.ModelForm):
                    'order', ]
         widgets = {
             'job_admins': UserSelectWidget,
+            'prerequisites': PrerequisiteSelectWidget,
         }
 
         # According to the documentation django-modeltranslations copies the
@@ -35,6 +38,11 @@ class JobForm(forms.ModelForm):
         self.event = kwargs.pop('event')
 
         super(JobForm, self).__init__(*args, **kwargs)
+
+        if not self.event.prerequisites:
+            self.fields.pop('prerequisites')
+        else:
+            self.fields['prerequisites'].queryset = Prerequisite.objects.filter(event=self.event)
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing

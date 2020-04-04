@@ -1,0 +1,26 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Delete prerequisite" %}</h2>
+
+    <form action="{% url 'prerequisites:delete_prerequisite' event.url_name prerequisite.pk %}" method="post">
+        {% csrf_token %}
+
+        <table class="table">
+            <tr>
+                <th>{% trans "Prerequisite" %}</th>
+                <td>{{ prerequisite.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Description" %}</th>
+                <td>{{ prerequisite.description|safe }}</td>
+            </tr>
+        </table>
+
+        {% bootstrap_form_errors form %}
+
+        <input type="submit" value="{% trans "Delete prerequisite" %}" class="btn btn-outline-danger" />
+    </form>
+{% endblock %}

@@ -234,6 +234,11 @@ class Event(models.Model):
         verbose_name=_("Use the inventory functionality"),
     )
 
+    prerequisites = models.BooleanField(
+        default=False,
+        verbose_name=_("Manage prerequisites for helpers"),
+    )
+
     archived = models.BooleanField(
         default=False,
         verbose_name=_("Event is archived"),

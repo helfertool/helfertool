@@ -17,6 +17,7 @@ import uuid
 from badges.models import Badge
 from gifts.models import HelpersGifts
 from mail.tracking import new_tracking_registration
+from prerequisites.models import Prerequisite
 
 from .event import Event
 from .job import Job
@@ -139,6 +140,12 @@ class Helper(models.Model):
     privacy_statement = models.BooleanField(
         default=False,
         verbose_name=_("I agree with the data privacy statement."),
+    )
+
+    prerequisites = models.ManyToManyField(
+        Prerequisite,
+        through='prerequisites.FulfilledPrerequisite',
+        blank=True,
     )
 
     def __str__(self):
