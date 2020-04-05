@@ -6,8 +6,9 @@ from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from registration.decorators import archived_not_available
-from registration.views.utils import nopermission, is_involved
+from registration.views.utils import nopermission
 from registration.models import Event
+from registration.permissions import has_access, ACCESS_GIFTS_EDIT
 
 from ..forms import GiftSetForm, GiftSetDeleteForm
 from ..models import GiftSet
@@ -36,7 +37,7 @@ def edit_gift_set(request, event_url_name, gift_set_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not is_involved(request.user, event_url_name, admin_required=True):
+    if not has_access(request.user, event, ACCESS_GIFTS_EDIT):
         return nopermission(request)
 
     # check if active
@@ -76,7 +77,7 @@ def delete_gift_set(request, event_url_name, gift_set_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_GIFTS_EDIT):
         return nopermission(request)
 
     # check if active

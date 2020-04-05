@@ -9,6 +9,7 @@ from ..forms import BadgeRoleForm, BadgeRoleDeleteForm
 from registration.decorators import archived_not_available
 from registration.views.utils import nopermission
 from registration.models import Event
+from registration.permissions import has_access, ACCESS_BADGES_EDIT
 
 from .utils import notactive
 
@@ -19,7 +20,7 @@ def edit_role(request, event_url_name, role_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT):
         return nopermission(request)
 
     # check if badge system is active
@@ -54,7 +55,7 @@ def delete_role(request, event_url_name, role_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT):
         return nopermission(request)
 
     # check if badge system is active

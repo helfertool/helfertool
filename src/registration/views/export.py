@@ -15,6 +15,7 @@ from ..utils import escape_filename
 from ..export.excel import xlsx
 from ..export.pdf import pdf
 from ..decorators import archived_not_available
+from ..permissions import has_access, ACCESS_EVENT_EXPORT_HELPERS
 
 
 @login_required
@@ -32,7 +33,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         job = get_object_or_404(Job, pk=job_pk)
 
         # check permission
-        if not job.is_admin(request.user):
+        if not has_access(request.user, job, ACCESS_EVENT_EXPORT_HELPERS):
             return nopermission(request)
 
         jobs = [job, ]
@@ -40,7 +41,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         filename = "%s - %s" % (event.name, job.name)
     else:
         # check permission
-        if not event.is_admin(request.user):
+        if not has_access(request.user, event, ACCESS_EVENT_EXPORT_HELPERS):
             return nopermission(request)
 
         jobs = event.job_set.all()

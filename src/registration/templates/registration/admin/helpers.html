@@ -1,16 +1,14 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons staticfiles permissions %}
+{% load i18n bootstrap4 icons staticfiles globalpermissions permissions %}
 
 {% block admincontent %}
-    {% is_admin event as admin %}
-
     <h2>{% trans "Overview over helpers" %}</h2>
 
     {% if not event.job_set.exists %}
         <p class="text-muted">{% trans "There are no jobs and shifts." %}</p>
     {% else %}
         {# export of all jobs #}
-        {% if admin and not event.archived %}
+        {% if user_can_export and not event.archived %}
             <p>
                 {% icon "file-download" %}
                 <b>{% trans "Export" %}:</b>
@@ -67,8 +65,6 @@
         {% endif %}
 
         {% for job in event.job_set.all %}
-            {% is_job_admin job as job_admin %}
-
             <h3>
                 {{ job.name }}
 
@@ -79,9 +75,10 @@
                 {% endif %}
             </h3>
 
-            {% if job_admin and not event.archived%}
+            {% has_access job "ACCESS_JOB_VIEW_HELPERS" as show_link %}
+            {% if show_link and not event.archived %}
                 <p>
-                    <a href="{% url 'helpers' event.url_name job.pk %}">
+                    <a href="{% url 'helpers_for_job' event.url_name job.pk %}">
                     {% icon "info-circle" %}
                     {% trans "Show" %}</a>
                 </p>
@@ -118,7 +115,6 @@
                                 {% if shift.name %}
                                     <br />{{ shift.name }}
                                 {% endif %}
-
 
                                 <div class="progress mb-2">
                                     {% if shift.helpers_percent == 100 %}

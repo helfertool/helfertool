@@ -5,6 +5,8 @@ from django.utils.translation import ugettext as _
 
 from registration.decorators import archived_not_available
 from registration.models import Event
+from registration.views.utils import nopermission
+from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
 
 
 @login_required
@@ -13,7 +15,7 @@ def chart_timeline(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_STATISTICS_VIEW):
         return JsonResponse({})
 
     # collect data

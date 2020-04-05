@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-04 22:36+0200\n"
+"POT-Creation-Date: 2020-04-05 16:13+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,12 +35,12 @@ msgid "hours"
 msgstr "Stunden"
 
 #: statistic/templates/statistic/overview.html:23
-#: statistic/templates/statistic/shirts.html:21
+#: statistic/templates/statistic/shirts.html:18
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
 #: statistic/templates/statistic/overview.html:27
-#: statistic/templates/statistic/shirts.html:27
+#: statistic/templates/statistic/shirts.html:24
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
@@ -60,29 +60,29 @@ msgstr "Zeitliche Entwicklung der Anmeldungen"
 msgid "No helpers are registered."
 msgstr "Es sind keine Helfer angemeldet."
 
-#: statistic/templates/statistic/shirts.html:7
+#: statistic/templates/statistic/shirts.html:5
 #: statistic/templates/statistic/shirts_not_active.html:6
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: statistic/templates/statistic/shirts.html:11
-#: statistic/templates/statistic/shirts.html:65
+#: statistic/templates/statistic/shirts.html:8
+#: statistic/templates/statistic/shirts.html:61
 msgid "Total"
 msgstr "Insgesamt"
 
-#: statistic/templates/statistic/shirts.html:35
+#: statistic/templates/statistic/shirts.html:33
 msgid "Helpers (without coordinators)"
 msgstr "Helfer (ohne Koordinatoren)"
 
-#: statistic/templates/statistic/shirts.html:38
+#: statistic/templates/statistic/shirts.html:36
 msgid "Info:"
 msgstr "Hinweis:"
 
-#: statistic/templates/statistic/shirts.html:39
+#: statistic/templates/statistic/shirts.html:37
 msgid "The T-shirt of a helper is counted for the first shift."
 msgstr "Das T-Shirt eines Helfers wird zur ersten Schicht gezählt."
 
-#: statistic/templates/statistic/shirts.html:49
+#: statistic/templates/statistic/shirts.html:45
 msgid "Shift"
 msgstr "Schicht"
 
@@ -90,6 +90,6 @@ msgstr "Schicht"
 msgid "For this event no t-shirt sizes were collected."
 msgstr " Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
-#: statistic/views/chart.py:52
+#: statistic/views/chart.py:54
 msgid "Number of helpers"
 msgstr "Anzahl Helfer"

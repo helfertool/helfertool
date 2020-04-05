@@ -1,25 +1,25 @@
 from django import forms
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
+from django.utils.translation import ugettext as _
 
 from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
 
 import os
 
-from toolsettings.forms import UserSelectWidget
+from toolsettings.forms import SingleUserSelectWidget
 
 from .fields import DatePicker
-from ..models import Event
+from ..models import Event, EventAdminRoles
 
 
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['text', 'imprint', 'registered', 'badge_settings',
-                   'archived', ]
+        exclude = ['admins', 'text', 'imprint', 'registered', 'badge_settings', 'archived', ]
         widgets = {
-            'admins': UserSelectWidget,
             'text': CKEditorWidget,
             'date': DatePicker,
             'changes_until': DatePicker,
@@ -38,12 +38,54 @@ class EventForm(forms.ModelForm):
 
         if self.instance.archived:
             for field_id in self.fields:
-                if field_id != "admins" and field_id != "url_name":
+                if field_id != "url_name":
                     self.fields[field_id].disabled = True
 
         if not self.instance.ask_shirt and 'shirt_sizes' in self.fields:
             # 'shirt_sizes' is not in fields for EventDuplicateForm
             self.fields.pop('shirt_sizes')
+
+
+class EventAdminRolesForm(forms.ModelForm):
+    class Meta:
+        model = EventAdminRoles
+        fields = ['roles', ]
+
+
+class EventAdminRolesAddForm(forms.ModelForm):
+    class Meta:
+        model = EventAdminRoles
+        fields = ['user', 'roles', ]
+        widgets = {
+            'user': SingleUserSelectWidget,
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.event = kwargs.pop('event')
+
+        super(EventAdminRolesAddForm, self).__init__(*args, **kwargs)
+
+        # we want to be able to submit an empty form as it is part of a page with multiple forms
+        # if no user is set, the form is still valid and the save does not change anything
+        self.fields['user'].required = False
+
+    def save(self, commit=True):
+        # if no user given, just skip it
+        if self.cleaned_data['user']:
+            instance = super(EventAdminRolesAddForm, self).save(False)
+            instance.event = self.event
+            if commit:
+                instance.save()
+            return instance
+
+    def clean_user(self):
+        user = self.cleaned_data['user']
+
+        # user already has admin privileges for this event -> invalid
+        if user and EventAdminRoles.objects.filter(event=self.event, user=user).exists():
+            raise ValidationError(_('User already has permissions for this event assigned'))
+
+        return user
 
 
 class EventDeleteForm(forms.ModelForm):

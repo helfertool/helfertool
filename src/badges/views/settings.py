@@ -6,8 +6,9 @@ from django.shortcuts import render, get_object_or_404
 
 from ..forms import BadgeSettingsForm, BadgeDefaultsForm, BadgeJobDefaultsForm
 
-from registration.views.utils import nopermission, is_involved
 from registration.models import Event
+from registration.views.utils import nopermission
+from registration.permissions import has_access, ACCESS_BADGES_EDIT
 
 from .utils import notactive
 
@@ -17,7 +18,7 @@ def settings(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not is_involved(request.user, event_url_name, admin_required=True):
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT):
         return nopermission(request)
 
     # check if badge system is active
@@ -58,7 +59,7 @@ def settings_advanced(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT):
         return nopermission(request)
 
     # check if badge system is active
@@ -91,7 +92,7 @@ def default_template(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT):
         return nopermission(request)
 
     # check if badge system is active

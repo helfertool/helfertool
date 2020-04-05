@@ -10,6 +10,7 @@ from .utils import nopermission
 from ..models import Event, Link
 from ..forms import LinkForm, LinkDeleteForm
 from ..decorators import archived_not_available
+from ..permissions import has_access, ACCESS_EVENT_EDIT_LINKS
 
 import logging
 logger = logging.getLogger("helfertool")
@@ -20,7 +21,7 @@ def links(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_LINKS):
         return nopermission(request)
 
     # get all links
@@ -37,7 +38,7 @@ def edit_link(request, event_url_name, link_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_LINKS):
         return nopermission(request)
 
     # get job, if available
@@ -79,7 +80,7 @@ def delete_link(request, event_url_name, link_pk):
     link = get_object_or_404(Link, pk=link_pk)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT_LINKS):
         return nopermission(request)
 
     # check if event matches

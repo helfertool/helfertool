@@ -7,6 +7,7 @@ from django.contrib import messages
 from registration.decorators import archived_not_available
 from registration.models import Event
 from registration.views.utils import nopermission
+from registration.permissions import has_access, ACCESS_PREREQUISITES_EDIT, ACCESS_PREREQUISITES_VIEW
 
 from .utils import notactive
 
@@ -27,7 +28,7 @@ def edit_prerequisite(request, event_url_name, prerequisite_pk=None):
         return notactive(request)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_PREREQUISITES_EDIT):
         return nopermission(request)
 
     # get prerequisite, if available
@@ -73,7 +74,7 @@ def view_prerequisites(request, event_url_name):
         return notactive(request)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_PREREQUISITES_VIEW):
         return nopermission(request)
 
     prerequisites = Prerequisite.objects.filter(event=event)
@@ -93,7 +94,7 @@ def delete_prerequisite(request, event_url_name, prerequisite_pk):
         return notactive(request)
 
     # check permission
-    if not event.is_admin(request.user):
+    if not has_access(request.user, event, ACCESS_PREREQUISITES_EDIT):
         return nopermission(request)
 
     prerequisite = get_object_or_404(Prerequisite, pk=prerequisite_pk)
