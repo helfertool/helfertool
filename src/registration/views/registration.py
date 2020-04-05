@@ -1,8 +1,12 @@
+import datetime
+
+from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
@@ -18,17 +22,31 @@ import logging
 logger = logging.getLogger("helfertool")
 
 
-def index(request):
+def index_all_events(request):
+    return index(request, False)
+
+
+def index(request, filter_old_events=True):
     events = Event.objects.all()
 
     # public events
     active_events = [e for e in events if e.active]
     active_events = sorted(active_events, key=lambda e: e.date)
-
+    enable_show_more_events = False
     # inactive events that are visible for current user
     involved_events = []
     if not request.user.is_anonymous:
-        for event in events:
+        if filter_old_events:
+            years = settings.DISPLAY_EVENT_MAX_AGE_YEARS
+            # yes this does fail for leapyears, and we might display one more event
+            # the impact of this problem is neglegible
+            oldest_event = timezone.now() - datetime.timedelta(days=365 * years)
+            filtered_events = events.filter(date__gt=oldest_event)
+            enable_show_more_events = True
+        else:
+            filtered_events = events
+
+        for event in filtered_events:
             event.involved = has_access(request.user, event, ACCESS_INVOLVED)
 
             if event.involved and not event.active:
@@ -38,8 +56,11 @@ def index(request):
     if events.count() == 1 and active_events:
         return redirect(form, event_url_name=active_events[0].url_name)
 
-    context = {'active_events': active_events,
-               'involved_events': involved_events}
+    context = {
+        'active_events': active_events,
+        'involved_events': involved_events,
+        'enable_show_more_events': enable_show_more_events,
+    }
     return render(request, 'registration/index.html', context)
 
 

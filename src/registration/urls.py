@@ -7,6 +7,8 @@ from .feeds import HelperFeed
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
+    url(r'^all/$', views.index_all_events, name='index_all_events'),
+
     # about
     url(r'^about/$',
         TemplateView.as_view(template_name='registration/about.html'),

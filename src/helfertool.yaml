@@ -1,4 +1,4 @@
-# Show this announcement on every page (for example for maintenance) 
+# Show this announcement on every page (for example for maintenance)
 #announcement: ""
 
 # Location of uploaded files, static files and temporary files.
@@ -229,6 +229,11 @@ security:
 
 # Custom URLs, mail addresses, ...
 customization:
+    # Modify certain properties for the general helfertool to display
+    display:
+        # Maximum age for events to be displayed by default on the index page
+        event_max_age_years: 1
+
     # There are some external links that should/can be changed
     urls:
         # Imprint with contact details
