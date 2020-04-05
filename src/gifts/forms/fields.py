@@ -21,15 +21,20 @@ class PresenceField(ChoiceField):
 
     * True: the helper was present
     * False: the helper was absent
-    * None: Auto was selected
+    * None: Auto/Unkown was selected
     """
 
     PRESENCE_AUTO = "auto"
+    PRESENCE_UNKNOWN = "unknown"
     PRESENCE_PRESENT = "present"
     PRESENCE_ABSENT = "absent"
 
     PRESENCE_CHOICES_AUTO = [
         (PRESENCE_AUTO, choice_lazy("clock", "text-info", _("Auto"))),
+    ]
+
+    PRESENCE_CHOICES_UNKNOWN = [
+        (PRESENCE_UNKNOWN, choice_lazy("question", "text-info", _("Unknown"))),
     ]
 
     PRESENCE_CHOICES = [
@@ -41,20 +46,26 @@ class PresenceField(ChoiceField):
         automatic_presence = kwargs.pop("automatic_presence")
         helpershift = kwargs.pop("helpershift")
 
-        # depending on the automatic presence setting, add "auto"
+        # depending on the automatic presence setting, add "auto" or "unknown"
         if automatic_presence:
             choices = self.PRESENCE_CHOICES_AUTO + self.PRESENCE_CHOICES
         else:
-            choices = self.PRESENCE_CHOICES
+            choices = self.PRESENCE_CHOICES_UNKNOWN + self.PRESENCE_CHOICES
 
         # initial value
         if helpershift.present:
+            # present (manually) set
             initial = self.PRESENCE_PRESENT
         else:
             if helpershift.manual_presence:
+                # absent manually set
                 initial = self.PRESENCE_ABSENT
             else:
-                initial = self.PRESENCE_AUTO
+                # nothing manually set -> auto/unkown
+                if automatic_presence:
+                    initial = self.PRESENCE_AUTO
+                else:
+                    initial = self.PRESENCE_UNKNOWN
 
         super(PresenceField, self).__init__(
             widget=RadioSelect,
@@ -70,7 +81,7 @@ class PresenceField(ChoiceField):
             return True
         if cleaned_value == self.PRESENCE_ABSENT:
             return False
-        if cleaned_value == self.PRESENCE_AUTO:
+        if cleaned_value == self.PRESENCE_AUTO or cleaned_value == self.PRESENCE_UNKNOWN:
             return None
 
     def widget_attrs(self, widget):

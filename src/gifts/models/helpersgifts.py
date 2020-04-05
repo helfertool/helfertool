@@ -140,7 +140,8 @@ class HelpersGifts(models.Model):
         """
         Check if present flag should be set to True or False based on automatic presence.
         """
-        if not helpershift.manual_presence:
+        if self.helper.event.gift_settings.enable_automatic_presence and \
+                not helpershift.manual_presence:
             return timezone.now() > helpershift.shift.end
         return False
 
