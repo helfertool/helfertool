@@ -19,7 +19,7 @@ class IncludedGift(models.Model):
         on_delete=models.CASCADE,
     )
 
-    count = models.IntegerField(
+    count = models.FloatField(
         verbose_name=_("Count"),
         default=1,
         validators=[MinValueValidator(1)],
