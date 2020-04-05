@@ -11,6 +11,10 @@
             <a class="btn btn-sm btn-outline-primary" onclick="set_all('auto'); return false;" href="">
                 {% icon "clock" %} {% trans "Set all to auto" %}
             </a>
+            {% else %}
+            <a class="btn btn-sm btn-outline-primary" onclick="set_all('unknown'); return false;" href="">
+                {% icon "question" %} {% trans "Set all to unknown" %}
+            </a>
             {% endif %}
             <a class="btn btn-sm btn-outline-primary" onclick="set_all('present'); return false;" href="">
                 {% icon "check" %} {% trans "Set all to present" %}
