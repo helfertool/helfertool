@@ -228,8 +228,8 @@ security:
 customization:
     # Modify certain properties for the general helfertool to display
     display:
-        # Maximum age for events to be displayed by default on the index page
-        event_max_age_years: 1
+        # Maximum years of events to be displayed by default on the main page
+        events_last_years: 2
 
     # There are some external links that should/can be changed
     urls:
