@@ -390,9 +390,11 @@ if is_docker:
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog_docker')
 
 # Display Options
-# Maximum age of events displayed on index
-DISPLAY_EVENT_MAX_AGE_YEARS = int(dict_get(config, 3, 'customization',
-                                  'display', 'event_max_age_years'))
+# Maximum years of events to be displayed by default on the main page
+EVENTS_LAST_YEARS = int(dict_get(config, 2, 'customization', 'display', 'events_last_years'))
+if EVENTS_LAST_YEARS < 0:
+    print("events_show_years must be positive or 0")
+    sys.exit(1)
 
 # announcement on every page
 ANNOUNCEMENT_TEXT = dict_get(config, None, 'announcement')

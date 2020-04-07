@@ -32,17 +32,15 @@ def index(request, filter_old_events=True):
     # public events
     active_events = [e for e in events if e.active]
     active_events = sorted(active_events, key=lambda e: e.date)
-    enable_show_more_events = False
+
     # inactive events that are visible for current user
     involved_events = []
+    enable_show_more_events = False
     if not request.user.is_anonymous:
         if filter_old_events:
-            years = settings.DISPLAY_EVENT_MAX_AGE_YEARS
-            # yes this does fail for leapyears, and we might display one more event
-            # the impact of this problem is neglegible
-            oldest_event = timezone.now() - datetime.timedelta(days=365 * years)
-            filtered_events = events.filter(date__gt=oldest_event)
-            enable_show_more_events = True
+            oldest_year = datetime.datetime.now().year - settings.EVENTS_LAST_YEARS
+            filtered_events = events.filter(date__year__gte=oldest_year)
+            enable_show_more_events = events.filter(date__year__lt=oldest_year).exists()
         else:
             filtered_events = events
 
