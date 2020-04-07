@@ -1,8 +1,12 @@
+import datetime
+
+from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
@@ -18,7 +22,11 @@ import logging
 logger = logging.getLogger("helfertool")
 
 
-def index(request):
+def index_all_events(request):
+    return index(request, False)
+
+
+def index(request, filter_old_events=True):
     events = Event.objects.all()
 
     # public events
@@ -27,8 +35,16 @@ def index(request):
 
     # inactive events that are visible for current user
     involved_events = []
+    enable_show_more_events = False
     if not request.user.is_anonymous:
-        for event in events:
+        if filter_old_events:
+            oldest_year = datetime.datetime.now().year - settings.EVENTS_LAST_YEARS
+            filtered_events = events.filter(date__year__gte=oldest_year)
+            enable_show_more_events = events.filter(date__year__lt=oldest_year).exists()
+        else:
+            filtered_events = events
+
+        for event in filtered_events:
             event.involved = has_access(request.user, event, ACCESS_INVOLVED)
 
             if event.involved and not event.active:
@@ -38,8 +54,11 @@ def index(request):
     if events.count() == 1 and active_events:
         return redirect(form, event_url_name=active_events[0].url_name)
 
-    context = {'active_events': active_events,
-               'involved_events': involved_events}
+    context = {
+        'active_events': active_events,
+        'involved_events': involved_events,
+        'enable_show_more_events': enable_show_more_events,
+    }
     return render(request, 'registration/index.html', context)
 
 
