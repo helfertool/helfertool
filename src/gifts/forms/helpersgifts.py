@@ -24,10 +24,13 @@ class HelpersGiftsForm(forms.ModelForm):
         for giftset in self.instance.deservedgiftset_set.all():
             delivered_id_str = "delivered_{}".format(giftset.pk)
 
+            missed_shift = self.instance.helper.has_missed_shift(giftset.shift)
+
             self.fields[delivered_id_str] = forms.BooleanField(
                 label=_("Delivered"),
                 required=False,
-                initial=giftset.delivered)
+                initial=giftset.delivered,
+                disabled=missed_shift)
 
         # presence fields per shift
         for helpershift in self.instance.helper.helpershift_set.all():
@@ -54,6 +57,8 @@ class HelpersGiftsForm(forms.ModelForm):
 
             instance.set_present(helpershift.shift, present)
 
+        # and finally store the other flags
+        instance = super(HelpersGiftsForm, self).save(commit)
         return instance
 
     def deservedgifts_for_shift(self, shift):

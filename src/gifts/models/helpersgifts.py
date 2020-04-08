@@ -91,25 +91,54 @@ class HelpersGifts(models.Model):
         """
         Returns the sum of all deserved gifts (gifts where the helper was marked
         present.
-        :return dict {<giftname> : {'given': <int>, 'total': <int>, 'missing':<int>} }
+        :return dict {"<giftname>" : {'total': <int>, 'given': <int>, 'earned': <int>,
+                                      'pending_with_deposit': <int>, 'pending': <int>} }
         """
         result = OrderedDict()
 
-        # TODO: maybe do one query for this?
+        # iterate over all deserved gifts of this helper
         for deserved_gift in DeservedGiftSet.objects.filter(helper=self):
             gift_set = deserved_gift.gift_set
 
+            # we need to know whether the helper was present or not
+            helpershift = HelperShift.objects.get(helper=self.helper, shift=deserved_gift.shift)
+            present_at_shift = helpershift.present
+            present_pending = not helpershift.manual_presence
+
+            already_delivered = deserved_gift.delivered
+
+            # not iterate over all gifts inside the deserved gift set
             for included_gift in gift_set.includedgift_set.all():
                 name = included_gift.gift.name
+                count = included_gift.count
+
+                # we found this gift the first time -> add it to result
                 if name not in result:
-                    result[name] = {'given': 0, 'total': 0}
+                    result[name] = {
+                        'total': 0,
+                        'given': 0,
+                        'earned': 0,
+                        'pending': 0,
+                        'pending_with_deposit': 0,
+                    }
 
-                result[name]['total'] += included_gift.count
-                if deserved_gift.delivered:
-                    result[name]['given'] += included_gift.count
+                # and now update the values
+                # as long as the helper is not absent, count the gifts
+                if present_at_shift or present_pending:
+                    result[name]['total'] += count
 
-        for name in result.keys():
-            result[name]['missing'] = result[name]['total'] - result[name]['given']
+                if present_at_shift:
+                    # helper was really present -> earned and maybe pendning
+                    result[name]['earned'] += count
+
+                    if already_delivered:
+                        result[name]['given'] += count
+                    else:
+                        result[name]['pending_with_deposit'] += count
+                        result[name]['pending'] += count
+                elif present_pending and not already_delivered:
+                    # helper was not manually set to not present, so we would need deposit
+                    result[name]['pending_with_deposit'] += count
 
         return result
 
