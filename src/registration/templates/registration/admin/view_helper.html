@@ -112,9 +112,23 @@
         {% endif %}
     </p>
 
-    {% if prerequisites_form or gifts_form %}
+    {# internal comment - view #}
+    {% if view_internal_comment %}
+        <h3>{% trans "Internal comment" %}</h3>
+        <div class="internal-comment">
+            {{ helper.internal_comment | linebreaksbr }}
+        </div>
+    {% endif %}
+
+    {% if internal_comment_form or prerequisites_form or gifts_form %}
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+
+            {# internal comment - edit #}
+            {% if internal_comment_form %}
+                <h3>{% trans "Internal comment" %}</h3>
+                {% bootstrap_field internal_comment_form.internal_comment show_label=False %}
+            {% endif %}
 
             {# prerequisites #}
             {% if prerequisites_form.has_items %}

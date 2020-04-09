@@ -26,6 +26,8 @@ ACCESS_JOB_VIEW_STATISTICS = "ACCESS_JOB_VIEW_STATISTICS"  # view statistics for
 
 ACCESS_HELPER_EDIT = "ACCESS_HELPER_EDIT"  # edit the personal data of a helper
 ACCESS_HELPER_VIEW = "ACCESS_HELPER_VIEW"  # view the personal data of a helper
+ACCESS_HELPER_INTERNAL_COMMENT_EDIT = "ACCESS_HELPER_INTERNAL_COMMENT_EDIT"  # edit the internal comment of a helper
+ACCESS_HELPER_INTERNAL_COMMENT_VIEW = "ACCESS_HELPER_INTERNAL_COMMENT_VIEW"  # view the internal comment of a helper
 ACCESS_HELPER_RESEND = "ACCESS_HELPER_RESEND"  # resend the confirmation mail to a helper
 
 ACCESS_INVENTORY_EDIT = "ACCESS_INVENTORY_EDIT"  # edit inventory settings for an event
@@ -124,6 +126,19 @@ _rbac_matrix = {
     ],
 
     ACCESS_HELPER_VIEW: [
+        EventAdminRoles.ROLE_ADMIN,
+        EventAdminRoles.ROLE_RESTRICTED_ADMIN,
+        EventAdminRoles.ROLE_FRONTDESK,
+        EventAdminRoles.ROLE_INVENTORY,
+    ],
+
+    ACCESS_HELPER_INTERNAL_COMMENT_EDIT: [
+        EventAdminRoles.ROLE_ADMIN,
+        EventAdminRoles.ROLE_RESTRICTED_ADMIN,
+        EventAdminRoles.ROLE_FRONTDESK,
+    ],
+
+    ACCESS_HELPER_INTERNAL_COMMENT_VIEW: [
         EventAdminRoles.ROLE_ADMIN,
         EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         EventAdminRoles.ROLE_FRONTDESK,

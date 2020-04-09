@@ -15,7 +15,7 @@ from badges.models import Badge
 class HelperForm(forms.ModelForm):
     class Meta:
         model = Helper
-        exclude = ['event', 'shifts', 'privacy_statement', 'mail_failed', 'prerequisites']
+        exclude = ['event', 'shifts', 'privacy_statement', 'mail_failed', 'internal_comment', 'prerequisites']
 
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')
@@ -283,3 +283,21 @@ class HelperSearchForm(forms.Form):
 
 class HelperResendMailForm(forms.Form):
     pass
+
+
+class HelperInternalCommentForm(forms.ModelForm):
+    class Meta:
+        model = Helper
+        fields = ['internal_comment', ]
+
+    def __init__(self, *args, **kwargs):
+        super(HelperInternalCommentForm, self).__init__(*args, **kwargs)
+
+        self.fields['internal_comment'].widget.attrs['rows'] = 3
+
+    def clean(self):
+        cleaned_data = super(HelperInternalCommentForm, self).clean()
+
+        self.cleaned_data['internal_comment'] = self.cleaned_data['internal_comment'].strip()
+
+        return cleaned_data

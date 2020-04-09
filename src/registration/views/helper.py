@@ -9,13 +9,13 @@ from django.utils.translation import ugettext as _
 from .utils import nopermission, get_or_404
 
 from ..models import Event, Job, Shift
-from ..forms import HelperForm, HelperDeleteForm, \
-    HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
-    HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm
+from ..forms import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
+    HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm, HelperInternalCommentForm
 from ..decorators import archived_not_available
 from ..permissions import has_access, has_access_event_or_job, ACCESS_INVOLVED, ACCESS_JOB_EDIT_HELPERS, \
     ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_VIEW, ACCESS_HELPER_RESEND, \
-    ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE, ACCESS_EVENT_EXPORT_HELPERS, ACCESS_PREREQUISITES_HANDLE
+    ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE, ACCESS_EVENT_EXPORT_HELPERS, ACCESS_PREREQUISITES_HANDLE, \
+    ACCESS_HELPER_INTERNAL_COMMENT_VIEW, ACCESS_HELPER_INTERNAL_COMMENT_EDIT
 
 from gifts.forms import HelpersGiftsForm
 from prerequisites.forms import HelperPrerequisiteForm
@@ -74,12 +74,26 @@ def view_helper(request, event_url_name, helper_pk):
     if not has_access(request.user, helper, ACCESS_HELPER_VIEW):
         return nopermission(request)
 
-    edit_badge = event.badges and has_access(request.user, event, ACCESS_BADGES_EDIT_HELPER)
-    edit_gifts = event.gifts and has_access(request.user, event, ACCESS_GIFTS_HANDLE)
-    edit_prerequisites = event.prerequisites and has_access(request.user, event, ACCESS_PREREQUISITES_HANDLE)
+    edit_internal_comment = has_access(request.user, helper, ACCESS_HELPER_INTERNAL_COMMENT_EDIT)
+    view_internal_comment = has_access(request.user, helper, ACCESS_HELPER_INTERNAL_COMMENT_VIEW)
+    if edit_internal_comment:
+        # if we can edit, don't show the read-only comment
+        view_internal_comment = False
+
+    edit_badge = event.badges and has_access(request.user, helper, ACCESS_BADGES_EDIT_HELPER)
+    edit_gifts = event.gifts and has_access(request.user, helper, ACCESS_GIFTS_HANDLE)
+    edit_prerequisites = event.prerequisites and has_access(request.user, helper, ACCESS_PREREQUISITES_HANDLE)
 
     # we have multiple forms. all of them need to be valid in order to save them
     forms_valid = True
+
+    # internal comment
+    internal_comment_form = None
+    if edit_internal_comment:
+        internal_comment_form = HelperInternalCommentForm(request.POST or None, instance=helper)
+
+        if not internal_comment_form.is_valid():
+            forms_valid = False
 
     # gift editing
     gifts_form = None
@@ -104,7 +118,10 @@ def view_helper(request, event_url_name, helper_pk):
             forms_valid = False
 
     # the forms are valid and we have at least one form -> save and redirect
-    if forms_valid and (gifts_form or prerequisites_form):
+    if forms_valid and (internal_comment_form or gifts_form or prerequisites_form):
+        if internal_comment_form and internal_comment_form.is_valid():
+            internal_comment_form.save()
+
         if gifts_form and gifts_form.is_valid():
             gifts_form.save()
 
@@ -118,6 +135,8 @@ def view_helper(request, event_url_name, helper_pk):
     context = {'event': event,
                'helper': helper,
                'edit_badge': edit_badge,
+               'view_internal_comment': view_internal_comment,
+               'internal_comment_form': internal_comment_form,
                'gifts_form': gifts_form,
                'prerequisites_form': prerequisites_form}
     return render(request, 'registration/admin/view_helper.html', context)
