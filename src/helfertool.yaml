@@ -156,20 +156,21 @@ authentication:
     #        # There are two types to handle claims
     #        # 1) direct: the claim is directly compared
     #        # 2) member: the claim is a list and it is checked if the specified value is included (useful for groups/roles)
+    #        # The path is a JMESPath. Plain claim names like "roles" are also a valid JMESPath.
     #        login:
     #            #compare: "direct"
-    #            #name: "helfertool_login"
+    #            #path: "helfertool_login"
     #            #value: true
     #            compare: "member"
-    #            name: "roles"
+    #            path: "roles"
     #            value: "helfertool_login"
     #
     #        admin:
     #            #compare: "direct"
-    #            #name: "helfertool_admin"
+    #            #path: "helfertool_admin"
     #            #value: true
     #            compare: "member"
-    #            name: "roles"
+    #            path: "roles"
     #            value: "helfertool_admin"
 
     # Prepend character to all locally created users
