@@ -231,6 +231,18 @@ customization:
         # Maximum years of events to be displayed by default on the main page
         events_last_years: 2
 
+    # Fuzzy search for helper names
+    # Only available on PostgrSQL with pg_trgm extension, disabled automatically otherwise
+    search:
+        # Values between 0.2 (show more results) and 0.5 (show less results) seem to be reasonable.
+        # The similarity threshold of 0.3 was selected based on a name database of ~4000 western
+        # european names and the gut feel when a good match was actually found.
+        similarity: 0.3
+
+        # If PostgreSQL is used and pg_trgm is installed, the similarity search is automatically used.
+        # If you do not want to have this, disable it here.
+        disable_similarity: false
+
     # There are some external links that should/can be changed
     urls:
         # Imprint with contact details

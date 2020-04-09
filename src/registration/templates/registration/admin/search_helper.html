@@ -7,21 +7,22 @@
 
     <form action="" method="post">
         {% csrf_token %}
-
         {% bootstrap_form form %}
 
-        {% if event.badges %}
-            <p class="text-muted">
-                {% trans "You can also enter/scan a badge barcode." %}
-            </p>
-        {% endif %}
+        <p class="text-muted">
+            {% blocktrans %}You can use first name, surname, email or phone number of the helper.{% endblocktrans %}
+
+            {% if event.badges %}
+                {% trans "Additionally, you can also enter/scan a badge barcode." %}
+            {% endif %}
+        </p>
 
         <input type="submit" value="{% trans "Search" %}" class="btn btn-outline-primary" />
     </form>
 
     {% if not new_search %}
+        <h3>{% trans "Result" %}</h3>
         {% if result %}
-            <h3>{% trans "Result" %}</h3>
             <ul>
                 {% for helper in result %}
                     <li>
@@ -33,6 +34,7 @@
                 {% endfor %}
             </ul>
         {% else %}
+            <p class="text-danger">{% trans "No results found" %}</p>
         {% endif %}
     {% endif %}
 {% endblock %}

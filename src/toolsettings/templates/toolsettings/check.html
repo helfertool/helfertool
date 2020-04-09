@@ -26,10 +26,19 @@
                 {% endif %}
             </td>
         </tr>
+        <tr class="d-flex">
+            <th class="col-3">{% trans "Similarity search" %} </th>
+            <td class="col-9">
+                {% if similarity_search %}
+                    <i class="fas fa-check"></i>
+                {% else %}
+                    <i class="fas fa-minus"></i>
+                {% endif %}
+            </td>
+        </tr>
     </table>
 
     <h3>{% trans "External services" %}</h3>
-
 
     <table class="table">
         <tr class="d-flex">

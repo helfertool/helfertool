@@ -65,9 +65,6 @@ def check(request):
         ldap_ok = False
 
     # headers
-    for header, value in request.META.items():
-        if header.startswith('HTTP_'):
-            print(header + " " + value)
     header_host = request.META.get('HTTP_HOST')
     header_x_real_ip = request.META.get('HTTP_X_REAL_IP')
     header_x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -76,6 +73,7 @@ def check(request):
     context = {
         'version': settings.HELFERTOOL_VERSION,
         'container_version': settings.HELFERTOOL_CONTAINER_VERSION,
+        'similarity_search': not settings.SEARCH_SIMILARITY_DISABLED,
 
         'templates_ok': templates_ok,
         'mail_ok': mail_ok,
