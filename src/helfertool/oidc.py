@@ -5,6 +5,7 @@ from django.views.decorators.debug import sensitive_variables
 
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
 
+import jmespath
 import unicodedata
 
 
@@ -74,16 +75,22 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     def _check_claim_for_flag(self, claims, conf):
         # get config and check if it is there
         compare = conf.get('compare', None)
-        name = conf.get('name', None)
+        path = conf.get('path', None)
         value = conf.get('value', None)
 
-        if compare is None or name is None or value is None:
+        if compare is None or path is None or value is None:
             raise ImproperlyConfigured("Invalid OpenID Connect claim configuration (parameters missing)")
+
+        # get claim value
+        claim_value = jmespath.search(path, claims)
+
+        if claim_value is None:
+            return False
 
         # check claim
         if compare == 'direct':
-            return claims.get(name, None) == value
+            return claim_value == value
         elif compare == 'member':
-            return value in claims.get(name, [])
+            return type(claim_value) == list and value in claim_value
         else:
             raise ImproperlyConfigured("Invalid OpenID Connect claim configuration (invalid mode)")
