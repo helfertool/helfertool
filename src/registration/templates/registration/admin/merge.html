@@ -29,12 +29,13 @@
                        required="required"
                        type="radio"
                        value="{{ helper.pk }}"
+                       class="mt-4"
                 />
                 <label for="helper_{{ forloop.counter0 }}">
                     {% trans "Keep this data" %}
                 </label>
 
-                {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
+                {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode show_internal_comment=True %}
             {% endfor %}
 
             <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary mt-3" />

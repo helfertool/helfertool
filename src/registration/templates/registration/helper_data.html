@@ -45,6 +45,21 @@
         <td>{{ helper.comment | default:"-" }}</td>
     </tr>
 
+    {% if show_internal_comment %}
+        <tr>
+            <th>{% trans "Internal comment" %}: </th>
+            <td>
+                {% if helper.internal_comment %}
+                <div class="internal-comment">
+                    {{ helper.internal_comment | linebreaksbr }}
+                </div>
+                {% else %}
+                -
+                {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+
     <tr>
         <th>{% trans "Registration time" %}: </th>
         <td>{{ helper.timestamp }}</td>

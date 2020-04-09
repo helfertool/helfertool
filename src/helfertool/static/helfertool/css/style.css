@@ -326,6 +326,15 @@ div.mailbody pre
     border: 0;
 }
 
+/* internal comment - view */
+div.internal-comment
+{
+    height: 6em;
+    overflow-y: scroll;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
 /* datatables */
 .datatables-icon::before
 {
