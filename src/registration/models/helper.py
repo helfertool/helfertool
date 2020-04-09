@@ -34,6 +34,7 @@ class Helper(models.Model):
         :email: the e-mail address
         :phone: phone number
         :comment: optional comment
+        :internal_comment: optional internal comment
         :shirt: t-shirt size (possible sizes are defined here)
         :vegetarian: is the helper vegetarian?
         :infection_instruction: status of the instruction for food handling
@@ -102,6 +103,11 @@ class Helper(models.Model):
         max_length=200,
         blank=True,
         verbose_name=_("Comment"),
+    )
+
+    internal_comment = models.TextField(
+        blank=True,
+        verbose_name=_("Internal comment"),
     )
 
     shirt = models.CharField(
