@@ -27,7 +27,7 @@ COPY deployment/docker/rsyslog.conf /helfertool/rsyslog.conf
 
 RUN cd /helfertool/src/ && \
     # install python libs
-    pip3 install -r requirements.txt mysqlclient psycopg2-binary uwsgitop && \
+    pip3 install -r requirements.txt mysqlclient uwsgitop && \
     # copy static files
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py collectstatic --noinput && \
     chmod -R go+rX /helfertool/static && \

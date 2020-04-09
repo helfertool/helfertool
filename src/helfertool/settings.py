@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from datetime import timedelta
 
-from .utils import dict_get, build_path, get_version
+from .utils import dict_get, build_path, get_version, pg_trgm_installed
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -411,6 +411,18 @@ WEBSITE_URL = 'https://www.helfertool.org'
 # mail address for "About this software" page and support requests
 CONTACT_MAIL = dict_get(config, 'helfertool@localhost', 'customization',
                         'contact_address')
+
+# similarity search for postgresql
+SEARCH_SIMILARITY = dict_get(config, 0.3, 'customization', 'search', 'similarity')
+SEARCH_SIMILARITY_DISABLED = dict_get(config, False, 'customization', 'search', 'disable_similarity')
+
+if SEARCH_SIMILARITY_DISABLED is False:
+    # it only works on postgresql when pg_trgm is there, so check this. otherwise, disable
+    if 'postgresql' in DATABASES['default']['ENGINE']:
+        if not pg_trgm_installed():
+            SEARCH_SIMILARITY_DISABLED = True
+    else:
+        SEARCH_SIMILARITY_DISABLED = True
 
 # badges
 BADGE_PDFLATEX = dict_get(config, '/usr/bin/pdflatex', 'badges', 'pdflatex')
