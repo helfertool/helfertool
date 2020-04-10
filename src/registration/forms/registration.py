@@ -99,6 +99,11 @@ class RegisterForm(forms.ModelForm):
             if shift.is_full() or (shift.blocked and not
                                    self.displayed_shifts):
                 self.fields[id].widget.attrs['disabled'] = True
+            else:
+                # else set it up for automatic disabling
+                self.fields[id].widget.attrs['class'] = "registration_possible"
+                self.fields[id].widget.attrs['data-begin'] = int(shift.begin.timestamp())
+                self.fields[id].widget.attrs['data-end'] = int(shift.end.timestamp())
 
             # check button if this shift should be selected
             if shift in self.selected_shifts:
@@ -207,22 +212,20 @@ class RegisterForm(forms.ModelForm):
                            _("You must specify, if you have a instruction for the handling of food."))
 
         # check for overlapping shifts
-        if self.event.max_overlapping:
-            max = self.event.max_overlapping
+        if self.event.max_overlapping is not None:
+            max_overlap = self.event.max_overlapping
             for shifts in itertools.combinations(selected_shifts, 2):
                 s1 = Shift.objects.get(pk=self.shifts[shifts[0]])
                 s2 = Shift.objects.get(pk=self.shifts[shifts[1]])
 
                 # check if shifts overlap (1st or term) or one shift is part
                 # of the other shift (2nd and 3rd or term)
-                if ((s2.end-s1.begin).total_seconds() > max*60 and
-                    (s1.end-s2.begin).total_seconds() > max*60) or \
+                if ((s2.end-s1.begin).total_seconds() > max_overlap*60 and
+                    (s1.end-s2.begin).total_seconds() > max_overlap*60) or \
                    (s1.begin >= s2.begin and s1.end <= s2.end) or \
                    (s2.begin >= s1.begin and s2.end <= s1.end):
-                    raise ValidationError(
-                        _("Some of your shifts overlap more then "
-                          "%(minutes)d minutes.") %
-                        {'minutes': max})
+                    raise ValidationError(_("Some of your shifts overlap more then %(minutes)d minutes.") %
+                                          {'minutes': max_overlap})
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save(False)

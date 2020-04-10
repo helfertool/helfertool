@@ -1,6 +1,6 @@
 {% load i18n bootstrap4 icons static registerform_shifts toolsettings %}
 
-<form action="" method="post">
+<form action="" method="post" id="register_form" data-max-overlapping="{{ event.max_overlapping }}">
     {% csrf_token %}
 
     <h2>{% trans "Jobs" %}</h2>
@@ -36,37 +36,34 @@
                 {% for day, shifts in shifts.items %}
                     <td>
                     {% for shift in shifts %}
-                        {# checkbox #}
-                        {{ form | lookup_shift:shift.pk }}
-                        <label for="id_shift_{{ shift.pk }}">
-                            {# time #}
-                            {% if shift.is_full %}
-                                <del>{{ shift.time_hours }}</del>
-                            {% elif shift.blocked and not form.displayed_shifts %}
-                                <del>{{ shift.time_hours }}</del>
-                            {% else %}
-                                {{ shift.time_hours }}
-                            {% endif %}
+                        {% if shift.is_full or shift.blocked and not form.displayed_shifts %}
+                        <div class="full">
+                        {% else %}
+                        <div>
+                        {% endif %}
+                            {# checkbox #}
+                            {{ form | lookup_shift:shift.pk }}
+                            <label for="id_shift_{{ shift.pk }}">
+                                <span class="time">{{ shift.time_hours }}</span>
 
-                            {# number of helpers #}
-                            {% if event.show_public_numbers %}
-                                {% if shift.blocked and not form.displayed_shifts %}
-                                    <span class="badge badge-outline-dark">
-                                        {{ shift.number }}/{{ shift.number }}
-                                    </span>
-                                {% else %}
-                                    <span class="badge badge-outline-dark">
-                                        {{ shift.num_helpers }}/{{ shift.number }}
-                                    </span>
+                                {# number of helpers #}
+                                {% if event.show_public_numbers %}
+                                    {% if shift.blocked and not form.displayed_shifts %}
+                                        <span class="badge badge-outline-dark">
+                                            {{ shift.number }}/{{ shift.number }}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge badge-outline-dark">
+                                            {{ shift.num_helpers }}/{{ shift.number }}
+                                        </span>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
 
-                            {% if shift.name %}
-                                <br /><span class="name">{{ shift.name }}</span>
-                            {% endif %}
-                        </label>
-
-                        <br />
+                                {% if shift.name %}
+                                    <br /><span class="name">{{ shift.name }}</span>
+                                {% endif %}
+                            </label>
+                        </div>
                     {% endfor %}
                     </td>
                 {% endfor %}
@@ -178,6 +175,6 @@
         </div>
     </div>
 
-    <script src="{% static "helfertool/js/infection_instruction.js" %}"></script>
+    <script src="{% static "helfertool/js/registration.js" %}"></script>
 </form>
 
