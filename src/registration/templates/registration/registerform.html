@@ -1,8 +1,7 @@
 {% load i18n bootstrap4 icons static registerform_shifts toolsettings %}
 
-<form action="" method="post">
+<form action="" method="post" id="register_form" data-max-overlapping="{{ event.max_overlapping }}">
     {% csrf_token %}
-    <input type="hidden" id="max_overlapping" value="{{ event.max_overlapping }}" />
 
     <h2>{% trans "Jobs" %}</h2>
     {# list of all jobs and shifts #}
@@ -38,9 +37,9 @@
                     <td>
                     {% for shift in shifts %}
                         {% if shift.is_full or shift.blocked and not form.displayed_shifts %}
-                            <div class="full">
+                        <div class="full">
                         {% else %}
-                            <div>
+                        <div>
                         {% endif %}
                             {# checkbox #}
                             {{ form | lookup_shift:shift.pk }}
