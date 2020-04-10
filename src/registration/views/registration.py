@@ -37,18 +37,25 @@ def index(request, filter_old_events=True):
     involved_events = []
     enable_show_more_events = False
     if not request.user.is_anonymous:
-        if filter_old_events:
-            oldest_year = datetime.datetime.now().year - settings.EVENTS_LAST_YEARS
-            filtered_events = events.filter(date__year__gte=oldest_year)
-            enable_show_more_events = events.filter(date__year__lt=oldest_year).exists()
-        else:
-            filtered_events = events
-
-        for event in filtered_events:
+        # first get all involved events
+        all_involved_events = []
+        for event in events:
             event.involved = has_access(request.user, event, ACCESS_INVOLVED)
 
             if event.involved and not event.active:
-                involved_events.append(event)
+                all_involved_events.append(event)
+
+        # and then optionally cut away the old ones
+        if filter_old_events:
+            oldest_year = datetime.datetime.now().year - settings.EVENTS_LAST_YEARS
+            for event in all_involved_events:
+                if event.date.year >= oldest_year:
+                    involved_events.append(event)
+                else:
+                    # we skip an event, so we need a button to show it
+                    enable_show_more_events = True
+        else:
+            involved_events = all_involved_events
 
     # only one public event and no internal events -> redirect
     if events.count() == 1 and active_events:
