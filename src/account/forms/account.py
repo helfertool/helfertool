@@ -39,11 +39,21 @@ def _change_permission(user, groupname, has_perm, admin_user):
 
 
 def _user_flag_changeable(user, flag):
+    # local account -> yes
     if user.has_usable_password():
         return True
 
+    # LDAP enabled -> check the settings
     if hasattr(settings, "AUTH_LDAP_USER_FLAGS_BY_GROUP"):
-        return settings.AUTH_LDAP_USER_FLAGS_BY_GROUP.get(flag, None) is None
+        if settings.AUTH_LDAP_USER_FLAGS_BY_GROUP.get(flag, None) is not None:
+            return False
+
+    # OpenID connect enabled -> check the settings
+    if settings.OIDC_CUSTOM_PROVIDER_NAME is not None:
+        if flag == "is_active" and settings.OIDC_CUSTOM_CLAIM_LOGIN is not None:
+            return False
+        if flag == "is_superuser" and settings.OIDC_CUSTOM_CLAIM_ADMIN is not None:
+            return False
 
     return True
 
@@ -95,7 +105,7 @@ class EditUserForm(forms.ModelForm):
         if _user_flag_changeable(self.instance, "is_active"):
             self.fields["is_active"].help_text = ""
         else:
-            self.fields["is_active"].help_text = _("Managed by LDAP group")
+            self.fields["is_active"].help_text = _("Managed by external identity provider")
             self.fields["is_active"].disabled = True
 
         self._superuser_initial = self.instance.is_superuser
@@ -103,7 +113,7 @@ class EditUserForm(forms.ModelForm):
         if _user_flag_changeable(self.instance, "is_superuser"):
             self.fields["is_superuser"].help_text = ""
         else:
-            self.fields["is_superuser"].help_text = _("Managed by LDAP group")
+            self.fields["is_superuser"].help_text = _("Managed by external identity provider")
             self.fields["is_superuser"].disabled = True
 
         # permission: adduser

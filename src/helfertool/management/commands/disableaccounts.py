@@ -14,7 +14,8 @@ class Command(BaseCommand):
     help = """Disabled accounts which are inactive since the specified time.
     If the account was never logged in, the creation date is checked instead of the login date.
     
-    Accounts from external authentication sources (LDAP) are not changed since the active flag is synced again from there."""
+    Accounts from external authentication sources (LDAP, OpenID Connect) are not changed
+    as the active flag is synced again from there."""
 
     def add_arguments(self, parser):
         parser.add_argument('date', type=date,

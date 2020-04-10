@@ -80,7 +80,7 @@ def view_user(request, user_pk=None):
 
             return redirect('account:view_user', user.pk)
     else:
-        # user from LDAP
+        # user from LDAP/OpenID Connect
         pw_form = None
 
     context = {
