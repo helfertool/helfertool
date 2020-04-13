@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
-    <h2>{% trans "Advanced badge settings" %}</h2>
+    <h2 id="badges-header">{% trans "Advanced badge settings" %}</h2>
 
     <div class="alert alert-info" role="alert">
         {% trans "Changes of most of this settings require an update of the LaTeX template!" %}
@@ -31,11 +31,11 @@
     {% if permissions.count == 0 %}
         <p class="text-muted">{% trans "There are no permissions." %}</p>
     {% else %}
-        <table class="table">
+        <table class="table" aria-describedby="badges-header">
             <tr class="d-flex">
-                <th class="col-5">{% trans "Name" %}</th>
-                <th class="col-5">{% trans "LaTeX Name" %}</th>
-                <th class="col-2"></th>
+                <th class="col-5" scope="col">{% trans "Name" %}</th>
+                <th class="col-5" scope="col">{% trans "LaTeX Name" %}</th>
+                <th class="col-2" scope="col"></th>
             </tr>
 
             {% for perm in permissions %}

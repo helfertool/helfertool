@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons inventory %}
 
 {% block admincontent %}
-    <h2>{% trans "User agreements" %}</h2>
+    <h2 id="agreements-header">{% trans "User agreements" %}</h2>
 
     <p><a href="{% url 'account:new_agreement' %}">
         {% icon "plus" %}
@@ -10,12 +10,12 @@
     </a></p>
 
     {% if agreements %}
-        <table class="table">
+        <table class="table" aria-describedby="agreements-header">
             <tr>
-                <th>{% trans "Name" %}</th>
-                <th>{% trans "Start date" %}</th>
-                <th>{% trans "End date" %}</th>
-                <th></th>
+                <th scope="col">{% trans "Name" %}</th>
+                <th scope="col">{% trans "Start date" %}</th>
+                <th scope="col">{% trans "End date" %}</th>
+                <th scope="col"></th>
             </tr>
             {% for agreement in agreements %}
                 <tr>

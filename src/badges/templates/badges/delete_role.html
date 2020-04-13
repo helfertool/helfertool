@@ -3,18 +3,18 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete Badge Role" %}</h2>
+    <h2  id="badges-header">{% trans "Delete Badge Role" %}</h2>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="badges-header">
             <tr>
-                <th>{% trans "Name" %}</th>
+                <th scope="row">{% trans "Name" %}</th>
                 <td>{{ role.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Permissions" %}</th>
+                <th scope="row">{% trans "Permissions" %}</th>
                 <td>
                     <ul>
                         {% for perm in role.permissions.all %}

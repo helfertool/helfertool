@@ -1,8 +1,9 @@
 function all_gifts_delivered(element, include_deposit) {
     // If it is not set, set all checkboxes to their originial value.
-    delivery_state=$(element).prop("checked");
+    var delivery_state=$(element).prop("checked");
 
     // decide wether to include boxes with deposit
+    var boxes = null;
     if (include_deposit) {
         boxes = $('.delivery');
     } else {
@@ -16,7 +17,7 @@ function all_gifts_delivered(element, include_deposit) {
         });
     } else {
         boxes.each(function(index) {
-            value=$(this).data("original");
+            let value=$(this).data("original");
             $(this).children("input[type=checkbox]:not([disabled])").prop("checked", value=="True");
         });
     }

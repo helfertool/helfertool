@@ -9,9 +9,11 @@
 {% endif %}
 
 <div class="list-group">
+    <ul>
     {% for field in form %}
         <li class="list-group-item">
             {% bootstrap_field field form_group_class="" %}
         </li>
     {% endfor %}
+    <ul>
 </div>

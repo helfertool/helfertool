@@ -3,18 +3,18 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete prerequisite" %}</h2>
+    <h2 id='delete-prerequisite-header'>{% trans "Delete prerequisite" %}</h2>
 
     <form action="{% url 'prerequisites:delete_prerequisite' event.url_name prerequisite.pk %}" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="delete-prerequisite-header">
             <tr>
-                <th>{% trans "Prerequisite" %}</th>
+                <th scope="row">{% trans "Prerequisite" %}</th>
                 <td>{{ prerequisite.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Description" %}</th>
+                <th scope="row">{% trans "Description" %}</th>
                 <td>{{ prerequisite.description|safe }}</td>
             </tr>
         </table>

@@ -14,7 +14,7 @@ $("canvas.chart").each(function() {
         {
             // hide chart canvas and show text
             var empty = chart.data("empty");
-            emptynode = $("#" + empty);
+            var emptynode = $("#" + empty);
 
             chart.addClass('d-none');
             emptynode.removeClass('d-none');

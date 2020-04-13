@@ -3,22 +3,22 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete item" %}</h2>
+    <h2 id="inventory-header">{% trans "Delete item" %}</h2>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="inventory-header">
             <tr>
-                <th>{% trans "Inventory" %}</th>
+                <th scope="row">{% trans "Inventory" %}</th>
                 <td>{{ item.inventory.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Name" %}</th>
+                <th scope="row">{% trans "Name" %}</th>
                 <td>{{ item.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Barcode" %}</th>
+                <th scope="row">{% trans "Barcode" %}</th>
                 <td>{{ item.barcode }}</td>
             </tr>
         </table>

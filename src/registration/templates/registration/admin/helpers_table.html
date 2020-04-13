@@ -16,45 +16,46 @@ coordinators. This is only important for the delete_helper view.
 {% endcomment %}
 
 <table class="table">
+    <caption class="d-none">{% trans "Helper Table"%}</div>
     <thead>
         <tr>
-            <th class="nosort" data-priority="1"></th>
+            <th class="nosort" data-priority="1" scope="col"></th>
 
-            <th data-priority="1">
+            <th data-priority="1" scope="col">
                 {% trans "First name" %}
             </th>
 
-            <th data-priority="1">
+            <th data-priority="1" scope="col">
                 {% trans "Surname" %}
             </th>
 
             {% if event.ask_shirt %}
-            <th data-priority="5">
+            <th data-priority="5" scope="col">
                 {% trans "T-shirt" %}
             </th>
             {% endif %}
 
             {% if event.ask_vegetarian %}
-            <th data-priority="6">
+            <th data-priority="6" scope="col">
                 {% trans "Vegetarian" %}
             </th>
             {% endif %}
 
             {% if job.infection_instruction %}
-            <th data-priority="4">
+            <th data-priority="4" scope="col">
                 {% trans "Food handling" %}
             </th>
             {% endif %}
 
-            <th data-priority="2">
+            <th data-priority="2" scope="col">
                 {% trans "Comment" %}
             </th>
 
-            <th data-priority="3">
+            <th data-priority="3" scope="col">
                 {% trans "Registration time" %}
             </th>
 
-            <th class="nosort" data-priority="1"></th>
+            <th class="nosort" data-priority="1" scope="col"></th>
         </tr>
     </thead>
     <tbody>

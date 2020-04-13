@@ -3,7 +3,7 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Mail:" %} {{ mail.subject }}</h2>
+    <h2 id="mail-header">{% trans "Mail:" %} {{ mail.subject }}</h2>
 
     {% if mail.failed %}
         <div class="alert alert-danger" role="alert">
@@ -11,29 +11,29 @@
         </div>
     {% endif %}
 
-    <table class="table">
+    <table class="table" aria-describedby="mail-header">
         <tr>
-            <th>{% trans "Sent by" %}</th>
+            <th scope="row">{% trans "Sent by" %}</th>
             <td>{{ mail.user.get_full_name }}</td>
         </tr>
         <tr>
-            <th>{% trans "Sender" %}</th>
+            <th scope="row">{% trans "Sender" %}</th>
             <td>{{ mail.sender }}</td>
         </tr>
         <tr>
-            <th>{% trans "Date" %}</th>
+            <th scope="row">{% trans "Date" %}</th>
             <td>{{ mail.date }}</td>
         </tr>
         <tr>
-            <th>{% trans "CC" %}</th>
+            <th scope="row">{% trans "CC" %}</th>
             <td>{{ mail.cc | default:"-" }}</td>
         </tr>
         <tr>
-            <th>{% trans "Reply to" %}</th>
+            <th scope="row">{% trans "Reply to" %}</th>
             <td>{{ mail.reply_to | default:"-" }}</td>
         </tr>
         <tr>
-            <th>{% trans "Receiver" %}</th>
+            <th scope="row">{% trans "Receiver" %}</th>
             <td>
                 <ul>
                     {% for tmp in mail.receiver_list %}

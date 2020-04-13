@@ -78,9 +78,8 @@ class MailHandler:
 
         # 3) Original mail
         original_msg = None
-        if len(payload) >= 3:
-            # the original message again is a multipart message...
-            if payload[2].is_multipart():
+        # the original message again is a multipart message...
+        if len(payload) >= 3 and payload[2].is_multipart():
                 original_msg = payload[2].get_payload()[0]
 
         # 2) Delivery status notification

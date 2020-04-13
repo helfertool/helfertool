@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons inventory %}
 
 {% block admincontent %}
-    <h2>{% trans "Inventory" %}: {{ inventory.name }}</h2>
+    <h2 id="inventory-header">{% trans "Inventory" %}: {{ inventory.name }}</h2>
 
     <p><a href="{% url 'inventory:new_item' inventory.pk %}">
         {% icon "plus" %}
@@ -10,12 +10,12 @@
     </a></p>
 
     {% if items %}
-        <table class="table">
+        <table class="table" aria-describedby="inventory-header">
             <tr>
-                <th>{% trans "Name" %}</th>
-                <th>{% trans "Barcode" %}</th>
-                <th>{% trans "Comment" %}</th>
-                <th></th>
+                <th scope="col">{% trans "Name" %}</th>
+                <th scope="col">{% trans "Barcode" %}</th>
+                <th scope="col">{% trans "Comment" %}</th>
+                <th scope="col"></th>
             </tr>
             {% for item in items %}
                 <tr>

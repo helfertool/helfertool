@@ -92,31 +92,33 @@ class RegisterForm(forms.ModelForm):
         # add fields for shifts
         for shift in all_shifts:
             id = 'shift_%s' % shift.pk
-            self.fields[id] = forms.BooleanField(label=shift,
-                                                 required=False)
-
-            # disable button if shift is full
-            if shift.is_full() or (shift.blocked and not
-                                   self.displayed_shifts):
-                self.fields[id].widget.attrs['disabled'] = True
-            else:
-                # else set it up for automatic disabling
-                self.fields[id].widget.attrs['class'] = "registration_possible"
-                self.fields[id].widget.attrs['data-begin'] = int(shift.begin.timestamp())
-                self.fields[id].widget.attrs['data-end'] = int(shift.end.timestamp())
-
-            # check button if this shift should be selected
-            if shift in self.selected_shifts:
-                self.fields[id].widget.attrs['checked'] = True
-
-            # set class if infection instruction is needed for this shift
-            if shift.job.infection_instruction:
-                self.fields[id].widget.attrs['class'] = 'infection_instruction'
-                self.fields[id].widget.attrs['onClick'] = \
-                    'handle_infection_instruction()'
+            self.fields[id] = self._make_field(shift)
 
             # safe mapping id <-> pk
             self.shifts[id] = shift.pk
+
+    def _make_field(self, shift):
+        field = forms.BooleanField(label=shift, required=False)
+
+        # disable button if shift is full
+        if shift.is_full() or (shift.blocked and not
+                               self.displayed_shifts):
+            field.widget.attrs['disabled'] = True
+        else:
+            # else set it up for automatic disabling
+            field.widget.attrs['class'] = "registration_possible"
+            field.widget.attrs['data-begin'] = int(shift.begin.timestamp())
+            field.widget.attrs['data-end'] = int(shift.end.timestamp())
+
+        # check button if this shift should be selected
+        if shift in self.selected_shifts:
+            field.widget.attrs['checked'] = True
+
+        # set class if infection instruction is needed for this shift
+        if shift.job.infection_instruction:
+            field.widget.attrs['class'] = 'infection_instruction'
+            field.widget.attrs['onClick'] = \
+                'handle_infection_instruction()'
 
     def get_jobs(self):
         if self.displayed_shifts:
@@ -175,19 +177,18 @@ class RegisterForm(forms.ModelForm):
             self.add_error('privacy_statement',
                            _("You have to accept the data privacy statement."))
 
-        number_of_shifts = 0
         infection_instruction_needed = False
 
         selected_shifts = list(filter(lambda s: self.cleaned_data.get(s),
                                       self.shifts))
+        # check number of shifts > 0
+        if not selected_shifts:
+            raise ValidationError(_("You must select at least one shift."))
 
         # iterate over all (selected) shifts
         for shift in selected_shifts:
             # get this shift
             cur_shift = Shift.objects.get(pk=self.shifts[shift])
-
-            # number of shifts
-            number_of_shifts += 1
 
             # check if infection instruction is needed for one of the
             # shifts
@@ -202,10 +203,6 @@ class RegisterForm(forms.ModelForm):
             if cur_shift.blocked and not self.displayed_shifts:
                 raise ValidationError(_("You selected a blocked shift."))
 
-        # check number of shifts > 0
-        if number_of_shifts == 0:
-            raise ValidationError(_("You must select at least one shift."))
-
         # infection instruction needed but field not set?
         if (infection_instruction_needed and self.cleaned_data.get('infection_instruction') == ""):
             self.add_error('infection_instruction',
@@ -214,18 +211,30 @@ class RegisterForm(forms.ModelForm):
         # check for overlapping shifts
         if self.event.max_overlapping is not None:
             max_overlap = self.event.max_overlapping
-            for shifts in itertools.combinations(selected_shifts, 2):
-                s1 = Shift.objects.get(pk=self.shifts[shifts[0]])
-                s2 = Shift.objects.get(pk=self.shifts[shifts[1]])
+            if self._check_has_overlap(selected_shifts, max_overlap):
+                raise ValidationError(_("Some of your shifts overlap more then %(minutes)d minutes.") %
+                                        {'minutes': max_overlap})
 
-                # check if shifts overlap (1st or term) or one shift is part
-                # of the other shift (2nd and 3rd or term)
-                if ((s2.end-s1.begin).total_seconds() > max_overlap*60
-                        and (s1.end-s2.begin).total_seconds() > max_overlap*60) \
-                        or (s1.begin >= s2.begin and s1.end <= s2.end) \
-                        or (s2.begin >= s1.begin and s2.end <= s1.end):
-                    raise ValidationError(_("Some of your shifts overlap more then %(minutes)d minutes.") %
-                                          {'minutes': max_overlap})
+    def _check_has_overlap(self, shifts, max_overlap):
+        """
+        Check if any two shifts from the argument list are overlapping
+        The arguments are the keys of the shifts
+
+        :return: true of overlap exists
+        """
+
+        for shifts in itertools.combinations(shifts, 2):
+            s1 = Shift.objects.get(pk=self.shifts[shifts[0]])
+            s2 = Shift.objects.get(pk=self.shifts[shifts[1]])
+
+            # check if shifts overlap (1st or term) or one shift is part
+            # of the other shift (2nd and 3rd or term)
+            if ((s2.end-s1.begin).total_seconds() > max_overlap*60
+                    and (s1.end-s2.begin).total_seconds() > max_overlap*60) \
+                    or (s1.begin >= s2.begin and s1.end <= s2.end) \
+                    or (s2.begin >= s1.begin and s2.end <= s1.end):
+                return True
+        return False
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save(False)

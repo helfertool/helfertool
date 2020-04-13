@@ -5,13 +5,13 @@
     <h2>{% trans "T-Shirts" %}</h2>
 
     {% if total_shirts %}
-        <h3>{% trans "Total" %}</h3>
+        <h3 id="shirts-total-header">{% trans "Total" %}</h3>
 
-        <table class="table">
+        <table class="table" aria-describedby="shirts-total-header">
             <tr>
-                <th class="width-10em"></th>
+                <th class="width-10em" scope="col"></th>
                 {% for size in size_names %}
-                    <th>{{ size }}</th>
+                    <th scope="col">{{ size }}</th>
                 {% endfor %}
             </tr>
             <tr>
@@ -38,13 +38,13 @@
         </div>
 
         {% for job,data in job_shirts.items %}
-            <h4>{{ job.name }}</h4>
+            <h4 id="job-{{ job.id }}-header">{{ job.name }}</h4>
 
-            <table class="table">
+            <table class="table" aria-describedby="job-{{ job.id }}-header">
                 <tr>
-                    <th class="width-10em">{% trans "Shift" %}</th>
+                    <th class="width-10em" scope="col">{% trans "Shift" %}</th>
                     {% for size in size_names %}
-                        <th>{{ size }}</th>
+                        <th scope="col">{{ size }}</th>
                     {% endfor %}
                 </tr>
 
@@ -58,9 +58,9 @@
                 {% endfor %}
 
                 <tr>
-                    <th>{% trans "Total" %}</th>
+                    <th scope="row">{% trans "Total" %}</th>
                     {% for size,num in data.total.items %}
-                        <th>{{ num }}</th>
+                        <th scope="col">{{ num }}</th>
                     {% endfor %}
                 </tr>
             </table>

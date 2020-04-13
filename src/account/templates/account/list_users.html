@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons globalpermissions lastlogin %}
 
 {% block admincontent %}
-    <h2>{% trans "Users" %}</h2>
+    <h2 id="users-header">{% trans "Users" %}</h2>
 
     <form action="{% url "account:list_users" %}" method="GET" class="form-inline">
         <div class="input-group">
@@ -48,11 +48,11 @@
     </p>
 
     {% if users %}
-        <table class="table mt-3">
+        <table class="table mt-3" aria-describedby="users-header">
             <tr>
-                <th class="col-4">{% trans "Name" %}</th>
-                <th class="col-4">{% trans "Details" %}</th>
-                <th class="col-4">{% trans "Last login" %}</th>
+                <th class="col-4" scope="col">{% trans "Name" %}</th>
+                <th class="col-4" scope="col">{% trans "Details" %}</th>
+                <th class="col-4" scope="col">{% trans "Last login" %}</th>
             </tr>
             {% for user in users %}
                 <tr>

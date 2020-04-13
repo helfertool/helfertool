@@ -245,8 +245,7 @@ def has_access_event_or_job(user, event, access_event, access_job):
     `access_event` can be `None`.
     """
     # check event
-    if access_event:
-        if has_access(user, event, access_event):
+    if access_event and has_access(user, event, access_event):
             return True
 
     # check jobs

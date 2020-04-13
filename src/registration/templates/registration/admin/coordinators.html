@@ -6,16 +6,16 @@
     <h2>{% trans "Coordinators" %}</h2>
 
     {% for job in event.job_set.all %}
-        <h3>{{ job.name }}</h3>
+        <h3 id="job-{{ job.id }}-header">{{ job.name }}</h3>
 
         {% if job.coordinators.count == 0 %}
             <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
         {% else %}
-            <table class="table">
+            <table class="table" aria-describedby="job-{{ job.id }}-header">
                 <tr>
-                    <th>{% trans "Name" %}</th>
-                    <th>{% trans "E-Mail" %}</th>
-                    <th>{% trans "Mobile phone" %}</th>
+                    <th scope="col">{% trans "Name" %}</th>
+                    <th scope="col">{% trans "E-Mail" %}</th>
+                    <th scope="col">{% trans "Mobile phone" %}</th>
                 </tr>
                 {% for coordinator in job.coordinators.all %}
                     <tr>
