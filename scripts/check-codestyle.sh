@@ -9,6 +9,7 @@ RESET="\x1b[0m"
 
 PEP8_IGNORES="E121,E123,E126,E226,E24,E704"  # defaults
 PEP8_IGNORES="$PEP8_IGNORES,E402"
+PEP8_IGNORES="$PEP8_IGNORES,W503" # Break _before_ binary operator
 PEP8_LINE_LENGTH=120
 
 # base directory
@@ -25,7 +26,7 @@ fi
 # check each module
 for m in $modules ; do
     # print module
-    echo -ne "${GREEN}Checking module: $m${RESET}\t\t"
+	printf "${GREEN}Checking module: %-13s${RESET} " "$m"
 
     # PEP8
     pep_output="$(flake8 --exclude migrations,__init__.py --ignore $PEP8_IGNORES --max-line-length=$PEP8_LINE_LENGTH $m 2>&1)"

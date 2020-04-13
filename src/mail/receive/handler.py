@@ -60,7 +60,7 @@ class MailHandler:
 
         Returns None or a list of DeliveryNotification objects (one message may contain multiple mail addresses).
         """
-        # based on https://stackoverflow.com/questions/5298285/detecting-if-an-email-is-a-delivery-status-notification-and-extract-informatio
+        # based on https://stackoverflow.com/questions/5298285/detecting-if-an-email-is-a-delivery-status-notification-and-extract-informatio # noqa
 
         # it needs to be a multipart message
         if not msg.is_multipart():

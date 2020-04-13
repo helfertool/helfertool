@@ -24,6 +24,7 @@ def gifts_for_shift(form, shift):
 def helper_has_missed_shift(helper, shift):
     return helper.has_missed_shift(shift)
 
+
 @register.simple_tag
 def helper_shift_requires_deposit(helper, shift):
     helpershift = HelperShift.objects.get(helper=helper, shift=shift)

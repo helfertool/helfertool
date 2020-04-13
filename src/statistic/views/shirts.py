@@ -7,7 +7,8 @@ from collections import OrderedDict
 from registration.views.utils import nopermission
 from registration.decorators import archived_not_available
 from registration.models import Event, Helper
-from registration.permissions import has_access, has_access_event_or_job, ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS
+from registration.permissions import has_access, has_access_event_or_job, \
+    ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS
 
 
 class JobShirts:

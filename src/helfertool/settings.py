@@ -37,10 +37,10 @@ except yaml.parser.ParserError as e:
 is_docker = dict_get(config, False, 'docker')
 
 # versioning
-HELFERTOOL_VERSION=get_version(os.path.join(BASE_DIR, 'version.txt'))
-HELFERTOOL_CONTAINER_VERSION=None
+HELFERTOOL_VERSION = get_version(os.path.join(BASE_DIR, 'version.txt'))
+HELFERTOOL_CONTAINER_VERSION = None
 if is_docker:
-    HELFERTOOL_CONTAINER_VERSION=get_version('/helfertool/container_version')
+    HELFERTOOL_CONTAINER_VERSION = get_version('/helfertool/container_version')
 
 # directories for static and media files
 if is_docker:

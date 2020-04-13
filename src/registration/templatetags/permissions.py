@@ -1,9 +1,8 @@
 from django import template
-from django.conf import settings
 
 from ..permissions import has_access as ext_has_access
 from ..permissions import has_access_event_or_job as ext_has_access_event_or_job
-from ..permissions import ACCESS_INVOLVED, _check_job_role
+from ..permissions import _check_job_role
 
 register = template.Library()
 

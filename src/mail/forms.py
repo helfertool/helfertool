@@ -9,7 +9,7 @@ from smtplib import SMTPException
 from .models import SentMail, MailDelivery
 from .tracking import new_tracking_event
 
-from registration.permissions import has_access, ACCESS_INVOLVED, ACCESS_MAILS_SEND, ACCESS_JOB_SEND_MAILS
+from registration.permissions import has_access, ACCESS_MAILS_SEND, ACCESS_JOB_SEND_MAILS
 
 
 class MailFormError(Exception):
