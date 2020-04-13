@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
 
-from ..models import Event, Job, Shift
+from ..models import Event, Shift
 from ..forms import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
     HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm, HelperInternalCommentForm
 from ..decorators import archived_not_available
@@ -31,7 +31,7 @@ def helpers(request, event_url_name):
     # check permission
     if not has_access(request.user, event, ACCESS_INVOLVED):
         return nopermission(request)
-    
+
     user_can_export = has_access(request.user, event, ACCESS_EVENT_EXPORT_HELPERS)
 
     # list of days with shifts
@@ -60,11 +60,12 @@ def helpers_for_job(request, event_url_name, job_pk):
 
     # show list of helpers
     context = {'event': event,
-                'job': job,
-                'shifts_by_day': shifts_by_day,
-                'user_manages_attendance': user_manages_attendance}
+               'job': job,
+               'shifts_by_day': shifts_by_day,
+               'user_manages_attendance': user_manages_attendance}
     return render(request, 'registration/admin/helpers_for_job.html',
-                    context)
+                  context)
+
 
 @login_required
 def view_helper(request, event_url_name, helper_pk):

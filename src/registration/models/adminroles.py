@@ -24,7 +24,7 @@ class EventAdminRoles(models.Model):
 
     class Meta:
         unique_together = ['event', 'user', ]
-        
+
     event = models.ForeignKey(
         Event,
         on_delete=models.CASCADE,

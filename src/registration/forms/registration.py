@@ -220,10 +220,10 @@ class RegisterForm(forms.ModelForm):
 
                 # check if shifts overlap (1st or term) or one shift is part
                 # of the other shift (2nd and 3rd or term)
-                if ((s2.end-s1.begin).total_seconds() > max_overlap*60 and
-                    (s1.end-s2.begin).total_seconds() > max_overlap*60) or \
-                   (s1.begin >= s2.begin and s1.end <= s2.end) or \
-                   (s2.begin >= s1.begin and s2.end <= s1.end):
+                if ((s2.end-s1.begin).total_seconds() > max_overlap*60
+                        and (s1.end-s2.begin).total_seconds() > max_overlap*60) \
+                        or (s1.begin >= s2.begin and s1.end <= s2.end) \
+                        or (s2.begin >= s1.begin and s2.end <= s1.end):
                     raise ValidationError(_("Some of your shifts overlap more then %(minutes)d minutes.") %
                                           {'minutes': max_overlap})
 

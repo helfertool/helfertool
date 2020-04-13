@@ -31,7 +31,7 @@ def edit_event(request, event_url_name=None):
     else:
         # event will be created -> superuser or addevent group
         if not (request.user.is_superuser or has_addevent_group(request.user)):
-            return nopermission(request)     
+            return nopermission(request)
 
     # handle form
     form = EventForm(request.POST or None, request.FILES or None,
@@ -84,7 +84,7 @@ def edit_event_admins(request, event_url_name=None):
     # check permission
     if not has_access(request.user, event, ACCESS_EVENT_EDIT):
         return nopermission(request)
-  
+
     # one form per existing admin (differentiated by prefix)
     all_forms = []
     event_admin_roles = EventAdminRoles.objects.filter(event=event)

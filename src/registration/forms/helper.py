@@ -1,6 +1,5 @@
 from django import forms
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.postgres.search import TrigramSimilarity
 from django.core.exceptions import ValidationError
 from django.db.models import Q
@@ -259,10 +258,10 @@ class HelperSearchForm(forms.Form):
 
         if settings.SEARCH_SIMILARITY_DISABLED:
             # traditional direct-matching
-            data = self.event.helper_set.filter(Q(firstname__icontains=p) |
-                                                Q(surname__icontains=p) |
-                                                Q(email__icontains=p) |
-                                                Q(phone__icontains=p))
+            data = self.event.helper_set.filter(Q(firstname__icontains=p)
+                                                | Q(surname__icontains=p)
+                                                | Q(email__icontains=p)
+                                                | Q(phone__icontains=p))
         else:
             # proper databases support -> fuzzy-matching
             data = self.event.helper_set.annotate(
@@ -271,9 +270,9 @@ class HelperSearchForm(forms.Form):
             ).annotate(
                 similarity=Greatest('similarity_fn', 'similarity_sn'),
             ).filter(
-                Q(similarity__gte=settings.SEARCH_SIMILARITY) |
-                Q(email__icontains=p) |
-                Q(phone__icontains=p)
+                Q(similarity__gte=settings.SEARCH_SIMILARITY)
+                | Q(email__icontains=p)
+                | Q(phone__icontains=p)
             ).order_by('-similarity')
 
         data = filter(lambda h: has_access(self.user, h, ACCESS_HELPER_VIEW), data)

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from collections import OrderedDict
-from django.db.models.functions import TruncDate, TruncTime
+from django.db.models.functions import TruncDate
 
 from .utils import nopermission
 

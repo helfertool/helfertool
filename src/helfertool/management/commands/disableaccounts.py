@@ -13,14 +13,14 @@ def date(s):
 class Command(BaseCommand):
     help = """Disabled accounts which are inactive since the specified time.
     If the account was never logged in, the creation date is checked instead of the login date.
-    
+
     Accounts from external authentication sources (LDAP, OpenID Connect) are not changed
     as the active flag is synced again from there."""
 
     def add_arguments(self, parser):
         parser.add_argument('date', type=date,
-                            help='Accounts which were not active since this date will be disabled (format: YYYY-MM-DD).')
-        
+                            help='Accounts that were not active since this date will be disabled (format: YYYY-MM-DD).')
+
         parser.add_argument('--dry-run', action='store_true', help='do not really disable the accounts')
 
     def handle(self, *args, **options):
@@ -32,7 +32,9 @@ class Command(BaseCommand):
         # 2. need to be disabled because
         #    a. last login before deadline
         #    b. never logged in but created before deadline
-        for u in User.objects.filter(is_active=True).filter(Q(last_login__lt=date) | Q(last_login__isnull=True, date_joined__lt=date)):
+        for u in User.objects.filter(is_active=True) \
+            .filter(Q(last_login__lt=date)
+                    | Q(last_login__isnull=True, date_joined__lt=date)):
             # skip users from external authentication providers
             if u.has_usable_password():
                 # disable user

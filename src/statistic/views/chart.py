@@ -5,7 +5,6 @@ from django.utils.translation import ugettext as _
 
 from registration.decorators import archived_not_available
 from registration.models import Event
-from registration.views.utils import nopermission
 from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
 
 
