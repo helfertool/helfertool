@@ -4,17 +4,17 @@
 {% block admincontent %}
     <h2>{% trans "Helpers with prerequisite:" %} {{ prerequisite.name }}</h2>
 
-    {{ prerequisite.description|safe }}
+    <div id="prerequisite-description">{{ prerequisite.description|safe }}</div>
 
     {% if helpers %}
-        <table class="table">
+        <table class="table" aria-describedby="prerequisite-description">
             <thead>
                 <tr>
-                    <th>{% trans "First name" %}</th>
-                    <th>{% trans "Surname" %}</th>
-                    <th>{% trans "Registration time" %}</th>
-                    <th>{% trans "Fulfilled" %}</th>
-                    <th></th>
+                    <th scope="col">{% trans "First name" %}</th>
+                    <th scope="col">{% trans "Surname" %}</th>
+                    <th scope="col">{% trans "Registration time" %}</th>
+                    <th scope="col">{% trans "Fulfilled" %}</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>

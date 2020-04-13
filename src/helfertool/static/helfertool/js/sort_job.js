@@ -15,8 +15,8 @@ function _handle_sort(item_num_cur, direction)
     if(_item_exists(item_num_cur) && _item_exists(item_num_swap))
     {
         // get name, pk and order
-        data_cur = _get_data(item_num_cur);
-        data_swap = _get_data(item_num_swap);
+        var data_cur = _get_data(item_num_cur);
+        var data_swap = _get_data(item_num_swap);
 
         // move item in list
         _set_item(item_num_cur, data_swap[0], data_swap[1]);

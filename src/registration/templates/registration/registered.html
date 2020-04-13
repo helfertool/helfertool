@@ -42,7 +42,7 @@
 
         {% if event.changes_possible %}
             <p><a href="{% url 'update_personal' event.url_name data.pk %}">
-                <i class="fas fa-edit"></i> {% trans "Edit" %}
+                <em class="fas fa-edit"></em> {% trans "Edit" %}
             </a></p>
         {% endif %}
 
@@ -86,21 +86,21 @@
         {% comment %}
         {% if event.changes_possible %}
             <a class="btn btn-primary" href="TODO">
-                <i class="fa fa-plus fa-lg"></i> {% trans "Register for more shifts" %}
+                <em class="fa fa-plus fa-lg"></em> {% trans "Register for more shifts" %}
             </a> &nbsp;
         {% endif %}
         {% endcomment %}
 
         <p>
             <a class="btn btn-outline-primary" href="{% url 'ical' event.url_name data.pk %}">
-                <i class="far fa-calendar-alt fa-lg"></i> {% trans "Add to calendar (iCal)" %}
+                <em class="far fa-calendar-alt fa-lg"></em> {% trans "Add to calendar (iCal)" %}
             </a>
         </p>
     {% endif %}
 
     {% if event.imprint %}
         <div class="contact">
-            <p><b>{% trans "Contact" %}</b></p>
+            <p><strong>{% trans "Contact" %}</strong></p>
             {{ event.imprint | safe }}
         </div>
     {% endif %}

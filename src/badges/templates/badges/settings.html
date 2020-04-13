@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons badges %}
 
 {% block admincontent %}
-    <h2>{% trans "Badge settings" %}</h2>
+    <h2 id="badge-header">{% trans "Badge settings" %}</h2>
 
     <p>
         <a href="{% url 'badges:settings_advanced' event.url_name %}">
@@ -15,12 +15,12 @@
     {% if roles.count == 0 %}
         <p class="text-muted">{% trans "There are no roles." %}</p>
     {% else %}
-        <table class="table">
+        <table class="table" aria-describedby="badge-header">
             <tr class="d-flex">
-                <th class="col-3">{% trans "Name" %}</th>
-                <th class="col-3">{% trans "LaTeX Name" %}</th>
-                <th class="col-4">{% trans "Permissions" %}</th>
-                <th class="col-2"></th>
+                <th class="col-3" scope="col">{% trans "Name" %}</th>
+                <th class="col-3" scope="col">{% trans "LaTeX Name" %}</th>
+                <th class="col-4" scope="col">{% trans "Permissions" %}</th>
+                <th class="col-2" scope="col"></th>
             </tr>
 
             {% for role in roles %}
@@ -58,15 +58,15 @@
         </p>
     {% endif %}
 
-    <h3>{% trans "Designs" %}</h3>
+    <h3 id="designs-header">{% trans "Designs" %}</h3>
 
     {% if designs.count == 0 %}
         <p class="text-muted">{% trans "There are no designs." %}</p>
     {% else %}
-        <table class="table">
+        <table class="table" aria-describedby="designs-header">
             <tr class="d-flex">
-                <th class="col-10">{% trans "Name" %}</th>
-                <th class="col-2"></th>
+                <th class="col-10" scope="col">{% trans "Name" %}</th>
+                <th class="col-2" scope="col"></th>
             </tr>
 
             {% for design in designs %}
@@ -98,18 +98,18 @@
     {% endif %}
 
 
-    <h3>{% trans "Defaults" %}</h3>
+    <h3 id="defaults-header">{% trans "Defaults" %}</h3>
     <form action="" method="post">
         {% csrf_token %}
 
         {% bootstrap_form defaults_form %}
 
-        <table class="table">
+        <table class="table" aria-describedby="defaults-header">
             <tr class="d-flex">
-                <th class="col-3">{% trans "Job" %}</th>
-                <th class="col-3">{% trans "Role" %}</th>
-                <th class="col-3">{% trans "Design" %}</th>
-                <th class="col-3">{% trans "Print no default role" %}</th>
+                <th class="col-3" scope="col">{% trans "Job" %}</th>
+                <th class="col-3" scope="col">{% trans "Role" %}</th>
+                <th class="col-3" scope="col">{% trans "Design" %}</th>
+                <th class="col-3" scope="col">{% trans "Print no default role" %}</th>
             </tr>
 
             {% for job in event.job_set.all %}

@@ -42,7 +42,7 @@
     {% endif %}
 
     {% if event.logo %}
-        <img src="{{ MEDIA_URL }}{{ event.logo }}" id="logo" />
+        <img src="{{ MEDIA_URL }}{{ event.logo }}" id="logo" alt="event logo" />
     {% endif %}
 
     <h1>{{ event }}</h1>
@@ -53,7 +53,7 @@
 
     {% if event.imprint %}
         <div class="contact">
-            <p><b>{% trans "Contact" %}</b></p>
+            <p><strong>{% trans "Contact" %}</strong></p>
             {{ event.imprint | safe }}
         </div>
     {% endif %}

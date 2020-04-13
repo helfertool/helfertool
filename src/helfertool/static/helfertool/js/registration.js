@@ -1,4 +1,4 @@
-max_overlapping = parseInt($('#register_form').data('max-overlapping'));
+var max_overlapping = parseInt($('#register_form').data('max-overlapping'));
 
 function update_shift_registration(input_field) {
     // do not check, if the overlapping setting is None (in python)
@@ -60,10 +60,10 @@ function update_shift_registration(input_field) {
         var other_end = $(other_field).data('end');
 
         // this is the same logic as in RegisterForm, so the frontend and backend reject the same shifts
-        is_overlapping = (other_end-begin > max_overlapping_seconds &&
-                          end-other_begin > max_overlapping_seconds) ||
-                         (begin >= other_begin && end <= other_end) ||
-                         (other_begin >= begin && other_end <= end);
+        var is_overlapping = (other_end-begin > max_overlapping_seconds
+                              && end-other_begin > max_overlapping_seconds)
+                             || (begin >= other_begin && end <= other_end)
+                             || (other_begin >= begin && other_end <= end);
 
         if (is_overlapping) {
             modifier(other_field);

@@ -3,24 +3,24 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete coordinator" %}</h2>
+    <h2 id="coordinator-header">{% trans "Delete coordinator" %}</h2>
 
     <form action="" method="post">
         {% csrf_token %}
 
         {% bootstrap_form_errors form %}
 
-        <table class="table">
+        <table class="table" aria-describedby="coordinator-header">
             <tr>
-                <th>{% trans "Name" %}</th>
+                <th scope="row">{% trans "Name" %}</th>
                 <td>{{ helper.full_name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Mail" %}</th>
+                <th scope="row">{% trans "Mail" %}</th>
                 <td>{{ helper.email }}</td>
             </tr>
             <tr>
-                <th>{% trans "Job" %}</th>
+                <th scope="row">{% trans "Job" %}</th>
                 <td>{{ job.name }}</td>
             </tr>
         </table>

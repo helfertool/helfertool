@@ -14,12 +14,12 @@
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
 
-    <h3>{% trans "Gifts" %}</h3>
-    <table class="table">
+    <h3 id="gifts-header">{% trans "Gifts" %}</h3>
+    <table class="table" aria-describedby="gifts-header">
         <tr>
-            <th>{% trans "Name" %}</th>
+            <th scope="col">{% trans "Name" %}</th>
             {% if not event.archived %}
-                <th></th>
+                <th scope="col"></th>
             {% endif %}
         </tr>
 
@@ -41,13 +41,13 @@
         <p><a href="{% url "gifts:add_gift" event.url_name %}">{% icon "plus" %} {% trans "Add gift" %}</a></p>
     {% endif %}
 
-    <h3>{% trans "Gift sets" %}</h3>
-    <table class="table">
+    <h3 id="giftset-header">{% trans "Gift sets" %}</h3>
+    <table class="table" aria-describedby="giftset-header">
         <tr>
-            <th>{% trans "Name" %}</th>
-            <th>{% trans "Gifts" %}</th>
+            <th scope="col">{% trans "Name" %}</th>
+            <th scope="col">{% trans "Gifts" %}</th>
             {% if not event.archived %}
-                <th></th>
+                <th scope="col"></th>
             {% endif %}
         </tr>
 

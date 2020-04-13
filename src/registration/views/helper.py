@@ -118,15 +118,15 @@ def view_helper(request, event_url_name, helper_pk):
         if not prerequisites_form.is_valid():
             forms_valid = False
 
-    # the forms are valid and we have at least one form -> save and redirect
+    # all forms are valid and we have at least one form -> save and redirect
     if forms_valid and (internal_comment_form or gifts_form or prerequisites_form):
-        if internal_comment_form and internal_comment_form.is_valid():
+        if internal_comment_form:
             internal_comment_form.save()
 
-        if gifts_form and gifts_form.is_valid():
+        if gifts_form:
             gifts_form.save()
 
-        if prerequisites_form and prerequisites_form.is_valid():
+        if prerequisites_form:
             prerequisites_form.save(request)
 
         messages.success(request, _("Changes were saved."))

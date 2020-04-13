@@ -11,13 +11,13 @@
             </a>
         </h4>
 
-        <div id="roles-collapse" class="collapse">
+        <div id="roles-collapse" class="collapse" id="event-admin-description">
             <h5 class="alert-heading">{% trans "For the whole event" %}</h4>
 
-            <p><b>{% trans "Administrator" %}</b><br />
+            <p><strong>{% trans "Administrator" %}</strong><br />
             {% trans "Can do everything with the event, including deletion and permissions changes." %}</p>
 
-            <p><b>{% trans "Restricted administrator" %}</b><br />
+            <p><strong>{% trans "Restricted administrator" %}</strong><br />
             {% trans "Can manage helpers and all related features, but not change the event settings. The user can not:" %}</p>
             <ul>
                 <li>{% trans "Edit or delete the event itself" %}</li>
@@ -25,14 +25,14 @@
                 <li>{% trans "Change jobs or shifts" %}</li>
                 <li>{% trans "Change inventory, badges, gifts or prerequisite settings" %}</li>
             </ul>
-            
-            <p><b>{% trans "Front desk" %}</b><br />
+
+            <p><strong>{% trans "Front desk" %}</strong><br />
             {% trans "Can read all helper data, resend the confirmation mail, set the presence of the helpers and delivered gifts." %}</p>
 
-            <p><b>{% trans "Inventory" %}</b><br />
+            <p><strong>{% trans "Inventory" %}</strong><br />
             {% trans "Can read all helper data and register or take back inventory items." %}</p>
 
-            <p><b>{% trans "Badges" %}</b><br />
+            <p><strong>{% trans "Badges" %}</strong><br />
             {% trans "Can print and register badges." %}</p>
 
             <hr>
@@ -48,18 +48,18 @@
 
             <hr>
 
-            <p><b>{% trans "To remove a user, deselect all roles and click Save." %}</b></p>
+            <p><strong>{% trans "To remove a user, deselect all roles and click Save." %}</strong></p>
         </div>
     </div>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="event-admin-description">
             <thead>
                 <tr>
-                    <th scope="col" width="60%">{% trans "User" %}</th>
-                    <th scope="col" width="40%">{% trans "Roles" %}</th>
+                    <th scope="col" class="col-md-6">{% trans "User" %}</th>
+                    <th scope="col" class="col-md-4">{% trans "Roles" %}</th>
                 </tr>
             </thead>
             <tbody>

@@ -3,18 +3,18 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete job" %}</h2>
+    <h2 id="job-header">{% trans "Delete job" %}</h2>
 
     <form action="{% url 'delete_job' event.url_name job.pk %}" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="job-header">
             <tr>
-                <th>{% trans "Job" %}</th>
+                <th scope="row">{% trans "Job" %}</th>
                 <td>{{ job.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Description" %}</th>
+                <th scope="row">{% trans "Description" %}</th>
                 <td>{{ job.description|safe }}</td>
             </tr>
         </table>

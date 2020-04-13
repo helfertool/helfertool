@@ -265,9 +265,8 @@ class Event(models.Model):
 
             new_choices = self.get_shirt_choices()
             for choice in Event.SHIRT_CHOICES:
-                if choice not in new_choices:
-                    if self.helper_set.filter(shirt=choice[0]).exists():
-                        not_removable.append(choice[1])
+                if choice not in new_choices and self.helper_set.filter(shirt=choice[0]).exists():
+                    not_removable.append(choice[1])
 
             if not_removable:
                 sizes = ', '.join(map(str, not_removable))
@@ -331,38 +330,53 @@ def event_saved(sender, instance, using, **kwargs):
     helpers and coordinators if necessary.
     """
     if instance.badges:
-        # badge settings for event
-        if not instance.badge_settings:
-            settings = BadgeSettings()
-            settings.event = instance
-            settings.save()
-
-        # badge defaults for jobs
-        for job in instance.job_set.all():
-            if not job.badge_defaults:
-                defaults = BadgeDefaults()
-                defaults.save()
-
-                job.badge_defaults = defaults
-                job.save()
-
-        # badge for helpers
-        for helper in instance.helper_set.all():
-            if not hasattr(helper, 'badge'):
-                badge = Badge()
-                badge.helper = helper
-                badge.save()
+        _setup_badge_settings(instance)
 
     if instance.gifts:
-        if not instance.gift_settings:
-            GiftSettings.objects.create(event=instance)
-
-        for helper in instance.helper_set.all():
-            if not hasattr(helper, 'gifts'):
-                gifts = HelpersGifts()
-                gifts.helper = helper
-                gifts.save()
+        _setup_gift_settings(instance)
 
     if instance.inventory:
-        if not instance.inventory_settings:
-            InventorySettings.objects.create(event=instance)
+        _setup_inventory_settings(instance)
+
+def _setup_badge_settings(event):
+    """
+    Set up badges for all jobs and helpers
+    """
+    # badge settings for event
+    if not event.badge_settings:
+        settings = BadgeSettings()
+        settings.event = event
+        settings.save()
+
+    # badge defaults for jobs
+    for job in event.job_set.all():
+        if not job.badge_defaults:
+            defaults = BadgeDefaults()
+            defaults.save()
+
+            job.badge_defaults = defaults
+            job.save()
+
+    # badge for helpers
+    for helper in event.helper_set.all():
+        if not hasattr(helper, 'badge'):
+            badge = Badge()
+            badge.helper = helper
+            badge.save()
+
+def _setup_gift_settings(event):
+    """
+    Setup gift relations for all helpers
+    """
+    if not event.gift_settings:
+        GiftSettings.objects.create(event=event)
+
+    for helper in event.helper_set.all():
+        if not hasattr(helper, 'gifts'):
+            gifts = HelpersGifts()
+            gifts.helper = helper
+            gifts.save()
+
+def _setup_inventory_settings(event):
+    if not event.inventory_settings:
+        InventorySettings.objects.create(event=event)

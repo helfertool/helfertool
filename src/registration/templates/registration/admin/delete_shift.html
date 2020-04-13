@@ -3,22 +3,22 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete shift" %}</h2>
+    <h2 id="shift-header">{% trans "Delete shift" %}</h2>
 
     <form action="{% url 'delete_shift' event.url_name job.pk shift.pk %}" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="shift-header">
             <tr>
-                <th>{% trans "Job" %}</th>
+                <th scope="row">{% trans "Job" %}</th>
                 <td>{{ shift.job.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Begin" %}</th>
+                <th scope="row">{% trans "Begin" %}</th>
                 <td>{{ shift.begin }}</td>
             </tr>
             <tr>
-                <th>{% trans "End" %}</th>
+                <th scope="row">{% trans "End" %}</th>
                 <td>{{ shift.end }}</td>
             </tr>
         </table>

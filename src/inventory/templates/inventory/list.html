@@ -4,14 +4,14 @@
 {% load inventory %}
 
 {% block admincontent %}
-    <h2>{% trans "Inventory" %}</h2>
+    <h2 id="inventory-header">{% trans "Inventory" %}</h2>
 
     {% regroup used_items by item as item_groups %} {# TODO: sort by item #}
 
-    <table class="table">
+    <table class="table" aria-describedby="inventory-header">
         <tr class="d-flex">
-            <th class="col-4">{% trans "Item" %}</th>
-            <th class="col-8">{% trans "Status and log" %}</th>
+            <th class="col-4" scope="col">{% trans "Item" %}</th>
+            <th class="col-8" scope="col">{% trans "Status and log" %}</th>
         </tr>
         {% for group in item_groups %}
             <tr class="d-flex">
@@ -56,7 +56,7 @@
                                         </span>
                                     {% else %}
                                         <span class="text-danger">
-                                            <b>{{ use.helper }}</b><br/>
+                                            <strong>{{ use.helper }}</strong><br/>
                                             {% trans "Since" %}
                                             {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
                                         </span>

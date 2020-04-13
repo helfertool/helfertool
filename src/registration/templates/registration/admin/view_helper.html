@@ -48,8 +48,12 @@
 
     {# coordinated jobs #}
     {% if helper.is_coordinator %}
-        <h3>{% trans "Coordinator" %}</h3>
-        <table class="table">
+        <h3 id="coordinator-header">{% trans "Coordinator" %}</h3>
+        <table class="table" aria-describedby="coordinator-header">
+            <tr>
+                <th scope="col">{% trans "Job" %}</th>
+                <th scope="col"></th>
+            </tr>
             {% for job in helper.coordinated_jobs %}
                 {% has_access job "ACCESS_JOB_EDIT_HELPERS" as user_job_edit_helpers %}
                 <tr>
@@ -69,8 +73,12 @@
 
     {# shifts #}
     {% if helper.shifts.count %}
-        <h3>{% trans "Shifts" %}</h3>
-        <table class="table">
+        <h3 id="shifts-header">{% trans "Shifts" %}</h3>
+        <table class="table" aria-describedby="shifts-header">
+            <tr>
+                <th scope="col">{% trans "Shift" %}</th>
+                <th scope="col"></th>
+            </tr>
             {% for shift in helper.shifts.all|dictsort:"begin" %}
                 <tr>
                     <td>{{ shift }}</td>
@@ -139,7 +147,7 @@
 
             {# gifts #}
             {% if gifts_form %}
-                <h3>{% trans "Gifts" %}</h3>
+                <h3 id="gifts-header">{% trans "Gifts" %}</h3>
 
                 {% include "gifts/helper.html" with form=gifts_form helper=helper default_deposit=helper.event.gift_settings.default_deposit %}
             {% endif %}

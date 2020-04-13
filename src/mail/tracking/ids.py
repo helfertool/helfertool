@@ -5,7 +5,10 @@ MAIL_REGISTRATION = "registration"
 MAIL_EVENT = "event"
 MAIL_NEWS = "news"
 
-uuid_regex = re.compile('^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$')
+# sonarcloud complains about the following regex, because it contains patterns that are also in queries
+# that lead to exponential complexity evaluation.
+# the complexity of this regex is linear over the input, so nothing to worry here.
+uuid_regex = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$') # NOSONAR
 
 
 def new_tracking_registration(helper):

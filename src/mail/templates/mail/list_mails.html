@@ -2,16 +2,16 @@
 {% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
-    <h2>{% trans "All mails" %}</h2>
+    <h2 id="mails-header">{% trans "All mails" %}</h2>
 
     {% if sent_mails %}
-        <table class="table">
+        <table class="table" aria-describedby="mails-header">
             <tr>
-                <th></th>
-                <th>{% trans "Subject" %}</th>
-                <th>{% trans "Receiver" %}</th>
-                <th>{% trans "Date" %}</th>
-                <th></th>
+                <th scope="col"></th>
+                <th scope="col">{% trans "Subject" %}</th>
+                <th scope="col">{% trans "Receiver" %}</th>
+                <th scope="col">{% trans "Date" %}</th>
+                <th scope="col"></th>
             </tr>
             {% for mail in sent_mails %}
                 <tr>

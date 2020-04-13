@@ -21,7 +21,7 @@
     {% endif %}
 
     {% for job in event.job_set.all %}
-        <h3>
+        <h3 id="job-{{ job.id }}-header">
             {{ job.name }}
 
             {% if job.public %}
@@ -66,18 +66,18 @@
         {% if job.shift_set.count == 0 %}
             <p class="text-muted">{% trans "There are no shifts." %}</p>
         {% else %}
-            <table class="table">
+            <table class="table" aria-describedby="job-{{ job.id }}-header">
                 <tr>
-                    <th>{% trans "Begin" %}</th>
-                    <th>{% trans "End" %}</th>
-                    <th>{% trans "Name" %}</th>
-                    <th>{% trans "Number of helpers" %}</th>
+                    <th scope="col">{% trans "Begin" %}</th>
+                    <th scope="col">{% trans "End" %}</th>
+                    <th scope="col">{% trans "Name" %}</th>
+                    <th scope="col">{% trans "Number of helpers" %}</th>
                     {% if event.gifts %}
-                        <th>{% trans "Gifts" %}</th>
+                        <th scope="col">{% trans "Gifts" %}</th>
                     {% endif %}
 
                     {% if not event.archived %}
-                        <th></th>
+                        <th scope="col"></th>
                     {% endif %}
                 </tr>
                 {% for shift in job.shift_set.all %}

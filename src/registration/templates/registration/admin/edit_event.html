@@ -91,7 +91,7 @@
     {% if event %}
         <h3>{% trans "Duplicate event" %}</h3>
         <div class="alert alert-info" role="alert">
-            <b>{% trans "You can duplicate this event." %}</b>
+            <strong>{% trans "You can duplicate this event." %}</strong>
 
             <br/>
 
@@ -105,7 +105,7 @@
     {% if event and not event.archived %}
         <h3>{% trans "Archive event" %}</h3>
         <div class="alert alert-danger" role="alert">
-            <b>{% trans "You can archive this event, this means that all coordinators and helpers are deleted." %}</b>
+            <strong>{% trans "You can archive this event, this means that all coordinators and helpers are deleted." %}</strong>
 
             <br/>
 
@@ -123,7 +123,7 @@
     {% if event %}
         <h3>{% trans "Delete event" %}</h3>
         <div class="alert alert-danger" role="alert">
-            <b>{% trans "You can delete this event including all jobs, shifts and helpers." %}</b>
+            <strong>{% trans "You can delete this event including all jobs, shifts and helpers." %}</strong>
 
             <br/>
 

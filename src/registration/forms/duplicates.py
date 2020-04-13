@@ -32,31 +32,32 @@ class MergeDuplicatesForm(forms.Form):
 
         # and then to the merge
         for helper in self._helpers:
-            if helper != remaining_helper:
-                # merge shifts
-                for helpershift in HelperShift.objects.filter(helper=helper):
-                    helpershift.helper = remaining_helper
-                    helpershift.save()
+            if helper == remaining_helper:
+                continue
+            # merge shifts
+            for helpershift in HelperShift.objects.filter(helper=helper):
+                helpershift.helper = remaining_helper
+                helpershift.save()
 
-                # merged coordinated jobs
-                for job in helper.coordinated_jobs:
-                    job.coordinators.add(remaining_helper)
+            # merged coordinated jobs
+            for job in helper.coordinated_jobs:
+                job.coordinators.add(remaining_helper)
 
-                # merge gifts
-                if remaining_helper.event.gifts:
-                    remaining_helper.gifts.merge(helper.gifts)
+            # merge gifts
+            if remaining_helper.event.gifts:
+                remaining_helper.gifts.merge(helper.gifts)
 
-                # then create the duplicate entry so that old links in mails still work
-                Duplicate.objects.create(deleted=helper.id,
-                                         existing=remaining_helper)
+            # then create the duplicate entry so that old links in mails still work
+            Duplicate.objects.create(deleted=helper.id,
+                                        existing=remaining_helper)
 
-                # the overall timestamp of the helper should be the oldest one
-                # (there are multiple timestamps saved: one per helper and one per shift)
-                if helper.timestamp < oldest_timestamp:
-                    oldest_timestamp = helper.timestamp
+            # the overall timestamp of the helper should be the oldest one
+            # (there are multiple timestamps saved: one per helper and one per shift)
+            if helper.timestamp < oldest_timestamp:
+                oldest_timestamp = helper.timestamp
 
-                # and delete the old helper
-                helper.delete()
+            # and delete the old helper
+            helper.delete()
 
         # update timestamp
         remaining_helper.timestamp = oldest_timestamp

@@ -2,15 +2,15 @@
 {% load i18n bootstrap4 staticfiles duration %}
 
 {% block admincontent %}
-    <h2>{% trans "Statistics" %}</h2>
+    <h2 id="statistics-header">{% trans "Statistics" %}</h2>
 
-    <table class="table">
+    <table class="table" aria-describedby="statistics-header">
         <tr>
-            <th>{% trans "Number of shift slots" %}</th>
+            <th scope="row">{% trans "Number of shift slots" %}</th>
             <td>{{ num_shift_slots | default:"-" }}</td>
         </tr>
         <tr>
-            <th>{% trans "Total number of hours (also free slots)" %}</th>
+            <th scope="row">{% trans "Total number of hours (also free slots)" %}</th>
             <td>
                 {% if hours_total %}
                     {{ hours_total | duration_hours }} {% trans "hours" %}
@@ -20,21 +20,21 @@
             </td>
         </tr>
         <tr>
-            <th class="col-sm-4">{% trans "Helpers and coordinators" %}</th>
+            <th class="col-sm-4" scope="row">{% trans "Helpers and coordinators" %}</th>
             <td class="col-sm-8">{{ num_helpers }}</td>
         </tr>
         <tr>
-            <th>{% trans "Coordinators" %}</th>
+            <th scope="row">{% trans "Coordinators" %}</th>
             <td>{{ num_coordinators }}</td>
         </tr>
         {% if event.ask_vegetarian %}
             <tr>
-                <th>{% trans "Vegetarians" %}</th>
+                <th scope="row">{% trans "Vegetarians" %}</th>
                 <td>{{ num_vegetarians }}</td>
             </tr>
         {% endif %}
         <tr>
-            <th>{% trans "Number of empty shift slots" %}</th>
+            <th scope="row">{% trans "Number of empty shift slots" %}</th>
             <td>{{ num_empty_shift_slots | default:"-" }}</td>
         </tr>
     </table>

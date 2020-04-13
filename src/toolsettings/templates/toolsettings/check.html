@@ -4,11 +4,11 @@
 {% block admincontent %}
     <h2>{% trans "Check installation" %}</h2>
 
-    <h3>{% trans "Helfertool" %}</h3>
+    <h3 id="helfertool-check-header">{% trans "Helfertool" %}</h3>
 
-    <table class="table">
+    <table class="table" aria-describedby="helfertool-check-header">
         <tr class="d-flex">
-            <th class="col-3">{% trans "Version" %} </th>
+            <th class="col-3" scope="row">{% trans "Version" %} </th>
             <td class="col-9">
                 {{ version }}
                 {% if container_version %}
@@ -17,111 +17,111 @@
             </td>
         </tr>
         <tr class="d-flex">
-            <th class="col-3">{% trans "Templates" %} </th>
+            <th class="col-3" scope="row">{% trans "Templates" %} </th>
             <td class="col-9">
                 {% if templates_ok %}
-                    <i class="fas fa-check"></i>
+                    <em class="fas fa-check"></em>
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>
         <tr class="d-flex">
-            <th class="col-3">{% trans "Similarity search" %} </th>
+            <th class="col-3" scope="row">{% trans "Similarity search" %} </th>
             <td class="col-9">
                 {% if similarity_search %}
-                    <i class="fas fa-check"></i>
+                    <em class="fas fa-check"></em>
                 {% else %}
-                    <i class="fas fa-minus"></i>
+                    <em class="fas fa-minus"></em>
                 {% endif %}
             </td>
         </tr>
     </table>
 
-    <h3>{% trans "External services" %}</h3>
+    <h3 id="services-check-header">{% trans "External services" %}</h3>
 
-    <table class="table">
+    <table class="table" aria-describedby="helfertool-check-header">
         <tr class="d-flex">
-            <th class="col-3">{% trans "Mail" %} </th>
+            <th class="col-3" scope="row">{% trans "Mail" %} </th>
             <td class="col-9">
                 {% if mail_ok %}
-                    <i class="fas fa-check"></i>
+                    <em class="fas fa-check"></em>
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>
 
         <tr class="d-flex">
-            <th class="col-3">{% trans "RabbitMQ" %} </th>
+            <th class="col-3" scope="row">{% trans "RabbitMQ" %} </th>
             <td class="col-9">
                 {% if celery_broker_ok %}
-                    <i class="fas fa-check"></i>
+                    <em class="fas fa-check"></em>
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>
 
         <tr class="d-flex">
-            <th class="col-3">{% trans "LDAP" %} </th>
+            <th class="col-3" scope="row">{% trans "LDAP" %} </th>
             <td class="col-9">
                 {% if ldap_configured %}
                     {% if ldap_ok %}
-                        <i class="fas fa-check"></i>
+                        <em class="fas fa-check"></em>
                     {% else %}
-                        <i class="fas fa-times text-danger"></i>
+                        <em class="fas fa-times text-danger"></em>
                     {% endif %}
                 {% else %}
-                    <i class="fas fa-minus"></i>
+                    <em class="fas fa-minus"></em>
                 {% endif %}
             </td>
         </tr>
     </table>
 
-    <h3>{% trans "Header" %}</h3>
+    <h3 id="header-check-header">{% trans "Header" %}</h3>
 
-    <table class="table">
+    <table class="table" aria-describedby="header-check-header">
         <tr class="d-flex">
-            <th class="col-3">Host</th>
+            <th class="col-3" scope="row">Host</th>
             <td class="col-9">
                 {% if header_host %}
                     {{ header_host }}
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>
 
         <tr class="d-flex">
-            <th class="col-3">X-Real-IP</th>
+            <th class="col-3" scope="row">X-Real-IP</th>
             <td class="col-9">
                 {% if header_x_real_ip %}
                     {{ header_x_real_ip }}
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>
 
         <tr class="d-flex">
-            <th class="col-3">X-Forwarded-For</th>
+            <th class="col-3" scope="row">X-Forwarded-For</th>
             <td class="col-9">
                 {% if header_x_forwarded_for %}
                     {{ header_x_forwarded_for }}
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>
 
         <tr class="d-flex">
-            <th class="col-3">X-Forwarded-Proto</th>
+            <th class="col-3" scope="row">X-Forwarded-Proto</th>
             <td class="col-9">
                 {% if header_x_forwarded_proto %}
                     {{ header_x_forwarded_proto }}
                 {% else %}
-                    <i class="fas fa-times text-danger"></i>
+                    <em class="fas fa-times text-danger"></em>
                 {% endif %}
             </td>
         </tr>

@@ -104,10 +104,6 @@ class SentMail(models.Model):
             if has_access(user, job, ACCESS_JOB_VIEW_MAILS):
                 return True
 
-        for shift in self.shifts.all():
-            if has_access(user, job, ACCESS_JOB_VIEW_MAILS):
-                return True
-
         return False
 
     @property

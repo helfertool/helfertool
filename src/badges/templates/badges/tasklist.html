@@ -1,9 +1,13 @@
 {% load i18n bootstrap4 icons %}
-
-<table class="table">
-    {% if no_login %}
-        <p>{% trans "Please login again." %}</p>
-    {% else %}
+{% if no_login %}
+    <p>{% trans "Please login again." %}</p>
+{% else %}
+    <h3 id="tasklist-header">{% trans "Badge Status"%}</h3>
+    <table class="table" aria-describedby="tasklist-header">
+        <tr>
+            <th scope="col">{% trans "Task" %}</th>
+            <th scope="col">{% trans "Status" %}</th>
+        </tr>
         {% for task in tasks %}
             <tr>
                 <td>
@@ -12,7 +16,7 @@
                     {% elif task.error %}
                         <span class="text-danger">{% icon "exclamation-triangle" %}</span>
                     {% else %}
-                        <i class="fa fa-spinner fa-pulse"></i>
+                        <em class="fa fa-spinner fa-pulse"></em>
                     {% endif %}
 
                     &nbsp;
@@ -33,5 +37,5 @@
                 </td>
             </tr>
         {% endfor %}
-    {% endif %}
-</table>
+    </table>
+{% endif %}
