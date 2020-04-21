@@ -142,6 +142,9 @@ authentication:
     #        # Endpoint URLs
     #        authorization_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/auth"
     #        token_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/token"
+    #
+    #        # Optional: If present, the endpoint is must return all relevant info for authentication and authorization.
+    #        #           If omitted, information is expected to be contained in the id_token
     #        user_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo"
     #
     #        # URI to get JWKS
