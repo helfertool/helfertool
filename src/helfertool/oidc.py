@@ -60,9 +60,16 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
         # check if admin privilege should be assigned based on claims
         if settings.OIDC_CUSTOM_CLAIM_ADMIN:
             user.is_superuser = user.is_staff = self._check_claim_for_flag(claims, settings.OIDC_CUSTOM_CLAIM_ADMIN)
-        
+
         user.save()
         return user
+
+    def get_userinfo(self, access_token, id_token, payload):
+        if settings.OIDC_OP_USER_ENDPOINT:
+            return super(CustomOIDCAuthenticationBackend, self).get_userinfo(access_token, id_token, payload)
+        else:
+            # Assume payload of id_token contains all information
+            return payload
 
     def _check_claim_for_flag(self, claims, conf):
         # get config and check if it is there
