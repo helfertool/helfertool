@@ -72,49 +72,55 @@ function overlap_toggle_shift(input_field) {
 }
 
 function prerequisite_toggle_shift(input_field) {
+    /// Enable prerequisite, if it is required by a shift
+    /// if javascript were disabled, all prerequisites are rendered, so that our user can still select evth.
+
+    /// Convert input data a;b;c to [a, b, c] - django is a bitch and cannot export properly
     if (!Array.isArray($(input_field).data('prerequisites'))) {
         $(input_field).data('prerequisites',
             $(input_field).data('prerequisites').split(';')
         );
     }
 
-    if ($.isEmptyObject($(input_field).data('prerequisites')))
-        return;
-
     $(input_field).data('prerequisites').forEach(function(prerequisite){
+        /// a prerequisite element XXX has to be described in <div id='prerequisite_XXX_description'>
         element = $("#prerequisite_" + prerequisite + "_description");
         if (element.length > 0) {
             if (!$(element).data('pending-shifts')) {
                 $(element).data('pending-shifts', {})
             }
 
+            /// use addClass, because it will only enable the class if not already enabled
             if (input_field.checked) {
+                /// Add the shifts that require this prerequisite to the prerequisite description
+                /// in the DOM tree
                 element.data('pending-shifts')[prerequisite] = input_field;
                 $(element).removeClass('prerequisite-hidden');
                 $(element).addClass('prerequisite-required');
             } else {
+                /// Remove the prerequisite from the description in the DOM tree
                 if ($(element).data('pending-shifts')[prerequisite]) {
                     delete $(element).data('pending-shifts')[prerequisite];
                 }
 
+                /// If this prerequisite is not required by a shift, we can disable it again
                 if ($.isEmptyObject($(element).data('pending-shifts'))) {
                     $(element).removeClass('prerequisite-required');
                     $(element).addClass('prerequisite-hidden');
                 }
             }
-        } else {
-            console.log("trying to enable prerequisite " + prerequisite + " without a description");
         }
     });
 }
 
 
 function update_shift_registration(input_field) {
+    /// Check overlap and prerequisites.
     overlap_toggle_shift(input_field);
     prerequisite_toggle_shift(input_field);
 }
 
-// update and register event handler for every field
+// update and register event handler for every field at startup
 $('input.registration_possible').each(function (i, element) {
     update_shift_registration(element);
     $(this).change(function () {
