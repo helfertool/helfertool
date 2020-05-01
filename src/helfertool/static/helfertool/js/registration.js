@@ -1,6 +1,6 @@
 max_overlapping = parseInt($('#register_form').data('max-overlapping'));
 
-function update_shift_registration(input_field) {
+function overlap_toggle_shift(input_field) {
     // do not check, if the overlapping setting is None (in python)
     if(isNaN(max_overlapping)) {
         return
@@ -69,7 +69,49 @@ function update_shift_registration(input_field) {
             modifier(other_field);
         }
     });
+}
 
+function prerequisite_toggle_shift(input_field) {
+    if (!Array.isArray($(input_field).data('prerequisites'))) {
+        $(input_field).data('prerequisites',
+            $(input_field).data('prerequisites').split(';')
+        );
+    }
+
+    if ($.isEmptyObject($(input_field).data('prerequisites')))
+        return;
+
+    $(input_field).data('prerequisites').forEach(function(prerequisite){
+        element = $("#prerequisite_" + prerequisite + "_description");
+        if (element.length > 0) {
+            if (!$(element).data('pending-shifts')) {
+                $(element).data('pending-shifts', {})
+            }
+
+            if (input_field.checked) {
+                element.data('pending-shifts')[prerequisite] = input_field;
+                $(element).removeClass('prerequisite-hidden');
+                $(element).addClass('prerequisite-required');
+            } else {
+                if ($(element).data('pending-shifts')[prerequisite]) {
+                    delete $(element).data('pending-shifts')[prerequisite];
+                }
+
+                if ($.isEmptyObject($(element).data('pending-shifts'))) {
+                    $(element).removeClass('prerequisite-required');
+                    $(element).addClass('prerequisite-hidden');
+                }
+            }
+        } else {
+            console.log("trying to enable prerequisite " + prerequisite + " without a description");
+        }
+    });
+}
+
+
+function update_shift_registration(input_field) {
+    overlap_toggle_shift(input_field);
+    prerequisite_toggle_shift(input_field);
 }
 
 // update and register event handler for every field
@@ -79,26 +121,3 @@ $('input.registration_possible').each(function (i, element) {
         update_shift_registration(this);
     });
 });
-
-/* Infection instruction field */
-function handle_infection_instruction()
-{
-    var show_field = 0;
-
-    // iterate over all relevant checkboxes
-    $(".infection_instruction").each(function() {
-        if($(this).prop('checked'))
-        {
-            show_field = 1;
-            return false;
-        }
-    })
-
-    // show or hide input field
-    if(show_field)
-        $("#id_infection_instruction").parent().show()
-    else
-        $("#id_infection_instruction").parent().hide()
-}
-
-handle_infection_instruction();
