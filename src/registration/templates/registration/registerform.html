@@ -119,6 +119,12 @@
                 {% bootstrap_field form.infection_instruction required_css_class='' %}
             </div>
 
+            {% for p in prerequisites %}
+                <div id="prerequisite_{{ p.label }}_description" class="alert alert-info">
+                    {% bootstrap_field p required_css_class='' %}
+                </div>
+            {% endfor %}
+
             {% bootstrap_field form.comment required_css_class='' %}
 
             {% if form.ask_full_age %}
