@@ -94,13 +94,13 @@ function prerequisite_toggle_shift(input_field) {
             if (input_field.checked) {
                 /// Add the shifts that require this prerequisite to the prerequisite description
                 /// in the DOM tree
-                element.data('pending-shifts')[prerequisite] = input_field;
+                element.data('pending-shifts')[input_field.id] = input_field;
                 $(element).removeClass('prerequisite-hidden');
                 $(element).addClass('prerequisite-required');
             } else {
                 /// Remove the prerequisite from the description in the DOM tree
-                if ($(element).data('pending-shifts')[prerequisite]) {
-                    delete $(element).data('pending-shifts')[prerequisite];
+                if ($(element).data('pending-shifts')[input_field.id]) {
+                    delete $(element).data('pending-shifts')[input_field.id];
                 }
 
                 /// If this prerequisite is not required by a shift, we can disable it again

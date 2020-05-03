@@ -21,6 +21,7 @@
 
 {% block content %}
     {% bootstrap_form_errors form %}
+    {% bootstrap_form_errors prerequisite_form %}
 
     {% if event.archived %}
         <div class="alert alert-info" role="alert">

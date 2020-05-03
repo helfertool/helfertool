@@ -107,8 +107,10 @@ def form(request, event_url_name, link_pk=None):
 
     prerequisite_form = RegistrationPrerequisiteForm(request.POST or None, event=event, registerform=form)
 
-    if form.is_valid():
+    if form.is_valid() and prerequisite_form.is_valid():
         helper = form.save()
+
+        prerequisite_form.save(request, helper)
 
         logger.info("helper registered", extra={
             'event': event,
@@ -124,7 +126,7 @@ def form(request, event_url_name, link_pk=None):
     context = {'event': event,
                'form': form,
                'user_is_involved': user_is_involved,
-               'prerequisites': prerequisite_form}
+               'prerequisite_form': prerequisite_form}
     return render(request, 'registration/form.html', context)
 
 
