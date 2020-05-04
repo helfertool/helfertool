@@ -110,7 +110,7 @@ def form(request, event_url_name, link_pk=None):
     if form.is_valid() and prerequisite_form.is_valid():
         helper = form.save()
 
-        prerequisite_form.save(request, helper)
+        prerequisite_form.save(helper)
 
         logger.info("helper registered", extra={
             'event': event,

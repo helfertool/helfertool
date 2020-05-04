@@ -82,6 +82,14 @@ function prerequisite_toggle_shift(input_field) {
         );
     }
 
+    /// Header handling setup
+    header = $("#prerequisite_header");
+    if (header.length > 0){
+        if (!$(header).data('active-prerequisites')) {
+            $(header).data('active-prerequisites', {})
+        }
+    }
+
     $(input_field).data('prerequisites').forEach(function(prerequisite){
         /// a prerequisite element XXX has to be described in <div id='prerequisite_XXX_description'>
         element = $("#prerequisite_" + prerequisite + "_description");
@@ -97,6 +105,9 @@ function prerequisite_toggle_shift(input_field) {
                 element.data('pending-shifts')[input_field.id] = input_field;
                 $(element).removeClass('prerequisite-hidden');
                 $(element).addClass('prerequisite-required');
+
+                /// add the prerequisite to the header description in the DOM tree
+                header.data('active-prerequisites')[prerequisite] = prerequisite;
             } else {
                 /// Remove the prerequisite from the description in the DOM tree
                 if ($(element).data('pending-shifts')[input_field.id]) {
@@ -107,10 +118,24 @@ function prerequisite_toggle_shift(input_field) {
                 if ($.isEmptyObject($(element).data('pending-shifts'))) {
                     $(element).removeClass('prerequisite-required');
                     $(element).addClass('prerequisite-hidden');
+
+                    /// Also remove the prerequisite from the header description
+                    if ($(header).data('active-prerequisites')[prerequisite]) {
+                        delete $(header).data('active-prerequisites')[prerequisite]
+                    }
                 }
             }
         }
     });
+
+    /// Disable header if no prerequisites are required
+    if ($.isEmptyObject($(header).data('active-prerequisites'))) {
+        $(header).removeClass('prerequisite-required');
+        $(header).addClass('prerequisite-hidden');
+    } else {
+        $(header).removeClass('prerequisite-hidden');
+        $(header).addClass('prerequisite-required');
+    }
 }
 
 

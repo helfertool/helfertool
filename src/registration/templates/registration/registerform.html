@@ -115,9 +115,11 @@
 
     {# prerequisite handling #}
     <div class="row">
-        <div class="col-lg-12">
-
-            <h2>{% trans "Requirements for your selected shifts" %}</h2>
+        <div id="prerequisite-container" class="col-lg-12">
+            {# Display header if needed #}
+            <div id = "prerequisite_header">
+                <h2>{% trans "Requirements for your selected shifts" %}</h2>
+            </div>
 
             {# Display infection instruction field if needed (include this into prerequisites framework?) #}
             <div id="prerequisite_infection_instruction_description" class="alert alert-info">
@@ -125,11 +127,11 @@
             </div>
 
             {# Display buttons for needed prerequisites #}
-            {% for name, prerequisite in prerequisite_form.all_prerequisites.items %}
-                <div id="prerequisite_{{ name }}_description" class="alert alert-info">
+            {% for pk, prerequisite in prerequisite_form.all_prerequisites.items %}
+                <div id="prerequisite_{{ prerequisite.name }}_description" class="alert alert-info" layout="inline">
 
-                    {% lookup_prerequisite prerequisite_form name as p %}
-                    {% bootstrap_field p required_css_class='' %}
+                    {% lookup_prerequisite prerequisite_form pk as p %}
+                    <div class="d-inline-block">{% bootstrap_field p required_css_class='' %}</div>
 
                     {% if prerequisite.description %}
                         <button type="button"
