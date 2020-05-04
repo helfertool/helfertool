@@ -8,6 +8,7 @@ from ..models import Helper, Shift
 from news.helper import news_add_email
 
 import itertools
+import json
 
 
 class RegisterForm(forms.ModelForm):
@@ -105,15 +106,16 @@ class RegisterForm(forms.ModelForm):
                 self.fields[id].widget.attrs['data-begin'] = int(shift.begin.timestamp())
                 self.fields[id].widget.attrs['data-end'] = int(shift.end.timestamp())
 
+                prerequisites = [p.name.replace(' ;', '_') for p in shift.job.prerequisites.all()]
+                # TODO: make the infection instruction a prerequisite!
+                if shift.job.infection_instruction:
+                    prerequisites += ['infection_instruction']
+
+                self.fields[id].widget.attrs['data-prerequisites'] = ";".join(prerequisites)
+
             # check button if this shift should be selected
             if shift in self.selected_shifts:
                 self.fields[id].widget.attrs['checked'] = True
-
-            # set class if infection instruction is needed for this shift
-            if shift.job.infection_instruction:
-                self.fields[id].widget.attrs['class'] = 'infection_instruction'
-                self.fields[id].widget.attrs['onClick'] = \
-                    'handle_infection_instruction()'
 
             # safe mapping id <-> pk
             self.shifts[id] = shift.pk

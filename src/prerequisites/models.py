@@ -13,6 +13,7 @@ class Prerequisite(models.Model):
         :name: Name
         :description: Description
         :helper_can_set: Helpers can specify at registration whether they have this prerequisite
+        :visible: This prerequisite is visible at registration
     """
 
     event = models.ForeignKey(
@@ -28,6 +29,11 @@ class Prerequisite(models.Model):
     description = BleachField(
         blank=True,
         verbose_name=_("Description"),
+    )
+
+    visible = models.BooleanField(
+        default=True,
+        verbose_name=_("Helpers can specify this prerequisite at registration")
     )
 
     def check_helper(self, helper):

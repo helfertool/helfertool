@@ -243,6 +243,14 @@ img.icon
     text-decoration: line-through
 }
 
+/* Prerequisite hiding and showing */
+.prerequisite-required {
+}
+
+.prerequisite-hidden {
+    display: none;
+}
+
 /* info button for job description */
 .info-expand
 {

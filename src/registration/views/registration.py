@@ -14,6 +14,7 @@ from .utils import nopermission, get_or_404
 from ..forms import RegisterForm, DeregisterForm, HelperForm
 from ..models import Event, Link
 from ..permissions import has_access, ACCESS_INVOLVED
+from prerequisites.forms import RegistrationPrerequisiteForm
 
 
 from news.helper import news_test_email
@@ -104,8 +105,12 @@ def form(request, event_url_name, link_pk=None):
     form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
                         link=link is not None)
 
-    if form.is_valid():
+    prerequisite_form = RegistrationPrerequisiteForm(request.POST or None, event=event, registerform=form)
+
+    if form.is_valid() and prerequisite_form.is_valid():
         helper = form.save()
+
+        prerequisite_form.save(helper)
 
         logger.info("helper registered", extra={
             'event': event,
@@ -120,7 +125,8 @@ def form(request, event_url_name, link_pk=None):
 
     context = {'event': event,
                'form': form,
-               'user_is_involved': user_is_involved}
+               'user_is_involved': user_is_involved,
+               'prerequisite_form': prerequisite_form}
     return render(request, 'registration/form.html', context)
 
 

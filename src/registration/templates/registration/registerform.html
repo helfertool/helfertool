@@ -1,4 +1,4 @@
-{% load i18n bootstrap4 icons static registerform_shifts toolsettings %}
+{% load i18n bootstrap4 icons static registerform_shifts toolsettings prerequisites %}
 
 <form action="" method="post" id="register_form" data-max-overlapping="{{ event.max_overlapping }}">
     {% csrf_token %}
@@ -113,9 +113,41 @@
         {% endif %}
     </div>
 
+    {# prerequisite handling #}
     <div class="row">
-            <div class="col-lg-12">
-            {% bootstrap_field form.infection_instruction required_css_class='' %}
+        <div id="prerequisite-container" class="col-lg-12">
+            {# Display header if needed #}
+            <div id = "prerequisite_header">
+                <h2>{% trans "Requirements for your selected shifts" %}</h2>
+            </div>
+
+            {# Display infection instruction field if needed (include this into prerequisites framework?) #}
+            <div id="prerequisite_infection_instruction_description" class="alert alert-info">
+                {% bootstrap_field form.infection_instruction required_css_class='' %}
+            </div>
+
+            {# Display buttons for needed prerequisites #}
+            {% for pk, prerequisite in prerequisite_form.all_prerequisites.items %}
+                <div id="prerequisite_{{ prerequisite.name }}_description" class="alert alert-info" layout="inline">
+
+                    {% lookup_prerequisite prerequisite_form pk as p %}
+                    <div class="d-inline-block">{% bootstrap_field p required_css_class='' %}</div>
+
+                    {% if prerequisite.description %}
+                        <button type="button"
+                                class="btn btn-outline-primary btn-sm info-expand"
+                                data-toggle="collapse"
+                                data-target="#prerequisite-{{ prerequisite.pk }}">
+                            {% icon "info" %}
+                        </button>
+                    {% endif %}
+
+                    <div id="prerequisite-{{ prerequisite.pk }}" class="collapse">
+                        <p>{{ prerequisite.description | safe }}</p>
+                    </div>
+
+                </div>
+            {% endfor %}
 
             {% bootstrap_field form.comment required_css_class='' %}
 

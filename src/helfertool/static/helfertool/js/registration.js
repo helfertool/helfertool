@@ -1,6 +1,6 @@
 max_overlapping = parseInt($('#register_form').data('max-overlapping'));
 
-function update_shift_registration(input_field) {
+function overlap_toggle_shift(input_field) {
     // do not check, if the overlapping setting is None (in python)
     if(isNaN(max_overlapping)) {
         return
@@ -69,36 +69,86 @@ function update_shift_registration(input_field) {
             modifier(other_field);
         }
     });
-
 }
 
-// update and register event handler for every field
+function prerequisite_toggle_shift(input_field) {
+    /// Enable prerequisite, if it is required by a shift
+    /// if javascript were disabled, all prerequisites are rendered, so that our user can still select evth.
+
+    /// Convert input data a;b;c to [a, b, c] - django is a bitch and cannot export properly
+    if (!Array.isArray($(input_field).data('prerequisites'))) {
+        $(input_field).data('prerequisites',
+            $(input_field).data('prerequisites').split(';')
+        );
+    }
+
+    /// Header handling setup
+    header = $("#prerequisite_header");
+    if (header.length > 0){
+        if (!$(header).data('active-prerequisites')) {
+            $(header).data('active-prerequisites', {})
+        }
+    }
+
+    $(input_field).data('prerequisites').forEach(function(prerequisite){
+        /// a prerequisite element XXX has to be described in <div id='prerequisite_XXX_description'>
+        element = $("#prerequisite_" + prerequisite + "_description");
+        if (element.length > 0) {
+            if (!$(element).data('pending-shifts')) {
+                $(element).data('pending-shifts', {})
+            }
+
+            /// use addClass, because it will only enable the class if not already enabled
+            if (input_field.checked) {
+                /// Add the shifts that require this prerequisite to the prerequisite description
+                /// in the DOM tree
+                element.data('pending-shifts')[input_field.id] = input_field;
+                $(element).removeClass('prerequisite-hidden');
+                $(element).addClass('prerequisite-required');
+
+                /// add the prerequisite to the header description in the DOM tree
+                header.data('active-prerequisites')[prerequisite] = prerequisite;
+            } else {
+                /// Remove the prerequisite from the description in the DOM tree
+                if ($(element).data('pending-shifts')[input_field.id]) {
+                    delete $(element).data('pending-shifts')[input_field.id];
+                }
+
+                /// If this prerequisite is not required by a shift, we can disable it again
+                if ($.isEmptyObject($(element).data('pending-shifts'))) {
+                    $(element).removeClass('prerequisite-required');
+                    $(element).addClass('prerequisite-hidden');
+
+                    /// Also remove the prerequisite from the header description
+                    if ($(header).data('active-prerequisites')[prerequisite]) {
+                        delete $(header).data('active-prerequisites')[prerequisite]
+                    }
+                }
+            }
+        }
+    });
+
+    /// Disable header if no prerequisites are required
+    if ($.isEmptyObject($(header).data('active-prerequisites'))) {
+        $(header).removeClass('prerequisite-required');
+        $(header).addClass('prerequisite-hidden');
+    } else {
+        $(header).removeClass('prerequisite-hidden');
+        $(header).addClass('prerequisite-required');
+    }
+}
+
+
+function update_shift_registration(input_field) {
+    /// Check overlap and prerequisites.
+    overlap_toggle_shift(input_field);
+    prerequisite_toggle_shift(input_field);
+}
+
+// update and register event handler for every field at startup
 $('input.registration_possible').each(function (i, element) {
     update_shift_registration(element);
     $(this).change(function () {
         update_shift_registration(this);
     });
 });
-
-/* Infection instruction field */
-function handle_infection_instruction()
-{
-    var show_field = 0;
-
-    // iterate over all relevant checkboxes
-    $(".infection_instruction").each(function() {
-        if($(this).prop('checked'))
-        {
-            show_field = 1;
-            return false;
-        }
-    })
-
-    // show or hide input field
-    if(show_field)
-        $("#id_infection_instruction").parent().show()
-    else
-        $("#id_infection_instruction").parent().hide()
-}
-
-handle_infection_instruction();
