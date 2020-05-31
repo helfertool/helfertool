@@ -32,7 +32,7 @@ class BadgeCreator:
         # create temporary files
         self.dir = mkdtemp(dir=settings.TMP_ROOT, prefix="badges_")
         self.latex_file, self.latex_file_path = mkstemp(suffix='.tex',
-                                                       dir=self.dir)
+                                                        dir=self.dir)
 
         # we copy the photos and background images to the temporary directory
         # pdflatex is only allowed to include files from there

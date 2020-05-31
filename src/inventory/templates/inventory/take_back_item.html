@@ -20,7 +20,7 @@
     {% if last_helper %}
         {% if last_helper_items %}
             <div class="alert alert-info">
-                <b>{{ last_helper.full_name }}</b><br/>
+                <strong>{{ last_helper.full_name }}</strong><br/>
 
             {% trans "The helper still has these items:" %}
             <ul>
@@ -30,7 +30,7 @@
             </ul>
         {% else %}
             <div class="alert alert-success">
-                <b>{{ last_helper.full_name }}</b><br/>
+                <strong>{{ last_helper.full_name }}</strong><br/>
 
             {% trans "Everything returned!" %}
         {% endif %}

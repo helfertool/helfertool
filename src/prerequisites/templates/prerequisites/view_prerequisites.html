@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
-    <h2>{% trans "Prerequisites" %}</h2>
+    <h2 id="prerequisite-header">{% trans "Prerequisites" %}</h2>
 
     {% if not event.archived %}
     <p><a href="{% url 'prerequisites:new_prerequisite' event.url_name %}">
@@ -12,11 +12,11 @@
     {% endif %}
 
     {% if prerequisites %}
-        <table class="table">
+        <table class="table" aria-describedby="prerequisite-header">
             <tr>
-                <th width="30%">{% trans "Name" %}</th>
-                <th width="45%">{% trans "Description" %}</th>
-                <th width="25%"></th>
+                <th scope="col" class="width-30">{% trans "Name" %}</th>
+                <th scope="col" class="width-50">{% trans "Description" %}</th>
+                <th scope="col" class="width-20"></th>
             </tr>
             {% for prerequisite in prerequisites %}
                 <tr>

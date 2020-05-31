@@ -3,18 +3,18 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Delete inventory" %}</h2>
+    <h2 id="inventory-header">{% trans "Delete inventory" %}</h2>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        <table class="table">
+        <table class="table" aria-describedby="inventory-header">
             <tr>
-                <th>{% trans "Name" %}</th>
+                <th scope="row">{% trans "Name" %}</th>
                 <td>{{ inventory.name }}</td>
             </tr>
             <tr>
-                <th>{% trans "Admins" %}</th>
+                <th scope="row">{% trans "Admins" %}</th>
                 <td>
                     {% for admin in inventory.admins.all %}
                         {{ admin.get_full_name }}<br/>

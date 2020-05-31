@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 staticfiles %}
 
 {% block admincontent %}
-    <h2>{% trans "Generate badges" %}</h2>
+    <h2 id="badge-header">{% trans "Generate badges" %}</h2>
 
     {% if not possible %}
         <div class="alert alert-danger" role="alert">
@@ -19,11 +19,11 @@
             {% trans "Please reload the page (due to inactivity)." %}
         </div>
 
-        <table class="table">
+        <table class="table" aria-describedby="badge-header">
             <tr>
-                <th>{% trans "Job" %}</th>
-                <th></th>
-                <th></th>
+                <th scope="col">{% trans "Job" %}</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
 
             {% for job in jobs %}

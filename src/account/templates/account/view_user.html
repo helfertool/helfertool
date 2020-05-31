@@ -3,24 +3,24 @@
 
 {% block admincontent %}
     {% if changed_user.get_full_name %}
-        <h2>{{ changed_user.get_full_name }}</h2>
+        <h2 id="user-header">{{ changed_user.get_full_name }}</h2>
     {% else %}
-        <h2>{{ changed_user.username }}</h2>
+        <h2 id="user-header">{{ changed_user.username }}</h2>
     {% endif %}
 
     <div class="row">
         <div class="col-xs-12 col-lg-5">
-            <table class="table">
+            <table class="table" aria-describedby="user-header">
                 <tr>
-                    <th>{% trans "Username" %}</th>
+                    <th scope="row">{% trans "Username" %}</th>
                     <td>{{ changed_user.username }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans "Email address" %}</th>
+                    <th scope="row">{% trans "Email address" %}</th>
                     <td>{{ changed_user.email }}</td>
                 </tr>
                 <tr>
-                    <th>{% trans "Details" %}</th>
+                    <th scope="row">{% trans "Details" %}</th>
                     <td>
                         {% include "account/user_permissions.html" with user=changed_user %}
                     </td>

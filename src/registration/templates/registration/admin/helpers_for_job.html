@@ -16,12 +16,12 @@
     {% if user_event_export_helpers %}
         <p>
             {% icon "file-download" %}
-            <b class="mr-2">{% trans "Export" %}:</b>
+            <strong class="mr-2">{% trans "Export" %}:</strong>
             <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon mr-2">
-                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
             </a>
             <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
-                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
             </a>
         </p>
     {% endif %}
@@ -29,7 +29,7 @@
     {# jump labels #}
     {% if shifts_by_day %}
         <p>
-            <i class="fas fa-link"></i>
+            <em class="fas fa-link"></em>
             {% for day, shifts in shifts_by_day %}
                 <a href="#{{ day | date:"Ymd" }}">{{ day }}</a>&nbsp;
             {% endfor %}
@@ -60,12 +60,12 @@
         <p>
             {% with day_str=day|date:"Y-m-d" %}
                 {% icon "file-download" %}
-                <b class="mr-2">{% blocktrans with day=day %}Export for {{ day }}{% endblocktrans %}:</b>
+                <strong class="mr-2">{% blocktrans with day=day %}Export for {{ day }}{% endblocktrans %}:</strong>
                 <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon mr-2">
-                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" />
+                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
                 </a>
                 <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
-                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" />
+                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
                 </a>
             {% endwith %}
         </p>

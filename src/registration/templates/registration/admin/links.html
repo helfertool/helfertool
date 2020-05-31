@@ -2,19 +2,19 @@
 {% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
-    <h2>{% trans "Links" %}</h2>
+    <h2 id="links-header">{% trans "Links" %}</h2>
 
     {% if not links %}
         <p class="text-muted">{% trans "There are no links." %}</p>
     {% else %}
-        <table class="table">
+        <table class="table" aria-describedby="links-header">
             <tr>
-                <th>{% trans "Shifts" %}</th>
-                <th>{% trans "Usage" %}</th>
-                <th>{% trans "Creator" %}</th>
+                <th scope="col">{% trans "Shifts" %}</th>
+                <th scope="col">{% trans "Usage" %}</th>
+                <th scope="col">{% trans "Creator" %}</th>
 
                 {% if not event.archived %}
-                    <th></th>
+                    <th scope="col"></th>
                 {% endif %}
             </tr>
 

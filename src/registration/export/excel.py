@@ -31,9 +31,9 @@ class Iterator():
 def cleanName(name):
     """ Cleans the name to be a valid sheet name in excel.
 
-    The characters [ ] : * ? / \ are removed.
+    The characters [ ] : * ? / \\ are removed.
     """
-    return re.sub(r'[\[\]:*?\\\/]', '', name)
+    return re.sub(r'[\[\]:*?\/]', '', name)
 
 
 def escape(payload):
@@ -42,7 +42,7 @@ def escape(payload):
 
     # http://blog.zsec.uk/csv-dangers-mitigations/
     if payload[0] in ('@', '+', '-', '=', '|'):
-        payload = payload.replace("|", "\|")
+        payload = payload.replace("|", r"\|")
         payload = "'" + payload + "'"
     return payload
 

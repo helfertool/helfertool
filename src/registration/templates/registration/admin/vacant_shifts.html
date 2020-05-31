@@ -2,7 +2,7 @@
 {% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
-    <h2>{% trans "Vacant shifts" %}</h2>
+    <h2 id="vacant-shifts-header">{% trans "Vacant shifts" %}</h2>
 
     {% if no_shifts %}
         <p class="text-muted">{% trans "There are no shifts." %}</p>
@@ -20,12 +20,12 @@
                 <h3>{{ day }}</h3>
                     {% for job,shifts in jobs.items %}
                         <h4>{{ job }}</h4>
-                        <table class="table">
+                        <table class="table w-auto" aria-describedby="vacant-shifts-header">
                             <tr>
-                                <th width="30%">{% trans "Status" %}</th>
-                                <th width="20%">{% trans "Time" %}</th>
-                                <th width="30%">{% trans "Name" %}</th>
-                                <th width="20%">{% trans "Missing / Total" %}</th>
+                                <th scope="col" class="width-30">{% trans "Status" %}</th>
+                                <th scope="col" class="width-20">{% trans "Time" %}</th>
+                                <th scope="col" class="width-30">{% trans "Name" %}</th>
+                                <th scope="col" class="width-20">{% trans "Missing / Total" %}</th>
                             </tr>
                             {% for shift in shifts %}
                                 <tr>

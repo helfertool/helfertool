@@ -1,0 +1,31 @@
+{% load i18n %}
+
+{# included by registration/delete_event and registration/archive_event #}
+{# requires: event, admins #}
+        <table class="table" aria-describedby="event-description">
+            <tr>
+                <th scope="row">{% trans "Event" %}</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{% trans "Date" %}</th>
+                <td>{{ event.date }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{% trans "E-Mail" %}</th>
+                <td>{{ event.email }}</td>
+            </tr>
+            <tr>
+                <th scope="row">{% trans "Admins" %}</th>
+                <td>
+                    {% for admin in event.admins.all %}
+                        {% if admin.first_name and admin.last_name %}
+                            {{ admin.first_name }} {{ admin.last_name }} ({{ admin.username }})
+                        {% else %}
+                            {{ admin.username }}
+                        {% endif %}
+                        <br />
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>

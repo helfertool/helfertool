@@ -1,8 +1,5 @@
 from .models import Event, EventAdminRoles, Job, Helper
 
-from django.utils.translation import ugettext_lazy as _
-
-
 # This is the central file that defines and manages the different permissions for events, jobs and users.
 # Global permissions like creating events, users or sending newsletters are managed in the accounts app.
 
@@ -248,15 +245,14 @@ def has_access_event_or_job(user, event, access_event, access_job):
     `access_event` can be `None`.
     """
     # check event
-    if access_event:
-        if has_access(user, event, access_event):
+    if access_event and has_access(user, event, access_event):
             return True
 
     # check jobs
     for job in event.job_set.all():
         if has_access(user, job, access_job):
             return True
-    
+
     return False
 
 
@@ -264,7 +260,7 @@ def _has_access_event(user, event, access):
     # check role
     if _check_event_role(user, event, access):
         return True
-    
+
     # special cases
     if access == ACCESS_INVOLVED:
         # involved: also check jobs
@@ -280,11 +276,11 @@ def _has_access_job(user, job, access):
     # check role
     if _check_event_role(user, job.event, access):
         return True
-    
+
     # handle job admins
     if _check_job_role(user, job, access):
         return True
-    
+
     return False
 
 
@@ -302,7 +298,7 @@ def _has_access_helper(user, helper, access):
     for job in helper.job_set.all():
         if _check_job_role(user, job, access):
             return True
-    
+
     return False
 
 
@@ -328,6 +324,7 @@ def _check_event_role(user, event, access):
             return True
 
     return False
+
 
 def _check_job_role(user, job, access):
     # user is job admin or not, nothing more

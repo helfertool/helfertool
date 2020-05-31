@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{% trans "Sign off from shift" %}</h1>
+    <h1 id="register-header">{% trans "Sign off from shift" %}</h1>
 
     <form action="" method="post" accept-charset="utf-8">
-        <table class="table table-condensed">
+        <table class="table table-condensed" aria-describedby="register-header">
             <tr>
-                <th>{% trans "Name" %}</th>
+                <th scope="row">{% trans "Name" %}</th>
                 <td>{{ helper.full_name }} </td>
             </tr>
             <tr>
-                <th>{% trans "Shift" %}</th>
+                <th scope="row">{% trans "Shift" %}</th>
                 <td>{{ shift }} </td>
             </tr>
         </table>

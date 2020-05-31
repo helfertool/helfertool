@@ -3,13 +3,13 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% trans "Collected deposit" %}</h2>
+    <h2 id="deposit-header">{% trans "Collected deposit" %}</h2>
 
     {% if helpers %}
-        <table class="table">
+        <table class="table" aria-describedby="deposit-header">
             <tr>
-                <th>{% trans "Name" %}</th>
-                <th>{% trans "Deposit" %}</th>
+                <th scope="col">{% trans "Name" %}</th>
+                <th scope="col">{% trans "Deposit" %}</th>
             </tr>
 
             {% for h in helpers %}
@@ -20,8 +20,8 @@
             {% endfor %}
 
             <tr>
-                <th>{% trans "Sum" %}</th>
-                <th>{{ deposit_sum }} &euro;</th>
+                <th scope="row">{% trans "Sum" %}</th>
+                <th scope="row">{{ deposit_sum }} &euro;</th>
             </tr>
         </table>
     {% else %}

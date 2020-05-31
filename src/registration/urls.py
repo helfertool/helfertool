@@ -29,27 +29,27 @@ urlpatterns = [
         name='form'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/'
-        '(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_id>[a-z0-9\-]+)/$',
         views.registered,
         name='registered'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/'
-        '(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_id>[a-z0-9\-]+)/$',
         views.validate,
         name='validate'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/ical/'
-        '(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_id>[a-z0-9\-]+)/$',
         HelperFeed(),
         name='ical'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/update/'
-        '(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_id>[a-z0-9\-]+)/$',
         views.update_personal,
         name='update_personal'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/deregister/'
-        '(?P<helper_id>[a-z0-9\-]+)/(?P<shift_pk>[0-9]+)/$',
+        r'(?P<helper_id>[a-z0-9\-]+)/(?P<shift_pk>[0-9]+)/$',
         views.deregister,
         name='deregister'),
 
@@ -104,28 +104,28 @@ urlpatterns = [
         name='delete_job'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/'
-        'duplicate/$',
+        r'duplicate/$',
         views.duplicate_job,
         name='duplicate_job'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/'
-        'duplicate/day/$',
+        r'duplicate/day/$',
         views.duplicate_job_day,
         name='duplicate_job_day'),
 
     # shifts
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
-        '(?P<shift_pk>[0-9]+)/$',
+        r'(?P<shift_pk>[0-9]+)/$',
         views.edit_shift,
         name='edit_shift'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
-        '(?P<shift_pk>[0-9]+)/delete/$',
+        r'(?P<shift_pk>[0-9]+)/delete/$',
         views.delete_shift,
         name='delete_shift'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/shift/'
-        'new/$',
+        r'new/$',
         views.edit_shift,
         name='new_shift'),
 
@@ -143,53 +143,53 @@ urlpatterns = [
         name='search_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/$',
         views.view_helper,
         name='view_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/edit/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/edit/$',
         views.edit_helper,
         name='edit_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)/$',
         views.delete_helper,
         name='delete_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)/all/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/delete/(?P<shift_pk>[0-9]+)/all/$',
         views.delete_helper,
         {'show_all_shifts': True},
         name='delete_helper_all'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/delete/coordinator/(?P<job_pk>[0-9]+)/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/delete/coordinator/(?P<job_pk>[0-9]+)/$',
         views.delete_coordinator,
         name='delete_coordinator'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/'
-        '(?P<shift_pk>[0-9]+)/$',
+        r'(?P<shift_pk>[0-9]+)/$',
         views.add_helper,
         name='add_helper'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/add/coordinator/'
-        '(?P<job_pk>[0-9]+)/$',
+        r'(?P<job_pk>[0-9]+)/$',
         views.add_coordinator,
         name='add_coordinator'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/add/shift/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/add/shift/$',
         views.add_helper_to_shift,
         name='add_helper_to_shift'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/add/coordinator/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/add/coordinator/$',
         views.add_helper_as_coordinator,
         name='add_helper_as_coordinator'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/'
-        '(?P<helper_pk>[0-9a-f\-]+)/resend/$',
+        r'(?P<helper_pk>[0-9a-f\-]+)/resend/$',
         views.resend_mail,
         name='resend_mail'),
 
@@ -199,17 +199,17 @@ urlpatterns = [
         name='export'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<filetype>[a-z]+)/all/'
-        '(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        r'(?P<date_str>\d{4}-\d{2}-\d{2})/$',
         views.export,
         name='export_date'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<filetype>[a-z]+)/'
-        '(?P<job_pk>[0-9]+)/$',
+        r'(?P<job_pk>[0-9]+)/$',
         views.export,
         name='export_job'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<filetype>[a-z]+)/'
-        '(?P<job_pk>[0-9]+)/(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        r'(?P<job_pk>[0-9]+)/(?P<date_str>\d{4}-\d{2}-\d{2})/$',
         views.export,
         name='export_job_date'),
 
@@ -237,7 +237,7 @@ urlpatterns = [
         name='edit_link'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/links/(?P<link_pk>[0-9a-f\-]+)/'
-        'delete/$',
+        r'delete/$',
         views.delete_link,
         name='delete_link'),
 

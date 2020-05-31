@@ -95,7 +95,13 @@ class HelpersGifts(models.Model):
                                       'pending_with_deposit': <int>, 'pending': <int>} }
         """
         result = OrderedDict()
-
+        default_fields = {
+            'total': 0,
+            'given': 0,
+            'earned': 0,
+            'pending': 0,
+            'pending_with_deposit': 0,
+        }
         # iterate over all deserved gifts of this helper
         for deserved_gift in DeservedGiftSet.objects.filter(helper=self):
             gift_set = deserved_gift.gift_set
@@ -112,33 +118,27 @@ class HelpersGifts(models.Model):
                 name = included_gift.gift.name
                 count = included_gift.count
 
-                # we found this gift the first time -> add it to result
-                if name not in result:
-                    result[name] = {
-                        'total': 0,
-                        'given': 0,
-                        'earned': 0,
-                        'pending': 0,
-                        'pending_with_deposit': 0,
-                    }
+                data = result.setdefault(name, default_fields.copy())
 
-                # and now update the values
                 # as long as the helper is not absent, count the gifts
                 if present_at_shift or present_pending:
-                    result[name]['total'] += count
+                    data['total'] += count
+
+                if already_delivered:
+                    # gift was delivered
+                    data['given'] += count
+
+                elif present_at_shift or present_pending:
+                    # helper can receive this gift, if he pays deposit
+                    data['pending_with_deposit'] += count
 
                 if present_at_shift:
-                    # helper was really present -> earned and maybe pendning
-                    result[name]['earned'] += count
+                    # if the helper was marked as present, he earned it
+                    data['earned'] += count
 
-                    if already_delivered:
-                        result[name]['given'] += count
-                    else:
-                        result[name]['pending_with_deposit'] += count
-                        result[name]['pending'] += count
-                elif present_pending and not already_delivered:
-                    # helper was not manually set to not present, so we would need deposit
-                    result[name]['pending_with_deposit'] += count
+                    if not already_delivered:
+                        # helper can receive this gift
+                        data['pending'] += count
 
         return result
 

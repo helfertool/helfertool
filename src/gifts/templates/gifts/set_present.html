@@ -6,7 +6,7 @@
     <h3>{{ shift }}</h3>
 
     {% if form.visible_fields %}
-        <p>
+        <p id="set-all-presence">
             {% if form.automatic_presence %}
             <a class="btn btn-sm btn-outline-primary" onclick="set_all('auto'); return false;" href="">
                 {% icon "clock" %} {% trans "Set all to auto" %}
@@ -27,11 +27,15 @@
         <form action="" method="post">
             {% csrf_token %}
 
-            <table class="table">
+            <table class="table" aria-describedby="set-all-presence">
+                <tr>
+                    <th class="w-50" scope="col">{% trans Name %}</th>
+                    <th class="w-50" scope="col"></th>
+                </tr>
                 {% for field in form.visible_fields %}
                 <tr>
-                    <td width="50%">{{ field }}</td>
-                    <td width="50%">{{ field.label }}</td>
+                    <td>{{ field }}</td>
+                    <td>{{ field.label }}</td>
                 </tr>
                 {% endfor %}
             </table>

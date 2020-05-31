@@ -10,7 +10,7 @@
     {% for job in jobs %}
         {% get_shifts form job as shifts %}
 
-        <h3>
+        <h3 id="job-header-{{ job.pk }}">
             {{ job.name }}
             {% if job.description %}
                 <button type="button"
@@ -26,10 +26,10 @@
             <p>{{ job.description | safe }}</p>
         </div>
 
-        <table class="shifts">
+        <table class="shifts" aria-describedby="job-header-{{ job.pk }}">
             <tr>
                 {% for day, shifts in shifts.items %}
-                    <th>{{ day }}</th>
+                    <th scope="col">{{ day }}</th>
                 {% endfor %}
             </tr>
             <tr>
@@ -143,7 +143,7 @@
     {% if form.ask_news %}
         <div class="row">
             <div class="col-lg-12">
-                <p><b>{% trans "We would like to inform you about futher events!" %}</b></p>
+                <p><strong>{% trans "We would like to inform you about futher events!" %}</strong></p>
                 {% bootstrap_field form.news %}
 
                 <div class="card collapse mb-4" id="privacy_newsletter">
@@ -164,7 +164,7 @@
                     {% trans "Note: after saving an e-mail will be sent to the given address." %}
 
                     {% if form.internal and event.ask_full_age %}
-                        <br/><br/><b>{% trans "Make sure that the helper is full age!" %}</b>
+                        <br/><br/><strong>{% trans "Make sure that the helper is full age!" %}</strong>
                     {% endif %}
                 </div>
 

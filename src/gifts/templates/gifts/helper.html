@@ -5,10 +5,10 @@
 <div class="row">
     {% if helper.shifts.count != 0 %}
         <div class="col-lg-12">
-            <table class="shifts">
+            <table class="shifts" aria-describedby="gifts-header">
                 {% for shift in helper.shifts.all|dictsort:"begin" %}
                     <tr>
-                        <th class="align-top">
+                        <th class="align-top" scope="row">
                             {% helper_has_missed_shift helper shift as missed_shift %}
 
                             {% if missed_shift %}
@@ -50,20 +50,21 @@
             </table>
         </div>
 
+        <h4 id="gifts-summary">{% trans "Summary" %}</h4>
         {% with gift_sum=helper.gifts.gifts_sum.items %}
         {% if gift_sum %}
             <div>
-                <table class="table">
+                <table class="table" aria-describedby="gifts-summary">
                     <tr>
-                        <th>{% trans "Gift" %}</th>
-                        <th>{% trans "Total" %}</th>
-                        <th>{% trans "Given" %}</th>
-                        <th>
+                        <th scope="col">{% trans "Gift" %}</th>
+                        <th scope="col">{% trans "Total" %}</th>
+                        <th scope="col">{% trans "Given" %}</th>
+                        <th scope="col">
                             {% trans "Pending (with deposit)" %}
                             <br />
                             <span class="text-muted font-weight-normal">{% trans "Including future shifts" %}</span>
                         </th>
-                        <th>
+                        <th scope="col">
                             {% trans "Pending" %}
                             <br />
                             <span class="text-muted font-weight-normal">{% trans "Helper was present" %}</span>
@@ -72,19 +73,19 @@
 
                     {% for name,numbers in gift_sum %}
                         <tr>
-                            <th>{{ name }}</th>
+                            <th scope="row">{{ name }}</th>
                             <td>{{ numbers.total }}</td>
                             <td>{{ numbers.given }}</td>
                             <td>
                                 {% if numbers.pending_with_deposit > 0 %}
-                                    <span class="text-warning"><b>{{ numbers.pending_with_deposit }}</b></span>
+                                    <span class="text-warning"><strong>{{ numbers.pending_with_deposit }}</strong></span>
                                 {% else %}
                                     <span class="text-success">{{ numbers.pending_with_deposit }}</span>
                                 {% endif %}
                             </td>
                             <td>
                                 {% if numbers.pending > 0 %}
-                                    <span class="text-warning"><b>{{ numbers.pending }}</b></span>
+                                    <span class="text-warning"><strong>{{ numbers.pending }}</strong></span>
                                 {% else %}
                                     <span class="text-success">{{ numbers.pending }}</span>
                                 {% endif %}

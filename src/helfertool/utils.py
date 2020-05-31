@@ -33,7 +33,7 @@ def get_version(path):
 
 def pg_trgm_installed():
     with connection.cursor() as cursor:
-        cursor.execute("select installed_version from pg_available_extensions where name='pg_trgm';");
+        cursor.execute("select installed_version from pg_available_extensions where name='pg_trgm';")
         version = cursor.fetchone()[0]
 
         return version is not None

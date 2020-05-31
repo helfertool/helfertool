@@ -126,10 +126,10 @@ def list_users(request):
     # get users based on search term
     search = request.GET.get("search")
     if search:
-        all_users = User.objects.filter(Q(username__icontains=search) |
-                                        Q(first_name__icontains=search) |
-                                        Q(last_name__icontains=search) |
-                                        Q(email__icontains=search)).order_by('last_name')
+        all_users = User.objects.filter(Q(username__icontains=search)
+                                        | Q(first_name__icontains=search)
+                                        | Q(last_name__icontains=search)
+                                        | Q(email__icontains=search)).order_by('last_name')
     else:
         all_users = User.objects.all().order_by("last_name")
 
