@@ -101,8 +101,7 @@ class RegisterForm(forms.ModelForm):
         field = forms.BooleanField(label=shift, required=False)
 
         # disable button if shift is full
-        if shift.is_full() or (shift.blocked and not
-                               self.displayed_shifts):
+        if shift.is_full() or (shift.blocked and not self.displayed_shifts):
             field.widget.attrs['disabled'] = True
         else:
             # else set it up for automatic disabling
@@ -117,8 +116,9 @@ class RegisterForm(forms.ModelForm):
         # set class if infection instruction is needed for this shift
         if shift.job.infection_instruction:
             field.widget.attrs['class'] = 'infection_instruction'
-            field.widget.attrs['onClick'] = \
-                'handle_infection_instruction()'
+            field.widget.attrs['onClick'] = 'handle_infection_instruction()'
+
+        return field
 
     def get_jobs(self):
         if self.displayed_shifts:
