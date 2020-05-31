@@ -22,10 +22,10 @@
                         <h4>{{ job }}</h4>
                         <table class="table w-auto" aria-describedby="vacant-shifts-header">
                             <tr>
-                                <th scope="col">{% trans "Status" %}</th>
-                                <th scope="col">{% trans "Time" %}</th>
-                                <th scope="col">{% trans "Name" %}</th>
-                                <th scope="col">{% trans "Missing / Total" %}</th>
+                                <th scope="col" class="width-30">{% trans "Status" %}</th>
+                                <th scope="col" class="width-20">{% trans "Time" %}</th>
+                                <th scope="col" class="width-30">{% trans "Name" %}</th>
+                                <th scope="col" class="width-20">{% trans "Missing / Total" %}</th>
                             </tr>
                             {% for shift in shifts %}
                                 <tr>

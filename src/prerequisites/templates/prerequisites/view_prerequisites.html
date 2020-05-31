@@ -12,11 +12,11 @@
     {% endif %}
 
     {% if prerequisites %}
-        <table class="table w-auto" aria-describedby="prerequisite-header">
+        <table class="table" aria-describedby="prerequisite-header">
             <tr>
-                <th scope="col">{% trans "Name" %}</th>
-                <th scope="col">{% trans "Description" %}</th>
-                <th scope="col"></th>
+                <th scope="col" class="width-30">{% trans "Name" %}</th>
+                <th scope="col" class="width-50">{% trans "Description" %}</th>
+                <th scope="col" class="width-20"></th>
             </tr>
             {% for prerequisite in prerequisites %}
                 <tr>

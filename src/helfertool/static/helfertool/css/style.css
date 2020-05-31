@@ -386,6 +386,17 @@ ul.presence li {
     width: auto;
 }
 
+/* width in precent (10% steps, necessary for CSP) */
+.width-10 { width: 10% }
+.width-20 { width: 20% }
+.width-30 { width: 30% }
+.width-40 { width: 40% }
+.width-50 { width: 50% }
+.width-60 { width: 60% }
+.width-70 { width: 70% }
+.width-80 { width: 80% }
+.width-90 { width: 90% }
+
 /* progress bar for number of helpers (5% steps, necessary for CSP) */
 .percent-0 { width: 0%; }
 .percent-1 { width: 5%; }
