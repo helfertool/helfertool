@@ -87,7 +87,7 @@
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
 
-    {# duplicate #}
+    {# duplicate and move #}
     {% if event %}
         <h3>{% trans "Duplicate event" %}</h3>
         <div class="alert alert-info" role="alert">
@@ -97,6 +97,17 @@
 
             <a href="{% url 'duplicate_event' event.url_name %}" class="btn btn-outline-primary mt-3" role="button">
                 {% trans "Duplicate event" %}
+            </a>
+        </div>
+
+        <h3>{% trans "Move event" %}</h3>
+        <div class="alert alert-info" role="alert">
+            <strong>{% trans "You can move this event." %}</strong>
+
+            <br/>
+
+            <a href="{% url 'move_event' event.url_name %}" class="btn btn-outline-primary mt-3" role="button">
+                {% trans "Move event" %}
             </a>
         </div>
     {% endif %}

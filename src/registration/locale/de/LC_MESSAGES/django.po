@@ -309,6 +309,7 @@ msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9."
 #: registration/models/event.py:108
 #: registration/templates/registration/admin/archive_event.html:17
 #: registration/templates/registration/admin/delete_event.html:17
+#: registration/templates/registration/admin/move_event.html:37
 msgid "Date"
 msgstr "Datum"
 
@@ -657,6 +658,7 @@ msgstr "Veranstaltung archivieren"
 
 #: registration/templates/registration/admin/archive_event.html:13
 #: registration/templates/registration/admin/delete_event.html:13
+#: registration/templates/registration/admin/move_event.html:29
 msgid "Event"
 msgstr "Veranstaltung"
 
@@ -909,6 +911,10 @@ msgstr "Speichern"
 #: registration/templates/registration/admin/edit_event.html:94
 msgid "You can duplicate this event."
 msgstr "Du kannst diese Veranstaltung duplizieren."
+
+#: registration/templates/registration/admin/edit_event.html:108
+msgid "You can move this event."
+msgstr "Du kannst diese Veranstaltung verschieben."
 
 #: registration/templates/registration/admin/edit_event.html:108
 msgid ""
@@ -1208,6 +1214,50 @@ msgstr "Diese Daten behalten"
 #: registration/templates/registration/admin/merge.html:44
 msgid "There are not duplicates for this mail address."
 msgstr "Es gibt keine Duplikate für diese E-Mail Adresse."
+
+#: registration/templates/registration/admin/move_event.html:6
+msgid "Move event"
+msgstr "Veranstaltung veschieben"
+
+#: registration/templates/registration/admin/move_event.html:9
+msgid "The following dates <b>will be changed</b>:"
+msgstr "Folgende Daten <b>werden geändert</b>:"
+
+#: registration/templates/registration/admin/move_event.html:11
+msgid "Event date"
+msgstr "Veranstaltungsdatum"
+
+#: registration/templates/registration/admin/move_event.html:12
+msgid "Deregistration and changes possible until date (<i>if set</i>)"
+msgstr "Abmeldung und Änderungen möglich bis (<i>falls gesetzt</i>)"
+
+#: registration/templates/registration/admin/move_event.html:13
+msgid "Starting date of every shift"
+msgstr "Startdatum jeder Schicht"
+
+#: registration/templates/registration/admin/move_event.html:14
+msgid "Ending date of every shift"
+msgstr "Enddatum jeder Schicht"
+
+#: registration/templates/registration/admin/move_event.html:17
+msgid "The following things will <b>remain unchanged</b>:"
+msgstr "Die folgended Daten <b>bleiben unverändert</b>:"
+
+#: registration/templates/registration/admin/move_event.html:19
+msgid "All settings (jobs, shifts, texts, etc.)"
+msgstr "Alle Einstellungen (Aufgaben, Schichten, Texte, etc.)"
+
+#: registration/templates/registration/admin/move_event.html:20
+msgid "All registered people (helpers, coordinators, etc.)"
+msgstr "Alle registrierten Menschen (Helfer, Koordinatoren, etc.)"
+
+#: registration/templates/registration/admin/move_event.html:21
+msgid "Sign up date of helpers"
+msgstr "Anmeldedatum der Helfer"
+
+#: registration/templates/registration/admin/move_event.html:44
+msgid "Move"
+msgstr "Verschieben"
 
 #: registration/templates/registration/admin/nopermission.html:5
 msgid "No permission"
