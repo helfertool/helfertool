@@ -1,0 +1,34 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Move event" %}</h2>
+
+    <div class="alert alert-info" role="alert">
+        {% trans "The following dates <strong>will be changed</strong>:" %}
+        <ul>
+            <li>{% trans "Event date" %}</li>
+            <li>{% trans "Deregistration and changes possible until date (<em>if set</em>)" %}</li>
+            <li>{% trans "Starting date of every shift" %}</li>
+            <li>{% trans "Ending date of every shift" %}</li>
+        </ul>
+
+        {% trans "The following things will <strong>remain unchanged</strong>:" %}
+        <ul>
+            <li>{% trans "All settings (jobs, shifts, texts, etc.)" %}</li>
+            <li>{% trans "All registered people (helpers, coordinators, etc.)" %}</li>
+            <li>{% trans "Sign up date of helpers" %}</li>
+        </ul>
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {% include "registration/admin/overview_event.html" %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Move" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}

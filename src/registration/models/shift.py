@@ -194,21 +194,7 @@ class Shift(models.Model):
 
         # maybe just the date is changed
         if new_date:
-            old_begin_localtime = localtime(self.begin)
-            old_end_localtime = localtime(self.end)
-
-            # move date alone without time
-            diff_days = new_date - old_begin_localtime.date()
-
-            new_begin_date = old_begin_localtime.date() + diff_days
-            new_end_date = old_end_localtime.date() + diff_days
-
-            # set time separately (10 am should always be 10 am, also when a time change is between old and new date)
-            begin_time = old_begin_localtime.time()
-            end_time = old_end_localtime.time()
-
-            new_shift.begin = datetime.combine(new_begin_date, begin_time)
-            new_shift.end = datetime.combine(new_end_date, end_time)
+            new_shift.move_date(new_date)
 
         # now save that
         new_shift.save()
@@ -221,7 +207,24 @@ class Shift(models.Model):
                 new_shift.gifts.add(gift)
 
         return new_shift
+    
+    def move_date(self, new_date):
+        # current begin and end in local time
+        old_begin_localtime = localtime(self.begin)
+        old_end_localtime = localtime(self.end)
 
+        # move date alone without chainging time
+        diff_days = new_date - old_begin_localtime.date()
+
+        new_begin_date = old_begin_localtime.date() + diff_days
+        new_end_date = old_end_localtime.date() + diff_days
+
+        # set time separately (10 am should always be 10 am, also when a time change is between old and new date)
+        begin_time = old_begin_localtime.time()
+        end_time = old_end_localtime.time()
+
+        self.begin = datetime.combine(new_begin_date, begin_time)
+        self.end = datetime.combine(new_end_date, end_time)
 
 @receiver(pre_delete, sender=Shift)
 def shift_deleted(sender, instance, using, **kwargs):
