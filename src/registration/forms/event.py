@@ -3,9 +3,11 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
+from django.utils.timezone import localtime
 
 from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
+from datetime import datetime
 
 import os
 
@@ -220,3 +222,36 @@ class EventDuplicateForm(EventForm):
             self.other_event.inventory_settings.duplicate(self.instance)
             self.instance.inventory = True
             self.instance.save()
+
+
+class EventMoveForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = []
+
+    new_date = forms.DateField(
+        label=_("New date"),
+        widget=DatePicker,
+    )
+
+    def save(self, commit=True):
+        new_date = self.cleaned_data.get('new_date')
+        diff_days = new_date - self.instance.date
+
+        if self.instance.date != new_date:
+            # change date of every shift
+            for job in self.instance.job_set.all():
+                for shift in job.shift_set.all():
+                    shift.move_date(new_date)
+                    shift.save()
+
+            # change event date
+            self.instance.date = new_date
+
+             # change 'changes_until' if set
+            if self.instance.changes_until:
+                self.instance.changes_until += diff_days
+
+            self.instance.save()
+        
+        return self.instance
