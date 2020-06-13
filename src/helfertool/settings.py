@@ -504,6 +504,7 @@ INSTALLED_APPS = (
     'account.apps.AccountConfig',
     'toolsettings.apps.ToolsettingsConfig',
     'prerequisites.apps.PrerequisitesConfig',
+    'toollog.apps.ToollogConfig',
     'helfertool',
 )
 
