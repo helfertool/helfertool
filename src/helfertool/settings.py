@@ -360,8 +360,6 @@ LOGGING = {
         # Do not change loglevel!
         'helfertool_database': {
             'class': 'toollog.utils.HelfertoolDatabaseHandler',
-            'filters': [],
-            'formatter': 'helfertool_console',
             'level': 'INFO',
         }
     },

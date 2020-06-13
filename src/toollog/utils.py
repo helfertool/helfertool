@@ -1,6 +1,8 @@
 import logging
 import json
 
+from django.db import models
+
 
 class HelfertoolDatabaseHandler(logging.Handler):
     """
@@ -10,24 +12,22 @@ class HelfertoolDatabaseHandler(logging.Handler):
     def __init__(self, *args, **kwargs):
         super(HelfertoolDatabaseHandler, self).__init__(*args, **kwargs)
 
-
-    def get_extra(self, extras, key, classname):
+    def get_extra(self, record, key, classname):
         """
         Extract the key with the classname from the extras dictionary.
 
         returns an object of type classname or the primary key of the object,
         both storable in a ForeignKey-object
         """
-        if key in extras:
-            if isinstance(extras[key], classname):
-                keypk = key + "_pk"
-                if keypk in extras and  extras[key].pk != extras[keypk]:
-                    raise ValueError("Inconsistenc in log extras: %s should contain the pk of %s", key, keypk)
-                return extras[key]
+        if key in record.__dict__ and isinstance(record.__dict__[key], classname):
+            keypk = key + "_pk"
+            if keypk in record.__dict__ and record.__dict__[key].pk != record.__dict__[keypk]:
+                raise ValueError("Inconsistenc in log extras: %s should contain the pk of %s" % (key, keypk))
+            return record.__dict__[key]
 
         keypk = key + "_pk"
-        if keypk in extras:
-            return extras[keypk]
+        if keypk in record.__dict__:
+            return record.__dict__[keypk]
 
         return None
 
@@ -54,25 +54,41 @@ class HelfertoolDatabaseHandler(logging.Handler):
         from registration.models import Event, Helper
         from toollog.models import HelfertoolLogEntry
 
-
         # Extract information from the record
         dbrecord = HelfertoolLogEntry()
         dbrecord.level = record.levelname
-        dbrecord.messsage = record.getMessage()
+        dbrecord.message = record.getMessage()
         dbrecord.time = record.created
         dbrecord.app = record.name
 
-        extras = record.extras
-
         # dissect the extras
-        dbrecord.event = self.get_extra(extras, 'event', Event)
-        dbrecord.user = self.get_extra(extras, 'user', User)
-        dbrecord.helper = self.get_extra(extras, 'helper', Helper)
+        dbrecord.event = self.get_extra(record, 'event', Event)
+        dbrecord.user = self.get_extra(record, 'user', User)
+        dbrecord.helper = self.get_extra(record, 'helper', Helper)
 
-        # Remove already parsed fields
-        extras = dict(filter(lambda key: key not in ['event', 'event_pk', 'user', 'user_pk', 'helper', 'helper_pk']))
+        # remove all standard arfs from the record
+        extra = {k: v for k, v in record.__dict__.items() if k not in [
+            'name', 'msg', 'args', 'levelname', 'levelno', 'pathname', 'filename', 'module',
+            'exc_info', 'exc_text', 'stack_info', 'funcName', 'lineno',
+            'created', 'asctime', 'msecs', 'relativeCreated',
+            'thread', 'threadName', 'processName', 'process', 'extras', 'message']
+        }
+
+        extra.pop('event', None)
+        extra.pop('event_pk', None)
+        extra.pop('user', None)
+        extra.pop('user_pk', None)
+        extra.pop('helper', None)
+        extra.pop('helper_pk', None)
+
+        # clean up keys
+        for k in extra:
+            if isinstance(extra[k], models.Model):
+                extra[k] = extra[k].pk
+            else:
+                extra[k] = str(extra[k])
 
         # Change this for migrating to JSONField
-        dbrecord.extras = json.dumps(extras)
+        dbrecord.extra = json.dumps(extra)
 
         dbrecord.save()

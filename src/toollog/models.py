@@ -2,8 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from registration.models import Event, Helper
 
+
 def get_sentinel_user():
     return User.objects.get_or_create(username='deleted')[0]
+
 
 class HelfertoolLogEntry(models.Model):
     """ Backbone for HelfertoolDatabaseHandler
@@ -18,9 +20,6 @@ class HelfertoolLogEntry(models.Model):
         :helper: the helper referred to in the log
         :extra: any superfluous, generic data stored as json.
     """
-
-    class Meta:
-        ordering: ['time']
 
     level = models.CharField(max_length=16)
 
