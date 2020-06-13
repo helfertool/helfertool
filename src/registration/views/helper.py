@@ -21,7 +21,7 @@ from gifts.forms import HelpersGiftsForm
 from prerequisites.forms import HelperPrerequisiteForm
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
@@ -202,6 +202,7 @@ def add_helper(request, event_url_name, shift_pk):
             'user': request.user,
             'event': event,
             'helper': helper,
+            # TODO add shifts
         })
 
         if not helper.send_mail(request, internal=True):

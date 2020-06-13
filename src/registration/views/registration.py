@@ -18,7 +18,7 @@ from ..permissions import has_access, ACCESS_INVOLVED
 from news.helper import news_test_email
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.registration")
 
 
 def index_all_events(request):

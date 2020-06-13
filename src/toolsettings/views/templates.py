@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.toolsettings")
 
 from registration.views.utils import nopermission
 

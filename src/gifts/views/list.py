@@ -15,7 +15,7 @@ from ..forms import GiftSettingsForm
 from .utils import notactive
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.gifts")
 
 
 @login_required

@@ -14,7 +14,7 @@ from ..decorators import archived_not_available
 from ..permissions import has_access, ACCESS_EVENT_EDIT_DUPLICATES
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.registration")
 
 
 @login_required

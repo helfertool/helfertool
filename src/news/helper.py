@@ -1,7 +1,7 @@
 from .models import Person
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.news")
 
 
 def news_add_email(email):
