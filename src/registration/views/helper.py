@@ -195,11 +195,12 @@ def add_helper(request, event_url_name, shift_pk):
     if form.is_valid():
         helper = form.save()
 
+        shiftids = [s.pk for s in all_shifts]
         logger.info("helper created", extra={
             'user': request.user,
             'event': event,
             'helper': helper,
-            # TODO add shifts
+            'shifts': shiftids,
         })
 
         if not helper.send_mail(request, internal=True):

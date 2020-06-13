@@ -108,6 +108,7 @@ def form(request, event_url_name, link_pk=None):
 
         logger.info("helper registered", extra={
             'event': event,
+            'user': request.user if request.user.is_authenticated() else None,
             'helper': helper,
             'withlink': link_pk is not None,
         })
