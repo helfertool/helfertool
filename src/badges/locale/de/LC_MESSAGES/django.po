@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 16:13+0200\n"
+"POT-Creation-Date: 2020-06-13 11:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #: badges/forms/badge.py:38 badges/forms/design.py:23 badges/forms/design.py:29
 msgid "The file is not an image."
@@ -117,7 +117,7 @@ msgid "Color for text"
 msgstr "Textfarbe"
 
 #: badges/models/design.py:49 badges/models/design.py:57
-msgid "E.g. #00ff00"
+msgid "e.g. #00ff00"
 msgstr "z.B. #00ff00"
 
 #: badges/models/design.py:56
@@ -183,7 +183,7 @@ msgstr "Badges nur für Koordinatoren"
 
 #: badges/models/settings.py:82
 msgid "Print barcodes on badges to avoid duplicates"
-msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern."
+msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern"
 
 #: badges/templates/badges/delete_design.html:6
 msgid "Delete Badge Design"
@@ -282,6 +282,14 @@ msgstr "Bitte lade die Seite neu (wegen Inaktivität)."
 msgid "Job"
 msgstr "Aufgabe"
 
+#: badges/templates/badges/index.html:25
+msgid "Generate"
+msgstr "Generieren"
+
+#: badges/templates/badges/index.html:26
+msgid "Warnings"
+msgstr "Warnungen"
+
 #: badges/templates/badges/index.html:35
 msgid "Unregistered badges"
 msgstr "Nicht registrierte Badges"
@@ -304,6 +312,7 @@ msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
 #: badges/templates/badges/not_active.html:6
+#: badges/templates/badges/tasklist.html:9
 msgid "Badges"
 msgstr "Badges"
 
@@ -390,7 +399,7 @@ msgid "Here you can get the sample LaTeX template:"
 msgstr "Hier kannst du die Vorlage für das LaTeX Template bekommen:"
 
 #: badges/templates/badges/settings_advanced.html:15
-#: badges/templates/badges/tasklist.html:30
+#: badges/templates/badges/tasklist.html:26
 msgid "Download"
 msgstr "Herunterladen"
 
@@ -402,11 +411,19 @@ msgstr "Es gibt keine Berechtigungen."
 msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 
-#: badges/templates/badges/tasklist.html:5
+#: badges/templates/badges/tasklist.html:3
 msgid "Please login again."
 msgstr "Logge dich bitte wieder ein."
 
-#: badges/templates/badges/tasklist.html:26
+#: badges/templates/badges/tasklist.html:6
+msgid "Currently generated badges"
+msgstr "Aktuell generierte Badges"
+
+#: badges/templates/badges/tasklist.html:10
+msgid "Status"
+msgstr "Status"
+
+#: badges/templates/badges/tasklist.html:22
 msgid "Show errors"
 msgstr "Fehler anzeigen"
 
@@ -451,3 +468,6 @@ msgstr "Bagde bereits gedruckt: %(name)s"
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
+
+#~ msgid "Badge Status"
+#~ msgstr "Badge Status"

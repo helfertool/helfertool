@@ -7,37 +7,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 16:13+0200\n"
+"POT-Creation-Date: 2020-06-13 11:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: account/forms/account.py:98 account/forms/account.py:106
-msgid "Managed by LDAP group"
-msgstr "Durch LDAP Gruppe verwaltet"
+#: account/forms/account.py:107 account/forms/account.py:115
+msgid "Managed by external identity provider"
+msgstr "Durch externen Identity Provider verwaltet"
 
-#: account/forms/account.py:102 account/templates/account/list_users.html:34
+#: account/forms/account.py:111 account/templates/account/list_users.html:34
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
 msgstr "Administrator"
 
-#: account/forms/account.py:112 account/templates/account/list_users.html:42
+#: account/forms/account.py:121 account/templates/account/list_users.html:42
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
 msgstr "Nutzer hinzufügen"
 
-#: account/forms/account.py:120 account/templates/account/list_users.html:38
+#: account/forms/account.py:129 account/templates/account/list_users.html:38
 #: account/templates/account/user_permissions.html:14
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:128 account/templates/account/list_users.html:46
+#: account/forms/account.py:137 account/templates/account/list_users.html:46
 #: account/templates/account/user_permissions.html:23
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
@@ -184,8 +184,8 @@ msgid "Change password"
 msgstr "Passwort ändern"
 
 #: account/templates/account/view_user.html:56
-msgid "The password cannot be changed."
-msgstr "Das Passwort kann nicht geändert werden."
+msgid "The password cannot be changed here."
+msgstr "Das Passwort kann hier nicht geändert werden."
 
 #: account/templatetags/lastlogin.py:15
 msgid "Never"
@@ -212,6 +212,9 @@ msgstr "Benutzer %(username)s hinzugefügt"
 #: account/views/account.py:79
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
+
+#~ msgid "Managed by LDAP group"
+#~ msgstr "Durch LDAP Gruppe verwaltet"
 
 #, fuzzy
 #~| msgid "%(last_login)s ago"
