@@ -4,7 +4,7 @@ import mail
 from .ids import parse_tracking, MAIL_EVENT, MAIL_NEWS, MAIL_REGISTRATION
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.mail")
 
 
 def _handle_event(uuid_str, deliverynotification):

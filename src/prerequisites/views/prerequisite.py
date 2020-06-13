@@ -15,7 +15,7 @@ from ..forms import PrerequisiteForm, PrerequisiteDeleteForm
 from ..models import Prerequisite
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.prerequisites")
 
 
 @login_required

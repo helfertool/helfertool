@@ -8,7 +8,7 @@ from django.utils.translation import ugettext as _
 from smtplib import SMTPException
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.mail")
 
 from registration.decorators import archived_not_available
 from registration.models import Event

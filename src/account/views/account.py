@@ -14,7 +14,7 @@ from ..forms import CreateUserForm, EditUserForm
 from ..templatetags.globalpermissions import has_adduser_group
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.account")
 
 
 @login_required

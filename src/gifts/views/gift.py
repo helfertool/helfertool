@@ -16,7 +16,7 @@ from ..models import Gift, GiftSet
 from .utils import notactive
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.gifts")
 
 
 def _validate_gift(event, gift_pk):
