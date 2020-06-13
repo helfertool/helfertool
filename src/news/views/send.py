@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.news")
 
 from account.templatetags.globalpermissions import has_sendnews_group
 from registration.views.utils import nopermission

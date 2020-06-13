@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from ..templatetags.globalpermissions import has_adduser_group, has_addevent_group, has_sendnews_group
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.account")
 
 
 logging_group_map = {

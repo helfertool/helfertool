@@ -5,7 +5,7 @@ from axes.helpers import get_client_ip_address
 from axes.signals import user_locked_out
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.account")
 
 
 @receiver(user_logged_in)

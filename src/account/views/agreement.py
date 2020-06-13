@@ -10,7 +10,7 @@ from ..models import Agreement, UserAgreement
 from ..forms import AgreementForm, UserAgreementForm, DeleteForm
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.account")
 
 
 @login_required

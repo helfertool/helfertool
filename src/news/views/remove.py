@@ -8,7 +8,7 @@ from registration.views.utils import nopermission
 from ..forms import RemoveForm
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.news")
 
 
 @login_required

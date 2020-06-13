@@ -3,7 +3,7 @@ from django import forms
 from ..utils import prerequisites_for_helper
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.prerequisites")
 
 
 class HelperPrerequisiteForm(forms.Form):

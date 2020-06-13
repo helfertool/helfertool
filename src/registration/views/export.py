@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.dateparse import parse_date
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.registration")
 
 from io import BytesIO
 

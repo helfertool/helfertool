@@ -12,7 +12,7 @@ from ..forms import ShiftForm, ShiftDeleteForm
 from ..permissions import has_access, ACCESS_JOB_EDIT
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.registration")
 
 
 @login_required

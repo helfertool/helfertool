@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from smtplib import SMTPException
 
 import logging
-logger = logging.getLogger("helfertool")
+logger = logging.getLogger("helfertool.registration")
 
 import uuid
 
