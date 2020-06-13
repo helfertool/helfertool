@@ -102,6 +102,8 @@ def view_helper(request, event_url_name, helper_pk):
         helper.gifts.update()
 
         gifts_form = HelpersGiftsForm(request.POST or None,
+                                      user=request.user,
+                                      helper=helper,
                                       instance=helper.gifts,
                                       prefix="gifts")
 
@@ -294,11 +296,11 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
     if form.is_valid():
         form.save()
 
-        # TODO: add job
         logger.info("helper newjob", extra={
             'user': request.user,
             'event': event,
             'helper': helper,
+            'job': job,
         })
 
         return HttpResponseRedirect(reverse('view_helper',

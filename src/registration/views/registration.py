@@ -131,7 +131,7 @@ def registered(request, event_url_name, helper_id=None):
     news = news_test_email(helper.email)
 
     context = {'event': event,
-               'data': helper,
+               'helper': helper,
                'news': news}
     return render(request, 'registration/registered.html', context)
 
@@ -178,6 +178,7 @@ def deregister(request, event_url_name, helper_id, shift_pk):
 
         logger.info("helper deregistered", extra={
             'event': event,
+            'user': request.user if request.user.is_authenticated() else None,
             'helper': helper,
             "helper_pk": helper_id,
         })
@@ -220,7 +221,8 @@ def update_personal(request, event_url_name, helper_id):
         logger.info("helper dataupdated", extra={
             'event': event,
             'helper': helper,
-            "helper_pk": helper_id,
+            'user': request.user if request.user.is_authenticated() else None,
+            'helper_pk': helper_id,
         })
 
         if form.email_has_changed:

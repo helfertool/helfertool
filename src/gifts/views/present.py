@@ -13,6 +13,8 @@ from .utils import notactive
 
 from ..forms import PresentForm
 
+import logging
+logger = logging.getLogger("helfertool.gifts")
 
 @login_required
 @archived_not_available
@@ -33,6 +35,12 @@ def set_present(request, event_url_name, shift_pk):
         form.save()
 
         messages.success(request, _("Attendance was saved"))
+
+        logger.info("helper set present", extra={
+            'event': event,
+            'helper': helper,
+            'user': request.user,
+        })
 
         return HttpResponseRedirect(reverse('gifts:set_present',
                                     args=[event.url_name, shift.pk, ]))

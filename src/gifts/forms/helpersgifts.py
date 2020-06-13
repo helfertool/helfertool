@@ -4,6 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from .fields import PresenceField
 from ..models import HelpersGifts
 
+import logging
+logger = logging.getLogger("helfertool.gifts")
 
 class HelpersGiftsForm(forms.ModelForm):
     class Meta:
@@ -11,6 +13,8 @@ class HelpersGiftsForm(forms.ModelForm):
         exclude = ['helper', 'deserved_gifts', ]
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        self.helper = kwargs.pop('helper')
         super(HelpersGiftsForm, self).__init__(*args, **kwargs)
 
         automatic_presence = self.instance.helper.event.giftsettings.enable_automatic_presence
@@ -47,6 +51,16 @@ class HelpersGiftsForm(forms.ModelForm):
         for giftset in self.instance.deservedgiftset_set.all():
             delivered_id_str = "delivered_{}".format(giftset.pk)
 
+            if commit:
+                gifts = { gift.gift.id : gift.count for gift in giftset.gifts }
+                logger.info("giftset delivered", extras={
+                    'user': self.user,
+                    'helper': self.helper,
+                    'event': self.helper.event,
+                    'giftset': giftset,
+                    'gifts': gifts,
+                })
+
             giftset.delivered = self.cleaned_data[delivered_id_str]
             giftset.save()
 
@@ -54,6 +68,14 @@ class HelpersGiftsForm(forms.ModelForm):
         for helpershift in self.instance.helper.helpershift_set.all():
             present_id_str = "present_{}".format(helpershift.shift.pk)
             present = self.cleaned_data.get(present_id_str)
+
+            logstr = "helper present" if present else "helper absent"
+            logger.info(logstr, extras={
+                'user': self.user,
+                'helper': self.helper,
+                'event': self.helper.event,
+                'shift': helpershift,
+            })
 
             instance.set_present(helpershift.shift, present)
 

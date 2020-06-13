@@ -9,6 +9,8 @@ from .set import GiftSet
 from .deservedgiftset import DeservedGiftSet
 from registration.models.helpershift import HelperShift
 
+import logging
+logger = logging.getLogger("helfertool.gifts")
 
 class HelpersGifts(models.Model):
     helper = models.OneToOneField(
@@ -156,6 +158,14 @@ class HelpersGifts(models.Model):
                 # None -> automatic presence
                 helpershift.manual_presence = False
                 helpershift.present = self._check_auto_presence(helpershift)
+
+                if helpershift.present:
+                    logger.info("helper auto present", extras={
+                        'helper': self.helper,
+                        'event': self.helper.event,
+                        'shift': helpershift,
+                    })
+
                 helpershift.save()
             else:
                 # presence manually set
