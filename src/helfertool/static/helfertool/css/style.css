@@ -23,6 +23,8 @@ h1, h2, h3, h4 {
 .btn-outline-primary {
     color: #1ea082;
     border-color: #1ea082;
+
+    text-decoration: none!important;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):hover {
