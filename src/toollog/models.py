@@ -1,9 +1,6 @@
 from django.db import models
-
-from registration.models import Event, Helper, Shift, Job
-from gifts.models import GiftSet, Gift
-from account.models import Agreement
 from django.contrib.auth.models import User
+from registration.models import Event, Helper
 
 def get_sentinel_user():
     return User.objects.get_or_create(username='deleted')[0]
@@ -18,10 +15,8 @@ class HelfertoolLogEntry(models.Model):
         :app: sender
         :event: the Event used
         :user: the logged in User that emitted the event that created the log
-        :helper: the helper that issued the log
+        :helper: the helper referred to in the log
         :extra: any superfluous, generic data stored as json.
-
-        It will also concatenate other, extra information as an extra-field as json.
     """
 
     class Meta:

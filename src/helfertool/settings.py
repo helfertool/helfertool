@@ -356,10 +356,18 @@ LOGGING = {
             'formatter': 'helfertool_console',
             'level': 'INFO',
         },
+
+        # Do not change loglevel!
+        'helfertool_database': {
+            'class': 'toollog.utils.HelfertoolDatabaseHandler',
+            'filters': [],
+            'formatter': 'helfertool_console',
+            'level': 'INFO',
+        }
     },
     'loggers': {
         'helfertool': {
-            'handlers': ['helfertool_console'],
+            'handlers': ['helfertool_console', 'helfertool_database'],
             'level': 'INFO',
         },
     },
