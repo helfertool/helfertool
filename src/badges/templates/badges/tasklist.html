@@ -2,40 +2,35 @@
 {% if no_login %}
     <p>{% trans "Please login again." %}</p>
 {% else %}
-    <h3 id="tasklist-header">{% trans "Badge Status"%}</h3>
+    {% if tasks %}
+    <h3 id="tasklist-header" class="d-none">{% trans "Currently generated badges"%}</h3>
     <table class="table" aria-describedby="tasklist-header">
         <tr>
-            <th scope="col">{% trans "Task" %}</th>
+            <th scope="col">{% trans "Badges" %}</th>
             <th scope="col">{% trans "Status" %}</th>
         </tr>
         {% for task in tasks %}
             <tr>
                 <td>
-                    {% if task.finished %}
-                        {% icon "check" %}
-                    {% elif task.error %}
-                        <span class="text-danger">{% icon "exclamation-triangle" %}</span>
-                    {% else %}
-                        <em class="fa fa-spinner fa-pulse"></em>
-                    {% endif %}
-
-                    &nbsp;
-
                     {{ task.name }}
                 </td>
 
                 <td>
                     {% if task.error %}
-                        <a href="{% url "badges:failed" event.url_name task.id %}">
+                        <span class="text-danger">{% icon "exclamation-triangle" %}</span>
+                        <a href="{% url "badges:failed" event.url_name task.id %}" class="text-danger">
                             {% trans "Show errors" %}
                         </a>
                     {% elif task.finished %}
                         <a href="{% url "badges:download" event.url_name task.id %}">
                             {% trans "Download" %}
                         </a>
+                    {% else %}
+                        <em class="fa fa-spinner fa-pulse"></em>
                     {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
+    {% endif %}
 {% endif %}

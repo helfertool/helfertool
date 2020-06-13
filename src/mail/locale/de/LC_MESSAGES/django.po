@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 16:13+0200\n"
+"POT-Creation-Date: 2020-06-13 11:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: mail/forms.py:44 mail/models.py:118
+#: mail/forms.py:44 mail/models.py:114
 msgid "All helpers and coordinators"
 msgstr "Alle Helfer und Koordinatoren"
 
-#: mail/forms.py:45 mail/models.py:122
+#: mail/forms.py:45 mail/models.py:118
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
@@ -30,11 +30,11 @@ msgstr "Alle Koordinatoren"
 msgid "General"
 msgstr "Allgemein"
 
-#: mail/forms.py:54 mail/models.py:125
+#: mail/forms.py:54 mail/models.py:121
 msgid "{}, Helpers and coordinators"
 msgstr "{}, Helfer und Koordinatoren"
 
-#: mail/forms.py:59 mail/models.py:128
+#: mail/forms.py:59 mail/models.py:124
 msgid "{}, Coordinators"
 msgstr "{}, Koordinatoren"
 

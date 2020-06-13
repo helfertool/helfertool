@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 16:13+0200\n"
+"POT-Creation-Date: 2020-06-13 11:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -90,6 +90,6 @@ msgstr "Schicht"
 msgid "For this event no t-shirt sizes were collected."
 msgstr " Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
-#: statistic/views/chart.py:54
+#: statistic/views/chart.py:53
 msgid "Number of helpers"
 msgstr "Anzahl Helfer"

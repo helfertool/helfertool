@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-05 16:13+0200\n"
+"POT-Creation-Date: 2020-06-13 11:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,21 +15,25 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: gifts/forms/fields.py:32
+#: gifts/forms/fields.py:33
 msgid "Auto"
 msgstr "Auto"
 
-#: gifts/forms/fields.py:36
+#: gifts/forms/fields.py:37
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: gifts/forms/fields.py:41
 msgid "Present"
 msgstr "Anwesend"
 
-#: gifts/forms/fields.py:37
+#: gifts/forms/fields.py:42
 msgid "Absent"
 msgstr "Abwesend"
 
-#: gifts/forms/helpersgifts.py:28 gifts/templates/gifts/helper.html:54
+#: gifts/forms/helpersgifts.py:30 gifts/templates/gifts/helper.html:33
 msgid "Delivered"
 msgstr "Ausgegeben"
 
@@ -94,7 +98,7 @@ msgid "Delete gift"
 msgstr "Geschenk löschen"
 
 #: gifts/templates/gifts/delete_gift.html:13
-#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:78
+#: gifts/templates/gifts/edit_gift.html:6 gifts/templates/gifts/helper.html:59
 msgid "Gift"
 msgstr "Geschenk"
 
@@ -123,33 +127,49 @@ msgstr "Beinhaltete Geschenke"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/list.html:14 gifts/templates/gifts/set_present.html:37
+#: gifts/templates/gifts/list.html:14 gifts/templates/gifts/set_present.html:45
 msgid "Save"
 msgstr "Speichern"
 
-#: gifts/templates/gifts/helper.html:12
-msgid "Set to default"
-msgstr "Auf Standard setzen"
-
-#: gifts/templates/gifts/helper.html:66
+#: gifts/templates/gifts/helper.html:45
 msgid "No gifts"
 msgstr "Keine Geschenke"
 
-#: gifts/templates/gifts/helper.html:79
-msgid "Given"
-msgstr "Ausgegeben"
+#: gifts/templates/gifts/helper.html:53
+msgid "Summary"
+msgstr "Zusammenfassung"
 
-#: gifts/templates/gifts/helper.html:80
+#: gifts/templates/gifts/helper.html:60
 msgid "Total"
 msgstr "Insgesamt"
 
-#: gifts/templates/gifts/helper.html:82
+#: gifts/templates/gifts/helper.html:61
+msgid "Given"
+msgstr "Ausgegeben"
+
+#: gifts/templates/gifts/helper.html:63
+msgid "Pending (with deposit)"
+msgstr "Ausstehend (mit Pfand)"
+
+#: gifts/templates/gifts/helper.html:65
+msgid "Including future shifts"
+msgstr "Inklusive zukünftige Schichten"
+
+#: gifts/templates/gifts/helper.html:68
 msgid "Pending"
 msgstr "Ausstehend"
 
-#: gifts/templates/gifts/helper.html:106
+#: gifts/templates/gifts/helper.html:70
+msgid "Helper was present"
+msgstr "Helfer war anwesend"
+
+#: gifts/templates/gifts/helper.html:103 gifts/templates/gifts/helper.html:107
 msgid "All delivered"
 msgstr "Alles ausgegeben"
+
+#: gifts/templates/gifts/helper.html:124
+msgid "Set to default"
+msgstr "Auf Standard setzen"
 
 #: gifts/templates/gifts/list.html:5
 msgid "Gifts and attendance settings"
@@ -216,14 +236,18 @@ msgid "Set all to auto"
 msgstr "Alle auf auto setzen"
 
 #: gifts/templates/gifts/set_present.html:16
+msgid "Set all to unknown"
+msgstr "Alle auf unbekannt setzen"
+
+#: gifts/templates/gifts/set_present.html:20
 msgid "Set all to present"
 msgstr "Alle auf anwesend setzen"
 
-#: gifts/templates/gifts/set_present.html:19
+#: gifts/templates/gifts/set_present.html:23
 msgid "Set all to absent"
 msgstr "Alle auf abwesend setzen"
 
-#: gifts/templates/gifts/set_present.html:40
+#: gifts/templates/gifts/set_present.html:48
 msgid "Nobody is registered for this shift."
 msgstr "Niemand ist für diese Schicht angemeldet."
 

@@ -46,7 +46,7 @@ class BadgeDesign(models.Model):
         default="#000000",
         validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
         verbose_name=_("Color for text"),
-        help_text=_("E.g. #00ff00"),
+        help_text=_("e.g. #00ff00"),
     )
 
     bg_color = models.CharField(
@@ -54,7 +54,7 @@ class BadgeDesign(models.Model):
         default="#FFFFFF",
         validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
         verbose_name=_("Background color"),
-        help_text=_("E.g. #00ff00"),
+        help_text=_("e.g. #00ff00"),
     )
 
     bg_front = models.ImageField(
