@@ -29,16 +29,10 @@ class HelperPrerequisiteForm(forms.Form):
                 initial=prereqisite.check_helper(self.helper)
             )
 
-    def save(self, request):
+    def save(self):
         if self._prerequisites:
             for id_str, prerequisite in self._prerequisites.items():
                 prerequisite.set_helper(self.helper, self.cleaned_data[id_str])
-
-            logger.info("helper prerequisites", extra={
-                'user': request.user,
-                'event': self.helper.event,
-                'helper': self.helper,
-            })
 
     def has_items(self):
         return bool(self.fields)

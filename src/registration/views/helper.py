@@ -127,7 +127,13 @@ def view_helper(request, event_url_name, helper_pk):
             gifts_form.save()
 
         if prerequisites_form:
-            prerequisites_form.save(request)
+            prerequisites_form.save()
+
+        logger.info("helper additionaldata", extra={
+                'user': request.user,
+                'event': event,
+                'helper': helper,
+            })
 
         messages.success(request, _("Changes were saved."))
         return redirect('view_helper', event_url_name=event.url_name, helper_pk=helper.pk)
