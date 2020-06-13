@@ -338,6 +338,7 @@ def event_saved(sender, instance, using, **kwargs):
     if instance.inventory:
         _setup_inventory_settings(instance)
 
+
 def _setup_badge_settings(event):
     """
     Set up badges for all jobs and helpers
@@ -364,6 +365,7 @@ def _setup_badge_settings(event):
             badge.helper = helper
             badge.save()
 
+
 def _setup_gift_settings(event):
     """
     Setup gift relations for all helpers
@@ -376,6 +378,7 @@ def _setup_gift_settings(event):
             gifts = HelpersGifts()
             gifts.helper = helper
             gifts.save()
+
 
 def _setup_inventory_settings(event):
     if not event.inventory_settings:

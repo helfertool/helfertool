@@ -207,7 +207,7 @@ class Shift(models.Model):
                 new_shift.gifts.add(gift)
 
         return new_shift
-    
+
     def move_date(self, new_date):
         # current begin and end in local time
         old_begin_localtime = localtime(self.begin)
@@ -225,6 +225,7 @@ class Shift(models.Model):
 
         self.begin = datetime.combine(new_begin_date, begin_time)
         self.end = datetime.combine(new_end_date, end_time)
+
 
 @receiver(pre_delete, sender=Shift)
 def shift_deleted(sender, instance, using, **kwargs):

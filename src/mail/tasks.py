@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 from celery import task
-from celery.five import monotonic
+from celery.five import monotonic  # pylint: disable=E0611
 from contextlib import contextmanager
 from django.conf import settings
 from django.core.cache import caches

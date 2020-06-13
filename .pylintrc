@@ -1,0 +1,5 @@
+[MASTER]
+load-plugins=pylint_django,pylint_celery
+
+[TYPECHECK]
+ignored-classes=ForeignKey,CheckboxInput

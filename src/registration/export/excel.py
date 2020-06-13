@@ -3,6 +3,8 @@ from django.utils.translation import ugettext as _
 import re
 import xlsxwriter
 
+# pylint: disable=E1102
+
 
 class Iterator():
     """ Returns ascending natural numbers beginning from 0. """
