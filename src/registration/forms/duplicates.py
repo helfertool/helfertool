@@ -48,8 +48,7 @@ class MergeDuplicatesForm(forms.Form):
                 remaining_helper.gifts.merge(helper.gifts)
 
             # then create the duplicate entry so that old links in mails still work
-            Duplicate.objects.create(deleted=helper.id,
-                                        existing=remaining_helper)
+            Duplicate.objects.create(deleted=helper.id, existing=remaining_helper)
 
             # the overall timestamp of the helper should be the oldest one
             # (there are multiple timestamps saved: one per helper and one per shift)

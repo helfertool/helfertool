@@ -1,4 +1,5 @@
 pylint
 pylint-django
+pylint-celery
 flake8
 bump2version

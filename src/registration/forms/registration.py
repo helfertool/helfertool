@@ -213,7 +213,7 @@ class RegisterForm(forms.ModelForm):
             max_overlap = self.event.max_overlapping
             if self._check_has_overlap(selected_shifts, max_overlap):
                 raise ValidationError(_("Some of your shifts overlap more then %(minutes)d minutes.") %
-                                        {'minutes': max_overlap})
+                                      {'minutes': max_overlap})
 
     def _check_has_overlap(self, shifts, max_overlap):
         """

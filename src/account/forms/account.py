@@ -44,9 +44,9 @@ def _user_flag_changeable(user, flag):
         return True
 
     # LDAP enabled -> check the settings
-    if hasattr(settings, "AUTH_LDAP_USER_FLAGS_BY_GROUP") \
-        and settings.AUTH_LDAP_USER_FLAGS_BY_GROUP.get(flag, None) is not None:
-            return False
+    if hasattr(settings, "AUTH_LDAP_USER_FLAGS_BY_GROUP") and \
+            settings.AUTH_LDAP_USER_FLAGS_BY_GROUP.get(flag, None) is not None:
+        return False
 
     # OpenID connect enabled -> check the settings
     if settings.OIDC_CUSTOM_PROVIDER_NAME is not None:
@@ -79,8 +79,7 @@ class CreateUserForm(UserCreationForm):
         # add LOCAL_USER_CHAR to the beginning
         char = settings.LOCAL_USER_CHAR
         if char and not self.cleaned_data.get('username').startswith(char):
-                self.cleaned_data['username'] = char + \
-                    self.cleaned_data.get('username')
+            self.cleaned_data['username'] = char + self.cleaned_data.get('username')
 
         return super(CreateUserForm, self).clean()
 

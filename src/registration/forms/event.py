@@ -3,11 +3,9 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
-from django.utils.timezone import localtime
 
 from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
-from datetime import datetime
 
 import os
 
@@ -248,10 +246,10 @@ class EventMoveForm(forms.ModelForm):
             # change event date
             self.instance.date = new_date
 
-             # change 'changes_until' if set
+            # change 'changes_until' if set
             if self.instance.changes_until:
                 self.instance.changes_until += diff_days
 
             self.instance.save()
-        
+
         return self.instance
