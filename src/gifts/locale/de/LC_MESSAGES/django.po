@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 11:51+0200\n"
+"POT-Creation-Date: 2020-06-13 12:01+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -176,8 +176,8 @@ msgid "Gifts and attendance settings"
 msgstr "Einstellungen für Geschenke und Anwesenheiten"
 
 #: gifts/templates/gifts/list.html:7
-msgid "Settings"
-msgstr "Einstellungen"
+msgid "General"
+msgstr "Allgemein"
 
 #: gifts/templates/gifts/list.html:32 gifts/templates/gifts/list.html:67
 msgid "Edit"
@@ -264,6 +264,9 @@ msgstr "Anwesenheit wurde gespeichert"
 #, python-format
 msgid "Gift set deleted: %(name)s"
 msgstr "Geschenkset gelöscht: %(name)s"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
 
 #~ msgid ""
 #~ "Enable automatic availability confirmation at the end of a shift if "
