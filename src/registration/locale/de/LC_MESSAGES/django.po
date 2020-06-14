@@ -1350,7 +1350,7 @@ msgid ""
 "This helper has been marked as absent for some of his shifts in the past at "
 "this event (see below)."
 msgstr ""
-"Dieser Helfer wurde in Schichten dieses Events als Abwesend markiert (siehe "
+"Dieser Helfer wurde in Schichten dieses Events als abwesend markiert (siehe "
 "unten)."
 
 #: registration/templates/registration/admin/view_helper.html:15
