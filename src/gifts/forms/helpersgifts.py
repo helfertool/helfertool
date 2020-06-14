@@ -26,11 +26,15 @@ class HelpersGiftsForm(forms.ModelForm):
 
             missed_shift = self.instance.helper.has_missed_shift(giftset.shift)
 
+            # field should be disabled if the helper missed the shift and it is not delivered
+            # -> we can remove the delivered flags for missed shifts, but not add it
+            disabled = missed_shift and not giftset.delivered
+
             self.fields[delivered_id_str] = forms.BooleanField(
                 label=_("Delivered"),
                 required=False,
                 initial=giftset.delivered,
-                disabled=missed_shift)
+                disabled=disabled)
 
         # presence fields per shift
         for helpershift in self.instance.helper.helpershift_set.all():
