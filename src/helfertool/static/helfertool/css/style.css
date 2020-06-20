@@ -23,8 +23,6 @@ h1, h2, h3, h4 {
 .btn-outline-primary {
     color: #1ea082;
     border-color: #1ea082;
-
-    text-decoration: none!important;
 }
 
 .btn-outline-primary:not(:disabled):not(.disabled):hover {
@@ -72,6 +70,10 @@ h1, h2, h3, h4 {
 
 .alert a {
     text-decoration: underline;
+}
+
+.alert a.btn {
+    text-decoration: none;
 }
 
 /* badges (copied from bootstrap with adapted colors */
