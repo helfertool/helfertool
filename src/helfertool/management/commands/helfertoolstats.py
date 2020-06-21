@@ -11,9 +11,12 @@ class Command(BaseCommand):
         events = Event.objects.count()
         jobs = Job.objects.count()
         shifts = Shift.objects.count()
-        helpers = Shift.objects.filter(archived_number__isnull=False) \
-            .aggregate(total=Sum('archived_number'))['total'] \
-            + Helper.objects.count()
+        helpers = Helper.objects.count()
+
+        helpers_archived = Shift.objects.filter(archived_number__isnull=False) \
+            .aggregate(total=Sum('archived_number'))['total']
+        if helpers_archived:
+            helpers += helpers_archived
 
         print("Events:\t\t{}".format(events))
         print("Jobs:\t\t{}".format(jobs))
