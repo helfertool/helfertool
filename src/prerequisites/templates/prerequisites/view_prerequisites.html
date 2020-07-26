@@ -1,10 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n bootstrap4 icons permissions %}
 
 {% block admincontent %}
+    {% has_access event "ACCESS_PREREQUISITES_EDIT" as user_prerequisites_edit %}
+
     <h2 id="prerequisite-header">{% trans "Prerequisites" %}</h2>
 
-    {% if not event.archived %}
+    {% if not event.archived and user_prerequisites_edit %}
     <p><a href="{% url 'prerequisites:new_prerequisite' event.url_name %}">
         {% icon "plus" %}
         {% trans "New prerequisite" %}
@@ -29,19 +31,21 @@
                                 {% trans "Helpers" %}
                             </a>
 
-                            <br />
+                            {% if user_prerequisites_edit %}
+                                <br />
 
-                            <a href="{% url "prerequisites:edit_prerequisite" event.url_name prerequisite.pk %}">
-                                {% icon "pencil-alt" %}
-                                {% trans "Edit" %}
-                            </a>
+                                <a href="{% url "prerequisites:edit_prerequisite" event.url_name prerequisite.pk %}">
+                                    {% icon "pencil-alt" %}
+                                    {% trans "Edit" %}
+                                </a>
 
-                            <br />
+                                <br />
 
-                            <a href="{% url "prerequisites:delete_prerequisite" event.url_name prerequisite.pk %}">
-                                {% icon "trash-alt" %}
-                                {% trans "Delete" %}
-                            </a>
+                                <a href="{% url "prerequisites:delete_prerequisite" event.url_name prerequisite.pk %}">
+                                    {% icon "trash-alt" %}
+                                    {% trans "Delete" %}
+                                </a>
+                            {% endif %}
                         {% endif %}
                     </td>
                 </tr>
