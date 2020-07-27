@@ -77,7 +77,7 @@ class CodestyleChecker:
                 modules.append(f)
         return modules
 
-    def _run_check(self, name, cmd):
+    def _run_check(self, name, cmd, additional_env=None):
         """ Run the command for a check and handle output.
 
         Flake8 currently does not have a stable non-legacy API and pylint internally also uses Popen.
@@ -88,8 +88,13 @@ class CodestyleChecker:
 
         Returns: list of strings
         """
+        env = None
+        if additional_env:
+            env = dict(os.environ)
+            env.update(additional_env)
+
         try:
-            tmp = subprocess.run(cmd, cwd=SOURCE_DIR, capture_output=True, text=True)
+            tmp = subprocess.run(cmd, cwd=SOURCE_DIR, env=env, capture_output=True, text=True)
         except FileNotFoundError:
             raise CheckError("{} not found".format(name))
 
@@ -126,7 +131,11 @@ class CodestyleChecker:
                "--exit-zero",
                module]
 
-        findings = self._run_check("pyltint", cmd)
+        env = {
+            "DJANGO_SETTINGS_MODULE": "helfertool.settings",
+        }
+
+        findings = self._run_check("pylint", cmd, env)
 
         # filter lines with "*************" (pylint shows that between findingds)
         findings = list(filter(lambda s: "*************" not in s, findings))
