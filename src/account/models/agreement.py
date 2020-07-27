@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -43,7 +43,7 @@ class Agreement(models.Model):
 
 class UserAgreement(models.Model):
     user = models.ForeignKey(
-        User,
+        get_user_model(),
         on_delete=models.CASCADE,
     )
 

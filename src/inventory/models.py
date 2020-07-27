@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -20,7 +20,7 @@ class Inventory(models.Model):
     )
 
     admins = models.ManyToManyField(
-        User,
+        get_user_model(),
         blank=True,
         verbose_name=_("Administrators of inventory"),
     )

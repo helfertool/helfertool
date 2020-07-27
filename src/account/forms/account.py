@@ -1,7 +1,8 @@
 from django import forms
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
 from ..templatetags.globalpermissions import has_adduser_group, has_addevent_group, has_sendnews_group
@@ -60,7 +61,7 @@ def _user_flag_changeable(user, flag):
 
 class CreateUserForm(UserCreationForm):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ("username", "email", "first_name", "last_name", "password1",
                   "password2")
         widgets = {
@@ -86,7 +87,7 @@ class CreateUserForm(UserCreationForm):
 
 class EditUserForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ("first_name", "last_name", "email", "is_active", "is_superuser")
 
     def __init__(self, *args, **kwargs):

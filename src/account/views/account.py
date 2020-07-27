@@ -1,9 +1,8 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
@@ -47,7 +46,7 @@ def add_user(request):
 @login_required
 def view_user(request, user_pk=None):
     if user_pk:
-        user = get_object_or_404(User, pk=user_pk)
+        user = get_object_or_404(get_user_model(), pk=user_pk)
     else:
         user = request.user
 
@@ -96,7 +95,7 @@ def edit_user(request, user_pk):
     if not request.user.is_superuser:
         return nopermission(request)
 
-    changed_user = get_object_or_404(User, pk=user_pk)
+    changed_user = get_object_or_404(get_user_model(), pk=user_pk)
 
     form = EditUserForm(request.POST or None, instance=changed_user, admin_user=request.user)
 
@@ -126,12 +125,12 @@ def list_users(request):
     # get users based on search term
     search = request.GET.get("search")
     if search:
-        all_users = User.objects.filter(Q(username__icontains=search)
-                                        | Q(first_name__icontains=search)
-                                        | Q(last_name__icontains=search)
-                                        | Q(email__icontains=search)).order_by('last_name')
+        all_users = get_user_model().objects.filter(Q(username__icontains=search)
+                                                    | Q(first_name__icontains=search)
+                                                    | Q(last_name__icontains=search)
+                                                    | Q(email__icontains=search)).order_by('last_name')
     else:
-        all_users = User.objects.all().order_by("last_name")
+        all_users = get_user_model().objects.all().order_by("last_name")
 
     # apply filters
     filterstr = request.GET.get("filter")

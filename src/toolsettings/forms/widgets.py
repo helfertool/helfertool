@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 
 
@@ -9,7 +9,7 @@ def _label_from_instance(self, obj):
 
 
 class SingleUserSelectWidget(ModelSelect2Widget):
-    model = User
+    model = get_user_model()
 
     search_fields = [
         'username__icontains',
@@ -22,7 +22,7 @@ class SingleUserSelectWidget(ModelSelect2Widget):
 
 
 class UserSelectWidget(ModelSelect2MultipleWidget):
-    model = User
+    model = get_user_model()
 
     search_fields = [
         'username__icontains',

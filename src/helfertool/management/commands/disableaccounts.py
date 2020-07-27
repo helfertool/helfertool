@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 from django.utils.timezone import make_aware
@@ -32,7 +32,7 @@ class Command(BaseCommand):
         # 2. need to be disabled because
         #    a. last login before deadline
         #    b. never logged in but created before deadline
-        for u in User.objects.filter(is_active=True) \
+        for u in get_user_model().objects.filter(is_active=True) \
             .filter(Q(last_login__lt=date)
                     | Q(last_login__isnull=True, date_joined__lt=date)):
             # skip users from external authentication providers

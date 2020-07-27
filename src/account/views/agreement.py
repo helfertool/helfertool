@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.utils import timezone
 
 import datetime
 
@@ -50,7 +51,7 @@ def handle_user_agreement(request, agreement_pk):
     form = UserAgreementForm(request.POST or None, instance=user_agreement)
 
     if form.is_valid():
-        form.instance.agreed = datetime.datetime.now()
+        form.instance.agreed = timezone.now()
         form.save()
 
         logger.info("useragreement accepted", extra={

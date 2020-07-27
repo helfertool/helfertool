@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
@@ -167,7 +167,7 @@ class Event(models.Model):
     )
 
     admins = models.ManyToManyField(
-        User,
+        get_user_model(),
         blank=True,
         through='registration.EventAdminRoles'
     )

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,7 +23,7 @@ class Issue(models.Model):
     )
 
     sender = models.ForeignKey(
-        User,
+        get_user_model(),
         on_delete=models.CASCADE,
     )
 
@@ -44,7 +44,7 @@ class Issue(models.Model):
     )
 
     done_by = models.ForeignKey(
-        User,
+        get_user_model(),
         null=True,
         related_name='+',
         on_delete=models.CASCADE,
