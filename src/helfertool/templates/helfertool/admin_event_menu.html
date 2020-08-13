@@ -174,7 +174,7 @@
 
                 {% if event.badge_settings.barcodes %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'badges:register' event.url_name %}">{% trans "Registration" %}</a>
+                        <a class="nav-link" href="{% url 'badges:register' event.url_name %}">{% trans "Registration" context "Badges" %}</a>
                     </li>
                 {% endif %}
             {% endif %}

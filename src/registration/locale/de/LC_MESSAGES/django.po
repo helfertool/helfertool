@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 12:01+0200\n"
+"POT-Creation-Date: 2020-08-13 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3.1\n"
 
-#: registration/export/excel.py:86 registration/models/helper.py:85
+#: registration/export/excel.py:88 registration/models/helper.py:85
 #: registration/templates/registration/admin/helpers_table.html:25
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:87 registration/models/helper.py:90
+#: registration/export/excel.py:89 registration/models/helper.py:90
 #: registration/templates/registration/admin/helpers_table.html:29
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:88 registration/models/event.py:139
+#: registration/export/excel.py:90 registration/models/event.py:139
 #: registration/models/helper.py:94
 #: registration/templates/registration/admin/coordinators.html:17
 #: registration/templates/registration/admin/overview_event.html:15
@@ -35,39 +35,39 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:92 registration/export/pdf.py:45
+#: registration/export/excel.py:94 registration/export/pdf.py:45
 #: registration/models/helper.py:99
 #: registration/templates/registration/admin/coordinators.html:18
 #: registration/templates/registration/helper_data.html:17
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export/excel.py:96 registration/export/pdf.py:48
+#: registration/export/excel.py:98 registration/export/pdf.py:48
 #: registration/models/helper.py:117
 #: registration/templates/registration/admin/helpers_table.html:34
 #: registration/templates/registration/helper_data.html:24
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:100 registration/models/helper.py:122
+#: registration/export/excel.py:102 registration/models/helper.py:122
 #: registration/templates/registration/admin/helpers_table.html:40
 #: registration/templates/registration/helper_data.html:38
 msgid "Vegetarian"
 msgstr "Vegetarier"
 
-#: registration/export/excel.py:104
+#: registration/export/excel.py:106
 #: registration/templates/registration/admin/helpers_table.html:46
 msgid "Food handling"
 msgstr "Gesundheitsbelehrung"
 
-#: registration/export/excel.py:107 registration/export/pdf.py:50
+#: registration/export/excel.py:109 registration/export/pdf.py:50
 #: registration/models/helper.py:105
 #: registration/templates/registration/admin/helpers_table.html:51
 #: registration/templates/registration/helper_data.html:44
 msgid "Comment"
 msgstr "Kommentar"
 
-#: registration/export/excel.py:122 registration/export/pdf.py:84
+#: registration/export/excel.py:124 registration/export/pdf.py:84
 #: registration/templates/registration/admin/coordinators.html:6
 #: registration/templates/registration/admin/helpers_for_job.html:40
 msgid "Coordinators"
@@ -89,12 +89,12 @@ msgstr "Name"
 msgid "Nobody is registered for this shift."
 msgstr "Es ist niemand zu dieser Schicht angemeldet."
 
-#: registration/forms/event.py:88
+#: registration/forms/event.py:86
 msgid "User already has permissions for this event assigned"
 msgstr ""
 "Dem Nutzer wurden bereits Berechtigungen für diese Veranstaltungen zugewiesen"
 
-#: registration/forms/event.py:233 registration/forms/job.py:91
+#: registration/forms/event.py:231 registration/forms/job.py:91
 msgid "New date"
 msgstr "Neues Datum"
 

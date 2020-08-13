@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 12:01+0200\n"
+"POT-Creation-Date: 2020-08-13 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,13 +19,13 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 
 #: prerequisites/models.py:25
-#: prerequisites/templates/prerequisites/view_prerequisites.html:17
+#: prerequisites/templates/prerequisites/view_prerequisites.html:19
 msgid "Name"
 msgstr "Name"
 
 #: prerequisites/models.py:30
 #: prerequisites/templates/prerequisites/delete_prerequisite.html:17
-#: prerequisites/templates/prerequisites/view_prerequisites.html:18
+#: prerequisites/templates/prerequisites/view_prerequisites.html:20
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -47,7 +47,7 @@ msgid "Edit prerequisite"
 msgstr "Voraussetzung bearbeiten"
 
 #: prerequisites/templates/prerequisites/edit_prerequisite.html:11
-#: prerequisites/templates/prerequisites/view_prerequisites.html:10
+#: prerequisites/templates/prerequisites/view_prerequisites.html:12
 msgid "New prerequisite"
 msgstr "Neue Voraussetzung"
 
@@ -60,7 +60,7 @@ msgid "Helper does not fulfil all prerequisites (for now)."
 msgstr "Der Helfer erfüllt (aktuell) nicht alle Voraussetzungen."
 
 #: prerequisites/templates/prerequisites/not_active.html:6
-#: prerequisites/templates/prerequisites/view_prerequisites.html:5
+#: prerequisites/templates/prerequisites/view_prerequisites.html:7
 msgid "Prerequisites"
 msgstr "Voraussetzungen"
 
@@ -97,19 +97,19 @@ msgid "There are no helpers registered that need this prerequisite."
 msgstr ""
 "Es sind keine Helfer angemeldet, die diese Voraussetzung erfüllen müssen."
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:29
+#: prerequisites/templates/prerequisites/view_prerequisites.html:31
 msgid "Helpers"
 msgstr "Helfer"
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:36
+#: prerequisites/templates/prerequisites/view_prerequisites.html:39
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:43
+#: prerequisites/templates/prerequisites/view_prerequisites.html:46
 msgid "Delete"
 msgstr "Löschen"
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:51
+#: prerequisites/templates/prerequisites/view_prerequisites.html:55
 msgid "There are no prerequisites."
 msgstr "Es gibt keine Voraussetzungen."
 

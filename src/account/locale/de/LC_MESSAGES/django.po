@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 12:01+0200\n"
+"POT-Creation-Date: 2020-08-13 14:45+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -204,12 +204,12 @@ msgstr "Gestern"
 msgid "%(last_login_ago)s ago"
 msgstr "Vor %(last_login_ago)s"
 
-#: account/views/account.py:33
+#: account/views/account.py:32
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Benutzer %(username)s hinzugefügt"
 
-#: account/views/account.py:79
+#: account/views/account.py:78
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
