@@ -27,7 +27,11 @@
             </ul>
 
             <p><strong>{% trans "Front desk" %}</strong><br />
-            {% trans "Can read all helper data, resend the confirmation mail, set the presence of the helpers and delivered gifts." %}</p>
+            {% blocktrans trimmed %}
+            Can read all helper data, resend the confirmation mail, edit the internal comment and change the delivered
+            gifts of the helpers. The user cannot change the presence or any other data.
+            {% endblocktrans %}
+            </p>
 
             <p><strong>{% trans "Inventory" %}</strong><br />
             {% trans "Can read all helper data and register or take back inventory items." %}</p>

@@ -11,6 +11,10 @@ from registration.models.helpershift import HelperShift
 
 
 class HelpersGifts(models.Model):
+    """
+    Important: if new fields are added here, they need to be handled in HelpersGiftsForm.
+    The gift-related fields can be switched to read-only, so they need to be added there.
+    """
     helper = models.OneToOneField(
         'registration.Helper',
         related_name='gifts',

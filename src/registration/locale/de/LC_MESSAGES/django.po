@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 14:45+0200\n"
+"POT-Creation-Date: 2020-08-13 17:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -220,12 +220,12 @@ msgid "Front desk"
 msgstr "Front Desk"
 
 #: registration/models/adminroles.py:21
-#: registration/templates/registration/admin/edit_event_admins.html:32
+#: registration/templates/registration/admin/edit_event_admins.html:36
 msgid "Inventory"
 msgstr "Inventar"
 
 #: registration/models/adminroles.py:22
-#: registration/templates/registration/admin/edit_event_admins.html:35
+#: registration/templates/registration/admin/edit_event_admins.html:39
 msgid "Badges"
 msgstr "Badges"
 
@@ -895,7 +895,7 @@ msgid "Features"
 msgstr "Features"
 
 #: registration/templates/registration/admin/edit_event.html:87
-#: registration/templates/registration/admin/edit_event_admins.html:79
+#: registration/templates/registration/admin/edit_event_admins.html:83
 #: registration/templates/registration/admin/edit_helper.html:31
 #: registration/templates/registration/admin/edit_job.html:19
 #: registration/templates/registration/admin/edit_link.html:13
@@ -980,26 +980,28 @@ msgstr ""
 
 #: registration/templates/registration/admin/edit_event_admins.html:30
 msgid ""
-"Can read all helper data, resend the confirmation mail, set the presence of "
-"the helpers and delivered gifts."
+"Can read all helper data, resend the confirmation mail, edit the internal "
+"comment and change the delivered gifts of the helpers. The user cannot "
+"change the presence or any other data."
 msgstr ""
-"Kann alle Daten der Helfer lesen, Bestätigungsmails erneut versenden, die "
-"Anwesenheit der Helfer und ausgegebene Geschenke setzen."
+"Kann alle Daten der Helfer lesen, Bestätigungsmails erneut versenden, den "
+"internen Kommentar bearbeiten und die ausgegebenen Geschenke der Helfer "
+"setzen. Der Nutzer kann die Anwesenheit und weitere Daten nicht ändern."
 
-#: registration/templates/registration/admin/edit_event_admins.html:33
+#: registration/templates/registration/admin/edit_event_admins.html:37
 msgid "Can read all helper data and register or take back inventory items."
 msgstr ""
 "Kann alle Daten der Helfer lesen und Inventar ausgeben oder zurücknehmen."
 
-#: registration/templates/registration/admin/edit_event_admins.html:36
+#: registration/templates/registration/admin/edit_event_admins.html:40
 msgid "Can print and register badges."
 msgstr "Kann Badges drucken und registrieren."
 
-#: registration/templates/registration/admin/edit_event_admins.html:40
+#: registration/templates/registration/admin/edit_event_admins.html:44
 msgid "For single jobs"
 msgstr "Für einzelne Aufgaben"
 
-#: registration/templates/registration/admin/edit_event_admins.html:44
+#: registration/templates/registration/admin/edit_event_admins.html:48
 #, python-format
 msgid ""
 "Permissions for single jobs are managed in the <a href=\"%(a_job_settings)s"
@@ -1008,16 +1010,16 @@ msgstr ""
 "Die Berechtigungen für einzelne Aufgaben werden in den <a href="
 "\"%(a_job_settings)s\">Einstellungen der Aufgaben</a> verwaltet."
 
-#: registration/templates/registration/admin/edit_event_admins.html:51
+#: registration/templates/registration/admin/edit_event_admins.html:55
 msgid "To remove a user, deselect all roles and click Save."
 msgstr ""
 "Um einen Benutzer zu entfernen, alle Rollen abwählen und Sichern klicken."
 
-#: registration/templates/registration/admin/edit_event_admins.html:61
+#: registration/templates/registration/admin/edit_event_admins.html:65
 msgid "User"
 msgstr "Benutzer"
 
-#: registration/templates/registration/admin/edit_event_admins.html:62
+#: registration/templates/registration/admin/edit_event_admins.html:66
 msgid "Roles"
 msgstr "Rollen"
 
@@ -1664,36 +1666,36 @@ msgstr "Veranstaltung wurde kopiert: %(event)s"
 msgid "Event was moved: %(event)s"
 msgstr "Veranstaltung wurde verschoben: %(event)s"
 
-#: registration/views/helper.py:132
+#: registration/views/helper.py:135
 msgid "Changes were saved."
 msgstr "Änderungen wurden gespeichert."
 
-#: registration/views/helper.py:169 registration/views/helper.py:205
+#: registration/views/helper.py:172 registration/views/helper.py:208
 msgid "Sending the mail failed, but the helper was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, der Helfer wurde dennoch gespeichert."
 
-#: registration/views/helper.py:238
+#: registration/views/helper.py:241
 msgid "Sending the mail failed, but the coordinator was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, aber der Koordinator wurde dennoch "
 "gespeichert."
 
-#: registration/views/helper.py:331
+#: registration/views/helper.py:334
 #, python-format
 msgid "Helper deleted: %(name)s"
 msgstr "Helfer gelöscht: %(name)s"
 
-#: registration/views/helper.py:383
+#: registration/views/helper.py:386
 #, python-format
 msgid "Coordinator %(name)s from job \"%(jobname)s\""
 msgstr "Koordinator %(name)s für Aufgabe \"%(jobname)s\""
 
-#: registration/views/helper.py:451
+#: registration/views/helper.py:454
 msgid "Confirmation mail was sent"
 msgstr "Bestätigungsmail wurde gesendet"
 
-#: registration/views/helper.py:457
+#: registration/views/helper.py:460
 msgid "Sending the mail failed."
 msgstr "Senden der E-Mail fehlgeschlagen."
 

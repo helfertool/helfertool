@@ -7,7 +7,7 @@ from collections import OrderedDict
 from registration.decorators import archived_not_available
 from registration.views.utils import nopermission
 from registration.models import Event, Helper
-from registration.permissions import has_access, ACCESS_GIFTS_EDIT, ACCESS_GIFTS_HANDLE
+from registration.permissions import has_access, ACCESS_GIFTS_EDIT, ACCESS_GIFTS_VIEW_SUMMARY
 
 from ..models import Gift, GiftSet
 from ..forms import GiftSettingsForm
@@ -61,7 +61,7 @@ def list_deposit(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not has_access(request.user, event, ACCESS_GIFTS_HANDLE):
+    if not has_access(request.user, event, ACCESS_GIFTS_VIEW_SUMMARY):
         return nopermission(request)
 
     # check if active
@@ -88,7 +88,7 @@ def list_shirts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission
-    if not has_access(request.user, event, ACCESS_GIFTS_HANDLE):
+    if not has_access(request.user, event, ACCESS_GIFTS_VIEW_SUMMARY):
         return nopermission(request)
 
     # check if active

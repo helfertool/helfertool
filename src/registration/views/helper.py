@@ -14,8 +14,8 @@ from ..forms import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, R
 from ..decorators import archived_not_available
 from ..permissions import has_access, has_access_event_or_job, ACCESS_INVOLVED, ACCESS_JOB_EDIT_HELPERS, \
     ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_VIEW, ACCESS_HELPER_RESEND, \
-    ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE, ACCESS_EVENT_EXPORT_HELPERS, ACCESS_PREREQUISITES_HANDLE, \
-    ACCESS_HELPER_INTERNAL_COMMENT_VIEW, ACCESS_HELPER_INTERNAL_COMMENT_EDIT
+    ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE_GIFTS, ACCESS_GIFTS_HANDLE_PRESENCE, ACCESS_EVENT_EXPORT_HELPERS, \
+    ACCESS_PREREQUISITES_HANDLE, ACCESS_HELPER_INTERNAL_COMMENT_VIEW, ACCESS_HELPER_INTERNAL_COMMENT_EDIT
 
 from gifts.forms import HelpersGiftsForm
 from prerequisites.forms import HelperPrerequisiteForm
@@ -54,7 +54,7 @@ def helpers_for_job(request, event_url_name, job_pk):
     if not has_access(request.user, job, ACCESS_JOB_VIEW_HELPERS):
         return nopermission(request)
 
-    user_manages_attendance = has_access(request.user, event, ACCESS_GIFTS_HANDLE)
+    user_manages_presence = has_access(request.user, event, ACCESS_GIFTS_HANDLE_PRESENCE)
 
     shifts_by_day = job.shifts_by_day().items()
 
@@ -62,7 +62,7 @@ def helpers_for_job(request, event_url_name, job_pk):
     context = {'event': event,
                'job': job,
                'shifts_by_day': shifts_by_day,
-               'user_manages_attendance': user_manages_attendance}
+               'user_manages_presence': user_manages_presence}
     return render(request, 'registration/admin/helpers_for_job.html',
                   context)
 
@@ -82,7 +82,8 @@ def view_helper(request, event_url_name, helper_pk):
         view_internal_comment = False
 
     edit_badge = event.badges and has_access(request.user, helper, ACCESS_BADGES_EDIT_HELPER)
-    edit_gifts = event.gifts and has_access(request.user, helper, ACCESS_GIFTS_HANDLE)
+    edit_gifts = event.gifts and has_access(request.user, helper, ACCESS_GIFTS_HANDLE_GIFTS)
+    edit_presence = event.gifts and has_access(request.user, helper, ACCESS_GIFTS_HANDLE_PRESENCE)
     edit_prerequisites = event.prerequisites and has_access(request.user, helper, ACCESS_PREREQUISITES_HANDLE)
 
     # we have multiple forms. all of them need to be valid in order to save them
@@ -98,11 +99,13 @@ def view_helper(request, event_url_name, helper_pk):
 
     # gift editing
     gifts_form = None
-    if edit_gifts:
+    if edit_gifts or edit_presence:
         helper.gifts.update()
 
         gifts_form = HelpersGiftsForm(request.POST or None,
                                       instance=helper.gifts,
+                                      gifts_readonly=not edit_gifts,
+                                      presence_readonly=not edit_presence,
                                       prefix="gifts")
 
         if not gifts_form.is_valid():

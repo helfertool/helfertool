@@ -40,7 +40,9 @@ ACCESS_MAILS_VIEW = "ACCESS_MAILS_VIEW"  # can view all mails of an event
 ACCESS_STATISTICS_VIEW = "ACCESS_STATISTICS_VIEW"  # can view statistics
 
 ACCESS_GIFTS_EDIT = "ACCESS_GIFTS_EDIT"  # edit gift settings for an event
-ACCESS_GIFTS_HANDLE = "ACCESS_GIFTS_HANDLE"  # give gifts to helpers and note presence
+ACCESS_GIFTS_HANDLE_GIFTS = "ACCESS_GIFTS_HANDLE_GIFTS"  # give gifts to helpers
+ACCESS_GIFTS_HANDLE_PRESENCE = "ACCESS_GIFTS_HANDLE_PRESENCE"  # change presence of helpers
+ACCESS_GIFTS_VIEW_SUMMARY = "ACCESS_GIFTS_VIEW_SUMMARY"  # view summary of gift data (collected deposit, missing shirts)
 
 ACCESS_PREREQUISITES_EDIT = "ACCESS_PREREQUISITES_EDIT"  # edit prerequisite settings for an event
 ACCESS_PREREQUISITES_VIEW = "ACCESS_PREREQUISITES_VIEW"  # view global lists which helper fulfils which prerequisites
@@ -192,10 +194,20 @@ _rbac_matrix = {
         EventAdminRoles.ROLE_ADMIN,
     ],
 
-    ACCESS_GIFTS_HANDLE: [
+    ACCESS_GIFTS_HANDLE_GIFTS: [
         EventAdminRoles.ROLE_ADMIN,
         EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         EventAdminRoles.ROLE_FRONTDESK,
+    ],
+
+    ACCESS_GIFTS_HANDLE_PRESENCE: [
+        EventAdminRoles.ROLE_ADMIN,
+        EventAdminRoles.ROLE_RESTRICTED_ADMIN,
+    ],
+
+    ACCESS_GIFTS_VIEW_SUMMARY: [
+        EventAdminRoles.ROLE_ADMIN,
+        EventAdminRoles.ROLE_RESTRICTED_ADMIN,
     ],
 
     ACCESS_PREREQUISITES_EDIT: [

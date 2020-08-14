@@ -10,7 +10,7 @@
     {% has_access_event_or_job event "ACCESS_MAILS_SEND" "ACCESS_JOB_SEND_MAILS" as user_mails_send %}
     {% has_access_event_or_job event "ACCESS_MAILS_VIEW" "ACCESS_JOB_VIEW_MAILS" as user_mails_view %}
     {% has_access event "ACCESS_GIFTS_EDIT" as user_gifts_edit %}
-    {% has_access event "ACCESS_GIFTS_HANDLE" as user_gifts_handle %}
+    {% has_access event "ACCESS_GIFTS_VIEW_SUMMARY" as user_gifts_view_summary %}
     {% has_access event "ACCESS_BADGES_EDIT" as user_badges_edit %}
     {% has_access event "ACCESS_BADGES_GENERATE" as user_badges_generate %}
     {% has_access event "ACCESS_PREREQUISITES_VIEW" as user_prerequisites_view %}
@@ -133,7 +133,7 @@
     {% endif %}
 
     {% if event.gifts %}
-    {% if user_gifts_edit or user_gifts_handle %}
+    {% if user_gifts_edit or user_gifts_view_summary %}
         <h2>{% trans "Gifts and attendance" %}</h2>
         <ul class="nav flex-column">
             {% if user_gifts_edit %}
@@ -142,7 +142,7 @@
             </li>
             {% endif %}
 
-            {% if user_gifts_handle and not event.archived %}
+            {% if user_gifts_view_summary and not event.archived %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'gifts:list_deposit' event.url_name %}">{% trans "Collected deposit" %}</a>
                 </li>

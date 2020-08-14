@@ -45,6 +45,7 @@ class PresenceField(ChoiceField):
     def __init__(self, *args, **kwargs):
         automatic_presence = kwargs.pop("automatic_presence")
         helpershift = kwargs.pop("helpershift")
+        disabled = kwargs.pop("disabled", False)
 
         # depending on the automatic presence setting, add "auto" or "unknown"
         if automatic_presence:
@@ -71,6 +72,7 @@ class PresenceField(ChoiceField):
             widget=RadioSelect,
             choices=choices,
             initial=initial,
+            disabled=disabled,
             label=helpershift.helper.full_name,
         )
 

@@ -7,7 +7,7 @@ from django.utils.translation import ugettext as _
 
 from registration.decorators import archived_not_available
 from registration.views.utils import nopermission, get_or_404
-from registration.permissions import has_access, ACCESS_GIFTS_HANDLE
+from registration.permissions import has_access, ACCESS_GIFTS_HANDLE_PRESENCE
 
 from .utils import notactive
 
@@ -20,7 +20,7 @@ def set_present(request, event_url_name, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
 
     # check permission
-    if not has_access(request.user, event, ACCESS_GIFTS_HANDLE):
+    if not has_access(request.user, event, ACCESS_GIFTS_HANDLE_PRESENCE):
         return nopermission(request)
 
     # check if active
