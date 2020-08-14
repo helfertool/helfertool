@@ -32,7 +32,7 @@ def set_present(request, event_url_name, shift_pk):
     if form.is_valid():
         form.save()
 
-        messages.success(request, _("Attendance was saved"))
+        messages.success(request, _("Presence was saved"))
 
         return HttpResponseRedirect(reverse('gifts:set_present',
                                     args=[event.url_name, shift.pk, ]))

@@ -84,7 +84,7 @@
             {% if event.gifts and user_manages_presence %}
             <p>
                 <a href="{% url "gifts:set_present" event.url_name shift.pk %}">
-                    {% icon "check-square" %} {% trans "Set attendance for complete shift" %}
+                    {% icon "check-square" %} {% trans "Set presence for complete shift" %}
                 </a>
             </p>
             {% endif %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 17:37+0200\n"
+"POT-Creation-Date: 2020-08-14 15:19+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,8 +102,8 @@ msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:37
-msgid "Event permissions"
-msgstr "Berechtigungen für Veranstaltung"
+msgid "Permissions"
+msgstr "Berechtigungen"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:43
 msgid "Jobs and shifts"
@@ -162,7 +162,7 @@ msgid "T-Shirts"
 msgstr "T-Shirts"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:137
-msgid "Gifts and attendance"
+msgid "Gifts and presence"
 msgstr "Geschenke und Anwesenheit"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:141
@@ -337,6 +337,9 @@ msgstr ""
 #: helfertool/templates/helfertool/login_oidc_failed.html:9
 msgid "You are not allowed to login."
 msgstr "Du darfst dich nicht einloggen."
+
+#~ msgid "Event permissions"
+#~ msgstr "Berechtigungen für Veranstaltung"
 
 #~ msgid "Gifts"
 #~ msgstr "Geschenke"

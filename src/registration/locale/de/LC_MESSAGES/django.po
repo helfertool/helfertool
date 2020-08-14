@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-13 17:37+0200\n"
+"POT-Creation-Date: 2020-08-14 15:19+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -935,8 +935,8 @@ msgstr ""
 "löschen."
 
 #: registration/templates/registration/admin/edit_event_admins.html:5
-msgid "Event permissions"
-msgstr "Berechtigungen für Veranstaltung"
+msgid "Permissions"
+msgstr "Berechtigungen"
 
 #: registration/templates/registration/admin/edit_event_admins.html:8
 msgid "Role descriptions"
@@ -1013,7 +1013,7 @@ msgstr ""
 #: registration/templates/registration/admin/edit_event_admins.html:55
 msgid "To remove a user, deselect all roles and click Save."
 msgstr ""
-"Um einen Benutzer zu entfernen, alle Rollen abwählen und Sichern klicken."
+"Um einen Benutzer zu entfernen, alle Rollen abwählen und Speichern klicken."
 
 #: registration/templates/registration/admin/edit_event_admins.html:65
 msgid "User"
@@ -1129,7 +1129,7 @@ msgid "(%(current)s of %(total)s)"
 msgstr "(%(current)s von %(total)s)"
 
 #: registration/templates/registration/admin/helpers_for_job.html:87
-msgid "Set attendance for complete shift"
+msgid "Set presence for complete shift"
 msgstr "Anwesenheit für komplette Schicht setzen"
 
 #: registration/templates/registration/admin/helpers_table.html:19
@@ -1721,6 +1721,9 @@ msgstr ""
 #: registration/views/shift.py:67
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Event permissions"
+#~ msgstr "Berechtigungen für Veranstaltung"
 
 #~ msgid "Login"
 #~ msgstr "Login"

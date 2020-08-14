@@ -34,7 +34,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'edit_event_admins' event.url_name %}">{% trans "Event permissions" %}</a>
+                <a class="nav-link" href="{% url 'edit_event_admins' event.url_name %}">{% trans "Permissions" %}</a>
             </li>
         {% endif %}
 
@@ -134,7 +134,7 @@
 
     {% if event.gifts %}
     {% if user_gifts_edit or user_gifts_view_summary %}
-        <h2>{% trans "Gifts and attendance" %}</h2>
+        <h2>{% trans "Gifts and presence" %}</h2>
         <ul class="nav flex-column">
             {% if user_gifts_edit %}
             <li class="nav-item">
