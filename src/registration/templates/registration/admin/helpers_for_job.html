@@ -57,6 +57,7 @@
     {% for day, shifts in shifts_by_day %}
         <h3 id="{{ day | date:"Ymd" }}">{{ day }}</h3>
 
+        {% if user_event_export_helpers %}
         <p>
             {% with day_str=day|date:"Y-m-d" %}
                 {% icon "file-download" %}
@@ -69,6 +70,7 @@
                 </a>
             {% endwith %}
         </p>
+        {% endif %}
 
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
