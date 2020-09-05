@@ -340,6 +340,7 @@ LOGGING = {
         },
     },
     'formatters': {
+        # formatters for console and syslog. database logging does not use a formatter
         'helfertool_console': {
             '()': 'toollog.formatters.TextFormatter',
             'format': '[%(asctime)s] %(levelname)s %(message)s (%(extras)s)',
@@ -351,12 +352,21 @@ LOGGING = {
         },
     },
     'handlers': {
+        # console output in debug mode (-> development)
         'helfertool_console': {
             'class': 'logging.StreamHandler',
             'filters': ['require_debug_true'],
             'formatter': 'helfertool_console',
             'level': 'INFO',
         },
+
+        # store in database (only event-related entries)
+        'helfertool_database': {
+            'class': 'toollog.handlers.DatabaseHandler',
+            'level': 'INFO',
+        }
+
+        # syslog handlers are added dynamically below
     },
     'loggers': {
         'helfertool': {
@@ -366,6 +376,11 @@ LOGGING = {
     },
 }
 
+# enable database logging
+if dict_get(config, True, 'logging', 'database'):
+    LOGGING['loggers']['helfertool']['handlers'].append('helfertool_database')
+
+# enable syslog if configured
 syslog_config = dict_get(config, None, 'logging', 'syslog')
 if syslog_config:
     protocol = dict_get(syslog_config, 'udp', 'protocol')
@@ -385,6 +400,7 @@ if syslog_config:
 
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog')
 
+# additional syslog output if we run in docker (-> rsyslog -> files)
 if is_docker:
     LOGGING['handlers']['helfertool_syslog_docker'] = {
         'class': 'logging.handlers.SysLogHandler',

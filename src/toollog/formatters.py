@@ -1,6 +1,6 @@
 import logging
 
-from .utils import get_extra_attrs
+from .utils import get_extras_with_replacement
 
 
 class TextFormatter(logging.Formatter):
@@ -11,7 +11,7 @@ class TextFormatter(logging.Formatter):
     """
     def format(self, record):
         if not hasattr(record, 'extras'):
-            extras = get_extra_attrs(record)
+            extras = get_extras_with_replacement(record)
             extras = ["{}=\"{}\"".format(k, v) for k, v in extras.items()]
             extras = ' '.join(extras)
 
