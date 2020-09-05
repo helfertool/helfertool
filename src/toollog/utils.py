@@ -1,12 +1,15 @@
 SKIP_ATTRS = (
     # all default attributes
-    'args', 'created', 'exc_info', 'exc_text', 'filename', 'funcName',
-    'levelname', 'levelno', 'lineno', 'module', 'msecs', 'msg', 'name',
+    'asctime', 'args', 'created', 'exc_info', 'exc_text', 'filename', 'funcName',
+    'levelname', 'levelno', 'lineno', 'message', 'module', 'msecs', 'msg', 'name',
     'pathname', 'process', 'processName', 'relativeCreated', 'stack_info',
     'thread', 'threadName',
 
     # custom things
-    'event', 'job', 'shift', 'helper',
+    'event', 'job', 'shift', 'helper', "user",
+
+    # the TextFormatter set the "extras" attribute
+    "extras",
 )
 
 
@@ -16,7 +19,21 @@ def add_entry(data, key, value):
     return data
 
 
-def get_extra_attrs(record):
+def get_extras(record):
+    """
+    Extracts all extra attributes from the log record without changes.
+    It just removes the default attributes and also the user, event, job, shift and helper.
+    """
+    result = {}
+
+    for k, v in record.__dict__.items():
+        if k not in SKIP_ATTRS:
+            result[k] = v
+
+    return result
+
+
+def get_extras_with_replacement(record):
     """
     Extracts all extra attributes from the log record and additionally:
 
@@ -24,12 +41,9 @@ def get_extra_attrs(record):
     * replaces "job" by "job_name" and "job_pk"
     * replaces "shift" by "shift_name" and "shift_pk"
     * replaces "helper" by "helper_name" and "helper_pk"
+    * replaces "user" (the object) by "user" (the username as string)
     """
-    result = {}
-
-    for k, v in record.__dict__.items():
-        if k not in SKIP_ATTRS:
-            result[k] = v
+    result = get_extras(record)
 
     # event
     if hasattr(record, 'event'):
@@ -50,5 +64,9 @@ def get_extra_attrs(record):
     if hasattr(record, 'helper') and record.helper:
         result = add_entry(result, "helper_name", record.helper.full_name)
         result = add_entry(result, "helper_pk", record.helper.pk)
+
+    # user
+    if hasattr(record, 'user') and record.user:
+        result = add_entry(result, "user", record.user.username)
 
     return result

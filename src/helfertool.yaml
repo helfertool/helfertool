@@ -202,6 +202,10 @@ logging:
     #    # Syslog facility to use
     #    facility: 'local7'
 
+    # Store all event-related events in the database.
+    # The log entries are only stored as long as the event exists and are deleted with the event.
+    #database: true
+
 # Security settings
 security:
     # Do not activate debugging in productive environments!
