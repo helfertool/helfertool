@@ -50,6 +50,7 @@ urlpatterns += [
     url(r'', include('inventory.urls')),
     url(r'', include('mail.urls')),
     url(r'', include('prerequisites.urls')),
+    url(r'', include('toollog.urls')),
 ]
 
 # for development

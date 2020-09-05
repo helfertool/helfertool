@@ -1,13 +1,3 @@
-import logging
-
-# The logging part was inspired by the following blog entries and projects:
-#
-# https://lincolnloop.com/blog/django-logging-right-way/
-# https://lincolnloop.com/blog/logging-systemds-journal-python/
-# https://github.com/madzak/python-json-logger
-# https://www.caktusgroup.com/blog/2013/09/18/central-logging-django-graylog2-and-graypy/
-
-
 SKIP_ATTRS = (
     # all default attributes
     'args', 'created', 'exc_info', 'exc_text', 'filename', 'funcName',
@@ -62,20 +52,3 @@ def get_extra_attrs(record):
         result = add_entry(result, "helper_pk", record.helper.pk)
 
     return result
-
-
-class HelfertoolFormatter(logging.Formatter):
-    """
-    Customer formatter that outputs log lines like this:
-
-    INFO user created (user="hertle" added_user="foo")
-    """
-    def format(self, record):
-        if not hasattr(record, 'extras'):
-            extras = get_extra_attrs(record)
-            extras = ["{}=\"{}\"".format(k, v) for k, v in extras.items()]
-            extras = ' '.join(extras)
-
-            setattr(record, 'extras', extras)
-
-        return super().format(record)

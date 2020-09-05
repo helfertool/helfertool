@@ -3,6 +3,7 @@ Django settings for Helfertool.
 """
 
 import os
+import socket
 import sys
 import yaml
 
@@ -340,12 +341,12 @@ LOGGING = {
     },
     'formatters': {
         'helfertool_console': {
-            '()': 'helfertool.log.HelfertoolFormatter',
+            '()': 'toollog.formatters.TextFormatter',
             'format': '[%(asctime)s] %(levelname)s %(message)s (%(extras)s)',
             'datefmt': '%d/%b/%Y %H:%M:%S'
         },
         'helfertool_syslog': {
-            '()': 'helfertool.log.HelfertoolFormatter',
+            '()': 'toollog.formatters.TextFormatter',
             'format': '%(name)s %(levelname)s %(message)s (%(extras)s)',
         },
     },
@@ -367,13 +368,19 @@ LOGGING = {
 
 syslog_config = dict_get(config, None, 'logging', 'syslog')
 if syslog_config:
+    protocol = dict_get(syslog_config, 'udp', 'protocol')
+    if protocol not in ['tcp', 'udp']:
+        print('Invalid syslog port: "tcp" or "udp" expected')
+        sys.exit(1)
+
     LOGGING['handlers']['helfertool_syslog'] = {
         'class': 'logging.handlers.SysLogHandler',
         'formatter': 'helfertool_syslog',
-        'level': dict_get(syslog_config, 'INFO', 'level'),
+        'level': 'INFO',
         'facility': dict_get(syslog_config, 'local7', 'facility'),
         'address': (dict_get(syslog_config, 'localhost', 'server'),
                     dict_get(syslog_config, 514, 'port')),
+        'socktype': socket.SOCK_DGRAM if protocol == 'udp' else socket.SOCK_STREAM,
     }
 
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog')
@@ -504,6 +511,7 @@ INSTALLED_APPS = (
     'account.apps.AccountConfig',
     'toolsettings.apps.ToolsettingsConfig',
     'prerequisites.apps.PrerequisitesConfig',
+    'toollog.apps.ToollogConfig',
     'helfertool',
 )
 

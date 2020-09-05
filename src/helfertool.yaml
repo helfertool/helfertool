@@ -193,9 +193,11 @@ logging:
     #    # Log level that will be sent to syslog: INFO, WARNING, ERROR
     #    level: 'INFO'
     #
-    #    # Server and port
+    #    # Server, port and protocol
+    #    # UDP is recommended. With TCP, the syslog server needs to run and accept connections when the Helfertool is started.
     #    server: 'localhost'
     #    port: 514
+    #    protocol: 'udp'
     #
     #    # Syslog facility to use
     #    facility: 'local7'
