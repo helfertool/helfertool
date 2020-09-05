@@ -66,6 +66,7 @@ def merge(request, event_url_name, email):
                 logger.info("helper merged", extra={
                     'user': request.user,
                     'helper': h,
+                    'event': event,
                     'helper_pk': h.pk,
                 })
 

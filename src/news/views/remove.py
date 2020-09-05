@@ -24,6 +24,7 @@ def remove(request):
         messages.success(request, _("Recipient removed."))
 
         logger.info("newsletter removed", extra={
+            'user': request.user,
             'email': email,
         })
 

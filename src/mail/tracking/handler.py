@@ -26,6 +26,7 @@ def _handle_event(uuid_str, deliverynotification):
 
         logger.info("mail handled", extra={
             'type': MAIL_EVENT,
+            'event': delivery.helper.event,
             'helper': delivery.helper,
             'mail_tracking': sentmail.tracking_uuid,
         })
