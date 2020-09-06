@@ -23,6 +23,10 @@ urlpatterns = [
         views.edit_event,
         name='new_event'),
 
+    url(r'^manage/past/$',
+        views.past_events,
+        name='past_events'),
+
     # registration
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/$',
         views.form,

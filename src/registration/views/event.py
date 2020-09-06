@@ -5,6 +5,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
 import logging
 logger = logging.getLogger("helfertool.registration")
 
@@ -14,7 +17,7 @@ from .utils import nopermission
 
 from ..decorators import archived_not_available
 from ..forms import EventForm, EventAdminRolesForm, EventAdminRolesAddForm, EventDeleteForm, EventArchiveForm, \
-    EventDuplicateForm, EventMoveForm
+    EventDuplicateForm, EventMoveForm, PastEventForm
 from ..models import Event, EventAdminRoles
 from ..permissions import has_access, ACCESS_EVENT_EDIT
 
@@ -259,3 +262,25 @@ def move_event(request, event_url_name):
     context = {'event': event,
                'form': form}
     return render(request, 'registration/admin/move_event.html', context)
+
+
+@login_required
+def past_events(request):
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    # form for months
+    months = 4  # the default value
+    form = PastEventForm(request.GET or None, initial={'months': months})
+    if form.is_valid():
+        months = form.cleaned_data.get('months')
+
+    # get events
+    deadline = datetime.today() - relativedelta(months=months)
+    events = Event.objects.filter(archived=False, date__lte=deadline).order_by('date')
+
+    context = {
+        'form': form,
+        'events': events,
+    }
+    return render(request, 'registration/admin/past_events.html', context)
