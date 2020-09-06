@@ -319,14 +319,21 @@ if dict_get(config, False, 'security', 'behind_proxy') or is_docker:
     USE_X_FORWARDED_HOST = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# cookie security
+# cookies
+LANGUAGE_COOKIE_NAME = "lang"
+
 if not DEBUG:
     CSRF_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
     CSRF_COOKIE_SAMESITE = "Strict"
+
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_SAMESITE = "Strict"
+
+    LANGUAGE_COOKIE_HTTPONLY = True
+    LANGUAGE_COOKIE_SECURE = True
+    LANGUAGE_COOKIE_SAMESITE = "Strict"
 
 # logging
 ADMINS = [(mail, mail) for mail in dict_get(config, [], 'logging', 'mails')]
