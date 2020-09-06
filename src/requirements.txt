@@ -13,6 +13,7 @@ jmespath
 mozilla-django-oidc
 pillow
 psycopg2-binary
+python-dateutil
 python-magic
 pyyaml
 reportlab

@@ -12,6 +12,12 @@
         </li>
     {% endif %}
 
+    {% if user.is_superuser %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'past_events' %}">{% trans "Past events" %}</a>
+    </li>
+    {% endif %}
+
     {% if user.is_superuser or user|is_inventory_admin_any %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a>
