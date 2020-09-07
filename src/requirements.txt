@@ -20,3 +20,4 @@ python-magic
 pyyaml
 reportlab
 xlsxwriter
+vine<5.0.0
