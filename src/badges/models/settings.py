@@ -25,6 +25,16 @@ class BadgeSettings(models.Model):
         :event: The event that uses the badge creation
     """
 
+    SHIFT_FORMAT_DATE = 'DATE'
+    SHIFT_FORMAT_HOURS = 'HOURS'
+    SHIFT_FORMAT_WEEKDAY = 'WEEKDAY'
+
+    SHIFT_FORMAT_CHOICES = (
+        (SHIFT_FORMAT_HOURS, _("Hours only")),
+        (SHIFT_FORMAT_WEEKDAY, _("Include weekday")),
+        (SHIFT_FORMAT_DATE, _("Include date")),
+    )
+
     event = models.OneToOneField(
         'registration.Event',
         on_delete=models.CASCADE,
@@ -70,6 +80,20 @@ class BadgeSettings(models.Model):
         max_length=200,
         default="",
         verbose_name=_("Role for helpers"),
+    )
+
+    shift_format = models.CharField(
+        choices=SHIFT_FORMAT_CHOICES,
+        default=SHIFT_FORMAT_HOURS,
+        max_length=250,
+        verbose_name=_("Format for shift on badges"),
+        help_text=_("""There is not much space on the badges, so the list of shifts needs to be as small as possible.
+                    Nevertheless, the weekday or date may be required for events with several days."""),
+    )
+
+    shift_no_names = models.BooleanField(
+        default=False,
+        verbose_name=_("Do not use shift names for badges, always print times"),
     )
 
     only_coordinators = models.BooleanField(

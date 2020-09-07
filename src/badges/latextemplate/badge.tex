@@ -151,18 +151,18 @@
                 \node[draw=none, text width=0.5\badgewidth] at (0.05,0.1) {\Large \badge@firstname\ \badge@surname};
 
                 % job
-                \node at (0.05,0.5) {\badge@job};
+                \node[text width=0.5\badgewidth] at (0.05,0.5) {\badge@job};
                 % role
-                \node at (0.05,0.6) {\badge@role};
+                \node[text width=0.5\badgewidth] at (0.05,0.6) {\badge@role};
                 % shift
-                \node at (0.05,0.8) {\badge@shift};
+                \node[text width=0.9\badgewidth] at (0.05,0.75) {\small \badge@shift};
 
                 % photo
                 \ifthenelse{\equal{\badge@photo}{}}
                 {
                 }
                 {
-                    \node at (0.6,0.05)  {\includegraphics[width=0.3\badgewidth]{\badge@photo}};
+                    \node at (0.65,0.05)  {\includegraphics[width=0.3\badgewidth]{\badge@photo}};
                 }
 
                 %
@@ -219,7 +219,7 @@
                     \node at (0.15,0.6) {\sout{Finanzbereich}};
                 }
 
-                % barcode (change the position of the barcode if necessary of simply ignore it)
+                % barcode (change the position of the barcode if necessary or simply ignore it)
                 \ifthenelse{\equal{\badge@id}{}}
                 {
                 }
