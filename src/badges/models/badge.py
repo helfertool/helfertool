@@ -20,7 +20,7 @@ class Badge(models.Model):
 
     barcode = models.PositiveIntegerField(
         verbose_name=_("Barcode"),
-        null=True,  # will be set in post_save handler
+        null=True,  # will be set in save method
         blank=True,
     )
 
