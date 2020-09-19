@@ -3,7 +3,11 @@
 {% load bootstrap4 %}
 
 {% block admincontent %}
-    <h2>{% blocktrans with name=helper.full_name %}Badge for {{ name }}{% endblocktrans %}</h2>
+    {% if helper %}
+        <h2>{% blocktrans with name=helper.full_name %}Badge for {{ name }}{% endblocktrans %}</h2>
+    {% else %}
+        <h2>{% blocktrans with name=form.instance.firstname %}Special badges for {{ name }}{% endblocktrans %}</h2>
+    {% endif %}
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}

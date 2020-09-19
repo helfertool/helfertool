@@ -76,12 +76,16 @@ def take_back_badge(request, event_url_name, item_pk):
         form = BadgeBarcodeForm(request.POST or None, event=event)
 
         if form.is_valid():
-            item.remove_from_helper(form.badge.helper)
+            if form.badge.helper:
+                item.remove_from_helper(form.badge.helper)
 
-            request.session['inventory_helper_pk'] = \
-                str(form.badge.helper.pk)
+                request.session['inventory_helper_pk'] = \
+                    str(form.badge.helper.pk)
 
-            return redirect('inventory:take_back', event_url_name)
+                return redirect('inventory:take_back', event_url_name)
+            else:
+                # special badge -> just show wrong helper message
+                wrong_helper = True
     except (KeyError, Item.DoesNotExist):
         form = None
     except WrongHelper:

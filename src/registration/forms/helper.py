@@ -243,12 +243,11 @@ class HelperSearchForm(forms.Form):
             return None
 
         try:
-            badge = Badge.objects.get(helper__event=self.event,
-                                      barcode=barcode)
+            badge = Badge.objects.get(event=self.event, barcode=barcode)
         except Badge.DoesNotExist:
             return None
 
-        if has_access(self.user, badge.helper, ACCESS_HELPER_VIEW):
+        if badge.helper and has_access(self.user, badge.helper, ACCESS_HELPER_VIEW):
             return badge.helper
 
         return None

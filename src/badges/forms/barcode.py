@@ -28,8 +28,7 @@ class BadgeBarcodeForm(forms.Form):
 
         # check if badge exists
         try:
-            self.badge = Badge.objects.get(helper__event=self.event,
-                                           barcode=barcode)
+            self.badge = Badge.objects.get(event=self.event, barcode=barcode)
         except Badge.DoesNotExist:
             raise ValidationError(_("This badge does not exist. "
                                     "Maybe it was deleted since printing or "

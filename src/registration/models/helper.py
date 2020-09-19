@@ -291,6 +291,7 @@ def helper_saved(sender, instance, using, **kwargs):
     if instance.event:
         if instance.event.badges and not hasattr(instance, 'badge'):
             badge = Badge()
+            badge.event = instance.event
             badge.helper = instance
             badge.save()
 

@@ -5,12 +5,14 @@ from celery.exceptions import Ignore
 
 from django.conf import settings
 from django.utils import translation
+from django.utils.translation import ugettext as _
 
 from PIL import Image
 
 import os
 import shutil
 
+import badges
 import badges.creator
 import registration
 
@@ -24,7 +26,7 @@ def scale_badge_photo(filepath):
 
 
 @shared_task(bind=True, throws=(badges.creator.BadgeCreatorError, ))
-def generate_badges(self, event_pk, job_pk, skip_printed):
+def generate_badges(self, event_pk, job_pk, generate, skip_printed):
     event = registration.models.Event.objects.get(pk=event_pk)
     try:
         job = registration.models.Job.objects.get(pk=job_pk)
@@ -38,15 +40,20 @@ def generate_badges(self, event_pk, job_pk, skip_printed):
     # badge creation
     creator = badges.creator.BadgeCreator(event.badge_settings)
 
-    # jobs that should be handled
-    if job:
+    # determine the jobs, that will be included, and the filename
+    if generate == "job" and job:
         jobs = [job, ]
         filename = job.name
-    else:
+    elif generate == "special":
+        jobs = []
+        filename = _("Special badges")
+    elif generate == "all":
         jobs = event.job_set.all()
         filename = event.name
+    else:
+        raise ValueError("Invalid parameters")
 
-    # add helpers and coordinators
+    # add helpers and coordinators from selected jobs
     for j in jobs:
         for h in j.helpers_and_coordinators():
             # skip if badge was printed already
@@ -63,7 +70,15 @@ def generate_badges(self, event_pk, job_pk, skip_printed):
                         not h.is_coordinator:
                     continue
 
-                creator.add_helper(h)
+                creator.add_badge(h.badge)
+
+    # add special badges
+    if generate == "special" or generate == "all":
+        for b in badges.models.Badge.objects.filter(event=event, helper=None):
+            if not (skip_printed and b.printed):
+                creator.add_badge(b)
+
+    # try to generate the pdf file
     try:
         tmp_dir, pdf_filename = creator.generate()
     except badges.creator.BadgeCreatorError as e:
@@ -75,6 +90,7 @@ def generate_badges(self, event_pk, job_pk, skip_printed):
     finally:
         translation.activate(prev_language)
 
+    # schedule cleanup task
     clean = cleanup.subtask((tmp_dir, ), countdown=settings.BADGE_PDF_TIMEOUT + settings.BADGE_RM_DELAY)
     cleanup_task = clean.delay()
 

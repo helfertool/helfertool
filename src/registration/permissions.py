@@ -32,6 +32,7 @@ ACCESS_INVENTORY_HANDLE = "ACCESS_INVENTORY_HANDLE"  # register and take back in
 
 ACCESS_BADGES_EDIT = "ACCESS_BADGES_EDIT"  # edit badge settings for an event
 ACCESS_BADGES_EDIT_HELPER = "ACCESS_BADGES_EDIT_HELPER"  # edit badges of single helpers
+ACCESS_BADGES_EDIT_SPECIAL = "ACCESS_BADGES_EDIT_SPECIAL"  # edit special badges (=badges without helpers)
 ACCESS_BADGES_GENERATE = "ACCESS_BADGES_GENERATE"  # generate and register badges
 
 ACCESS_MAILS_SEND = "ACCESS_MAILS_SEND"  # can send all mails of an event
@@ -165,6 +166,11 @@ _rbac_matrix = {
     ],
 
     ACCESS_BADGES_EDIT_HELPER: [
+        EventAdminRoles.ROLE_ADMIN,
+        EventAdminRoles.ROLE_RESTRICTED_ADMIN,
+    ],
+
+    ACCESS_BADGES_EDIT_SPECIAL: [
         EventAdminRoles.ROLE_ADMIN,
         EventAdminRoles.ROLE_RESTRICTED_ADMIN,
     ],

@@ -12,6 +12,7 @@
     {% has_access event "ACCESS_GIFTS_EDIT" as user_gifts_edit %}
     {% has_access event "ACCESS_GIFTS_VIEW_SUMMARY" as user_gifts_view_summary %}
     {% has_access event "ACCESS_BADGES_EDIT" as user_badges_edit %}
+    {% has_access event "ACCESS_BADGES_EDIT_SPECIAL" as user_badges_edit_special %}
     {% has_access event "ACCESS_BADGES_GENERATE" as user_badges_generate %}
     {% has_access event "ACCESS_PREREQUISITES_VIEW" as user_prerequisites_view %}
     {% has_access event "ACCESS_INVENTORY_EDIT" as user_inventory_edit %}
@@ -164,6 +165,12 @@
             {% if user_badges_edit %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'badges:settings' event.url_name %}">{% trans "Settings" %}</a>
+            </li>
+            {% endif %}
+
+            {% if user_badges_edit_special %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'badges:list_specialbadges' event.url_name %}">{% trans "Special badges" %}</a>
             </li>
             {% endif %}
 

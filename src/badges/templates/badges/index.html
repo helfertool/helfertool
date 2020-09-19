@@ -55,6 +55,23 @@
                     </td>
                 </tr>
             {% endfor %}
+
+            <tr>
+                <td>{% trans "Special badges" %}</td>
+                <td>
+                    {% if event.badge_settings.barcodes %}
+                        <a href="{% url "badges:generate_special" event.url_name %}">
+                            {% trans "Unregistered badges" %}
+                        </a>
+                        <br />
+                    {% endif %}
+                    <a href="{% url "badges:generate_all_special" event.url_name %}">
+                        {% trans "All badges" %}
+                    </a>
+                </td>
+                <td>
+                </td>
+            </tr>
         </table>
 
         {% if event.badge_settings.barcodes %}

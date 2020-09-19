@@ -457,6 +457,7 @@ if SEARCH_SIMILARITY_DISABLED is False:
 # badges
 BADGE_PDFLATEX = dict_get(config, '/usr/bin/pdflatex', 'badges', 'pdflatex')
 BADGE_PHOTO_MAX_SIZE = dict_get(config, 1000, 'badges', 'photo_max_size')
+BADGE_SPECIAL_MAX = dict_get(config, 50, 'badges', 'special_badges_max')
 
 BADGE_PDF_TIMEOUT = 60 * dict_get(config, 30, 'badges', 'pdf_timeout')
 BADGE_RM_DELAY = 60 * dict_get(config, 2, 'badges', 'rm_delay')
