@@ -27,6 +27,12 @@
             <th scope="row">{% trans "Coordinators" %}</th>
             <td>{{ num_coordinators }}</td>
         </tr>
+        {% if event.badges %}
+        <tr>
+            <th scope="row">{% trans "Special badges" %}</th>
+            <td>{{ num_specialbadges }}</td>
+        </tr>
+        {% endif %}
         {% if event.ask_vegetarian %}
             <tr>
                 <th scope="row">{% trans "Vegetarians" %}</th>

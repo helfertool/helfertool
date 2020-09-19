@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.template.defaultfilters import date as date_f
 
 from tempfile import mkdtemp, mkstemp
 import os
@@ -27,13 +26,12 @@ class BadgeCreator:
         self.columns = self.settings.columns
         self.rows = self.settings.rows
 
-        # list of helpers (dict with attributes)
-        self.helpers = []
+        # list of badges (dict with attributes)
+        self.badges = []
 
         # create temporary files
         self.dir = mkdtemp(dir=settings.TMP_ROOT, prefix="badges_")
-        self.latex_file, self.latex_file_path = mkstemp(suffix='.tex',
-                                                        dir=self.dir)
+        self.latex_file, self.latex_file_path = mkstemp(suffix='.tex', dir=self.dir)
 
         # we copy the photos and background images to the temporary directory
         # pdflatex is only allowed to include files from there
@@ -46,69 +44,43 @@ class BadgeCreator:
         # prevent that the same file is copied multiple times
         self._copied_files = []
 
-    def add_helper(self, helper):
+    def add_badge(self, badge):
+        design = badge.get_design()
+        role = badge.get_role()
+
         tmp = {
-            'firstname': self._latex_escape(helper.badge.firstname or helper.firstname),
-            'surname': self._latex_escape(helper.badge.surname or helper.surname),
+            # texts
+            'firstname': self._latex_escape(badge.get_firstname_text()),
+            'surname': self._latex_escape(badge.get_surname_text()),
+            'job': self._latex_escape(badge.get_job_text()),
+            'shift': self._latex_escape(badge.get_shift_text(self.settings)),
+            'role': self._latex_escape(badge.get_role_text(self.settings)),
+
+            'photo': '',  # filled later
+
+            'fontcolor': self._latex_color(design.font_color),
+            'bgcolor': self._latex_color(design.bg_color),
+            'bgfront': '',  # filled later
+            'bgback': '',  # filled later
+
+            'id': '',  # filled later (= barcode)
+            'roleid': role.latex_name,
         }
 
-        job = helper.badge.get_job()
-
-        # job
-        if helper.badge.job:
-            tmp['job'] = self._latex_escape(helper.badge.job)
-        elif job:
-            tmp['job'] = self._latex_escape(job.name)
-        else:
-            tmp['job'] = ''
-
-        # shift
-        if helper.badge.shift:
-            tmp['shift'] = self._latex_escape(helper.badge.shift)
-        else:
-            tmp['shift'] = self._latex_escape(self._get_shift_text(helper, job))
-
-        # role
-        if helper.badge.role:
-            tmp['role'] = self._latex_escape(helper.badge.role)
-        elif not helper.badge.no_default_role():
-            if helper.is_coordinator:
-                tmp['role'] = self._latex_escape(self.settings.coordinator_title)
-            else:
-                tmp['role'] = self._latex_escape(self.settings.helper_title)
-        else:
-            tmp['role'] = ""
-
-        # photo
-        if helper.badge.photo:
-            tmp['photo'] = self._copy_photo(helper.badge.photo.path)
-        else:
-            tmp['photo'] = ''
+        # copy photo
+        if badge.photo:
+            tmp['photo'] = self._copy_photo(badge.photo.path)
 
         # design
-        design = helper.badge.get_design()
-        tmp['fontcolor'] = self._latex_color(design.font_color)
-        tmp['bgcolor'] = self._latex_color(design.bg_color)
-
         if design.bg_front:
             tmp['bgfront'] = self._copy_background(design.bg_front.path)
-        else:
-            tmp['bgfront'] = ""
 
         if design.bg_back:
             tmp['bgback'] = self._copy_background(design.bg_back.path)
-        else:
-            tmp['bgback'] = ""
-
-        # role
-        role = helper.badge.get_role()
-        tmp['roleid'] = role.latex_name
 
         # badge id
         if self.settings.barcodes:
-            tmp['id'] = "%010d" % helper.badge.barcode
-        else:
-            tmp['id'] = ""
+            tmp['id'] = "%010d" % badge.barcode
 
         # permissions
         all_permissions = badges.models.BadgePermission.objects.filter(badge_settings=self.settings.pk).all()
@@ -119,7 +91,7 @@ class BadgeCreator:
             else:
                 tmp['perm-%s' % perm.latex_name] = 'false'
 
-        self.helpers.append(tmp)
+        self.badges.append(tmp)
 
     def generate(self):
         latex_code = self._get_latex()
@@ -176,47 +148,9 @@ class BadgeCreator:
         if os.path.isdir(self.dir):
             shutil.rmtree(self.dir)
 
-    def _get_shift_text(self, helper, primary_job):
-        """
-        We create a string like: Shift 1, Shift 2 (Other job), Shift 3
-        Depending on the settings, we use the shift name (if available) or the time in a certain format.
-        The job is added if it is not the primary job.
-
-        Returns the text (not LaTeX escaped!)
-        """
-        shift_texts = []
-        for shift in helper.shifts.all().order_by('begin'):
-            # get shift date / name
-            cur_text = ""
-            if not self.settings.shift_no_names and shift.name:
-                # we want to use a name and have one
-                cur_text = shift.name
-            else:
-                # use time. format depends on settings, but we always needs the time
-                cur_text = shift.time_hours()
-
-                # the date format depends on the settings
-                date_format_string = None
-                if self.settings.shift_format == badges.models.BadgeSettings.SHIFT_FORMAT_DATE:
-                    date_format_string = "d.m"
-                elif self.settings.shift_format == badges.models.BadgeSettings.SHIFT_FORMAT_WEEKDAY:
-                    date_format_string = "D"
-
-                # add the date, if we want to
-                if date_format_string:
-                    cur_text = "{} {}".format(date_f(shift.date(), date_format_string), cur_text)
-
-            # add job if it is not the primary job
-            if shift.job != primary_job:
-                cur_text = "{} ({})".format(cur_text, shift.job.name)
-
-            shift_texts.append(cur_text)
-
-        return ', '.join(shift_texts)
-
     def _get_latex(self):
         # whitespace, if code would be empty
-        if len(self.helpers) == 0:
+        if len(self.badges) == 0:
             return r'\ '
 
         r = ''
@@ -225,9 +159,9 @@ class BadgeCreator:
         num_page = self.columns*self.rows
 
         page = 1
-        while (page-1)*num_page < len(self.helpers):
+        while (page-1)*num_page < len(self.badges):
             # helper for this page
-            data_for_page = self.helpers[(page-1)*num_page:page*num_page]
+            data_for_page = self.badges[(page-1)*num_page:page*num_page]
 
             # front side
             r = r + self._create_table('badgefront', data_for_page)

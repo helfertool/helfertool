@@ -73,19 +73,26 @@ def register_badge(request, event_url_name, item_pk):
         return notactive(request)
 
     already_assigned = False
+    special_badge = False
     try:
         item = Item.objects.get(pk=item_pk)
 
         form = BadgeBarcodeForm(request.POST or None, event=event)
 
         if form.is_valid():
-            item.add_to_helper(form.badge.helper)
+            # it is a valid badge
+            if form.badge.helper:
+                # normal badge with helper -> do it
+                item.add_to_helper(form.badge.helper)
 
-            # update saved data in session
-            request.session['inventory_helper_pk'] = str(form.badge.helper.pk)
-            request.session['inventory_item_name'] = item.name
+                # update saved data in session
+                request.session['inventory_helper_pk'] = str(form.badge.helper.pk)
+                request.session['inventory_item_name'] = item.name
 
-            return redirect('inventory:register', event_url_name)
+                return redirect('inventory:register', event_url_name)
+            else:
+                # no helper -> special badge
+                special_badge = True
     except (KeyError, Item.DoesNotExist):
         form = None
     except AlreadyAssigned:
@@ -93,6 +100,7 @@ def register_badge(request, event_url_name, item_pk):
 
     context = {'event': event,
                'form': form,
-               'already_assigned': already_assigned}
+               'already_assigned': already_assigned,
+               'special_badge': special_badge}
     return render(request, 'inventory/register_badge.html',
                   context)

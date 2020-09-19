@@ -1,0 +1,66 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n icons %}
+
+{% block admincontent %}
+    <h2 id="badge-header">{% trans "Special badges" %}</h2>
+
+    <div class="alert alert-info">
+        {% blocktrans trimmed %}
+            Special badges are badges, which are not associated with helpers and numbered serially, for example:
+            Police 1, Police 2, etc.
+            This allows to create several similar badges without adding helpers manually.
+            Please note, that it is not possible to assign inventory items to these special badges.
+        {% endblocktrans %}
+        <br />
+        {% trans "Special badges are not deleted when the event is archived, so they can be reused." %}
+        <em>{% trans "Please do not enter any personal data like names here!" %}</em>
+    </div>
+
+    {% if not event.archived %}
+    <p>
+        <a href="{% url 'badges:new_specialbadges' event.url_name %}">
+            {% icon "plus" %} {% trans "Add special badges" %}
+        </a>
+    </p>
+    {% endif %}
+
+    {% if specialbadges %}
+        <table class="table" aria-describedby="badge-header">
+            <tr class="d-flex">
+                <th class="col-8" scope="col">{% trans "Name" %}</th>
+                <th class="col-2" scope="col">{% trans "Number" %}</th>
+                <th class="col-2" scope="col"></th>
+            </tr>
+
+            {% for badge in specialbadges %}
+            <tr class="d-flex">
+                <td class="col-8">
+                    {{ badge.name }} <br/>
+                    <span class="text-muted">
+                        {% trans "Texts: Job" %}: {{ badge.template_badge.job | default:"-" }},
+                        {% trans "Shift" %}: {{ badge.template_badge.shift | default:"-" }},
+                        {% trans "Role" %}: {{ badge.template_badge.role | default:"-" }} <br/>
+                        {% trans "Role" %}: {{ badge.template_badge.custom_role | default:"-" }},
+                        {% trans "Design" %}: {{ badge.template_badge.custom_design | default:"-" }} <br/>
+                        {% trans "Photo" %}: {{ badge.template_badge.photo | yesno }}
+                    </span>
+                </td>
+                <td class="col-2">{{ badge.number }}</td>
+                <td class="col-2">
+                    {% if not event.archived %}
+                    <a href="{% url 'badges:edit_specialbadges' event.url_name badge.pk %}">
+                        {% icon "pencil-alt" %} {% trans "Edit" %}
+                    </a>
+                    <br />
+                    <a href="{% url 'badges:delete_specialbadges' event.url_name badge.pk %}">
+                        {% icon "trash-alt" %} {% trans "Delete" %}
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p class="text-muted">{% trans "There are no special badges." %}</p>
+    {% endif %}
+{% endblock %}

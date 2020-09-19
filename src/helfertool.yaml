@@ -279,6 +279,9 @@ badges:
     # Maximum photo size in kb
     photo_max_size: 1000
 
+    # Maximum number of copies for special badges
+    special_badges_max: 50
+
     # Time until PDF file is deleted after it was created in minutes
     pdf_timeout: 30
 

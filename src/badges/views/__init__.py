@@ -5,3 +5,4 @@ from .design import edit_design, delete_design
 from .generate import index, generate, warnings, failed, download, tasklist
 from .register import register
 from .badge import edit_badge
+from .specialbadges import list_specialbadges, edit_specialbadges, edit_specialbadges_template, delete_specialbadges

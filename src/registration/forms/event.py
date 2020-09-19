@@ -215,6 +215,9 @@ class EventDuplicateForm(EventForm):
             self.instance.badges = True
             self.instance.save()
 
+            for specialbadges in self.other_event.specialbadges_set.all():
+                specialbadges.duplicate(self.instance)
+
         # inventory
         if activate_inventory:
             self.other_event.inventory_settings.duplicate(self.instance)

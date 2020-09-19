@@ -20,6 +20,12 @@
                 </div>
             {% endif %}
 
+            {% if special_badge %}
+            <div class="alert alert-danger">
+                {% trans "This is a special badge, which is not associated with a helper. It cannot be used here." %}
+            </div>
+            {% endif %}
+
             {% bootstrap_form form show_label=False %}
         </form>
 

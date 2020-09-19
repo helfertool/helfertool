@@ -362,6 +362,7 @@ def _setup_badge_settings(event):
     for helper in event.helper_set.all():
         if not hasattr(helper, 'badge'):
             badge = Badge()
+            badge.event = event
             badge.helper = helper
             badge.save()
 

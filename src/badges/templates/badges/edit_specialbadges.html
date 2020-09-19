@@ -1,0 +1,15 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n %}
+{% load bootstrap4 %}
+
+{% block admincontent %}
+    <h2>{% trans "Special badges" %}</h2>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <input type="submit" value="{% trans "Continue" %}" class="btn btn-outline-primary" />
+    </form>
+{% endblock %}
