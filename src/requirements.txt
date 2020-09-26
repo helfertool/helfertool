@@ -9,8 +9,6 @@ django-modeltranslation
 django-multiselectfield
 django_ical
 django_select2
-amqp
-celery
 jmespath
 mozilla-django-oidc
 pillow
@@ -20,4 +18,6 @@ python-magic
 pyyaml
 reportlab
 xlsxwriter
-vine<5.0.0
+celery<5.0.0
+vine<5.0.0  # added due to celery
+amqp<5.0.0  # pinned due to celery
