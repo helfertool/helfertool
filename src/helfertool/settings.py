@@ -424,6 +424,10 @@ if is_docker:
 
 # Helfertool features
 FEATURES_NEWSLETTER = bool(dict_get(config, True, 'features', 'newsletter'))
+FEATURES_BADGES = bool(dict_get(config, True, 'features', 'badges'))
+FEATURES_GIFTS = bool(dict_get(config, True, 'features', 'gifts'))
+FEATURES_PREREQUISITES = bool(dict_get(config, True, 'features', 'prerequisites'))
+FEATURES_INVENTORY = bool(dict_get(config, True, 'features', 'inventory'))
 
 # Display Options
 # Maximum years of events to be displayed by default on the main page

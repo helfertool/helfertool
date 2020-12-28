@@ -1,15 +1,19 @@
+from django.conf import settings
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 
 from ..models import Inventory, Item
-from ..forms import InventoryForm, InventoryDeleteForm, ItemForm, \
-    ItemDeleteForm
+from ..forms import InventoryForm, InventoryDeleteForm, ItemForm, ItemDeleteForm
 from ..decorators import any_inventory_admin_required, inventory_admin_required
 
 
 @any_inventory_admin_required
 def inventory_list(request):
+    # check if feature is available
+    if not settings.FEATURES_INVENTORY:
+        raise Http404
+
     inventories = Inventory.objects.all()
 
     context = {'inventories': inventories}
@@ -19,6 +23,10 @@ def inventory_list(request):
 
 @inventory_admin_required
 def edit_inventory(request, inventory=None):
+    # check if feature is available
+    if not settings.FEATURES_INVENTORY:
+        raise Http404
+
     # permission checking is done in inventory_admin_required
     form = InventoryForm(request.POST or None, instance=inventory)
 
@@ -33,6 +41,10 @@ def edit_inventory(request, inventory=None):
 
 @inventory_admin_required
 def delete_inventory(request, inventory):
+    # check if feature is available
+    if not settings.FEATURES_INVENTORY:
+        raise Http404
+
     # permission checking is done in inventory_admin_required
     form = InventoryDeleteForm(request.POST or None, instance=inventory)
 
@@ -48,6 +60,10 @@ def delete_inventory(request, inventory):
 
 @inventory_admin_required
 def inventory_items(request, inventory):
+    # check if feature is available
+    if not settings.FEATURES_INVENTORY:
+        raise Http404
+
     # permission checking is done in inventory_admin_required
     context = {'inventory': inventory,
                'items': inventory.item_set.all()}
@@ -56,6 +72,10 @@ def inventory_items(request, inventory):
 
 @inventory_admin_required
 def edit_item(request, inventory, item_pk=None):
+    # check if feature is available
+    if not settings.FEATURES_INVENTORY:
+        raise Http404
+
     item = None
     if item_pk:
         item = get_object_or_404(Item, pk=item_pk)
@@ -77,6 +97,10 @@ def edit_item(request, inventory, item_pk=None):
 
 @inventory_admin_required
 def delete_item(request, inventory, item_pk):
+    # check if feature is available
+    if not settings.FEATURES_INVENTORY:
+        raise Http404
+
     item = get_object_or_404(Item, pk=item_pk)
 
     if item.inventory != inventory:

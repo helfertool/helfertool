@@ -1,6 +1,7 @@
 {% load i18n globalpermissions inventory setting %}
 
 {% setting "FEATURES_NEWSLETTER" as features_newsletter %}
+{% setting "FEATURES_INVENTORY" as features_inventory %}
 
 <h2>{% trans "General" %}</h2>
 <ul class="nav flex-column">
@@ -20,10 +21,12 @@
     </li>
     {% endif %}
 
+    {% if features_inventory %}
     {% if user.is_superuser or user|is_inventory_admin_any %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a>
         </li>
+    {% endif %}
     {% endif %}
 
     <li class="nav-item">

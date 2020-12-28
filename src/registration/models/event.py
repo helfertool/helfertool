@@ -335,9 +335,19 @@ class Event(models.Model):
         """
         changed = False
 
-        if not settings.FEATURES_NEWSLETTER and self.ask_news:
-            self.ask_news = False
-            changed = True
+        flags = [
+            ["FEATURES_NEWSLETTER", "ask_news"],
+            ["FEATURES_BADGES", "badges"],
+            ["FEATURES_GIFTS", "gifts"],
+            ["FEATURES_PREREQUISITES", "prerequisites"],
+            ["FEATURES_INVENTORY", "inventory"],
+        ]
+
+        for flag in flags:
+            # settings.FEATURE_... is False and self.... is True -> change
+            if not getattr(settings, flag[0]) and getattr(self, flag[1]):
+                setattr(self, flag[1], False)
+                changed = True
 
         return changed
 
