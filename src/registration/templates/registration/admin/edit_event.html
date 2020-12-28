@@ -64,7 +64,9 @@
 
         <h3>{% trans "Requested helper data" %}</h3>
         {% bootstrap_field form.ask_full_age %}
-        {% bootstrap_field form.ask_news %}
+        {% if form.ask_news %}
+            {% bootstrap_field form.ask_news %}
+        {% endif %}
         {% bootstrap_field form.ask_vegetarian %}
         {% bootstrap_field form.ask_phone %}
         {% bootstrap_field form.ask_shirt %}

@@ -1,7 +1,8 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
@@ -17,6 +18,10 @@ from ..forms import MailForm
 
 @login_required
 def send(request):
+    # check if feature is available
+    if not settings.FEATURES_NEWSLETTER:
+        raise Http404
+
     # check permission
     if not (request.user.is_superuser or has_sendnews_group(request.user)):
         return nopermission(request)

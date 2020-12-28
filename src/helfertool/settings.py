@@ -113,13 +113,16 @@ CELERY_BROKER_POOL_LIMIT = None
 
 # caches
 CACHES = {
+    # default cache - not used on purpose currently
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
+    # select2 needs its own cache
     'select2': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'select2_cache',
     },
+    # cache for locks (used by celery tasks to prevent parallel execution)
     'locks': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'locks_cache',
@@ -418,6 +421,9 @@ if is_docker:
     }
 
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_syslog_docker')
+
+# Helfertool features
+FEATURES_NEWSLETTER = bool(dict_get(config, True, 'features', 'newsletter'))
 
 # Display Options
 # Maximum years of events to be displayed by default on the main page

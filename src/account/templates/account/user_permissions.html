@@ -1,4 +1,4 @@
-{% load i18n icons globalpermissions %}
+{% load i18n icons globalpermissions setting %}
 
 {% if not user.is_active %}
     <span class="text-danger">
@@ -19,6 +19,7 @@
     {% icon "user" %} {% trans "Add users" %}<br />
 {% endif %}
 
-{% if user|has_sendnews_group %}
+{% setting "FEATURES_NEWSLETTER" as features_newsletter %}
+{% if features_newsletter and user|has_sendnews_group %}
     {% icon "mail-bulk" %} {% trans "Send newsletter" %}<br />
 {% endif %}

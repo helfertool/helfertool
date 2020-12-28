@@ -16,10 +16,9 @@ class MailForwarder:
     def __init__(self):
         self._connection = None
 
-        self._own_addresses = [
-            settings.EMAIL_SENDER_ADDRESS.lower(),
-            settings.FORWARD_UNHANDLED_ADDRESS.lower(),
-        ]
+        self._own_addresses = [settings.EMAIL_SENDER_ADDRESS.lower(), ]
+        if settings.FORWARD_UNHANDLED_ADDRESS:
+            self._own_addresses.append(settings.FORWARD_UNHANDLED_ADDRESS.lower())
 
     def connect(self):
         """

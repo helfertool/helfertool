@@ -21,7 +21,9 @@
         {% bootstrap_field form.is_superuser %}
         {% bootstrap_field form.perm_addevent %}
         {% bootstrap_field form.perm_adduser %}
-        {% bootstrap_field form.perm_sendnews %}
+        {% if form.perm_sendnews %}
+            {% bootstrap_field form.perm_sendnews %}
+        {% endif %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>
