@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -9,6 +11,10 @@ from ..forms import SubscribeForm
 
 
 def subscribe(request):
+    # check if feature is available
+    if not settings.FEATURES_NEWSLETTER:
+        raise Http404
+
     form = SubscribeForm(request.POST or None)
     if form.is_valid():
         form.save()

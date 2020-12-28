@@ -45,6 +45,10 @@ class EventForm(forms.ModelForm):
             # 'shirt_sizes' is not in fields for EventDuplicateForm
             self.fields.pop('shirt_sizes')
 
+        # remove flags for disabled features
+        if not settings.FEATURES_NEWSLETTER:
+            self.fields.pop('ask_news')
+
 
 class EventAdminRolesForm(forms.ModelForm):
     class Meta:

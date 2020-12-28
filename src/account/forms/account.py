@@ -132,12 +132,13 @@ class EditUserForm(forms.ModelForm):
         )
 
         # permission: sendnews
-        self._sendnews_initial = has_sendnews_group(self.instance)
-        self.fields["perm_sendnews"] = forms.BooleanField(
-            label=_("Send newsletter"),
-            required=False,
-            initial=self._sendnews_initial,
-        )
+        if settings.FEATURES_NEWSLETTER:
+            self._sendnews_initial = has_sendnews_group(self.instance)
+            self.fields["perm_sendnews"] = forms.BooleanField(
+                label=_("Send newsletter"),
+                required=False,
+                initial=self._sendnews_initial,
+            )
 
     def save(self, commit=True):
         instance = super(EditUserForm, self).save(commit)
@@ -172,7 +173,8 @@ class EditUserForm(forms.ModelForm):
         if self.cleaned_data.get("is_superuser"):
             self.cleaned_data["perm_adduser"] = False
             self.cleaned_data["perm_addevent"] = False
-            self.cleaned_data["perm_sendnews"] = False
+            if settings.FEATURES_NEWSLETTER:
+                self.cleaned_data["perm_sendnews"] = False
 
         # change permissions
         if self.cleaned_data.get("perm_adduser") != self._adduser_initial:
@@ -185,9 +187,10 @@ class EditUserForm(forms.ModelForm):
                                self.cleaned_data.get("perm_addevent"),
                                self._admin_user)
 
-        if self.cleaned_data.get("perm_sendnews") != self._sendnews_initial:
-            _change_permission(self.instance, settings.GROUP_SENDNEWS,
-                               self.cleaned_data.get("perm_sendnews"),
-                               self._admin_user)
+        if settings.FEATURES_NEWSLETTER:
+            if self.cleaned_data.get("perm_sendnews") != self._sendnews_initial:
+                _change_permission(self.instance, settings.GROUP_SENDNEWS,
+                                   self.cleaned_data.get("perm_sendnews"),
+                                   self._admin_user)
 
         return instance

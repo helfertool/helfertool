@@ -142,7 +142,7 @@ def list_users(request):
         all_users = all_users.filter(groups__name__in=[settings.GROUP_ADDEVENT, ])
     elif filterstr == "adduser":
         all_users = all_users.filter(groups__name__in=[settings.GROUP_ADDUSER, ])
-    elif filterstr == "sendnews":
+    elif filterstr == "sendnews" and settings.FEATURES_NEWSLETTER:
         all_users = all_users.filter(groups__name__in=[settings.GROUP_SENDNEWS, ])
     else:
         filterstr = ""

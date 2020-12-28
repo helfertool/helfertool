@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
@@ -319,68 +319,93 @@ class Event(models.Model):
         return self.changes_until is not None and \
             datetime.date.today() <= self.changes_until
 
+    def _setup_flags(self):
+        """
+        Set flags like `ask_news` depending on global settings. If a feature is disabled globally,
+        this methods takes care that it is disabled for the event.
+
+        Returns True if a value changed, otherwise False.
+
+        Background info:
+        This method is called from the pre_save handler and on startup in a Celery task.
+
+        We want to prevent duplicated checks like "is the feature enabled for the event
+        and also enabled globally?" all the time. So the event flags are used and set to `False` is a
+        feature is disabled globally.
+        """
+        changed = False
+
+        if not settings.FEATURES_NEWSLETTER and self.ask_news:
+            self.ask_news = False
+            changed = True
+
+        return changed
+
+    def _setup_badge_settings(self):
+        """
+        Set up badges for all jobs and helpers (called from post_save handler).
+
+        It adds the badge settings if badge creation is enabled and it is not there already.
+        It also adds badge defaults to all jobs and badges to all helpers and coordinators if necessary.
+        """
+        # badge settings for event
+        if not self.badge_settings:
+            settings = BadgeSettings()
+            settings.event = self
+            settings.save()
+
+        # badge defaults for jobs
+        for job in self.job_set.all():
+            if not job.badge_defaults:
+                defaults = BadgeDefaults()
+                defaults.save()
+
+                job.badge_defaults = defaults
+                job.save()
+
+        # badge for helpers
+        for helper in self.helper_set.all():
+            if not hasattr(helper, 'badge'):
+                badge = Badge()
+                badge.event = self
+                badge.helper = helper
+                badge.save()
+
+    def _setup_gift_settings(self):
+        """
+        Setup gift relations for all helpers (called from post_save handler).
+        """
+        if not self.gift_settings:
+            GiftSettings.objects.create(event=self)
+
+        for helper in self.helper_set.all():
+            if not hasattr(helper, 'gifts'):
+                gifts = HelpersGifts()
+                gifts.helper = helper
+                gifts.save()
+
+    def _setup_inventory_settings(self):
+        """
+        Setup inventory settings for the event (called from post_save handler).
+        """
+        if not self.inventory_settings:
+            InventorySettings.objects.create(event=self)
+
+
+@receiver(pre_save, sender=Event, dispatch_uid='pre_event_saved')
+def pre_event_saved(sender, instance, using, **kwargs):
+    """ Set flags like `ask_news` depending on global settings BEFORE event is saved. """
+    instance._setup_flags()
+
 
 @receiver(post_save, sender=Event, dispatch_uid='event_saved')
 def event_saved(sender, instance, using, **kwargs):
-    """ Add badge settings, badges and gifts if necessary.
-
-    This is a signal handler, that is called, when a event is saved. It
-    adds the badge settings if badge creation is enabled and it is not
-    there already. It also adds badge defaults to all jobs and badges to all
-    helpers and coordinators if necessary.
-    """
+    """ Add badge settings, badges and gifts if necessary AFTER event is saved. """
     if instance.badges:
-        _setup_badge_settings(instance)
+        instance._setup_badge_settings()
 
     if instance.gifts:
-        _setup_gift_settings(instance)
+        instance._setup_gift_settings()
 
     if instance.inventory:
-        _setup_inventory_settings(instance)
-
-
-def _setup_badge_settings(event):
-    """
-    Set up badges for all jobs and helpers
-    """
-    # badge settings for event
-    if not event.badge_settings:
-        settings = BadgeSettings()
-        settings.event = event
-        settings.save()
-
-    # badge defaults for jobs
-    for job in event.job_set.all():
-        if not job.badge_defaults:
-            defaults = BadgeDefaults()
-            defaults.save()
-
-            job.badge_defaults = defaults
-            job.save()
-
-    # badge for helpers
-    for helper in event.helper_set.all():
-        if not hasattr(helper, 'badge'):
-            badge = Badge()
-            badge.event = event
-            badge.helper = helper
-            badge.save()
-
-
-def _setup_gift_settings(event):
-    """
-    Setup gift relations for all helpers
-    """
-    if not event.gift_settings:
-        GiftSettings.objects.create(event=event)
-
-    for helper in event.helper_set.all():
-        if not hasattr(helper, 'gifts'):
-            gifts = HelpersGifts()
-            gifts.helper = helper
-            gifts.save()
-
-
-def _setup_inventory_settings(event):
-    if not event.inventory_settings:
-        InventorySettings.objects.create(event=event)
+        instance._setup_inventory_settings()

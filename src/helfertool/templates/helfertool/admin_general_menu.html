@@ -1,4 +1,6 @@
-{% load i18n globalpermissions inventory %}
+{% load i18n globalpermissions inventory setting %}
+
+{% setting "FEATURES_NEWSLETTER" as features_newsletter %}
 
 <h2>{% trans "General" %}</h2>
 <ul class="nav flex-column">
@@ -50,6 +52,7 @@
     </ul>
 {% endif %}
 
+{% if features_newsletter %}
 {% if user.is_superuser or user|has_sendnews_group %}
     <h2>{% trans "Newsletter" %}</h2>
     <ul class="nav flex-column">
@@ -62,6 +65,7 @@
             </li>
         {% endif %}
     </ul>
+{% endif %}
 {% endif %}
 
 {% if user.is_superuser %}

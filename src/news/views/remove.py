@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
@@ -13,6 +15,10 @@ logger = logging.getLogger("helfertool.news")
 
 @login_required
 def remove(request):
+    # check if feature is available
+    if not settings.FEATURES_NEWSLETTER:
+        raise Http404
+
     # must be superuser
     if not request.user.is_superuser:
         return nopermission(request)
