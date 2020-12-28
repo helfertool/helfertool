@@ -80,11 +80,24 @@
             {% endfor %}
         {% endif %}
 
-        <h3>{% trans "Features" %}</h3>
-        {% bootstrap_field form.badges %}
-        {% bootstrap_field form.gifts %}
-        {% bootstrap_field form.prerequisites %}
-        {% bootstrap_field form.inventory %}
+        {% if form.badges or form.gifts or form.prerequisites or form.inventory %}
+            <h3>{% trans "Features" %}</h3>
+            {% if form.badges %}
+                {% bootstrap_field form.badges %}
+            {% endif %}
+
+            {% if form.gifts %}
+                {% bootstrap_field form.gifts %}
+            {% endif %}
+
+            {% if form.prerequisites %}
+                {% bootstrap_field form.prerequisites %}
+            {% endif %}
+
+            {% if form.inventory %}
+                {% bootstrap_field form.inventory %}
+            {% endif %}
+        {% endif %}
 
         <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
     </form>

@@ -48,6 +48,14 @@ class EventForm(forms.ModelForm):
         # remove flags for disabled features
         if not settings.FEATURES_NEWSLETTER:
             self.fields.pop('ask_news')
+        if not settings.FEATURES_BADGES:
+            self.fields.pop('badges')
+        if not settings.FEATURES_GIFTS:
+            self.fields.pop('gifts')
+        if not settings.FEATURES_PREREQUISITES:
+            self.fields.pop('prerequisites')
+        if not settings.FEATURES_INVENTORY:
+            self.fields.pop('inventory')
 
 
 class EventAdminRolesForm(forms.ModelForm):
