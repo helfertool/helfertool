@@ -13,6 +13,7 @@ from toolsettings.forms import SingleUserSelectWidget
 
 from .fields import DatePicker
 from ..models import Event, EventAdminRoles
+from toollog.models import LogEntry
 
 
 class EventForm(forms.ModelForm):
@@ -136,6 +137,9 @@ class EventArchiveForm(forms.ModelForm):
                 # trigger post_remove signal
                 for h in shift.helper_set.all():
                     h.shifts.remove(shift)
+
+        # delete all currently stored log entries - the archive entry will be added afterwards
+        LogEntry.objects.filter(event=self.instance).delete()
 
 
 class EventDuplicateForm(EventForm):
