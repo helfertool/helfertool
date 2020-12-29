@@ -109,7 +109,7 @@ def edit_event_admins(request, event_url_name=None):
                     logger.info("event adminchanged", extra={
                         'user': request.user,
                         'event': event,
-                        'changed_user': form.instance.user,
+                        'changed_user': form.instance.user.username,
                         'roles': ','.join(form.instance.roles),
                     })
                     form.save()
@@ -117,7 +117,7 @@ def edit_event_admins(request, event_url_name=None):
                 logger.info("event adminremoved", extra={
                     'user': request.user,
                     'event': event,
-                    'changed_user': form.instance.user,
+                    'changed_user': form.instance.user.username,
                 })
                 form.instance.delete()
 
@@ -129,7 +129,7 @@ def edit_event_admins(request, event_url_name=None):
                 logger.info("event adminadded", extra={
                     'user': request.user,
                     'event': event,
-                    'changed_user': new_admin.user,
+                    'changed_user': new_admin.user.username,
                     'roles': ','.join(new_admin.roles),
                 })
             return redirect('edit_event_admins', event_url_name=event_url_name)

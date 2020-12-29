@@ -13,12 +13,6 @@ SKIP_ATTRS = (
 )
 
 
-def add_entry(data, key, value):
-    if key not in data:
-        data[key] = value
-    return data
-
-
 def get_extras(record):
     """
     Extracts all extra attributes from the log record without changes.
@@ -47,26 +41,36 @@ def get_extras_with_replacement(record):
 
     # event
     if hasattr(record, 'event'):
-        result = add_entry(result, "event_url", record.event.url_name)
-        result = add_entry(result, "event_pk", record.event.pk)
+        result = _add_entry(result, "event_url", record.event.url_name)
+        result = _add_entry(result, "event_pk", record.event.pk)
 
     # job
     if hasattr(record, 'job') and record.job:
-        result = add_entry(result, "job_name", record.job.name)
-        result = add_entry(result, "job_pk", record.job.pk)
+        result = _add_entry(result, "job_name", record.job.name)
+        result = _add_entry(result, "job_pk", record.job.pk)
 
     # shift
     if hasattr(record, 'shift') and record.shift:
-        result = add_entry(result, "shift_name", str(record.shift))
-        result = add_entry(result, "shift_pk", record.shift.pk)
+        result = _add_entry(result, "shift_name", str(record.shift))
+        result = _add_entry(result, "shift_pk", record.shift.pk)
 
     # helper
     if hasattr(record, 'helper') and record.helper:
-        result = add_entry(result, "helper_name", record.helper.full_name)
-        result = add_entry(result, "helper_pk", record.helper.pk)
+        result = _add_entry(result, "helper_name", record.helper.full_name)
+        result = _add_entry(result, "helper_pk", record.helper.pk)
 
     # user
     if hasattr(record, 'user') and record.user:
-        result = add_entry(result, "user", record.user.username)
+        result = _add_entry(result, "user", record.user.username)
 
     return result
+
+
+def _add_entry(data, key, value):
+    """
+    Adds an entry to a dict if it does not exist already.
+    If the key exists already, the dict is not changed.
+    """
+    if key not in data:
+        data[key] = value
+    return data

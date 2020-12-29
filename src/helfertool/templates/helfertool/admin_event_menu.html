@@ -40,12 +40,6 @@
             </li>
         {% endif %}
 
-        {% if user_event_view_auditlog %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'toollog:event_audit_log' event.url_name %}">{% trans "Audit log" %}</a>
-            </li>
-        {% endif %}
-
         {% if user_event_edit_jobs %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'jobs_and_shifts' event.url_name %}">{% trans "Jobs and shifts" %}</a>
@@ -55,6 +49,12 @@
         {% if user_event_edit_links %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'links' event.url_name %}">{% trans "Links" %}</a>
+            </li>
+        {% endif %}
+
+        {% if user_event_view_auditlog %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'toollog:event_audit_log' event.url_name %}">{% trans "Audit log" %}</a>
             </li>
         {% endif %}
     </ul>

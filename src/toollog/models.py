@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.template.defaultfilters import date as date_f
 from django.utils.timezone import localtime
@@ -69,6 +70,7 @@ class LogEntry(models.Model):
         blank=True,
         null=True,
         verbose_name=_("Extra data"),
+        encoder=DjangoJSONEncoder,  # necessary to serialize UUIDs
     )
 
     module = models.CharField(

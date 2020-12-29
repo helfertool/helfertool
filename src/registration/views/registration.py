@@ -178,7 +178,6 @@ def deregister(request, event_url_name, helper_id, shift_pk):
         logger.info("helper deregistered", extra={
             'event': event,
             'helper': helper,
-            "helper_pk": helper_id,
         })
 
         if not helper.pk:
@@ -219,7 +218,6 @@ def update_personal(request, event_url_name, helper_id):
         logger.info("helper dataupdated", extra={
             'event': event,
             'helper': helper,
-            "helper_pk": helper_id,
         })
 
         if form.email_has_changed:

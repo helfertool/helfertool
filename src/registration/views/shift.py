@@ -70,7 +70,6 @@ def delete_shift(request, event_url_name, job_pk, shift_pk):
             'user': request.user,
             'event': event,
             'shift': shift,
-            'shift_pk': shift_pk,
         })
 
         # redirect to shift

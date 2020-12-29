@@ -97,7 +97,7 @@ def delete_link(request, event_url_name, link_pk):
         logger.info("link deleted", extra={
             'user': request.user,
             'event': event,
-            'link': link_pk,
+            'link': link.id,
         })
 
         # redirect to shift

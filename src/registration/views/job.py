@@ -80,12 +80,10 @@ def delete_job(request, event_url_name, job_pk):
             'user': request.user,
             'event': event,
             'job': job,
-            'job_pk': job_pk,
         })
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('jobs_and_shifts',
-                                            args=[event_url_name]))
+        return HttpResponseRedirect(reverse('jobs_and_shifts', args=[event_url_name]))
 
     # check if there are coordinators
     helpers_registered = job.coordinators.count() != 0
@@ -124,7 +122,8 @@ def duplicate_job(request, event_url_name, job_pk):
             'user': request.user,
             'event': event,
             'job': new_job,
-            'duplicated_from': job,
+            'duplicated_from': job.name,
+            'duplicated_from_pk': job.pk,
         })
 
         return HttpResponseRedirect(reverse('jobs_and_shifts',

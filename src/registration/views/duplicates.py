@@ -67,7 +67,6 @@ def merge(request, event_url_name, email):
                     'user': request.user,
                     'helper': h,
                     'event': event,
-                    'helper_pk': h.pk,
                 })
 
                 return HttpResponseRedirect(reverse('view_helper',
