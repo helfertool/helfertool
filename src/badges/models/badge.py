@@ -114,7 +114,7 @@ class Badge(models.Model):
         super(Badge, self).save(*args, **kwargs)
 
         if not self.barcode:
-            self.barcode = self.pk
+            self.barcode = self.pk + 1000  # prevent barcodes like "10"
             self.save()
 
         if self._old_photo != self.photo and self.photo:
