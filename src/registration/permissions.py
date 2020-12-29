@@ -13,6 +13,7 @@ ACCESS_EVENT_EDIT_JOBS = "ACCESS_EVENT_EDIT_JOBS"  # add/delete/duplicate/sort j
 ACCESS_EVENT_EXPORT_HELPERS = "ACCESS_EVENT_EXPORT_HELPERS"  # export data as pdf/excel
 ACCESS_EVENT_EDIT_DUPLICATES = "ACCESS_EVENT_EDIT_DUPLICATES"  # manage duplicated helpers
 ACCESS_EVENT_VIEW_COORDINATORS = "ACCESS_EVENT_VIEW_COORDINATORS"  # view the contact details of coordinators
+ACCESS_EVENT_VIEW_AUDITLOGS = "ACCESS_EVENT_VIEW_AUDITLOGS"  # view audit logs of the event
 
 ACCESS_JOB_EDIT = "ACCESS_JOB_EDIT"  # edit an existing job
 ACCESS_JOB_EDIT_HELPERS = "ACCESS_JOB_EDIT_HELPERS"  # add/remove helpers of job
@@ -87,6 +88,10 @@ _rbac_matrix = {
         EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         EventAdminRoles.ROLE_FRONTDESK,
         EventAdminRoles.ROLE_INVENTORY,
+    ],
+
+    ACCESS_EVENT_VIEW_AUDITLOGS: [
+        EventAdminRoles.ROLE_ADMIN,
     ],
 
     ACCESS_JOB_EDIT: [
