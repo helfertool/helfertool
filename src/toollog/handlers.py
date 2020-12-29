@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.utils.timezone import make_aware
 
 from datetime import datetime
@@ -48,5 +49,12 @@ class DatabaseHandler(logging.Handler):
 
         try:
             entry.save()
-        except ValueError:  # if the event is deleted, we cannot save
+        except ValueError:
+            # if the event is deleted, we cannot save. we only store logs for existing events,
+            # so we can discard this event (deletions are still logged via syslog / in files if container is used)
             pass
+        except IntegrityError:
+            # if a helper is deleted, the helper object is still there while we prepare the entry.
+            # on save, the helper may already be deleted, so we have a foreign key error.
+            entry.helper = None
+            entry.save()
