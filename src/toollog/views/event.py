@@ -7,6 +7,7 @@ from registration.permissions import has_access, ACCESS_EVENT_VIEW_AUDITLOGS
 from registration.views.utils import nopermission
 
 from ..models import LogEntry
+from ..forms import EventAuditLogFilter
 
 
 @login_required
@@ -20,6 +21,17 @@ def event_audit_log(request, event_url_name):
     # get logs for this event
     all_logs = LogEntry.objects.filter(event=event)
 
+    # form for filter
+    form = EventAuditLogFilter(request.POST or None, event=event)
+    if form.is_valid():
+        # apply filters
+        if form.instance.user:
+            all_logs = all_logs.filter(user=form.instance.user)
+        if form.instance.helper:
+            all_logs = all_logs.filter(helper=form.instance.helper)
+        if form.instance.message:
+            all_logs = all_logs.filter(message__icontains=form.instance.message)
+
     # paginate
     paginator = Paginator(all_logs, 50)
     page = request.GET.get('page')
@@ -27,5 +39,6 @@ def event_audit_log(request, event_url_name):
 
     # render page
     context = {'event': event,
+               'form': form,
                'log': log}
     return render(request, 'toollog/event_audit_log.html', context)

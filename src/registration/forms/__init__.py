@@ -7,3 +7,4 @@ from .helper import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, H
 from .link import LinkForm, LinkDeleteForm
 from .registration import RegisterForm, DeregisterForm
 from .duplicates import MergeDuplicatesForm
+from .widgets import SingleHelperSelectWidget
