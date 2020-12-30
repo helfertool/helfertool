@@ -1,9 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
-    <h2 id="event-description">{% trans "Audit log" %}</h2>
+    <h2{% trans "Audit log" %}</h2>
 
     <table class="table" aria-label="List of audit log events">
         <tr>
@@ -11,16 +10,33 @@
             <th scope="col">{% trans "Entry" %}</th>
             <th scope="col">{% trans "Helper" %}</th>
             <th scope="col">{% trans "User" %}</th>
-            <th scope="col">{% trans "Extras" %}</th>
+            <th scope="col"></th>
         </tr>
         {% for entry in log %}
         <tr>
             <td>{{ entry.timestamp }} <span class="text-muted">({{ entry.timestamp|date:"O" }})</span></td>
             <td>{{ entry.message }}</td>
-            <td>{{ entry.helper|default:"" }}</td>
+            <td>
+                {% if entry.helper %}
+                    <a href="{% url 'view_helper' event.url_name entry.helper.pk %}">{{ entry.helper.full_name }}</a>
+                {% endif %}
+            </td>
             <td>{{ entry.user.get_full_name }}</td>
-            <td>{{ entry.extras }}</td>
+            <td>
+                {% if entry.extras %}
+                    <a data-toggle="collapse" href="#log-extras-{{ entry.id }}" role="button">{% icon "plus" %}</a>
+                {% endif %}
+            </td>
         </tr>
+        {% if entry.extras %}
+            <tr>
+                <td colspan="5" class="border-0 pt-0 pb-0">
+                    <div id="log-extras-{{ entry.id }}" class="collapse mb-3">
+                        {{ entry.extras }}
+                    </div>
+                </td>
+            </tr>
+        {% endif %}
         {% endfor %}
     </table>
 
