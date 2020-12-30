@@ -27,7 +27,7 @@ def set_present(request, event_url_name, shift_pk):
     if not event.gifts:
         return notactive(request)
 
-    form = PresentForm(request.POST or None, shift=shift)
+    form = PresentForm(request.POST or None, shift=shift, user=request.user)
 
     if form.is_valid():
         form.save()

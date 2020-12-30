@@ -12,13 +12,14 @@ class HelperPrerequisiteForm(forms.Form):
     """
 
     def __init__(self, *args, **kwargs):
-        self.helper = kwargs.pop('helper')
+        self._helper = kwargs.pop("helper")
+        self._user = kwargs.pop("user")
 
         super(HelperPrerequisiteForm, self).__init__(*args, **kwargs)
 
         # create fields and store the prerequisites for later use
         self._prerequisites = {}
-        for prereqisite in prerequisites_for_helper(self.helper):
+        for prereqisite in prerequisites_for_helper(self._helper):
             id_str = "prerequisite_{}".format(prereqisite.pk)
 
             self._prerequisites[id_str] = prereqisite
@@ -26,25 +27,31 @@ class HelperPrerequisiteForm(forms.Form):
             self.fields[id_str] = forms.BooleanField(
                 label=prereqisite.name,
                 required=False,
-                initial=prereqisite.check_helper(self.helper)
+                initial=prereqisite.check_helper(self._helper)
             )
 
-    def save(self, request):
-        if self._prerequisites:
+    def save(self):
+        if self._prerequisites and self.has_changed():
             for id_str, prerequisite in self._prerequisites.items():
-                prerequisite.set_helper(self.helper, self.cleaned_data[id_str])
+                state = self.cleaned_data[id_str]
+                prerequisite.set_helper(self._helper, state)
 
-            logger.info("helper prerequisites", extra={
-                'user': request.user,
-                'event': self.helper.event,
-                'helper': self.helper,
-            })
+                # logging per prerequisite (if changed)
+                if id_str in self.changed_data:
+                    logger.info("helper prerequisites", extra={
+                        'user': self._user,
+                        'event': self._helper.event,
+                        'helper': self._helper,
+                        'prerequisite': prerequisite.name,
+                        'prerequisite_pk': prerequisite.pk,
+                        'state': state,
+                    })
 
     def has_items(self):
         return bool(self.fields)
 
     def has_unfilfilled(self):
         for prerequisite in self._prerequisites.values():
-            if not prerequisite.check_helper(self.helper):
+            if not prerequisite.check_helper(self._helper):
                 return True
         return False

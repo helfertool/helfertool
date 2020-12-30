@@ -4,6 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 from .fields import PresenceField
 from ..models import HelpersGifts
 
+import logging
+logger = logging.getLogger("helfertool.gifts")
+
 
 class HelpersGiftsForm(forms.ModelForm):
     class Meta:
@@ -13,6 +16,7 @@ class HelpersGiftsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         gifts_readonly = kwargs.pop("gifts_readonly", False)
         presence_readonly = kwargs.pop("presence_readonly", False)
+        self._user = kwargs.pop("user")
 
         super(HelpersGiftsForm, self).__init__(*args, **kwargs)
 
@@ -67,12 +71,34 @@ class HelpersGiftsForm(forms.ModelForm):
             giftset.delivered = self.cleaned_data[delivered_id_str]
             giftset.save()
 
+            # logging per giftset and shift (if it changed)
+            if delivered_id_str in self.changed_data:
+                logger.info("helper giftset", extra={
+                    'user': self._user,
+                    'event': self.instance.helper.event,
+                    'helper': self.instance.helper,
+                    'shift': giftset.shift,
+                    'giftset_pk': giftset.gift_set.pk,
+                    'giftset': giftset.gift_set.name,
+                    'delivered': giftset.delivered,
+                })
+
         # presence
         for helpershift in self.instance.helper.helpershift_set.all():
             present_id_str = "present_{}".format(helpershift.shift.pk)
             present = self.cleaned_data.get(present_id_str)
 
             instance.set_present(helpershift.shift, present)
+
+            # logging per shift
+            if present_id_str in self.changed_data:
+                logger.info("helper presence", extra={
+                    'user': self._user,
+                    'event': self.instance.helper.event,
+                    'helper': self.instance.helper,
+                    'shift': helpershift.shift,
+                    'present': present,
+                })
 
         # and finally store the other flags
         instance = super(HelpersGiftsForm, self).save(commit)

@@ -10,6 +10,9 @@ from ..models import Helper, Shift, Job
 from ..permissions import has_access, ACCESS_HELPER_VIEW, ACCESS_JOB_EDIT_HELPERS
 from badges.models import Badge
 
+import logging
+logger = logging.getLogger("helfertool.registration")
+
 
 class HelperForm(forms.ModelForm):
     class Meta:
@@ -289,6 +292,7 @@ class HelperInternalCommentForm(forms.ModelForm):
         fields = ['internal_comment', ]
 
     def __init__(self, *args, **kwargs):
+        self._user = kwargs.pop("user")
         super(HelperInternalCommentForm, self).__init__(*args, **kwargs)
 
         self.fields['internal_comment'].widget.attrs['rows'] = 3
@@ -299,3 +303,13 @@ class HelperInternalCommentForm(forms.ModelForm):
         self.cleaned_data['internal_comment'] = self.cleaned_data['internal_comment'].strip()
 
         return cleaned_data
+
+    def save(self, commit=True):
+        super(HelperInternalCommentForm, self).save(commit)
+
+        if self.has_changed():
+            logger.info("helper internalcomment", extra={
+                'user': self._user,
+                'event': self.instance.event,
+                'helper': self.instance,
+            })
