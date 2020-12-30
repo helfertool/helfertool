@@ -92,7 +92,7 @@ def view_helper(request, event_url_name, helper_pk):
     # internal comment
     internal_comment_form = None
     if edit_internal_comment:
-        internal_comment_form = HelperInternalCommentForm(request.POST or None, instance=helper)
+        internal_comment_form = HelperInternalCommentForm(request.POST or None, instance=helper, user=request.user)
 
         if not internal_comment_form.is_valid():
             forms_valid = False
@@ -106,6 +106,7 @@ def view_helper(request, event_url_name, helper_pk):
                                       instance=helper.gifts,
                                       gifts_readonly=not edit_gifts,
                                       presence_readonly=not edit_presence,
+                                      user=request.user,
                                       prefix="gifts")
 
         if not gifts_form.is_valid():
@@ -116,6 +117,7 @@ def view_helper(request, event_url_name, helper_pk):
     if edit_prerequisites:
         prerequisites_form = HelperPrerequisiteForm(request.POST or None,
                                                     helper=helper,
+                                                    user=request.user,
                                                     prefix="prerequisites")
 
         if not prerequisites_form.is_valid():
@@ -130,7 +132,7 @@ def view_helper(request, event_url_name, helper_pk):
             gifts_form.save()
 
         if prerequisites_form:
-            prerequisites_form.save(request)
+            prerequisites_form.save()
 
         messages.success(request, _("Changes were saved."))
         return redirect('view_helper', event_url_name=event.url_name, helper_pk=helper.pk)

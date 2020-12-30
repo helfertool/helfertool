@@ -8,13 +8,16 @@ class HelperShift(models.Model):
 
     This model then can be used by other apps to "attach" more data with OneToOne fields and signals.
 
-    The fields `present` and `absent` belong to the gifts app. They are directly inserted here as it
-    would be too complicated to add another model for just two booleans.
+    The fields `present` and `manual_presence` belong to the gifts app. They are directly inserted here as it
+    would be too complicated to add another model for just two booleans. Additionally, this has the advantage
+    that the `present` flag can directly used by other apps.
 
     Columns:
+        :helper: The helper
+        :shift: The shift
         :timestamp: Timestamp when the helper registered for this shift
         :present: Flag set when the helper is there (manually or automatically)
-        :absent: Flag manually set if the helper did not attend at his shift
+        :manual_presence: `present` flag was manually set
     """
     class Meta:
         unique_together = ('helper', 'shift',)
