@@ -5,7 +5,7 @@ volunteers or staff for an event. See <https://www.helfertool.org> for more info
 
 We have a Matrix room now to discuss development and administration of the Helfertool: [#helfertool:matrix.org](https://matrix.to/#/#helfertool:matrix.org)
 
-[![Matrix](https://matrix.to/img/matrix-badge.svg)](https://matrix.to/#/#helfertool:matrix.org)
+[![Matrix](https://www.helfertool.org/img/matrix-badge-github.svg)](https://matrix.to/#/#helfertool:matrix.org)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=helfertool_helfertool&metric=alert_status)](https://sonarcloud.io/dashboard?id=helfertool_helfertool)
 
 # Install
