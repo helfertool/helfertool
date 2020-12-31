@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -57,33 +58,43 @@ def template_privacy(request):
         return nopermission(request)
 
     # forms
+    all_forms = []
+
+    # texts for registration
     obj_privacy, c = HTMLSetting.objects.get_or_create(key='privacy')
     form_privacy = HTMLSettingForm(request.POST or None,
                                    instance=obj_privacy,
                                    prefix='privacy')
+    all_forms.append(form_privacy)
 
     obj_privacy_text, c = TextSetting.objects.get_or_create(key='privacy')
     form_privacy_text = TextSettingForm(request.POST or None,
                                         instance=obj_privacy_text,
                                         prefix='privacy_text')
+    all_forms.append(form_privacy_text)
 
-    obj_news, c = HTMLSetting.objects.get_or_create(key='privacy_newsletter')
-    form_news = HTMLSettingForm(request.POST or None,
-                                instance=obj_news,
-                                prefix='news')
+    # forms for newsletter texts (if enabled)
+    if settings.FEATURES_NEWSLETTER:
+        obj_news, c = HTMLSetting.objects.get_or_create(key='privacy_newsletter')
+        form_news = HTMLSettingForm(request.POST or None,
+                                    instance=obj_news,
+                                    prefix='news')
+        all_forms.append(form_news)
 
-    obj_news_subscribe, c = HTMLSetting.objects.get_or_create(
-        key='privacy_newsletter_subscribe')
-    form_news_subscribe = HTMLSettingForm(request.POST or None,
-                                          instance=obj_news_subscribe,
-                                          prefix='news_subscribe')
+        obj_news_subscribe, c = HTMLSetting.objects.get_or_create(key='privacy_newsletter_subscribe')
+        form_news_subscribe = HTMLSettingForm(request.POST or None,
+                                              instance=obj_news_subscribe,
+                                              prefix='news_subscribe')
+        all_forms.append(form_news_subscribe)
+    else:
+        # for template
+        form_news = None
+        form_news_subscribe = None
 
-    if form_privacy.is_valid() and form_privacy_text.is_valid() \
-            and form_news.is_valid() and form_news_subscribe.is_valid():
-        form_privacy.save()
-        form_privacy_text.save()
-        form_news.save()
-        form_news_subscribe.save()
+    # check all forms and save
+    if all([f.is_valid() for f in all_forms]):
+        for f in all_forms:
+            f.save()
 
         logger.info("settings changed", extra={
             'changed': 'templates_privacy',
