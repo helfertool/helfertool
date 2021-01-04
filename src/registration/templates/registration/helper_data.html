@@ -1,5 +1,11 @@
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n bootstrap4 %}
+
+{% comment %}
+Parameters:
+    helper
+    show_internal_comment
+    show_badge_barcode
+{% endcomment %}
 
 <table class="table table-hover" aria-describedby="helper-header">
     <tr>
@@ -12,14 +18,14 @@
         <td>{{ helper.email }}</td>
     </tr>
 
-    {% if event.ask_phone %}
+    {% if helper.event.ask_phone %}
         <tr>
             <th scope="row">{% trans "Mobile phone" %}: </th>
             <td>{{ helper.phone }}</td>
         </tr>
     {% endif %}
 
-    {% if event.ask_shirt %}
+    {% if helper.event.ask_shirt %}
         <tr>
             <th scope="row">{% trans "T-shirt" %}: </th>
             <td>{{ helper.get_shirt_display }}</td>
@@ -33,7 +39,7 @@
         </tr>
     {% endif %}
 
-    {% if event.ask_vegetarian %}
+    {% if helper.event.ask_vegetarian %}
         <tr>
             <th scope="row">{% trans "Vegetarian" %}: </th>
             <td>{{ helper.vegetarian | yesno }}</td>
@@ -65,10 +71,10 @@
         <td>{{ helper.timestamp }}</td>
     </tr>
 
-    {% if badge_barcode %}
+    {% if show_badge_barcode and helper.event.badges %}
         <tr>
             <th scope="row">{% trans "Badge Barcode" %}</th>
-            <td>{{ badge_barcode }}</td>
+            <td>{{ helper.badge.barcode }}</td>
         </tr>
     {% endif %}
 </table>

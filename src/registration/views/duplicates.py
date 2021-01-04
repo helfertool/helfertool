@@ -57,9 +57,7 @@ def merge(request, event_url_name, email):
     if helpers.count() > 1:
         form = MergeDuplicatesForm(request.POST or None, helpers=helpers)
 
-        if not form.check_merge_possible():
-            error = True
-        elif form.is_valid():
+        if form.is_valid():
             try:
                 h = form.merge()
 
@@ -72,6 +70,7 @@ def merge(request, event_url_name, email):
                 return HttpResponseRedirect(reverse('view_helper',
                                                     args=[event_url_name, h.pk]))
             except ValueError:
+                # happens only if the shifts changed between is_valid() and merge()
                 error = True
 
     context = {'event': event,
