@@ -30,7 +30,7 @@
     </a>
     {% endif %}
 
-    {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode %}
+    {% include "registration/helper_data.html" with helper=helper show_badge_barcode=True %}
 
     {% if helper.mail_failed %}
         <p>

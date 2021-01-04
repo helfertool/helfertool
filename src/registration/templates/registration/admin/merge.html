@@ -7,11 +7,11 @@
 
     {% if error %}
         <div class="alert alert-danger" role="alert">
-            {% trans "You cannot merge helpers of which multiple have the same shift." %}
+            {% trans "Cannot merge helpers which have the same shift." %}
         </div>
     {% elif form %}
         <div class="alert alert-info" role="alert">
-            {% trans "You have to select one data set, all other will be deleted." %}
+            {% trans "You have to select one data set, the others are deleted. You can also skip some entries and keep them as duplicates. " %}
 
             <br/><br/>
 
@@ -23,19 +23,31 @@
 
             {% bootstrap_form_errors form %}
 
-            {% for helper in form.helpers.field.queryset %}
-                <input id="helper_{{ forloop.counter0 }}"
-                       name="helpers"
+            {% for helper in form.helpers %}
+                {# select this helper as remaining #}
+                <input id="helper_selection_{{ forloop.counter0 }}"
+                       name="helpers_selection"
                        required="required"
                        type="radio"
                        value="{{ helper.pk }}"
                        class="mt-4"
                 />
-                <label for="helper_{{ forloop.counter0 }}">
+                <label for="helper_selection_{{ forloop.counter0 }}">
                     {% trans "Keep this data" %}
                 </label>
 
-                {% include "registration/helper_data.html" with helper=helper badge_barcode=helper.badge.barcode show_internal_comment=True %}
+                {# ignore this helper #}
+                <input id="helper_ignore_{{ forloop.counter0 }}"
+                    name="helpers_ignore"
+                    type="checkbox"
+                    value="{{ helper.pk }}"
+                    class="mt-4 ml-2"
+                />
+                <label for="helper_ignore_{{ forloop.counter0 }}">
+                    {% trans "Ignore this helper" %}
+                </label>
+
+                {% include "registration/helper_data.html" with helper=helper show_badge_barcode=True show_internal_comment=True %}
             {% endfor %}
 
             <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary mt-3" />

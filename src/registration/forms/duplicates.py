@@ -1,38 +1,60 @@
 from django import forms
 from django.db import transaction
+from django.utils.translation import ugettext as _
 
 from ..models import Duplicate, HelperShift
 
 
 class MergeDuplicatesForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        self._helpers = kwargs.pop('helpers')
+        self.helpers = kwargs.pop('helpers')
 
         super(MergeDuplicatesForm, self).__init__(*args, **kwargs)
 
-        self.fields['helpers'] = forms.ModelChoiceField(
-            queryset=self._helpers,
-            widget=forms.RadioSelect(attrs={'id': 'helper'}),
+        self.fields['helpers_ignore'] = forms.ModelMultipleChoiceField(
+            queryset=self.helpers,
+            widget=forms.CheckboxSelectMultiple(attrs={'id': 'helper_ignore'}),
+            required=False,
+            label='',
+        )
+
+        self.fields['helpers_selection'] = forms.ModelChoiceField(
+            queryset=self.helpers,
+            widget=forms.RadioSelect(attrs={'id': 'helper_selection'}),
             empty_label=None,
             required=True,
             label='')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        remaining_helper = cleaned_data['helpers_selection']
+        ignore_helpers = cleaned_data['helpers_ignore']
+
+        # remaining helpers must not be ignored (this makes no sense)
+        if remaining_helper in ignore_helpers:
+            raise forms.ValidationError(_("The remaining helper must not be ignored."))
+
+        # check for overlapping shifts
+        if not self.check_merge_possible(ignore_helpers):
+            raise forms.ValidationError(_('Cannot merge helpers which have the same shift.'))
 
     @transaction.atomic
     def merge(self):
         """
         Merge the helpers and keep the data selected in the form.
         """
-        remaining_helper = self.cleaned_data['helpers']
+        remaining_helper = self.cleaned_data['helpers_selection']
+        ignore_helpers = self.cleaned_data['helpers_ignore']
         oldest_timestamp = remaining_helper.timestamp
 
-        # check it again inside atomic code block. we do error handling here and not in validate
-        # to make sure that no change happends after the validation and before the merge
-        if not self.check_merge_possible():
+        # we check this again inside the atomic code block to ensure that no change happends after the
+        # validation and before the merge (= no new shifts were added)
+        if not self.check_merge_possible(ignore_helpers):
             raise ValueError("Cannot merge helpers with same shifts")
 
         # and then to the merge
-        for helper in self._helpers:
-            if helper == remaining_helper:
+        for helper in self.helpers:
+            if helper == remaining_helper or helper in ignore_helpers:
                 continue
             # merge shifts
             for helpershift in HelperShift.objects.filter(helper=helper):
@@ -64,7 +86,7 @@ class MergeDuplicatesForm(forms.Form):
 
         return remaining_helper
 
-    def check_merge_possible(self):
+    def check_merge_possible(self, ignore_helpers=None):
         """
         Check if the merge is possible.
 
@@ -72,7 +94,12 @@ class MergeDuplicatesForm(forms.Form):
         we would "loose" allocated seats and this is probably not intended.
         """
         shifts = []
-        for helper in self._helpers:
+        for helper in self.helpers:
+            # if we have ignored_helpers, check that
+            if ignore_helpers and helper in ignore_helpers:
+                continue
+
+            # compare all shifts
             for shift in helper.shifts.all():
                 if shift in shifts:
                     return False
