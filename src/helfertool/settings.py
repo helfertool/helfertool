@@ -358,7 +358,7 @@ LOGGING = {
         },
         'helfertool_syslog': {
             '()': 'toollog.formatters.TextFormatter',
-            'format': '%(name)s %(levelname)s %(message)s (%(extras)s)',
+            'format': 'helfertool %(levelname)s %(message)s (%(extras)s)',
         },
     },
     'handlers': {
