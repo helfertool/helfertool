@@ -43,6 +43,7 @@ def _handle_registration(uuid_str, deliverynotification):
 
         logger.info("mail handled", extra={
             'type': MAIL_REGISTRATION,
+            'event': helper.event,
             'helper': helper,
         })
 
