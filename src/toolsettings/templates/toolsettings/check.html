@@ -1,5 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 %}
+{% load i18n bootstrap4 icons %}
 
 {% block admincontent %}
     <h2>{% trans "Check installation" %}</h2>
@@ -95,10 +95,17 @@
         </tr>
 
         <tr class="d-flex">
-            <th class="col-3" scope="row">X-Real-IP</th>
+            <th class="col-3" scope="row">{% trans "Remote IP" %}</th>
             <td class="col-9">
-                {% if header_x_real_ip %}
-                    {{ header_x_real_ip }}
+                {% if header_remote_addr %}
+                    {{ header_remote_addr }}
+                    {% if header_remote_addr != header_x_forwarded_for %}
+                        <br/>
+                        <span class="text-danger">
+                            {% icon "exclamation-triangle" %}
+                            {% trans "X-Forwarded-For is set to different value" %}
+                        </span>
+                    {% endif %}
                 {% else %}
                     <em class="fas fa-times text-danger"></em>
                 {% endif %}

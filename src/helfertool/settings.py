@@ -317,9 +317,8 @@ DEBUG = dict_get(config, False, 'security', 'debug')
 SECRET_KEY = dict_get(config, 'CHANGEME', 'security', 'secret')
 ALLOWED_HOSTS = dict_get(config, [], 'security', 'allowed_hosts')
 
-# use X-Forwarded-* headers
+# use X-Forwarded-Proto header to determine if https is used
 if dict_get(config, False, 'security', 'behind_proxy') or is_docker:
-    USE_X_FORWARDED_HOST = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # cookies
