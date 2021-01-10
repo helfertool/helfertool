@@ -2,6 +2,7 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
+from django.db.models import Count
 from django.utils.translation import ugettext as _
 
 from ckeditor.widgets import CKEditorWidget
@@ -12,7 +13,7 @@ import os
 from toolsettings.forms import SingleUserSelectWidget
 
 from .fields import DatePicker
-from ..models import Event, EventAdminRoles
+from ..models import Event, EventAdminRoles, EventArchive
 from toollog.models import LogEntry
 
 
@@ -116,12 +117,21 @@ class EventArchiveForm(forms.ModelForm):
         fields = []
 
     def archive(self):
+        # set event flags
         self.instance.archived = True
         self.instance.active = False
         self.instance.save()
 
+        # archive shirt statistics
+        if self.instance.ask_shirt:
+            shirt_data = {}
+            for data in self.instance.helper_set.values('shirt').annotate(num=Count('shirt')).order_by():
+                shirt_data[data['shirt']] = data['num']
+            EventArchive.objects.create(event=self.instance, key="shirts", version=1, data=shirt_data)
+
+        # delete coordinators and helpers
         for job in self.instance.job_set.all():
-            # delete coordinators
+            # store number of coordinators
             job.archived_number_coordinators = job.coordinators.count()
             job.save()
 
@@ -131,6 +141,7 @@ class EventArchiveForm(forms.ModelForm):
 
             # now the shifts
             for shift in job.shift_set.all():
+                # store number of helpers
                 shift.archived_number = shift.helper_set.count()
                 shift.save()
 
