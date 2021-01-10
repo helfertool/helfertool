@@ -1,4 +1,5 @@
 from .event import Event
+from .eventarchive import EventArchive
 from .adminroles import EventAdminRoles
 from .job import Job
 from .shift import Shift

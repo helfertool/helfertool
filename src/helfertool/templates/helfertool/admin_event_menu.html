@@ -121,11 +121,10 @@
     </ul>
     {% endif %}
 
-    {% if not event.archived %}
-    {% if user_statistics_view or user_statistics_shirts %}
+    {% if not event.archived and user_statistics_view or event.ask_shirt and user_statistics_shirts %}
         <h2>{% trans "Statistics" %}</h2>
         <ul class="nav flex-column">
-            {% if user_statistics_view %}
+            {% if not event.archived and user_statistics_view %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'statistic:overview' event.url_name %}">{% trans "Overview" %}</a>
             </li>
@@ -137,7 +136,6 @@
                 </li>
             {% endif %}
         </ul>
-    {% endif %}
     {% endif %}
 
     {% if event.gifts %}

@@ -4,6 +4,12 @@
 {% block admincontent %}
     <h2>{% trans "T-Shirts" %}</h2>
 
+    {% if not total_shirts and not job_shirts %}
+        <div class="alert alert-info" role="alert">
+            {% trans "No data available." %}
+        </div>
+    {% endif %}
+
     {% if total_shirts %}
         <h3 id="shirts-total-header">{% trans "Total" %}</h3>
 
@@ -20,12 +26,15 @@
                     <td>{{ num }}</td>
                 {% endfor %}
             </tr>
+
+            {% if coordinator_shirts %}
             <tr>
                 <td>{% trans "Coordinators" %}</td>
                 {% for size, num in coordinator_shirts.items %}
                     <td>{{ num }}</td>
                 {% endfor %}
             </tr>
+            {% endif %}
         </table>
     {% endif %}
 
