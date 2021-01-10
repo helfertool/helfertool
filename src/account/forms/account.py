@@ -187,10 +187,9 @@ class EditUserForm(forms.ModelForm):
                                self.cleaned_data.get("perm_addevent"),
                                self._admin_user)
 
-        if settings.FEATURES_NEWSLETTER:
-            if self.cleaned_data.get("perm_sendnews") != self._sendnews_initial:
-                _change_permission(self.instance, settings.GROUP_SENDNEWS,
-                                   self.cleaned_data.get("perm_sendnews"),
-                                   self._admin_user)
+        if settings.FEATURES_NEWSLETTER and self.cleaned_data.get("perm_sendnews") != self._sendnews_initial:
+            _change_permission(self.instance, settings.GROUP_SENDNEWS,
+                               self.cleaned_data.get("perm_sendnews"),
+                               self._admin_user)
 
         return instance
