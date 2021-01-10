@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
@@ -19,26 +20,33 @@ def event_audit_log(request, event_url_name):
         return nopermission(request)
 
     # get logs for this event
-    all_logs = LogEntry.objects.filter(event=event)
+    if settings.DATABASE_LOGGING:
+        enabled = True
+        all_logs = LogEntry.objects.filter(event=event)
 
-    # form for filter
-    form = EventAuditLogFilter(request.POST or None, event=event)
-    if form.is_valid():
-        # apply filters
-        if form.instance.user:
-            all_logs = all_logs.filter(user=form.instance.user)
-        if form.instance.helper:
-            all_logs = all_logs.filter(helper=form.instance.helper)
-        if form.instance.message:
-            all_logs = all_logs.filter(message__icontains=form.instance.message)
+        # form for filter
+        form = EventAuditLogFilter(request.POST or None, event=event)
+        if form.is_valid():
+            # apply filters
+            if form.instance.user:
+                all_logs = all_logs.filter(user=form.instance.user)
+            if form.instance.helper:
+                all_logs = all_logs.filter(helper=form.instance.helper)
+            if form.instance.message:
+                all_logs = all_logs.filter(message__icontains=form.instance.message)
 
-    # paginate
-    paginator = Paginator(all_logs, 50)
-    page = request.GET.get('page')
-    log = paginator.get_page(page)
+        # paginate
+        paginator = Paginator(all_logs, 50)
+        page = request.GET.get('page')
+        log = paginator.get_page(page)
+    else:
+        enabled = False
+        log = None
+        form = None
 
     # render page
     context = {'event': event,
+               'enabled': enabled,
                'form': form,
                'log': log}
     return render(request, 'toollog/event_audit_log.html', context)

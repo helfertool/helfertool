@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 16:30+0100\n"
-"PO-Revision-Date: 2021-01-10 16:30+0100\n"
+"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"PO-Revision-Date: 2021-01-10 19:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: toollog/models.py:31 toollog/templates/toollog/event_audit_log.html:23
+#: toollog/models.py:31 toollog/templates/toollog/event_audit_log.html:24
 msgid "Timestamp"
 msgstr "Zeitstempel"
 
@@ -34,11 +34,11 @@ msgstr "Nachricht"
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: toollog/models.py:57 toollog/templates/toollog/event_audit_log.html:25
+#: toollog/models.py:57 toollog/templates/toollog/event_audit_log.html:26
 msgid "Helper"
 msgstr "Helfer"
 
-#: toollog/models.py:65 toollog/templates/toollog/event_audit_log.html:26
+#: toollog/models.py:65 toollog/templates/toollog/event_audit_log.html:27
 msgid "User"
 msgstr "Benutzer"
 
@@ -54,21 +54,25 @@ msgstr "Helfertool Modul"
 msgid "Audit log"
 msgstr "Auditprotokoll"
 
-#: toollog/templates/toollog/event_audit_log.html:16
+#: toollog/templates/toollog/event_audit_log.html:17
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: toollog/templates/toollog/event_audit_log.html:17
+#: toollog/templates/toollog/event_audit_log.html:18
 msgid "Clear filter"
 msgstr "Filter löschen"
 
-#: toollog/templates/toollog/event_audit_log.html:24
+#: toollog/templates/toollog/event_audit_log.html:25
 msgid "Entry"
 msgstr "Eintrag"
 
-#: toollog/templates/toollog/event_audit_log.html:57
+#: toollog/templates/toollog/event_audit_log.html:58
 msgid "No log entries found."
 msgstr "Keine Logeinträge gefunden."
+
+#: toollog/templates/toollog/event_audit_log.html:64
+msgid "Logging to database not enabled."
+msgstr "Logging in Datenbank nicht aktiviert."
 
 #~ msgid "Clear"
 #~ msgstr "Löschen"
