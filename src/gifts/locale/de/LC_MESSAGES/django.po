@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 15:19+0200\n"
+"POT-Creation-Date: 2021-01-10 16:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -33,7 +33,7 @@ msgstr "Anwesend"
 msgid "Absent"
 msgstr "Abwesend"
 
-#: gifts/forms/helpersgifts.py:33 gifts/templates/gifts/helper.html:33
+#: gifts/forms/helpersgifts.py:37 gifts/templates/gifts/helper.html:33
 msgid "Delivered"
 msgstr "Ausgegeben"
 
@@ -42,7 +42,7 @@ msgid "Helper got gift"
 msgstr "Helfer hat Geschenk erhalten"
 
 #: gifts/models/gift.py:10 gifts/models/set.py:14
-#: gifts/templates/gifts/list.html:20 gifts/templates/gifts/list.html:47
+#: gifts/templates/gifts/list.html:22 gifts/templates/gifts/list.html:49
 #: gifts/templates/gifts/list_deposit.html:11
 #: gifts/templates/gifts/list_shirts.html:29
 msgid "Name"
@@ -88,8 +88,8 @@ msgstr "Verdiente Geschenke"
 msgid "Count"
 msgstr "Anzahl"
 
-#: gifts/models/set.py:19 gifts/templates/gifts/list.html:17
-#: gifts/templates/gifts/list.html:48 gifts/templates/gifts/not_active.html:6
+#: gifts/models/set.py:19 gifts/templates/gifts/list.html:19
+#: gifts/templates/gifts/list.html:50 gifts/templates/gifts/not_active.html:6
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -108,7 +108,7 @@ msgstr "Geschenksets, die dieses Geschenk verwenden"
 
 #: gifts/templates/gifts/delete_gift.html:28
 #: gifts/templates/gifts/delete_gift_set.html:28
-#: gifts/templates/gifts/list.html:33 gifts/templates/gifts/list.html:68
+#: gifts/templates/gifts/list.html:35 gifts/templates/gifts/list.html:70
 msgid "Delete"
 msgstr "Löschen"
 
@@ -127,7 +127,7 @@ msgstr "Beinhaltete Geschenke"
 
 #: gifts/templates/gifts/edit_gift.html:13
 #: gifts/templates/gifts/edit_gift_set.html:13
-#: gifts/templates/gifts/list.html:14 gifts/templates/gifts/set_present.html:45
+#: gifts/templates/gifts/list.html:15 gifts/templates/gifts/set_present.html:45
 msgid "Save"
 msgstr "Speichern"
 
@@ -179,19 +179,19 @@ msgstr "Einstellungen für Geschenke und Anwesenheiten"
 msgid "General"
 msgstr "Allgemein"
 
-#: gifts/templates/gifts/list.html:32 gifts/templates/gifts/list.html:67
+#: gifts/templates/gifts/list.html:34 gifts/templates/gifts/list.html:69
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: gifts/templates/gifts/list.html:41
+#: gifts/templates/gifts/list.html:43
 msgid "Add gift"
 msgstr "Geschenk hinzufügen"
 
-#: gifts/templates/gifts/list.html:44
+#: gifts/templates/gifts/list.html:46
 msgid "Gift sets"
 msgstr "Geschenksets"
 
-#: gifts/templates/gifts/list.html:76
+#: gifts/templates/gifts/list.html:78
 msgid "Add gift set"
 msgstr "Geschenkset hinzufügen"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 15:19+0200\n"
+"POT-Creation-Date: 2021-01-10 16:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,14 +37,14 @@ msgstr "Nutzer hinzufügen"
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:137 account/templates/account/list_users.html:46
-#: account/templates/account/user_permissions.html:23
+#: account/forms/account.py:138 account/templates/account/list_users.html:48
+#: account/templates/account/user_permissions.html:24
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
 
 #: account/models/agreement.py:13
 #: account/templates/account/list_agreements.html:15
-#: account/templates/account/list_users.html:53
+#: account/templates/account/list_users.html:56
 msgid "Name"
 msgstr "Name"
 
@@ -94,7 +94,7 @@ msgid "New user agreement"
 msgstr "Neue Nutzervereinbarung"
 
 #: account/templates/account/edit_agreement.html:20
-#: account/templates/account/edit_user.html:26
+#: account/templates/account/edit_user.html:28
 #: account/templates/account/view_user.html:51
 msgid "Save"
 msgstr "Sichern"
@@ -158,16 +158,16 @@ msgstr "Kein Filter"
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: account/templates/account/list_users.html:54
+#: account/templates/account/list_users.html:57
 #: account/templates/account/view_user.html:23
 msgid "Details"
 msgstr "Details"
 
-#: account/templates/account/list_users.html:55
+#: account/templates/account/list_users.html:58
 msgid "Last login"
 msgstr "Letzter Login"
 
-#: account/templates/account/list_users.html:110
+#: account/templates/account/list_users.html:113
 msgid "No users found."
 msgstr "Keine Benutzer gefunden."
 

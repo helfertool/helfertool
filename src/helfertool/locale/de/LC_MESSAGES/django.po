@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 15:19+0200\n"
+"POT-Creation-Date: 2021-01-10 16:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,13 +15,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: helfertool/settings.py:75
+#: helfertool/settings.py:76
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:76
+#: helfertool/settings.py:77
 msgid "English"
 msgstr "English"
 
@@ -88,186 +88,198 @@ msgstr "Die Veranstaltung ist archiviert."
 msgid "Administration"
 msgstr "Administration"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:22
-#: helfertool/templates/helfertool/admin_general_menu.html:3
+#: helfertool/templates/helfertool/admin_event_menu.html:24
+#: helfertool/templates/helfertool/admin_general_menu.html:6
 msgid "General"
 msgstr "Allgemein"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:27
+#: helfertool/templates/helfertool/admin_event_menu.html:29
 msgid "Go to registration"
 msgstr "Zur Anmeldung"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:33
+#: helfertool/templates/helfertool/admin_event_menu.html:35
 msgid "Edit event"
 msgstr "Veranstaltung bearbeiten"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:37
+#: helfertool/templates/helfertool/admin_event_menu.html:39
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:43
+#: helfertool/templates/helfertool/admin_event_menu.html:45
 msgid "Jobs and shifts"
 msgstr "Aufgaben und Schichten"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:49
+#: helfertool/templates/helfertool/admin_event_menu.html:51
 msgid "Links"
 msgstr "Links"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:54
+#: helfertool/templates/helfertool/admin_event_menu.html:57
+msgid "Audit log"
+msgstr "Auditprotokoll"
+
+#: helfertool/templates/helfertool/admin_event_menu.html:62
 msgid "Helpers"
 msgstr "Helfer"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:57
+#: helfertool/templates/helfertool/admin_event_menu.html:65
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:78
+#: helfertool/templates/helfertool/admin_event_menu.html:86
 msgid "Search helper"
 msgstr "Helfer suchen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:83
+#: helfertool/templates/helfertool/admin_event_menu.html:91
 msgid "Duplicates"
 msgstr "Duplikate"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:88
+#: helfertool/templates/helfertool/admin_event_menu.html:96
 msgid "Vacant shifts"
 msgstr "Unbesetzte Schichten"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:93
+#: helfertool/templates/helfertool/admin_event_menu.html:101
 msgid "All coordinators"
 msgstr "Alle Koordinatoren"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:100
+#: helfertool/templates/helfertool/admin_event_menu.html:108
 msgid "Mail"
 msgstr "E-Mail"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:104
+#: helfertool/templates/helfertool/admin_event_menu.html:112
 msgid "Send"
 msgstr "Senden"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:110
+#: helfertool/templates/helfertool/admin_event_menu.html:118
 msgid "All mails"
 msgstr "Alle E-Mails"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:118
+#: helfertool/templates/helfertool/admin_event_menu.html:126
 msgid "Statistics"
 msgstr "Statistik"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:122
+#: helfertool/templates/helfertool/admin_event_menu.html:130
 msgid "Overview"
 msgstr "Übersicht"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:128
+#: helfertool/templates/helfertool/admin_event_menu.html:136
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:137
+#: helfertool/templates/helfertool/admin_event_menu.html:145
 msgid "Gifts and presence"
 msgstr "Geschenke und Anwesenheit"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:141
-#: helfertool/templates/helfertool/admin_event_menu.html:166
-#: helfertool/templates/helfertool/admin_event_menu.html:200
-#: helfertool/templates/helfertool/admin_general_menu.html:62
+#: helfertool/templates/helfertool/admin_event_menu.html:149
+#: helfertool/templates/helfertool/admin_event_menu.html:174
+#: helfertool/templates/helfertool/admin_event_menu.html:214
+#: helfertool/templates/helfertool/admin_general_menu.html:75
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:147
+#: helfertool/templates/helfertool/admin_event_menu.html:155
 msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:152
+#: helfertool/templates/helfertool/admin_event_menu.html:160
 msgid "Missing T-shirts"
 msgstr "Fehlende T-Shirts"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:162
+#: helfertool/templates/helfertool/admin_event_menu.html:170
 msgid "Badges"
 msgstr "Badges"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:172
+#: helfertool/templates/helfertool/admin_event_menu.html:180
+msgid "Special badges"
+msgstr "Spezial Badges"
+
+#: helfertool/templates/helfertool/admin_event_menu.html:186
 msgid "Generate"
 msgstr "Generieren"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:177
+#: helfertool/templates/helfertool/admin_event_menu.html:191
 msgctxt "Badges"
 msgid "Registration"
 msgstr "Registrierung"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:186
+#: helfertool/templates/helfertool/admin_event_menu.html:200
 msgid "Prerequisites"
 msgstr "Voraussetzungen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:189
+#: helfertool/templates/helfertool/admin_event_menu.html:203
 msgid "Settings and lists"
 msgstr "Einstellungen und Listen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:196
-#: helfertool/templates/helfertool/admin_general_menu.html:17
+#: helfertool/templates/helfertool/admin_event_menu.html:210
+#: helfertool/templates/helfertool/admin_general_menu.html:27
 msgid "Inventory"
 msgstr "Inventar"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:206
+#: helfertool/templates/helfertool/admin_event_menu.html:220
 msgctxt "Register item and badge"
 msgid "Register"
 msgstr "Eintragen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:210
+#: helfertool/templates/helfertool/admin_event_menu.html:224
 msgid "Take back"
 msgstr "Zurücknehmen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:214
+#: helfertool/templates/helfertool/admin_event_menu.html:228
 msgid "List"
 msgstr "Liste"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:6
+#: helfertool/templates/helfertool/admin_general_menu.html:9
 msgid "My account"
 msgstr "Mein Account"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:11
+#: helfertool/templates/helfertool/admin_general_menu.html:14
 msgid "New event"
 msgstr "Neue Veranstaltung"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:22
+#: helfertool/templates/helfertool/admin_general_menu.html:20
+msgid "Past events"
+msgstr "Vergangene Veranstaltungen"
+
+#: helfertool/templates/helfertool/admin_general_menu.html:33
 msgid "Support"
 msgstr "Support"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:27
+#: helfertool/templates/helfertool/admin_general_menu.html:38
 msgid "User management"
 msgstr "Benutzerverwaltung"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:31
+#: helfertool/templates/helfertool/admin_general_menu.html:42
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:37
+#: helfertool/templates/helfertool/admin_general_menu.html:48
 msgid "All users"
 msgstr "Alle Nutzer"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:41
+#: helfertool/templates/helfertool/admin_general_menu.html:52
 msgid "User agreements"
 msgstr "Nutzervereinbarungen"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:48
+#: helfertool/templates/helfertool/admin_general_menu.html:60
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:51
+#: helfertool/templates/helfertool/admin_general_menu.html:63
 msgid "Send news"
 msgstr "Newsletter versenden"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:55
+#: helfertool/templates/helfertool/admin_general_menu.html:67
 msgid "Remove recipient"
 msgstr "Empfänger entfernen"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:66
+#: helfertool/templates/helfertool/admin_general_menu.html:79
 msgid "Templates"
 msgstr "Templates"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:70
+#: helfertool/templates/helfertool/admin_general_menu.html:83
 msgid "Check installation"
 msgstr "Installation überprüfen"
 
-#: helfertool/templates/helfertool/admin_general_menu.html:75
+#: helfertool/templates/helfertool/admin_general_menu.html:88
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 

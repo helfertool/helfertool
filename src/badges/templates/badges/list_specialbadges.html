@@ -5,15 +5,18 @@
     <h2 id="badge-header">{% trans "Special badges" %}</h2>
 
     <div class="alert alert-info">
+        <p>
         {% blocktrans trimmed %}
             Special badges are badges, which are not associated with helpers and numbered serially, for example:
             Police 1, Police 2, etc.
             This allows to create several similar badges without adding helpers manually.
             Please note, that it is not possible to assign inventory items to these special badges.
         {% endblocktrans %}
-        <br />
-        {% trans "Special badges are not deleted when the event is archived, so they can be reused." %}
-        <em>{% trans "Please do not enter any personal data like names here!" %}</em>
+        </p>
+        
+        <p>{% trans "Special badges are not deleted when the event is archived, so they can be reused." %}</p>
+
+        <p class="mb-0 font-italic">{% trans "Please do not enter any personal data like names here!" %}</p>
     </div>
 
     {% if not event.archived %}

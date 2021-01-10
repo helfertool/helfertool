@@ -88,7 +88,7 @@ class BadgeSettings(models.Model):
         max_length=250,
         verbose_name=_("Format for shift on badges"),
         help_text=_("""There is not much space on the badges, so the list of shifts needs to be as small as possible.
-                    Nevertheless, the weekday or date may be required for events with several days."""),
+Nevertheless, the weekday or date may be required for events with several days."""),
     )
 
     shift_no_names = models.BooleanField(
