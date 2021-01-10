@@ -11,7 +11,9 @@
 
         {% bootstrap_form settings_form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        {% if not event.archived %}
+            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        {% endif %}
     </form>
 
     <h3 id="gifts-header">{% trans "Gifts" %}</h3>
