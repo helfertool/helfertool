@@ -14,7 +14,7 @@
 
         {% bootstrap_form_errors form %}
         <input type="submit" value="{% trans "Update" %}" class="btn btn-outline-primary mb-4" />
-        <a href="{% url 'toollog:event_audit_log' event.url_name %}" class="btn btn-outline-primary mb-4 ml-2">{% trans "Clear" %}</a>
+        <a href="{% url 'toollog:event_audit_log' event.url_name %}" class="btn btn-outline-primary mb-4 ml-2">{% trans "Clear filter" %}</a>
     </form>
 
     {% if log %}

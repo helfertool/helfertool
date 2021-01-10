@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 15:19+0200\n"
+"POT-Creation-Date: 2021-01-10 16:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: statistic/templates/statistic/overview.html:5
 msgid "Statistics"
@@ -35,28 +35,32 @@ msgid "hours"
 msgstr "Stunden"
 
 #: statistic/templates/statistic/overview.html:23
-#: statistic/templates/statistic/shirts.html:18
+#: statistic/templates/statistic/shirts.html:24
 msgid "Helpers and coordinators"
 msgstr "Helfer und Koordinatoren"
 
 #: statistic/templates/statistic/overview.html:27
-#: statistic/templates/statistic/shirts.html:24
+#: statistic/templates/statistic/shirts.html:32
 msgid "Coordinators"
 msgstr "Koordinatoren"
 
 #: statistic/templates/statistic/overview.html:32
+msgid "Special badges"
+msgstr "Spezial Badges"
+
+#: statistic/templates/statistic/overview.html:38
 msgid "Vegetarians"
 msgstr "Vegetarier"
 
-#: statistic/templates/statistic/overview.html:37
+#: statistic/templates/statistic/overview.html:43
 msgid "Number of empty shift slots"
 msgstr "Anzahl an leeren Schichtslots"
 
-#: statistic/templates/statistic/overview.html:42
+#: statistic/templates/statistic/overview.html:48
 msgid "Chronological development of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
 
-#: statistic/templates/statistic/overview.html:45
+#: statistic/templates/statistic/overview.html:51
 msgid "No helpers are registered."
 msgstr "Es sind keine Helfer angemeldet."
 
@@ -65,24 +69,28 @@ msgstr "Es sind keine Helfer angemeldet."
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: statistic/templates/statistic/shirts.html:8
-#: statistic/templates/statistic/shirts.html:61
+#: statistic/templates/statistic/shirts.html:9
+msgid "No data available."
+msgstr "Keine Daten verfügbar."
+
+#: statistic/templates/statistic/shirts.html:14
+#: statistic/templates/statistic/shirts.html:70
 msgid "Total"
 msgstr "Insgesamt"
 
-#: statistic/templates/statistic/shirts.html:33
+#: statistic/templates/statistic/shirts.html:42
 msgid "Helpers (without coordinators)"
 msgstr "Helfer (ohne Koordinatoren)"
 
-#: statistic/templates/statistic/shirts.html:36
+#: statistic/templates/statistic/shirts.html:45
 msgid "Info:"
 msgstr "Hinweis:"
 
-#: statistic/templates/statistic/shirts.html:37
+#: statistic/templates/statistic/shirts.html:46
 msgid "The T-shirt of a helper is counted for the first shift."
 msgstr "Das T-Shirt eines Helfers wird zur ersten Schicht gezählt."
 
-#: statistic/templates/statistic/shirts.html:45
+#: statistic/templates/statistic/shirts.html:54
 msgid "Shift"
 msgstr "Schicht"
 

@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 15:19+0200\n"
+"POT-Creation-Date: 2021-01-10 16:30+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: inventory/forms/admin.py:45
 msgid "Item with this barcode already exists in this inventory"
@@ -108,7 +108,7 @@ msgstr "Löschen"
 
 #: inventory/templates/inventory/admin/inventory_items.html:42
 msgid "There are no items."
-msgstr "Es gibt keine Gegenstände"
+msgstr "Es gibt keine Gegenstände."
 
 #: inventory/templates/inventory/admin/inventory_list.html:9
 msgid "New inventory"
@@ -180,7 +180,15 @@ msgstr "Gegenstand scannen"
 msgid "This item is already assigned to another helper."
 msgstr "Dieser Gegenstand ist bereits einem anderen Helfer zugeordnet"
 
-#: inventory/templates/inventory/register_badge.html:26
+#: inventory/templates/inventory/register_badge.html:25
+msgid ""
+"This is a special badge, which is not associated with a helper. It cannot be "
+"used here."
+msgstr ""
+"Das ist ein Spezial Badge, welches mit keinem Helfer verknüpft ist. Es kann "
+"hier nicht genutzt werden."
+
+#: inventory/templates/inventory/register_badge.html:32
 #: inventory/templates/inventory/take_back_badge.html:26
 msgid "Scan other item"
 msgstr "Anderen Gegenstand scannen"
