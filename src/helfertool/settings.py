@@ -386,7 +386,8 @@ LOGGING = {
 }
 
 # enable database logging
-if dict_get(config, True, 'logging', 'database'):
+DATABASE_LOGGING = dict_get(config, True, 'logging', 'database')
+if DATABASE_LOGGING:
     LOGGING['loggers']['helfertool']['handlers'].append('helfertool_database')
 
 # enable syslog if configured

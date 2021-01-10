@@ -1,7 +1,9 @@
-{% load i18n icons permissions %}
+{% load i18n icons permissions setting %}
 
 {% has_access event "ACCESS_INVOLVED" as involved %}
 {% if involved %}
+    {% setting "DATABASE_LOGGING" as database_logging %}
+
     {% has_access event "ACCESS_EVENT_EDIT" as user_event_edit %}
     {% has_access event "ACCESS_EVENT_EDIT_JOBS" as user_event_edit_jobs %}
     {% has_access event "ACCESS_EVENT_EDIT_LINKS" as user_event_edit_links %}
@@ -52,7 +54,7 @@
             </li>
         {% endif %}
 
-        {% if user_event_view_auditlog %}
+        {% if database_logging and user_event_view_auditlog %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'toollog:event_audit_log' event.url_name %}">{% trans "Audit log" %}</a>
             </li>
