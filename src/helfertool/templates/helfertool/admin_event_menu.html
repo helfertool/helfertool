@@ -9,7 +9,7 @@
     {% has_access event "ACCESS_EVENT_EDIT_LINKS" as user_event_edit_links %}
     {% has_access event "ACCESS_EVENT_EDIT_DUPLICATES" as user_event_edit_duplicates %}
     {% has_access_event_or_job event "ACCESS_EVENT_VIEW_COORDINATORS" "ACCESS_EVENT_VIEW_COORDINATORS" as user_event_view_coordinators %}
-    {% has_access event "ACCESS_EVENT_VIEW_AUDITLOG" as user_event_view_auditlog %}
+    {% has_access event "ACCESS_EVENT_VIEW_AUDITLOGS" as user_event_view_auditlogs %}
     {% has_access_event_or_job event "ACCESS_MAILS_SEND" "ACCESS_JOB_SEND_MAILS" as user_mails_send %}
     {% has_access_event_or_job event "ACCESS_MAILS_VIEW" "ACCESS_JOB_VIEW_MAILS" as user_mails_view %}
     {% has_access event "ACCESS_GIFTS_EDIT" as user_gifts_edit %}
@@ -54,7 +54,7 @@
             </li>
         {% endif %}
 
-        {% if database_logging and user_event_view_auditlog %}
+        {% if database_logging and user_event_view_auditlogs %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'toollog:event_audit_log' event.url_name %}">{% trans "Audit log" %}</a>
             </li>
