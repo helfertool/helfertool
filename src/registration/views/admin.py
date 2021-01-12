@@ -5,24 +5,12 @@ from .utils import nopermission
 
 from ..decorators import archived_not_available
 from ..models import Event
-from ..permissions import has_access, has_access_event_or_job, ACCESS_EVENT_EDIT, ACCESS_INVOLVED, \
-    ACCESS_EVENT_VIEW_COORDINATORS
+from ..permissions import has_access, has_access_event_or_job, ACCESS_EVENT_EDIT, ACCESS_EVENT_VIEW_COORDINATORS
 
 
 @login_required
 def admin(request):
-    context = {'event': None}
-    return render(request, 'registration/admin/index.html', context)
-
-
-@login_required
-def manage_event(request, event_url_name):
-    event = get_object_or_404(Event, url_name=event_url_name)
-
-    if not has_access(request.user, event, ACCESS_INVOLVED):
-        return nopermission(request)
-
-    context = {'event': event}
+    context = {}
     return render(request, 'registration/admin/index.html', context)
 
 

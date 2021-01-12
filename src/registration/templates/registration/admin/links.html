@@ -1,45 +1,48 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="links-header">{% trans "Links" %}</h2>
+{% block content %}
+    <h1>{% trans "Links" %}</h1>
 
     {% if not links %}
         <p class="text-muted">{% trans "There are no links." %}</p>
     {% else %}
-        <table class="table" aria-describedby="links-header">
-            <tr>
-                <th scope="col">{% trans "Shifts" %}</th>
-                <th scope="col">{% trans "Usage" %}</th>
-                <th scope="col">{% trans "Creator" %}</th>
-
-                {% if not event.archived %}
-                    <th scope="col"></th>
-                {% endif %}
-            </tr>
-
+        <ul class="list-group mb-3">
             {% for link in links %}
-                <tr>
-                    <td>
-                        <ul>
-                            {% for shift in link.shifts.all %}
-                                <li>{{ shift }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ link.usage }}</td>
-                    <td>{{ link.creator.get_full_name | default:link.creator.username }}</td>
-
-                    {% if not event.archived %}
-                        <td>
-                            <a href="{% url "form_for_link" event.url_name link.id %}">{% icon "link" %} Link</a><br />
-                            <a href="{% url "edit_link" event.url_name link.id %}">{% icon "pencil-alt" %} Edit</a><br />
-                            <a href="{% url "delete_link" event.url_name link.id %}">{% icon "trash-alt" %} Delete</a>
-                        </td>
-                    {% endif %}
-                </tr>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-8 py-1 text-break">
+                                <ul class="reset-list">
+                                    {% for shift in link.shifts.all %}
+                                        <li>{{ shift }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-4 py-1">
+                                {% if link.usage %}
+                                    {{ link.usage }}<br/>
+                                {% endif %}
+                                {% if link.creator %}
+                                    {% trans "Created by" %} {{ link.creator.get_full_name | default:link.creator.username }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                        {% if not event.archived %}
+                            <td>
+                                <a href="{% url "form_for_link" event.url_name link.id %}">{% icon "link" %} Link</a><br />
+                                <a href="{% url "edit_link" event.url_name link.id %}">{% icon "pencil-alt" %} Edit</a><br />
+                                <a href="{% url "delete_link" event.url_name link.id %}">{% icon "trash-alt" %} Delete</a>
+                            </td>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% endif %}
 
     {% if not event.archived %}

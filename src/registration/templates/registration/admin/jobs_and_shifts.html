@@ -1,108 +1,97 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Jobs and shifts" %}</h2>
+{% block content %}
+    <h1>{% trans "Jobs and shifts" %}</h1>
 
     {% if not event.archived %}
         <p>
-            <a href="{% url 'new_job' event.url_name %}">
-                {% icon "plus" %}
-                {% trans "New job" %}
-            </a>
+            <a href="{% url 'new_job' event.url_name %}" class="me-3 text-nowrap">{% icon "plus" %} {% trans "New job" %}</a>
 
-            &nbsp;
-
-            <a href="{% url 'sort_job' event.url_name %}">
-                {% icon "sort" %}
-                {% trans "Sort jobs" %}
-            </a>
+            <a href="{% url 'sort_job' event.url_name %}">{% icon "sort" %} {% trans "Sort jobs" %}</a>
         </p>
     {% endif %}
 
     {% for job in event.job_set.all %}
-        <h3 id="job-{{ job.id }}-header">
+        <h2>
             {{ job.name }}
 
             {% if job.public %}
-                <span class="badge badge-outline-dark">
+                <span class="badge badge-outline-secondary fs-6 align-middle">
                     {% icon "eye" %} {% trans "Public" %}
                 </span>
             {% endif %}
-        </h3>
+        </h2>
 
         {% if not event.archived %}
             <p>
-                <a href="{% url 'edit_job' event.url_name job.pk %}">
-                {% icon "pencil-alt" %}
-                {% trans "Edit" %}</a>
-
-                &nbsp;
-
-                <a href="{% url 'duplicate_job' event.url_name job.pk %}">
-                {% icon "copy" %}
-                {% trans "Duplicate" %}</a>
-
-                &nbsp;
-
-                <a href="{% url 'duplicate_job_day' event.url_name job.pk %}">
-                {% icon "copy" %}
-                {% trans "Duplicate one day" %}</a>
-
-                &nbsp;
-
-                <a href="{% url 'delete_job' event.url_name job.pk %}">
-                {% icon "trash-alt" %}
-                {% trans "Delete" %}</a>
-
-                &nbsp;
-
-                <a href="{% url 'new_shift' event.url_name job.pk %}">
-                {% icon "plus" %}
-                {% trans "New shift" %}</a>
+                <a href="{% url 'edit_job' event.url_name job.pk %}" class="me-3 text-nowrap">
+                    {% icon "pencil-alt" %} {% trans "Edit" %}
+                </a>
+                <a href="{% url 'duplicate_job' event.url_name job.pk %}" class="me-3 text-nowrap">
+                    {% icon "copy" %} {% trans "Duplicate" %}
+                </a>
+                <a href="{% url 'duplicate_job_day' event.url_name job.pk %}" class="me-3 text-nowrap">
+                    {% icon "copy" %} {% trans "Duplicate one day" %}
+                </a>
+                <a href="{% url 'delete_job' event.url_name job.pk %}" class="me-3 text-nowrap">
+                    {% icon "trash-alt" %} {% trans "Delete" %}
+                </a>
+                <a href="{% url 'new_shift' event.url_name job.pk %}" class="text-nowrap">
+                    {% icon "plus" %} {% trans "New shift" %}
+                </a>
             </p>
         {% endif %}
 
         {% if job.shift_set.count == 0 %}
             <p class="text-muted">{% trans "There are no shifts." %}</p>
         {% else %}
-            <table class="table" aria-describedby="job-{{ job.id }}-header">
-                <tr>
-                    <th scope="col">{% trans "Begin" %}</th>
-                    <th scope="col">{% trans "End" %}</th>
-                    <th scope="col">{% trans "Name" %}</th>
-                    <th scope="col">{% trans "Number of helpers" %}</th>
-                    {% if event.gifts %}
-                        <th scope="col">{% trans "Gifts" %}</th>
-                    {% endif %}
-
-                    {% if not event.archived %}
-                        <th scope="col"></th>
-                    {% endif %}
-                </tr>
+            <ul class="list-group mb-4">
                 {% for shift in job.shift_set.all %}
-                    <tr>
-                        <td>
-                            {% if shift.hidden %}
-                                {% icon "eye-slash" %}
-                            {% elif shift.blocked %}
-                                {% icon "lock" %}
-                            {% endif %}
-                            {{ shift.begin }}
-                        </td>
-                        <td>{{ shift.end }}</td>
-                        <td>{{ shift.name }}</td>
-                        <td>{{ shift.number }}</td>
-                        {% if event.gifts %}
-                            <td>
-                                {% for gift in shift.gifts.all %}
-                                    {{ gift.name }}<br/>
-                                {% endfor %}
-                            </td>
-                        {% endif %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-8 col-lg-9 col-xl-10">
+                            <div class="row">
+                                <div class="col-12 col-lg-5 col-xxl-3 py-1 text-break">
+                                    <span class="table-icon d-none d-xxl-inline-block">
+                                        {# show hidden/blocked icon if we only have one line #}
+                                        {% if shift.hidden %}
+                                            {% icon "eye-slash" %}
+                                        {% elif shift.blocked %}
+                                            {% icon "lock" %}
+                                        {% endif %}
+                                    </span>
 
-                        {% if not event.archived %}
-                            <td>
+                                    {% icon "caret-right" %} {{ shift.begin }}
+                                </div>
+                                <div class="col-12 col-lg-5 col-xxl-3 py-1 text-break">
+                                    {% icon "caret-left" %} {{ shift.end }}
+                                </div>
+                                <div class="col-12 col-lg-2 col-xxl-1 py-1 text-break">
+                                    {% icon "users" %} {{ shift.number }}
+                                </div>
+                                <div class="col-12 d-xxl-none">
+                                    {# show hidden/blocked icon if we have multiple lines #}
+                                    {% if shift.hidden %}
+                                        {% icon "eye-slash" %} {% trans "Not visible in public registration" %}
+                                    {% elif shift.blocked %}
+                                        {% icon "lock" %} {% trans "Displayed as full in public registration" %}
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 col-xxl-3 py-1 text-break">
+                                    {{ shift.name }}
+                                </div>
+                                <div class="col-12 col-xxl-2 py-1 text-break">
+                                    {% if event.gifts %}
+                                        {% for gift in shift.gifts.all %}
+                                            {{ gift.name }}<br/>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                            {% if not event.archived %}
                                 <a href="{% url 'edit_shift' event.url_name job.pk shift.pk %}">
                                     {% icon "pencil-alt" %}
                                     {% trans "Edit" %}
@@ -112,12 +101,12 @@
                                     {% icon "trash-alt" %}
                                     {% trans "Delete" %}
                                 </a>
-                            </td>
-                        {% endif %}
-                    </tr>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
                 {% endfor %}
-            </table>
+            </ul>
         {% endif %}
-
     {% endfor %}
 {% endblock %}

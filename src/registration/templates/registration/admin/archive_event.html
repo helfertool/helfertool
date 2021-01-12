@@ -1,23 +1,23 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="event-description">{% trans "Archive event" %}</h2>
+{% block content %}
+    <h1>{% trans "Archive event" %}</h1>
+
+    <div class="alert alert-danger" role="alert">
+        <p><strong>{% trans "Do you want to archive this event? This will delete all helpers and coordinators!" %}</strong></p>
+
+        {% blocktrans trimmed %}
+            The number of registered helpers per shift and the number of coordinators are saved.
+            All personal data will be deleted irrevocably.
+        {% endblocktrans %}
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}
-
-        {% include "registration/admin/overview_event.html" %}
-
-        <div class="alert alert-danger" role="alert">
-            <p><strong>{% trans "Do you want to archive this event? This will delete all helpers and coordinators!" %}</strong></p>
-
-            <p>{% trans "Only the number of registered helpers per shift and the number of coordinators are saved. All other data like shirt sizes are deleted irrevocably." %}</p>
-        </div>
-
-        {% bootstrap_form_errors form %}
-
-        <input type="submit" value="{% trans "Yes, I want to archive this event and delete all personal data!" %}" class="btn btn-outline-danger" />
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-outline-danger">
+            {% icon "archive" %} {% trans "Yes, I want to archive this event and delete all personal data!" %}
+        </button>
     </form>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n icons %}
 
-{% block admincontent %}
-    <h2 id="badge-header">{% trans "Special badges" %}</h2>
+{% block content %}
+    <h2>{% trans "Special badges" %}</h2>
 
-    <div class="alert alert-info">
+    <div class="alert alert-secondary">
         <p>
         {% blocktrans trimmed %}
             Special badges are badges, which are not associated with helpers and numbered serially, for example:
@@ -28,41 +28,47 @@
     {% endif %}
 
     {% if specialbadges %}
-        <table class="table" aria-describedby="badge-header">
-            <tr class="d-flex">
-                <th class="col-8" scope="col">{% trans "Name" %}</th>
-                <th class="col-2" scope="col">{% trans "Number" %}</th>
-                <th class="col-2" scope="col"></th>
-            </tr>
-
+        <ul class="list-group">
             {% for badge in specialbadges %}
-            <tr class="d-flex">
-                <td class="col-8">
-                    {{ badge.name }} <br/>
-                    <span class="text-muted">
-                        {% trans "Texts: Job" %}: {{ badge.template_badge.job | default:"-" }},
-                        {% trans "Shift" %}: {{ badge.template_badge.shift | default:"-" }},
-                        {% trans "Role" %}: {{ badge.template_badge.role | default:"-" }} <br/>
-                        {% trans "Role" %}: {{ badge.template_badge.custom_role | default:"-" }},
-                        {% trans "Design" %}: {{ badge.template_badge.custom_design | default:"-" }} <br/>
-                        {% trans "Photo" %}: {{ badge.template_badge.photo | yesno }}
-                    </span>
-                </td>
-                <td class="col-2">{{ badge.number }}</td>
-                <td class="col-2">
-                    {% if not event.archived %}
-                    <a href="{% url 'badges:edit_specialbadges' event.url_name badge.pk %}">
-                        {% icon "pencil-alt" %} {% trans "Edit" %}
-                    </a>
-                    <br />
-                    <a href="{% url 'badges:delete_specialbadges' event.url_name badge.pk %}">
-                        {% icon "trash-alt" %} {% trans "Delete" %}
-                    </a>
-                    {% endif %}
-                </td>
-            </tr>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 py-1 text-break">
+                                {{ badge.name }}
+                            </div>
+                            <div class="col-12 col-lg-5 py-1 text-break">
+                                {% trans "Texts: Job" %}: {{ badge.template_badge.job | default:"-" }},
+                                {% trans "Shift" %}: {{ badge.template_badge.shift | default:"-" }},
+                                {% trans "Role" %}: {{ badge.template_badge.role | default:"-" }} <br/>
+                                {% trans "Role" %}: {{ badge.template_badge.custom_role | default:"-" }},
+                                {% trans "Design" %}: {{ badge.template_badge.custom_design | default:"-" }} <br/>
+                                {% trans "Photo" %}: {{ badge.template_badge.photo | yesno }}
+                            </div>
+                            <div class="col-12 col-lg-3 py-1">
+                                {% blocktrans trimmed count counter=badge.number %}
+                                    1 badge
+                                {% plural %}
+                                    {{ counter }} badges
+                                {% endblocktrans %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                        {% if not event.archived %}
+                            <a href="{% url 'badges:edit_specialbadges' event.url_name badge.pk %}">
+                                {% icon "pencil-alt" %} {% trans "Edit" %}
+                            </a>
+                            <br />
+                            <a href="{% url 'badges:delete_specialbadges' event.url_name badge.pk %}">
+                                {% icon "trash-alt" %} {% trans "Delete" %}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "There are no special badges." %}</p>
     {% endif %}

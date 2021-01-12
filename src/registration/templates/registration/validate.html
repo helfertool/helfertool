@@ -1,27 +1,24 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
+{% load i18n icons %}
 
 {% block title %}
-    {% blocktrans trimmed %}
-        Register for {{ event }} as helper
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
     {% endblocktrans %}
 {% endblock %}
 
 {% block content %}
     <h1>{{ event }}</h1>
 
-    <div class="alert alert-info" role="alert">
-        {% if already_validated %}
-            {% trans "Thank you! Your mail address was already confirmed." %}
-        {% else %}
-            {% trans "Thank you! You confirmed your mail address." %}
-        {% endif %}
+    <div class="alert alert-info mt-3" role="alert">
+        {% trans "Thank you! You confirmed your mail address and registration." %}
     </div>
 
-    {% if event.imprint %}
-        <div class="contact">
-            <p><strong>{% trans "Contact" %}</strong></p>
-            {{ event.imprint | safe }}
-        </div>
-    {% endif %}
+    <p>
+        <a class="btn btn-outline-primary mt-3" href="{% url "registered" event.url_name helper.pk %}">
+            {% icon "search" %} {% trans "View my data" %}
+        </a>
+    </p>
+
+    {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}

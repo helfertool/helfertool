@@ -1,30 +1,31 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="coordinator-header">{% trans "Delete coordinator" %}</h2>
+{% block content %}
+    <h1>{% trans "Delete coordinator" %}</h1>
+
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Data of coordinator' %}">
+                <tr>
+                    <th scope="row">{% trans "Name" %}</th>
+                    <td>{{ helper.full_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Mail" %}</th>
+                    <td>{{ helper.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Job" %}</th>
+                    <td>{{ job.name }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}
-
         {% bootstrap_form_errors form %}
-
-        <table class="table" aria-describedby="coordinator-header">
-            <tr>
-                <th scope="row">{% trans "Name" %}</th>
-                <td>{{ helper.full_name }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{% trans "Mail" %}</th>
-                <td>{{ helper.email }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{% trans "Job" %}</th>
-                <td>{{ job.name }}</td>
-            </tr>
-        </table>
-
-        <input type="submit" value="{% trans "Remove coordinator from this job" %}" class="btn btn-outline-danger" />
+        <button type="submit" class="btn btn-outline-danger">{% icon "trash-alt" %} {% trans "Delete" %}</button>
     </form>
 {% endblock %}

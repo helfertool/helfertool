@@ -1,9 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 %}
 
-{% block admincontent %}
-    <h2>{% trans "Warnings for badge generation" %}</h2>
+{% block content %}
+    <h1>{% trans "Warnings for badge generation" %}</h1>
 
     {% if not helpers %}
         <p class="text-muted">{% trans "There are no warnings." %}</p>
@@ -15,7 +14,7 @@
 
         <ul>
             {% for h in helpers %}
-                <li><a href="{% url 'view_helper' event.url_name h.pk %}">{{ h.firstname }} {{ h.surname }}</a></li>
+                <li><a href="{% url 'view_helper' event.url_name h.pk %}">{{ h.full_name }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}

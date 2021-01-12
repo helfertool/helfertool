@@ -45,22 +45,18 @@ if is_docker:
 
 # directories for static and media files
 if is_docker:
-    STATIC_ROOT = "static"
+    STATIC_ROOT = "/helfertool/static"
     MEDIA_ROOT = "/data/media"
     TMP_ROOT = "/data/tmp"
 else:
-    STATIC_ROOT = build_path(dict_get(config, 'static', 'files', 'static'),
-                             BASE_DIR)
-    MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'),
-                            BASE_DIR)
+    STATIC_ROOT = build_path(dict_get(config, 'static', 'files', 'static'), BASE_DIR)
+    MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'), BASE_DIR)
 
     # directory for temporary files (badges, file uploads)
-    TMP_ROOT = build_path(dict_get(config, '/tmp', 'files', 'tmp'),
-                          BASE_DIR)
+    TMP_ROOT = build_path(dict_get(config, '/tmp', 'files', 'tmp'), BASE_DIR)
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-
 
 # file permissions for newly uploaded files and directories
 FILE_UPLOAD_PERMISSIONS = 0o640
@@ -97,8 +93,9 @@ DATABASES = {
 
 # build correct relative path for sqlite (if necessary)
 if 'sqlite3' in DATABASES['default']['ENGINE']:
-    DATABASES['default']['NAME'] = build_path(DATABASES['default']['NAME'],
-                                              BASE_DIR)
+    DATABASES['default']['NAME'] = build_path(DATABASES['default']['NAME'], BASE_DIR)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # rabbitmq
 CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}/{}'.format(
@@ -495,8 +492,8 @@ GROUP_ADDEVENT = "registration_addevent"
 GROUP_SENDNEWS = "registration_sendnews"
 
 # Bootstrap config
-BOOTSTRAP4 = {
-    'required_css_class': 'required',
+BOOTSTRAP5 = {
+    'required_css_class': 'required-form',
 }
 
 # HTML sanitization for text fields
@@ -516,6 +513,10 @@ CKEDITOR_CONFIGS = {
             ['Link', 'Unlink'],
             ['Source']
         ],
+        # we want to have a responsive ckeditor:
+        # 1. set width for editor itself here
+        # 2. set width also vor div.django-ckeditor-widget via custom CSS
+        'width': '100%',
     }
 }
 
@@ -534,10 +535,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'mozilla_django_oidc',
     'axes',
-    'bootstrap4',
+    'django_bootstrap5',
     'django_icons',
     'django_select2',
     'ckeditor',
+    'compressor',
     'registration.apps.RegistrationConfig',
     'statistic.apps.StatisticConfig',
     'badges.apps.BadgesConfig',
@@ -569,9 +571,7 @@ if oidc_config:
 
 MIDDLEWARE.append('axes.middleware.AxesMiddleware')  # axes should be the last one
 
-# urls and templates
-ROOT_URLCONF = 'helfertool.urls'
-
+# templates and css/js compression
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -588,5 +588,31 @@ TEMPLATES = [
         },
     },
 ]
+
+COMPRESS_ENABLED = True  # compress also in debug mode
+COMPRESS_OFFLINE = not DEBUG or is_docker  # offline compression for prod deployments and always in docker
+COMPRESS_OUTPUT_DIR = "compressed"
+COMPRESS_FILTERS = {
+    'css': [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.CSSCompressorFilter',
+    ],
+    'js': [
+        'compressor.filters.jsmin.JSMinFilter',
+    ],
+}
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'sassc {infile} {outfile}'),
+)
+
+# urls and wsgi things
+ROOT_URLCONF = 'helfertool.urls'
 
 WSGI_APPLICATION = 'helfertool.wsgi.application'

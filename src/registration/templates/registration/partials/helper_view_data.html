@@ -1,0 +1,84 @@
+{% load i18n django_bootstrap5 %}
+
+{% comment %}
+Parameters:
+    helper
+    show_internal_comment
+    show_badge_barcode
+{% endcomment %}
+
+<div class="row">
+    <div class="col-xs-12 col-xl-6">
+        <table class="table" aria-description="{% trans "Personal data of helper" %}">
+            <tr>
+                <th scope="row" class="w-50">{% trans "Name" %}: </th>
+                <td class="w-50">{{ helper.firstname }} {{ helper.surname }}</td>
+            </tr>
+
+            <tr>
+                <th scope="row">{% trans "E-Mail" %}: </th>
+                <td>{{ helper.email }}</td>
+            </tr>
+
+            {% if helper.event.ask_phone %}
+                <tr>
+                    <th scope="row">{% trans "Mobile phone" %}: </th>
+                    <td>{{ helper.phone }}</td>
+                </tr>
+            {% endif %}
+
+            {% if helper.event.ask_shirt %}
+                <tr>
+                    <th scope="row">{% trans "T-shirt" %}: </th>
+                    <td>{{ helper.get_shirt_display }}</td>
+                </tr>
+            {% endif %}
+
+            {% if helper.needs_infection_instruction %}
+                <tr>
+                    <th scope="row">{% trans "Instruction for the handling of food" %}: </th>
+                    <td>{{ helper.get_infection_instruction_display }}</td>
+                </tr>
+            {% endif %}
+
+            {% if helper.event.ask_vegetarian %}
+                <tr>
+                    <th scope="row">{% trans "Vegetarian" %}: </th>
+                    <td>{{ helper.vegetarian | yesno }}</td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th scope="row">{% trans "Comment" %}: </th>
+                <td>{{ helper.comment | default:"-" }}</td>
+            </tr>
+
+            {% if show_internal_comment %}
+                <tr>
+                    <th scope="row">{% trans "Internal comment" %}: </th>
+                    <td>
+                        {% if helper.internal_comment %}
+                        <div class="internal-comment">
+                            {{ helper.internal_comment | linebreaksbr }}
+                        </div>
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+
+            <tr>
+                <th scope="row">{% trans "Registration time" %}: </th>
+                <td>{{ helper.timestamp }}</td>
+            </tr>
+
+            {% if show_badge_barcode and helper.event.badges %}
+                <tr>
+                    <th scope="row">{% trans "Badge Barcode" %}</th>
+                    <td>{{ helper.badge.barcode }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+</div>

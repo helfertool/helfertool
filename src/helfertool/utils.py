@@ -7,6 +7,24 @@ from django.db import connection
 
 
 def dict_get(data, default, *keys):
+    """
+    Lookup in nested dict.
+
+    Example:
+        data = {
+            "a" = 1,
+            "b" = {
+                "c": 2,
+                "d": 3,
+            }
+        }
+
+        dict_get(data, 0, "a")  # returns 1
+        dict_get(data, 0, "b", "c")  # returns 2
+        dict_get(data, 0, "c")  # returns 0 (the default value)
+
+    Used on settings.py
+    """
     try:
         for key in keys:
             data = data[key]
@@ -16,6 +34,11 @@ def dict_get(data, default, *keys):
 
 
 def build_path(path, base_dir):
+    """
+    Build the path for a settings option.
+
+    If absolute, return it. Otherwise, build it relative to the Git folder (on the level of `src`)
+    """
     if os.path.isabs(path):
         return path
     else:
@@ -35,6 +58,9 @@ def get_version(path):
 
 
 def pg_trgm_installed():
+    """
+    Check, if pg_trgm extension is installed in PostgreSQL server.
+    """
     with connection.cursor() as cursor:
         cursor.execute("select installed_version from pg_available_extensions where name='pg_trgm';")
         version = cursor.fetchone()[0]

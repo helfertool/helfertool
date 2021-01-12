@@ -10,8 +10,6 @@ from collections import OrderedDict
 from copy import deepcopy
 from datetime import datetime
 
-import math
-
 
 class Shift(models.Model):
     """ A shift of one job.
@@ -77,10 +75,9 @@ class Shift(models.Model):
 
     def __str__(self):
         if self.name:
-            return "%s, %s, %s" % (self.job.name, self.name,
-                                   self.time_with_day())
+            return "{}, {} ({})".format(self.job.name, self.time_with_day(), self.name)
         else:
-            return "%s, %s" % (self.job.name, self.time_with_day())
+            return "{}, {}".format(self.job.name, self.time_with_day())
 
     def time(self):
         """ Returns a string representation of the begin and end time.
@@ -111,6 +108,18 @@ class Shift(models.Model):
         """ Returns the day on which the shifts begins. """
         return localtime(self.begin).date()
 
+    def begin_timestamp(self):
+        """ Returns POSIX timestamp if begin data as int.
+
+        Used in template. """
+        return int(self.begin.timestamp())
+
+    def end_timestamp(self):
+        """ Returns POSIX timestamp if end data as int.
+
+        Used in template. """
+        return int(self.end.timestamp())
+
     def num_helpers(self):
         """
         Returns the current number of helpers, but 0 if event is archived.
@@ -138,23 +147,6 @@ class Shift(models.Model):
 
         num = self.num_helpers_archived()
         return int(round(float(num) / self.number * 100.0, 0))
-
-    def helpers_percent_5percent(self):
-        """
-        Returns the percentage of registered helpers in 5% steps.
-        So the returned value is between 0 and 20 (including both values).
-
-        This is used to generate the CSS class names defined in style.css.
-        Therefore, inline CSS can be avoided.
-        """
-        percent = self.helpers_percent()
-        return math.ceil(percent / 5)
-
-    def helpers_percent_vacant_5percent(self):
-        """
-        Same as `helpers_percent_5percent`, but for the missing helpers.
-        """
-        return 20 - self.helpers_percent_5percent()
 
     @property
     def shirt_sizes(self):

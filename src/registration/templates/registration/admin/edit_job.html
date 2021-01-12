@@ -1,21 +1,51 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons translation %}
 
-{% block admincontent %}
+{% block content %}
     {% if job %}
-        <h2>{% trans "Edit job" %}</h2>
-
-        <form action="{% url 'edit_job' event.url_name job.pk %}" method="post">
+        <h1>{% trans "Edit job" %}</h1>
+    {% elif duplicate_job %}
+        <h1>{% trans "Duplicate job:" %} {{ duplicate_job.name }}</h1>
     {% else %}
-        <h2>{% trans "New job" %}</h2>
-
-        <form action="{% url 'new_job' event.url_name %}" method="post">
+        <h1>{% trans "New job" %}</h1>
     {% endif %}
+
+    <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        {% get_available_languages as languages %}
+        <div class="row">
+        {% for lang, name in languages %}
+            <div class="col-lg-6">
+                {% translated_field form "name" lang as field %}
+                {% bootstrap_field field layout="floating" %}
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="row">
+            {% for lang, name in languages %}
+                <div class="col-xl-6">
+                    {% translated_field form "description" lang as field %}
+                    {% bootstrap_field field %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% bootstrap_field form.public layout="floating" %}
+
+        {% if form.infection_instruction %}
+            {% bootstrap_field form.infection_instruction layout="floating" %}
+        {% endif %}
+
+        {% if form.prerequisites %}
+            {% bootstrap_field form.prerequisites layout="floating" %}
+        {% endif %}
+
+        {% bootstrap_field form.job_admins layout="floating" %}
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}

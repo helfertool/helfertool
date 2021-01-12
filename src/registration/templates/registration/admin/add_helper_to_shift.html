@@ -1,19 +1,26 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons shifts %}
 
-{% block admincontent %}
-    <h2>{% trans "Add to shift" %}</h2>
+{% block content %}
+    <h1>{% trans "Add to shift" %}</h1>
 
-    {% if form.shifts %}
+    {% if form.possible_shifts %}
+        <div class="alert alert-primary" role="alert">
+            {% trans "Plase note: Overlapping shifts are not checked here." %}
+        </div>
+
         <form action="" method="post">
             {% csrf_token %}
 
-            {% bootstrap_form form %}
+            {% bootstrap_form_errors form %}
+
+            {% form_shifttable form.shifts %}
 
             <input type="submit" value="{% trans "Add" %}" class="btn btn-outline-primary" />
         </form>
     {% else %}
             <p class="text-muted">{% trans "There are no shifts left for which you have the permission to add helpers." %}</p>
+
+            <a href="{% url 'view_helper' event.url_name helper.pk %}" class="btn btn-outline-primary">{% icon "arrow-left" %} {% trans "Back" %}</a>
     {% endif %}
 {% endblock %}

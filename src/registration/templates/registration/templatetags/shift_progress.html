@@ -1,0 +1,12 @@
+<div class="progress">
+    {% if highlight_missing %}
+        <div class="progress-bar bg-success percent-{{ percent }}"
+        role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+
+        <div class="progress-bar {% if percent > 50 %}bg-warning{% else %}bg-danger{% endif %} percent-{{ percent_vacant }}"
+        role="progressbar" aria-valuenow="{{ percent_vacant }}" aria-valuemin="0" aria-valuemax="100"></div>
+    {% else %}
+        <div class="progress-bar {% if percent == 100 %}bg-success{% elif percent > 50 %}bg-warning{% else %}bg-danger{% endif %} percent-{{ percent }}"
+        role="progressbar" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+    {% endif %}
+</div>

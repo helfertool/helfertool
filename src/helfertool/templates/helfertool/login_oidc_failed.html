@@ -1,11 +1,10 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h1>{% trans "Login" %}</h1>
+    <div class="errorpage text-center text-muted">
+        <i class="far fa-frown-open display-1"></i>
 
-    <div class="alert alert-danger" role="alert">
-        {% trans "You are not allowed to login." %}
+        <h1 class="message">{% trans "You are not allowed to login" %}</h1>
     </div>
 {% endblock %}

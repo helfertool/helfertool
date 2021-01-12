@@ -1,0 +1,41 @@
+{% load django_bootstrap5 %}
+
+{# personal data of helper, which can also be changed in public forms #}
+
+<div class="row">
+    <div class="col-lg-6">
+        {% bootstrap_field form.firstname layout="floating" %}
+    </div>
+
+    <div class="col-lg-6">
+        {% bootstrap_field form.surname layout="floating" %}
+    </div>
+
+    <div class="col-lg-6">
+        {% bootstrap_field form.email layout="floating" %}
+    </div>
+
+    {% if form.phone %}
+        <div class="col-lg-6">
+                {% bootstrap_field form.phone layout="floating" %}
+        </div>
+    {% endif %}
+
+    {% if form.shirt %}
+        <div class="col-lg-6">
+                {% bootstrap_field form.shirt layout="floating" %}
+        </div>
+    {% endif %}
+
+    {% if form.vegetarian %}
+        <div class="col-lg-6">
+                {% bootstrap_field form.vegetarian layout="floating" %}
+        </div>
+    {% endif %}
+</div>
+
+{% if form.infection_instruction %}
+    {% bootstrap_field form.infection_instruction layout="floating" %}
+{% endif %}
+
+{% bootstrap_field form.comment layout="floating" %}

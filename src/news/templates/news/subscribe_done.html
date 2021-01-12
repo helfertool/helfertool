@@ -1,13 +1,19 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h2>{% trans "Subscribed to newsletter" %}</h2>
+    <h1>{% trans "Subscribed to newsletter" %}</h1>
 
     <p>
         {% blocktrans trimmed %}
             Thank you! We will notify you about future events.
         {% endblocktrans %}
     </p>
+
+    <p>
+        <a href="{% url "index" %}" class="btn btn-outline-primary ">
+            {% icon "list" %} {% trans "Back to all events" %}
+        </a>
+    </p>
+
 {% endblock %}

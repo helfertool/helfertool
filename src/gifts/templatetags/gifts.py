@@ -5,14 +5,14 @@ from registration.models.helpershift import HelperShift
 register = template.Library()
 
 
-@register.filter
-def lookup_helpersgifts_delivered(h, key):
-    return h['delivered_' + str(key)]
+@register.simple_tag
+def lookup_helpersgifts_delivered(form, key):
+    return form['delivered_' + str(key)]
 
 
-@register.filter
-def lookup_helpersgifts_present(h, key):
-    return h['present_' + str(key)]
+@register.simple_tag
+def lookup_helpersgifts_present(form, key):
+    return form['present_' + str(key)]
 
 
 @register.simple_tag

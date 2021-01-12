@@ -1,30 +1,33 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons permissions %}
+{% load i18n django_bootstrap5 icons permissions %}
 
-{% block admincontent %}
+{% block content %}
     {% has_access event "ACCESS_PREREQUISITES_EDIT" as user_prerequisites_edit %}
 
-    <h2 id="prerequisite-header">{% trans "Prerequisites" %}</h2>
+    <h1>{% trans "Prerequisites" %}</h1>
 
     {% if not event.archived and user_prerequisites_edit %}
     <p><a href="{% url 'prerequisites:new_prerequisite' event.url_name %}">
-        {% icon "plus" %}
-        {% trans "New prerequisite" %}
+        {% icon "plus" %} {% trans "New prerequisite" %}
     </a></p>
     {% endif %}
 
     {% if prerequisites %}
-        <table class="table" aria-describedby="prerequisite-header">
-            <tr>
-                <th scope="col" class="width-30">{% trans "Name" %}</th>
-                <th scope="col" class="width-50">{% trans "Description" %}</th>
-                <th scope="col" class="width-20"></th>
-            </tr>
+        <ul class="list-group">
             {% for prerequisite in prerequisites %}
-                <tr>
-                    <td>{{ prerequisite.name }}</td>
-                    <td>{{ prerequisite.description|truncatechars_html:60|safe }}</td>
-                    <td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {{ prerequisite.name }}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                                {{ prerequisite.description|truncatechars_html:60|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         {% if not event.archived %}
                             <a href="{% url "prerequisites:view_helpers_prerequisite" event.url_name prerequisite.pk %}">
                                 {% icon "list" %}
@@ -47,10 +50,11 @@
                                 </a>
                             {% endif %}
                         {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "There are no prerequisites." %}</p>
     {% endif %}

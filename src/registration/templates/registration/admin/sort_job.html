@@ -1,47 +1,51 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons static %}
+{% load i18n django_bootstrap5 icons static %}
 
-{% block admincontent %}
-    <h2>{% trans "Sort jobs" %}</h2>
+{% block content %}
+    <h1>{% trans "Sort jobs" %}</h1>
 
     <form action="{% url 'sort_job' event.url_name %}" method="post">
         {% csrf_token %}
 
         {{ form }}
 
-        <ul class="list-group">
-            {% for job in event.job_set.all %}
-                <li class="list-group-item clearfix">
-                    <span id="item_{{ forloop.counter }}" data-pk="{{ job.pk }}">
-                        {{ job.name }}
-                    </span>
+        <div class="row mb-3">
+            <div class="col-12 col-xl-6">
+                <ul class="list-group">
+                    {% for job in event.job_set.all %}
+                        <li class="list-group-item clearfix">
+                            <span id="item_{{ forloop.counter }}" data-pk="{{ job.pk }}">
+                                {{ job.name }}
+                            </span>
 
-                    <span class="float-right">
-                        {% if forloop.first %}
-                            <span class="btn btn-sm btn-outline-primary disabled">
-                                {% icon "chevron-up" %}
-                            </span>
-                        {% else %}
-                            <span class="btn btn-sm btn-outline-primary" onclick="handle_sort_up({{ forloop.counter }}); event.stopPropagation();">
-                                {% icon "chevron-up" %}
-                            </span>
-                        {% endif %}
+                            <span class="float-end">
+                                {% if forloop.first %}
+                                    <span class="btn btn-sm btn-outline-primary disabled">
+                                        {% icon "chevron-up" %}
+                                    </span>
+                                {% else %}
+                                    <span class="btn btn-sm btn-outline-primary" onclick="handle_sort_up({{ forloop.counter }}); event.stopPropagation();">
+                                        {% icon "chevron-up" %}
+                                    </span>
+                                {% endif %}
 
-                        {% if forloop.last %}
-                            <span class="btn btn-sm btn-outline-primary disabled">
-                                {% icon "chevron-down" %}
+                                {% if forloop.last %}
+                                    <span class="btn btn-sm btn-outline-primary disabled">
+                                        {% icon "chevron-down" %}
+                                    </span>
+                                {% else %}
+                                    <span class="btn btn-sm btn-outline-primary" onclick="handle_sort_down({{ forloop.counter }}); event.stopPropagation();">
+                                        {% icon "chevron-down" %}
+                                    </span>
+                                {% endif %}
                             </span>
-                        {% else %}
-                            <span class="btn btn-sm btn-outline-primary" onclick="handle_sort_down({{ forloop.counter }}); event.stopPropagation();">
-                                {% icon "chevron-down" %}
-                            </span>
-                        {% endif %}
-                    </span>
-                </li>
-            {% endfor %}
-        </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary mt-4" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 
     <script src="{% static "helfertool/js/sort_job.js" %}"></script>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,16 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: prerequisites/models.py:25
-#: prerequisites/templates/prerequisites/view_prerequisites.html:19
 msgid "Name"
 msgstr "Name"
 
 #: prerequisites/models.py:30
-#: prerequisites/templates/prerequisites/delete_prerequisite.html:17
-#: prerequisites/templates/prerequisites/view_prerequisites.html:20
+#: prerequisites/templates/prerequisites/delete_prerequisite.html:15
+#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:8
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -33,25 +32,33 @@ msgstr "Beschreibung"
 msgid "Helper fulfils this prerequisite"
 msgstr "Helfer erfüllt diese Voraussetzung"
 
-#: prerequisites/templates/prerequisites/delete_prerequisite.html:6
-#: prerequisites/templates/prerequisites/delete_prerequisite.html:24
+#: prerequisites/templates/prerequisites/delete_prerequisite.html:5
 msgid "Delete prerequisite"
 msgstr "Voraussetzung löschen"
 
-#: prerequisites/templates/prerequisites/delete_prerequisite.html:13
+#: prerequisites/templates/prerequisites/delete_prerequisite.html:9
+msgid "Data of prerequisite"
+msgstr "Daten der Voraussetzung"
+
+#: prerequisites/templates/prerequisites/delete_prerequisite.html:11
 msgid "Prerequisite"
 msgstr "Voraussetzung"
 
-#: prerequisites/templates/prerequisites/edit_prerequisite.html:7
+#: prerequisites/templates/prerequisites/delete_prerequisite.html:25
+#: prerequisites/templates/prerequisites/view_prerequisites.html:49
+msgid "Delete"
+msgstr "Löschen"
+
+#: prerequisites/templates/prerequisites/edit_prerequisite.html:6
 msgid "Edit prerequisite"
 msgstr "Voraussetzung bearbeiten"
 
-#: prerequisites/templates/prerequisites/edit_prerequisite.html:11
-#: prerequisites/templates/prerequisites/view_prerequisites.html:12
+#: prerequisites/templates/prerequisites/edit_prerequisite.html:8
+#: prerequisites/templates/prerequisites/view_prerequisites.html:11
 msgid "New prerequisite"
 msgstr "Neue Voraussetzung"
 
-#: prerequisites/templates/prerequisites/edit_prerequisite.html:19
+#: prerequisites/templates/prerequisites/edit_prerequisite.html:35
 msgid "Save"
 msgstr "Speichern"
 
@@ -59,12 +66,12 @@ msgstr "Speichern"
 msgid "Helper does not fulfil all prerequisites (for now)."
 msgstr "Der Helfer erfüllt (aktuell) nicht alle Voraussetzungen."
 
-#: prerequisites/templates/prerequisites/not_active.html:6
+#: prerequisites/templates/prerequisites/not_active.html:5
 #: prerequisites/templates/prerequisites/view_prerequisites.html:7
 msgid "Prerequisites"
 msgstr "Voraussetzungen"
 
-#: prerequisites/templates/prerequisites/not_active.html:9
+#: prerequisites/templates/prerequisites/not_active.html:8
 msgid "The management of prerequsites is not actived."
 msgstr "Die Verwaltung von Voraussetzungen ist nicht aktiviert."
 
@@ -72,44 +79,37 @@ msgstr "Die Verwaltung von Voraussetzungen ist nicht aktiviert."
 msgid "Helpers with prerequisite:"
 msgstr "Helfer mit Voraussetzung:"
 
-#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:13
-msgid "First name"
-msgstr "Vorname"
+#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:27
+msgid "Yes"
+msgstr "Ja"
 
-#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:14
-msgid "Surname"
-msgstr "Nachname"
+#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:29
+msgid "No"
+msgstr "Nein"
 
-#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:15
-msgid "Registration time"
-msgstr "Anmeldezeit"
+#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:31
+#, python-format
+msgid "(Registered since %(timestamp)s)"
+msgstr "(Angemeldet seit %(timestamp)s)"
 
-#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:16
-msgid "Fulfilled"
-msgstr "Erfüllt"
-
-#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:38
+#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:41
 msgid "View"
 msgstr "Anzeigen"
 
-#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:46
+#: prerequisites/templates/prerequisites/view_helpers_prerequisite.html:49
 msgid "There are no helpers registered that need this prerequisite."
 msgstr ""
 "Es sind keine Helfer angemeldet, die diese Voraussetzung erfüllen müssen."
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:31
+#: prerequisites/templates/prerequisites/view_prerequisites.html:34
 msgid "Helpers"
 msgstr "Helfer"
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:39
+#: prerequisites/templates/prerequisites/view_prerequisites.html:42
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: prerequisites/templates/prerequisites/view_prerequisites.html:46
-msgid "Delete"
-msgstr "Löschen"
-
-#: prerequisites/templates/prerequisites/view_prerequisites.html:55
+#: prerequisites/templates/prerequisites/view_prerequisites.html:59
 msgid "There are no prerequisites."
 msgstr "Es gibt keine Voraussetzungen."
 
@@ -117,6 +117,18 @@ msgstr "Es gibt keine Voraussetzungen."
 #, python-format
 msgid "Prerequisite deleted: %(name)s"
 msgstr "Voraussetzung gelöscht: %(name)s"
+
+#~ msgid "First name"
+#~ msgstr "Vorname"
+
+#~ msgid "Surname"
+#~ msgstr "Nachname"
+
+#~ msgid "Registration time"
+#~ msgstr "Anmeldezeit"
+
+#~ msgid "Fulfilled"
+#~ msgstr "Erfüllt"
 
 #~ msgid "Prerequisite already exists."
 #~ msgstr "Voraussetzung existiert bereits."

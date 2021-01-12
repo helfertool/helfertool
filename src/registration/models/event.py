@@ -228,7 +228,7 @@ class Event(models.Model):
 
     gifts = models.BooleanField(
         default=False,
-        verbose_name=_("Manage gifts for helpers"),
+        verbose_name=_("Manage gifts and presence for helpers"),
     )
 
     inventory = models.BooleanField(
@@ -276,18 +276,18 @@ class Event(models.Model):
                                          format(sizes))})
 
     def get_shirt_choices(self, internal=True):
+        """
+        Return the valid shirt sizes in the correct format for a field's choices parameter.
+
+        If internal is False, "Unknown" is not added.
+        """
         choices = []
 
         for shirt in Event.SHIRT_CHOICES:
-            if (shirt[0] == Event.SHIRT_UNKNOWN and internal) or \
-                    shirt[0] in self.shirt_sizes:
+            if (shirt[0] == Event.SHIRT_UNKNOWN and internal) or shirt[0] in self.shirt_sizes:
                 choices.append(shirt)
 
         return choices
-
-    @property
-    def public_jobs(self):
-        return self.job_set.filter(public=True)
 
     @property
     def badge_settings(self):
@@ -312,7 +312,7 @@ class Event(models.Model):
 
     @property
     def all_coordinators(self):
-        return self.helper_set.filter(job__isnull=False)
+        return self.helper_set.filter(job__isnull=False).distinct()
 
     @property
     def changes_possible(self):

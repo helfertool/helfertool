@@ -28,5 +28,5 @@ def is_job_admin(context, job):
     if not job:
         return False
 
-    # FIXME: change after job admin roles are implemented
+    # TODO: change if job admin roles are implemented
     return _check_job_role(context["user"], job, None)

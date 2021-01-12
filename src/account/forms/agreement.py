@@ -3,7 +3,7 @@ from django.conf import settings
 
 from ckeditor.widgets import CKEditorWidget
 
-from registration.forms.fields import DatePicker
+from helfertool.forms import DatePicker
 
 from ..models import Agreement, UserAgreement
 

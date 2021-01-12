@@ -1,0 +1,19 @@
+/* make ckeditor responsive (together with width in settins.py) */
+.django-ckeditor-widget {
+    width: 100%;
+}
+
+/* ckeditor would hide the error message, so show it explicitly */
+.django-ckeditor-widget + .invalid-feedback {
+    display: block;
+}
+
+/* highlight the invalid ckeditor by changing the border color */
+.is-invalid .django-ckeditor-widget .cke_chrome {
+    border-color: $danger;
+}
+
+/* and also highlight valid ckeditors by changing the border color */
+.is-valid .django-ckeditor-widget .cke_chrome {
+    border-color: $success;
+}

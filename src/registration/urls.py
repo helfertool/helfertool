@@ -62,10 +62,6 @@ urlpatterns = [
         name='deleted'),
 
     # manage event
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/manage/$',
-        views.manage_event,
-        name='manage_event'),
-
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/$',
         views.edit_event,
         name='edit_event'),

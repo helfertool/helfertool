@@ -30,7 +30,8 @@ class Link(models.Model):
 
     creator = models.ForeignKey(
         get_user_model(),
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     usage = models.CharField(

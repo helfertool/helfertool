@@ -1,0 +1,9 @@
+{% load shifts %}
+
+{% for job, shifts in jobs.items %}
+    <h2>{{ job.name }}</h2>
+
+    {% shifttable job shifts %}
+        {% form_shifttable_shift widget shift %}
+    {% endshifttable %}
+{% endfor %}

@@ -1,8 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons inventory %}
+{% load i18n django_bootstrap5 icons inventory %}
 
-{% block admincontent %}
-    <h2 id="inventory-header">{% trans "Inventory" %}: {{ inventory.name }}</h2>
+{% block content %}
+    <h1>{% trans "Inventory" %}: {{ inventory.name }}</h1>
 
     <p><a href="{% url 'inventory:new_item' inventory.pk %}">
         {% icon "plus" %}
@@ -10,19 +10,26 @@
     </a></p>
 
     {% if items %}
-        <table class="table" aria-describedby="inventory-header">
-            <tr>
-                <th scope="col">{% trans "Name" %}</th>
-                <th scope="col">{% trans "Barcode" %}</th>
-                <th scope="col">{% trans "Comment" %}</th>
-                <th scope="col"></th>
-            </tr>
+        <ul class="list-group">
             {% for item in items %}
-                <tr>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.barcode }}</td>
-                    <td>{{ item.comment|truncatechars:20|linebreaks }}</td>
-                    <td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-4 py-1 text-break">
+                                {{ item.name }}
+                            </div>
+                            <div class="col-12 col-md-4 py-1">
+                                <code>{% icon "barcode" %} {{ item.barcode }}</code>
+                            </div>
+                            {% if item.comment %}
+                            <div class="col-12 col-md-4 py-1 text-break">
+                                {{ item.comment|truncatechars:20|linebreaks }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         <a href="{% url "inventory:edit_item" inventory.pk item.pk %}">
                             {% icon "pencil-alt" %}
                             {% trans "Edit" %}
@@ -34,10 +41,11 @@
                             {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "There are no items." %}</p>
     {% endif %}

@@ -1,12 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 static %}
+{% load i18n django_bootstrap5 static %}
 
-{% block admincontent %}
-    <h2 id="badge-header">{% trans "Generate badges" %}</h2>
+{% block content %}
+    <h1>{% trans "Generate badges" %}</h1>
 
     {% if not possible %}
         <div class="alert alert-danger" role="alert">
-            {% trans "Some settings are missing to generate badges. Check the following settings:" %}
+            <p>{% trans "Some settings are missing to generate badges. Check the following settings:" %}</p>
             <ul>
                 <li>{% trans "LaTeX template" %}</li>
                 <li>{% trans "Default role" %}</li>
@@ -19,17 +19,31 @@
             {% trans "Please reload the page (due to inactivity)." %}
         </div>
 
-        <table class="table" aria-describedby="badge-header">
-            <tr>
-                <th scope="col">{% trans "Job" %}</th>
-                <th scope="col">{% trans "Generate" %}</th>
-                <th scope="col">{% trans "Warnings" %}</th>
-            </tr>
-
+        <ul class="list-group mb-3">
             {% for job in jobs %}
-                <tr>
-                    <td>{{ job.name }}</td>
-                    <td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {{ job.name }}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                                {% if job.num_warnings == 0 %}
+                                    {% trans "No warnings" %}
+                                {% else %}
+                                    <a href="{% url "badges:warnings" event.url_name job.pk %}">
+                                        {% blocktrans trimmed count counter=job.num_warnings %}
+                                            1 warning
+                                        {% plural %}
+                                            {{ counter }} warnings
+                                        {% endblocktrans %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         {% if event.badge_settings.barcodes %}
                             <a href="{% url "badges:generate_for_job" event.url_name job.pk %}">
                                 {% trans "Unregistered badges" %}
@@ -39,40 +53,36 @@
                         <a href="{% url "badges:generate_all_for_job" event.url_name job.pk %}">
                             {% trans "All badges" %}
                         </a>
-                    </td>
-                    <td>
-                        {% if job.num_warnings == 0 %}
-                            {% blocktrans trimmed with num=job.num_warnings %}
-                                {{ num }} warnings
-                            {% endblocktrans %}
-                        {% else %}
-                            <a href="{% url "badges:warnings" event.url_name job.pk %}">
-                                {% blocktrans trimmed with num=job.num_warnings %}
-                                    {{ num }} warnings
-                                {% endblocktrans %}
-                            </a>
-                        {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
 
-            <tr>
-                <td>{% trans "Special badges" %}</td>
-                <td>
-                    {% if event.badge_settings.barcodes %}
-                        <a href="{% url "badges:generate_special" event.url_name %}">
-                            {% trans "Unregistered badges" %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {% trans "Special badges" %}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                        {% if event.badge_settings.barcodes %}
+                            <a href="{% url "badges:generate_special" event.url_name %}">
+                                {% trans "Unregistered badges" %}
+                            </a>
+                            <br />
+                        {% endif %}
+                        <a href="{% url "badges:generate_all_special" event.url_name %}">
+                            {% trans "All badges" %}
                         </a>
-                        <br />
-                    {% endif %}
-                    <a href="{% url "badges:generate_all_special" event.url_name %}">
-                        {% trans "All badges" %}
-                    </a>
-                </td>
-                <td>
-                </td>
-            </tr>
-        </table>
+                    </div>
+                </div>
+            </li>
+        </ul>
 
         {% if event.badge_settings.barcodes %}
             <a href="{% url "badges:generate" event.url_name %}">

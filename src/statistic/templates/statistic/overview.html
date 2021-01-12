@@ -1,54 +1,42 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 static duration %}
+{% load i18n django_bootstrap5 static %}
 
-{% block admincontent %}
-    <h2 id="statistics-header">{% trans "Statistics" %}</h2>
+{% block content %}
+    <h1>{% trans "Statistics" %}</h1>
 
-    <table class="table" aria-describedby="statistics-header">
-        <tr>
-            <th scope="row">{% trans "Number of shift slots" %}</th>
-            <td>{{ num_shift_slots | default:"-" }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Total number of hours (also free slots)" %}</th>
-            <td>
-                {% if hours_total %}
-                    {{ hours_total | duration_hours }} {% trans "hours" %}
-                {% else %}
-                    -
-                {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <th class="col-sm-4" scope="row">{% trans "Helpers and coordinators" %}</th>
-            <td class="col-sm-8">{{ num_helpers }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Coordinators" %}</th>
-            <td>{{ num_coordinators }}</td>
-        </tr>
-        {% if event.badges %}
-        <tr>
-            <th scope="row">{% trans "Special badges" %}</th>
-            <td>{{ num_specialbadges }}</td>
-        </tr>
-        {% endif %}
+    <div class="row">
+        <div class="col-lg-6 col-xxl-4 statistics">
+            <div class="title">{% trans "People" %}</div>
+            <canvas class="chart" data-url="{% url 'statistic:chart_helpers' event.url_name %}" data-empty="helpers_empty"></canvas>
+            <div id="helpers_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
+            <div class="details">{% trans "Total number of people" %}: {{ num_people }}</div>
+        </div>
+
+        <div class="col-lg-6 col-xxl-4 statistics">
+            <div class="title">{% trans "Shifts" %}</div>
+            <canvas class="chart" data-url="{% url 'statistic:chart_shifts' event.url_name %}" data-empty="shifts_empty"></canvas>
+            <div id="shifts_empty" class="placeholder d-none">{% trans "There are no shifts." %}</div>
+            <div class="details">{% trans "Total number of shift slots" %}: {{ num_shift_slots }}</div>
+        </div>
+
         {% if event.ask_vegetarian %}
-            <tr>
-                <th scope="row">{% trans "Vegetarians" %}</th>
-                <td>{{ num_vegetarians }}</td>
-            </tr>
+        <div class="col-lg-6 col-xxl-4 statistics">
+            <div class="title">{% trans "Vegetarians" %}</div>
+            <canvas class="chart" data-url="{% url 'statistic:chart_eating_habits' event.url_name %}" data-empty="eating_habits_empty"></canvas>
+            <div id="eating_habits_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
+        </div>
         {% endif %}
-        <tr>
-            <th scope="row">{% trans "Number of empty shift slots" %}</th>
-            <td>{{ num_empty_shift_slots | default:"-" }}</td>
-        </tr>
-    </table>
+    </div>
 
-    <h3>{% trans "Chronological development of registrations" %}</h3>
-
-    <canvas class="chart" width="400" height="200" data-url="{% url 'statistic:chart_timeline' event.url_name %}" data-empty="overview_empty"></canvas>
-    <p id="overview_empty" class="text-muted d-none">{% trans "No helpers are registered." %}</p>
+    <div class="row">
+        <div class="col-12 statistics">
+            <div class="title">{% trans "Timeline of registrations" %}</div>
+            <div class="timeline-wrapper">
+                <canvas class="chart" data-url="{% url 'statistic:chart_timeline' event.url_name %}" data-empty="overview_empty"></canvas>
+            </div>
+            <p id="overview_empty" class="text-muted d-none">{% trans "There are no helpers." %}</p>
+        </div>
+    </div>
 
     <script src="{% static "helfertool/js/chart.js" %}"></script>
 {% endblock %}

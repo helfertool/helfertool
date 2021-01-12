@@ -1,15 +1,27 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Special badges" %}</h2>
+{% block content %}
+    {% if form.instance.pk %}
+        <h1>{% trans "Edit special badge" %}</h1>
+    {% else %}
+        <h1>{% trans "New special badge" %}</h1>
+    {% endif %}
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Continue" %}" class="btn btn-outline-primary" />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.name layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.number layout="floating" %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "arrow-right" %} {% trans "Continue" %}</button>
     </form>
 {% endblock %}

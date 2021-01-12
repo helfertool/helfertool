@@ -1,13 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Search helper" %}</h2>
+{% block content %}
+    <h1>{% trans "Search helper" %}</h1>
 
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {% bootstrap_form form layout="floating" %}
 
         <p class="text-muted">
             {% blocktrans %}You can use first name, surname, email or phone number of the helper.{% endblocktrans %}
@@ -17,24 +16,27 @@
             {% endif %}
         </p>
 
-        <input type="submit" value="{% trans "Search" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "search" %} {% trans "Search" %}</button>
     </form>
 
     {% if not new_search %}
-        <h3>{% trans "Result" %}</h3>
+        <h2 class="mt-3">{% trans "Found helpers" %}</h2>
         {% if result %}
-            <ul>
+            <ul class="list-group">
                 {% for helper in result %}
-                    <li>
-                        <a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a>
+                    <li class="list-group-item">
+                        <a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a><br/>
+
+                        {{ helper.all_jobs|join:', ' }}
+
                         {% if event.badges and event.badge_settings.barcodes and event.inventory %}
-                            ({% trans "Barcode" %}: {{ helper.badge.barcode }})
+                            <span class="text-muted float-end">{% trans "Barcode" %}: {{ helper.badge.barcode }}</span>
                         {% endif %}
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p class="text-danger">{% trans "No results found" %}</p>
+            <p class="text-muted">{% trans "No results found" %}</p>
         {% endif %}
     {% endif %}
 {% endblock %}

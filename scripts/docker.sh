@@ -49,7 +49,7 @@ elif [ "$git_branch" = "dev" ] ; then
 else
     # other branch: build is fine, but do not push
     echo "Current branch is $git_branch. Docker container must not be pushed!"
-    docker_tag="$git_branch"
+    docker_tag="$(echo "$git_branch" | tr '/' '-')"
     docker_prevent_push=1
 fi
 
@@ -68,9 +68,8 @@ if [ "$action" = "build" ] ; then
         -t "$docker_name:$docker_tag" .
 elif [ "$action" = "fastbuild" ] ; then
     # build with cache, as fast as possible
-    container_version="$(date --utc --iso-8601=seconds)"
     docker build \
-        --build-arg CONTAINER_VERSION="$container_version" \
+        --build-arg CONTAINER_VERSION="fastbuild" \
         -t "$docker_name:$docker_tag" .
 
     echo ""

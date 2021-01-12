@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,87 +38,99 @@ msgstr "Installation überprüfen"
 msgid "Helfertool"
 msgstr "Helfertool"
 
-#: toolsettings/templates/toolsettings/check.html:11
+#: toolsettings/templates/toolsettings/check.html:10
+msgid "Status of Helfertool"
+msgstr "Status des Helfertools"
+
+#: toolsettings/templates/toolsettings/check.html:12
 msgid "Version"
 msgstr "Version"
 
-#: toolsettings/templates/toolsettings/check.html:15
+#: toolsettings/templates/toolsettings/check.html:16
 msgid "Container:"
 msgstr "Container:"
 
-#: toolsettings/templates/toolsettings/check.html:20
+#: toolsettings/templates/toolsettings/check.html:21
 #: toolsettings/templates/toolsettings/templates.html:5
 msgid "Templates"
 msgstr "Templates"
 
-#: toolsettings/templates/toolsettings/check.html:31
+#: toolsettings/templates/toolsettings/check.html:34
 msgid "External services"
 msgstr "Externe Dienste"
 
-#: toolsettings/templates/toolsettings/check.html:35
+#: toolsettings/templates/toolsettings/check.html:37
+msgid "Status of external services"
+msgstr "Status der externen Dienste"
+
+#: toolsettings/templates/toolsettings/check.html:39
 msgid "Mail"
 msgstr "E-Mail"
 
-#: toolsettings/templates/toolsettings/check.html:46
+#: toolsettings/templates/toolsettings/check.html:50
 msgid "RabbitMQ"
 msgstr "RabbitMQ"
 
-#: toolsettings/templates/toolsettings/check.html:57
+#: toolsettings/templates/toolsettings/check.html:61
 msgid "LDAP"
 msgstr "LDAP"
 
-#: toolsettings/templates/toolsettings/check.html:72
+#: toolsettings/templates/toolsettings/check.html:76
 msgid "Search for similar names"
 msgstr "Suche nach ähnlichen Namen"
 
-#: toolsettings/templates/toolsettings/check.html:83
+#: toolsettings/templates/toolsettings/check.html:89
 msgid "Header"
 msgstr "Header"
 
-#: toolsettings/templates/toolsettings/check.html:98
+#: toolsettings/templates/toolsettings/check.html:92
+msgid "Status of HTTP headers"
+msgstr "Status der HTTP Header"
+
+#: toolsettings/templates/toolsettings/check.html:105
 msgid "Remote IP"
 msgstr "Remote IP"
 
-#: toolsettings/templates/toolsettings/check.html:106
+#: toolsettings/templates/toolsettings/check.html:113
 msgid "X-Forwarded-For is set to different value"
 msgstr "X-Forwarded-For hat einen anderen Wert"
 
-#: toolsettings/templates/toolsettings/template_about.html:6
+#: toolsettings/templates/toolsettings/template_about.html:5
 msgid "Template: About this software"
 msgstr "Template: Über diese Software"
 
-#: toolsettings/templates/toolsettings/template_about.html:13
-#: toolsettings/templates/toolsettings/template_add_user.html:13
-#: toolsettings/templates/toolsettings/template_login.html:13
-#: toolsettings/templates/toolsettings/template_privacy.html:27
+#: toolsettings/templates/toolsettings/template_about.html:20
+#: toolsettings/templates/toolsettings/template_add_user.html:20
+#: toolsettings/templates/toolsettings/template_login.html:20
+#: toolsettings/templates/toolsettings/template_privacy.html:56
 msgid "Save"
 msgstr "Speichern"
 
-#: toolsettings/templates/toolsettings/template_add_user.html:6
+#: toolsettings/templates/toolsettings/template_add_user.html:5
 msgid "Template: Add user"
 msgstr "Template: Nutzer hinzufügen"
 
-#: toolsettings/templates/toolsettings/template_login.html:6
+#: toolsettings/templates/toolsettings/template_login.html:5
 msgid "Template: Login page"
 msgstr "Template: Login Seite"
 
-#: toolsettings/templates/toolsettings/template_privacy.html:6
+#: toolsettings/templates/toolsettings/template_privacy.html:5
 msgid "Template: Privacy statements"
 msgstr "Template: Datenschutzerklärung"
 
-#: toolsettings/templates/toolsettings/template_privacy.html:11
+#: toolsettings/templates/toolsettings/template_privacy.html:12
 msgid "Event (HTML)"
 msgstr "Veranstaltung (HTML)"
 
-#: toolsettings/templates/toolsettings/template_privacy.html:14
+#: toolsettings/templates/toolsettings/template_privacy.html:22
 msgid "Event (Plaintext for mail)"
 msgstr "Veranstaltung (Plaintext für E-Mail)"
 
-#: toolsettings/templates/toolsettings/template_privacy.html:18
+#: toolsettings/templates/toolsettings/template_privacy.html:33
 msgid "Newsletter (together with event registration)"
 msgstr "Newsletter (beim Anmelden zu einer Veranstaltung)"
 
-#: toolsettings/templates/toolsettings/template_privacy.html:23
+#: toolsettings/templates/toolsettings/template_privacy.html:45
 msgid "Newsletter (subscription without event registration)"
 msgstr "Newsletter (Abonnement ohne Anmeldung zu einer Veranstaltung)"
 

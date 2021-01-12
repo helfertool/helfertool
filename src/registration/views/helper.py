@@ -192,15 +192,15 @@ def add_helper(request, event_url_name, shift_pk):
         return nopermission(request)
 
     # get all shifts of this job
-    all_shifts = Shift.objects.filter(job=shift.job)
+    shifts_qs = Shift.objects.filter(job=shift.job)
 
-    form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
-                        selected_shifts=[shift, ], internal=True)
+    form = RegisterForm(request.POST or None, event=event, shifts_qs=shifts_qs, preselected_shifts=[shift, ],
+                        is_internal=True)
 
     if form.is_valid():
         helper = form.save()
 
-        shiftids = [s.pk for s in all_shifts]
+        shiftids = [s.pk for s in helper.shifts.all()]
         logger.info("helper created", extra={
             'user': request.user,
             'event': event,
@@ -279,7 +279,8 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
 
     # render page
     context = {'event': event,
-               'form': form}
+               'form': form,
+               'helper': helper}
     return render(request, 'registration/admin/add_helper_to_shift.html',
                   context)
 
@@ -293,8 +294,7 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
     if not has_access_event_or_job(request.user, event, None, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
-    form = HelperAddCoordinatorForm(request.POST or None, helper=helper,
-                                    user=request.user)
+    form = HelperAddCoordinatorForm(request.POST or None, helper=helper, user=request.user)
 
     if form.is_valid():
         form.save()
@@ -306,12 +306,12 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
             'helper': helper,
         })
 
-        return HttpResponseRedirect(reverse('view_helper',
-                                            args=[event_url_name, helper.pk]))
+        return HttpResponseRedirect(reverse('view_helper', args=[event_url_name, helper.pk]))
 
     # render page
     context = {'event': event,
-               'form': form}
+               'form': form,
+               'helper': helper}
     return render(request, 'registration/admin/add_helper_as_coordinator.html',
                   context)
 

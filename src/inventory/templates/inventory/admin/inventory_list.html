@@ -1,8 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons inventory %}
+{% load i18n django_bootstrap5 icons inventory %}
 
-{% block admincontent %}
-    <h2 id="inventory-header">{% trans "Inventory" %}</h2>
+{% block content %}
+    <h1 id="inventory-header">{% trans "Inventory" %}</h1>
 
     <p><a href="{% url 'inventory:new_inventory' %}">
         {% icon "plus" %}
@@ -10,23 +10,25 @@
     </a></p>
 
     {% if inventories %}
-        <table class="table" aria-describedby="inventory-header">
-            <tr>
-                <th scope="col">{% trans "Name" %}</th>
-                <th scope="col">{% trans "Admins" %}</th>
-                <th scope="col"></th>
-            </tr>
+        <ul class="list-group">
             {% for inventory in inventories %}
-                <tr>
-                    <td>{{ inventory.name }}</td>
-                    <td>
-                        <ul>
-                            {% for admin in inventory.admins.all %}
-                                <li>{{ admin.get_full_name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {{ inventory.name }}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                                <ul class="reset-list">
+                                    {% for admin in inventory.admins.all %}
+                                        <li>{{ admin.get_full_name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         {% is_inventory_admin inventory as is_admin %}
                         {% if is_admin %}
                             <a href="{% url "inventory:inventory_items" inventory.pk %}">
@@ -49,10 +51,11 @@
                                 {% trans "Delete" %}
                             </a>
                         {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "There is no inventory." %}</p>
     {% endif %}

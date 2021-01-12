@@ -37,8 +37,9 @@ def shirts(request, event_url_name):
     size_names = [name for size, name in shirt_choices]
 
     # collect data
+    # size -> {"all": 40, "coordinators": 10}
     total_shirts = OrderedDict()
-    coordinator_shirts = OrderedDict()
+
     job_shirts = OrderedDict()
 
     # different data sources depending on archive flag
@@ -47,7 +48,7 @@ def shirts(request, event_url_name):
         try:
             archive_data = EventArchive.objects.get(event=event, key="shirts", version=1).data
             for size, name in shirt_choices:
-                total_shirts.update({name: archive_data.get(size, 0)})
+                total_shirts.update({name: {"all": archive_data.get(size, 0), "coordinators": None}})
         except EventArchive.DoesNotExist:
             # no data archived -> no output
             pass
@@ -74,8 +75,7 @@ def shirts(request, event_url_name):
                 except Helper.DoesNotExist:
                     pass
 
-                total_shirts.update({name: num_total})
-                coordinator_shirts.update({name: num_coordinator})
+                total_shirts.update({name: {"all": num_total, "coordinators": num_coordinator}})
 
         # for each job
         for job in event.job_set.all():
@@ -99,6 +99,5 @@ def shirts(request, event_url_name):
     context = {'event': event,
                'size_names': size_names,
                'total_shirts': total_shirts,
-               'coordinator_shirts': coordinator_shirts,
                'job_shirts': job_shirts}
     return render(request, 'statistic/shirts.html', context)

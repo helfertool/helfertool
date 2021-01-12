@@ -1,9 +1,8 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h2>{% trans "Unsubscribe from newsletter" %}</h2>
+    <h1>{% trans "Unsubscribe from newsletter" %}</h1>
 
     {% if person %}
         <p>
@@ -14,7 +13,7 @@
 
         <form action="" method="post">
             {% csrf_token %}
-            <input type="submit" value="{% trans "Unsubscribe" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary">{% icon "trash-alt" %} {% trans "Unsubscribe" %}</button>
         </form>
     {% else %}
         <p>

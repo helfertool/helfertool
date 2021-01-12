@@ -1,16 +1,15 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Merge duplicates" %}</h2>
+{% block content %}
+    <h1>{% trans "Merge duplicates" %}</h1>
 
     {% if error %}
         <div class="alert alert-danger" role="alert">
             {% trans "Cannot merge helpers which have the same shift." %}
         </div>
     {% elif form %}
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-secondary" role="alert">
             {% trans "You have to select one data set, the others are deleted. You can also skip some entries and keep them as duplicates." %}
 
             <br/><br/>
@@ -24,33 +23,39 @@
             {% bootstrap_form_errors form %}
 
             {% for helper in form.helpers %}
-                {# select this helper as remaining #}
-                <input id="helper_selection_{{ forloop.counter0 }}"
-                       name="helpers_selection"
-                       required="required"
-                       type="radio"
-                       value="{{ helper.pk }}"
-                       class="mt-4"
-                />
-                <label for="helper_selection_{{ forloop.counter0 }}">
-                    {% trans "Keep this data" %}
-                </label>
+                <div class="mb-4">
+                    {# select this helper as remaining #}
+                    <div class="form-check form-check-inline">
+                        <input id="helper_selection_{{ forloop.counter0 }}"
+                            name="helpers_selection"
+                            required="required"
+                            type="radio"
+                            value="{{ helper.pk }}"
+                            class="form-check-input"
+                        />
+                        <label class="form-check-label" for="helper_selection_{{ forloop.counter0 }}">
+                            {% trans "Keep this data" %}
+                        </label>
+                    </div>
 
-                {# ignore this helper #}
-                <input id="helper_ignore_{{ forloop.counter0 }}"
-                    name="helpers_ignore"
-                    type="checkbox"
-                    value="{{ helper.pk }}"
-                    class="mt-4 ml-2"
-                />
-                <label for="helper_ignore_{{ forloop.counter0 }}">
-                    {% trans "Ignore this helper" %}
-                </label>
+                    {# ignore this helper #}
+                    <div class="form-check form-check-inline">
+                        <input id="helper_ignore_{{ forloop.counter0 }}"
+                            name="helpers_ignore"
+                            type="checkbox"
+                            value="{{ helper.pk }}"
+                            class="form-check-input"
+                        />
+                        <label class="form-check-label" for="helper_ignore_{{ forloop.counter0 }}">
+                            {% trans "Ignore this helper" %}
+                        </label>
+                    </div>
 
-                {% include "registration/helper_data.html" with helper=helper show_badge_barcode=True show_internal_comment=True %}
+                    {% include "registration/partials/helper_view_data.html" with helper=helper show_badge_barcode=True show_internal_comment=True %}
+                </div>
             {% endfor %}
 
-            <input type="submit" value="{% trans "Merge" %}" class="btn btn-outline-primary mt-3" />
+            <button type="submit" class="btn btn-outline-primary">{% icon "compress" %} {% trans "Merge" %}</button>
         </form>
     {% else %}
         <div class="alert alert-warning" role="alert">

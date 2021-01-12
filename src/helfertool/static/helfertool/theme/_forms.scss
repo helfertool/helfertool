@@ -1,0 +1,10 @@
+/* required fields in forms (class is set by django-bootstrap5) */
+.required-form > label::after {
+    content: "*";
+    color: $primary;
+}
+
+/* textareas with floating labels have the same height as input fields, so we increase it here */
+.form-floating > textarea.form-control {
+    height: 15rem;
+}

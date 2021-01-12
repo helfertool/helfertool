@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: news/forms/mail.py:21
 msgid "Language"
@@ -26,7 +26,7 @@ msgstr "Sprache"
 msgid "Add English text"
 msgstr "Englischen Text hinzufügen"
 
-#: news/forms/mail.py:33 news/templates/news/send.html:19
+#: news/forms/mail.py:33
 msgid "Subject"
 msgstr "Betreff"
 
@@ -98,7 +98,7 @@ msgstr ""
 msgid "Remove recipient"
 msgstr "Empfänger entfernen"
 
-#: news/templates/news/remove.html:12
+#: news/templates/news/remove.html:14
 msgid "Remove"
 msgstr "Entfernen"
 
@@ -110,7 +110,7 @@ msgstr "Newsletter versenden"
 msgid "Number of recipients:"
 msgstr "Anzahl der Empfänger:"
 
-#: news/templates/news/send.html:50
+#: news/templates/news/send.html:55
 msgid "Send"
 msgstr "Senden"
 
@@ -126,30 +126,34 @@ msgstr "Datenschutzerklärung"
 msgid "Subscribe"
 msgstr "Eintragen"
 
-#: news/templates/news/subscribe_done.html:6
+#: news/templates/news/subscribe_done.html:5
 msgid "Subscribed to newsletter"
 msgstr "Newsletter abonniert"
 
-#: news/templates/news/subscribe_done.html:9
+#: news/templates/news/subscribe_done.html:8
 msgid "Thank you! We will notify you about future events."
 msgstr "Danke! Wir werden dich über zukünftige Veranstaltungen informieren."
 
-#: news/templates/news/unsubscribe.html:6
+#: news/templates/news/subscribe_done.html:15
+msgid "Back to all events"
+msgstr "Zurück zu allen Veranstaltungen"
+
+#: news/templates/news/unsubscribe.html:5
 msgid "Unsubscribe from newsletter"
 msgstr "Vom Newsletter abmelden"
 
-#: news/templates/news/unsubscribe.html:10
+#: news/templates/news/unsubscribe.html:9
 #, python-format
 msgid "Do not send further mails about upcoming events to %(email)s?"
 msgstr ""
 "Keine weiteren E-Mails über bevorstehende Veranstaltungen an %(email)s "
 "senden?"
 
-#: news/templates/news/unsubscribe.html:17
+#: news/templates/news/unsubscribe.html:16
 msgid "Unsubscribe"
 msgstr "Austragen"
 
-#: news/templates/news/unsubscribe.html:21
+#: news/templates/news/unsubscribe.html:20
 msgid "This mail address was already deleted."
 msgstr "Diese E-Mail Adresse wurde bereits gelöscht."
 

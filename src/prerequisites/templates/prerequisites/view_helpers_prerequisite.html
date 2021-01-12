@@ -1,47 +1,50 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons prerequisites static %}
+{% load i18n django_bootstrap5 icons prerequisites static %}
 
-{% block admincontent %}
-    <h2>{% trans "Helpers with prerequisite:" %} {{ prerequisite.name }}</h2>
+{% block content %}
+    <h1>{% trans "Helpers with prerequisite:" %} {{ prerequisite.name }}</h1>
 
-    <div id="prerequisite-description">{{ prerequisite.description|safe }}</div>
+    {% if prerequisite.description %}
+    <p class="fw-bold mb-0">{% trans "Description" %}:</p>
+    <div>
+        {{ prerequisite.description|safe }}
+    </div>
+    {% endif %}
 
     {% if helpers %}
-        <table class="table" aria-describedby="prerequisite-description">
-            <thead>
-                <tr>
-                    <th scope="col">{% trans "First name" %}</th>
-                    <th scope="col">{% trans "Surname" %}</th>
-                    <th scope="col">{% trans "Registration time" %}</th>
-                    <th scope="col">{% trans "Fulfilled" %}</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for helper in helpers|dictsort:"surname" %}
-                <tr>
-                    <td>{{ helper.firstname }}</td>
-                    <td>{{ helper.surname }}</td>
-                    <td data-order="{{ helper.timestamp|date:"U" }}" >{{ helper.timestamp }}</td>
-
-                    {% helper_has_fulfilled_prerequisite helper prerequisite as fulfilled %}
-                    <td data-order="{{ fulfilled }}" >
-                        {% if fulfilled %}
-                            <span class="text-success">{% icon "check" %}</span>
-                        {% else %}
-                            <span class="text-danger">{% icon "times" %}</span>
-                        {% endif %}
-                    </td>
-                    <td>
+        <ul class="list-group">
+            {% for helper in helpers %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-5 py-1 text-break">
+                                {{ helper.full_name }}
+                            </div>
+                            <div class="col-12 col-md-7 py-1">
+                                {% helper_has_fulfilled_prerequisite helper prerequisite as fulfilled %}
+                                {% if fulfilled %}
+                                    <span class="text-success">{% icon "check" %} {% trans "Yes" %}</span>
+                                {% else %}
+                                    <span class="text-danger">{% icon "times" %} {% trans "No" %}</span>
+                                    <span class="text-muted">
+                                        {% blocktrans trimmed with timestamp=helper.timestamp %}
+                                        (Registered since {{ timestamp }})
+                                        {% endblocktrans %}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         <a href="{% url "view_helper" event.url_name helper.pk %}">
-                            {% icon "eye" %}
-                            {% trans "View" %}
+                            {% icon "search" %} {% trans "View" %}
                         </a>
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-            </tbody>
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "There are no helpers registered that need this prerequisite." %}</p>
     {% endif %}

@@ -1,12 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons static permissions %}
+{% load i18n django_bootstrap5 icons static permissions %}
 
-{% block admincontent %}
-    <h2>
+{% block content %}
+    <h1>
         {% blocktrans trimmed with jobname=job.name%}
             Helpers for {{ jobname }}
         {% endblocktrans %}
-    </h2>
+    </h1>
 
     {% has_access job "ACCESS_EVENT_EXPORT_HELPERS" as user_event_export_helpers %}
     {% has_access job "ACCESS_JOB_EDIT_HELPERS" as user_job_edit_helpers %}
@@ -14,99 +14,135 @@
 
     {# export #}
     {% if user_event_export_helpers %}
-        <p>
-            {% icon "file-download" %}
-            <strong class="mr-2">{% trans "Export" %}:</strong>
-            <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon mr-2">
-                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
-            </a>
-            <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
-                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
-            </a>
-        </p>
+        <button type="button" class="btn btn-outline-primary mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#exportdata">
+            {% icon "download" %} {% trans "Export data" %}
+        </button>
+
+        <div class="modal fade" id="exportdata" tabindex="-1" aria-labelledby="exportdata-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exportdata-label">
+                            {% blocktrans trimmed with jobname=job.name %}
+                                Export data for {{ jobname }}
+                            {% endblocktrans %}
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                {% trans "All days" %}
+
+                                <div class="float-end">
+                                    <a href="{% url 'export_job' event.url_name 'excel' job.pk %}" class="icon mr-2">
+                                        <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
+                                    </a>
+                                    <a href="{% url 'export_job' event.url_name 'pdf' job.pk %}" class="icon">
+                                        <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
+                                    </a>
+                                </div>
+                            </li>
+
+                            {% for day, shifts in shifts_by_day %}
+                                {% with day_str=day|date:"Y-m-d" %}
+                                <li class="list-group-item">
+                                    {{ day }}
+
+                                    <div class="float-end">
+                                        <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon mr-2">
+                                            <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
+                                        </a>
+                                        <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
+                                            <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
+                                        </a>
+                                    </div>
+                                </li>
+                                {% endwith %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "Close" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
 
     {# jump labels #}
     {% if shifts_by_day %}
         <p>
-            <em class="fas fa-link"></em>
             {% for day, shifts in shifts_by_day %}
-                <a href="#{{ day | date:"Ymd" }}">{{ day }}</a>&nbsp;
+                <a href="#{{ day | date:"Ymd" }}" class="btn btn-sm btn-outline-primary my-1">{% icon "link" %} {{ day }}</a>&nbsp;
             {% endfor %}
         </p>
     {% endif %}
 
     {# coordinators #}
-    <h3>{% trans "Coordinators" %}</h3>
-    {% if job.coordinators.count == 0 %}
-        <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
-    {% else %}
-        {% include "registration/admin/helpers_table.html" with event=event job=job helpers=job.coordinators.all can_view=user_helper_view can_delete=user_job_edit_helpers %}
+    <h2 class="m-0">{% trans "Coordinators" %}</h2>
+    {% if user_job_edit_helpers %}
+        <p class="mt-3">
+            <a href="{% url 'add_coordinator' event.url_name job.pk %}">
+                {% icon "plus" %}
+                {% trans "Add coordinator" %}
+            </a>
+        </p>
     {% endif %}
 
-    {% if user_job_edit_helpers %}
-    <p>
-        <a href="{% url 'add_coordinator' event.url_name job.pk %}">
-            {% icon "plus" %}
-            {% trans "Add coordinator" %}
-        </a>
-    </p>
-    {% endif %}
+    <div class="mb-4">
+        {% if job.coordinators.count == 0 %}
+            <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
+        {% else %}
+            {% include "registration/partials/helpers_table.html" with event=event job=job helpers=job.coordinators.all can_view=user_helper_view can_delete=user_job_edit_helpers %}
+        {% endif %}
+    </div>
 
     {# iterate over days #}
     {% for day, shifts in shifts_by_day %}
-        <h3 id="{{ day | date:"Ymd" }}">{{ day }}</h3>
-
-        {% if user_event_export_helpers %}
-        <p>
-            {% with day_str=day|date:"Y-m-d" %}
-                {% icon "file-download" %}
-                <strong class="mr-2">{% blocktrans with day=day %}Export for {{ day }}{% endblocktrans %}:</strong>
-                <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon mr-2">
-                    <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
-                </a>
-                <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
-                    <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
-                </a>
-            {% endwith %}
-        </p>
-        {% endif %}
+        <h2 id="{{ day | date:"Ymd" }}">{{ day }}</h2>
 
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
-            <h4>{{ shift.time_hours }}
-                {% blocktrans trimmed with current=shift.num_helpers total=shift.number %}
-                    ({{ current }} of {{ total }})
-                {% endblocktrans %}
-                {% if shift.name %}
-                    <br/ >{{ shift.name }}
+            <h3 class="m-0">{{ shift.time_hours }}
+                <span class="badge badge-outline-secondary ms-1">
+                    {% blocktrans trimmed with current=shift.num_helpers total=shift.number %}
+                        {{ current }} of {{ total }}
+                    {% endblocktrans %}
+                </span>
+            </h3>
+            {% if shift.name %}
+                <p class="text-muted text-break fs-4 m-0">{{ shift.name }}</p>
+            {% endif %}
+
+            <p class="mt-3">
+                {% if user_job_edit_helpers %}
+                    {% if shift.is_full %}
+                        <span class="me-3 my-2 text-nowrap text-muted">
+                            {% icon "plus" %}
+                            {% trans "Add helper" %}
+                        </span>
+                    {% else %}
+                        <a href="{% url 'add_helper' event.url_name shift.pk %}" class="me-3 my-2 text-nowrap">
+                            {% icon "plus" %}
+                            {% trans "Add helper" %}
+                        </a>
+                    {% endif %}
                 {% endif %}
-            </h4>
 
-            {% if event.gifts and user_manages_presence %}
-            <p>
-                <a href="{% url "gifts:set_present" event.url_name shift.pk %}">
-                    {% icon "check-square" %} {% trans "Set presence for complete shift" %}
-                </a>
-            </p>
-            {% endif %}
-
-            {% if shift.helper_set.count == 0 %}
-                <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
-            {% else %}
-                {% include "registration/admin/helpers_table.html" with event=event job=job shift=shift helpers=shift.helper_set.all can_view=user_helper_view can_delete=user_job_edit_helpers %}
-            {% endif %}
-
-            {% if not shift.is_full and user_job_edit_helpers %}
-                <p>
-                    <a href="{% url 'add_helper' event.url_name shift.pk %}">
-                        {% icon "plus" %}
-                        {% trans "Add helper" %}
+                {% if event.gifts and user_manages_presence %}
+                    <a href="{% url "gifts:set_present" event.url_name shift.pk %}" class="my-2 text-nowrap">
+                        {% icon "check-square" %} {% trans "Set presence for complete shift" %}
                     </a>
-               </p>
-           {% endif %}
+                {% endif %}
+            </p>
+
+            <div class="mb-4">
+                {% if shift.helper_set.count == 0 %}
+                    <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>
+                {% else %}
+                    {% include "registration/partials/helpers_table.html" with event=event job=job shift=shift helpers=shift.helper_set.all can_view=user_helper_view can_delete=user_job_edit_helpers %}
+                {% endif %}
+            </div>
         {% endfor %}
     {% endfor %}
-
-    <script src="{% static "helfertool/js/helpers_table.js" %}"></script>
 {% endblock %}

@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.db.models.functions import Greatest
 from django.utils.translation import ugettext_lazy as _
 
+from .widgets import ShiftTableWidget
 from ..models import Helper, Shift, Job
 from ..permissions import has_access, ACCESS_HELPER_VIEW, ACCESS_JOB_EDIT_HELPERS
 from badges.models import Badge
@@ -99,16 +100,17 @@ class HelperAddShiftForm(forms.Form):
         # all administered shifts
         administered_jobs = [job for job in event.job_set.all()
                              if has_access(self.user, job, ACCESS_JOB_EDIT_HELPERS)]
-        shifts = Shift.objects.filter(job__event=event,
-                                      job__in=administered_jobs)
+        shifts = Shift.objects.filter(job__event=event, job__in=administered_jobs)
 
         # exclude already taken shifts
-        shifts = shifts.exclude(id__in=self.helper.shifts.all())
+        self.possible_shifts = shifts.exclude(id__in=self.helper.shifts.all())
 
         # add field
         self.fields['shifts'] = forms.ModelMultipleChoiceField(
-            widget=forms.CheckboxSelectMultiple,
-            queryset=shifts, required=True)
+            widget=ShiftTableWidget,
+            queryset=self.possible_shifts,
+            required=True,
+        )
 
     def clean(self):
         super(HelperAddShiftForm, self).clean()
@@ -145,12 +147,12 @@ class HelperAddCoordinatorForm(forms.Form):
                 if has_access(self.user, job, ACCESS_JOB_EDIT_HELPERS) and job not in coordinated_jobs]
 
         # we need a queryset
-        jobs = Job.objects.filter(pk__in=jobs)
+        self.possible_jobs = Job.objects.filter(pk__in=jobs)
 
         # add field
         self.fields['jobs'] = forms.ModelMultipleChoiceField(
             widget=forms.CheckboxSelectMultiple,
-            queryset=jobs, required=True)
+            queryset=self.possible_jobs, required=True)
 
     def save(self, commit=True):
         for job in self.cleaned_data.get('jobs'):
