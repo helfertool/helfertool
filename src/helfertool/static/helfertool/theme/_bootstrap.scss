@@ -1,0 +1,27 @@
+// do not use native fonts
+$font-family-base: "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+// make everything a little bit smaller
+$font-size-base: 0.95rem;
+
+// do not unterline links
+$link-decoration: none;
+
+// navbar height
+$navbar-height: 5rem;
+
+// navbar text colors
+$navbar-dark-color: $primary-text;
+$navbar-dark-hover-color: rgba($primary-text, .75);
+$navbar-dark-active-color: $primary-text;
+$navbar-dark-disabled-color: rgba($primary-text, .25);
+
+$navbar-nav-link-padding-x: 0.7rem;
+
+// do not user darker colors for alert texts
+$alert-bg-scale:                -80%;
+$alert-border-scale:            -70%;
+$alert-color-scale:             -100%;
+
+// now include bootstrap
+@import "bootstrap/scss/bootstrap";

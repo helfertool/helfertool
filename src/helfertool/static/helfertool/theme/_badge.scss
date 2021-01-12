@@ -1,0 +1,7 @@
+@each $state, $value in $theme-colors {
+    .badge-outline-#{$state} {
+        color: $value;
+        background-color: $body-bg;
+        border: 1px solid $value;
+    }
+}

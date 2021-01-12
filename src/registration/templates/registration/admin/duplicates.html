@@ -1,10 +1,10 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Duplicates" %}</h2>
+{% block content %}
+    <h1>{% trans "Duplicates" %}</h1>
 
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-secondary" role="alert">
         {% trans "For this detection of helpers that are registered multiple times only the mail address is used." %}
     </div>
 

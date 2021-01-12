@@ -1,12 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 translation %}
+{% load i18n django_bootstrap5 icons translation %}
 
-{% block admincontent %}
+{% block content %}
     {# edit/new #}
     {% if event %}
-        <h2>{% trans "Edit event" %}</h2>
+        <h1>{% trans "Edit event" %}</h1>
     {% else %}
-        <h2>{% trans "New event" %}</h2>
+        <h1>{% trans "New event" %}</h1>
     {% endif %}
 
     <form action="" method="post" enctype="multipart/form-data">
@@ -18,59 +18,123 @@
             </div>
         {% endif %}
 
-        <h3>{% trans "General" %}</h3>
-        {% bootstrap_field form.name %}
-        {% bootstrap_field form.url_name %}
-        {% bootstrap_field form.date %}
-        {% bootstrap_field form.days %}
-        {% bootstrap_field form.email %}
+        <h2>{% trans "General" %}</h2>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.name layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.url_name layout="floating" %}
+            </div>
+        </div>
 
-        <h3>{% trans "Registration" %}</h3>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.date layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6 align-self-center">
+                {% bootstrap_field form.days layout="floating" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.email layout="floating" %}
+            </div>
+        </div>
+
+        <h2>{% trans "Registration" %}</h2>
         {% bootstrap_field form.active %}
         {% bootstrap_field form.mail_validation %}
         {% bootstrap_field form.show_public_numbers %}
-        {% bootstrap_field form.changes_until %}
-        {% bootstrap_field form.max_overlapping %}
 
-        <h3>{% trans "Texts" %}</h3>
-        {% get_available_languages as languages %}
-        <ul class="nav nav-tabs" id="texts" role="tablist">
-            {% for lang, name in languages %}
-                <li class="nav-item">
-                    <a class="nav-link {% if forloop.first %}active{% endif %}"
-                       id="texts-{{ lang }}" href="#{{ lang }}" data-toggle="tab" role="tab"
-                       aria-controls="{{ lang }}" aria-selected="true">{{ name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-        <div class="tab-content" id="texts-content">
-            {% for lang, name in languages %}
-                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ lang }}" role="tabpanel" aria-labelledby="texts-{{ lang }}">
-                    {% translated_field form "text" lang as field %}
-                    {% bootstrap_field field %}
-
-                    {% translated_field form "imprint" lang as field %}
-                    {% bootstrap_field field %}
-
-                    {% translated_field form "registered" lang as field %}
-                    {% bootstrap_field field %}
-                </div>
-            {% endfor %}
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.max_overlapping layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.changes_until layout="floating" %}
+            </div>
         </div>
 
-        <h3>{% trans "Logos" %}</h3>
-        {% bootstrap_field form.logo %}
-        {% bootstrap_field form.logo_social %}
+        <h2>{% trans "Texts" %}</h2>
+        <ul class="nav nav-tabs mb-2" id="texts-tabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="texts-tabs-registration" data-bs-toggle="tab"data-bs-target="#texts-registration"
+                        type="button" role="tab" aria-controls="texts-registration" aria-selected="true">
+                    {% trans "Text before registration" %}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="texts-tabs-registered" data-bs-toggle="tab"data-bs-target="#texts-registered"
+                        type="button" role="tab" aria-controls="texts-registered" aria-selected="false">
+                    {% trans "Text after registration" %}
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="texts-tabs-imprint" data-bs-toggle="tab"data-bs-target="#texts-imprint"
+                        type="button" role="tab" aria-controls="texts-imprint" aria-selected="false">
+                    {% trans "Contact" %}
+                </button>
+            </li>
+        </ul>
 
-        <h3>{% trans "Requested helper data" %}</h3>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="texts-registration" role="tabpanel" aria-labelledby="texts-tabs-registration">
+                <div class="row">
+                    {% get_available_languages as languages %}
+                    {% for lang, name in languages %}
+                        <div class="col-lg-6">
+                            {% translated_field form "text" lang as field %}
+                            {% bootstrap_field field %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="texts-registered" role="tabpanel" aria-labelledby="texts-tabs-registered">
+                <div class="row">
+                    {% get_available_languages as languages %}
+                    {% for lang, name in languages %}
+                        <div class="col-lg-6">
+                            {% translated_field form "registered" lang as field %}
+                            {% bootstrap_field field %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="texts-imprint" role="tabpanel" aria-labelledby="texts-tabs-imprint">
+                <div class="row">
+                    {% get_available_languages as languages %}
+                    {% for lang, name in languages %}
+                        <div class="col-lg-6">
+                            {% translated_field form "imprint" lang as field %}
+                            {% bootstrap_field field %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <h2>{% trans "Logos" %}</h2>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.logo %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.logo_social %}
+            </div>
+        </div>
+
+        <h2>{% trans "Requested helper data" %}</h2>
         {% bootstrap_field form.ask_full_age %}
         {% if form.ask_news %}
             {% bootstrap_field form.ask_news %}
         {% endif %}
         {% bootstrap_field form.ask_vegetarian %}
         {% bootstrap_field form.ask_phone %}
-        {% bootstrap_field form.ask_shirt %}
 
+        {% bootstrap_field form.ask_shirt %}
+        <div class="ms-4">
         {% if not event or event.ask_shirt %}
             {% bootstrap_field form.shirt_sizes %}
 
@@ -79,9 +143,10 @@
                 <div class="text-danger">{{ text }}</div>
             {% endfor %}
         {% endif %}
+        </div>
 
         {% if form.badges or form.gifts or form.prerequisites or form.inventory %}
-            <h3>{% trans "Features" %}</h3>
+            <h2>{% trans "Features" %}</h2>
             {% if form.badges %}
                 {% bootstrap_field form.badges %}
             {% endif %}
@@ -99,62 +164,59 @@
             {% endif %}
         {% endif %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 
     {# duplicate and move #}
     {% if event %}
-        <h3>{% trans "Duplicate event" %}</h3>
-        <div class="alert alert-info" role="alert">
+        <h2 class="mt-4">{% trans "Duplicate event" %}</h2>
+        <div class="alert alert-dark" role="alert">
             <strong>{% trans "You can duplicate this event." %}</strong>
-
             <br/>
-
+            {% trans "All settings are copied to the new event, but personal data is not." %}
+            <br/>
             <a href="{% url 'duplicate_event' event.url_name %}" class="btn btn-outline-primary mt-3" role="button">
-                {% trans "Duplicate event" %}
+                {% icon "copy" %} {% trans "Duplicate event" %}
             </a>
         </div>
 
-        <h3>{% trans "Move event" %}</h3>
-        <div class="alert alert-info" role="alert">
+        <h2>{% trans "Move event" %}</h2>
+        <div class="alert alert-dark" role="alert">
             <strong>{% trans "You can move this event." %}</strong>
-
             <br/>
-
+            {% trans "The event with all shifts is moved to a new date." %}
+            <br/>
             <a href="{% url 'move_event' event.url_name %}" class="btn btn-outline-primary mt-3" role="button">
-                {% trans "Move event" %}
+                {% icon "arrow-right" %} {% trans "Move event" %}
             </a>
         </div>
     {% endif %}
 
     {# archive #}
     {% if event and not event.archived %}
-        <h3>{% trans "Archive event" %}</h3>
+        <h2>{% trans "Archive event" %}</h2>
         <div class="alert alert-danger" role="alert">
             <strong>{% trans "You can archive this event, this means that all coordinators and helpers are deleted." %}</strong>
-
             <br/>
-
-            {% trans "Only the number of registered helpers per shift and the number of coordinators are saved. All other data like shirt sizes are deleted irrevocably." %}
-
+            {% blocktrans trimmed %}
+                The number of registered helpers per shift and the number of coordinators are saved.
+                All personal data will be deleted irrevocably.
+            {% endblocktrans %}
             <br/>
-
             <a href="{% url 'archive_event' event.url_name %}" class="btn btn-outline-danger mt-3" role="button">
-                {% trans "Archive event" %}
+                {% icon "archive" %} {% trans "Archive event" %}
             </a>
         </div>
     {% endif %}
 
     {# delete #}
     {% if event %}
-        <h3>{% trans "Delete event" %}</h3>
+        <h2>{% trans "Delete event" %}</h2>
         <div class="alert alert-danger" role="alert">
             <strong>{% trans "You can delete this event including all jobs, shifts and helpers." %}</strong>
-
             <br/>
-
             <a href="{% url 'delete_event' event.url_name %}" class="btn btn-outline-danger mt-3" role="button">
-                {% trans "Delete event" %}
+                {% icon "trash-alt" %} {% trans "Delete event" %}
             </a>
         </div>
     {% endif %}

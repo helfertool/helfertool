@@ -1,30 +1,37 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Edit user" %}</h2>
+{% block content %}
+    <h1>{% trans "Edit user" %}</h1>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form_errors form %}
+        <div class="row">
+            <div class="col-lg-12">
+                {% bootstrap_form_errors form %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-xl-6">
+                <h2>{% trans "Personal data" %}</h2>
+                {% bootstrap_field form.first_name layout="floating" %}
+                {% bootstrap_field form.last_name layout="floating" %}
+                {% bootstrap_field form.email layout="floating" %}
 
-        <h3>{% trans "Personal data" %}</h3>
-        {% bootstrap_field form.first_name %}
-        {% bootstrap_field form.last_name %}
-        {% bootstrap_field form.email %}
+                <h2>{% trans "Account status" %}</h2>
+                {% bootstrap_field form.is_active %}
 
-        <h3>{% trans "Account status" %}</h3>
-        {% bootstrap_field form.is_active %}
+                <h2>{% trans "Permissions" %}</h2>
+                {% bootstrap_field form.is_superuser %}
+                {% bootstrap_field form.perm_addevent %}
+                {% bootstrap_field form.perm_adduser %}
+                {% if form.perm_sendnews %}
+                    {% bootstrap_field form.perm_sendnews %}
+                {% endif %}
 
-        <h3>{% trans "Permissions" %}</h3>
-        {% bootstrap_field form.is_superuser %}
-        {% bootstrap_field form.perm_addevent %}
-        {% bootstrap_field form.perm_adduser %}
-        {% if form.perm_sendnews %}
-            {% bootstrap_field form.perm_sendnews %}
-        {% endif %}
-
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+                <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
+            </div>
+        </div>
     </form>
 {% endblock %}

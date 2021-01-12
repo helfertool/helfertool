@@ -1,15 +1,14 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="badges-header">{% trans "Advanced badge settings" %}</h2>
+{% block content %}
+    <h1>{% trans "Advanced badge settings" %}</h1>
 
     <div class="alert alert-info" role="alert">
         {% trans "Changes of most of this settings require an update of the LaTeX template!" %}
     </div>
 
-    <h3>{% trans "Template" %}</h3>
-
+    <h2>{% trans "Template" %}</h2>
     <p>
         {% trans "Here you can get the sample LaTeX template:" %}
         <a href="{% url 'badges:default_template' event.url_name %}">{% trans "Download" %}</a>
@@ -18,31 +17,65 @@
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form_errors form %}
+
+        {% bootstrap_field form.latex_template layout="floating" %}
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.columns layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.rows layout="floating" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.coordinator_title layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.helper_title layout="floating" %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.shift_format layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.language layout="floating" %}
+            </div>
+        </div>
+
+        {% bootstrap_field form.shift_no_names layout="floating" %}
+        {% bootstrap_field form.only_coordinators layout="floating" %}
+        {% bootstrap_field form.barcodes layout="floating" %}
 
         {% if not event.archived %}
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary mb-3">{% icon "save" %} {% trans "Save" %}</button>
         {% endif %}
     </form>
 
-
-    <h3>{% trans "Permissions" %}</h3>
-
+    <h2>{% trans "Permissions" %}</h2>
     {% if permissions.count == 0 %}
         <p class="text-muted">{% trans "There are no permissions." %}</p>
     {% else %}
-        <table class="table" aria-describedby="badges-header">
-            <tr class="d-flex">
-                <th class="col-5" scope="col">{% trans "Name" %}</th>
-                <th class="col-5" scope="col">{% trans "LaTeX Name" %}</th>
-                <th class="col-2" scope="col"></th>
-            </tr>
-
+        <ul class="list-group mb-3">
             {% for perm in permissions %}
-                <tr class="d-flex">
-                    <td class="col-5">{{ perm.name }}</td>
-                    <td class="col-5">{{ perm.latex_name }}</td>
-                    <td class="col-2">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {{ perm.name }}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                                <code>{% icon "tag" %} {{ perm.latex_name }}</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         {% if not event.archived %}
                             <a href="{% url 'badges:edit_permission' event.url_name perm.pk %}">
                                 {% icon "pencil-alt" %} {% trans "Edit" %}
@@ -52,10 +85,11 @@
                                 {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
                         {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% endif %}
 
     {% if not event.archived %}

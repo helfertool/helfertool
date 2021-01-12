@@ -1,3 +1,6 @@
+/*
+ * Overlapping shifts
+ */
 var max_overlapping = parseInt($('#register_form').data('max-overlapping'));
 
 function update_shift_registration(input_field) {
@@ -20,8 +23,6 @@ function update_shift_registration(input_field) {
 
             // now disable the input field
             e.disabled = true;
-            $(e.parentNode).addClass('colliding');
-            $(e.parentNode).removeClass('notcolliding');
         }
     } else {
         // the user has removed a shift selection, enable the colliding shifts again
@@ -39,8 +40,6 @@ function update_shift_registration(input_field) {
             // and the check if we have other ones
             if ($.isEmptyObject($(e).data('colliders'))) {
                 e.disabled = false;
-                $(e.parentNode).removeClass('colliding');
-                $(e.parentNode).addClass('notcolliding');
             }
         }
     }
@@ -69,7 +68,6 @@ function update_shift_registration(input_field) {
             modifier(other_field);
         }
     });
-
 }
 
 // update and register event handler for every field
@@ -80,7 +78,10 @@ $('input.registration_possible').each(function (i, element) {
     });
 });
 
-/* Infection instruction field */
+/*
+ * infection instruction
+ */
+
 function handle_infection_instruction()
 {
     var show_field = 0;
@@ -101,4 +102,12 @@ function handle_infection_instruction()
         $("#id_infection_instruction").parent().hide()
 }
 
+// register event handler
+$('input.infection_instruction').each(function (i, element) {
+    $(this).change(function () {
+        handle_infection_instruction();
+    });
+});
+
+// and run it directly
 handle_infection_instruction();

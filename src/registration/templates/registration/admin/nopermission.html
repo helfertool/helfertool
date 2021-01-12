@@ -1,8 +1,12 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
+{% load i18n django_bootstrap5 icons setting %}
 
 {% block content %}
-    <h1>{% trans "No permission" %}</h1>
+    <div class="errorpage text-center text-muted">
+        <i class="far fa-frown-open display-1"></i>
 
-    <p>{% trans "You have no permission to view this page!" %}</p>
+        <h1 class="message">{% trans "No permission" %}</h1>
+
+        <p class="code">{% trans "You have no permission to view this page!" %}</p>
+    </div>
 {% endblock %}

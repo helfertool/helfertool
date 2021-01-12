@@ -1,0 +1,8 @@
+{% load i18n %}
+
+{% if event.imprint %}
+    <div class="contact mt-5">
+        <p><strong>{% trans "Contact" %}</strong></p>
+        {{ event.imprint | safe }}
+    </div>
+{% endif %}

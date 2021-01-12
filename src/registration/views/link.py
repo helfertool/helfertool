@@ -50,8 +50,7 @@ def edit_link(request, event_url_name, link_pk=None):
             raise Http404()
 
     # form
-    form = LinkForm(request.POST or None, instance=link, event=event,
-                    creator=request.user)
+    form = LinkForm(request.POST or None, instance=link, event=event, creator=request.user)
 
     if form.is_valid():
         link = form.save()
@@ -69,7 +68,8 @@ def edit_link(request, event_url_name, link_pk=None):
 
     # render page
     context = {'event': event,
-               'form': form}
+               'form': form,
+               'link': link}
     return render(request, 'registration/admin/edit_link.html', context)
 
 

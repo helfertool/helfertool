@@ -1,40 +1,41 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons badges %}
+{% load i18n django_bootstrap5 icons badges %}
 
-{% block admincontent %}
-    <h2 id="badge-header">{% trans "Badge settings" %}</h2>
+{% block content %}
+    <h1>{% trans "Badge settings" %}</h1>
 
     <p>
         <a href="{% url 'badges:settings_advanced' event.url_name %}">
-            {% trans "Advanced settings" %}
+            {% icon "angle-double-right" %} {% trans "Advanced settings" %}
         </a>
     </p>
 
-    <h3>{% trans "Roles" %}</h3>
-
+    <h2>{% trans "Roles" %}</h2>
     {% if roles.count == 0 %}
         <p class="text-muted">{% trans "There are no roles." %}</p>
     {% else %}
-        <table class="table" aria-describedby="badge-header">
-            <tr class="d-flex">
-                <th class="col-3" scope="col">{% trans "Name" %}</th>
-                <th class="col-3" scope="col">{% trans "LaTeX Name" %}</th>
-                <th class="col-4" scope="col">{% trans "Permissions" %}</th>
-                <th class="col-2" scope="col"></th>
-            </tr>
-
+        <ul class="list-group mb-3">
             {% for role in roles %}
-                <tr class="d-flex">
-                    <td class="col-3">{{ role.name }}</td>
-                    <td class="col-3">{{ role.latex_name }}</td>
-                    <td class="col-4">
-                        <ul>
-                            {% for perm in role.permissions.all %}
-                                <li>{{ perm.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td class="col-2">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-4 py-1 text-break">
+                                {{ role.name }}
+                            </div>
+                            <div class="col-12 col-md-4 py-1">
+                                <ul class="reset-list">
+                                    {% for perm in role.permissions.all %}
+                                        <li>{{ perm.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-12 col-md-4 py-1 text-break">
+                                <code>{% icon "tag" %} {{ role.latex_name }}</code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         {% if not event.archived %}
                             <a href="{% url 'badges:edit_role' event.url_name role.pk %}">
                                 {% icon "pencil-alt" %} {% trans "Edit" %}
@@ -44,10 +45,11 @@
                                 {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
                         {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% endif %}
 
     {% if not event.archived %}
@@ -58,22 +60,18 @@
         </p>
     {% endif %}
 
-    <h3 id="designs-header">{% trans "Designs" %}</h3>
-
+    <h2>{% trans "Designs" %}</h2>
     {% if designs.count == 0 %}
         <p class="text-muted">{% trans "There are no designs." %}</p>
     {% else %}
-        <table class="table" aria-describedby="designs-header">
-            <tr class="d-flex">
-                <th class="col-10" scope="col">{% trans "Name" %}</th>
-                <th class="col-2" scope="col"></th>
-            </tr>
-
+        <ul class="list-group mb-3">
             {% for design in designs %}
-                <tr class="d-flex">
-                    <td class="col-10">{{ design.name }}</td>
-
-                    <td class="col-2">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        {{ design.name }}
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         {% if not event.archived %}
                             <a href="{% url 'badges:edit_design' event.url_name design.pk %}">
                                 {% icon "pencil-alt" %} {% trans "Edit" %}
@@ -83,10 +81,11 @@
                                 {% icon "trash-alt" %} {% trans "Delete" %}
                             </a>
                         {% endif %}
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% endif %}
 
     {% if not event.archived %}
@@ -97,45 +96,49 @@
         </p>
     {% endif %}
 
-
-    <h3 id="defaults-header">{% trans "Defaults" %}</h3>
+    <h2>{% trans "Defaults" %}</h2>
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form defaults_form %}
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field defaults_form.role layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field defaults_form.design layout="floating" %}
+            </div>
+        </div>
 
-        <table class="table" aria-describedby="defaults-header">
-            <tr class="d-flex">
-                <th class="col-3" scope="col">{% trans "Job" %}</th>
-                <th class="col-3" scope="col">{% trans "Role" %}</th>
-                <th class="col-3" scope="col">{% trans "Design" %}</th>
-                <th class="col-3" scope="col">{% trans "Print no default role" %}</th>
-            </tr>
+        {% if event.job_set %}
+            <ul class="list-group mb-3">
+                {% for job in event.job_set.all %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-12 col-md-3 my-1">
+                            {{ job.name }}
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                            {% badge_job_role_field job_defaults_form job.pk as field %}
+                            {% bootstrap_field field layout="floating" %}
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                            {% badge_job_design_field job_defaults_form job.pk as field %}
+                            {% bootstrap_field field layout="floating" %}
+                        </div>
+                        <div class="col-12 col-md-3 my-1">
+                            {% badge_job_no_def_role_field job_defaults_form job.pk as field %}
+                            {% bootstrap_field field layout="floating" %}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-            {% for job in event.job_set.all %}
-                <tr class="d-flex">
-                    <td class="col-3">{{ job.name }}</td>
-                    <td class="col-3">
-                        {% badge_job_role_field job_defaults_form job.pk as field %}
-                        {% bootstrap_field field show_label=False %}
-                    </td>
-                    <td class="col-3">
-                        {% badge_job_design_field job_defaults_form job.pk as field %}
-                        {% bootstrap_field field show_label=False %}
-                    </td>
-                    <td class="col-3">
-                        {% badge_job_no_def_role_field job_defaults_form job.pk as field %}
-                        {% bootstrap_field field show_label=False %}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-
-        {% bootstrap_form_errors job_defaults_form %}
         {% bootstrap_form_errors job_defaults_form %}
 
         {% if not event.archived %}
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
         {% endif %}
     </form>
 {% endblock %}

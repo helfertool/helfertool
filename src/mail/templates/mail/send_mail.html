@@ -1,15 +1,33 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 static %}
+{% load i18n django_bootstrap5 icons static %}
 
-{% block admincontent %}
-    <h2>{% trans "Send mails" %}</h2>
+{% block content %}
+    <h1>{% trans "Send mails" %}</h1>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
+        {% bootstrap_field form.receiver layout="floating" %}
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.reply_to layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.custom_reply_to layout="floating" %}
+            </div>
+        </div>
+
+        {% bootstrap_field form.cc layout="floating" %}
+
+        <div class="mt-5">
+            {% bootstrap_field form.subject layout="floating" %}
+            {% bootstrap_field form.text layout="floating" %}
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "paper-plane" %} {% trans "Send" %}</button>
     </form>
 
     <script src="{% static "helfertool/js/mail_reply_to.js" %}"></script>

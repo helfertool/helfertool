@@ -2,91 +2,104 @@
 
 {% setting "FEATURES_NEWSLETTER" as features_newsletter %}
 {% setting "FEATURES_INVENTORY" as features_inventory %}
+<nav id="sidemenu">
+    <div class="sidemenu-header">{% trans "Settings" %}</div>
 
-<h2>{% trans "General" %}</h2>
-<ul class="nav flex-column">
-    <li class="nav-item">
-        <a class="nav-link" href="{% url "account:view_user" %}">{% trans "My account" %}</a>
-    </li>
-
-    {% if user.is_superuser or user|has_addevent_group %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'new_event' %}">{% trans "New event" %}</a>
-        </li>
-    {% endif %}
-
-    {% if user.is_superuser %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'past_events' %}">{% trans "Past events" %}</a>
-    </li>
-    {% endif %}
-
-    {% if features_inventory %}
-    {% if user.is_superuser or user|is_inventory_admin_any %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'inventory:inventory_list' %}">{% trans "Inventory" %}</a>
-        </li>
-    {% endif %}
-    {% endif %}
-
-    <li class="nav-item">
-        <a class="nav-link" href="{% url "help:create_issue" %}">{% trans "Support" %}</a>
-    </li>
-</ul>
-
-{% if user.is_superuser or user|has_adduser_group %}
-    <h2>{% trans "User management" %}</h2>
     <ul class="nav flex-column">
+        <li class="nav-item">
+            <p class="sidemenu-section">{% trans "General" %}</p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="{% url "account:view_user" %}" class="nav-link">{% trans "My account" %}</a>
+                </li>
+
+                {% if user.is_superuser or user|has_addevent_group %}
+                <li class="nav-item">
+                    <a href="{% url 'new_event' %}" class="nav-link">{% trans "New event" %}</a>
+                </li>
+                {% endif %}
+
+                {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a href="{% url 'past_events' %}" class="nav-link">{% trans "Past events" %}</a>
+                </li>
+                {% endif %}
+
+                {% if features_inventory %}
+                {% if user.is_superuser or user|is_inventory_admin_any %}
+                    <li class="nav-item">
+                        <a href="{% url 'inventory:inventory_list' %}" class="nav-link">{% trans "Inventory" %}</a>
+                    </li>
+                {% endif %}
+                {% endif %}
+
+                <li class="nav-item">
+                    <a href="{% url "help:create_issue" %}" class="nav-link">{% trans "Support" %}</a>
+                </li>
+            </ul>
+        </li>
+
         {% if user.is_superuser or user|has_adduser_group %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'account:add_user' %}">{% trans "Add user" %}</a>
-            </li>
+        <li class="nav-item">
+            <p class="sidemenu-section">{% trans "User management" %}</p>
+            <ul class="nav flex-column">
+                {% if user.is_superuser or user|has_adduser_group %}
+                <li class="nav-item">
+                    <a href="{% url 'account:add_user' %}" class="nav-link">{% trans "Add user" %}</a>
+                </li>
+                {% endif %}
+
+                {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a href="{% url 'account:list_users' %}" class="nav-link">{% trans "All users" %}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'account:list_agreements' %}" class="nav-link">{% trans "User agreements" %}</a>
+                </li>
+                {% endif %}
+            </ul>
+        </li>
+        {% endif %}
+
+        {% if features_newsletter %}
+        {% if user.is_superuser or user|has_sendnews_group %}
+        <li class="nav-item">
+            <p class="sidemenu-section">{% trans "Newsletter" %}</p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="{% url 'news:send' %}" class="nav-link">{% trans "Send news" %}</a>
+                </li>
+
+                {% if user.is_superuser %}
+                    <li class="nav-item">
+                        <a href="{% url 'news:remove' %}" class="nav-link">{% trans "Remove recipient" %}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+        {% endif %}
         {% endif %}
 
         {% if user.is_superuser %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'account:list_users' %}">{% trans "All users" %}</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'account:list_agreements' %}">{% trans "User agreements" %}</a>
-            </li>
+        <li class="nav-item">
+            <p class="sidemenu-section">{% trans "Settings" %}</p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="{% url "toolsettings:templates" %}" class="nav-link">{% trans "Templates" %}</a>
+                </li>
+        
+                <li class="nav-item">
+                    <a href="{% url "toolsettings:check" %}" class="nav-link">{% trans "Check installation" %}</a>
+                </li>
+        
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a href="{% url 'admin:index' %}" class="nav-link">{% trans "Django Admin Interface" %}</a>
+                </li>
+                {% endif %}
+            </ul>
+        </li>
         {% endif %}
     </ul>
-{% endif %}
-
-{% if features_newsletter %}
-{% if user.is_superuser or user|has_sendnews_group %}
-    <h2>{% trans "Newsletter" %}</h2>
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'news:send' %}">{% trans "Send news" %}</a>
-        </li>
-        {% if user.is_superuser %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'news:remove' %}">{% trans "Remove recipient" %}</a>
-            </li>
-        {% endif %}
-    </ul>
-{% endif %}
-{% endif %}
-
-{% if user.is_superuser %}
-    <h2>{% trans "Settings" %}</h2>
-
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="{% url "toolsettings:templates" %}">{% trans "Templates" %}</a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="{% url "toolsettings:check" %}">{% trans "Check installation" %}</a>
-        </li>
-
-        {% if user.is_staff %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'admin:index' %}">{% trans "Django Admin Interface" %}</a>
-            </li>
-        {% endif %}
-    </ul>
-{% endif %}
+</nav>

@@ -10,9 +10,9 @@ from copy import deepcopy
 
 import os
 
+from helfertool.forms import DatePicker
 from toolsettings.forms import SingleUserSelectWidget
 
-from .fields import DatePicker
 from ..models import Event, EventAdminRoles, EventArchive
 from toollog.models import LogEntry
 
@@ -30,7 +30,7 @@ class EventForm(forms.ModelForm):
         # According to the documentation django-modeltranslations copies the
         # widget from the original field.
         # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
-        # Therefore set it manually...
+        # Therefore set it manually...        for w in ('text', 'imprint', 'registered'):
         for w in ('text', 'imprint', 'registered'):
             for lang, name in settings.LANGUAGES:
                 widgets["{}_{}".format(w, lang)] = CKEditorWidget()
@@ -38,6 +38,7 @@ class EventForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
 
+        # disable most fields if event is archived
         if self.instance.archived:
             for field_id in self.fields:
                 if field_id != "url_name":
@@ -58,6 +59,13 @@ class EventForm(forms.ModelForm):
             self.fields.pop('prerequisites')
         if not settings.FEATURES_INVENTORY:
             self.fields.pop('inventory')
+
+        # change labels of ckeditor fields: We only want to have the language name as label
+        # everything else is in the template.
+        for field in ('text', 'imprint', 'registered'):
+            if field in self.fields:
+                for lang, name in settings.LANGUAGES:
+                    self.fields["{}_{}".format(field, lang)].label = name
 
 
 class EventAdminRolesForm(forms.ModelForm):

@@ -40,15 +40,22 @@ class BadgeJobDefaultsForm(forms.Form):
         # add fields for each job
         for job in self.event.job_set.all():
             self.fields['job_%d_design' % job.pk] = forms.ModelChoiceField(
-                queryset=designs, required=False,
-                initial=job.badge_defaults.design)
+                queryset=designs,
+                required=False,
+                initial=job.badge_defaults.design,
+                label=_("Design"),
+            )
             self.fields['job_%d_role' % job.pk] = forms.ModelChoiceField(
-                queryset=roles, required=False,
-                initial=job.badge_defaults.role)
+                queryset=roles,
+                required=False,
+                initial=job.badge_defaults.role,
+                label=_("Role"),
+            )
             self.fields['job_%d_no_def_role' % job.pk] = forms.BooleanField(
                 initial=job.badge_defaults.no_default_role,
                 required=False,
-                label=_("No default role"))
+                label=_("Print no default role"),
+            )
 
         if self.event.archived:
             for field_id in self.fields:

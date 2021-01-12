@@ -1,42 +1,44 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="helper-header">{% trans "Delete helper" %}</h2>
+{% block content %}
+    <h1>{% trans "Delete helper" %}</h1>
 
     <form action="" method="post">
+        <div class="row">
+            <div class="col-xs-12 col-xl-6">
+                <table class="table" aria-description="{% trans 'Data of helper' %}">
+                    <tr>
+                        <th scope="row">{% trans "Name" %}</th>
+                        <td>{{ helper.full_name }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{% trans "Mail" %}</th>
+                        <td>{{ helper.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{% trans "Shifts" %}</th>
+                        <td>
+                            {% bootstrap_field form.shifts show_label=False %}
+                        </td>
+                    </tr>
+                </table>
+
+                {% if helper.shifts.count > 1 and not show_all_shifts %}
+                    <div class="alert alert-info" role="alert">
+                        <p>{% trans "There are more shifts for this helper." %}</p>
+                        <a class="btn btn-sm btn-outline-primary" href="{% url 'delete_helper_all' event.url_name helper.pk shift.pk %}">
+                            {% trans "Show" %}
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="alert alert-danger" role="alert">{% trans "Remove the helper from all selected shifts?" %}</div>
+            </div>
+        </div>
+
         {% csrf_token %}
-
         {% bootstrap_form_errors form %}
-
-        <table class="table" aria-describedby="helper-header">
-            <tr>
-                <th scope="row">{% trans "Name" %}</th>
-                <td>{{ helper.full_name }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{% trans "Mail" %}</th>
-                <td>{{ helper.email }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{% trans "Shifts" %}</th>
-                <td>
-                    {% bootstrap_field form.shifts show_label=False %}
-                </td>
-            </tr>
-        </table>
-
-        {% if helper.shifts.count > 1 and not show_all_shifts %}
-            <p>
-                {% trans "There are more shifts for this helper." %}
-                <a href="{% url 'delete_helper_all' event.url_name helper.pk shift.pk %}">
-                    {% trans "Show" %}</a>.
-            </p>
-        {% endif %}
-
-        <div class="alert alert-danger" role="alert">{% trans "Remove the helper from all selected shifts?" %}</div>
-
-        <input type="submit" value="{% trans "Delete" %}" class="btn btn-danger" />
+        <button type="submit" class="btn btn-outline-danger">{% icon "trash-alt" %} {% trans "Delete" %}</button>
     </form>
 {% endblock %}

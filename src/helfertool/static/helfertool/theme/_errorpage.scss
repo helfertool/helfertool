@@ -1,0 +1,27 @@
+.errorpage {
+    margin-top: 3rem;
+
+    .message {
+        margin-top: 1.5rem;
+    }
+
+    .code {
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+    }
+    
+    .additional {
+        margin-top: -2rem;
+        margin-bottom: 3rem;
+
+        font-weight: bold;
+    }
+
+    .link {
+        margin-top: 1.5rem;
+    }
+
+    .link a {
+        width: 20rem;
+    }
+}

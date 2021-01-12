@@ -73,11 +73,11 @@ def form(request, event_url_name, link_pk=None):
 
     # get link if given
     link = None
-    all_shifts = None
+    shifts_qs = None
     if link_pk:
         try:
             link = Link.objects.get(pk=link_pk)
-            all_shifts = link.shifts.all()
+            shifts_qs = link.shifts.all()
         except (Link.DoesNotExist, ValidationError):
             # show some message when link does not exist
             context = {'event': event}
@@ -100,8 +100,7 @@ def form(request, event_url_name, link_pk=None):
             return nopermission(request)
 
     # handle form
-    form = RegisterForm(request.POST or None, event=event, shifts=all_shifts,
-                        link=link is not None)
+    form = RegisterForm(request.POST or None, event=event, shifts_qs=shifts_qs, is_link=link is not None)
 
     if form.is_valid():
         helper = form.save()
@@ -143,9 +142,6 @@ def validate(request, event_url_name, helper_id):
     if not event.mail_validation:
         raise Http404()
 
-    # already validated?
-    already_validated = helper.validated
-
     # validate
     helper.validated = True
     helper.save()
@@ -156,7 +152,7 @@ def validate(request, event_url_name, helper_id):
     })
 
     context = {'event': event,
-               'already_validated': already_validated}
+               'helper': helper}
     return render(request, 'registration/validate.html', context)
 
 

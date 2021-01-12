@@ -50,12 +50,15 @@ def view_user(request, user_pk=None):
     else:
         user = request.user
 
+    # handle own and other user differently
+    is_own_user = request.user == user
+
     # only superusers can view/change other users
-    if not request.user.is_superuser and request.user != user:
+    if not request.user.is_superuser and not is_own_user:
         return nopermission(request)
 
     # superusers do not need to enter the old password, except for the own account
-    if request.user.is_superuser and request.user != user:
+    if request.user.is_superuser and not is_own_user:
         pw_form_class = SetPasswordForm
     else:
         pw_form_class = PasswordChangeForm
@@ -84,6 +87,7 @@ def view_user(request, user_pk=None):
 
     context = {
         "changed_user": user,
+        "is_own_user": is_own_user,
         "pw_form": pw_form
     }
     return render(request, 'account/view_user.html', context)

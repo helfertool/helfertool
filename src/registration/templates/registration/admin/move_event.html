@@ -1,11 +1,10 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Move event" %}</h2>
+{% block content %}
+    <h1>{% trans "Move event" %}</h1>
 
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-secondary" role="alert">
         {% trans "The following dates <strong>will be changed</strong>:" %}
         <ul>
             <li>{% trans "Event date" %}</li>
@@ -15,20 +14,27 @@
         </ul>
 
         {% trans "The following things will <strong>remain unchanged</strong>:" %}
-        <ul>
+        <ul class="mb-0">
             <li>{% trans "All settings (jobs, shifts, texts, etc.)" %}</li>
             <li>{% trans "All registered people (helpers, coordinators, etc.)" %}</li>
             <li>{% trans "Sign up date of helpers" %}</li>
         </ul>
     </div>
 
+    <ul class="list-group mb-3">
+        <li class="list-group-item">
+            {% trans "Old date:" %} {{ event.date }}
+        </li>
+        <li class="list-group-item">
+            {% trans "Weekday:" %} {{ event.date|date:"l" }}
+        </li>
+    </ul>
+
     <form action="" method="post">
         {% csrf_token %}
 
-        {% include "registration/admin/overview_event.html" %}
+        {% bootstrap_form form layout="floating" %}
 
-        {% bootstrap_form form %}
-
-        <input type="submit" value="{% trans "Move" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "arrow-right" %} {% trans "Move" %}</button>
     </form>
 {% endblock %}

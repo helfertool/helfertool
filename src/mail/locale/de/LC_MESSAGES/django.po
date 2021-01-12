@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: mail/forms.py:44 mail/models.py:114
 msgid "All helpers and coordinators"
@@ -46,7 +46,7 @@ msgstr "Andere Adresse"
 msgid "Receivers"
 msgstr "Empfänger"
 
-#: mail/forms.py:88 mail/templates/mail/show_mail.html:32
+#: mail/forms.py:88 mail/templates/mail/show_mail.html:33
 msgid "Reply to"
 msgstr "Antwort an"
 
@@ -58,11 +58,11 @@ msgstr "Andere Antwortadresse"
 msgid "Only used if \"Custom\" is selected above."
 msgstr "Wird nur benutzt, wenn \"Andere Adresse\" oben ausgewählt ist."
 
-#: mail/forms.py:99 mail/templates/mail/show_mail.html:28
+#: mail/forms.py:99 mail/templates/mail/show_mail.html:29
 msgid "CC"
 msgstr "CC"
 
-#: mail/forms.py:104 mail/templates/mail/list_mails.html:11
+#: mail/forms.py:104
 msgid "Subject"
 msgstr "Betreff"
 
@@ -83,19 +83,11 @@ msgstr ""
 msgid "All mails"
 msgstr "Alle E-Mails"
 
-#: mail/templates/mail/list_mails.html:12 mail/templates/mail/show_mail.html:36
-msgid "Receiver"
-msgstr "Empfänger"
-
-#: mail/templates/mail/list_mails.html:13 mail/templates/mail/show_mail.html:24
-msgid "Date"
-msgstr "Datum"
-
-#: mail/templates/mail/list_mails.html:35
+#: mail/templates/mail/list_mails.html:36
 msgid "View"
 msgstr "Anzeigen"
 
-#: mail/templates/mail/list_mails.html:42
+#: mail/templates/mail/list_mails.html:44
 msgid "No mails were sent (or you are not allowed to see these mails)."
 msgstr "Es wurden keine E-Mails verschickt (oder du kannst diese nicht sehen)."
 
@@ -103,25 +95,37 @@ msgstr "Es wurden keine E-Mails verschickt (oder du kannst diese nicht sehen)."
 msgid "Send mails"
 msgstr "E-Mails senden"
 
-#: mail/templates/mail/send_mail.html:12
+#: mail/templates/mail/send_mail.html:30
 msgid "Send"
 msgstr "Senden"
 
-#: mail/templates/mail/show_mail.html:6
+#: mail/templates/mail/show_mail.html:5
 msgid "Mail:"
 msgstr "E-Mail:"
 
-#: mail/templates/mail/show_mail.html:10
+#: mail/templates/mail/show_mail.html:9
 msgid "This mail was not sent successfully."
 msgstr "Diese E-Mail konnte nicht erfolgreich verschickt werden."
 
-#: mail/templates/mail/show_mail.html:16
+#: mail/templates/mail/show_mail.html:15
+msgid "Mail meta data"
+msgstr "E-Mail Metadaten"
+
+#: mail/templates/mail/show_mail.html:17
 msgid "Sent by"
 msgstr "Gesendet von"
 
-#: mail/templates/mail/show_mail.html:20
-msgid "Sender"
-msgstr "Absender"
+#: mail/templates/mail/show_mail.html:21
+msgid "Date"
+msgstr "Datum"
+
+#: mail/templates/mail/show_mail.html:25
+msgid "Sender address"
+msgstr "Absender Adresse"
+
+#: mail/templates/mail/show_mail.html:37
+msgid "Receiver"
+msgstr "Empfänger"
 
 #: mail/views/send_mail.py:36
 msgid "Mail was sent successfully"

@@ -6,7 +6,7 @@ from django_select2.forms import Select2MultipleWidget
 
 from gifts.models import GiftSet
 
-from .fields import DateTimePicker
+from helfertool.forms import DateTimePicker
 from ..models import Shift
 
 

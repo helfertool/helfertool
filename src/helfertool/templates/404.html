@@ -1,18 +1,24 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 icons setting %}
+{% load i18n django_bootstrap5 icons setting %}
 
 {% block content %}
-    <h1>{% trans "Page not found" %}</h1>
+    <div class="errorpage text-center text-muted">
+        <i class="far fa-frown-open display-1"></i>
 
-    <p class="text-muted">{% trans "Error 404" %}</p>
+        <h1 class="message">{% trans "Page not found" %}</h1>
 
-    <p class="mt-4">
-        <a href="{% url "index" %}" class="btn btn-outline-primary">
-            {% icon "list" %} {% trans "Show events" %}
-        </a>
-        &nbsp;
-        <a href="mailto:{% setting "CONTACT_MAIL" %}" class="btn btn-outline-primary">
-            {% icon "envelope" %} {% trans "Contact" %}
-        </a>
-    </p>
+        <p class="code">{% trans "Error 404" %}</p>
+
+        <p class="link">
+            <a href="{% url "index" %}" class="btn btn-outline-primary ">
+                {% icon "list" %} {% trans "Show events" %}
+            </a>
+        </p>
+
+        <p class="link">
+            <a href="mailto:{% setting "CONTACT_MAIL" %}" class="btn btn-outline-primary">
+                {% icon "envelope" %} {% trans "Contact" %}
+            </a>
+        </p>
+    </div>
 {% endblock %}

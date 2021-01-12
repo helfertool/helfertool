@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: help/forms.py:25
 msgid "New issue"
@@ -51,18 +51,18 @@ msgid "Other topic"
 msgstr "Anderes Thema"
 
 #: help/models.py:37
-msgid "Subject"
+msgid "Topic"
 msgstr "Thema"
 
 #: help/models.py:43
 msgid "Text"
 msgstr "Text"
 
-#: help/templates/help/create_issue.html:7
+#: help/templates/help/create_issue.html:5
 msgid "Create issue"
 msgstr "Anfrage senden"
 
-#: help/templates/help/create_issue.html:12
+#: help/templates/help/create_issue.html:10
 #, python-format
 msgid ""
 "You can use this form to contact the admins. Did you have a look at the <a "
@@ -77,11 +77,13 @@ msgstr "Senden"
 
 #: help/views.py:20
 msgid "The issue was saved and sent to the admins."
-msgstr "Die Anfrage wurde gespeichert und an die Administratoren geschickt"
+msgstr "Die Anfrage wurde gespeichert und an die Administratoren geschickt."
 
-#: help/views.py:23
-#, python-format
-msgid "The issue was created but notifying the admins failed: %(error)s"
+#: help/views.py:22
+msgid "The issue was created but notifying the admins failed"
 msgstr ""
 "Die Anfrage wurde gespeichert, aber das Benachrichtigen der Administratoren "
-"ist fehlgeschlagen: %(error)s"
+"ist fehlgeschlagen"
+
+#~ msgid "Subject"
+#~ msgstr "Thema"

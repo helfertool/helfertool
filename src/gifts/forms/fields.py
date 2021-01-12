@@ -87,4 +87,4 @@ class PresenceField(ChoiceField):
             return None
 
     def widget_attrs(self, widget):
-        return {"class": "list-inline presence"}
+        return {"class": "presence"}

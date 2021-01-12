@@ -244,6 +244,9 @@ class Helper(models.Model):
             self.delete()
 
     def has_missed_shift(self, shift=None):
+        if not self.event.gifts:
+            return False
+
         if shift is None:
             return self.helpershift_set.filter(present=False, manual_presence=True).exists()
         else:
@@ -279,6 +282,16 @@ class Helper(models.Model):
         if len(shifts) > 0:
             return shifts[0]
         return None
+
+    @property
+    def all_jobs(self):
+        """ Returns all jobs, which are done by the helper (as coordinator or helper) """
+        jobs = set(self.coordinated_jobs)
+
+        for shift in self.shifts.prefetch_related('job'):
+            jobs.add(shift.job)
+
+        return jobs
 
 
 @receiver(post_save, sender=Helper, dispatch_uid='helper_saved')

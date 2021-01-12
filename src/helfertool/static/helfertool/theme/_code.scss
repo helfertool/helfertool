@@ -1,0 +1,14 @@
+// code body used for mails, latex errors, etc.
+div.code
+{
+    border: 1px solid $border-color;
+    padding: 1em 1em 0 1em;
+    margin-bottom: 2em;
+}
+
+// wrap text in pre ("code" class can also be used without pre inside)
+div.code pre
+{
+    white-space: pre-wrap;
+    word-break: keep-all;
+}

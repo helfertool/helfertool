@@ -1,0 +1,30 @@
+{% load icons %}
+
+<div class="form-check">
+    <input type="checkbox" name="{{ widget.name }}" value="{{ widget.value }}" id="{{ widget.name }}_{{ widget.value }}"
+        class="form-check-input {% if shift.job.infection_instruction %}infection_instruction{% endif %} {% if not widget.attrs.disabled %}registration_possible{% endif %}"
+        {% if widget.attrs.checked %}checked{% endif %} {% if widget.attrs.disabled %}disabled{% endif %}
+        data-begin="{{ shift.begin_timestamp }}" data-end="{{ shift.end_timestamp }}">
+
+    <label class="form-check-label" for="{{ widget.name }}_{{ widget.value }}">
+        {{ shift.time_hours }}
+
+        {% if event.show_public_numbers %}
+            {% if widget.attrs.disabled %}
+                <span class="badge badge-outline-secondary">
+                    {{ shift.number }}/{{ shift.number }}
+                </span>
+            {% else %}
+                <span class="badge badge-outline-secondary">
+                    {{ shift.num_helpers }}/{{ shift.number }}
+                </span>
+            {% endif %}
+        {% endif %}
+
+        <br/>
+
+        <span class="d-inline-block text-truncate shifttable-maxwidth" title="{{ shift.name }}">
+            {{ shift.name|default:"&nbsp;" }}
+        </span>
+    </label>
+</div>

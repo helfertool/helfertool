@@ -1,13 +1,13 @@
-{% load i18n bootstrap4 icons prerequisites %}
+{% load i18n django_bootstrap5 icons %}
 
 {# will be included by registration/admin/view_helper.html #}
 
 {% if form.has_unfilfilled %}
     <p class="text-danger">
-        {% icon "times" %} {% trans "Helper does not fulfil all prerequisites (for now)." %}
+        {% icon "exclamation-circle" %} {% trans "Helper does not fulfil all prerequisites (for now)." %}
     </p>
 {% endif %}
 
 {% for field in form %}
-        {% bootstrap_field field form_group_class="" %}
+        {% bootstrap_field field %}
 {% endfor %}

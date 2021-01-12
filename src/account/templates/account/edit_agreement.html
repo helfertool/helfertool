@@ -1,22 +1,47 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap4 %}
+{% load django_bootstrap5 icons translation %}
 
-{% block admincontent %}
+{% block content %}
     {% if agreement %}
-    <h2>{% trans "Edit user agreement" %}</h2>
+        <h1>{% trans "Edit user agreement" %}</h1>
 
-    <form action="{% url 'account:edit_agreement' agreement.pk %}" method="post">
+        <form action="{% url 'account:edit_agreement' agreement.pk %}" method="post">
     {% else %}
-    <h2>{% trans "New user agreement" %}</h2>
+        <h1>{% trans "New user agreement" %}</h1>
 
-    <form action="{% url 'account:new_agreement' %}" method="post">
+        <form action="{% url 'account:new_agreement' %}" method="post">
     {% endif %}
-
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% get_available_languages as languages %}
+        <div class="row">
+        {% for lang, name in languages %}
+            <div class="col-lg-6">
+                {% translated_field form "name" lang as field %}
+                {% bootstrap_field field layout="floating" %}
+            </div>
+        {% endfor %}
+        </div>
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        <div class="row">
+        {% for lang, name in languages %}
+            <div class="col-xl-6">
+                {% translated_field form "text" lang as field %}
+                {% bootstrap_field field %}
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                {% bootstrap_field form.start layout="floating" %}
+            </div>
+            <div class="col-lg-6">
+                {% bootstrap_field form.end layout="floating" %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}

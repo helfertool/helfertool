@@ -1,33 +1,32 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
+{% block content %}
     {% if helper %}
-        <h2>{{ helper.full_name }}</h2>
+        <h1>{{ helper.full_name }}</h1>
     {% else %}
-        <h2>{% trans "Add new coordinator" %}</h2>
+        <h1>{% trans "Add new coordinator" %}</h1>
     {% endif %}
-    
+
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <div class="row">
-            <div class="col-xs-12 col-lg-5">
-                {% bootstrap_form form %}
-            </div>
-        </div>
+        {% include "registration/partials/helper_edit_data.html" with form=form %}
+
+        {% if form.validated %}
+            {% bootstrap_field form.validated layout="floating" %}
+        {% endif %}
 
         {% if helper %}
             <div class="alert alert-info" role="alert">
-                {% trans "Note: if you change the mail address a confirmation mail will be sent to the new address." %}
+                {% trans "Note: If you change the mail address a confirmation mail will be sent to the new address." %}
             </div>
         {% else %}
             <div class="alert alert-info" role="alert">
-                {% trans "Note: after saving an e-mail will be sent to the given address." %}
+                {% trans "Note: After saving an e-mail will be sent to the given address." %}
             </div>
         {% endif %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}

@@ -1,9 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 %}
 
-{% block admincontent %}
-    <h2 id="shirts-header">{% trans "Missing T-shirts" %}</h2>
+{% block content %}
+    <h1>{% trans "Missing T-shirts" %}</h1>
 
     {% if shirts_not_active %}
         <div class="alert alert-danger" role="alert">
@@ -11,32 +10,43 @@
         </div>
     {% else %}
         {% if helpers %}
-            <table class="table" aria-describedby="shirts-header">
-                <tr>
-                    {% for size, num in num_shirts.items %}
-                        <th scope="col">{{ size }}</th>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    {% for size, num in num_shirts.items %}
-                        <td>{{ num }}</td>
-                    {% endfor %}
-                </tr>
-            </table>
+            <h2>{% trans "Sum" %}</h2>
+            <div class="row">
+                <div class="col-xs-12 col-xl-6">
+                    <table class="table" aria-description="{% trans 'Number of missing shirts per size' %}">
+                        <tr class="d-flex">
+                            <th class="col-8" scope="col">{% trans "Size" %}</th>
+                            <th class="col-4" scope="col">{% trans "Number" %}</th>
+                        </tr>
 
-            <table class="table mt-5" aria-describedby="shirts-header">
-                <tr>
-                    <th scope="col">{% trans "Name" %}</th>
-                    <th scope="col">{% trans "Size" %}</th>
-                </tr>
+                        {% for size, num in num_shirts.items %}
+                            <tr class="d-flex">
+                                <td class="col-8">{{ size }}</td>
+                                <td class="col-4">{{ num }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
 
-                {% for h in helpers %}
-                    <tr>
-                        <td><a href="{% url "view_helper" event.url_name h.pk %}">{{ h.full_name }}</a></td>
-                        <td>{{ h.get_shirt_display }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <h2>{% trans "Helpers" %}</h2>
+            <div class="row">
+                <div class="col-xs-12 col-xl-6">
+                    <table class="table" aria-description="{% trans 'Helpers with missing shirts' %}">
+                        <tr class="d-flex">
+                            <th class="col-8" scope="col">{% trans "Name" %}</th>
+                            <th class="col-4" scope="col">{% trans "Size" %}</th>
+                        </tr>
+
+                        {% for h in helpers %}
+                            <tr class="d-flex">
+                                <td class="col-8"><a href="{% url "view_helper" event.url_name h.pk %}">{{ h.full_name }}</a></td>
+                                <td class="col-4">{{ h.get_shirt_display }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
         {% else %}
             <p class="text-muted">{% trans "No T-shirts are missing." %}</p>
         {% endif %}

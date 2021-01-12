@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.views.defaults import page_not_found, server_error, permission_denied, bad_request
 from django.views.generic import TemplateView
 
 
@@ -56,3 +57,11 @@ urlpatterns += [
 # for development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    urlpatterns += [
+        url(r'errors/400/', bad_request, {'exception': None}),
+        url(r'errors/403/', permission_denied, {'exception': None}),
+        url(r'errors/404/', page_not_found, {'exception': None}),
+        url(r'errors/500/', server_error),
+        url(r'errors/banned', TemplateView.as_view(template_name='helfertool/login_banned.html'),),
+    ]

@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
     <h1>{{ form.instance.agreement.name }}</h1>
@@ -11,6 +11,6 @@
     <form action="{% url "account:handle_user_agreement" form.instance.agreement.pk %}" method="post">
         {% csrf_token %}
 
-        <input type="submit" value="{% trans "I got it!" %}" class="btn btn-outline-primary mt-3" />
+        <button type="submit" class="btn btn-outline-primary mt-3">{% icon "check" %} {% trans "I got it!" %}</button>
     </form>
 {% endblock %}

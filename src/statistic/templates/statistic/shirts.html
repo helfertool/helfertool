@@ -1,8 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "T-Shirts" %}</h2>
+{% block content %}
+    <h1>{% trans "T-Shirts" %}</h1>
 
     {% if not total_shirts and not job_shirts %}
         <div class="alert alert-info" role="alert">
@@ -11,68 +11,116 @@
     {% endif %}
 
     {% if total_shirts %}
-        <h3 id="shirts-total-header">{% trans "Total" %}</h3>
+        <h2>{% trans "Total" %}</h2>
 
-        <table class="table" aria-describedby="shirts-total-header">
-            <tr>
-                <th class="width-10em" scope="col"></th>
-                {% for size in size_names %}
-                    <th scope="col">{{ size }}</th>
-                {% endfor %}
-            </tr>
-            <tr>
-                <td>{% trans "Helpers and coordinators" %}</td>
-                {% for size, num in total_shirts.items %}
-                    <td>{{ num }}</td>
-                {% endfor %}
-            </tr>
+        <div class="row">
+            <div class="col-xs-12 col-xl-6">
+                <table class="table" aria-description="{% trans "T-shirt sizes of all helpers and coordinators" %}">
+                    <tr>
+                        <th scope="col" class="w-25">{% trans "Size" %}</th>
+                        <th scope="col" class="w-25">{% trans "Helpers and coordinators" %}</th>
+                        {% if not event.archived %}
+                            <th scope="col" class="w-25">{% trans "Only coordinators" %}</th>
+                        {% endif %}
+                    </tr>
 
-            {% if coordinator_shirts %}
-            <tr>
-                <td>{% trans "Coordinators" %}</td>
-                {% for size, num in coordinator_shirts.items %}
-                    <td>{{ num }}</td>
-                {% endfor %}
-            </tr>
-            {% endif %}
-        </table>
+                    {% for size, data in total_shirts.items %}
+                        <tr>
+                            <td>{{ size }}</td>
+                            <td>{{ data.all }}</td>
+                            {% if not event.archived %}
+                                <td>{{ data.coordinators }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     {% endif %}
 
     {% if job_shirts %}
-        <h3>{% trans "Helpers (without coordinators)" %}</h3>
+        <h2>{% trans "Helpers (without coordinators)" %}</h2>
 
         <div class="alert alert-info">
             <strong>{% trans "Info:" %}</strong>
-            {% trans "The T-shirt of a helper is counted for the first shift." %}
+            {% trans "The T-shirt of a helper is counted for the job with the first shift." %}
         </div>
 
         {% for job,data in job_shirts.items %}
-            <h4 id="job-{{ job.id }}-header">{{ job.name }}</h4>
+            <h3>{{ job.name }}</h3>
 
-            <table class="table" aria-describedby="job-{{ job.id }}-header">
-                <tr>
-                    <th class="width-10em" scope="col">{% trans "Shift" %}</th>
-                    {% for size in size_names %}
-                        <th scope="col">{{ size }}</th>
-                    {% endfor %}
-                </tr>
+            {# summary for job #}
+            <div class="row">
+                <div class="col-xs-12 col-xl-6">
+                    <table class="table" aria-description="{% trans "T-shirt sizes of all helpers and coordinators" %}">
+                        <tr>
+                            <th scope="col" class="w-25">{% trans "Size" %}</th>
+                            <th scope="col" class="w-25">{% trans "Helpers and coordinators" %}</th>
+                            {% if not event.archived %}
+                                {# same colunm width as above #}
+                                <th scope="col" class="w-25"></th>
+                            {% endif %}
+                        </tr>
 
-                {% for shift,sizes_for_shift in data.shifts.items %}
-                    <tr>
-                        <td>{{ shift.time }}{% if shift.name %}, {{ shift.name }}{%endif %}</td>
-                        {% for size,num in sizes_for_shift.items %}
-                            <td>{{ num }}</td>
+                        {% for size,num in data.total.items %}
+                            <tr>
+                                <td>{{ size }}</td>
+                                <td>{{ num }}</td>
+                                {% if not event.archived %}
+                                    <td></td>
+                                {% endif %}
+                            </tr>
                         {% endfor %}
-                    </tr>
-                {% endfor %}
+                    </table>
+                </div>
+            </div>
 
-                <tr>
-                    <th scope="row">{% trans "Total" %}</th>
-                    {% for size,num in data.total.items %}
-                        <th scope="col">{{ num }}</th>
-                    {% endfor %}
-                </tr>
-            </table>
+            {# details per shift #}
+            <button type="button" class="btn btn-outline-primary mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#sizes-{{ job.pk }}">
+                {% icon "list" %} {% trans "Sizes per shift" %}
+            </button>
+
+            <div class="modal fade" id="sizes-{{ job.pk }}" tabindex="-1" aria-labelledby="sizes-{{ job.pk }}-label" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="sizes-{{ job.pk }}-label">
+                                {% blocktrans trimmed with name=job.name %}
+                                    T-Shirt sizes for {{ name }}
+                                {% endblocktrans %}
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group">
+                                {% for shift,sizes_for_shift in data.shifts.items %}
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 py-1 text-break">
+                                            {{ shift.time_with_day }}
+                                            {% if shift.name %}
+                                                <br/>{{ shift.name }}
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-12 col-md-8 py-1">
+                                            {% for size,num in sizes_for_shift.items %}
+                                                {% if num > 0 %}
+                                                    <span class="badge badge-outline-secondary shirt-badge">
+                                                        {{ num }}x {{ size }}
+                                                    </span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "Close" %}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
     {% endif %}
 {% endblock %}

@@ -1,72 +1,72 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
-{% load inventory %}
+{% load i18n django_bootstrap5 inventory %}
 
-{% block admincontent %}
-    <h2 id="inventory-header">{% trans "Inventory" %}</h2>
+{% block content %}
+    <h1>{% trans "Inventory" %}</h1>
 
-    {% regroup used_items by item as item_groups %} {# TODO: sort by item #}
-
-    <table class="table" aria-describedby="inventory-header">
-        <tr class="d-flex">
-            <th class="col-4" scope="col">{% trans "Item" %}</th>
-            <th class="col-8" scope="col">{% trans "Status and log" %}</th>
-        </tr>
-        {% for group in item_groups %}
-            <tr class="d-flex">
-                <td class="col-4">{{ group.grouper.name }}</td>
-
-                <td class="col-8">
-                    {% active_uses group.list as num_uses %}
-                    {% if num_uses == 0 %}
-                        {% trans "Not in use" %}
-                    {% elif group.grouper.inventory.multiple_assignments %}
-                        <span class="text-danger">
-                            {% blocktrans trimmed %}
-                                {{ num_uses }} times in use
-                            {% endblocktrans %}
-                        </span>
-                    {% else %}
-                        <span class="text-danger">
-                        {% with group.list|last as last %}
-                            {% blocktrans trimmed with helper=last.helper%}
-                                In use: {{ helper }}
-                            {% endblocktrans %}
-                        {% endwith %}
-                        </span>
-                    {% endif %}
-
-                    <br/>
-
-                    <a data-toggle="collapse" href="#log-{{ group.grouper.pk }}">
-                        {% trans "Show log" %}
-                    </a>
-
-                    <div id="log-{{ group.grouper.pk }}" class="collapse">
-                        <ul>
-                            {% for use in group.list|dictsort:"timestamp" %}
-                                <li>
-                                    {% if use.timestamp_returned %}
-                                        {{ use.helper }}<br />
-                                        <span class="text-muted">
-                                            {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
-                                            {% trans "to" %}
-                                            {{ use.timestamp_returned|date:"SHORT_DATETIME_FORMAT" }}
-                                        </span>
-                                    {% else %}
-                                        <span class="text-danger">
-                                            <strong>{{ use.helper }}</strong><br/>
-                                            {% trans "Since" %}
-                                            {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
-                                        </span>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
-                        </ul>
+    {% if used_items %}
+        {% regroup used_items by item as item_groups %} {# TODO: sort by item #}
+        <ul class="list-group">
+            {% for group in item_groups %}
+            <li class="list-group-item mb-3">
+                <div class="row">
+                    <div class="col-12 col-md-4 py-1">
+                        {{ group.grouper.name }}
                     </div>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+                    <div class="col-12 col-md-8 py-1">
+                        {% active_uses group.list as num_uses %}
+                        {% if num_uses == 0 %}
+                            {% trans "Not in use" %}
+                        {% elif group.grouper.inventory.multiple_assignments %}
+                            <span class="text-danger">
+                                {% blocktrans trimmed %}
+                                    {{ num_uses }} times in use
+                                {% endblocktrans %}
+                            </span>
+                        {% else %}
+                            <span class="text-danger">
+                            {% with group.list|last as last %}
+                                {% blocktrans trimmed with helper=last.helper%}
+                                    In use: {{ helper }}
+                                {% endblocktrans %}
+                            {% endwith %}
+                            </span>
+                        {% endif %}
+
+                        <br/>
+
+                        <a data-bs-toggle="collapse" href="#log-{{ group.grouper.pk }}">
+                            {% trans "Show log" %}
+                        </a>
+
+                        <div id="log-{{ group.grouper.pk }}" class="collapse">
+                            <ul class="reset-list">
+                                {% for use in group.list|dictsort:"timestamp" %}
+                                    <li>
+                                        {% if use.timestamp_returned %}
+                                            {{ use.helper }}<br />
+                                            <span class="text-muted">
+                                                {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
+                                                {% trans "to" %}
+                                                {{ use.timestamp_returned|date:"SHORT_DATETIME_FORMAT" }}
+                                            </span>
+                                        {% else %}
+                                            <span class="text-danger">
+                                                <strong>{{ use.helper }}</strong><br/>
+                                                {% trans "Since" %}
+                                                {{ use.timestamp|date:"SHORT_DATETIME_FORMAT" }}
+                                            </span>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">{% trans "No items were given to helpers yet." %}</p>
+    {% endif %}
 {% endblock %}

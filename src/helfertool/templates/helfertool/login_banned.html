@@ -1,17 +1,12 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h1>{% trans "Login" %}</h1>
+    <div class="errorpage text-center text-muted">
+        <i class="far fa-frown-open display-1"></i>
 
-    <div class="alert alert-danger">
-        <strong>{% trans "Too many login attempts!" %}</strong>
+        <h1 class="message">{% trans "Too many login attempts!" %}</h1>
 
-        <br/><br/>
-
-        {% blocktrans trimmed with limit=failure_limit %}
-            You tried to log in {{ limit }} times with the wrong credentials, try again later.
-        {% endblocktrans %}
+        <p class="code">{% trans "You tried to log in several times with the wrong credentials, try again later." %}</p>
     </div>
 {% endblock %}

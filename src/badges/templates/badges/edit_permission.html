@@ -1,16 +1,35 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons translation %}
 
-{% block admincontent %}
-    <h2>{% trans "Badge Permission" %}</h2>
+{% block content %}
+    {% if form.instance.pk %}
+        <h1>{% trans "Edit badge permission" %}</h1>
+    {% else %}
+        <h1>{% trans "New badge permission" %}</h1>
+    {% endif %}
 
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        {% get_available_languages as languages %}
+        <div class="row">
+        {% for lang, name in languages %}
+            <div class="col-lg-6">
+                {% translated_field form "name" lang as field %}
+                {% bootstrap_field field layout="floating" %}
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.latex_name layout="floating" %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}
 

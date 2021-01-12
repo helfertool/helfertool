@@ -1,20 +1,16 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{{ helper.full_name }}</h2>
+{% block content %}
+    <h1>{{ helper.full_name }}</h1>
+
+    <div class="alert alert-info">
+        {% trans "Send confirmation mail again?" %}
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}
-
         {% bootstrap_form form %}
-        {% bootstrap_form_errors form %}
-
-        <div class="alert alert-info">
-            {% trans "Send confirmation mail again?" %}
-        </div>
-
-        <input type="submit" value="{% trans "Send" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "paper-plane" %} {% trans "Send" %}</button>
     </form>
 {% endblock %}

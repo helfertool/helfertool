@@ -1,23 +1,67 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
+{% block content %}
     {% if helper %}
-        <h2>{% blocktrans with name=helper.full_name %}Badge for {{ name }}{% endblocktrans %}</h2>
+        <h1>{% blocktrans with name=helper.full_name %}Badge for {{ name }}{% endblocktrans %}</h1>
     {% else %}
-        <h2>{% blocktrans with name=form.instance.firstname %}Special badges for {{ name }}{% endblocktrans %}</h2>
+        <h1>{% blocktrans with name=form.instance.firstname %}Special badges for {{ name }}{% endblocktrans %}</h1>
     {% endif %}
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
+        {% bootstrap_form_errors form %}
+
         <div class="row">
-            <div class="col-xs-12 col-lg-5">
-                {% bootstrap_form form %}
+            {% if form.firstname and form.surname %}
+                <div class="col-12 col-md-6">
+                    {% bootstrap_field form.firstname layout="floating" %}
+                </div>
+                <div class="col-12 col-md-6">
+                    {% bootstrap_field form.surname layout="floating" %}
+                </div>
+            {% endif %}
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.job layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.shift layout="floating" %}
+            </div>
+
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.role layout="floating" %}
+            </div>
+            {% if form.primary_job %}
+                <div class="col-12 col-md-6">
+                    {% bootstrap_field form.primary_job layout="floating" %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.custom_role layout="floating" %}
+            </div>
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.custom_design layout="floating" %}
             </div>
         </div>
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.photo layout="floating" %}
+            </div>
+        </div>
+
+        {% if form.printed %}
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    {% bootstrap_field form.printed layout="floating" %}
+                </div>
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends "helfertool/base.html" %}
-{% load bootstrap4 i18n toolsettings %}
+{% load i18n django_bootstrap5 icons toolsettings %}
 
 {% block content %}
-    <h2>{% trans "Subscribe to newsletter" %}</h2>
+    <h1>{% trans "Subscribe to newsletter" %}</h1>
 
     <form action="" method="post">
         {% csrf_token %}
@@ -11,7 +11,7 @@
             <div class="col-lg-6 col-sm-12">
                 {% bootstrap_form_errors form %}
 
-                {% bootstrap_field form.email show_label=False %}
+                {% bootstrap_field form.email required_css_class="" layout="floating" %}
             </div>
         </div>
 
@@ -28,6 +28,6 @@
             </div>
         </div>
 
-        <input type="submit" value="{% trans "Subscribe" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "envelope" %} {% trans "Subscribe" %}</button>
     </form>
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 icons globalpermissions %}
+{% load i18n django_bootstrap5 icons globalpermissions %}
 
 {% block title %}
     {% blocktrans trimmed with eventname=event.name %}
@@ -20,41 +20,35 @@
 {% endblock %}
 
 {% block content %}
-    {% bootstrap_form_errors form %}
-
     {% if event.archived %}
         <div class="alert alert-info" role="alert">
             {% trans "This event is archived." %}
         </div>
     {% elif not event.active and not form.link %}
         <div class="alert alert-info" role="alert">
-            {% trans "This public registration is disabled." %}
+            {% trans "The public registration is disabled." %}
         </div>
     {% endif %}
 
-    {% if user_is_involved %}
-        <p>
-            <a href="{% url 'manage_event' event_url_name=event.url_name %}" class="btn btn-outline-primary">
+    {% bootstrap_form_errors form %}
+
+    <h1>
+        {{ event }}
+
+        {% if user_is_involved %}
+            <a href="{% url 'helpers' event.url_name %}" class="btn btn-lg shadow-none">
                 {% icon "cog" %}
-                {% trans "Manage event" %}
             </a>
-        </p>
-    {% endif %}
+        {% endif %}
+    </h1>
 
     {% if event.logo %}
-        <img src="{{ MEDIA_URL }}{{ event.logo }}" id="logo" alt="event logo" />
+        <img src="{{ MEDIA_URL }}{{ event.logo }}" class="event-logo" alt="{% trans "Event logo" %}" />
     {% endif %}
-
-    <h1>{{ event }}</h1>
 
     {{ event.text | safe }}
 
-    {% include "registration/registerform.html" with event=event form=form %}
+    {% include "registration/partials/registerform.html" with event=event form=form %}
 
-    {% if event.imprint %}
-        <div class="contact">
-            <p><strong>{% trans "Contact" %}</strong></p>
-            {{ event.imprint | safe }}
-        </div>
-    {% endif %}
+    {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}

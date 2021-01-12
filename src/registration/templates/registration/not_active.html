@@ -1,26 +1,10 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
-
-{% load registerform_shifts %}
-
-{% block title %}
-    {% blocktrans trimmed %}
-        Register for {{ event }} as helper
-    {% endblocktrans %}
-{% endblock %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h1>{{ event }}</h1>
+    <div class="errorpage text-center text-muted">
+        <i class="far fa-frown-open display-1"></i>
 
-    <div class="alert alert-info" role="alert">
-        {% trans "The registration is not open." %}
+        <h1 class="message">{% trans "The registration is not open" %}</h1>
     </div>
-
-    {% if event.imprint %}
-        <div class="contact">
-            <p><strong>{% trans "Contact" %}</strong></p>
-            {{ event.imprint | safe }}
-        </div>
-    {% endif %}
 {% endblock %}

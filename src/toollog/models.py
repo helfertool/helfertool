@@ -38,7 +38,7 @@ class LogEntry(models.Model):
 
     message = models.CharField(
         max_length=512,
-        verbose_name=_("Message"),
+        verbose_name=_("Entry"),
     )
 
     event = models.ForeignKey(

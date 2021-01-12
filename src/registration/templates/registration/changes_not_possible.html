@@ -1,8 +1,5 @@
 {% extends "helfertool/base.html" %}
 {% load i18n %}
-{% load bootstrap4 %}
-
-{% load registerform_shifts %}
 
 {% block title %}
     {% blocktrans trimmed with eventname=event.name %}
@@ -13,14 +10,11 @@
 {% block content %}
     <h1>{{ event }}</h1>
 
-    <div class="alert alert-danger" role="alert">
-        {% trans "You cannot change the data yourself." %}
+    <div class="alert alert-danger mt-3" role="alert">
+        {% trans "You cannot change your registration and data here anymore." %}
+        <br /><br />
+        {% trans "Please contact us directly for changes. Thank you!" %}
     </div>
 
-    {% if event.imprint %}
-        <div class="contact">
-            <p><strong>{% trans "Contact" %}</strong></p>
-            {{ event.imprint | safe }}
-        </div>
-    {% endif %}
+    {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}

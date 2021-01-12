@@ -1,5 +1,6 @@
 from django import forms
 
+from .widgets import ShiftTableWidget
 from ..models import Link, Shift
 
 
@@ -8,7 +9,7 @@ class LinkForm(forms.ModelForm):
         model = Link
         exclude = ['event', 'creator']
         widgets = {
-            'shifts': forms.CheckboxSelectMultiple(),
+            'shifts': ShiftTableWidget,
         }
 
     def __init__(self, *args, **kwargs):
@@ -18,16 +19,15 @@ class LinkForm(forms.ModelForm):
         super(LinkForm, self).__init__(*args, **kwargs)
 
         # only show shifts for this event
-        self.fields['shifts'].queryset = Shift.objects.filter(
-            job__event=self.event)
+        self.fields['shifts'].queryset = Shift.objects.filter(job__event=self.event)
 
     def save(self, commit=True):
         instance = super(LinkForm, self).save(False)
 
         # add event and creator
         instance.event = self.event
-        # if instance.creator is None:
-        instance.creator = self.creator  # FIXME
+        if instance.creator is None:
+            instance.creator = self.creator
 
         if commit:
             instance.save()

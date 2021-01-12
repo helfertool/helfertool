@@ -1,29 +1,58 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons translation %}
 
-{% block admincontent %}
+{% block content %}
     <h2>{% trans "Template: Privacy statements" %}</h2>
 
     <form action="{% url 'toolsettings:template_privacy' %}" method="post">
         {% csrf_token %}
 
-        <h3>{% trans "Event (HTML)" %}</h3>
-        {% bootstrap_form form_privacy %}
+        {% get_available_languages as languages %}
 
-        <h3>{% trans "Event (Plaintext for mail)" %}</h3>
-        {% bootstrap_form form_privacy_text %}
+        <h2>{% trans "Event (HTML)" %}</h2>
+        <div class="row">
+        {% for lang, name in languages %}
+            <div class="col-lg-6">
+                {% translated_field form_privacy "value" lang as field %}
+                {% bootstrap_field field %}
+            </div>
+        {% endfor %}
+        </div>
+
+        <h2>{% trans "Event (Plaintext for mail)" %}</h2>
+        <div class="row">
+            {% for lang, name in languages %}
+                <div class="col-lg-6">
+                    {% translated_field form_privacy_text "value" lang as field %}
+                    {% bootstrap_field field %}
+                </div>
+            {% endfor %}
+        </div>
 
         {% if form_news %}
-            <h3>{% trans "Newsletter (together with event registration)" %}</h3>
-            {% bootstrap_form form_news %}
+            <h2>{% trans "Newsletter (together with event registration)" %}</h2>
+            <div class="row">
+                {% for lang, name in languages %}
+                    <div class="col-lg-6">
+                        {% translated_field form_news "value" lang as field %}
+                        {% bootstrap_field field %}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
 
         {% if form_news_subscribe %}
-            <h3>{% trans "Newsletter (subscription without event registration)" %}</h3>
-            {% bootstrap_form form_news_subscribe %}
+            <h2>{% trans "Newsletter (subscription without event registration)" %}</h2>
+            <div class="row">
+                {% for lang, name in languages %}
+                    <div class="col-lg-6">
+                        {% translated_field form_news_subscribe "value" lang as field %}
+                        {% bootstrap_field field %}
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}

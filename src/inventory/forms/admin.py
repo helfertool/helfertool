@@ -1,5 +1,4 @@
 from django import forms
-from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from toolsettings.forms import UserSelectWidget
@@ -42,7 +41,7 @@ class ItemForm(forms.ModelForm):
         try:
             existing = Item.objects.get(barcode=cleaned_data["barcode"], inventory=self.inventory)
             if not self.instance.pk or existing.pk != self.instance.pk:
-                raise ValidationError(_("Item with this barcode already exists in this inventory"))
+                self.add_error("barcode", _("Item with this barcode already exists in this inventory"))
         except Item.DoesNotExist:
             pass
 

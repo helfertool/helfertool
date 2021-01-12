@@ -1,12 +1,11 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Duplicate event" %}</h2>
+{% block content %}
+    <h1>{% trans "Duplicate event" %}</h1>
 
-    <div class="alert alert-info" role="alert">
-        <ul>
+    <div class="alert alert-secondary" role="alert">
+        <ul class="mb-0">
             <li>{% trans "All jobs, shifts and settings will be copied" %}</li>
             <li>{% trans "The registered helpers and coordinators will <strong>not</strong> be copied" %}</li>
             <li>{% trans "The admins for the event and all jobs will <strong>not</strong> be copied" %}</li>
@@ -18,8 +17,8 @@
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form form layout="floating" %}
 
-        <input type="submit" value="{% trans "Duplicate" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "copy" %} {% trans "Duplicate" %}</button>
     </form>
 {% endblock %}

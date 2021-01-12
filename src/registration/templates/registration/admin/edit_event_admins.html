@@ -1,12 +1,12 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 translation %}
+{% load i18n django_bootstrap5 icons translation %}
 
-{% block admincontent %}
-    <h2>{% trans "Permissions" %}</h2>
+{% block content %}
+    <h1>{% trans "Permissions" %}</h1>
 
-    <div class="alert alert-info">
+    <div class="alert alert-secondary">
         <h4 class="alert-heading">{% trans "Role descriptions" %}
-            <a class="btn btn-sm btn-outline-primary ml-2 align-top" data-toggle="collapse" href="#roles-collapse" role="button" aria-expanded="false" aria-controls="roles-collapse">
+            <a class="btn btn-sm btn-outline-secondary ml-2 align-top" data-bs-toggle="collapse" href="#roles-collapse" role="button" aria-expanded="false" aria-controls="roles-collapse">
                 {% trans "Show" %}
             </a>
         </h4>
@@ -60,27 +60,32 @@
     <form action="" method="post">
         {% csrf_token %}
 
-        <table class="table" aria-describedby="event-admin-description">
-            <thead>
-                <tr>
-                    <th scope="col" class="col-md-6">{% trans "User" %}</th>
-                    <th scope="col" class="col-md-4">{% trans "Roles" %}</th>
-                </tr>
-            </thead>
-            <tbody>
+        <ul class="list-group mb-3">
             {% for form in forms %}
-                <tr>
-                    <td>{{ form.instance.user.get_full_name }} ({{ form.instance.user.username }})</td>
-                    <td>{% bootstrap_field form.roles show_label=false %}</td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-12 col-xl-6">
+                        {{ form.instance.user.get_full_name }} ({{ form.instance.user.username }})
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        {% bootstrap_field form.roles show_label=false %}
+                    </div>
+                </div>
+            </li>
             {% endfor %}
 
-            <tr>
-                <td>{% bootstrap_field add_form.user show_label=false %}</td>
-                <td>{% bootstrap_field add_form.roles show_label=false %}</td>
-            </tr>
-            </tbody>
-        </table>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-12 col-xl-6">
+                        {% bootstrap_field add_form.user show_label=false %}
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        {% bootstrap_field add_form.roles show_label=false %}
+                    </div>
+                </div>
+            </li>
+        </ul>
 
-        <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
     </form>
 {% endblock %}

@@ -17,12 +17,9 @@ def create_issue(request):
     if form.is_valid():
         try:
             form.save()
-            messages.success(request, _("The issue was saved and sent to the "
-                                        "admins."))
-        except (SMTPException, ConnectionError) as e:
-            messages.error(request, _("The issue was created but notifying "
-                                      "the admins failed: %(error)s") %
-                           {'error': str(e)})
+            messages.success(request, _("The issue was saved and sent to the admins."))
+        except (SMTPException, ConnectionError):
+            messages.error(request, _("The issue was created but notifying the admins failed"))
 
         return HttpResponseRedirect(reverse('help:create_issue'))
 
