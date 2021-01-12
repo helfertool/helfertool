@@ -1,0 +1,31 @@
+.statistics {
+    padding: 3em;
+
+    // all boxes should have the same height, but we do not want to crop
+    min-height: 10em;
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .placeholder {
+        text-align: center;
+        color: $secondary;
+        padding-top: 2em;
+    }
+
+    .details {
+        text-align: center;
+        padding-top: 1em;
+    }
+
+    .timeline-wrapper {
+        // set height of timeline explicitly (in combination with chartjs option maintainAspectRatio: false)
+        height: 30em;
+    }
+}
+
+.shirt-badge {
+    font-size: 100%;
+}

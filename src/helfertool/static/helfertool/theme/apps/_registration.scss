@@ -1,0 +1,89 @@
+// progress bar for number of helpers (necessary for CSP)
+@for $i from 0 through 100 {
+    .percent-#{$i} { width: $i*1%; }
+}
+
+// download icons (xls or pdf)
+.icon {
+    width:2em;
+    vertical-align: middle;
+}
+
+// icon in jobs & shifts table (hidden, locked)
+.table-icon {
+    display:inline-block;
+    width: 1.3em;
+}
+
+// shifts table (rendered by shifttable templatetag)
+div.shifttable {
+    div.shifttable-day {
+        display: inline-block;
+        vertical-align: top;
+
+        width: 16em;
+
+        // relevant for line breaks
+        margin-right: 0.5em;
+        margin-bottom: 1em;
+    }
+
+    div.shifttable-date {
+        padding: 0.25em;
+        margin-bottom: 0.5em;
+
+        border: 1px solid $primary;
+        border-radius: 0.25em;
+
+        color: $primary;
+        font-weight: bold;
+    }
+
+    div.shifttable-shift {
+        padding: 0.25em;
+        margin-bottom: 0.5em;
+
+        border: 1px solid $secondary;
+        border-radius: 0.25em;
+    }
+
+    // set max-width of an element, used with text-truncate
+    .shifttable-maxwidth {
+        max-width: 14em;
+    }
+
+    // for registration form
+    input:disabled + label {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+
+        opacity: 1;
+    }
+
+    input:not([disabled]) + label {
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+}
+
+/* logo on registration page */
+img.event-logo
+{
+    max-width: 250px;
+    max-height: 350px;
+}
+
+@media (min-width: map-get($grid-breakpoints, "md"))
+{
+    img.event-logo
+    {
+        float:right;
+
+        // the image is placed after the heading, so push it a bit to the top here
+        margin-top: -3em;
+    }
+}

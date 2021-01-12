@@ -1,4 +1,4 @@
-{% load static i18n bootstrap4 setting globalpermissions inventory %}
+{% load static compress i18n django_bootstrap5 setting globalpermissions inventory %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -7,87 +7,90 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {# jquery #}
-        <script src="{% static "helfertool/vendor/jquery/jquery.min.js" %}"></script>
+        {% compress css file main %}
+            <link href="{% static  "helfertool/theme/helfertool.scss" %}" media="all" rel="stylesheet" type="text/x-scss">
+            <!--<link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">-->
+        {% endcompress %}
 
-        {# bootstrap4 #}
-        <link href="{% static  "helfertool/vendor/bootstrap4/css/bootstrap.min.css" %}" media="all" rel="stylesheet">
-        <script src="{% static "helfertool/vendor/bootstrap4/js/bootstrap.bundle.min.js" %}"></script>
-
-        {# font awesome #}
-        <script src="{% static "helfertool/vendor/fontawesome/js/all.min.js" %}"></script>
-
-        {# custom css #}
-        <link href="{% static "helfertool/css/style.css" %}" media="all" rel="stylesheet">
+        {% compress js file main %}
+            <script src="{% static "helfertool/vendor/jquery/jquery.min.js" %}"></script>
+            <script src="{% static "helfertool/vendor/fontawesome/js/all.min.js" %}"></script>
+            <script src="{% static "helfertool/theme/bootstrap/dist/js/bootstrap.bundle.min.js" %}"></script>
+            <script src="{% static "helfertool/theme/helfertool.js" %}"></script>
+        {% endcompress %}
 
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
-        <title>{% block title %}{% trans "Helfertool" %}{% endblock %}</title>
+        <title>{% trans "Helfertool" %}</title>
 
         <link rel="shortcut icon" type="image/x-icon" href="{% static "helfertool/img/logo/icon.png" %}">
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="{% static "helfertool/img/logo/logo.svg" %}" height="20" alt="" class="navbar-logo">
+        <nav class="navbar navbar-expand navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url "index" %}">
+                    <img src="{% static "helfertool/img/logo/logo.svg" %}" height="20" alt="">
                 </a>
 
-                {# button to show menu on small devices#}
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarcontent" aria-controls="navbarcontent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                {# left menu #}
+                <ul class="navbar-nav me-auto">
+                    {% block sidemenubutton %}{% endblock %}
 
-                {# menu content #}
-                <div class="navbar-collapse collapse" id="navbarcontent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "index" %}">{% trans "Events" %}</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "index" %}">
+                            <i class="fas fa-home"></i> <span class="d-none d-md-inline-block">{% trans "Events" %}</span>
+                        </a>
+                    </li>
 
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "admin" %}">
+                            <i class="fas fa-wrench"></i> <span class="d-none d-md-inline-block">{% trans "Administration" context "Admin interface" %}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    {# switch language #}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe-europe"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end bg-white">
+                            {# form for language change as we need POSTs #}
+                            <form action="{% url 'set_language' %}" method="post" role="form" class="form-inline">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}" />
+
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+
+                                {% for language in languages %}
+                                    <li class="dropdown-item bg-white">
+                                        <button name="language" value="{{ language.code }}" type="submit" class="btn btn-link  shadow-none">{{ language.name_local }}</button>
+                                    </li>
+                                {% endfor %}
+                            </form>
+                        </ul>
+                    </li>
+
+                    {# login/logout #}
+                    <li class="nav-item">
                         {% if user.is_authenticated %}
-                            {# logged in #}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url "admin" %}">{% trans "Administration" context "Admin interface" %}</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url "logout" %}">{% trans "Logout" %}</a>
-                            </li>
+                            <a class="nav-link" href="{% url "logout" %}">
+                                <i class="fas fa-sign-out-alt"></i> <span class="d-none d-md-inline-block">{% trans "Logout" %}</span>
+                            </a>
                         {% else %}
-                            {# not logged in #}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url "login" %}">{% trans "Login" %}</a>
-                            </li>
+                            <a class="nav-link" href="{% url "login" %}">
+                                <i class="fas fa-sign-in-alt"></i> <span class="d-none d-md-inline-block">{% trans "Login" %}</span>
+                            </a>
                         {% endif %}
-                        {# end login #}
-                    </ul>
-
-                    {# language chooser #}
-                    <form action="{% url 'set_language' %}" method="post" role="form" class="form-inline">
-                        {% csrf_token %}
-                        <input name="next" type="hidden" value="{{ redirect_to }}" />
-
-                        <select name="language" onchange="this.form.submit()" class="form-control mr-sm-2">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        {% get_available_languages as LANGUAGES %}
-                        {% get_language_info_list for LANGUAGES as languages %}
-
-                        {% for language in languages %}
-                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                                {{ language.name_local }}
-                            </option>
-                        {% endfor %}
-                        </select>
-
-                        <noscript>
-                            <button type="submit" class="btn btn-outline-success my-2 my-sm-0">{% trans "Switch" %}</button>
-                        </noscript>
-                    </form>
-                    {# end language chooser #}
-                </div>
+                    </li>
+                </ul>
             </div>
         </nav>
 
@@ -98,26 +101,26 @@
             </div>
         {% endif %}
 
-        <div class="container container-main">
-            {# messages #}
-            {% if messages %}
-                {% bootstrap_messages messages %}
-            {% endif %}
-
-            {# content #}
-            {% block content %}{% endblock %}
+        <div class="wrapper">
+            {% block contentcontainer %}
+                <div id="content" class="container">
+                    {% if messages %}
+                        {% bootstrap_messages messages %}
+                    {% endif %}
+                    
+                    {% block content %}{% endblock %}
+                </div>
+            {% endblock %}
         </div>
 
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted">
-                    <a href="{% setting "PRIVACY_URL" %}" target="_blank">{% trans "Privacy" %}</a>
-                    |
-                    <a href="{% setting "IMPRINT_URL" %}" target="_blank">{% trans "Imprint" %}</a>
-                    |
-                    <a href="{% url "about" %}">{% trans "About this software" %}</a>
-                </p>
-            </div>
+        <footer class="container-fluid footer">
+            <p class="text-muted">
+                <a href="{% setting "PRIVACY_URL" %}" target="_blank">{% trans "Privacy" %}</a>
+                |
+                <a href="{% setting "IMPRINT_URL" %}" target="_blank">{% trans "Imprint" %}</a>
+                |
+                <a href="{% url "about" %}">{% trans "About this software" %}</a>
+            </p>
         </footer>
     </body>
 </html>

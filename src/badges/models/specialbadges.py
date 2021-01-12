@@ -89,6 +89,7 @@ class SpecialBadges(models.Model):
 
         new_specialbadges.template_badge = Badge.objects.create(event=event)
         _copy_badge(self.template_badge, new_specialbadges.template_badge)
+        new_specialbadges.template_badge.save()
 
         new_specialbadges.save()
 

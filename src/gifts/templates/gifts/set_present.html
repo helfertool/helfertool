@@ -1,25 +1,25 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons static %}
+{% load i18n django_bootstrap5 icons static %}
 
-{% block admincontent %}
-    <h2>{% trans "Presence for shift" %}</h2>
-    <h3>{{ shift }}</h3>
+{% block content %}
+    <h1>{% trans "Presence for shift" %}</h1>
+    <h2>{{ shift }}</h2>
 
     {% if form.visible_fields %}
-        <p id="set-all-presence">
+        <p>
             {% if form.automatic_presence %}
-            <a class="btn btn-sm btn-outline-primary" onclick="set_all('auto'); return false;" href="">
-                {% icon "clock" %} {% trans "Set all to auto" %}
-            </a>
+                <a class="btn btn-sm btn-outline-primary my-1" onclick="set_all('auto'); return false;" href="">
+                    {% icon "clock" %} {% trans "Set all to auto" %}
+                </a>
             {% else %}
-            <a class="btn btn-sm btn-outline-primary" onclick="set_all('unknown'); return false;" href="">
-                {% icon "question" %} {% trans "Set all to unknown" %}
-            </a>
+                <a class="btn btn-sm btn-outline-primary my-1" onclick="set_all('unknown'); return false;" href="">
+                    {% icon "question" %} {% trans "Set all to unknown" %}
+                </a>
             {% endif %}
-            <a class="btn btn-sm btn-outline-primary" onclick="set_all('present'); return false;" href="">
+            <a class="btn btn-sm btn-outline-primary my-1" onclick="set_all('present'); return false;" href="">
                 {% icon "check" %} {% trans "Set all to present" %}
             </a>
-            <a class="btn btn-sm btn-outline-primary" onclick="set_all('absent'); return false;" href="">
+            <a class="btn btn-sm btn-outline-primary my-1" onclick="set_all('absent'); return false;" href="">
                 {% icon "times" %} {% trans "Set all to absent" %}
             </a>
         </p>
@@ -27,22 +27,24 @@
         <form action="" method="post">
             {% csrf_token %}
 
-            <table class="table" aria-describedby="set-all-presence">
-                <tr>
-                    <th class="w-50" scope="col">{% trans Name %}</th>
-                    <th class="w-50" scope="col"></th>
-                </tr>
+            <ul class="list-group mt-4 mb-4">
                 {% for field in form.visible_fields %}
-                <tr>
-                    <td>{{ field }}</td>
-                    <td>{{ field.label }}</td>
-                </tr>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-4 col-sm-auto text-nobreak">
+                            {% bootstrap_field field show_label=False %}
+                        </div>
+                        <div class="col-8 col-sm-3">
+                            {{ field.label }}
+                        </div>
+                    </div>
+                </li>
                 {% endfor %}
-            </table>
+            </ul>
 
             {% bootstrap_form_errors form %}
 
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
         </form>
     {% else %}
         <p class="text-muted">{% trans "Nobody is registered for this shift." %}</p>

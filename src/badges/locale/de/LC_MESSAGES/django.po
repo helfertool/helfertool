@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,9 +38,20 @@ msgstr ""
 "Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken "
 "gelöscht oder das Badge gehört nicht zu dieser Veranstaltung."
 
-#: badges/forms/defaults.py:51
-msgid "No default role"
-msgstr "Keine Standard Rolle"
+#: badges/forms/defaults.py:46 badges/models/badge.py:97
+#: badges/templates/badges/list_specialbadges.html:45
+msgid "Design"
+msgstr "Design"
+
+#: badges/forms/defaults.py:52 badges/models/badge.py:88
+#: badges/templates/badges/list_specialbadges.html:43
+#: badges/templates/badges/list_specialbadges.html:44
+msgid "Role"
+msgstr "Rolle"
+
+#: badges/forms/defaults.py:57
+msgid "Print no default role"
+msgstr "Keine Standard Rolle abdrucken"
 
 #: badges/forms/settings.py:28
 msgid "File does not contain LaTeX code."
@@ -66,7 +77,7 @@ msgstr "Anderer Text für Schicht"
 msgid "Other text for role"
 msgstr "Anderer Text für Rolle"
 
-#: badges/models/badge.py:67 badges/templates/badges/list_specialbadges.html:48
+#: badges/models/badge.py:67 badges/templates/badges/list_specialbadges.html:46
 msgid "Photo"
 msgstr "Foto"
 
@@ -77,17 +88,6 @@ msgstr "Primäre Aufgabe"
 #: badges/models/badge.py:76
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
-
-#: badges/models/badge.py:88 badges/templates/badges/list_specialbadges.html:45
-#: badges/templates/badges/list_specialbadges.html:46
-#: badges/templates/badges/settings.html:110
-msgid "Role"
-msgstr "Rolle"
-
-#: badges/models/badge.py:97 badges/templates/badges/list_specialbadges.html:47
-#: badges/templates/badges/settings.html:111
-msgid "Design"
-msgstr "Design"
 
 #: badges/models/badge.py:102
 msgid "Badge was printed already"
@@ -105,36 +105,32 @@ msgstr "Standard Design"
 msgid "Do not print default roles on badges"
 msgstr "Keine Standard Rollen auf die Badges drucken"
 
-#: badges/models/design.py:41 badges/models/permission.py:17
+#: badges/models/design.py:42 badges/models/permission.py:17
 #: badges/models/role.py:18 badges/models/specialbadges.py:52
-#: badges/templates/badges/delete_design.html:13
-#: badges/templates/badges/delete_permission.html:13
-#: badges/templates/badges/delete_role.html:13
-#: badges/templates/badges/delete_specialbadges.html:13
-#: badges/templates/badges/list_specialbadges.html:33
-#: badges/templates/badges/settings.html:20
-#: badges/templates/badges/settings.html:68
-#: badges/templates/badges/settings_advanced.html:36
+#: badges/templates/badges/delete_design.html:11
+#: badges/templates/badges/delete_permission.html:11
+#: badges/templates/badges/delete_role.html:11
+#: badges/templates/badges/delete_specialbadges.html:11
 msgid "Name"
 msgstr "Name"
 
-#: badges/models/design.py:48
+#: badges/models/design.py:49
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: badges/models/design.py:49 badges/models/design.py:57
+#: badges/models/design.py:50 badges/models/design.py:58
 msgid "e.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: badges/models/design.py:56
+#: badges/models/design.py:57
 msgid "Background color"
 msgstr "Hintergrundfarbe"
 
-#: badges/models/design.py:61
+#: badges/models/design.py:62
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: badges/models/design.py:68
+#: badges/models/design.py:69
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
@@ -153,9 +149,8 @@ msgstr ""
 msgid "This name is used for the LaTeX template."
 msgstr "Dieser Name wird im LaTeX Template verwendet."
 
-#: badges/models/role.py:30 badges/templates/badges/delete_role.html:17
-#: badges/templates/badges/settings.html:22
-#: badges/templates/badges/settings_advanced.html:29
+#: badges/models/role.py:30 badges/templates/badges/delete_role.html:15
+#: badges/templates/badges/settings_advanced.html:60
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -227,110 +222,125 @@ msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern"
 msgid "Number of badges"
 msgstr "Anzahl der Badges"
 
-#: badges/tasks.py:49 badges/templates/badges/edit_specialbadges.html:6
-#: badges/templates/badges/index.html:60
+#: badges/tasks.py:49 badges/templates/badges/index.html:66
 #: badges/templates/badges/list_specialbadges.html:5
 msgid "Special badges"
 msgstr "Spezial Badges"
 
-#: badges/templates/badges/delete_design.html:6
-msgid "Delete Badge Design"
+#: badges/templates/badges/delete_design.html:5
+msgid "Delete badge design"
 msgstr "Badge Design löschen"
 
-#: badges/templates/badges/delete_design.html:18
-msgid "Remove this badge design?"
-msgstr "Dieses Badge Design löschen?"
+#: badges/templates/badges/delete_design.html:9
+msgid "Data of badge design"
+msgstr "Daten des Badge Designs"
 
-#: badges/templates/badges/delete_design.html:22
-#: badges/templates/badges/delete_permission.html:22
-#: badges/templates/badges/delete_role.html:32
-#: badges/templates/badges/delete_specialbadges.html:26
-#: badges/templates/badges/list_specialbadges.html:59
-#: badges/templates/badges/settings.html:44
-#: badges/templates/badges/settings.html:83
-#: badges/templates/badges/settings_advanced.html:52
+#: badges/templates/badges/delete_design.html:21
+#: badges/templates/badges/delete_permission.html:21
+#: badges/templates/badges/delete_role.html:31
+#: badges/templates/badges/delete_specialbadges.html:27
+#: badges/templates/badges/list_specialbadges.html:64
+#: badges/templates/badges/settings.html:45
+#: badges/templates/badges/settings.html:81
+#: badges/templates/badges/settings_advanced.html:85
 msgid "Delete"
 msgstr "Löschen"
 
-#: badges/templates/badges/delete_permission.html:6
-msgid "Delete Badge Permission"
+#: badges/templates/badges/delete_permission.html:5
+msgid "Delete badge permission"
 msgstr "Badge Berechtigung löschen"
 
-#: badges/templates/badges/delete_permission.html:18
-msgid "Remove this badge permission?"
-msgstr "Diese Badge Berechtigung löschen?"
+#: badges/templates/badges/delete_permission.html:9
+msgid "Data of badge permission"
+msgstr "Daten der Badge Berechtigung"
 
-#: badges/templates/badges/delete_role.html:6
-msgid "Delete Badge Role"
+#: badges/templates/badges/delete_role.html:5
+msgid "Delete badge role"
 msgstr "Badge Rolle löschen"
 
-#: badges/templates/badges/delete_role.html:28
-msgid "Remove this badge role?"
-msgstr "Diese Badge Rolle löschen?"
+#: badges/templates/badges/delete_role.html:9
+#: badges/templates/badges/delete_specialbadges.html:9
+msgid "Data of badge role"
+msgstr "Daten der Badge Rolle"
 
-#: badges/templates/badges/delete_specialbadges.html:6
+#: badges/templates/badges/delete_specialbadges.html:5
 msgid "Delete special badges"
 msgstr "Spezial Badges löschen"
 
-#: badges/templates/badges/delete_specialbadges.html:17
-#: badges/templates/badges/list_specialbadges.html:34
+#: badges/templates/badges/delete_specialbadges.html:15
 msgid "Number"
 msgstr "Anzahl"
 
-#: badges/templates/badges/delete_specialbadges.html:22
-msgid "Remove these special badges?"
-msgstr "Diese Spezial Badges löschen?"
-
-#: badges/templates/badges/download.html:6
+#: badges/templates/badges/download.html:5
 msgid "Download not available"
 msgstr "Download nicht verfügbar"
 
-#: badges/templates/badges/download.html:9
+#: badges/templates/badges/download.html:8
 msgid "Either the PDF is not ready yet or the generation failed."
 msgstr ""
 "Entweder ist die PDF Datei noch nicht verfügbar oder die Generierung ist "
 "fehlgeschlagen."
 
-#: badges/templates/badges/edit_badge.html:7
+#: badges/templates/badges/edit_badge.html:6
 #, python-format
 msgid "Badge for %(name)s"
 msgstr "Badge für %(name)s"
 
-#: badges/templates/badges/edit_badge.html:9
+#: badges/templates/badges/edit_badge.html:8
 #, python-format
 msgid "Special badges for %(name)s"
 msgstr "Spezial Badges für %(name)s"
 
-#: badges/templates/badges/edit_badge.html:21
-#: badges/templates/badges/edit_design.html:13
-#: badges/templates/badges/edit_permission.html:13
-#: badges/templates/badges/edit_role.html:13
-#: badges/templates/badges/settings.html:138
-#: badges/templates/badges/settings_advanced.html:24
+#: badges/templates/badges/edit_badge.html:65
+#: badges/templates/badges/edit_design.html:44
+#: badges/templates/badges/edit_permission.html:32
+#: badges/templates/badges/edit_role.html:34
+#: badges/templates/badges/settings.html:141
+#: badges/templates/badges/settings_advanced.html:56
 msgid "Save"
 msgstr "Speichern"
 
 #: badges/templates/badges/edit_design.html:6
-msgid "Badge Design"
-msgstr "Badge Design"
+msgid "Edit badge design"
+msgstr "Badge Design bearbeiten"
+
+#: badges/templates/badges/edit_design.html:8
+msgid "New badge design"
+msgstr "Neues Badge Design"
 
 #: badges/templates/badges/edit_permission.html:6
-msgid "Badge Permission"
-msgstr "Badge Berechtigung"
+msgid "Edit badge permission"
+msgstr "Badge Berechtigung bearbeiten"
+
+#: badges/templates/badges/edit_permission.html:8
+msgid "New badge permission"
+msgstr "Neue Badge Berechtigung"
 
 #: badges/templates/badges/edit_role.html:6
-msgid "Badge Role"
-msgstr "Badge Rolle"
+msgid "Edit badge role"
+msgstr "Badge Rolle bearbeiten"
 
-#: badges/templates/badges/edit_specialbadges.html:13
+#: badges/templates/badges/edit_role.html:8
+msgid "New badge role"
+msgstr "Neue Badge Rolle"
+
+#: badges/templates/badges/edit_specialbadges.html:6
+msgid "Edit special badge"
+msgstr "Spezial Badge bearbeiten"
+
+#: badges/templates/badges/edit_specialbadges.html:8
+msgid "New special badge"
+msgstr "Neues Spezial Badge"
+
+#: badges/templates/badges/edit_specialbadges.html:25
 msgid "Continue"
 msgstr "Weiter"
 
-#: badges/templates/badges/failed.html:6
+#: badges/templates/badges/failed.html:5
 msgid "Generating badges failed"
 msgstr "Generieren der Badges fehlgeschlagen"
 
-#: badges/templates/badges/failed.html:18
+#: badges/templates/badges/failed.html:17
 msgid "There is no error"
 msgstr "Es gibt keinen Fehler"
 
@@ -349,37 +359,30 @@ msgstr ""
 msgid "Please reload the page (due to inactivity)."
 msgstr "Bitte lade die Seite neu (wegen Inaktivität)."
 
-#: badges/templates/badges/index.html:24
-#: badges/templates/badges/settings.html:109
-msgid "Job"
-msgstr "Aufgabe"
+#: badges/templates/badges/index.html:33
+msgid "No warnings"
+msgstr "Keine Warnungen"
 
-#: badges/templates/badges/index.html:25
-msgid "Generate"
-msgstr "Generieren"
+#: badges/templates/badges/index.html:36
+#, python-format
+msgid "1 warning"
+msgid_plural "%(counter)s warnings"
+msgstr[0] "1 Warnung"
+msgstr[1] "%(counter)s Warnungen"
 
-#: badges/templates/badges/index.html:26
-msgid "Warnings"
-msgstr "Warnungen"
-
-#: badges/templates/badges/index.html:35 badges/templates/badges/index.html:64
+#: badges/templates/badges/index.html:49 badges/templates/badges/index.html:75
 msgid "Unregistered badges"
 msgstr "Nicht registrierte Badges"
 
-#: badges/templates/badges/index.html:40 badges/templates/badges/index.html:69
+#: badges/templates/badges/index.html:54 badges/templates/badges/index.html:80
 msgid "All badges"
 msgstr "Alle Badges"
 
-#: badges/templates/badges/index.html:45 badges/templates/badges/index.html:50
-#, python-format
-msgid "%(num)s warnings"
-msgstr "%(num)s Warnungen"
-
-#: badges/templates/badges/index.html:79 badges/views/generate.py:199
+#: badges/templates/badges/index.html:89 badges/views/generate.py:199
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:84 badges/views/generate.py:201
+#: badges/templates/badges/index.html:94 badges/views/generate.py:201
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -412,39 +415,45 @@ msgstr "Bitte gib hier keine personenbezogenen Daten wie Namen ein!"
 msgid "Add special badges"
 msgstr "Spezial Badges hinzufügen"
 
-#: badges/templates/badges/list_specialbadges.html:43
+#: badges/templates/badges/list_specialbadges.html:41
 msgid "Texts: Job"
 msgstr "Texte: Aufgabe"
 
-#: badges/templates/badges/list_specialbadges.html:44
+#: badges/templates/badges/list_specialbadges.html:42
 msgid "Shift"
 msgstr "Schicht"
 
-#: badges/templates/badges/list_specialbadges.html:55
-#: badges/templates/badges/settings.html:40
-#: badges/templates/badges/settings.html:79
-#: badges/templates/badges/settings_advanced.html:48
+#: badges/templates/badges/list_specialbadges.html:49
+#, python-format
+msgid "1 badge"
+msgid_plural "%(counter)s badges"
+msgstr[0] "1 Badge"
+msgstr[1] "%(counter)s Badges"
+
+#: badges/templates/badges/list_specialbadges.html:60
+#: badges/templates/badges/settings.html:41
+#: badges/templates/badges/settings.html:77
+#: badges/templates/badges/settings_advanced.html:81
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: badges/templates/badges/list_specialbadges.html:67
+#: badges/templates/badges/list_specialbadges.html:73
 msgid "There are no special badges."
 msgstr "Es gibt keine Spezial Badges."
 
-#: badges/templates/badges/not_active.html:6
-#: badges/templates/badges/tasklist.html:9
+#: badges/templates/badges/not_active.html:5
 msgid "Badges"
 msgstr "Badges"
 
-#: badges/templates/badges/not_active.html:9
+#: badges/templates/badges/not_active.html:8
 msgid "The badge creation is not actived."
 msgstr "Die Generierung von Badges ist nicht aktiviert."
 
-#: badges/templates/badges/register.html:6
+#: badges/templates/badges/register.html:5
 msgid "Register badges"
 msgstr "Badges registrieren"
 
-#: badges/templates/badges/register.html:10
+#: badges/templates/badges/register.html:9
 msgid "Barcodes are not activated."
 msgstr "Barcodes sind nicht aktiviert."
 
@@ -460,38 +469,29 @@ msgstr "Erweiterte Einstellungen"
 msgid "Roles"
 msgstr "Rollen"
 
-#: badges/templates/badges/settings.html:16
+#: badges/templates/badges/settings.html:15
 msgid "There are no roles."
 msgstr "Es gibt keine Rollen."
 
-#: badges/templates/badges/settings.html:21
-#: badges/templates/badges/settings_advanced.html:37
-msgid "LaTeX Name"
-msgstr "LaTeX Name"
-
-#: badges/templates/badges/settings.html:56
+#: badges/templates/badges/settings.html:58
 msgid "Add role"
 msgstr "Rolle hinzufügen"
 
-#: badges/templates/badges/settings.html:61
+#: badges/templates/badges/settings.html:63
 msgid "Designs"
 msgstr "Designs"
 
-#: badges/templates/badges/settings.html:64
+#: badges/templates/badges/settings.html:65
 msgid "There are no designs."
 msgstr "Es gibt keine Designs."
 
-#: badges/templates/badges/settings.html:95
+#: badges/templates/badges/settings.html:94
 msgid "Add design"
 msgstr "Design hinzufügen"
 
-#: badges/templates/badges/settings.html:101
+#: badges/templates/badges/settings.html:99
 msgid "Defaults"
 msgstr "Standards"
-
-#: badges/templates/badges/settings.html:112
-msgid "Print no default role"
-msgstr "Keine Standard Rolle abdrucken"
 
 #: badges/templates/badges/settings_advanced.html:5
 msgid "Advanced badge settings"
@@ -508,52 +508,44 @@ msgstr ""
 msgid "Template"
 msgstr "Template"
 
-#: badges/templates/badges/settings_advanced.html:14
+#: badges/templates/badges/settings_advanced.html:13
 msgid "Here you can get the sample LaTeX template:"
 msgstr "Hier kannst du die Vorlage für das LaTeX Template bekommen:"
 
-#: badges/templates/badges/settings_advanced.html:15
-#: badges/templates/badges/tasklist.html:26
+#: badges/templates/badges/settings_advanced.html:14
+#: badges/templates/badges/tasklist.html:23
 msgid "Download"
 msgstr "Herunterladen"
 
-#: badges/templates/badges/settings_advanced.html:32
+#: badges/templates/badges/settings_advanced.html:62
 msgid "There are no permissions."
 msgstr "Es gibt keine Berechtigungen."
 
-#: badges/templates/badges/settings_advanced.html:64
+#: badges/templates/badges/settings_advanced.html:98
 msgid "Add permission"
 msgstr "Berechtigung hinzufügen"
 
 #: badges/templates/badges/tasklist.html:3
-msgid "Please login again."
+msgid "Please log in again."
 msgstr "Logge dich bitte wieder ein."
 
-#: badges/templates/badges/tasklist.html:6
-msgid "Currently generated badges"
-msgstr "Aktuell generierte Badges"
-
-#: badges/templates/badges/tasklist.html:10
-msgid "Status"
-msgstr "Status"
-
-#: badges/templates/badges/tasklist.html:22
+#: badges/templates/badges/tasklist.html:19
 msgid "Show errors"
 msgstr "Fehler anzeigen"
 
-#: badges/templates/badges/warnings.html:6
+#: badges/templates/badges/warnings.html:5
 msgid "Warnings for badge generation"
 msgstr "Warnungen für die Badge Generierung"
 
-#: badges/templates/badges/warnings.html:9
+#: badges/templates/badges/warnings.html:8
 msgid "There are no warnings."
 msgstr "Es gibt keine Warnungen."
 
-#: badges/templates/badges/warnings.html:12
+#: badges/templates/badges/warnings.html:11
 msgid "Info:"
 msgstr "Hinweis:"
 
-#: badges/templates/badges/warnings.html:13
+#: badges/templates/badges/warnings.html:12
 msgid ""
 "The listed persons have more than one job, so you have to select the primary "
 "job in the badge settings."
@@ -590,6 +582,40 @@ msgstr "Bagde bereits gedruckt: %(name)s"
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"
+
+#~ msgid "No default role"
+#~ msgstr "Keine Standard Rolle"
+
+#~ msgid "Remove this badge design?"
+#~ msgstr "Dieses Badge Design löschen?"
+
+#~ msgid "Remove this badge permission?"
+#~ msgstr "Diese Badge Berechtigung löschen?"
+
+#~ msgid "Remove this badge role?"
+#~ msgstr "Diese Badge Rolle löschen?"
+
+#~ msgid "Remove these special badges?"
+#~ msgstr "Diese Spezial Badges löschen?"
+
+#~ msgid "Job"
+#~ msgstr "Aufgabe"
+
+#~ msgid "Generate"
+#~ msgstr "Generieren"
+
+#, python-format
+#~ msgid "%(num)s warnings"
+#~ msgstr "%(num)s Warnungen"
+
+#~ msgid "LaTeX Name"
+#~ msgstr "LaTeX Name"
+
+#~ msgid "Currently generated badges"
+#~ msgstr "Aktuell generierte Badges"
+
+#~ msgid "Status"
+#~ msgstr "Status"
 
 #~ msgid "Badge Status"
 #~ msgstr "Badge Status"

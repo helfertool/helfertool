@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 toolsettings setting %}
+{% load i18n django_bootstrap5 icons toolsettings setting %}
 
 {% block content %}
     <h1>{% trans "Login" %}</h1>
@@ -14,7 +14,7 @@
             {% endblocktrans %}
         </a>
 
-        <h3 class="pt-md-3">{% trans "Local account" %}</h3>
+        <h2 class="pt-md-3">{% trans "Local account" %}</h2>
     {% endif %}
 
     <form action="{% url "login" %}" method="post" accept-charset="utf-8" role="form">
@@ -25,12 +25,12 @@
                 {% bootstrap_form_errors form %}
             </div>
             <div class="col-xs-12 col-lg-6">
-                {% bootstrap_field form.username required_css_class='' %}
-                {% bootstrap_field form.password required_css_class='' %}
+                {% bootstrap_field form.username required_css_class="" layout="floating" %}
+                {% bootstrap_field form.password required_css_class=""  layout="floating" %}
             </div>
         </div>
 
         <input type="hidden" name="next" value="{{ next }}" />
-        <input type="submit" value="{% trans "Login" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-primary">{% icon "sign-in-alt" %} {% trans "Login" %}</button>
     </form>
 {% endblock %}

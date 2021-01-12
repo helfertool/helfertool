@@ -1,19 +1,20 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Add as coordinator" %}</h2>
+{% block content %}
+    <h1>{% trans "Add as coordinator" %}</h1>
 
-    {% if form.jobs %}
+    {% if form.possible_jobs %}
         <form action="" method="post">
             {% csrf_token %}
 
-            {% bootstrap_form form %}
+            {% bootstrap_form form show_label=False %}
 
-            <input type="submit" value="{% trans "Add" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary">{% icon "plus" %} {% trans "Add" %}</button>
         </form>
     {% else %}
             <p class="text-muted">{% trans "There are no jobs left for which you have the permission to add coordinators." %}</p>
+
+            <a href="{% url 'view_helper' event.url_name helper.pk %}" class="btn btn-outline-primary">{% icon "arrow-left" %} {% trans "Back" %}</a>
     {% endif %}
 {% endblock %}

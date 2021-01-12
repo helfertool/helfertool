@@ -1,52 +1,51 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 translation %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Past events" %}</h2>
+{% block content %}
+    <h1>{% trans "Past events" %}</h1>
 
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-secondary" role="alert">
         {% blocktrans trimmed %}
             This page shows events, which are older then the specified time, but not archived yet. 
         {% endblocktrans %}
     </div>
 
     <form action="" method="get">
-        {% bootstrap_form form %}
+        {% bootstrap_form form layout="floating" %}
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Update" %}" class="btn btn-outline-primary mb-4" />
+        <button type="submit" class="btn btn-outline-primary mb-4">{% icon "sync" %} {% trans "Update" %}</button>
     </form>
 
     {% if events %}
-        <table class="table" aria-describedby="job-{{ job.id }}-header">
-            <tr>
-                <th scope="col">{% trans "Event" %}</th>
-                <th scope="col">{% trans "Date" %}</th>
-                <th scope="col">{% trans "Admins" %}</th>
-            </tr>
+        <ul class="list-group">
             {% for event in events %}
-            <tr>
-                <td><a href="{% url 'edit_event' event.url_name %}">{{ event.name }}</a></td>
-                <td>
-                    {{ event.date }}
-                    <span class="text-muted">
-                    {% blocktrans trimmed with time=event.date|timesince %}
-                        ({{ time }} ago)
-                    {% endblocktrans %}
-                    </span>
-                </td>
-                <td>
-                    {% for admin in event.admins.all %}
-                    {{ admin.get_full_name }}
-                    {% if admin.email %}
-                        ({{ admin.email }})
-                    {% endif %}
-                    <br />
-                {% endfor %}
-                </td>
-            </tr>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-12 col-md-3 py-1">
+                        <a href="{% url 'edit_event' event.url_name %}">{{ event.name }}</a>
+                    </div>
+                    <div class="col-12 col-md-4 py-1">
+                        {{ event.date }}
+                        <span class="text-muted">
+                        {% blocktrans trimmed with time=event.date|timesince %}
+                            ({{ time }} ago)
+                        {% endblocktrans %}
+                        </span>
+                    </div>
+                    <div class="col-12 col-md-5 py-1">
+                        {% for admin in event.admins.all %}
+                            {{ admin.get_full_name }}
+                            {% if admin.email %}
+                                ({{ admin.email }})
+                            {% endif %}
+                            <br />
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "No events found." %}</p>
     {% endif %}

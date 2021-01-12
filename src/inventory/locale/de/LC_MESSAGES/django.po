@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,13 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: inventory/forms/admin.py:45
+#: inventory/forms/admin.py:44
 msgid "Item with this barcode already exists in this inventory"
 msgstr "Es gibt bereits einen Gegenstand mit diesem Barcode in diesem Inventar"
 
 #: inventory/forms/barcode.py:10 inventory/models.py:57
-#: inventory/templates/inventory/admin/delete_item.html:21
-#: inventory/templates/inventory/admin/inventory_items.html:16
+#: inventory/templates/inventory/admin/delete_item.html:19
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -33,10 +32,8 @@ msgid "There is no item with this barcode for this event."
 msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
 
 #: inventory/models.py:19 inventory/models.py:52
-#: inventory/templates/inventory/admin/delete_inventory.html:13
-#: inventory/templates/inventory/admin/delete_item.html:17
-#: inventory/templates/inventory/admin/inventory_items.html:15
-#: inventory/templates/inventory/admin/inventory_list.html:15
+#: inventory/templates/inventory/admin/delete_inventory.html:11
+#: inventory/templates/inventory/admin/delete_item.html:15
 msgid "Name"
 msgstr "Name"
 
@@ -49,7 +46,6 @@ msgid "Same item may be assigned to different helpers"
 msgstr "Gleicher Gegenstand darf mehreren Personen zugeordnet werden"
 
 #: inventory/models.py:62
-#: inventory/templates/inventory/admin/inventory_items.html:17
 msgid "Comment"
 msgstr "Kommantar"
 
@@ -57,38 +53,49 @@ msgstr "Kommantar"
 msgid "Available inventory"
 msgstr "Verfügbares Inventar"
 
-#: inventory/templates/inventory/admin/delete_inventory.html:6
-#: inventory/templates/inventory/admin/delete_inventory.html:28
+#: inventory/templates/inventory/admin/delete_inventory.html:5
 msgid "Delete inventory"
 msgstr "Inventar löschen"
 
-#: inventory/templates/inventory/admin/delete_inventory.html:17
-#: inventory/templates/inventory/admin/inventory_list.html:16
+#: inventory/templates/inventory/admin/delete_inventory.html:9
+msgid "Data of inventory"
+msgstr "Daten des Inventars"
+
+#: inventory/templates/inventory/admin/delete_inventory.html:15
 msgid "Admins"
 msgstr "Admins"
 
-#: inventory/templates/inventory/admin/delete_item.html:6
-#: inventory/templates/inventory/admin/delete_item.html:28
+#: inventory/templates/inventory/admin/delete_inventory.html:29
+#: inventory/templates/inventory/admin/delete_item.html:29
+#: inventory/templates/inventory/admin/inventory_items.html:42
+#: inventory/templates/inventory/admin/inventory_list.html:51
+msgid "Delete"
+msgstr "Löschen"
+
+#: inventory/templates/inventory/admin/delete_item.html:5
 msgid "Delete item"
 msgstr "Gegenstand löschen"
 
-#: inventory/templates/inventory/admin/delete_item.html:13
-#: inventory/templates/inventory/admin/edit_inventory.html:6
+#: inventory/templates/inventory/admin/delete_item.html:9
+msgid "Data of inventory item"
+msgstr "Daten des Gegenstands"
+
+#: inventory/templates/inventory/admin/delete_item.html:11
+#: inventory/templates/inventory/admin/edit_inventory.html:5
 #: inventory/templates/inventory/admin/inventory_items.html:5
 #: inventory/templates/inventory/admin/inventory_list.html:5
-#: inventory/templates/inventory/list.html:7
-#: inventory/templates/inventory/not_active.html:6
+#: inventory/templates/inventory/list.html:5
+#: inventory/templates/inventory/not_active.html:5
 msgid "Inventory"
 msgstr "Inventar"
 
-#: inventory/templates/inventory/admin/edit_inventory.html:13
-#: inventory/templates/inventory/admin/edit_item.html:13
-#: inventory/templates/inventory/event_settings.html:13
+#: inventory/templates/inventory/admin/edit_inventory.html:12
+#: inventory/templates/inventory/admin/edit_item.html:12
+#: inventory/templates/inventory/event_settings.html:12
 msgid "Save"
 msgstr "Speichern"
 
-#: inventory/templates/inventory/admin/edit_item.html:6
-#: inventory/templates/inventory/list.html:13
+#: inventory/templates/inventory/admin/edit_item.html:5
 msgid "Item"
 msgstr "Gegenstand"
 
@@ -96,17 +103,12 @@ msgstr "Gegenstand"
 msgid "New item"
 msgstr "Neuer Gegenstand"
 
-#: inventory/templates/inventory/admin/inventory_items.html:28
-#: inventory/templates/inventory/admin/inventory_list.html:42
+#: inventory/templates/inventory/admin/inventory_items.html:35
+#: inventory/templates/inventory/admin/inventory_list.html:44
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: inventory/templates/inventory/admin/inventory_items.html:35
-#: inventory/templates/inventory/admin/inventory_list.html:49
-msgid "Delete"
-msgstr "Löschen"
-
-#: inventory/templates/inventory/admin/inventory_items.html:42
+#: inventory/templates/inventory/admin/inventory_items.html:50
 msgid "There are no items."
 msgstr "Es gibt keine Gegenstände."
 
@@ -115,72 +117,72 @@ msgid "New inventory"
 msgstr "Neues Inventar"
 
 #. Translators: List verb
-#: inventory/templates/inventory/admin/inventory_list.html:35
+#: inventory/templates/inventory/admin/inventory_list.html:37
 msgid "List"
 msgstr "Auflisten"
 
-#: inventory/templates/inventory/admin/inventory_list.html:57
+#: inventory/templates/inventory/admin/inventory_list.html:60
 msgid "There is no inventory."
 msgstr "Es gibt kein Inventar."
 
-#: inventory/templates/inventory/event_settings.html:6
+#: inventory/templates/inventory/event_settings.html:5
 msgid "Inventory settings"
 msgstr "Inventar Einstellungen"
 
-#: inventory/templates/inventory/list.html:14
-msgid "Status and log"
-msgstr "Status und Log"
-
-#: inventory/templates/inventory/list.html:23
+#: inventory/templates/inventory/list.html:19
 msgid "Not in use"
 msgstr "Wird nicht verwendet"
 
-#: inventory/templates/inventory/list.html:26
+#: inventory/templates/inventory/list.html:22
 #, python-format
 msgid "%(num_uses)s times in use"
 msgstr "%(num_uses)s mal in Verwendung"
 
-#: inventory/templates/inventory/list.html:33
+#: inventory/templates/inventory/list.html:29
 #, python-format
 msgid "In use: %(helper)s"
 msgstr "In Verwendung: %(helper)s"
 
-#: inventory/templates/inventory/list.html:43
+#: inventory/templates/inventory/list.html:39
 msgid "Show log"
 msgstr "Zeige Log"
 
-#: inventory/templates/inventory/list.html:54
+#: inventory/templates/inventory/list.html:50
 msgid "to"
 msgstr "bis"
 
-#: inventory/templates/inventory/list.html:60
+#: inventory/templates/inventory/list.html:56
 msgid "Since"
 msgstr "Seit"
 
-#: inventory/templates/inventory/not_active.html:9
+#: inventory/templates/inventory/list.html:70
+msgid "No items were given to helpers yet."
+msgstr "Es wurden noch keine Gegenstände an die Helfer:in ausgegeben."
+
+#: inventory/templates/inventory/not_active.html:8
 msgid "The inventory functionality is not actived."
 msgstr "Die Inventar Funktion ist nicht aktiviert."
 
-#: inventory/templates/inventory/register_badge.html:6
+#: inventory/templates/inventory/register_badge.html:5
 msgid "Register: Scan badge"
 msgstr "Eintragen: Badge scannen"
 
-#: inventory/templates/inventory/register_badge.html:10
-#: inventory/templates/inventory/take_back_badge.html:10
+#: inventory/templates/inventory/register_badge.html:9
+#: inventory/templates/inventory/take_back_badge.html:9
 msgid "You have to scan the item first."
 msgstr "Du musst den Gegenstand zuerst scannen."
 
-#: inventory/templates/inventory/register_badge.html:12
-#: inventory/templates/inventory/take_back_badge.html:12
+#: inventory/templates/inventory/register_badge.html:11
+#: inventory/templates/inventory/take_back_badge.html:11
 msgid "Scan item"
 msgstr "Gegenstand scannen"
 
-#: inventory/templates/inventory/register_badge.html:19
-#: inventory/templates/inventory/register_item.html:13
+#: inventory/templates/inventory/register_badge.html:18
+#: inventory/templates/inventory/register_item.html:12
 msgid "This item is already assigned to another helper."
-msgstr "Dieser Gegenstand ist bereits einem anderen Helfer zugeordnet"
+msgstr "Dieser Gegenstand ist bereits einem anderen Helfer zugeordnet."
 
-#: inventory/templates/inventory/register_badge.html:25
+#: inventory/templates/inventory/register_badge.html:24
 msgid ""
 "This is a special badge, which is not associated with a helper. It cannot be "
 "used here."
@@ -188,69 +190,72 @@ msgstr ""
 "Das ist ein Spezial Badge, welches mit keinem Helfer verknüpft ist. Es kann "
 "hier nicht genutzt werden."
 
-#: inventory/templates/inventory/register_badge.html:32
-#: inventory/templates/inventory/take_back_badge.html:26
+#: inventory/templates/inventory/register_badge.html:31
+#: inventory/templates/inventory/take_back_badge.html:25
 msgid "Scan other item"
 msgstr "Anderen Gegenstand scannen"
 
-#: inventory/templates/inventory/register_item.html:6
+#: inventory/templates/inventory/register_item.html:5
 msgid "Register: Scan item"
 msgstr "Eintragen: Gegenstand scannen"
 
-#: inventory/templates/inventory/register_item.html:20
+#: inventory/templates/inventory/register_item.html:19
 msgid "Take item back"
 msgstr "Gegenstand zurücknehmen"
 
-#: inventory/templates/inventory/register_item.html:28
+#: inventory/templates/inventory/register_item.html:27
 #, python-format
 msgid "Assigned to %(last_helper)s"
 msgstr "Eingetragen für %(last_helper)s"
 
-#: inventory/templates/inventory/register_item.html:34
+#: inventory/templates/inventory/register_item.html:33
 msgid "The helper now has these items:"
 msgstr "Der Helfer hat jetzt folgende Gegenstände:"
 
-#: inventory/templates/inventory/take_back_badge.html:6
+#: inventory/templates/inventory/take_back_badge.html:5
 msgid "Take back: Scan badge"
 msgstr "Zurück nehmen: Badge scannen"
 
-#: inventory/templates/inventory/take_back_badge.html:19
+#: inventory/templates/inventory/take_back_badge.html:18
 msgid "This item is not assigned to this helper, but to another helper."
 msgstr ""
 "Der Gegenstand ist nicht für diesen Helfer eingetragen, aber für einen "
 "anderen."
 
-#: inventory/templates/inventory/take_back_badge.html:29
+#: inventory/templates/inventory/take_back_badge.html:28
 msgid "Take back without badge"
 msgstr "Ohne Badge zurück nehmen"
 
-#: inventory/templates/inventory/take_back_error.html:6
+#: inventory/templates/inventory/take_back_error.html:5
 msgid "Error during taking back an item"
 msgstr "Fehler beim Zurücknehmen des Gegenstands"
 
-#: inventory/templates/inventory/take_back_error.html:10
+#: inventory/templates/inventory/take_back_error.html:9
 msgid ""
 "The item should only be assigned once, but multiple assignments are saved."
 msgstr ""
 "Der Gegenstand sollte nur einmal zugeordnet sein, aber es sind mehrere "
 "Zuordnungen gespeichert."
 
-#: inventory/templates/inventory/take_back_error.html:12
+#: inventory/templates/inventory/take_back_error.html:11
 msgid "The item is not assigned to any helper."
 msgstr "Dieser Gegenstand ist keinem Helfer zugeordnet."
 
-#: inventory/templates/inventory/take_back_item.html:6
+#: inventory/templates/inventory/take_back_item.html:5
 msgid "Take back: Scan item"
 msgstr "Zurück nehmen: Gegenstand scannen"
 
-#: inventory/templates/inventory/take_back_item.html:13
+#: inventory/templates/inventory/take_back_item.html:12
 msgid "This item is not in use."
 msgstr "Der Gegenstand wird nicht verwendet."
 
-#: inventory/templates/inventory/take_back_item.html:25
+#: inventory/templates/inventory/take_back_item.html:24
 msgid "The helper still has these items:"
 msgstr "Der Helfer hat noch folgende Gegenstände:"
 
-#: inventory/templates/inventory/take_back_item.html:35
+#: inventory/templates/inventory/take_back_item.html:34
 msgid "Everything returned!"
 msgstr "Alles zurück gegeben!"
+
+#~ msgid "Status and log"
+#~ msgstr "Status und Log"

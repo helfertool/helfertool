@@ -1,11 +1,11 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Audit log" %}</h2>
+{% block content %}
+    <h1>{% trans "Audit log" %}</h1>
 
     {% if enabled %}
-        <form action="{% url 'toollog:event_audit_log' event.url_name %}" method="post">
+        <form action="{% url 'toollog:event_audit_log' event.url_name %}" method="post" class="mb-3">
             {% csrf_token %}
             <div class="row">
                 <div class="col-lg-4">{% bootstrap_field form.user %}</div>
@@ -14,51 +14,77 @@
             </div>
 
             {% bootstrap_form_errors form %}
-            <input type="submit" value="{% trans "Update" %}" class="btn btn-outline-primary mb-4" />
-            <a href="{% url 'toollog:event_audit_log' event.url_name %}" class="btn btn-outline-primary mb-4 ml-2">{% trans "Clear filter" %}</a>
+
+            <button type="submit" class="btn btn-outline-primary me-2 my-1">{% icon "search" %} {% trans "Search" %}</button>
+            <a href="{% url 'toollog:event_audit_log' event.url_name %}" class="btn btn-outline-primary my-1">{% icon "times" %} {% trans "Clear filter" %}</a>
         </form>
 
         {% if log %}
-            <table class="table" aria-label="List of audit log events">
-                <tr>
-                    <th scope="col">{% trans "Timestamp" %}</th>
-                    <th scope="col">{% trans "Entry" %}</th>
-                    <th scope="col">{% trans "Helper" %}</th>
-                    <th scope="col">{% trans "User" %}</th>
-                    <th scope="col"></th>
-                </tr>
-                {% for entry in log %}
-                <tr>
-                    <td>{{ entry.timestamp }} <span class="text-muted">({{ entry.timestamp|date:"O" }})</span></td>
-                    <td>{{ entry.message }}</td>
-                    <td>
-                        {% if entry.helper %}
-                            <a href="{% url 'view_helper' event.url_name entry.helper.pk %}">{{ entry.helper.full_name }}</a>
-                        {% endif %}
-                    </td>
-                    <td>{{ entry.user.get_full_name }}</td>
-                    <td>
-                        {% if entry.extras %}
-                            <a data-toggle="collapse" href="#log-extras-{{ entry.id }}" role="button">{% icon "plus" %}</a>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% if entry.extras %}
-                    <tr>
-                        <td colspan="5" class="border-0 pt-0 pb-0">
-                            <div id="log-extras-{{ entry.id }}" class="collapse mb-3">
-                                {{ entry.extras }}
+            <ul class="list-group mb-4">
+                <li class="list-group-item fw-bold">
+                    <div class="row">
+                        <div class="row">
+                            <div class="d-none d-md-table-cell col-6 col-xl-3 py-1">
+                                {% trans "Timestamp" %}
                             </div>
-                        </td>
-                    </tr>
-                {% endif %}
+                            <div class="d-none d-md-table-cell col-6 col-xl-3 py-1">
+                                {% trans "Entry" %}
+                            </div>
+                            <div class="d-none d-xl-table-cell col-3 py-1">
+                                {% trans "Helper" %}
+                            </div>
+                            <div class="d-none d-xl-table-cell col-3 py-1">
+                                {% trans "User" %}
+                            </div>
+
+                            {# show alternative header on small screen sizes (we cannot hide the complete li, otherwise a border line is missing) #}
+                            <div class="d-md-none col-12 py-1">
+                                {% trans "Entries" %}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                {% for entry in log %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-xl-3 py-1">
+                                <span class="d-md-none">{% icon "clock" %}</span>
+                                {{ entry.timestamp }} <span class="text-muted">({{ entry.timestamp|date:"O" }})</span>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-3 py-1">
+                                {{ entry.message }}
+
+                                {% if entry.extras %}
+                                    <a data-bs-toggle="collapse" href="#log-extras-{{ entry.id }}" role="button" class="ms-1">{% icon "plus" %}</a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-xl-3 py-1">
+                                {% if entry.helper %}
+                                    <span class="d-xl-none fw-bold">{% trans "Helper" %}:</span>
+                                    <a href="{% url 'view_helper' event.url_name entry.helper.pk %}">{{ entry.helper.full_name }}</a>
+                                {% endif %}
+                            </div>
+                            <div class="col-12 col-xl-3 py-1">
+                                <span class="d-xl-none fw-bold">{% trans "User" %}:</span>
+                                {{ entry.user.get_full_name }}
+                            </div>
+                            {% if entry.extras %}
+                                <div id="log-extras-{{ entry.id }}" class="collapse col-12 text-muted">
+                                    {{ entry.extras }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </li>
                 {% endfor %}
-            </table>
+            </ul>
+
+            {% bootstrap_pagination log %}
         {% else %}
             <p class="text-muted">{% trans "No log entries found." %}</p>
         {% endif %}
-
-        {% bootstrap_pagination log %}
     {% else %}
         <div class="alert alert-info">
             {% trans "Logging to database not enabled." %}

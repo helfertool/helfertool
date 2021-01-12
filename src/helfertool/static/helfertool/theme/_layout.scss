@@ -1,0 +1,160 @@
+// the overall components: navbar, side menu, footer
+
+$sidemenu_width: 15rem;
+$footer_height: 2.5rem;
+
+html {
+    // required for footer
+    position: relative;
+    min-height: 100%;
+}
+
+// navbar on top
+.navbar {
+    // align the logo relatively to the text
+    .navbar-brand img {
+        margin-bottom: 5px;
+    }
+}
+
+// sidemenu
+.wrapper {
+    // required for sidemenu
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+
+    // keep space for footer
+    margin-bottom: $footer_height;
+
+    // crop content on the right (due to min-width of #content)
+    overflow-x: hidden;
+}
+
+#sidemenu {
+    // set fixed width
+    min-width: $sidemenu_width;
+    max-width: $sidemenu_width;
+
+    // stretch sidemenu to full height (55px is about the height of the navbar)
+    min-height: calc(100vh - 55px - #{$footer_height});
+
+    // paddings
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    // color
+    background-color: darken($body-bg, 5%);
+    border-right: 1px solid darken($body-bg, 20%);
+
+    // animations
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+
+    // header on top of sidemenu
+    .sidemenu-header {
+        font-weight: bold;
+        font-size: 1.25rem;
+
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+    }
+
+    // header for different sections of sidemenu
+    .sidemenu-section {
+        font-weight: bold;
+
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+
+        // some additional space between sections
+        padding-top: 0.75rem;
+
+        // we use p elements as span applies the padding only to the first line
+        // therefore, we need to remove the default margin of p elements
+        //margin: 1rem 0 0 0;
+        margin: 0;
+
+        color: rgba($body-color, .75)
+    }
+
+    // link styling
+    a {
+        font-weight: bold;
+        color: $body-color;
+    }
+
+    a:hover {
+        color: rgba($body-color, .75);
+    }
+
+    // normal menu items (first ul is section, second ul contains the links)
+    ul ul li a {
+        padding-left: 2rem;
+        font-weight: normal;
+
+        // decrease the space between to items a bit (default: 0.5rem)
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+    }
+
+    // additional indentation layer for event -> helpers -> helpers and coordinators -> list of jobs
+    ul ul ul li a {
+        padding-left: 2.5rem;
+    }
+}
+
+// the class "visibility" is used to toggle the visibility of the sidemenu
+// on big screens, we hide the navbar is "visibility" is there
+// the sidemenu is visible by default
+#sidemenu.visibility {
+    margin-left: -$sidemenu_width;
+}
+
+// but on small screens, we toggle the functionality of the "visibility" flag
+// the sidemenu therefore is hidden by default 
+@media (max-width: 768px) {
+    #sidemenu {
+        margin-left: -$sidemenu_width;
+    }
+
+    #sidemenu.visibility {
+        margin-left: 0;
+    }
+}
+
+// content
+div#content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    // prevent that content box is getting to small
+    // if less space is there, the content is moved to the right and cropped (overflow-x)
+    // same size as sidemenu seems ok
+    min-width: $sidemenu_width;
+
+    overflow-x: auto;  // TODO: keep or remove?
+}
+
+// footer
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: $footer_height;
+    width: 100%;
+
+    text-align: center;
+
+    background-color: $primary;
+
+    .text-muted {
+        margin: 8px 0;
+        color: $primary-text!important;
+    }
+
+    a, a:hover, a:active, a:focus {
+        color: $primary-text;
+    }
+}

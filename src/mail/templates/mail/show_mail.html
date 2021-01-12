@@ -1,9 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 %}
 
-{% block admincontent %}
-    <h2 id="mail-header">{% trans "Mail:" %} {{ mail.subject }}</h2>
+{% block content %}
+    <h1>{% trans "Mail:" %} {{ mail.subject }}</h1>
 
     {% if mail.failed %}
         <div class="alert alert-danger" role="alert">
@@ -11,40 +10,44 @@
         </div>
     {% endif %}
 
-    <table class="table" aria-describedby="mail-header">
-        <tr>
-            <th scope="row">{% trans "Sent by" %}</th>
-            <td>{{ mail.user.get_full_name }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Sender" %}</th>
-            <td>{{ mail.sender }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Date" %}</th>
-            <td>{{ mail.date }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "CC" %}</th>
-            <td>{{ mail.cc | default:"-" }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Reply to" %}</th>
-            <td>{{ mail.reply_to | default:"-" }}</td>
-        </tr>
-        <tr>
-            <th scope="row">{% trans "Receiver" %}</th>
-            <td>
-                <ul>
-                    {% for tmp in mail.receiver_list %}
-                        <li>{{ tmp }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Mail meta data' %}">
+                <tr>
+                    <th scope="row">{% trans "Sent by" %}</th>
+                    <td>{{ mail.user.get_full_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Date" %}</th>
+                    <td>{{ mail.date }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Sender address" %}</th>
+                    <td>{{ mail.sender }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "CC" %}</th>
+                    <td>{{ mail.cc | default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Reply to" %}</th>
+                    <td>{{ mail.reply_to | default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Receiver" %}</th>
+                    <td>
+                        <ul>
+                            {% for tmp in mail.receiver_list %}
+                                <li>{{ tmp }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <div class="wraptext mailbody">
+    <div class="code">
         {{ mail.text | linebreaks }}
     </pre>
 {% endblock %}

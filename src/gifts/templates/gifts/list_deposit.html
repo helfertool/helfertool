@@ -1,29 +1,33 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n %}
-{% load bootstrap4 %}
+{% load django_bootstrap5 %}
 
-{% block admincontent %}
-    <h2 id="deposit-header">{% trans "Collected deposit" %}</h2>
+{% block content %}
+    <h1>{% trans "Collected deposit" %}</h1>
 
     {% if helpers %}
-        <table class="table" aria-describedby="deposit-header">
-            <tr>
-                <th scope="col">{% trans "Name" %}</th>
-                <th scope="col">{% trans "Deposit" %}</th>
-            </tr>
+        <div class="row">
+            <div class="col-xs-12 col-xl-6">
+                <table class="table" aria-description="{% trans 'List of helpers with deposit' %}">
+                    <tr>
+                        <th scope="col">{% trans "Name" %}</th>
+                        <th scope="col">{% trans "Deposit" %}</th>
+                    </tr>
 
-            {% for h in helpers %}
-                <tr>
-                    <td><a href="{% url "view_helper" event.url_name h.pk %}">{{ h.full_name }}</a></td>
-                    <td>{{ h.gifts.deposit }} &euro;</td>
-                </tr>
-            {% endfor %}
+                    {% for h in helpers %}
+                        <tr>
+                            <td><a href="{% url "view_helper" event.url_name h.pk %}">{{ h.full_name }}</a></td>
+                            <td>{{ h.gifts.deposit }}</td>
+                        </tr>
+                    {% endfor %}
 
-            <tr>
-                <th scope="row">{% trans "Sum" %}</th>
-                <th scope="row">{{ deposit_sum }} &euro;</th>
-            </tr>
-        </table>
+                    <tr>
+                        <th scope="row">{% trans "Sum" %}</th>
+                        <th scope="row">{{ deposit_sum }}</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
     {% else %}
         <p class="text-muted">{% trans "No deposit has to be returned." %}</p>
     {% endif %}

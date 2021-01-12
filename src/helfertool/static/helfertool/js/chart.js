@@ -1,6 +1,3 @@
-// CSP: disable automatic style injection (remove for chart.js 3)
-Chart.platform.disableCSSInjection = true;
-
 $("canvas.chart").each(function() {
     var chart = $(this);
 

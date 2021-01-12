@@ -1,137 +1,146 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Check installation" %}</h2>
+{% block content %}
+    <h1>{% trans "Check installation" %}</h1>
 
-    <h3 id="helfertool-check-header">{% trans "Helfertool" %}</h3>
+    <h2>{% trans "Helfertool" %}</h2>
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Status of Helfertool' %}">
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "Version" %} </th>
+                    <td class="col-6">
+                        {{ version }}
+                        {% if container_version %}
+                            ({% trans "Container:" %} {{ container_version }})
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "Templates" %} </th>
+                    <td class="col-6">
+                        {% if templates_ok %}
+                            <em class="fas fa-check"></em>
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-    <table class="table" aria-describedby="helfertool-check-header">
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "Version" %} </th>
-            <td class="col-9">
-                {{ version }}
-                {% if container_version %}
-                    ({% trans "Container:" %} {{ container_version }})
-                {% endif %}
-            </td>
-        </tr>
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "Templates" %} </th>
-            <td class="col-9">
-                {% if templates_ok %}
-                    <em class="fas fa-check"></em>
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
-    </table>
+    <h2>{% trans "External services" %}</h2>
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Status of external services' %}">
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "Mail" %} </th>
+                    <td class="col-6">
+                        {% if mail_ok %}
+                            <em class="fas fa-check"></em>
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
 
-    <h3 id="services-check-header">{% trans "External services" %}</h3>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "RabbitMQ" %} </th>
+                    <td class="col-6">
+                        {% if celery_broker_ok %}
+                            <em class="fas fa-check"></em>
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
 
-    <table class="table" aria-describedby="helfertool-check-header">
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "Mail" %} </th>
-            <td class="col-9">
-                {% if mail_ok %}
-                    <em class="fas fa-check"></em>
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "LDAP" %} </th>
+                    <td class="col-6">
+                        {% if ldap_configured %}
+                            {% if ldap_ok %}
+                                <em class="fas fa-check"></em>
+                            {% else %}
+                                <em class="fas fa-times text-danger"></em>
+                            {% endif %}
+                        {% else %}
+                            <em class="fas fa-minus"></em>
+                        {% endif %}
+                    </td>
+                </tr>
 
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "RabbitMQ" %} </th>
-            <td class="col-9">
-                {% if celery_broker_ok %}
-                    <em class="fas fa-check"></em>
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "Search for similar names" %} </th>
+                    <td class="col-6">
+                        {% if similarity_search %}
+                            <em class="fas fa-check"></em>
+                        {% else %}
+                            <em class="fas fa-minus"></em>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "LDAP" %} </th>
-            <td class="col-9">
-                {% if ldap_configured %}
-                    {% if ldap_ok %}
-                        <em class="fas fa-check"></em>
-                    {% else %}
-                        <em class="fas fa-times text-danger"></em>
-                    {% endif %}
-                {% else %}
-                    <em class="fas fa-minus"></em>
-                {% endif %}
-            </td>
-        </tr>
+    <h2>{% trans "Header" %}</h2>
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Status of HTTP headers' %}">
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">Host</th>
+                    <td class="col-6">
+                        {% if header_host %}
+                            {{ header_host }}
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
 
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "Search for similar names" %} </th>
-            <td class="col-9">
-                {% if similarity_search %}
-                    <em class="fas fa-check"></em>
-                {% else %}
-                    <em class="fas fa-minus"></em>
-                {% endif %}
-            </td>
-        </tr>
-    </table>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "Remote IP" %}</th>
+                    <td class="col-6">
+                        {% if header_remote_addr %}
+                            {{ header_remote_addr }}
+                            {% if header_remote_addr != header_x_forwarded_for %}
+                                <br/>
+                                <span class="text-danger">
+                                    {% icon "exclamation-triangle" %}
+                                    {% trans "X-Forwarded-For is set to different value" %}
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
 
-    <h3 id="header-check-header">{% trans "Header" %}</h3>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">X-Forwarded-For</th>
+                    <td class="col-6">
+                        {% if header_x_forwarded_for %}
+                            {{ header_x_forwarded_for }}
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
 
-    <table class="table" aria-describedby="header-check-header">
-        <tr class="d-flex">
-            <th class="col-3" scope="row">Host</th>
-            <td class="col-9">
-                {% if header_host %}
-                    {{ header_host }}
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
-
-        <tr class="d-flex">
-            <th class="col-3" scope="row">{% trans "Remote IP" %}</th>
-            <td class="col-9">
-                {% if header_remote_addr %}
-                    {{ header_remote_addr }}
-                    {% if header_remote_addr != header_x_forwarded_for %}
-                        <br/>
-                        <span class="text-danger">
-                            {% icon "exclamation-triangle" %}
-                            {% trans "X-Forwarded-For is set to different value" %}
-                        </span>
-                    {% endif %}
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
-
-        <tr class="d-flex">
-            <th class="col-3" scope="row">X-Forwarded-For</th>
-            <td class="col-9">
-                {% if header_x_forwarded_for %}
-                    {{ header_x_forwarded_for }}
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
-
-        <tr class="d-flex">
-            <th class="col-3" scope="row">X-Forwarded-Proto</th>
-            <td class="col-9">
-                {% if header_x_forwarded_proto %}
-                    {{ header_x_forwarded_proto }}
-                {% else %}
-                    <em class="fas fa-times text-danger"></em>
-                {% endif %}
-            </td>
-        </tr>
-    </table>
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">X-Forwarded-Proto</th>
+                    <td class="col-6">
+                        {% if header_x_forwarded_proto %}
+                            {{ header_x_forwarded_proto }}
+                        {% else %}
+                            <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock %}

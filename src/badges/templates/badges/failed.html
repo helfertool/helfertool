@@ -1,14 +1,13 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 %}
 
-{% block admincontent %}
-    <h2>{% trans "Generating badges failed" %}</h2>
+{% block content %}
+    <h1>{% trans "Generating badges failed" %}</h1>
 
     {% if latex_output %}
-        <pre>
-            {{ latex_output }}
-        </pre>
+        <div class="code">
+            <pre>{{ latex_output }}</pre>
+        </div>
     {% elif error %}
         <div class="alert alert-danger" role="alert">
             {{ error }}

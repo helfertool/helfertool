@@ -1,19 +1,31 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Delete user agreement" %}</h2>
+{% block content %}
+    <h1>{% trans "Delete user agreement" %}</h1>
 
-    <div class="alert alert-danger" role="alert">
-        {% blocktrans trimmed with name=agreement.name%}
-            Delete user agreement {{ name }}?
-        {% endblocktrans %}
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Data of user agreement' %}">
+                <tr>
+                    <th scope="row">{% trans "Name" %}</th>
+                    <td>{{ agreement.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Start date" %}</th>
+                    <td>{{ agreement.start }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "End date" %}</th>
+                    <td>{{ agreement.end|default:"-" }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <form action="{% url 'account:delete_agreement' agreement.pk %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-outline-danger">{% trans "Delete user agreement" %}</button>
+        <button type="submit" class="btn btn-outline-danger">{% icon "trash-alt" %} {% trans "Delete" %}</button>
     </form>
 {% endblock %}

@@ -1,36 +1,36 @@
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 {% if no_login %}
-    <p>{% trans "Please login again." %}</p>
+    <p>{% trans "Please log in again." %}</p>
 {% else %}
     {% if tasks %}
-    <h3 id="tasklist-header" class="d-none">{% trans "Currently generated badges"%}</h3>
-    <table class="table" aria-describedby="tasklist-header">
-        <tr>
-            <th scope="col">{% trans "Badges" %}</th>
-            <th scope="col">{% trans "Status" %}</th>
-        </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>
-                    {{ task.name }}
-                </td>
-
-                <td>
-                    {% if task.error %}
-                        <span class="text-danger">{% icon "exclamation-triangle" %}</span>
-                        <a href="{% url "badges:failed" event.url_name task.id %}" class="text-danger">
-                            {% trans "Show errors" %}
-                        </a>
-                    {% elif task.finished %}
-                        <a href="{% url "badges:download" event.url_name task.id %}">
-                            {% trans "Download" %}
-                        </a>
-                    {% else %}
-                        <em class="fa fa-spinner fa-pulse"></em>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+        <div class="row my-3">
+            <div class="col-12 col-xl-6">
+                <ul class="list-group mb-3">
+                    {% for task in tasks %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6">
+                                {{ task.name }}
+                            </div>
+                            <div class="col-6 text-nowrap">
+                                {% if task.error %}
+                                    <span class="text-danger">{% icon "exclamation-triangle" %}</span>
+                                    <a href="{% url "badges:failed" event.url_name task.id %}" class="text-danger">
+                                        {% trans "Show errors" %}
+                                    </a>
+                                {% elif task.finished %}
+                                    <a href="{% url "badges:download" event.url_name task.id %}">
+                                        {% icon "download" %} {% trans "Download" %}
+                                    </a>
+                                {% else %}
+                                    <em class="fa fa-spinner fa-pulse"></em>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     {% endif %}
 {% endif %}

@@ -24,6 +24,7 @@ class BadgeDesign(models.Model):
         :badge_settings: settings
         :name: name of design
         :font_color: Color of the text
+        :bg_color: Color of the background
         :bg_front: Background picture of the front
         :bg_back: Background picture of the back
     """

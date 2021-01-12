@@ -1,0 +1,37 @@
+// colors that can be changed
+// most of them are bootstrap variables that are overwritten here, some of them are custom
+$primary:       #1ea082;  // bootstrap variable
+$primary-text:  #ffffff;  // custom variable
+
+$body-bg:       #ffffff;  // bootstrap variable
+$body-color:    #212529;  // bootstrap variable (gray-900)
+
+$danger:        #d53e54;  // bootstrap variable
+$success:       #1a876e;  // bootstrap variable
+
+// contrast level: 3.0, 4.5 (bootstrap default), or 7.0
+// with the bootstrap default, the buttons have a black text. white text is (imho) better readable
+$min-contrast-ratio:   3.0;
+
+// test: dark mode?
+/*
+$primary:       #dddddd;  // bootstrap variable
+$primary-text:  #222222;  // custom variable
+
+$body-bg:       #222222;  // bootstrap variable
+$body-color:    #dddddd;  // bootstrap variable (gray-900)
+*/
+
+// set some other bootstrap colors so that everything is somehow consitent
+// TODO: move to _bootstrap.scss?
+$white:         $body-bg;  // used in language dropdown
+$info:          $primary;  // used for some messages (TODO: maybe get rid of this in django/html code?)
+$code-color:    $body-color;  // bootstrap highlights code, but we use it just for the font
+
+// TODO: maybe set these?
+/*
+$secondary:     #1A876E;  // bootstrap variable (gray-600)
+$warning:       $yellow !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;
+*/

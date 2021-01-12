@@ -1,8 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons shifts %}
 
-{% block admincontent %}
-    <h2 id="vacant-shifts-header">{% trans "Vacant shifts" %}</h2>
+{% block content %}
+    <h1>{% trans "Vacant shifts" %}</h1>
 
     {% if no_shifts %}
         <p class="text-muted">{% trans "There are no shifts." %}</p>
@@ -11,41 +11,40 @@
             {% trans "Congratulations! No vacant shifts." %}
         </div>
     {% else %}
-        <div class="alert alert-info">
+        <div class="alert alert-secondary">
             {% trans "The vacant shifts are grouped by day here, so it is easier to get an overview." %}
         </div>
 
         {% for day,jobs in vacant_days.items %}
             {% with day_str=day|date:"Y-m-d" %}
-                <h3>{{ day }}</h3>
-                    {% for job,shifts in jobs.items %}
-                        <h4>{{ job }}</h4>
-                        <table class="table w-auto" aria-describedby="vacant-shifts-header">
-                            <tr>
-                                <th scope="col" class="width-30">{% trans "Status" %}</th>
-                                <th scope="col" class="width-20">{% trans "Time" %}</th>
-                                <th scope="col" class="width-30">{% trans "Name" %}</th>
-                                <th scope="col" class="width-20">{% trans "Missing / Total" %}</th>
-                            </tr>
-                            {% for shift in shifts %}
-                                <tr>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success percent-{{ shift.helpers_percent_5percent }}" role="progressbar"
-                                            aria-valuenow="{{ shift.helpers_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
-
-                                            <div class="progress-bar percent-{{ shift.helpers_percent_vacant_5percent }}
-                                            {% if shift.helpers_percent > 50 %}bg-warning{% else %}bg-danger{% endif %}"
-                                            role="progressbar" aria-valuenow="{{ shift.helpers_percent }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td>{{ shift.time_hours }}</td>
-                                    <td>{{ shift.name }}</td>
-                                    <td>{{ shift.num_vacant }} / {{ shift.number }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    {% endfor %}
+                <h2>{{ day }}</h2>
+                {% for job,shifts in jobs.items %}
+                    <h3>{{ job }}</h3>
+                    <ul class="list-group">
+                        {% for shift in shifts %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-3 text-break">
+                                    {{ shift.time_hours }}
+                                    {% if shift.name %}
+                                        ({{ shift.name }})
+                                    {% endif %}
+                                </div>
+                                <div class="col-3">
+                                    {% shift_progress shift highlight_missing=True %}
+                                </div>
+                                <div class="col-3">
+                                    {% blocktrans trimmed count counter=shift.num_vacant with total=shift.number %}
+                                    {{ counter }} of {{ total }} missing
+                                    {% plural %}
+                                    {{ counter }} of {{ total }} missing
+                                    {% endblocktrans %}
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
             {% endwith %}
         {% endfor %}
     {% endif %}

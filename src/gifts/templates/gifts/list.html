@@ -1,81 +1,95 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Gifts and presence settings" %}</h2>
+{% block content %}
+    <h1>{% trans "Gifts and presence settings" %}</h1>
 
-    <h3>{% trans "General" %}</h3>
+    <h2>{% trans "General" %}</h2>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        {% bootstrap_form settings_form %}
+        {% bootstrap_form_errors settings_form %}
+
+        {% bootstrap_field settings_form.enable_automatic_presence layout="floating" %}
+
+        <div class="row">
+            <div class="col-12 col-xl-6">
+                {% bootstrap_field settings_form.default_deposit layout="floating" %}
+            </div>
+        </div>
 
         {% if not event.archived %}
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary mb-4">{% icon "save" %} {% trans "Save" %}</button>
         {% endif %}
     </form>
 
-    <h3 id="gifts-header">{% trans "Gifts" %}</h3>
-    <table class="table" aria-describedby="gifts-header">
-        <tr>
-            <th scope="col">{% trans "Name" %}</th>
-            {% if not event.archived %}
-                <th scope="col"></th>
-            {% endif %}
-        </tr>
-
-        {% for gift in gifts %}
-            <tr>
-                <td>{{ gift.name }}</td>
-
-                {% if not event.archived %}
-                    <td>
-                        <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% icon "pencil-alt" %} {% trans "Edit" %}</a><br/>
-                        <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
+    <h2>{% trans "Gifts" %}</h2>
+    {% if gifts %}
+        <ul class="list-group mb-3">
+            {% for gift in gifts %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        {{ gift.name }}
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                        {% if not event.archived %}
+                            <td>
+                                <a href="{% url "gifts:edit_gift" event.url_name gift.pk %}">{% icon "pencil-alt" %} {% trans "Edit" %}</a><br/>
+                                <a href="{% url "gifts:delete_gift" event.url_name gift.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
+                            </td>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">{% trans "There are no gifts." %}</p>
+    {% endif %}
 
     {% if not event.archived %}
         <p><a href="{% url "gifts:add_gift" event.url_name %}">{% icon "plus" %} {% trans "Add gift" %}</a></p>
     {% endif %}
 
-    <h3 id="giftset-header">{% trans "Gift sets" %}</h3>
-    <table class="table" aria-describedby="giftset-header">
-        <tr>
-            <th scope="col">{% trans "Name" %}</th>
-            <th scope="col">{% trans "Gifts" %}</th>
-            {% if not event.archived %}
-                <th scope="col"></th>
-            {% endif %}
-        </tr>
-
-        {% for gift_set in gift_sets %}
-            <tr>
-                <td>{{ gift_set.name }}</td>
-                <td>
-                    <ul>
-                        {% for gift in gift_set.includedgift_set.all %}
-                            <li>{{ gift.count }} {{ gift.gift.name }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-
-                {% if not event.archived %}
-                    <td>
-                        <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% icon "pencil-alt" %} {% trans "Edit" %}</a><br/>
-                        <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
-                    </td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
+    <h2>{% trans "Gift sets" %}</h2>
+    {% if gift_sets %}
+        <ul class="list-group">
+            {% for gift_set in gift_sets %}
+            <li class="list-group-item mb-3">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {{ gift_set.name }}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                                <ul class="reset-list">
+                                    {% for gift in gift_set.includedgift_set.all %}
+                                        <li>{{ gift.count }}x {{ gift.gift.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                        {% if not event.archived %}
+                            <td>
+                                <a href="{% url "gifts:edit_gift_set" event.url_name gift_set.pk %}">{% icon "pencil-alt" %} {% trans "Edit" %}</a><br/>
+                                <a href="{% url "gifts:delete_gift_set" event.url_name gift_set.pk %}">{% icon "trash-alt" %} {% trans "Delete" %}</a>
+                            </td>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">{% trans "There are no gift sets." %}</p>
+    {% endif %}
 
     {% if not event.archived %}
         <p><a href="{% url "gifts:add_gift_set" event.url_name %}">{% icon "plus" %} {% trans "Add gift set" %}</a></p>
     {% endif %}
-
 {% endblock %}

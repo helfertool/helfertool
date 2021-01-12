@@ -1,14 +1,13 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2>{% trans "Delete link" %}</h2>
+{% block content %}
+    <h1>{% trans "Delete link" %}</h1>
 
     <form action="" method="post">
         {% csrf_token %}
 
-        <h3>{% trans "Shifts" %}</h3>
+        <h2>{% trans "Shifts" %}</h2>
 
         <ul>
             {% for shift in link.shifts.all %}
@@ -18,7 +17,7 @@
 
         {% bootstrap_form_errors form %}
 
-        <input type="submit" value="{% trans "Delete link" %}" class="btn btn-outline-danger" />
+        <button type="submit" class="btn btn-outline-danger">{% icon "trash-alt" %} {% trans "Delete" %}</button>
     </form>
 {% endblock %}
 

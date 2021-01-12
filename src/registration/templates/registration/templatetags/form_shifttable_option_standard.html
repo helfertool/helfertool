@@ -1,0 +1,20 @@
+{% load icons %}
+<div class="form-check">
+    <input type="checkbox" class="form-check-input" name="{{ widget.name }}" value="{{ widget.value }}" id="{{ widget.name }}_{{ widget.value }}" {% if widget.attrs.checked %}checked{% endif %} {% if widget.attrs.disabled %}disabled{% endif %}>
+
+    <label class="form-check-label" for="{{ widget.name }}_{{ widget.value }}">
+        {% if shift.hidden %}
+            {% icon "eye-slash" %}
+        {% elif shift.blocked %}
+            {% icon "lock" %}
+        {% endif %}
+        {{ shift.time_hours }}
+    </label>
+
+    <br/>
+
+    <span class="d-inline-block text-truncate shifttable-maxwidth" title="{{ shift.name }}">
+        {{ shift.name|default:"&nbsp;" }}
+    </span>
+</div>
+

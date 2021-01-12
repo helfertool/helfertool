@@ -1,0 +1,144 @@
+{% load i18n django_bootstrap5 icons %}
+
+{% comment %}
+required parameters:
+    event
+    job
+    helpers
+    can_view
+    can_delete
+
+optional:
+    shift
+
+If shift is missing this template assumes that the printed helpers are
+coordinators. This is only important for the delete_helper view.
+
+The table is rendered differently based on the bootstrap grid system.
+The order of the columns is set as follows:
+- 1: default order for maximal width (the order in which the columns are written here)
+- 2: move things to the end on smaller screens (so we have a table and then a list further attributes)
+{% endcomment %}
+
+<ul class="list-group">
+    <li class="list-group-item fw-bold">
+        {# table head #}
+        <div class="row">
+            <div class="col-8 col-lg-9 col-xl-10">
+                <div class="row">
+                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
+                        {% trans "First name" %}
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2">
+                        {% trans "Surname" %}
+                    </div>
+
+                    {% if event.ask_shirt %}
+                        <div class="d-none d-xxl-table-cell col-xxl-1">
+                            {% trans "T-shirt" %}
+                        </div>
+                    {% endif %}
+
+                    {% if event.ask_vegetarian %}
+                        <div class="d-none d-xxl-table-cell col-xxl-1">
+                            {% trans "Vegetarian" %}
+                        </div>
+                    {% endif %}
+
+                    {% if job.infection_instruction %}
+                        <div class="d-none d-xxl-table-cell col-xxl-2">
+                            {% comment %}Translators: insert wbr tag on long words{% endcomment %}
+                            {% trans "Food handling" %}
+                        </div>
+                    {% endif %}
+
+                    <div class="d-none d-lg-table-cell col-lg-4 col-xl-3 col-xxl-2">
+                        {% trans "Comment" %}
+                    </div>
+                    <div class="d-none d-xl-table-cell col-xl-3 col-xxl-2">
+                        {% trans "Registration time" %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-3 col-xl-2">
+            </div>
+        </div>
+    </li>
+
+    {% for helper in helpers %}
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-8 col-lg-9 col-xl-10">
+                <div class="row">
+                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2 py-1 order-1 text-break">
+                        {{ helper.firstname }}
+                    </div>
+                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2 py-1 order-1 text-break">
+                        {{ helper.surname }}
+                    </div>
+
+                    {% if event.ask_shirt %}
+                        <div class="col-12 col-xxl-1 order-2 order-xxl-1 py-1">
+                            <span class="d-xxl-none fw-bold">{% trans "T-shirt" %}:</span>
+                            {{ helper.get_shirt_display }}
+                        </div>
+                    {% endif %}
+
+                    {% if event.ask_vegetarian %}
+                        <div class="col-12 col-xxl-1 order-2 order-xxl-1 py-1">
+                            <span class="d-xxl-none fw-bold">{% trans "Vegetarian" %}:</span>
+                            {{ helper.vegetarian | yesno }}
+                        </div>
+                    {% endif %}
+
+                    {% if job.infection_instruction %}
+                        <div class="col-12 col-xxl-1 order-2 order-xxl-2 py-1">
+                            <span class="d-xxl-none fw-bold">{% trans "Food handling" %}:</span>
+                            {{ helper.get_infection_instruction_short }}
+                        </div>
+                    {% endif %}
+
+                    <div class="col-12 col-lg-4 col-xl-3 col-xxl-2 order-2 order-lg-1 py-1 text-break">
+                        <span class="d-lg-none fw-bold">{% trans "Comment" %}:</span>
+                        {{ helper.comment }}
+                    </div>
+                    <div class="col-12 col-xl-3 col-xxl-2 order-2 order-xl-1 py-1">
+                        <span class="d-xl-none fw-bold">{% trans "Registration time" %}:</span>
+                        {{ helper.timestamp }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 col-lg-3 col-xl-2">
+                {# actions and warnings #}
+                {% if can_view %}
+                    <a href="{% url 'view_helper' event.url_name helper.pk %}"class="text-nowrap" >
+                        {% icon "search" %} {% trans "View" %}
+                    </a><br />
+                {% endif %}
+
+                {% if can_delete %}
+                    {% if shift %}
+                        <a href="{% url 'delete_helper' event.url_name helper.pk shift.pk %}" class="text-nowrap">
+                            {% icon "trash-alt" %} {% trans "Delete" %}
+                        </a><br />
+                    {% else %}
+                        <a href="{% url 'delete_coordinator' event.url_name helper.pk job.pk %}" class="text-nowrap">
+                            {% icon "trash-alt" %} {% trans "Delete" %}
+                        </a><br />
+                    {% endif %}
+                {% endif %}
+
+                {% if helper.mail_failed %}
+                    <span class="text-danger">{% icon "exclamation-circle" %} {% trans "Mail not delivered" %}</span><br />
+                {% elif helper.has_to_validate %}
+                    <span class="text-secondary">{% icon "exclamation-circle" %} {% trans "Mail not validated" %}</span><br />
+                {% endif %}
+
+                {% if helper.has_missed_shift %}
+                    <span class="text-danger">{% icon "exclamation-circle" %} {% trans "Absent for some shifts" %}</span>
+                {% endif %}
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

@@ -2,54 +2,58 @@
 {% load i18n icons setting %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-lg-12">
-            <h1>{% trans "Events" %}</h1>
-        </div>
-    </div>
+    <h1>{% trans "Events" %}</h1>
 
-    <div class="row">
-        {% if active_events %}
-            <div class="col-lg-6 col-xs-12 mb-5">
-                <ul class="list-group">
-                    {% for event in active_events %}
-                        <li class="list-group-item">
-                            {% if event.involved %}
-                                <a href="{% url 'manage_event' event.url_name %}" class="float-right">
+    {% if active_events %}
+        <div class="row">
+            {% for event in active_events %}
+                <div class="col-lg-6 col-xs-12 p-3">
+                    <div class="card">
+                        <div class="card-body row">
+                            <div class="col-10">
+                                <a href="{% url 'form' event.url_name %}" class="fw-bold text-dark">{{ event }}</a>
+
+                                <br/>
+
+                                <span class="text-muted">
+                                    <i class="far fa-clock"></i>
+                                    {% if event.days > 1 %}
+                                        {% blocktrans with date=event.date days=event.days trimmed %}
+                                            {{ date }}, {{ days }} days
+                                        {% endblocktrans %}
+                                    {% else %}
+                                        {{ event.date }}
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                            <div class="col-2 text-end">
+                                {% if event.involved %}
+                                <a href="{% url 'helpers' event.url_name %}" class="btn btn-sm shadow-none my-2">
                                     {% icon "cog" %}
-                                    {% trans "Manage" %}
                                 </a>
-                            {% endif %}
-
-                            <a href="{% url 'form' event.url_name %}">{{ event }}</a>
-
-                            <br />
-
-                            <span class="badge badge-outline-dark">
-                                {% if event.days > 1 %}
-                                    {% blocktrans with date=event.date days=event.days trimmed %}
-                                        {{ date }}, {{ days }} days
-                                    {% endblocktrans %}
-                                {% else %}
-                                    {{ event.date }}
                                 {% endif %}
-                            </span>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% else %}
-            <div class="col-lg-12 mb-3">
-                <div class="alert alert-info" role="alert">
-                    {% trans "At the moment there is no event you can register for." %}
+                            </div>
+
+                            <div class="col-12 mt-3">
+                                <a href="{% url 'form' event.url_name %}" class="btn btn-sm btn-outline-primary">
+                                    {% trans "Register!" %}
+                                </a>    
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            {% trans "At the moment there is no event you can register for." %}
+        </div>
+    {% endif %}
 
     {% setting "FEATURES_NEWSLETTER" as features_newsletter %}
     {% if features_newsletter %}
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-12">
             <strong>{% trans "Stay informed about future events!" %}</strong>
 
@@ -64,48 +68,49 @@
     {% endif %}
 
     {% if involved_events %}
-        <div class="row">
-            <div class="col-lg-12">
-                <h2>{% trans "Inactive" %}</h2>
-            </div>
+        {% regroup involved_events|dictsortreversed:"date" by date|date:"Y" as involved_events_list %}
+        <h2 class="mt-3">{% trans "Not published" %}</h2>
 
-            {% regroup involved_events|dictsortreversed:"date" by date|date:"Y" as involved_events_list %}
+        {% for group in involved_events_list %}
+            <h3>{{ group.grouper }}</h3>
 
-            {% for group in involved_events_list %}
-                <div class="col-lg-6 col-xs-12">
-                    <h3>{{ group.grouper }}</h3>
-                    <ul class="list-group">
-                        {% for event in group.list|dictsort:"name.lower" %}
-                            <li class="list-group-item">
-                                <a href="{% url 'manage_event' event.url_name %}" class="float-right">
-                                    {% icon "cog" %}
-                                    {% trans "Manage" %}
-                                </a>
+            <ul class="list-group mb-3">
+                {% for event in group.list|dictsort:"name.lower" %}
+                <li class="list-group-item">
+                    <div class="row align-items-center">
+                        <div class="col-6 col-md-4 order-md-1">
+                            <a href="{% url 'form' event.url_name %}" class="fw-bold text-dark">{{ event }}</a>
+                        </div>
 
-                                <a href="{% url 'form' event.url_name %}">{{ event }}</a>
+                        <div class="col-6 col-md-3 order-md-3 text-end">
+                            {% if event.archived %}
+                                <span class="badge bg-secondary">{% icon "archive" %} {% trans "archived" %}</span>
+                            {% endif %}
 
-                                <br />
+                            <a href="{% url 'helpers' event.url_name %}" class="btn btn-sm shadow-none my-2">
+                                {% icon "cog" %}
+                            </a>
+                        </div>
 
-                                <span class="badge badge-outline-dark">
-                                    {% if event.days > 1 %}
-                                        {% blocktrans with date=event.date days=event.days trimmed %}
-                                            {{ date }}, {{ days }} days
-                                        {% endblocktrans %}
-                                    {% else %}
-                                        {{ event.date }}
-                                    {% endif %}
-                                </span>
-
-                                {% if event.archived %}
-                                    <span class="badge badge-dark">{% icon "archive" %} {% trans "archived" %}</span>
+                        <div class="col-12 col-md-5 order-md-2">
+                            <span class="text-muted">
+                                <i class="far fa-clock"></i>
+                                {% if event.days > 1 %}
+                                    {% blocktrans with date=event.date days=event.days trimmed %}
+                                        {{ date }}, {{ days }} days
+                                    {% endblocktrans %}
+                                {% else %}
+                                    {{ event.date }}
                                 {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endfor %}
-        </div>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
     {% endif %}
+
     {% if enable_show_more_events %}
         <div class="mt-3">
             <a href="{% url 'index_all_events' %}">{% trans "Display all events" %}</a>

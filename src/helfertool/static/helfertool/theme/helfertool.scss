@@ -1,0 +1,25 @@
+// first, import our own colors
+@import "colors";
+
+// then import bootstrap including customized bootstrap theming
+@import "bootstrap";
+
+// then the design elements with more customizations
+@import "layout";
+@import "alert";
+
+// and now the custom components / things that do not directly modify bootstrap
+@import "about";
+@import "announcement";
+@import "badge";
+@import "ckeditor";
+@import "code";
+@import "errorpage";
+@import "forms";
+@import "list";
+
+
+// css for specific apps
+@import "apps/gifts";
+@import "apps/registration";
+@import "apps/statistics";

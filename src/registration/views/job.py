@@ -131,9 +131,9 @@ def duplicate_job(request, event_url_name, job_pk):
 
     # render page
     context = {'event': event,
-               'job': job,
+               'duplicate_job': job,
                'form': form}
-    return render(request, 'registration/admin/duplicate_job.html', context)
+    return render(request, 'registration/admin/edit_job.html', context)
 
 
 @login_required

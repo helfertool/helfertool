@@ -18,7 +18,7 @@ class SubscribeForm(forms.ModelForm):
 
         # privacy statement
         privacy_label = format_html(
-            '{} (<a href="" data-toggle="collapse" data-target="#privacy">{}</a>)',
+            '{} (<a href="" data-bs-toggle="collapse" data-bs-target="#privacy">{}</a>)',
             _("I agree with the data privacy statement."),
             _("Show"),
         )

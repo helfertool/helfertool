@@ -1,0 +1,74 @@
+{% load i18n django_bootstrap5 icons static shifts toolsettings %}
+
+<form action="" method="post" id="register_form" data-max-overlapping="{{ event.max_overlapping }}">
+    {% csrf_token %}
+
+    {% form_shifttable form.shifts %}
+
+    <h2>{% trans "Personal data" %}</h2>
+
+    {% include "registration/partials/helper_edit_data.html" with form=form %}
+
+    {% if form.ask_full_age %}
+        {% bootstrap_field form.full_age layout="floating" required_css_class="" %}
+    {% endif %}
+
+    {% if not form.is_internal %}
+        {% bootstrap_field form.privacy_statement %}
+
+        <div class="modal fade" id="privacy" tabindex="-1" aria-labelledby="privacy-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="privacy-label">
+                            {% trans "Privacy statement" %}
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        {% htmlsetting "privacy" %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "OK" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if form.ask_news %}
+        <p><strong>{% trans "We would like to inform you about futher events!" %}</strong></p>
+        {% bootstrap_field form.news %}
+
+        <div class="modal fade" id="privacy-newsletter" tabindex="-1" aria-labelledby="privacy-newsletter-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="privacy-newsletter-label">
+                            {% trans "Privacy statement for the newsletter" %}
+                        </h5>
+                    </div>
+                    <div class="modal-body">
+                        {% htmlsetting "privacy_newsletter" %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "OK" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if form.is_internal %}
+        <div class="alert alert-primary" role="alert">
+            {% trans "Note: after saving an e-mail will be sent to the given address." %}
+
+            {% if form.is_internal and event.ask_full_age %}
+                <br/><br/><strong>{% trans "Make sure that the helper is full age!" %}</strong>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Register" %}</button>
+
+    <script src="{% static "helfertool/js/registration.js" %}"></script>
+</form>

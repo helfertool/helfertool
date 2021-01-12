@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-10 19:58+0100\n"
+"POT-Creation-Date: 2021-06-07 22:24+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,35 +16,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: account/forms/account.py:107 account/forms/account.py:115
 msgid "Managed by external identity provider"
 msgstr "Durch externen Identity Provider verwaltet"
 
-#: account/forms/account.py:111 account/templates/account/list_users.html:34
+#: account/forms/account.py:111 account/templates/account/list_users.html:35
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
 msgstr "Administrator"
 
-#: account/forms/account.py:121 account/templates/account/list_users.html:42
+#: account/forms/account.py:121 account/templates/account/list_users.html:43
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
 msgstr "Nutzer hinzufügen"
 
-#: account/forms/account.py:129 account/templates/account/list_users.html:38
+#: account/forms/account.py:129 account/templates/account/list_users.html:39
 #: account/templates/account/user_permissions.html:14
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:138 account/templates/account/list_users.html:48
+#: account/forms/account.py:138 account/templates/account/list_users.html:49
 #: account/templates/account/user_permissions.html:24
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
 
 #: account/models/agreement.py:13
-#: account/templates/account/list_agreements.html:15
-#: account/templates/account/list_users.html:56
+#: account/templates/account/delete_agreement.html:11
+#: account/templates/account/view_user.html:19
 msgid "Name"
 msgstr "Name"
 
@@ -53,12 +53,12 @@ msgid "Text"
 msgstr "Text"
 
 #: account/models/agreement.py:21
-#: account/templates/account/list_agreements.html:16
+#: account/templates/account/delete_agreement.html:15
 msgid "Start date"
 msgstr "Startdatum"
 
 #: account/models/agreement.py:25
-#: account/templates/account/list_agreements.html:17
+#: account/templates/account/delete_agreement.html:19
 msgid "End date"
 msgstr "Enddatum"
 
@@ -70,19 +70,22 @@ msgstr "Enddatum muss nach Startdatum liegen."
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: account/templates/account/add_user.html:14
+#: account/templates/account/add_user.html:16
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: account/templates/account/delete_agreement.html:6
-#: account/templates/account/delete_agreement.html:17
+#: account/templates/account/delete_agreement.html:5
 msgid "Delete user agreement"
 msgstr "Nutzervereinbarung löschen"
 
 #: account/templates/account/delete_agreement.html:9
-#, python-format
-msgid "Delete user agreement %(name)s?"
-msgstr "Nutzervereinbarung %(name)s löschen?"
+msgid "Data of user agreement"
+msgstr "Daten der Nutzervereinbarung"
+
+#: account/templates/account/delete_agreement.html:29
+#: account/templates/account/list_agreements.html:43
+msgid "Delete"
+msgstr "Löschen"
 
 #: account/templates/account/edit_agreement.html:7
 msgid "Edit user agreement"
@@ -93,9 +96,9 @@ msgstr "Nutzervereinbarung bearbeiten"
 msgid "New user agreement"
 msgstr "Neue Nutzervereinbarung"
 
-#: account/templates/account/edit_agreement.html:20
-#: account/templates/account/edit_user.html:28
-#: account/templates/account/view_user.html:51
+#: account/templates/account/edit_agreement.html:45
+#: account/templates/account/edit_user.html:33
+#: account/templates/account/view_user.html:55
 msgid "Save"
 msgstr "Sichern"
 
@@ -103,15 +106,15 @@ msgstr "Sichern"
 msgid "Edit user"
 msgstr "Nutzer bearbeiten"
 
-#: account/templates/account/edit_user.html:12
+#: account/templates/account/edit_user.html:17
 msgid "Personal data"
 msgstr "Persönliche Daten"
 
-#: account/templates/account/edit_user.html:17
+#: account/templates/account/edit_user.html:22
 msgid "Account status"
 msgstr "Account Status"
 
-#: account/templates/account/edit_user.html:20
+#: account/templates/account/edit_user.html:25
 msgid "Permissions"
 msgstr "Berechtigungen"
 
@@ -123,16 +126,17 @@ msgstr "Verstanden!"
 msgid "User agreements"
 msgstr "Nutzervereinbarungen"
 
-#: account/templates/account/list_agreements.html:28
-#: account/templates/account/view_user.html:36
+#: account/templates/account/list_agreements.html:26
+#, python-format
+msgid "From %(date)s"
+msgstr "Ab %(date)s"
+
+#: account/templates/account/list_agreements.html:36
+#: account/templates/account/view_user.html:40
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: account/templates/account/list_agreements.html:35
-msgid "Delete"
-msgstr "Löschen"
-
-#: account/templates/account/list_agreements.html:42
+#: account/templates/account/list_agreements.html:51
 msgid "There are no user agreements."
 msgstr "Es gibt keine Nutzervereinbarungen."
 
@@ -140,50 +144,53 @@ msgstr "Es gibt keine Nutzervereinbarungen."
 msgid "Users"
 msgstr "Benutzer"
 
-#: account/templates/account/list_users.html:12
-#: account/templates/account/list_users.html:18
+#: account/templates/account/list_users.html:13
+#: account/templates/account/list_users.html:17
 msgid "Search"
 msgstr "Suchen"
 
-#: account/templates/account/list_users.html:23
+#: account/templates/account/list_users.html:24
 msgid "Filter:"
 msgstr "Filter:"
 
-#: account/templates/account/list_users.html:26
+#: account/templates/account/list_users.html:27
 msgid "No filter"
 msgstr "Kein Filter"
 
-#: account/templates/account/list_users.html:30
+#: account/templates/account/list_users.html:31
 #: account/templates/account/user_permissions.html:5
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: account/templates/account/list_users.html:57
-#: account/templates/account/view_user.html:23
-msgid "Details"
-msgstr "Details"
-
-#: account/templates/account/list_users.html:58
-msgid "Last login"
-msgstr "Letzter Login"
-
-#: account/templates/account/list_users.html:113
+#: account/templates/account/list_users.html:87
 msgid "No users found."
 msgstr "Keine Benutzer gefunden."
+
+#: account/templates/account/view_user.html:6
+msgid "My account"
+msgstr "Mein Account"
+
+#: account/templates/account/view_user.html:13
+msgid "Account data"
+msgstr "Account Daten"
 
 #: account/templates/account/view_user.html:15
 msgid "Username"
 msgstr "Benutzername"
 
-#: account/templates/account/view_user.html:19
+#: account/templates/account/view_user.html:23
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: account/templates/account/view_user.html:41
+#: account/templates/account/view_user.html:27
+msgid "Details"
+msgstr "Details"
+
+#: account/templates/account/view_user.html:45
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: account/templates/account/view_user.html:56
+#: account/templates/account/view_user.html:60
 msgid "The password cannot be changed here."
 msgstr "Das Passwort kann hier nicht geändert werden."
 
@@ -209,9 +216,16 @@ msgstr "Vor %(last_login_ago)s"
 msgid "Added user %(username)s"
 msgstr "Benutzer %(username)s hinzugefügt"
 
-#: account/views/account.py:78
+#: account/views/account.py:81
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
+
+#, python-format
+#~ msgid "Delete user agreement %(name)s?"
+#~ msgstr "Nutzervereinbarung %(name)s löschen?"
+
+#~ msgid "Last login"
+#~ msgstr "Letzter Login"
 
 #~ msgid "Managed by LDAP group"
 #~ msgstr "Durch LDAP Gruppe verwaltet"

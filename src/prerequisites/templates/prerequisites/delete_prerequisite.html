@@ -1,26 +1,27 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id='delete-prerequisite-header'>{% trans "Delete prerequisite" %}</h2>
+{% block content %}
+    <h1>{% trans "Delete prerequisite" %}</h1>
+
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans 'Data of prerequisite' %}">
+                <tr>
+                    <th scope="row">{% trans "Prerequisite" %}</th>
+                    <td>{{ prerequisite.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Description" %}</th>
+                    <td>{{ prerequisite.description|safe }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
     <form action="{% url 'prerequisites:delete_prerequisite' event.url_name prerequisite.pk %}" method="post">
         {% csrf_token %}
-
-        <table class="table" aria-describedby="delete-prerequisite-header">
-            <tr>
-                <th scope="row">{% trans "Prerequisite" %}</th>
-                <td>{{ prerequisite.name }}</td>
-            </tr>
-            <tr>
-                <th scope="row">{% trans "Description" %}</th>
-                <td>{{ prerequisite.description|safe }}</td>
-            </tr>
-        </table>
-
         {% bootstrap_form_errors form %}
-
-        <input type="submit" value="{% trans "Delete prerequisite" %}" class="btn btn-outline-danger" />
+        <button type="submit" class="btn btn-outline-danger">{% icon "trash-alt" %} {% trans "Delete" %}</button>
     </form>
 {% endblock %}

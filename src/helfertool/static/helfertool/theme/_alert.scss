@@ -1,0 +1,13 @@
+.alert {
+    // modify alerts: remove background color
+    background-color: $body-bg;
+
+    // fix links in alert boxes
+    a {
+        text-decoration: underline;
+    }
+    
+    a.btn {
+        text-decoration: none;
+    }
+}

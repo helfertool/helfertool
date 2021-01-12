@@ -1,9 +1,9 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 icons toolsettings %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block title %}
-    {% blocktrans trimmed %}
-        Register for {{ event }} as helper
+    {% blocktrans trimmed with eventname=event.name %}
+        Helfertool - {{ eventname }}
     {% endblocktrans %}
 {% endblock %}
 
@@ -12,7 +12,7 @@
 
     {% if data.has_to_validate %}
         <div class="alert alert-info" role="alert">
-            {% trans "You have to confirm your mail address by clicking on a link we sent to you." %}
+            {% trans "Please confirm your mail address and registration by clicking on the link we sent to you." %}
         </div>
     {% endif %}
 
@@ -23,33 +23,33 @@
     {% if personal_data_form %}
         <form action="" method="post" accept-charset="utf-8">
             {% csrf_token %}
-            <div class="row">
-                <div class="col-lg-12">
-                    {% bootstrap_form personal_data_form required_css_class='' %}
 
-                    <div class="alert alert-info" role="alert">
-                        {% trans "If you change your mail address a confirmation mail will be sent to the new address." %}
-                    </div>
-                </div>
+            {% include "registration/partials/helper_edit_data.html" with form=personal_data_form %}
+
+            <div class="alert alert-primary" role="alert">
+                {% trans "If you change your mail address a confirmation mail will be sent to the new address." %}
             </div>
 
-            <input type="submit" value="{% trans "Save" %}" class="btn btn-outline-primary" />
+            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
         </form>
 
         <p></p>
     {% else %}
-        {% include "registration/helper_data.html" with helper=data %}
+        {% include "registration/partials/helper_view_data.html" with helper=data %}
 
         {% if event.changes_possible %}
-            <p><a href="{% url 'update_personal' event.url_name data.pk %}">
-                <em class="fas fa-edit"></em> {% trans "Edit" %}
-            </a></p>
+            <p>
+                <a href="{% url 'update_personal' event.url_name data.pk %}">
+                    {% icon "edit" %} {% trans "Edit" %}
+                </a>
+            </p>
         {% endif %}
 
         {% if event.changes_possible %}
             <div class="alert alert-info" role="alert">
                 {% blocktrans with date=event.changes_until trimmed %}
-                    You can change your selected shifts and personal data until {{ date }} on this page (we have sent you the link to this page by e-mail).
+                    You can change your selected shifts and personal data until {{ date }} on this page (we have also sent you the link via e-mail).
+                    Afterwards, please contact us directly for changes.
                 {% endblocktrans %}
             </div>
         {% endif %}
@@ -57,31 +57,31 @@
 
     {% if data.is_coordinator %}
         <h2>{% trans "Jobs" %}</h2>
-        <p>
-            <ul class="list-group list-group-flush">
+        <ul class="list-group mb-3">
             {% for job in data.coordinated_jobs %}
-                <li class="list-group-item">{{ job }}</li>
+                <li class="list-group-item">
+                    {{ job.name }}
+                </li>
             {% endfor %}
-            </ul>
-        </p>
+        </ul>
     {% endif %}
 
     {% if data.shifts.exists %}
         <h2>{% trans "Shifts" %}</h2>
 
-        <p>
-            <ul class="list-group list-group-flush">
+        <ul class="list-group mb-3">
             {% for shift in data.shifts.all %}
                 <li class="list-group-item">
                     {{ shift }}
 
                     {% if event.changes_possible %}
-                        <a href="{% url 'deregister' event.url_name data.pk shift.pk %}" class="float-right">{% icon "sign-out-alt" %} {% trans "Sign off" %}</a>
+                        <a href="{% url 'deregister' event.url_name data.pk shift.pk %}" class="float-end">
+                            {% icon "times" %} {% trans "Sign off" %}
+                        </a>
                     {% endif %}
                 </li>
             {% endfor %}
-            </ul>
-        <p>
+        </ul>
 
         {% comment %}
         {% if event.changes_possible %}
@@ -91,17 +91,12 @@
         {% endif %}
         {% endcomment %}
 
-        <p>
+        <p class="mt-4">
             <a class="btn btn-outline-primary" href="{% url 'ical' event.url_name data.pk %}">
                 <em class="far fa-calendar-alt fa-lg"></em> {% trans "Add to calendar (iCal)" %}
             </a>
         </p>
     {% endif %}
 
-    {% if event.imprint %}
-        <div class="contact">
-            <p><strong>{% trans "Contact" %}</strong></p>
-            {{ event.imprint | safe }}
-        </div>
-    {% endif %}
+    {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}

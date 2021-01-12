@@ -1,8 +1,8 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons inventory %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="agreements-header">{% trans "User agreements" %}</h2>
+{% block content %}
+    <h1>{% trans "User agreements" %}</h1>
 
     <p><a href="{% url 'account:new_agreement' %}">
         {% icon "plus" %}
@@ -10,19 +10,27 @@
     </a></p>
 
     {% if agreements %}
-        <table class="table" aria-describedby="agreements-header">
-            <tr>
-                <th scope="col">{% trans "Name" %}</th>
-                <th scope="col">{% trans "Start date" %}</th>
-                <th scope="col">{% trans "End date" %}</th>
-                <th scope="col"></th>
-            </tr>
+        <ul class="list-group">
             {% for agreement in agreements %}
-                <tr>
-                    <td>{{ agreement.name }}</td>
-                    <td>{{ agreement.start }}</td>
-                    <td>{{ agreement.end|default:"-" }}</td>
-                    <td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-md-6 py-1 text-break">
+                                {{ agreement.name }}
+                            </div>
+                            <div class="col-12 col-md-6 py-1">
+                                {% if agreement.end %}
+                                    {{ agreement.start }} - {{ agreement.end }}
+                                {% else %}
+                                    {% blocktrans trimmed with date=agreement.start %}
+                                        From {{ date }}
+                                    {% endblocktrans %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         <a href="{% url "account:edit_agreement" agreement.pk %}">
                             {% icon "pencil-alt" %}
                             {% trans "Edit" %}
@@ -34,10 +42,11 @@
                             {% icon "trash-alt" %}
                             {% trans "Delete" %}
                         </a>
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "There are no user agreements." %}</p>
     {% endif %}

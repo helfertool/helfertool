@@ -1,0 +1,6 @@
+/* if we put a standard list inside a list group, it is indented.
+the class "reset-list" reverts some properties, so that the list does not look indented anymore */
+ul.reset-list {
+    padding-left: 0.85rem;
+    list-style-type: disc;
+}

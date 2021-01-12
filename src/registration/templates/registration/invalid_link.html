@@ -1,34 +1,18 @@
 {% extends "helfertool/base.html" %}
-{% load i18n bootstrap4 icons %}
-
-{% load registerform_shifts %}
-
-{% block title %}
-    {% blocktrans trimmed with eventname=event.name %}
-        Helfertool - {{ eventname }}
-    {% endblocktrans %}
-{% endblock %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h1>{{ event }}</h1>
+    <div class="errorpage text-center text-muted">
+        <i class="far fa-frown-open display-1"></i>
 
-    <div class="alert alert-info" role="alert">
-        {% trans "This link is not valid." %}
+        <h1 class="message">{% trans "This link is not valid" %}</h1>
+
+        {% if event.active %}
+            <p class="link">
+                <a href="{% url "form" event.url_name %}" class="btn btn-outline-primary ">
+                    {% icon "external-link-alt" %} {% trans "To the public registration" %}
+                </a>
+            </p>
+        {% endif %}
     </div>
-
-    {% if event.active %}
-        <p>
-            <a href="{% url "form" event.url_name %}" class="btn btn-outline-primary">
-                {% icon "external-link-alt" %}
-                {% trans "Go to public registration" %}
-            </a>
-        </p>
-    {% endif %}
-
-    {% if event.imprint %}
-        <div class="contact">
-            <p><strong>{% trans "Contact" %}</strong></p>
-            {{ event.imprint | safe }}
-        </div>
-    {% endif %}
 {% endblock %}

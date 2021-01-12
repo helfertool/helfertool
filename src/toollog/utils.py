@@ -61,6 +61,7 @@ def get_extras_with_replacement(record):
 
     # user
     if hasattr(record, 'user') and record.user:
+        # sometimes, we need to resolve the username, sometimes we directly receive it
         if type(record.user) == str:
             result = _add_entry(result, "user", record.user)
         else:

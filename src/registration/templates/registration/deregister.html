@@ -1,6 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load bootstrap4 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block title %}
     {% blocktrans trimmed with eventname=event.name %}
@@ -9,21 +8,28 @@
 {% endblock %}
 
 {% block content %}
-    <h1 id="register-header">{% trans "Sign off from shift" %}</h1>
+    <h1>{% trans "Sign off from shift" %}</h1>
 
-    <form action="" method="post" accept-charset="utf-8">
-        <table class="table table-condensed" aria-describedby="register-header">
-            <tr>
-                <th scope="row">{% trans "Name" %}</th>
-                <td>{{ helper.full_name }} </td>
-            </tr>
-            <tr>
-                <th scope="row">{% trans "Shift" %}</th>
-                <td>{{ shift }} </td>
-            </tr>
-        </table>
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-description="{% trans "Personal data of helper" %}">
+                <tr>
+                    <th scope="row" class="w-50">{% trans "Name" %}: </th>
+                    <td class="w-50">{{ helper.full_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="w-50">{% trans "Shift" %}: </th>
+                    <td class="w-50">{{ shift }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <form action="" method="post">
         {% csrf_token %}
 
-        <input type="submit" value="{% trans "Sign off" %}" class="btn btn-outline-primary" />
+        <button type="submit" class="btn btn-outline-danger">{% icon "times" %} {% trans "Sign off" %}</button>
     </form>
+
+    {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}

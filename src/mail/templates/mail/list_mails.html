@@ -1,43 +1,45 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n bootstrap4 icons %}
+{% load i18n django_bootstrap5 icons %}
 
-{% block admincontent %}
-    <h2 id="mails-header">{% trans "All mails" %}</h2>
+{% block content %}
+    <h1>{% trans "All mails" %}</h1>
 
     {% if sent_mails %}
-        <table class="table" aria-describedby="mails-header">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">{% trans "Subject" %}</th>
-                <th scope="col">{% trans "Receiver" %}</th>
-                <th scope="col">{% trans "Date" %}</th>
-                <th scope="col"></th>
-            </tr>
+        <ul class="list-group">
             {% for mail in sent_mails %}
-                <tr>
-                    <td>
-                        {% if mail.failed %}
-                            <span class="text-danger">{% icon "exclamation-triangle" %}</span>
-                        {% endif %}
-                    </td>
-                    <td>{{ mail.subject }}</td>
-                    <td>
-                        <ul>
-                            {% for tmp in mail.receiver_list %}
-                                <li>{{ tmp }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ mail.date }}</td>
-                    <td>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-8 col-lg-9 col-xl-10">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 py-1 text-break">
+                                {% if mail.failed %}
+                                    <span class="text-danger me-1">{% icon "exclamation-triangle" %}</span>
+                                {% endif %}
+
+                                {{ mail.subject }}
+                            </div>
+                            <div class="col-12 col-lg-4 py-1">
+                                <ul class="reset-list">
+                                {% for tmp in mail.receiver_list %}
+                                    <li>{{ tmp }}</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="col-12 col-lg-4 py-1">
+                                {% icon "clock" %} {{ mail.date }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
                         <a href="{% url 'mail:show' event.url_name mail.pk %}">
                             {% icon "search" %}
                             {% trans "View" %}
                         </a>
-                    </td>
-                </tr>
+                    </div>
+                </div>
+            </li>
             {% endfor %}
-        </table>
+        </ul>
     {% else %}
         <p class="text-muted">{% trans "No mails were sent (or you are not allowed to see these mails)." %}</p>
     {% endif %}
