@@ -36,8 +36,8 @@ get_release_series()
 # behavior depends on branch
 git_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-if [ "$git_branch" = "master" ] ; then
-    # we are on master -> do a stable release and update the latest tag
+if [ "$git_branch" = "main" ] ; then
+    # we are on main -> do a stable release and update the latest tag
     docker_tag="$(get_release_series)"
     docker_update_latest=1
 elif [ "$(echo "$git_branch" | grep "^lts/")" != "" ] ; then
