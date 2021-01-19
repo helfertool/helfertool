@@ -331,7 +331,11 @@ if not DEBUG:
 
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SECURE = True
-    SESSION_COOKIE_SAMESITE = "Strict"
+    # OIDC with foreign TLDs is blocked by SAMESITE=Strict, so make this configurable
+    if oidc_config and dict_get(oidc_config, False, 'provider', 'is_foreign_tld'):
+        SESSION_COOKIE_SAMESITE = "Lax"
+    else:
+        SESSION_COOKIE_SAMESITE = "Strict"
 
     LANGUAGE_COOKIE_HTTPONLY = True
     LANGUAGE_COOKIE_SECURE = True
