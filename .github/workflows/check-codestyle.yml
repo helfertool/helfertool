@@ -19,7 +19,9 @@ jobs:
         python-version: 3.8
 
     - name: Install dependencies via apt
-      run: sudo apt-get install libldap2-dev libsasl2-dev libmariadb-dev-compat
+      run: |
+        sudo apt-get update
+        sudo apt-get install libldap2-dev libsasl2-dev libmariadb-dev-compat
 
     - name: Install dependencies via pip
       run: |
