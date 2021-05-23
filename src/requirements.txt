@@ -4,7 +4,7 @@ django-axes
 django-bleach
 django-bootstrap4
 django-ckeditor
-django-icons
+django-icons<3.0.0
 django-modeltranslation
 django-multiselectfield
 django_ical
