@@ -108,12 +108,12 @@ class MailForwarder:
         else:
             new_from = new_from_name + new_from_name_suffix
 
-        msg.replace_header("From", email.utils.formataddr((new_from, settings.FORWARD_UNHANDLED_ADDRESS)))
+        self._replace_header(msg, "From", email.utils.formataddr((new_from, settings.FORWARD_UNHANDLED_ADDRESS)))
 
         # Change To: internal forwarding address + original to (without own addresses)
         new_to = [(settings.FORWARD_UNHANDLED_NAME, settings.FORWARD_UNHANDLED_ADDRESS)]
         self._merge_addr_list(new_to, original_to)
-        msg.replace_header("To", self._format_addr_header(new_to))
+        self._replace_header(msg, "To", self._format_addr_header(new_to))
 
         # CC is not touched (it is only informational)
 
@@ -125,10 +125,7 @@ class MailForwarder:
         self._merge_addr_list(new_reply_to, original_to)
         self._merge_addr_list(new_reply_to, original_cc)
 
-        if "reply-to" in msg:
-            msg.replace_header("reply-to", self._format_addr_header(new_reply_to))
-        else:
-            msg.add_header("reply-to", self._format_addr_header(new_reply_to))
+        self._replace_header(msg, "reply-to", self._format_addr_header(new_reply_to))
 
         # send mail
         self._connection.sendmail(settings.FORWARD_UNHANDLED_ADDRESS, settings.FORWARD_UNHANDLED_ADDRESS,
@@ -177,3 +174,9 @@ class MailForwarder:
 
     def _format_addr_header(self, addresses):
         return ", ".join([email.utils.formataddr(addr) for addr in addresses])
+
+    def _replace_header(self, msg, key, value):
+        if key in msg:
+            msg.replace_header(key, value)
+        else:
+            msg.add_header(key, value)
