@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -106,15 +106,15 @@ msgstr "Auditprotokoll"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:77
 msgid "Helpers"
-msgstr "Helfer"
+msgstr "Helfer:innen"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:80
 msgid "Helpers and coordinators"
-msgstr "Helfer und Koordinatoren"
+msgstr "Helfer:innen und Koordinator:innen"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:101
 msgid "Search helper"
-msgstr "Helfer suchen"
+msgstr "Helfer:in suchen"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:106
 msgid "Duplicates"
@@ -126,7 +126,7 @@ msgstr "Unbesetzte Schichten"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:116
 msgid "All coordinators"
-msgstr "Alle Koordinatoren"
+msgstr "Alle Koordinator:innen"
 
 #: helfertool/templates/helfertool/admin_event_menu.html:125
 msgid "Mail"
@@ -232,20 +232,20 @@ msgid "Support"
 msgstr "Support"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:44
-msgid "User management"
-msgstr "Benutzerverwaltung"
+msgid "Users"
+msgstr "Benutzer:innen"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:48
 msgid "Add user"
-msgstr "Nutzer hinzufügen"
+msgstr "Benutzer:in hinzufügen"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:54
 msgid "All users"
-msgstr "Alle Nutzer"
+msgstr "Alle Benutzer:innen"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:58
 msgid "User agreements"
-msgstr "Nutzervereinbarungen"
+msgstr "Nutzungsvereinbarungen"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:68
 msgid "Newsletter"
@@ -257,7 +257,7 @@ msgstr "Newsletter versenden"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:76
 msgid "Remove recipient"
-msgstr "Empfänger entfernen"
+msgstr "Empfänger:in entfernen"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:89
 msgid "Templates"
@@ -330,6 +330,9 @@ msgstr ""
 #: helfertool/templates/helfertool/login_oidc_failed.html:8
 msgid "You are not allowed to login"
 msgstr "Du darfst dich nicht einloggen"
+
+#~ msgid "User management"
+#~ msgstr "Benutzerverwaltung"
 
 #, python-format
 #~ msgid "Helfertool - %(eventname)s"
