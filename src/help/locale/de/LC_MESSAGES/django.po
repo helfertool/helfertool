@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -32,7 +32,7 @@ msgstr "Veranstaltung bewerben"
 
 #: help/models.py:18
 msgid "Permission to add new users"
-msgstr "Berechtigung zum Anlegen neuer Nutzer"
+msgstr "Berechtigung zum Anlegen neuer Benutzer:innen"
 
 #: help/models.py:19
 msgid "Permission to add new events"
@@ -68,8 +68,8 @@ msgid ""
 "You can use this form to contact the admins. Did you have a look at the <a "
 "href=\"%(docs_url)s\">documentation</a>?"
 msgstr ""
-"Du kannst dieses Formular nutzen, um die Administratoren zu kontaktieren. "
-"Hast du schon in die <a href=\"%(docs_url)s\">Dokumentation</a> geschaut?"
+"Du kannst dieses Formular nutzen, um die Admins zu kontaktieren. Hast du "
+"schon in die <a href=\"%(docs_url)s\">Dokumentation</a> geschaut?"
 
 #: help/templates/help/create_issue.html:22
 msgid "Send"
@@ -77,13 +77,13 @@ msgstr "Senden"
 
 #: help/views.py:20
 msgid "The issue was saved and sent to the admins."
-msgstr "Die Anfrage wurde gespeichert und an die Administratoren geschickt."
+msgstr "Die Anfrage wurde gespeichert und an die Admins geschickt."
 
 #: help/views.py:22
 msgid "The issue was created but notifying the admins failed"
 msgstr ""
-"Die Anfrage wurde gespeichert, aber das Benachrichtigen der Administratoren "
-"ist fehlgeschlagen"
+"Die Anfrage wurde gespeichert, aber das Benachrichtigen der Admins ist "
+"fehlgeschlagen"
 
 #~ msgid "Subject"
 #~ msgstr "Thema"

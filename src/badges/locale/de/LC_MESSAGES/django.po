@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,8 +35,8 @@ msgid ""
 "This badge does not exist. Maybe it was deleted since printing or does not "
 "belong to this event."
 msgstr ""
-"Dieses Badge existiert nicht. Vielleicht wurde der Helfer seit dem Drucken "
-"gelöscht oder das Badge gehört nicht zu dieser Veranstaltung."
+"Dieses Badge existiert nicht. Vielleicht wurde die Helfer:in seit dem "
+"Drucken gelöscht oder das Badge gehört nicht zu dieser Veranstaltung."
 
 #: badges/forms/defaults.py:46 badges/models/badge.py:97
 #: badges/templates/badges/list_specialbadges.html:45
@@ -184,11 +184,11 @@ msgstr "Badge Sprache"
 
 #: badges/models/settings.py:76
 msgid "Role for coordinators"
-msgstr "Rolle für Koordinatoren"
+msgstr "Rolle für Koordinator:innen"
 
 #: badges/models/settings.py:82
 msgid "Role for helpers"
-msgstr "Rolle für Helfer"
+msgstr "Rolle für Helfer:innen"
 
 #: badges/models/settings.py:89
 msgid "Format for shift on badges"
@@ -212,7 +212,7 @@ msgstr "Keine Schichtnamen verwenden, immer die Zeiten abdrucken"
 
 #: badges/models/settings.py:101
 msgid "Badges only for coordinators"
-msgstr "Badges nur für Koordinatoren"
+msgstr "Badges nur für Koordinator:innen"
 
 #: badges/models/settings.py:106
 msgid "Print barcodes on badges to avoid duplicates"
@@ -393,10 +393,10 @@ msgid ""
 "create several similar badges without adding helpers manually. Please note, "
 "that it is not possible to assign inventory items to these special badges."
 msgstr ""
-"Spezial Badges sind Badges, die nicht mit Helfern verbunden sind und "
+"Spezial Badges sind Badges, die nicht mit Helfer:innen verbunden sind und "
 "fortlaufend nummeriert sind, zum Beispiel: Polizei 1, Polizei 2, etc. Es "
 "können also mehrere ähnliche Badges erstellt werden ohne dafür manuell "
-"Helfer anzulegen. Bitte beachte, dass es nicht möglich ist, Inventar "
+"Helfer:innen anzulegen. Bitte beachte, dass es nicht möglich ist, Inventar "
 "Gegenstände an diese Spezial Badges zuzuweisen."
 
 #: badges/templates/badges/list_specialbadges.html:17

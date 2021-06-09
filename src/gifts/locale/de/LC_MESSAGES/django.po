@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgstr "Ausgegeben"
 
 #: gifts/models/deservedgiftset.py:22
 msgid "Helper got gift"
-msgstr "Helfer hat Geschenk erhalten"
+msgstr "Helfer:in hat Geschenk erhalten"
 
 #: gifts/models/gift.py:10 gifts/models/set.py:14
 #: gifts/templates/gifts/delete_gift.html:11
@@ -51,19 +51,19 @@ msgstr "Name"
 
 #: gifts/models/giftsettings.py:16
 msgid "Enable automatic presence for helpers"
-msgstr "Helfer automatisch auf anwesend setzen"
+msgstr "Helfer:innen automatisch auf anwesend setzen"
 
 #: gifts/models/giftsettings.py:17
 msgid ""
 "At the end of the shift, the helper is automatically set to present, unless "
 "the absence was reported."
 msgstr ""
-"Am Ende der Schicht werden die Helfer automatisch auf anwesend gesetzt, "
-"außer sie sind bereits als abwesend eingetragen."
+"Am Ende der Schicht werden die Helfer:innen automatisch auf anwesend "
+"gesetzt, außer sie sind bereits als abwesend eingetragen."
 
 #: gifts/models/giftsettings.py:22
 msgid "Default deposit for a helper"
-msgstr "Standard Pfand für Helfer"
+msgstr "Standard Pfand für Helfer:innen"
 
 #: gifts/models/helpersgifts.py:25 gifts/templates/gifts/helper.html:146
 #: gifts/templates/gifts/list_deposit.html:14
@@ -76,11 +76,11 @@ msgstr "Pfand zurückgegeben"
 
 #: gifts/models/helpersgifts.py:39
 msgid "Helper got her T-shirt"
-msgstr "Helfer hat T-Shirt erhalten"
+msgstr "Helfer:in hat T-Shirt erhalten"
 
 #: gifts/models/helpersgifts.py:44
 msgid "Buy a T-shirt for helper"
-msgstr "T-Shirt für Helfer kaufen"
+msgstr "T-Shirt für Helfer:in kaufen"
 
 #: gifts/models/helpersgifts.py:49
 msgid "Deserved gifts"
@@ -164,7 +164,7 @@ msgstr "Ausstehend"
 
 #: gifts/templates/gifts/helper.html:80
 msgid "Helper was present"
-msgstr "Helfer war anwesend"
+msgstr "Helfer:in war anwesend"
 
 #: gifts/templates/gifts/helper.html:123 gifts/templates/gifts/helper.html:132
 msgid "All delivered"

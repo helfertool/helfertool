@@ -41,7 +41,7 @@
 
         {% if user.is_superuser or user|has_adduser_group %}
         <li class="nav-item">
-            <p class="sidemenu-section">{% trans "User management" %}</p>
+            <p class="sidemenu-section">{% trans "Users" %}</p>
             <ul class="nav flex-column">
                 {% if user.is_superuser or user|has_adduser_group %}
                 <li class="nav-item">

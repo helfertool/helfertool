@@ -2,7 +2,7 @@
 {% load i18n django_bootstrap5 icons static permissions shifts %}
 
 {% block content %}
-    <h1>{% trans "Overview over helpers" %}</h1>
+    <h1>{% trans "Overview of helpers" %}</h1>
 
     {% if not event.job_set.exists %}
         <p class="text-muted">{% trans "There are no jobs and shifts." %}</p>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,7 +50,7 @@ msgstr "Gesamtzahl an Schichtslots"
 
 #: statistic/templates/statistic/overview.html:24
 msgid "Vegetarians"
-msgstr "Vegetarier"
+msgstr "Vegetarier:innen"
 
 #: statistic/templates/statistic/overview.html:33
 msgid "Timeline of registrations"
@@ -119,7 +119,7 @@ msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
 #: statistic/views/chart.py:124
 msgid "Number of helpers"
-msgstr "Anzahl Helfer"
+msgstr "Anzahl Helfer:innen"
 
 #: statistic/views/chart.py:176
 msgid "Helpers"
