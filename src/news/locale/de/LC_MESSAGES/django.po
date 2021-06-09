@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -69,7 +69,7 @@ msgstr "Du musst die Datenschutzerklärung akzeptieren."
 #: news/models/person.py:28
 msgid "Helper subscribed during registration for event"
 msgstr ""
-"Helfer hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
+"Helfer:in hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
 
 #: news/templates/news/mail/end.txt:2
 #, python-format
@@ -92,11 +92,11 @@ msgid ""
 "Hello dear helpers,\n"
 msgstr ""
 "\n"
-"Hallo liebe Helferinnen und Helfer,\n"
+"Hallo liebe Helfer:innen,\n"
 
 #: news/templates/news/remove.html:5
 msgid "Remove recipient"
-msgstr "Empfänger entfernen"
+msgstr "Empfänger:in entfernen"
 
 #: news/templates/news/remove.html:14
 msgid "Remove"
@@ -108,7 +108,7 @@ msgstr "Newsletter versenden"
 
 #: news/templates/news/send.html:7
 msgid "Number of recipients:"
-msgstr "Anzahl der Empfänger:"
+msgstr "Anzahl der Empfänger:innen:"
 
 #: news/templates/news/send.html:55
 msgid "Send"
@@ -170,8 +170,8 @@ msgstr ""
 
 #: news/views/remove.py:30
 msgid "Recipient removed."
-msgstr "Empfänger entfernt."
+msgstr "Empfänger:in entfernt."
 
 #: news/views/send.py:37
 msgid "Mails are being sent now."
-msgstr "E-Mails werden gerade verschickt."
+msgstr "E-Mails werden jetzt verschickt."

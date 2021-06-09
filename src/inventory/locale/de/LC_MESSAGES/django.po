@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgstr "Name"
 
 #: inventory/models.py:25
 msgid "Administrators of inventory"
-msgstr "Verwalter des Inventars"
+msgstr "Verwalter:innen des Inventars"
 
 #: inventory/models.py:30
 msgid "Same item may be assigned to different helpers"
@@ -180,15 +180,15 @@ msgstr "Gegenstand scannen"
 #: inventory/templates/inventory/register_badge.html:18
 #: inventory/templates/inventory/register_item.html:12
 msgid "This item is already assigned to another helper."
-msgstr "Dieser Gegenstand ist bereits einem anderen Helfer zugeordnet."
+msgstr "Dieser Gegenstand ist bereits einer anderen Helfer:in zugeordnet."
 
 #: inventory/templates/inventory/register_badge.html:24
 msgid ""
 "This is a special badge, which is not associated with a helper. It cannot be "
 "used here."
 msgstr ""
-"Das ist ein Spezial Badge, welches mit keinem Helfer verknüpft ist. Es kann "
-"hier nicht genutzt werden."
+"Das ist ein Spezial Badge, welches mit keiner Helfer:in verknüpft ist. Es "
+"kann hier nicht genutzt werden."
 
 #: inventory/templates/inventory/register_badge.html:31
 #: inventory/templates/inventory/take_back_badge.html:25
@@ -210,7 +210,7 @@ msgstr "Eingetragen für %(last_helper)s"
 
 #: inventory/templates/inventory/register_item.html:33
 msgid "The helper now has these items:"
-msgstr "Der Helfer hat jetzt folgende Gegenstände:"
+msgstr "Die Helfer:in hat jetzt folgende Gegenstände:"
 
 #: inventory/templates/inventory/take_back_badge.html:5
 msgid "Take back: Scan badge"
@@ -219,8 +219,8 @@ msgstr "Zurück nehmen: Badge scannen"
 #: inventory/templates/inventory/take_back_badge.html:18
 msgid "This item is not assigned to this helper, but to another helper."
 msgstr ""
-"Der Gegenstand ist nicht für diesen Helfer eingetragen, aber für einen "
-"anderen."
+"Der Gegenstand ist nicht für diese Helfer:in eingetragen, aber für eine "
+"andere."
 
 #: inventory/templates/inventory/take_back_badge.html:28
 msgid "Take back without badge"
@@ -239,7 +239,7 @@ msgstr ""
 
 #: inventory/templates/inventory/take_back_error.html:11
 msgid "The item is not assigned to any helper."
-msgstr "Dieser Gegenstand ist keinem Helfer zugeordnet."
+msgstr "Dieser Gegenstand ist keiner Helfer:in zugeordnet."
 
 #: inventory/templates/inventory/take_back_item.html:5
 msgid "Take back: Scan item"
@@ -251,7 +251,7 @@ msgstr "Der Gegenstand wird nicht verwendet."
 
 #: inventory/templates/inventory/take_back_item.html:24
 msgid "The helper still has these items:"
-msgstr "Der Helfer hat noch folgende Gegenstände:"
+msgstr "Die Helfer:in hat noch folgende Gegenstände:"
 
 #: inventory/templates/inventory/take_back_item.html:34
 msgid "Everything returned!"

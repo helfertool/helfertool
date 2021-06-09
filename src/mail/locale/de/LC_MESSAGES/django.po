@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: mail/forms.py:44 mail/models.py:114
 msgid "All helpers and coordinators"
-msgstr "Alle Helfer und Koordinatoren"
+msgstr "Alle Helfer:innen und Koordinator:innen"
 
 #: mail/forms.py:45 mail/models.py:118
 msgid "All coordinators"
-msgstr "Alle Koordinatoren"
+msgstr "Alle Koordinator:innen"
 
 #: mail/forms.py:47
 msgid "General"
@@ -32,11 +32,11 @@ msgstr "Allgemein"
 
 #: mail/forms.py:54 mail/models.py:121
 msgid "{}, Helpers and coordinators"
-msgstr "{}, Helfer und Koordinatoren"
+msgstr "{}, Helfer:innen und Koordinator:innen"
 
 #: mail/forms.py:59 mail/models.py:124
 msgid "{}, Coordinators"
-msgstr "{}, Koordinatoren"
+msgstr "{}, Koordinator:innen"
 
 #: mail/forms.py:77
 msgid "Custom"
@@ -44,7 +44,7 @@ msgstr "Andere Adresse"
 
 #: mail/forms.py:82
 msgid "Receivers"
-msgstr "Empfänger"
+msgstr "Empfänger:innen"
 
 #: mail/forms.py:88 mail/templates/mail/show_mail.html:33
 msgid "Reply to"
@@ -77,7 +77,8 @@ msgstr "Du musst eine andere Antwortadresse angeben"
 #: mail/forms.py:167
 msgid "There are no helpers or coordinators that would receive this mail."
 msgstr ""
-"Es gibt keine Helfer oder Koordinatoren, die diese E-Mail empfangen würden."
+"Es gibt keine Helfer:innen oder Koordinator:innen, die diese E-Mail "
+"empfangen würden."
 
 #: mail/templates/mail/list_mails.html:5
 msgid "All mails"
@@ -125,7 +126,7 @@ msgstr "Absender Adresse"
 
 #: mail/templates/mail/show_mail.html:37
 msgid "Receiver"
-msgstr "Empfänger"
+msgstr "Empfänger:innen"
 
 #: mail/views/send_mail.py:36
 msgid "Mail was sent successfully"

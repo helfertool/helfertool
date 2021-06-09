@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-07 22:24+0200\n"
+"POT-Creation-Date: 2021-06-09 21:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,12 +25,12 @@ msgstr "Durch externen Identity Provider verwaltet"
 #: account/forms/account.py:111 account/templates/account/list_users.html:35
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
-msgstr "Administrator"
+msgstr "Administrator:in"
 
 #: account/forms/account.py:121 account/templates/account/list_users.html:43
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
-msgstr "Nutzer hinzufügen"
+msgstr "Benutzer:innen hinzufügen"
 
 #: account/forms/account.py:129 account/templates/account/list_users.html:39
 #: account/templates/account/user_permissions.html:14
@@ -68,7 +68,7 @@ msgstr "Enddatum muss nach Startdatum liegen."
 
 #: account/templates/account/add_user.html:5
 msgid "Add user"
-msgstr "Nutzer hinzufügen"
+msgstr "Benutzer:in hinzufügen"
 
 #: account/templates/account/add_user.html:16
 msgid "Add"
@@ -76,11 +76,11 @@ msgstr "Hinzufügen"
 
 #: account/templates/account/delete_agreement.html:5
 msgid "Delete user agreement"
-msgstr "Nutzervereinbarung löschen"
+msgstr "Nutzungsvereinbarung löschen"
 
 #: account/templates/account/delete_agreement.html:9
 msgid "Data of user agreement"
-msgstr "Daten der Nutzervereinbarung"
+msgstr "Daten der Nutzungsvereinbarung"
 
 #: account/templates/account/delete_agreement.html:29
 #: account/templates/account/list_agreements.html:43
@@ -89,12 +89,12 @@ msgstr "Löschen"
 
 #: account/templates/account/edit_agreement.html:7
 msgid "Edit user agreement"
-msgstr "Nutzervereinbarung bearbeiten"
+msgstr "Nutzungsvereinbarung bearbeiten"
 
 #: account/templates/account/edit_agreement.html:11
 #: account/templates/account/list_agreements.html:9
 msgid "New user agreement"
-msgstr "Neue Nutzervereinbarung"
+msgstr "Neue Nutzungsvereinbarung"
 
 #: account/templates/account/edit_agreement.html:45
 #: account/templates/account/edit_user.html:33
@@ -104,7 +104,7 @@ msgstr "Sichern"
 
 #: account/templates/account/edit_user.html:5
 msgid "Edit user"
-msgstr "Nutzer bearbeiten"
+msgstr "Benutzer:in bearbeiten"
 
 #: account/templates/account/edit_user.html:17
 msgid "Personal data"
@@ -124,7 +124,7 @@ msgstr "Verstanden!"
 
 #: account/templates/account/list_agreements.html:5
 msgid "User agreements"
-msgstr "Nutzervereinbarungen"
+msgstr "Nutzungsvereinbarungen"
 
 #: account/templates/account/list_agreements.html:26
 #, python-format
@@ -138,11 +138,11 @@ msgstr "Bearbeiten"
 
 #: account/templates/account/list_agreements.html:51
 msgid "There are no user agreements."
-msgstr "Es gibt keine Nutzervereinbarungen."
+msgstr "Es gibt keine Nutzungsvereinbarungen."
 
 #: account/templates/account/list_users.html:5
 msgid "Users"
-msgstr "Benutzer"
+msgstr "Benutzer:innen"
 
 #: account/templates/account/list_users.html:13
 #: account/templates/account/list_users.html:17
@@ -164,7 +164,7 @@ msgstr "Deaktiviert"
 
 #: account/templates/account/list_users.html:87
 msgid "No users found."
-msgstr "Keine Benutzer gefunden."
+msgstr "Keine Benutzer:in gefunden."
 
 #: account/templates/account/view_user.html:6
 msgid "My account"
@@ -175,8 +175,8 @@ msgid "Account data"
 msgstr "Account Daten"
 
 #: account/templates/account/view_user.html:15
-msgid "Username"
-msgstr "Benutzername"
+msgid "Login"
+msgstr "Login"
 
 #: account/templates/account/view_user.html:23
 msgid "Email address"
@@ -214,18 +214,18 @@ msgstr "Vor %(last_login_ago)s"
 #: account/views/account.py:32
 #, python-format
 msgid "Added user %(username)s"
-msgstr "Benutzer %(username)s hinzugefügt"
+msgstr "Benutzer:in %(username)s hinzugefügt"
 
 #: account/views/account.py:81
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
+#~ msgid "Username"
+#~ msgstr "Benuzername"
+
 #, python-format
 #~ msgid "Delete user agreement %(name)s?"
 #~ msgstr "Nutzervereinbarung %(name)s löschen?"
-
-#~ msgid "Last login"
-#~ msgstr "Letzter Login"
 
 #~ msgid "Managed by LDAP group"
 #~ msgstr "Durch LDAP Gruppe verwaltet"
