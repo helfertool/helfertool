@@ -1,5 +1,13 @@
-/* PresenceField widget: list inline */
-div.presence div {
-    float: left;
-    margin-right: 1em;
+// PresenceField widget
+div.presence {
+    // list inline
+    div {
+        float: left;
+        margin-right: 1em;
+    }
+
+    // no line break in labels
+    label span {
+        white-space: nowrap;
+    }
 }

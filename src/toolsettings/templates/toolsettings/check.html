@@ -10,7 +10,7 @@
             <table class="table" aria-description="{% trans 'Status of Helfertool' %}">
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "Version" %} </th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {{ version }}
                         {% if container_version %}
                             ({% trans "Container:" %} {{ container_version }})
@@ -19,7 +19,7 @@
                 </tr>
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "Templates" %} </th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if templates_ok %}
                             <em class="fas fa-check"></em>
                         {% else %}
@@ -37,7 +37,7 @@
             <table class="table" aria-description="{% trans 'Status of external services' %}">
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "Mail" %} </th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if mail_ok %}
                             <em class="fas fa-check"></em>
                         {% else %}
@@ -48,7 +48,7 @@
 
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "RabbitMQ" %} </th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if celery_broker_ok %}
                             <em class="fas fa-check"></em>
                         {% else %}
@@ -59,7 +59,7 @@
 
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "LDAP" %} </th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if ldap_configured %}
                             {% if ldap_ok %}
                                 <em class="fas fa-check"></em>
@@ -74,7 +74,7 @@
 
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "Search for similar names" %} </th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if similarity_search %}
                             <em class="fas fa-check"></em>
                         {% else %}
@@ -92,7 +92,7 @@
             <table class="table" aria-description="{% trans 'Status of HTTP headers' %}">
                 <tr class="d-flex">
                     <th class="col-6" scope="row">Host</th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if header_host %}
                             {{ header_host }}
                         {% else %}
@@ -103,7 +103,7 @@
 
                 <tr class="d-flex">
                     <th class="col-6" scope="row">{% trans "Remote IP" %}</th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if header_remote_addr %}
                             {{ header_remote_addr }}
                             {% if header_remote_addr != header_x_forwarded_for %}
@@ -121,7 +121,7 @@
 
                 <tr class="d-flex">
                     <th class="col-6" scope="row">X-Forwarded-For</th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if header_x_forwarded_for %}
                             {{ header_x_forwarded_for }}
                         {% else %}
@@ -132,7 +132,7 @@
 
                 <tr class="d-flex">
                     <th class="col-6" scope="row">X-Forwarded-Proto</th>
-                    <td class="col-6">
+                    <td class="col-6 text-break">
                         {% if header_x_forwarded_proto %}
                             {{ header_x_forwarded_proto }}
                         {% else %}

@@ -145,10 +145,10 @@ Parameters:
     <div class="col-auto">
         {% trans "Deposit" %}
     </div>
-    <div class="col-5">
+    <div class="col-5 py-1">
         {% bootstrap_field form.deposit show_label=False wrapper_class="" %}
     </div>
-    <div class="col-5">
+    <div class="col-5 py-1">
         {% with default_deposit=helper.event.gift_settings.default_deposit %}
             {% if default_deposit %}
                 <a class="btn btn-sm btn-outline-primary" onclick="set_default_deposit({{ default_deposit }}); return false;" href="">
