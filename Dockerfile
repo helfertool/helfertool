@@ -29,7 +29,7 @@ COPY deployment/docker/rsyslog.conf /helfertool/rsyslog.conf
 RUN cd /helfertool/src/ && \
     # install python libs
     pip3 install -U pip && \
-    pip3 install -r requirements.txt mysqlclient uwsgitop && \
+    pip3 install -r requirements.txt -r requirements_prod.txt && \
     # generate compressed CSS/JS files
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py compress --force && \
     # copy static files
