@@ -1,6 +1,5 @@
 from django import forms
 from django.conf import settings
-from django.contrib.postgres.search import TrigramSimilarity
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.db.models.functions import Greatest
@@ -10,6 +9,12 @@ from .widgets import ShiftTableWidget
 from ..models import Helper, Shift, Job
 from ..permissions import has_access, ACCESS_HELPER_VIEW, ACCESS_JOB_EDIT_HELPERS
 from badges.models import Badge
+
+# we want to be able to run without psycopg2 for development
+try:
+    from django.contrib.postgres.search import TrigramSimilarity
+except ImportError:
+    pass
 
 import logging
 logger = logging.getLogger("helfertool.registration")
