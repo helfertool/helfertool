@@ -23,7 +23,7 @@ def overview(request, event_url_name):
     if event.badges:
         num_people += SpecialBadges.objects.filter(event=event).aggregate(Sum('number'))['number__sum'] or 0
 
-    num_shift_slots = Shift.objects.filter(job__event=event).aggregate(Sum('number'))['number__sum']
+    num_shift_slots = Shift.objects.filter(job__event=event).aggregate(Sum('number'))['number__sum'] or 0
 
     # render
     context = {

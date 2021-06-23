@@ -171,6 +171,10 @@ def chart_helpers(request, event_url_name):
     else:
         num_specialbadges = 0
 
+    # abort if nothing to show
+    if total_helpers + num_specialbadges == 0:
+        return JsonResponse({})
+
     # output format
     data = [
         {"value": num_helpers, "label": _("Helpers")},
@@ -192,9 +196,13 @@ def chart_shifts(request, event_url_name):
         return JsonResponse({})
 
     # get data
-    total_shifts = Shift.objects.filter(job__event=event).aggregate(Sum('number'))['number__sum']
+    total_shifts = Shift.objects.filter(job__event=event).aggregate(Sum('number'))['number__sum'] or 0
     filled_shifts = HelperShift.objects.filter(helper__event=event).count()
     vacant_shifts = total_shifts - filled_shifts
+
+    # abort if nothing to show
+    if total_shifts == 0:
+        return JsonResponse({})
 
     # output format
     data = [
@@ -220,6 +228,10 @@ def chart_eating_habits(request, event_url_name):
     # get data
     num_vegetarians = event.helper_set.filter(vegetarian=True).count()
     num_rest = event.helper_set.filter(vegetarian=False).count()
+
+    # abort if nothing to show
+    if num_vegetarians + num_rest == 0:
+        return JsonResponse({})
 
     # output format
     data = [

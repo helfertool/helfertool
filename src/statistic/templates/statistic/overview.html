@@ -7,21 +7,30 @@
     <div class="row">
         <div class="col-lg-6 col-xxl-4 statistics">
             <div class="title">{% trans "People" %}</div>
+
             <canvas class="chart" data-url="{% url 'statistic:chart_helpers' event.url_name %}" data-empty="helpers_empty"></canvas>
             <div id="helpers_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
-            <div class="details">{% trans "Total number of people" %}: {{ num_people }}</div>
+
+            {% if num_people %}
+                <div class="details">{% trans "Total number of people" %}: {{ num_people }}</div>
+            {% endif %}
         </div>
 
         <div class="col-lg-6 col-xxl-4 statistics">
             <div class="title">{% trans "Shifts" %}</div>
+
             <canvas class="chart" data-url="{% url 'statistic:chart_shifts' event.url_name %}" data-empty="shifts_empty"></canvas>
             <div id="shifts_empty" class="placeholder d-none">{% trans "There are no shifts." %}</div>
-            <div class="details">{% trans "Total number of shift slots" %}: {{ num_shift_slots }}</div>
+
+            {% if num_shift_slots %}
+                <div class="details">{% trans "Total number of shift slots" %}: {{ num_shift_slots }}</div>
+            {% endif %}
         </div>
 
         {% if event.ask_vegetarian %}
         <div class="col-lg-6 col-xxl-4 statistics">
             <div class="title">{% trans "Vegetarians" %}</div>
+
             <canvas class="chart" data-url="{% url 'statistic:chart_eating_habits' event.url_name %}" data-empty="eating_habits_empty"></canvas>
             <div id="eating_habits_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
         </div>
@@ -33,8 +42,8 @@
             <div class="title">{% trans "Timeline of registrations" %}</div>
             <div class="timeline-wrapper">
                 <canvas class="chart" data-url="{% url 'statistic:chart_timeline' event.url_name %}" data-empty="overview_empty"></canvas>
+                <div id="overview_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
             </div>
-            <p id="overview_empty" class="text-muted d-none">{% trans "There are no helpers." %}</p>
         </div>
     </div>
 
