@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Lato";
+    src: url('../font/Lato-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: "Lato";
+    src: url('../font/Lato-Bold.woff2') format('woff2');
+    font-weight: bold;
+}
+
+$font-family-base: "Lato", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
