@@ -1,11 +1,13 @@
 @font-face {
     font-family: "Lato";
-    src: url('../font/Lato-Regular.woff2') format('woff2');
+    src: url('../font/Nunito-Regular.woff2') format('woff2'),
+         url('../font/Nunito-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: "Lato";
-    src: url('../font/Lato-Bold.woff2') format('woff2');
+    src: url('../font/Nunito-Bold.woff2') format('woff2'),
+         url('../font/Nunito-Bold.ttf') format('truetype');
     font-weight: bold;
 }
 
