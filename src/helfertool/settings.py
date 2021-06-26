@@ -524,6 +524,7 @@ SELECT2_CACHE_BACKEND = 'select2'
 
 # application definition
 INSTALLED_APPS = (
+    'helfertool',  # we override some default translations here, so put it first
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -550,7 +551,6 @@ INSTALLED_APPS = (
     'toolsettings.apps.ToolsettingsConfig',
     'prerequisites.apps.PrerequisitesConfig',
     'toollog.apps.ToollogConfig',
-    'helfertool',
 )
 
 # middleware

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-09 21:28+0200\n"
+"POT-Creation-Date: 2021-06-26 18:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,33 +26,33 @@ msgstr "Statistiken"
 msgid "People"
 msgstr "Personen"
 
-#: statistic/templates/statistic/overview.html:11
-#: statistic/templates/statistic/overview.html:26
-#: statistic/templates/statistic/overview.html:37
+#: statistic/templates/statistic/overview.html:12
+#: statistic/templates/statistic/overview.html:35
+#: statistic/templates/statistic/overview.html:45
 msgid "There are no helpers."
 msgstr "Es gibt keine Helfer:innen."
 
-#: statistic/templates/statistic/overview.html:12
+#: statistic/templates/statistic/overview.html:15
 msgid "Total number of people"
 msgstr "Gesamtzahl an Personen"
 
-#: statistic/templates/statistic/overview.html:16
+#: statistic/templates/statistic/overview.html:20
 msgid "Shifts"
 msgstr "Schichten"
 
-#: statistic/templates/statistic/overview.html:18
+#: statistic/templates/statistic/overview.html:23
 msgid "There are no shifts."
 msgstr "Es gibt keine Schichten."
 
-#: statistic/templates/statistic/overview.html:19
+#: statistic/templates/statistic/overview.html:26
 msgid "Total number of shift slots"
 msgstr "Gesamtzahl an Schichtslots"
 
-#: statistic/templates/statistic/overview.html:24
+#: statistic/templates/statistic/overview.html:32
 msgid "Vegetarians"
 msgstr "Vegetarier:innen"
 
-#: statistic/templates/statistic/overview.html:33
+#: statistic/templates/statistic/overview.html:42
 msgid "Timeline of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
 
@@ -121,31 +121,31 @@ msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 msgid "Number of helpers"
 msgstr "Anzahl Helfer:innen"
 
-#: statistic/views/chart.py:176
+#: statistic/views/chart.py:180
 msgid "Helpers"
 msgstr "Helfer:innen"
 
-#: statistic/views/chart.py:177
+#: statistic/views/chart.py:181
 msgid "Coordinators"
 msgstr "Koordinator:innen"
 
-#: statistic/views/chart.py:180
+#: statistic/views/chart.py:184
 msgid "Special badges"
 msgstr "Spezial Badges"
 
-#: statistic/views/chart.py:201
+#: statistic/views/chart.py:209
 msgid "Filled slots"
 msgstr "Volle Slots"
 
-#: statistic/views/chart.py:202
+#: statistic/views/chart.py:210
 msgid "Vacant slots"
-msgstr "Leere slots"
+msgstr "Leere Slots"
 
-#: statistic/views/chart.py:226
+#: statistic/views/chart.py:238
 msgid "Vegetarian"
 msgstr "Vegetarier:in"
 
-#: statistic/views/chart.py:227
+#: statistic/views/chart.py:239
 msgid "No preference"
 msgstr "Keine Präferenz"
 

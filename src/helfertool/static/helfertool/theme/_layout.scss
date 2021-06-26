@@ -107,7 +107,7 @@ html {
 }
 
 // the class "visibility" is used to toggle the visibility of the sidemenu
-// on big screens, we hide the navbar is "visibility" is there
+// on big screens, we hide the navbar if "visibility" is there
 // the sidemenu is visible by default
 #sidemenu.visibility {
     margin-left: -$sidemenu_width;

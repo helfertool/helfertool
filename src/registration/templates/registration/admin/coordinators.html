@@ -10,7 +10,7 @@
         {% if job.coordinators.count == 0 %}
             <p class="text-muted">{% trans "There are no coordinators for this job." %}</p>
         {% else %}
-            <ul class="list-group">
+            <ul class="list-group mb-3">
                 {% for coordinator in job.coordinators.all %}
                 <li class="list-group-item">
                     <div class="row">
