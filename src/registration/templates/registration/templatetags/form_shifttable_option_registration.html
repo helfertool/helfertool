@@ -6,16 +6,16 @@
         {% if widget.attrs.checked %}checked{% endif %} {% if widget.attrs.disabled %}disabled{% endif %}
         data-begin="{{ shift.begin_timestamp }}" data-end="{{ shift.end_timestamp }}">
 
-    <label class="form-check-label" for="{{ widget.name }}_{{ widget.value }}">
+    <label class="form-check-label w-100" for="{{ widget.name }}_{{ widget.value }}">
         {{ shift.time_hours }}
 
         {% if event.show_public_numbers %}
             {% if widget.attrs.disabled %}
-                <span class="badge badge-outline-secondary">
+                <span class="badge badge-outline-secondary float-end">
                     {{ shift.number }}/{{ shift.number }}
                 </span>
             {% else %}
-                <span class="badge badge-outline-secondary">
+                <span class="badge badge-outline-secondary float-end">
                     {{ shift.num_helpers }}/{{ shift.number }}
                 </span>
             {% endif %}

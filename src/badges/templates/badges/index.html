@@ -23,7 +23,7 @@
             {% for job in jobs %}
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-8 col-lg-9 col-xl-10">
+                    <div class="col-7 col-lg-9 col-xl-10">
                         <div class="row">
                             <div class="col-12 col-md-6 py-1 text-break">
                                 {{ job.name }}
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                    <div class="col-5 col-lg-3 col-xl-2">
                         {% if event.badge_settings.barcodes %}
                             <a href="{% url "badges:generate_for_job" event.url_name job.pk %}">
                                 {% trans "Unregistered badges" %}
@@ -60,7 +60,7 @@
 
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col-8 col-lg-9 col-xl-10">
+                    <div class="col-7 col-lg-9 col-xl-10">
                         <div class="row">
                             <div class="col-12 col-md-6 py-1 text-break">
                                 {% trans "Special badges" %}
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 col-lg-3 col-xl-2 text-nowrap">
+                    <div class="col-5 col-lg-3 col-xl-2">
                         {% if event.badge_settings.barcodes %}
                             <a href="{% url "badges:generate_special" event.url_name %}">
                                 {% trans "Unregistered badges" %}

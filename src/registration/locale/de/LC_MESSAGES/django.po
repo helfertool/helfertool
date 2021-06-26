@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-09 21:28+0200\n"
+"POT-Creation-Date: 2021-06-26 18:33+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -114,24 +114,24 @@ msgstr "Neues Datum"
 msgid "Months"
 msgstr "Monate"
 
-#: registration/forms/helper.py:119
+#: registration/forms/helper.py:124
 msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
 
-#: registration/forms/helper.py:123
+#: registration/forms/helper.py:128
 msgid "This shift if already full: {}"
 msgstr "Die Schicht ist bereits voll: {}"
 
-#: registration/forms/helper.py:193
+#: registration/forms/helper.py:198
 msgid "No shift selected"
 msgstr "Keine Schicht ausgewählt"
 
-#: registration/forms/helper.py:198
+#: registration/forms/helper.py:203
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keine Helfer:in aus der Aufgabe \"%(jobname)s\" löschen"
 
-#: registration/forms/helper.py:229
+#: registration/forms/helper.py:234
 msgid "Search term"
 msgstr "Suchbegriff"
 
@@ -337,7 +337,6 @@ msgid "Displayed on the main page"
 msgstr "Auf der Hauptseite sichtbar"
 
 #: registration/models/event.py:121
-#: registration/templates/registration/admin/edit_event.html:65
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
@@ -356,7 +355,6 @@ msgid "Displayed at the bottom of all pages for the event."
 msgstr "Wird auf allen Seiten dieser Veranstaltung unten angezeigt."
 
 #: registration/models/event.py:133
-#: registration/templates/registration/admin/edit_event.html:71
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
@@ -910,6 +908,14 @@ msgstr "Anmeldung"
 #: registration/templates/registration/admin/edit_event.html:60
 msgid "Texts"
 msgstr "Texte"
+
+#: registration/templates/registration/admin/edit_event.html:65
+msgid "Before registration"
+msgstr "Vor Anmeldung"
+
+#: registration/templates/registration/admin/edit_event.html:71
+msgid "After registration"
+msgstr "Nach Anmeldung"
 
 #: registration/templates/registration/admin/edit_event.html:118
 msgid "Logos"

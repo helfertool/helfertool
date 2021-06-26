@@ -88,19 +88,21 @@
             </p>
 
             {% shifttable job %}
-                {% if shift.hidden %}
-                    {% icon "eye-slash" %}
-                {% elif shift.blocked %}
-                    {% icon "lock" %}
-                {% endif %}
-                {{ shift.time_hours }}
-                <span class="badge badge-outline-dark ms-1 mb-1">
-                    {{ shift.num_helpers_archived }}/{{ shift.number }}
-                </span>
+                <div class="mb-1">
+                    {% if shift.hidden %}
+                        {% icon "eye-slash" %}
+                    {% elif shift.blocked %}
+                        {% icon "lock" %}
+                    {% endif %}
+                    {{ shift.time_hours }}
+                    <span class="badge badge-outline-dark float-end">
+                        {{ shift.num_helpers_archived }}/{{ shift.number }}
+                    </span>
+                </div>
 
                 {% shift_progress shift %}
 
-                <span class="d-inline-block text-truncate shifttable-maxwidth" title="{{ shift.name }}">
+                <span class="d-inline-block mt-1 text-truncate shifttable-maxwidth" title="{{ shift.name }}">
                     {{ shift.name|default:"&nbsp;" }}
                 </span>
             {% endshifttable %}
