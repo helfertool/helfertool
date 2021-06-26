@@ -300,9 +300,8 @@ AXES_LOCK_OUT_AT_FAILURE = True
 AXES_ONLY_USER_FAILURES = True
 AXES_USE_USER_AGENT = False
 
-AXES_FAILURE_LIMIT = dict_get(config, 3, 'security', 'lockout', 'limit')
-AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, 'security',
-                                               'lockout', 'time'))
+AXES_FAILURE_LIMIT = dict_get(config, 5, 'security', 'lockout', 'limit')
+AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, 'security', 'lockout', 'time'))
 
 AXES_LOCKOUT_TEMPLATE = 'helfertool/login_banned.html'
 AXES_DISABLE_ACCESS_LOG = True

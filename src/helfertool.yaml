@@ -230,7 +230,7 @@ security:
     # Account lockout
     lockout:
         # Number of failed login attempts until lockout
-        limit: 3
+        limit: 5
 
         # Lockout duration in minutes
         time: 10
