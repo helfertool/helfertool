@@ -22,7 +22,7 @@
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
-        <title>{% trans "Helfertool" %}</title>
+        <title>{% block title %}{% trans "Helfertool" %}{% endblock %}</title>
 
         <link rel="shortcut icon" type="image/x-icon" href="{% static "helfertool/img/logo/icon.png" %}">
     </head>
