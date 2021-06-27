@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from toolsettings.forms import UserSelectWidget
+from helfertool.forms import UserSelectWidget
 
 from ..models import Item, Inventory
 

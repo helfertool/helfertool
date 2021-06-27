@@ -10,8 +10,7 @@ from copy import deepcopy
 
 import os
 
-from helfertool.forms import DatePicker
-from toolsettings.forms import SingleUserSelectWidget
+from helfertool.forms import DatePicker, SingleUserSelectWidget
 
 from ..models import Event, EventAdminRoles, EventArchive
 from toollog.models import LogEntry

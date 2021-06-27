@@ -1,7 +1,7 @@
 from django import forms
 
 from ..models import LogEntry
-from toolsettings.forms import SingleUserSelectWidget
+from helfertool.forms import SingleUserSelectWidget
 from registration.forms import SingleHelperSelectWidget
 
 
