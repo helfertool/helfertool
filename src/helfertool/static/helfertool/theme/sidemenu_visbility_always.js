@@ -1,0 +1,1 @@
+$('#sidemenu').toggleClass('visibility-always');
