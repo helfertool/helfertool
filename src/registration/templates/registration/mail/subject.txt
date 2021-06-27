@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans with eventname=event.name %}Registration for {{ eventname }}{% endblocktrans %}
+{% load i18n %}{% blocktrans with eventname=event.name|safe %}Registration for {{ eventname }}{% endblocktrans %}

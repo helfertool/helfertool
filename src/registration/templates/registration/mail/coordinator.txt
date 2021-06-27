@@ -1,10 +1,10 @@
-{% load i18n toolsettings %}{% blocktrans with firstname=user.firstname %}Hello {{ firstname }},
+{% load i18n toolsettings %}{% blocktrans with firstname=user.firstname|safe %}Hello {{ firstname }},
 
 you were registered for the following jobs:{% endblocktrans %}
 {% for job in user.coordinated_jobs %}
- * {{ job }}
+ * {{ job|safe }}
 {% endfor %}
-{% if user.has_to_validate %}{% blocktrans %}You have to confirm your mail address by clicking on the following link: {{ validate_url }}
+{% if user.has_to_validate %}{% blocktrans %}Please confirm your mail address by clicking on the following link: {{ validate_url }}
 
 {% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
 
