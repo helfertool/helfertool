@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-26 18:33+0200\n"
+"POT-Creation-Date: 2021-06-27 21:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -100,17 +100,17 @@ msgstr ""
 "Du kannst keine Helfer:innen zusammenfassen, welche für die gleiche Schicht "
 "angemeldet sind."
 
-#: registration/forms/event.py:108
+#: registration/forms/event.py:107
 msgid "User already has permissions for this event assigned"
 msgstr ""
 "Der Benutzer:in wurden bereits Berechtigungen für diese Veranstaltungen "
 "zugewiesen"
 
-#: registration/forms/event.py:269 registration/forms/job.py:91
+#: registration/forms/event.py:268 registration/forms/job.py:90
 msgid "New date"
 msgstr "Neues Datum"
 
-#: registration/forms/event.py:299
+#: registration/forms/event.py:298
 msgid "Months"
 msgstr "Monate"
 
@@ -135,7 +135,7 @@ msgstr "Du darfst keine Helfer:in aus der Aufgabe \"%(jobname)s\" löschen"
 msgid "Search term"
 msgstr "Suchbegriff"
 
-#: registration/forms/job.py:87
+#: registration/forms/job.py:86
 msgid "Date to copy from"
 msgstr "Datum, von dem kopiert werden soll"
 
@@ -1565,12 +1565,12 @@ msgstr ""
 #: registration/templates/registration/mail/public.txt:7
 #, python-format
 msgid ""
-"You have to confirm your mail address by clicking on the following link: "
+"Please confirm your mail address by clicking on the following link: "
 "%(validate_url)s\n"
 "\n"
 msgstr ""
-"Du musst deine E-Mail Adresse bestätigen, indem du auf folgenden Link "
-"klickst: %(validate_url)s\n"
+"Bitte bestätige deine E-Mail Adresse, indem du auf folgenden Link klickst: "
+"%(validate_url)s\n"
 "\n"
 
 #: registration/templates/registration/mail/coordinator.txt:9
