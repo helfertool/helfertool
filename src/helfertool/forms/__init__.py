@@ -1,1 +1,1 @@
-from .widgets import DatePicker, DateTimePicker
+from .widgets import DatePicker, DateTimePicker, SingleUserSelectWidget, UserSelectWidget
