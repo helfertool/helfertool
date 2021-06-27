@@ -125,6 +125,12 @@ html {
     }
 }
 
+// the class visibility-always can be added to the sidemenu so display it independent of the screen size
+// used in general admin view as it has no content
+#sidemenu.visibility-always {
+    margin-left: 0!important;
+}
+
 // content
 div#content {
     padding-top: 1rem;
