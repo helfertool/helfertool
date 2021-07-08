@@ -8,7 +8,6 @@ RUN apt-get update && apt-get full-upgrade -y && \
     apt-get install -y python3 python3-pip uwsgi uwsgi-plugin-python3 \
         nginx supervisor gosu rsyslog \
         libldap2-dev libsasl2-dev libmariadb-dev-compat \
-        sassc \
         texlive-latex-extra texlive-fonts-recommended texlive-lang-german && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc/* && \

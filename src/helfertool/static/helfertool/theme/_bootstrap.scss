@@ -1,3 +1,9 @@
+// set some bootstrap colors so that everything is somehow consistent
+// the changeable colors are set in _colors.scss
+$white:         $body-bg;  // used in language dropdown
+$info:          $primary;  // used for some messages
+$code-color:    $body-color;  // bootstrap highlights code, but we use it just for the font
+
 // make everything a little bit smaller
 $font-size-base: 0.95rem;
 
