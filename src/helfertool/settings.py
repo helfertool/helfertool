@@ -607,7 +607,7 @@ STATICFILES_FINDERS = (
 )
 
 COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'sassc {infile} {outfile}'),
+    ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
 # urls and wsgi things
