@@ -12,17 +12,24 @@
                 {% bootstrap_form_errors form %}
 
                 {% bootstrap_field form.email required_css_class="" layout="floating" %}
+                {% bootstrap_field form.privacy_statement %}
+
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                {% bootstrap_field form.privacy_statement %}
-
-                <div class="card collapse mb-4" id="privacy">
-                    <h5 class="card-header">{% trans "Privacy statement" %}</h5>
-                    <div class="card-body">
+        <div class="modal fade" id="privacy" tabindex="-1" aria-labelledby="privacy-label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="privacy-label">
+                            {% trans "Privacy statement" %}
+                        </h5>
+                    </div>
+                    <div class="modal-body">
                         {% htmlsetting "privacy_newsletter_subscribe" %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "OK" %}</button>
                     </div>
                 </div>
             </div>
