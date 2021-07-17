@@ -1,5 +1,6 @@
 from django.conf import settings as django_settings
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -105,6 +106,33 @@ def default_template(request, event_url_name):
 
     # send file
     with open(django_settings.BADGE_DEFAULT_TEMPLATE, 'rb') as f:
+        response.write(f.read())
+
+    return response
+
+
+@login_required
+def current_template(request, event_url_name):
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # check if file is there
+    if not event.badge_settings.latex_template:
+        raise Http404()
+
+    # output
+    response = HttpResponse(content_type='application/x-tex')
+    response['Content-Disposition'] = 'attachment; filename="template_{}.tex"'.format(event.url_name)
+
+    # send file
+    with event.badge_settings.latex_template.open('rb') as f:
         response.write(f.read())
 
     return response

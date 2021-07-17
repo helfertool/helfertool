@@ -1,0 +1,27 @@
+{# modified version of django_bootstrap5/templates/django_bootstrap5/widgets/clearable_file_input.html #}
+
+<input type="file" name="{{ widget.name }}" class="form-control" {% include "django/forms/widgets/attrs.html" %}>
+
+{% if widget.is_initial %}
+    <div class="row mt-1">
+        {% if not widget.required %}
+            <div class="col-auto">
+                <div class="form-check">
+                    <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}"
+                           class="form-check-input"
+                            {% if widget.attrs.disabled %} disabled{% endif %}>
+                    <label for="{{ widget.checkbox_id }}"
+                           class="form-check-label">{{ widget.clear_checkbox_label }}</label>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if widget.download_url %}
+        <div class="row mt-1">
+            <div class="col-auto">
+                <img src="{{ widget.download_url }}" class="image-preview" />
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

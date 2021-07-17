@@ -3,13 +3,17 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 from multiselectfield import MultiSelectField
 
 import datetime
+import os
+import posixpath
+import shutil
+import uuid
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 from gifts.models import HelpersGifts
@@ -19,6 +23,13 @@ from inventory.models import InventorySettings
 
 def _default_mail():
     return settings.EMAIL_SENDER_ADDRESS
+
+
+def _logo_upload_path(instance, filename):
+    event = str(instance.pk)
+    new_filename = "{}{}".format(uuid.uuid4(), os.path.splitext(filename)[1])
+
+    return posixpath.join('public', event, 'logos', new_filename)
 
 
 class Event(models.Model):
@@ -142,7 +153,7 @@ class Event(models.Model):
 
     # note: there is code to duplicate the file in forms/event.py
     logo = models.ImageField(
-        upload_to='logos',
+        upload_to=_logo_upload_path,
         blank=True,
         null=True,
         verbose_name=_("Logo"),
@@ -150,7 +161,7 @@ class Event(models.Model):
 
     # note: there is code to duplicate the file in forms/event.py
     logo_social = models.ImageField(
-        upload_to='logos',
+        upload_to=_logo_upload_path,
         blank=True,
         null=True,
         verbose_name=_("Logo for Facebook"),
@@ -419,3 +430,11 @@ def event_saved(sender, instance, using, **kwargs):
 
     if instance.inventory:
         instance._setup_inventory_settings()
+
+
+@receiver(post_delete, sender=Event, dispatch_uid='event_deleted')
+def event_deleted(sender, instance, using, **kwargs):
+    """ Delete files which were uploaded for this event. """
+    event = str(instance.pk)
+    for d in ["public", "private"]:
+        shutil.rmtree(settings.MEDIA_ROOT / d / event, ignore_errors=True)

@@ -32,12 +32,12 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-12 col-md-6">
-                {% bootstrap_field form.bg_front layout="floating" %}
+                {{ form.bg_front.label_tag }} {{ form.bg_front }}
             </div>
             <div class="col-12 col-md-6">
-                {% bootstrap_field form.bg_back layout="floating" %}
+                {{ form.bg_back.label_tag }} {{ form.bg_back }}
             </div>
         </div>
 

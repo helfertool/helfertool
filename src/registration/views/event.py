@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
@@ -12,6 +12,7 @@ import logging
 logger = logging.getLogger("helfertool.registration")
 
 from account.templatetags.globalpermissions import has_addevent_group
+from helfertool.utils import serve_file
 
 from .utils import nopermission
 
@@ -284,3 +285,21 @@ def past_events(request):
         'events': events,
     }
     return render(request, 'registration/admin/past_events.html', context)
+
+
+@login_required
+def get_event_logo(request, event_url_name, logotype):
+    if logotype not in ["default", "social"]:
+        raise Http404()
+
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not has_access(request.user, event, ACCESS_EVENT_EDIT):
+        return nopermission(request)
+
+    # output
+    if logotype == "default":
+        return serve_file(event.logo)
+    else:
+        return serve_file(event.logo_social)

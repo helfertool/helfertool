@@ -56,7 +56,7 @@ urlpatterns += [
 
 # for development
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL + "public", document_root=settings.MEDIA_ROOT / "public")
 
     urlpatterns += [
         url(r'errors/400/', bad_request, {'exception': None}),

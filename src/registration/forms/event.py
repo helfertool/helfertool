@@ -4,13 +4,14 @@ from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db.models import Count
 from django.utils.translation import ugettext as _
+from django.urls import reverse
 
 from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
 
 import os
 
-from helfertool.forms import DatePicker, SingleUserSelectWidget
+from helfertool.forms import DatePicker, SingleUserSelectWidget, ImageFileInput
 
 from ..models import Event, EventAdminRoles, EventArchive
 from toollog.models import LogEntry
@@ -24,6 +25,8 @@ class EventForm(forms.ModelForm):
             'text': CKEditorWidget,
             'date': DatePicker,
             'changes_until': DatePicker,
+            'logo': ImageFileInput,
+            'logo_social': ImageFileInput,
         }
 
         # According to the documentation django-modeltranslations copies the
@@ -65,6 +68,11 @@ class EventForm(forms.ModelForm):
             if field in self.fields:
                 for lang, name in settings.LANGUAGES:
                     self.fields["{}_{}".format(field, lang)].label = name
+
+        # set download_url parameters for widgets
+        url_name = self.instance.url_name
+        self.fields["logo"].widget.download_url = reverse("get_event_logo", args=[url_name, "default"])
+        self.fields["logo_social"].widget.download_url = reverse("get_event_logo", args=[url_name, "social"])
 
 
 class EventAdminRolesForm(forms.ModelForm):
@@ -190,7 +198,9 @@ class EventDuplicateForm(EventForm):
         self.instance.prerequisites = False
         self.instance.inventory = False
 
-        # copy logo
+        super(EventDuplicateForm, self).save(commit=True)  # we have to save
+
+        # copy logo after save (so that we have a PK)
         if self.instance.logo:
             new_logo = ContentFile(self.instance.logo.read())
             new_logo.name = os.path.basename(self.instance.logo.name)
@@ -202,7 +212,7 @@ class EventDuplicateForm(EventForm):
                 self.instance.logo_social.name)
             self.instance.logo_social = new_logo_social
 
-        super(EventDuplicateForm, self).save(commit=True)  # we have to save
+        super(EventDuplicateForm, self).save(commit=True)  # save again
 
         # remove admins and add current user (done in save)
         self.instance.admins.clear()

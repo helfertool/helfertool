@@ -9,10 +9,6 @@
     </div>
 
     <h2>{% trans "Template" %}</h2>
-    <p>
-        {% trans "Here you can get the sample LaTeX template:" %}
-        <a href="{% url 'badges:default_template' event.url_name %}">{% trans "Download" %}</a>
-    </p>
 
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -20,6 +16,18 @@
         {% bootstrap_form_errors form %}
 
         {% bootstrap_field form.latex_template layout="floating" %}
+
+        <p>
+            {% if form.latex_template.value %}
+                <a href="{% url 'badges:current_template' event.url_name %}" class="text-nowrap me-3">
+                    {% icon "download" %} {% trans "Download current template" %}
+                </a>
+            {% endif %}
+
+            <a href="{% url 'badges:default_template' event.url_name %}" class="text-nowrap">
+                {% icon "download" %} {% trans "Download empty default template" %}
+            </a>
+        </p>
 
         <div class="row">
             <div class="col-12 col-md-6">

@@ -11,6 +11,9 @@ class BadgeSettingsForm(forms.ModelForm):
     class Meta:
         model = BadgeSettings
         exclude = ['event', 'defaults', ]
+        widgets = {
+            'latex_template': forms.FileInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super(BadgeSettingsForm, self).__init__(*args, **kwargs)

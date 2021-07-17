@@ -10,14 +10,14 @@ import yaml
 from django.utils.translation import ugettext_lazy as _
 
 from datetime import timedelta
+from pathlib import Path
 
 from .utils import dict_get, build_path, get_version, pg_trgm_installed
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # import configuration file
-config_file = os.environ.get('HELFERTOOL_CONFIG_FILE',
-                             os.path.join(BASE_DIR, 'helfertool.yaml'))
+config_file = os.environ.get('HELFERTOOL_CONFIG_FILE', BASE_DIR / 'helfertool.yaml')
 
 try:
     with open(config_file, 'r') as f:
@@ -38,16 +38,16 @@ except yaml.parser.ParserError as e:
 is_docker = dict_get(config, False, 'docker')
 
 # versioning
-HELFERTOOL_VERSION = get_version(os.path.join(BASE_DIR, 'version.txt'))
+HELFERTOOL_VERSION = get_version(BASE_DIR / 'version.txt')
 HELFERTOOL_CONTAINER_VERSION = None
 if is_docker:
     HELFERTOOL_CONTAINER_VERSION = get_version('/helfertool/container_version')
 
 # directories for static and media files
 if is_docker:
-    STATIC_ROOT = "/helfertool/static"
-    MEDIA_ROOT = "/data/media"
-    TMP_ROOT = "/data/tmp"
+    STATIC_ROOT = Path("/helfertool/static")
+    MEDIA_ROOT = Path("/data/media")
+    TMP_ROOT = Path("/data/tmp")
 else:
     STATIC_ROOT = build_path(dict_get(config, 'static', 'files', 'static'), BASE_DIR)
     MEDIA_ROOT = build_path(dict_get(config, 'media', 'files', 'media'), BASE_DIR)
@@ -473,8 +473,7 @@ BADGE_PDF_TIMEOUT = 60 * dict_get(config, 30, 'badges', 'pdf_timeout')
 BADGE_RM_DELAY = 60 * dict_get(config, 2, 'badges', 'rm_delay')
 
 BADGE_DEFAULT_TEMPLATE = build_path(
-    dict_get(config, 'src/badges/latextemplate/badge.tex', 'badges',
-             'template'),
+    dict_get(config, 'src/badges/latextemplate/badge.tex', 'badges', 'template'),
     BASE_DIR)
 
 # copy generated latex code for badges to this file, disable with None
@@ -573,7 +572,7 @@ MIDDLEWARE.append('axes.middleware.AxesMiddleware')  # axes should be the last o
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,  'helfertool', 'templates'), ],
+        'DIRS': [BASE_DIR / 'helfertool' / 'templates', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

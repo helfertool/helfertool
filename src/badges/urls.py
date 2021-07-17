@@ -19,12 +19,21 @@ urlpatterns = [
         views.default_template,
         name='default_template'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/currenttemplate',
+        views.current_template,
+        name='current_template'),
+
     #
     # edit badge
     #
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/$',
         views.edit_badge,
         name='edit_badge'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/photo/$',
+        views.get_badge_photo,
+        name='get_badge_photo'),
+
 
     #
     # permission
@@ -70,6 +79,10 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/delete/$',
         views.delete_design,
         name='delete_design'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/bg/(?P<side>[a-z]+)/$',
+        views.get_design_bg,
+        name='get_design_bg'),
 
     #
     # badge generation
