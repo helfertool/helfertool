@@ -1,8 +1,12 @@
 from django.db import models
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from django.template.defaultfilters import date as date_f
 from django.utils.translation import ugettext_lazy as _
 
+import os
 import posixpath
+import uuid
 
 from .. import tasks
 from .settings import BadgeSettings
@@ -10,8 +14,9 @@ from .settings import BadgeSettings
 
 def _badge_upload_path(instance, filename):
     event = str(instance.event.pk)
+    new_filename = "{}{}".format(uuid.uuid4(), os.path.splitext(filename)[1])
 
-    return posixpath.join('badges', event, 'photos', filename)
+    return posixpath.join('private', event, 'badges', 'photos', new_filename)
 
 
 class Badge(models.Model):
@@ -266,3 +271,13 @@ class Badge(models.Model):
             shift_texts.append(cur_text)
 
         return ', '.join(shift_texts)
+
+
+@receiver(post_delete, sender=Badge, dispatch_uid='badge_deleted')
+def badge_deleted(sender, instance, using, **kwargs):
+    """ Delete uploaded photo from disk. """
+    if instance.photo:
+        try:
+            os.remove(instance.photo.path)
+        except FileNotFoundError:
+            pass

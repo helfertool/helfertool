@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import os
 import posixpath
+import uuid
 
 from copy import deepcopy
 
@@ -13,8 +14,9 @@ from .settings import BadgeSettings
 
 def _design_upload_path(instance, filename):
     event = str(instance.get_event().pk)
+    new_filename = "{}{}".format(uuid.uuid4(), os.path.splitext(filename)[1])
 
-    return posixpath.join('badges', event, 'backgrounds', filename)
+    return posixpath.join('private', event, 'badges', 'backgrounds', new_filename)
 
 
 class BadgeDesign(models.Model):

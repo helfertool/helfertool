@@ -1,10 +1,9 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 from ..models import BadgeDesign, BadgeRole, Badge
-from ..utils import is_image
 
+from helfertool.forms import ImageFileInput
 from registration.models import Job
 
 
@@ -18,6 +17,9 @@ class BadgeForm(forms.ModelForm):
     class Meta:
         model = Badge
         exclude = ['event', 'helper', 'barcode']
+        widgets = {
+            'photo': ImageFileInput,
+        }
 
     def __init__(self, *args, **kwargs):
         super(BadgeForm, self).__init__(*args, **kwargs)
@@ -25,8 +27,7 @@ class BadgeForm(forms.ModelForm):
         # check whether we edit a helper or a special badge
         if self.instance.helper:
             # restrict queryset of primary_job
-            jobs = Job.objects.filter(shift__helper=self.instance.helper).\
-                distinct()
+            jobs = Job.objects.filter(shift__helper=self.instance.helper).distinct()
             coordinated_jobs = self.instance.helper.coordinated_jobs.distinct()
 
             self.fields['primary_job'].queryset = jobs | coordinated_jobs
@@ -45,8 +46,6 @@ class BadgeForm(forms.ModelForm):
         designs = BadgeDesign.objects.filter(badge_settings=badge_settings)
         self.fields['custom_design'].queryset = designs
 
-    def clean_photo(self):
-        file = self.cleaned_data['photo']
-        if file and not is_image(file):
-            raise ValidationError(_("The file is not an image."))
-        return file
+        # set download_url parameters for widgets
+        url_args = [self.instance.event.url_name, self.instance.helper.pk]
+        self.fields["photo"].widget.download_url = reverse("badges:get_badge_photo", args=url_args)

@@ -1,9 +1,11 @@
-import os
+import mimetypes
 
 from celery.five import monotonic  # pylint: disable=E0611
 from contextlib import contextmanager
 from django.core.cache import caches
 from django.db import connection
+from django.http import FileResponse, Http404
+from pathlib import Path
 
 
 def dict_get(data, default, *keys):
@@ -39,10 +41,11 @@ def build_path(path, base_dir):
 
     If absolute, return it. Otherwise, build it relative to the Git folder (on the level of `src`)
     """
-    if os.path.isabs(path):
-        return path
+    tmp_path = Path(path)
+    if tmp_path.is_absolute():
+        return tmp_path
     else:
-        return os.path.join(base_dir, '..', path)
+        return base_dir.parent / tmp_path
 
 
 def get_version(path):
@@ -91,3 +94,20 @@ def cache_lock(lock_id, oid, expire=60*10):
             # owned by someone else
             # also don't release the lock if we didn't acquire it
             caches['locks'].delete(lock_id)
+
+
+def serve_file(file):
+    """ Reads a file from disk and returns FileReponse with the correct content type and encoding.
+
+    Warning: The Content-Disposition header is not set, as it is currently used with images."""
+    if not file:
+        raise Http404
+
+    content_type, encoding = mimetypes.guess_type(str(file))
+    content_type = content_type or 'application/octet-stream'
+
+    response = FileResponse(file.open('rb'), content_type=content_type)
+    if encoding:
+        response.headers["Content-Encoding"] = encoding
+
+    return response

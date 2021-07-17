@@ -8,3 +8,10 @@
 .form-floating > textarea.form-control {
     height: 15rem;
 }
+
+/* used by ImageFileInput to show the uploaded image */
+.image-preview
+{
+    max-width: 300px;
+    max-height: 300px;
+}

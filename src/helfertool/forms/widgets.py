@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
 
@@ -55,3 +56,20 @@ class UserSelectWidget(ModelSelect2MultipleWidget):
 
     def label_from_instance(self, obj):
         return _user_label_from_instance(self, obj)
+
+
+class ImageFileInput(forms.ClearableFileInput):
+    """ ClearableFileInput that does not show the URL to the current file, but the image instead.
+
+    If the image should be displayed, the parameter download_url must be set in the form
+    (it is dynamic, so we cannot guess it here).
+    """
+    template_name = 'helfertool/forms/widgets/image_file_input.html'
+    clear_checkbox_label = _("Delete image")
+
+    download_url = None
+
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context["widget"]["download_url"] = self.download_url
+        return context

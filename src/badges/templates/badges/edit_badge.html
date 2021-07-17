@@ -48,9 +48,9 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-12 col-md-6">
-                {% bootstrap_field form.photo layout="floating" %}
+                {{ form.photo.label_tag }} {{ form.photo }}
             </div>
         </div>
 
