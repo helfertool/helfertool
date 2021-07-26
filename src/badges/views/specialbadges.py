@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from ..models import SpecialBadges
 from ..forms import SpecialBadgesForm, BadgeForm, SpecialBadgesDeleteForm
 
+from helfertool.utils import serve_file
 from registration.decorators import archived_not_available
 from registration.models import Event
 from registration.permissions import has_access, ACCESS_BADGES_EDIT_SPECIAL
@@ -121,3 +122,24 @@ def delete_specialbadges(request, event_url_name, specialbadges_pk):
                'form': form,
                'specialbadges': specialbadges}
     return render(request, 'badges/delete_specialbadges.html', context)
+
+
+@login_required
+def get_specialbadges_photo(request, event_url_name, specialbadges_pk):
+    """ Download badge photo of special badge.
+
+    For normal badge: get_badge_photo """
+    event = get_object_or_404(Event, url_name=event_url_name)
+
+    # check permission
+    if not has_access(request.user, event, ACCESS_BADGES_EDIT_SPECIAL):
+        return nopermission(request)
+
+    # check if badge system is active
+    if not event.badges:
+        return notactive(request)
+
+    # get special badges
+    specialbadges = get_object_or_404(SpecialBadges, template_badge=specialbadges_pk, event=event)
+
+    return serve_file(specialbadges.template_badge.photo)

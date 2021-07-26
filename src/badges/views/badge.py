@@ -42,6 +42,9 @@ def edit_badge(request, event_url_name, helper_pk):
 
 @login_required
 def get_badge_photo(request, event_url_name, helper_pk):
+    """ Download badge photo of normal badge.
+
+    For special badges: get_specialbadges_photo """
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
