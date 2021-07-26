@@ -15,7 +15,7 @@ from .defaults import BadgeDefaults
 def _settings_upload_path(instance, filename):
     event = str(instance.event.pk)
 
-    return posixpath.join('private', event, 'badges', 'template.tex')
+    return posixpath.join('private', event, 'badges', 'template', 'template.tex')
 
 
 class BadgeSettings(models.Model):
