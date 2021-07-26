@@ -14,6 +14,7 @@ import os
 from helfertool.forms import DatePicker, SingleUserSelectWidget, ImageFileInput
 
 from ..models import Event, EventAdminRoles, EventArchive
+from badges.models import SpecialBadges
 from toollog.models import LogEntry
 
 
@@ -70,9 +71,11 @@ class EventForm(forms.ModelForm):
                     self.fields["{}_{}".format(field, lang)].label = name
 
         # set download_url parameters for widgets
-        url_name = self.instance.url_name
-        self.fields["logo"].widget.download_url = reverse("get_event_logo", args=[url_name, "default"])
-        self.fields["logo_social"].widget.download_url = reverse("get_event_logo", args=[url_name, "social"])
+        # EventDuplicateForm inherits from EventForm, but does not have a logo field, so check this here
+        if "logo" in self.fields:
+            url_name = self.instance.url_name
+            self.fields["logo"].widget.download_url = reverse("get_event_logo", args=[url_name, "default"])
+            self.fields["logo_social"].widget.download_url = reverse("get_event_logo", args=[url_name, "social"])
 
 
 class EventAdminRolesForm(forms.ModelForm):
@@ -163,6 +166,30 @@ class EventArchiveForm(forms.ModelForm):
                 # trigger post_remove signal
                 for h in shift.helper_set.all():
                     h.shifts.remove(shift)
+
+        # delete left over badge photos (upload of new file keeps old file)
+        # we only want to delete the photos that do not belong to special badges
+        event = str(self.instance.pk)
+        photos_directory = settings.MEDIA_ROOT / 'private' / event / 'badges' / 'photos'
+        try:
+            # get all stored images
+            all_images = os.listdir(photos_directory)
+
+            # get special badges, that should be kept
+            for badge in SpecialBadges.objects.filter(event=self.instance).prefetch_related('template_badge'):
+                if badge.template_badge.photo:
+                    # if we have a photo, remove it from the all_iamges list
+                    cur_image = os.path.basename(badge.template_badge.photo.path)
+                    try:
+                        all_images.remove(cur_image)
+                    except ValueError:
+                        pass
+
+            # remove the images now
+            for image in all_images:
+                os.remove(photos_directory / image)
+        except FileNotFoundError:
+            pass
 
         # delete all currently stored log entries - the archive entry will be added afterwards
         LogEntry.objects.filter(event=self.instance).delete()

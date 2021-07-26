@@ -177,4 +177,8 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/delete/$',
         views.delete_specialbadges,
         name='delete_specialbadges'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/photo/$',
+        views.get_specialbadges_photo,
+        name='get_specialbadges_photo'),
 ]

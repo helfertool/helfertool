@@ -47,5 +47,11 @@ class BadgeForm(forms.ModelForm):
         self.fields['custom_design'].queryset = designs
 
         # set download_url parameters for widgets
-        url_args = [self.instance.event.url_name, self.instance.helper.pk]
-        self.fields["photo"].widget.download_url = reverse("badges:get_badge_photo", args=url_args)
+        if self.instance.helper:
+            # for normal badge
+            url_args = [self.instance.event.url_name, self.instance.helper.pk]
+            self.fields["photo"].widget.download_url = reverse("badges:get_badge_photo", args=url_args)
+        else:
+            # for special badges
+            url_args = [self.instance.event.url_name, self.instance.pk]
+            self.fields["photo"].widget.download_url = reverse("badges:get_specialbadges_photo", args=url_args)
