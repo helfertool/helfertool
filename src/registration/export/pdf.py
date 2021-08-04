@@ -1,7 +1,6 @@
 from django.utils.translation import ugettext as _
 
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, \
-    Paragraph, PageBreak
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4

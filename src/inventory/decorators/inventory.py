@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 
 from ..models import Inventory
 from ..utils import is_inventory_admin

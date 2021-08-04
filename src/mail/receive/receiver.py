@@ -1,9 +1,9 @@
 from django.conf import settings
 
+from .error import MailHandlerError
+
 import email
 import imaplib
-
-from .error import MailHandlerError
 
 # look at the calendar, it's not 19xx anymore
 imaplib._MAXLINE = 1000000

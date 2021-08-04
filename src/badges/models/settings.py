@@ -4,12 +4,12 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from .defaults import BadgeDefaults
+
 from copy import deepcopy
 
 import os
 import posixpath
-
-from .defaults import BadgeDefaults
 
 
 def _settings_upload_path(instance, filename):

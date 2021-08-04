@@ -1,12 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from ..forms import BadgeForm
-
-from helfertool.utils import serve_file
-from registration.views.utils import nopermission, get_or_404
+from helfertool.utils import serve_file, nopermission
 from registration.permissions import has_access, ACCESS_BADGES_EDIT_HELPER
+from registration.utils import get_or_404
 
+from ..forms import BadgeForm
 from .utils import notactive
 
 

@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 
 from ..forms import HTMLSettingForm, TextSettingForm
 from ..models import HTMLSetting, TextSetting

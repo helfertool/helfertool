@@ -1,14 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from ..models import BadgePermission
-from ..forms import BadgePermissionForm, BadgePermissionDeleteForm
-
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
-from registration.views.utils import nopermission
 from registration.models import Event
 from registration.permissions import has_access, ACCESS_BADGES_EDIT
 
+from ..forms import BadgePermissionForm, BadgePermissionDeleteForm
+from ..models import BadgePermission
 from .utils import notactive
 
 

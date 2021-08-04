@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
-from smtplib import SMTPException
-
 from .forms import IssueForm
+
+from smtplib import SMTPException
 
 
 @login_required

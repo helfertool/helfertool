@@ -3,13 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from ..forms import BadgeBarcodeForm
-
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
-from registration.views.utils import nopermission
 from registration.models import Event
 from registration.permissions import has_access, ACCESS_BADGES_GENERATE
 
+from ..forms import BadgeBarcodeForm
 from .utils import notactive
 
 

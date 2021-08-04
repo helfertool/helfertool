@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 
 from ..forms import CreateUserForm, EditUserForm
 from ..templatetags.globalpermissions import has_adduser_group

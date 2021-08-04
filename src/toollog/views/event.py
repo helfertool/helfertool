@@ -3,9 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
+from helfertool.utils import nopermission
 from registration.models import Event
 from registration.permissions import has_access, ACCESS_EVENT_VIEW_AUDITLOGS
-from registration.views.utils import nopermission
 
 from ..models import LogEntry
 from ..forms import EventAuditLogFilter

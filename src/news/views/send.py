@@ -6,14 +6,14 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
+from account.templatetags.globalpermissions import has_sendnews_group
+from helfertool.utils import nopermission
+
+from ..forms import MailForm
+from ..models import Person
+
 import logging
 logger = logging.getLogger("helfertool.news")
-
-from account.templatetags.globalpermissions import has_sendnews_group
-from registration.views.utils import nopermission
-
-from ..models import Person
-from ..forms import MailForm
 
 
 @login_required

@@ -7,21 +7,21 @@ from django.dispatch import receiver
 from django.template.loader import get_template
 from django.utils.translation import ugettext_lazy as _
 
-from smtplib import SMTPException
-
-import logging
-logger = logging.getLogger("helfertool.registration")
-
-import uuid
-
 from badges.models import Badge
 from gifts.models import HelpersGifts
 from mail.tracking import new_tracking_registration
 from prerequisites.models import Prerequisite
 
 from .event import Event
-from .job import Job
 from .helpershift import HelperShift
+from .job import Job
+
+from smtplib import SMTPException
+
+import uuid
+
+import logging
+logger = logging.getLogger("helfertool.registration")
 
 
 class Helper(models.Model):

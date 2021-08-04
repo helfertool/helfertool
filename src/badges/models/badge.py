@@ -4,12 +4,12 @@ from django.dispatch import receiver
 from django.template.defaultfilters import date as date_f
 from django.utils.translation import ugettext_lazy as _
 
+from .. import tasks
+from .settings import BadgeSettings
+
 import os
 import posixpath
 import uuid
-
-from .. import tasks
-from .settings import BadgeSettings
 
 
 def _badge_upload_path(instance, filename):

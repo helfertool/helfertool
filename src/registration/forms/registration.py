@@ -3,10 +3,10 @@ from django.core.exceptions import ValidationError
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
+from news.helper import news_add_email
+
 from .widgets import ShiftTableRegistrationWidget
 from ..models import Helper, Shift
-
-from news.helper import news_add_email
 
 import itertools
 

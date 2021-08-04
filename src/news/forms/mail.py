@@ -3,9 +3,9 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-import re
-
 from .. import tasks
+
+import re
 
 
 class MailForm(forms.Form):

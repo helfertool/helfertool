@@ -1,8 +1,9 @@
 from django import forms
 
-from ..models import LogEntry
 from helfertool.forms import SingleUserSelectWidget
 from registration.forms import SingleHelperSelectWidget
+
+from ..models import LogEntry
 
 
 class EventAuditLogFilter(forms.ModelForm):

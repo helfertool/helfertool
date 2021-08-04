@@ -3,17 +3,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
+from helfertool.utils import nopermission
+from registration.decorators import archived_not_available
+from registration.models import Event
+from registration.permissions import has_access_event_or_job, ACCESS_MAILS_SEND, ACCESS_JOB_SEND_MAILS
+
+from ..forms import MailForm, MailFormError
+
 from smtplib import SMTPException
 
 import logging
 logger = logging.getLogger("helfertool.mail")
-
-from registration.decorators import archived_not_available
-from registration.models import Event
-from registration.views.utils import nopermission
-from registration.permissions import has_access_event_or_job, ACCESS_MAILS_SEND, ACCESS_JOB_SEND_MAILS
-
-from ..forms import MailForm, MailFormError
 
 
 @login_required

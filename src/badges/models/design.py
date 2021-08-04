@@ -3,13 +3,13 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from .settings import BadgeSettings
+
 import os
 import posixpath
 import uuid
 
 from copy import deepcopy
-
-from .settings import BadgeSettings
 
 
 def _design_upload_path(instance, filename):

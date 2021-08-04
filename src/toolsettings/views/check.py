@@ -4,12 +4,12 @@ from django.core import mail
 from django.core.mail.backends.smtp import EmailBackend
 from django.shortcuts import render
 
-import kombu
-import ldap
-
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 
 from ..models import HTMLSetting, TextSetting
+
+import kombu
+import ldap
 
 
 @login_required

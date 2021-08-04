@@ -5,11 +5,11 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 
-from collections import OrderedDict
-from copy import deepcopy
-
 from badges.models import BadgeDefaults
 from prerequisites.models import Prerequisite
+
+from collections import OrderedDict
+from copy import deepcopy
 
 
 class Job(models.Model):

@@ -4,12 +4,11 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
-from ..forms import BadgeSettingsForm, BadgeDefaultsForm, BadgeJobDefaultsForm
-
+from helfertool.utils import nopermission
 from registration.models import Event
-from registration.views.utils import nopermission
 from registration.permissions import has_access, ACCESS_BADGES_EDIT
 
+from ..forms import BadgeSettingsForm, BadgeDefaultsForm, BadgeJobDefaultsForm
 from .utils import notactive
 
 

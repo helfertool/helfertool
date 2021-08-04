@@ -2,12 +2,12 @@ from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
-from collections import OrderedDict
-
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 from registration.models import Event, EventArchive, Helper
 from registration.permissions import has_access, has_access_event_or_job, \
     ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS
+
+from collections import OrderedDict
 
 
 class JobShirts:

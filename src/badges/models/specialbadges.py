@@ -5,9 +5,9 @@ from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-import os
-
 from .badge import Badge
+
+import os
 
 
 def _copy_badge(src, dest):
