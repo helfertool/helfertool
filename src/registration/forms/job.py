@@ -38,10 +38,15 @@ class JobForm(forms.ModelForm):
 
         super(JobForm, self).__init__(*args, **kwargs)
 
+        # remove or configure prerequisites field
         if not self.event.prerequisites:
             self.fields.pop('prerequisites')
         else:
             self.fields['prerequisites'].queryset = Prerequisite.objects.filter(event=self.event)
+
+        # set better label for description fields
+        for lang, name in settings.LANGUAGES:
+            self.fields["description_{}".format(lang)].label = _("Description (%(lang)s)") % {"lang": name}
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing

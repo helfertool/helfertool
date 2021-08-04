@@ -33,7 +33,7 @@ class EventForm(forms.ModelForm):
         # According to the documentation django-modeltranslations copies the
         # widget from the original field.
         # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
-        # Therefore set it manually...        for w in ('text', 'imprint', 'registered'):
+        # Therefore set it manually...
         for w in ('text', 'imprint', 'registered'):
             for lang, name in settings.LANGUAGES:
                 widgets["{}_{}".format(w, lang)] = CKEditorWidget()
@@ -66,9 +66,10 @@ class EventForm(forms.ModelForm):
         # change labels of ckeditor fields: We only want to have the language name as label
         # everything else is in the template.
         for field in ('text', 'imprint', 'registered'):
-            if field in self.fields:
-                for lang, name in settings.LANGUAGES:
-                    self.fields["{}_{}".format(field, lang)].label = name
+            for lang, name in settings.LANGUAGES:
+                field_name = "{}_{}".format(field, lang)
+                if field_name in self.fields:
+                    self.fields[field_name].label = name
 
         # set download_url parameters for widgets
         # EventDuplicateForm inherits from EventForm, but does not have a logo field, so check this here
