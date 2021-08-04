@@ -1,5 +1,6 @@
 from django import forms
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 from ckeditor.widgets import CKEditorWidget
 
 from ..models import Prerequisite
@@ -26,6 +27,10 @@ class PrerequisiteForm(forms.ModelForm):
         self.event = kwargs.pop('event')
 
         super(PrerequisiteForm, self).__init__(*args, **kwargs)
+
+        # set better label for description fields
+        for lang, name in settings.LANGUAGES:
+            self.fields["description_{}".format(lang)].label = _("Description (%(lang)s)") % {"lang": name}
 
     def save(self, commit=True):
         instance = super(PrerequisiteForm, self).save(False)  # event is missing

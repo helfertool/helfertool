@@ -1,5 +1,6 @@
 from django import forms
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.widgets import CKEditorWidget
 
@@ -25,6 +26,13 @@ class AgreementForm(forms.ModelForm):
         # Therefore set it manually...
         for lang, name in settings.LANGUAGES:
             widgets["text_{}".format(lang)] = CKEditorWidget()
+
+    def __init__(self, *args, **kwargs):
+        super(AgreementForm, self).__init__(*args, **kwargs)
+
+        # set better label for description fields
+        for lang, name in settings.LANGUAGES:
+            self.fields["text_{}".format(lang)].label = _("Text (%(lang)s)") % {"lang": name}
 
 
 class UserAgreementForm(forms.ModelForm):

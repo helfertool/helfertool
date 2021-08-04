@@ -1,6 +1,6 @@
 from django_select2.forms import ModelSelect2MultipleWidget
 
-from prerequisites.models import Prerequisite
+from ..models import Prerequisite
 
 
 class PrerequisiteSelectWidget(ModelSelect2MultipleWidget):
