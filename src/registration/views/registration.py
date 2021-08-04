@@ -1,5 +1,3 @@
-import datetime
-
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
@@ -7,14 +5,15 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .utils import nopermission, get_or_404
+from helfertool.utils import nopermission
+from news.helper import news_test_email
 
+from ..utils import get_or_404
 from ..forms import RegisterForm, DeregisterForm, HelperForm
 from ..models import Event, Link
 from ..permissions import has_access, ACCESS_INVOLVED
 
-
-from news.helper import news_test_email
+import datetime
 
 import logging
 logger = logging.getLogger("helfertool.registration")

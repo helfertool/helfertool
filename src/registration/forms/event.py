@@ -6,16 +6,16 @@ from django.db.models import Count
 from django.utils.translation import ugettext as _
 from django.urls import reverse
 
+from badges.models import SpecialBadges
+from helfertool.forms import DatePicker, SingleUserSelectWidget, ImageFileInput
+from toollog.models import LogEntry
+
+from ..models import Event, EventAdminRoles, EventArchive
+
 from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
 
 import os
-
-from helfertool.forms import DatePicker, SingleUserSelectWidget, ImageFileInput
-
-from ..models import Event, EventAdminRoles, EventArchive
-from badges.models import SpecialBadges
-from toollog.models import LogEntry
 
 
 class EventForm(forms.ModelForm):

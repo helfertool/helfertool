@@ -1,6 +1,5 @@
 from .forwarder import MailForwarder
 from .receiver import MailReceiver
-
 from ..tracking import handle_tracking
 
 

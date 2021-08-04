@@ -2,10 +2,10 @@ from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect
 
+from news.forms import SubscribeForm
+
 import logging
 logger = logging.getLogger("helfertool.news")
-
-from ..forms import SubscribeForm
 
 
 def subscribe(request):

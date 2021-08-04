@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
+from helfertool.utils import nopermission
 from registration.models import Event
-from registration.views.utils import nopermission
 from registration.permissions import has_access_event_or_job, ACCESS_MAILS_VIEW, ACCESS_JOB_VIEW_MAILS
 
 from ..models import SentMail

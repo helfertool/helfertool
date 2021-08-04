@@ -1,9 +1,9 @@
 from django.conf import settings
 
+from .error import MailHandlerError
+
 import email
 import smtplib
-
-from .error import MailHandlerError
 
 
 class MailForwarder:

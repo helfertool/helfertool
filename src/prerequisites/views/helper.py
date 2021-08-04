@@ -2,14 +2,13 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
 from registration.models import Event, Helper
-from registration.views.utils import nopermission
 from registration.permissions import has_access, ACCESS_PREREQUISITES_VIEW
 
-from .utils import notactive
-
 from ..models import Prerequisite
+from .utils import notactive
 
 
 @login_required

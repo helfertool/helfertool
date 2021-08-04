@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 
-from .utils import nopermission
+from helfertool.utils import nopermission
 
 from ..decorators import archived_not_available
 from ..models import Event

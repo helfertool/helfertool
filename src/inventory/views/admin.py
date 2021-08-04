@@ -2,9 +2,9 @@ from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
-from ..models import Inventory, Item
-from ..forms import InventoryForm, InventoryDeleteForm, ItemForm, ItemDeleteForm
 from ..decorators import any_inventory_admin_required, inventory_admin_required
+from ..forms import InventoryForm, InventoryDeleteForm, ItemForm, ItemDeleteForm
+from ..models import Inventory, Item
 
 
 @any_inventory_admin_required

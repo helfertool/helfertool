@@ -5,10 +5,11 @@ from django.db.models import Q
 from django.db.models.functions import Greatest
 from django.utils.translation import ugettext_lazy as _
 
-from .widgets import ShiftTableWidget
+from badges.models import Badge
+
 from ..models import Helper, Shift, Job
 from ..permissions import has_access, ACCESS_HELPER_VIEW, ACCESS_JOB_EDIT_HELPERS
-from badges.models import Badge
+from .widgets import ShiftTableWidget
 
 # we want to be able to run without psycopg2 for development
 try:

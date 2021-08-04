@@ -4,19 +4,17 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-
 from account.templatetags.globalpermissions import has_addevent_group
-from helfertool.utils import serve_file
-
-from .utils import nopermission
+from helfertool.utils import nopermission, serve_file
 
 from ..decorators import archived_not_available
 from ..forms import EventForm, EventAdminRolesForm, EventAdminRolesAddForm, EventDeleteForm, EventArchiveForm, \
     EventDuplicateForm, EventMoveForm, PastEventForm
 from ..models import Event, EventAdminRoles
 from ..permissions import has_access, ACCESS_EVENT_EDIT
+
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 import logging
 logger = logging.getLogger("helfertool.registration")

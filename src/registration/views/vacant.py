@@ -3,10 +3,10 @@ from django.shortcuts import render, get_object_or_404
 from collections import OrderedDict
 from django.db.models.functions import TruncDate
 
-from .utils import nopermission
+from helfertool.utils import nopermission
 
-from ..models import Event, Shift
 from ..decorators import archived_not_available
+from ..models import Event, Shift
 from ..permissions import has_access, ACCESS_INVOLVED
 
 

@@ -3,12 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .utils import nopermission, get_or_404
+from helfertool.utils import nopermission
 
 from ..decorators import archived_not_available
 from ..forms import JobForm, JobDeleteForm, JobDuplicateForm, JobDuplicateDayForm, JobSortForm
 from ..models import Event, Job
 from ..permissions import has_access, ACCESS_EVENT_EDIT_JOBS, ACCESS_JOB_EDIT
+from ..utils import get_or_404
 
 import logging
 logger = logging.getLogger("helfertool.registration")

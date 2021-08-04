@@ -5,8 +5,11 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .utils import nopermission, get_or_404
+from gifts.forms import HelpersGiftsForm
+from helfertool.utils import nopermission
+from prerequisites.forms import HelperPrerequisiteForm
 
+from ..utils import get_or_404
 from ..models import Event, Shift
 from ..forms import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
     HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm, HelperInternalCommentForm
@@ -15,9 +18,6 @@ from ..permissions import has_access, has_access_event_or_job, ACCESS_INVOLVED, 
     ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_VIEW, ACCESS_HELPER_RESEND, \
     ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE_GIFTS, ACCESS_GIFTS_HANDLE_PRESENCE, ACCESS_EVENT_EXPORT_HELPERS, \
     ACCESS_PREREQUISITES_HANDLE, ACCESS_HELPER_INTERNAL_COMMENT_VIEW, ACCESS_HELPER_INTERNAL_COMMENT_EDIT
-
-from gifts.forms import HelpersGiftsForm
-from prerequisites.forms import HelperPrerequisiteForm
 
 import logging
 logger = logging.getLogger("helfertool.registration")

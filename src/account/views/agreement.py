@@ -3,12 +3,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.utils import timezone
 
-import datetime
-
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 
 from ..models import Agreement, UserAgreement
 from ..forms import AgreementForm, UserAgreementForm, DeleteForm
+
+import datetime
 
 import logging
 logger = logging.getLogger("helfertool.account")

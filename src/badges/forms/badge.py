@@ -1,10 +1,10 @@
 from django import forms
 from django.urls import reverse
 
-from ..models import BadgeDesign, BadgeRole, Badge
-
 from helfertool.forms import ImageFileInput
 from registration.models import Job
+
+from ..models import BadgeDesign, BadgeRole, Badge
 
 
 class BadgeForm(forms.ModelForm):

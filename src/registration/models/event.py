@@ -9,16 +9,16 @@ from django.utils.translation import ugettext_lazy as _
 from django_bleach.models import BleachField
 from multiselectfield import MultiSelectField
 
+from badges.models import BadgeSettings, BadgeDefaults, Badge
+from gifts.models import HelpersGifts
+from gifts.models.giftsettings import GiftSettings
+from inventory.models import InventorySettings
+
 import datetime
 import os
 import posixpath
 import shutil
 import uuid
-
-from badges.models import BadgeSettings, BadgeDefaults, Badge
-from gifts.models import HelpersGifts
-from gifts.models.giftsettings import GiftSettings
-from inventory.models import InventorySettings
 
 
 def _default_mail():

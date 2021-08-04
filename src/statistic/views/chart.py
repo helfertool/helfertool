@@ -4,13 +4,14 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
 
-from datetime import timedelta
-from itertools import cycle
-
 from badges.models import SpecialBadges
 from registration.decorators import archived_not_available
 from registration.models import Event, Shift, HelperShift
 from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
+
+from datetime import timedelta
+from itertools import cycle
+
 
 # colors
 # TODO: get from theming config, if this is implemented

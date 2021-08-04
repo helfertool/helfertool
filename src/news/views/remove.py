@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
-from registration.views.utils import nopermission
+from helfertool.utils import nopermission
 
 from ..forms import RemoveForm
 

@@ -1,6 +1,5 @@
 from .registration import index_all_events, index, form, registered, validate, \
     deregister, deleted, update_personal
-
 from .admin import admin, jobs_and_shifts, coordinators
 from .event import edit_event, edit_event_admins, delete_event, archive_event, duplicate_event, \
     move_event, past_events, get_event_logo

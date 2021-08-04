@@ -3,9 +3,9 @@ from django.db.models import Sum
 from django.shortcuts import render, get_object_or_404
 
 from badges.models import SpecialBadges
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
 from registration.models import Event, Shift
-from registration.views.utils import nopermission
 from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
 
 

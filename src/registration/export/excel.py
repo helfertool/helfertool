@@ -1,5 +1,6 @@
 from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
+
 import re
 import xlsxwriter
 

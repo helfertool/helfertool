@@ -3,11 +3,12 @@ from django.db import models, transaction
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from collections import OrderedDict
+from registration.models.helpershift import HelperShift
 
 from .set import GiftSet
 from .deservedgiftset import DeservedGiftSet
-from registration.models.helpershift import HelperShift
+
+from collections import OrderedDict
 
 
 class HelpersGifts(models.Model):

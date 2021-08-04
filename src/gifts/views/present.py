@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
-from registration.views.utils import nopermission, get_or_404
 from registration.permissions import has_access, ACCESS_GIFTS_HANDLE_PRESENCE
-
-from .utils import notactive
+from registration.utils import get_or_404
 
 from ..forms import PresentForm
+from .utils import notactive
 
 
 @login_required

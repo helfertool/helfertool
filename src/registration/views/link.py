@@ -4,11 +4,11 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
-from .utils import nopermission
+from helfertool.utils import nopermission
 
-from ..models import Event, Link
-from ..forms import LinkForm, LinkDeleteForm
 from ..decorators import archived_not_available
+from ..forms import LinkForm, LinkDeleteForm
+from ..models import Event, Link
 from ..permissions import has_access, ACCESS_EVENT_EDIT_LINKS
 
 import logging

@@ -2,14 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 
-from collections import OrderedDict
+from helfertool.utils import nopermission
 
-from .utils import nopermission
-
-from ..models import Event
-from ..forms import MergeDuplicatesForm
 from ..decorators import archived_not_available
+from ..forms import MergeDuplicatesForm
+from ..models import Event
 from ..permissions import has_access, ACCESS_EVENT_EDIT_DUPLICATES
+
+from collections import OrderedDict
 
 import logging
 logger = logging.getLogger("helfertool.registration")

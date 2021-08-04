@@ -2,17 +2,16 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Sum
 from django.shortcuts import render, redirect, get_object_or_404
 
-from collections import OrderedDict
-
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
-from registration.views.utils import nopermission
 from registration.models import Event, Helper
 from registration.permissions import has_access, ACCESS_GIFTS_EDIT, ACCESS_GIFTS_VIEW_SUMMARY
 
-from ..models import Gift, GiftSet
 from ..forms import GiftSettingsForm
-
+from ..models import Gift, GiftSet
 from .utils import notactive
+
+from collections import OrderedDict
 
 import logging
 logger = logging.getLogger("helfertool.gifts")

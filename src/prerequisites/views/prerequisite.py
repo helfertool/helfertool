@@ -4,15 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import messages
 
+from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
 from registration.models import Event
-from registration.views.utils import nopermission
 from registration.permissions import has_access, ACCESS_PREREQUISITES_EDIT, ACCESS_PREREQUISITES_VIEW
-
-from .utils import notactive
 
 from ..forms import PrerequisiteForm, PrerequisiteDeleteForm
 from ..models import Prerequisite
+from .utils import notactive
 
 import logging
 logger = logging.getLogger("helfertool.prerequisites")

@@ -2,12 +2,12 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from django_select2.forms import Select2MultipleWidget
-
 from gifts.models import GiftSet
-
 from helfertool.forms import DateTimePicker
+
 from ..models import Shift
+
+from django_select2.forms import Select2MultipleWidget
 
 
 class ShiftForm(forms.ModelForm):

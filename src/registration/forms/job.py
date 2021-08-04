@@ -3,14 +3,14 @@ from django.conf import settings
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 
-from ckeditor.widgets import CKEditorWidget
-from datetime import datetime
-
 from helfertool.forms import DatePicker, UserSelectWidget
 from prerequisites.forms import PrerequisiteSelectWidget
 from prerequisites.models import Prerequisite
 
 from ..models import Job
+
+from ckeditor.widgets import CKEditorWidget
+from datetime import datetime
 
 
 class JobForm(forms.ModelForm):

@@ -1,7 +1,7 @@
 from django import forms
 
-from .widgets import ShiftTableWidget
 from ..models import Link, Shift
+from .widgets import ShiftTableWidget
 
 
 class LinkForm(forms.ModelForm):

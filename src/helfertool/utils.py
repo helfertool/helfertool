@@ -1,11 +1,13 @@
-import mimetypes
-
-from celery.five import monotonic  # pylint: disable=E0611
-from contextlib import contextmanager
 from django.core.cache import caches
 from django.db import connection
 from django.http import FileResponse, Http404
+from django.shortcuts import render
+
+from celery.five import monotonic  # pylint: disable=E0611
+from contextlib import contextmanager
 from pathlib import Path
+
+import mimetypes
 
 
 def dict_get(data, default, *keys):
@@ -111,3 +113,10 @@ def serve_file(file):
         response.headers["Content-Encoding"] = encoding
 
     return response
+
+
+def nopermission(request):
+    """
+    Render the "no permission" page".
+    """
+    return render(request, 'helfertool/nopermission.html')
