@@ -21,9 +21,10 @@ class BadgeDesignForm(forms.ModelForm):
         super(BadgeDesignForm, self).__init__(*args, **kwargs)
 
         # set download_url parameters for widgets
-        url_args = [self.instance.get_event().url_name, self.instance.pk]
-        self.fields["bg_front"].widget.download_url = reverse("badges:get_design_bg", args=url_args + ["front"])
-        self.fields["bg_back"].widget.download_url = reverse("badges:get_design_bg", args=url_args + ["back"])
+        if self.instance.pk:
+            url_args = [self.instance.get_event().url_name, self.instance.pk]
+            self.fields["bg_front"].widget.download_url = reverse("badges:get_design_bg", args=url_args + ["front"])
+            self.fields["bg_back"].widget.download_url = reverse("badges:get_design_bg", args=url_args + ["back"])
 
     def save(self, commit=True):
         instance = super(BadgeDesignForm, self).save(False)

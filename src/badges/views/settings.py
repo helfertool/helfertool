@@ -1,9 +1,8 @@
 from django.conf import settings as django_settings
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 
 from ..forms import BadgeSettingsForm, BadgeDefaultsForm, BadgeJobDefaultsForm
 
@@ -44,8 +43,7 @@ def settings(request, event_url_name):
         defaults_form.save()
         job_defaults_form.save()
 
-        return HttpResponseRedirect(reverse('badges:settings',
-                                            args=[event.url_name, ]))
+        return redirect('badges:settings', event_url_name=event.url_name)
 
     context = {'event': event,
                'roles': roles,
@@ -77,8 +75,7 @@ def settings_advanced(request, event_url_name):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges:settings_advanced',
-                                            args=[event.url_name, ]))
+        return redirect('badges:settings_advanced', event_url_name=event.url_name)
 
     # render
     context = {'event': event,

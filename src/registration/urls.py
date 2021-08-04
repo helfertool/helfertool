@@ -33,27 +33,27 @@ urlpatterns = [
         name='form'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/registered/'
-        r'(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_pk>[a-z0-9\-]+)/$',
         views.registered,
         name='registered'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/'
-        r'(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_pk>[a-z0-9\-]+)/$',
         views.validate,
         name='validate'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/ical/'
-        r'(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_pk>[a-z0-9\-]+)/$',
         HelperFeed(),
         name='ical'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/update/'
-        r'(?P<helper_id>[a-z0-9\-]+)/$',
+        r'(?P<helper_pk>[a-z0-9\-]+)/$',
         views.update_personal,
         name='update_personal'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/deregister/'
-        r'(?P<helper_id>[a-z0-9\-]+)/(?P<shift_pk>[0-9]+)/$',
+        r'(?P<helper_pk>[a-z0-9\-]+)/(?P<shift_pk>[0-9]+)/$',
         views.deregister,
         name='deregister'),
 

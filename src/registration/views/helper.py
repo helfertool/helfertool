@@ -1,8 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from django.db.models.functions import TruncDate
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
@@ -173,7 +172,7 @@ def edit_helper(request, event_url_name, helper_pk):
             if not helper.send_mail(request, internal=False):
                 messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return HttpResponseRedirect(reverse('view_helper', args=[event_url_name, helper.pk]))
+        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
     context = {'event': event,
@@ -211,7 +210,7 @@ def add_helper(request, event_url_name, shift_pk):
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, shift.job.pk]))
+        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=shift.job.pk)
 
     # render page
     context = {'event': event,
@@ -244,7 +243,7 @@ def add_coordinator(request, event_url_name, job_pk):
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the coordinator was saved."))
 
-        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, job.pk]))
+        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
     context = {'event': event,
@@ -274,8 +273,7 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
             'helper': helper,
         })
 
-        return HttpResponseRedirect(reverse('view_helper',
-                                            args=[event_url_name, helper.pk]))
+        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
     context = {'event': event,
@@ -306,7 +304,7 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
             'helper': helper,
         })
 
-        return HttpResponseRedirect(reverse('view_helper', args=[event_url_name, helper.pk]))
+        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
     context = {'event': event,
@@ -346,7 +344,7 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
         })
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, shift.job.pk]))
+        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=shift.job.pk)
 
     # render page
     context = {'event': event,
@@ -390,7 +388,7 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
                          {'name': helper.full_name, 'jobname': job.name})
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('helpers_for_job', args=[event_url_name, job.pk]))
+        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
     context = {'event': event,
@@ -420,8 +418,7 @@ def search_helper(request, event_url_name):
         # input was barcode -> redirect
         helper = form.check_barcode()
         if helper:
-            return HttpResponseRedirect(reverse(
-                'view_helper', args=[event_url_name, helper.pk]))
+            return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
 
         # else show results
         result = form.get()
@@ -461,7 +458,7 @@ def resend_mail(request, event_url_name, helper_pk):
         else:
             messages.error(request, _("Sending the mail failed."))
 
-        return HttpResponseRedirect(reverse('view_helper', args=[event_url_name, helper.pk]))
+        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
 
     context = {'event': event,
                'helper': helper,

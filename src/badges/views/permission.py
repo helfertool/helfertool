@@ -1,7 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from ..models import BadgePermission
 from ..forms import BadgePermissionForm, BadgePermissionDeleteForm
@@ -40,8 +38,7 @@ def edit_permission(request, event_url_name, permission_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges:settings_advanced',
-                                            args=[event.url_name, ]))
+        return redirect('badges:settings_advanced', event_url_name=event.url_name)
 
     context = {'event': event,
                'form': form}
@@ -72,8 +69,7 @@ def delete_permission(request, event_url_name, permission_pk):
     if form.is_valid():
         form.delete()
 
-        return HttpResponseRedirect(reverse('badges:settings_advanced',
-                                            args=[event.url_name, ]))
+        return redirect('badges:settings_advanced', event_url_name=event.url_name)
 
     context = {'event': event,
                'form': form,

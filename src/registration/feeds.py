@@ -10,9 +10,8 @@ class HelperFeed(ICalFeed):
     timezone = settings.TIME_ZONE
     product_id = "-//helfertool.org//Helfertool"
 
-    def get_object(self, request, event_url_name, helper_id):
-        event, job, shift, helper = get_or_404(event_url_name,
-                                               helper_pk=helper_id)
+    def get_object(self, request, event_url_name, helper_pk):
+        event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
         self._event = event
         self._helper = helper
         self._registered_link = reverse('registered', args=[event.url_name,

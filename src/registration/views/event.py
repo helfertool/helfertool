@@ -1,15 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
-import logging
-logger = logging.getLogger("helfertool.registration")
 
 from account.templatetags.globalpermissions import has_addevent_group
 from helfertool.utils import serve_file
@@ -21,6 +17,9 @@ from ..forms import EventForm, EventAdminRolesForm, EventAdminRolesAddForm, Even
     EventDuplicateForm, EventMoveForm, PastEventForm
 from ..models import Event, EventAdminRoles
 from ..permissions import has_access, ACCESS_EVENT_EDIT
+
+import logging
+logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
@@ -67,8 +66,7 @@ def edit_event(request, event_url_name=None):
 
         # redirect to this page, so reload does not send the form data again
         # if the event was created, this redirects to the event settings
-        return HttpResponseRedirect(reverse('edit_event',
-                                            args=[form['url_name'].value()]))
+        return redirect('edit_event', event_url_name=form['url_name'].value())
 
     # get event without possible invalid modifications from form
     saved_event = None
@@ -160,11 +158,10 @@ def delete_event(request, event_url_name):
             'event': event,
         })
 
-        messages.success(request, _("Event deleted: %(name)s") %
-                         {'name': event.name})
+        messages.success(request, _("Event deleted: %(name)s") % {'name': event.name})
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('index'))
+        return redirect('index')
 
     # render page
     context = {'event': event,
@@ -192,8 +189,7 @@ def archive_event(request, event_url_name):
             'event': event,
         })
 
-        return HttpResponseRedirect(reverse('edit_event',
-                                            args=[event_url_name, ]))
+        return redirect('edit_event', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,
@@ -225,8 +221,7 @@ def duplicate_event(request, event_url_name):
 
         messages.success(request, _("Event was duplicated: %(event)s") %
                          {'event': form['name'].value()})
-        return HttpResponseRedirect(reverse('edit_event',
-                                            args=[form['url_name'].value(), ]))
+        return redirect('edit_event', event_url_name=form['url_name'].value())
 
     # render page
     context = {'event': event,
@@ -257,7 +252,7 @@ def move_event(request, event_url_name):
 
         messages.success(request, _("Event was moved: %(event)s") % {'event': event.name})
 
-        return HttpResponseRedirect(reverse('edit_event', args=[event_url_name, ]))
+        return redirect('edit_event', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,

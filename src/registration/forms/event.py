@@ -72,7 +72,7 @@ class EventForm(forms.ModelForm):
 
         # set download_url parameters for widgets
         # EventDuplicateForm inherits from EventForm, but does not have a logo field, so check this here
-        if "logo" in self.fields:
+        if self.instance.pk and "logo" in self.fields:
             url_name = self.instance.url_name
             self.fields["logo"].widget.download_url = reverse("get_event_logo", args=[url_name, "default"])
             self.fields["logo_social"].widget.download_url = reverse("get_event_logo", args=[url_name, "social"])

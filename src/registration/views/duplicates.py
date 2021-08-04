@@ -1,8 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 from django.db.models import Count
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from collections import OrderedDict
 
@@ -67,8 +65,7 @@ def merge(request, event_url_name, email):
                     'event': event,
                 })
 
-                return HttpResponseRedirect(reverse('view_helper',
-                                                    args=[event_url_name, h.pk]))
+                return redirect('view_helper', event_url_name=event_url_name, helper_pk=h.pk)
             except ValueError:
                 # happens only if the shifts changed between is_valid() and merge()
                 error = True

@@ -1,8 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from registration.decorators import archived_not_available
@@ -63,8 +62,7 @@ def edit_gift(request, event_url_name, gift_pk=None):
             'gift': gift.name,
         })
 
-        return HttpResponseRedirect(reverse('gifts:list',
-                                            args=[event.url_name, ]))
+        return redirect('gifts:list', event_url_name=event.url_name)
 
     context = {'event': event,
                'form': form}
@@ -106,8 +104,7 @@ def delete_gift(request, event_url_name, gift_pk):
         })
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('gifts:list',
-                                            args=[event.url_name, ]))
+        return redirect('gifts:list', event_url_name=event.url_name)
 
     # render page
     context = {'gift': gift,

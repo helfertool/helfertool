@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 from smtplib import SMTPException
@@ -21,7 +19,7 @@ def create_issue(request):
         except (SMTPException, ConnectionError):
             messages.error(request, _("The issue was created but notifying the admins failed"))
 
-        return HttpResponseRedirect(reverse('help:create_issue'))
+        return redirect('help:create_issue')
 
     context = {'form': form}
     return render(request, 'help/create_issue.html', context)

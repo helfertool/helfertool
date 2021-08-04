@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_admins
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from celery.result import AsyncResult
@@ -209,7 +208,7 @@ def generate(request, event_url_name, job_pk=None, generate=None, skip_printed=T
     request.session['badge_tasks'].insert(0, task)
     request.session.modified = True
 
-    return HttpResponseRedirect(reverse('badges:index', args=[event.url_name]))
+    return redirect('badges:index', event_url_name=event.url_name)
 
 
 @login_required

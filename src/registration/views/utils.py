@@ -28,8 +28,7 @@ def get_or_404(event_url_name=None, job_pk=None, shift_pk=None,
             # check if the current helper_pk belongs to a deleted duplicate
             if handle_duplicates:
                 try:
-                    helper_pk = Duplicate.objects.get(deleted=helper_pk) \
-                                         .existing.pk
+                    helper_pk = Duplicate.objects.get(deleted=helper_pk).existing.pk
                 except Duplicate.DoesNotExist:
                     pass
 
