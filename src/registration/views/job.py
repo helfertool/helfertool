@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
@@ -49,8 +47,7 @@ def edit_job(request, event_url_name, job_pk=None):
             'job': job,
         })
 
-        return HttpResponseRedirect(reverse('jobs_and_shifts',
-                                            args=[event_url_name]))
+        return redirect('jobs_and_shifts', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,
@@ -83,7 +80,7 @@ def delete_job(request, event_url_name, job_pk):
         })
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('jobs_and_shifts', args=[event_url_name]))
+        return redirect('jobs_and_shifts', event_url_name=event_url_name)
 
     # check if there are coordinators
     helpers_registered = job.coordinators.count() != 0
@@ -126,8 +123,7 @@ def duplicate_job(request, event_url_name, job_pk):
             'duplicated_from_pk': job.pk,
         })
 
-        return HttpResponseRedirect(reverse('jobs_and_shifts',
-                                            args=[event_url_name]))
+        return redirect('jobs_and_shifts', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,
@@ -158,8 +154,7 @@ def duplicate_job_day(request, event_url_name, job_pk):
                 'shift': shift,
             })
 
-        return HttpResponseRedirect(reverse('jobs_and_shifts',
-                                            args=[event_url_name]))
+        return redirect('jobs_and_shifts', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,
@@ -188,8 +183,7 @@ def sort_job(request, event_url_name):
             'event': event,
         })
 
-        return HttpResponseRedirect(reverse('jobs_and_shifts',
-                                            args=[event_url_name]))
+        return redirect('jobs_and_shifts', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,

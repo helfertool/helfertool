@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from helfertool.utils import serve_file
 from registration.decorators import archived_not_available
@@ -39,7 +38,7 @@ def edit_design(request, event_url_name, design_pk=None):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('badges:settings', args=[event.url_name, ]))
+        return redirect('badges:settings', event_url_name=event.url_name)
 
     context = {'event': event,
                'form': form}
@@ -67,7 +66,7 @@ def delete_design(request, event_url_name, design_pk):
     if form.is_valid():
         form.delete()
 
-        return HttpResponseRedirect(reverse('badges:settings', args=[event.url_name, ]))
+        return redirect('badges:settings', event_url_name=event.url_name)
 
     context = {'event': event,
                'form': form,

@@ -1,8 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission
@@ -64,7 +63,7 @@ def edit_link(request, event_url_name, link_pk=None):
             'link': link.id,
         })
 
-        return HttpResponseRedirect(reverse('links', args=[event_url_name]))
+        return redirect('links', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,
@@ -101,7 +100,7 @@ def delete_link(request, event_url_name, link_pk):
         })
 
         # redirect to shift
-        return HttpResponseRedirect(reverse('links', args=[event_url_name]))
+        return redirect('links', event_url_name=event_url_name)
 
     # render page
     context = {'event': event,

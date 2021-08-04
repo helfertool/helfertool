@@ -2,8 +2,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 import logging
@@ -41,7 +41,7 @@ def send(request):
             'subject': form.cleaned_data['subject'],
         })
 
-        return HttpResponseRedirect(reverse('news:send'))
+        return redirect('news:send')
 
     num_recipients = Person.objects.count()
 

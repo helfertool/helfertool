@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 from registration.decorators import archived_not_available
@@ -34,8 +32,7 @@ def set_present(request, event_url_name, shift_pk):
 
         messages.success(request, _("Presence was saved"))
 
-        return HttpResponseRedirect(reverse('gifts:set_present',
-                                    args=[event.url_name, shift.pk, ]))
+        return redirect('gifts:set_present', event_url_name=event.url_name, shift_pk=shift.pk)
 
     context = {'event': event,
                'shift': shift,

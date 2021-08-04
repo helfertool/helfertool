@@ -3,9 +3,8 @@ import datetime
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404, redirect
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from .utils import nopermission, get_or_404
@@ -114,7 +113,7 @@ def form(request, event_url_name, link_pk=None):
         if not helper.send_mail(request, internal=False):
             messages.error(request, _("Sending the mail failed, but the registration was saved."))
 
-        return HttpResponseRedirect(reverse('registered', args=[event.url_name, helper.pk]))
+        return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
 
     context = {'event': event,
                'form': form,
@@ -122,9 +121,8 @@ def form(request, event_url_name, link_pk=None):
     return render(request, 'registration/form.html', context)
 
 
-def registered(request, event_url_name, helper_id=None):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id,
-                                           handle_duplicates=True)
+def registered(request, event_url_name, helper_pk=None):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
     news = news_test_email(helper.email)
 
@@ -134,8 +132,8 @@ def registered(request, event_url_name, helper_id=None):
     return render(request, 'registration/registered.html', context)
 
 
-def validate(request, event_url_name, helper_id):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id,
+def validate(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk,
                                            handle_duplicates=True)
 
     # 404 if validation is not used
@@ -156,9 +154,9 @@ def validate(request, event_url_name, helper_id):
     return render(request, 'registration/validate.html', context)
 
 
-def deregister(request, event_url_name, helper_id, shift_pk):
+def deregister(request, event_url_name, helper_pk, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name,
-                                           helper_pk=helper_id,
+                                           helper_pk=helper_pk,
                                            shift_pk=shift_pk)
 
     if not event.changes_possible:
@@ -177,11 +175,9 @@ def deregister(request, event_url_name, helper_id, shift_pk):
         })
 
         if not helper.pk:
-            return HttpResponseRedirect(reverse('deleted',
-                                                args=[event.url_name]))
+            return redirect('deleted', event_url_name=event.url_name)
 
-        return HttpResponseRedirect(reverse('registered',
-                                            args=[event.url_name, helper.pk]))
+        return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
 
     context = {'event': event,
                'helper': helper,
@@ -197,8 +193,8 @@ def deleted(request, event_url_name):
     return render(request, 'registration/deleted.html', context)
 
 
-def update_personal(request, event_url_name, helper_id):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_id)
+def update_personal(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     if not event.changes_possible:
         context = {'event': event}
@@ -220,8 +216,7 @@ def update_personal(request, event_url_name, helper_id):
             if not helper.send_mail(request, internal=False):
                 messages.error(request, _("Sending the mail failed, but the change was saved."))
 
-        return HttpResponseRedirect(reverse('registered',
-                                            args=[event.url_name, helper.pk]))
+        return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
 
     news = news_test_email(helper.email)  # needed in template
 

@@ -1,7 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from ..forms import BadgeForm
 
@@ -30,8 +28,7 @@ def edit_badge(request, event_url_name, helper_pk):
     if form.is_valid():
         form.save()
 
-        return HttpResponseRedirect(reverse('view_helper',
-                                            args=[event_url_name, helper.pk]))
+        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
     context = {'event': event,

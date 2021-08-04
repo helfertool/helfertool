@@ -1,16 +1,14 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
-
-import logging
-logger = logging.getLogger("helfertool.toolsettings")
+from django.shortcuts import render, redirect
 
 from registration.views.utils import nopermission
 
 from ..forms import HTMLSettingForm, TextSettingForm
 from ..models import HTMLSetting, TextSetting
+
+import logging
+logger = logging.getLogger("helfertool.toolsettings")
 
 
 # TODO: refactor to remove duplicated code
@@ -44,7 +42,7 @@ def template_about(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:templates'))
+        return redirect('toolsettings:templates')
 
     # render page
     context = {'form': form}
@@ -101,7 +99,7 @@ def template_privacy(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:templates'))
+        return redirect('toolsettings:templates')
 
     # render page
     context = {'form_privacy': form_privacy,
@@ -129,7 +127,7 @@ def template_login(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:templates'))
+        return redirect('toolsettings:templates')
 
     # render page
     context = {'form': form}
@@ -154,7 +152,7 @@ def template_add_user(request):
             'user': request.user,
         })
 
-        return HttpResponseRedirect(reverse('toolsettings:templates'))
+        return redirect('toolsettings:templates')
 
     # render page
     context = {'form': form}

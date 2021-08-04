@@ -1,7 +1,6 @@
 from django.conf import settings
-from django.urls import reverse
-from django.http import HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from ..models import Inventory, Item
 from ..forms import InventoryForm, InventoryDeleteForm, ItemForm, ItemDeleteForm
@@ -32,7 +31,7 @@ def edit_inventory(request, inventory=None):
 
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('inventory:inventory_list'))
+        return redirect('inventory:inventory_list')
 
     # render page
     context = {'form': form}
@@ -50,7 +49,7 @@ def delete_inventory(request, inventory):
 
     if form.is_valid():
         form.delete()
-        return HttpResponseRedirect(reverse('inventory:inventory_list'))
+        return redirect('inventory:inventory_list')
 
     # render page
     context = {'inventory': inventory,
@@ -88,8 +87,7 @@ def edit_item(request, inventory, item_pk=None):
     if form.is_valid():
         # TODO: handle unique_together constraint
         form.save()
-        return HttpResponseRedirect(reverse('inventory:inventory_items',
-                                    args=[inventory.pk]))
+        return redirect('inventory:inventory_items', inventory_pk=inventory.pk)
 
     context = {'form': form}
     return render(request, 'inventory/admin/edit_item.html', context)
@@ -110,8 +108,7 @@ def delete_item(request, inventory, item_pk):
 
     if form.is_valid():
         form.delete()
-        return HttpResponseRedirect(reverse('inventory:inventory_items',
-                                    args=[inventory.pk]))
+        return redirect('inventory:inventory_items', inventory_pk=inventory.pk)
 
     # render page
     context = {'item': item,

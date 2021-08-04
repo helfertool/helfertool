@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.http import Http404
+from django.shortcuts import render, redirect
 
 import logging
 logger = logging.getLogger("helfertool.news")
@@ -31,7 +30,7 @@ def unsubscribe(request, token):
 
         person.delete()
 
-        return HttpResponseRedirect(reverse('news:unsubscribe_done'))
+        return redirect('news:unsubscribe_done')
 
     context = {'person': person}
     return render(request, 'news/unsubscribe.html', context)
