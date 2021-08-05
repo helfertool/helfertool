@@ -16,7 +16,8 @@ class SentMail(models.Model):
 
     user = models.ForeignKey(
         get_user_model(),
-        on_delete=models.CASCADE,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     date = models.DateTimeField(
