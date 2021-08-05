@@ -10,7 +10,7 @@ from django.utils.translation import ugettext as _
 
 from helfertool.utils import nopermission
 
-from ..forms import CreateUserForm, EditUserForm
+from ..forms import CreateUserForm, EditUserForm, DeleteUserForm
 from ..templatetags.globalpermissions import has_adduser_group
 
 import logging
@@ -118,6 +118,33 @@ def edit_user(request, user_pk):
         'changed_user': changed_user,
     }
     return render(request, 'account/edit_user.html', context)
+
+
+@login_required
+def delete_user(request, user_pk):
+    # check permission
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    deleted_user = get_object_or_404(get_user_model(), pk=user_pk)
+
+    form = DeleteUserForm(request.POST or None, instance=deleted_user)
+
+    if form.is_valid():
+        logger.info("user deleted", extra={
+            'user': request.user,
+            'deleted_user': deleted_user.username,
+        })
+
+        form.delete()
+
+        return redirect('account:list_users')
+
+    context = {
+        'form': form,
+        'deleted_user': deleted_user,
+    }
+    return render(request, 'account/delete_user.html', context)
 
 
 @login_required

@@ -17,8 +17,7 @@ def list_mails(request, event_url_name):
         return nopermission(request)
 
     all_sent_mails = SentMail.objects.filter(event=event)
-    sent_mails = list(filter(lambda s: s.can_see_mail(request.user),
-                             all_sent_mails))
+    sent_mails = list(filter(lambda s: s.can_see_mail(request.user), all_sent_mails))
 
     # render page
     context = {'event': event,

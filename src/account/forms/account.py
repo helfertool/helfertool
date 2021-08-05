@@ -193,3 +193,12 @@ class EditUserForm(forms.ModelForm):
                                self._admin_user)
 
         return instance
+
+
+class DeleteUserForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = []
+
+    def delete(self):
+        self.instance.delete()

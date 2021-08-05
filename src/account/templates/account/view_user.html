@@ -35,9 +35,11 @@
 
     {% if user.is_superuser %}
         <p>
-            <a href="{% url "account:edit_user" changed_user.pk %}">
-                {% icon "pencil-alt" %}
-                {% trans "Edit" %}
+            <a href="{% url "account:edit_user" changed_user.pk %}" class="me-3 text-nowrap">
+                {% icon "pencil-alt" %} {% trans "Edit" %}
+            </a>
+            <a href="{% url "account:delete_user" changed_user.pk %}" class="me-3 text-nowrap">
+                {% icon "trash-alt" %} {% trans "Delete" %}
             </a>
         </p>
     {% endif %}

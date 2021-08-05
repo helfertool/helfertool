@@ -17,6 +17,10 @@ urlpatterns = [
         views.edit_user,
         name='edit_user'),
 
+    url(r'^(?P<user_pk>[0-9]+)/delete/$',
+        views.delete_user,
+        name='delete_user'),
+
     url(r'^new/$',
         views.add_user,
         name='add_user'),

@@ -15,7 +15,7 @@
             <table class="table" aria-description="{% trans 'Mail meta data' %}">
                 <tr>
                     <th scope="row">{% trans "Sent by" %}</th>
-                    <td>{{ mail.user.get_full_name }}</td>
+                    <td>{{ mail.user.get_full_name | default:"-" }}</td>
                 </tr>
                 <tr>
                     <th scope="row">{% trans "Date" %}</th>
