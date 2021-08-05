@@ -16,8 +16,6 @@ class MailReceiver:
     It checks one particular folder and returns the unseen messages. This is used by MailHandler.
     """
     def __init__(self):
-        self._folder = "Listen.helfertool"  # Default: INBOX
-
         self._connection = None
 
     def connect(self):
@@ -38,7 +36,7 @@ class MailReceiver:
 
             if settings.RECEIVE_EMAIL_USE_TLS:
                 self._connection.starttls()
-        except imaplib.IMAP4.error:
+        except (imaplib.IMAP4.error, ConnectionRefusedError):
             raise MailHandlerError("Invalid hostname, port or TLS settings for IMAP")
 
         # login
