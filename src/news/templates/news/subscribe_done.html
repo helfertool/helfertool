@@ -4,11 +4,7 @@
 {% block content %}
     <h1>{% trans "Subscribed to newsletter" %}</h1>
 
-    <p>
-        {% blocktrans trimmed %}
-            Thank you! We will notify you about future events.
-        {% endblocktrans %}
-    </p>
+    <p>{% trans "Thank you!" %}</p>
 
     <p>
         <a href="{% url "index" %}" class="btn btn-outline-primary ">

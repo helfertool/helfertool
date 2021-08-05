@@ -157,3 +157,28 @@ def template_add_user(request):
     # render page
     context = {'form': form}
     return render(request, 'toolsettings/template_add_user.html', context)
+
+
+@login_required
+def template_newsletter(request):
+    # must be superuser
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    # form
+    obj, c = HTMLSetting.objects.get_or_create(key='newsletter')
+    form = HTMLSettingForm(request.POST or None, instance=obj)
+
+    if form.is_valid():
+        form.save()
+
+        logger.info("settings changed", extra={
+            'changed': 'templates_newsletter',
+            'user': request.user,
+        })
+
+        return redirect('toolsettings:templates')
+
+    # render page
+    context = {'form': form}
+    return render(request, 'toolsettings/template_newsletter.html', context)

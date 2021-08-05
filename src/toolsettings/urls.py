@@ -24,6 +24,10 @@ urlpatterns = [
         views.template_add_user,
         name='template_add_user'),
 
+    url(r'^templates/newsletter/$',
+        views.template_newsletter,
+        name='template_newsletter'),
+
     url(r'^check/$',
         views.check,
         name='check'),

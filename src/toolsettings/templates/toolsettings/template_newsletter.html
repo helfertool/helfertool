@@ -1,0 +1,22 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons translation %}
+
+{% block content %}
+    <h1>{% trans "Template: Newsletter subscription" %}</h1>
+
+    <form action="{% url 'toolsettings:template_newsletter' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            {% get_available_languages as languages %}
+            {% for lang, name in languages %}
+                <div class="col-lg-6">
+                    {% translated_field form "value" lang as field %}
+                    {% bootstrap_field field %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
+    </form>
+{% endblock %}
