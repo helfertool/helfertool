@@ -36,12 +36,27 @@
         <div class="col-xs-12 col-xl-6">
             <table class="table" aria-description="{% trans 'Status of external services' %}">
                 <tr class="d-flex">
-                    <th class="col-6" scope="row">{% trans "Mail" %} </th>
+                    <th class="col-6" scope="row">{% trans "Mail (SMTP)" %} </th>
                     <td class="col-6 text-break">
-                        {% if mail_ok %}
+                        {% if mail_smtp_ok %}
                             <em class="fas fa-check"></em>
                         {% else %}
                             <em class="fas fa-times text-danger"></em>
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr class="d-flex">
+                    <th class="col-6" scope="row">{% trans "Mail (IMAP)" %} </th>
+                    <td class="col-6 text-break">
+                        {% if mail_imap_configured %}
+                            {% if mail_imap_ok %}
+                                <em class="fas fa-check"></em>
+                            {% else %}
+                                <em class="fas fa-times text-danger"></em>
+                            {% endif %}
+                        {% else %}
+                            <em class="fas fa-minus"></em>
                         {% endif %}
                     </td>
                 </tr>

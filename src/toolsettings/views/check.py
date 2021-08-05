@@ -5,6 +5,8 @@ from django.core.mail.backends.smtp import EmailBackend
 from django.shortcuts import render
 
 from helfertool.utils import nopermission
+from mail.receive.error import MailHandlerError
+from mail.receive.receiver import MailReceiver
 
 from ..models import HTMLSetting, TextSetting
 
@@ -21,7 +23,7 @@ def check(request):
     # templates
     templates_ok = True
 
-    for html_setting in ('about', 'privacy', 'privacy_newsletter', 'login', 'add_user'):
+    for html_setting in ('about', 'privacy', 'privacy_newsletter', 'login', 'add_user', 'newsletter'):
         try:
             HTMLSetting.objects.get(key=html_setting)
         except HTMLSetting.DoesNotExist:
@@ -33,14 +35,29 @@ def check(request):
         except TextSetting.DoesNotExist:
             templates_ok = False
 
-    # mail
-    mail_ok = True
+    # mail (smtp)
+    mail_smtp_ok = True
     try:
         mail_conn = mail.get_connection()
         if isinstance(mail_conn, EmailBackend):
             mail_conn.open()
     except (ConnectionRefusedError, OSError):
-        mail_ok = False
+        mail_smtp_ok = False
+
+    # mail (imap)
+    if settings.RECEIVE_EMAIL_HOST:
+        mail_imap_configured = True
+        try:
+            receiver = MailReceiver()
+            receiver.connect()
+            receiver.close()
+
+            mail_imap_ok = True
+        except MailHandlerError:
+            mail_imap_ok = False
+    else:
+        mail_imap_configured = False
+        mail_imap_ok = False
 
     # celery
     celery_broker_ok = True
@@ -76,7 +93,9 @@ def check(request):
         'similarity_search': not settings.SEARCH_SIMILARITY_DISABLED,
 
         'templates_ok': templates_ok,
-        'mail_ok': mail_ok,
+        'mail_smtp_ok': mail_smtp_ok,
+        'mail_imap_configured': mail_imap_configured,
+        'mail_imap_ok': mail_imap_ok,
         'celery_broker_ok': celery_broker_ok,
         'ldap_configured': ldap_configured,
         'ldap_ok': ldap_ok,
