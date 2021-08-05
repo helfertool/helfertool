@@ -200,3 +200,12 @@
             E-Mail: <a href="mailto:helfertool@localhost">helfertool@localhost</a></em></p>
 
             <p>In the event of cancellation, your data will be deleted upon receipt of your notice.</p>
+
+# Newsletter subscription (HTML)
+-   model: toolsettings.htmlsetting
+    pk: 7
+    fields:
+        key: newsletter
+        value: ''
+        value_de: ''
+        value_en: ''

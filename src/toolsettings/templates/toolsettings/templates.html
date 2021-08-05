@@ -5,8 +5,9 @@
     <h1>{% trans "Templates" %}</h1>
     <ul>
         <li><a href="{% url "toolsettings:template_privacy" %}">{% trans "Privacy" %}</a></li>
-        <li><a href="{% url "toolsettings:template_about" %}">{% trans "About this software" %}</a></li>
         <li><a href="{% url "toolsettings:template_login" %}">{% trans "Login page" %}</a></li>
+        <li><a href="{% url "toolsettings:template_newsletter" %}">{% trans "Newsletter subscription" %}</a></li>
         <li><a href="{% url "toolsettings:template_add_user" %}">{% trans "Add user" %}</a></li>
+        <li><a href="{% url "toolsettings:template_about" %}">{% trans "About this software" %}</a></li>
     </ul>
 {% endblock %}

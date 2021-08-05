@@ -4,6 +4,8 @@
 {% block content %}
     <h1>{% trans "Subscribe to newsletter" %}</h1>
 
+    {% htmlsetting "newsletter" %}
+
     <form action="" method="post">
         {% csrf_token %}
 
