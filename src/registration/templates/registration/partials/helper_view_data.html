@@ -41,10 +41,10 @@ Parameters:
                 </tr>
             {% endif %}
 
-            {% if helper.event.ask_vegetarian %}
+            {% if helper.event.ask_nutrition %}
                 <tr>
-                    <th scope="row">{% trans "Vegetarian" %}: </th>
-                    <td>{{ helper.vegetarian | yesno }}</td>
+                    <th scope="row">{% trans "Nutrition" %}: </th>
+                    <td>{{ helper.get_nutrition_short }}</td>
                 </tr>
             {% endif %}
 

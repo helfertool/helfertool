@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 21:16+0200\n"
+"POT-Creation-Date: 2021-08-06 15:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -64,34 +64,38 @@ msgid "Status of external services"
 msgstr "Status der externen Dienste"
 
 #: toolsettings/templates/toolsettings/check.html:39
-msgid "Mail"
-msgstr "E-Mail"
+msgid "Mail (SMTP)"
+msgstr "Mail (SMTP)"
 
 #: toolsettings/templates/toolsettings/check.html:50
+msgid "Mail (IMAP)"
+msgstr "Mail (IMAP)"
+
+#: toolsettings/templates/toolsettings/check.html:65
 msgid "RabbitMQ"
 msgstr "RabbitMQ"
 
-#: toolsettings/templates/toolsettings/check.html:61
+#: toolsettings/templates/toolsettings/check.html:76
 msgid "LDAP"
 msgstr "LDAP"
 
-#: toolsettings/templates/toolsettings/check.html:76
+#: toolsettings/templates/toolsettings/check.html:91
 msgid "Search for similar names"
 msgstr "Suche nach ähnlichen Namen"
 
-#: toolsettings/templates/toolsettings/check.html:89
+#: toolsettings/templates/toolsettings/check.html:104
 msgid "Header"
 msgstr "Header"
 
-#: toolsettings/templates/toolsettings/check.html:92
+#: toolsettings/templates/toolsettings/check.html:107
 msgid "Status of HTTP headers"
 msgstr "Status der HTTP Header"
 
-#: toolsettings/templates/toolsettings/check.html:105
+#: toolsettings/templates/toolsettings/check.html:120
 msgid "Remote IP"
 msgstr "Remote IP"
 
-#: toolsettings/templates/toolsettings/check.html:113
+#: toolsettings/templates/toolsettings/check.html:128
 msgid "X-Forwarded-For is set to different value"
 msgstr "X-Forwarded-For hat einen anderen Wert"
 
@@ -102,6 +106,7 @@ msgstr "Template: Über diese Software"
 #: toolsettings/templates/toolsettings/template_about.html:20
 #: toolsettings/templates/toolsettings/template_add_user.html:20
 #: toolsettings/templates/toolsettings/template_login.html:20
+#: toolsettings/templates/toolsettings/template_newsletter.html:20
 #: toolsettings/templates/toolsettings/template_privacy.html:56
 msgid "Save"
 msgstr "Speichern"
@@ -113,6 +118,10 @@ msgstr "Template: Nutzer hinzufügen"
 #: toolsettings/templates/toolsettings/template_login.html:5
 msgid "Template: Login page"
 msgstr "Template: Login Seite"
+
+#: toolsettings/templates/toolsettings/template_newsletter.html:5
+msgid "Template: Newsletter subscription"
+msgstr "Template: Anmeldung Newsletter"
 
 #: toolsettings/templates/toolsettings/template_privacy.html:5
 msgid "Template: Privacy statements"
@@ -139,16 +148,23 @@ msgid "Privacy"
 msgstr "Datenschutz"
 
 #: toolsettings/templates/toolsettings/templates.html:8
-msgid "About this software"
-msgstr "Über diese Software"
-
-#: toolsettings/templates/toolsettings/templates.html:9
 msgid "Login page"
 msgstr "Login Seite"
+
+#: toolsettings/templates/toolsettings/templates.html:9
+msgid "Newsletter subscription"
+msgstr "Anmeldung Newsletter"
 
 #: toolsettings/templates/toolsettings/templates.html:10
 msgid "Add user"
 msgstr "Nutzer:in hinzufügen"
+
+#: toolsettings/templates/toolsettings/templates.html:11
+msgid "About this software"
+msgstr "Über diese Software"
+
+#~ msgid "Mail"
+#~ msgstr "E-Mail"
 
 #~ msgid "Other"
 #~ msgstr "Sonstiges"

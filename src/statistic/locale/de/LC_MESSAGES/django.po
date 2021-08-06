@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 21:16+0200\n"
+"POT-Creation-Date: 2021-08-06 15:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,8 +49,8 @@ msgid "Total number of shift slots"
 msgstr "Gesamtzahl an Schichtslots"
 
 #: statistic/templates/statistic/overview.html:32
-msgid "Vegetarians"
-msgstr "Vegetarier:innen"
+msgid "Nutrition"
+msgstr "Ernährung"
 
 #: statistic/templates/statistic/overview.html:42
 msgid "Timeline of registrations"
@@ -117,37 +117,49 @@ msgstr "Schließen"
 msgid "For this event no t-shirt sizes were collected."
 msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
-#: statistic/views/chart.py:124
+#: statistic/views/chart.py:127
 msgid "Number of helpers"
 msgstr "Anzahl Helfer:innen"
 
-#: statistic/views/chart.py:180
+#: statistic/views/chart.py:183
 msgid "Helpers"
 msgstr "Helfer:innen"
 
-#: statistic/views/chart.py:181
+#: statistic/views/chart.py:184
 msgid "Coordinators"
 msgstr "Koordinator:innen"
 
-#: statistic/views/chart.py:184
+#: statistic/views/chart.py:187
 msgid "Special badges"
 msgstr "Spezial Badges"
 
-#: statistic/views/chart.py:209
+#: statistic/views/chart.py:212
 msgid "Filled slots"
 msgstr "Volle Slots"
 
-#: statistic/views/chart.py:210
+#: statistic/views/chart.py:213
 msgid "Vacant slots"
 msgstr "Leere Slots"
 
-#: statistic/views/chart.py:238
-msgid "Vegetarian"
-msgstr "Vegetarier:in"
-
-#: statistic/views/chart.py:239
+#: statistic/views/chart.py:243
 msgid "No preference"
 msgstr "Keine Präferenz"
+
+#. Translators: adjective
+#: statistic/views/chart.py:245
+msgid "Vegetarian"
+msgstr "Vegetarisch"
+
+#: statistic/views/chart.py:246
+msgid "Vegan"
+msgstr "Vegan"
+
+#: statistic/views/chart.py:247
+msgid "Other"
+msgstr "Anderes"
+
+#~ msgid "Vegetarians"
+#~ msgstr "Vegetarier:innen"
 
 #~ msgid "hours"
 #~ msgstr "Stunden"

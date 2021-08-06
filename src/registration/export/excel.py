@@ -1,4 +1,3 @@
-from django.template import defaultfilters as filters
 from django.utils.translation import ugettext as _
 
 import re
@@ -99,8 +98,8 @@ def xlsx(buffer, event, jobs, date):
             worksheet.write(0, column.next(), _("T-shirt"), bold)
             worksheet.set_column(column.get(), column.get(), 10)
 
-        if event.ask_vegetarian:
-            worksheet.write(0, column.next(), _("Vegetarian"), bold)
+        if event.ask_nutrition:
+            worksheet.write(0, column.next(), _("Nutrition"), bold)
             worksheet.set_column(column.get(), column.get(), 13)
 
         if job.infection_instruction:
@@ -161,10 +160,8 @@ def add_helpers(worksheet, row, column, event, job, helpers,
             worksheet.write(row.get(), column.next(), escape(helper.phone), format)
         if event.ask_shirt:
             worksheet.write(row.get(), column.next(), escape(str(helper.get_shirt_display())), format)
-        if event.ask_vegetarian:
-            worksheet.write(row.get(), column.next(),
-                            escape(filters.yesno(helper.vegetarian)), format)
+        if event.ask_nutrition:
+            worksheet.write(row.get(), column.next(), escape(str(helper.get_nutrition_short())), format)
         if job.infection_instruction:
             worksheet.write(row.get(), column.next(), escape(str(helper.get_infection_instruction_short())), format)
-        worksheet.write(row.get(), column.next(), escape(helper.comment),
-                        format)
+        worksheet.write(row.get(), column.next(), escape(helper.comment), format)

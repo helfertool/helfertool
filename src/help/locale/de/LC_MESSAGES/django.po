@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 21:16+0200\n"
+"POT-Creation-Date: 2021-08-06 15:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,11 +50,11 @@ msgstr "Fehlerbericht"
 msgid "Other topic"
 msgstr "Anderes Thema"
 
-#: help/models.py:37
+#: help/models.py:38
 msgid "Topic"
 msgstr "Thema"
 
-#: help/models.py:43
+#: help/models.py:44
 msgid "Text"
 msgstr "Text"
 
@@ -75,11 +75,11 @@ msgstr ""
 msgid "Send"
 msgstr "Senden"
 
-#: help/views.py:20
+#: help/views.py:18
 msgid "The issue was saved and sent to the admins."
 msgstr "Die Anfrage wurde gespeichert und an die Admins geschickt."
 
-#: help/views.py:22
+#: help/views.py:20
 msgid "The issue was created but notifying the admins failed"
 msgstr ""
 "Die Anfrage wurde gespeichert, aber das Benachrichtigen der Admins ist "

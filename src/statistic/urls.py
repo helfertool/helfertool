@@ -21,8 +21,8 @@ urlpatterns = [
         name='chart_shifts'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/statistics/chart/eatinghabits/$',
-        views.chart_eating_habits,
-        name='chart_eating_habits'),
+        views.chart_nutrition,
+        name='chart_nutrition'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/shirts/$',
         views.shirts,

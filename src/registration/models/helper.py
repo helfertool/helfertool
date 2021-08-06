@@ -36,7 +36,7 @@ class Helper(models.Model):
         :comment: optional comment
         :internal_comment: optional internal comment
         :shirt: t-shirt size (possible sizes are defined here)
-        :vegetarian: is the helper vegetarian?
+        :nutrition: is the helper vegetarian/vegan/...?
         :infection_instruction: status of the instruction for food handling
         :timestamp: time of registration
         :validated: the validation link was clicked (if validation is enabled)
@@ -47,6 +47,7 @@ class Helper(models.Model):
     class Meta:
         ordering = ['event', 'surname', 'firstname']
 
+    # choices for food handling inctruction (short texts used internalls, normal ones in registration form)
     INSTRUCTION_NO = "No"
     INSTRUCTION_YES = "Yes"
     INSTRUCTION_REFRESH = "Refresh"
@@ -54,14 +55,35 @@ class Helper(models.Model):
     INSTRUCTION_CHOICES = (
         (INSTRUCTION_NO, _("I never got an instruction")),
         (INSTRUCTION_YES, _("I have a valid instruction")),
-        (INSTRUCTION_REFRESH, _("I got a instruction by a doctor, "
-                                "it must be refreshed"))
+        (INSTRUCTION_REFRESH, _("I got a instruction by a doctor, it must be refreshed"))
     )
 
     INSTRUCTION_CHOICES_SHORT = (
         (INSTRUCTION_NO, _("No")),
         (INSTRUCTION_YES, _("Valid")),
         (INSTRUCTION_REFRESH, _("Refreshment"))
+    )
+
+    # choices for nutrition (short texts used internalls, normal ones in registration form)
+    NUTRITION_NO_PREFERENCE = "NO_PREFERENCE"
+    NUTRITION_VEGETARIAN = "VEGETARIAN"
+    NUTRITION_VEGAN = "VEGAN"
+    NUTRITION_OTHER = "OTHER"
+
+    NUTRITION_CHOICES = (
+        (NUTRITION_NO_PREFERENCE, _("No preference")),
+        # Translators: adjective
+        (NUTRITION_VEGETARIAN, _("Vegetarian")),
+        (NUTRITION_VEGAN, _("Vegan")),
+        (NUTRITION_OTHER, _("Other (please specify in comment)")),
+    )
+
+    NUTRITION_CHOICES_SHORT = (
+        (NUTRITION_NO_PREFERENCE, _("No preference")),
+        # Translators: adjective
+        (NUTRITION_VEGETARIAN, _("Vegetarian")),
+        (NUTRITION_VEGAN, _("Vegan")),
+        (NUTRITION_OTHER, _("Other")),
     )
 
     id = models.UUIDField(
@@ -117,9 +139,11 @@ class Helper(models.Model):
         verbose_name=_("T-shirt"),
     )
 
-    vegetarian = models.BooleanField(
-        default=False,
-        verbose_name=_("Vegetarian"),
+    nutrition = models.CharField(
+        max_length=20,
+        choices=NUTRITION_CHOICES,
+        default=NUTRITION_NO_PREFERENCE,
+        verbose_name=_("Nutrition"),
         help_text=_("This helps us estimating the food for our helpers."),
     )
 
@@ -162,11 +186,16 @@ class Helper(models.Model):
         return "%s %s" % (self.firstname, self.surname)
 
     def get_infection_instruction_short(self):
-        """ Returns the short description for the infection_instruction
-            field.
-        """
+        """ Returns the short description for the infection_instruction field. """
         for item in Helper.INSTRUCTION_CHOICES_SHORT:
             if item[0] == self.infection_instruction:
+                return item[1]
+        return ""
+
+    def get_nutrition_short(self):
+        """ Returns the short description for the nutrition field. """
+        for item in Helper.NUTRITION_CHOICES_SHORT:
+            if item[0] == self.nutrition:
                 return item[1]
         return ""
 

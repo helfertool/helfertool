@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 from badges.models import SpecialBadges
 from registration.decorators import archived_not_available
-from registration.models import Event, Shift, HelperShift
+from registration.models import Event, Shift, HelperShift, Helper
 from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
 
 from datetime import timedelta
@@ -16,9 +16,11 @@ from itertools import cycle
 # colors
 # TODO: get from theming config, if this is implemented
 colors_primary = [
-    "#1a876e",
-    "#29d3ac",
-    "#31ffd0",
+    "#1A876E",
+    "#F5BE16",
+    "#E747F5",
+    "#A88518",
+    "#2FF5C7",
 ]
 
 colors_danger = [
@@ -216,28 +218,33 @@ def chart_shifts(request, event_url_name):
 
 @login_required
 @archived_not_available
-def chart_eating_habits(request, event_url_name):
+def chart_nutrition(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # permission
     if not has_access(request.user, event, ACCESS_STATISTICS_VIEW):
         return JsonResponse({})
 
-    if not event.ask_vegetarian:
+    if not event.ask_nutrition:
         JsonResponse({})
 
     # get data
-    num_vegetarians = event.helper_set.filter(vegetarian=True).count()
-    num_rest = event.helper_set.filter(vegetarian=False).count()
+    num_no_preference = event.helper_set.filter(nutrition=Helper.NUTRITION_NO_PREFERENCE).count()
+    num_vegetarian = event.helper_set.filter(nutrition=Helper.NUTRITION_VEGETARIAN).count()
+    num_vegean = event.helper_set.filter(nutrition=Helper.NUTRITION_VEGAN).count()
+    num_other = event.helper_set.filter(nutrition=Helper.NUTRITION_OTHER).count()
 
     # abort if nothing to show
-    if num_vegetarians + num_rest == 0:
+    if num_no_preference + num_vegetarian + num_vegean + num_other == 0:
         return JsonResponse({})
 
     # output format
     data = [
-        {"value": num_vegetarians, "label": _("Vegetarian")},
-        {"value": num_rest, "label": _("No preference")},
+        {"value": num_no_preference, "label": _("No preference")},
+        # Translators: adjective
+        {"value": num_vegetarian, "label": _("Vegetarian")},
+        {"value": num_vegean, "label": _("Vegan")},
+        {"value": num_other, "label": _("Other")},
     ]
 
     return _chart_doughnut(data)

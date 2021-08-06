@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 21:16+0200\n"
+"POT-Creation-Date: 2021-08-06 15:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -118,11 +118,15 @@ msgstr "Senden"
 msgid "Subscribe to newsletter"
 msgstr "Newsletter abonnieren"
 
-#: news/templates/news/subscribe.html:23
+#: news/templates/news/subscribe.html:27
 msgid "Privacy statement"
 msgstr "Datenschutzerklärung"
 
-#: news/templates/news/subscribe.html:31
+#: news/templates/news/subscribe.html:34
+msgid "OK"
+msgstr "OK"
+
+#: news/templates/news/subscribe.html:40
 msgid "Subscribe"
 msgstr "Eintragen"
 
@@ -130,11 +134,11 @@ msgstr "Eintragen"
 msgid "Subscribed to newsletter"
 msgstr "Newsletter abonniert"
 
-#: news/templates/news/subscribe_done.html:8
-msgid "Thank you! We will notify you about future events."
-msgstr "Danke! Wir werden dich über zukünftige Veranstaltungen informieren."
+#: news/templates/news/subscribe_done.html:7
+msgid "Thank you!"
+msgstr "Danke!"
 
-#: news/templates/news/subscribe_done.html:15
+#: news/templates/news/subscribe_done.html:11
 msgid "Back to all events"
 msgstr "Zurück zu allen Veranstaltungen"
 
@@ -175,3 +179,6 @@ msgstr "Empfänger:in entfernt."
 #: news/views/send.py:37
 msgid "Mails are being sent now."
 msgstr "E-Mails werden jetzt verschickt."
+
+#~ msgid "Thank you! We will notify you about future events."
+#~ msgstr "Danke! Wir werden dich über zukünftige Veranstaltungen informieren."
