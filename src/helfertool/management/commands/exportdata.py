@@ -23,7 +23,7 @@ def printable(data):
 class Command(BaseCommand):
     """
     Export anonymized helper data of an event. The UUIDs of helpers are hashed and most personal data is not exported.
-    The following personal data is exported: shirt sizes, vegetarian, infection_instruction.
+    The following personal data is exported: shirt sizes, nutrition, infection_instruction.
 
     The command will export multiple CSV files into a directory (optionally specified with --output).
 
@@ -60,9 +60,9 @@ class Command(BaseCommand):
         print("Exporting helpers to {output_dir}/helper.csv...".format(**locals()))
         with open("{output_dir}/helper.csv".format(**locals()), 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=";")
-            writer.writerow(["pk", "shirt", "vegetarian", "infection_instruction", "timestamp", "validated"])
+            writer.writerow(["pk", "shirt", "nutrition", "infection_instruction", "timestamp", "validated"])
             for h in event.helper_set.all():
-                writer.writerow([hash(h.pk, salt), h.shirt, h.vegetarian, h.infection_instruction, h.timestamp,
+                writer.writerow([hash(h.pk, salt), h.shirt, h.nutrition, h.infection_instruction, h.timestamp,
                                  h.validated])
 
         print("Exporting jobs to {output_dir}/jobs.csv...".format(**locals()))

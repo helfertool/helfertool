@@ -49,7 +49,7 @@ class Event(models.Model):
         :admins: list of admins of this event, they can see and edit everything
         :ask_shirt: ask for the t-shirt size during registration
         :ask_phone: ask for the mobile phone number during registration
-        :ask_vegetarian: ask, if the helper is vegetarian
+        :ask_nutrition: ask, if the helper is vegetarian/vegan/...
         :show_public_numbers: show the number of current and maximal helpers on
                              the registration page
         :mail_validation: helper must validate his mail address by a link
@@ -206,9 +206,9 @@ class Event(models.Model):
         verbose_name=_("Ask for T-shirt size"),
     )
 
-    ask_vegetarian = models.BooleanField(
+    ask_nutrition = models.BooleanField(
         default=True,
-        verbose_name=_("Ask, if helper is vegetarian"),
+        verbose_name=_("Ask for preferred nutrition"),
     )
 
     ask_full_age = models.BooleanField(

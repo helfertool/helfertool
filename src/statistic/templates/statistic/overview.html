@@ -27,12 +27,12 @@
             {% endif %}
         </div>
 
-        {% if event.ask_vegetarian %}
+        {% if event.ask_nutrition %}
         <div class="col-lg-6 col-xxl-4 statistics">
-            <div class="title">{% trans "Vegetarians" %}</div>
+            <div class="title">{% trans "Nutrition" %}</div>
 
-            <canvas class="chart" data-url="{% url 'statistic:chart_eating_habits' event.url_name %}" data-empty="eating_habits_empty"></canvas>
-            <div id="eating_habits_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
+            <canvas class="chart" data-url="{% url 'statistic:chart_nutrition' event.url_name %}" data-empty="nutrition_empty"></canvas>
+            <div id="nutrition_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
         </div>
         {% endif %}
     </div>

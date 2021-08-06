@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-27 21:16+0200\n"
+"POT-Creation-Date: 2021-08-06 15:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,8 +42,14 @@ msgstr "Veranstaltungen hinzufügen"
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
 
+#: account/forms/agreement.py:35
+#, python-format
+msgid "Text (%(lang)s)"
+msgstr "Text (%(lang)s)"
+
 #: account/models/agreement.py:13
 #: account/templates/account/delete_agreement.html:11
+#: account/templates/account/delete_user.html:15
 #: account/templates/account/view_user.html:19
 msgid "Name"
 msgstr "Name"
@@ -83,9 +89,34 @@ msgid "Data of user agreement"
 msgstr "Daten der Nutzungsvereinbarung"
 
 #: account/templates/account/delete_agreement.html:29
+#: account/templates/account/delete_user.html:33
 #: account/templates/account/list_agreements.html:43
+#: account/templates/account/view_user.html:42
 msgid "Delete"
 msgstr "Löschen"
+
+#: account/templates/account/delete_user.html:5
+msgid "Delete user"
+msgstr "Benutzer:in löschen"
+
+#: account/templates/account/delete_user.html:9
+#: account/templates/account/view_user.html:13
+msgid "Account data"
+msgstr "Account Daten"
+
+#: account/templates/account/delete_user.html:11
+#: account/templates/account/view_user.html:15
+msgid "Login"
+msgstr "Login"
+
+#: account/templates/account/delete_user.html:19
+#: account/templates/account/view_user.html:23
+msgid "Email address"
+msgstr "E-Mail Adresse"
+
+#: account/templates/account/delete_user.html:27
+msgid "Do you want to delete this user?"
+msgstr "Willst du diese Benutzer:in löschen?"
 
 #: account/templates/account/edit_agreement.html:7
 msgid "Edit user agreement"
@@ -98,7 +129,7 @@ msgstr "Neue Nutzungsvereinbarung"
 
 #: account/templates/account/edit_agreement.html:45
 #: account/templates/account/edit_user.html:33
-#: account/templates/account/view_user.html:55
+#: account/templates/account/view_user.html:57
 msgid "Save"
 msgstr "Sichern"
 
@@ -132,7 +163,7 @@ msgid "From %(date)s"
 msgstr "Ab %(date)s"
 
 #: account/templates/account/list_agreements.html:36
-#: account/templates/account/view_user.html:40
+#: account/templates/account/view_user.html:39
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -170,27 +201,15 @@ msgstr "Keine Benutzer:in gefunden."
 msgid "My account"
 msgstr "Mein Account"
 
-#: account/templates/account/view_user.html:13
-msgid "Account data"
-msgstr "Account Daten"
-
-#: account/templates/account/view_user.html:15
-msgid "Login"
-msgstr "Login"
-
-#: account/templates/account/view_user.html:23
-msgid "Email address"
-msgstr "E-Mail Adresse"
-
 #: account/templates/account/view_user.html:27
 msgid "Details"
 msgstr "Details"
 
-#: account/templates/account/view_user.html:45
+#: account/templates/account/view_user.html:47
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: account/templates/account/view_user.html:60
+#: account/templates/account/view_user.html:62
 msgid "The password cannot be changed here."
 msgstr "Das Passwort kann hier nicht geändert werden."
 

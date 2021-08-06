@@ -19,7 +19,7 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = Helper
         fields = ['firstname', 'surname', 'email', 'phone', 'shirt',
-                  'vegetarian', 'infection_instruction', 'comment',
+                  'nutrition', 'infection_instruction', 'comment',
                   'privacy_statement', 'shifts']
         widgets = {
             'shifts': ShiftTableRegistrationWidget,
@@ -49,9 +49,9 @@ class RegisterForm(forms.ModelForm):
             # restrict choices
             self.fields['shirt'].choices = self.event.get_shirt_choices(internal=self.is_internal)
 
-        # remove field for vegetarian food?
-        if not self.event.ask_vegetarian:
-            self.fields.pop('vegetarian')
+        # remove field for nutrition?
+        if not self.event.ask_nutrition:
+            self.fields.pop('nutrition')
 
         # remove field or privacy statement?
         if self.is_internal:

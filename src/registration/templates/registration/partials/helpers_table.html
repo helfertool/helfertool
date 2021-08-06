@@ -39,9 +39,9 @@ The order of the columns is set as follows:
                         </div>
                     {% endif %}
 
-                    {% if event.ask_vegetarian %}
+                    {% if event.ask_nutrition %}
                         <div class="d-none d-xxl-table-cell col-xxl-1">
-                            {% trans "Vegetarian" %}
+                            {% trans "Nutrition" %}
                         </div>
                     {% endif %}
 
@@ -84,10 +84,10 @@ The order of the columns is set as follows:
                         </div>
                     {% endif %}
 
-                    {% if event.ask_vegetarian %}
+                    {% if event.ask_nutrition %}
                         <div class="col-12 col-xxl-1 order-2 order-xxl-1 py-1">
-                            <span class="d-xxl-none fw-bold">{% trans "Vegetarian" %}:</span>
-                            {{ helper.vegetarian | yesno }}
+                            <span class="d-xxl-none fw-bold">{% trans "Nutrition" %}:</span>
+                            {{ helper.get_nutrition_short }}
                         </div>
                     {% endif %}
 
