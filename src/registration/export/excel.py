@@ -127,7 +127,7 @@ def xlsx(buffer, event, jobs, date):
 
         # show all shifts
         for shift in job.shift_set.order_by('begin'):
-            if date and shift.begin.date() != date:
+            if date and shift.date() != date:
                 continue
 
             worksheet.merge_range(row.next(), 0, row.get(),

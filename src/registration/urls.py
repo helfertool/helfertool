@@ -207,7 +207,7 @@ urlpatterns = [
         name='export'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<filetype>[a-z]+)/all/'
-        r'(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        r'(?P<date_str>[0-9]+-[0-9]+-[0-9]+)/$',
         views.export,
         name='export_date'),
 
@@ -217,7 +217,7 @@ urlpatterns = [
         name='export_job'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<filetype>[a-z]+)/'
-        r'(?P<job_pk>[0-9]+)/(?P<date_str>\d{4}-\d{2}-\d{2})/$',
+        r'(?P<job_pk>[0-9]+)/(?P<date_str>[0-9]+-[0-9]+-[0-9]+)/$',
         views.export,
         name='export_job_date'),
 

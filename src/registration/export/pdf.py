@@ -87,7 +87,7 @@ def pdf(buffer, event, jobs, date):
 
         # iterate over shifts
         for shift in job.shift_set.all():
-            if date and shift.begin.date() != date:
+            if date and shift.date() != date:
                 continue
 
             heading = h2(shift.time_with_day())
