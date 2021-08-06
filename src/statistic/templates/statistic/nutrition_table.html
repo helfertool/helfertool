@@ -1,0 +1,74 @@
+{% load i18n icons %}
+
+{# included in nutrition.html #}
+
+{# table with numbers #}
+<div class="row">
+    <div class="col-xs-12 col-xl-6">
+        <table class="table" aria-description="{% trans "Nutrition for helpers" %}">
+            <tr>
+                <th scope="row" class="w-50">{% trans "No preference" %}</th>
+                <td scope="row" class="w-50">{{ data.num_no_preference }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="w-50">{% trans "Vegetarian" %}</th>
+                <td scope="row" class="w-50">{{ data.num_vegetarian }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="w-50">{% trans "Vegan" %}</th>
+                <td scope="row" class="w-50">{{ data.num_vegan }}</td>
+            </tr>
+            <tr>
+                <th scope="row" class="w-50">{% trans "Other" %}</th>
+                <td scope="row" class="w-50">
+                    {{ data.num_other }}
+
+                    {% if data.helpers_other %}
+                        (<a href="" data-bs-toggle="modal"
+                            data-bs-target="#nutrition-{% if job %}{{ job.pk }}{% else %}total{% endif %}">{% trans "Show" %}</a>)
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+{# modal dialog with comments #}
+<div class="modal fade" id="nutrition-{% if job %}{{ job.pk }}{% else %}total{% endif %}" tabindex="-1"
+     aria-labelledby="nutrition-{% if job %}{{ job.pk }}{% else %}total{% endif %}-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nutrition-{% if job %}{{ job.pk }}{% else %}total{% endif %}-label">
+                    {% if job %}
+                        {% blocktrans trimmed with name=job.name %}
+                            Other nutrition for {{ name }}
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "Other nutrition for complete event" %}
+                    {% endif %}
+                </h5>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    {% for helper in data.helpers_other %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-12 col-md-4 py-1 text-break">
+                                <a href="{% url 'view_helper' event.url_name helper.pk %}">{{ helper.full_name }}</a>
+                            </div>
+                            <div class="col-12 col-md-8 py-1 text-break">
+                                {{ helper.comment | default:"-" }}
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "Close" %}</button>
+            </div>
+        </div>
+    </div>
+</div>

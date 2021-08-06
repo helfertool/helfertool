@@ -1,0 +1,10 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 %}
+
+{% block content %}
+    <h1>{% trans "Nutrition" %}</h1>
+
+    <div class="alert alert-danger" role="alert">
+        {% trans "For this event no nutrition prefences were collected." %}
+    </div>
+{% endblock %}

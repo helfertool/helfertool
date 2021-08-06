@@ -12,18 +12,18 @@ Parameters:
         <table class="table" aria-description="{% trans "Personal data of helper" %}">
             <tr>
                 <th scope="row" class="w-50">{% trans "Name" %}: </th>
-                <td class="w-50">{{ helper.firstname }} {{ helper.surname }}</td>
+                <td class="w-50 text-break">{{ helper.firstname }} {{ helper.surname }}</td>
             </tr>
 
             <tr>
                 <th scope="row">{% trans "E-Mail" %}: </th>
-                <td>{{ helper.email }}</td>
+                <td class="text-break">{{ helper.email }}</td>
             </tr>
 
             {% if helper.event.ask_phone %}
                 <tr>
                     <th scope="row">{% trans "Mobile phone" %}: </th>
-                    <td>{{ helper.phone }}</td>
+                    <td class="text-break">{{ helper.phone }}</td>
                 </tr>
             {% endif %}
 
@@ -50,7 +50,7 @@ Parameters:
 
             <tr>
                 <th scope="row">{% trans "Comment" %}: </th>
-                <td>{{ helper.comment | default:"-" }}</td>
+                <td class="text-break">{{ helper.comment | default:"-" }}</td>
             </tr>
 
             {% if show_internal_comment %}

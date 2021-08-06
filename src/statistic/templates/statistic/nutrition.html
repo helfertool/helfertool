@@ -1,0 +1,28 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons %}
+
+{% block content %}
+    <h1>{% trans "Nutrition" %}</h1>
+
+    {% if event_data %}
+        <h2>{% trans "Total" %}</h2>
+        {% include "statistic/nutrition_table.html" with data=event_data %}
+    {% endif %}
+
+    {% if job_data %}
+        <h2>{% trans "Per job" %}</h2>
+
+        <div class="alert alert-info">
+            <strong>{% trans "Info:" %}</strong>
+            {% blocktrans trimmed %}
+                Helpers and coordinators are counted for all their jobs.
+                If you sum up the numbers here, they might be higher than the total numbers.
+            {% endblocktrans %}
+        </div>
+
+        {% for job,data in job_data.items %}
+            <h3>{{ job.name }}</h3>
+            {% include "statistic/nutrition_table.html" with data=data job=job %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
