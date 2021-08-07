@@ -4,11 +4,12 @@
 {% block content %}
     <h1>{% trans "Subscribe to newsletter" %}</h1>
 
-    <p>{% trans "We have sent you a confirmation e-mail. Please finish the subscription by clicking on the link in this mail." %}</p>
+    <p>{% trans "We will notify you about future events. Thank you!" %}
 
-    <p>{% trans "In case you have already subscribed in the past, you will not receive a mail." %}</p>
-
-    <p>{% trans "Thank you!" %}</p>
+    <p>
+        {% trans "You changed your mind?" %}
+        <a href="{% url "news:unsubscribe" person.token %}" class="ms-1">{% icon "arrow-right" %} {% trans "Unsubscribe" %}</a>
+    </p>
 
     <p>
         <a href="{% url "index" %}" class="btn btn-outline-primary ">

@@ -1,6 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n %}
-{% load django_bootstrap5 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
     <h1>{% trans "Subscription deleted" %}</h1>
@@ -9,5 +8,11 @@
         {% blocktrans trimmed %}
             You will not receive further mails. Thank you for your support in the past!
         {% endblocktrans %}
+    </p>
+
+    <p>
+        <a href="{% url "index" %}" class="btn btn-outline-primary ">
+            {% icon "list" %} {% trans "Back to all events" %}
+        </a>
     </p>
 {% endblock %}

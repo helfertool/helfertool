@@ -4,17 +4,22 @@ import logging
 logger = logging.getLogger("helfertool.news")
 
 
-def news_add_email(email):
-    obj, created = Person.objects.get_or_create(email=email)
+def news_add_email(email, withevent=True):
+    """ Subscribe email address to newsletter.
+    The confirmation mail is not sent by this function.
 
-    logger.info("newsletter subscribe", extra={
-        'email': obj.email,
-        'withevent': True,
-    })
+    Returns the `Person` object and `created` flag.
+    """
+    person, created = Person.objects.get_or_create(
+        email=email,
+        defaults={"withevent": withevent},
+    )
 
+    if created:
+        # only log, if explicitly subscribed or really created
+        logger.info("newsletter subscribe", extra={
+            'email': person.email,
+            'withevent': withevent,
+        })
 
-def news_test_email(email):
-    try:
-        return Person.objects.get(email=email)
-    except Person.DoesNotExist:
-        return None
+    return person, created

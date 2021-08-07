@@ -3,6 +3,7 @@ import uuid
 
 MAIL_REGISTRATION = "registration"
 MAIL_EVENT = "event"
+MAIL_NEWS_CONFIRM = "newsconfirm"
 MAIL_NEWS = "news"
 
 # sonarcloud complains about the following regex, because it contains patterns that are also in queries
@@ -26,6 +27,13 @@ def new_tracking_event():
     return mail_uuid, mail_header
 
 
+def new_tracking_news_confirm(person):
+    mail_id = "{};{}".format(MAIL_NEWS_CONFIRM, person.token)
+    mail_header = {"X-Helfertool": mail_id}
+
+    return mail_header
+
+
 def new_tracking_news(person):
     mail_id = "{};{}".format(MAIL_NEWS, person.token)
     mail_header = {"X-Helfertool": mail_id}
@@ -41,7 +49,7 @@ def parse_tracking(value):
     msg_type, uuid_str = tmp
 
     # check message type
-    if msg_type not in (MAIL_EVENT, MAIL_NEWS, MAIL_REGISTRATION):
+    if msg_type not in (MAIL_EVENT, MAIL_NEWS, MAIL_NEWS_CONFIRM, MAIL_REGISTRATION):
         raise ValueError("Invalid header type")
 
     # check uuid

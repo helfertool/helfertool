@@ -20,13 +20,13 @@ def send_news_mails(first_language, append_english, subject, text, text_en, unsu
     prev_language = translation.get_language()
 
     count = 0
-    for person in Person.objects.all():
+    for person in Person.objects.filter(validated=True):
         # build mail text
         mail_text = ""
         tmp_unsubscribe_url = unsubsribe_url + str(person.token)
 
         if append_english:
-            mail_text += render_to_string("news/mail/english.txt")
+            mail_text += render_to_string("news/mail/newsletter_english.txt")
 
         mail_text += _mail_text_language(first_language, text, tmp_unsubscribe_url)
 
@@ -62,9 +62,9 @@ def _mail_text_language(language, text, unsubscribe_url):
     translation.activate(language)
 
     tmp = ""
-    tmp += render_to_string("news/mail/preface.txt")
+    tmp += render_to_string("news/mail/newsletter_preface.txt")
     tmp += text
-    tmp += render_to_string("news/mail/end.txt",
+    tmp += render_to_string("news/mail/newsletter_end.txt",
                             {'unsubscribe_url': unsubscribe_url})
 
     return tmp

@@ -1,7 +1,7 @@
 import registration
 import mail
 
-from .ids import parse_tracking, MAIL_EVENT, MAIL_NEWS, MAIL_REGISTRATION
+from .ids import parse_tracking, MAIL_EVENT, MAIL_NEWS, MAIL_NEWS_CONFIRM, MAIL_REGISTRATION
 
 import logging
 logger = logging.getLogger("helfertool.mail")
@@ -55,6 +55,7 @@ def _handle_registration(uuid_str, deliverynotification):
 _handlers = {
     MAIL_EVENT: _handle_event,
     MAIL_NEWS: None,
+    MAIL_NEWS_CONFIRM: None,
     MAIL_REGISTRATION: _handle_registration,
 }
 

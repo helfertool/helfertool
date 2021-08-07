@@ -1,0 +1,7 @@
+{% load i18n %}{% blocktrans %}Hello,
+
+you subscribed to the newsletter on {{ domain }}.
+
+Please confirm your subscription by clicking on the following link: {{ confirm_url }}
+
+Thanks for your support!{% endblocktrans %}
