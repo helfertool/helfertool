@@ -25,11 +25,11 @@
         </div>
 
         <div class="code">
-            <pre id="englishbelow">{% include "news/mail/english.txt" %}</pre>
+            <pre id="englishbelow">{% include "news/mail/newsletter_english.txt" %}</pre>
 
             {% for lang, name in form.languages %}
                 {% language lang %}
-                    <pre id="preface_{{ lang }}" class="mail_preface">{% include "news/mail/preface.txt" %}</pre>
+                    <pre id="preface_{{ lang }}" class="mail_preface">{% include "news/mail/newsletter_preface.txt" %}</pre>
                 {% endlanguage %}
             {% endfor %}
 
@@ -37,17 +37,17 @@
 
             {% for lang, name in form.languages %}
                 {% language lang %}
-                    <pre id="end_{{ lang }}" class="mail_end">{% include "news/mail/end.txt" %}</pre>
+                    <pre id="end_{{ lang }}" class="mail_end">{% include "news/mail/newsletter_end.txt" %}</pre>
                 {% endlanguage %}
             {% endfor %}
 
             <div id="block_en">
                 {% language "en" %}
-                    <pre>{% include "news/mail/preface.txt" %}</pre>
+                    <pre>{% include "news/mail/newsletter_preface.txt" %}</pre>
                 {% endlanguage %}
                 {% bootstrap_field form.text_en show_label=False %}
                 {% language "en" %}
-                    <pre>{% include "news/mail/end.txt" %}</pre>
+                    <pre>{% include "news/mail/newsletter_end.txt" %}</pre>
                 {% endlanguage %}
             </div>
         </div>

@@ -21,5 +21,11 @@
                 This mail address was already deleted.
             {% endblocktrans %}
         </p>
+
+        <p>
+            <a href="{% url "index" %}" class="btn btn-outline-primary ">
+                {% icon "list" %} {% trans "Back to all events" %}
+            </a>
+        </p>
     {% endif %}
 {% endblock %}

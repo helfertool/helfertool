@@ -153,7 +153,7 @@ msgstr "Login Seite"
 
 #: toolsettings/templates/toolsettings/templates.html:9
 msgid "Newsletter subscription"
-msgstr "Anmeldung Newsletter"
+msgstr "Anmeldung zum Newsletter"
 
 #: toolsettings/templates/toolsettings/templates.html:10
 msgid "Add user"

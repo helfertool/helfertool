@@ -43,7 +43,7 @@ def send(request):
 
         return redirect('news:send')
 
-    num_recipients = Person.objects.count()
+    num_recipients = Person.objects.filter(validated=True).count()
 
     context = {'num_recipients': num_recipients,
                'url': base_url,

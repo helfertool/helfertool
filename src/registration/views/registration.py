@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
 
 from helfertool.utils import nopermission
-from news.helper import news_test_email
 
 from ..utils import get_or_404
 from ..forms import RegisterForm, DeregisterForm, HelperForm
@@ -123,11 +122,8 @@ def form(request, event_url_name, link_pk=None):
 def registered(request, event_url_name, helper_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
-    news = news_test_email(helper.email)
-
     context = {'event': event,
-               'data': helper,
-               'news': news}
+               'data': helper}
     return render(request, 'registration/registered.html', context)
 
 
@@ -140,13 +136,14 @@ def validate(request, event_url_name, helper_pk):
         raise Http404()
 
     # validate
-    helper.validated = True
-    helper.save()
+    if not helper.validated:
+        helper.validated = True
+        helper.save()
 
-    logger.info("helper validated", extra={
-        'event': event,
-        'helper': helper,
-    })
+        logger.info("helper validated", extra={
+            'event': event,
+            'helper': helper,
+        })
 
     context = {'event': event,
                'helper': helper}
@@ -217,10 +214,7 @@ def update_personal(request, event_url_name, helper_pk):
 
         return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
 
-    news = news_test_email(helper.email)  # needed in template
-
     context = {'event': event,
                'data': helper,
-               'news': news,
                'personal_data_form': form}
     return render(request, 'registration/registered.html', context)

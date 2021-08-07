@@ -23,6 +23,10 @@ urlpatterns = [
         TemplateView.as_view(template_name='news/subscribe_done.html'),
         name='subscribe_done'),
 
+    url(r'^subscribe/(?P<token>[0-9a-f\-]*)/$',
+        views.subscribe_confirm,
+        name='subscribe_confirm'),
+
     # empty tokens are allowed since this is used to generate the link once
     # and add the specific tokens
     # empty tokens are handled in the view with an 404
