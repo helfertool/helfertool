@@ -521,6 +521,17 @@ CKEDITOR_CONFIGS = {
 # django-select2 config
 SELECT2_CACHE_BACKEND = 'select2'
 
+# django-icons config
+DJANGO_ICONS = {
+    'DEFAULTS': {
+        'renderer': 'fontawesome4',
+    },
+
+    'RENDERERS': {
+        'fontawesome4': 'FontAwesome4Renderer',
+    },
+}
+
 # application definition
 INSTALLED_APPS = (
     'helfertool',  # we override some default translations here, so put it first
