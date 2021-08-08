@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 15:10+0200\n"
+"POT-Creation-Date: 2021-08-08 16:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -160,66 +160,70 @@ msgstr "Übersicht"
 msgid "T-Shirts"
 msgstr "T-Shirts"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:164
+#: helfertool/templates/helfertool/admin_event_menu.html:160
+msgid "Nutrition"
+msgstr "Ernährung"
+
+#: helfertool/templates/helfertool/admin_event_menu.html:170
 msgid "Gifts and presence"
 msgstr "Geschenke und Anwesenheit"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:168
-#: helfertool/templates/helfertool/admin_event_menu.html:195
-#: helfertool/templates/helfertool/admin_event_menu.html:239
+#: helfertool/templates/helfertool/admin_event_menu.html:174
+#: helfertool/templates/helfertool/admin_event_menu.html:201
+#: helfertool/templates/helfertool/admin_event_menu.html:245
 #: helfertool/templates/helfertool/admin_general_menu.html:6
 #: helfertool/templates/helfertool/admin_general_menu.html:86
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:174
+#: helfertool/templates/helfertool/admin_event_menu.html:180
 msgid "Collected deposit"
 msgstr "Gesammeltes Pfand"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:179
+#: helfertool/templates/helfertool/admin_event_menu.html:185
 msgid "Missing T-shirts"
 msgstr "Fehlende T-Shirts"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:191
+#: helfertool/templates/helfertool/admin_event_menu.html:197
 msgid "Badges"
 msgstr "Badges"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:201
+#: helfertool/templates/helfertool/admin_event_menu.html:207
 msgid "Special badges"
 msgstr "Spezial Badges"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:207
+#: helfertool/templates/helfertool/admin_event_menu.html:213
 msgid "Generate"
 msgstr "Generieren"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:212
+#: helfertool/templates/helfertool/admin_event_menu.html:218
 msgctxt "Badges"
 msgid "Registration"
 msgstr "Registrierung"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:223
+#: helfertool/templates/helfertool/admin_event_menu.html:229
 msgid "Prerequisites"
 msgstr "Voraussetzungen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:226
+#: helfertool/templates/helfertool/admin_event_menu.html:232
 msgid "Settings and lists"
 msgstr "Einstellungen und Listen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:235
+#: helfertool/templates/helfertool/admin_event_menu.html:241
 #: helfertool/templates/helfertool/admin_general_menu.html:31
 msgid "Inventory"
 msgstr "Inventar"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:245
+#: helfertool/templates/helfertool/admin_event_menu.html:251
 msgctxt "Register item and badge"
 msgid "Register"
 msgstr "Eintragen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:249
+#: helfertool/templates/helfertool/admin_event_menu.html:255
 msgid "Take back"
 msgstr "Zurücknehmen"
 
-#: helfertool/templates/helfertool/admin_event_menu.html:253
+#: helfertool/templates/helfertool/admin_event_menu.html:259
 msgid "List"
 msgstr "Liste"
 

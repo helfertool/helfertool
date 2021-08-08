@@ -1,10 +1,12 @@
+from django.utils import timezone
+
 from .models import Person
 
 import logging
 logger = logging.getLogger("helfertool.news")
 
 
-def news_add_email(email, withevent=True):
+def news_add_email(email, withevent=False):
     """ Subscribe email address to newsletter.
     The confirmation mail is not sent by this function.
 
@@ -12,7 +14,9 @@ def news_add_email(email, withevent=True):
     """
     person, created = Person.objects.get_or_create(
         email=email,
-        defaults={"withevent": withevent},
+        defaults={
+            "withevent": withevent,
+        },
     )
 
     if created:
@@ -23,3 +27,23 @@ def news_add_email(email, withevent=True):
         })
 
     return person, created
+
+
+def news_validate_person(person):
+    """ Validate a person. """
+    person.validated = True
+    person.timestamp_validated = timezone.now()
+    person.save()
+
+    logger.info("newsletter validated", extra={
+        'email': person.email,
+    })
+
+
+def news_validate_helper(helper):
+    """ Validate a person, but based on the helper object.
+    The matching person objects are identified based on the mail address.
+    """
+    persons = Person.objects.filter(email=helper.email)
+    for p in persons:
+        news_validate_person(p)

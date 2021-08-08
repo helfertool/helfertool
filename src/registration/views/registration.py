@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from helfertool.utils import nopermission
+from news.helper import news_validate_helper
 
 from ..utils import get_or_404
 from ..forms import RegisterForm, DeregisterForm, HelperForm
@@ -140,6 +141,9 @@ def validate(request, event_url_name, helper_pk):
             'event': event,
             'helper': helper,
         })
+
+        # also validate newsletter subscription, if necessary
+        news_validate_helper(helper)
 
     context = {'event': event,
                'helper': helper}

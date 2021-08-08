@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 15:10+0200\n"
+"POT-Creation-Date: 2021-08-08 16:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,6 +17,84 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
+
+#: statistic/templates/statistic/nutrition.html:5
+#: statistic/templates/statistic/nutrition_not_active.html:5
+#: statistic/templates/statistic/overview.html:32
+msgid "Nutrition"
+msgstr "Ernährung"
+
+#: statistic/templates/statistic/nutrition.html:8
+#: statistic/templates/statistic/shirts.html:14
+msgid "Total"
+msgstr "Insgesamt"
+
+#: statistic/templates/statistic/nutrition.html:13
+msgid "Per job"
+msgstr "Pro Aufgabe"
+
+#: statistic/templates/statistic/nutrition.html:16
+#: statistic/templates/statistic/shirts.html:45
+msgid "Info:"
+msgstr "Hinweis:"
+
+#: statistic/templates/statistic/nutrition.html:17
+msgid ""
+"Helpers and coordinators are counted for all their jobs. If you sum up the "
+"numbers here, they might be higher than the total numbers."
+msgstr ""
+"Helfer:innen und Koordinator:innen werden für alle ihre Aufgaben gezählt. "
+"Wenn du die Zahlen hier aufsummierst, könnten sie also größer als die "
+"Gesamtzahlen sein."
+
+#: statistic/templates/statistic/nutrition_not_active.html:8
+msgid "For this event no nutrition prefences were collected."
+msgstr ""
+"Für diese Veranstaltung wurde die bevorzugte Ernährungsweise nicht "
+"gesammelt."
+
+#: statistic/templates/statistic/nutrition_table.html:8
+msgid "Nutrition for helpers"
+msgstr "Ernährungsweisen der Helfer:innen"
+
+#: statistic/templates/statistic/nutrition_table.html:10
+#: statistic/views/chart.py:243
+msgid "No preference"
+msgstr "Keine Präferenz"
+
+#. Translators: adjective
+#: statistic/templates/statistic/nutrition_table.html:14
+#: statistic/views/chart.py:245
+msgid "Vegetarian"
+msgstr "Vegetarisch"
+
+#: statistic/templates/statistic/nutrition_table.html:18
+#: statistic/views/chart.py:246
+msgid "Vegan"
+msgstr "Vegan"
+
+#: statistic/templates/statistic/nutrition_table.html:22
+#: statistic/views/chart.py:247
+msgid "Other"
+msgstr "Anderes"
+
+#: statistic/templates/statistic/nutrition_table.html:28
+msgid "Show"
+msgstr "Anzeigen"
+
+#: statistic/templates/statistic/nutrition_table.html:45
+#, python-format
+msgid "Other nutrition for %(name)s"
+msgstr "Andere Ernährungsweisen für %(name)s"
+
+#: statistic/templates/statistic/nutrition_table.html:49
+msgid "Other nutrition for complete event"
+msgstr "Andere Ernährungsweisen für gesamte Veranstaltung"
+
+#: statistic/templates/statistic/nutrition_table.html:70
+#: statistic/templates/statistic/shirts.html:119
+msgid "Close"
+msgstr "Schließen"
 
 #: statistic/templates/statistic/overview.html:5
 msgid "Statistics"
@@ -48,10 +126,6 @@ msgstr "Es gibt keine Schichten."
 msgid "Total number of shift slots"
 msgstr "Gesamtzahl an Schichtslots"
 
-#: statistic/templates/statistic/overview.html:32
-msgid "Nutrition"
-msgstr "Ernährung"
-
 #: statistic/templates/statistic/overview.html:42
 msgid "Timeline of registrations"
 msgstr "Zeitliche Entwicklung der Anmeldungen"
@@ -65,12 +139,7 @@ msgstr "T-Shirts"
 msgid "No data available."
 msgstr "Keine Daten verfügbar."
 
-#: statistic/templates/statistic/shirts.html:14
-msgid "Total"
-msgstr "Insgesamt"
-
 #: statistic/templates/statistic/shirts.html:18
-#: statistic/templates/statistic/shirts.html:55
 msgid "T-shirt sizes of all helpers and coordinators"
 msgstr "T-Shirt Größen aller Helfer:innen und Koordinator:innen"
 
@@ -80,7 +149,6 @@ msgid "Size"
 msgstr "Größe"
 
 #: statistic/templates/statistic/shirts.html:21
-#: statistic/templates/statistic/shirts.html:58
 msgid "Helpers and coordinators"
 msgstr "Helfer:innen und Koordinator:innen"
 
@@ -92,13 +160,17 @@ msgstr "Nur Koordinator:innen"
 msgid "Helpers (without coordinators)"
 msgstr "Helfer:innen (ohne Koordinator:innen)"
 
-#: statistic/templates/statistic/shirts.html:45
-msgid "Info:"
-msgstr "Hinweis:"
-
 #: statistic/templates/statistic/shirts.html:46
 msgid "The T-shirt of a helper is counted for the job with the first shift."
 msgstr "Das T-Shirt einer Helfer:in wird zur ersten Schicht gezählt."
+
+#: statistic/templates/statistic/shirts.html:55
+msgid "T-shirt sizes for job"
+msgstr "T-Shirt Größen für Aufgabe"
+
+#: statistic/templates/statistic/shirts.html:58 statistic/views/chart.py:183
+msgid "Helpers"
+msgstr "Helfer:innen"
 
 #: statistic/templates/statistic/shirts.html:80
 msgid "Sizes per shift"
@@ -109,10 +181,6 @@ msgstr "Größen pro Schicht"
 msgid "T-Shirt sizes for %(name)s"
 msgstr "T-Shirt Größen für %(name)s"
 
-#: statistic/templates/statistic/shirts.html:119
-msgid "Close"
-msgstr "Schließen"
-
 #: statistic/templates/statistic/shirts_not_active.html:8
 msgid "For this event no t-shirt sizes were collected."
 msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
@@ -120,10 +188,6 @@ msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 #: statistic/views/chart.py:127
 msgid "Number of helpers"
 msgstr "Anzahl Helfer:innen"
-
-#: statistic/views/chart.py:183
-msgid "Helpers"
-msgstr "Helfer:innen"
 
 #: statistic/views/chart.py:184
 msgid "Coordinators"
@@ -140,23 +204,6 @@ msgstr "Volle Slots"
 #: statistic/views/chart.py:213
 msgid "Vacant slots"
 msgstr "Leere Slots"
-
-#: statistic/views/chart.py:243
-msgid "No preference"
-msgstr "Keine Präferenz"
-
-#. Translators: adjective
-#: statistic/views/chart.py:245
-msgid "Vegetarian"
-msgstr "Vegetarisch"
-
-#: statistic/views/chart.py:246
-msgid "Vegan"
-msgstr "Vegan"
-
-#: statistic/views/chart.py:247
-msgid "Other"
-msgstr "Anderes"
 
 #~ msgid "Vegetarians"
 #~ msgstr "Vegetarier:innen"

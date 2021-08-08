@@ -245,7 +245,8 @@ class Helper(models.Model):
         text = text_template.render({'user': self,
                                      'event': event,
                                      'validate_url': validate_url,
-                                     'registered_url': registered_url})
+                                     'registered_url': registered_url,
+                                     'contact_mail': settings.CONTACT_MAIL})
 
         # header for mail tracking
         tracking_header = new_tracking_registration(self)
