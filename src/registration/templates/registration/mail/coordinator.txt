@@ -4,13 +4,15 @@ you were registered for the following jobs:{% endblocktrans %}
 {% for job in user.coordinated_jobs %}
  * {{ job|safe }}
 {% endfor %}
-{% if user.has_to_validate %}{% blocktrans %}Please confirm your mail address by clicking on the following link: {{ validate_url }}
+{% if user.has_to_validate %}{% blocktrans %}Please confirm your registration by clicking on the following link: {{ validate_url }}
 
 {% endblocktrans %}{% endif %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}
 
-{% trans "Your data is used according to the following data privacy statement, if you do not agree with it please veto per e-mail." %}
+{% blocktrans %}If you did not expect this e-mail, please contact {{ contact_mail }}.{% endblocktrans %}
 
 {% blocktrans %}Thanks for your support!{% endblocktrans %}
 
 -- 
+{% blocktrans %}Your data is used according to the following data privacy statement, if you do not agree with it please contact {{ contact_mail }}.{% endblocktrans %}
+
 {% textsetting "privacy" %}

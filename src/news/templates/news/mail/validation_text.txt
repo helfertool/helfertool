@@ -4,4 +4,6 @@ you subscribed to the newsletter on {{ domain }}.
 
 Please confirm your subscription by clicking on the following link: {{ confirm_url }}
 
+If that was not you, you can ignore this mail.
+
 Thanks for your support!{% endblocktrans %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 15:10+0200\n"
+"POT-Creation-Date: 2021-08-08 16:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,7 +42,7 @@ msgstr "Englischer Text"
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
-#: news/forms/remove.py:9 news/models/person.py:18
+#: news/forms/remove.py:9 news/forms/subscribe.py:13 news/models/person.py:39
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -50,28 +50,28 @@ msgstr "E-Mail"
 msgid "Unknown e-mail address"
 msgstr "Unbekannte E-Mail Adresse"
 
-#: news/forms/subscribe.py:17
-msgid "You subscribed already to the newsletter."
-msgstr "Du hast den Newsletter bereits abonniert."
-
-#: news/forms/subscribe.py:22
+#: news/forms/subscribe.py:20
 msgid "I agree with the data privacy statement."
 msgstr "Ich stimme der Datenschutzerklärung zu."
 
-#: news/forms/subscribe.py:23
+#: news/forms/subscribe.py:21
 msgid "Show"
 msgstr "Anzeigen"
 
-#: news/forms/subscribe.py:25
+#: news/forms/subscribe.py:23
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: news/models/person.py:28
+#: news/models/person.py:49
+msgid "Validation e-mail was confirmed (double opt-in)"
+msgstr "Bestätigungsmail wurde bestätigt (Double Opt-In)"
+
+#: news/models/person.py:59
 msgid "Helper subscribed during registration for event"
 msgstr ""
 "Helfer:in hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
 
-#: news/templates/news/mail/end.txt:2
+#: news/templates/news/mail/newsletter_end.txt:2
 #, python-format
 msgid ""
 "\n"
@@ -86,13 +86,42 @@ msgstr ""
 "\n"
 "Viele Grüße!\n"
 
-#: news/templates/news/mail/preface.txt:2
+#: news/templates/news/mail/newsletter_preface.txt:2
 msgid ""
 "\n"
 "Hello dear helpers,\n"
 msgstr ""
 "\n"
 "Hallo liebe Helfer:innen,\n"
+
+#: news/templates/news/mail/validation_subject.txt:1
+msgid "Newsletter subscription"
+msgstr "Anmeldung Newsletter"
+
+#: news/templates/news/mail/validation_text.txt:1
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"you subscribed to the newsletter on %(domain)s.\n"
+"\n"
+"Please confirm your subscription by clicking on the following link: "
+"%(confirm_url)s\n"
+"\n"
+"If that was not you, you can ignore this mail.\n"
+"\n"
+"Thanks for your support!"
+msgstr ""
+"Hallo,\n"
+"\n"
+"du hast dich auf %(domain)s für den Newsletter angemeldet.\n"
+"\n"
+"Bitte bestätige deine Anmeldung, indem zu auf folgenden Link klickst: "
+"%(confirm_url)s\n"
+"\n"
+"Falls das nicht du warst, kannst du diese E-Mail ignorieren.\n"
+"\n"
+"Danke für deine Unterstützung!"
 
 #: news/templates/news/remove.html:5
 msgid "Remove recipient"
@@ -115,6 +144,8 @@ msgid "Send"
 msgstr "Senden"
 
 #: news/templates/news/subscribe.html:5
+#: news/templates/news/subscribe_confirm.html:5
+#: news/templates/news/subscribe_done.html:5
 msgid "Subscribe to newsletter"
 msgstr "Newsletter abonnieren"
 
@@ -130,17 +161,44 @@ msgstr "OK"
 msgid "Subscribe"
 msgstr "Eintragen"
 
-#: news/templates/news/subscribe_done.html:5
-msgid "Subscribed to newsletter"
-msgstr "Newsletter abonniert"
+#: news/templates/news/subscribe_confirm.html:7
+msgid "We will notify you about future events. Thank you!"
+msgstr "Wir werden dich über zukünftige Veranstaltungen informieren. Danke!"
 
-#: news/templates/news/subscribe_done.html:7
-msgid "Thank you!"
-msgstr "Danke!"
+#: news/templates/news/subscribe_confirm.html:10
+msgid "You changed your mind?"
+msgstr "Du hast deine Meinung geändert?"
 
-#: news/templates/news/subscribe_done.html:11
+#: news/templates/news/subscribe_confirm.html:11
+#: news/templates/news/unsubscribe.html:16
+msgid "Unsubscribe"
+msgstr "Austragen"
+
+#: news/templates/news/subscribe_confirm.html:16
+#: news/templates/news/subscribe_done.html:15
+#: news/templates/news/unsubscribe.html:27
+#: news/templates/news/unsubscribe_done.html:15
 msgid "Back to all events"
 msgstr "Zurück zu allen Veranstaltungen"
+
+#: news/templates/news/subscribe_done.html:7
+msgid ""
+"We have sent you a confirmation e-mail. Please finish the subscription by "
+"clicking on the link in this mail."
+msgstr ""
+"Wir haben dir eine E-Mail zur Bestätigung gesendet. Bitte schließe deine "
+"Anmeldung ab, indem du auf den Link in der E-Mail klickst. "
+
+#: news/templates/news/subscribe_done.html:9
+msgid ""
+"In case you have already subscribed in the past, you will not receive a mail."
+msgstr ""
+"Falls du dich früher bereits eingetragen hast, wirst du keine E-Mail "
+"erhalten."
+
+#: news/templates/news/subscribe_done.html:11
+msgid "Thank you!"
+msgstr "Danke!"
 
 #: news/templates/news/unsubscribe.html:5
 msgid "Unsubscribe from newsletter"
@@ -153,19 +211,15 @@ msgstr ""
 "Keine weiteren E-Mails über bevorstehende Veranstaltungen an %(email)s "
 "senden?"
 
-#: news/templates/news/unsubscribe.html:16
-msgid "Unsubscribe"
-msgstr "Austragen"
-
 #: news/templates/news/unsubscribe.html:20
 msgid "This mail address was already deleted."
 msgstr "Diese E-Mail Adresse wurde bereits gelöscht."
 
-#: news/templates/news/unsubscribe_done.html:6
+#: news/templates/news/unsubscribe_done.html:5
 msgid "Subscription deleted"
 msgstr "Abo gelöscht"
 
-#: news/templates/news/unsubscribe_done.html:9
+#: news/templates/news/unsubscribe_done.html:8
 msgid ""
 "You will not receive further mails. Thank you for your support in the past!"
 msgstr ""
@@ -180,5 +234,12 @@ msgstr "Empfänger:in entfernt."
 msgid "Mails are being sent now."
 msgstr "E-Mails werden jetzt verschickt."
 
-#~ msgid "Thank you! We will notify you about future events."
-#~ msgstr "Danke! Wir werden dich über zukünftige Veranstaltungen informieren."
+#: news/views/subscribe.py:44
+msgid "The link is not valid anymore. Please subscribe again."
+msgstr "Der Link ist nicht mehr gültig. Bitte trage dich erneut ein."
+
+#~ msgid "You subscribed already to the newsletter."
+#~ msgstr "Du hast den Newsletter bereits abonniert."
+
+#~ msgid "Subscribed to newsletter"
+#~ msgstr "Newsletter abonniert"

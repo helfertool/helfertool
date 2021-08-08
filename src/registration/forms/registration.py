@@ -165,7 +165,7 @@ class RegisterForm(forms.ModelForm):
 
         # add to news
         if self.ask_news and self.cleaned_data.get('news'):
-            news_add_email(self.cleaned_data.get('email'))
+            news_add_email(self.cleaned_data.get('email'), withevent=True)
 
         return instance
 

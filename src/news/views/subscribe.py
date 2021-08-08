@@ -3,11 +3,10 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from ..forms import SubscribeForm
-from ..helper import news_add_email
+from ..helper import news_add_email, news_validate_person
 from ..models import Person
 
 import logging
@@ -48,13 +47,7 @@ def subscribe_confirm(request, token):
         raise Http404()
 
     if not person.validated:
-        person.validated = True
-        person.timestamp_validated = timezone.now()
-        person.save()
-
-        logger.info("newsletter validated", extra={
-            'email': person.email,
-        })
+        news_validate_person(person)
 
     context = {'person': person}
     return render(request, 'news/subscribe_confirm.html', context)

@@ -4,8 +4,10 @@ you registered for the following shifts:{% endblocktrans %}
 {% for shift in user.shifts.all %}
  * {{ shift|safe }}
 {% endfor %}
-{% if user.has_to_validate %}{% blocktrans %}Please confirm your mail address by clicking on the following link: {{ validate_url }}
+{% if user.has_to_validate %}{% blocktrans %}Please confirm your registration by clicking on the following link: {{ validate_url }}
 
 {% endblocktrans %}{% endif %}{% if event.changes_possible %}{% blocktrans with changes_until=event.changes_until %}You can view your data here and change it or deregister until {{ changes_until }}: {{ registered_url }}{%endblocktrans%}{% else %}{% blocktrans %}You can view your data here: {{ registered_url }}{%endblocktrans%}{% endif %}
+
+{% blocktrans %}If you did not expect this e-mail, please contact {{ contact_mail }}.{% endblocktrans %}
 
 {% blocktrans %}Thanks for your support!{% endblocktrans %}

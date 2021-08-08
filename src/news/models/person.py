@@ -16,6 +16,16 @@ logger = logging.getLogger("helfertool.news")
 
 
 class Person(models.Model):
+    """ Newsletter recipient.
+
+    Columns:
+        :token: Token for confirm/unsubscribe URLs
+        :email: Mail address
+        :timestamp: Timestamp of initial subscription (creation time of object)
+        :validated: Mail address validated (GDPR double opt-in)
+        :timestamp_validated: Timestamp of mail validation (GDPR double opt-in)
+        :withevent: Subscription during event registration or separately? (for statistics)
+    """
     class Meta:
         ordering = ['timestamp', ]
 

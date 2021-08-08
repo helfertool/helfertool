@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-06 15:10+0200\n"
+"POT-Creation-Date: 2021-08-08 16:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,29 +18,29 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: registration/export/excel.py:89 registration/models/helper.py:107
+#: registration/export/excel.py:88 registration/models/helper.py:107
 #: registration/templates/registration/partials/helpers_table.html:30
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:90 registration/models/helper.py:112
+#: registration/export/excel.py:89 registration/models/helper.py:112
 #: registration/templates/registration/partials/helpers_table.html:33
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:91 registration/models/event.py:150
+#: registration/export/excel.py:90 registration/models/event.py:149
 #: registration/models/helper.py:116
 #: registration/templates/registration/partials/helper_view_data.html:19
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:95 registration/export/pdf.py:44
+#: registration/export/excel.py:94 registration/export/pdf.py:44
 #: registration/models/helper.py:121
 #: registration/templates/registration/partials/helper_view_data.html:25
 msgid "Mobile phone"
 msgstr "Handynummer"
 
-#: registration/export/excel.py:99 registration/export/pdf.py:47
+#: registration/export/excel.py:98 registration/export/pdf.py:47
 #: registration/models/helper.py:139
 #: registration/templates/registration/partials/helper_view_data.html:32
 #: registration/templates/registration/partials/helpers_table.html:38
@@ -48,7 +48,7 @@ msgstr "Handynummer"
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:103 registration/models/helper.py:146
+#: registration/export/excel.py:102 registration/models/helper.py:146
 #: registration/templates/registration/partials/helper_view_data.html:46
 #: registration/templates/registration/partials/helpers_table.html:44
 #: registration/templates/registration/partials/helpers_table.html:89
@@ -56,13 +56,13 @@ msgid "Nutrition"
 msgstr "Ernährung"
 
 #. Translators: insert wbr tag on long words
-#: registration/export/excel.py:107
+#: registration/export/excel.py:106
 #: registration/templates/registration/partials/helpers_table.html:51
 #: registration/templates/registration/partials/helpers_table.html:96
 msgid "Food handling"
 msgstr "Gesundheits<wbr>belehrung"
 
-#: registration/export/excel.py:110 registration/export/pdf.py:49
+#: registration/export/excel.py:109 registration/export/pdf.py:49
 #: registration/models/helper.py:127
 #: registration/templates/registration/partials/helper_view_data.html:52
 #: registration/templates/registration/partials/helpers_table.html:56
@@ -70,7 +70,7 @@ msgstr "Gesundheits<wbr>belehrung"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: registration/export/excel.py:125 registration/export/pdf.py:83
+#: registration/export/excel.py:124 registration/export/pdf.py:83
 #: registration/templates/registration/admin/coordinators.html:5
 #: registration/templates/registration/admin/helpers_for_job.html:82
 msgid "Coordinators"
@@ -114,24 +114,24 @@ msgstr "Neues Datum"
 msgid "Months"
 msgstr "Monate"
 
-#: registration/forms/helper.py:125
+#: registration/forms/helper.py:121
 msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
 
-#: registration/forms/helper.py:129
+#: registration/forms/helper.py:125
 msgid "This shift if already full: {}"
 msgstr "Die Schicht ist bereits voll: {}"
 
-#: registration/forms/helper.py:199
+#: registration/forms/helper.py:195
 msgid "No shift selected"
 msgstr "Keine Schicht ausgewählt"
 
-#: registration/forms/helper.py:204
+#: registration/forms/helper.py:200
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keine Helfer:in aus der Aufgabe \"%(jobname)s\" löschen"
 
-#: registration/forms/helper.py:235
+#: registration/forms/helper.py:231
 msgid "Search term"
 msgstr "Suchbegriff"
 
@@ -253,141 +253,141 @@ msgstr "Badges"
 msgid "Role"
 msgstr "Rolle"
 
-#: registration/models/event.py:76
+#: registration/models/event.py:75
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: registration/models/event.py:77
+#: registration/models/event.py:76
 msgid "I do not want a T-Shirt"
 msgstr "Ich möchte kein T-Shirt"
 
-#: registration/models/event.py:78
+#: registration/models/event.py:77
 msgid "XS"
 msgstr "XS"
 
-#: registration/models/event.py:79
+#: registration/models/event.py:78
 msgid "S"
 msgstr "S"
 
-#: registration/models/event.py:80
+#: registration/models/event.py:79
 msgid "M"
 msgstr "M"
 
-#: registration/models/event.py:81
+#: registration/models/event.py:80
 msgid "L"
 msgstr "L"
 
-#: registration/models/event.py:82
+#: registration/models/event.py:81
 msgid "XL"
 msgstr "XL"
 
-#: registration/models/event.py:83
+#: registration/models/event.py:82
 msgid "XXL"
 msgstr "XXL"
 
-#: registration/models/event.py:84
+#: registration/models/event.py:83
 msgid "3XL"
 msgstr "3XL"
 
-#: registration/models/event.py:85
+#: registration/models/event.py:84
 msgid "XS (girly)"
 msgstr "XS (girly)"
 
-#: registration/models/event.py:86
+#: registration/models/event.py:85
 msgid "S (girly)"
 msgstr "S (girly)"
 
-#: registration/models/event.py:87
+#: registration/models/event.py:86
 msgid "M (girly)"
 msgstr "M (girly)"
 
-#: registration/models/event.py:88
+#: registration/models/event.py:87
 msgid "L (girly)"
 msgstr "L (girly)"
 
-#: registration/models/event.py:89
+#: registration/models/event.py:88
 msgid "XL (girly)"
 msgstr "XL (girly)"
 
-#: registration/models/event.py:90
+#: registration/models/event.py:89
 msgid "XXL (girly)"
 msgstr "XXL (girly)"
 
-#: registration/models/event.py:107
+#: registration/models/event.py:106
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: registration/models/event.py:114
+#: registration/models/event.py:113
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: registration/models/event.py:115
+#: registration/models/event.py:114
 msgid "May contain the following chars: a-zA-Z0-9."
 msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9."
 
-#: registration/models/event.py:119
+#: registration/models/event.py:118
 msgid "Date"
 msgstr "Datum"
 
-#: registration/models/event.py:120
+#: registration/models/event.py:119
 msgid "First day of event"
 msgstr "Erster Tag der Veranstaltung"
 
-#: registration/models/event.py:125
+#: registration/models/event.py:124
 msgid "Number of days"
 msgstr "Anzahl an Tage"
 
-#: registration/models/event.py:126
+#: registration/models/event.py:125
 msgid "Displayed on the main page"
 msgstr "Auf der Hauptseite sichtbar"
 
-#: registration/models/event.py:132
+#: registration/models/event.py:131
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models/event.py:133
+#: registration/models/event.py:132
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:138
-#: registration/templates/registration/admin/edit_event.html:77
+#: registration/models/event.py:137
+#: registration/templates/registration/admin/edit_event.html:76
 #: registration/templates/registration/partials/contact.html:5
 msgid "Contact"
 msgstr "Kontakt"
 
-#: registration/models/event.py:139
+#: registration/models/event.py:138
 msgid "Displayed at the bottom of all pages for the event."
 msgstr "Wird auf allen Seiten dieser Veranstaltung unten angezeigt."
 
-#: registration/models/event.py:144
+#: registration/models/event.py:143
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models/event.py:145
+#: registration/models/event.py:144
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models/event.py:151
+#: registration/models/event.py:150
 msgid "Used as Reply-to address for mails sent to helpers"
 msgstr "Wird als Antwortadresse für E-Mails an Helfer:innen verwendet"
 
-#: registration/models/event.py:159
+#: registration/models/event.py:158
 msgid "Logo"
 msgstr "Logo"
 
-#: registration/models/event.py:167
+#: registration/models/event.py:166
 msgid "Logo for Facebook"
 msgstr "Logo für Facebook"
 
-#: registration/models/event.py:168
+#: registration/models/event.py:167
 msgid "Best results with 1052 x 548 px."
 msgstr "Bestes Ergebnis mit 1052 x 548 px."
 
-#: registration/models/event.py:174
+#: registration/models/event.py:173
 msgid "Maximal overlapping of shifts"
 msgstr "Maximale Überlappung von Schichten"
 
-#: registration/models/event.py:175
+#: registration/models/event.py:174
 msgid ""
 "If two shifts overlap more than this value in minutes it is not possible to "
 "register for both shifts. Leave empty to disable this check."
@@ -396,15 +396,15 @@ msgstr ""
 "man sich nicht für beide Schichten anmelden. Wenn das Feld leer ist, wird "
 "die Überlappung nicht geprüft."
 
-#: registration/models/event.py:188
+#: registration/models/event.py:187
 msgid "Registration publicly visible"
 msgstr "Anmeldung öffentlich sichtbar"
 
-#: registration/models/event.py:192
+#: registration/models/event.py:191
 msgid "Deregistration and changes possible until"
 msgstr "Abmeldung und Änderungen möglich bis"
 
-#: registration/models/event.py:193
+#: registration/models/event.py:192
 msgid ""
 "Helpers can change their personal data and shifts until this date "
 "themselves. Leave emtpy to disable this."
@@ -412,65 +412,57 @@ msgstr ""
 "Helfer:innen können ihre persönlichen Daten und Schichten bis zu diesem "
 "Datum selbst bearbeiten. Leer lassen, um dies zu deaktivieren."
 
-#: registration/models/event.py:201
+#: registration/models/event.py:200
 msgid "Ask for phone number"
 msgstr "Nach Handynummer fragen"
 
-#: registration/models/event.py:206
+#: registration/models/event.py:205
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:211
+#: registration/models/event.py:210
 msgid "Ask for preferred nutrition"
 msgstr "Nach bevorzugter Ernährungsweise fragen"
 
-#: registration/models/event.py:216
+#: registration/models/event.py:215
 msgid "Helpers have to confirm to be full age"
 msgstr "Helfer:innen müssen bestätigen, volljährig zu sein"
 
-#: registration/models/event.py:221
+#: registration/models/event.py:220
 msgid "Ask if helper wants to be notified about new events"
 msgstr ""
 "Fragen, ob die Helfer:in über weitere Veranstaltungen informiert werden "
 "möchte"
 
-#: registration/models/event.py:226
+#: registration/models/event.py:225
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer:innen auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:231
-msgid ""
-"Registrations for public shifts must be validated by a link that is sent per "
-"mail"
-msgstr ""
-"Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
-"werden, der per E-Mail verschickt wird"
-
-#: registration/models/event.py:237
+#: registration/models/event.py:230
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
-#: registration/models/event.py:242
+#: registration/models/event.py:235
 msgid "Manage gifts and presence for helpers"
 msgstr "Geschenke und Anwesenheit der Helfer:innen verwalten"
 
-#: registration/models/event.py:247
+#: registration/models/event.py:240
 msgid "Use the inventory functionality"
 msgstr "Die Inventar Funktion verwenden"
 
-#: registration/models/event.py:252
+#: registration/models/event.py:245
 msgid "Manage prerequisites for helpers"
 msgstr "Voraussetzungen für Helfer:innen verwalten"
 
-#: registration/models/event.py:257
+#: registration/models/event.py:250
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert"
 
-#: registration/models/event.py:264
+#: registration/models/event.py:257
 msgid "Available T-shirt sizes"
 msgstr "Verfügbare T-Shirt Größen"
 
-#: registration/models/event.py:285
+#: registration/models/event.py:278
 msgid "The following sizes are used and therefore cannot be removed: {}"
 msgstr ""
 "Die folgenden Größen werden verwendet und können daher nicht entfernt "
@@ -557,7 +549,7 @@ msgstr "Anmeldezeit der Helfer:in"
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/helper.py:176
+#: registration/models/helper.py:181
 msgid "I agree with the data privacy statement."
 msgstr "Ich stimme der Datenschutzerklärung zu."
 
@@ -708,8 +700,8 @@ msgstr ""
 "innen hinzuzufügen."
 
 #: registration/templates/registration/admin/archive_event.html:5
-#: registration/templates/registration/admin/edit_event.html:197
-#: registration/templates/registration/admin/edit_event.html:207
+#: registration/templates/registration/admin/edit_event.html:196
+#: registration/templates/registration/admin/edit_event.html:206
 msgid "Archive event"
 msgstr "Veranstaltung archivieren"
 
@@ -722,7 +714,7 @@ msgstr ""
 "und Koordinator:innen gelöscht!"
 
 #: registration/templates/registration/admin/archive_event.html:10
-#: registration/templates/registration/admin/edit_event.html:201
+#: registration/templates/registration/admin/edit_event.html:200
 msgid ""
 "The number of registered helpers per shift and the number of coordinators "
 "are saved. All personal data will be deleted irrevocably."
@@ -778,8 +770,8 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: registration/templates/registration/admin/delete_event.html:5
-#: registration/templates/registration/admin/edit_event.html:214
-#: registration/templates/registration/admin/edit_event.html:219
+#: registration/templates/registration/admin/edit_event.html:213
+#: registration/templates/registration/admin/edit_event.html:218
 msgid "Delete event"
 msgstr "Veranstaltung löschen"
 
@@ -846,8 +838,8 @@ msgid "There are registered helpers for this shift!"
 msgstr "Es sind Helfer:innen für diese Schicht angemeldet!"
 
 #: registration/templates/registration/admin/duplicate_event.html:5
-#: registration/templates/registration/admin/edit_event.html:172
-#: registration/templates/registration/admin/edit_event.html:179
+#: registration/templates/registration/admin/edit_event.html:171
+#: registration/templates/registration/admin/edit_event.html:178
 msgid "Duplicate event"
 msgstr "Veranstaltung duplizieren"
 
@@ -931,33 +923,33 @@ msgstr "Allgemein"
 msgid "Registration"
 msgstr "Anmeldung"
 
-#: registration/templates/registration/admin/edit_event.html:60
+#: registration/templates/registration/admin/edit_event.html:59
 msgid "Texts"
 msgstr "Texte"
 
-#: registration/templates/registration/admin/edit_event.html:65
+#: registration/templates/registration/admin/edit_event.html:64
 msgid "Before registration"
 msgstr "Vor Anmeldung"
 
-#: registration/templates/registration/admin/edit_event.html:71
+#: registration/templates/registration/admin/edit_event.html:70
 msgid "After registration"
 msgstr "Nach Anmeldung"
 
-#: registration/templates/registration/admin/edit_event.html:118
+#: registration/templates/registration/admin/edit_event.html:117
 msgid "Logos"
 msgstr "Logos"
 
-#: registration/templates/registration/admin/edit_event.html:128
+#: registration/templates/registration/admin/edit_event.html:127
 msgid "Requested helper data"
 msgstr "Abgefragte Daten der Helfer:innen"
 
-#: registration/templates/registration/admin/edit_event.html:149
+#: registration/templates/registration/admin/edit_event.html:148
 msgid "Features"
 msgstr "Features"
 
-#: registration/templates/registration/admin/edit_event.html:167
+#: registration/templates/registration/admin/edit_event.html:166
 #: registration/templates/registration/admin/edit_event_admins.html:89
-#: registration/templates/registration/admin/edit_helper.html:30
+#: registration/templates/registration/admin/edit_helper.html:34
 #: registration/templates/registration/admin/edit_job.html:49
 #: registration/templates/registration/admin/edit_link.html:20
 #: registration/templates/registration/admin/edit_shift.html:52
@@ -967,32 +959,32 @@ msgstr "Features"
 msgid "Save"
 msgstr "Speichern"
 
-#: registration/templates/registration/admin/edit_event.html:174
+#: registration/templates/registration/admin/edit_event.html:173
 msgid "You can duplicate this event."
 msgstr "Du kannst diese Veranstaltung duplizieren."
 
-#: registration/templates/registration/admin/edit_event.html:176
+#: registration/templates/registration/admin/edit_event.html:175
 msgid "All settings are copied to the new event, but personal data is not."
 msgstr ""
 "Alle Einstellungen werden in die neue Veranstaltung kopiert, "
 "personenbezogene Daten nicht."
 
-#: registration/templates/registration/admin/edit_event.html:183
-#: registration/templates/registration/admin/edit_event.html:190
+#: registration/templates/registration/admin/edit_event.html:182
+#: registration/templates/registration/admin/edit_event.html:189
 #: registration/templates/registration/admin/move_event.html:5
 msgid "Move event"
 msgstr "Veranstaltung veschieben"
 
-#: registration/templates/registration/admin/edit_event.html:185
+#: registration/templates/registration/admin/edit_event.html:184
 msgid "You can move this event."
 msgstr "Du kannst diese Veranstaltung verschieben."
 
-#: registration/templates/registration/admin/edit_event.html:187
+#: registration/templates/registration/admin/edit_event.html:186
 msgid "The event with all shifts is moved to a new date."
 msgstr ""
 "Die Veranstaltung wird mit allen Schichten auf ein neues Datum verschoben."
 
-#: registration/templates/registration/admin/edit_event.html:199
+#: registration/templates/registration/admin/edit_event.html:198
 msgid ""
 "You can archive this event, this means that all coordinators and helpers are "
 "deleted."
@@ -1000,7 +992,7 @@ msgstr ""
 "Du kannst diese Veranstaltung archivieren, das bedeutet, dass alle "
 "Koordinator:innen und Helfer:innen gelöscht werden."
 
-#: registration/templates/registration/admin/edit_event.html:216
+#: registration/templates/registration/admin/edit_event.html:215
 msgid "You can delete this event including all jobs, shifts and helpers."
 msgstr ""
 "Du kannst diese Veranstaltung mit allen Aufgaben, Schichten und Helfer:innen "
@@ -1105,10 +1097,15 @@ msgstr ""
 "Bestätigungsmail an die neue Adresse geschickt."
 
 #: registration/templates/registration/admin/edit_helper.html:26
+#: registration/templates/registration/partials/registerform.html:63
 msgid "Note: After saving an e-mail will be sent to the given address."
 msgstr ""
 "Bitte beachten: Nach dem Speichern wird eine E-Mail an die angegeben Adresse "
 "geschickt."
+
+#: registration/templates/registration/admin/edit_helper.html:29
+msgid "Make sure that the coordinator is full age!"
+msgstr "Versichere dich, dass die Koordinator:in volljährig ist!"
 
 #: registration/templates/registration/admin/edit_job.html:6
 msgid "Edit job"
@@ -1583,11 +1580,11 @@ msgstr ""
 #: registration/templates/registration/mail/public.txt:7
 #, python-format
 msgid ""
-"Please confirm your mail address by clicking on the following link: "
+"Please confirm your registration by clicking on the following link: "
 "%(validate_url)s\n"
 "\n"
 msgstr ""
-"Bitte bestätige deine E-Mail Adresse, indem du auf folgenden Link klickst: "
+"Bitte bestätige deine Anmeldung, indem du auf folgenden Link klickst: "
 "%(validate_url)s\n"
 "\n"
 
@@ -1600,18 +1597,28 @@ msgstr "Du kannst deine Daten hier ansehen: %(registered_url)s"
 
 #: registration/templates/registration/mail/coordinator.txt:11
 #: registration/templates/registration/mail/internal.txt:11
-msgid ""
-"Your data is used according to the following data privacy statement, if you "
-"do not agree with it please veto per e-mail."
+#: registration/templates/registration/mail/public.txt:11
+#, python-format
+msgid "If you did not expect this e-mail, please contact %(contact_mail)s."
 msgstr ""
-"Deine Daten werden entsprechend der folgenden Datenschutzerklärung genutzt, "
-"widerspreche bitte per E-Mail wenn du damit nicht einverstanden bist."
+"Falls du diese E-Mail nicht erwartet hast, bitte wende dich an "
+"%(contact_mail)s."
 
 #: registration/templates/registration/mail/coordinator.txt:13
 #: registration/templates/registration/mail/internal.txt:13
-#: registration/templates/registration/mail/public.txt:11
+#: registration/templates/registration/mail/public.txt:13
 msgid "Thanks for your support!"
 msgstr "Danke für deine Unterstützung!"
+
+#: registration/templates/registration/mail/coordinator.txt:16
+#: registration/templates/registration/mail/internal.txt:16
+msgid ""
+"Your data is used according to the following data privacy statement, if you "
+"do not agree with it please contact {{ contact_mail }}."
+msgstr ""
+"Deine Daten werden entsprechend der folgenden Datenschutzerklärung genutzt, "
+"wende dich bitte an {{ contact_mail }} wenn du damit nicht einverstanden "
+"bist."
 
 #: registration/templates/registration/mail/internal.txt:1
 #, python-format
@@ -1697,12 +1704,6 @@ msgstr "Wir würden dich gerne über weitere Veranstaltungen informieren!"
 #: registration/templates/registration/partials/registerform.html:47
 msgid "Privacy statement for the newsletter"
 msgstr "Datenschutzerklärung für Newsletter"
-
-#: registration/templates/registration/partials/registerform.html:63
-msgid "Note: after saving an e-mail will be sent to the given address."
-msgstr ""
-"Bitte beachten: Nach dem Speichern wird eine E-Mail an die angegeben Adresse "
-"geschickt."
 
 #: registration/templates/registration/partials/registerform.html:66
 msgid "Make sure that the helper is full age!"
@@ -1818,12 +1819,12 @@ msgstr "Aufgabe gelöscht: %(name)s"
 msgid "Link deleted"
 msgstr "Link gelöscht"
 
-#: registration/views/registration.py:113
+#: registration/views/registration.py:114
 msgid "Sending the mail failed, but the registration was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Anmeldung wurde dennoch gespeichert."
 
-#: registration/views/registration.py:216
+#: registration/views/registration.py:213
 msgid "Sending the mail failed, but the change was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Änderung wurde dennoch gespeichert."
@@ -1831,6 +1832,18 @@ msgstr ""
 #: registration/views/shift.py:65
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid ""
+#~ "Registrations for public shifts must be validated by a link that is sent "
+#~ "per mail"
+#~ msgstr ""
+#~ "Anmeldungen für öffentliche Schichten müssen durch einen Link bestätigt "
+#~ "werden, der per E-Mail verschickt wird"
+
+#~ msgid "Note: after saving an e-mail will be sent to the given address."
+#~ msgstr ""
+#~ "Bitte beachten: Nach dem Speichern wird eine E-Mail an die angegeben "
+#~ "Adresse geschickt."
 
 #~ msgid "Ask, if helper is vegetarian"
 #~ msgstr "Fragen, ob die Helfer:in Vegetarier ist"
