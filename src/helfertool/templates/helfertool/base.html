@@ -1,4 +1,4 @@
-{% load static compress i18n django_bootstrap5 setting globalpermissions inventory %}
+{% load static compress i18n django_bootstrap5 toolsettings globalpermissions inventory %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -94,7 +94,7 @@
             </div>
         </nav>
 
-        {% setting "ANNOUNCEMENT_TEXT" as announcement %}
+        {% djangosetting "ANNOUNCEMENT_TEXT" as announcement %}
         {% if announcement %}
             <div class="container-fluid announcement">
                 {{ announcement }}
@@ -115,9 +115,9 @@
 
         <footer class="container-fluid footer">
             <p class="text-muted">
-                <a href="{% setting "PRIVACY_URL" %}" target="_blank">{% trans "Privacy" %}</a>
+                <a href="{% djangosetting "PRIVACY_URL" %}" target="_blank">{% trans "Privacy" %}</a>
                 |
-                <a href="{% setting "IMPRINT_URL" %}" target="_blank">{% trans "Imprint" %}</a>
+                <a href="{% djangosetting "IMPRINT_URL" %}" target="_blank">{% trans "Imprint" %}</a>
                 |
                 <a href="{% url "about" %}">{% trans "About this software" %}</a>
             </p>

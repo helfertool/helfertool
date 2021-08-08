@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n django_bootstrap5 icons setting %}
+{% load i18n django_bootstrap5 icons toolsettings %}
 
 {% block content %}
     <div class="errorpage text-center text-muted">
@@ -18,7 +18,7 @@
         </p>
 
         <p class="link">
-            <a href="mailto:{% setting "CONTACT_MAIL" %}" class="btn btn-outline-primary">
+            <a href="mailto:{% djangosetting "CONTACT_MAIL" %}" class="btn btn-outline-primary">
                 {% icon "envelope" %} {% trans "Contact" %}
             </a>
         </p>

@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n icons setting %}
+{% load i18n icons toolsettings %}
 
 {% block content %}
     <h1>{% trans "Events" %}</h1>
@@ -51,7 +51,7 @@
         </div>
     {% endif %}
 
-    {% setting "FEATURES_NEWSLETTER" as features_newsletter %}
+    {% djangosetting "FEATURES_NEWSLETTER" as features_newsletter %}
     {% if features_newsletter %}
     <div class="row mt-3">
         <div class="col-12">
