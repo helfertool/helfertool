@@ -1,7 +1,7 @@
-{% load i18n globalpermissions inventory setting %}
+{% load i18n globalpermissions inventory toolsettings %}
 
-{% setting "FEATURES_NEWSLETTER" as features_newsletter %}
-{% setting "FEATURES_INVENTORY" as features_inventory %}
+{% djangosetting "FEATURES_NEWSLETTER" as features_newsletter %}
+{% djangosetting "FEATURES_INVENTORY" as features_inventory %}
 <nav id="sidemenu">
     <div class="sidemenu-header">{% trans "Settings" %}</div>
 

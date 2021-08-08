@@ -1,5 +1,5 @@
 {% extends "helfertool/base.html" %}
-{% load i18n django_bootstrap5 setting static toolsettings %}
+{% load i18n django_bootstrap5 static toolsettings %}
 
 {% block content %}
     <h1>{% trans "About this software" %}</h1>
@@ -16,7 +16,7 @@
 
         <p>
             {% trans "More information about the Helfertool can be found here:" %}
-            <a href="{% setting "WEBSITE_URL" %}" target="_blank">{% setting "WEBSITE_URL" %}</a>
+            <a href="{% djangosetting "WEBSITE_URL" %}" target="_blank">{% djangosetting "WEBSITE_URL" %}</a>
         </p>
 
         {# logos #}

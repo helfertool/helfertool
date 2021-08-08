@@ -1,4 +1,4 @@
-{% load i18n icons globalpermissions setting %}
+{% load i18n icons globalpermissions toolsettings %}
 
 {% if not user.is_active %}
     <span class="text-danger">
@@ -19,7 +19,7 @@
     {% icon "user" %} {% trans "Add users" %}<br />
 {% endif %}
 
-{% setting "FEATURES_NEWSLETTER" as features_newsletter %}
+{% djangosetting "FEATURES_NEWSLETTER" as features_newsletter %}
 {% if features_newsletter and user|has_sendnews_group %}
     {% icon "mail-bulk" %} {% trans "Send newsletter" %}<br />
 {% endif %}

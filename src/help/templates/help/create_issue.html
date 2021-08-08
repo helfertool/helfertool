@@ -1,10 +1,10 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n django_bootstrap5 icons setting %}
+{% load i18n django_bootstrap5 icons toolsettings %}
 
 {% block content %}
     <h1>{% trans "Create issue" %}</h1>
 
-    {% setting "DOCS_URL" as docs_url %}
+    {% djangosetting "DOCS_URL" as docs_url %}
 
     <p>
         {% blocktrans trimmed %}

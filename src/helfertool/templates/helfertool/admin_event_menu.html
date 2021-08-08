@@ -1,8 +1,8 @@
-{% load i18n icons permissions setting %}
+{% load i18n icons permissions toolsettings %}
 
 {% has_access event "ACCESS_INVOLVED" as involved %}
 {% if involved %}
-    {% setting "DATABASE_LOGGING" as database_logging %}
+    {% djangosetting "DATABASE_LOGGING" as database_logging %}
 
     {% has_access event "ACCESS_EVENT_EDIT" as user_event_edit %}
     {% has_access event "ACCESS_EVENT_EDIT_JOBS" as user_event_edit_jobs %}

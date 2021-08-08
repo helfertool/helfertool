@@ -1,5 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n django_bootstrap5 icons globalpermissions lastlogin setting %}
+{% load i18n django_bootstrap5 icons toolsettings globalpermissions lastlogin %}
 
 {% block content %}
     <h1>{% trans "Users" %}</h1>
@@ -43,7 +43,7 @@
             {% trans "Add users" %}
         </a>
 
-        {% setting "FEATURES_NEWSLETTER" as features_newsletter %}
+        {% djangosetting "FEATURES_NEWSLETTER" as features_newsletter %}
         {% if features_newsletter %}
         <a href="?page={{ users.number }}&search={{ search }}&filter=sendnews" class="btn btn-sm my-1 btn-outline-primary {% if filter == "sendnews" %}active{% endif %}">
             {% trans "Send newsletter" %}
