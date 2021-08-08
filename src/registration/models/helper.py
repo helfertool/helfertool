@@ -160,8 +160,13 @@ class Helper(models.Model):
     )
 
     validated = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("E-Mail address was confirmed"),
+    )
+
+    timestamp_validated = models.DateTimeField(
+        blank=True,
+        null=True,
     )
 
     mail_failed = models.CharField(
@@ -288,10 +293,7 @@ class Helper(models.Model):
 
     @property
     def has_to_validate(self):
-        if not self.event:
-            return False
-
-        return self.event.mail_validation and not self.validated
+        return not self.validated
 
     @property
     def coordinated_jobs(self):

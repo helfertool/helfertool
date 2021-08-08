@@ -158,10 +158,6 @@ class RegisterForm(forms.ModelForm):
         instance = super(RegisterForm, self).save(False)
         instance.event = self.event
 
-        # if mail validation if necessary: helper is not validated
-        if self.event.mail_validation:
-            instance.validated = False
-
         if commit:
             instance.save()
 
