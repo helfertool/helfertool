@@ -52,7 +52,6 @@ class Event(models.Model):
         :ask_nutrition: ask, if the helper is vegetarian/vegan/...
         :show_public_numbers: show the number of current and maximal helpers on
                              the registration page
-        :mail_validation: helper must validate his mail address by a link
         :badge: use the badge creation system
     """
 
@@ -224,12 +223,6 @@ class Event(models.Model):
     show_public_numbers = models.BooleanField(
         default=True,
         verbose_name=_("Show number of helpers on registration page"),
-    )
-
-    mail_validation = models.BooleanField(
-        default=True,
-        verbose_name=_("Registrations for public shifts must be validated by "
-                       "a link that is sent per mail"),
     )
 
     badges = models.BooleanField(

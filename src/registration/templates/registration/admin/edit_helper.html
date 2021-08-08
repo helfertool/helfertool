@@ -24,6 +24,10 @@
         {% else %}
             <div class="alert alert-info" role="alert">
                 {% trans "Note: After saving an e-mail will be sent to the given address." %}
+
+                {% if event.ask_full_age %}
+                    <br/><br/><strong>{% trans "Make sure that the coordinator is full age!" %}</strong>
+                {% endif %}
             </div>
         {% endif %}
 

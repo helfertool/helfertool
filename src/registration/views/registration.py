@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from helfertool.utils import nopermission
@@ -128,16 +129,11 @@ def registered(request, event_url_name, helper_pk=None):
 
 
 def validate(request, event_url_name, helper_pk):
-    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk,
-                                           handle_duplicates=True)
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
-    # 404 if validation is not used
-    if not event.mail_validation:
-        raise Http404()
-
-    # validate
     if not helper.validated:
         helper.validated = True
+        helper.timestamp_validated = timezone.now()
         helper.save()
 
         logger.info("helper validated", extra={

@@ -67,19 +67,15 @@ class HelperForm(forms.ModelForm):
 
         instance.event = self.related_event
 
-        if self.related_event.mail_validation:
-            # new coordinator for job needs to validate mail address
-            if self.job:
-                instance.validated = False
-
-            # invalidate email if it was changed. sending out the new mail is done in the view
-            if self.old_email != instance.email:
-                instance.validated = False
-                instance.mail_failed = None
+        # invalidate email if it was changed. sending out the new mail is done in the view
+        if self.email_has_changed:
+            instance.validated = False
+            instance.mail_failed = None
 
         if commit:
             instance.save()
 
+        # update coordinators after save (if relevant)
         if self.job:
             self.job.coordinators.add(self.instance)
 
