@@ -484,6 +484,9 @@ else:
 
 BADGE_LANGUAGE_CODE = dict_get(config, 'de', 'language', 'badges')
 
+# newsletter
+NEWS_SUBSCRIBE_DEADLINE = dict_get(config, 3, 'subscribe_deadline', 'newsletter')
+
 # internal group names
 GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"

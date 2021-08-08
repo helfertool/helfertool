@@ -3,20 +3,24 @@ from __future__ import absolute_import
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.utils import translation
+from django.utils import translation, timezone
 
-from celery import shared_task
+from celery import task, shared_task
+
+from mail.tracking import new_tracking_news
 
 import smtplib
 import time
 
-from mail.tracking import new_tracking_news
-
-from .models import Person
+from dateutil.relativedelta import relativedelta
 
 
 @shared_task
 def send_news_mails(first_language, append_english, subject, text, text_en, unsubsribe_url):
+    # import on top would break setup_periodic_tasks in helfertool/celery.py as django is not fully loaded
+    # so we import it here
+    from news.models import Person
+
     prev_language = translation.get_language()
 
     count = 0
@@ -68,3 +72,17 @@ def _mail_text_language(language, text, unsubscribe_url):
                             {'unsubscribe_url': unsubscribe_url})
 
     return tmp
+
+
+@task
+def cleanup():
+    """ Delete newsletter subscriptions that were not validated for some time (3 days by default).
+
+    This tasks is executed every hour via celery beat.
+    """
+    # import on top would break setup_periodic_tasks in helfertool/celery.py as django is not fully loaded
+    # so we import it here
+    from news.models import Person
+
+    deadline = timezone.now() - relativedelta(days=settings.NEWS_SUBSCRIBE_DEADLINE)
+    Person.objects.filter(validated=False, timestamp__lte=deadline).delete()

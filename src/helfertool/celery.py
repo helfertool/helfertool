@@ -12,18 +12,23 @@ from celery.signals import task_failure
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "helfertool.settings")
 
+# init celery
 app = Celery('helfertool')
-
-# Using a string here means the worker will not have to
-# pickle the object when using Windows.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks()
 
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
+    # note: exceptions in this code are not displayed in celery
+    # for debugging, add own exception handling that prints all exceptions
+    #
+    # additionally, django is not fully loaded here. importing models will fail
     from mail.tasks import receive_mails
-    sender.add_periodic_task(settings.RECEIVE_INTERVAL, receive_mails.s(), name='receive mails')
+    sender.add_periodic_task(settings.RECEIVE_INTERVAL, receive_mails.s())
+
+    from news.tasks import cleanup
+    sender.add_periodic_task(3600, cleanup.s())
 
 
 @task_failure.connect
