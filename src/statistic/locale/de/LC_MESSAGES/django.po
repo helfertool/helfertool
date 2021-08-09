@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 16:10+0200\n"
+"POT-Creation-Date: 2021-08-09 18:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -50,8 +50,7 @@ msgstr ""
 #: statistic/templates/statistic/nutrition_not_active.html:8
 msgid "For this event no nutrition prefences were collected."
 msgstr ""
-"Für diese Veranstaltung wurde die bevorzugte Ernährungsweise nicht "
-"gesammelt."
+"Für diese Veranstaltung wurde die bevorzugte Ernährungsweise nicht gesammelt."
 
 #: statistic/templates/statistic/nutrition_table.html:8
 msgid "Nutrition for helpers"

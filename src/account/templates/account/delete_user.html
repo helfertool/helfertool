@@ -25,6 +25,10 @@
 
     <div class="alert alert-danger" role="alert">
         {% trans "Do you want to delete this user?" %}
+
+        {% if request.user == deleted_user %}
+            <br/><br/><strong>{% trans "Warning: This is your account!" %}</strong>
+        {% endif %}
     </div>
 
     <form action="" method="post">
