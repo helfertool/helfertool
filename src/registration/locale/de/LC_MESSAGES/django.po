@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-08 16:10+0200\n"
+"POT-Creation-Date: 2021-08-09 18:54+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -969,17 +969,17 @@ msgstr ""
 "Alle Einstellungen werden in die neue Veranstaltung kopiert, "
 "personenbezogene Daten nicht."
 
-#: registration/templates/registration/admin/edit_event.html:182
-#: registration/templates/registration/admin/edit_event.html:189
+#: registration/templates/registration/admin/edit_event.html:185
+#: registration/templates/registration/admin/edit_event.html:192
 #: registration/templates/registration/admin/move_event.html:5
 msgid "Move event"
 msgstr "Veranstaltung veschieben"
 
-#: registration/templates/registration/admin/edit_event.html:184
+#: registration/templates/registration/admin/edit_event.html:187
 msgid "You can move this event."
 msgstr "Du kannst diese Veranstaltung verschieben."
 
-#: registration/templates/registration/admin/edit_event.html:186
+#: registration/templates/registration/admin/edit_event.html:189
 msgid "The event with all shifts is moved to a new date."
 msgstr ""
 "Die Veranstaltung wird mit allen Schichten auf ein neues Datum verschoben."
@@ -1612,13 +1612,13 @@ msgstr "Danke für deine Unterstützung!"
 
 #: registration/templates/registration/mail/coordinator.txt:16
 #: registration/templates/registration/mail/internal.txt:16
+#, python-format
 msgid ""
 "Your data is used according to the following data privacy statement, if you "
-"do not agree with it please contact {{ contact_mail }}."
+"do not agree with it please contact %(contact_mail)s."
 msgstr ""
 "Deine Daten werden entsprechend der folgenden Datenschutzerklärung genutzt, "
-"wende dich bitte an {{ contact_mail }} wenn du damit nicht einverstanden "
-"bist."
+"wende dich bitte an %(contact_mail)s wenn du damit nicht einverstanden bist."
 
 #: registration/templates/registration/mail/internal.txt:1
 #, python-format
@@ -1750,8 +1750,8 @@ msgid "Add to calendar (iCal)"
 msgstr "Zum Kalender hinzufügen (iCal)"
 
 #: registration/templates/registration/validate.html:14
-msgid "Thank you! You confirmed your mail address and registration."
-msgstr "Danke! Du hast deine E-Mail Adresse und Anmeldung bestätigt."
+msgid "Thank you! You confirmed your registration."
+msgstr "Danke! Du hast deine Anmeldung bestätigt."
 
 #: registration/templates/registration/validate.html:19
 msgid "View my data"

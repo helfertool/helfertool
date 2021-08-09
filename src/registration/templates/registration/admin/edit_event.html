@@ -178,7 +178,10 @@
                 {% icon "copy" %} {% trans "Duplicate event" %}
             </a>
         </div>
+    {% endif %}
 
+    {# move and archive #}
+    {% if event and not event.archived %}
         <h2>{% trans "Move event" %}</h2>
         <div class="alert alert-dark" role="alert">
             <strong>{% trans "You can move this event." %}</strong>
@@ -189,10 +192,7 @@
                 {% icon "arrow-right" %} {% trans "Move event" %}
             </a>
         </div>
-    {% endif %}
 
-    {# archive #}
-    {% if event and not event.archived %}
         <h2>{% trans "Archive event" %}</h2>
         <div class="alert alert-danger" role="alert">
             <strong>{% trans "You can archive this event, this means that all coordinators and helpers are deleted." %}</strong>
