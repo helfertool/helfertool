@@ -44,6 +44,6 @@ def news_validate_helper(helper):
     """ Validate a person, but based on the helper object.
     The matching person objects are identified based on the mail address.
     """
-    persons = Person.objects.filter(email=helper.email)
+    persons = Person.objects.filter(email=helper.email, validated=False)
     for p in persons:
         news_validate_person(p)
