@@ -141,6 +141,10 @@ class EditUserForm(forms.ModelForm):
             )
 
     def save(self, commit=True):
+        # set is_staff to same value as is_superuser
+        self.instance.is_staff = self.cleaned_data.get("is_superuser")
+
+        # save
         instance = super(EditUserForm, self).save(commit)
 
         # logging for active flag
