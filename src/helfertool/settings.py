@@ -317,6 +317,9 @@ ALLOWED_HOSTS = dict_get(config, [], 'security', 'allowed_hosts')
 if dict_get(config, False, 'security', 'behind_proxy') or is_docker:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# enable X-XSS-Protection (although modern browsers do not support it anymore)
+SECURE_BROWSER_XSS_FILTER = True
+
 # cookies
 LANGUAGE_COOKIE_NAME = "lang"
 
@@ -575,6 +578,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 if oidc_config:
