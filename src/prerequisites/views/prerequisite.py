@@ -1,8 +1,9 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
-from django.contrib import messages
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
@@ -18,6 +19,7 @@ logger = logging.getLogger("helfertool.prerequisites")
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_prerequisite(request, event_url_name, prerequisite_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -65,6 +67,7 @@ def edit_prerequisite(request, event_url_name, prerequisite_pk=None):
 
 
 @login_required
+@never_cache
 def view_prerequisites(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -84,6 +87,7 @@ def view_prerequisites(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def delete_prerequisite(request, event_url_name, prerequisite_pk):
     event = get_object_or_404(Event, url_name=event_url_name)

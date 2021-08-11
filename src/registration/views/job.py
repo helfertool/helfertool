@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -16,6 +17,7 @@ logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_job(request, event_url_name, job_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -58,6 +60,7 @@ def edit_job(request, event_url_name, job_pk=None):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def delete_job(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
@@ -102,6 +105,7 @@ def delete_job(request, event_url_name, job_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def duplicate_job(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
@@ -134,6 +138,7 @@ def duplicate_job(request, event_url_name, job_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def duplicate_job_day(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
@@ -165,6 +170,7 @@ def duplicate_job_day(request, event_url_name, job_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def sort_job(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)

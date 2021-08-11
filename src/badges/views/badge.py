@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import serve_file, nopermission
 from registration.permissions import has_access, ACCESS_BADGES_EDIT_HELPER
@@ -10,6 +11,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 def edit_badge(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
@@ -37,6 +39,7 @@ def edit_badge(request, event_url_name, helper_pk):
 
 
 @login_required
+@never_cache
 def get_badge_photo(request, event_url_name, helper_pk):
     """ Download badge photo of normal badge.
 

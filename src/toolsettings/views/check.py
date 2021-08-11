@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import mail
 from django.core.mail.backends.smtp import EmailBackend
 from django.shortcuts import render
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from mail.receive.error import MailHandlerError
@@ -15,6 +16,7 @@ import ldap
 
 
 @login_required
+@never_cache
 def check(request):
     # must be superuser
     if not request.user.is_superuser:

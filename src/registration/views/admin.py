@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -9,12 +10,14 @@ from ..permissions import has_access, has_access_event_or_job, ACCESS_EVENT_EDIT
 
 
 @login_required
+@never_cache
 def admin(request):
     context = {}
     return render(request, 'registration/admin/index.html', context)
 
 
 @login_required
+@never_cache
 def jobs_and_shifts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -28,6 +31,7 @@ def jobs_and_shifts(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def coordinators(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)

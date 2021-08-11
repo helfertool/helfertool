@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.models import Event
@@ -13,6 +14,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 def settings(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -53,6 +55,7 @@ def settings(request, event_url_name):
 
 
 @login_required
+@never_cache
 def settings_advanced(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -85,6 +88,7 @@ def settings_advanced(request, event_url_name):
 
 
 @login_required
+@never_cache
 def default_template(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -108,6 +112,7 @@ def default_template(request, event_url_name):
 
 
 @login_required
+@never_cache
 def current_template(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 

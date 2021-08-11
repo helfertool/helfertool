@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -15,6 +16,7 @@ logger = logging.getLogger("helfertool.toolsettings")
 
 
 @login_required
+@never_cache
 def templates(request):
     # must be superuser
     if not request.user.is_superuser:
@@ -25,6 +27,7 @@ def templates(request):
 
 
 @login_required
+@never_cache
 def template_about(request):
     # must be superuser
     if not request.user.is_superuser:
@@ -50,6 +53,7 @@ def template_about(request):
 
 
 @login_required
+@never_cache
 def template_privacy(request):
     # must be superuser
     if not request.user.is_superuser:
@@ -110,6 +114,7 @@ def template_privacy(request):
 
 
 @login_required
+@never_cache
 def template_login(request):
     # must be superuser
     if not request.user.is_superuser:
@@ -135,6 +140,7 @@ def template_login(request):
 
 
 @login_required
+@never_cache
 def template_add_user(request):
     # must be superuser
     if not request.user.is_superuser:
@@ -160,6 +166,7 @@ def template_add_user(request):
 
 
 @login_required
+@never_cache
 def template_newsletter(request):
     # must be superuser
     if not request.user.is_superuser:

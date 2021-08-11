@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Sum
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
@@ -18,6 +19,7 @@ logger = logging.getLogger("helfertool.gifts")
 
 
 @login_required
+@never_cache
 def list(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -55,6 +57,7 @@ def list(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def list_deposit(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -82,6 +85,7 @@ def list_deposit(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def list_shirts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)

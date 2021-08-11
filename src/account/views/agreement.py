@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
+from django.views.decorators.cache import never_cache
 from django.utils import timezone
 
 from helfertool.utils import nopermission
@@ -15,6 +16,7 @@ logger = logging.getLogger("helfertool.account")
 
 
 @login_required
+@never_cache
 def check_user_agreement(request):
     today = datetime.datetime.today().date()
 
@@ -35,6 +37,7 @@ def check_user_agreement(request):
 
 
 @login_required
+@never_cache
 def handle_user_agreement(request, agreement_pk):
     agreement = get_object_or_404(Agreement, pk=agreement_pk)
 
@@ -67,6 +70,7 @@ def handle_user_agreement(request, agreement_pk):
 
 
 @login_required
+@never_cache
 def list_agreements(request):
     # must be superuser
     if not request.user.is_superuser:
@@ -80,6 +84,7 @@ def list_agreements(request):
 
 
 @login_required
+@never_cache
 def edit_agreement(request, agreement_pk=None):
     # must be superuser
     if not request.user.is_superuser:
@@ -117,6 +122,7 @@ def edit_agreement(request, agreement_pk=None):
 
 
 @login_required
+@never_cache
 def delete_agreement(request, agreement_pk):
     # must be superuser
     if not request.user.is_superuser:

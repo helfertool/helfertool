@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission, serve_file
 from registration.decorators import archived_not_available
@@ -12,6 +13,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 def list_specialbadges(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -32,6 +34,7 @@ def list_specialbadges(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_specialbadges(request, event_url_name, specialbadges_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -64,6 +67,7 @@ def edit_specialbadges(request, event_url_name, specialbadges_pk=None):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_specialbadges_template(request, event_url_name, specialbadges_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -94,6 +98,7 @@ def edit_specialbadges_template(request, event_url_name, specialbadges_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def delete_specialbadges(request, event_url_name, specialbadges_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -123,6 +128,7 @@ def delete_specialbadges(request, event_url_name, specialbadges_pk):
 
 
 @login_required
+@never_cache
 def get_specialbadges_photo(request, event_url_name, specialbadges_pk):
     """ Download badge photo of special badge.
 

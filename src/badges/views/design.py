@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission, serve_file
 from registration.decorators import archived_not_available
@@ -13,6 +14,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_design(request, event_url_name, design_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -45,6 +47,7 @@ def edit_design(request, event_url_name, design_pk=None):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def delete_design(request, event_url_name, design_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -74,6 +77,7 @@ def delete_design(request, event_url_name, design_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def get_design_bg(request, event_url_name, design_pk, side):
     if side not in ["front", "back"]:

@@ -3,6 +3,7 @@ from django.core.mail import mail_admins
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
@@ -52,6 +53,7 @@ class BadgeTaskResult:
 
 
 @login_required
+@never_cache
 @archived_not_available
 def index(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -78,6 +80,7 @@ def index(request, event_url_name):
     return render(request, 'badges/index.html', context)
 
 
+@never_cache
 def tasklist(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -123,6 +126,7 @@ def tasklist(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def warnings(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk)
@@ -146,6 +150,7 @@ def warnings(request, event_url_name, job_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def generate(request, event_url_name, job_pk=None, generate=None, skip_printed=True):
     """
@@ -212,6 +217,7 @@ def generate(request, event_url_name, job_pk=None, generate=None, skip_printed=T
 
 
 @login_required
+@never_cache
 @archived_not_available
 def failed(request, event_url_name, task_id):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -247,6 +253,7 @@ def failed(request, event_url_name, task_id):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def download(request, event_url_name, task_id):
     event = get_object_or_404(Event, url_name=event_url_name)

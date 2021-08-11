@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -18,6 +19,7 @@ logger = logging.getLogger("helfertool.account")
 
 
 @login_required
+@never_cache
 def add_user(request):
     # check permission
     if not (request.user.is_superuser or has_adduser_group(request.user)):
@@ -44,6 +46,7 @@ def add_user(request):
 
 
 @login_required
+@never_cache
 def view_user(request, user_pk=None):
     if user_pk:
         user = get_object_or_404(get_user_model(), pk=user_pk)
@@ -94,6 +97,7 @@ def view_user(request, user_pk=None):
 
 
 @login_required
+@never_cache
 def edit_user(request, user_pk):
     # check permission
     if not request.user.is_superuser:
@@ -121,6 +125,7 @@ def edit_user(request, user_pk):
 
 
 @login_required
+@never_cache
 def delete_user(request, user_pk):
     # check permission
     if not request.user.is_superuser:
@@ -148,6 +153,7 @@ def delete_user(request, user_pk):
 
 
 @login_required
+@never_cache
 def list_users(request):
     # check permission
     if not request.user.is_superuser:

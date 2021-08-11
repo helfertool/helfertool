@@ -1,6 +1,7 @@
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.models import Event, EventArchive, Helper
@@ -20,6 +21,7 @@ class JobShirts:
 
 
 @login_required
+@never_cache
 def shirts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
     shirt_choices = event.get_shirt_choices()

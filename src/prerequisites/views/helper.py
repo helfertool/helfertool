@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
@@ -12,6 +13,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 @archived_not_available
 def view_helpers_prerequisite(request, event_url_name, prerequisite_pk):
     event = get_object_or_404(Event, url_name=event_url_name)

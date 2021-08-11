@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -14,6 +15,7 @@ logger = logging.getLogger("helfertool.news")
 
 
 @login_required
+@never_cache
 def remove(request):
     # check if feature is available
     if not settings.FEATURES_NEWSLETTER:

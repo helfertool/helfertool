@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.decorators.cache import never_cache
 
 from badges.forms import BadgeBarcodeForm
 from helfertool.utils import nopermission
@@ -14,6 +15,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 @archived_not_available
 def take_back_item(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -55,6 +57,7 @@ def take_back_item(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def take_back_badge(request, event_url_name, item_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -99,6 +102,7 @@ def take_back_badge(request, event_url_name, item_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def take_back_direct(request, event_url_name, item_pk):
     event = get_object_or_404(Event, url_name=event_url_name)

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
@@ -13,6 +14,7 @@ from .utils import notactive
 
 
 @login_required
+@never_cache
 @archived_not_available
 def set_present(request, event_url_name, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)

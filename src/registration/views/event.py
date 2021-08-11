@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from account.templatetags.globalpermissions import has_addevent_group
 from helfertool.utils import nopermission, serve_file
@@ -21,6 +22,7 @@ logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
+@never_cache
 def edit_event(request, event_url_name=None):
     event = None
 
@@ -78,6 +80,7 @@ def edit_event(request, event_url_name=None):
 
 
 @login_required
+@never_cache
 def edit_event_admins(request, event_url_name=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -138,6 +141,7 @@ def edit_event_admins(request, event_url_name=None):
 
 
 @login_required
+@never_cache
 def delete_event(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -168,6 +172,7 @@ def delete_event(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def archive_event(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -196,6 +201,7 @@ def archive_event(request, event_url_name):
 
 
 @login_required
+@never_cache
 def duplicate_event(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -228,6 +234,7 @@ def duplicate_event(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def move_event(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -259,6 +266,7 @@ def move_event(request, event_url_name):
 
 
 @login_required
+@never_cache
 def past_events(request):
     if not request.user.is_superuser:
         return nopermission(request)

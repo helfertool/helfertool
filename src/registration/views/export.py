@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.utils.dateparse import parse_date
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -19,6 +20,7 @@ logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
+@never_cache
 @archived_not_available
 def export(request, event_url_name, filetype, job_pk=None, date_str=None):
     # check for valid export type

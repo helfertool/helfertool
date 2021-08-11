@@ -3,6 +3,7 @@ from django.db.models import Sum
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from badges.models import SpecialBadges
 from registration.decorators import archived_not_available
@@ -79,6 +80,7 @@ def _chart_doughnut(data):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def chart_timeline(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -155,6 +157,7 @@ def chart_timeline(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def chart_helpers(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -190,6 +193,7 @@ def chart_helpers(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def chart_shifts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -217,6 +221,7 @@ def chart_shifts(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def chart_nutrition(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
