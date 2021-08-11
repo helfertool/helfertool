@@ -4,6 +4,7 @@ from django.db.models.functions import TruncDate
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from gifts.forms import HelpersGiftsForm
 from helfertool.utils import nopermission
@@ -24,6 +25,7 @@ logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
+@never_cache
 def helpers(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -46,6 +48,7 @@ def helpers(request, event_url_name):
 
 
 @login_required
+@never_cache
 def helpers_for_job(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk=job_pk)
 
@@ -67,6 +70,7 @@ def helpers_for_job(request, event_url_name, job_pk):
 
 
 @login_required
+@never_cache
 def view_helper(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
@@ -148,6 +152,7 @@ def view_helper(request, event_url_name, helper_pk):
 
 
 @login_required
+@never_cache
 def edit_helper(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
@@ -182,6 +187,7 @@ def edit_helper(request, event_url_name, helper_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def add_helper(request, event_url_name, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
@@ -219,6 +225,7 @@ def add_helper(request, event_url_name, shift_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def add_coordinator(request, event_url_name, job_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk=job_pk)
@@ -252,6 +259,7 @@ def add_coordinator(request, event_url_name, job_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def add_helper_to_shift(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
@@ -284,6 +292,7 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def add_helper_as_coordinator(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
@@ -315,6 +324,7 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
 
 
 @login_required
+@never_cache
 def delete_helper(request, event_url_name, helper_pk, shift_pk,
                   show_all_shifts=False):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk, helper_pk=helper_pk)
@@ -356,6 +366,7 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
 
 
 @login_required
+@never_cache
 def delete_coordinator(request, event_url_name, helper_pk, job_pk):
     event, job, shift, helper = get_or_404(event_url_name,
                                            job_pk=job_pk,
@@ -400,6 +411,7 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def search_helper(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -433,6 +445,7 @@ def search_helper(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def resend_mail(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)

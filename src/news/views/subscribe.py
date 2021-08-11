@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.cache import never_cache
 
 from ..forms import SubscribeForm
 from ..helper import news_add_email, news_validate_person
@@ -13,6 +14,7 @@ import logging
 logger = logging.getLogger("helfertool.news")
 
 
+@never_cache
 def subscribe(request):
     # check if feature is available
     if not settings.FEATURES_NEWSLETTER:
@@ -31,6 +33,7 @@ def subscribe(request):
     return render(request, 'news/subscribe.html', context)
 
 
+@never_cache
 def subscribe_confirm(request, token):
     # check if feature is available
     if not settings.FEATURES_NEWSLETTER:

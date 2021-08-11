@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -16,6 +17,7 @@ logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
+@never_cache
 @archived_not_available
 def duplicates(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -39,6 +41,7 @@ def duplicates(request, event_url_name):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def merge(request, event_url_name, email):
     event = get_object_or_404(Event, url_name=event_url_name)

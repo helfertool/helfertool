@@ -1,7 +1,8 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
 from collections import OrderedDict
+from django.contrib.auth.decorators import login_required
 from django.db.models.functions import TruncDate
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -11,6 +12,7 @@ from ..permissions import has_access, ACCESS_INVOLVED
 
 
 @login_required
+@never_cache
 @archived_not_available
 def vacant_shifts(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)

@@ -5,6 +5,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from news.helper import news_validate_helper
@@ -67,6 +68,7 @@ def index(request, filter_old_events=True):
     return render(request, 'registration/index.html', context)
 
 
+@never_cache
 def form(request, event_url_name, link_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -121,6 +123,7 @@ def form(request, event_url_name, link_pk=None):
     return render(request, 'registration/form.html', context)
 
 
+@never_cache
 def registered(request, event_url_name, helper_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
@@ -129,6 +132,7 @@ def registered(request, event_url_name, helper_pk=None):
     return render(request, 'registration/registered.html', context)
 
 
+@never_cache
 def validate(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
@@ -150,6 +154,7 @@ def validate(request, event_url_name, helper_pk):
     return render(request, 'registration/validate.html', context)
 
 
+@never_cache
 def deregister(request, event_url_name, helper_pk, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name,
                                            helper_pk=helper_pk,
@@ -182,6 +187,7 @@ def deregister(request, event_url_name, helper_pk, shift_pk):
     return render(request, 'registration/deregister.html', context)
 
 
+@never_cache
 def deleted(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
@@ -189,6 +195,7 @@ def deleted(request, event_url_name):
     return render(request, 'registration/deleted.html', context)
 
 
+@never_cache
 def update_personal(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 

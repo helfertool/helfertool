@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import never_cache
 
 from ..forms import UnsubscribeForm
 from ..models import Person
@@ -10,6 +11,7 @@ import logging
 logger = logging.getLogger("helfertool.news")
 
 
+@never_cache
 def unsubscribe(request, token):
     # check if feature is available and token is there
     if not settings.FEATURES_NEWSLETTER or not token:

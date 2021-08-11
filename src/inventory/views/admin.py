@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.cache import never_cache
 
 from ..decorators import any_inventory_admin_required, inventory_admin_required
 from ..forms import InventoryForm, InventoryDeleteForm, ItemForm, ItemDeleteForm
@@ -8,6 +9,7 @@ from ..models import Inventory, Item
 
 
 @any_inventory_admin_required
+@never_cache
 def inventory_list(request):
     # check if feature is available
     if not settings.FEATURES_INVENTORY:
@@ -21,6 +23,7 @@ def inventory_list(request):
 
 
 @inventory_admin_required
+@never_cache
 def edit_inventory(request, inventory=None):
     # check if feature is available
     if not settings.FEATURES_INVENTORY:
@@ -39,6 +42,7 @@ def edit_inventory(request, inventory=None):
 
 
 @inventory_admin_required
+@never_cache
 def delete_inventory(request, inventory):
     # check if feature is available
     if not settings.FEATURES_INVENTORY:
@@ -58,6 +62,7 @@ def delete_inventory(request, inventory):
 
 
 @inventory_admin_required
+@never_cache
 def inventory_items(request, inventory):
     # check if feature is available
     if not settings.FEATURES_INVENTORY:
@@ -70,6 +75,7 @@ def inventory_items(request, inventory):
 
 
 @inventory_admin_required
+@never_cache
 def edit_item(request, inventory, item_pk=None):
     # check if feature is available
     if not settings.FEATURES_INVENTORY:
@@ -94,6 +100,7 @@ def edit_item(request, inventory, item_pk=None):
 
 
 @inventory_admin_required
+@never_cache
 def delete_item(request, inventory, item_pk):
     # check if feature is available
     if not settings.FEATURES_INVENTORY:

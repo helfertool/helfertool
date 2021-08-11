@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
@@ -30,6 +31,7 @@ def _validate_gift_set(event, gift_set_pk):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_gift_set(request, event_url_name, gift_set_pk=None):
     event = get_object_or_404(Event, url_name=event_url_name)
@@ -69,6 +71,7 @@ def edit_gift_set(request, event_url_name, gift_set_pk=None):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def delete_gift_set(request, event_url_name, gift_set_pk):
     event = get_object_or_404(Event, url_name=event_url_name)

@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
@@ -15,6 +16,7 @@ logger = logging.getLogger("helfertool.registration")
 
 
 @login_required
+@never_cache
 @archived_not_available
 def edit_shift(request, event_url_name, job_pk, shift_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, job_pk, shift_pk)
@@ -49,6 +51,7 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
 
 
 @login_required
+@never_cache
 @archived_not_available
 def delete_shift(request, event_url_name, job_pk, shift_pk):
     event, job, shift, helper = get_or_404(event_url_name, job_pk, shift_pk)
