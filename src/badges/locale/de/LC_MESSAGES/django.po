@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-09 18:54+0200\n"
+"POT-Creation-Date: 2021-08-12 18:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -374,11 +374,11 @@ msgstr "Nicht registrierte Badges"
 msgid "All badges"
 msgstr "Alle Badges"
 
-#: badges/templates/badges/index.html:89 badges/views/generate.py:198
+#: badges/templates/badges/index.html:89 badges/views/generate.py:203
 msgid "All unregistered badges"
 msgstr "Alle nicht registrierten Badges"
 
-#: badges/templates/badges/index.html:94 badges/views/generate.py:200
+#: badges/templates/badges/index.html:94 badges/views/generate.py:205
 msgid "Really all badges"
 msgstr "Wirklich alle Badges"
 
@@ -552,32 +552,32 @@ msgstr ""
 "Die aufgelisteten Personen haben mehr als eine Aufgabe, daher musst du in "
 "den Badge Einstellungen eine primäre Aufgabe auswählen."
 
-#: badges/views/generate.py:188
+#: badges/views/generate.py:193
 msgid "{} (only unregistered)"
 msgstr "{} (nicht registrierte Badges)"
 
-#: badges/views/generate.py:190
+#: badges/views/generate.py:195
 msgid "{} (all)"
 msgstr "{} (alle)"
 
-#: badges/views/generate.py:193
+#: badges/views/generate.py:198
 msgid "Special badges (only unregistered)"
 msgstr "Spezial Badges (nicht registrierte Badges)"
 
-#: badges/views/generate.py:195
+#: badges/views/generate.py:200
 msgid "Special badges (all)"
 msgstr "Spezial Badges (alle)"
 
-#: badges/views/generate.py:234
+#: badges/views/generate.py:240
 msgid "Internal Server Error. The admins were notified."
 msgstr "Interner Fehler. Die Admins wurden benachrichtigt."
 
-#: badges/views/register.py:34
+#: badges/views/register.py:36
 #, python-format
 msgid "Badge already printed: %(name)s"
 msgstr "Bagde bereits gedruckt: %(name)s"
 
-#: badges/views/register.py:39
+#: badges/views/register.py:41
 #, python-format
 msgid "Badge registered: %(name)s"
 msgstr "Badge registriert: %(name)s"

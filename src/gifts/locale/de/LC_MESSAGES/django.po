@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-09 18:54+0200\n"
+"POT-Creation-Date: 2021-08-12 18:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -299,16 +299,16 @@ msgstr "Alle auf abwesend setzen"
 msgid "Nobody is registered for this shift."
 msgstr "Niemand ist für diese Schicht angemeldet."
 
-#: gifts/views/gift.py:95
+#: gifts/views/gift.py:98
 #, python-format
 msgid "Gift deleted: %(name)s"
 msgstr "Geschenk gelöscht: %(name)s"
 
-#: gifts/views/present.py:33
+#: gifts/views/present.py:35
 msgid "Presence was saved"
 msgstr "Anwesenheit wurde gespeichert"
 
-#: gifts/views/set.py:91
+#: gifts/views/set.py:94
 #, python-format
 msgid "Gift set deleted: %(name)s"
 msgstr "Geschenkset gelöscht: %(name)s"

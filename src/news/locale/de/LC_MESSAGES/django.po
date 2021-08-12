@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-09 18:54+0200\n"
+"POT-Creation-Date: 2021-08-12 18:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -226,15 +226,15 @@ msgstr ""
 "Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
 "der Vergangenheit!"
 
-#: news/views/remove.py:30
+#: news/views/remove.py:32
 msgid "Recipient removed."
 msgstr "Empfänger:in entfernt."
 
-#: news/views/send.py:37
+#: news/views/send.py:39
 msgid "Mails are being sent now."
 msgstr "E-Mails werden jetzt verschickt."
 
-#: news/views/subscribe.py:44
+#: news/views/subscribe.py:47
 msgid "The link is not valid anymore. Please subscribe again."
 msgstr "Der Link ist nicht mehr gültig. Bitte trage dich erneut ein."
 
