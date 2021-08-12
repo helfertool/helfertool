@@ -287,6 +287,28 @@ class Event(models.Model):
                                          "therefore cannot be removed: {}".
                                          format(sizes))})
 
+    def save(self, *args, **kwargs):
+        # if we do the initial save, we do not have a PK yet, but we need the PK for the path of uploaded images
+        # we therefore remove the logos temporarily, save the model, add them again and save again
+        initial_save = False
+        if not self.pk:
+            initial_save = True
+
+            logo_original = self.logo
+            self.logo = None
+
+            logo_social_original = self.logo_social
+            self.logo_social = None
+
+        # save
+        super(Event, self).save(*args, **kwargs)
+
+        # if it was the initial save, add logos and save again
+        if initial_save:
+            self.logo = logo_original
+            self.logo_social = logo_social_original
+            self.save()
+
     def get_shirt_choices(self, internal=True):
         """
         Return the valid shirt sizes in the correct format for a field's choices parameter.
@@ -420,8 +442,8 @@ def pre_event_saved(sender, instance, using, **kwargs):
     instance._setup_flags()
 
 
-@receiver(post_save, sender=Event, dispatch_uid='event_saved')
-def event_saved(sender, instance, using, **kwargs):
+@receiver(post_save, sender=Event, dispatch_uid='post_event_saved')
+def post_event_saved(sender, instance, using, **kwargs):
     """ Add badge settings, badges and gifts if necessary AFTER event is saved. """
     if instance.badges:
         instance._setup_badge_settings()
