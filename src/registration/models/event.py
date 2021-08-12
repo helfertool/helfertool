@@ -32,6 +32,14 @@ def _logo_upload_path(instance, filename):
     return posixpath.join('public', event, 'logos', new_filename)
 
 
+def _validate_url_blocklist(value):
+    """ Validator for `url_name` parameter that blocks values that are part of other URLs like "subscribe". """
+    blocked = ["manage", "i18n", "select2", "login", "logout", "oidc", "help", "subscribe", "unsubscribe"]
+
+    if value.lower() in blocked:
+        raise ValidationError(_('%(value)s cannot be used here'), params={'value': value})
+
+
 class Event(models.Model):
     class Meta:
         ordering = ['name', 'url_name']
@@ -109,7 +117,7 @@ class Event(models.Model):
     url_name = models.CharField(
         max_length=200,
         unique=True,
-        validators=[RegexValidator('^[a-zA-Z0-9]+$')],
+        validators=[RegexValidator('^[a-zA-Z0-9]+$'), _validate_url_blocklist],
         verbose_name=_("Name for URL"),
         help_text=_("May contain the following chars: a-zA-Z0-9."),
     )
