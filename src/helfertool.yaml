@@ -154,9 +154,10 @@ authentication:
     #        client_id: "helfertool"
     #        client_secret: "<SECRET>"
     #
-    #        # Controls the session cookie SameSite - policy, forcing it to "Lax", which allows 302 redirects from a foreign domain.
-    #        # Set this to True, if your oidc provider resides on a different top level domain name than the helfertool. (defaults to False)
-    #        # is_foreign_tld: False
+    #        # Controls the session cookie SameSite attribute, forcing it to "Lax". This is necessary if your OIDC provider
+    #        # resides on a different top level domain name than the Helfertool (error message: "You are not allowed to login")
+    #        # Set it to true in this case.
+    #        thirdparty_domain: false
     #
     #    # Permissions based on claims
     #    claims:
