@@ -26,7 +26,7 @@ def handle_field(instance, fieldname, upload_to_func, dest):
             # rename file and first make sure that directory exists
             os.makedirs(os.path.dirname(new_path), settings.FILE_UPLOAD_DIRECTORY_PERMISSIONS, exist_ok=True)
             try:
-                os.rename(field.path, new_path)
+                shutil.copy(field.path, new_path)
             except FileNotFoundError:
                 print("WARNING: File not found: {}".format(field.name))
                 return
@@ -61,6 +61,6 @@ class Command(BaseCommand):
             handle_field(setting, "latex_template", _settings_upload_path, "private")
             setting.save()
 
-        # delete old directories (= files, which do not belong to an existing model)
+        # delete old directories (including files, which do not belong to an existing model)
         shutil.rmtree(settings.MEDIA_ROOT / "logos", ignore_errors=True)
         shutil.rmtree(settings.MEDIA_ROOT / "badges", ignore_errors=True)

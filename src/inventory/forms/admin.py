@@ -39,7 +39,7 @@ class ItemForm(forms.ModelForm):
 
         # check that barcode is unique for this inventory (not done by default since inventory is excluded)
         try:
-            existing = Item.objects.get(barcode=cleaned_data["barcode"], inventory=self.inventory)
+            existing = Item.objects.get(barcode=cleaned_data.get("barcode"), inventory=self.inventory)
             if not self.instance.pk or existing.pk != self.instance.pk:
                 self.add_error("barcode", _("Item with this barcode already exists in this inventory"))
         except Item.DoesNotExist:
