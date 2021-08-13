@@ -10,4 +10,14 @@ div.presence {
     label span {
         white-space: nowrap;
     }
+
+    // if field is disabled, the opacity is set to 0.5 by default
+    // we set the button to 0.6 and the label to 1, so it is better readable
+    .form-check-input:disabled {
+        opacity: 0.6;
+    }
+
+    .form-check-input[disabled] ~ .form-check-label, .form-check-input:disabled ~ .form-check-label {
+        opacity: 1;
+    }
 }
