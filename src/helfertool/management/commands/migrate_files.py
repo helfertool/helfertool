@@ -13,26 +13,24 @@ from badges.models.settings import BadgeSettings, _settings_upload_path
 def handle_field(instance, fieldname, upload_to_func, dest):
     field = getattr(instance, fieldname)
 
-    # check if there is a file
-    if field:
-        # is it already in public / private?
-        if not field.name.startswith(dest):
-            print("Moving {}".format(field.name))
+    # check if there is a file and it is not already migrated
+    if field and not field.name.startswith(dest):
+        print("Moving {}".format(field.name))
 
-            # determine new name
-            new_name = upload_to_func(instance, os.path.basename(field.name))
-            new_path = settings.MEDIA_ROOT / new_name
+        # determine new name
+        new_name = upload_to_func(instance, os.path.basename(field.name))
+        new_path = settings.MEDIA_ROOT / new_name
 
-            # rename file and first make sure that directory exists
-            os.makedirs(os.path.dirname(new_path), settings.FILE_UPLOAD_DIRECTORY_PERMISSIONS, exist_ok=True)
-            try:
-                shutil.copy(field.path, new_path)
-            except FileNotFoundError:
-                print("WARNING: File not found: {}".format(field.name))
-                return
+        # rename file and first make sure that directory exists
+        os.makedirs(os.path.dirname(new_path), settings.FILE_UPLOAD_DIRECTORY_PERMISSIONS, exist_ok=True)
+        try:
+            shutil.copy(field.path, new_path)
+        except FileNotFoundError:
+            print("WARNING: File not found: {}".format(field.name))
+            return
 
-            # set new name in DB
-            field.name = new_name
+        # set new name in DB
+        field.name = new_name
 
 
 class Command(BaseCommand):

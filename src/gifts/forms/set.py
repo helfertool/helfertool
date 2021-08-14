@@ -17,17 +17,17 @@ class GiftSetForm(forms.ModelForm):
         self.gift_form_ids = {}
 
         for gift in available_gifts:
-            id = "gift_{}".format(gift.pk)
-            self.gift_form_ids[gift.pk] = id
+            gift_id = "gift_{}".format(gift.pk)
+            self.gift_form_ids[gift.pk] = gift_id
 
             number = 0
             if self.instance:
                 number = self.instance.get_gift_num(gift)
 
-            self.fields[id] = forms.IntegerField(label=gift.name,
-                                                 required=False,
-                                                 min_value=0,
-                                                 initial=number)
+            self.fields[gift_id] = forms.IntegerField(label=gift.name,
+                                                      required=False,
+                                                      min_value=0,
+                                                      initial=number)
 
     def save(self, commit=True):
         instance = super(GiftSetForm, self).save(False)

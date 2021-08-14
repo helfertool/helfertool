@@ -30,7 +30,7 @@ class Iterator():
         self.__v = -1
 
 
-def cleanName(name):
+def clean_name(name):
     """ Cleans the name to be a valid sheet name in excel.
 
     The characters [ ] : * ? / \\ are removed.
@@ -66,7 +66,7 @@ def xlsx(buffer, event, jobs, date):
     # export jobs
     for job in jobs:
         # find unique worksheet name
-        job_name = cleanName(job.name)[:20]  # worksheet name must be <= 31 chars
+        job_name = clean_name(job.name)[:20]  # worksheet name must be <= 31 chars
 
         job_name_use = job_name
         counter = 2
@@ -122,8 +122,7 @@ def xlsx(buffer, event, jobs, date):
         if not date and job.coordinators.exists():
             worksheet.merge_range(row.next(), 0, row.get(), last_column,
                                   _("Coordinators"), bold)
-            add_helpers(worksheet, row, column, event, job,
-                        job.coordinators.all(), multiple_shifts)
+            add_helpers(worksheet, row, column, event, job, job.coordinators.all(), multiple_shifts)
 
         # show all shifts
         for shift in job.shift_set.order_by('begin'):
@@ -132,36 +131,33 @@ def xlsx(buffer, event, jobs, date):
 
             worksheet.merge_range(row.next(), 0, row.get(),
                                   last_column, shift.time(), bold)
-            add_helpers(worksheet, row, column, event, job,
-                        shift.helper_set.all(), multiple_shifts)
+            add_helpers(worksheet, row, column, event, job, shift.helper_set.all(), multiple_shifts)
 
     # close xlsx
     workbook.close()
 
 
-def add_helpers(worksheet, row, column, event, job, helpers,
-                multiple_shifts_format):
+def add_helpers(worksheet, row, column, event, job, helpers, multiple_shifts_format):
     for helper in helpers:
         row.next()
         column.reset()
 
         num_shifts = helper.shifts.count()
         num_jobs = len(helper.coordinated_jobs)
-        format = None
+        cell_format = None
         if num_shifts + num_jobs > 1:
-            format = multiple_shifts_format
+            cell_format = multiple_shifts_format
 
-        worksheet.write(row.get(), column.next(), escape(helper.firstname),
-                        format)
-        worksheet.write(row.get(), column.next(), escape(helper.surname),
-                        format)
-        worksheet.write(row.get(), column.next(), escape(helper.email), format)
+        worksheet.write(row.get(), column.next(), escape(helper.firstname), cell_format)
+        worksheet.write(row.get(), column.next(), escape(helper.surname), cell_format)
+        worksheet.write(row.get(), column.next(), escape(helper.email), cell_format)
         if event.ask_phone:
-            worksheet.write(row.get(), column.next(), escape(helper.phone), format)
+            worksheet.write(row.get(), column.next(), escape(helper.phone), cell_format)
         if event.ask_shirt:
-            worksheet.write(row.get(), column.next(), escape(str(helper.get_shirt_display())), format)
+            worksheet.write(row.get(), column.next(), escape(str(helper.get_shirt_display())), cell_format)
         if event.ask_nutrition:
-            worksheet.write(row.get(), column.next(), escape(str(helper.get_nutrition_short())), format)
+            worksheet.write(row.get(), column.next(), escape(str(helper.get_nutrition_short())), cell_format)
         if job.infection_instruction:
-            worksheet.write(row.get(), column.next(), escape(str(helper.get_infection_instruction_short())), format)
-        worksheet.write(row.get(), column.next(), escape(helper.comment), format)
+            worksheet.write(row.get(), column.next(), escape(str(helper.get_infection_instruction_short())),
+                            cell_format)
+        worksheet.write(row.get(), column.next(), escape(helper.comment), cell_format)

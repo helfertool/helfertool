@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-12 18:44+0200\n"
+"POT-Creation-Date: 2021-08-14 11:17+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -317,6 +317,10 @@ msgstr "Impressum"
 #: helfertool/templates/helfertool/base.html:122
 msgid "About this software"
 msgstr "Über diese Software"
+
+#: helfertool/templates/helfertool/forms/widgets/image_file_input.html:23
+msgid "Image preview"
+msgstr "Bild Vorschau"
 
 #: helfertool/templates/helfertool/login.html:12
 #, python-format
