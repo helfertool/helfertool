@@ -21,6 +21,7 @@
     {% has_access event "ACCESS_INVENTORY_EDIT" as user_inventory_edit %}
     {% has_access event "ACCESS_INVENTORY_HANDLE" as user_inventory_handle %}
     {% has_access event "ACCESS_STATISTICS_VIEW" as user_statistics_view %}
+    {% has_access event "ACCESS_CORONA_EDIT" as user_corona_edit %}
     {% has_access_event_or_job event "ACCESS_STATISTICS_VIEW" "ACCESS_JOB_VIEW_STATISTICS" as user_statistics_specific %}
 
 <nav id="sidemenu">
@@ -262,6 +263,17 @@
             </ul>
         </li>
         {% endif %}
+        {% endif %}
+
+        {% if event.corona and user_corona_edit %}
+        <li class="nav-item">
+            <p class="sidemenu-section">{% trans "COVID-19" %}</p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="{% url 'corona:settings' event.url_name %}" class="nav-link">{% trans "Settings" %}</a>
+                </li>
+            </ul>
+        </li>
         {% endif %}
     </ul>
 </nav>

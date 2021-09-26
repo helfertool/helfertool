@@ -62,6 +62,8 @@ class EventForm(forms.ModelForm):
             self.fields.pop('prerequisites')
         if not settings.FEATURES_INVENTORY:
             self.fields.pop('inventory')
+        if not settings.FEATURES_CORONA:
+            self.fields.pop('corona')
 
         # change labels of ckeditor fields: We only want to have the language name as label
         # everything else is in the template.
@@ -221,10 +223,12 @@ class EventDuplicateForm(EventForm):
         activate_gifts = self.instance.gifts
         activate_prerequisites = self.instance.prerequisites
         activate_inventory = self.instance.inventory
+        activate_corona = self.instance.corona
         self.instance.badges = False
         self.instance.gifts = False
         self.instance.prerequisites = False
         self.instance.inventory = False
+        self.instance.corona = False
 
         super(EventDuplicateForm, self).save(commit=True)  # we have to save
 
@@ -294,6 +298,12 @@ class EventDuplicateForm(EventForm):
         if activate_inventory:
             self.other_event.inventory_settings.duplicate(self.instance)
             self.instance.inventory = True
+            self.instance.save()
+
+        # corona
+        if activate_corona:
+            self.other_event.corona_settings.duplicate(self.instance)
+            self.instance.corona = True
             self.instance.save()
 
 

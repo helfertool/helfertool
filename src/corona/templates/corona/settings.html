@@ -1,0 +1,22 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons %}
+
+{% block content %}
+    <h1>{% trans "COVID-19 settings" %}</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                {% bootstrap_field form.rules layout="floating" %}
+            </div>
+        </div>
+
+        {% bootstrap_form_errors form %}
+
+        {% if not event.archived %}
+            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
+        {% endif %}
+    </form>
+{% endblock %}

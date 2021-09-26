@@ -431,6 +431,7 @@ FEATURES_BADGES = bool(dict_get(config, True, 'features', 'badges'))
 FEATURES_GIFTS = bool(dict_get(config, True, 'features', 'gifts'))
 FEATURES_PREREQUISITES = bool(dict_get(config, True, 'features', 'prerequisites'))
 FEATURES_INVENTORY = bool(dict_get(config, True, 'features', 'inventory'))
+FEATURES_CORONA = bool(dict_get(config, True, 'features', 'corona'))
 
 # Display Options
 # Maximum years of events to be displayed by default on the main page
@@ -567,6 +568,7 @@ INSTALLED_APPS = (
     'toolsettings.apps.ToolsettingsConfig',
     'prerequisites.apps.PrerequisitesConfig',
     'toollog.apps.ToollogConfig',
+    'corona.apps.CoronaConfig',
 )
 
 # middleware

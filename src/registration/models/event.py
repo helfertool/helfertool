@@ -10,6 +10,7 @@ from django_bleach.models import BleachField
 from multiselectfield import MultiSelectField
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
+from corona.models import CoronaSettings
 from gifts.models import HelpersGifts
 from gifts.models.giftsettings import GiftSettings
 from inventory.models import InventorySettings
@@ -253,6 +254,11 @@ class Event(models.Model):
         verbose_name=_("Manage prerequisites for helpers"),
     )
 
+    corona = models.BooleanField(
+        default=False,
+        verbose_name=_("Collect additional data for COVID-19 contact tracing"),
+    )
+
     archived = models.BooleanField(
         default=False,
         verbose_name=_("Event is archived"),
@@ -345,6 +351,13 @@ class Event(models.Model):
             return None
 
     @property
+    def corona_settings(self):
+        try:
+            return self.coronasettings
+        except AttributeError:
+            return None
+
+    @property
     def all_coordinators(self):
         return self.helper_set.filter(job__isnull=False).distinct()
 
@@ -375,6 +388,7 @@ class Event(models.Model):
             ["FEATURES_GIFTS", "gifts"],
             ["FEATURES_PREREQUISITES", "prerequisites"],
             ["FEATURES_INVENTORY", "inventory"],
+            ["FEATURES_CORONA", "corona"],
         ]
 
         for flag in flags:
@@ -435,6 +449,13 @@ class Event(models.Model):
         if not self.inventory_settings:
             InventorySettings.objects.create(event=self)
 
+    def _setup_corona_settings(self):
+        """
+        Setup corona settings for the event (called from post_save handler).
+        """
+        if not self.corona_settings:
+            CoronaSettings.objects.create(event=self)
+
 
 @receiver(pre_save, sender=Event, dispatch_uid='pre_event_saved')
 def pre_event_saved(sender, instance, using, **kwargs):
@@ -453,6 +474,9 @@ def post_event_saved(sender, instance, using, **kwargs):
 
     if instance.inventory:
         instance._setup_inventory_settings()
+
+    if instance.corona:
+        instance._setup_corona_settings()
 
 
 @receiver(post_delete, sender=Event, dispatch_uid='event_deleted')

@@ -144,7 +144,7 @@
         {% endif %}
         </div>
 
-        {% if form.badges or form.gifts or form.prerequisites or form.inventory %}
+        {% if form.badges or form.gifts or form.prerequisites or form.inventory or form.corona %}
             <h2>{% trans "Features" %}</h2>
             {% if form.badges %}
                 {% bootstrap_field form.badges %}
@@ -160,6 +160,10 @@
 
             {% if form.inventory %}
                 {% bootstrap_field form.inventory %}
+            {% endif %}
+
+            {% if form.corona %}
+                {% bootstrap_field form.corona %}
             {% endif %}
         {% endif %}
 

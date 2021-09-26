@@ -52,6 +52,7 @@ urlpatterns += [
     url(r'', include('mail.urls')),
     url(r'', include('prerequisites.urls')),
     url(r'', include('toollog.urls')),
+    url(r'', include('corona.urls')),
 ]
 
 # for development

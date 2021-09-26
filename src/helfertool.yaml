@@ -253,6 +253,7 @@ features:
     gifts: true
     prerequisites: true
     inventory: true
+    corona: true
 
 # Custom URLs, mail addresses, ...
 customization:
