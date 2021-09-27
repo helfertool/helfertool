@@ -21,6 +21,9 @@ language:
     # Timezone
     timezone: "Europe/Berlin"
 
+    # Default country for Corona contact tracing (ISO-3166-1)
+    country: "DE"
+
 # Database connection
 database:
     # SQLite

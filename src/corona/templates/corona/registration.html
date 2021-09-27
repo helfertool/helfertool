@@ -1,0 +1,41 @@
+{% load i18n django_bootstrap5 icons %}
+
+<div class="alert alert-primary">
+    <h4 class="alert-heading">{% trans "COVID-19 measures" %} {% icon "head-side-mask" %}</h4>
+
+    {% if event.corona_settings.rules == "2G" %}
+        <p>
+            {% blocktrans trimmed %}
+                At this event the <strong>2G</strong> regulation is applied.
+                This means that you must be either vaccinated or recovered to have access.
+                The proof will be checked and the entrance and access without it is not possible.
+            {% endblocktrans %}
+        </p>
+
+        <p><strong>{% trans "A negative test is not sufficient!" %}</strong></p>
+    {% elif event.corona_settings.rules == "3G" %}
+        <p>
+            {% blocktrans trimmed %}
+                At this event the <strong>3G</strong> regulation is applied.
+                This means that you must be either vaccinated, recovered or provide a negative official test to have access.
+                The proof will be checked and the entrance and access without it is not possible.
+            {% endblocktrans %}
+        </p>
+    {% endif %}
+
+    <p>{% trans "We are required to collect address and contact information for contact tracking purposes." %}</p>
+
+    {% bootstrap_field form.street layout="floating" required_css_class="" %}
+    <div class="row">
+        <div class="col-lg-4">
+            {% bootstrap_field form.zip layout="floating" required_css_class="" %}
+        </div>
+
+        <div class="col-lg-8">
+            {% bootstrap_field form.city layout="floating" required_css_class="" %}
+        </div>
+    </div>
+    {% bootstrap_field form.country layout="floating" required_css_class="" %}
+
+    {% bootstrap_field form.agreed layout="floating" required_css_class="" wrapper_class="" %}
+</div>

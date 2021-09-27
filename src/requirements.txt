@@ -7,6 +7,7 @@ django-axes
 django-bleach
 django-bootstrap5
 django-ckeditor
+django-countries
 django-icons
 django-libsass
 django-modeltranslation

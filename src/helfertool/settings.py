@@ -77,6 +77,8 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+DEFAULT_COUNTRY = dict_get(config, 'DE', 'language', 'country')
+
 # database
 DATABASES = {
     'default': {
@@ -554,6 +556,7 @@ INSTALLED_APPS = (
     'django_bootstrap5',
     'django_icons',
     'django_select2',
+    'django_countries',
     'ckeditor',
     'compressor',
     'registration.apps.RegistrationConfig',
