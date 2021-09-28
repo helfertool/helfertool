@@ -25,17 +25,5 @@
 
     <p>{% trans "We are required to collect address and contact information for contact tracking purposes." %}</p>
 
-    {% bootstrap_field form.street layout="floating" required_css_class="" %}
-    <div class="row">
-        <div class="col-lg-4">
-            {% bootstrap_field form.zip layout="floating" required_css_class="" %}
-        </div>
-
-        <div class="col-lg-8">
-            {% bootstrap_field form.city layout="floating" required_css_class="" %}
-        </div>
-    </div>
-    {% bootstrap_field form.country layout="floating" required_css_class="" %}
-
-    {% bootstrap_field form.agreed layout="floating" required_css_class="" wrapper_class="" %}
+    {% include "corona/partials/dataform.html" with form=form %}
 </div>
