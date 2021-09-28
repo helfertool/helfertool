@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-28 21:22+0200\n"
+"PO-Revision-Date: 2021-09-28 21:34+0200\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: corona/forms/data.py:24
+msgid "You have to provide correct data."
+msgstr "Du musst korrekte Daten angeben."
+
+#: corona/models/data.py:22
+msgid "Street and house number"
+msgstr "Straße und Hausnummer"
+
+#: corona/models/data.py:27
+msgid "ZIP code"
+msgstr "PLZ"
+
+#: corona/models/data.py:32
+msgid "City"
+msgstr "Stadt"
+
+#: corona/models/data.py:36
+msgid "Country"
+msgstr "Land"
+
+#: corona/models/data.py:41
+msgid "I assure that the provided data is correct."
+msgstr "Ich versichere, dass die angegebenen Daten korrekt sind."
+
+#: corona/models/settings.py:12
+msgid "2G"
+msgstr "2G"
+
+#: corona/models/settings.py:13
+msgid "3G"
+msgstr "3G"
+
+#: corona/models/settings.py:25
+msgid "Admission rules"
+msgstr "Einlassregeln"
+
+#: corona/templates/corona/edit_helper.html:5
+#: corona/templates/corona/view_helper.html:5
+#, python-format
+msgid "Contact tracing for %(name)s"
+msgstr "Kontaktverfolgung für %(name)s"
+
+#: corona/templates/corona/edit_helper.html:14
+#: corona/templates/corona/settings.html:19
+msgid "Save"
+msgstr "Speichern"
+
+#: corona/templates/corona/not_active.html:5
+msgid "COVID-19"
+msgstr "COVID-19"
+
+#: corona/templates/corona/not_active.html:8
+msgid "The COVID-19 contact tracing is not actived."
+msgstr "Die COVID-19 Kontaktverfolgung ist nicht aktiv."
+
+#: corona/templates/corona/registration.html:4
+msgid "COVID-19 measures"
+msgstr "COVID-19 Maßnahmen"
+
+#: corona/templates/corona/registration.html:8
+msgid ""
+"At this event the <strong>2G</strong> regulation is applied. This means that "
+"you must be either vaccinated or recovered to have access. The proof will be "
+"checked at the entrance and access without it is not possible."
+msgstr ""
+"Bei dieser Veranstaltung gilt die <strong>2G</strong> Regelung. Das "
+"bedeutet, dass du entweder geimpft oder genesen sein musst, um Zutritt zu "
+"erhalten. Der Nachweis wird am Eingang kontrolliert und der Zutritt ist ohne "
+"diesen nicht möglich."
+
+#: corona/templates/corona/registration.html:15
+msgid "A negative test is not sufficient!"
+msgstr "Ein negativer Test ist nicht ausreichend!"
+
+#: corona/templates/corona/registration.html:18
+msgid ""
+"At this event the <strong>3G</strong> regulation is applied. This means that "
+"you must be either vaccinated, recovered or provide a negative official test "
+"to have access. The proof will be checked at the entrance and access without "
+"it is not possible."
+msgstr ""
+"Bei dieser Veranstaltung gilt die <strong>3G</strong> Regelung. Das "
+"bedeutet, dass du entweder geimpft oder genesen sein oder einen negativen "
+"offiziellen Test vorlegen musst, um Zutritt zu erhalten. Der Nachweis wird "
+"am Eingang kontrolliert und der Zutritt ist ohne diesen nicht möglich."
+
+#: corona/templates/corona/registration.html:26
+msgid ""
+"We are required to collect address and contact information for contact "
+"tracking purposes."
+msgstr ""
+"Wir sind verpflichtet, Adresse und Kontaktinformationen zum Zwecke der "
+"Kontaktverfolgung zu erfassen."
+
+#: corona/templates/corona/settings.html:5
+msgid "COVID-19 settings"
+msgstr "COVID-19 Einstellungen"
+
+#: corona/templates/corona/view_helper.html:10
+msgid "Personal data of helper"
+msgstr "Persönliche Daten der Helfer:in"
+
+#: corona/templates/corona/view_helper.html:12
+msgid "Name"
+msgstr "Name"
+
+#: corona/templates/corona/view_helper.html:17
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: corona/templates/corona/view_helper.html:23
+msgid "Mobile phone"
+msgstr "Handynummer"
+
+#: corona/templates/corona/view_helper.html:30
+msgid "Address"
+msgstr "Adresse"
+
+#: corona/templates/corona/view_helper.html:32
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: corona/templates/corona/view_helper.html:47
+msgid "Add data"
+msgstr "Daten hinzufügen"
+
+#: corona/templates/corona/view_helper.html:52
+msgid "COVID-19 contact tracing was not enabled while the helper registered."
+msgstr ""
+"Die COVID-19 Kontaktverfolgung war nicht aktiv als sich die Helfer:in "
+"angemeldet hat."
+
+#: corona/templates/corona/view_helper.html:58
+msgid "Back"
+msgstr "Zurück"
