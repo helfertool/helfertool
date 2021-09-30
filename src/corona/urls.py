@@ -12,6 +12,14 @@ urlpatterns = [
         views.cleanup,
         name='cleanup'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/corona/data/$',
+        views.data,
+        name='data'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/corona/missing/$',
+        views.missing,
+        name='missing'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/corona/$',
         views.view_helper,
         name='view_helper'),

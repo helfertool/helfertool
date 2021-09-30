@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
+from registration.decorators import archived_not_available
 from registration.models import Event
 from registration.permissions import has_access, ACCESS_CORONA_EDIT
 
@@ -17,6 +18,7 @@ logger = logging.getLogger("helfertool.corona")
 
 @login_required
 @never_cache
+@archived_not_available
 def cleanup(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
