@@ -2,8 +2,9 @@
 {% load i18n django_bootstrap5 icons %}
 
 {% block content %}
-    <h1>{% trans "COVID-19 settings" %}</h1>
+    <h1>{% trans "COVID-19 contact tracing" %}</h1>
 
+    <h2>{% trans "Settings" %}</h2>
     <form action="" method="post">
         {% csrf_token %}
 
@@ -16,7 +17,19 @@
         {% bootstrap_form_errors form %}
 
         {% if not event.archived %}
-            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
+            <button type="submit" class="btn btn-outline-primary mb-3">{% icon "save" %} {% trans "Save" %}</button>
         {% endif %}
     </form>
+
+    <h2>{% trans "Delete data" %}</h2>
+    <div class="alert alert-danger" role="alert">
+        <strong>{% trans "You can delete the addresses of the helpers as soon as you do not need it anymore." %}</strong><br/>
+
+        {% trans "All other data is not deleted." %}<br/>
+
+        <a href="{% url 'corona:cleanup' event.url_name %}" class="btn btn-outline-danger mt-3" role="button">
+            {% icon "archive" %} {% trans "Delete data" %}
+        </a>
+    </div>
+
 {% endblock %}
