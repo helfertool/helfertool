@@ -12,7 +12,7 @@ def excel_export(event):
     # create excel file in memory
     buffer = BytesIO()
     workbook = xlsxwriter.Workbook(buffer)
-    worksheet = workbook.add_worksheet(_("Corona contact tracing"))
+    worksheet = workbook.add_worksheet(_("Contact tracing data"))
     bold = workbook.add_format({'bold': True})
 
     row = Iterator()

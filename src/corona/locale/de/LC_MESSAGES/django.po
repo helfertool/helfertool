@@ -7,36 +7,68 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-28 21:22+0200\n"
-"PO-Revision-Date: 2021-09-28 21:34+0200\n"
+"POT-Creation-Date: 2021-10-02 16:27+0200\n"
+"PO-Revision-Date: 2021-10-02 16:35+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.4.2\n"
+
+#: corona/export.py:15
+msgid "Contact tracing data"
+msgstr "Daten zur Kontaktverfolgung"
+
+#: corona/export.py:23
+msgid "First name"
+msgstr "Vorname"
+
+#: corona/export.py:24
+msgid "Surname"
+msgstr "Nachname"
+
+#: corona/export.py:25 corona/templates/corona/view_helper.html:17
+msgid "E-Mail"
+msgstr "E-Mail"
+
+#: corona/export.py:26 corona/templates/corona/view_helper.html:23
+msgid "Mobile phone"
+msgstr "Handynummer"
+
+#: corona/export.py:27 corona/models/data.py:22
+msgid "Street and house number"
+msgstr "Straße und Hausnummer"
+
+#: corona/export.py:28
+msgid "ZIP"
+msgstr "PLZ"
+
+#: corona/export.py:29 corona/models/data.py:32
+msgid "City"
+msgstr "Stadt"
+
+#: corona/export.py:30 corona/models/data.py:36
+msgid "Country"
+msgstr "Land"
+
+#: corona/export.py:31
+msgid "Shifts and jobs"
+msgstr "Schichten und Aufgaben"
+
+#: corona/export.py:54
+msgid "Coordinator"
+msgstr "Koordinator:in"
 
 #: corona/forms/data.py:24
 msgid "You have to provide correct data."
 msgstr "Du musst korrekte Daten angeben."
 
-#: corona/models/data.py:22
-msgid "Street and house number"
-msgstr "Straße und Hausnummer"
-
 #: corona/models/data.py:27
 msgid "ZIP code"
 msgstr "PLZ"
-
-#: corona/models/data.py:32
-msgid "City"
-msgstr "Stadt"
-
-#: corona/models/data.py:36
-msgid "Country"
-msgstr "Land"
 
 #: corona/models/data.py:41
 msgid "I assure that the provided data is correct."
@@ -54,6 +86,52 @@ msgstr "3G"
 msgid "Admission rules"
 msgstr "Einlassregeln"
 
+#: corona/templates/corona/cleanup.html:5
+msgid "Delete contact tracing data"
+msgstr "Daten zur Kontaktverfolgung löschen"
+
+#: corona/templates/corona/cleanup.html:8
+msgid "Do you want to remove the contact tracing data for this event?"
+msgstr ""
+"Willst du die Daten zur Kontaktverfolgung für diese Veranstaltung löschen?"
+
+#: corona/templates/corona/cleanup.html:14
+msgid "Delete"
+msgstr "Löschen"
+
+#: corona/templates/corona/data.html:5
+msgid "COVID-19 contact tracing"
+msgstr "COVID-19 Kontaktverfolgung"
+
+#: corona/templates/corona/data.html:10
+#, python-format
+msgid "Contact tracing data missing for %(num_missing)s helpers!"
+msgstr "Daten zur Kontaktverfolgung fehlen für %(num_missing)s Helfer:innen!"
+
+#: corona/templates/corona/data.html:18
+msgid "Show"
+msgstr "Anzeigen"
+
+#: corona/templates/corona/data.html:24
+msgid "Contact tracing data is available for all helpers."
+msgstr "Daten zur Kontaktverfolgung sind für alle Helfer:innen verfügbar."
+
+#: corona/templates/corona/data.html:31
+msgid ""
+"You can export names, contact information and addresses of all helpers here. "
+"The export does not contain special badges."
+msgstr ""
+"Du kannst Namen, Kontaktdaten und Adressen aller Helfer:innen hier "
+"exportieren. Der Export enthält keine Spezial Badges."
+
+#: corona/templates/corona/data.html:33
+msgid "Please use this data responsibly."
+msgstr "Bitte gehe verantwortungsvoll mit den Daten um."
+
+#: corona/templates/corona/data.html:37
+msgid "Export"
+msgstr "Exportieren"
+
 #: corona/templates/corona/edit_helper.html:5
 #: corona/templates/corona/view_helper.html:5
 #, python-format
@@ -61,9 +139,17 @@ msgid "Contact tracing for %(name)s"
 msgstr "Kontaktverfolgung für %(name)s"
 
 #: corona/templates/corona/edit_helper.html:14
-#: corona/templates/corona/settings.html:19
+#: corona/templates/corona/settings.html:20
 msgid "Save"
 msgstr "Speichern"
+
+#: corona/templates/corona/missing.html:5
+msgid "Missing COVID-19 contact tracing"
+msgstr "Fehlende Daten zur Kontaktverfolgung"
+
+#: corona/templates/corona/missing.html:14
+msgid "No data missing."
+msgstr "Keine fehlenden Daten."
 
 #: corona/templates/corona/not_active.html:5
 msgid "COVID-19"
@@ -116,6 +202,27 @@ msgstr ""
 msgid "COVID-19 settings"
 msgstr "COVID-19 Einstellungen"
 
+#: corona/templates/corona/settings.html:7
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: corona/templates/corona/settings.html:25
+#: corona/templates/corona/settings.html:32
+msgid "Delete data"
+msgstr "Daten löschen"
+
+#: corona/templates/corona/settings.html:27
+msgid ""
+"You can delete the addresses of the helpers as soon as you do not need it "
+"anymore."
+msgstr ""
+"Du kannst die Adressen der Helfer:innen löschen, sobald sie nicht mehr "
+"benötigt werden."
+
+#: corona/templates/corona/settings.html:29
+msgid "All other data is not deleted."
+msgstr "Alle anderen Daten werden nicht gelöscht."
+
 #: corona/templates/corona/view_helper.html:10
 msgid "Personal data of helper"
 msgstr "Persönliche Daten der Helfer:in"
@@ -123,14 +230,6 @@ msgstr "Persönliche Daten der Helfer:in"
 #: corona/templates/corona/view_helper.html:12
 msgid "Name"
 msgstr "Name"
-
-#: corona/templates/corona/view_helper.html:17
-msgid "E-Mail"
-msgstr "E-Mail"
-
-#: corona/templates/corona/view_helper.html:23
-msgid "Mobile phone"
-msgstr "Handynummer"
 
 #: corona/templates/corona/view_helper.html:30
 msgid "Address"
@@ -153,3 +252,11 @@ msgstr ""
 #: corona/templates/corona/view_helper.html:58
 msgid "Back"
 msgstr "Zurück"
+
+#: corona/views/cleanup.py:43
+msgid "Contact tracing data deleted"
+msgstr "Daten zur Kontaktverfolgung wurden gelöscht"
+
+#: corona/views/data.py:83
+msgid "Corona contact tracing"
+msgstr "Corona Kontaktverfolgung"
