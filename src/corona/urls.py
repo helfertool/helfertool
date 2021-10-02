@@ -16,6 +16,10 @@ urlpatterns = [
         views.data,
         name='data'),
 
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/corona/export/$',
+        views.export,
+        name='export'),
+
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/corona/missing/$',
         views.missing,
         name='missing'),

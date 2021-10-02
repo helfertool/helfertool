@@ -16,6 +16,11 @@ class Iterator():
         self.__v += 1
         return self.__v
 
+    def add(self, n):
+        """ Returns the next number beginning from 0. """
+        self.__v += n
+        return self.__v
+
     def get(self):
         """ Returns the current number.
 

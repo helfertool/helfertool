@@ -26,4 +26,15 @@
             {% endblocktrans %}
         </div>
     {% endif %}
+
+    <div class="alert alert-success" role="alert">
+        <p>{% trans "You can export names, contact information and addresses of all helpers here. The export does not contain special badges." %}</p>
+
+        <p>{% trans "Please use this data responsibly." %}</p>
+
+        <a href="{% url 'corona:export' event.url_name %}" class="btn btn-outline-primary">
+            {% icon "download" %}
+            {% trans "Export" %}
+        </a>
+    </div>
 {% endblock %}
