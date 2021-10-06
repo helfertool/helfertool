@@ -52,17 +52,17 @@ class EventForm(forms.ModelForm):
             self.fields.pop('shirt_sizes')
 
         # remove flags for disabled features
-        if not settings.FEATURES_NEWSLETTER:
+        if not settings.FEATURES_NEWSLETTER and 'ask_news' in self.fields:
             self.fields.pop('ask_news')
-        if not settings.FEATURES_BADGES:
+        if not settings.FEATURES_BADGES and 'badges' in self.fields:
             self.fields.pop('badges')
-        if not settings.FEATURES_GIFTS:
+        if not settings.FEATURES_GIFTS and 'gifts' in self.fields:
             self.fields.pop('gifts')
-        if not settings.FEATURES_PREREQUISITES:
+        if not settings.FEATURES_PREREQUISITES and 'prerequisites' in self.fields:
             self.fields.pop('prerequisites')
-        if not settings.FEATURES_INVENTORY:
+        if not settings.FEATURES_INVENTORY and 'inventory' in self.fields:
             self.fields.pop('inventory')
-        if not settings.FEATURES_CORONA:
+        if not settings.FEATURES_CORONA and 'corona' in self.fields:
             self.fields.pop('corona')
 
         # change labels of ckeditor fields: We only want to have the language name as label
