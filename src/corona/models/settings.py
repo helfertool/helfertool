@@ -7,10 +7,12 @@ from copy import deepcopy
 class CoronaSettings(models.Model):
     RULES_2G = '2G'
     RULES_3G = '3G'
+    RULES_3Gplus = '3Gplus'
 
     RULES_CHOICES = (
         (RULES_2G, _("2G")),
         (RULES_3G, _("3G")),
+        (RULES_3Gplus, _("3G plus")),
     )
 
     event = models.OneToOneField(

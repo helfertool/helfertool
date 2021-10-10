@@ -21,6 +21,16 @@
                 The proof will be checked at the entrance and access without it is not possible.
             {% endblocktrans %}
         </p>
+    {% elif event.corona_settings.rules == "3Gplus" %}
+        <p>
+            {% blocktrans trimmed %}
+                At this event the <strong>3G plus</strong> regulation is applied.
+                This means that you must be either vaccinated, recovered or provide a negative PCR test to have access.
+                The proof will be checked at the entrance and access without it is not possible.
+            {% endblocktrans %}
+        </p>
+
+        <p>{% trans "A negative antigen rapid test is not sufficient!" %}</p>
     {% endif %}
 
     <p>{% trans "We are required to collect address and contact information for contact tracking purposes." %}</p>
