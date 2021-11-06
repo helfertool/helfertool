@@ -70,10 +70,10 @@ The order of the columns is set as follows:
         <div class="row">
             <div class="col-8 col-lg-9 col-xl-10">
                 <div class="row">
-                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2 py-1 order-1 text-break">
+                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2 order-1 py-1 text-break">
                         {{ helper.firstname }}
                     </div>
-                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2 py-1 order-1 text-break">
+                    <div class="col-6 col-lg-4 col-xl-3 col-xxl-2 order-1 py-1 text-break">
                         {{ helper.surname }}
                     </div>
 
@@ -92,7 +92,7 @@ The order of the columns is set as follows:
                     {% endif %}
 
                     {% if job.infection_instruction %}
-                        <div class="col-12 col-xxl-1 order-2 order-xxl-2 py-1">
+                        <div class="col-12 col-xxl-2 order-2 order-xxl-1 py-1">
                             <span class="d-xxl-none fw-bold">{% trans "Food handling" %}:</span>
                             {{ helper.get_infection_instruction_short }}
                         </div>
