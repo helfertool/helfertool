@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 17:37+0200\n"
+"POT-Creation-Date: 2021-11-06 15:38+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1248,7 +1248,7 @@ msgstr "In öffentlicher Anmeldung nicht sichtbar"
 
 #: registration/templates/registration/admin/jobs_and_shifts.html:78
 msgid "Displayed as full in public registration"
-msgstr "In öffentlicher Anmeldung ans voll anzeigen"
+msgstr "In öffentlicher Anmeldung als voll anzeigen"
 
 #: registration/templates/registration/admin/links.html:5
 msgid "Links"
