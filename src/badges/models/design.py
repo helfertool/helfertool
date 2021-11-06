@@ -3,6 +3,8 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from helfertool.forms import RestrictedImageField
+
 from .settings import BadgeSettings
 
 import os
@@ -60,14 +62,14 @@ class BadgeDesign(models.Model):
         help_text=_("e.g. #00ff00"),
     )
 
-    bg_front = models.ImageField(
+    bg_front = RestrictedImageField(
         verbose_name=_("Background image for front"),
         upload_to=_design_upload_path,
         blank=True,
         null=True,
     )
 
-    bg_back = models.ImageField(
+    bg_back = RestrictedImageField(
         verbose_name=_("Background image for back"),
         upload_to=_design_upload_path,
         blank=True,

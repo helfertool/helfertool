@@ -13,6 +13,7 @@ from badges.models import BadgeSettings, BadgeDefaults, Badge
 from corona.models import CoronaSettings
 from gifts.models import HelpersGifts
 from gifts.models.giftsettings import GiftSettings
+from helfertool.forms import RestrictedImageField
 from inventory.models import InventorySettings
 
 import datetime
@@ -160,7 +161,7 @@ class Event(models.Model):
     )
 
     # note: there is code to duplicate the file in forms/event.py
-    logo = models.ImageField(
+    logo = RestrictedImageField(
         upload_to=_logo_upload_path,
         blank=True,
         null=True,
@@ -168,7 +169,7 @@ class Event(models.Model):
     )
 
     # note: there is code to duplicate the file in forms/event.py
-    logo_social = models.ImageField(
+    logo_social = RestrictedImageField(
         upload_to=_logo_upload_path,
         blank=True,
         null=True,

@@ -4,6 +4,8 @@ from django.dispatch import receiver
 from django.template.defaultfilters import date as date_f
 from django.utils.translation import ugettext_lazy as _
 
+from helfertool.forms import RestrictedImageField
+
 from .. import tasks
 from .settings import BadgeSettings
 
@@ -68,7 +70,7 @@ class Badge(models.Model):
         blank=True,
     )
 
-    photo = models.ImageField(
+    photo = RestrictedImageField(
         verbose_name=_("Photo"),
         upload_to=_badge_upload_path,
         blank=True,
