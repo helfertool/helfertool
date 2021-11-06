@@ -1,16 +1,16 @@
 {% load django_bootstrap5 %}
 
-{% bootstrap_field form.street layout="floating" required_css_class="" %}
+{% bootstrap_field form.street layout="floating" %}
 <div class="row">
     <div class="col-lg-4">
-        {% bootstrap_field form.zip layout="floating" required_css_class="" %}
+        {% bootstrap_field form.zip layout="floating" %}
     </div>
 
     <div class="col-lg-8">
-        {% bootstrap_field form.city layout="floating" required_css_class="" %}
+        {% bootstrap_field form.city layout="floating" %}
     </div>
 </div>
 
-{% bootstrap_field form.country layout="floating" required_css_class="" %}
+{% bootstrap_field form.country layout="floating" %}
 
-{% bootstrap_field form.agreed layout="floating" required_css_class="" wrapper_class="" %}
+{% bootstrap_field form.agreed layout="floating" wrapper_class="" %}
