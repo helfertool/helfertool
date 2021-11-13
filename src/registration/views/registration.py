@@ -217,8 +217,17 @@ def update_personal(request, event_url_name, helper_pk):
     form = HelperForm(request.POST or None, instance=helper, event=event,
                       public=True)
 
-    if form.is_valid():
+    if event.corona:
+        corona_form = ContactTracingDataForm(request.POST or None, instance=helper.contacttracingdata,
+                                             event=event, prefix="corona")
+    else:
+        corona_form = None
+
+    if form.is_valid() and (corona_form is None or corona_form.is_valid()):
         form.save()
+
+        if corona_form:
+            corona_form.save(helper=helper)
 
         logger.info("helper dataupdated", extra={
             'event': event,
@@ -233,5 +242,6 @@ def update_personal(request, event_url_name, helper_pk):
 
     context = {'event': event,
                'data': helper,
-               'personal_data_form': form}
+               'personal_data_form': form,
+               'corona_form': corona_form}
     return render(request, 'registration/registered.html', context)

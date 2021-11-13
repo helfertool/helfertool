@@ -26,6 +26,10 @@
 
             {% include "registration/partials/helper_edit_data.html" with form=personal_data_form %}
 
+            {% if corona_form %}
+                {% include "corona/registration.html" with form=corona_form event=event %}
+            {% endif %}
+
             <div class="alert alert-primary" role="alert">
                 {% trans "If you change your mail address a confirmation mail will be sent to the new address." %}
             </div>
