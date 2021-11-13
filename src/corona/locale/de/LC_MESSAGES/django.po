@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 15:38+0100\n"
-"PO-Revision-Date: 2021-10-10 17:38+0200\n"
+"POT-Creation-Date: 2021-11-13 21:12+0100\n"
+"PO-Revision-Date: 2021-11-13 21:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -74,19 +74,23 @@ msgstr "PLZ"
 msgid "I assure that the provided data is correct."
 msgstr "Ich versichere, dass die angegebenen Daten korrekt sind."
 
-#: corona/models/settings.py:13
+#: corona/models/settings.py:14
 msgid "2G"
 msgstr "2G"
 
-#: corona/models/settings.py:14
+#: corona/models/settings.py:15
+msgid "2G plus"
+msgstr "2G plus"
+
+#: corona/models/settings.py:16
 msgid "3G"
 msgstr "3G"
 
-#: corona/models/settings.py:15
+#: corona/models/settings.py:17
 msgid "3G plus"
 msgstr "3G plus"
 
-#: corona/models/settings.py:27
+#: corona/models/settings.py:29
 msgid "Admission rules"
 msgstr "Einlassregeln"
 
@@ -184,6 +188,19 @@ msgstr "Ein negativer Test ist nicht ausreichend!"
 
 #: corona/templates/corona/registration.html:18
 msgid ""
+"At this event the <strong>2G plus</strong> regulation is applied. This means "
+"that you must be either vaccinated or recovered <strong>and</strong> provide "
+"a negative antigen rapid test to have access. The proof will be checked at "
+"the entrance and access without it is not possible."
+msgstr ""
+"Bei dieser Veranstaltung gilt die <strong>2G plus</strong> Regelung. Das "
+"bedeutet, dass du entweder geimpft oder genesen sein musst <strong>und</"
+"strong> einen negativen Schnelltest vorlegen musst, um Zutritt zu erhalten. "
+"Der Nachweis wird am Eingang kontrolliert und der Zutritt ist ohne diesen "
+"nicht möglich."
+
+#: corona/templates/corona/registration.html:26
+msgid ""
 "At this event the <strong>3G</strong> regulation is applied. This means that "
 "you must be either vaccinated, recovered or provide a negative official test "
 "to have access. The proof will be checked at the entrance and access without "
@@ -194,7 +211,7 @@ msgstr ""
 "offiziellen Test vorlegen musst, um Zutritt zu erhalten. Der Nachweis wird "
 "am Eingang kontrolliert und der Zutritt ist ohne diesen nicht möglich."
 
-#: corona/templates/corona/registration.html:26
+#: corona/templates/corona/registration.html:34
 msgid ""
 "At this event the <strong>3G plus</strong> regulation is applied. This means "
 "that you must be either vaccinated, recovered or provide a negative PCR test "
@@ -206,11 +223,11 @@ msgstr ""
 "PCR Test vorlegen musst, um Zutritt zu erhalten. Der Nachweis wird am "
 "Eingang kontrolliert und der Zutritt ist ohne diesen nicht möglich."
 
-#: corona/templates/corona/registration.html:33
+#: corona/templates/corona/registration.html:41
 msgid "A negative antigen rapid test is not sufficient!"
 msgstr "Ein negativer Antigen Schnelltest ist nicht ausreichend!"
 
-#: corona/templates/corona/registration.html:36
+#: corona/templates/corona/registration.html:44
 msgid ""
 "We are required to collect address and contact information for contact "
 "tracking purposes."

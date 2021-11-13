@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-06 15:38+0100\n"
+"POT-Creation-Date: 2021-11-13 21:12+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: badges/forms/barcode.py:9 badges/models/badge.py:36
+#: badges/forms/barcode.py:9 badges/models/badge.py:38
 msgid "Barcode"
 msgstr "Barcode"
 
@@ -34,12 +34,12 @@ msgstr ""
 "Dieses Badge existiert nicht. Vielleicht wurde die Helfer:in seit dem "
 "Drucken gelöscht oder das Badge gehört nicht zu dieser Veranstaltung."
 
-#: badges/forms/defaults.py:46 badges/models/badge.py:102
+#: badges/forms/defaults.py:46 badges/models/badge.py:104
 #: badges/templates/badges/list_specialbadges.html:45
 msgid "Design"
 msgstr "Design"
 
-#: badges/forms/defaults.py:52 badges/models/badge.py:93
+#: badges/forms/defaults.py:52 badges/models/badge.py:95
 #: badges/templates/badges/list_specialbadges.html:43
 #: badges/templates/badges/list_specialbadges.html:44
 msgid "Role"
@@ -53,39 +53,39 @@ msgstr "Keine Standard Rolle abdrucken"
 msgid "File does not contain LaTeX code."
 msgstr "Die Datei enthält keinen LaTeX Code."
 
-#: badges/models/badge.py:43
+#: badges/models/badge.py:45
 msgid "Other firstname"
 msgstr "Anderer Vorname"
 
-#: badges/models/badge.py:49
+#: badges/models/badge.py:51
 msgid "Other surname"
 msgstr "Anderer Nachname"
 
-#: badges/models/badge.py:55
+#: badges/models/badge.py:57
 msgid "Other text for job"
 msgstr "Anderer Text für Aufgabe"
 
-#: badges/models/badge.py:61
+#: badges/models/badge.py:63
 msgid "Other text for shift"
 msgstr "Anderer Text für Schicht"
 
-#: badges/models/badge.py:67
+#: badges/models/badge.py:69
 msgid "Other text for role"
 msgstr "Anderer Text für Rolle"
 
-#: badges/models/badge.py:72 badges/templates/badges/list_specialbadges.html:46
+#: badges/models/badge.py:74 badges/templates/badges/list_specialbadges.html:46
 msgid "Photo"
 msgstr "Foto"
 
-#: badges/models/badge.py:80
+#: badges/models/badge.py:82
 msgid "Primary job"
 msgstr "Primäre Aufgabe"
 
-#: badges/models/badge.py:81
+#: badges/models/badge.py:83
 msgid "Only necessary if this person has multiple jobs."
 msgstr "Nur notwendig, wenn diese Person für mehrere Aufgaben eingetragen ist."
 
-#: badges/models/badge.py:107
+#: badges/models/badge.py:109
 msgid "Badge was printed already"
 msgstr "Badge wurde bereits gedruckt"
 
@@ -101,8 +101,8 @@ msgstr "Standard Design"
 msgid "Do not print default roles on badges"
 msgstr "Keine Standard Rollen auf die Badges drucken"
 
-#: badges/models/design.py:44 badges/models/permission.py:17
-#: badges/models/role.py:18 badges/models/specialbadges.py:52
+#: badges/models/design.py:46 badges/models/permission.py:17
+#: badges/models/role.py:18 badges/models/specialbadges.py:53
 #: badges/templates/badges/delete_design.html:11
 #: badges/templates/badges/delete_permission.html:11
 #: badges/templates/badges/delete_role.html:11
@@ -110,23 +110,23 @@ msgstr "Keine Standard Rollen auf die Badges drucken"
 msgid "Name"
 msgstr "Name"
 
-#: badges/models/design.py:51
+#: badges/models/design.py:53
 msgid "Color for text"
 msgstr "Textfarbe"
 
-#: badges/models/design.py:52 badges/models/design.py:60
+#: badges/models/design.py:54 badges/models/design.py:62
 msgid "e.g. #00ff00"
 msgstr "z.B. #00ff00"
 
-#: badges/models/design.py:59
+#: badges/models/design.py:61
 msgid "Background color"
 msgstr "Hintergrundfarbe"
 
-#: badges/models/design.py:64
+#: badges/models/design.py:66
 msgid "Background image for front"
 msgstr "Hintergrundbild für die Vorderseite"
 
-#: badges/models/design.py:71
+#: badges/models/design.py:73
 msgid "Background image for back"
 msgstr "Hintergrundbild für die Rückseite"
 
@@ -214,7 +214,7 @@ msgstr "Badges nur für Koordinator:innen"
 msgid "Print barcodes on badges to avoid duplicates"
 msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern"
 
-#: badges/models/specialbadges.py:57
+#: badges/models/specialbadges.py:58
 msgid "Number of badges"
 msgstr "Anzahl der Badges"
 
