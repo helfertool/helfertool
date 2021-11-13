@@ -18,13 +18,14 @@ def _copy_badge(src, dest):
     dest.custom_role = src.custom_role
     dest.custom_design = src.custom_design
 
-    if src.event == dest.event:
-        # same event, reuse the same file
-        dest.photo = src.photo
-    else:
-        # different event, copy the file
-        dest.photo = ContentFile(src.photo.read())
-        dest.photo.name = os.path.basename(src.photo.name)
+    if src.photo:
+        if src.event == dest.event:
+            # same event, reuse the same file
+            dest.photo = src.photo
+        else:
+            # different event, copy the file
+            dest.photo = ContentFile(src.photo.read())
+            dest.photo.name = os.path.basename(src.photo.name)
 
 
 class SpecialBadges(models.Model):

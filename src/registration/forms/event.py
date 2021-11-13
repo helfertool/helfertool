@@ -251,60 +251,79 @@ class EventDuplicateForm(EventForm):
         if not self.user.is_superuser:
             self.instance.admins.add(self.user)
 
-        # gifts
-        gift_mapping = {}
-        gift_set_mapping = {}
-        if activate_gifts:
-            # duplicate gift settings
-            self.other_event.gift_settings.duplicate(self.instance)
-
-            # duplicate all gifts and build mapping
-            for gift in self.other_event.gift_set.all():
-                new_gift = gift.duplicate(self.instance)
-                gift_mapping[gift] = new_gift
-
-            # now duplicate gift sets
-            for gift_set in self.other_event.giftset_set.all():
-                new_gift_set = gift_set.duplicate(self.instance, gift_mapping)
-                gift_set_mapping[gift_set] = new_gift_set
-
-            self.instance.gifts = True
-            self.instance.save()
-
-        # prerequisites
-        prerequisite_mapping = {}
-        if activate_prerequisites:
-            for prerequisite in self.other_event.prerequisite_set.all():
-                new_prerequisite = prerequisite.duplicate(self.instance)
-                prerequisite_mapping[prerequisite] = new_prerequisite
-
-            self.instance.prerequisites = True
-            self.instance.save()
+        # copy gifts and prerequisites, we need it for the jobs and shifts
+        gift_set_mapping = self._duplicate_gifts(activate_gifts)
+        prerequisite_mapping = self._duplicate_prerequisites(activate_prerequisites)
 
         # copy jobs (and shifts)
         for job in self.other_event.job_set.all():
             job.duplicate(self.instance, gift_set_mapping, prerequisite_mapping)
 
-        # badges
-        if activate_badges:
+        # copy other features
+        self._duplicate_badges(activate_badges)
+        self._duplicate_inventory(activate_inventory)
+        self._duplicate_corona(activate_corona)
+
+    def _duplicate_gifts(self, activate):
+        # gifts
+        gift_mapping = {}
+        gift_set_mapping = {}
+
+        # duplicate gift settings
+        if self.other_event.gift_settings:
+            self.other_event.gift_settings.duplicate(self.instance)
+
+        # duplicate all gifts and build mapping
+        for gift in self.other_event.gift_set.all():
+            new_gift = gift.duplicate(self.instance)
+            gift_mapping[gift] = new_gift
+
+        # now duplicate gift sets
+        for gift_set in self.other_event.giftset_set.all():
+            new_gift_set = gift_set.duplicate(self.instance, gift_mapping)
+            gift_set_mapping[gift_set] = new_gift_set
+
+        self.instance.gifts = activate
+        self.instance.save()
+
+        return gift_set_mapping
+
+    def _duplicate_prerequisites(self, activate):
+        # prerequisites
+        prerequisite_mapping = {}
+
+        for prerequisite in self.other_event.prerequisite_set.all():
+            new_prerequisite = prerequisite.duplicate(self.instance)
+            prerequisite_mapping[prerequisite] = new_prerequisite
+
+        self.instance.prerequisites = activate
+        self.instance.save()
+
+        return prerequisite_mapping
+
+    def _duplicate_badges(self, activate):
+        if self.other_event.badge_settings:
             self.other_event.badge_settings.duplicate(self.instance)
-            self.instance.badges = True
-            self.instance.save()
 
-            for specialbadges in self.other_event.specialbadges_set.all():
-                specialbadges.duplicate(self.instance)
+        self.instance.badges = activate
+        self.instance.save()
 
-        # inventory
-        if activate_inventory:
+        for specialbadges in self.other_event.specialbadges_set.all():
+            specialbadges.duplicate(self.instance)
+
+    def _duplicate_inventory(self, activate):
+        if self.other_event.inventory_settings:
             self.other_event.inventory_settings.duplicate(self.instance)
-            self.instance.inventory = True
-            self.instance.save()
 
-        # corona
-        if activate_corona:
+        self.instance.inventory = activate
+        self.instance.save()
+
+    def _duplicate_corona(self, activate):
+        if self.other_event.corona_settings:
             self.other_event.corona_settings.duplicate(self.instance)
-            self.instance.corona = True
-            self.instance.save()
+
+        self.instance.corona = activate
+        self.instance.save()
 
 
 class EventMoveForm(forms.ModelForm):
