@@ -13,6 +13,14 @@
         </p>
 
         <p><strong>{% trans "A negative test is not sufficient!" %}</strong></p>
+    {% elif event.corona_settings.rules == "2Gplus" %}
+        <p>
+            {% blocktrans trimmed %}
+                At this event the <strong>2G plus</strong> regulation is applied.
+                This means that you must be either vaccinated or recovered <strong>and</strong> provide a negative antigen rapid test to have access.
+                The proof will be checked at the entrance and access without it is not possible.
+            {% endblocktrans %}
+        </p>
     {% elif event.corona_settings.rules == "3G" %}
         <p>
             {% blocktrans trimmed %}
