@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-13 21:12+0100\n"
+"POT-Creation-Date: 2021-11-29 21:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
 #: helfertool/forms/fields.py:18
 msgid "File type not supported, use JPG or PNG."
@@ -309,25 +309,26 @@ msgctxt "Admin interface"
 msgid "Administration"
 msgstr "Verwaltung"
 
-#: helfertool/templates/helfertool/base.html:84
+#: helfertool/templates/helfertool/base.html:87
+#: helfertool/templates/helfertool/base.html:92
 msgid "Logout"
 msgstr "Logout"
 
-#: helfertool/templates/helfertool/base.html:88
+#: helfertool/templates/helfertool/base.html:97
 #: helfertool/templates/helfertool/login.html:5
 #: helfertool/templates/helfertool/login.html:34
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:117
+#: helfertool/templates/helfertool/base.html:126
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:119
+#: helfertool/templates/helfertool/base.html:128
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:121
+#: helfertool/templates/helfertool/base.html:130
 msgid "About this software"
 msgstr "Über diese Software"
 
@@ -336,6 +337,7 @@ msgid "Image preview"
 msgstr "Bild Vorschau"
 
 #: helfertool/templates/helfertool/login.html:12
+#: helfertool/templates/helfertool/login_oidc_failed.html:19
 #, python-format
 msgid "Login with %(name)s"
 msgstr "Mit %(name)s einloggen"
@@ -357,8 +359,14 @@ msgstr ""
 "versuche es später wieder."
 
 #: helfertool/templates/helfertool/login_oidc_failed.html:8
-msgid "You are not allowed to login"
-msgstr "Du darfst dich nicht einloggen"
+msgid "Login failed"
+msgstr "Anmeldung fehlgeschlagen"
+
+#: helfertool/templates/helfertool/login_oidc_failed.html:12
+msgid "Either you are not allowed to log in or your session expired."
+msgstr ""
+"Entweder darfst du dich nicht anmelden oder deine Session ist "
+"abgelaufen."
 
 #: helfertool/templates/helfertool/nopermission.html:8
 msgid "No permission"
