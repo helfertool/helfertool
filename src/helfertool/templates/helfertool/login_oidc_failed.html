@@ -1,10 +1,26 @@
 {% extends "helfertool/base.html" %}
-{% load i18n django_bootstrap5 icons %}
+{% load i18n django_bootstrap5 icons toolsettings %}
 
 {% block content %}
     <div class="errorpage text-center text-muted">
         <em class="far fa-frown-open display-1"></em>
 
-        <h1 class="message">{% trans "You are not allowed to login" %}</h1>
+        <h1 class="message">{% trans "Login failed" %}</h1>
+
+        <p class="code"></p>
+
+        <p class="additional">{% trans "Either you are not allowed to log in or your session expired." %}</p>
+
+        {% djangosetting "OIDC_CUSTOM_PROVIDER_NAME" as OIDC_CUSTOM_PROVIDER_NAME %}
+        {% if OIDC_CUSTOM_PROVIDER_NAME %}    
+        <p class="link">
+            <a href="{% url 'oidc_authentication_init' %}" class="btn btn-outline-primary">
+                {% icon "sign-in-alt" %}
+                {% blocktrans with name=OIDC_CUSTOM_PROVIDER_NAME trimmed %}
+                    Login with {{ name }}
+                {% endblocktrans %}
+            </a>
+        </p>
+        {% endif %}
     </div>
 {% endblock %}
