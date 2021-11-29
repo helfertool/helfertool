@@ -105,6 +105,7 @@ mail:
     batch_gap: 5
 
 # Authentication settings
+# Note: It is recommended to only enabled LDAP or OpenID Connect, not both at the same time.
 authentication:
     # Get users from LDAP
     #ldap:
@@ -143,24 +144,36 @@ authentication:
     #    # Provider details
     #    provider:
     #        # Endpoint URLs
-    #        authorization_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/auth"
-    #        token_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/token"
+    #        authorization_endpoint: "https://auth.helfertool.org/auth/realms/test/protocol/openid-connect/auth"
+    #        token_endpoint: "https://auth.helfertool.org/auth/realms/test/protocol/openid-connect/token"
     #
     #        # Optional: If present, the endpoint is must return all relevant info for authentication and authorization.
     #        #           If omitted, information is expected to be contained in the id_token
-    #        user_endpoint: "http://localhost:8080/auth/realms/test/protocol/openid-connect/userinfo"
+    #        user_endpoint: "https://auth.helfertool.org/auth/realms/test/protocol/openid-connect/userinfo"
     #
     #        # URI to get JWKS
-    #        jwks_uri: "http://localhost:8080/auth/realms/test/protocol/openid-connect/certs"
+    #        jwks_uri: "https://auth.helfertool.org/auth/realms/test/protocol/openid-connect/certs"
     #
     #        # Client ID and secret
     #        client_id: "helfertool"
     #        client_secret: "<SECRET>"
     #
     #        # Controls the session cookie SameSite attribute, forcing it to "Lax". This is necessary if your OIDC provider
-    #        # resides on a different top level domain name than the Helfertool (error message: "You are not allowed to login")
+    #        # resides on a different top level domain name than the Helfertool (error message: "Login failed")
     #        # Set it to true in this case.
     #        thirdparty_domain: false
+    #
+    #        # It could happen that the user is disabled or claims change. So we can redirect the users from time to time
+    #        # to the OIDC provider and validate if they are still allowed to login.
+    #        # Time in minutes, set to 0 to disable it (Note: the idle timeout of the provider should be higher than this value)
+    #        renew_check_interval: 15
+    #
+    #        # If the session is only terminated in the application, the login via OIDC works again without asking for credentials.
+    #        # Therefore, we can also trigger a logout at the OIDC provider.
+    #        # The URL is less well specified and depends on the provider (here: Keycloak)
+    #        logout:
+    #            endpoint: "https://auth.helfertool.org/auth/realms/test/protocol/openid-connect/logout"
+    #            redirect_parameter: "redirect_uri"
     #
     #    # Permissions based on claims
     #    claims:

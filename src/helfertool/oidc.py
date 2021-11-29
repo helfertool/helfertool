@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse
+from django.utils.http import urlencode
 from django.views.decorators.debug import sensitive_variables
 
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
@@ -22,6 +23,16 @@ def axes_whitelist(request, credentials):
         return True
 
     return False
+
+
+# logout at OIDC provider
+def custom_oidc_logout(request):
+    if settings.OIDC_CUSTOM_LOGOUT_REDIRECT_PARAMTER:
+        redirect_url = request.build_absolute_uri(settings.LOGOUT_REDIRECT_URL)
+        query = urlencode({settings.OIDC_CUSTOM_LOGOUT_REDIRECT_PARAMTER: redirect_url})
+        return "{}?{}".format(settings.OIDC_CUSTOM_LOGOUT_ENDPOINT, query)
+    else:
+        return settings.OIDC_CUSTOM_LOGOUT_ENDPOINT
 
 
 class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):

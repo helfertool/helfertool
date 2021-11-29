@@ -185,6 +185,7 @@ MAIL_BATCH_GAP = dict_get(config, 5, 'mail', 'batch_gap')
 # authentication
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/manage/account/check/'
+LOGOUT_REDIRECT_URL = '/'
 
 LOCAL_USER_CHAR = dict_get(config, None, 'authentication', 'local_user_char')
 
@@ -239,6 +240,8 @@ if ldap_config:
 # OpenID Connect
 oidc_config = dict_get(config, None, 'authentication', 'oidc')
 OIDC_CUSTOM_PROVIDER_NAME = None  # used to check if enabled or not
+OIDC_CUSTOM_LOGOUT_ENDPOINT = None
+OIDC_CUSTOM_LOGOUT_REDIRECT_PARAMTER = None
 if oidc_config:
     # name for identity provider displayed on login page (custom paremeter, not from lib)
     OIDC_CUSTOM_PROVIDER_NAME = dict_get(oidc_config, "OpenID Connect", 'provider_name')
@@ -256,10 +259,23 @@ if oidc_config:
 
     OIDC_RP_SCOPES = "openid email profile"  # also ask for profile -> given_name and family_name
 
+    oidc_renew_check_interval = dict_get(oidc_config, 0, 'provider', 'renew_check_interval')
+    if oidc_renew_check_interval > 0:
+        OIDC_RENEW_ID_TOKEN_EXPIRY_SECONDS = oidc_renew_check_interval * 60
+
     # username is mail address
     OIDC_USERNAME_ALGO = "helfertool.oidc.generate_username"
 
+    # login and logout
     LOGIN_REDIRECT_URL_FAILURE = "/oidc/failed"
+    ALLOW_LOGOUT_GET_METHOD = True
+
+    oidc_logout = dict_get(oidc_config, None, "provider", "logout")
+    if oidc_logout:
+        OIDC_CUSTOM_LOGOUT_ENDPOINT = dict_get(oidc_logout, None, "endpoint")
+        OIDC_CUSTOM_LOGOUT_REDIRECT_PARAMTER = dict_get(oidc_logout, None, "redirect_parameter")
+
+        OIDC_OP_LOGOUT_URL_METHOD = "helfertool.oidc.custom_oidc_logout"
 
     # claims for is_active and is_admin
     OIDC_CUSTOM_CLAIM_LOGIN = dict_get(oidc_config, None, 'claims', 'login')
@@ -586,7 +602,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if oidc_config:
+if oidc_config and oidc_renew_check_interval > 0:
     MIDDLEWARE.append('mozilla_django_oidc.middleware.SessionRefresh')
 
 MIDDLEWARE.append('axes.middleware.AxesMiddleware')  # axes should be the last one
