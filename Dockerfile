@@ -1,34 +1,39 @@
-FROM debian:buster
+FROM debian:bullseye
 
 ARG CONTAINER_VERSION="unknown"
 
 ENV LANG=C.UTF-8
 
 RUN apt-get update && apt-get full-upgrade -y && \
-    apt-get install -y python3 python3-pip uwsgi uwsgi-plugin-python3 \
-        nginx supervisor gosu rsyslog \
-        libldap2-dev libsasl2-dev libmariadb-dev \
-        texlive-latex-extra texlive-fonts-recommended texlive-lang-german && \
+    apt-get install --no-install-recommends -y \
+        supervisor nginx rsyslog pwgen \
+        python3 python3-pip python3-dev uwsgi uwsgi-plugin-python3 \
+        build-essential libldap2-dev libsasl2-dev libmariadb-dev libmagic1 \
+        texlive-latex-extra texlive-plain-generic texlive-fonts-recommended texlive-lang-german && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc/* && \
-    # add user, some directories and fix owners
-    useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 1000 && \
-    mkdir /data /log /helfertool/run && \
-    chown -R helfertool:helfertool /data /log /helfertool/run
-
-RUN echo $CONTAINER_VERSION > /helfertool/container_version
+    # add user, some directories and set file permissions
+    useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 10001 && \
+    mkdir -p /config /data /log /helfertool/run && \
+    chmod -R 0777 /helfertool/run && \
+    # nginx always writes to /var/log/nginx/error.log before reading the config
+    # so we redirect it to a writable location
+    rm /var/log/nginx/error.log && \
+    ln -s /helfertool/run/nginx/error.log /var/log/nginx/error.log && \
+    # we should have a writable /tmp, some tools expect this
+    rm -rf /tmp && \
+    ln -s /helfertool/run/tmp /tmp
 
 COPY src /helfertool/src
-COPY deployment/docker/helfertool.sh /usr/local/bin/helfertool
-COPY deployment/docker/uwsgi.conf /helfertool/uwsgi.conf
-COPY deployment/docker/supervisord.conf /helfertool/supervisord.conf
-COPY deployment/docker/nginx.conf /helfertool/nginx.conf
-COPY deployment/docker/rsyslog.conf /helfertool/rsyslog.conf
+COPY deployment/container/etc /helfertool/etc
+COPY deployment/container/helfertool.sh /usr/local/bin/helfertool
 
-RUN cd /helfertool/src/ && \
+RUN echo $CONTAINER_VERSION > /helfertool/container_version && \
     # install python libs
+    cd /helfertool/src/ && \
     pip3 install -U pip && \
     pip3 install -r requirements.txt -r requirements_prod.txt && \
+    rm -rf /root/.cache/pip/ && \
     # generate compressed CSS/JS files
     HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py compress --force && \
     # copy static files
@@ -37,8 +42,9 @@ RUN cd /helfertool/src/ && \
     # fix permissions
     chmod +x /usr/local/bin/helfertool
 
-VOLUME ["/config", "/data", "/log"]
+VOLUME ["/config", "/data", "/log", "/helfertool/run"]
 EXPOSE 8000
 
+USER helfertool
 ENTRYPOINT ["/usr/local/bin/helfertool"]
 CMD ["run"]

@@ -2,36 +2,40 @@
 
 set -Eeo pipefail
 
-# set default id/gid and drop privileges
-: ${USERID:=1000}
-: ${GROUPID:=1000}
-
-if [ "$USERID" = "0" ] ; then
-    echo "Running as root is not recommended. Exiting."
+die () {
+    echo "$1"
     exit 1
+}
+
+# check that we do not run as root
+if [ "$(id -u)" = "0" ] ; then
+    die "Running as root in container. Exiting."
 fi
 
-if [ "$(id -u)" = "0" ] ; then
-    chown -R $USERID:$GROUPID /var/lib/nginx /var/log/nginx /usr/share/nginx /helfertool/run
-    exec gosu $USERID:$GROUPID "$BASH_SOURCE" "$@"
+# check if we can write into /logs, /data and /helfertool/run
+touch /log/.test 2>/dev/null || die "Cannot write to log directory. Exiting."
+rm -f /log/.test
+
+touch /data/.test 2>/dev/null || die "Cannot write to data directory. Exiting."
+rm -f /data/.test
+
+touch /helfertool/run/.test 2>/dev/null || die "Cannot write to tmp directory (/helfertool/run in container). Exiting."
+rm -f /helfertool/run/.test
+
+# check if /config/helfertool.yaml is there
+if ! [ -f /config/helfertool.yaml ] ; then
+    die "helfertool.yaml is missing. Exiting."
 fi
 
 # prepare environment
 cd /helfertool/src
-mkdir -p /data/media /data/tmp
+mkdir -p /data/media /data/tmp /helfertool/run/tmp
 export HELFERTOOL_CONFIG_FILE="/config/helfertool.yaml"
 
 # command: init
 if [ "$1" = "init" ] ; then
     # initialise database with default settings
-    python3 manage.py migrate --noinput
     python3 manage.py loaddata toolsettings
-
-# command: createadmin
-elif [ "$1" = "createadmin" ] ; then
-    # create new superuser
-    python3 manage.py migrate --noinput
-    python3 manage.py createsuperuser
 
 # command: reload
 elif [ "$1" = "reload" ] ; then
@@ -71,13 +75,19 @@ elif [ "$1" = "run" ] ; then
 
     echo "Running with $HELFERTOOL_WORKERS web and $HELFERTOOL_TASK_WORKERS task workers"
 
+    # create some directories and files that we need
+    mkdir -p /helfertool/run/supervisord /helfertool/run/nginx
+    touch /var/log/nginx/error.log  # /var/log/nginx/error.log is a symlink to this file
+
+    # set random password for supervisord unix socket
+    sed "s/will_be_replaced/$(pwgen 40 1)/g" /helfertool/etc/supervisord.conf > /helfertool/run/supervisord.conf
+
     # run migrations and go
     python3 manage.py migrate --noinput
     python3 manage.py createcachetable
-    exec supervisord --nodaemon --configuration /helfertool/supervisord.conf
+    exec supervisord --nodaemon --configuration /helfertool/run/supervisord.conf
 
 # help message
 else
-    echo "Commands: init, createadmin, reload, postrotate, run, manage"
-    exit 1
+    die "Commands: init, createadmin, reload, postrotate, run, manage"
 fi
