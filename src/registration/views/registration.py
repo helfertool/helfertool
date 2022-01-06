@@ -17,6 +17,8 @@ from ..models import Event, Link
 from ..permissions import has_access, ACCESS_INVOLVED
 
 import datetime
+from collections import OrderedDict
+from itertools import groupby
 
 import logging
 logger = logging.getLogger("helfertool.registration")
@@ -32,6 +34,10 @@ def index(request, filter_old_events=True):
     # public events
     active_events = [e for e in events if e.active]
     active_events = sorted(active_events, key=lambda e: e.date)
+
+    # only one public event and it is active -> redirect
+    if events.count() == 1 and active_events:
+        return redirect("form", event_url_name=active_events[0].url_name)
 
     # inactive events that are visible for current user
     involved_events = []
@@ -57,13 +63,19 @@ def index(request, filter_old_events=True):
         else:
             involved_events = all_involved_events
 
-    # only one public event and no internal events -> redirect
-    if events.count() == 1 and active_events:
-        return redirect(form, event_url_name=active_events[0].url_name)
+    # group involved_events by date
+    # first, sort descending by date
+    involved_events_sorted = sorted(involved_events, key=lambda e: e.date, reverse=True)
+    # then group by year
+    involved_events_grouped = groupby(involved_events_sorted, key=lambda e: e.date.year)
+    # then convert to data structure that django templates understand and sort by name
+    involved_events_by_year = OrderedDict()
+    for year, events in involved_events_grouped:
+        involved_events_by_year[year] = list(sorted(events, key=lambda e: e.name.lower()))
 
     context = {
         'active_events': active_events,
-        'involved_events': involved_events,
+        'involved_events_by_year': involved_events_by_year,
         'enable_show_more_events': enable_show_more_events,
     }
     return render(request, 'registration/index.html', context)
