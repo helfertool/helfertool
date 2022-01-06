@@ -100,6 +100,8 @@ if 'sqlite3' in DATABASES['default']['ENGINE']:
     DATABASES['default']['NAME'] = build_path(DATABASES['default']['NAME'],
                                               BASE_DIR)
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # rabbitmq
 CELERY_BROKER_URL = 'amqp://{}:{}@{}:{}/{}'.format(
     dict_get(config, 'guest', 'rabbitmq', 'user'),

@@ -75,7 +75,7 @@
                 <div class="col-lg-6 col-xs-12">
                     <h3>{{ group.grouper }}</h3>
                     <ul class="list-group">
-                        {% for event in group.list|dictsort:"name.lower" %}
+                        {% for event in group.list|dictsort:"name" %}
                             <li class="list-group-item">
                                 <a href="{% url 'manage_event' event.url_name %}" class="float-right">
                                     {% icon "cog" %}
