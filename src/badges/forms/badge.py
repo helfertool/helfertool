@@ -46,6 +46,11 @@ class BadgeForm(forms.ModelForm):
         designs = BadgeDesign.objects.filter(badge_settings=badge_settings)
         self.fields['custom_design'].queryset = designs
 
+        # disable stripping of whitespaces, so that we can override the default texts with a space
+        self.fields['job'].strip = False
+        self.fields['shift'].strip = False
+        self.fields['role'].strip = False
+
         # set download_url parameters for widgets
         if self.instance.helper:
             # for normal badge
