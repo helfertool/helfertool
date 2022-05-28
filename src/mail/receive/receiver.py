@@ -4,6 +4,7 @@ from .error import MailHandlerError
 
 import email
 import imaplib
+import socket
 
 # look at the calendar, it's not 19xx anymore
 imaplib._MAXLINE = 1000000
@@ -36,7 +37,7 @@ class MailReceiver:
 
             if settings.RECEIVE_EMAIL_USE_TLS:
                 self._connection.starttls()
-        except (imaplib.IMAP4.error, ConnectionRefusedError):
+        except (imaplib.IMAP4.error, ConnectionRefusedError, socket.gaierror):
             raise MailHandlerError("Invalid hostname, port or TLS settings for IMAP")
 
         # login

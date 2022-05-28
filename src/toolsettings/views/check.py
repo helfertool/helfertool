@@ -13,6 +13,7 @@ from ..models import HTMLSetting, TextSetting
 
 import kombu
 import ldap
+import socket
 
 
 @login_required
@@ -43,7 +44,7 @@ def check(request):
         mail_conn = mail.get_connection()
         if isinstance(mail_conn, EmailBackend):
             mail_conn.open()
-    except (ConnectionRefusedError, OSError):
+    except (ConnectionRefusedError, OSError, socket.gaierror):
         mail_smtp_ok = False
 
     # mail (imap)
