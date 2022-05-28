@@ -18,9 +18,8 @@ class JobForm(forms.ModelForm):
         model = Job
 
         # note: change also below in JobDuplicateForm
-        exclude = ['name', 'description', 'event', 'coordinators',
-                   'badge_defaults', 'archived_number_coordinators',
-                   'order', ]
+        exclude = ['name', 'description', 'important_notes', 'event', 'coordinators',
+                   'badge_defaults', 'archived_number_coordinators', 'order', ]
         widgets = {
             'job_admins': UserSelectWidget,
             'prerequisites': PrerequisiteSelectWidget,
@@ -32,6 +31,7 @@ class JobForm(forms.ModelForm):
         # Therefore set it manually...
         for lang, name in settings.LANGUAGES:
             widgets["description_{}".format(lang)] = CKEditorWidget()
+            widgets["important_notes_{}".format(lang)] = CKEditorWidget()
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop('event')
@@ -47,6 +47,7 @@ class JobForm(forms.ModelForm):
         # set better label for description fields
         for lang, name in settings.LANGUAGES:
             self.fields["description_{}".format(lang)].label = _("Description (%(lang)s)") % {"lang": name}
+            self.fields["important_notes_{}".format(lang)].label = _("Important notes (%(lang)s)") % {"lang": name}
 
     def save(self, commit=True):
         instance = super(JobForm, self).save(False)  # event is missing

@@ -28,6 +28,8 @@
         </div>
     </div>
 
+    {{ job.important_notes | safe }}
+
     {% shifttable job shifts %}
         {% form_shifttable_shift_registration widget shift %}
     {% endshifttable %}

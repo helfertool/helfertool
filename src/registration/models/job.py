@@ -21,6 +21,7 @@ class Job(models.Model):
         :infection_instruction: is an instruction for the handling of food
                                 necessary?
         :description: longer description of the job
+        :important_notes: important notes that are directly displayed during registration
         :job_admins: users, that can see and edit the helpers
         :public: job is visible publicly
         :badge_design: badge design for this job
@@ -52,6 +53,13 @@ class Job(models.Model):
     description = BleachField(
         blank=True,
         verbose_name=_("Description"),
+    )
+
+    important_notes = BleachField(
+        blank=True,
+        verbose_name=_("Important notes"),
+        help_text=_("""This text is directly shown on the registration page, so that helpers cannot
+                    miss notes in the description."""),
     )
 
     job_admins = models.ManyToManyField(

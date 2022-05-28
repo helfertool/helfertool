@@ -34,6 +34,15 @@
             {% endfor %}
         </div>
 
+        <div class="row">
+            {% for lang, name in languages %}
+                <div class="col-xl-6">
+                    {% translated_field form "important_notes" lang as field %}
+                    {% bootstrap_field field %}
+                </div>
+            {% endfor %}
+        </div>
+
         {% bootstrap_field form.public layout="floating" %}
 
         {% if form.infection_instruction %}
