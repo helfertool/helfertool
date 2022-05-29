@@ -1,0 +1,46 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons %}
+
+{% block content %}
+    <h1>{% trans "Merge user" %}</h1>
+
+    <h2>{% trans "Remaining user" %}</h2>
+    <div class="row">
+        <div class="col-xs-12 col-xl-6">
+            <table class="table" aria-label="{% trans 'Account data' %}">
+                <tr>
+                    <th scope="row">{% trans "Login" %}</th>
+                    <td>{{ remaining_user.username }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Name" %}</th>
+                    <td>{{ remaining_user.get_full_name|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Email address" %}</th>
+                    <td>{{ remaining_user.email }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>{% trans "User for deletion" %}</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                {% bootstrap_form_errors form %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-xl-6">
+                {% bootstrap_field form.deleted_user layout="floating" show_label=False %}
+
+                <button type="submit" class="btn btn-outline-danger mt-2">{% icon "compress" %} {% trans "Merge" %}</button>
+            </div>
+        </div>
+
+    </form>
+{% endblock %}

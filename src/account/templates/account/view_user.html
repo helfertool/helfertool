@@ -38,6 +38,9 @@
             <a href="{% url "account:edit_user" changed_user.pk %}" class="me-3 text-nowrap">
                 {% icon "pencil-alt" %} {% trans "Edit" %}
             </a>
+            <a href="{% url "account:merge_user" changed_user.pk %}" class="me-3 text-nowrap">
+                {% icon "compress" %} {% trans "Merge" %}
+            </a>
             <a href="{% url "account:delete_user" changed_user.pk %}" class="me-3 text-nowrap">
                 {% icon "trash-alt" %} {% trans "Delete" %}
             </a>

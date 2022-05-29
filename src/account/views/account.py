@@ -11,7 +11,7 @@ from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 
-from ..forms import CreateUserForm, EditUserForm, DeleteUserForm
+from ..forms import CreateUserForm, EditUserForm, DeleteUserForm, MergeUserForm
 from ..templatetags.globalpermissions import has_adduser_group
 
 import logging
@@ -150,6 +150,38 @@ def delete_user(request, user_pk):
         'deleted_user': deleted_user,
     }
     return render(request, 'account/delete_user.html', context)
+
+
+@login_required
+@never_cache
+def merge_user(request, user_pk):
+    # check permission
+    if not request.user.is_superuser:
+        return nopermission(request)
+
+    remaining_user = get_object_or_404(get_user_model(), pk=user_pk)
+
+    form = MergeUserForm(request.POST or None, remaining_user=remaining_user)
+
+    if form.is_valid():
+        logger.info("user merged", extra={
+            'user': request.user,
+            'remaining_user': remaining_user.username,
+            'deleted_user': form.deleted_user_obj.username,
+        })
+
+        form.merge()
+
+        messages.success(request, _("Merged user {} into {}".format(
+            form.deleted_user_obj.username, remaining_user.username)))
+
+        return redirect('account:list_users')
+
+    context = {
+        'form': form,
+        'remaining_user': remaining_user,
+    }
+    return render(request, 'account/merge_user.html', context)
 
 
 @login_required

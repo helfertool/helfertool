@@ -21,6 +21,10 @@ urlpatterns = [
         views.delete_user,
         name='delete_user'),
 
+    url(r'^(?P<user_pk>[0-9]+)/merge/$',
+        views.merge_user,
+        name='merge_user'),
+
     url(r'^new/$',
         views.add_user,
         name='add_user'),

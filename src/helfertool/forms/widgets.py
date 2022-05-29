@@ -24,7 +24,7 @@ class DateTimePicker(forms.SplitDateTimeWidget):
         )
 
 
-def _user_label_from_instance(self, obj):
+def user_label_from_instance(obj):
     if obj.first_name and obj.last_name:
         return "{} ({})".format(obj.get_full_name(), obj.get_username())
     return obj.get_username()
@@ -41,7 +41,7 @@ class SingleUserSelectWidget(ModelSelect2Widget):
     ]
 
     def label_from_instance(self, obj):
-        return _user_label_from_instance(self, obj)
+        return user_label_from_instance(obj)
 
 
 class UserSelectWidget(ModelSelect2MultipleWidget):
@@ -55,7 +55,7 @@ class UserSelectWidget(ModelSelect2MultipleWidget):
     ]
 
     def label_from_instance(self, obj):
-        return _user_label_from_instance(self, obj)
+        return user_label_from_instance(obj)
 
 
 class ImageFileInput(forms.ClearableFileInput):

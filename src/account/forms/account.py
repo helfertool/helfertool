@@ -5,6 +5,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
+from django_select2.forms import Select2Widget
+
+from helfertool.forms.widgets import user_label_from_instance
+from registration.models import EventAdminRoles, Job, Link
+from mail.models import SentMail
+from inventory.models import Inventory
+from toollog.models import LogEntry
+
 from ..templatetags.globalpermissions import has_adduser_group, has_addevent_group, has_sendnews_group
 
 import logging
@@ -206,3 +214,72 @@ class DeleteUserForm(forms.ModelForm):
 
     def delete(self):
         self.instance.delete()
+
+
+class MergeUserForm(forms.Form):
+    deleted_user = forms.ChoiceField(
+        label=_("Other user, which will be deleted"),
+        widget=Select2Widget,
+    )
+
+    def __init__(self, *args, **kwargs):
+        self._remaining_user = kwargs.pop("remaining_user")
+
+        super(MergeUserForm, self).__init__(*args, **kwargs)
+
+        # fill choices for deleted user
+        choices = [["", "---"], ]
+        for u in get_user_model().objects.all():
+            if u != self._remaining_user:
+                choices.append([u.username, user_label_from_instance(u)])
+        self.fields["deleted_user"].choices = choices
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        User = get_user_model()
+        try:
+            self.deleted_user_obj = User.objects.get(username=cleaned_data["deleted_user"])
+        except User.DoesNotExist:
+            self.add_error("deleted_user", _("User does not exist"))
+
+    def merge(self):
+        # registration -> EventAdminRoles
+        for admin in EventAdminRoles.objects.filter(user=self.deleted_user_obj):
+            try:
+                admin_other = EventAdminRoles.objects.get(event=admin.event, user=self._remaining_user)
+
+                # the other user also has admin access -> merge permissions
+                # old roles will be deleted together with user later
+                for role in admin.roles:
+                    if role not in admin_other.roles:
+                        admin_other.roles.append(role)
+                admin_other.save()
+            except EventAdminRoles.DoesNotExist:
+                # the other user does not have admin permissions for the event -> just rewrite existing entry
+                admin.user = self._remaining_user
+                admin.save()
+
+        # registration -> Job
+        for job in Job.objects.filter(job_admins=self.deleted_user_obj):
+            if not job.job_admins.filter(pk=self._remaining_user.pk).exists():
+                job.job_admins.add(self._remaining_user)
+                job.save()
+
+        # registration -> Link
+        Link.objects.filter(creator=self.deleted_user_obj).update(creator=self._remaining_user)
+
+        # mail -> SentMail
+        SentMail.objects.filter(user=self.deleted_user_obj).update(user=self._remaining_user)
+
+        # inventory -> Inventory
+        for inventory in Inventory.objects.filter(admins=self.deleted_user_obj):
+            if not inventory.admins.filter(pk=self._remaining_user.pk).exists():
+                inventory.admins.add(self._remaining_user)
+                inventory.save()
+
+        # toollog -> LogEntry
+        LogEntry.objects.filter(user=self.deleted_user_obj).update(user=self._remaining_user)
+
+        # get rid of old user
+        self.deleted_user_obj.delete()
