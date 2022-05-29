@@ -40,6 +40,8 @@ class Helper(models.Model):
         :infection_instruction: status of the instruction for food handling
         :timestamp: time of registration
         :validated: the validation link was clicked (if validation is enabled)
+        :timestamp_validated: time when validation link was clicked (if validation is enabled)
+        :validation_id: Additional UUID for mail validation link, so that we prevent guessing of the URL
         :mail_failed: a "undelivered" report returned for the registration mail
         :privacy_statement: the privacy statement was accepted
     """
@@ -169,6 +171,11 @@ class Helper(models.Model):
         null=True,
     )
 
+    validation_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+    )
+
     mail_failed = models.CharField(
         blank=True,
         null=True,
@@ -229,7 +236,8 @@ class Helper(models.Model):
 
         # generate URLs
         event = self.event
-        validate_url = request.build_absolute_uri(reverse('validate', args=[event.url_name, self.id]))
+        validate_url = request.build_absolute_uri(reverse('validate',
+                                                  args=[event.url_name, self.id, self.validation_id]))
         registered_url = request.build_absolute_uri(reverse('registered', args=[event.url_name, self.id]))
 
         # generate subject and text from templates

@@ -38,9 +38,14 @@ urlpatterns = [
         name='registered'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/'
-        r'(?P<helper_pk>[a-z0-9\-]+)/$',
+        r'(?P<helper_pk>[a-z0-9\-]+)/(?P<validation_id>[a-z0-9\-]+)/$',
         views.validate,
         name='validate'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/validate/'
+        r'(?P<helper_pk>[a-z0-9\-]+)/$',
+        views.validate,
+        name='validate_old'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/ical/'
         r'(?P<helper_pk>[a-z0-9\-]+)/$',
