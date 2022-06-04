@@ -133,6 +133,7 @@ class BadgeCreator:
 
             subprocess.check_output([settings.BADGE_PDFLATEX,
                                      "-halt-on-error",
+                                     "-interaction=nonstopmode",
                                      "-no-shell-escape",
                                      "-output-directory", self.dir,
                                      os.path.basename(self.latex_file_path)],
