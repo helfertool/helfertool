@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0019_auto_20201229_2210'),
+        ("badges", "0019_auto_20201229_2210"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='badgesettings',
-            name='shift_format',
-            field=models.CharField(choices=[('HOURS', 'Hours only'), ('WEEKDAY', 'Include weekday'), ('DATE', 'Include date')], default='HOURS', help_text='There is not much space on the badges, so the list of shifts needs to be as small as possible.\nNevertheless, the weekday or date may be required for events with several days.', max_length=250, verbose_name='Format for shift on badges'),
+            model_name="badgesettings",
+            name="shift_format",
+            field=models.CharField(
+                choices=[("HOURS", "Hours only"), ("WEEKDAY", "Include weekday"), ("DATE", "Include date")],
+                default="HOURS",
+                help_text="There is not much space on the badges, so the list of shifts needs to be as small as possible.\nNevertheless, the weekday or date may be required for events with several days.",
+                max_length=250,
+                verbose_name="Format for shift on badges",
+            ),
         ),
     ]

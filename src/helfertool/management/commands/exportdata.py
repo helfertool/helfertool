@@ -17,7 +17,7 @@ def hash(data, salt):
 
 
 def printable(data):
-    return ''.join(filter(lambda x: x in string.printable, data))
+    return "".join(filter(lambda x: x in string.printable, data))
 
 
 class Command(BaseCommand):
@@ -30,9 +30,10 @@ class Command(BaseCommand):
     The CSV files are meant for data analysis without leaking any personal data.
     Nevertheless, please review the files before giving them to someone!
     """
+
     def add_arguments(self, parser):
-        parser.add_argument('event_url_name', type=str, help="URL name of the event")
-        parser.add_argument('--output', type=str, help='The output directory (default: URL name of exported event)')
+        parser.add_argument("event_url_name", type=str, help="URL name of the event")
+        parser.add_argument("--output", type=str, help="The output directory (default: URL name of exported event)")
 
     def handle(self, *args, **options):
         event_url_name = options["event_url_name"]
@@ -58,22 +59,23 @@ class Command(BaseCommand):
 
         # export
         print("Exporting helpers to {output_dir}/helper.csv...".format(**locals()))
-        with open("{output_dir}/helper.csv".format(**locals()), 'w', newline='') as csvfile:
+        with open("{output_dir}/helper.csv".format(**locals()), "w", newline="") as csvfile:
             writer = csv.writer(csvfile, delimiter=";")
             writer.writerow(["pk", "shirt", "nutrition", "infection_instruction", "timestamp", "validated"])
             for h in event.helper_set.all():
-                writer.writerow([hash(h.pk, salt), h.shirt, h.nutrition, h.infection_instruction, h.timestamp,
-                                 h.validated])
+                writer.writerow(
+                    [hash(h.pk, salt), h.shirt, h.nutrition, h.infection_instruction, h.timestamp, h.validated]
+                )
 
         print("Exporting jobs to {output_dir}/jobs.csv...".format(**locals()))
-        with open("{output_dir}/jobs.csv".format(**locals()), 'w', newline='') as csvfile:
+        with open("{output_dir}/jobs.csv".format(**locals()), "w", newline="") as csvfile:
             writer = csv.writer(csvfile, delimiter=";")
             writer.writerow(["pk", "name", "infection_instruction"])
             for j in event.job_set.all():
                 writer.writerow([j.pk, printable(j.name), j.infection_instruction])
 
         print("Exporting shifts to {output_dir}/shifts.csv...".format(**locals()))
-        with open("{output_dir}/shifts.csv".format(**locals()), 'w', newline='') as csvfile:
+        with open("{output_dir}/shifts.csv".format(**locals()), "w", newline="") as csvfile:
             writer = csv.writer(csvfile, delimiter=";")
             writer.writerow(["pk", "job_pk", "name", "begin", "end", "number"])
             for j in event.job_set.all():
@@ -81,7 +83,7 @@ class Command(BaseCommand):
                     writer.writerow([s.pk, j.pk, printable(s.name), s.begin, s.end, s.number])
 
         print("Exporting helper shifts to {output_dir}/helper_shifts.csv...".format(**locals()))
-        with open("{output_dir}/helper_shifts.csv".format(**locals()), 'w', newline='') as csvfile:
+        with open("{output_dir}/helper_shifts.csv".format(**locals()), "w", newline="") as csvfile:
             writer = csv.writer(csvfile, delimiter=";")
             writer.writerow(["helper_pk", "shift_pk", "timestamp"])
             for j in event.job_set.all():
@@ -90,7 +92,7 @@ class Command(BaseCommand):
                         writer.writerow([hash(h.helper.pk, salt), s.pk, h.timestamp])
 
         print("Exporting helper gifts to {output_dir}/helper_gifts.csv...".format(**locals()))
-        with open("{output_dir}/helper_gifts.csv".format(**locals()), 'w', newline='') as csvfile:
+        with open("{output_dir}/helper_gifts.csv".format(**locals()), "w", newline="") as csvfile:
             writer = csv.writer(csvfile, delimiter=";")
             gifttypes = [g.name for g in event.gift_set.all()]
             writer.writerow(["helper_pk"] + [printable(g) for g in gifttypes])

@@ -10,26 +10,26 @@ import re
 
 class MailForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request')
+        self.request = kwargs.pop("request")
 
         super(MailForm, self).__init__(*args, **kwargs)
 
         self.languages = self._get_languages()
 
-        self.fields['language'] = forms.ChoiceField(
+        self.fields["language"] = forms.ChoiceField(
             choices=self.languages,
             label=_("Language"),
         )
-        self.fields['language'].widget.attrs['onChange'] = 'handle_lang()'
+        self.fields["language"].widget.attrs["onChange"] = "handle_lang()"
 
-        self.fields['english'] = forms.BooleanField(
+        self.fields["english"] = forms.BooleanField(
             label=_("Add English text"),
             initial=True,
             required=False,
         )
-        self.fields['english'].widget.attrs['onChange'] = 'handle_lang()'
+        self.fields["english"].widget.attrs["onChange"] = "handle_lang()"
 
-        self.fields['subject'] = forms.CharField(
+        self.fields["subject"] = forms.CharField(
             label=_("Subject"),
             max_length=200,
         )
@@ -48,31 +48,27 @@ class MailForm(forms.Form):
     def clean(self):
         cleaned_data = super(MailForm, self).clean()
 
-        if cleaned_data.get('language') != 'en' and \
-                cleaned_data.get('english') and \
-                not cleaned_data.get("text_en"):
-            self.add_error('text_en', _("This field is required."))
+        if cleaned_data.get("language") != "en" and cleaned_data.get("english") and not cleaned_data.get("text_en"):
+            self.add_error("text_en", _("This field is required."))
 
         return cleaned_data
 
     def send_mail(self):
-        subject = self.cleaned_data.get('subject')
-        text = self.cleaned_data.get('text')
-        text_en = self.cleaned_data.get('text_en')
+        subject = self.cleaned_data.get("subject")
+        text = self.cleaned_data.get("text")
+        text_en = self.cleaned_data.get("text_en")
 
-        first_language = self.cleaned_data.get('language')
-        append_english = self.cleaned_data.get('english')
-        if first_language == 'en':
+        first_language = self.cleaned_data.get("language")
+        append_english = self.cleaned_data.get("english")
+        if first_language == "en":
             # english may be set anyway
             append_english = False
 
-        unsubscribe_url = self.request.build_absolute_uri(
-            reverse('news:unsubscribe', args=[""]))
+        unsubscribe_url = self.request.build_absolute_uri(reverse("news:unsubscribe", args=[""]))
         # since args is empty, the URL ends with // (this is a dirty trick to get the base URL for unsubscribe)
         unsubscribe_url = re.sub("//$", "/", unsubscribe_url)
 
-        tasks.send_news_mails.delay(first_language, append_english, subject,
-                                    text, text_en, unsubscribe_url)
+        tasks.send_news_mails.delay(first_language, append_english, subject, text, text_en, unsubscribe_url)
 
     def _get_languages(self):
         """

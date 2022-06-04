@@ -33,25 +33,25 @@ def settings(request, event_url_name):
     designs = event.badge_settings.badgedesign_set.all()
 
     # forms for defaults
-    defaults_form = BadgeDefaultsForm(request.POST or None,
-                                      instance=event.badge_settings.defaults,
-                                      settings=event.badge_settings,
-                                      prefix='event')
-    job_defaults_form = BadgeJobDefaultsForm(request.POST or None, event=event,
-                                             prefix='jobs')
+    defaults_form = BadgeDefaultsForm(
+        request.POST or None, instance=event.badge_settings.defaults, settings=event.badge_settings, prefix="event"
+    )
+    job_defaults_form = BadgeJobDefaultsForm(request.POST or None, event=event, prefix="jobs")
 
     if defaults_form.is_valid() and job_defaults_form.is_valid():
         defaults_form.save()
         job_defaults_form.save()
 
-        return redirect('badges:settings', event_url_name=event.url_name)
+        return redirect("badges:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'roles': roles,
-               'designs': designs,
-               'defaults_form': defaults_form,
-               'job_defaults_form': job_defaults_form}
-    return render(request, 'badges/settings.html', context)
+    context = {
+        "event": event,
+        "roles": roles,
+        "designs": designs,
+        "defaults_form": defaults_form,
+        "job_defaults_form": job_defaults_form,
+    }
+    return render(request, "badges/settings.html", context)
 
 
 @login_required
@@ -68,8 +68,7 @@ def settings_advanced(request, event_url_name):
         return notactive(request)
 
     # form for settings
-    form = BadgeSettingsForm(request.POST or None, request.FILES or None,
-                             instance=event.badge_settings)
+    form = BadgeSettingsForm(request.POST or None, request.FILES or None, instance=event.badge_settings)
 
     # for for permissions
     permissions = event.badge_settings.badgepermission_set.all()
@@ -77,14 +76,11 @@ def settings_advanced(request, event_url_name):
     if form.is_valid():
         form.save()
 
-        return redirect('badges:settings_advanced', event_url_name=event.url_name)
+        return redirect("badges:settings_advanced", event_url_name=event.url_name)
 
     # render
-    context = {'event': event,
-               'form': form,
-               'permissions': permissions}
-    return render(request, 'badges/settings_advanced.html',
-                  context)
+    context = {"event": event, "form": form, "permissions": permissions}
+    return render(request, "badges/settings_advanced.html", context)
 
 
 @login_required
@@ -101,11 +97,11 @@ def default_template(request, event_url_name):
         return notactive(request)
 
     # output
-    response = HttpResponse(content_type='application/x-tex')
-    response['Content-Disposition'] = 'attachment; filename="template.tex"'
+    response = HttpResponse(content_type="application/x-tex")
+    response["Content-Disposition"] = 'attachment; filename="template.tex"'
 
     # send file
-    with open(django_settings.BADGE_DEFAULT_TEMPLATE, 'rb') as f:
+    with open(django_settings.BADGE_DEFAULT_TEMPLATE, "rb") as f:
         response.write(f.read())
 
     return response
@@ -129,11 +125,11 @@ def current_template(request, event_url_name):
         raise Http404()
 
     # output
-    response = HttpResponse(content_type='application/x-tex')
-    response['Content-Disposition'] = 'attachment; filename="template_{}.tex"'.format(event.url_name)
+    response = HttpResponse(content_type="application/x-tex")
+    response["Content-Disposition"] = 'attachment; filename="template_{}.tex"'.format(event.url_name)
 
     # send file
-    with event.badge_settings.latex_template.open('rb') as f:
+    with event.badge_settings.latex_template.open("rb") as f:
         response.write(f.read())
 
     return response

@@ -15,6 +15,7 @@ from ..models import Prerequisite
 from .utils import notactive
 
 import logging
+
 logger = logging.getLogger("helfertool.prerequisites")
 
 
@@ -49,21 +50,22 @@ def edit_prerequisite(request, event_url_name, prerequisite_pk=None):
         if prerequisite_pk:
             log_msg = "prerequisite changed"
 
-        logger.info(log_msg, extra={
-            'user': request.user,
-            'event': event,
-            'prerequisite': prerequisite.name,
-            'prerequisite_pk': prerequisite.pk,
-        })
+        logger.info(
+            log_msg,
+            extra={
+                "user": request.user,
+                "event": event,
+                "prerequisite": prerequisite.name,
+                "prerequisite_pk": prerequisite.pk,
+            },
+        )
 
         # redirect to prerequisite overview
-        return redirect('prerequisites:view_prerequisites', event_url_name=event.url_name)
+        return redirect("prerequisites:view_prerequisites", event_url_name=event.url_name)
 
     # render page
-    context = {'event': event,
-               'prerequisite': prerequisite,
-               'form': form}
-    return render(request, 'prerequisites/edit_prerequisite.html', context)
+    context = {"event": event, "prerequisite": prerequisite, "form": form}
+    return render(request, "prerequisites/edit_prerequisite.html", context)
 
 
 @login_required
@@ -81,9 +83,8 @@ def view_prerequisites(request, event_url_name):
 
     prerequisites = Prerequisite.objects.filter(event=event)
 
-    context = {'event': event,
-               'prerequisites': prerequisites}
-    return render(request, 'prerequisites/view_prerequisites.html', context)
+    context = {"event": event, "prerequisites": prerequisites}
+    return render(request, "prerequisites/view_prerequisites.html", context)
 
 
 @login_required
@@ -110,20 +111,21 @@ def delete_prerequisite(request, event_url_name, prerequisite_pk):
 
     if form.is_valid():
         form.delete()
-        messages.success(request, _("Prerequisite deleted: %(name)s") % {'name': prerequisite.name})
+        messages.success(request, _("Prerequisite deleted: %(name)s") % {"name": prerequisite.name})
 
-        logger.info("prerequisite deleted", extra={
-            'user': request.user,
-            'event': event,
-            'prerequisite': prerequisite.name,
-            'prerequisite_pk': prerequisite.pk,
-        })
+        logger.info(
+            "prerequisite deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "prerequisite": prerequisite.name,
+                "prerequisite_pk": prerequisite.pk,
+            },
+        )
 
         # redirect to prerequisite overview
-        return redirect('prerequisites:view_prerequisites', event_url_name=event.url_name)
+        return redirect("prerequisites:view_prerequisites", event_url_name=event.url_name)
 
     # render page
-    context = {'event': event,
-               'prerequisite': prerequisite,
-               'form': form}
-    return render(request, 'prerequisites/delete_prerequisite.html', context)
+    context = {"event": event, "prerequisite": prerequisite, "form": form}
+    return render(request, "prerequisites/delete_prerequisite.html", context)

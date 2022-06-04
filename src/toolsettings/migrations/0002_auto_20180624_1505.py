@@ -9,38 +9,38 @@ import django_bleach.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('toolsettings', '0001_initial'),
+        ("toolsettings", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='htmlsetting',
-            name='value',
-            field=django_bleach.models.BleachField(blank=True, default='', verbose_name='HTML'),
+            model_name="htmlsetting",
+            name="value",
+            field=django_bleach.models.BleachField(blank=True, default="", verbose_name="HTML"),
         ),
         migrations.AlterField(
-            model_name='htmlsetting',
-            name='value_de',
-            field=django_bleach.models.BleachField(blank=True, default='', null=True, verbose_name='HTML'),
+            model_name="htmlsetting",
+            name="value_de",
+            field=django_bleach.models.BleachField(blank=True, default="", null=True, verbose_name="HTML"),
         ),
         migrations.AlterField(
-            model_name='htmlsetting',
-            name='value_en',
-            field=django_bleach.models.BleachField(blank=True, default='', null=True, verbose_name='HTML'),
+            model_name="htmlsetting",
+            name="value_en",
+            field=django_bleach.models.BleachField(blank=True, default="", null=True, verbose_name="HTML"),
         ),
         migrations.AlterField(
-            model_name='textsetting',
-            name='value',
-            field=models.TextField(blank=True, default='', verbose_name='Text'),
+            model_name="textsetting",
+            name="value",
+            field=models.TextField(blank=True, default="", verbose_name="Text"),
         ),
         migrations.AlterField(
-            model_name='textsetting',
-            name='value_de',
-            field=models.TextField(blank=True, default='', null=True, verbose_name='Text'),
+            model_name="textsetting",
+            name="value_de",
+            field=models.TextField(blank=True, default="", null=True, verbose_name="Text"),
         ),
         migrations.AlterField(
-            model_name='textsetting',
-            name='value_en',
-            field=models.TextField(blank=True, default='', null=True, verbose_name='Text'),
+            model_name="textsetting",
+            name="value_en",
+            field=models.TextField(blank=True, default="", null=True, verbose_name="Text"),
         ),
     ]

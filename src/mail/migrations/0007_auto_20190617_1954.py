@@ -7,28 +7,28 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0030_helper_mail_failed'),
-        ('mail', '0006_auto_20160730_1610'),
+        ("registration", "0030_helper_mail_failed"),
+        ("mail", "0006_auto_20160730_1610"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='sentmail',
-            name='tracking_uuid',
+            model_name="sentmail",
+            name="tracking_uuid",
             field=models.UUIDField(blank=True, null=True),
         ),
         migrations.CreateModel(
-            name='MailDelivery',
+            name="MailDelivery",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('failed', models.CharField(blank=True, default=None, max_length=512, null=True)),
-                ('helper', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.Helper')),
-                ('sentmail', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mail.SentMail')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("failed", models.CharField(blank=True, default=None, max_length=512, null=True)),
+                ("helper", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.Helper")),
+                ("sentmail", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="mail.SentMail")),
             ],
         ),
         migrations.AddField(
-            model_name='sentmail',
-            name='tracking_helper',
-            field=models.ManyToManyField(through='mail.MailDelivery', to='registration.Helper'),
+            model_name="sentmail",
+            name="tracking_helper",
+            field=models.ManyToManyField(through="mail.MailDelivery", to="registration.Helper"),
         ),
     ]

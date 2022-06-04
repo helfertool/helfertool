@@ -11,7 +11,7 @@ class Gift(models.Model):
     )
 
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 

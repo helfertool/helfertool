@@ -6,12 +6,10 @@ from ..models import Badge
 
 
 class BadgeBarcodeForm(forms.Form):
-    badge_barcode = forms.IntegerField(label=_("Barcode"),
-                                       widget=forms.TextInput(
-                                       attrs={'autofocus': ''}))
+    badge_barcode = forms.IntegerField(label=_("Barcode"), widget=forms.TextInput(attrs={"autofocus": ""}))
 
     def __init__(self, *args, **kwargs):
-        self.event = kwargs.pop('event')
+        self.event = kwargs.pop("event")
 
         self.badge = None
 
@@ -20,7 +18,7 @@ class BadgeBarcodeForm(forms.Form):
     def clean(self):
         super(BadgeBarcodeForm, self).__init__()
 
-        barcode = self.cleaned_data.get('badge_barcode')
+        barcode = self.cleaned_data.get("badge_barcode")
 
         # check if id is given
         if not barcode:
@@ -30,6 +28,10 @@ class BadgeBarcodeForm(forms.Form):
         try:
             self.badge = Badge.objects.get(event=self.event, barcode=barcode)
         except Badge.DoesNotExist:
-            raise ValidationError(_("This badge does not exist. "
-                                    "Maybe it was deleted since printing or "
-                                    "does not belong to this event."))
+            raise ValidationError(
+                _(
+                    "This badge does not exist. "
+                    "Maybe it was deleted since printing or "
+                    "does not belong to this event."
+                )
+            )

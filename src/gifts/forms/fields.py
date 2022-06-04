@@ -8,8 +8,9 @@ from django_icons import icon
 
 
 def choice(icon_name, classes, text):
-    return mark_safe(format_lazy('<span class="{classes}"> {icon} {text}</span>',
-                                 icon=icon(icon_name), classes=classes, text=text))
+    return mark_safe(
+        format_lazy('<span class="{classes}"> {icon} {text}</span>', icon=icon(icon_name), classes=classes, text=text)
+    )
 
 
 choice_lazy = lazy(choice)

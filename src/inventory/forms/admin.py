@@ -11,7 +11,7 @@ class InventoryForm(forms.ModelForm):
         model = Inventory
         exclude = []
         widgets = {
-            'admins': UserSelectWidget,
+            "admins": UserSelectWidget,
         }
 
 
@@ -27,10 +27,12 @@ class InventoryDeleteForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        exclude = ['inventory', ]
+        exclude = [
+            "inventory",
+        ]
 
     def __init__(self, *args, **kwargs):
-        self.inventory = kwargs.pop('inventory')
+        self.inventory = kwargs.pop("inventory")
 
         super(ItemForm, self).__init__(*args, **kwargs)
 

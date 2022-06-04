@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0030_helper_mail_failed'),
+        ("registration", "0030_helper_mail_failed"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='ask_phone',
-            field=models.BooleanField(default=True, verbose_name='Ask for phone number'),
+            model_name="event",
+            name="ask_phone",
+            field=models.BooleanField(default=True, verbose_name="Ask for phone number"),
         ),
     ]

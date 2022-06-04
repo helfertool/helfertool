@@ -4,13 +4,13 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Issue(models.Model):
-    NEW_EVENT = 'newevent'
-    PROMOTE_EVENT = 'promoteevent'
-    PERM_ADD_USER = 'permadduser'
-    PERM_ADD_EVENT = 'permaddevent'
-    FEATURE = 'feature'
-    BUG = 'bug'
-    OTHER = 'other'
+    NEW_EVENT = "newevent"
+    PROMOTE_EVENT = "promoteevent"
+    PERM_ADD_USER = "permadduser"
+    PERM_ADD_EVENT = "permaddevent"
+    FEATURE = "feature"
+    BUG = "bug"
+    OTHER = "other"
 
     SUBJECT_CHOICES = (
         (NEW_EVENT, _("New event")),
@@ -47,10 +47,9 @@ class Issue(models.Model):
     done_by = models.ForeignKey(
         get_user_model(),
         null=True,
-        related_name='+',
+        related_name="+",
         on_delete=models.SET_NULL,
     )
 
     def __str__(self):
-        return "{}: {}".format(self.sender.get_full_name(),
-                               self.get_subject_display())
+        return "{}: {}".format(self.sender.get_full_name(), self.get_subject_display())

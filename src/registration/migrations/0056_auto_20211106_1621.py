@@ -8,18 +8,26 @@ import registration.models.event
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0055_event_corona'),
+        ("registration", "0055_event_corona"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='logo',
-            field=helfertool.forms.fields.RestrictedImageField(blank=True, null=True, upload_to=registration.models.event._logo_upload_path, verbose_name='Logo'),
+            model_name="event",
+            name="logo",
+            field=helfertool.forms.fields.RestrictedImageField(
+                blank=True, null=True, upload_to=registration.models.event._logo_upload_path, verbose_name="Logo"
+            ),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='logo_social',
-            field=helfertool.forms.fields.RestrictedImageField(blank=True, help_text='Best results with 1052 x 548 px.', null=True, upload_to=registration.models.event._logo_upload_path, verbose_name='Logo for Facebook'),
+            model_name="event",
+            name="logo_social",
+            field=helfertool.forms.fields.RestrictedImageField(
+                blank=True,
+                help_text="Best results with 1052 x 548 px.",
+                null=True,
+                upload_to=registration.models.event._logo_upload_path,
+                verbose_name="Logo for Facebook",
+            ),
         ),
     ]

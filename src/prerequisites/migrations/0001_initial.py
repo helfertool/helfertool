@@ -10,30 +10,36 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('registration', '0031_event_ask_phone'),
+        ("registration", "0031_event_ask_phone"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Prerequisite',
+            name="Prerequisite",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=200, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=200, null=True, verbose_name='Name')),
-                ('description', django_bleach.models.BleachField(blank=True, verbose_name='Description')),
-                ('description_de', django_bleach.models.BleachField(blank=True, null=True, verbose_name='Description')),
-                ('description_en', django_bleach.models.BleachField(blank=True, null=True, verbose_name='Description')),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.Event')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=200, verbose_name="Name")),
+                ("name_de", models.CharField(max_length=200, null=True, verbose_name="Name")),
+                ("name_en", models.CharField(max_length=200, null=True, verbose_name="Name")),
+                ("description", django_bleach.models.BleachField(blank=True, verbose_name="Description")),
+                ("description_de", django_bleach.models.BleachField(blank=True, null=True, verbose_name="Description")),
+                ("description_en", django_bleach.models.BleachField(blank=True, null=True, verbose_name="Description")),
+                ("event", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.Event")),
             ],
         ),
         migrations.CreateModel(
-            name='FulfilledPrerequisite',
+            name="FulfilledPrerequisite",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('has_prerequisite', models.BooleanField(default=False, verbose_name='Helper fulfils this prerequisite')),
-                ('helper', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.Helper')),
-                ('prerequisite', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='prerequisites.Prerequisite')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "has_prerequisite",
+                    models.BooleanField(default=False, verbose_name="Helper fulfils this prerequisite"),
+                ),
+                ("helper", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.Helper")),
+                (
+                    "prerequisite",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="prerequisites.Prerequisite"),
+                ),
             ],
         ),
     ]

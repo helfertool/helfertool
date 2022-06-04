@@ -31,8 +31,8 @@ def shirts(request, event_url_name):
 
     # check if shirt sizes are collected for this event
     if not event.ask_shirt:
-        context = {'event': event}
-        return render(request, 'statistic/shirts_not_active.html', context)
+        context = {"event": event}
+        return render(request, "statistic/shirts_not_active.html", context)
 
     # size names
     size_names = [name for size, name in shirt_choices]
@@ -58,8 +58,8 @@ def shirts(request, event_url_name):
         # event wide
         if has_access(request.user, event, ACCESS_STATISTICS_VIEW):
             # shirt sizes
-            total_shirts_query = event.helper_set.values('shirt').annotate(num=Count('shirt')).order_by()
-            coordinator_shirts_query = event.all_coordinators.values('shirt').annotate(num=Count('shirt')).order_by()
+            total_shirts_query = event.helper_set.values("shirt").annotate(num=Count("shirt")).order_by()
+            coordinator_shirts_query = event.all_coordinators.values("shirt").annotate(num=Count("shirt")).order_by()
 
             # total numbers (iterate over all sizes in correct order)
             for size, name in shirt_choices:
@@ -67,12 +67,12 @@ def shirts(request, event_url_name):
                 num_coordinator = 0
 
                 try:
-                    num_total = total_shirts_query.get(shirt=size)['num']
+                    num_total = total_shirts_query.get(shirt=size)["num"]
                 except Helper.DoesNotExist:
                     pass
 
                 try:
-                    num_coordinator = coordinator_shirts_query.get(shirt=size)['num']
+                    num_coordinator = coordinator_shirts_query.get(shirt=size)["num"]
                 except Helper.DoesNotExist:
                     pass
 
@@ -93,12 +93,9 @@ def shirts(request, event_url_name):
                 # update total number
                 for size, name in shirt_choices:
                     num = sizes_for_job.total[name]
-                    sizes_for_job.total.update({name: num+sizes_for_shift[name]})
+                    sizes_for_job.total.update({name: num + sizes_for_shift[name]})
             job_shirts.update({job: sizes_for_job})
 
     # render
-    context = {'event': event,
-               'size_names': size_names,
-               'total_shirts': total_shirts,
-               'job_shirts': job_shirts}
-    return render(request, 'statistic/shirts.html', context)
+    context = {"event": event, "size_names": size_names, "total_shirts": total_shirts, "job_shirts": job_shirts}
+    return render(request, "statistic/shirts.html", context)

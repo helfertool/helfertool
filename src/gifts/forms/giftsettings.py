@@ -6,7 +6,9 @@ from ..models import GiftSettings
 class GiftSettingsForm(forms.ModelForm):
     class Meta:
         model = GiftSettings
-        exclude = ['event', ]
+        exclude = [
+            "event",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(GiftSettingsForm, self).__init__(*args, **kwargs)

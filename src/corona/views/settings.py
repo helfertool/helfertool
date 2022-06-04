@@ -10,6 +10,7 @@ from ..forms import CoronaSettingsForm
 from .utils import notactive
 
 import logging
+
 logger = logging.getLogger("helfertool.corona")
 
 
@@ -31,13 +32,15 @@ def settings(request, event_url_name):
     if form.is_valid():
         form.save()
 
-        logger.info("corona settings", extra={
-            'user': request.user,
-            'event': event,
-        })
+        logger.info(
+            "corona settings",
+            extra={
+                "user": request.user,
+                "event": event,
+            },
+        )
 
-        return redirect('corona:settings', event_url_name=event.url_name)
+        return redirect("corona:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'corona/settings.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "corona/settings.html", context)

@@ -6,10 +6,14 @@ from ..models import Gift, GiftSet
 class GiftSetForm(forms.ModelForm):
     class Meta:
         model = GiftSet
-        exclude = ['name', 'event', 'gifts', ]
+        exclude = [
+            "name",
+            "event",
+            "gifts",
+        ]
 
     def __init__(self, *args, **kwargs):
-        self.event = kwargs.pop('event')
+        self.event = kwargs.pop("event")
 
         super(GiftSetForm, self).__init__(*args, **kwargs)
 
@@ -24,10 +28,7 @@ class GiftSetForm(forms.ModelForm):
             if self.instance:
                 number = self.instance.get_gift_num(gift)
 
-            self.fields[gift_id] = forms.IntegerField(label=gift.name,
-                                                      required=False,
-                                                      min_value=0,
-                                                      initial=number)
+            self.fields[gift_id] = forms.IntegerField(label=gift.name, required=False, min_value=0, initial=number)
 
     def save(self, commit=True):
         instance = super(GiftSetForm, self).save(False)

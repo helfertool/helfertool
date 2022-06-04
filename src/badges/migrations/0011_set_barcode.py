@@ -6,7 +6,7 @@ from django.db import migrations
 
 
 def copy_barcode(apps, schema_editor):
-    Badge = apps.get_model('badges', 'Badge')
+    Badge = apps.get_model("badges", "Badge")
     for row in Badge.objects.all():
         row.barcode = row.pk
         row.save()
@@ -15,10 +15,9 @@ def copy_barcode(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0010_badge_barcode'),
+        ("badges", "0010_badge_barcode"),
     ]
 
     operations = [
-        migrations.RunPython(copy_barcode,
-                             reverse_code=migrations.RunPython.noop),
+        migrations.RunPython(copy_barcode, reverse_code=migrations.RunPython.noop),
     ]

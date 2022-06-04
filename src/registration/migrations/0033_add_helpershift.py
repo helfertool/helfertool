@@ -7,27 +7,33 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0032_auto_20200404_2111'),
+        ("registration", "0032_auto_20200404_2111"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='helper',
-            name='timestamp',
-            field=models.DateTimeField(auto_now_add=True, verbose_name='Registration time for the helper'),
+            model_name="helper",
+            name="timestamp",
+            field=models.DateTimeField(auto_now_add=True, verbose_name="Registration time for the helper"),
         ),
         migrations.CreateModel(
-            name='HelperShift',
+            name="HelperShift",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('timestamp', models.DateTimeField(auto_now_add=True, verbose_name='Registration time for this shift')),
-                ('present', models.BooleanField(default=False, help_text='Helper was at shift', verbose_name='Present')),
-                ('manual_presence', models.BooleanField(default=False, editable=False, help_text='presence was manually set')),
-                ('helper', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.Helper')),
-                ('shift', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.Shift')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("timestamp", models.DateTimeField(auto_now_add=True, verbose_name="Registration time for this shift")),
+                (
+                    "present",
+                    models.BooleanField(default=False, help_text="Helper was at shift", verbose_name="Present"),
+                ),
+                (
+                    "manual_presence",
+                    models.BooleanField(default=False, editable=False, help_text="presence was manually set"),
+                ),
+                ("helper", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.Helper")),
+                ("shift", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.Shift")),
             ],
             options={
-                'unique_together': {('helper', 'shift')},
+                "unique_together": {("helper", "shift")},
             },
         ),
     ]

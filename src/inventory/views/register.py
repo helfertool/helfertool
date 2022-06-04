@@ -29,12 +29,11 @@ def register_item(request, event_url_name):
         return notactive(request)
 
     # data from last registration
-    last_helper_pk = request.session.pop('inventory_helper_pk', None)
-    last_item_name = request.session.pop('inventory_item_name', None)
+    last_helper_pk = request.session.pop("inventory_helper_pk", None)
+    last_item_name = request.session.pop("inventory_item_name", None)
     try:
         last_helper = Helper.objects.get(pk=last_helper_pk)
-        last_helper_items = UsedItem.objects.filter(helper=last_helper,
-                                                    timestamp_returned=None)
+        last_helper_items = UsedItem.objects.filter(helper=last_helper, timestamp_returned=None)
     except Helper.DoesNotExist:
         last_helper = None
         last_helper_items = None
@@ -45,19 +44,19 @@ def register_item(request, event_url_name):
     not_available = False
     if form.is_valid():
         if form.item.is_available(event):
-            return redirect('inventory:register_badge', event_url_name,
-                            form.item.pk)
+            return redirect("inventory:register_badge", event_url_name, form.item.pk)
         else:
             not_available = True
 
-    context = {'event': event,
-               'form': form,
-               'not_available': not_available,
-               'last_helper': last_helper,
-               'last_helper_items': last_helper_items,
-               'last_item_name': last_item_name}
-    return render(request, 'inventory/register_item.html',
-                  context)
+    context = {
+        "event": event,
+        "form": form,
+        "not_available": not_available,
+        "last_helper": last_helper,
+        "last_helper_items": last_helper_items,
+        "last_item_name": last_item_name,
+    }
+    return render(request, "inventory/register_item.html", context)
 
 
 @login_required
@@ -88,10 +87,10 @@ def register_badge(request, event_url_name, item_pk):
                 item.add_to_helper(form.badge.helper)
 
                 # update saved data in session
-                request.session['inventory_helper_pk'] = str(form.badge.helper.pk)
-                request.session['inventory_item_name'] = item.name
+                request.session["inventory_helper_pk"] = str(form.badge.helper.pk)
+                request.session["inventory_item_name"] = item.name
 
-                return redirect('inventory:register', event_url_name)
+                return redirect("inventory:register", event_url_name)
             else:
                 # no helper -> special badge
                 special_badge = True
@@ -100,9 +99,5 @@ def register_badge(request, event_url_name, item_pk):
     except AlreadyAssigned:
         already_assigned = True
 
-    context = {'event': event,
-               'form': form,
-               'already_assigned': already_assigned,
-               'special_badge': special_badge}
-    return render(request, 'inventory/register_badge.html',
-                  context)
+    context = {"event": event, "form": form, "already_assigned": already_assigned, "special_badge": special_badge}
+    return render(request, "inventory/register_badge.html", context)

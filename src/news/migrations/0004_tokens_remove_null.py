@@ -9,13 +9,13 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0003_generate_tokens'),
+        ("news", "0003_generate_tokens"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='person',
-            name='token',
+            model_name="person",
+            name="token",
             field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
     ]

@@ -7,18 +7,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0012_auto_20181021_1954'),
+        ("badges", "0012_auto_20181021_1954"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='badgedesign',
-            name='bg_color',
-            field=models.CharField(default='#FFFFFF', help_text='e.g. #00ff00', max_length=7, validators=[django.core.validators.RegexValidator('^#[a-fA-F0-9]{6}$')], verbose_name='Background color'),
+            model_name="badgedesign",
+            name="bg_color",
+            field=models.CharField(
+                default="#FFFFFF",
+                help_text="e.g. #00ff00",
+                max_length=7,
+                validators=[django.core.validators.RegexValidator("^#[a-fA-F0-9]{6}$")],
+                verbose_name="Background color",
+            ),
         ),
         migrations.AlterField(
-            model_name='badgedesign',
-            name='font_color',
-            field=models.CharField(default='#000000', help_text='e.g. #00ff00', max_length=7, validators=[django.core.validators.RegexValidator('^#[a-fA-F0-9]{6}$')], verbose_name='Color for text'),
+            model_name="badgedesign",
+            name="font_color",
+            field=models.CharField(
+                default="#000000",
+                help_text="e.g. #00ff00",
+                max_length=7,
+                validators=[django.core.validators.RegexValidator("^#[a-fA-F0-9]{6}$")],
+                verbose_name="Color for text",
+            ),
         ),
     ]

@@ -21,11 +21,12 @@ from smtplib import SMTPException
 import uuid
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
 class Helper(models.Model):
-    """ Helper in one or more shifts.
+    """Helper in one or more shifts.
 
     Columns:
         :shifts: all shifts of this person
@@ -47,7 +48,7 @@ class Helper(models.Model):
     """
 
     class Meta:
-        ordering = ['event', 'surname', 'firstname']
+        ordering = ["event", "surname", "firstname"]
 
     # choices for food handling inctruction (short texts used internalls, normal ones in registration form)
     INSTRUCTION_NO = "No"
@@ -57,13 +58,13 @@ class Helper(models.Model):
     INSTRUCTION_CHOICES = (
         (INSTRUCTION_NO, _("I never got an instruction")),
         (INSTRUCTION_YES, _("I have a valid instruction")),
-        (INSTRUCTION_REFRESH, _("I got a instruction by a doctor, it must be refreshed"))
+        (INSTRUCTION_REFRESH, _("I got a instruction by a doctor, it must be refreshed")),
     )
 
     INSTRUCTION_CHOICES_SHORT = (
         (INSTRUCTION_NO, _("No")),
         (INSTRUCTION_YES, _("Valid")),
-        (INSTRUCTION_REFRESH, _("Refreshment"))
+        (INSTRUCTION_REFRESH, _("Refreshment")),
     )
 
     # choices for nutrition (short texts used internalls, normal ones in registration form)
@@ -95,7 +96,7 @@ class Helper(models.Model):
     )
 
     shifts = models.ManyToManyField(
-        'Shift',
+        "Shift",
         through=HelperShift,
     )
 
@@ -156,10 +157,7 @@ class Helper(models.Model):
         verbose_name=_("Instruction for the handling of food"),
     )
 
-    timestamp = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_("Registration time for the helper")
-    )
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_("Registration time for the helper"))
 
     validated = models.BooleanField(
         default=False,
@@ -190,7 +188,7 @@ class Helper(models.Model):
 
     prerequisites = models.ManyToManyField(
         Prerequisite,
-        through='prerequisites.FulfilledPrerequisite',
+        through="prerequisites.FulfilledPrerequisite",
         blank=True,
     )
 
@@ -198,14 +196,14 @@ class Helper(models.Model):
         return "%s %s" % (self.firstname, self.surname)
 
     def get_infection_instruction_short(self):
-        """ Returns the short description for the infection_instruction field. """
+        """Returns the short description for the infection_instruction field."""
         for item in Helper.INSTRUCTION_CHOICES_SHORT:
             if item[0] == self.infection_instruction:
                 return item[1]
         return ""
 
     def get_nutrition_short(self):
-        """ Returns the short description for the nutrition field. """
+        """Returns the short description for the nutrition field."""
         for item in Helper.NUTRITION_CHOICES_SHORT:
             if item[0] == self.nutrition:
                 return item[1]
@@ -226,7 +224,7 @@ class Helper(models.Model):
         return False
 
     def send_mail(self, request, internal):
-        """ Send a confirmation e-mail to the registered helper.
+        """Send a confirmation e-mail to the registered helper.
 
         This e-mail contains a list of the shifts, the helper registered for.
         """
@@ -236,36 +234,47 @@ class Helper(models.Model):
 
         # generate URLs
         event = self.event
-        validate_url = request.build_absolute_uri(reverse('validate',
-                                                  args=[event.url_name, self.id, self.validation_id]))
-        registered_url = request.build_absolute_uri(reverse('registered', args=[event.url_name, self.id]))
+        validate_url = request.build_absolute_uri(
+            reverse("validate", args=[event.url_name, self.id, self.validation_id])
+        )
+        registered_url = request.build_absolute_uri(reverse("registered", args=[event.url_name, self.id]))
 
         # generate subject and text from templates
-        subject_template = get_template('registration/mail/subject.txt')
-        subject = subject_template.render({'event': event}).rstrip()
+        subject_template = get_template("registration/mail/subject.txt")
+        subject = subject_template.render({"event": event}).rstrip()
 
         if self.is_coordinator:
-            text_template = get_template('registration/mail/coordinator.txt')
+            text_template = get_template("registration/mail/coordinator.txt")
         elif internal:
-            text_template = get_template('registration/mail/internal.txt')
+            text_template = get_template("registration/mail/internal.txt")
         else:
-            text_template = get_template('registration/mail/public.txt')
-        text = text_template.render({'user': self,
-                                     'event': event,
-                                     'validate_url': validate_url,
-                                     'registered_url': registered_url,
-                                     'contact_mail': settings.CONTACT_MAIL})
+            text_template = get_template("registration/mail/public.txt")
+        text = text_template.render(
+            {
+                "user": self,
+                "event": event,
+                "validate_url": validate_url,
+                "registered_url": registered_url,
+                "contact_mail": settings.CONTACT_MAIL,
+            }
+        )
 
         # header for mail tracking
         tracking_header = new_tracking_registration(self)
 
         # sent it and handle errors
-        mail = EmailMessage(subject,
-                            text,
-                            settings.EMAIL_SENDER_ADDRESS,
-                            [self.email, ],  # to
-                            reply_to=[event.email, ],
-                            headers=tracking_header)
+        mail = EmailMessage(
+            subject,
+            text,
+            settings.EMAIL_SENDER_ADDRESS,
+            [
+                self.email,
+            ],  # to
+            reply_to=[
+                event.email,
+            ],
+            headers=tracking_header,
+        )
 
         try:
             mail.send(fail_silently=False)
@@ -274,11 +283,14 @@ class Helper(models.Model):
             self.mail_failed = "Local server error"
             self.save()
 
-            logger.error("helper mailerror", extra={
-                'event': event,
-                'helper': self,
-                'error': str(e),
-            })
+            logger.error(
+                "helper mailerror",
+                extra={
+                    "event": event,
+                    "helper": self,
+                    "error": str(e),
+                },
+            )
 
             return False
 
@@ -297,7 +309,7 @@ class Helper(models.Model):
 
     @property
     def full_name(self):
-        """ Returns full name of helper """
+        """Returns full name of helper"""
         return "%s %s" % (self.firstname, self.surname)
 
     @property
@@ -306,68 +318,68 @@ class Helper(models.Model):
 
     @property
     def coordinated_jobs(self):
-        if hasattr(self, 'job_set'):
-            return getattr(self, 'job_set').all()
+        if hasattr(self, "job_set"):
+            return getattr(self, "job_set").all()
         return []
 
     @property
     def is_coordinator(self):
-        if not hasattr(self, 'job_set'):
+        if not hasattr(self, "job_set"):
             return False
-        return getattr(self, 'job_set').count() > 0
+        return getattr(self, "job_set").count() > 0
 
     @property
     def first_shift(self):
-        shifts = self.shifts.order_by('begin')
+        shifts = self.shifts.order_by("begin")
         if len(shifts) > 0:
             return shifts[0]
         return None
 
     @property
     def all_jobs(self):
-        """ Returns all jobs, which are done by the helper (as coordinator or helper) """
+        """Returns all jobs, which are done by the helper (as coordinator or helper)"""
         jobs = set(self.coordinated_jobs)
 
-        for shift in self.shifts.prefetch_related('job'):
+        for shift in self.shifts.prefetch_related("job"):
             jobs.add(shift.job)
 
         return jobs
 
 
-@receiver(post_save, sender=Helper, dispatch_uid='helper_saved')
+@receiver(post_save, sender=Helper, dispatch_uid="helper_saved")
 def helper_saved(sender, instance, using, **kwargs):
-    """ Add badge and gifts to helper if necessary.
+    """Add badge and gifts to helper if necessary.
 
     This is a signal handler, that is called, when a helper is saved. It
     adds the badge if badge creation is enabled and it is not there already.
     """
     if instance.event:
-        if instance.event.badges and not hasattr(instance, 'badge'):
+        if instance.event.badges and not hasattr(instance, "badge"):
             badge = Badge()
             badge.event = instance.event
             badge.helper = instance
             badge.save()
 
-        if instance.event.gifts and not hasattr(instance, 'gifts'):
+        if instance.event.gifts and not hasattr(instance, "gifts"):
             gifts = HelpersGifts()
             gifts.helper = instance
             gifts.save()
 
 
 def helper_deleted(sender, **kwargs):
-    action = kwargs.pop('action')
+    action = kwargs.pop("action")
 
     if action == "post_remove":
-        helper = kwargs.pop('instance')
+        helper = kwargs.pop("instance")
         helper.check_delete()
 
 
 def coordinator_deleted(sender, **kwargs):
-    action = kwargs.pop('action')
+    action = kwargs.pop("action")
 
     if action == "post_remove":
-        pk_set = kwargs.pop('pk_set')
-        model = kwargs.pop('model')  # this is Helper
+        pk_set = kwargs.pop("pk_set")
+        model = kwargs.pop("model")  # this is Helper
 
         # iterate over all deleted helpers, this should be only one helper
         for helper_pk in pk_set:

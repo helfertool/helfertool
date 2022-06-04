@@ -6,18 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0013_auto_20200614_1918'),
+        ("badges", "0013_auto_20200614_1918"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badgesettings',
-            name='shift_format',
-            field=models.CharField(choices=[('HOURS', 'Hours only'), ('WEEKDAY', 'Include weekday'), ('DATE', 'Include date')], default='HOURS', help_text='There is not much space on the badges, so the list of shifts needs to be as small as possible.\n                    Nevertheless, the weekday or date may be required for events with several days.', max_length=250, verbose_name='Format for shift on badges'),
+            model_name="badgesettings",
+            name="shift_format",
+            field=models.CharField(
+                choices=[("HOURS", "Hours only"), ("WEEKDAY", "Include weekday"), ("DATE", "Include date")],
+                default="HOURS",
+                help_text="There is not much space on the badges, so the list of shifts needs to be as small as possible.\n                    Nevertheless, the weekday or date may be required for events with several days.",
+                max_length=250,
+                verbose_name="Format for shift on badges",
+            ),
         ),
         migrations.AddField(
-            model_name='badgesettings',
-            name='shift_no_names',
-            field=models.BooleanField(default=False, verbose_name='Do not use shift names for badges, always print times'),
+            model_name="badgesettings",
+            name="shift_no_names",
+            field=models.BooleanField(
+                default=False, verbose_name="Do not use shift names for badges, always print times"
+            ),
         ),
     ]

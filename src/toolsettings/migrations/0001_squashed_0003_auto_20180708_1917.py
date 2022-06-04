@@ -9,36 +9,57 @@ import django_bleach.models
 
 class Migration(migrations.Migration):
 
-    replaces = [('toolsettings', '0001_initial'), ('toolsettings', '0002_auto_20180624_1505'), ('toolsettings', '0003_auto_20180708_1917')]
+    replaces = [
+        ("toolsettings", "0001_initial"),
+        ("toolsettings", "0002_auto_20180624_1505"),
+        ("toolsettings", "0003_auto_20180708_1917"),
+    ]
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='HTMLSetting',
+            name="HTMLSetting",
             fields=[
-                ('key', models.CharField(max_length=200, primary_key=True, serialize=False, validators=[django.core.validators.RegexValidator('^[a-zA-Z0-9]+$')], verbose_name='Key')),
-                ('value', django_bleach.models.BleachField(blank=True, default='', verbose_name='HTML')),
-                ('value_de', django_bleach.models.BleachField(blank=True, default='', null=True, verbose_name='HTML')),
-                ('value_en', django_bleach.models.BleachField(blank=True, default='', null=True, verbose_name='HTML')),
+                (
+                    "key",
+                    models.CharField(
+                        max_length=200,
+                        primary_key=True,
+                        serialize=False,
+                        validators=[django.core.validators.RegexValidator("^[a-zA-Z0-9]+$")],
+                        verbose_name="Key",
+                    ),
+                ),
+                ("value", django_bleach.models.BleachField(blank=True, default="", verbose_name="HTML")),
+                ("value_de", django_bleach.models.BleachField(blank=True, default="", null=True, verbose_name="HTML")),
+                ("value_en", django_bleach.models.BleachField(blank=True, default="", null=True, verbose_name="HTML")),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='TextSetting',
+            name="TextSetting",
             fields=[
-                ('key', models.CharField(max_length=200, primary_key=True, serialize=False, validators=[django.core.validators.RegexValidator('^[a-zA-Z0-9]+$')], verbose_name='Key')),
-                ('value', models.TextField(blank=True, default='', verbose_name='Text')),
-                ('value_de', models.TextField(blank=True, default='', null=True, verbose_name='Text')),
-                ('value_en', models.TextField(blank=True, default='', null=True, verbose_name='Text')),
+                (
+                    "key",
+                    models.CharField(
+                        max_length=200,
+                        primary_key=True,
+                        serialize=False,
+                        validators=[django.core.validators.RegexValidator("^[a-zA-Z0-9]+$")],
+                        verbose_name="Key",
+                    ),
+                ),
+                ("value", models.TextField(blank=True, default="", verbose_name="Text")),
+                ("value_de", models.TextField(blank=True, default="", null=True, verbose_name="Text")),
+                ("value_en", models.TextField(blank=True, default="", null=True, verbose_name="Text")),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

@@ -10,11 +10,11 @@ class InventoryBarcodeForm(forms.Form):
         label=_("Barcode"),
         max_length=200,
         required=True,
-        widget=forms.TextInput(attrs={'autofocus': ''}),
+        widget=forms.TextInput(attrs={"autofocus": ""}),
     )
 
     def __init__(self, *args, **kwargs):
-        self.event = kwargs.pop('event')
+        self.event = kwargs.pop("event")
 
         self.item = None
 
@@ -23,14 +23,11 @@ class InventoryBarcodeForm(forms.Form):
     def clean(self):
         super(InventoryBarcodeForm, self).__init__()
 
-        barcode = self.cleaned_data.get('barcode')
+        barcode = self.cleaned_data.get("barcode")
 
         # check if badge exists
         try:
-            available = self.event.inventory_settings.available_inventory. \
-                values('id')
-            self.item = Item.objects.get(inventory__in=available,
-                                         barcode=barcode)
+            available = self.event.inventory_settings.available_inventory.values("id")
+            self.item = Item.objects.get(inventory__in=available, barcode=barcode)
         except Item.DoesNotExist:
-            raise ValidationError(_("There is no item with this barcode for "
-                                    "this event."))
+            raise ValidationError(_("There is no item with this barcode for " "this event."))

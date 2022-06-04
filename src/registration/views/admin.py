@@ -13,7 +13,7 @@ from ..permissions import has_access, has_access_event_or_job, ACCESS_EVENT_EDIT
 @never_cache
 def admin(request):
     context = {}
-    return render(request, 'registration/admin/index.html', context)
+    return render(request, "registration/admin/index.html", context)
 
 
 @login_required
@@ -26,8 +26,8 @@ def jobs_and_shifts(request, event_url_name):
         return nopermission(request)
 
     # list all jobs and shifts
-    context = {'event': event}
-    return render(request, 'registration/admin/jobs_and_shifts.html', context)
+    context = {"event": event}
+    return render(request, "registration/admin/jobs_and_shifts.html", context)
 
 
 @login_required
@@ -39,5 +39,5 @@ def coordinators(request, event_url_name):
     if not has_access_event_or_job(request.user, event, ACCESS_EVENT_VIEW_COORDINATORS):
         return nopermission(request)
 
-    context = {'event': event}
-    return render(request, 'registration/admin/coordinators.html', context)
+    context = {"event": event}
+    return render(request, "registration/admin/coordinators.html", context)

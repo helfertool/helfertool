@@ -8,6 +8,7 @@ from ..forms import UnsubscribeForm
 from ..models import Person
 
 import logging
+
 logger = logging.getLogger("helfertool.news")
 
 
@@ -20,19 +21,22 @@ def unsubscribe(request, token):
     try:
         person = Person.objects.get(token=token)
     except Person.DoesNotExist:
-        return render(request, 'news/unsubscribe.html')
+        return render(request, "news/unsubscribe.html")
     except ValidationError:
         raise Http404()
 
     form = UnsubscribeForm(request.POST or None)
     if form.is_valid():
-        logger.info("newsletter unsubscribe", extra={
-            'email': person.email,
-        })
+        logger.info(
+            "newsletter unsubscribe",
+            extra={
+                "email": person.email,
+            },
+        )
 
         person.delete()
 
-        return redirect('news:unsubscribe_done')
+        return redirect("news:unsubscribe_done")
 
-    context = {'person': person}
-    return render(request, 'news/unsubscribe.html', context)
+    context = {"person": person}
+    return render(request, "news/unsubscribe.html", context)

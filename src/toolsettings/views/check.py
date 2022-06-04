@@ -26,13 +26,13 @@ def check(request):
     # templates
     templates_ok = True
 
-    for html_setting in ('about', 'privacy', 'privacy_newsletter', 'login', 'add_user', 'newsletter'):
+    for html_setting in ("about", "privacy", "privacy_newsletter", "login", "add_user", "newsletter"):
         try:
             HTMLSetting.objects.get(key=html_setting)
         except HTMLSetting.DoesNotExist:
             templates_ok = False
 
-    for text_setting in ('privacy', ):
+    for text_setting in ("privacy",):
         try:
             TextSetting.objects.get(key=text_setting)
         except TextSetting.DoesNotExist:
@@ -71,13 +71,12 @@ def check(request):
         celery_broker_ok = False
 
     # ldap
-    if 'django_auth_ldap.backend.LDAPBackend' in settings.AUTHENTICATION_BACKENDS:
+    if "django_auth_ldap.backend.LDAPBackend" in settings.AUTHENTICATION_BACKENDS:
         ldap_configured = True
         ldap_ok = True
         try:
             ldap_conn = ldap.initialize(settings.AUTH_LDAP_SERVER_URI)
-            ldap_conn.simple_bind_s(settings.AUTH_LDAP_BIND_DN,
-                                    settings.AUTH_LDAP_BIND_PASSWORD)
+            ldap_conn.simple_bind_s(settings.AUTH_LDAP_BIND_DN, settings.AUTH_LDAP_BIND_PASSWORD)
         except ldap.LDAPError:  # pylint: disable=E1101
             ldap_ok = False
     else:
@@ -85,27 +84,25 @@ def check(request):
         ldap_ok = False
 
     # headers
-    header_host = request.META.get('HTTP_HOST')
-    header_remote_addr = request.META.get('REMOTE_ADDR')
-    header_x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    header_x_forwarded_proto = request.META.get('HTTP_X_FORWARDED_PROTO')
+    header_host = request.META.get("HTTP_HOST")
+    header_remote_addr = request.META.get("REMOTE_ADDR")
+    header_x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+    header_x_forwarded_proto = request.META.get("HTTP_X_FORWARDED_PROTO")
 
     context = {
-        'version': settings.HELFERTOOL_VERSION,
-        'container_version': settings.HELFERTOOL_CONTAINER_VERSION,
-        'similarity_search': not settings.SEARCH_SIMILARITY_DISABLED,
-
-        'templates_ok': templates_ok,
-        'mail_smtp_ok': mail_smtp_ok,
-        'mail_imap_configured': mail_imap_configured,
-        'mail_imap_ok': mail_imap_ok,
-        'celery_broker_ok': celery_broker_ok,
-        'ldap_configured': ldap_configured,
-        'ldap_ok': ldap_ok,
-
-        'header_host': header_host,
-        'header_remote_addr': header_remote_addr,
-        'header_x_forwarded_for': header_x_forwarded_for,
-        'header_x_forwarded_proto': header_x_forwarded_proto,
+        "version": settings.HELFERTOOL_VERSION,
+        "container_version": settings.HELFERTOOL_CONTAINER_VERSION,
+        "similarity_search": not settings.SEARCH_SIMILARITY_DISABLED,
+        "templates_ok": templates_ok,
+        "mail_smtp_ok": mail_smtp_ok,
+        "mail_imap_configured": mail_imap_configured,
+        "mail_imap_ok": mail_imap_ok,
+        "celery_broker_ok": celery_broker_ok,
+        "ldap_configured": ldap_configured,
+        "ldap_ok": ldap_ok,
+        "header_host": header_host,
+        "header_remote_addr": header_remote_addr,
+        "header_x_forwarded_for": header_x_forwarded_for,
+        "header_x_forwarded_proto": header_x_forwarded_proto,
     }
-    return render(request, 'toolsettings/check.html', context)
+    return render(request, "toolsettings/check.html", context)

@@ -8,23 +8,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0012_remove_helper_got_shirt'),
+        ("registration", "0012_remove_helper_got_shirt"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='archived',
-            field=models.BooleanField(default=False, verbose_name='Event is archived'),
+            model_name="event",
+            name="archived",
+            field=models.BooleanField(default=False, verbose_name="Event is archived"),
         ),
         migrations.AddField(
-            model_name='job',
-            name='archived_number_coordinators',
-            field=models.IntegerField(default=0, verbose_name='Number of coordinators for archived event'),
+            model_name="job",
+            name="archived_number_coordinators",
+            field=models.IntegerField(default=0, verbose_name="Number of coordinators for archived event"),
         ),
         migrations.AddField(
-            model_name='shift',
-            name='archived_number',
-            field=models.IntegerField(default=0, verbose_name='Number of registered helpers for archived event'),
+            model_name="shift",
+            name="archived_number",
+            field=models.IntegerField(default=0, verbose_name="Number of registered helpers for archived event"),
         ),
     ]

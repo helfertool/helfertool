@@ -1,5 +1,6 @@
 [MASTER]
 load-plugins=pylint_django,pylint_celery
+django-settings-module=helfertool.settings
 
 [TYPECHECK]
 ignored-classes=ForeignKey,CheckboxInput

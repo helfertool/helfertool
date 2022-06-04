@@ -69,11 +69,11 @@ def _chart_doughnut(data):
                     "backgroundColor": colors,
                 },
             ],
-            "labels": labels
+            "labels": labels,
         },
         "options": {
             "cutout": "60%",
-        }
+        },
     }
 
     return JsonResponse(output)
@@ -93,7 +93,7 @@ def chart_timeline(request, event_url_name):
     timeline = {}
     for helper in event.helper_set.all():
         if not helper.is_coordinator:
-            day = helper.timestamp.strftime('%Y-%m-%d')
+            day = helper.timestamp.strftime("%Y-%m-%d")
             if day in timeline:
                 timeline[day] += 1
             else:
@@ -106,7 +106,7 @@ def chart_timeline(request, event_url_name):
     # add "0" value on day before first registration
     day_one = event.helper_set.order_by("timestamp").first().timestamp
     day_zero = day_one - timedelta(days=1)
-    timeline[day_zero.strftime('%Y-%m-%d')] = 0
+    timeline[day_zero.strftime("%Y-%m-%d")] = 0
 
     # sum up the days
     timeline_sum_data = []
@@ -115,16 +115,18 @@ def chart_timeline(request, event_url_name):
     for day in days:
         cur_sum += timeline[day]
 
-        timeline_sum_data.append({
-            "x": day,
-            "y": cur_sum,
-        })
+        timeline_sum_data.append(
+            {
+                "x": day,
+                "y": cur_sum,
+            }
+        )
 
     # output format
     output = {
         "type": "line",
         "data": {
-            'datasets': [
+            "datasets": [
                 {
                     "label": _("Number of helpers"),
                     "data": timeline_sum_data,
@@ -173,7 +175,7 @@ def chart_helpers(request, event_url_name):
     num_helpers = total_helpers - num_coordinators
 
     if event.badges:
-        num_specialbadges = SpecialBadges.objects.filter(event=event).aggregate(Sum('number'))['number__sum'] or 0
+        num_specialbadges = SpecialBadges.objects.filter(event=event).aggregate(Sum("number"))["number__sum"] or 0
     else:
         num_specialbadges = 0
 
@@ -203,7 +205,7 @@ def chart_shifts(request, event_url_name):
         return JsonResponse({})
 
     # get data
-    total_shifts = Shift.objects.filter(job__event=event).aggregate(Sum('number'))['number__sum'] or 0
+    total_shifts = Shift.objects.filter(job__event=event).aggregate(Sum("number"))["number__sum"] or 0
     filled_shifts = HelperShift.objects.filter(helper__event=event).count()
     vacant_shifts = total_shifts - filled_shifts
 

@@ -6,10 +6,14 @@ from .set import GiftSet
 
 class DeservedGiftSet(models.Model):
     class Meta:
-        unique_together = ('helper', 'gift_set', 'shift', )
+        unique_together = (
+            "helper",
+            "gift_set",
+            "shift",
+        )
 
     helper = models.ForeignKey(
-        'HelpersGifts',
+        "HelpersGifts",
         on_delete=models.CASCADE,
     )
 
@@ -24,6 +28,6 @@ class DeservedGiftSet(models.Model):
     )
 
     shift = models.ForeignKey(
-        'registration.Shift',
+        "registration.Shift",
         on_delete=models.CASCADE,
     )

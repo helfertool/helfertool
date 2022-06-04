@@ -14,6 +14,7 @@ from ..permissions import has_access, ACCESS_EVENT_EDIT_DUPLICATES
 from collections import OrderedDict
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -27,18 +28,22 @@ def duplicates(request, event_url_name):
     if not has_access(request.user, event, ACCESS_EVENT_EDIT_DUPLICATES):
         return nopermission(request)
 
-    duplicates = event.helper_set.annotate(email_lower=Lower('email')).values('email_lower') \
-        .annotate(email_count=Count('email_lower')).exclude(email_count=1).order_by('email_lower')
+    duplicates = (
+        event.helper_set.annotate(email_lower=Lower("email"))
+        .values("email_lower")
+        .annotate(email_count=Count("email_lower"))
+        .exclude(email_count=1)
+        .order_by("email_lower")
+    )
 
     duplicated_helpers = OrderedDict()
 
     for dup in duplicates:
-        duplicated_helpers[dup['email_lower']] = event.helper_set.filter(email__iexact=dup['email_lower'])
+        duplicated_helpers[dup["email_lower"]] = event.helper_set.filter(email__iexact=dup["email_lower"])
 
     # overview over jobs
-    context = {'event': event,
-               'duplicated_helpers': duplicated_helpers}
-    return render(request, 'registration/admin/duplicates.html', context)
+    context = {"event": event, "duplicated_helpers": duplicated_helpers}
+    return render(request, "registration/admin/duplicates.html", context)
 
 
 @login_required
@@ -63,18 +68,19 @@ def merge(request, event_url_name, email):
             try:
                 h = form.merge()
 
-                logger.info("helper merged", extra={
-                    'user': request.user,
-                    'helper': h,
-                    'event': event,
-                })
+                logger.info(
+                    "helper merged",
+                    extra={
+                        "user": request.user,
+                        "helper": h,
+                        "event": event,
+                    },
+                )
 
-                return redirect('view_helper', event_url_name=event_url_name, helper_pk=h.pk)
+                return redirect("view_helper", event_url_name=event_url_name, helper_pk=h.pk)
             except ValueError:
                 # happens only if the shifts changed between is_valid() and merge()
                 error = True
 
-    context = {'event': event,
-               'form': form,
-               'error': error}
-    return render(request, 'registration/admin/merge.html', context)
+    context = {"event": event, "form": form, "error": error}
+    return render(request, "registration/admin/merge.html", context)

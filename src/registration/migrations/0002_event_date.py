@@ -10,14 +10,18 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0001_initial'),
+        ("registration", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='date',
-            field=models.DateField(default=datetime.datetime(2016, 3, 5, 18, 4, 27, 134060, tzinfo=utc), help_text='First day of event', verbose_name='Date'),
+            model_name="event",
+            name="date",
+            field=models.DateField(
+                default=datetime.datetime(2016, 3, 5, 18, 4, 27, 134060, tzinfo=utc),
+                help_text="First day of event",
+                verbose_name="Date",
+            ),
             preserve_default=False,
         ),
     ]

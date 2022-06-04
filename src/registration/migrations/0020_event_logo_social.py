@@ -8,13 +8,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0019_auto_20170427_1411'),
+        ("registration", "0019_auto_20170427_1411"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='logo_social',
-            field=models.ImageField(blank=True, help_text='Best results with 1052 x 548 px.', null=True, upload_to='logos', verbose_name='Logo for Facebook'),
+            model_name="event",
+            name="logo_social",
+            field=models.ImageField(
+                blank=True,
+                help_text="Best results with 1052 x 548 px.",
+                null=True,
+                upload_to="logos",
+                verbose_name="Logo for Facebook",
+            ),
         ),
     ]

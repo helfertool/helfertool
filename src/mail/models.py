@@ -7,10 +7,12 @@ from registration.permissions import has_access, ACCESS_INVOLVED, ACCESS_MAILS_V
 
 class SentMail(models.Model):
     class Meta:
-        ordering = ['-date', ]
+        ordering = [
+            "-date",
+        ]
 
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
@@ -49,19 +51,19 @@ class SentMail(models.Model):
     )
 
     jobs_all = models.ManyToManyField(
-        'registration.Job',
-        related_name='sent_mails_all',
+        "registration.Job",
+        related_name="sent_mails_all",
         blank=True,
     )
 
     jobs_only_coordinators = models.ManyToManyField(
-        'registration.Job',
-        related_name='sent_mails_only_coordinators',
+        "registration.Job",
+        related_name="sent_mails_only_coordinators",
         blank=True,
     )
 
     shifts = models.ManyToManyField(
-        'registration.Shift',
+        "registration.Shift",
         blank=True,
     )
 
@@ -75,8 +77,8 @@ class SentMail(models.Model):
     )
 
     tracking_helper = models.ManyToManyField(
-        'registration.Helper',
-        through='MailDelivery',
+        "registration.Helper",
+        through="MailDelivery",
     )
 
     def __str__(self):
@@ -132,12 +134,12 @@ class SentMail(models.Model):
 
 class MailDelivery(models.Model):
     helper = models.ForeignKey(
-        'registration.Helper',
+        "registration.Helper",
         on_delete=models.CASCADE,
     )
 
     sentmail = models.ForeignKey(
-        'SentMail',
+        "SentMail",
         on_delete=models.CASCADE,
     )
 

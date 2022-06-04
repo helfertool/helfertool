@@ -6,7 +6,7 @@ import uuid
 
 
 class Link(models.Model):
-    """ Link to some shifts for registration
+    """Link to some shifts for registration
 
     Columns:
         :id: Primary key, UUID
@@ -14,6 +14,7 @@ class Link(models.Model):
         :shifts: Shifts that are linked
         :creator: User that created the link
     """
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -21,12 +22,12 @@ class Link(models.Model):
     )
 
     event = models.ForeignKey(
-        'Event',
+        "Event",
         on_delete=models.CASCADE,
     )
 
     shifts = models.ManyToManyField(
-        'Shift',
+        "Shift",
     )
 
     creator = models.ForeignKey(

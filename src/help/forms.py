@@ -9,10 +9,10 @@ from .models import Issue
 class IssueForm(forms.ModelForm):
     class Meta:
         model = Issue
-        exclude = ['sender', 'date', 'done_by']
+        exclude = ["sender", "date", "done_by"]
 
     def __init__(self, *args, **kwargs):
-        self.sender = kwargs.pop('user')
+        self.sender = kwargs.pop("user")
 
         super(IssueForm, self).__init__(*args, **kwargs)
 
@@ -21,11 +21,15 @@ class IssueForm(forms.ModelForm):
 
         super(IssueForm, self).save(commit)
 
-        mail = EmailMessage("{}: {}".format(
-                                _("New issue"),
-                                self.instance.get_subject_display()),
-                            self.instance.text,
-                            settings.CONTACT_MAIL,      # from
-                            [settings.CONTACT_MAIL, ],  # to
-                            reply_to=[self.sender.email, ])
+        mail = EmailMessage(
+            "{}: {}".format(_("New issue"), self.instance.get_subject_display()),
+            self.instance.text,
+            settings.CONTACT_MAIL,  # from
+            [
+                settings.CONTACT_MAIL,
+            ],  # to
+            reply_to=[
+                self.sender.email,
+            ],
+        )
         mail.send(fail_silently=False)

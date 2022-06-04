@@ -16,9 +16,10 @@ class HelpersGifts(models.Model):
     Important: if new fields are added here, they need to be handled in HelpersGiftsForm.
     The gift-related fields can be switched to read-only, so they need to be added there.
     """
+
     helper = models.OneToOneField(
-        'registration.Helper',
-        related_name='gifts',
+        "registration.Helper",
+        related_name="gifts",
         on_delete=models.CASCADE,
     )
 
@@ -69,8 +70,7 @@ class HelpersGifts(models.Model):
             shift = helpershift.shift
 
             # update presence automatically
-            if self.helper.event.gift_settings.enable_automatic_presence and \
-                    self._check_auto_presence(helpershift):
+            if self.helper.event.gift_settings.enable_automatic_presence and self._check_auto_presence(helpershift):
                 # shift has ended in the past -> set present
                 helpershift.present = True
                 helpershift.manual_presence = False
@@ -101,11 +101,11 @@ class HelpersGifts(models.Model):
         """
         result = OrderedDict()
         default_fields = {
-            'total': 0,
-            'given': 0,
-            'earned': 0,
-            'pending': 0,
-            'pending_with_deposit': 0,
+            "total": 0,
+            "given": 0,
+            "earned": 0,
+            "pending": 0,
+            "pending_with_deposit": 0,
         }
         # iterate over all deserved gifts of this helper
         for deserved_gift in DeservedGiftSet.objects.filter(helper=self):
@@ -127,23 +127,23 @@ class HelpersGifts(models.Model):
 
                 # as long as the helper is not absent, count the gifts
                 if present_at_shift or present_pending:
-                    data['total'] += count
+                    data["total"] += count
 
                 if already_delivered:
                     # gift was delivered
-                    data['given'] += count
+                    data["given"] += count
 
                 elif present_at_shift or present_pending:
                     # helper can receive this gift, if he pays deposit
-                    data['pending_with_deposit'] += count
+                    data["pending_with_deposit"] += count
 
                 if present_at_shift:
                     # if the helper was marked as present, he earned it
-                    data['earned'] += count
+                    data["earned"] += count
 
                     if not already_delivered:
                         # helper can receive this gift
-                        data['pending'] += count
+                        data["pending"] += count
 
         return result
 
@@ -174,8 +174,7 @@ class HelpersGifts(models.Model):
         """
         Check if present flag should be set to True or False based on automatic presence.
         """
-        if self.helper.event.gift_settings.enable_automatic_presence and \
-                not helpershift.manual_presence:
+        if self.helper.event.gift_settings.enable_automatic_presence and not helpershift.manual_presence:
             return timezone.now() > helpershift.shift.end
         return False
 
@@ -201,10 +200,7 @@ class HelpersGifts(models.Model):
         for gift in DeservedGiftSet.objects.filter(helper=other_gifts):
             # check if it exists for this helper and the same gift_set and
             # shift already
-            own_deservedgiftset = DeservedGiftSet.objects.filter(
-                helper=self,
-                gift_set=gift.gift_set,
-                shift=gift.shift)
+            own_deservedgiftset = DeservedGiftSet.objects.filter(helper=self, gift_set=gift.gift_set, shift=gift.shift)
 
             if own_deservedgiftset.exists():
                 # update "delivered" flag, delete other

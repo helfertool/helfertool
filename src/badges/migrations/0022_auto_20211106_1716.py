@@ -9,23 +9,35 @@ import helfertool.forms.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0021_auto_20210523_1533'),
+        ("badges", "0021_auto_20210523_1533"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='badge',
-            name='photo',
-            field=helfertool.forms.fields.RestrictedImageField(blank=True, null=True, upload_to=badges.models.badge._badge_upload_path, verbose_name='Photo'),
+            model_name="badge",
+            name="photo",
+            field=helfertool.forms.fields.RestrictedImageField(
+                blank=True, null=True, upload_to=badges.models.badge._badge_upload_path, verbose_name="Photo"
+            ),
         ),
         migrations.AlterField(
-            model_name='badgedesign',
-            name='bg_back',
-            field=helfertool.forms.fields.RestrictedImageField(blank=True, null=True, upload_to=badges.models.design._design_upload_path, verbose_name='Background image for back'),
+            model_name="badgedesign",
+            name="bg_back",
+            field=helfertool.forms.fields.RestrictedImageField(
+                blank=True,
+                null=True,
+                upload_to=badges.models.design._design_upload_path,
+                verbose_name="Background image for back",
+            ),
         ),
         migrations.AlterField(
-            model_name='badgedesign',
-            name='bg_front',
-            field=helfertool.forms.fields.RestrictedImageField(blank=True, null=True, upload_to=badges.models.design._design_upload_path, verbose_name='Background image for front'),
+            model_name="badgedesign",
+            name="bg_front",
+            field=helfertool.forms.fields.RestrictedImageField(
+                blank=True,
+                null=True,
+                upload_to=badges.models.design._design_upload_path,
+                verbose_name="Background image for front",
+            ),
         ),
     ]

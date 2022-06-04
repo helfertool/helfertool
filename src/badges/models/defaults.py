@@ -6,8 +6,8 @@ from copy import deepcopy
 
 class BadgeDefaults(models.Model):
     role = models.ForeignKey(
-        'BadgeRole',
-        related_name='+',  # no reverse accessor
+        "BadgeRole",
+        related_name="+",  # no reverse accessor
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -15,8 +15,8 @@ class BadgeDefaults(models.Model):
     )
 
     design = models.ForeignKey(
-        'BadgeDesign',
-        related_name='+',  # no reverse accessor
+        "BadgeDesign",
+        related_name="+",  # no reverse accessor
         null=True,
         blank=True,
         on_delete=models.SET_NULL,

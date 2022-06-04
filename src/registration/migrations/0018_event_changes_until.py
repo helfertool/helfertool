@@ -8,13 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0017_auto_20170210_1726'),
+        ("registration", "0017_auto_20170210_1726"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='changes_until',
-            field=models.DateField(blank=True, help_text='Helpers can change their personal data and shifts until this date themselves. Leave emtpy to disable this.', null=True, verbose_name='Deregistration and changes possible until'),
+            model_name="event",
+            name="changes_until",
+            field=models.DateField(
+                blank=True,
+                help_text="Helpers can change their personal data and shifts until this date themselves. Leave emtpy to disable this.",
+                null=True,
+                verbose_name="Deregistration and changes possible until",
+            ),
         ),
     ]

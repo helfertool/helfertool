@@ -10,9 +10,14 @@ class PrerequisiteForm(forms.ModelForm):
     """
     Form for new prerequisite creation
     """
+
     class Meta:
         model = Prerequisite
-        exclude = ['name', 'description', 'event', ]
+        exclude = [
+            "name",
+            "description",
+            "event",
+        ]
 
         widgets = {}
 
@@ -24,7 +29,7 @@ class PrerequisiteForm(forms.ModelForm):
             widgets["description_{}".format(lang)] = CKEditorWidget()
 
     def __init__(self, *args, **kwargs):
-        self.event = kwargs.pop('event')
+        self.event = kwargs.pop("event")
 
         super(PrerequisiteForm, self).__init__(*args, **kwargs)
 
@@ -48,6 +53,7 @@ class PrerequisiteDeleteForm(forms.ModelForm):
     """
     Prerequisite deletion
     """
+
     class Meta:
         model = Prerequisite
         fields = []

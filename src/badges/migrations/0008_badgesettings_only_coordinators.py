@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0007_badgesettings_language'),
+        ("badges", "0007_badgesettings_language"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badgesettings',
-            name='only_coordinators',
-            field=models.BooleanField(default=False, verbose_name='Badges only for coordinators'),
+            model_name="badgesettings",
+            name="only_coordinators",
+            field=models.BooleanField(default=False, verbose_name="Badges only for coordinators"),
         ),
     ]

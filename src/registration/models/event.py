@@ -31,20 +31,20 @@ def _logo_upload_path(instance, filename):
     event = str(instance.pk)
     new_filename = "{}{}".format(uuid.uuid4(), os.path.splitext(filename)[1])
 
-    return posixpath.join('public', event, 'logos', new_filename)
+    return posixpath.join("public", event, "logos", new_filename)
 
 
 def _validate_url_blocklist(value):
-    """ Validator for `url_name` parameter that blocks values that are part of other URLs like "subscribe". """
+    """Validator for `url_name` parameter that blocks values that are part of other URLs like "subscribe"."""
     blocked = ["manage", "i18n", "select2", "login", "logout", "oidc", "help", "subscribe", "unsubscribe"]
 
     if value.lower() in blocked:
-        raise ValidationError(_('%(value)s cannot be used here'), params={'value': value})
+        raise ValidationError(_("%(value)s cannot be used here"), params={"value": value})
 
 
 class Event(models.Model):
     class Meta:
-        ordering = ['name', 'url_name']
+        ordering = ["name", "url_name"]
 
     """ Event for registration.
 
@@ -65,38 +65,38 @@ class Event(models.Model):
         :badge: use the badge creation system
     """
 
-    SHIRT_UNKNOWN = 'UNKNOWN'
-    SHIRT_NO = 'NO'
-    SHIRT_XS = 'XS'
-    SHIRT_S = 'S'
-    SHIRT_M = 'M'
-    SHIRT_L = 'L'
-    SHIRT_XL = 'XL'
-    SHIRT_XXL = 'XXL'
-    SHIRT_3XL = '3XL'
-    SHIRT_XS_GIRLY = 'XS_GIRLY'
-    SHIRT_S_GIRLY = 'S_GIRLY'
-    SHIRT_M_GIRLY = 'M_GIRLY'
-    SHIRT_L_GIRLY = 'L_GIRLY'
-    SHIRT_XL_GIRLY = 'XL_GIRLY'
-    SHIRT_XXL_GIRLY = 'XXL_GIRLY'
+    SHIRT_UNKNOWN = "UNKNOWN"
+    SHIRT_NO = "NO"
+    SHIRT_XS = "XS"
+    SHIRT_S = "S"
+    SHIRT_M = "M"
+    SHIRT_L = "L"
+    SHIRT_XL = "XL"
+    SHIRT_XXL = "XXL"
+    SHIRT_3XL = "3XL"
+    SHIRT_XS_GIRLY = "XS_GIRLY"
+    SHIRT_S_GIRLY = "S_GIRLY"
+    SHIRT_M_GIRLY = "M_GIRLY"
+    SHIRT_L_GIRLY = "L_GIRLY"
+    SHIRT_XL_GIRLY = "XL_GIRLY"
+    SHIRT_XXL_GIRLY = "XXL_GIRLY"
 
     SHIRT_CHOICES = (
-        (SHIRT_UNKNOWN, _('Unknown')),
-        (SHIRT_NO, _('I do not want a T-Shirt')),
-        (SHIRT_XS, _('XS')),
-        (SHIRT_S, _('S')),
-        (SHIRT_M, _('M')),
-        (SHIRT_L, _('L')),
-        (SHIRT_XL, _('XL')),
-        (SHIRT_XXL, _('XXL')),
-        (SHIRT_3XL, _('3XL')),
-        (SHIRT_XS_GIRLY, _('XS (girly)')),
-        (SHIRT_S_GIRLY, _('S (girly)')),
-        (SHIRT_M_GIRLY, _('M (girly)')),
-        (SHIRT_L_GIRLY, _('L (girly)')),
-        (SHIRT_XL_GIRLY, _('XL (girly)')),
-        (SHIRT_XXL_GIRLY, _('XXL (girly)')),
+        (SHIRT_UNKNOWN, _("Unknown")),
+        (SHIRT_NO, _("I do not want a T-Shirt")),
+        (SHIRT_XS, _("XS")),
+        (SHIRT_S, _("S")),
+        (SHIRT_M, _("M")),
+        (SHIRT_L, _("L")),
+        (SHIRT_XL, _("XL")),
+        (SHIRT_XXL, _("XXL")),
+        (SHIRT_3XL, _("3XL")),
+        (SHIRT_XS_GIRLY, _("XS (girly)")),
+        (SHIRT_S_GIRLY, _("S (girly)")),
+        (SHIRT_M_GIRLY, _("M (girly)")),
+        (SHIRT_L_GIRLY, _("L (girly)")),
+        (SHIRT_XL_GIRLY, _("XL (girly)")),
+        (SHIRT_XXL_GIRLY, _("XXL (girly)")),
     )
 
     SHIRT_CHOICES_DEFAULTS = (
@@ -119,7 +119,7 @@ class Event(models.Model):
     url_name = models.CharField(
         max_length=200,
         unique=True,
-        validators=[RegexValidator('^[a-zA-Z0-9]+$'), _validate_url_blocklist],
+        validators=[RegexValidator("^[a-zA-Z0-9]+$"), _validate_url_blocklist],
         verbose_name=_("Name for URL"),
         help_text=_("May contain the following chars: a-zA-Z0-9."),
     )
@@ -144,7 +144,7 @@ class Event(models.Model):
 
     imprint = BleachField(
         blank=True,
-        verbose_name=_('Contact'),
+        verbose_name=_("Contact"),
         help_text=_("Displayed at the bottom of all pages for the event."),
     )
 
@@ -181,16 +181,14 @@ class Event(models.Model):
         null=True,
         blank=True,
         verbose_name=_("Maximal overlapping of shifts"),
-        help_text=_("If two shifts overlap more than this value in minutes "
-                    "it is not possible to register for both shifts. Leave "
-                    "empty to disable this check."),
+        help_text=_(
+            "If two shifts overlap more than this value in minutes "
+            "it is not possible to register for both shifts. Leave "
+            "empty to disable this check."
+        ),
     )
 
-    admins = models.ManyToManyField(
-        get_user_model(),
-        blank=True,
-        through='registration.EventAdminRoles'
-    )
+    admins = models.ManyToManyField(get_user_model(), blank=True, through="registration.EventAdminRoles")
 
     active = models.BooleanField(
         default=False,
@@ -199,8 +197,10 @@ class Event(models.Model):
 
     changes_until = models.DateField(
         verbose_name=_("Deregistration and changes possible until"),
-        help_text=_("Helpers can change their personal data and shifts until "
-                    "this date themselves. Leave emtpy to disable this."),
+        help_text=_(
+            "Helpers can change their personal data and shifts until "
+            "this date themselves. Leave emtpy to disable this."
+        ),
         null=True,
         blank=True,
     )
@@ -220,10 +220,7 @@ class Event(models.Model):
         verbose_name=_("Ask for preferred nutrition"),
     )
 
-    ask_full_age = models.BooleanField(
-        default=True,
-        verbose_name=_("Helpers have to confirm to be full age")
-    )
+    ask_full_age = models.BooleanField(default=True, verbose_name=_("Helpers have to confirm to be full age"))
 
     ask_news = models.BooleanField(
         default=True,
@@ -266,7 +263,7 @@ class Event(models.Model):
     )
 
     shirt_sizes = MultiSelectField(
-        choices=filter(lambda e: e[0] != 'UNKNOWN', SHIRT_CHOICES),
+        choices=filter(lambda e: e[0] != "UNKNOWN", SHIRT_CHOICES),
         default=SHIRT_CHOICES_DEFAULTS,
         max_length=250,
         verbose_name=_("Available T-shirt sizes"),
@@ -288,11 +285,14 @@ class Event(models.Model):
                     not_removable.append(choice[1])
 
             if not_removable:
-                sizes = ', '.join(map(str, not_removable))
-                raise ValidationError({'shirt_sizes':
-                                       _("The following sizes are used and "
-                                         "therefore cannot be removed: {}".
-                                         format(sizes))})
+                sizes = ", ".join(map(str, not_removable))
+                raise ValidationError(
+                    {
+                        "shirt_sizes": _(
+                            "The following sizes are used and " "therefore cannot be removed: {}".format(sizes)
+                        )
+                    }
+                )
 
     def save(self, *args, **kwargs):
         # if we do the initial save, we do not have a PK yet, but we need the PK for the path of uploaded images
@@ -364,8 +364,7 @@ class Event(models.Model):
 
     @property
     def changes_possible(self):
-        return self.changes_until is not None and \
-            datetime.date.today() <= self.changes_until
+        return self.changes_until is not None and datetime.date.today() <= self.changes_until
 
     def _setup_flags(self):
         """
@@ -424,7 +423,7 @@ class Event(models.Model):
 
         # badge for helpers
         for helper in self.helper_set.all():
-            if not hasattr(helper, 'badge'):
+            if not hasattr(helper, "badge"):
                 badge = Badge()
                 badge.event = self
                 badge.helper = helper
@@ -438,7 +437,7 @@ class Event(models.Model):
             GiftSettings.objects.create(event=self)
 
         for helper in self.helper_set.all():
-            if not hasattr(helper, 'gifts'):
+            if not hasattr(helper, "gifts"):
                 gifts = HelpersGifts()
                 gifts.helper = helper
                 gifts.save()
@@ -458,15 +457,15 @@ class Event(models.Model):
             CoronaSettings.objects.create(event=self)
 
 
-@receiver(pre_save, sender=Event, dispatch_uid='pre_event_saved')
+@receiver(pre_save, sender=Event, dispatch_uid="pre_event_saved")
 def pre_event_saved(sender, instance, using, **kwargs):
-    """ Set flags like `ask_news` depending on global settings BEFORE event is saved. """
+    """Set flags like `ask_news` depending on global settings BEFORE event is saved."""
     instance._setup_flags()
 
 
-@receiver(post_save, sender=Event, dispatch_uid='post_event_saved')
+@receiver(post_save, sender=Event, dispatch_uid="post_event_saved")
 def post_event_saved(sender, instance, using, **kwargs):
-    """ Add badge settings, badges and gifts if necessary AFTER event is saved. """
+    """Add badge settings, badges and gifts if necessary AFTER event is saved."""
     if instance.badges:
         instance._setup_badge_settings()
 
@@ -480,9 +479,9 @@ def post_event_saved(sender, instance, using, **kwargs):
         instance._setup_corona_settings()
 
 
-@receiver(post_delete, sender=Event, dispatch_uid='event_deleted')
+@receiver(post_delete, sender=Event, dispatch_uid="event_deleted")
 def event_deleted(sender, instance, using, **kwargs):
-    """ Delete files which were uploaded for this event. """
+    """Delete files which were uploaded for this event."""
     event = str(instance.pk)
     for d in ["public", "private"]:
         shutil.rmtree(settings.MEDIA_ROOT / d / event, ignore_errors=True)

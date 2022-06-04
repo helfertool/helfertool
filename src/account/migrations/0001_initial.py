@@ -18,27 +18,30 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Agreement',
+            name="Agreement",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Name')),
-                ('name_de', models.CharField(max_length=200, null=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=200, null=True, verbose_name='Name')),
-                ('text', django_bleach.models.BleachField(verbose_name='Text')),
-                ('text_de', django_bleach.models.BleachField(null=True, verbose_name='Text')),
-                ('text_en', django_bleach.models.BleachField(null=True, verbose_name='Text')),
-                ('begin', models.DateField(verbose_name='Begin date')),
-                ('deadline', models.PositiveIntegerField(default=7, verbose_name='Deadline after first display in days')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=200, verbose_name="Name")),
+                ("name_de", models.CharField(max_length=200, null=True, verbose_name="Name")),
+                ("name_en", models.CharField(max_length=200, null=True, verbose_name="Name")),
+                ("text", django_bleach.models.BleachField(verbose_name="Text")),
+                ("text_de", django_bleach.models.BleachField(null=True, verbose_name="Text")),
+                ("text_en", django_bleach.models.BleachField(null=True, verbose_name="Text")),
+                ("begin", models.DateField(verbose_name="Begin date")),
+                (
+                    "deadline",
+                    models.PositiveIntegerField(default=7, verbose_name="Deadline after first display in days"),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='UserAgreement',
+            name="UserAgreement",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_displayed', models.DateTimeField(auto_now_add=True)),
-                ('agreed', models.DateTimeField(blank=True, null=True)),
-                ('agreement', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='account.Agreement')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("first_displayed", models.DateTimeField(auto_now_add=True)),
+                ("agreed", models.DateTimeField(blank=True, null=True)),
+                ("agreement", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="account.Agreement")),
+                ("user", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

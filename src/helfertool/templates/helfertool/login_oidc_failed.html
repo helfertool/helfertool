@@ -12,7 +12,7 @@
         <p class="additional">{% trans "Either you are not allowed to log in or your session expired." %}</p>
 
         {% djangosetting "OIDC_CUSTOM_PROVIDER_NAME" as OIDC_CUSTOM_PROVIDER_NAME %}
-        {% if OIDC_CUSTOM_PROVIDER_NAME %}    
+        {% if OIDC_CUSTOM_PROVIDER_NAME %}
         <p class="link">
             <a href="{% url 'oidc_authentication_init' %}" class="btn btn-outline-primary">
                 {% icon "sign-in-alt" %}

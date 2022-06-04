@@ -19,8 +19,8 @@ class MailFormError(Exception):
 class MailForm(forms.Form):
     def __init__(self, *args, **kwargs):
         # get parameters
-        self.event = kwargs.pop('event')
-        self.user = kwargs.pop('user')
+        self.event = kwargs.pop("event")
+        self.user = kwargs.pop("user")
 
         # different select values
 
@@ -77,35 +77,35 @@ class MailForm(forms.Form):
         reply_to.append(("-", _("Custom")))
 
         # fields
-        self.fields['receiver'] = forms.MultipleChoiceField(
+        self.fields["receiver"] = forms.MultipleChoiceField(
             choices=choices,
             label=_("Receivers"),
             widget=Select2MultipleWidget,
         )
 
-        self.fields['reply_to'] = forms.ChoiceField(
+        self.fields["reply_to"] = forms.ChoiceField(
             choices=reply_to,
             label=_("Reply to"),
         )
-        self.fields['reply_to'].widget.attrs['onChange'] = 'handle_reply_to()'
+        self.fields["reply_to"].widget.attrs["onChange"] = "handle_reply_to()"
 
-        self.fields['custom_reply_to'] = forms.EmailField(
+        self.fields["custom_reply_to"] = forms.EmailField(
             label=_("Custom reply to"),
             help_text=_('Only used if "Custom" is selected above.'),
             required=False,
         )
 
-        self.fields['cc'] = forms.EmailField(
+        self.fields["cc"] = forms.EmailField(
             label=_("CC"),
             required=False,
         )
 
-        self.fields['subject'] = forms.CharField(
+        self.fields["subject"] = forms.CharField(
             label=_("Subject"),
             max_length=200,
         )
 
-        self.fields['text'] = forms.CharField(
+        self.fields["text"] = forms.CharField(
             widget=forms.Textarea,
             label=_("Text"),
         )
@@ -113,19 +113,17 @@ class MailForm(forms.Form):
     def clean(self):
         cleaned_data = super(MailForm, self).clean()
 
-        if cleaned_data.get("reply_to") == "-" and \
-                not cleaned_data.get("custom_reply_to"):
-            raise forms.ValidationError(_("You must specify a custom reply "
-                                          "to address."))
+        if cleaned_data.get("reply_to") == "-" and not cleaned_data.get("custom_reply_to"):
+            raise forms.ValidationError(_("You must specify a custom reply " "to address."))
 
     def send_mail(self):
         # basic parameters
-        subject = self.cleaned_data.get('subject')
-        text = self.cleaned_data.get('text')
+        subject = self.cleaned_data.get("subject")
+        text = self.cleaned_data.get("text")
 
-        reply_to = self.cleaned_data.get('reply_to')
+        reply_to = self.cleaned_data.get("reply_to")
         if reply_to == "-":
-            reply_to = self.cleaned_data.get('custom_reply_to')
+            reply_to = self.cleaned_data.get("custom_reply_to")
 
         # model for log
         sentmail = SentMail.objects.create(
@@ -139,9 +137,11 @@ class MailForm(forms.Form):
 
         # CC
         cc = []
-        if self.cleaned_data.get('cc'):
-            cc = [self.cleaned_data.get('cc'), ]
-            sentmail.cc = self.cleaned_data.get('cc')
+        if self.cleaned_data.get("cc"):
+            cc = [
+                self.cleaned_data.get("cc"),
+            ]
+            sentmail.cc = self.cleaned_data.get("cc")
 
         # tracking id
         tracking_uuid, tracking_header = new_tracking_event()
@@ -164,17 +164,22 @@ class MailForm(forms.Form):
         if not receiver_list:
             sentmail.failed = True
             sentmail.save()
-            raise MailFormError(_("There are no helpers or coordinators that "
-                                  "would receive this mail."))
+            raise MailFormError(_("There are no helpers or coordinators that " "would receive this mail."))
 
-        mail = EmailMessage(subject,
-                            text,
-                            settings.EMAIL_SENDER_ADDRESS,
-                            [reply_to, ],    # to
-                            receiver_list,
-                            reply_to=[reply_to, ],
-                            cc=cc,
-                            headers=tracking_header)
+        mail = EmailMessage(
+            subject,
+            text,
+            settings.EMAIL_SENDER_ADDRESS,
+            [
+                reply_to,
+            ],  # to
+            receiver_list,
+            reply_to=[
+                reply_to,
+            ],
+            cc=cc,
+            headers=tracking_header,
+        )
 
         try:
             mail.send(fail_silently=False)
@@ -184,7 +189,7 @@ class MailForm(forms.Form):
             raise
 
     def _get_helpers(self, sentmail):
-        receiver_list = self.cleaned_data.get('receiver')
+        receiver_list = self.cleaned_data.get("receiver")
 
         tmp = []
 

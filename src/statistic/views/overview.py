@@ -23,14 +23,14 @@ def overview(request, event_url_name):
     # get data, that we need outside of chart.js
     num_people = event.helper_set.count()
     if event.badges:
-        num_people += SpecialBadges.objects.filter(event=event).aggregate(Sum('number'))['number__sum'] or 0
+        num_people += SpecialBadges.objects.filter(event=event).aggregate(Sum("number"))["number__sum"] or 0
 
-    num_shift_slots = Shift.objects.filter(job__event=event).aggregate(Sum('number'))['number__sum'] or 0
+    num_shift_slots = Shift.objects.filter(job__event=event).aggregate(Sum("number"))["number__sum"] or 0
 
     # render
     context = {
-        'event': event,
-        'num_people': num_people,
-        'num_shift_slots': num_shift_slots,
+        "event": event,
+        "num_people": num_people,
+        "num_shift_slots": num_shift_slots,
     }
-    return render(request, 'statistic/overview.html', context)
+    return render(request, "statistic/overview.html", context)

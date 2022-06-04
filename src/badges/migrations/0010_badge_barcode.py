@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0009_auto_20170414_1630'),
+        ("badges", "0009_auto_20170414_1630"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badge',
-            name='barcode',
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Barcode'),
+            model_name="badge",
+            name="barcode",
+            field=models.PositiveIntegerField(blank=True, null=True, verbose_name="Barcode"),
         ),
     ]

@@ -15,6 +15,7 @@ from .utils import notactive
 from collections import OrderedDict
 
 import logging
+
 logger = logging.getLogger("helfertool.gifts")
 
 
@@ -38,10 +39,13 @@ def list(request, event_url_name):
         settings_form.save()
 
         log_msg = "giftsettings changed"
-        logger.info(log_msg, extra={
-            'user': request.user,
-            'event': event,
-        })
+        logger.info(
+            log_msg,
+            extra={
+                "user": request.user,
+                "event": event,
+            },
+        )
 
         return redirect("gifts:list", event_url_name=event.url_name)
 
@@ -49,11 +53,8 @@ def list(request, event_url_name):
     gifts = Gift.objects.filter(event=event)
     gift_sets = GiftSet.objects.filter(event=event)
 
-    context = {'event': event,
-               'gifts': gifts,
-               'gift_sets': gift_sets,
-               'settings_form': settings_form}
-    return render(request, 'gifts/list.html', context)
+    context = {"event": event, "gifts": gifts, "gift_sets": gift_sets, "settings_form": settings_form}
+    return render(request, "gifts/list.html", context)
 
 
 @login_required
@@ -70,18 +71,15 @@ def list_deposit(request, event_url_name):
     if not event.gifts:
         return notactive(request)
 
-    helpers = event.helper_set.filter(gifts__deposit__isnull=False,
-                                      gifts__deposit_returned=False)
+    helpers = event.helper_set.filter(gifts__deposit__isnull=False, gifts__deposit_returned=False)
 
     if helpers:
-        deposit_sum = helpers.aggregate(total=Sum('gifts__deposit'))['total']
+        deposit_sum = helpers.aggregate(total=Sum("gifts__deposit"))["total"]
     else:
         deposit_sum = None
 
-    context = {'event': event,
-               'helpers': helpers,
-               'deposit_sum': deposit_sum}
-    return render(request, 'gifts/list_deposit.html', context)
+    context = {"event": event, "helpers": helpers, "deposit_sum": deposit_sum}
+    return render(request, "gifts/list_deposit.html", context)
 
 
 @login_required
@@ -102,12 +100,12 @@ def list_shirts(request, event_url_name):
         helpers = event.helper_set.filter(gifts__buy_shirt=True)
 
         num_shirts = OrderedDict()
-        shirts = helpers.values('shirt').annotate(num=Count('shirt'))
+        shirts = helpers.values("shirt").annotate(num=Count("shirt"))
         for size, name in event.get_shirt_choices():
             num = 0
 
             try:
-                num = shirts.get(shirt=size)['num']
+                num = shirts.get(shirt=size)["num"]
             except Helper.DoesNotExist:
                 pass
 
@@ -116,8 +114,5 @@ def list_shirts(request, event_url_name):
         helpers = None
         num_shirts = None
 
-    context = {'event': event,
-               'helpers': helpers,
-               'num_shirts': num_shirts,
-               'shirts_not_active': not event.ask_shirt}
-    return render(request, 'gifts/list_shirts.html', context)
+    context = {"event": event, "helpers": helpers, "num_shirts": num_shirts, "shirts_not_active": not event.ask_shirt}
+    return render(request, "gifts/list_shirts.html", context)

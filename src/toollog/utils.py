@@ -1,13 +1,33 @@
 SKIP_ATTRS = (
     # all default attributes
-    'asctime', 'args', 'created', 'exc_info', 'exc_text', 'filename', 'funcName',
-    'levelname', 'levelno', 'lineno', 'message', 'module', 'msecs', 'msg', 'name',
-    'pathname', 'process', 'processName', 'relativeCreated', 'stack_info',
-    'thread', 'threadName',
-
+    "asctime",
+    "args",
+    "created",
+    "exc_info",
+    "exc_text",
+    "filename",
+    "funcName",
+    "levelname",
+    "levelno",
+    "lineno",
+    "message",
+    "module",
+    "msecs",
+    "msg",
+    "name",
+    "pathname",
+    "process",
+    "processName",
+    "relativeCreated",
+    "stack_info",
+    "thread",
+    "threadName",
     # custom things
-    'event', 'job', 'shift', 'helper', "user",
-
+    "event",
+    "job",
+    "shift",
+    "helper",
+    "user",
     # the TextFormatter set the "extras" attribute
     "extras",
 )
@@ -40,27 +60,27 @@ def get_extras_with_replacement(record):
     result = get_extras(record)
 
     # event
-    if hasattr(record, 'event'):
+    if hasattr(record, "event"):
         result = _add_entry(result, "event_url", record.event.url_name)
         result = _add_entry(result, "event_pk", record.event.pk)
 
     # job
-    if hasattr(record, 'job') and record.job:
+    if hasattr(record, "job") and record.job:
         result = _add_entry(result, "job_name", record.job.name)
         result = _add_entry(result, "job_pk", record.job.pk)
 
     # shift
-    if hasattr(record, 'shift') and record.shift:
+    if hasattr(record, "shift") and record.shift:
         result = _add_entry(result, "shift_name", str(record.shift))
         result = _add_entry(result, "shift_pk", record.shift.pk)
 
     # helper
-    if hasattr(record, 'helper') and record.helper:
+    if hasattr(record, "helper") and record.helper:
         result = _add_entry(result, "helper_name", record.helper.full_name)
         result = _add_entry(result, "helper_pk", record.helper.pk)
 
     # user
-    if hasattr(record, 'user') and record.user:
+    if hasattr(record, "user") and record.user:
         # sometimes, we need to resolve the username, sometimes we directly receive it
         if type(record.user) == str:
             result = _add_entry(result, "user", record.user)

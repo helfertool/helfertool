@@ -15,6 +15,7 @@ class DatabaseHandler(logging.Handler):
     Currently, only log entries that belong to an event are stored in the database.
     All other log entries are available in the log files / via syslog.
     """
+
     def __init__(self, *args, **kwargs):
         self._logentry_model = None
 
@@ -25,15 +26,16 @@ class DatabaseHandler(logging.Handler):
         # therefore, we do it here dynamically when necessary - but only once
         if not self._logentry_model:
             from .models import LogEntry
+
             self._logentry_model = LogEntry
 
         # get the event, helper and user if they are stored in the entry
-        event = record.event if hasattr(record, 'event') else None
+        event = record.event if hasattr(record, "event") else None
         if not event:
             return
 
-        helper = record.helper if hasattr(record, 'helper') else None
-        user = record.user if hasattr(record, 'user') else None
+        helper = record.helper if hasattr(record, "helper") else None
+        user = record.user if hasattr(record, "user") else None
 
         # create the entry
         entry = self._logentry_model(

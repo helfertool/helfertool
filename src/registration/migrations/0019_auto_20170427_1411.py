@@ -8,12 +8,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0018_event_changes_until'),
+        ("registration", "0018_event_changes_until"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='helper',
-            options={'ordering': ['event', 'surname', 'firstname']},
+            name="helper",
+            options={"ordering": ["event", "surname", "firstname"]},
         ),
     ]

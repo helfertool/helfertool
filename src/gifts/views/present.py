@@ -34,9 +34,7 @@ def set_present(request, event_url_name, shift_pk):
 
         messages.success(request, _("Presence was saved"))
 
-        return redirect('gifts:set_present', event_url_name=event.url_name, shift_pk=shift.pk)
+        return redirect("gifts:set_present", event_url_name=event.url_name, shift_pk=shift.pk)
 
-    context = {'event': event,
-               'shift': shift,
-               'form': form}
-    return render(request, 'gifts/set_present.html', context)
+    context = {"event": event, "shift": shift, "form": form}
+    return render(request, "gifts/set_present.html", context)

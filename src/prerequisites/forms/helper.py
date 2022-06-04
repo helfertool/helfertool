@@ -3,6 +3,7 @@ from django import forms
 from ..utils import prerequisites_for_helper
 
 import logging
+
 logger = logging.getLogger("helfertool.prerequisites")
 
 
@@ -25,9 +26,7 @@ class HelperPrerequisiteForm(forms.Form):
             self._prerequisites[id_str] = prereqisite
 
             self.fields[id_str] = forms.BooleanField(
-                label=prereqisite.name,
-                required=False,
-                initial=prereqisite.check_helper(self._helper)
+                label=prereqisite.name, required=False, initial=prereqisite.check_helper(self._helper)
             )
 
     def save(self):
@@ -38,14 +37,17 @@ class HelperPrerequisiteForm(forms.Form):
 
                 # logging per prerequisite (if changed)
                 if id_str in self.changed_data:
-                    logger.info("helper prerequisites", extra={
-                        'user': self._user,
-                        'event': self._helper.event,
-                        'helper': self._helper,
-                        'prerequisite': prerequisite.name,
-                        'prerequisite_pk': prerequisite.pk,
-                        'state': state,
-                    })
+                    logger.info(
+                        "helper prerequisites",
+                        extra={
+                            "user": self._user,
+                            "event": self._helper.event,
+                            "helper": self._helper,
+                            "prerequisite": prerequisite.name,
+                            "prerequisite_pk": prerequisite.pk,
+                            "state": state,
+                        },
+                    )
 
     def has_items(self):
         return bool(self.fields)

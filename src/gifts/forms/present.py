@@ -3,13 +3,14 @@ from django import forms
 from .fields import PresenceField
 
 import logging
+
 logger = logging.getLogger("helfertool.gifts")
 
 
 class PresentForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        self._shift = kwargs.pop('shift')
-        self._user = kwargs.pop('user')
+        self._shift = kwargs.pop("shift")
+        self._user = kwargs.pop("user")
 
         super(PresentForm, self).__init__(*args, **kwargs)
 
@@ -23,9 +24,7 @@ class PresentForm(forms.Form):
         for helpershift in self._shift.helpershift_set.all():
             id_str = "helper_{}".format(helpershift.helper.pk)
 
-            self.fields[id_str] = PresenceField(
-                automatic_presence=self.automatic_presence,
-                helpershift=helpershift)
+            self.fields[id_str] = PresenceField(automatic_presence=self.automatic_presence, helpershift=helpershift)
 
     def save(self):
         for helpershift in self._shift.helpershift_set.all():
@@ -35,10 +34,13 @@ class PresentForm(forms.Form):
 
             # logging per helper (if changed)
             if id_str in self.changed_data:
-                logger.info("helper presence", extra={
-                    'user': self._user,
-                    'event': helpershift.helper.event,
-                    'helper': helpershift.helper,
-                    'shift': helpershift.shift,
-                    'present': present,
-                })
+                logger.info(
+                    "helper presence",
+                    extra={
+                        "user": self._user,
+                        "event": helpershift.helper.event,
+                        "helper": helpershift.helper,
+                        "shift": helpershift.shift,
+                        "present": present,
+                    },
+                )

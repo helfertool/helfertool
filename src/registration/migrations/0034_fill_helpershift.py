@@ -4,9 +4,9 @@ from django.db import migrations
 
 
 def create_helpershift_relations(apps, schema_editor):
-    Helper = apps.get_model('registration', 'Helper')
-    HelperShift = apps.get_model('registration', 'HelperShift')
-    HelpersGifts = apps.get_model('gifts', 'HelpersGifts')
+    Helper = apps.get_model("registration", "Helper")
+    HelperShift = apps.get_model("registration", "HelperShift")
+    HelpersGifts = apps.get_model("gifts", "HelpersGifts")
 
     for helper in Helper.objects.all():
         helpersgift = HelpersGifts.objects.filter(helper=helper)
@@ -24,15 +24,15 @@ def create_helpershift_relations(apps, schema_editor):
             helpershift.save()
 
             # set timestamp separate as it has auto_now_add set
-            helpershift.timestamp=helper.timestamp
+            helpershift.timestamp = helper.timestamp
             helpershift.save()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0033_add_helpershift'),
-        ('gifts', '0008_auto_20170401_1512'),
+        ("registration", "0033_add_helpershift"),
+        ("gifts", "0008_auto_20170401_1512"),
     ]
 
     operations = [

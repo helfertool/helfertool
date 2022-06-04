@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0017_auto_20170210_1726'),
-        ('gifts', '0007_helpersgifts_buy_shirt'),
+        ("registration", "0017_auto_20170210_1726"),
+        ("gifts", "0007_helpersgifts_buy_shirt"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='deservedgiftset',
-            name='present',
+            model_name="deservedgiftset",
+            name="present",
         ),
         migrations.AddField(
-            model_name='helpersgifts',
-            name='accomplished_shifts',
-            field=models.ManyToManyField(blank=True, to='registration.Shift'),
+            model_name="helpersgifts",
+            name="accomplished_shifts",
+            field=models.ManyToManyField(blank=True, to="registration.Shift"),
         ),
     ]

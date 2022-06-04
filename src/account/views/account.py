@@ -15,6 +15,7 @@ from ..forms import CreateUserForm, EditUserForm, DeleteUserForm, MergeUserForm
 from ..templatetags.globalpermissions import has_adduser_group
 
 import logging
+
 logger = logging.getLogger("helfertool.account")
 
 
@@ -31,18 +32,20 @@ def add_user(request):
     if form.is_valid():
         user = form.save()
 
-        messages.success(request, _("Added user %(username)s" %
-                         {'username': user}))
+        messages.success(request, _("Added user %(username)s" % {"username": user}))
 
-        logger.info("user created", extra={
-            'user': request.user,
-            'added_user': user.username,
-        })
+        logger.info(
+            "user created",
+            extra={
+                "user": request.user,
+                "added_user": user.username,
+            },
+        )
 
-        return redirect('account:add_user')
+        return redirect("account:add_user")
 
-    context = {'form': form}
-    return render(request, 'account/add_user.html', context)
+    context = {"form": form}
+    return render(request, "account/add_user.html", context)
 
 
 @login_required
@@ -76,24 +79,23 @@ def view_user(request, user_pk=None):
             if request.user == user:
                 update_session_auth_hash(request, pw_form.user)
 
-            logger.info("password changed", extra={
-                'user': request.user,
-                'changed_user': user.username,
-            })
+            logger.info(
+                "password changed",
+                extra={
+                    "user": request.user,
+                    "changed_user": user.username,
+                },
+            )
 
             messages.success(request, _("Changed password successfully"))
 
-            return redirect('account:view_user', user.pk)
+            return redirect("account:view_user", user.pk)
     else:
         # user from LDAP/OpenID Connect
         pw_form = None
 
-    context = {
-        "changed_user": user,
-        "is_own_user": is_own_user,
-        "pw_form": pw_form
-    }
-    return render(request, 'account/view_user.html', context)
+    context = {"changed_user": user, "is_own_user": is_own_user, "pw_form": pw_form}
+    return render(request, "account/view_user.html", context)
 
 
 @login_required
@@ -110,18 +112,21 @@ def edit_user(request, user_pk):
     if form.is_valid():
         form.save()
 
-        logger.info("user changed", extra={
-            'user': request.user,
-            'changed_user': changed_user.username,
-        })
+        logger.info(
+            "user changed",
+            extra={
+                "user": request.user,
+                "changed_user": changed_user.username,
+            },
+        )
 
-        return redirect('account:view_user', changed_user.pk)
+        return redirect("account:view_user", changed_user.pk)
 
     context = {
-        'form': form,
-        'changed_user': changed_user,
+        "form": form,
+        "changed_user": changed_user,
     }
-    return render(request, 'account/edit_user.html', context)
+    return render(request, "account/edit_user.html", context)
 
 
 @login_required
@@ -136,20 +141,23 @@ def delete_user(request, user_pk):
     form = DeleteUserForm(request.POST or None, instance=deleted_user)
 
     if form.is_valid():
-        logger.info("user deleted", extra={
-            'user': request.user,
-            'deleted_user': deleted_user.username,
-        })
+        logger.info(
+            "user deleted",
+            extra={
+                "user": request.user,
+                "deleted_user": deleted_user.username,
+            },
+        )
 
         form.delete()
 
-        return redirect('account:list_users')
+        return redirect("account:list_users")
 
     context = {
-        'form': form,
-        'deleted_user': deleted_user,
+        "form": form,
+        "deleted_user": deleted_user,
     }
-    return render(request, 'account/delete_user.html', context)
+    return render(request, "account/delete_user.html", context)
 
 
 @login_required
@@ -164,24 +172,28 @@ def merge_user(request, user_pk):
     form = MergeUserForm(request.POST or None, remaining_user=remaining_user)
 
     if form.is_valid():
-        logger.info("user merged", extra={
-            'user': request.user,
-            'remaining_user': remaining_user.username,
-            'deleted_user': form.deleted_user_obj.username,
-        })
+        logger.info(
+            "user merged",
+            extra={
+                "user": request.user,
+                "remaining_user": remaining_user.username,
+                "deleted_user": form.deleted_user_obj.username,
+            },
+        )
 
         form.merge()
 
-        messages.success(request, _("Merged user {} into {}".format(
-            form.deleted_user_obj.username, remaining_user.username)))
+        messages.success(
+            request, _("Merged user {} into {}".format(form.deleted_user_obj.username, remaining_user.username))
+        )
 
-        return redirect('account:list_users')
+        return redirect("account:list_users")
 
     context = {
-        'form': form,
-        'remaining_user': remaining_user,
+        "form": form,
+        "remaining_user": remaining_user,
     }
-    return render(request, 'account/merge_user.html', context)
+    return render(request, "account/merge_user.html", context)
 
 
 @login_required
@@ -194,10 +206,16 @@ def list_users(request):
     # get users based on search term
     search = request.GET.get("search")
     if search:
-        all_users = get_user_model().objects.filter(Q(username__icontains=search)
-                                                    | Q(first_name__icontains=search)
-                                                    | Q(last_name__icontains=search)
-                                                    | Q(email__icontains=search)).order_by('last_name')
+        all_users = (
+            get_user_model()
+            .objects.filter(
+                Q(username__icontains=search)
+                | Q(first_name__icontains=search)
+                | Q(last_name__icontains=search)
+                | Q(email__icontains=search)
+            )
+            .order_by("last_name")
+        )
     else:
         all_users = get_user_model().objects.all().order_by("last_name")
 
@@ -208,23 +226,34 @@ def list_users(request):
     elif filterstr == "admin":
         all_users = all_users.filter(is_superuser=True)
     elif filterstr == "addevent":
-        all_users = all_users.filter(groups__name__in=[settings.GROUP_ADDEVENT, ])
+        all_users = all_users.filter(
+            groups__name__in=[
+                settings.GROUP_ADDEVENT,
+            ]
+        )
     elif filterstr == "adduser":
-        all_users = all_users.filter(groups__name__in=[settings.GROUP_ADDUSER, ])
+        all_users = all_users.filter(
+            groups__name__in=[
+                settings.GROUP_ADDUSER,
+            ]
+        )
     elif filterstr == "sendnews" and settings.FEATURES_NEWSLETTER:
-        all_users = all_users.filter(groups__name__in=[settings.GROUP_SENDNEWS, ])
+        all_users = all_users.filter(
+            groups__name__in=[
+                settings.GROUP_SENDNEWS,
+            ]
+        )
     else:
         filterstr = ""
 
     # paginate
     paginator = Paginator(all_users, 50)
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     users = paginator.get_page(page)
 
     context = {
-        'users': users,
-        'search': search or "",
-        'filter': filterstr,
+        "users": users,
+        "search": search or "",
+        "filter": filterstr,
     }
-    return render(request, 'account/list_users.html',
-                  context)
+    return render(request, "account/list_users.html", context)

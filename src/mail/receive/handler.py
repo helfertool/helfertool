@@ -19,6 +19,7 @@ class MailHandler:
     MailHandler checks a mailbox for new mails, handles the received delivery notifications and forwards
     all other mails.
     """
+
     def __init__(self):
         self._receiver = MailReceiver()
         self._forwarder = MailForwarder()
@@ -84,7 +85,7 @@ class MailHandler:
         # 2) Delivery status notification
         dsn_msg = payload[1]
 
-        if dsn_msg.get_content_type() != 'message/delivery-status':
+        if dsn_msg.get_content_type() != "message/delivery-status":
             return None
 
         result = []

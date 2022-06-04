@@ -39,7 +39,7 @@ def event_audit_log(request, event_url_name):
 
         # paginate
         paginator = Paginator(all_logs, 50)
-        page = request.GET.get('page')
+        page = request.GET.get("page")
         log = paginator.get_page(page)
     else:
         enabled = False
@@ -47,8 +47,5 @@ def event_audit_log(request, event_url_name):
         form = None
 
     # render page
-    context = {'event': event,
-               'enabled': enabled,
-               'form': form,
-               'log': log}
-    return render(request, 'toollog/event_audit_log.html', context)
+    context = {"event": event, "enabled": enabled, "form": form, "log": log}
+    return render(request, "toollog/event_audit_log.html", context)

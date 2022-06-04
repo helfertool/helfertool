@@ -9,22 +9,25 @@ from .job import Job
 
 
 class EventAdminRoles(models.Model):
-    ROLE_ADMIN = 'ADMIN'
-    ROLE_RESTRICTED_ADMIN = 'RESTRICTED_ADMIN'
-    ROLE_FRONTDESK = 'FRONTDESK'
-    ROLE_INVENTORY = 'INVENTORY'
-    ROLE_BADGES = 'BADGES'
+    ROLE_ADMIN = "ADMIN"
+    ROLE_RESTRICTED_ADMIN = "RESTRICTED_ADMIN"
+    ROLE_FRONTDESK = "FRONTDESK"
+    ROLE_INVENTORY = "INVENTORY"
+    ROLE_BADGES = "BADGES"
 
     ROLE_CHOICES = (
-        (ROLE_ADMIN, _('Administrator')),
-        (ROLE_RESTRICTED_ADMIN, _('Restricted administrator')),
-        (ROLE_FRONTDESK, _('Front desk')),
-        (ROLE_INVENTORY, _('Inventory')),
-        (ROLE_BADGES, _('Badges')),
+        (ROLE_ADMIN, _("Administrator")),
+        (ROLE_RESTRICTED_ADMIN, _("Restricted administrator")),
+        (ROLE_FRONTDESK, _("Front desk")),
+        (ROLE_INVENTORY, _("Inventory")),
+        (ROLE_BADGES, _("Badges")),
     )
 
     class Meta:
-        unique_together = ['event', 'user', ]
+        unique_together = [
+            "event",
+            "user",
+        ]
 
     event = models.ForeignKey(
         Event,
@@ -49,16 +52,19 @@ class EventAdminRoles(models.Model):
 
 
 class JobAdminRoles(models.Model):
-    ROLE_FULL = 'FULL'
-    ROLE_DEFAULT = 'DEFAULT'
+    ROLE_FULL = "FULL"
+    ROLE_DEFAULT = "DEFAULT"
 
     ROLE_CHOICES = (
-        (ROLE_FULL, _('Full access to all data')),
-        (ROLE_DEFAULT, _('Default access')),
+        (ROLE_FULL, _("Full access to all data")),
+        (ROLE_DEFAULT, _("Default access")),
     )
 
     class Meta:
-        unique_together = ['job', 'user', ]
+        unique_together = [
+            "job",
+            "user",
+        ]
 
     job = models.ForeignKey(
         Job,

@@ -29,22 +29,18 @@ def edit_permission(request, event_url_name, permission_pk=None):
     # get BadgePermission
     permission = None
     if permission_pk:
-        permission = get_object_or_404(BadgePermission, pk=permission_pk,
-                                       badge_settings__event=event)
+        permission = get_object_or_404(BadgePermission, pk=permission_pk, badge_settings__event=event)
 
     # form
-    form = BadgePermissionForm(request.POST or None, instance=permission,
-                               settings=event.badge_settings)
+    form = BadgePermissionForm(request.POST or None, instance=permission, settings=event.badge_settings)
 
     if form.is_valid():
         form.save()
 
-        return redirect('badges:settings_advanced', event_url_name=event.url_name)
+        return redirect("badges:settings_advanced", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'badges/edit_permission.html',
-                  context)
+    context = {"event": event, "form": form}
+    return render(request, "badges/edit_permission.html", context)
 
 
 @login_required
@@ -62,8 +58,7 @@ def delete_permission(request, event_url_name, permission_pk):
         return notactive(request)
 
     # get BadgePermission
-    permission = get_object_or_404(BadgePermission, pk=permission_pk,
-                                   badge_settings__event=event)
+    permission = get_object_or_404(BadgePermission, pk=permission_pk, badge_settings__event=event)
 
     # form
     form = BadgePermissionDeleteForm(request.POST or None, instance=permission)
@@ -71,10 +66,7 @@ def delete_permission(request, event_url_name, permission_pk):
     if form.is_valid():
         form.delete()
 
-        return redirect('badges:settings_advanced', event_url_name=event.url_name)
+        return redirect("badges:settings_advanced", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form,
-               'permission': permission}
-    return render(request, 'badges/delete_permission.html',
-                  context)
+    context = {"event": event, "form": form, "permission": permission}
+    return render(request, "badges/delete_permission.html", context)

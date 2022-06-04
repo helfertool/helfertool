@@ -15,19 +15,19 @@ import posixpath
 def _settings_upload_path(instance, filename):
     event = str(instance.event.pk)
 
-    return posixpath.join('private', event, 'badges', 'template', 'template.tex')
+    return posixpath.join("private", event, "badges", "template", "template.tex")
 
 
 class BadgeSettings(models.Model):
-    """ Settings for badge creation
+    """Settings for badge creation
 
     Columns:
         :event: The event that uses the badge creation
     """
 
-    SHIFT_FORMAT_DATE = 'DATE'
-    SHIFT_FORMAT_HOURS = 'HOURS'
-    SHIFT_FORMAT_WEEKDAY = 'WEEKDAY'
+    SHIFT_FORMAT_DATE = "DATE"
+    SHIFT_FORMAT_HOURS = "HOURS"
+    SHIFT_FORMAT_WEEKDAY = "WEEKDAY"
 
     SHIFT_FORMAT_CHOICES = (
         (SHIFT_FORMAT_HOURS, _("Hours only")),
@@ -36,12 +36,12 @@ class BadgeSettings(models.Model):
     )
 
     event = models.OneToOneField(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
     defaults = models.OneToOneField(
-        'BadgeDefaults',
+        "BadgeDefaults",
         on_delete=models.CASCADE,
     )
 
@@ -87,8 +87,10 @@ class BadgeSettings(models.Model):
         default=SHIFT_FORMAT_HOURS,
         max_length=250,
         verbose_name=_("Format for shift on badges"),
-        help_text=_("""There is not much space on the badges, so the list of shifts needs to be as small as possible.
-Nevertheless, the weekday or date may be required for events with several days."""),
+        help_text=_(
+            """There is not much space on the badges, so the list of shifts needs to be as small as possible.
+Nevertheless, the weekday or date may be required for events with several days."""
+        ),
     )
 
     shift_no_names = models.BooleanField(
@@ -107,7 +109,7 @@ Nevertheless, the weekday or date may be required for events with several days."
     )
 
     def save(self, *args, **kwargs):
-        if not hasattr(self, 'defaults'):
+        if not hasattr(self, "defaults"):
             defaults = BadgeDefaults()
             defaults.save()
 

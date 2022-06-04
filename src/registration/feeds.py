@@ -14,7 +14,7 @@ class HelperFeed(ICalFeed):
         event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
         self._event = event
         self._helper = helper
-        self._registered_link = reverse('registered', args=[event.url_name, helper.pk])
+        self._registered_link = reverse("registered", args=[event.url_name, helper.pk])
 
         return helper
 

@@ -21,7 +21,7 @@ class GiftSet(models.Model):
     )
 
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
@@ -46,8 +46,7 @@ class GiftSet(models.Model):
                 tmp.save()
         except IncludedGift.DoesNotExist:
             if num:
-                IncludedGift.objects.create(gift_set=self, gift=gift,
-                                            count=num)
+                IncludedGift.objects.create(gift_set=self, gift=gift, count=num)
 
     def duplicate(self, event, gift_mapping):
         new_gift_set = deepcopy(self)

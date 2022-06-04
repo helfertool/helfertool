@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def fill_event_field(apps, schema_editor):
-    Badge = apps.get_model('badges', 'Badge')
+    Badge = apps.get_model("badges", "Badge")
 
     for badge in Badge.objects.all():
         badge.event = badge.helper.event
@@ -14,7 +14,7 @@ def fill_event_field(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0015_badge_add_event'),
+        ("badges", "0015_badge_add_event"),
     ]
 
     operations = [

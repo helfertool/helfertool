@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def migrate_vegetarian(apps, schema_editor):
-    Helper = apps.get_model('registration', 'Helper')
+    Helper = apps.get_model("registration", "Helper")
 
     for helper in Helper.objects.all():
         if helper.vegetarian:
@@ -15,7 +15,7 @@ def migrate_vegetarian(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0049_auto_20210806_1249'),
+        ("registration", "0049_auto_20210806_1249"),
     ]
 
     operations = [

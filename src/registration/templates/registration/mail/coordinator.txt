@@ -12,7 +12,7 @@ you were registered for the following jobs:{% endblocktrans %}
 
 {% blocktrans %}Thanks for your support!{% endblocktrans %}
 
--- 
+--
 {% blocktrans %}Your data is used according to the following data privacy statement, if you do not agree with it please contact {{ contact_mail }}.{% endblocktrans %}
 
 {% textsetting "privacy" %}

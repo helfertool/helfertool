@@ -8,17 +8,17 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mail', '0005_sentmail_failed'),
+        ("mail", "0005_sentmail_failed"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='sentmail',
-            options={'ordering': ['-date']},
+            name="sentmail",
+            options={"ordering": ["-date"]},
         ),
         migrations.RenameField(
-            model_name='sentmail',
-            old_name='response_to',
-            new_name='reply_to',
+            model_name="sentmail",
+            old_name="response_to",
+            new_name="reply_to",
         ),
     ]

@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0054_alter_event_url_name'),
+        ("registration", "0054_alter_event_url_name"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='corona',
-            field=models.BooleanField(default=False, verbose_name='Collect additional data for COVID-19 contact tracing'),
+            model_name="event",
+            name="corona",
+            field=models.BooleanField(
+                default=False, verbose_name="Collect additional data for COVID-19 contact tracing"
+            ),
         ),
     ]

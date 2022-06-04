@@ -13,7 +13,7 @@ def excel_export(event):
     buffer = BytesIO()
     workbook = xlsxwriter.Workbook(buffer)
     worksheet = workbook.add_worksheet(_("Contact tracing data"))
-    bold = workbook.add_format({'bold': True})
+    bold = workbook.add_format({"bold": True})
 
     row = Iterator()
     column = Iterator()

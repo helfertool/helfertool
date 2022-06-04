@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0036_add_helpershift_to_helper'),
+        ("registration", "0036_add_helpershift_to_helper"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='helpershift',
-            name='manual_presence',
-            field=models.BooleanField(default=False, editable=False, verbose_name='Presence was manually set'),
+            model_name="helpershift",
+            name="manual_presence",
+            field=models.BooleanField(default=False, editable=False, verbose_name="Presence was manually set"),
         ),
     ]

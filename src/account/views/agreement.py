@@ -12,6 +12,7 @@ from ..forms import AgreementForm, UserAgreementForm, DeleteForm
 import datetime
 
 import logging
+
 logger = logging.getLogger("helfertool.account")
 
 
@@ -31,9 +32,9 @@ def check_user_agreement(request):
         )
 
         if not user_agreement.agreed:
-            return redirect('account:handle_user_agreement', agreement.pk)
+            return redirect("account:handle_user_agreement", agreement.pk)
 
-    return redirect('index')
+    return redirect("index")
 
 
 @login_required
@@ -48,7 +49,7 @@ def handle_user_agreement(request, agreement_pk):
 
     # already agreed -> back to check page
     if user_agreement.agreed or not agreement.in_timeframe:
-        return redirect('account:check_user_agreement')
+        return redirect("account:check_user_agreement")
 
     # ask for agreement
     form = UserAgreementForm(request.POST or None, instance=user_agreement)
@@ -57,16 +58,19 @@ def handle_user_agreement(request, agreement_pk):
         form.instance.agreed = timezone.now()
         form.save()
 
-        logger.info("useragreement accepted", extra={
-            'user': request.user,
-            'agreement': agreement.name,
-            'agreement_pk': agreement.pk,
-        })
+        logger.info(
+            "useragreement accepted",
+            extra={
+                "user": request.user,
+                "agreement": agreement.name,
+                "agreement_pk": agreement.pk,
+            },
+        )
 
-        return redirect('account:check_user_agreement')
+        return redirect("account:check_user_agreement")
 
-    context = {'form': form}
-    return render(request, 'account/handle_user_agreement.html', context)
+    context = {"form": form}
+    return render(request, "account/handle_user_agreement.html", context)
 
 
 @login_required
@@ -78,9 +82,8 @@ def list_agreements(request):
 
     agreements = Agreement.objects.all()
 
-    context = {'agreements': agreements}
-    return render(request, 'account/list_agreements.html',
-                  context)
+    context = {"agreements": agreements}
+    return render(request, "account/list_agreements.html", context)
 
 
 @login_required
@@ -107,18 +110,20 @@ def edit_agreement(request, agreement_pk=None):
             logmsg = "useragreement created"
             agreement = form.instance
 
-        logger.info(logmsg, extra={
-            'user': request.user,
-            'agreement': agreement.name,
-            'agreement_pk': agreement.pk,
-        })
+        logger.info(
+            logmsg,
+            extra={
+                "user": request.user,
+                "agreement": agreement.name,
+                "agreement_pk": agreement.pk,
+            },
+        )
 
         return redirect("account:list_agreements")
 
     # render page
-    context = {"form": form,
-               "agreement": agreement}
-    return render(request, 'account/edit_agreement.html', context)
+    context = {"form": form, "agreement": agreement}
+    return render(request, "account/edit_agreement.html", context)
 
 
 @login_required
@@ -133,17 +138,19 @@ def delete_agreement(request, agreement_pk):
     agreement = get_object_or_404(Agreement, pk=agreement_pk)
 
     if form.is_valid():
-        logger.info("useragreement deleted", extra={
-            'user': request.user,
-            'agreement': agreement.name,
-            'agreement_pk': agreement.pk,
-        })
+        logger.info(
+            "useragreement deleted",
+            extra={
+                "user": request.user,
+                "agreement": agreement.name,
+                "agreement_pk": agreement.pk,
+            },
+        )
 
         agreement.delete()
 
         return redirect("account:list_agreements")
 
     # render page
-    context = {"form": form,
-               "agreement": agreement}
-    return render(request, 'account/delete_agreement.html', context)
+    context = {"form": form, "agreement": agreement}
+    return render(request, "account/delete_agreement.html", context)

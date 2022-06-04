@@ -6,7 +6,9 @@ from ..models import CoronaSettings
 class CoronaSettingsForm(forms.ModelForm):
     class Meta:
         model = CoronaSettings
-        exclude = ['event', ]
+        exclude = [
+            "event",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(CoronaSettingsForm, self).__init__(*args, **kwargs)

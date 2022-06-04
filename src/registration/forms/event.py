@@ -21,20 +21,27 @@ import os
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['admins', 'text', 'imprint', 'registered', 'badge_settings', 'archived', ]
+        exclude = [
+            "admins",
+            "text",
+            "imprint",
+            "registered",
+            "badge_settings",
+            "archived",
+        ]
         widgets = {
-            'text': CKEditorWidget,
-            'date': DatePicker,
-            'changes_until': DatePicker,
-            'logo': ImageFileInput,
-            'logo_social': ImageFileInput,
+            "text": CKEditorWidget,
+            "date": DatePicker,
+            "changes_until": DatePicker,
+            "logo": ImageFileInput,
+            "logo_social": ImageFileInput,
         }
 
         # According to the documentation django-modeltranslations copies the
         # widget from the original field.
         # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
         # Therefore set it manually...
-        for w in ('text', 'imprint', 'registered'):
+        for w in ("text", "imprint", "registered"):
             for lang, name in settings.LANGUAGES:
                 widgets["{}_{}".format(w, lang)] = CKEditorWidget()
 
@@ -47,27 +54,27 @@ class EventForm(forms.ModelForm):
                 if field_id != "url_name":
                     self.fields[field_id].disabled = True
 
-        if not self.instance.ask_shirt and 'shirt_sizes' in self.fields:
+        if not self.instance.ask_shirt and "shirt_sizes" in self.fields:
             # 'shirt_sizes' is not in fields for EventDuplicateForm
-            self.fields.pop('shirt_sizes')
+            self.fields.pop("shirt_sizes")
 
         # remove flags for disabled features
-        if not settings.FEATURES_NEWSLETTER and 'ask_news' in self.fields:
-            self.fields.pop('ask_news')
-        if not settings.FEATURES_BADGES and 'badges' in self.fields:
-            self.fields.pop('badges')
-        if not settings.FEATURES_GIFTS and 'gifts' in self.fields:
-            self.fields.pop('gifts')
-        if not settings.FEATURES_PREREQUISITES and 'prerequisites' in self.fields:
-            self.fields.pop('prerequisites')
-        if not settings.FEATURES_INVENTORY and 'inventory' in self.fields:
-            self.fields.pop('inventory')
-        if not settings.FEATURES_CORONA and 'corona' in self.fields:
-            self.fields.pop('corona')
+        if not settings.FEATURES_NEWSLETTER and "ask_news" in self.fields:
+            self.fields.pop("ask_news")
+        if not settings.FEATURES_BADGES and "badges" in self.fields:
+            self.fields.pop("badges")
+        if not settings.FEATURES_GIFTS and "gifts" in self.fields:
+            self.fields.pop("gifts")
+        if not settings.FEATURES_PREREQUISITES and "prerequisites" in self.fields:
+            self.fields.pop("prerequisites")
+        if not settings.FEATURES_INVENTORY and "inventory" in self.fields:
+            self.fields.pop("inventory")
+        if not settings.FEATURES_CORONA and "corona" in self.fields:
+            self.fields.pop("corona")
 
         # change labels of ckeditor fields: We only want to have the language name as label
         # everything else is in the template.
-        for field in ('text', 'imprint', 'registered'):
+        for field in ("text", "imprint", "registered"):
             for lang, name in settings.LANGUAGES:
                 field_name = "{}_{}".format(field, lang)
                 if field_name in self.fields:
@@ -84,29 +91,34 @@ class EventForm(forms.ModelForm):
 class EventAdminRolesForm(forms.ModelForm):
     class Meta:
         model = EventAdminRoles
-        fields = ['roles', ]
+        fields = [
+            "roles",
+        ]
 
 
 class EventAdminRolesAddForm(forms.ModelForm):
     class Meta:
         model = EventAdminRoles
-        fields = ['user', 'roles', ]
+        fields = [
+            "user",
+            "roles",
+        ]
         widgets = {
-            'user': SingleUserSelectWidget,
+            "user": SingleUserSelectWidget,
         }
 
     def __init__(self, *args, **kwargs):
-        self.event = kwargs.pop('event')
+        self.event = kwargs.pop("event")
 
         super(EventAdminRolesAddForm, self).__init__(*args, **kwargs)
 
         # we want to be able to submit an empty form as it is part of a page with multiple forms
         # if no user is set, the form is still valid and the save does not change anything
-        self.fields['user'].required = False
+        self.fields["user"].required = False
 
     def save(self, commit=True):
         # if no user given, just skip it
-        if self.cleaned_data['user']:
+        if self.cleaned_data["user"]:
             instance = super(EventAdminRolesAddForm, self).save(False)
             instance.event = self.event
             if commit:
@@ -114,11 +126,11 @@ class EventAdminRolesAddForm(forms.ModelForm):
             return instance
 
     def clean_user(self):
-        user = self.cleaned_data['user']
+        user = self.cleaned_data["user"]
 
         # user already has admin privileges for this event -> invalid
         if user and EventAdminRoles.objects.filter(event=self.event, user=user).exists():
-            raise ValidationError(_('User already has permissions for this event assigned'))
+            raise ValidationError(_("User already has permissions for this event assigned"))
 
         return user
 
@@ -146,8 +158,8 @@ class EventArchiveForm(forms.ModelForm):
         # archive shirt statistics
         if self.instance.ask_shirt:
             shirt_data = {}
-            for data in self.instance.helper_set.values('shirt').annotate(num=Count('shirt')).order_by():
-                shirt_data[data['shirt']] = data['num']
+            for data in self.instance.helper_set.values("shirt").annotate(num=Count("shirt")).order_by():
+                shirt_data[data["shirt"]] = data["num"]
             EventArchive.objects.create(event=self.instance, key="shirts", version=1, data=shirt_data)
 
         # delete coordinators and helpers
@@ -173,13 +185,13 @@ class EventArchiveForm(forms.ModelForm):
         # delete left over badge photos (upload of new file keeps old file)
         # we only want to delete the photos that do not belong to special badges
         event = str(self.instance.pk)
-        photos_directory = settings.MEDIA_ROOT / 'private' / event / 'badges' / 'photos'
+        photos_directory = settings.MEDIA_ROOT / "private" / event / "badges" / "photos"
         try:
             # get all stored images
             all_images = os.listdir(photos_directory)
 
             # get special badges, that should be kept
-            for badge in SpecialBadges.objects.filter(event=self.instance).prefetch_related('template_badge'):
+            for badge in SpecialBadges.objects.filter(event=self.instance).prefetch_related("template_badge"):
                 if badge.template_badge.photo:
                     # if we have a photo, remove it from the all_iamges list
                     cur_image = os.path.basename(badge.template_badge.photo.path)
@@ -201,18 +213,18 @@ class EventArchiveForm(forms.ModelForm):
 class EventDuplicateForm(EventForm):
     class Meta:
         model = Event
-        fields = ['name', 'url_name', 'date']
+        fields = ["name", "url_name", "date"]
         widgets = {
-            'date': DatePicker,
+            "date": DatePicker,
         }
 
     def __init__(self, *args, **kwargs):
-        self.other_event = kwargs.pop('other_event')
-        self.user = kwargs.pop('user')
+        self.other_event = kwargs.pop("other_event")
+        self.user = kwargs.pop("user")
 
-        kwargs['instance'] = deepcopy(self.other_event)
-        kwargs['instance'].pk = None
-        kwargs['instance'].archived = False
+        kwargs["instance"] = deepcopy(self.other_event)
+        kwargs["instance"].pk = None
+        kwargs["instance"].archived = False
         super(EventDuplicateForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
@@ -240,8 +252,7 @@ class EventDuplicateForm(EventForm):
 
         if self.instance.logo_social:
             new_logo_social = ContentFile(self.instance.logo_social.read())
-            new_logo_social.name = os.path.basename(
-                self.instance.logo_social.name)
+            new_logo_social.name = os.path.basename(self.instance.logo_social.name)
             self.instance.logo_social = new_logo_social
 
         super(EventDuplicateForm, self).save(commit=True)  # save again
@@ -337,7 +348,7 @@ class EventMoveForm(forms.ModelForm):
     )
 
     def save(self, commit=True):
-        new_date = self.cleaned_data.get('new_date')
+        new_date = self.cleaned_data.get("new_date")
         diff_days = new_date - self.instance.date
 
         if self.instance.date != new_date:

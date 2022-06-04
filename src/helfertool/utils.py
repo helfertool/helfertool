@@ -74,7 +74,7 @@ def pg_trgm_installed():
 
 
 @contextmanager
-def cache_lock(lock_id, oid, expire=60*10):
+def cache_lock(lock_id, oid, expire=60 * 10):
     """
     A lock based on the Django caching functionality. Used in some Celery tasks to prevent
     the parallel execution of the same task (e.g. receiving mails).
@@ -86,7 +86,7 @@ def cache_lock(lock_id, oid, expire=60*10):
     """
     timeout_at = monotonic() + expire - 3
     # cache.add fails if the key already exists
-    status = caches['locks'].add(lock_id, oid, expire)
+    status = caches["locks"].add(lock_id, oid, expire)
     try:
         yield status
     finally:
@@ -95,20 +95,20 @@ def cache_lock(lock_id, oid, expire=60*10):
             # to lessen the chance of releasing an expired lock
             # owned by someone else
             # also don't release the lock if we didn't acquire it
-            caches['locks'].delete(lock_id)
+            caches["locks"].delete(lock_id)
 
 
 def serve_file(file):
-    """ Reads a file from disk and returns FileReponse with the correct content type and encoding.
+    """Reads a file from disk and returns FileReponse with the correct content type and encoding.
 
     Warning: The Content-Disposition header is not set, as it is currently used with images."""
     if not file:
         raise Http404
 
     content_type, encoding = mimetypes.guess_type(str(file))
-    content_type = content_type or 'application/octet-stream'
+    content_type = content_type or "application/octet-stream"
 
-    response = FileResponse(file.open('rb'), content_type=content_type)
+    response = FileResponse(file.open("rb"), content_type=content_type)
     if encoding:
         response.headers["Content-Encoding"] = encoding
 
@@ -119,4 +119,4 @@ def nopermission(request):
     """
     Render the "no permission" page".
     """
-    return render(request, 'helfertool/nopermission.html')
+    return render(request, "helfertool/nopermission.html")

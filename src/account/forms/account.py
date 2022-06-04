@@ -16,6 +16,7 @@ from toollog.models import LogEntry
 from ..templatetags.globalpermissions import has_adduser_group, has_addevent_group, has_sendnews_group
 
 import logging
+
 logger = logging.getLogger("helfertool.account")
 
 
@@ -32,19 +33,25 @@ def _change_permission(user, groupname, has_perm, admin_user):
     if has_perm:
         user.groups.add(group)
 
-        logger.info("permission granted", extra={
-            'user': admin_user,
-            'permission': logging_group_map[groupname],
-            'changed_user': user,
-        })
+        logger.info(
+            "permission granted",
+            extra={
+                "user": admin_user,
+                "permission": logging_group_map[groupname],
+                "changed_user": user,
+            },
+        )
     else:
         user.groups.remove(group)
 
-        logger.info("permission revoked", extra={
-            'user': admin_user,
-            'permission': logging_group_map[groupname],
-            'changed_user': user,
-        })
+        logger.info(
+            "permission revoked",
+            extra={
+                "user": admin_user,
+                "permission": logging_group_map[groupname],
+                "changed_user": user,
+            },
+        )
 
 
 def _user_flag_changeable(user, flag):
@@ -53,8 +60,10 @@ def _user_flag_changeable(user, flag):
         return True
 
     # LDAP enabled -> check the settings
-    if hasattr(settings, "AUTH_LDAP_USER_FLAGS_BY_GROUP") and \
-            settings.AUTH_LDAP_USER_FLAGS_BY_GROUP.get(flag, None) is not None:
+    if (
+        hasattr(settings, "AUTH_LDAP_USER_FLAGS_BY_GROUP")
+        and settings.AUTH_LDAP_USER_FLAGS_BY_GROUP.get(flag, None) is not None
+    ):
         return False
 
     # OpenID connect enabled -> check the settings
@@ -70,12 +79,13 @@ def _user_flag_changeable(user, flag):
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ("username", "email", "first_name", "last_name", "password1",
-                  "password2")
+        fields = ("username", "email", "first_name", "last_name", "password1", "password2")
         widgets = {
-            "username": forms.TextInput(attrs={
-                'addon_before': settings.LOCAL_USER_CHAR or '',
-            }),
+            "username": forms.TextInput(
+                attrs={
+                    "addon_before": settings.LOCAL_USER_CHAR or "",
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -87,8 +97,8 @@ class CreateUserForm(UserCreationForm):
     def clean(self):
         # add LOCAL_USER_CHAR to the beginning
         char = settings.LOCAL_USER_CHAR
-        if char and not self.cleaned_data.get('username').startswith(char):
-            self.cleaned_data['username'] = char + self.cleaned_data.get('username')
+        if char and not self.cleaned_data.get("username").startswith(char):
+            self.cleaned_data["username"] = char + self.cleaned_data.get("username")
 
         return super(CreateUserForm, self).clean()
 
@@ -158,28 +168,40 @@ class EditUserForm(forms.ModelForm):
         # logging for active flag
         if self.cleaned_data.get("is_active") != self._active_initial:
             if self.cleaned_data.get("is_active"):
-                logger.info("user enabled", extra={
-                    'user': self._admin_user,
-                    'changed_user': self.instance,
-                })
+                logger.info(
+                    "user enabled",
+                    extra={
+                        "user": self._admin_user,
+                        "changed_user": self.instance,
+                    },
+                )
             else:
-                logger.info("user disabled", extra={
-                    'user': self._admin_user,
-                    'changed_user': self.instance,
-                })
+                logger.info(
+                    "user disabled",
+                    extra={
+                        "user": self._admin_user,
+                        "changed_user": self.instance,
+                    },
+                )
 
         # logging for superuser flag
         if self.cleaned_data.get("is_superuser") != self._superuser_initial:
             if self.cleaned_data.get("is_superuser"):
-                logger.info("administrator added", extra={
-                    'user': self._admin_user,
-                    'changed_user': self.instance,
-                })
+                logger.info(
+                    "administrator added",
+                    extra={
+                        "user": self._admin_user,
+                        "changed_user": self.instance,
+                    },
+                )
             else:
-                logger.info("administrator removed", extra={
-                    'user': self._admin_user,
-                    'changed_user': self.instance,
-                })
+                logger.info(
+                    "administrator removed",
+                    extra={
+                        "user": self._admin_user,
+                        "changed_user": self.instance,
+                    },
+                )
 
         # remove all permissions for administrators
         if self.cleaned_data.get("is_superuser"):
@@ -190,19 +212,19 @@ class EditUserForm(forms.ModelForm):
 
         # change permissions
         if self.cleaned_data.get("perm_adduser") != self._adduser_initial:
-            _change_permission(self.instance, settings.GROUP_ADDUSER,
-                               self.cleaned_data.get("perm_adduser"),
-                               self._admin_user)
+            _change_permission(
+                self.instance, settings.GROUP_ADDUSER, self.cleaned_data.get("perm_adduser"), self._admin_user
+            )
 
         if self.cleaned_data.get("perm_addevent") != self._addevent_initial:
-            _change_permission(self.instance, settings.GROUP_ADDEVENT,
-                               self.cleaned_data.get("perm_addevent"),
-                               self._admin_user)
+            _change_permission(
+                self.instance, settings.GROUP_ADDEVENT, self.cleaned_data.get("perm_addevent"), self._admin_user
+            )
 
         if settings.FEATURES_NEWSLETTER and self.cleaned_data.get("perm_sendnews") != self._sendnews_initial:
-            _change_permission(self.instance, settings.GROUP_SENDNEWS,
-                               self.cleaned_data.get("perm_sendnews"),
-                               self._admin_user)
+            _change_permission(
+                self.instance, settings.GROUP_SENDNEWS, self.cleaned_data.get("perm_sendnews"), self._admin_user
+            )
 
         return instance
 
@@ -228,7 +250,9 @@ class MergeUserForm(forms.Form):
         super(MergeUserForm, self).__init__(*args, **kwargs)
 
         # fill choices for deleted user
-        choices = [["", "---"], ]
+        choices = [
+            ["", "---"],
+        ]
         for u in get_user_model().objects.all():
             if u != self._remaining_user:
                 choices.append([u.username, user_label_from_instance(u)])

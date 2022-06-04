@@ -14,11 +14,12 @@ class BadgeForm(forms.ModelForm):
     or
     * a special badge
     """
+
     class Meta:
         model = Badge
-        exclude = ['event', 'helper', 'barcode']
+        exclude = ["event", "helper", "barcode"]
         widgets = {
-            'photo': ImageFileInput,
+            "photo": ImageFileInput,
         }
 
     def __init__(self, *args, **kwargs):
@@ -30,26 +31,26 @@ class BadgeForm(forms.ModelForm):
             jobs = Job.objects.filter(shift__helper=self.instance.helper).distinct()
             coordinated_jobs = self.instance.helper.coordinated_jobs.distinct()
 
-            self.fields['primary_job'].queryset = jobs | coordinated_jobs
+            self.fields["primary_job"].queryset = jobs | coordinated_jobs
         else:
-            del self.fields['firstname']
-            del self.fields['surname']
-            del self.fields['primary_job']
-            del self.fields['printed']
+            del self.fields["firstname"]
+            del self.fields["surname"]
+            del self.fields["primary_job"]
+            del self.fields["printed"]
 
         # restrict queryset of custom_role and custom_design
         badge_settings = self.instance.event.badgesettings
 
         roles = BadgeRole.objects.filter(badge_settings=badge_settings)
-        self.fields['custom_role'].queryset = roles
+        self.fields["custom_role"].queryset = roles
 
         designs = BadgeDesign.objects.filter(badge_settings=badge_settings)
-        self.fields['custom_design'].queryset = designs
+        self.fields["custom_design"].queryset = designs
 
         # disable stripping of whitespaces, so that we can override the default texts with a space
-        self.fields['job'].strip = False
-        self.fields['shift'].strip = False
-        self.fields['role'].strip = False
+        self.fields["job"].strip = False
+        self.fields["shift"].strip = False
+        self.fields["role"].strip = False
 
         # set download_url parameters for widgets
         if self.instance.helper:

@@ -7,15 +7,16 @@ from copy import deepcopy
 
 class GiftSettings(models.Model):
     event = models.OneToOneField(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
     enable_automatic_presence = models.BooleanField(
         default=False,
         verbose_name=_("Enable automatic presence for helpers"),
-        help_text=_("At the end of the shift, the helper is automatically set to present, "
-                    "unless the absence was reported.")
+        help_text=_(
+            "At the end of the shift, the helper is automatically set to present, " "unless the absence was reported."
+        ),
     )
 
     default_deposit = models.IntegerField(

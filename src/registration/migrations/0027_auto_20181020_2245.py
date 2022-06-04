@@ -11,38 +11,55 @@ import django_bleach.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0026_auto_20180806_1400'),
+        ("registration", "0026_auto_20180806_1400"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='days',
-            field=models.IntegerField(default=1, help_text='Displayed on the main page', validators=[django.core.validators.MinValueValidator(0)], verbose_name='Number of days'),
+            model_name="event",
+            name="days",
+            field=models.IntegerField(
+                default=1,
+                help_text="Displayed on the main page",
+                validators=[django.core.validators.MinValueValidator(0)],
+                verbose_name="Number of days",
+            ),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='imprint',
-            field=django_bleach.models.BleachField(blank=True, help_text='Displayed at the bottom of all pages for the event.', verbose_name='Contact'),
+            model_name="event",
+            name="imprint",
+            field=django_bleach.models.BleachField(
+                blank=True, help_text="Displayed at the bottom of all pages for the event.", verbose_name="Contact"
+            ),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='imprint_de',
-            field=django_bleach.models.BleachField(blank=True, help_text='Displayed at the bottom of all pages for the event.', null=True, verbose_name='Contact'),
+            model_name="event",
+            name="imprint_de",
+            field=django_bleach.models.BleachField(
+                blank=True,
+                help_text="Displayed at the bottom of all pages for the event.",
+                null=True,
+                verbose_name="Contact",
+            ),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='imprint_en',
-            field=django_bleach.models.BleachField(blank=True, help_text='Displayed at the bottom of all pages for the event.', null=True, verbose_name='Contact'),
+            model_name="event",
+            name="imprint_en",
+            field=django_bleach.models.BleachField(
+                blank=True,
+                help_text="Displayed at the bottom of all pages for the event.",
+                null=True,
+                verbose_name="Contact",
+            ),
         ),
         migrations.AlterField(
-            model_name='helper',
-            name='privacy_statement',
-            field=models.BooleanField(default=False, verbose_name='I agree with the data privacy statement.'),
+            model_name="helper",
+            name="privacy_statement",
+            field=models.BooleanField(default=False, verbose_name="I agree with the data privacy statement."),
         ),
         migrations.AlterField(
-            model_name='job',
-            name='job_admins',
-            field=models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL, verbose_name='Admins for this job'),
+            model_name="job",
+            name="job_admins",
+            field=models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL, verbose_name="Admins for this job"),
         ),
     ]

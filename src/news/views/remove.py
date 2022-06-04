@@ -11,6 +11,7 @@ from helfertool.utils import nopermission
 from ..forms import RemoveForm
 
 import logging
+
 logger = logging.getLogger("helfertool.news")
 
 
@@ -31,12 +32,15 @@ def remove(request):
 
         messages.success(request, _("Recipient removed."))
 
-        logger.info("newsletter removed", extra={
-            'user': request.user,
-            'email': email,
-        })
+        logger.info(
+            "newsletter removed",
+            extra={
+                "user": request.user,
+                "email": email,
+            },
+        )
 
-        return redirect('news:remove')
+        return redirect("news:remove")
 
-    context = {'form': form}
-    return render(request, 'news/remove.html', context)
+    context = {"form": form}
+    return render(request, "news/remove.html", context)

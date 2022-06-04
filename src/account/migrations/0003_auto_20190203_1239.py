@@ -9,18 +9,18 @@ import django.utils.datetime_safe
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0002_auto_20190202_2336'),
+        ("account", "0002_auto_20190202_2336"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='agreement',
-            name='begin',
+            model_name="agreement",
+            name="begin",
         ),
         migrations.AddField(
-            model_name='agreement',
-            name='start',
-            field=models.DateField(default=django.utils.datetime_safe.datetime.now, verbose_name='Start date'),
+            model_name="agreement",
+            name="start",
+            field=models.DateField(default=django.utils.datetime_safe.datetime.now, verbose_name="Start date"),
             preserve_default=False,
         ),
     ]

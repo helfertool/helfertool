@@ -16,6 +16,7 @@ from ..utils import escape_filename
 from io import BytesIO
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -39,7 +40,9 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
             return nopermission(request)
 
         include_sensitive = has_access(request.user, job, ACCESS_HELPER_VIEW_SENSITIVE)
-        jobs = [job, ]
+        jobs = [
+            job,
+        ]
         job_for_log = job
         filename = "%s - %s" % (event.name, job.name)
     else:
@@ -68,8 +71,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         if not job_pk:
             jobs = jobs.filter(shift__begin__date=date).distinct()
 
-        filename = "{} - {}_{:02d}_{:02d}".format(filename, date.year,
-                                                  date.month, date.day)
+        filename = "{} - {}_{:02d}_{:02d}".format(filename, date.year, date.month, date.day)
 
     # escape filename
     filename = escape_filename(filename)
@@ -78,28 +80,31 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
     buffer = BytesIO()
 
     # do filetype specific stuff
-    if filetype == 'excel':
+    if filetype == "excel":
         filename = "%s.xlsx" % filename
         content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         xlsx(buffer, event, jobs, date, include_sensitive)
-    elif filetype == 'pdf':
+    elif filetype == "pdf":
         filename = "%s.pdf" % filename
-        content_type = 'application/pdf'
+        content_type = "application/pdf"
         pdf(buffer, event, jobs, date)
 
     # log
-    logger.info("export", extra={
-        'user': request.user,
-        'event': event,
-        'job': job_for_log,
-        'type': filetype,
-        'file': filename,
-        'date': date_str,
-    })
+    logger.info(
+        "export",
+        extra={
+            "user": request.user,
+            "event": event,
+            "job": job_for_log,
+            "type": filetype,
+            "file": filename,
+            "date": date_str,
+        },
+    )
 
     # start http response
     response = HttpResponse(content_type=content_type)
-    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+    response["Content-Disposition"] = 'attachment; filename="%s"' % filename
 
     # close buffer, send file
     data = buffer.getvalue()

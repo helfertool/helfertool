@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0008_auto_20210807_1623'),
+        ("news", "0008_auto_20210807_1623"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='person',
-            name='validated',
-            field=models.BooleanField(default=False, verbose_name='Validation e-mail was confirmed (double opt-in)'),
+            model_name="person",
+            name="validated",
+            field=models.BooleanField(default=False, verbose_name="Validation e-mail was confirmed (double opt-in)"),
         ),
     ]

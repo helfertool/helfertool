@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0035_remove_shifts'),
+        ("registration", "0035_remove_shifts"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='helper',
-            name='shifts',
-            field=models.ManyToManyField(through='registration.HelperShift', to='registration.Shift'),
+            model_name="helper",
+            name="shifts",
+            field=models.ManyToManyField(through="registration.HelperShift", to="registration.Shift"),
         ),
     ]

@@ -9,13 +9,18 @@ import registration.models.event
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0014_event_inventory'),
+        ("registration", "0014_event_inventory"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='email',
-            field=models.EmailField(default=registration.models.event._default_mail, help_text='Used as Reply-to address for mails sent to helpers', max_length=254, verbose_name='E-Mail'),
+            model_name="event",
+            name="email",
+            field=models.EmailField(
+                default=registration.models.event._default_mail,
+                help_text="Used as Reply-to address for mails sent to helpers",
+                max_length=254,
+                verbose_name="E-Mail",
+            ),
         ),
     ]

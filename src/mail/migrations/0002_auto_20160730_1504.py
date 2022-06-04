@@ -11,24 +11,26 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('mail', '0001_initial'),
+        ("mail", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='sentmail',
-            name='user',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="sentmail",
+            name="user",
+            field=models.ForeignKey(
+                default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='sentmail',
-            name='cc',
+            model_name="sentmail",
+            name="cc",
             field=models.EmailField(blank=True, max_length=254),
         ),
         migrations.AlterField(
-            model_name='sentmail',
-            name='response_to',
+            model_name="sentmail",
+            name="response_to",
             field=models.EmailField(blank=True, max_length=254),
         ),
     ]

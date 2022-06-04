@@ -16,6 +16,7 @@ class MailReceiver:
 
     It checks one particular folder and returns the unseen messages. This is used by MailHandler.
     """
+
     def __init__(self):
         self._connection = None
 
@@ -29,11 +30,9 @@ class MailReceiver:
         # connect
         try:
             if settings.RECEIVE_EMAIL_USE_SSL:
-                self._connection = imaplib.IMAP4_SSL(host=settings.RECEIVE_EMAIL_HOST,
-                                                     port=settings.RECEIVE_EMAIL_PORT)
+                self._connection = imaplib.IMAP4_SSL(host=settings.RECEIVE_EMAIL_HOST, port=settings.RECEIVE_EMAIL_PORT)
             else:
-                self._connection = imaplib.IMAP4(host=settings.RECEIVE_EMAIL_HOST,
-                                                 port=settings.RECEIVE_EMAIL_PORT)
+                self._connection = imaplib.IMAP4(host=settings.RECEIVE_EMAIL_HOST, port=settings.RECEIVE_EMAIL_PORT)
 
             if settings.RECEIVE_EMAIL_USE_TLS:
                 self._connection.starttls()
@@ -68,7 +67,7 @@ class MailReceiver:
         """
         Returns message IDs of unseen messages
         """
-        ret, data = self._connection.search(None, 'UNSEEN')
+        ret, data = self._connection.search(None, "UNSEEN")
         if ret != "OK":
             raise RuntimeError(data)
 
@@ -78,7 +77,7 @@ class MailReceiver:
         """
         Fetch one message from server. This marks the message as seen.
         """
-        _, data = self._connection.fetch(msg_id, '(RFC822)')
+        _, data = self._connection.fetch(msg_id, "(RFC822)")
 
         if not data:
             return None

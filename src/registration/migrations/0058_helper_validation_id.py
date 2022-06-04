@@ -7,13 +7,13 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0057_auto_20220528_1729'),
+        ("registration", "0057_auto_20220528_1729"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='helper',
-            name='validation_id',
+            model_name="helper",
+            name="validation_id",
             field=models.UUIDField(default=uuid.uuid4, editable=False),
         ),
     ]

@@ -9,18 +9,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0004_auto_20160306_1424'),
+        ("badges", "0004_auto_20160306_1424"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='badgedesign',
-            name='bg_back',
-            field=models.ImageField(blank=True, null=True, upload_to=badges.models.design._design_upload_path, verbose_name='Background image for back'),
+            model_name="badgedesign",
+            name="bg_back",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to=badges.models.design._design_upload_path,
+                verbose_name="Background image for back",
+            ),
         ),
         migrations.AlterField(
-            model_name='badgedesign',
-            name='bg_front',
-            field=models.ImageField(blank=True, null=True, upload_to=badges.models.design._design_upload_path, verbose_name='Background image for front'),
+            model_name="badgedesign",
+            name="bg_front",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to=badges.models.design._design_upload_path,
+                verbose_name="Background image for front",
+            ),
         ),
     ]

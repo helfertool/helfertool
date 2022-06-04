@@ -15,6 +15,7 @@ from ..models import Gift, GiftSet
 from .utils import notactive
 
 import logging
+
 logger = logging.getLogger("helfertool.gifts")
 
 
@@ -56,19 +57,20 @@ def edit_gift(request, event_url_name, gift_pk=None):
         log_msg = "gift created"
         if gift_pk:
             log_msg = "gift changed"
-        logger.info(log_msg, extra={
-            'user': request.user,
-            'event': event,
-            'gift_pk': gift.pk,
-            'gift': gift.name,
-        })
+        logger.info(
+            log_msg,
+            extra={
+                "user": request.user,
+                "event": event,
+                "gift_pk": gift.pk,
+                "gift": gift.name,
+            },
+        )
 
-        return redirect('gifts:list', event_url_name=event.url_name)
+        return redirect("gifts:list", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'gifts/edit_gift.html',
-                  context)
+    context = {"event": event, "form": form}
+    return render(request, "gifts/edit_gift.html", context)
 
 
 @login_required
@@ -95,22 +97,21 @@ def delete_gift(request, event_url_name, gift_pk):
 
     if form.is_valid():
         form.delete()
-        messages.success(request, _("Gift deleted: %(name)s") %
-                         {'name': gift.name})
+        messages.success(request, _("Gift deleted: %(name)s") % {"name": gift.name})
 
-        logger.info("gift deleted", extra={
-            'user': request.user,
-            'event': event,
-            'gift_pk': gift_pk,
-            'gift': gift.name,
-        })
+        logger.info(
+            "gift deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "gift_pk": gift_pk,
+                "gift": gift.name,
+            },
+        )
 
         # redirect to shift
-        return redirect('gifts:list', event_url_name=event.url_name)
+        return redirect("gifts:list", event_url_name=event.url_name)
 
     # render page
-    context = {'gift': gift,
-               'gift_sets': gift_sets,
-               'form': form,
-               'event': event}
-    return render(request, 'gifts/delete_gift.html', context)
+    context = {"gift": gift, "gift_sets": gift_sets, "form": form, "event": event}
+    return render(request, "gifts/delete_gift.html", context)

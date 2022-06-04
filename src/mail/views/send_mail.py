@@ -14,6 +14,7 @@ from ..forms import MailForm, MailFormError
 from smtplib import SMTPException
 
 import logging
+
 logger = logging.getLogger("helfertool.mail")
 
 
@@ -35,23 +36,28 @@ def send_mail(request, event_url_name):
             form.send_mail()
             messages.success(request, _("Mail was sent successfully"))
 
-            logger.info("mail sent", extra={
-                'user': request.user,
-                'event': event,
-                'subject': form.cleaned_data['subject'],
-            })
+            logger.info(
+                "mail sent",
+                extra={
+                    "user": request.user,
+                    "event": event,
+                    "subject": form.cleaned_data["subject"],
+                },
+            )
         except (SMTPException, ConnectionError, MailFormError) as e:
             messages.error(request, _("Sending mails failed"))
 
-            logger.error("mail error", extra={
-                'user': request.user,
-                'event': event,
-                'subject': form.cleaned_data['subject'],
-                'error': str(e),
-            })
-        return redirect('mail:send', event_url_name=event_url_name)
+            logger.error(
+                "mail error",
+                extra={
+                    "user": request.user,
+                    "event": event,
+                    "subject": form.cleaned_data["subject"],
+                    "error": str(e),
+                },
+            )
+        return redirect("mail:send", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'form': form}
-    return render(request, 'mail/send_mail.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "mail/send_mail.html", context)

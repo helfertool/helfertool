@@ -19,6 +19,5 @@ def show_mail(request, event_url_name, mail_pk):
         return nopermission(request)
 
     # render page
-    context = {'event': event,
-               'mail': mail}
-    return render(request, 'mail/show_mail.html', context)
+    context = {"event": event, "mail": mail}
+    return render(request, "mail/show_mail.html", context)

@@ -12,7 +12,7 @@ import unicodedata
 
 # the username is the mail address
 def generate_username(email):
-    return unicodedata.normalize('NFKC', email)[:150]
+    return unicodedata.normalize("NFKC", email)[:150]
 
 
 # whitelist logins via openid connect in django-axes as locking it the job if the identity provider
@@ -40,7 +40,7 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
         verified = super(CustomOIDCAuthenticationBackend, self).verify_claims(claims)
 
         # we require the given_name and family_name
-        if 'given_name' not in claims or 'family_name' not in claims:
+        if "given_name" not in claims or "family_name" not in claims:
             return False
 
         # abort login early when user is not allowed to login -> do not create account in database
@@ -62,8 +62,8 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     # called on login when the user already exists, just update all attributes
     def update_user(self, user, claims):
         # name
-        user.first_name = claims.get('given_name')
-        user.last_name = claims.get('family_name')
+        user.first_name = claims.get("given_name")
+        user.last_name = claims.get("family_name")
 
         # check if login should be restricted (if not, login is allowed)
         if settings.OIDC_CUSTOM_CLAIM_LOGIN:
@@ -85,9 +85,9 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
 
     def _check_claim_for_flag(self, claims, conf):
         # get config and check if it is there
-        compare = conf.get('compare', None)
-        path = conf.get('path', None)
-        value = conf.get('value', None)
+        compare = conf.get("compare", None)
+        path = conf.get("path", None)
+        value = conf.get("value", None)
 
         if compare is None or path is None or value is None:
             raise ImproperlyConfigured("Invalid OpenID Connect claim configuration (parameters missing)")
@@ -99,9 +99,9 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
             return False
 
         # check claim
-        if compare == 'direct':
+        if compare == "direct":
             return claim_value == value
-        elif compare == 'member':
+        elif compare == "member":
             return type(claim_value) == list and value in claim_value
         else:
             raise ImproperlyConfigured("Invalid OpenID Connect claim configuration (invalid mode)")

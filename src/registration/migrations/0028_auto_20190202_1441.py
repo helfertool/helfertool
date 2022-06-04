@@ -8,17 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0027_auto_20181020_2245'),
+        ("registration", "0027_auto_20181020_2245"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='job',
-            options={'ordering': ['order', 'pk']},
+            name="job",
+            options={"ordering": ["order", "pk"]},
         ),
         migrations.AddField(
-            model_name='job',
-            name='order',
-            field=models.PositiveIntegerField(default=0, verbose_name='Order, highest number on top'),
+            model_name="job",
+            name="order",
+            field=models.PositiveIntegerField(default=0, verbose_name="Order, highest number on top"),
         ),
     ]

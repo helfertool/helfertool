@@ -12,7 +12,7 @@ from datetime import datetime
 
 
 class Shift(models.Model):
-    """ A shift of one job.
+    """A shift of one job.
 
     Columns:
         :job: job of this shift
@@ -23,11 +23,12 @@ class Shift(models.Model):
         :hidden: shift is not displayed publicly
         :name: name of the shift (optional)
     """
+
     class Meta:
-        ordering = ['job', 'begin', 'end']
+        ordering = ["job", "begin", "end"]
 
     job = models.ForeignKey(
-        'Job',
+        "Job",
         on_delete=models.CASCADE,
     )
 
@@ -63,7 +64,7 @@ class Shift(models.Model):
     )
 
     gifts = models.ManyToManyField(
-        'gifts.GiftSet',
+        "gifts.GiftSet",
         verbose_name=_("Gifts"),
         blank=True,
     )
@@ -80,24 +81,25 @@ class Shift(models.Model):
             return "{}, {}".format(self.job.name, self.time_with_day())
 
     def time(self):
-        """ Returns a string representation of the begin and end time.
+        """Returns a string representation of the begin and end time.
 
         The begin contains the date and time, the end only the time.
         """
-        return "%s, %s - %s" % (date_f(localtime(self.begin), 'DATE_FORMAT'),
-                                date_f(localtime(self.begin), 'TIME_FORMAT'),
-                                date_f(localtime(self.end), 'TIME_FORMAT'))
+        return "%s, %s - %s" % (
+            date_f(localtime(self.begin), "DATE_FORMAT"),
+            date_f(localtime(self.begin), "TIME_FORMAT"),
+            date_f(localtime(self.end), "TIME_FORMAT"),
+        )
 
     def time_hours(self):
-        """ Returns a string representation of the begin and end time.
+        """Returns a string representation of the begin and end time.
 
         Only the time is used, the date is not shown.
         """
-        return "%s - %s" % (date_f(localtime(self.begin), 'TIME_FORMAT'),
-                            date_f(localtime(self.end), 'TIME_FORMAT'))
+        return "%s - %s" % (date_f(localtime(self.begin), "TIME_FORMAT"), date_f(localtime(self.end), "TIME_FORMAT"))
 
     def time_with_day(self):
-        """ Returns a string representation of the day.
+        """Returns a string representation of the day.
 
         If the shift is on two days only the name of the first day is returned.
         """
@@ -105,19 +107,19 @@ class Shift(models.Model):
         return "{}, {}".format(day, self.time())
 
     def date(self):
-        """ Returns the day on which the shifts begins. """
+        """Returns the day on which the shifts begins."""
         return localtime(self.begin).date()
 
     def begin_timestamp(self):
-        """ Returns POSIX timestamp if begin data as int.
+        """Returns POSIX timestamp if begin data as int.
 
-        Used in template. """
+        Used in template."""
         return int(self.begin.timestamp())
 
     def end_timestamp(self):
-        """ Returns POSIX timestamp if end data as int.
+        """Returns POSIX timestamp if end data as int.
 
-        Used in template. """
+        Used in template."""
         return int(self.end.timestamp())
 
     def num_helpers(self):
@@ -127,18 +129,18 @@ class Shift(models.Model):
         return self.helper_set.count()
 
     def num_helpers_archived(self):
-        """ Returns the current number of helpers- """
+        """Returns the current number of helpers-"""
         if self.job.event.archived:
             return self.archived_number
         else:
             return self.helper_set.count()
 
     def is_full(self):
-        """ Check if the shift is full and return a boolean. """
+        """Check if the shift is full and return a boolean."""
         return self.num_helpers() >= self.number
 
     def helpers_percent(self):
-        """ Calculate the percentage of registered helpers and returns an int.
+        """Calculate the percentage of registered helpers and returns an int.
 
         If the maximal number of helpers for a shift is 0, 0 is returned.
         """
@@ -159,12 +161,12 @@ class Shift(models.Model):
         for helper in self.helper_set.all():
             if helper.first_shift == self:
                 tmp = shirts[helper.get_shirt_display()]
-                shirts.update({helper.get_shirt_display(): tmp+1})
+                shirts.update({helper.get_shirt_display(): tmp + 1})
 
         return shirts
 
     def duplicate(self, new_date=None, new_job=None, gift_set_mapping=None):
-        """ Duplicate a shift. There are multiple possibilities:
+        """Duplicate a shift. There are multiple possibilities:
 
         * Shift is copied to new day in same job: set new_date
         * Shift is copied to new job in same event: set new_job

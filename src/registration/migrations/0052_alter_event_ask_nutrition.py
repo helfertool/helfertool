@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0051_remove_helper_vegetarian'),
+        ("registration", "0051_remove_helper_vegetarian"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='ask_nutrition',
-            field=models.BooleanField(default=True, verbose_name='Ask for preferred nutrition'),
+            model_name="event",
+            name="ask_nutrition",
+            field=models.BooleanField(default=True, verbose_name="Ask for preferred nutrition"),
         ),
     ]

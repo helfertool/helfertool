@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('inventory', '0004_auto_20161114_0957'),
+        ("inventory", "0004_auto_20161114_0957"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='item',
-            name='comment',
-            field=models.TextField(blank=True, verbose_name='Comment'),
+            model_name="item",
+            name="comment",
+            field=models.TextField(blank=True, verbose_name="Comment"),
         ),
     ]

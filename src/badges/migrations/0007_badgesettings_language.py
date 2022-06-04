@@ -8,13 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0006_badgedefaults_no_default_role'),
+        ("badges", "0006_badgedefaults_no_default_role"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badgesettings',
-            name='language',
-            field=models.CharField(choices=[('de', 'German'), ('en', 'English')], default='de', max_length=10, verbose_name='Language of badges'),
+            model_name="badgesettings",
+            name="language",
+            field=models.CharField(
+                choices=[("de", "German"), ("en", "English")],
+                default="de",
+                max_length=10,
+                verbose_name="Language of badges",
+            ),
         ),
     ]

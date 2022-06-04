@@ -33,16 +33,14 @@ def register(request, event_url_name):
         if form.is_valid():
             if form.badge.printed:
                 # duplicate -> error
-                messages.error(request, _("Badge already printed: %(name)s") % {'name': form.badge.name()})
+                messages.error(request, _("Badge already printed: %(name)s") % {"name": form.badge.name()})
             else:
                 # mark as printed
                 form.badge.printed = True
                 form.badge.save()
-                messages.success(request, _("Badge registered: %(name)s") % {'name': form.badge.name()})
+                messages.success(request, _("Badge registered: %(name)s") % {"name": form.badge.name()})
     else:
         form = None
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'badges/register.html',
-                  context)
+    context = {"event": event, "form": form}
+    return render(request, "badges/register.html", context)

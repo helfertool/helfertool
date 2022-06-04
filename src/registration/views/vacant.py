@@ -22,9 +22,13 @@ def vacant_shifts(request, event_url_name):
         return nopermission(request)
 
     # first, get all days
-    days = Shift.objects.filter(job__event=event) \
-        .annotate(day=TruncDate('begin')).values_list('day', flat=True) \
-        .order_by('day').distinct()
+    days = (
+        Shift.objects.filter(job__event=event)
+        .annotate(day=TruncDate("begin"))
+        .values_list("day", flat=True)
+        .order_by("day")
+        .distinct()
+    )
 
     # then check every day for vacant shifts
     jobs = event.job_set.all()
@@ -46,7 +50,5 @@ def vacant_shifts(request, event_url_name):
         if vacant_jobs_on_day:
             vacant_days[day] = vacant_jobs_on_day
 
-    context = {'event': event,
-               'no_shifts': len(days) == 0,
-               'vacant_days': vacant_days}
-    return render(request, 'registration/admin/vacant_shifts.html', context)
+    context = {"event": event, "no_shifts": len(days) == 0, "vacant_days": vacant_days}
+    return render(request, "registration/admin/vacant_shifts.html", context)

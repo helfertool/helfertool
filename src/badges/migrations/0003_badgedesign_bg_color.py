@@ -9,13 +9,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0002_auto_20151229_1953'),
+        ("badges", "0002_auto_20151229_1953"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badgedesign',
-            name='bg_color',
-            field=models.CharField(default='#000000', help_text='E.g. #00ff00', max_length=7, validators=[django.core.validators.RegexValidator('^#[a-fA-F0-9]{6}$')], verbose_name='Background color'),
+            model_name="badgedesign",
+            name="bg_color",
+            field=models.CharField(
+                default="#000000",
+                help_text="E.g. #00ff00",
+                max_length=7,
+                validators=[django.core.validators.RegexValidator("^#[a-fA-F0-9]{6}$")],
+                verbose_name="Background color",
+            ),
         ),
     ]

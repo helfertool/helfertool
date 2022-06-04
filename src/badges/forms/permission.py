@@ -6,10 +6,13 @@ from ..models import BadgePermission
 class BadgePermissionForm(forms.ModelForm):
     class Meta:
         model = BadgePermission
-        exclude = ['badge_settings', 'name', ]
+        exclude = [
+            "badge_settings",
+            "name",
+        ]
 
     def __init__(self, *args, **kwargs):
-        self.settings = kwargs.pop('settings')
+        self.settings = kwargs.pop("settings")
 
         super(BadgePermissionForm, self).__init__(*args, **kwargs)
 

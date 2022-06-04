@@ -9,18 +9,59 @@ import multiselectfield.db.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0024_duplicate'),
+        ("registration", "0024_duplicate"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='shirt_sizes',
-            field=multiselectfield.db.fields.MultiSelectField(choices=[('NO', 'I do not want a T-Shirt'), ('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'), ('XXL', 'XXL'), ('3XL', '3XL'), ('XS_GIRLY', 'XS (girly)'), ('S_GIRLY', 'S (girly)'), ('M_GIRLY', 'M (girly)'), ('L_GIRLY', 'L (girly)'), ('XL_GIRLY', 'XL (girly)'), ('XXL_GIRLY', 'XXL (girly)')], default=('S', 'M', 'L', 'XL', 'XXL', 'S_GIRLY', 'M_GIRLY', 'L_GIRLY', 'XL_GIRLY'), max_length=250, verbose_name='Available T-shirt sizes'),
+            model_name="event",
+            name="shirt_sizes",
+            field=multiselectfield.db.fields.MultiSelectField(
+                choices=[
+                    ("NO", "I do not want a T-Shirt"),
+                    ("XS", "XS"),
+                    ("S", "S"),
+                    ("M", "M"),
+                    ("L", "L"),
+                    ("XL", "XL"),
+                    ("XXL", "XXL"),
+                    ("3XL", "3XL"),
+                    ("XS_GIRLY", "XS (girly)"),
+                    ("S_GIRLY", "S (girly)"),
+                    ("M_GIRLY", "M (girly)"),
+                    ("L_GIRLY", "L (girly)"),
+                    ("XL_GIRLY", "XL (girly)"),
+                    ("XXL_GIRLY", "XXL (girly)"),
+                ],
+                default=("S", "M", "L", "XL", "XXL", "S_GIRLY", "M_GIRLY", "L_GIRLY", "XL_GIRLY"),
+                max_length=250,
+                verbose_name="Available T-shirt sizes",
+            ),
         ),
         migrations.AlterField(
-            model_name='helper',
-            name='shirt',
-            field=models.CharField(choices=[('UNKNOWN', 'Unknown'), ('NO', 'I do not want a T-Shirt'), ('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'), ('XXL', 'XXL'), ('3XL', '3XL'), ('XS_GIRLY', 'XS (girly)'), ('S_GIRLY', 'S (girly)'), ('M_GIRLY', 'M (girly)'), ('L_GIRLY', 'L (girly)'), ('XL_GIRLY', 'XL (girly)'), ('XXL_GIRLY', 'XXL (girly)')], default='UNKNOWN', max_length=20, verbose_name='T-shirt'),
+            model_name="helper",
+            name="shirt",
+            field=models.CharField(
+                choices=[
+                    ("UNKNOWN", "Unknown"),
+                    ("NO", "I do not want a T-Shirt"),
+                    ("XS", "XS"),
+                    ("S", "S"),
+                    ("M", "M"),
+                    ("L", "L"),
+                    ("XL", "XL"),
+                    ("XXL", "XXL"),
+                    ("3XL", "3XL"),
+                    ("XS_GIRLY", "XS (girly)"),
+                    ("S_GIRLY", "S (girly)"),
+                    ("M_GIRLY", "M (girly)"),
+                    ("L_GIRLY", "L (girly)"),
+                    ("XL_GIRLY", "XL (girly)"),
+                    ("XXL_GIRLY", "XXL (girly)"),
+                ],
+                default="UNKNOWN",
+                max_length=20,
+                verbose_name="T-shirt",
+            ),
         ),
     ]

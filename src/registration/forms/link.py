@@ -7,19 +7,19 @@ from .widgets import ShiftTableWidget
 class LinkForm(forms.ModelForm):
     class Meta:
         model = Link
-        exclude = ['event', 'creator']
+        exclude = ["event", "creator"]
         widgets = {
-            'shifts': ShiftTableWidget,
+            "shifts": ShiftTableWidget,
         }
 
     def __init__(self, *args, **kwargs):
-        self.event = kwargs.pop('event')
-        self.creator = kwargs.pop('creator')
+        self.event = kwargs.pop("event")
+        self.creator = kwargs.pop("creator")
 
         super(LinkForm, self).__init__(*args, **kwargs)
 
         # only show shifts for this event
-        self.fields['shifts'].queryset = Shift.objects.filter(job__event=self.event)
+        self.fields["shifts"].queryset = Shift.objects.filter(job__event=self.event)
 
     def save(self, commit=True):
         instance = super(LinkForm, self).save(False)

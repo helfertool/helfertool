@@ -13,16 +13,39 @@ from prerequisites.forms import HelperPrerequisiteForm
 
 from ..utils import get_or_404
 from ..models import Event, Shift
-from ..forms import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, RegisterForm, HelperAddShiftForm, \
-    HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm, HelperInternalCommentForm
+from ..forms import (
+    HelperForm,
+    HelperDeleteForm,
+    HelperDeleteCoordinatorForm,
+    RegisterForm,
+    HelperAddShiftForm,
+    HelperAddCoordinatorForm,
+    HelperSearchForm,
+    HelperResendMailForm,
+    HelperInternalCommentForm,
+)
 from ..decorators import archived_not_available
-from ..permissions import has_access, has_access_event_or_job, ACCESS_INVOLVED, ACCESS_JOB_EDIT_HELPERS, \
-    ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_EDIT_SENSITIVE, ACCESS_HELPER_VIEW, \
-    ACCESS_HELPER_RESEND, ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE_GIFTS, ACCESS_GIFTS_HANDLE_PRESENCE, \
-    ACCESS_EVENT_EXPORT_HELPERS, ACCESS_PREREQUISITES_HANDLE, ACCESS_HELPER_INTERNAL_COMMENT_VIEW, \
-    ACCESS_HELPER_INTERNAL_COMMENT_EDIT
+from ..permissions import (
+    has_access,
+    has_access_event_or_job,
+    ACCESS_INVOLVED,
+    ACCESS_JOB_EDIT_HELPERS,
+    ACCESS_JOB_VIEW_HELPERS,
+    ACCESS_HELPER_EDIT,
+    ACCESS_HELPER_EDIT_SENSITIVE,
+    ACCESS_HELPER_VIEW,
+    ACCESS_HELPER_RESEND,
+    ACCESS_BADGES_EDIT_HELPER,
+    ACCESS_GIFTS_HANDLE_GIFTS,
+    ACCESS_GIFTS_HANDLE_PRESENCE,
+    ACCESS_EVENT_EXPORT_HELPERS,
+    ACCESS_PREREQUISITES_HANDLE,
+    ACCESS_HELPER_INTERNAL_COMMENT_VIEW,
+    ACCESS_HELPER_INTERNAL_COMMENT_EDIT,
+)
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -38,15 +61,17 @@ def helpers(request, event_url_name):
     user_can_export = has_access(request.user, event, ACCESS_EVENT_EXPORT_HELPERS)
 
     # list of days with shifts
-    days = Shift.objects.filter(job__event=event) \
-        .annotate(day=TruncDate('begin')).values_list('day', flat=True) \
-        .order_by('day').distinct()
+    days = (
+        Shift.objects.filter(job__event=event)
+        .annotate(day=TruncDate("begin"))
+        .values_list("day", flat=True)
+        .order_by("day")
+        .distinct()
+    )
 
     # overview over jobs
-    context = {'event': event,
-               'days': days,
-               'user_can_export': user_can_export}
-    return render(request, 'registration/admin/helpers.html', context)
+    context = {"event": event, "days": days, "user_can_export": user_can_export}
+    return render(request, "registration/admin/helpers.html", context)
 
 
 @login_required
@@ -63,12 +88,13 @@ def helpers_for_job(request, event_url_name, job_pk):
     shifts_by_day = job.shifts_by_day().items()
 
     # show list of helpers
-    context = {'event': event,
-               'job': job,
-               'shifts_by_day': shifts_by_day,
-               'user_manages_presence': user_manages_presence}
-    return render(request, 'registration/admin/helpers_for_job.html',
-                  context)
+    context = {
+        "event": event,
+        "job": job,
+        "shifts_by_day": shifts_by_day,
+        "user_manages_presence": user_manages_presence,
+    }
+    return render(request, "registration/admin/helpers_for_job.html", context)
 
 
 @login_required
@@ -107,12 +133,14 @@ def view_helper(request, event_url_name, helper_pk):
     if edit_gifts or edit_presence:
         helper.gifts.update()
 
-        gifts_form = HelpersGiftsForm(request.POST or None,
-                                      instance=helper.gifts,
-                                      gifts_readonly=not edit_gifts,
-                                      presence_readonly=not edit_presence,
-                                      user=request.user,
-                                      prefix="gifts")
+        gifts_form = HelpersGiftsForm(
+            request.POST or None,
+            instance=helper.gifts,
+            gifts_readonly=not edit_gifts,
+            presence_readonly=not edit_presence,
+            user=request.user,
+            prefix="gifts",
+        )
 
         if not gifts_form.is_valid():
             forms_valid = False
@@ -120,10 +148,9 @@ def view_helper(request, event_url_name, helper_pk):
     # prerequisite editing
     prerequisites_form = None
     if edit_prerequisites:
-        prerequisites_form = HelperPrerequisiteForm(request.POST or None,
-                                                    helper=helper,
-                                                    user=request.user,
-                                                    prefix="prerequisites")
+        prerequisites_form = HelperPrerequisiteForm(
+            request.POST or None, helper=helper, user=request.user, prefix="prerequisites"
+        )
 
         if not prerequisites_form.is_valid():
             forms_valid = False
@@ -140,17 +167,19 @@ def view_helper(request, event_url_name, helper_pk):
             prerequisites_form.save()
 
         messages.success(request, _("Changes were saved."))
-        return redirect('view_helper', event_url_name=event.url_name, helper_pk=helper.pk)
+        return redirect("view_helper", event_url_name=event.url_name, helper_pk=helper.pk)
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'edit_badge': edit_badge,
-               'view_internal_comment': view_internal_comment,
-               'internal_comment_form': internal_comment_form,
-               'gifts_form': gifts_form,
-               'prerequisites_form': prerequisites_form}
-    return render(request, 'registration/admin/view_helper.html', context)
+    context = {
+        "event": event,
+        "helper": helper,
+        "edit_badge": edit_badge,
+        "view_internal_comment": view_internal_comment,
+        "internal_comment_form": internal_comment_form,
+        "gifts_form": gifts_form,
+        "prerequisites_form": prerequisites_form,
+    }
+    return render(request, "registration/admin/view_helper.html", context)
 
 
 @login_required
@@ -169,24 +198,25 @@ def edit_helper(request, event_url_name, helper_pk):
     if form.is_valid():
         form.save()
 
-        logger.info("helper changed", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper changed",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
         if form.email_has_changed:
             # we do not know here if it was an internal registration or not, so send the public version
             if not helper.send_mail(request, internal=False):
                 messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+        return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'form': form}
-    return render(request, 'registration/admin/edit_helper.html', context)
+    context = {"event": event, "helper": helper, "form": form}
+    return render(request, "registration/admin/edit_helper.html", context)
 
 
 @login_required
@@ -202,8 +232,15 @@ def add_helper(request, event_url_name, shift_pk):
     # get all shifts of this job
     shifts_qs = Shift.objects.filter(job=shift.job)
 
-    form = RegisterForm(request.POST or None, event=event, shifts_qs=shifts_qs, preselected_shifts=[shift, ],
-                        is_internal=True)
+    form = RegisterForm(
+        request.POST or None,
+        event=event,
+        shifts_qs=shifts_qs,
+        preselected_shifts=[
+            shift,
+        ],
+        is_internal=True,
+    )
     if event.corona:
         corona_form = ContactTracingDataForm(request.POST or None, event=event, prefix="corona")
     else:
@@ -216,23 +253,24 @@ def add_helper(request, event_url_name, shift_pk):
             corona_form.save(helper=helper)
 
         shiftids = [s.pk for s in helper.shifts.all()]
-        logger.info("helper created", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-            'shifts': shiftids,
-        })
+        logger.info(
+            "helper created",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+                "shifts": shiftids,
+            },
+        )
 
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=shift.job.pk)
+        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=shift.job.pk)
 
     # render page
-    context = {'event': event,
-               'form': form,
-               'corona_form': corona_form}
-    return render(request, 'registration/admin/add_helper.html', context)
+    context = {"event": event, "form": form, "corona_form": corona_form}
+    return render(request, "registration/admin/add_helper.html", context)
 
 
 @login_required
@@ -258,23 +296,24 @@ def add_coordinator(request, event_url_name, job_pk):
         if corona_form:
             corona_form.save(helper=helper)
 
-        logger.info("helper created", extra={
-            'user': request.user,
-            'event': event,
-            'job': job,
-            'helper': helper,
-        })
+        logger.info(
+            "helper created",
+            extra={
+                "user": request.user,
+                "event": event,
+                "job": job,
+                "helper": helper,
+            },
+        )
 
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the coordinator was saved."))
 
-        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=job.pk)
+        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
-    context = {'event': event,
-               'form': form,
-               'corona_form': corona_form}
-    return render(request, 'registration/admin/edit_helper.html', context)
+    context = {"event": event, "form": form, "corona_form": corona_form}
+    return render(request, "registration/admin/edit_helper.html", context)
 
 
 @login_required
@@ -287,27 +326,26 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
     if not has_access_event_or_job(request.user, event, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
-    form = HelperAddShiftForm(request.POST or None, helper=helper,
-                              user=request.user)
+    form = HelperAddShiftForm(request.POST or None, helper=helper, user=request.user)
 
     if form.is_valid():
         form.save()
 
         # TODO: add shifts
-        logger.info("helper newshift", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper newshift",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
-        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+        return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
-    context = {'event': event,
-               'form': form,
-               'helper': helper}
-    return render(request, 'registration/admin/add_helper_to_shift.html',
-                  context)
+    context = {"event": event, "form": form, "helper": helper}
+    return render(request, "registration/admin/add_helper_to_shift.html", context)
 
 
 @login_required
@@ -326,26 +364,25 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
         form.save()
 
         # TODO: add job
-        logger.info("helper newjob", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper newjob",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
-        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+        return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
-    context = {'event': event,
-               'form': form,
-               'helper': helper}
-    return render(request, 'registration/admin/add_helper_as_coordinator.html',
-                  context)
+    context = {"event": event, "form": form, "helper": helper}
+    return render(request, "registration/admin/add_helper_as_coordinator.html", context)
 
 
 @login_required
 @never_cache
-def delete_helper(request, event_url_name, helper_pk, shift_pk,
-                  show_all_shifts=False):
+def delete_helper(request, event_url_name, helper_pk, shift_pk, show_all_shifts=False):
     event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk, helper_pk=helper_pk)
 
     # additional plausibility checks
@@ -357,39 +394,36 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk,
         return nopermission(request)
 
     # form
-    form = HelperDeleteForm(request.POST or None, instance=helper, shift=shift,
-                            user=request.user, show_all_shifts=show_all_shifts)
+    form = HelperDeleteForm(
+        request.POST or None, instance=helper, shift=shift, user=request.user, show_all_shifts=show_all_shifts
+    )
 
     if form.is_valid():
         form.delete()
-        messages.success(request, _("Helper deleted: %(name)s") %
-                         {'name': helper.full_name})
+        messages.success(request, _("Helper deleted: %(name)s") % {"name": helper.full_name})
 
         # TODO: only single shift or completely?
-        logger.info("helper deleted", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
         # redirect to shift
-        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=shift.job.pk)
+        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=shift.job.pk)
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'shift': shift,
-               'form': form,
-               'show_all_shifts': show_all_shifts}
-    return render(request, 'registration/admin/delete_helper.html', context)
+    context = {"event": event, "helper": helper, "shift": shift, "form": form, "show_all_shifts": show_all_shifts}
+    return render(request, "registration/admin/delete_helper.html", context)
 
 
 @login_required
 @never_cache
 def delete_coordinator(request, event_url_name, helper_pk, job_pk):
-    event, job, shift, helper = get_or_404(event_url_name,
-                                           job_pk=job_pk,
-                                           helper_pk=helper_pk)
+    event, job, shift, helper = get_or_404(event_url_name, job_pk=job_pk, helper_pk=helper_pk)
 
     # check permission
     if not has_access(request.user, job, ACCESS_JOB_EDIT_HELPERS):
@@ -400,33 +434,32 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
         raise Http404
 
     # form
-    form = HelperDeleteCoordinatorForm(request.POST or None, instance=helper,
-                                       job=job)
+    form = HelperDeleteCoordinatorForm(request.POST or None, instance=helper, job=job)
 
     if form.is_valid():
         form.delete()
 
         # TODO: only one job or completely?
-        logger.info("helper deleted", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
-        messages.success(request, _("Coordinator %(name)s from job "
-                                    "\"%(jobname)s\"") %
-                         {'name': helper.full_name, 'jobname': job.name})
+        messages.success(
+            request,
+            _("Coordinator %(name)s from job " '"%(jobname)s"') % {"name": helper.full_name, "jobname": job.name},
+        )
 
         # redirect to shift
-        return redirect('helpers_for_job', event_url_name=event_url_name, job_pk=job.pk)
+        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'job': job,
-               'form': form}
-    return render(request, 'registration/admin/delete_coordinator.html',
-                  context)
+    context = {"event": event, "helper": helper, "job": job, "form": form}
+    return render(request, "registration/admin/delete_coordinator.html", context)
 
 
 @login_required
@@ -448,18 +481,15 @@ def search_helper(request, event_url_name):
         # input was barcode -> redirect
         helper = form.check_barcode()
         if helper:
-            return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+            return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
         # else show results
         result = form.get()
         new_search = False
 
     # render page
-    context = {'event': event,
-               'form': form,
-               'result': result,
-               'new_search': new_search}
-    return render(request, 'registration/admin/search_helper.html', context)
+    context = {"event": event, "form": form, "result": result, "new_search": new_search}
+    return render(request, "registration/admin/search_helper.html", context)
 
 
 @login_required
@@ -474,11 +504,14 @@ def resend_mail(request, event_url_name, helper_pk):
     form = HelperResendMailForm(request.POST or None)
 
     if form.is_valid():
-        logger.info("helper confirmationmail", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper confirmationmail",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
         if helper.send_mail(request, internal=False):
             messages.success(request, _("Confirmation mail was sent"))
@@ -489,9 +522,7 @@ def resend_mail(request, event_url_name, helper_pk):
         else:
             messages.error(request, _("Sending the mail failed."))
 
-        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+        return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
-    context = {'event': event,
-               'helper': helper,
-               'form': form}
-    return render(request, 'registration/admin/resend_mail.html', context)
+    context = {"event": event, "helper": helper, "form": form}
+    return render(request, "registration/admin/resend_mail.html", context)

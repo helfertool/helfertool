@@ -9,7 +9,10 @@ from ..models import HTMLSetting, TextSetting
 class HTMLSettingForm(forms.ModelForm):
     class Meta:
         model = HTMLSetting
-        exclude = ['key', 'value', ]
+        exclude = [
+            "key",
+            "value",
+        ]
 
         # According to the documentation django-modeltranslations copies the
         # widget from the original field.
@@ -30,7 +33,10 @@ class HTMLSettingForm(forms.ModelForm):
 class TextSettingForm(forms.ModelForm):
     class Meta:
         model = TextSetting
-        exclude = ['key', 'value', ]
+        exclude = [
+            "key",
+            "value",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(TextSettingForm, self).__init__(*args, **kwargs)

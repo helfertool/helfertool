@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Gift, GiftSet, IncludedGift, HelpersGifts, \
-    DeservedGiftSet
+from .models import Gift, GiftSet, IncludedGift, HelpersGifts, DeservedGiftSet
 
 
 class IncludedGiftInline(admin.TabularInline):
@@ -10,7 +9,7 @@ class IncludedGiftInline(admin.TabularInline):
 
 
 class GiftSetAdmin(admin.ModelAdmin):
-    inlines = (IncludedGiftInline, )
+    inlines = (IncludedGiftInline,)
 
 
 admin.site.register(Gift)

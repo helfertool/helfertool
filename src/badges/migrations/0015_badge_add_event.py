@@ -7,19 +7,23 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0043_auto_20200409_1711'),
-        ('badges', '0014_auto_20200907_2140'),
+        ("registration", "0043_auto_20200409_1711"),
+        ("badges", "0014_auto_20200907_2140"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badge',
-            name='event',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='registration.event'),
+            model_name="badge",
+            name="event",
+            field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to="registration.event"
+            ),
         ),
         migrations.AlterField(
-            model_name='badge',
-            name='helper',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='registration.helper'),
+            model_name="badge",
+            name="helper",
+            field=models.OneToOneField(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to="registration.helper"
+            ),
         ),
     ]

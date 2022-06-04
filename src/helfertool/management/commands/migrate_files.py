@@ -34,7 +34,7 @@ def handle_field(instance, fieldname, upload_to_func, dest):
 
 
 class Command(BaseCommand):
-    help = 'Moves all uploaded files to the new directories (migration to Helfertool version 2.0.x)'
+    help = "Moves all uploaded files to the new directories (migration to Helfertool version 2.0.x)"
 
     def handle(self, *args, **options):
         # model: Event

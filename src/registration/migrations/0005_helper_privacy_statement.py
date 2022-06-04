@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0004_auto_20160323_1600'),
+        ("registration", "0004_auto_20160323_1600"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='helper',
-            name='privacy_statement',
-            field=models.BooleanField(default=False, verbose_name='I agree with the following data privacy statement'),
+            model_name="helper",
+            name="privacy_statement",
+            field=models.BooleanField(default=False, verbose_name="I agree with the following data privacy statement"),
         ),
     ]

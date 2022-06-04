@@ -9,14 +9,17 @@ from ..models import BadgeDesign
 class BadgeDesignForm(forms.ModelForm):
     class Meta:
         model = BadgeDesign
-        exclude = ['badge_settings', 'name', ]
+        exclude = [
+            "badge_settings",
+            "name",
+        ]
         widgets = {
             "bg_front": ImageFileInput,
             "bg_back": ImageFileInput,
         }
 
     def __init__(self, *args, **kwargs):
-        self.settings = kwargs.pop('settings')
+        self.settings = kwargs.pop("settings")
 
         super(BadgeDesignForm, self).__init__(*args, **kwargs)
 

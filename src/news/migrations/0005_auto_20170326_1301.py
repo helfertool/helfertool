@@ -9,17 +9,17 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0004_tokens_remove_null'),
+        ("news", "0004_tokens_remove_null"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='person',
-            name='id',
+            model_name="person",
+            name="id",
         ),
         migrations.AlterField(
-            model_name='person',
-            name='token',
+            model_name="person",
+            name="token",
             field=models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False),
         ),
     ]

@@ -13,6 +13,7 @@ from ..export import excel_export
 from .utils import notactive
 
 import logging
+
 logger = logging.getLogger("helfertool.corona")
 
 
@@ -33,9 +34,8 @@ def data(request, event_url_name):
     num_missing = event.helper_set.filter(contacttracingdata__isnull=True).count()
 
     # render page
-    context = {'event': event,
-               'num_missing': num_missing}
-    return render(request, 'corona/data.html', context)
+    context = {"event": event, "num_missing": num_missing}
+    return render(request, "corona/data.html", context)
 
 
 @login_required
@@ -55,9 +55,8 @@ def missing(request, event_url_name):
     helpers = event.helper_set.filter(contacttracingdata__isnull=True)
 
     # render page
-    context = {'event': event,
-               'helpers': helpers}
-    return render(request, 'corona/missing.html', context)
+    context = {"event": event, "helpers": helpers}
+    return render(request, "corona/missing.html", context)
 
 
 @login_required
@@ -74,15 +73,18 @@ def export(request, event_url_name):
     if not event.corona:
         return notactive(request)
 
-    logger.info("corona export", extra={
-        'user': request.user,
-        'event': event,
-    })
+    logger.info(
+        "corona export",
+        extra={
+            "user": request.user,
+            "event": event,
+        },
+    )
 
     # start http response
     filename = "{} - {}.xlsx".format(event.name, _("Corona contact tracing"))
     response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+    response["Content-Disposition"] = 'attachment; filename="%s"' % filename
 
     # close buffer, send file
     data = excel_export(event)

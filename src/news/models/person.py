@@ -12,11 +12,12 @@ from smtplib import SMTPException
 import uuid
 
 import logging
+
 logger = logging.getLogger("helfertool.news")
 
 
 class Person(models.Model):
-    """ Newsletter recipient.
+    """Newsletter recipient.
 
     Columns:
         :token: Token for confirm/unsubscribe URLs
@@ -26,8 +27,11 @@ class Person(models.Model):
         :timestamp_validated: Timestamp of mail validation (GDPR double opt-in)
         :withevent: Subscription during event registration or separately? (for statistics)
     """
+
     class Meta:
-        ordering = ['timestamp', ]
+        ordering = [
+            "timestamp",
+        ]
 
     token = models.UUIDField(
         primary_key=True,
@@ -63,40 +67,48 @@ class Person(models.Model):
         return self.email
 
     def send_validation_mail(self, request):
-        """ Send a validation e-mail to the specified mail address (GDPR double opt-in).
+        """Send a validation e-mail to the specified mail address (GDPR double opt-in).
 
         Used for public newsletter subscription.
         If a helper subscribed during the registration, no separate mail is sent.
         """
         # generate URLs
         domain = request.get_host()
-        confirm_url = request.build_absolute_uri(reverse('news:subscribe_confirm', args=[self.token]))
+        confirm_url = request.build_absolute_uri(reverse("news:subscribe_confirm", args=[self.token]))
 
         # generate subject and text from templates
-        subject_template = get_template('news/mail/validation_subject.txt')
+        subject_template = get_template("news/mail/validation_subject.txt")
         subject = subject_template.render().rstrip()
 
-        text_template = get_template('news/mail/validation_text.txt')
-        text = text_template.render({'confirm_url': confirm_url,
-                                     'domain': domain})
+        text_template = get_template("news/mail/validation_text.txt")
+        text = text_template.render({"confirm_url": confirm_url, "domain": domain})
 
         tracking_header = new_tracking_news_confirm(self)
 
         # sent it and handle errors
-        mail = EmailMessage(subject,
-                            text,
-                            settings.EMAIL_SENDER_ADDRESS,
-                            [self.email, ],  # to
-                            reply_to=[settings.EMAIL_SENDER_ADDRESS, ],
-                            headers=tracking_header)
+        mail = EmailMessage(
+            subject,
+            text,
+            settings.EMAIL_SENDER_ADDRESS,
+            [
+                self.email,
+            ],  # to
+            reply_to=[
+                settings.EMAIL_SENDER_ADDRESS,
+            ],
+            headers=tracking_header,
+        )
 
         try:
             mail.send(fail_silently=False)
             return True
         except (SMTPException, ConnectionError) as e:
-            logger.error("newsletter mailerror", extra={
-                'email': self.email,
-                'error': str(e),
-            })
+            logger.error(
+                "newsletter mailerror",
+                extra={
+                    "email": self.email,
+                    "error": str(e),
+                },
+            )
 
             return False

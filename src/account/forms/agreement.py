@@ -13,11 +13,11 @@ class AgreementForm(forms.ModelForm):
     class Meta:
         model = Agreement
 
-        exclude = ['name', 'text']
+        exclude = ["name", "text"]
 
         widgets = {
-            'start': DatePicker,
-            'end': DatePicker,
+            "start": DatePicker,
+            "end": DatePicker,
         }
 
         # According to the documentation django-modeltranslations copies the

@@ -9,16 +9,15 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Person',
+            name="Person",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254, unique=True, verbose_name='E-Mail')),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("email", models.EmailField(max_length=254, unique=True, verbose_name="E-Mail")),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
             ],
         ),
     ]

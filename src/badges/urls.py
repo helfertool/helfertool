@@ -2,183 +2,151 @@ from django.conf.urls import url
 
 from . import views
 
-app_name = 'badges'
+app_name = "badges"
 urlpatterns = [
     #
     # settings
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/$',
-        views.settings,
-        name='settings'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/advanced',
-        views.settings_advanced,
-        name='settings_advanced'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/defaulttemplate',
-        views.default_template,
-        name='default_template'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/currenttemplate',
-        views.current_template,
-        name='current_template'),
-
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/$", views.settings, name="settings"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/advanced", views.settings_advanced, name="settings_advanced"
+    ),
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/defaulttemplate", views.default_template, name="default_template"),
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/currenttemplate", views.current_template, name="current_template"),
     #
     # edit badge
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/$',
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/$",
         views.edit_badge,
-        name='edit_badge'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/photo/$',
+        name="edit_badge",
+    ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/photo/$",
         views.get_badge_photo,
-        name='get_badge_photo'),
-
-
+        name="get_badge_photo",
+    ),
     #
     # permission
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/(?P<permission_pk>[0-9]+)/$',
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/(?P<permission_pk>[0-9]+)/$",
         views.edit_permission,
-        name='edit_permission'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/add/',
-        views.edit_permission,
-        name='new_permission'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/(?P<permission_pk>[0-9]+)/delete/$',
+        name="edit_permission",
+    ),
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/add/", views.edit_permission, name="new_permission"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/(?P<permission_pk>[0-9]+)/delete/$",
         views.delete_permission,
-        name='delete_permission'),
-
+        name="delete_permission",
+    ),
     #
     # role
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/(?P<role_pk>[0-9]+)/$',
-        views.edit_role,
-        name='edit_role'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/add/',
-        views.edit_role,
-        name='new_role'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/(?P<role_pk>[0-9]+)/delete/$',
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/(?P<role_pk>[0-9]+)/$", views.edit_role, name="edit_role"),
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/add/", views.edit_role, name="new_role"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/(?P<role_pk>[0-9]+)/delete/$",
         views.delete_role,
-        name='delete_role'),
-
+        name="delete_role",
+    ),
     #
     # design
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/$',
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/$",
         views.edit_design,
-        name='edit_design'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/',
-        views.edit_design,
-        name='new_design'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/delete/$',
+        name="edit_design",
+    ),
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/", views.edit_design, name="new_design"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/delete/$",
         views.delete_design,
-        name='delete_design'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/bg/(?P<side>[a-z]+)/$',
+        name="delete_design",
+    ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/bg/(?P<side>[a-z]+)/$",
         views.get_design_bg,
-        name='get_design_bg'),
-
+        name="get_design_bg",
+    ),
     #
     # badge generation
     #
-
     # overview page
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$',
-        views.index,
-        name='index'),
-
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$", views.index, name="index"),
     # overview of generated badges (list of tasks)
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/tasklist/$',
-        views.tasklist,
-        name='tasklist'),
-
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/tasklist/$", views.tasklist, name="tasklist"),
     # warnings
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/warnings/(?P<job_pk>[0-9]+)$',
-        views.warnings,
-        name='warnings'),
-
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/warnings/(?P<job_pk>[0-9]+)$", views.warnings, name="warnings"),
     # generate for job
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/(?P<job_pk>[0-9]+)/$',
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/(?P<job_pk>[0-9]+)/$",
         views.generate,
-        {'generate': 'job'},
-        name='generate_for_job'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/(?P<job_pk>[0-9]+)/all/$',
+        {"generate": "job"},
+        name="generate_for_job",
+    ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/(?P<job_pk>[0-9]+)/all/$",
         views.generate,
-        {'generate': 'job', 'skip_printed': False},
-        name='generate_all_for_job'),
-
+        {"generate": "job", "skip_printed": False},
+        name="generate_all_for_job",
+    ),
     # generate special badges
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/special/$',
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/special/$",
         views.generate,
-        {'generate': 'special'},
-        name='generate_special'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/special/all/$',
+        {"generate": "special"},
+        name="generate_special",
+    ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/special/all/$",
         views.generate,
-        {'generate': 'special', 'skip_printed': False},
-        name='generate_all_special'),
-
+        {"generate": "special", "skip_printed": False},
+        name="generate_all_special",
+    ),
     # generate for all jobs and special badges
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/$',
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/$", views.generate, {"generate": "all"}, name="generate"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/all/$",
         views.generate,
-        {'generate': 'all'},
-        name='generate'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/all/$',
-        views.generate,
-        {'generate': 'all', 'skip_printed': False},
-        name='generate_all'),
-
+        {"generate": "all", "skip_printed": False},
+        name="generate_all",
+    ),
     # failed page
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/failed/'
-        r'(?P<task_id>[a-z0-9\-]+)/$',
-        views.failed,
-        name='failed'),
-
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/failed/" r"(?P<task_id>[a-z0-9\-]+)/$", views.failed, name="failed"),
     # download badges
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/download/'
-        r'(?P<task_id>[a-z0-9\-]+)/$',
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/download/" r"(?P<task_id>[a-z0-9\-]+)/$",
         views.download,
-        name='download'),
-
+        name="download",
+    ),
     #
     # register badges
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/',
-        views.register,
-        name='register'),
-
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/", views.register, name="register"),
     #
     # special badges
     #
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/$',
-        views.list_specialbadges,
-        name='list_specialbadges'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/$',
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/$", views.list_specialbadges, name="list_specialbadges"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/$",
         views.edit_specialbadges,
-        name='edit_specialbadges'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/add/$',
-        views.edit_specialbadges,
-        name='new_specialbadges'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/$',
+        name="edit_specialbadges",
+    ),
+    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/add/$", views.edit_specialbadges, name="new_specialbadges"),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/$",
         views.edit_specialbadges_template,
-        name='edit_specialbadges_template'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/delete/$',
+        name="edit_specialbadges_template",
+    ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/delete/$",
         views.delete_specialbadges,
-        name='delete_specialbadges'),
-
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/photo/$',
+        name="delete_specialbadges",
+    ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/photo/$",
         views.get_specialbadges_photo,
-        name='get_specialbadges_photo'),
+        name="get_specialbadges_photo",
+    ),
 ]

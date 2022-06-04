@@ -5,13 +5,17 @@ from .fields import PresenceField
 from ..models import HelpersGifts
 
 import logging
+
 logger = logging.getLogger("helfertool.gifts")
 
 
 class HelpersGiftsForm(forms.ModelForm):
     class Meta:
         model = HelpersGifts
-        exclude = ['helper', 'deserved_gifts', ]
+        exclude = [
+            "helper",
+            "deserved_gifts",
+        ]
 
     def __init__(self, *args, **kwargs):
         gifts_readonly = kwargs.pop("gifts_readonly", False)
@@ -34,32 +38,29 @@ class HelpersGiftsForm(forms.ModelForm):
             disabled = (missed_shift and not giftset.delivered) or gifts_readonly
 
             self.fields[delivered_id_str] = forms.BooleanField(
-                label=_("Delivered"),
-                required=False,
-                initial=giftset.delivered,
-                disabled=disabled)
+                label=_("Delivered"), required=False, initial=giftset.delivered, disabled=disabled
+            )
 
         # presence fields per shift
         for helpershift in self.instance.helper.helpershift_set.all():
             present_id_str = "present_{}".format(helpershift.shift.pk)
 
             self.fields[present_id_str] = PresenceField(
-                automatic_presence=automatic_presence,
-                helpershift=helpershift,
-                disabled=presence_readonly)
+                automatic_presence=automatic_presence, helpershift=helpershift, disabled=presence_readonly
+            )
 
         # disable gift related fields if gifts are read-only
         # (do this before possible removing some of them in the next code block)
         if gifts_readonly:
-            self.fields['deposit'].disabled = True
-            self.fields['deposit_returned'].disabled = True
-            self.fields['got_shirt'].disabled = True
-            self.fields['buy_shirt'].disabled = True
+            self.fields["deposit"].disabled = True
+            self.fields["deposit_returned"].disabled = True
+            self.fields["got_shirt"].disabled = True
+            self.fields["buy_shirt"].disabled = True
 
         # remove shirt related fields if shirts disabled
         if not self.instance.helper.event.ask_shirt:
-            self.fields.pop('got_shirt')
-            self.fields.pop('buy_shirt')
+            self.fields.pop("got_shirt")
+            self.fields.pop("buy_shirt")
 
     def save(self, commit=True):
         instance = super(HelpersGiftsForm, self).save(False)
@@ -73,15 +74,18 @@ class HelpersGiftsForm(forms.ModelForm):
 
             # logging per giftset and shift (if it changed)
             if delivered_id_str in self.changed_data:
-                logger.info("helper giftset", extra={
-                    'user': self._user,
-                    'event': self.instance.helper.event,
-                    'helper': self.instance.helper,
-                    'shift': giftset.shift,
-                    'giftset_pk': giftset.gift_set.pk,
-                    'giftset': giftset.gift_set.name,
-                    'delivered': giftset.delivered,
-                })
+                logger.info(
+                    "helper giftset",
+                    extra={
+                        "user": self._user,
+                        "event": self.instance.helper.event,
+                        "helper": self.instance.helper,
+                        "shift": giftset.shift,
+                        "giftset_pk": giftset.gift_set.pk,
+                        "giftset": giftset.gift_set.name,
+                        "delivered": giftset.delivered,
+                    },
+                )
 
         # presence
         for helpershift in self.instance.helper.helpershift_set.all():
@@ -92,13 +96,16 @@ class HelpersGiftsForm(forms.ModelForm):
 
             # logging per shift
             if present_id_str in self.changed_data:
-                logger.info("helper presence", extra={
-                    'user': self._user,
-                    'event': self.instance.helper.event,
-                    'helper': self.instance.helper,
-                    'shift': helpershift.shift,
-                    'present': present,
-                })
+                logger.info(
+                    "helper presence",
+                    extra={
+                        "user": self._user,
+                        "event": self.instance.helper.event,
+                        "helper": self.instance.helper,
+                        "shift": helpershift.shift,
+                        "present": present,
+                    },
+                )
 
         # and finally store the other flags
         instance = super(HelpersGiftsForm, self).save(commit)

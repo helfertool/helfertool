@@ -9,6 +9,7 @@ from ..forms import HTMLSettingForm, TextSettingForm
 from ..models import HTMLSetting, TextSetting
 
 import logging
+
 logger = logging.getLogger("helfertool.toolsettings")
 
 
@@ -23,7 +24,7 @@ def templates(request):
         return nopermission(request)
 
     context = {}
-    return render(request, 'toolsettings/templates.html', context)
+    return render(request, "toolsettings/templates.html", context)
 
 
 @login_required
@@ -34,22 +35,25 @@ def template_about(request):
         return nopermission(request)
 
     # form
-    obj, c = HTMLSetting.objects.get_or_create(key='about')
+    obj, c = HTMLSetting.objects.get_or_create(key="about")
     form = HTMLSettingForm(request.POST or None, instance=obj)
 
     if form.is_valid():
         form.save()
 
-        logger.info("settings changed", extra={
-            'changed': 'templates_about',
-            'user': request.user,
-        })
+        logger.info(
+            "settings changed",
+            extra={
+                "changed": "templates_about",
+                "user": request.user,
+            },
+        )
 
-        return redirect('toolsettings:templates')
+        return redirect("toolsettings:templates")
 
     # render page
-    context = {'form': form}
-    return render(request, 'toolsettings/template_about.html', context)
+    context = {"form": form}
+    return render(request, "toolsettings/template_about.html", context)
 
 
 @login_required
@@ -63,30 +67,24 @@ def template_privacy(request):
     all_forms = []
 
     # texts for registration
-    obj_privacy, c = HTMLSetting.objects.get_or_create(key='privacy')
-    form_privacy = HTMLSettingForm(request.POST or None,
-                                   instance=obj_privacy,
-                                   prefix='privacy')
+    obj_privacy, c = HTMLSetting.objects.get_or_create(key="privacy")
+    form_privacy = HTMLSettingForm(request.POST or None, instance=obj_privacy, prefix="privacy")
     all_forms.append(form_privacy)
 
-    obj_privacy_text, c = TextSetting.objects.get_or_create(key='privacy')
-    form_privacy_text = TextSettingForm(request.POST or None,
-                                        instance=obj_privacy_text,
-                                        prefix='privacy_text')
+    obj_privacy_text, c = TextSetting.objects.get_or_create(key="privacy")
+    form_privacy_text = TextSettingForm(request.POST or None, instance=obj_privacy_text, prefix="privacy_text")
     all_forms.append(form_privacy_text)
 
     # forms for newsletter texts (if enabled)
     if settings.FEATURES_NEWSLETTER:
-        obj_news, c = HTMLSetting.objects.get_or_create(key='privacy_newsletter')
-        form_news = HTMLSettingForm(request.POST or None,
-                                    instance=obj_news,
-                                    prefix='news')
+        obj_news, c = HTMLSetting.objects.get_or_create(key="privacy_newsletter")
+        form_news = HTMLSettingForm(request.POST or None, instance=obj_news, prefix="news")
         all_forms.append(form_news)
 
-        obj_news_subscribe, c = HTMLSetting.objects.get_or_create(key='privacy_newsletter_subscribe')
-        form_news_subscribe = HTMLSettingForm(request.POST or None,
-                                              instance=obj_news_subscribe,
-                                              prefix='news_subscribe')
+        obj_news_subscribe, c = HTMLSetting.objects.get_or_create(key="privacy_newsletter_subscribe")
+        form_news_subscribe = HTMLSettingForm(
+            request.POST or None, instance=obj_news_subscribe, prefix="news_subscribe"
+        )
         all_forms.append(form_news_subscribe)
     else:
         # for template
@@ -98,19 +96,24 @@ def template_privacy(request):
         for f in all_forms:
             f.save()
 
-        logger.info("settings changed", extra={
-            'changed': 'templates_privacy',
-            'user': request.user,
-        })
+        logger.info(
+            "settings changed",
+            extra={
+                "changed": "templates_privacy",
+                "user": request.user,
+            },
+        )
 
-        return redirect('toolsettings:templates')
+        return redirect("toolsettings:templates")
 
     # render page
-    context = {'form_privacy': form_privacy,
-               'form_privacy_text': form_privacy_text,
-               'form_news': form_news,
-               'form_news_subscribe': form_news_subscribe}
-    return render(request, 'toolsettings/template_privacy.html', context)
+    context = {
+        "form_privacy": form_privacy,
+        "form_privacy_text": form_privacy_text,
+        "form_news": form_news,
+        "form_news_subscribe": form_news_subscribe,
+    }
+    return render(request, "toolsettings/template_privacy.html", context)
 
 
 @login_required
@@ -121,22 +124,25 @@ def template_login(request):
         return nopermission(request)
 
     # form
-    obj, c = HTMLSetting.objects.get_or_create(key='login')
+    obj, c = HTMLSetting.objects.get_or_create(key="login")
     form = HTMLSettingForm(request.POST or None, instance=obj)
 
     if form.is_valid():
         form.save()
 
-        logger.info("settings changed", extra={
-            'changed': 'templates_login',
-            'user': request.user,
-        })
+        logger.info(
+            "settings changed",
+            extra={
+                "changed": "templates_login",
+                "user": request.user,
+            },
+        )
 
-        return redirect('toolsettings:templates')
+        return redirect("toolsettings:templates")
 
     # render page
-    context = {'form': form}
-    return render(request, 'toolsettings/template_login.html', context)
+    context = {"form": form}
+    return render(request, "toolsettings/template_login.html", context)
 
 
 @login_required
@@ -147,22 +153,25 @@ def template_add_user(request):
         return nopermission(request)
 
     # form
-    obj, c = HTMLSetting.objects.get_or_create(key='add_user')
+    obj, c = HTMLSetting.objects.get_or_create(key="add_user")
     form = HTMLSettingForm(request.POST or None, instance=obj)
 
     if form.is_valid():
         form.save()
 
-        logger.info("settings changed", extra={
-            'changed': 'templates_add_user',
-            'user': request.user,
-        })
+        logger.info(
+            "settings changed",
+            extra={
+                "changed": "templates_add_user",
+                "user": request.user,
+            },
+        )
 
-        return redirect('toolsettings:templates')
+        return redirect("toolsettings:templates")
 
     # render page
-    context = {'form': form}
-    return render(request, 'toolsettings/template_add_user.html', context)
+    context = {"form": form}
+    return render(request, "toolsettings/template_add_user.html", context)
 
 
 @login_required
@@ -173,19 +182,22 @@ def template_newsletter(request):
         return nopermission(request)
 
     # form
-    obj, c = HTMLSetting.objects.get_or_create(key='newsletter')
+    obj, c = HTMLSetting.objects.get_or_create(key="newsletter")
     form = HTMLSettingForm(request.POST or None, instance=obj)
 
     if form.is_valid():
         form.save()
 
-        logger.info("settings changed", extra={
-            'changed': 'templates_newsletter',
-            'user': request.user,
-        })
+        logger.info(
+            "settings changed",
+            extra={
+                "changed": "templates_newsletter",
+                "user": request.user,
+            },
+        )
 
-        return redirect('toolsettings:templates')
+        return redirect("toolsettings:templates")
 
     # render page
-    context = {'form': form}
-    return render(request, 'toolsettings/template_newsletter.html', context)
+    context = {"form": form}
+    return render(request, "toolsettings/template_newsletter.html", context)

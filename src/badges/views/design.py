@@ -33,17 +33,15 @@ def edit_design(request, event_url_name, design_pk=None):
         design = get_object_or_404(BadgeDesign, pk=design_pk, badge_settings__event=event)
 
     # form
-    form = BadgeDesignForm(request.POST or None, request.FILES or None,
-                           instance=design, settings=event.badge_settings)
+    form = BadgeDesignForm(request.POST or None, request.FILES or None, instance=design, settings=event.badge_settings)
 
     if form.is_valid():
         form.save()
 
-        return redirect('badges:settings', event_url_name=event.url_name)
+        return redirect("badges:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'badges/edit_design.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "badges/edit_design.html", context)
 
 
 @login_required
@@ -68,12 +66,10 @@ def delete_design(request, event_url_name, design_pk):
     if form.is_valid():
         form.delete()
 
-        return redirect('badges:settings', event_url_name=event.url_name)
+        return redirect("badges:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form,
-               'design': design}
-    return render(request, 'badges/delete_design.html', context)
+    context = {"event": event, "form": form, "design": design}
+    return render(request, "badges/delete_design.html", context)
 
 
 @login_required

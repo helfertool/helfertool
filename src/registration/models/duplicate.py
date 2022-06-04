@@ -6,7 +6,7 @@ from .helper import Helper
 
 
 class Duplicate(models.Model):
-    """ Duplicated helper that was deleted.
+    """Duplicated helper that was deleted.
 
     The mapping from old to new UUID is used so that the "registered" and
     "validate" URLs in the mail are still working.

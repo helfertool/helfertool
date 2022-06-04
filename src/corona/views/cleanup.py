@@ -13,6 +13,7 @@ from ..forms import CoronaCleanupForm
 from .utils import notactive
 
 import logging
+
 logger = logging.getLogger("helfertool.corona")
 
 
@@ -35,15 +36,17 @@ def cleanup(request, event_url_name):
     if form.is_valid():
         form.cleanup(event)
 
-        logger.info("corona cleanup", extra={
-            'user': request.user,
-            'event': event,
-        })
+        logger.info(
+            "corona cleanup",
+            extra={
+                "user": request.user,
+                "event": event,
+            },
+        )
 
         messages.success(request, _("Contact tracing data deleted"))
 
-        return redirect('corona:settings', event_url_name=event.url_name)
+        return redirect("corona:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'corona/cleanup.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "corona/cleanup.html", context)

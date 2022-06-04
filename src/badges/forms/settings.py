@@ -10,9 +10,12 @@ import magic
 class BadgeSettingsForm(forms.ModelForm):
     class Meta:
         model = BadgeSettings
-        exclude = ['event', 'defaults', ]
+        exclude = [
+            "event",
+            "defaults",
+        ]
         widgets = {
-            'latex_template': forms.FileInput(),
+            "latex_template": forms.FileInput(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -23,11 +26,11 @@ class BadgeSettingsForm(forms.ModelForm):
                 self.fields[field_id].disabled = True
 
     def clean_latex_template(self):
-        file = self.cleaned_data['latex_template']
+        file = self.cleaned_data["latex_template"]
 
         # check mimetype with libmagic
         filemime = magic.from_buffer(file.read(1024), mime=True)
-        if filemime != 'text/x-tex':
+        if filemime != "text/x-tex":
             raise ValidationError(_("File does not contain LaTeX code."))
 
         # seek to begin (may be necessary for further use?)

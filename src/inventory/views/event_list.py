@@ -27,7 +27,5 @@ def event_list(request, event_url_name):
 
     used_items = UsedItem.objects.filter(helper__event=event)
 
-    context = {'event': event,
-               'used_items': used_items}
-    return render(request, 'inventory/list.html',
-                  context)
+    context = {"event": event, "used_items": used_items}
+    return render(request, "inventory/list.html", context)

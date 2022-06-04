@@ -18,11 +18,11 @@ def _design_upload_path(instance, filename):
     event = str(instance.get_event().pk)
     new_filename = "{}{}".format(uuid.uuid4(), os.path.splitext(filename)[1])
 
-    return posixpath.join('private', event, 'badges', 'backgrounds', new_filename)
+    return posixpath.join("private", event, "badges", "backgrounds", new_filename)
 
 
 class BadgeDesign(models.Model):
-    """ Design of a badge (for an event or job)
+    """Design of a badge (for an event or job)
 
     Columns:
         :badge_settings: settings
@@ -49,7 +49,7 @@ class BadgeDesign(models.Model):
     font_color = models.CharField(
         max_length=7,
         default="#000000",
-        validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
+        validators=[RegexValidator("^#[a-fA-F0-9]{6}$")],
         verbose_name=_("Color for text"),
         help_text=_("e.g. #00ff00"),
     )
@@ -57,7 +57,7 @@ class BadgeDesign(models.Model):
     bg_color = models.CharField(
         max_length=7,
         default="#FFFFFF",
-        validators=[RegexValidator('^#[a-fA-F0-9]{6}$')],
+        validators=[RegexValidator("^#[a-fA-F0-9]{6}$")],
         verbose_name=_("Background color"),
         help_text=_("e.g. #00ff00"),
     )
@@ -85,7 +85,7 @@ class BadgeDesign(models.Model):
         new_design.pk = None
         new_design.badge_settings = settings
 
-        for var in ('bg_front', 'bg_back'):
+        for var in ("bg_front", "bg_back"):
             if getattr(self, var):
                 tmp = ContentFile(getattr(self, var).read())
                 tmp.name = os.path.basename(getattr(self, var).name)

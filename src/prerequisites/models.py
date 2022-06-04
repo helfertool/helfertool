@@ -16,7 +16,7 @@ class Prerequisite(models.Model):
     """
 
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
@@ -57,11 +57,7 @@ class Prerequisite(models.Model):
             fulfilled.has_prerequisite = state
             fulfilled.save()
         except FulfilledPrerequisite.DoesNotExist:
-            FulfilledPrerequisite.objects.create(
-                prerequisite=self,
-                helper=helper,
-                has_prerequisite=state
-            )
+            FulfilledPrerequisite.objects.create(prerequisite=self, helper=helper, has_prerequisite=state)
 
     def duplicate(self, event):
         new_prerequisite = deepcopy(self)
@@ -84,12 +80,12 @@ class FulfilledPrerequisite(models.Model):
     """
 
     prerequisite = models.ForeignKey(
-        'prerequisites.Prerequisite',
+        "prerequisites.Prerequisite",
         on_delete=models.CASCADE,
     )
 
     helper = models.ForeignKey(
-        'registration.Helper',
+        "registration.Helper",
         on_delete=models.CASCADE,
     )
 

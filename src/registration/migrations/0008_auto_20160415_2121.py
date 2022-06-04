@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0007_event_ask_news'),
+        ("registration", "0007_event_ask_news"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='active',
-            field=models.BooleanField(default=False, verbose_name='Registration publicly visible'),
+            model_name="event",
+            name="active",
+            field=models.BooleanField(default=False, verbose_name="Registration publicly visible"),
         ),
     ]

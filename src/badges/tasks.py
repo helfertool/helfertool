@@ -20,12 +20,11 @@ import registration
 @shared_task
 def scale_badge_photo(filepath):
     img = Image.open(filepath)
-    img.thumbnail((settings.BADGE_PHOTO_MAX_SIZE,
-                   settings.BADGE_PHOTO_MAX_SIZE))
+    img.thumbnail((settings.BADGE_PHOTO_MAX_SIZE, settings.BADGE_PHOTO_MAX_SIZE))
     img.save(filepath)
 
 
-@shared_task(bind=True, throws=(badges.creator.BadgeCreatorError, ))
+@shared_task(bind=True, throws=(badges.creator.BadgeCreatorError,))
 def generate_badges(self, event_pk, job_pk, generate, skip_printed):
     event = registration.models.Event.objects.get(pk=event_pk)
     try:
@@ -42,7 +41,9 @@ def generate_badges(self, event_pk, job_pk, generate, skip_printed):
 
     # determine the jobs, that will be included, and the filename
     if generate == "job" and job:
-        jobs = [job, ]
+        jobs = [
+            job,
+        ]
         filename = job.name
     elif generate == "special":
         jobs = []
@@ -64,10 +65,9 @@ def generate_badges(self, event_pk, job_pk, generate, skip_printed):
             helpers_job = h.badge.get_job()
             # print badge only if this is the primary job or the job is
             # unambiguous
-            if (not helpers_job or helpers_job == j):
+            if not helpers_job or helpers_job == j:
                 # skip helpers if this is requested
-                if event.badge_settings.only_coordinators and \
-                        not h.is_coordinator:
+                if event.badge_settings.only_coordinators and not h.is_coordinator:
                     continue
 
                 creator.add_badge(h.badge)
@@ -83,15 +83,13 @@ def generate_badges(self, event_pk, job_pk, generate, skip_printed):
         tmp_dir, pdf_filename = creator.generate()
     except badges.creator.BadgeCreatorError as e:
         creator.finish()
-        self.update_state(state='CREATOR_ERROR',
-                          meta={'error': e.value,
-                                'latex_output': e.latex_output})
+        self.update_state(state="CREATOR_ERROR", meta={"error": e.value, "latex_output": e.latex_output})
         raise Ignore()
     finally:
         translation.activate(prev_language)
 
     # schedule cleanup task
-    clean = cleanup.subtask((tmp_dir, ), countdown=settings.BADGE_PDF_TIMEOUT + settings.BADGE_RM_DELAY)
+    clean = cleanup.subtask((tmp_dir,), countdown=settings.BADGE_PDF_TIMEOUT + settings.BADGE_RM_DELAY)
     cleanup_task = clean.delay()
 
     return pdf_filename, filename, cleanup_task.task_id

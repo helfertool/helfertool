@@ -29,22 +29,18 @@ def edit_role(request, event_url_name, role_pk=None):
     # get BadgePermission
     role = None
     if role_pk:
-        role = get_object_or_404(BadgeRole, pk=role_pk,
-                                 badge_settings__event=event)
+        role = get_object_or_404(BadgeRole, pk=role_pk, badge_settings__event=event)
 
     # form
-    form = BadgeRoleForm(request.POST or None, instance=role,
-                         settings=event.badge_settings)
+    form = BadgeRoleForm(request.POST or None, instance=role, settings=event.badge_settings)
 
     if form.is_valid():
         form.save()
 
-        return redirect('badges:settings', event_url_name=event.url_name)
+        return redirect("badges:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'badges/edit_role.html',
-                  context)
+    context = {"event": event, "form": form}
+    return render(request, "badges/edit_role.html", context)
 
 
 @login_required
@@ -61,18 +57,14 @@ def delete_role(request, event_url_name, role_pk):
     if not event.badges:
         return notactive(request)
 
-    role = get_object_or_404(BadgeRole, pk=role_pk,
-                             badge_settings__event=event)
+    role = get_object_or_404(BadgeRole, pk=role_pk, badge_settings__event=event)
 
     form = BadgeRoleDeleteForm(request.POST or None, instance=role)
 
     if form.is_valid():
         form.delete()
 
-        return redirect('badges:settings', event_url_name=event.url_name)
+        return redirect("badges:settings", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form,
-               'role': role}
-    return render(request, 'badges/delete_role.html',
-                  context)
+    context = {"event": event, "form": form, "role": role}
+    return render(request, "badges/delete_role.html", context)

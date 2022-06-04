@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0007_auto_20190428_1816'),
+        ("news", "0007_auto_20190428_1816"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='person',
-            name='timestamp_validated',
+            model_name="person",
+            name="timestamp_validated",
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='person',
-            name='validated',
-            field=models.BooleanField(default=True, verbose_name='Validation e-mail was confirmed (double opt-in)'),
+            model_name="person",
+            name="validated",
+            field=models.BooleanField(default=True, verbose_name="Validation e-mail was confirmed (double opt-in)"),
         ),
     ]

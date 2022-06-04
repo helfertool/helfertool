@@ -28,6 +28,8 @@ def has_sendnews_group(user):
 
 @register.filter
 def has_perm_group(user):
-    return has_group(user, settings.GROUP_ADDUSER) or \
-           has_group(user, settings.GROUP_ADDEVENT) or \
-           has_group(user, settings.GROUP_SENDNEWS)
+    return (
+        has_group(user, settings.GROUP_ADDUSER)
+        or has_group(user, settings.GROUP_ADDEVENT)
+        or has_group(user, settings.GROUP_SENDNEWS)
+    )

@@ -7,28 +7,29 @@ from ..models import Duplicate, HelperShift
 
 class MergeDuplicatesForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        self.helpers = kwargs.pop('helpers')
+        self.helpers = kwargs.pop("helpers")
 
         super(MergeDuplicatesForm, self).__init__(*args, **kwargs)
 
-        self.fields['helpers_ignore'] = forms.ModelMultipleChoiceField(
+        self.fields["helpers_ignore"] = forms.ModelMultipleChoiceField(
             queryset=self.helpers,
-            widget=forms.CheckboxSelectMultiple(attrs={'id': 'helper_ignore'}),
+            widget=forms.CheckboxSelectMultiple(attrs={"id": "helper_ignore"}),
             required=False,
-            label='',
+            label="",
         )
 
-        self.fields['helpers_selection'] = forms.ModelChoiceField(
+        self.fields["helpers_selection"] = forms.ModelChoiceField(
             queryset=self.helpers,
-            widget=forms.RadioSelect(attrs={'id': 'helper_selection'}),
+            widget=forms.RadioSelect(attrs={"id": "helper_selection"}),
             empty_label=None,
             required=True,
-            label='')
+            label="",
+        )
 
     def clean(self):
         cleaned_data = super().clean()
-        remaining_helper = cleaned_data['helpers_selection']
-        ignore_helpers = cleaned_data['helpers_ignore']
+        remaining_helper = cleaned_data["helpers_selection"]
+        ignore_helpers = cleaned_data["helpers_ignore"]
 
         # remaining helpers must not be ignored (this makes no sense)
         if remaining_helper in ignore_helpers:
@@ -36,15 +37,15 @@ class MergeDuplicatesForm(forms.Form):
 
         # check for overlapping shifts
         if not self.check_merge_possible(ignore_helpers):
-            raise forms.ValidationError(_('Cannot merge helpers which have the same shift.'))
+            raise forms.ValidationError(_("Cannot merge helpers which have the same shift."))
 
     @transaction.atomic
     def merge(self):
         """
         Merge the helpers and keep the data selected in the form.
         """
-        remaining_helper = self.cleaned_data['helpers_selection']
-        ignore_helpers = self.cleaned_data['helpers_ignore']
+        remaining_helper = self.cleaned_data["helpers_selection"]
+        ignore_helpers = self.cleaned_data["helpers_ignore"]
         oldest_timestamp = remaining_helper.timestamp
 
         # we check this again inside the atomic code block to ensure that no change happends after the

@@ -6,7 +6,7 @@ import os
 
 
 class RestrictedImageField(models.ImageField):
-    """ ImageField that restricts the file extensions to jpg, jpeg and png.
+    """ImageField that restricts the file extensions to jpg, jpeg and png.
 
     For example, LaTeX does not like some file extensions that users could upload."""
 

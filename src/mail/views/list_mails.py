@@ -22,6 +22,5 @@ def list_mails(request, event_url_name):
     sent_mails = list(filter(lambda s: s.can_see_mail(request.user), all_sent_mails))
 
     # render page
-    context = {'event': event,
-               'sent_mails': sent_mails}
-    return render(request, 'mail/list_mails.html', context)
+    context = {"event": event, "sent_mails": sent_mails}
+    return render(request, "mail/list_mails.html", context)

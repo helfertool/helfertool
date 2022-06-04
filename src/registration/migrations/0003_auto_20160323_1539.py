@@ -8,13 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0002_event_date'),
+        ("registration", "0002_event_date"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='event',
-            name='email',
-            field=models.EmailField(default='helfertool@localhost', help_text='Used as sender of e-mails.', max_length=254, verbose_name='E-Mail'),
+            model_name="event",
+            name="email",
+            field=models.EmailField(
+                default="helfertool@localhost",
+                help_text="Used as sender of e-mails.",
+                max_length=254,
+                verbose_name="E-Mail",
+            ),
         ),
     ]

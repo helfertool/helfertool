@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0022_shift_hidden'),
+        ("registration", "0022_shift_hidden"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='shift',
-            name='blocked',
-            field=models.BooleanField(default=False, verbose_name='The shift is blocked and displayed as full.'),
+            model_name="shift",
+            name="blocked",
+            field=models.BooleanField(default=False, verbose_name="The shift is blocked and displayed as full."),
         ),
         migrations.AlterField(
-            model_name='shift',
-            name='hidden',
-            field=models.BooleanField(default=False, verbose_name='The shift is not visible.'),
+            model_name="shift",
+            name="hidden",
+            field=models.BooleanField(default=False, verbose_name="The shift is not visible."),
         ),
     ]

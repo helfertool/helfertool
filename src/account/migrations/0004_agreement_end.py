@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('account', '0003_auto_20190203_1239'),
+        ("account", "0003_auto_20190203_1239"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='agreement',
-            name='end',
-            field=models.DateField(blank=True, null=True, verbose_name='End date'),
+            model_name="agreement",
+            name="end",
+            field=models.DateField(blank=True, null=True, verbose_name="End date"),
         ),
     ]

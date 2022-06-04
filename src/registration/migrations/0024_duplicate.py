@@ -10,15 +10,15 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0023_auto_20170618_1101'),
+        ("registration", "0023_auto_20170618_1101"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Duplicate',
+            name="Duplicate",
             fields=[
-                ('deleted', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('existing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.Helper')),
+                ("deleted", models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
+                ("existing", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.Helper")),
             ],
         ),
     ]

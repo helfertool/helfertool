@@ -4,6 +4,7 @@ import mail
 from .ids import parse_tracking, MAIL_EVENT, MAIL_NEWS, MAIL_NEWS_CONFIRM, MAIL_REGISTRATION
 
 import logging
+
 logger = logging.getLogger("helfertool.mail")
 
 
@@ -15,8 +16,9 @@ def _handle_event(uuid_str, deliverynotification):
         return False
 
     # now find the MailDelivery based on the mail address
-    maildeliveries = mail.models.MailDelivery.objects.filter(sentmail=sentmail,
-                                                             helper__email=deliverynotification.recipient)
+    maildeliveries = mail.models.MailDelivery.objects.filter(
+        sentmail=sentmail, helper__email=deliverynotification.recipient
+    )
     if not maildeliveries.exists():
         return False
 
@@ -24,12 +26,15 @@ def _handle_event(uuid_str, deliverynotification):
         delivery.failed = deliverynotification.error_text
         delivery.save()
 
-        logger.info("mail handled", extra={
-            'type': MAIL_EVENT,
-            'event': delivery.helper.event,
-            'helper': delivery.helper,
-            'mail_tracking': sentmail.tracking_uuid,
-        })
+        logger.info(
+            "mail handled",
+            extra={
+                "type": MAIL_EVENT,
+                "event": delivery.helper.event,
+                "helper": delivery.helper,
+                "mail_tracking": sentmail.tracking_uuid,
+            },
+        )
 
     return True
 
@@ -41,11 +46,14 @@ def _handle_registration(uuid_str, deliverynotification):
         helper.mail_failed = deliverynotification.error_text[:500]
         helper.save()
 
-        logger.info("mail handled", extra={
-            'type': MAIL_REGISTRATION,
-            'event': helper.event,
-            'helper': helper,
-        })
+        logger.info(
+            "mail handled",
+            extra={
+                "type": MAIL_REGISTRATION,
+                "event": helper.event,
+                "helper": helper,
+            },
+        )
 
         return True
     except registration.models.Helper.DoesNotExist:

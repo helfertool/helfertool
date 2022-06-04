@@ -6,13 +6,12 @@ from django.utils.translation import ugettext_lazy as _
 from copy import deepcopy
 from datetime import datetime
 
-from .exceptions import WrongHelper, InvalidMultipleAssignment, NotAssigned, \
-    AlreadyAssigned
+from .exceptions import WrongHelper, InvalidMultipleAssignment, NotAssigned, AlreadyAssigned
 
 
 class Inventory(models.Model):
     class Meta:
-        ordering = ['name']
+        ordering = ["name"]
 
     name = models.CharField(
         max_length=200,
@@ -39,8 +38,8 @@ class Inventory(models.Model):
 
 class Item(models.Model):
     class Meta:
-        unique_together = ('inventory', 'barcode')
-        ordering = ['barcode']
+        unique_together = ("inventory", "barcode")
+        ordering = ["barcode"]
 
     inventory = models.ForeignKey(
         Inventory,
@@ -71,20 +70,17 @@ class Item(models.Model):
         return True
 
     def is_in_use(self, event):
-        return UsedItem.objects.filter(item=self, helper__event=event,
-                                       timestamp_returned=None).exists()
+        return UsedItem.objects.filter(item=self, helper__event=event, timestamp_returned=None).exists()
 
     def is_in_use_by_helper(self, helper):
-        return UsedItem.objects.filter(item=self, helper=helper,
-                                       timestamp_returned=None).exists()
+        return UsedItem.objects.filter(item=self, helper=helper, timestamp_returned=None).exists()
 
     def get_exclusive_user(self, event):
         if self.inventory.multiple_assignments:
             return None
 
         try:
-            return UsedItem.objects.get(item=self, helper__event=event,
-                                        timestamp_returned=None).helper
+            return UsedItem.objects.get(item=self, helper__event=event, timestamp_returned=None).helper
         except UsedItem.DoesNotExist:
             raise NotAssigned
         except MultipleObjectsReturned:
@@ -100,8 +96,7 @@ class Item(models.Model):
         if not self.is_in_use_by_helper(helper):
             raise WrongHelper()
 
-        uses = UsedItem.objects.filter(item=self, helper=helper,
-                                       timestamp_returned=None)
+        uses = UsedItem.objects.filter(item=self, helper=helper, timestamp_returned=None)
 
         if uses.count() > 0:
             tmp = uses[0]
@@ -111,10 +106,10 @@ class Item(models.Model):
 
 class UsedItem(models.Model):
     class Meta:
-        ordering = ('item__inventory__name', 'item__name', 'timestamp')
+        ordering = ("item__inventory__name", "item__name", "timestamp")
 
     helper = models.ForeignKey(
-        'registration.Helper',
+        "registration.Helper",
         on_delete=models.CASCADE,
     )
 
@@ -135,7 +130,7 @@ class UsedItem(models.Model):
 
 class InventorySettings(models.Model):
     event = models.OneToOneField(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 

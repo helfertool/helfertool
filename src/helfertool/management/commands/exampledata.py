@@ -39,8 +39,8 @@ class Command(BaseCommand):
             for i in range(2):
                 gift = Gift.objects.create(
                     event=event,
-                    name_en="Gift {}".format(i+1),
-                    name_de="Geschenk {}".format(i+1),
+                    name_en="Gift {}".format(i + 1),
+                    name_de="Geschenk {}".format(i + 1),
                 )
                 gifts.append(gift)
 
@@ -48,8 +48,8 @@ class Command(BaseCommand):
             for i in range(2):
                 giftset = GiftSet.objects.create(
                     event=event,
-                    name_en="Gift set {}".format(i+1),
-                    name_de="Geschenkset {}".format(i+1),
+                    name_en="Gift set {}".format(i + 1),
+                    name_de="Geschenkset {}".format(i + 1),
                 )
                 giftsets.append(giftset)
 
@@ -139,8 +139,8 @@ class Command(BaseCommand):
                 for s in range(3):
                     shift = Shift.objects.create(
                         job=job,
-                        begin=make_aware(datetime.combine(event_date, time(9+s*2, 45))),
-                        end=make_aware(datetime.combine(event_date, time(12+s*2, 0))),
+                        begin=make_aware(datetime.combine(event_date, time(9 + s * 2, 45))),
+                        end=make_aware(datetime.combine(event_date, time(12 + s * 2, 0))),
                         number=100,
                     )
 

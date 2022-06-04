@@ -7,7 +7,7 @@ class PrerequisiteSelectWidget(ModelSelect2MultipleWidget):
     model = Prerequisite
 
     search_fields = [
-        'name__icontains',
+        "name__icontains",
     ]
 
     def label_from_instance(self, obj):

@@ -10,7 +10,7 @@ import string
 def escape_filename(filename):
     """Escape a filename so it includes only valid characters."""
     valid = "-_.() %s%s" % (string.ascii_letters, string.digits)
-    return ''.join(char for char in filename if char in valid)
+    return "".join(char for char in filename if char in valid)
 
 
 def get_or_404(event_url_name=None, job_pk=None, shift_pk=None, helper_pk=None, handle_duplicates=False):

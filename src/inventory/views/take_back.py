@@ -28,11 +28,10 @@ def take_back_item(request, event_url_name):
     if not event.inventory:
         return notactive(request)
 
-    last_helper_pk = request.session.pop('inventory_helper_pk', None)
+    last_helper_pk = request.session.pop("inventory_helper_pk", None)
     try:
         last_helper = Helper.objects.get(pk=last_helper_pk)
-        last_helper_items = UsedItem.objects.filter(helper=last_helper,
-                                                    timestamp_returned=None)
+        last_helper_items = UsedItem.objects.filter(helper=last_helper, timestamp_returned=None)
     except Helper.DoesNotExist:
         last_helper = None
         last_helper_items = None
@@ -42,18 +41,18 @@ def take_back_item(request, event_url_name):
     not_in_use = False
     if form.is_valid():
         if form.item.is_in_use(event):
-            return redirect('inventory:take_back_badge', event_url_name,
-                            form.item.pk)
+            return redirect("inventory:take_back_badge", event_url_name, form.item.pk)
         else:
             not_in_use = True
 
-    context = {'event': event,
-               'form': form,
-               'not_in_use': not_in_use,
-               'last_helper': last_helper,
-               'last_helper_items': last_helper_items}
-    return render(request, 'inventory/take_back_item.html',
-                  context)
+    context = {
+        "event": event,
+        "form": form,
+        "not_in_use": not_in_use,
+        "last_helper": last_helper,
+        "last_helper_items": last_helper_items,
+    }
+    return render(request, "inventory/take_back_item.html", context)
 
 
 @login_required
@@ -81,10 +80,9 @@ def take_back_badge(request, event_url_name, item_pk):
             if form.badge.helper:
                 item.remove_from_helper(form.badge.helper)
 
-                request.session['inventory_helper_pk'] = \
-                    str(form.badge.helper.pk)
+                request.session["inventory_helper_pk"] = str(form.badge.helper.pk)
 
-                return redirect('inventory:take_back', event_url_name)
+                return redirect("inventory:take_back", event_url_name)
             else:
                 # special badge -> just show wrong helper message
                 wrong_helper = True
@@ -93,12 +91,8 @@ def take_back_badge(request, event_url_name, item_pk):
     except WrongHelper:
         wrong_helper = True
 
-    context = {'event': event,
-               'form': form,
-               'item': item,
-               'wrong_helper': wrong_helper}
-    return render(request, 'inventory/take_back_badge.html',
-                  context)
+    context = {"event": event, "form": form, "item": item, "wrong_helper": wrong_helper}
+    return render(request, "inventory/take_back_badge.html", context)
 
 
 @login_required
@@ -122,15 +116,13 @@ def take_back_direct(request, event_url_name, item_pk):
 
         item.remove_from_helper(helper)
 
-        request.session['inventory_helper_pk'] = str(helper.pk)
+        request.session["inventory_helper_pk"] = str(helper.pk)
 
-        return redirect('inventory:take_back', event_url_name)
+        return redirect("inventory:take_back", event_url_name)
     except InvalidMultipleAssignment:
-        error = 'multiple'
+        error = "multiple"
     except NotAssigned:
-        error = 'noassignment'
+        error = "noassignment"
 
-    context = {'event': event,
-               'error': error}
-    return render(request, 'inventory/take_back_error.html',
-                  context)
+    context = {"event": event, "error": error}
+    return render(request, "inventory/take_back_error.html", context)

@@ -23,9 +23,10 @@ def inventory_admin_required(function):
 
     Instead of the inventory_pk the inventory object is given to the view.
     """
+
     @login_required
     def _decorated(request, *args, **kwargs):
-        inventory_pk = kwargs.pop('inventory_pk', None)
+        inventory_pk = kwargs.pop("inventory_pk", None)
         inventory = None
 
         if inventory_pk:

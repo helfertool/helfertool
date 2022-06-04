@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 def date(s):
-    return datetime.strptime(s, '%Y-%m-%d')
+    return datetime.strptime(s, "%Y-%m-%d")
 
 
 class Command(BaseCommand):
@@ -18,23 +18,28 @@ class Command(BaseCommand):
     as the active flag is synced again from there."""
 
     def add_arguments(self, parser):
-        parser.add_argument('date', type=date,
-                            help='Accounts that were not active since this date will be disabled (format: YYYY-MM-DD).')
+        parser.add_argument(
+            "date",
+            type=date,
+            help="Accounts that were not active since this date will be disabled (format: YYYY-MM-DD).",
+        )
 
-        parser.add_argument('--dry-run', action='store_true', help='do not really disable the accounts')
+        parser.add_argument("--dry-run", action="store_true", help="do not really disable the accounts")
 
     def handle(self, *args, **options):
-        date = make_aware(options['date'])
-        dry_run = options['dry_run']
+        date = make_aware(options["date"])
+        dry_run = options["dry_run"]
 
         # get users which
         # 1. are still active
         # 2. need to be disabled because
         #    a. last login before deadline
         #    b. never logged in but created before deadline
-        for u in get_user_model().objects.filter(is_active=True) \
-            .filter(Q(last_login__lt=date)
-                    | Q(last_login__isnull=True, date_joined__lt=date)):
+        for u in (
+            get_user_model()
+            .objects.filter(is_active=True)
+            .filter(Q(last_login__lt=date) | Q(last_login__isnull=True, date_joined__lt=date))
+        ):
             # skip users from external authentication providers
             if u.has_usable_password():
                 # disable user

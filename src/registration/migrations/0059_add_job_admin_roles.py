@@ -10,25 +10,38 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('registration', '0058_helper_validation_id'),
+        ("registration", "0058_helper_validation_id"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='JobAdminRoles',
+            name="JobAdminRoles",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('roles', multiselectfield.db.fields.MultiSelectField(choices=[('FULL', 'Full access to all data'), ('DEFAULT', 'Default access')], default='DEFAULT', max_length=250, verbose_name='Role')),
-                ('job', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.job')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "roles",
+                    multiselectfield.db.fields.MultiSelectField(
+                        choices=[("FULL", "Full access to all data"), ("DEFAULT", "Default access")],
+                        default="DEFAULT",
+                        max_length=250,
+                        verbose_name="Role",
+                    ),
+                ),
+                ("job", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.job")),
+                ("user", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'unique_together': {('job', 'user')},
+                "unique_together": {("job", "user")},
             },
         ),
         migrations.AddField(
-            model_name='job',
-            name='job_admins_new',
-            field=models.ManyToManyField(blank=True, related_name='_registration_job_job_admins_new_+', through='registration.JobAdminRoles', to=settings.AUTH_USER_MODEL),
+            model_name="job",
+            name="job_admins_new",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="_registration_job_job_admins_new_+",
+                through="registration.JobAdminRoles",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

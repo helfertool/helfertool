@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('toollog', '0001_initial'),
+        ("toollog", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='logentry',
-            name='extras',
-            field=models.JSONField(blank=True, encoder=django.core.serializers.json.DjangoJSONEncoder, null=True, verbose_name='Extra data'),
+            model_name="logentry",
+            name="extras",
+            field=models.JSONField(
+                blank=True, encoder=django.core.serializers.json.DjangoJSONEncoder, null=True, verbose_name="Extra data"
+            ),
         ),
     ]

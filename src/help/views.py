@@ -21,7 +21,7 @@ def create_issue(request):
         except (SMTPException, ConnectionError):
             messages.error(request, _("The issue was created but notifying the admins failed"))
 
-        return redirect('help:create_issue')
+        return redirect("help:create_issue")
 
-    context = {'form': form}
-    return render(request, 'help/create_issue.html', context)
+    context = {"form": form}
+    return render(request, "help/create_issue.html", context)

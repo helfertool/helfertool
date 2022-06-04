@@ -8,13 +8,15 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('registration', '0040_delete_old_admins'),
+        ("registration", "0040_delete_old_admins"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='admins',
-            field=models.ManyToManyField(blank=True, through='registration.EventAdminRoles', to=settings.AUTH_USER_MODEL),
+            model_name="event",
+            name="admins",
+            field=models.ManyToManyField(
+                blank=True, through="registration.EventAdminRoles", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

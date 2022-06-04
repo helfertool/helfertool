@@ -19,29 +19,26 @@ class HelperShift(models.Model):
         :present: Flag set when the helper is there (manually or automatically)
         :manual_presence: `present` flag was manually set
     """
+
     class Meta:
-        unique_together = ('helper', 'shift',)
+        unique_together = (
+            "helper",
+            "shift",
+        )
 
     helper = models.ForeignKey(
-        'Helper',
+        "Helper",
         on_delete=models.CASCADE,
     )
 
     shift = models.ForeignKey(
-        'Shift',
+        "Shift",
         on_delete=models.CASCADE,
     )
 
-    timestamp = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_("Registration time for this shift")
-    )
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_("Registration time for this shift"))
 
-    present = models.BooleanField(
-        default=False,
-        verbose_name=_("Present"),
-        help_text=_("Helper was at shift")
-    )
+    present = models.BooleanField(default=False, verbose_name=_("Present"), help_text=_("Helper was at shift"))
 
     manual_presence = models.BooleanField(
         default=False,

@@ -18,17 +18,17 @@ def _badge_upload_path(instance, filename):
     event = str(instance.event.pk)
     new_filename = "{}{}".format(uuid.uuid4(), os.path.splitext(filename)[1])
 
-    return posixpath.join('private', event, 'badges', 'photos', new_filename)
+    return posixpath.join("private", event, "badges", "photos", new_filename)
 
 
 class Badge(models.Model):
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
     helper = models.OneToOneField(
-        'registration.Helper',
+        "registration.Helper",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
@@ -78,7 +78,7 @@ class Badge(models.Model):
     )
 
     primary_job = models.ForeignKey(
-        'registration.Job',
+        "registration.Job",
         verbose_name=_("Primary job"),
         help_text=_("Only necessary if this person has multiple jobs."),
         blank=True,
@@ -87,8 +87,8 @@ class Badge(models.Model):
     )
 
     custom_role = models.ForeignKey(
-        'BadgeRole',
-        related_name='+',  # no reverse accessor
+        "BadgeRole",
+        related_name="+",  # no reverse accessor
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -96,8 +96,8 @@ class Badge(models.Model):
     )
 
     custom_design = models.ForeignKey(
-        'BadgeDesign',
-        related_name='+',  # no reverse accessor
+        "BadgeDesign",
+        related_name="+",  # no reverse accessor
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -130,14 +130,14 @@ class Badge(models.Model):
             self._old_photo = self.photo  # do not run task multiple times
 
     def name(self):
-        """ The name of the badge (for messages in web interface) """
+        """The name of the badge (for messages in web interface)"""
         if self.helper:
             return self.helper.full_name
         else:
             return "{} {}".format(self.firstname, self.surname)
 
     def get_job(self):
-        """ Get the job to which the badge belongs.
+        """Get the job to which the badge belongs.
 
         If a primary job is selected, that's it.
         If the helper is coordinator for exactle one job, that's it.
@@ -190,24 +190,24 @@ class Badge(models.Model):
         return getattr(self.event.badge_settings.defaults, key)
 
     def get_design(self):
-        return self.custom_design or self._get_defaults('design')
+        return self.custom_design or self._get_defaults("design")
 
     def get_role(self):
-        return self.custom_role or self._get_defaults('role')
+        return self.custom_role or self._get_defaults("role")
 
     def no_default_role(self):
-        return self._get_defaults('no_default_role')
+        return self._get_defaults("no_default_role")
 
     def get_firstname_text(self):
-        """ Return text for surname on badge """
+        """Return text for surname on badge"""
         return self.firstname or (self.helper.firstname if self.helper else "")
 
     def get_surname_text(self):
-        """ Return text for surname on badge """
+        """Return text for surname on badge"""
         return self.surname or (self.helper.surname if self.helper else "")
 
     def get_job_text(self):
-        """ Return text for job on badge """
+        """Return text for job on badge"""
         if self.job:
             return self.job
         else:
@@ -217,7 +217,7 @@ class Badge(models.Model):
         return ""
 
     def get_shift_text(self, badgesettings):
-        """ Return text for shift on badge """
+        """Return text for shift on badge"""
         if self.shift:
             return self.shift
         elif self.helper:
@@ -225,7 +225,7 @@ class Badge(models.Model):
         return ""
 
     def get_role_text(self, badgesettings):
-        """ Return text for role on badge """
+        """Return text for role on badge"""
         if self.role:
             return self.role
         elif self.helper and not self.no_default_role():
@@ -245,7 +245,7 @@ class Badge(models.Model):
         Returns the text (not LaTeX escaped!)
         """
         shift_texts = []
-        for shift in helper.shifts.all().order_by('begin'):
+        for shift in helper.shifts.all().order_by("begin"):
             # get shift date / name
             cur_text = ""
             if not badgesettings.shift_no_names and shift.name:
@@ -272,12 +272,12 @@ class Badge(models.Model):
 
             shift_texts.append(cur_text)
 
-        return ', '.join(shift_texts)
+        return ", ".join(shift_texts)
 
 
-@receiver(post_delete, sender=Badge, dispatch_uid='badge_deleted')
+@receiver(post_delete, sender=Badge, dispatch_uid="badge_deleted")
 def badge_deleted(sender, instance, using, **kwargs):
-    """ Delete uploaded photo from disk. """
+    """Delete uploaded photo from disk."""
     if instance.photo:
         try:
             os.remove(instance.photo.path)

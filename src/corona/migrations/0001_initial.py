@@ -9,15 +9,15 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('registration', '0055_event_corona'),
+        ("registration", "0055_event_corona"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CoronaSettings',
+            name="CoronaSettings",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('event', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='registration.event')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("event", models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to="registration.event")),
             ],
         ),
     ]

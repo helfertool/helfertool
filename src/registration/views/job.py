@@ -7,13 +7,21 @@ from django.views.decorators.cache import never_cache
 from helfertool.utils import nopermission
 
 from ..decorators import archived_not_available
-from ..forms import JobForm, JobAdminRolesForm, JobAdminRolesAddForm, JobDeleteForm, JobDuplicateForm, \
-    JobDuplicateDayForm, JobSortForm
+from ..forms import (
+    JobForm,
+    JobAdminRolesForm,
+    JobAdminRolesAddForm,
+    JobDeleteForm,
+    JobDuplicateForm,
+    JobDuplicateDayForm,
+    JobSortForm,
+)
 from ..models import Event, Job, JobAdminRoles
 from ..permissions import has_access, ACCESS_EVENT_EDIT_JOBS, ACCESS_JOB_EDIT
 from ..utils import get_or_404
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -45,19 +53,20 @@ def edit_job(request, event_url_name, job_pk=None):
         log_msg = "job created"
         if job_pk:
             log_msg = "job changed"
-        logger.info(log_msg, extra={
-            'user': request.user,
-            'event': event,
-            'job': job,
-        })
+        logger.info(
+            log_msg,
+            extra={
+                "user": request.user,
+                "event": event,
+                "job": job,
+            },
+        )
 
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'job': job,
-               'form': form}
-    return render(request, 'registration/admin/edit_job.html', context)
+    context = {"event": event, "job": job, "form": form}
+    return render(request, "registration/admin/edit_job.html", context)
 
 
 @login_required
@@ -73,13 +82,11 @@ def edit_job_admins(request, event_url_name, job_pk=None):
     all_forms = []
     job_admin_roles = JobAdminRoles.objects.filter(job=job)
     for job_admin in job_admin_roles:
-        form = JobAdminRolesForm(request.POST or None,
-                                 instance=job_admin,
-                                 prefix='user_{}'.format(job_admin.user.pk))
+        form = JobAdminRolesForm(request.POST or None, instance=job_admin, prefix="user_{}".format(job_admin.user.pk))
         all_forms.append(form)
 
     # another form to add one new admin
-    add_form = JobAdminRolesAddForm(request.POST or None, prefix='add', job=job)
+    add_form = JobAdminRolesAddForm(request.POST or None, prefix="add", job=job)
 
     # we got a post request -> save
     if request.POST and (all_forms or add_form.is_valid()):
@@ -87,21 +94,27 @@ def edit_job_admins(request, event_url_name, job_pk=None):
         for form in all_forms:
             if form.is_valid():
                 if form.has_changed():
-                    logger.info("job adminchanged", extra={
-                        'user': request.user,
-                        'event': event,
-                        'job': job,
-                        'changed_user': form.instance.user.username,
-                        'roles': ','.join(form.instance.roles),
-                    })
+                    logger.info(
+                        "job adminchanged",
+                        extra={
+                            "user": request.user,
+                            "event": event,
+                            "job": job,
+                            "changed_user": form.instance.user.username,
+                            "roles": ",".join(form.instance.roles),
+                        },
+                    )
                     form.save()
             else:
-                logger.info("job adminremoved", extra={
-                    'user': request.user,
-                    'event': event,
-                    'job': job,
-                    'changed_user': form.instance.user.username,
-                })
+                logger.info(
+                    "job adminremoved",
+                    extra={
+                        "user": request.user,
+                        "event": event,
+                        "job": job,
+                        "changed_user": form.instance.user.username,
+                    },
+                )
                 form.instance.delete()
 
         # and save the form for a new admin
@@ -109,20 +122,20 @@ def edit_job_admins(request, event_url_name, job_pk=None):
             new_admin = add_form.save()
 
             if new_admin:
-                logger.info("job adminadded", extra={
-                    'user': request.user,
-                    'event': event,
-                    'job': job,
-                    'changed_user': new_admin.user.username,
-                    'roles': ','.join(new_admin.roles),
-                })
-            return redirect('edit_job_admins', event_url_name=event_url_name, job_pk=job.pk)
+                logger.info(
+                    "job adminadded",
+                    extra={
+                        "user": request.user,
+                        "event": event,
+                        "job": job,
+                        "changed_user": new_admin.user.username,
+                        "roles": ",".join(new_admin.roles),
+                    },
+                )
+            return redirect("edit_job_admins", event_url_name=event_url_name, job_pk=job.pk)
 
-    context = {'event': event,
-               'job': job,
-               'forms': all_forms,
-               'add_form': add_form}
-    return render(request, 'registration/admin/edit_job_admins.html', context)
+    context = {"event": event, "job": job, "forms": all_forms, "add_form": add_form}
+    return render(request, "registration/admin/edit_job_admins.html", context)
 
 
 @login_required
@@ -140,17 +153,19 @@ def delete_job(request, event_url_name, job_pk):
 
     if form.is_valid():
         form.delete()
-        messages.success(request, _("Job deleted: %(name)s") %
-                         {'name': job.name})
+        messages.success(request, _("Job deleted: %(name)s") % {"name": job.name})
 
-        logger.info("job deleted", extra={
-            'user': request.user,
-            'event': event,
-            'job': job,
-        })
+        logger.info(
+            "job deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "job": job,
+            },
+        )
 
         # redirect to shift
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # check if there are coordinators
     helpers_registered = job.coordinators.count() != 0
@@ -163,11 +178,8 @@ def delete_job(request, event_url_name, job_pk):
                 break
 
     # render page
-    context = {'event': event,
-               'job': job,
-               'helpers_registered': helpers_registered,
-               'form': form}
-    return render(request, 'registration/admin/delete_job.html', context)
+    context = {"event": event, "job": job, "helpers_registered": helpers_registered, "form": form}
+    return render(request, "registration/admin/delete_job.html", context)
 
 
 @login_required
@@ -186,21 +198,22 @@ def duplicate_job(request, event_url_name, job_pk):
     if form.is_valid():
         new_job = form.save()
 
-        logger.info("job created", extra={
-            'user': request.user,
-            'event': event,
-            'job': new_job,
-            'duplicated_from': job.name,
-            'duplicated_from_pk': job.pk,
-        })
+        logger.info(
+            "job created",
+            extra={
+                "user": request.user,
+                "event": event,
+                "job": new_job,
+                "duplicated_from": job.name,
+                "duplicated_from_pk": job.pk,
+            },
+        )
 
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'duplicate_job': job,
-               'form': form}
-    return render(request, 'registration/admin/edit_job.html', context)
+    context = {"event": event, "duplicate_job": job, "form": form}
+    return render(request, "registration/admin/edit_job.html", context)
 
 
 @login_required
@@ -220,19 +233,20 @@ def duplicate_job_day(request, event_url_name, job_pk):
         new_shifts = form.save()
 
         for shift in new_shifts:
-            logger.info("shift created", extra={
-                'user': request.user,
-                'event': event,
-                'shift': shift,
-            })
+            logger.info(
+                "shift created",
+                extra={
+                    "user": request.user,
+                    "event": event,
+                    "shift": shift,
+                },
+            )
 
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'job': job,
-               'form': form}
-    return render(request, 'registration/admin/duplicate_job_day.html', context)
+    context = {"event": event, "job": job, "form": form}
+    return render(request, "registration/admin/duplicate_job_day.html", context)
 
 
 @login_required
@@ -251,14 +265,16 @@ def sort_job(request, event_url_name):
     if form.is_valid():
         form.save()
 
-        logger.info("job sorted", extra={
-            'user': request.user,
-            'event': event,
-        })
+        logger.info(
+            "job sorted",
+            extra={
+                "user": request.user,
+                "event": event,
+            },
+        )
 
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'form': form}
-    return render(request, 'registration/admin/sort_job.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "registration/admin/sort_job.html", context)

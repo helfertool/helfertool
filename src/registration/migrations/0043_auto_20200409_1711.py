@@ -7,18 +7,29 @@ import multiselectfield.db.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0042_admins_unique'),
+        ("registration", "0042_admins_unique"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='helper',
-            name='internal_comment',
-            field=models.TextField(blank=True, verbose_name='Internal comment'),
+            model_name="helper",
+            name="internal_comment",
+            field=models.TextField(blank=True, verbose_name="Internal comment"),
         ),
         migrations.AlterField(
-            model_name='eventadminroles',
-            name='roles',
-            field=multiselectfield.db.fields.MultiSelectField(choices=[('ADMIN', 'Administrator'), ('RESTRICTED_ADMIN', 'Restricted administrator'), ('FRONTDESK', 'Front desk'), ('INVENTORY', 'Inventory'), ('BADGES', 'Badges')], default='ADMIN', max_length=250, verbose_name='Role'),
+            model_name="eventadminroles",
+            name="roles",
+            field=multiselectfield.db.fields.MultiSelectField(
+                choices=[
+                    ("ADMIN", "Administrator"),
+                    ("RESTRICTED_ADMIN", "Restricted administrator"),
+                    ("FRONTDESK", "Front desk"),
+                    ("INVENTORY", "Inventory"),
+                    ("BADGES", "Badges"),
+                ],
+                default="ADMIN",
+                max_length=250,
+                verbose_name="Role",
+            ),
         ),
     ]

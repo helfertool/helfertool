@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('gifts', '0005_auto_20160611_2243'),
+        ("gifts", "0005_auto_20160611_2243"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='deservedgiftset',
-            name='present',
-            field=models.BooleanField(default=False, verbose_name='Present'),
+            model_name="deservedgiftset",
+            name="present",
+            field=models.BooleanField(default=False, verbose_name="Present"),
         ),
     ]

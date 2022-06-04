@@ -13,7 +13,7 @@ from copy import deepcopy
 
 
 class Job(models.Model):
-    """ A job that contains min. 1 shift.
+    """A job that contains min. 1 shift.
 
     Columns:
         :event: event of this job
@@ -27,11 +27,12 @@ class Job(models.Model):
         :badge_design: badge design for this job
         :prerequisites: Prerequisites for this job
     """
+
     class Meta:
-        ordering = ['-order', 'pk']
+        ordering = ["-order", "pk"]
 
     event = models.ForeignKey(
-        'Event',
+        "Event",
         on_delete=models.CASCADE,
     )
 
@@ -58,19 +59,18 @@ class Job(models.Model):
     important_notes = BleachField(
         blank=True,
         verbose_name=_("Important notes"),
-        help_text=_("""This text is directly shown on the registration page, so that helpers cannot
-                    miss notes in the description."""),
+        help_text=_(
+            """This text is directly shown on the registration page, so that helpers cannot
+                    miss notes in the description."""
+        ),
     )
 
     job_admins = models.ManyToManyField(
-        get_user_model(),
-        blank=True,
-        through='registration.JobAdminRoles',
-        related_name='+'
+        get_user_model(), blank=True, through="registration.JobAdminRoles", related_name="+"
     )
 
     coordinators = models.ManyToManyField(
-        'Helper',
+        "Helper",
         blank=True,
     )
 
@@ -113,7 +113,7 @@ class Job(models.Model):
         return helpers | coordinators
 
     def shifts_by_day(self, shifts=None, show_hidden=True):
-        """ Returns all shifts grouped sorted by day and sorted by time.
+        """Returns all shifts grouped sorted by day and sorted by time.
 
         The result is a dict with date objects as keys. Each item of the
         dictionary is a OrderedDict of shifts.
@@ -143,16 +143,16 @@ class Job(models.Model):
                 tmp_shifts[day].append(shift)
             # or create begin list
             else:
-                tmp_shifts[day] = [shift, ]
+                tmp_shifts[day] = [
+                    shift,
+                ]
 
         # sort days
-        ordered_shifts = OrderedDict(sorted(tmp_shifts.items(),
-                                     key=lambda t: t[0]))
+        ordered_shifts = OrderedDict(sorted(tmp_shifts.items(), key=lambda t: t[0]))
 
         # sort shifts
         for day in ordered_shifts:
-            ordered_shifts[day] = sorted(ordered_shifts[day],
-                                         key=lambda s: s.begin)
+            ordered_shifts[day] = sorted(ordered_shifts[day], key=lambda s: s.begin)
 
         return ordered_shifts
 
@@ -183,9 +183,9 @@ class Job(models.Model):
         return new_job
 
 
-@receiver(pre_save, sender=Job, dispatch_uid='job_pre_save')
+@receiver(pre_save, sender=Job, dispatch_uid="job_pre_save")
 def job_pre_save(sender, instance, using, **kwargs):
-    """ Add badge defaults if necessary.
+    """Add badge defaults if necessary.
 
     This is a signal handler, that is called, before a job is saved. It
     adds the badge defaults if badge creation is enabled and it is not

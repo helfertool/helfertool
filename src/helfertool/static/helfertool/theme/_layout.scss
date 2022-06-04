@@ -114,7 +114,7 @@ html {
 }
 
 // but on small screens, we toggle the functionality of the "visibility" flag
-// the sidemenu therefore is hidden by default 
+// the sidemenu therefore is hidden by default
 @media (max-width: 768px) {
     #sidemenu {
         margin-left: -$sidemenu_width;

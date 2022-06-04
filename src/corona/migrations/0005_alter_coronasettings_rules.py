@@ -6,13 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('corona', '0004_contacttracingdata_agreed'),
+        ("corona", "0004_contacttracingdata_agreed"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='coronasettings',
-            name='rules',
-            field=models.CharField(choices=[('2G', '2G'), ('3G', '3G'), ('3Gplus', '3G plus')], default='2G', max_length=20, verbose_name='Admission rules'),
+            model_name="coronasettings",
+            name="rules",
+            field=models.CharField(
+                choices=[("2G", "2G"), ("3G", "3G"), ("3Gplus", "3G plus")],
+                default="2G",
+                max_length=20,
+                verbose_name="Admission rules",
+            ),
         ),
     ]

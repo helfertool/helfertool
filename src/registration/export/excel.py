@@ -6,41 +6,42 @@ import xlsxwriter
 # pylint: disable=E1102
 
 
-class Iterator():
-    """ Returns ascending natural numbers beginning from 0. """
+class Iterator:
+    """Returns ascending natural numbers beginning from 0."""
+
     def __init__(self):
         self.__v = -1
 
     def next(self):
-        """ Returns the next number beginning from 0. """
+        """Returns the next number beginning from 0."""
         self.__v += 1
         return self.__v
 
     def add(self, n):
-        """ Returns the next number beginning from 0. """
+        """Returns the next number beginning from 0."""
         self.__v += n
         return self.__v
 
     def get(self):
-        """ Returns the current number.
+        """Returns the current number.
 
         get() should only be used after next() to get the same number again.
         """
         return self.__v
 
     def reset(self):
-        """ Resets the counter.
+        """Resets the counter.
 
-        The first call to next() after this returns 0. """
+        The first call to next() after this returns 0."""
         self.__v = -1
 
 
 def clean_name(name):
-    """ Cleans the name to be a valid sheet name in excel.
+    """Cleans the name to be a valid sheet name in excel.
 
     The characters [ ] : * ? / \\ are removed.
     """
-    return re.sub(r'[\[\]:*?\/]', '', name)
+    return re.sub(r"[\[\]:*?\/]", "", name)
 
 
 def escape(payload):
@@ -48,14 +49,14 @@ def escape(payload):
         return ""
 
     # http://blog.zsec.uk/csv-dangers-mitigations/
-    if payload[0] in ('@', '+', '-', '=', '|'):
+    if payload[0] in ("@", "+", "-", "=", "|"):
         payload = payload.replace("|", r"\|")
         payload = "'" + payload + "'"
     return payload
 
 
 def xlsx(buffer, event, jobs, date, include_sensitive):
-    """ Exports the helpers for given jobs of an event as excel spreadsheet.
+    """Exports the helpers for given jobs of an event as excel spreadsheet.
 
     Parameter:
         buffer: a writeable bytes buffer (e.g. io.BytesIO or a file)
@@ -85,8 +86,8 @@ def xlsx(buffer, event, jobs, date, include_sensitive):
 
         # add things
         worksheet = workbook.add_worksheet(job_name_use)
-        bold = workbook.add_format({'bold': True})
-        multiple_shifts = workbook.add_format({'bg_color': '#fFFF99'})
+        bold = workbook.add_format({"bold": True})
+        multiple_shifts = workbook.add_format({"bg_color": "#fFFF99"})
 
         row = Iterator()
         column = Iterator()
@@ -127,20 +128,16 @@ def xlsx(buffer, event, jobs, date, include_sensitive):
 
         # coordinators
         if not date and job.coordinators.exists():
-            worksheet.merge_range(row.next(), 0, row.get(), last_column,
-                                  _("Coordinators"), bold)
-            add_helpers(worksheet, row, column, event, job, job.coordinators.all(), multiple_shifts,
-                        include_sensitive)
+            worksheet.merge_range(row.next(), 0, row.get(), last_column, _("Coordinators"), bold)
+            add_helpers(worksheet, row, column, event, job, job.coordinators.all(), multiple_shifts, include_sensitive)
 
         # show all shifts
-        for shift in job.shift_set.order_by('begin'):
+        for shift in job.shift_set.order_by("begin"):
             if date and shift.date() != date:
                 continue
 
-            worksheet.merge_range(row.next(), 0, row.get(),
-                                  last_column, shift.time(), bold)
-            add_helpers(worksheet, row, column, event, job, shift.helper_set.all(), multiple_shifts,
-                        include_sensitive)
+            worksheet.merge_range(row.next(), 0, row.get(), last_column, shift.time(), bold)
+            add_helpers(worksheet, row, column, event, job, shift.helper_set.all(), multiple_shifts, include_sensitive)
 
     # close xlsx
     workbook.close()
@@ -167,6 +164,7 @@ def add_helpers(worksheet, row, column, event, job, helpers, multiple_shifts_for
         if event.ask_nutrition:
             worksheet.write(row.get(), column.next(), escape(str(helper.get_nutrition_short())), cell_format)
         if job.infection_instruction:
-            worksheet.write(row.get(), column.next(), escape(str(helper.get_infection_instruction_short())),
-                            cell_format)
+            worksheet.write(
+                row.get(), column.next(), escape(str(helper.get_infection_instruction_short())), cell_format
+            )
         worksheet.write(row.get(), column.next(), escape(helper.comment), cell_format)

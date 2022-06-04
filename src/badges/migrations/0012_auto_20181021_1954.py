@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0011_set_barcode'),
+        ("badges", "0011_set_barcode"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='badgerole',
-            name='permissions',
-            field=models.ManyToManyField(blank=True, to='badges.BadgePermission', verbose_name='Permissions'),
+            model_name="badgerole",
+            name="permissions",
+            field=models.ManyToManyField(blank=True, to="badges.BadgePermission", verbose_name="Permissions"),
         ),
     ]

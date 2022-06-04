@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0005_auto_20170326_1301'),
+        ("news", "0005_auto_20170326_1301"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='person',
-            name='withevent',
-            field=models.BooleanField(default=True, verbose_name='Helper subscribed during registration for event'),
+            model_name="person",
+            name="withevent",
+            field=models.BooleanField(default=True, verbose_name="Helper subscribed during registration for event"),
         ),
     ]

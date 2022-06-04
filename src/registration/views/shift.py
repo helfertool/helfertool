@@ -12,6 +12,7 @@ from ..permissions import has_access, ACCESS_JOB_EDIT
 from ..utils import get_or_404
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -34,20 +35,20 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
         log_msg = "shift created"
         if shift_pk:
             log_msg = "shift changed"
-        logger.info(log_msg, extra={
-            'user': request.user,
-            'event': event,
-            'shift': shift,
-        })
+        logger.info(
+            log_msg,
+            extra={
+                "user": request.user,
+                "event": event,
+                "shift": shift,
+            },
+        )
 
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # render page
-    context = {'event': job.event,
-               'job': job,
-               'shift': shift,
-               'form': form}
-    return render(request, 'registration/admin/edit_shift.html', context)
+    context = {"event": job.event, "job": job, "shift": shift, "form": form}
+    return render(request, "registration/admin/edit_shift.html", context)
 
 
 @login_required
@@ -67,18 +68,18 @@ def delete_shift(request, event_url_name, job_pk, shift_pk):
         form.delete()
         messages.success(request, _("Shift deleted"))
 
-        logger.info("shift deleted", extra={
-            'user': request.user,
-            'event': event,
-            'shift': shift,
-        })
+        logger.info(
+            "shift deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "shift": shift,
+            },
+        )
 
         # redirect to shift
-        return redirect('jobs_and_shifts', event_url_name=event_url_name)
+        return redirect("jobs_and_shifts", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'shift': shift,
-               'job': job,
-               'form': form}
-    return render(request, 'registration/admin/delete_shift.html', context)
+    context = {"event": event, "shift": shift, "job": job, "form": form}
+    return render(request, "registration/admin/delete_shift.html", context)

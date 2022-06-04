@@ -35,7 +35,5 @@ def view_helpers_prerequisite(request, event_url_name, prerequisite_pk):
     helpers = Helper.objects.filter(shifts__job__prerequisites=prerequisite).distinct()
 
     # render page
-    context = {'event': event,
-               'prerequisite': prerequisite,
-               'helpers': helpers}
-    return render(request, 'prerequisites/view_helpers_prerequisite.html', context)
+    context = {"event": event, "prerequisite": prerequisite, "helpers": helpers}
+    return render(request, "prerequisites/view_helpers_prerequisite.html", context)

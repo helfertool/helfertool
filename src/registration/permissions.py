@@ -68,31 +68,24 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_EVENT_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_EVENT_EDIT_LINKS: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_EVENT_EDIT_JOBS: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_EVENT_EXPORT_HELPERS: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -103,16 +96,13 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_EVENT_EDIT_DUPLICATES: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_EVENT_VIEW_COORDINATORS: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -125,23 +115,18 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_EVENT_VIEW_AUDITLOGS: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_JOB_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_JOB_EDIT_HELPERS: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -152,7 +137,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_JOB_VIEW_HELPERS: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -165,7 +149,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_HELPER_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -176,7 +159,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_HELPER_VIEW: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -189,7 +171,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_HELPER_EDIT_SENSITIVE: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -199,7 +180,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_FULL,
         ],
     ],
-
     ACCESS_HELPER_VIEW_SENSITIVE: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -211,7 +191,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_FULL,
         ],
     ],
-
     ACCESS_HELPER_INTERNAL_COMMENT_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -223,7 +202,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_HELPER_INTERNAL_COMMENT_VIEW: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -236,7 +214,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_HELPER_RESEND: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -248,61 +225,48 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_INVENTORY_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_INVENTORY_HANDLE: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
             EventAdminRoles.ROLE_INVENTORY,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_BADGES_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_BADGES_EDIT_HELPER: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_BADGES_EDIT_SPECIAL: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_BADGES_GENERATE: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
             EventAdminRoles.ROLE_BADGES,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_MAILS_SEND: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -313,7 +277,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_MAILS_VIEW: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -324,7 +287,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_STATISTICS_VIEW: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -335,60 +297,47 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_GIFTS_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_GIFTS_HANDLE_GIFTS: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
             EventAdminRoles.ROLE_FRONTDESK,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_GIFTS_HANDLE_PRESENCE: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_GIFTS_VIEW_SUMMARY: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_PREREQUISITES_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_PREREQUISITES_VIEW: [
         [
             EventAdminRoles.ROLE_ADMIN,
             EventAdminRoles.ROLE_RESTRICTED_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_PREREQUISITES_HANDLE: [
         [
             EventAdminRoles.ROLE_ADMIN,
@@ -399,21 +348,17 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_DEFAULT,
         ],
     ],
-
     ACCESS_CORONA_EDIT: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
-
     ACCESS_CORONA_VIEW: [
         [
             EventAdminRoles.ROLE_ADMIN,
         ],
-        [
-        ],
+        [],
     ],
 }
 

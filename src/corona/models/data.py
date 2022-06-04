@@ -6,12 +6,12 @@ from django_countries.fields import CountryField
 
 class ContactTracingData(models.Model):
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
     helper = models.OneToOneField(
-        'registration.Helper',
+        "registration.Helper",
         on_delete=models.CASCADE,
         null=True,
         blank=True,

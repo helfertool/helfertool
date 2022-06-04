@@ -11,7 +11,7 @@ import os
 
 
 def _copy_badge(src, dest):
-    """ Copies all data from badge1 to badge2, except for the first and surname. """
+    """Copies all data from badge1 to badge2, except for the first and surname."""
     dest.job = src.job
     dest.shift = src.shift
     dest.role = src.role
@@ -43,8 +43,9 @@ class SpecialBadges(models.Model):
 
     The name is not localized as it is just printed on the badge.
     """
+
     event = models.ForeignKey(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 
@@ -62,20 +63,20 @@ class SpecialBadges(models.Model):
     # creation and deletion are done in signal handlers
     # it is included in the list of badges (next field)
     template_badge = models.OneToOneField(
-        'Badge',
+        "Badge",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='+',
+        related_name="+",
     )
 
     # the Badge objects, which are managed by this special badge
     # we have a one-to-many relation here, but it is cleaner to add it here instead of a foreinkey at the Badge model
     # the template_badge is included here
     badges = models.ManyToManyField(
-        'Badge',
+        "Badge",
         blank=True,
-        related_name='+',
+        related_name="+",
     )
 
     def __str__(self):
@@ -97,9 +98,9 @@ class SpecialBadges(models.Model):
         return new_specialbadges
 
 
-@receiver(post_save, sender=SpecialBadges, dispatch_uid='specialbadges_postsave')
+@receiver(post_save, sender=SpecialBadges, dispatch_uid="specialbadges_postsave")
 def specialbadges_postsave(sender, instance, **kwargs):
-    """ After saving a SpecialBadges object, update the batch of badges based on the template badge. """
+    """After saving a SpecialBadges object, update the batch of badges based on the template badge."""
     # if we do not have a template_badge yet, create it and add it to the badges
     if not instance.template_badge:
         instance.template_badge = Badge.objects.create(event=instance.event)
@@ -115,7 +116,7 @@ def specialbadges_postsave(sender, instance, **kwargs):
     instance.template_badge.save()
 
     # add or update other badges (2, ...)
-    for n in range(2, instance.number+1):
+    for n in range(2, instance.number + 1):
         # get or create badge object
         try:
             badge = instance.badges.get(surname=str(n))
@@ -133,12 +134,12 @@ def specialbadges_postsave(sender, instance, **kwargs):
 
     # if the number was decreased, we need to delete some badges
     if instance.number < instance.badges.count():
-        for n in range(instance.number+1, instance.badges.count()+1):
+        for n in range(instance.number + 1, instance.badges.count() + 1):
             Badge.objects.filter(surname=str(n)).delete()
 
 
-@receiver(pre_delete, sender=SpecialBadges, dispatch_uid='specialbadges_deleted')
+@receiver(pre_delete, sender=SpecialBadges, dispatch_uid="specialbadges_deleted")
 def specialbadges_deleted(sender, instance, **kwargs):
-    """ When a SpecialBadges object is deleted, delete all managed badges. """
+    """When a SpecialBadges object is deleted, delete all managed badges."""
     for badge in instance.badges.all():
         badge.delete()

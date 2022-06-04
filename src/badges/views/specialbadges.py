@@ -28,9 +28,8 @@ def list_specialbadges(request, event_url_name):
     # get special badges (=badges without helper object)
     specialbadges = SpecialBadges.objects.filter(event=event)
 
-    context = {'event': event,
-               'specialbadges': specialbadges}
-    return render(request, 'badges/list_specialbadges.html', context)
+    context = {"event": event, "specialbadges": specialbadges}
+    return render(request, "badges/list_specialbadges.html", context)
 
 
 @login_required
@@ -58,12 +57,12 @@ def edit_specialbadges(request, event_url_name, specialbadges_pk=None):
     if form.is_valid():
         instance = form.save()
 
-        return redirect('badges:edit_specialbadges_template', event_url_name=event.url_name,
-                        specialbadges_pk=instance.pk)
+        return redirect(
+            "badges:edit_specialbadges_template", event_url_name=event.url_name, specialbadges_pk=instance.pk
+        )
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'badges/edit_specialbadges.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "badges/edit_specialbadges.html", context)
 
 
 @login_required
@@ -90,11 +89,10 @@ def edit_specialbadges_template(request, event_url_name, specialbadges_pk):
         form.save()
         specialbadges.save()  # sync changes to other badges
 
-        return redirect('badges:list_specialbadges', event_url_name=event.url_name)
+        return redirect("badges:list_specialbadges", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'badges/edit_badge.html', context)
+    context = {"event": event, "form": form}
+    return render(request, "badges/edit_badge.html", context)
 
 
 @login_required
@@ -119,20 +117,18 @@ def delete_specialbadges(request, event_url_name, specialbadges_pk):
     if form.is_valid():
         form.delete()
 
-        return redirect('badges:list_specialbadges', event_url_name=event.url_name)
+        return redirect("badges:list_specialbadges", event_url_name=event.url_name)
 
-    context = {'event': event,
-               'form': form,
-               'specialbadges': specialbadges}
-    return render(request, 'badges/delete_specialbadges.html', context)
+    context = {"event": event, "form": form, "specialbadges": specialbadges}
+    return render(request, "badges/delete_specialbadges.html", context)
 
 
 @login_required
 @never_cache
 def get_specialbadges_photo(request, event_url_name, specialbadges_pk):
-    """ Download badge photo of special badge.
+    """Download badge photo of special badge.
 
-    For normal badge: get_badge_photo """
+    For normal badge: get_badge_photo"""
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission

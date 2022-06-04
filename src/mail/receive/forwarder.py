@@ -13,10 +13,13 @@ class MailForwarder:
     It rewrites the mail to be conform to DMARC, otherwise the mail could be dropped by the receiving mail server.
     This is used by MailHandler.
     """
+
     def __init__(self):
         self._connection = None
 
-        self._own_addresses = [settings.EMAIL_SENDER_ADDRESS.lower(), ]
+        self._own_addresses = [
+            settings.EMAIL_SENDER_ADDRESS.lower(),
+        ]
         if settings.FORWARD_UNHANDLED_ADDRESS:
             self._own_addresses.append(settings.FORWARD_UNHANDLED_ADDRESS.lower())
 
@@ -87,7 +90,7 @@ class MailForwarder:
         # rewrite headers (source: https://gitlab.com/mailman/mailman/blob/master/src/mailman/handlers/dmarc.py)
 
         # get original From name and address -> there is only one From address allowed
-        froms = self._cleaned_getaddresses(msg, 'from', keep_own=True)
+        froms = self._cleaned_getaddresses(msg, "from", keep_own=True)
         if len(froms) > 0:
             original_from_name, original_from_address = froms[0]
         else:
@@ -95,9 +98,9 @@ class MailForwarder:
 
         # get original TO, CC and Reply-To names and addresses
         # both own addresses are removed from the lists, so only external addresses are in there
-        original_to = self._cleaned_getaddresses(msg, 'to')
-        original_cc = self._cleaned_getaddresses(msg, 'cc')
-        original_reply_to = self._cleaned_getaddresses(msg, 'reply-to')
+        original_to = self._cleaned_getaddresses(msg, "to")
+        original_cc = self._cleaned_getaddresses(msg, "cc")
+        original_reply_to = self._cleaned_getaddresses(msg, "reply-to")
 
         # Change From: ... via ... <...@...>
         new_from_name = original_from_name or original_from_address or "Unknown"
@@ -119,7 +122,9 @@ class MailForwarder:
 
         # Change Reply-To: public address + original reply-to + original from + original to + original CC
         # the own addresses are already filtered out of the original headers, so only the public address is added here
-        new_reply_to = [(settings.EMAIL_SENDER_NAME, settings.EMAIL_SENDER_ADDRESS), ]
+        new_reply_to = [
+            (settings.EMAIL_SENDER_NAME, settings.EMAIL_SENDER_ADDRESS),
+        ]
         self._merge_addr_list(new_reply_to, original_reply_to)
         self._merge_addr(new_reply_to, original_from_name, original_from_address)
         self._merge_addr_list(new_reply_to, original_to)
@@ -128,8 +133,9 @@ class MailForwarder:
         self._replace_header(msg, "reply-to", self._format_addr_header(new_reply_to))
 
         # send mail
-        self._connection.sendmail(settings.FORWARD_UNHANDLED_ADDRESS, settings.FORWARD_UNHANDLED_ADDRESS,
-                                  msg.as_string())
+        self._connection.sendmail(
+            settings.FORWARD_UNHANDLED_ADDRESS, settings.FORWARD_UNHANDLED_ADDRESS, msg.as_string()
+        )
 
     def _cleaned_getaddresses(self, msg, header, keep_own=False):
         addresses = email.utils.getaddresses(msg.get_all(header, []))
@@ -139,7 +145,7 @@ class MailForwarder:
             # addr is tuple of name and address
 
             # remove invalid things
-            if '@' not in addr[1]:
+            if "@" not in addr[1]:
                 continue
 
             # remove own addresses

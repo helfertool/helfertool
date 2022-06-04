@@ -23,27 +23,24 @@ def edit_badge(request, event_url_name, helper_pk):
     if not event.badges:
         return notactive(request)
 
-    form = BadgeForm(request.POST or None, request.FILES or None,
-                     instance=helper.badge)
+    form = BadgeForm(request.POST or None, request.FILES or None, instance=helper.badge)
 
     if form.is_valid():
         form.save()
 
-        return redirect('view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+        return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'form': form}
-    return render(request, 'badges/edit_badge.html', context)
+    context = {"event": event, "helper": helper, "form": form}
+    return render(request, "badges/edit_badge.html", context)
 
 
 @login_required
 @never_cache
 def get_badge_photo(request, event_url_name, helper_pk):
-    """ Download badge photo of normal badge.
+    """Download badge photo of normal badge.
 
-    For special badges: get_specialbadges_photo """
+    For special badges: get_specialbadges_photo"""
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission

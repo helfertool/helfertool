@@ -6,24 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prerequisites', '0001_initial'),
-        ('registration', '0031_event_ask_phone'),
+        ("prerequisites", "0001_initial"),
+        ("registration", "0031_event_ask_phone"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='prerequisites',
-            field=models.BooleanField(default=False, verbose_name='Manage prerequisites for helpers'),
+            model_name="event",
+            name="prerequisites",
+            field=models.BooleanField(default=False, verbose_name="Manage prerequisites for helpers"),
         ),
         migrations.AddField(
-            model_name='helper',
-            name='prerequisites',
-            field=models.ManyToManyField(blank=True, through='prerequisites.FulfilledPrerequisite', to='prerequisites.Prerequisite'),
+            model_name="helper",
+            name="prerequisites",
+            field=models.ManyToManyField(
+                blank=True, through="prerequisites.FulfilledPrerequisite", to="prerequisites.Prerequisite"
+            ),
         ),
         migrations.AddField(
-            model_name='job',
-            name='prerequisites',
-            field=models.ManyToManyField(blank=True, to='prerequisites.Prerequisite', verbose_name='Prerequisites for this job'),
+            model_name="job",
+            name="prerequisites",
+            field=models.ManyToManyField(
+                blank=True, to="prerequisites.Prerequisite", verbose_name="Prerequisites for this job"
+            ),
         ),
     ]

@@ -11,6 +11,7 @@ from ..models import ContactTracingData
 from .utils import notactive
 
 import logging
+
 logger = logging.getLogger("helfertool.corona")
 
 
@@ -34,10 +35,8 @@ def view_helper(request, event_url_name, helper_pk):
         data = None
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'data': data}
-    return render(request, 'corona/view_helper.html', context)
+    context = {"event": event, "helper": helper, "data": data}
+    return render(request, "corona/view_helper.html", context)
 
 
 @login_required
@@ -64,16 +63,17 @@ def edit_helper(request, event_url_name, helper_pk):
     if form.is_valid():
         form.save(helper=helper)
 
-        logger.info("helper coronadata", extra={
-            'user': request.user,
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper coronadata",
+            extra={
+                "user": request.user,
+                "event": event,
+                "helper": helper,
+            },
+        )
 
-        return redirect('corona:view_helper', event_url_name=event_url_name, helper_pk=helper.pk)
+        return redirect("corona:view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
     # render page
-    context = {'event': event,
-               'helper': helper,
-               'form': form}
-    return render(request, 'corona/edit_helper.html', context)
+    context = {"event": event, "helper": helper, "form": form}
+    return render(request, "corona/edit_helper.html", context)

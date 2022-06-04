@@ -4,21 +4,24 @@ from django.db import migrations
 
 
 def create_through_relations(apps, schema_editor):
-    Event = apps.get_model('registration', 'Event')
-    EventAdminRoles = apps.get_model('registration', 'EventAdminRoles')
+    Event = apps.get_model("registration", "Event")
+    EventAdminRoles = apps.get_model("registration", "EventAdminRoles")
 
     for event in Event.objects.all():
         for admin in event.admins.all():
             EventAdminRoles(
                 event=event,
                 user=admin,
-                roles=['ADMIN', ],
+                roles=[
+                    "ADMIN",
+                ],
             ).save()
+
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0038_eventadminroles'),
+        ("registration", "0038_eventadminroles"),
     ]
 
     operations = [

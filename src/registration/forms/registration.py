@@ -12,63 +12,73 @@ import itertools
 
 
 class RegisterForm(forms.ModelForm):
-    """ Form for registration of helpers.
+    """Form for registration of helpers.
 
     This form asks for the personal data and handles the selection of shifts.
     """
+
     class Meta:
         model = Helper
-        fields = ['firstname', 'surname', 'email', 'phone', 'shirt',
-                  'nutrition', 'infection_instruction', 'comment',
-                  'privacy_statement', 'shifts']
+        fields = [
+            "firstname",
+            "surname",
+            "email",
+            "phone",
+            "shirt",
+            "nutrition",
+            "infection_instruction",
+            "comment",
+            "privacy_statement",
+            "shifts",
+        ]
         widgets = {
-            'shifts': ShiftTableRegistrationWidget,
+            "shifts": ShiftTableRegistrationWidget,
         }
 
     def __init__(self, *args, **kwargs):
-        """ Customize the form.
+        """Customize the form.
 
         Some fields like 'shirt' are removed, if they are not necessary.
         """
-        self.event = kwargs.pop('event')
-        self.shifts_qs = kwargs.pop('shifts_qs', None)
-        self.preselected_shifts = kwargs.pop('preselected_shifts', None)
-        self.is_internal = kwargs.pop('is_internal', False)
-        self.is_link = kwargs.pop('is_link', False)
+        self.event = kwargs.pop("event")
+        self.shifts_qs = kwargs.pop("shifts_qs", None)
+        self.preselected_shifts = kwargs.pop("preselected_shifts", None)
+        self.is_internal = kwargs.pop("is_internal", False)
+        self.is_link = kwargs.pop("is_link", False)
 
         super(RegisterForm, self).__init__(*args, **kwargs)
 
         # remove field for phone number?
         if not self.event.ask_phone:
-            self.fields.pop('phone')
+            self.fields.pop("phone")
 
         # remove field for shirt?
         if not self.event.ask_shirt:
-            self.fields.pop('shirt')
+            self.fields.pop("shirt")
         else:
             # restrict choices
-            self.fields['shirt'].choices = self.event.get_shirt_choices(internal=self.is_internal)
+            self.fields["shirt"].choices = self.event.get_shirt_choices(internal=self.is_internal)
 
         # remove field for nutrition?
         if not self.event.ask_nutrition:
-            self.fields.pop('nutrition')
+            self.fields.pop("nutrition")
 
         # remove field or privacy statement?
         if self.is_internal:
-            self.fields.pop('privacy_statement')
+            self.fields.pop("privacy_statement")
         else:
             # add link to show privacy statement after label
             privacy_label = format_html(
                 '{} (<a href="" data-bs-toggle="modal" data-bs-target="#privacy">{}</a>)',
-                self.fields['privacy_statement'].label,
+                self.fields["privacy_statement"].label,
                 _("Show"),
             )
-            self.fields['privacy_statement'].label = privacy_label
+            self.fields["privacy_statement"].label = privacy_label
 
         # add field for age?
         self.ask_full_age = self.event.ask_full_age and not self.is_internal
         if self.ask_full_age:
-            self.fields['full_age'] = forms.BooleanField(label=_("I confirm to be full aged."), required=False)
+            self.fields["full_age"] = forms.BooleanField(label=_("I confirm to be full aged."), required=False)
 
         # add field for notification about new events?
         self.ask_news = self.event.ask_news and not self.is_internal
@@ -78,7 +88,7 @@ class RegisterForm(forms.ModelForm):
                 _("I want to be informed about future events that are looking for helpers."),
                 _("Show privacy statement"),
             )
-            self.fields['news'] = forms.BooleanField(label=news_label, required=False)
+            self.fields["news"] = forms.BooleanField(label=news_label, required=False)
 
         # specify, which shifts are included in the form
         if not self.shifts_qs:
@@ -88,13 +98,13 @@ class RegisterForm(forms.ModelForm):
             self.respect_blocked = False
 
         # set preselected shifts to "checked"
-        self.fields['shifts'].queryset = self.shifts_qs
-        self.fields['shifts'].initial = self.preselected_shifts
-        self.fields['shifts'].required = False  # will be checked in clean with a nice error message
-        self.fields['shifts'].widget.respect_blocked = self.respect_blocked
+        self.fields["shifts"].queryset = self.shifts_qs
+        self.fields["shifts"].initial = self.preselected_shifts
+        self.fields["shifts"].required = False  # will be checked in clean with a nice error message
+        self.fields["shifts"].widget.respect_blocked = self.respect_blocked
 
     def clean(self):
-        """ Custom validation of shifts and other fields.
+        """Custom validation of shifts and other fields.
 
         This method performs some validations:
           * The helper must register for at least one shift.
@@ -112,24 +122,25 @@ class RegisterForm(forms.ModelForm):
         # Public registration is visible for involved users of the event.
         # But it should not work for them if the public registration is not active.
         if not self.is_internal and not self.event.active and not self.is_link:
-            raise ValidationError(_("The public registration for this event is disabled. "
-                                    "Use the form in the admin interface."))
+            raise ValidationError(
+                _("The public registration for this event is disabled. " "Use the form in the admin interface.")
+            )
 
         # check if shift was selected
-        if not self.cleaned_data.get('shifts'):
+        if not self.cleaned_data.get("shifts"):
             raise ValidationError(_("You must select at least one shift."))
 
         # check if helper if full age (but continue with further checks)
-        if self.ask_full_age and not self.cleaned_data.get('full_age'):
-            self.add_error('full_age', _("We are not allowed to accept helpers that are not of full age."))
+        if self.ask_full_age and not self.cleaned_data.get("full_age"):
+            self.add_error("full_age", _("We are not allowed to accept helpers that are not of full age."))
 
         # check if the data privacy statement was accepted (but continue with further checks)
-        if not self.is_internal and not self.cleaned_data.get('privacy_statement'):
-            self.add_error('privacy_statement', _("Please accept the data privacy statement."))
+        if not self.is_internal and not self.cleaned_data.get("privacy_statement"):
+            self.add_error("privacy_statement", _("Please accept the data privacy statement."))
 
         # iterate over all (selected) shifts
         infection_instruction_needed = False
-        for shift in self.cleaned_data.get('shifts'):
+        for shift in self.cleaned_data.get("shifts"):
             # check if infection instruction is needed for one of the shifts
             if shift.job.infection_instruction:
                 infection_instruction_needed = True
@@ -143,16 +154,19 @@ class RegisterForm(forms.ModelForm):
                 raise ValidationError(_("You selected a blocked shift."))
 
         # infection instruction needed but field not set?
-        if infection_instruction_needed and not self.cleaned_data.get('infection_instruction'):
-            self.add_error('infection_instruction',
-                           _("Please tell us, if you received already an instruction for the handling of food."))
+        if infection_instruction_needed and not self.cleaned_data.get("infection_instruction"):
+            self.add_error(
+                "infection_instruction",
+                _("Please tell us, if you received already an instruction for the handling of food."),
+            )
 
         # check for overlapping shifts
         if self.event.max_overlapping is not None:
             max_overlap = self.event.max_overlapping
             if self._check_has_overlap(max_overlap):
-                raise ValidationError(_("Some of your shifts overlap more then %(minutes)d minutes.") %
-                                      {'minutes': max_overlap})
+                raise ValidationError(
+                    _("Some of your shifts overlap more then %(minutes)d minutes.") % {"minutes": max_overlap}
+                )
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save(False)
@@ -164,8 +178,8 @@ class RegisterForm(forms.ModelForm):
         self.save_m2m()
 
         # add to news
-        if self.ask_news and self.cleaned_data.get('news'):
-            news_add_email(self.cleaned_data.get('email'), withevent=True)
+        if self.ask_news and self.cleaned_data.get("news"):
+            news_add_email(self.cleaned_data.get("email"), withevent=True)
 
         return instance
 
@@ -177,16 +191,20 @@ class RegisterForm(forms.ModelForm):
         :return: true of overlap exists
         """
 
-        for shifts in itertools.combinations(self.cleaned_data.get('shifts'), 2):
+        for shifts in itertools.combinations(self.cleaned_data.get("shifts"), 2):
             s1 = shifts[0]
             s2 = shifts[1]
 
             # check if shifts overlap (1st or term) or one shift is part
             # of the other shift (2nd and 3rd or term)
-            if ((s2.end-s1.begin).total_seconds() > max_overlap*60
-                    and (s1.end-s2.begin).total_seconds() > max_overlap*60) \
-                    or (s1.begin >= s2.begin and s1.end <= s2.end) \
-                    or (s2.begin >= s1.begin and s2.end <= s1.end):
+            if (
+                (
+                    (s2.end - s1.begin).total_seconds() > max_overlap * 60
+                    and (s1.end - s2.begin).total_seconds() > max_overlap * 60
+                )
+                or (s1.begin >= s2.begin and s1.end <= s2.end)
+                or (s2.begin >= s1.begin and s2.end <= s1.end)
+            ):
                 return True
         return False
 
@@ -197,7 +215,7 @@ class DeregisterForm(forms.ModelForm):
         fields = []
 
     def __init__(self, *args, **kwargs):
-        self.shift = kwargs.pop('shift')
+        self.shift = kwargs.pop("shift")
 
         super(DeregisterForm, self).__init__(*args, **kwargs)
 

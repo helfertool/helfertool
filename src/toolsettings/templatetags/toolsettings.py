@@ -10,17 +10,17 @@ register = template.Library()
 
 @register.simple_tag
 def htmlsetting(key):
-    """ Return HTML setting from database. """
+    """Return HTML setting from database."""
     return mark_safe(get_setting(HTMLSetting, key, ""))
 
 
 @register.simple_tag
 def textsetting(key):
-    """ Return text setting from database. """
+    """Return text setting from database."""
     return get_setting(TextSetting, key, "")
 
 
 @register.simple_tag
 def djangosetting(name):
-    """ Return setting from Django configuration. """
+    """Return setting from Django configuration."""
     return getattr(settings, name, "")

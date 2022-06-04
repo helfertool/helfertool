@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('corona', '0003_contacttracingdata'),
+        ("corona", "0003_contacttracingdata"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='contacttracingdata',
-            name='agreed',
-            field=models.BooleanField(default=False, verbose_name='I assure that the provided data is correct.'),
+            model_name="contacttracingdata",
+            name="agreed",
+            field=models.BooleanField(default=False, verbose_name="I assure that the provided data is correct."),
         ),
     ]

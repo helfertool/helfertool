@@ -22,6 +22,7 @@ from collections import OrderedDict
 from itertools import groupby
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -75,11 +76,11 @@ def index(request, filter_old_events=True):
         involved_events_by_year[year] = list(sorted(events, key=lambda e: e.name.lower()))
 
     context = {
-        'active_events': active_events,
-        'involved_events_by_year': involved_events_by_year,
-        'enable_show_more_events': enable_show_more_events,
+        "active_events": active_events,
+        "involved_events_by_year": involved_events_by_year,
+        "enable_show_more_events": enable_show_more_events,
     }
-    return render(request, 'registration/index.html', context)
+    return render(request, "registration/index.html", context)
 
 
 @never_cache
@@ -95,8 +96,8 @@ def form(request, event_url_name, link_pk=None):
             shifts_qs = link.shifts.all()
         except (Link.DoesNotExist, ValidationError):
             # show some message when link does not exist
-            context = {'event': event}
-            return render(request, 'registration/invalid_link.html', context)
+            context = {"event": event}
+            return render(request, "registration/invalid_link.html", context)
 
         # check if link belongs to event
         if link.event != event:
@@ -108,8 +109,8 @@ def form(request, event_url_name, link_pk=None):
         # not logged in -> show message
         if not request.user.is_authenticated:
             # show some message when link does not exist
-            context = {'event': event}
-            return render(request, 'registration/not_active.html', context)
+            context = {"event": event}
+            return render(request, "registration/not_active.html", context)
         # logged in -> check permission
         elif not user_is_involved:
             return nopermission(request)
@@ -128,31 +129,30 @@ def form(request, event_url_name, link_pk=None):
         if corona_form:
             corona_form.save(helper=helper)
 
-        logger.info("helper registered", extra={
-            'event': event,
-            'helper': helper,
-            'withlink': link_pk is not None,
-        })
+        logger.info(
+            "helper registered",
+            extra={
+                "event": event,
+                "helper": helper,
+                "withlink": link_pk is not None,
+            },
+        )
 
         if not helper.send_mail(request, internal=False):
             messages.error(request, _("Sending the mail failed, but the registration was saved."))
 
-        return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
+        return redirect("registered", event_url_name=event.url_name, helper_pk=helper.pk)
 
-    context = {'event': event,
-               'form': form,
-               'corona_form': corona_form,
-               'user_is_involved': user_is_involved}
-    return render(request, 'registration/form.html', context)
+    context = {"event": event, "form": form, "corona_form": corona_form, "user_is_involved": user_is_involved}
+    return render(request, "registration/form.html", context)
 
 
 @never_cache
 def registered(request, event_url_name, helper_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
-    context = {'event': event,
-               'data': helper}
-    return render(request, 'registration/registered.html', context)
+    context = {"event": event, "data": helper}
+    return render(request, "registration/registered.html", context)
 
 
 @never_cache
@@ -173,58 +173,57 @@ def validate(request, event_url_name, helper_pk, validation_id=None):
         helper.timestamp_validated = timezone.now()
         helper.save()
 
-        logger.info("helper validated", extra={
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper validated",
+            extra={
+                "event": event,
+                "helper": helper,
+            },
+        )
 
         # also validate newsletter subscription, if necessary
         news_validate_helper(helper)
 
-    context = {'event': event,
-               'helper': helper}
-    return render(request, 'registration/validate.html', context)
+    context = {"event": event, "helper": helper}
+    return render(request, "registration/validate.html", context)
 
 
 @never_cache
 def deregister(request, event_url_name, helper_pk, shift_pk):
-    event, job, shift, helper = get_or_404(event_url_name,
-                                           helper_pk=helper_pk,
-                                           shift_pk=shift_pk)
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, shift_pk=shift_pk)
 
     if not event.changes_possible:
-        context = {'event': event}
-        return render(request, 'registration/changes_not_possible.html',
-                      context)
+        context = {"event": event}
+        return render(request, "registration/changes_not_possible.html", context)
 
     form = DeregisterForm(request.POST or None, instance=helper, shift=shift)
 
     if form.is_valid():
         form.delete()
 
-        logger.info("helper deregistered", extra={
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper deregistered",
+            extra={
+                "event": event,
+                "helper": helper,
+            },
+        )
 
         if not helper.pk:
-            return redirect('deleted', event_url_name=event.url_name)
+            return redirect("deleted", event_url_name=event.url_name)
 
-        return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
+        return redirect("registered", event_url_name=event.url_name, helper_pk=helper.pk)
 
-    context = {'event': event,
-               'helper': helper,
-               'shift': shift,
-               'form': form}
-    return render(request, 'registration/deregister.html', context)
+    context = {"event": event, "helper": helper, "shift": shift, "form": form}
+    return render(request, "registration/deregister.html", context)
 
 
 @never_cache
 def deleted(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
-    context = {'event': event}
-    return render(request, 'registration/deleted.html', context)
+    context = {"event": event}
+    return render(request, "registration/deleted.html", context)
 
 
 @never_cache
@@ -232,15 +231,15 @@ def update_personal(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     if not event.changes_possible:
-        context = {'event': event}
-        return render(request, 'registration/changes_not_possible.html',
-                      context)
+        context = {"event": event}
+        return render(request, "registration/changes_not_possible.html", context)
 
     form = HelperForm(request.POST or None, instance=helper, event=event, public=True, mask_sensitive=True)
 
     if event.corona:
-        corona_form = ContactTracingDataForm(request.POST or None, instance=helper.contacttracingdata,
-                                             event=event, prefix="corona")
+        corona_form = ContactTracingDataForm(
+            request.POST or None, instance=helper.contacttracingdata, event=event, prefix="corona"
+        )
     else:
         corona_form = None
 
@@ -250,19 +249,19 @@ def update_personal(request, event_url_name, helper_pk):
         if corona_form:
             corona_form.save(helper=helper)
 
-        logger.info("helper dataupdated", extra={
-            'event': event,
-            'helper': helper,
-        })
+        logger.info(
+            "helper dataupdated",
+            extra={
+                "event": event,
+                "helper": helper,
+            },
+        )
 
         if form.email_has_changed:
             if not helper.send_mail(request, internal=False):
                 messages.error(request, _("Sending the mail failed, but the change was saved."))
 
-        return redirect('registered', event_url_name=event.url_name, helper_pk=helper.pk)
+        return redirect("registered", event_url_name=event.url_name, helper_pk=helper.pk)
 
-    context = {'event': event,
-               'data': helper,
-               'personal_data_form': form,
-               'corona_form': corona_form}
-    return render(request, 'registration/registered.html', context)
+    context = {"event": event, "data": helper, "personal_data_form": form, "corona_form": corona_form}
+    return render(request, "registration/registered.html", context)

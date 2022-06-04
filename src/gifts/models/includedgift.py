@@ -7,15 +7,18 @@ from copy import deepcopy
 
 class IncludedGift(models.Model):
     class Meta:
-        unique_together = ('gift_set', 'gift', )
+        unique_together = (
+            "gift_set",
+            "gift",
+        )
 
     gift_set = models.ForeignKey(
-        'GiftSet',
+        "GiftSet",
         on_delete=models.CASCADE,
     )
 
     gift = models.ForeignKey(
-        'Gift',
+        "Gift",
         on_delete=models.CASCADE,
     )
 

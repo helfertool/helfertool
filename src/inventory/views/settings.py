@@ -28,9 +28,7 @@ def event_settings(request, event_url_name):
     form = InventorySettingsForm(request.POST or None, instance=event.inventory_settings)
     if form.is_valid():
         form.save()
-        return redirect('inventory:event_settings', event_url_name)
+        return redirect("inventory:event_settings", event_url_name)
 
-    context = {'event': event,
-               'form': form}
-    return render(request, 'inventory/event_settings.html',
-                  context)
+    context = {"event": event, "form": form}
+    return render(request, "inventory/event_settings.html", context)

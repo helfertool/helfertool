@@ -7,12 +7,12 @@ register = template.Library()
 
 @register.simple_tag
 def lookup_helpersgifts_delivered(form, key):
-    return form['delivered_' + str(key)]
+    return form["delivered_" + str(key)]
 
 
 @register.simple_tag
 def lookup_helpersgifts_present(form, key):
-    return form['present_' + str(key)]
+    return form["present_" + str(key)]
 
 
 @register.simple_tag

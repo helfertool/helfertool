@@ -17,9 +17,8 @@ def inventory_list(request):
 
     inventories = Inventory.objects.all()
 
-    context = {'inventories': inventories}
-    return render(request, 'inventory/admin/inventory_list.html',
-                  context)
+    context = {"inventories": inventories}
+    return render(request, "inventory/admin/inventory_list.html", context)
 
 
 @inventory_admin_required
@@ -34,11 +33,11 @@ def edit_inventory(request, inventory=None):
 
     if form.is_valid():
         form.save()
-        return redirect('inventory:inventory_list')
+        return redirect("inventory:inventory_list")
 
     # render page
-    context = {'form': form}
-    return render(request, 'inventory/admin/edit_inventory.html', context)
+    context = {"form": form}
+    return render(request, "inventory/admin/edit_inventory.html", context)
 
 
 @inventory_admin_required
@@ -53,12 +52,11 @@ def delete_inventory(request, inventory):
 
     if form.is_valid():
         form.delete()
-        return redirect('inventory:inventory_list')
+        return redirect("inventory:inventory_list")
 
     # render page
-    context = {'inventory': inventory,
-               'form': form}
-    return render(request, 'inventory/admin/delete_inventory.html', context)
+    context = {"inventory": inventory, "form": form}
+    return render(request, "inventory/admin/delete_inventory.html", context)
 
 
 @inventory_admin_required
@@ -69,9 +67,8 @@ def inventory_items(request, inventory):
         raise Http404
 
     # permission checking is done in inventory_admin_required
-    context = {'inventory': inventory,
-               'items': inventory.item_set.all()}
-    return render(request, 'inventory/admin/inventory_items.html', context)
+    context = {"inventory": inventory, "items": inventory.item_set.all()}
+    return render(request, "inventory/admin/inventory_items.html", context)
 
 
 @inventory_admin_required
@@ -93,10 +90,10 @@ def edit_item(request, inventory, item_pk=None):
     if form.is_valid():
         # TODO: handle unique_together constraint
         form.save()
-        return redirect('inventory:inventory_items', inventory_pk=inventory.pk)
+        return redirect("inventory:inventory_items", inventory_pk=inventory.pk)
 
-    context = {'form': form}
-    return render(request, 'inventory/admin/edit_item.html', context)
+    context = {"form": form}
+    return render(request, "inventory/admin/edit_item.html", context)
 
 
 @inventory_admin_required
@@ -115,9 +112,8 @@ def delete_item(request, inventory, item_pk):
 
     if form.is_valid():
         form.delete()
-        return redirect('inventory:inventory_items', inventory_pk=inventory.pk)
+        return redirect("inventory:inventory_items", inventory_pk=inventory.pk)
 
     # render page
-    context = {'item': item,
-               'form': form}
-    return render(request, 'inventory/admin/delete_item.html', context)
+    context = {"item": item, "form": form}
+    return render(request, "inventory/admin/delete_item.html", context)

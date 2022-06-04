@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('inventory', '0002_inventorysettings'),
+        ("inventory", "0002_inventorysettings"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='useditem',
-            name='timestamp_returned',
+            model_name="useditem",
+            name="timestamp_returned",
             field=models.DateTimeField(blank=True, null=True),
         ),
     ]

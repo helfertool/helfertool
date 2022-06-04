@@ -5,7 +5,7 @@ from registration.models import Event, Job, Shift, Helper
 
 
 class Command(BaseCommand):
-    help = 'Print number of events, jobs, shifts and helpers'
+    help = "Print number of events, jobs, shifts and helpers"
 
     def handle(self, *args, **options):
         events = Event.objects.count()
@@ -13,8 +13,9 @@ class Command(BaseCommand):
         shifts = Shift.objects.count()
         helpers = Helper.objects.count()
 
-        helpers_archived = Shift.objects.filter(archived_number__isnull=False) \
-            .aggregate(total=Sum('archived_number'))['total']
+        helpers_archived = Shift.objects.filter(archived_number__isnull=False).aggregate(total=Sum("archived_number"))[
+            "total"
+        ]
         if helpers_archived:
             helpers += helpers_archived
 

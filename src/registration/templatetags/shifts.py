@@ -10,7 +10,7 @@ renderer = get_default_renderer()
 
 @register.tag
 def shifttable(parser, token):
-    """ Renders a table-like view of shifts for a specific job.
+    """Renders a table-like view of shifts for a specific job.
     The rendered shifts can be restricted by specifying a list of shifts.
 
     Example 1:
@@ -40,13 +40,14 @@ def shifttable(parser, token):
         shifts_name = None
 
     # parse until endshifttable
-    nodelist = parser.parse(('endshifttable',))
+    nodelist = parser.parse(("endshifttable",))
     parser.delete_first_token()
     return ShiftTableNode(job_name, shifts_name, nodelist)
 
 
 class ShiftTableNode(template.Node):
-    """ Implementation of 'shifttable` tag, see `shifttable`. """
+    """Implementation of 'shifttable` tag, see `shifttable`."""
+
     def __init__(self, job_name, shifts_name, nodelist):
         self.job_name = job_name
         self.shifts_name = shifts_name
@@ -67,7 +68,7 @@ class ShiftTableNode(template.Node):
 
         # put it together with frame
         template = '<div class="shifttable">{}</div>'
-        return template.format(''.join(days_html))
+        return template.format("".join(days_html))
 
     def _render_day(self, context, day, shifts):
         # render all shifts
@@ -78,18 +79,18 @@ class ShiftTableNode(template.Node):
         # put it together with date
         template = '<div class="shifttable-day"><div class="shifttable-date">{}</div>{}</div>'
         day_str = date(day)
-        return template.format(day_str, ''.join(shifts_html))
+        return template.format(day_str, "".join(shifts_html))
 
     def _render_shift(self, context, shift):
         # render content for single shift
-        context['shift'] = shift
+        context["shift"] = shift
         html = self.nodelist.render(context)
         return '<div class="shifttable-shift">{}</div>'.format(html)
 
 
 @register.simple_tag
 def form_shifttable(field):
-    """ Renders a table-like view of shifts for a form field.
+    """Renders a table-like view of shifts for a form field.
 
     The widget of the form field must be:
     - ShiftTableWidget
@@ -116,7 +117,9 @@ def form_shifttable(field):
         if job in jobs_and_shifts:
             jobs_and_shifts[job].append(shift)
         else:
-            jobs_and_shifts[job] = [shift, ]
+            jobs_and_shifts[job] = [
+                shift,
+            ]
 
     # for rendering, we first need the widget
     widget = field.field.widget
@@ -142,8 +145,8 @@ def form_shifttable(field):
 
 @register.simple_tag
 def form_shifttable_shift(widget, shift):
-    """ Belongs to form_shifttable and is called from the template, that is rendered there.
-    It renders the input for one shift using the template "option_template_name" from the widget. """
+    """Belongs to form_shifttable and is called from the template, that is rendered there.
+    It renders the input for one shift using the template "option_template_name" from the widget."""
     shiftwidget = widget["options"][shift.pk]
 
     context = {
@@ -156,14 +159,14 @@ def form_shifttable_shift(widget, shift):
 
 @register.simple_tag
 def form_shifttable_shift_registration(widget, shift):
-    """ Same as form_shifttable, but disables shifts if registration should not be possible. """
+    """Same as form_shifttable, but disables shifts if registration should not be possible."""
     shiftwidget = widget["options"][shift.pk]
 
     if shift.is_full():
-        shiftwidget['attrs']['disabled'] = True
+        shiftwidget["attrs"]["disabled"] = True
 
     if shift.blocked and widget["respect_blocked"]:
-        shiftwidget['attrs']['disabled'] = True
+        shiftwidget["attrs"]["disabled"] = True
 
     context = {
         "widget": shiftwidget,
@@ -175,7 +178,7 @@ def form_shifttable_shift_registration(widget, shift):
 
 @register.inclusion_tag("registration/templatetags/shift_progress.html")
 def shift_progress(shift, highlight_missing=False):
-    """ Renders a progress bar to visualize the number of registered and missing helpers.
+    """Renders a progress bar to visualize the number of registered and missing helpers.
 
     If `highlight_missing` is True, the registered helpers are green and the missing ones red/yellow.
     Otherwise, the registered helpers are green/yellow/red and the missing ones gray.
@@ -184,8 +187,8 @@ def shift_progress(shift, highlight_missing=False):
     percent_vacant = 100 - percent
 
     context = {
-        'highlight_missing': highlight_missing,
-        'percent': percent,
-        'percent_vacant': percent_vacant,
+        "highlight_missing": highlight_missing,
+        "percent": percent,
+        "percent_vacant": percent_vacant,
     }
     return context

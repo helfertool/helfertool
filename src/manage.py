@@ -8,4 +8,4 @@ if __name__ == "__main__":
     from django.core.management import execute_from_command_line
 
     # Sonarcloud things sys.argv is a codesmell. In this case, this is fine.
-    execute_from_command_line(sys.argv) # NOSONAR
+    execute_from_command_line(sys.argv)  # NOSONAR

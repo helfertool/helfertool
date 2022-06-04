@@ -11,7 +11,8 @@ from collections import OrderedDict
 
 
 class NutritionData:
-    """ Prepare numbers about chosen nutrition for template."""
+    """Prepare numbers about chosen nutrition for template."""
+
     def __init__(self, helper_set):
         # numbers
         self.num_no_preference = helper_set.filter(nutrition=Helper.NUTRITION_NO_PREFERENCE).count()
@@ -35,8 +36,8 @@ def nutrition(request, event_url_name):
 
     # check if nutrition is collected for this event
     if not event.ask_nutrition:
-        context = {'event': event}
-        return render(request, 'statistic/nutrition_not_active.html', context)
+        context = {"event": event}
+        return render(request, "statistic/nutrition_not_active.html", context)
 
     # event wide
     event_data = None
@@ -53,7 +54,5 @@ def nutrition(request, event_url_name):
         job_data[job] = NutritionData(job.helpers_and_coordinators())
 
     # render
-    context = {'event': event,
-               'event_data': event_data,
-               'job_data': job_data}
-    return render(request, 'statistic/nutrition.html', context)
+    context = {"event": event, "event_data": event_data, "job_data": job_data}
+    return render(request, "statistic/nutrition.html", context)

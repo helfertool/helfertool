@@ -11,6 +11,7 @@ from ..helper import news_add_email, news_validate_person
 from ..models import Person
 
 import logging
+
 logger = logging.getLogger("helfertool.news")
 
 
@@ -27,10 +28,10 @@ def subscribe(request):
         if created:
             person.send_validation_mail(request)
 
-        return redirect('news:subscribe_done')
+        return redirect("news:subscribe_done")
 
-    context = {'form': form}
-    return render(request, 'news/subscribe.html', context)
+    context = {"form": form}
+    return render(request, "news/subscribe.html", context)
 
 
 @never_cache
@@ -45,12 +46,12 @@ def subscribe_confirm(request, token):
     except Person.DoesNotExist:
         # token does not exists (anymore) -> show error and redirect to subscribe page
         messages.error(request, _("The link is not valid anymore. Please subscribe again."))
-        return redirect('news:subscribe')
+        return redirect("news:subscribe")
     except ValidationError:
         raise Http404()
 
     if not person.validated:
         news_validate_person(person)
 
-    context = {'person': person}
-    return render(request, 'news/subscribe_confirm.html', context)
+    context = {"person": person}
+    return render(request, "news/subscribe_confirm.html", context)

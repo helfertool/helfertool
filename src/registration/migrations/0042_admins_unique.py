@@ -8,12 +8,12 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('registration', '0041_add_new_admins'),
+        ("registration", "0041_add_new_admins"),
     ]
 
     operations = [
         migrations.AlterUniqueTogether(
-            name='eventadminroles',
-            unique_together={('event', 'user')},
+            name="eventadminroles",
+            unique_together={("event", "user")},
         ),
     ]

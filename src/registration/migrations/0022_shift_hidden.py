@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0021_auto_20170509_1759'),
+        ("registration", "0021_auto_20170509_1759"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='shift',
-            name='hidden',
-            field=models.BooleanField(default=False, verbose_name='If the job is publicly visible, the shift is not displayed.'),
+            model_name="shift",
+            name="hidden",
+            field=models.BooleanField(
+                default=False, verbose_name="If the job is publicly visible, the shift is not displayed."
+            ),
         ),
     ]

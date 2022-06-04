@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0013_auto_20160704_1214'),
+        ("registration", "0013_auto_20160704_1214"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='inventory',
-            field=models.BooleanField(default=False, verbose_name='Use the inventory functionality'),
+            model_name="event",
+            name="inventory",
+            field=models.BooleanField(default=False, verbose_name="Use the inventory functionality"),
         ),
     ]

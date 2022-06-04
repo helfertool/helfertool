@@ -43,11 +43,15 @@ def send_news_mails(first_language, append_english, subject, text, text_en, unsu
 
         # send mail
         try:
-            mail = EmailMessage(subject,
-                                mail_text,
-                                settings.EMAIL_SENDER_ADDRESS,
-                                [person.email, ],
-                                headers=tracking_header)
+            mail = EmailMessage(
+                subject,
+                mail_text,
+                settings.EMAIL_SENDER_ADDRESS,
+                [
+                    person.email,
+                ],
+                headers=tracking_header,
+            )
             mail.send(fail_silently=False)
         except smtplib.SMTPRecipientsRefused:
             pass
@@ -68,15 +72,14 @@ def _mail_text_language(language, text, unsubscribe_url):
     tmp = ""
     tmp += render_to_string("news/mail/newsletter_preface.txt")
     tmp += text
-    tmp += render_to_string("news/mail/newsletter_end.txt",
-                            {'unsubscribe_url': unsubscribe_url})
+    tmp += render_to_string("news/mail/newsletter_end.txt", {"unsubscribe_url": unsubscribe_url})
 
     return tmp
 
 
 @task
 def cleanup():
-    """ Delete newsletter subscriptions that were not validated for some time (3 days by default).
+    """Delete newsletter subscriptions that were not validated for some time (3 days by default).
 
     This tasks is executed every hour via celery beat.
     """

@@ -9,7 +9,7 @@ from registration.models import Event, Helper
 
 
 class LogEntry(models.Model):
-    """ Log entry which is stored by DatabaseHandler.
+    """Log entry which is stored by DatabaseHandler.
 
     The entries are only stored as long as the event exists.
 
@@ -25,16 +25,11 @@ class LogEntry(models.Model):
     """
 
     class Meta:
-        ordering = ['-timestamp']
+        ordering = ["-timestamp"]
 
-    timestamp = models.DateTimeField(
-        verbose_name=_("Timestamp")
-    )
+    timestamp = models.DateTimeField(verbose_name=_("Timestamp"))
 
-    level = models.CharField(
-        max_length=16,
-        verbose_name=_("Log level")
-    )
+    level = models.CharField(max_length=16, verbose_name=_("Log level"))
 
     message = models.CharField(
         max_length=512,
@@ -63,7 +58,7 @@ class LogEntry(models.Model):
         blank=True,
         on_delete=models.SET_NULL,  # keep logs for deleted users
         verbose_name=_("User"),
-        related_name="helfertoollogentry"
+        related_name="helfertoollogentry",
     )
 
     extras = models.JSONField(
@@ -80,7 +75,7 @@ class LogEntry(models.Model):
 
     def __str__(self):
         return "{} - {} - {}".format(
-            date_f(localtime(self.timestamp), 'DATETIME_FORMAT'),
+            date_f(localtime(self.timestamp), "DATETIME_FORMAT"),
             self.level,
             self.message,
         )

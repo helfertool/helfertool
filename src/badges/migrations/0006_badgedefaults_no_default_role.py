@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('badges', '0005_auto_20160306_1426'),
+        ("badges", "0005_auto_20160306_1426"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='badgedefaults',
-            name='no_default_role',
-            field=models.BooleanField(default=False, verbose_name='Do not print default roles on badges'),
+            model_name="badgedefaults",
+            name="no_default_role",
+            field=models.BooleanField(default=False, verbose_name="Do not print default roles on badges"),
         ),
     ]

@@ -10,12 +10,15 @@ from reportlab.lib.units import cm
 par_style = getSampleStyleSheet()["Normal"]
 h1_style = getSampleStyleSheet()["Heading1"]
 h2_style = getSampleStyleSheet()["Heading2"]
-table_style = TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-                          ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
-                          ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                          ])
+table_style = TableStyle(
+    [
+        ("INNERGRID", (0, 0), (-1, -1), 0.25, colors.black),
+        ("BOX", (0, 0), (-1, -1), 0.25, colors.black),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    ]
+)
 
-margin = 1.5*cm
+margin = 1.5 * cm
 
 
 def h1(text):
@@ -31,25 +34,33 @@ def par(text):
 
 
 def add_table(elements, data, widths):
-    t = Table(data, widths, hAlign='LEFT')
+    t = Table(data, widths, hAlign="LEFT")
     t.setStyle(table_style)
     elements.append(t)
 
 
 def table_of_helpers(elements, helpers, event):
     # table
-    header = [par(_("Name")), ]
-    spaces = [6, ]
+    header = [
+        par(_("Name")),
+    ]
+    spaces = [
+        6,
+    ]
     if event.ask_shirt:
         header.append(par(_("T-shirt")))
         spaces.append(2.5)
     header.append(par(_("Comment")))
     spaces.append(17 - sum(spaces))  # 17cm are the total possible width, adjust the comment column to fill that
 
-    data = [header, ]
+    data = [
+        header,
+    ]
 
     for helper in helpers:
-        tmp = [par("%s %s" % (helper.firstname, helper.surname)), ]
+        tmp = [
+            par("%s %s" % (helper.firstname, helper.surname)),
+        ]
         if event.ask_shirt:
             tmp.append(par(helper.get_shirt_display()))
         tmp.append(par(helper.comment))
@@ -60,8 +71,7 @@ def table_of_helpers(elements, helpers, event):
 
 
 def pdf(buffer, event, jobs, date):
-    doc = SimpleDocTemplate(buffer, topMargin=margin, rightMargin=margin,
-                            bottomMargin=margin, leftMargin=margin)
+    doc = SimpleDocTemplate(buffer, topMargin=margin, rightMargin=margin, bottomMargin=margin, leftMargin=margin)
     doc.pagesize = A4
 
     # elements

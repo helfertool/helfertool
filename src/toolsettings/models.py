@@ -8,13 +8,14 @@ class AbstractSetting(models.Model):
     """
     All types of settings have a key
     """
+
     class Meta:
         abstract = True
 
     key = models.CharField(
         max_length=200,
         primary_key=True,
-        validators=[RegexValidator('^[a-zA-Z0-9]+$')],
+        validators=[RegexValidator("^[a-zA-Z0-9]+$")],
         verbose_name=_("Key"),
     )
 

@@ -5,10 +5,10 @@ from copy import deepcopy
 
 
 class CoronaSettings(models.Model):
-    RULES_2G = '2G'
-    RULES_2Gplus = '2Gplus'
-    RULES_3G = '3G'
-    RULES_3Gplus = '3Gplus'
+    RULES_2G = "2G"
+    RULES_2Gplus = "2Gplus"
+    RULES_3G = "3G"
+    RULES_3Gplus = "3Gplus"
 
     RULES_CHOICES = (
         (RULES_2G, _("2G")),
@@ -18,7 +18,7 @@ class CoronaSettings(models.Model):
     )
 
     event = models.OneToOneField(
-        'registration.Event',
+        "registration.Event",
         on_delete=models.CASCADE,
     )
 

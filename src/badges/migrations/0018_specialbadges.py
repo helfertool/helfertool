@@ -8,20 +8,34 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('registration', '0043_auto_20200409_1711'),
-        ('badges', '0017_badge_event_required'),
+        ("registration", "0043_auto_20200409_1711"),
+        ("badges", "0017_badge_event_required"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SpecialBadges',
+            name="SpecialBadges",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, verbose_name='Name')),
-                ('number', models.IntegerField(validators=[django.core.validators.MinValueValidator(1)], verbose_name='Number of badges')),
-                ('badges', models.ManyToManyField(blank=True, to='badges.Badge')),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='registration.event')),
-                ('template_badge', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='badges.badge')),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=200, verbose_name="Name")),
+                (
+                    "number",
+                    models.IntegerField(
+                        validators=[django.core.validators.MinValueValidator(1)], verbose_name="Number of badges"
+                    ),
+                ),
+                ("badges", models.ManyToManyField(blank=True, to="badges.Badge")),
+                ("event", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="registration.event")),
+                (
+                    "template_badge",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="+",
+                        to="badges.badge",
+                    ),
+                ),
             ],
         ),
     ]

@@ -13,6 +13,7 @@ from ..models import Event, Link
 from ..permissions import has_access, ACCESS_EVENT_EDIT_LINKS
 
 import logging
+
 logger = logging.getLogger("helfertool.registration")
 
 
@@ -28,9 +29,8 @@ def links(request, event_url_name):
     # get all links
     links = event.link_set.all()
 
-    context = {'event': event,
-               'links': links}
-    return render(request, 'registration/admin/links.html', context)
+    context = {"event": event, "links": links}
+    return render(request, "registration/admin/links.html", context)
 
 
 @login_required
@@ -60,19 +60,20 @@ def edit_link(request, event_url_name, link_pk=None):
         log_msg = "link created"
         if link_pk:
             log_msg = "link changed"
-        logger.info(log_msg, extra={
-            'user': request.user,
-            'event': event,
-            'link': link.id,
-        })
+        logger.info(
+            log_msg,
+            extra={
+                "user": request.user,
+                "event": event,
+                "link": link.id,
+            },
+        )
 
-        return redirect('links', event_url_name=event_url_name)
+        return redirect("links", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'form': form,
-               'link': link}
-    return render(request, 'registration/admin/edit_link.html', context)
+    context = {"event": event, "form": form, "link": link}
+    return render(request, "registration/admin/edit_link.html", context)
 
 
 @login_required
@@ -97,17 +98,18 @@ def delete_link(request, event_url_name, link_pk):
         form.delete()
         messages.success(request, _("Link deleted"))
 
-        logger.info("link deleted", extra={
-            'user': request.user,
-            'event': event,
-            'link': link.id,
-        })
+        logger.info(
+            "link deleted",
+            extra={
+                "user": request.user,
+                "event": event,
+                "link": link.id,
+            },
+        )
 
         # redirect to shift
-        return redirect('links', event_url_name=event_url_name)
+        return redirect("links", event_url_name=event_url_name)
 
     # render page
-    context = {'event': event,
-               'link': link,
-               'form': form}
-    return render(request, 'registration/admin/delete_link.html', context)
+    context = {"event": event, "link": link, "form": form}
+    return render(request, "registration/admin/delete_link.html", context)

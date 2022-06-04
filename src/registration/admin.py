@@ -4,7 +4,11 @@ from .models import Event, EventAdminRoles, EventArchive, Job, JobAdminRoles, Sh
 
 
 class HelperAdmin(admin.ModelAdmin):
-    search_fields = ['firstname', 'surname', 'email', ]
+    search_fields = [
+        "firstname",
+        "surname",
+        "email",
+    ]
 
 
 admin.site.register(Event)

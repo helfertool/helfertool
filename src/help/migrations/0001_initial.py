@@ -17,14 +17,34 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Issue',
+            name="Issue",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(auto_now_add=True)),
-                ('subject', models.CharField(choices=[('permadduser', 'I want to have the permission to add users'), ('permaddevent', 'I want to have the permission to add event'), ('newevent', 'I need a new event'), ('other', 'Other topic')], max_length=20, verbose_name='Subject')),
-                ('text', models.TextField(blank=True, null=True, verbose_name='Text')),
-                ('done_by', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to=settings.AUTH_USER_MODEL)),
-                ('sender', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("id", models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("date", models.DateTimeField(auto_now_add=True)),
+                (
+                    "subject",
+                    models.CharField(
+                        choices=[
+                            ("permadduser", "I want to have the permission to add users"),
+                            ("permaddevent", "I want to have the permission to add event"),
+                            ("newevent", "I need a new event"),
+                            ("other", "Other topic"),
+                        ],
+                        max_length=20,
+                        verbose_name="Subject",
+                    ),
+                ),
+                ("text", models.TextField(blank=True, null=True, verbose_name="Text")),
+                (
+                    "done_by",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="+",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                ("sender", models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
