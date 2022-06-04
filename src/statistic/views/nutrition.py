@@ -5,8 +5,7 @@ from django.views.decorators.cache import never_cache
 from helfertool.utils import nopermission
 from registration.decorators import archived_not_available
 from registration.models import Event, Helper
-from registration.permissions import has_access, has_access_event_or_job, \
-    ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS
+from registration.permissions import has_access, has_access_event_or_job, ACCESS_STATISTICS_VIEW
 
 from collections import OrderedDict
 
@@ -31,7 +30,7 @@ def nutrition(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # permission
-    if not has_access_event_or_job(request.user, event, ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS):
+    if not has_access_event_or_job(request.user, event, ACCESS_STATISTICS_VIEW):
         return nopermission(request)
 
     # check if nutrition is collected for this event
@@ -48,7 +47,7 @@ def nutrition(request, event_url_name):
     job_data = OrderedDict()
     for job in event.job_set.all():
         # check permission for job
-        if not has_access(request.user, job, ACCESS_JOB_VIEW_STATISTICS):
+        if not has_access(request.user, job, ACCESS_STATISTICS_VIEW):
             continue
 
         job_data[job] = NutritionData(job.helpers_and_coordinators())

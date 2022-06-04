@@ -1,0 +1,31 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons translation %}
+
+{% block content %}
+    <h1>{% blocktrans with job=job.name %}Permissions for {{ job }}{% endblocktrans %}</h1>
+
+    <div class="alert alert-secondary">
+        <h4 class="alert-heading">{% trans "Role descriptions" %}
+            <a class="btn btn-sm btn-outline-secondary ml-2 align-top" data-bs-toggle="collapse" href="#roles-collapse" role="button" aria-expanded="false" aria-controls="roles-collapse">
+                {% trans "Show" %}
+            </a>
+        </h4>
+
+        <div id="roles-collapse" class="collapse" id="event-admin-description">
+            <p><strong>{% trans "Full access to all data" %}</strong><br />
+            {% trans "Can access all personal data of the helpers." %}</p>
+
+            <p><strong>{% trans "Default access" %}</strong><br />
+            {% trans "Can access the personal data of the helpers except of:" %}</p>
+            <ul>
+                <li>{% trans "Mobile phone number" %}</li>
+            </ul>
+
+            <hr>
+
+            <p><strong>{% trans "To remove a user, deselect all roles and click Save." %}</strong></p>
+        </div>
+    </div>
+
+    {% include "registration/partials/adminroles_form.html" %}
+{% endblock %}

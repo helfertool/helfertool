@@ -39,7 +39,7 @@
 
         <p></p>
     {% else %}
-        {% include "registration/partials/helper_view_data.html" with helper=data %}
+        {% include "registration/partials/helper_view_data.html" with helper=data mask_sensitive=True %}
 
         {% if event.changes_possible %}
             <p>

@@ -71,7 +71,7 @@ urlpatterns = [
         views.edit_event,
         name='edit_event'),
 
-    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/edit/admins/$',
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/admins/$',
         views.edit_event_admins,
         name='edit_event_admins'),
 
@@ -111,6 +111,10 @@ urlpatterns = [
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/edit/$',
         views.edit_job,
         name='edit_job'),
+
+    url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/admins/$',
+        views.edit_job_admins,
+        name='edit_job_admins'),
 
     url(r'^(?P<event_url_name>[a-zA-Z0-9]+)/jobs/(?P<job_pk>[0-9]+)/delete/$',
         views.delete_job,

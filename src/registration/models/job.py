@@ -65,7 +65,8 @@ class Job(models.Model):
     job_admins = models.ManyToManyField(
         get_user_model(),
         blank=True,
-        verbose_name=_("Admins for this job"),
+        through='registration.JobAdminRoles',
+        related_name='+'
     )
 
     coordinators = models.ManyToManyField(

@@ -36,8 +36,7 @@ def jobs_and_shifts(request, event_url_name):
 def coordinators(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
-    if not has_access_event_or_job(request.user, event, ACCESS_EVENT_VIEW_COORDINATORS,
-                                   ACCESS_EVENT_VIEW_COORDINATORS):
+    if not has_access_event_or_job(request.user, event, ACCESS_EVENT_VIEW_COORDINATORS):
         return nopermission(request)
 
     context = {'event': event}

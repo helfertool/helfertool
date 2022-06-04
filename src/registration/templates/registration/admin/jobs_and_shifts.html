@@ -28,6 +28,9 @@
                 <a href="{% url 'edit_job' event.url_name job.pk %}" class="me-3 text-nowrap">
                     {% icon "pencil-alt" %} {% trans "Edit" %}
                 </a>
+                <a href="{% url 'edit_job_admins' event.url_name job.pk %}" class="me-3 text-nowrap">
+                    {% icon "unlock" %} {% trans "Permissions" %}
+                </a>
                 <a href="{% url 'duplicate_job' event.url_name job.pk %}" class="me-3 text-nowrap">
                     {% icon "copy" %} {% trans "Duplicate" %}
                 </a>

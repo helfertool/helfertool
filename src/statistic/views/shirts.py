@@ -5,8 +5,7 @@ from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.models import Event, EventArchive, Helper
-from registration.permissions import has_access, has_access_event_or_job, \
-    ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS
+from registration.permissions import has_access, has_access_event_or_job, ACCESS_STATISTICS_VIEW
 
 from collections import OrderedDict
 
@@ -27,7 +26,7 @@ def shirts(request, event_url_name):
     shirt_choices = event.get_shirt_choices()
 
     # permission
-    if not has_access_event_or_job(request.user, event, ACCESS_STATISTICS_VIEW, ACCESS_JOB_VIEW_STATISTICS):
+    if not has_access_event_or_job(request.user, event, ACCESS_STATISTICS_VIEW):
         return nopermission(request)
 
     # check if shirt sizes are collected for this event
@@ -82,7 +81,7 @@ def shirts(request, event_url_name):
         # for each job
         for job in event.job_set.all():
             # check permission for job
-            if not has_access(request.user, job, ACCESS_JOB_VIEW_STATISTICS):
+            if not has_access(request.user, job, ACCESS_STATISTICS_VIEW):
                 continue
 
             sizes_for_job = JobShirts(shirt_choices)

@@ -8,10 +8,10 @@
     {% has_access event "ACCESS_EVENT_EDIT_JOBS" as user_event_edit_jobs %}
     {% has_access event "ACCESS_EVENT_EDIT_LINKS" as user_event_edit_links %}
     {% has_access event "ACCESS_EVENT_EDIT_DUPLICATES" as user_event_edit_duplicates %}
-    {% has_access_event_or_job event "ACCESS_EVENT_VIEW_COORDINATORS" "ACCESS_EVENT_VIEW_COORDINATORS" as user_event_view_coordinators %}
+    {% has_access_event_or_job event "ACCESS_EVENT_VIEW_COORDINATORS" as user_event_view_coordinators %}
     {% has_access event "ACCESS_EVENT_VIEW_AUDITLOGS" as user_event_view_auditlogs %}
-    {% has_access_event_or_job event "ACCESS_MAILS_SEND" "ACCESS_JOB_SEND_MAILS" as user_mails_send %}
-    {% has_access_event_or_job event "ACCESS_MAILS_VIEW" "ACCESS_JOB_VIEW_MAILS" as user_mails_view %}
+    {% has_access_event_or_job event "ACCESS_MAILS_SEND" as user_mails_send %}
+    {% has_access_event_or_job event "ACCESS_MAILS_VIEW" as user_mails_view %}
     {% has_access event "ACCESS_GIFTS_EDIT" as user_gifts_edit %}
     {% has_access event "ACCESS_GIFTS_VIEW_SUMMARY" as user_gifts_view_summary %}
     {% has_access event "ACCESS_BADGES_EDIT" as user_badges_edit %}
@@ -23,7 +23,7 @@
     {% has_access event "ACCESS_STATISTICS_VIEW" as user_statistics_view %}
     {% has_access event "ACCESS_CORONA_EDIT" as user_corona_edit %}
     {% has_access event "ACCESS_CORONA_VIEW" as user_corona_view %}
-    {% has_access_event_or_job event "ACCESS_STATISTICS_VIEW" "ACCESS_JOB_VIEW_STATISTICS" as user_statistics_specific %}
+    {% has_access_event_or_job event "ACCESS_STATISTICS_VIEW" as user_statistics_specific %}
 
 <nav id="sidemenu">
     <div class="sidemenu-header">{{ event.name }}</div>

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from registration.permissions import has_access, ACCESS_INVOLVED, ACCESS_MAILS_VIEW, ACCESS_JOB_VIEW_MAILS
+from registration.permissions import has_access, ACCESS_INVOLVED, ACCESS_MAILS_VIEW
 
 
 class SentMail(models.Model):
@@ -98,11 +98,11 @@ class SentMail(models.Model):
         # mails to all coordinators are only visible for admins
 
         for job in self.jobs_all.all():
-            if has_access(user, job, ACCESS_JOB_VIEW_MAILS):
+            if has_access(user, job, ACCESS_MAILS_VIEW):
                 return True
 
         for job in self.jobs_only_coordinators.all():
-            if has_access(user, job, ACCESS_JOB_VIEW_MAILS):
+            if has_access(user, job, ACCESS_MAILS_VIEW):
                 return True
 
         return False

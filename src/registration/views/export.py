@@ -10,7 +10,7 @@ from ..decorators import archived_not_available
 from ..export.excel import xlsx
 from ..export.pdf import pdf
 from ..models import Event, Job, Shift
-from ..permissions import has_access, ACCESS_EVENT_EXPORT_HELPERS
+from ..permissions import ACCESS_HELPER_VIEW_SENSITIVE, has_access, ACCESS_EVENT_EXPORT_HELPERS
 from ..utils import escape_filename
 
 from io import BytesIO
@@ -38,6 +38,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         if not has_access(request.user, job, ACCESS_EVENT_EXPORT_HELPERS):
             return nopermission(request)
 
+        include_sensitive = has_access(request.user, job, ACCESS_HELPER_VIEW_SENSITIVE)
         jobs = [job, ]
         job_for_log = job
         filename = "%s - %s" % (event.name, job.name)
@@ -46,6 +47,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         if not has_access(request.user, event, ACCESS_EVENT_EXPORT_HELPERS):
             return nopermission(request)
 
+        include_sensitive = has_access(request.user, event, ACCESS_HELPER_VIEW_SENSITIVE)
         jobs = event.job_set.all()
         job_for_log = None
         filename = event.name
@@ -78,9 +80,8 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
     # do filetype specific stuff
     if filetype == 'excel':
         filename = "%s.xlsx" % filename
-        content_type = "application/vnd.openxmlformats-officedocument" \
-                       ".spreadsheetml.sheet"
-        xlsx(buffer, event, jobs, date)
+        content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        xlsx(buffer, event, jobs, date, include_sensitive)
     elif filetype == 'pdf':
         filename = "%s.pdf" % filename
         content_type = 'application/pdf'

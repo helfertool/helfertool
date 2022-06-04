@@ -2,10 +2,11 @@
 {% load i18n django_bootstrap5 icons permissions %}
 
 {% block content %}
+    {% has_access helper "ACCESS_HELPER_VIEW_SENSITIVE" as user_view_sensitive %}
     {% has_access helper "ACCESS_HELPER_EDIT" as user_helper_edit %}
     {% has_access helper "ACCESS_HELPER_RESEND" as user_helper_resend %}
     {% has_access helper "ACCESS_CORONA_VIEW" as user_corona_view %}
-    {% has_access_event_or_job event "" "ACCESS_JOB_EDIT_HELPERS" as user_any_job_edit_helpers %}
+    {% has_access_event_or_job event "ACCESS_JOB_EDIT_HELPERS" as user_any_job_edit_helpers %}
 
     <h1>{{ helper.full_name }}</h1>
 
@@ -64,7 +65,7 @@
 
     </p>
 
-    {% include "registration/partials/helper_view_data.html" with helper=helper show_badge_barcode=True %}
+    {% include "registration/partials/helper_view_data.html" with helper=helper show_sensitive=user_view_sensitive show_badge_barcode=True %}
 
     {# coordinated jobs #}
     {% if helper.is_coordinator %}

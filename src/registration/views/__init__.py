@@ -3,7 +3,7 @@ from .registration import index_all_events, index, form, registered, validate, \
 from .admin import admin, jobs_and_shifts, coordinators
 from .event import edit_event, edit_event_admins, delete_event, archive_event, duplicate_event, \
     move_event, past_events, get_event_logo
-from .job import edit_job, delete_job, duplicate_job, duplicate_job_day, sort_job
+from .job import edit_job, edit_job_admins, delete_job, duplicate_job, duplicate_job_day, sort_job
 from .shift import edit_shift, delete_shift
 from .helper import helpers, helpers_for_job, add_helper, edit_helper, delete_helper, \
     add_coordinator, delete_coordinator, add_helper_to_shift, \

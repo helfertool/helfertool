@@ -12,8 +12,6 @@
         </h4>
 
         <div id="roles-collapse" class="collapse" id="event-admin-description">
-            <h5 class="alert-heading">{% trans "For the whole event" %}</h4>
-
             <p><strong>{% trans "Administrator" %}</strong><br />
             {% trans "Can do everything with the event, including deletion and permissions changes." %}</p>
 
@@ -43,8 +41,6 @@
 
             <hr>
 
-            <h5 class="alert-heading">{% trans "For single jobs" %}</h4>
-
             <p>
                 {% url 'jobs_and_shifts' event.url_name as a_job_settings %}
                 {% blocktrans trimmed %}
@@ -52,41 +48,9 @@
                 {% endblocktrans %}
             </p>
 
-            <hr>
-
             <p><strong>{% trans "To remove a user, deselect all roles and click Save." %}</strong></p>
         </div>
     </div>
 
-    <form action="" method="post">
-        {% csrf_token %}
-
-        <ul class="list-group mb-3">
-            {% for form in forms %}
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-12 col-xl-6">
-                        {{ form.instance.user.get_full_name }} ({{ form.instance.user.username }})
-                    </div>
-                    <div class="col-12 col-xl-6">
-                        {% bootstrap_field form.roles show_label=false %}
-                    </div>
-                </div>
-            </li>
-            {% endfor %}
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-12 col-xl-6">
-                        {% bootstrap_field add_form.user show_label=false %}
-                    </div>
-                    <div class="col-12 col-xl-6">
-                        {% bootstrap_field add_form.roles show_label=false %}
-                    </div>
-                </div>
-            </li>
-        </ul>
-
-        <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
-    </form>
+    {% include "registration/partials/adminroles_form.html" %}
 {% endblock %}

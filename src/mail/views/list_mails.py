@@ -4,7 +4,7 @@ from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
 from registration.models import Event
-from registration.permissions import has_access_event_or_job, ACCESS_MAILS_VIEW, ACCESS_JOB_VIEW_MAILS
+from registration.permissions import has_access_event_or_job, ACCESS_MAILS_VIEW
 
 from ..models import SentMail
 
@@ -15,7 +15,7 @@ def list_mails(request, event_url_name):
     event = get_object_or_404(Event, url_name=event_url_name)
 
     # check permission, more fine-granular permission checks are made lateron
-    if not has_access_event_or_job(request.user, event, ACCESS_MAILS_VIEW, ACCESS_JOB_VIEW_MAILS):
+    if not has_access_event_or_job(request.user, event, ACCESS_MAILS_VIEW):
         return nopermission(request)
 
     all_sent_mails = SentMail.objects.filter(event=event)

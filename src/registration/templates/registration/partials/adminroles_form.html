@@ -1,0 +1,33 @@
+{% load i18n django_bootstrap5 icons %}
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    <ul class="list-group mb-3">
+        {% for form in forms %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    {{ form.instance.user.get_full_name }} ({{ form.instance.user.username }})
+                </div>
+                <div class="col-12 col-xl-6">
+                    {% bootstrap_field form.roles show_label=false %}
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-12 col-xl-6">
+                    {% bootstrap_field add_form.user show_label=false %}
+                </div>
+                <div class="col-12 col-xl-6">
+                    {% bootstrap_field add_form.roles show_label=false %}
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
+</form>

@@ -236,8 +236,7 @@ def update_personal(request, event_url_name, helper_pk):
         return render(request, 'registration/changes_not_possible.html',
                       context)
 
-    form = HelperForm(request.POST or None, instance=helper, event=event,
-                      public=True)
+    form = HelperForm(request.POST or None, instance=helper, event=event, public=True, mask_sensitive=True)
 
     if event.corona:
         corona_form = ContactTracingDataForm(request.POST or None, instance=helper.contacttracingdata,

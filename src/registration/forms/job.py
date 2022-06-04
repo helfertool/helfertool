@@ -1,13 +1,14 @@
 from django import forms
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.utils import formats
 from django.utils.translation import ugettext_lazy as _
 
-from helfertool.forms import DatePicker, UserSelectWidget
+from helfertool.forms import DatePicker, SingleUserSelectWidget
 from prerequisites.forms import PrerequisiteSelectWidget
 from prerequisites.models import Prerequisite
 
-from ..models import Job
+from ..models import Job, JobAdminRoles
 
 from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
@@ -19,9 +20,8 @@ class JobForm(forms.ModelForm):
 
         # note: change also below in JobDuplicateForm
         exclude = ['name', 'description', 'important_notes', 'event', 'coordinators',
-                   'badge_defaults', 'archived_number_coordinators', 'order', ]
+                   'badge_defaults', 'archived_number_coordinators', 'order', 'job_admins']
         widgets = {
-            'job_admins': UserSelectWidget,
             'prerequisites': PrerequisiteSelectWidget,
         }
 
@@ -58,9 +58,51 @@ class JobForm(forms.ModelForm):
         if commit:
             instance.save()
 
-        self.save_m2m()  # save m2m, otherwise job_admins is lost
+        self.save_m2m()  # save m2m, otherwise prerequisites are lost
 
         return instance
+
+
+class JobAdminRolesForm(forms.ModelForm):
+    class Meta:
+        model = JobAdminRoles
+        fields = ['roles', ]
+
+
+class JobAdminRolesAddForm(forms.ModelForm):
+    class Meta:
+        model = JobAdminRoles
+        fields = ['user', 'roles', ]
+        widgets = {
+            'user': SingleUserSelectWidget,
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.job = kwargs.pop('job')
+
+        super(JobAdminRolesAddForm, self).__init__(*args, **kwargs)
+
+        # we want to be able to submit an empty form as it is part of a page with multiple forms
+        # if no user is set, the form is still valid and the save does not change anything
+        self.fields['user'].required = False
+
+    def save(self, commit=True):
+        # if no user given, just skip it
+        if self.cleaned_data['user']:
+            instance = super(JobAdminRolesAddForm, self).save(False)
+            instance.job = self.job
+            if commit:
+                instance.save()
+            return instance
+
+    def clean_user(self):
+        user = self.cleaned_data['user']
+
+        # user already has admin privileges for this job -> invalid
+        if user and JobAdminRoles.objects.filter(job=self.job, user=user).exists():
+            raise ValidationError(_('User already has permissions for this job assigned'))
+
+        return user
 
 
 class JobDeleteForm(forms.ModelForm):

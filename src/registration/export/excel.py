@@ -54,13 +54,15 @@ def escape(payload):
     return payload
 
 
-def xlsx(buffer, event, jobs, date):
+def xlsx(buffer, event, jobs, date, include_sensitive):
     """ Exports the helpers for given jobs of an event as excel spreadsheet.
 
     Parameter:
         buffer: a writeable bytes buffer (e.g. io.BytesIO or a file)
         event:  the exported event
         jobs:   a list of all exported jobs
+        date:   export only for this date
+        include_sensitive: Include sensitive data in export
     """
     # create xlsx
     workbook = xlsxwriter.Workbook(buffer)
@@ -95,7 +97,7 @@ def xlsx(buffer, event, jobs, date):
         worksheet.write(0, column.next(), _("E-Mail"), bold)
         worksheet.set_column(0, column.get(), 30)
 
-        if event.ask_phone:
+        if event.ask_phone and include_sensitive:
             worksheet.write(0, column.next(), _("Mobile phone"), bold)
             worksheet.set_column(column.get(), column.get(), 20)
 
@@ -127,7 +129,8 @@ def xlsx(buffer, event, jobs, date):
         if not date and job.coordinators.exists():
             worksheet.merge_range(row.next(), 0, row.get(), last_column,
                                   _("Coordinators"), bold)
-            add_helpers(worksheet, row, column, event, job, job.coordinators.all(), multiple_shifts)
+            add_helpers(worksheet, row, column, event, job, job.coordinators.all(), multiple_shifts,
+                        include_sensitive)
 
         # show all shifts
         for shift in job.shift_set.order_by('begin'):
@@ -136,13 +139,14 @@ def xlsx(buffer, event, jobs, date):
 
             worksheet.merge_range(row.next(), 0, row.get(),
                                   last_column, shift.time(), bold)
-            add_helpers(worksheet, row, column, event, job, shift.helper_set.all(), multiple_shifts)
+            add_helpers(worksheet, row, column, event, job, shift.helper_set.all(), multiple_shifts,
+                        include_sensitive)
 
     # close xlsx
     workbook.close()
 
 
-def add_helpers(worksheet, row, column, event, job, helpers, multiple_shifts_format):
+def add_helpers(worksheet, row, column, event, job, helpers, multiple_shifts_format, include_sensitive):
     for helper in helpers:
         row.next()
         column.reset()
@@ -156,7 +160,7 @@ def add_helpers(worksheet, row, column, event, job, helpers, multiple_shifts_for
         worksheet.write(row.get(), column.next(), escape(helper.firstname), cell_format)
         worksheet.write(row.get(), column.next(), escape(helper.surname), cell_format)
         worksheet.write(row.get(), column.next(), escape(helper.email), cell_format)
-        if event.ask_phone:
+        if event.ask_phone and include_sensitive:
             worksheet.write(row.get(), column.next(), escape(helper.phone), cell_format)
         if event.ask_shirt:
             worksheet.write(row.get(), column.next(), escape(str(helper.get_shirt_display())), cell_format)

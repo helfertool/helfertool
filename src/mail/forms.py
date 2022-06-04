@@ -9,7 +9,7 @@ from smtplib import SMTPException
 from .models import SentMail, MailDelivery
 from .tracking import new_tracking_event
 
-from registration.permissions import has_access, ACCESS_MAILS_SEND, ACCESS_JOB_SEND_MAILS
+from registration.permissions import has_access, ACCESS_MAILS_SEND
 
 
 class MailFormError(Exception):
@@ -47,7 +47,7 @@ class MailForm(forms.Form):
             choices.append((_("General"), tmp))
 
         for job in self.event.job_set.all():
-            if has_access(self.user, job, ACCESS_JOB_SEND_MAILS):
+            if has_access(self.user, job, ACCESS_MAILS_SEND):
                 tmp = []
 
                 # helpers and coordinators

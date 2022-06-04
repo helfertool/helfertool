@@ -7,8 +7,9 @@ from django.views.decorators.cache import never_cache
 from helfertool.utils import nopermission
 
 from ..decorators import archived_not_available
-from ..forms import JobForm, JobDeleteForm, JobDuplicateForm, JobDuplicateDayForm, JobSortForm
-from ..models import Event, Job
+from ..forms import JobForm, JobAdminRolesForm, JobAdminRolesAddForm, JobDeleteForm, JobDuplicateForm, \
+    JobDuplicateDayForm, JobSortForm
+from ..models import Event, Job, JobAdminRoles
 from ..permissions import has_access, ACCESS_EVENT_EDIT_JOBS, ACCESS_JOB_EDIT
 from ..utils import get_or_404
 
@@ -57,6 +58,71 @@ def edit_job(request, event_url_name, job_pk=None):
                'job': job,
                'form': form}
     return render(request, 'registration/admin/edit_job.html', context)
+
+
+@login_required
+@never_cache
+def edit_job_admins(request, event_url_name, job_pk=None):
+    event, job, shift, helper = get_or_404(event_url_name, job_pk)
+
+    # check permission
+    if not has_access(request.user, job, ACCESS_JOB_EDIT):
+        return nopermission(request)
+
+    # one form per existing admin (differentiated by prefix)
+    all_forms = []
+    job_admin_roles = JobAdminRoles.objects.filter(job=job)
+    for job_admin in job_admin_roles:
+        form = JobAdminRolesForm(request.POST or None,
+                                 instance=job_admin,
+                                 prefix='user_{}'.format(job_admin.user.pk))
+        all_forms.append(form)
+
+    # another form to add one new admin
+    add_form = JobAdminRolesAddForm(request.POST or None, prefix='add', job=job)
+
+    # we got a post request -> save
+    if request.POST and (all_forms or add_form.is_valid()):
+        # remove users without any role from admins (no roles = invalid forms)
+        for form in all_forms:
+            if form.is_valid():
+                if form.has_changed():
+                    logger.info("job adminchanged", extra={
+                        'user': request.user,
+                        'event': event,
+                        'job': job,
+                        'changed_user': form.instance.user.username,
+                        'roles': ','.join(form.instance.roles),
+                    })
+                    form.save()
+            else:
+                logger.info("job adminremoved", extra={
+                    'user': request.user,
+                    'event': event,
+                    'job': job,
+                    'changed_user': form.instance.user.username,
+                })
+                form.instance.delete()
+
+        # and save the form for a new admin
+        if add_form.is_valid():
+            new_admin = add_form.save()
+
+            if new_admin:
+                logger.info("job adminadded", extra={
+                    'user': request.user,
+                    'event': event,
+                    'job': job,
+                    'changed_user': new_admin.user.username,
+                    'roles': ','.join(new_admin.roles),
+                })
+            return redirect('edit_job_admins', event_url_name=event_url_name, job_pk=job.pk)
+
+    context = {'event': event,
+               'job': job,
+               'forms': all_forms,
+               'add_form': add_form}
+    return render(request, 'registration/admin/edit_job_admins.html', context)
 
 
 @login_required

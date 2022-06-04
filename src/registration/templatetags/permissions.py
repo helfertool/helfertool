@@ -16,11 +16,11 @@ def has_access(context, resource, access):
 
 
 @register.simple_tag(takes_context=True)
-def has_access_event_or_job(context, resource, access_event, access_job):
-    if resource is None or access_event is None or access_job is None:
+def has_access_event_or_job(context, resource, access):
+    if resource is None or access is None:
         return False
 
-    return ext_has_access_event_or_job(context["user"], resource, access_event, access_job)
+    return ext_has_access_event_or_job(context["user"], resource, access)
 
 
 @register.simple_tag(takes_context=True)

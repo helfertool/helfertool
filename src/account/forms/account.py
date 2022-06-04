@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_select2.forms import Select2Widget
 
 from helfertool.forms.widgets import user_label_from_instance
-from registration.models import EventAdminRoles, Job, Link
+from registration.models import EventAdminRoles, JobAdminRoles, Link
 from mail.models import SentMail
 from inventory.models import Inventory
 from toollog.models import LogEntry
@@ -251,20 +251,25 @@ class MergeUserForm(forms.Form):
 
                 # the other user also has admin access -> merge permissions
                 # old roles will be deleted together with user later
-                for role in admin.roles:
-                    if role not in admin_other.roles:
-                        admin_other.roles.append(role)
-                admin_other.save()
+                self._merge_admin_roles(admin, admin_other)
+
             except EventAdminRoles.DoesNotExist:
                 # the other user does not have admin permissions for the event -> just rewrite existing entry
                 admin.user = self._remaining_user
                 admin.save()
 
-        # registration -> Job
-        for job in Job.objects.filter(job_admins=self.deleted_user_obj):
-            if not job.job_admins.filter(pk=self._remaining_user.pk).exists():
-                job.job_admins.add(self._remaining_user)
-                job.save()
+        # registration -> JobAdminRoles
+        for admin in JobAdminRoles.objects.filter(user=self.deleted_user_obj):
+            try:
+                admin_other = JobAdminRoles.objects.get(job=admin.job, user=self._remaining_user)
+
+                # the other user also has admin access -> merge permissions
+                # old roles will be deleted together with user later
+                self._merge_admin_roles(admin, admin_other)
+            except JobAdminRoles.DoesNotExist:
+                # the other user does not have admin permissions for the event -> just rewrite existing entry
+                admin.user = self._remaining_user
+                admin.save()
 
         # registration -> Link
         Link.objects.filter(creator=self.deleted_user_obj).update(creator=self._remaining_user)
@@ -283,3 +288,9 @@ class MergeUserForm(forms.Form):
 
         # get rid of old user
         self.deleted_user_obj.delete()
+
+    def _merge_admin_roles(self, adminroles_deleted, adminroles_remaining):
+        for role in adminroles_deleted.roles:
+            if role not in adminroles_remaining.roles:
+                adminroles_remaining.roles.append(role)
+        adminroles_remaining.save()

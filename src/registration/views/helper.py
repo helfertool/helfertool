@@ -17,9 +17,10 @@ from ..forms import HelperForm, HelperDeleteForm, HelperDeleteCoordinatorForm, R
     HelperAddCoordinatorForm, HelperSearchForm, HelperResendMailForm, HelperInternalCommentForm
 from ..decorators import archived_not_available
 from ..permissions import has_access, has_access_event_or_job, ACCESS_INVOLVED, ACCESS_JOB_EDIT_HELPERS, \
-    ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_VIEW, ACCESS_HELPER_RESEND, \
-    ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE_GIFTS, ACCESS_GIFTS_HANDLE_PRESENCE, ACCESS_EVENT_EXPORT_HELPERS, \
-    ACCESS_PREREQUISITES_HANDLE, ACCESS_HELPER_INTERNAL_COMMENT_VIEW, ACCESS_HELPER_INTERNAL_COMMENT_EDIT
+    ACCESS_JOB_VIEW_HELPERS, ACCESS_HELPER_EDIT, ACCESS_HELPER_EDIT_SENSITIVE, ACCESS_HELPER_VIEW, \
+    ACCESS_HELPER_RESEND, ACCESS_BADGES_EDIT_HELPER, ACCESS_GIFTS_HANDLE_GIFTS, ACCESS_GIFTS_HANDLE_PRESENCE, \
+    ACCESS_EVENT_EXPORT_HELPERS, ACCESS_PREREQUISITES_HANDLE, ACCESS_HELPER_INTERNAL_COMMENT_VIEW, \
+    ACCESS_HELPER_INTERNAL_COMMENT_EDIT
 
 import logging
 logger = logging.getLogger("helfertool.registration")
@@ -160,9 +161,10 @@ def edit_helper(request, event_url_name, helper_pk):
     # check permission
     if not has_access(request.user, helper, ACCESS_HELPER_EDIT):
         return nopermission(request)
+    edit_sensitive = has_access(request.user, helper, ACCESS_HELPER_EDIT_SENSITIVE)
 
     # forms
-    form = HelperForm(request.POST or None, instance=helper, event=event)
+    form = HelperForm(request.POST or None, instance=helper, event=event, show_sensitive=edit_sensitive)
 
     if form.is_valid():
         form.save()
@@ -244,7 +246,7 @@ def add_coordinator(request, event_url_name, job_pk):
         return nopermission(request)
 
     # form
-    form = HelperForm(request.POST or None, job=job, event=event)
+    form = HelperForm(request.POST or None, job=job, event=event, show_sensitive=True)
     if event.corona:
         corona_form = ContactTracingDataForm(request.POST or None, event=event, prefix="corona")
     else:
@@ -282,7 +284,7 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not has_access_event_or_job(request.user, event, None, ACCESS_JOB_EDIT_HELPERS):
+    if not has_access_event_or_job(request.user, event, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     form = HelperAddShiftForm(request.POST or None, helper=helper,
@@ -315,7 +317,7 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not has_access_event_or_job(request.user, event, None, ACCESS_JOB_EDIT_HELPERS):
+    if not has_access_event_or_job(request.user, event, ACCESS_JOB_EDIT_HELPERS):
         return nopermission(request)
 
     form = HelperAddCoordinatorForm(request.POST or None, helper=helper, user=request.user)
@@ -438,8 +440,7 @@ def search_helper(request, event_url_name):
         return nopermission(request)
 
     # form
-    form = HelperSearchForm(request.POST or None, event=event,
-                            user=request.user)
+    form = HelperSearchForm(request.POST or None, event=event, user=request.user)
     result = None
     new_search = True
 

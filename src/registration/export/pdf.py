@@ -40,9 +40,6 @@ def table_of_helpers(elements, helpers, event):
     # table
     header = [par(_("Name")), ]
     spaces = [6, ]
-    if event.ask_phone:
-        header.append(par(_("Mobile phone")))
-        spaces.append(4)
     if event.ask_shirt:
         header.append(par(_("T-shirt")))
         spaces.append(2.5)
@@ -53,8 +50,6 @@ def table_of_helpers(elements, helpers, event):
 
     for helper in helpers:
         tmp = [par("%s %s" % (helper.firstname, helper.surname)), ]
-        if event.ask_phone:
-            tmp.append(par(helper.phone))
         if event.ask_shirt:
             tmp.append(par(helper.get_shirt_display()))
         tmp.append(par(helper.comment))

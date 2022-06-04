@@ -1,8 +1,10 @@
-{% load i18n django_bootstrap5 %}
+{% load i18n django_bootstrap5 masking %}
 
 {% comment %}
 Parameters:
     helper
+    show_sensitive
+    mask_sensitive
     show_internal_comment
     show_badge_barcode
 {% endcomment %}
@@ -21,10 +23,18 @@ Parameters:
             </tr>
 
             {% if helper.event.ask_phone %}
-                <tr>
-                    <th scope="row">{% trans "Mobile phone" %}: </th>
-                    <td class="text-break">{{ helper.phone }}</td>
-                </tr>
+                {% if show_sensitive or mask_sensitive %}
+                    <tr>
+                        <th scope="row">{% trans "Mobile phone" %}: </th>
+                        <td class="text-break">
+                            {% if show_sensitive %}
+                                {{ helper.phone }}
+                            {% elif mask_sensitive %}
+                                {{ helper.phone | mask }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
             {% endif %}
 
             {% if helper.event.ask_shirt %}

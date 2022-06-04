@@ -8,7 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from badges.models import Badge
 
 from ..models import Helper, Shift, Job
-from ..permissions import has_access, ACCESS_HELPER_VIEW, ACCESS_JOB_EDIT_HELPERS
+from ..permissions import has_access, has_access_event_or_job, ACCESS_HELPER_VIEW, \
+    ACCESS_HELPER_VIEW_SENSITIVE, ACCESS_JOB_EDIT_HELPERS
 from .widgets import ShiftTableWidget
 
 # we want to be able to run without psycopg2 for development
@@ -26,10 +27,22 @@ class HelperForm(forms.ModelForm):
         model = Helper
         exclude = ['event', 'shifts', 'privacy_statement', 'mail_failed', 'internal_comment', 'prerequisites']
 
+    SENSITIVE_FIELDS = ["phone"]
+
     def __init__(self, *args, **kwargs):
         self.related_event = kwargs.pop('event')
+
+        # if job is set, the form is used to add a new coordinator
         self.job = kwargs.pop('job', None)
+
+        # if public is set, internal fields ("validated") are removed
         self.public = kwargs.pop('public', False)
+
+        # if show_sensitive is set, sensitive values are shown
+        self.show_sensitive = kwargs.pop('show_sensitive', False)
+
+        # if mask_sensitive is set, sensitive values can be set, but are not shown
+        self.mask_sensitive = kwargs.pop('mask_sensitive', False)
 
         super(HelperForm, self).__init__(*args, **kwargs)
 
@@ -59,8 +72,32 @@ class HelperForm(forms.ModelForm):
         if self.job or self.public:
             self.fields.pop('validated')
 
+        # remove values of sensitive data
+        if self.mask_sensitive:
+            self._sensitive_values = {}
+            for fieldname in HelperForm.SENSITIVE_FIELDS:
+                if fieldname in self.fields:
+                    self.fields[fieldname].required = False
+                    self.fields[fieldname].help_text = _("If you do not enter a new value, the old one is kept.")
+
+                    self._sensitive_values[fieldname] = self.initial[fieldname]
+                    self.initial[fieldname] = ""
+        elif not self.show_sensitive:
+            for fieldname in HelperForm.SENSITIVE_FIELDS:
+                self.fields.pop(fieldname)
+
         # store old mail address for comparison
         self.old_email = self.instance.email
+
+    def clean(self):
+        super().clean()
+
+        # restore sensitive data if no new value is given
+        if self.mask_sensitive:
+            for fieldname in HelperForm.SENSITIVE_FIELDS:
+                if fieldname in self.fields:
+                    if self.cleaned_data[fieldname] == "":
+                        self.cleaned_data[fieldname] = self._sensitive_values[fieldname]
 
     def save(self, commit=True):
         instance = super(HelperForm, self).save(False)
@@ -262,23 +299,31 @@ class HelperSearchForm(forms.Form):
     def get(self):
         p = self.cleaned_data.get('pattern')
 
+        # it's difficult to decide if we want to include sensitive data in the search or not
+        # best case: only return helpers that are found based on sensitive data if user can view it
+        # however, we choose a simpler implementation that should be good enough:
+        # if a user can access sensitive data for at least one job, we include it in the search
+        include_sensitive = has_access_event_or_job(self.user, self.event, ACCESS_HELPER_VIEW_SENSITIVE)
+
         if settings.SEARCH_SIMILARITY_DISABLED:
             # traditional direct-matching
-            data = self.event.helper_set.filter(Q(firstname__icontains=p)
-                                                | Q(surname__icontains=p)
-                                                | Q(email__icontains=p)
-                                                | Q(phone__icontains=p))
+            searchfilter = Q(firstname__icontains=p) | Q(surname__icontains=p) | Q(email__icontains=p)
+            if include_sensitive:
+                searchfilter = searchfilter | Q(phone__icontains=p)
+            data = self.event.helper_set.filter(searchfilter)
         else:
             # proper databases support -> fuzzy-matching
+            searchfilter = Q(similarity__gte=settings.SEARCH_SIMILARITY) | Q(email__icontains=p)
+            if include_sensitive:
+                searchfilter = searchfilter | Q(phone__icontains=p)
+
             data = self.event.helper_set.annotate(
                 similarity_fn=TrigramSimilarity('firstname', p),
                 similarity_sn=TrigramSimilarity('surname', p),
             ).annotate(
                 similarity=Greatest('similarity_fn', 'similarity_sn'),
             ).filter(
-                Q(similarity__gte=settings.SEARCH_SIMILARITY)
-                | Q(email__icontains=p)
-                | Q(phone__icontains=p)
+                searchfilter
             ).order_by('-similarity')
 
         data = filter(lambda h: has_access(self.user, h, ACCESS_HELPER_VIEW), data)
