@@ -331,6 +331,3 @@ newsletter:
     # Newsletter subscriptions need to be confirmed with by clicking on a link.
     # This setting specifies how long the link is valid (days). Afterwards, the mail address is deleted.
     subscribe_deadline: 3
-
-# Deployed in docker image?
-docker: false
