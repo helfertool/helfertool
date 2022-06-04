@@ -66,6 +66,7 @@ if [ "$action" = "build" ] ; then
     container_version="$(date --utc --iso-8601=seconds)"
     podman build --no-cache --pull \
         --build-arg CONTAINER_VERSION="$container_version" \
+        --format docker \
         -t "$container_name:$container_tag" .
 
 # command: fastbuild
@@ -73,6 +74,7 @@ elif [ "$action" = "fastbuild" ] ; then
     # build with cache, as fast as possible
     podman build \
         --build-arg CONTAINER_VERSION="fastbuild" \
+        --format docker \
         -t "$container_name:$container_tag" .
 
     echo ""
@@ -92,6 +94,41 @@ elif [ "$action" = "test" ] ; then
         --tmpfs "/helfertool/run" \
         --publish 8000:8000 \
         "$container_name:$container_tag"
+
+# command: autotest
+elif [ "$action" = "autotest" ] ; then
+    # run container with test data, listen on port 8000
+    echo "Running container..."
+    podman run --detach \
+        --rm \
+        --name helfertool \
+        --user "$(id -u):$(id -g)" \
+        --userns keep-id \
+        --read-only \
+        --volume "$PWD/test/container/config:/config" \
+        --volume "$PWD/test/container/data:/data" \
+        --volume "$PWD/test/container/log:/log" \
+        --tmpfs "/helfertool/run" \
+        --publish 8000:8000 \
+        "$container_name:$container_tag"
+
+    sleep 10
+
+    set +e
+    echo "Running healthcheck..."
+    podman healthcheck run helfertool
+    healthcheck_return_code="$?"
+    set -e
+
+    echo "Stopping container..."
+    podman stop helfertool
+
+    if [ "$healthcheck_return_code" != "0" ] ; then
+        echo "\nFAILED"
+    else
+        echo "\nPASSED"
+    fi
+    exit $healthcheck_return_code
 
 # command: push
 elif [ "$action" = "push" ] ; then

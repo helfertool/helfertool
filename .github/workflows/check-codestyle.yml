@@ -1,4 +1,4 @@
-# This workflow runs flake8 and pylint through the check-codestyle.py script for every pull request
+# This workflow runs pre-commit for every pull request
 
 name: Check code style
 

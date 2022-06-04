@@ -1,0 +1,39 @@
+# This workflow builds a container on manual trigger
+
+name: Build container
+
+on:
+  push:
+    tags:
+    - 'v[0-9]+.[0-9]+.[0-9]+'
+  workflow_dispatch:
+
+env:
+  CONTAINER_REGISTRY: docker.io
+  CONTAINER_REGISTRY_USER: ${{ secrets.CONTAINER_REGISTRY_USER }}
+  CONTAINER_REGISTRY_PASSWORD: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+
+jobs:
+  build:
+    environment: dockerhub
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build container
+      run: ./scripts/container.sh build
+
+    - name: Test container
+      run: ./scripts/container.sh autotest
+
+    - name: Login to registroy
+      uses: redhat-actions/podman-login@v1
+      with:
+        registry: ${{ env.CONTAINER_REGISTRY }}
+        username: ${{ env.CONTAINER_REGISTRY_USER }}
+        password: ${{ env.CONTAINER_REGISTRY_PASSWORD }}
+
+    - name: Push container
+      run: ./scripts/container.sh push
