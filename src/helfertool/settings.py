@@ -34,26 +34,16 @@ except yaml.parser.ParserError as e:
     print(e)
     sys.exit(1)
 
-# check if docker deployment
-is_docker = dict_get(config, False, "docker")
-
 # versioning
 HELFERTOOL_VERSION = get_version(BASE_DIR / "version.txt")
-HELFERTOOL_CONTAINER_VERSION = None
-if is_docker:
-    HELFERTOOL_CONTAINER_VERSION = get_version("/helfertool/container_version")
+HELFERTOOL_CONTAINER_VERSION = None  # will be set in settings_container.py
 
-# directories for static and media files
-if is_docker:
-    STATIC_ROOT = Path("/helfertool/static")
-    MEDIA_ROOT = Path("/data/media")
-    TMP_ROOT = Path("/data/tmp")
-else:
-    STATIC_ROOT = build_path(dict_get(config, "static", "files", "static"), BASE_DIR)
-    MEDIA_ROOT = build_path(dict_get(config, "media", "files", "media"), BASE_DIR)
+# directories for static and media files (overwritten in settings_container.py)
+STATIC_ROOT = build_path(dict_get(config, "static", "files", "static"), BASE_DIR)
+MEDIA_ROOT = build_path(dict_get(config, "media", "files", "media"), BASE_DIR)
 
-    # directory for temporary files (badges, file uploads)
-    TMP_ROOT = build_path(dict_get(config, "/tmp", "files", "tmp"), BASE_DIR)
+# directory for temporary files like badges, file uploads (overwritten in settings_container.py)
+TMP_ROOT = build_path(dict_get(config, "/tmp", "files", "tmp"), BASE_DIR)
 
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
@@ -324,8 +314,8 @@ DEBUG = dict_get(config, False, "security", "debug")
 SECRET_KEY = dict_get(config, "CHANGEME", "security", "secret")
 ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts")
 
-# use X-Forwarded-Proto header to determine if https is used
-if dict_get(config, False, "security", "behind_proxy") or is_docker:
+# use X-Forwarded-Proto header to determine if https is used (overwritten in settings_container.py)
+if dict_get(config, False, "security", "behind_proxy"):
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # enable X-XSS-Protection (although modern browsers do not support it anymore)
@@ -403,6 +393,7 @@ if DATABASE_LOGGING:
     LOGGING["loggers"]["helfertool"]["handlers"].append("helfertool_database")
 
 # enable syslog if configured
+# additional syslog handler is added in settings_container.py
 syslog_config = dict_get(config, None, "logging", "syslog")
 if syslog_config:
     protocol = dict_get(syslog_config, "udp", "protocol")
@@ -420,18 +411,6 @@ if syslog_config:
     }
 
     LOGGING["loggers"]["helfertool"]["handlers"].append("helfertool_syslog")
-
-# additional syslog output if we run in docker (-> rsyslog -> files)
-if is_docker:
-    LOGGING["handlers"]["helfertool_syslog_docker"] = {
-        "class": "logging.handlers.SysLogHandler",
-        "formatter": "helfertool_syslog",
-        "level": "INFO",
-        "facility": "local7",
-        "address": ("localhost", 5140),
-    }
-
-    LOGGING["loggers"]["helfertool"]["handlers"].append("helfertool_syslog_docker")
 
 # Helfertool features
 FEATURES_NEWSLETTER = bool(dict_get(config, True, "features", "newsletter"))
@@ -618,7 +597,7 @@ TEMPLATES = [
 ]
 
 COMPRESS_ENABLED = True  # compress also in debug mode
-COMPRESS_OFFLINE = not DEBUG or is_docker  # offline compression for prod deployments and always in docker
+COMPRESS_OFFLINE = not DEBUG  # offline compression for prod deployments (overwritten in settings_container.py)
 COMPRESS_OUTPUT_DIR = "compressed"
 COMPRESS_FILTERS = {
     "css": [

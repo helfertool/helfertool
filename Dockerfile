@@ -3,6 +3,7 @@ FROM debian:bullseye
 ARG CONTAINER_VERSION="unknown"
 
 ENV LANG=C.UTF-8
+ENV DJANGO_SETTINGS_MODULE="helfertool.settings_container"
 
 RUN apt-get update && apt-get full-upgrade -y && \
     apt-get install --no-install-recommends -y \

@@ -30,6 +30,7 @@ fi
 # prepare environment
 cd /helfertool/src
 mkdir -p /data/media /data/tmp /helfertool/run/tmp
+
 export HELFERTOOL_CONFIG_FILE="/config/helfertool.yaml"
 
 # command: init

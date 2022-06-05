@@ -152,6 +152,7 @@ else
     echo "fastbuild\tBuild image using cached layers"
     echo
     echo "test\t\tRun container with test data"
+    echo "autotest\tRun container, health check and exit"
     echo
     echo "push\t\tPush container for current branch to container registry"
 
