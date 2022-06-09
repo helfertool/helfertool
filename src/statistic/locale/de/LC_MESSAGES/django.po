@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,23 +57,23 @@ msgid "Nutrition for helpers"
 msgstr "Ernährungsweisen der Helfer:innen"
 
 #: statistic/templates/statistic/nutrition_table.html:10
-#: statistic/views/chart.py:248
+#: statistic/views/chart.py:250
 msgid "No preference"
 msgstr "Keine Präferenz"
 
 #. Translators: adjective
 #: statistic/templates/statistic/nutrition_table.html:14
-#: statistic/views/chart.py:250
+#: statistic/views/chart.py:252
 msgid "Vegetarian"
 msgstr "Vegetarisch"
 
 #: statistic/templates/statistic/nutrition_table.html:18
-#: statistic/views/chart.py:251
+#: statistic/views/chart.py:253
 msgid "Vegan"
 msgstr "Vegan"
 
 #: statistic/templates/statistic/nutrition_table.html:22
-#: statistic/views/chart.py:252
+#: statistic/views/chart.py:254
 msgid "Other"
 msgstr "Anderes"
 
@@ -167,7 +167,7 @@ msgstr "Das T-Shirt einer Helfer:in wird zur ersten Schicht gezählt."
 msgid "T-shirt sizes for job"
 msgstr "T-Shirt Größen für Aufgabe"
 
-#: statistic/templates/statistic/shirts.html:58 statistic/views/chart.py:186
+#: statistic/templates/statistic/shirts.html:58 statistic/views/chart.py:188
 msgid "Helpers"
 msgstr "Helfer:innen"
 
@@ -184,23 +184,23 @@ msgstr "T-Shirt Größen für %(name)s"
 msgid "For this event no t-shirt sizes were collected."
 msgstr "Für diese Veranstaltung wurden keine T-Shirt Größen gesammelt."
 
-#: statistic/views/chart.py:129
+#: statistic/views/chart.py:131
 msgid "Number of helpers"
 msgstr "Anzahl Helfer:innen"
 
-#: statistic/views/chart.py:187
+#: statistic/views/chart.py:189
 msgid "Coordinators"
 msgstr "Koordinator:innen"
 
-#: statistic/views/chart.py:190
+#: statistic/views/chart.py:192
 msgid "Special badges"
 msgstr "Spezial Badges"
 
-#: statistic/views/chart.py:216
+#: statistic/views/chart.py:218
 msgid "Filled slots"
 msgstr "Volle Slots"
 
-#: statistic/views/chart.py:217
+#: statistic/views/chart.py:219
 msgid "Vacant slots"
 msgstr "Leere Slots"
 

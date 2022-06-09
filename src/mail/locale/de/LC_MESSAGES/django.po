@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: mail/forms.py:44 mail/models.py:115
+#: mail/forms.py:44 mail/models.py:117
 msgid "All helpers and coordinators"
 msgstr "Alle Helfer:innen und Koordinator:innen"
 
-#: mail/forms.py:45 mail/models.py:119
+#: mail/forms.py:45 mail/models.py:121
 msgid "All coordinators"
 msgstr "Alle Koordinator:innen"
 
@@ -30,11 +30,11 @@ msgstr "Alle Koordinator:innen"
 msgid "General"
 msgstr "Allgemein"
 
-#: mail/forms.py:54 mail/models.py:122
+#: mail/forms.py:54 mail/models.py:124
 msgid "{}, Helpers and coordinators"
 msgstr "{}, Helfer:innen und Koordinator:innen"
 
-#: mail/forms.py:59 mail/models.py:125
+#: mail/forms.py:59 mail/models.py:127
 msgid "{}, Coordinators"
 msgstr "{}, Koordinator:innen"
 
@@ -70,7 +70,7 @@ msgstr "Betreff"
 msgid "Text"
 msgstr "Text"
 
-#: mail/forms.py:118
+#: mail/forms.py:117
 msgid "You must specify a custom reply to address."
 msgstr "Du musst eine andere Antwortadresse angeben"
 
@@ -128,10 +128,10 @@ msgstr "Absender Adresse"
 msgid "Receiver"
 msgstr "Empfänger:innen"
 
-#: mail/views/send_mail.py:36
+#: mail/views/send_mail.py:37
 msgid "Mail was sent successfully"
 msgstr "E-Mail erfolgreich verschickt"
 
-#: mail/views/send_mail.py:44
+#: mail/views/send_mail.py:48
 msgid "Sending mails failed"
 msgstr "Senden der E-Mails fehlgeschlagen"

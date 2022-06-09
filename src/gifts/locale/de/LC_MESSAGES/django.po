@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,27 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: gifts/forms/fields.py:33
+#: gifts/forms/fields.py:34
 msgid "Auto"
 msgstr "Auto"
 
-#: gifts/forms/fields.py:37
+#: gifts/forms/fields.py:38
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: gifts/forms/fields.py:41
+#: gifts/forms/fields.py:42
 msgid "Present"
 msgstr "Anwesend"
 
-#: gifts/forms/fields.py:42
+#: gifts/forms/fields.py:43
 msgid "Absent"
 msgstr "Abwesend"
 
-#: gifts/forms/helpersgifts.py:37
+#: gifts/forms/helpersgifts.py:41
 msgid "Delivered"
 msgstr "Ausgegeben"
 
-#: gifts/models/deservedgiftset.py:22
+#: gifts/models/deservedgiftset.py:26
 msgid "Helper got gift"
 msgstr "Helfer:in hat Geschenk erhalten"
 
@@ -53,7 +53,7 @@ msgstr "Name"
 msgid "Enable automatic presence for helpers"
 msgstr "Helfer:innen automatisch auf anwesend setzen"
 
-#: gifts/models/giftsettings.py:17
+#: gifts/models/giftsettings.py:18
 msgid ""
 "At the end of the shift, the helper is automatically set to present, unless "
 "the absence was reported."
@@ -61,32 +61,32 @@ msgstr ""
 "Am Ende der Schicht werden die Helfer:innen automatisch auf anwesend "
 "gesetzt, außer sie sind bereits als abwesend eingetragen."
 
-#: gifts/models/giftsettings.py:22
+#: gifts/models/giftsettings.py:23
 msgid "Default deposit for a helper"
 msgstr "Standard Pfand für Helfer:innen"
 
-#: gifts/models/helpersgifts.py:26 gifts/templates/gifts/helper.html:146
+#: gifts/models/helpersgifts.py:27 gifts/templates/gifts/helper.html:146
 #: gifts/templates/gifts/list_deposit.html:14
 msgid "Deposit"
 msgstr "Pfand"
 
-#: gifts/models/helpersgifts.py:34
+#: gifts/models/helpersgifts.py:35
 msgid "Deposit returned"
 msgstr "Pfand zurückgegeben"
 
-#: gifts/models/helpersgifts.py:40
+#: gifts/models/helpersgifts.py:41
 msgid "Helper got her T-shirt"
 msgstr "Helfer:in hat T-Shirt erhalten"
 
-#: gifts/models/helpersgifts.py:45
+#: gifts/models/helpersgifts.py:46
 msgid "Buy a T-shirt for helper"
 msgstr "T-Shirt für Helfer:in kaufen"
 
-#: gifts/models/helpersgifts.py:50
+#: gifts/models/helpersgifts.py:51
 msgid "Deserved gifts"
 msgstr "Verdiente Geschenke"
 
-#: gifts/models/includedgift.py:23
+#: gifts/models/includedgift.py:26
 msgid "Count"
 msgstr "Anzahl"
 
@@ -299,7 +299,7 @@ msgstr "Alle auf abwesend setzen"
 msgid "Nobody is registered for this shift."
 msgstr "Niemand ist für diese Schicht angemeldet."
 
-#: gifts/views/gift.py:98
+#: gifts/views/gift.py:100
 #, python-format
 msgid "Gift deleted: %(name)s"
 msgstr "Geschenk gelöscht: %(name)s"
@@ -308,7 +308,7 @@ msgstr "Geschenk gelöscht: %(name)s"
 msgid "Presence was saved"
 msgstr "Anwesenheit wurde gespeichert"
 
-#: gifts/views/set.py:94
+#: gifts/views/set.py:96
 #, python-format
 msgid "Gift set deleted: %(name)s"
 msgstr "Geschenkset gelöscht: %(name)s"

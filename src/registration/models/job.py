@@ -60,8 +60,7 @@ class Job(models.Model):
         blank=True,
         verbose_name=_("Important notes"),
         help_text=_(
-            """This text is directly shown on the registration page, so that helpers cannot
-                    miss notes in the description."""
+            "This text is directly shown on the registration page, so that helpers cannot miss notes in the description."
         ),
     )
 

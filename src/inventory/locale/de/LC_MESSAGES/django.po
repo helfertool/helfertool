@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,38 +18,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: inventory/forms/admin.py:44
+#: inventory/forms/admin.py:46
 msgid "Item with this barcode already exists in this inventory"
 msgstr "Es gibt bereits einen Gegenstand mit diesem Barcode in diesem Inventar"
 
-#: inventory/forms/barcode.py:10 inventory/models.py:57
+#: inventory/forms/barcode.py:10 inventory/models.py:56
 #: inventory/templates/inventory/admin/delete_item.html:19
 msgid "Barcode"
 msgstr "Barcode"
 
-#: inventory/forms/barcode.py:35
+#: inventory/forms/barcode.py:33
 msgid "There is no item with this barcode for this event."
 msgstr "Es gibt keinen Gegenstand mit diesem Barcode für diese Veranstaltung."
 
-#: inventory/models.py:19 inventory/models.py:52
+#: inventory/models.py:18 inventory/models.py:51
 #: inventory/templates/inventory/admin/delete_inventory.html:11
 #: inventory/templates/inventory/admin/delete_item.html:15
 msgid "Name"
 msgstr "Name"
 
-#: inventory/models.py:25
+#: inventory/models.py:24
 msgid "Administrators of inventory"
 msgstr "Verwalter:innen des Inventars"
 
-#: inventory/models.py:30
+#: inventory/models.py:29
 msgid "Same item may be assigned to different helpers"
 msgstr "Gleicher Gegenstand darf mehreren Personen zugeordnet werden"
 
-#: inventory/models.py:62
+#: inventory/models.py:61
 msgid "Comment"
 msgstr "Kommantar"
 
-#: inventory/models.py:144
+#: inventory/models.py:139
 msgid "Available inventory"
 msgstr "Verfügbares Inventar"
 

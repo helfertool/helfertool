@@ -82,7 +82,7 @@ class HelperForm(forms.ModelForm):
             for fieldname in HelperForm.SENSITIVE_FIELDS:
                 if fieldname in self.fields:
                     self.fields[fieldname].required = False
-                    self.fields[fieldname].help_text = _("If you do not enter a new value, the old one is kept.")
+                    self.fields[fieldname].help_text = _("If you do not enter new data, the old one is kept.")
 
                     self._sensitive_values[fieldname] = self.initial[fieldname]
                     self.initial[fieldname] = ""

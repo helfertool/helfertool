@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "File type not supported, use JPG or PNG."
 msgstr "Dateityp nicht unterstützt, verwende JPG oder PNG."
 
-#: helfertool/forms/widgets.py:68
+#: helfertool/forms/widgets.py:73
 msgid "Delete image"
 msgstr "Bild löschen"
 
@@ -29,11 +29,11 @@ msgstr "Bild löschen"
 msgid "User"
 msgstr "Benutzer:in"
 
-#: helfertool/settings.py:72
+#: helfertool/settings.py:62
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:73
+#: helfertool/settings.py:63
 msgid "English"
 msgstr "English"
 
@@ -365,8 +365,7 @@ msgstr "Anmeldung fehlgeschlagen"
 #: helfertool/templates/helfertool/login_oidc_failed.html:12
 msgid "Either you are not allowed to log in or your session expired."
 msgstr ""
-"Entweder darfst du dich nicht anmelden oder deine Session ist "
-"abgelaufen."
+"Entweder darfst du dich nicht anmelden oder deine Session ist abgelaufen."
 
 #: helfertool/templates/helfertool/nopermission.html:8
 msgid "No permission"

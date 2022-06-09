@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,31 +16,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: account/forms/account.py:107 account/forms/account.py:115
+#: account/forms/account.py:125 account/forms/account.py:133
 msgid "Managed by external identity provider"
 msgstr "Durch externen Identity Provider verwaltet"
 
-#: account/forms/account.py:111 account/templates/account/list_users.html:35
+#: account/forms/account.py:129 account/templates/account/list_users.html:35
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
 msgstr "Administrator:in"
 
-#: account/forms/account.py:121 account/templates/account/list_users.html:43
+#: account/forms/account.py:139 account/templates/account/list_users.html:43
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
 msgstr "Benutzer:innen hinzufügen"
 
-#: account/forms/account.py:129 account/templates/account/list_users.html:39
+#: account/forms/account.py:147 account/templates/account/list_users.html:39
 #: account/templates/account/user_permissions.html:14
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:138 account/templates/account/list_users.html:49
+#: account/forms/account.py:156 account/templates/account/list_users.html:49
 #: account/templates/account/user_permissions.html:24
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
+
+#: account/forms/account.py:243
+msgid "Other user, which will be deleted"
+msgstr "Andere Benutzer:in, welche gelöscht wird"
+
+#: account/forms/account.py:268
+msgid "User does not exist"
+msgstr "Benutzer:in existiert nicht"
 
 #: account/forms/agreement.py:35
 #, python-format
@@ -50,6 +58,7 @@ msgstr "Text (%(lang)s)"
 #: account/models/agreement.py:13
 #: account/templates/account/delete_agreement.html:11
 #: account/templates/account/delete_user.html:15
+#: account/templates/account/merge_user.html:16
 #: account/templates/account/view_user.html:19
 msgid "Name"
 msgstr "Name"
@@ -91,7 +100,7 @@ msgstr "Daten der Nutzungsvereinbarung"
 #: account/templates/account/delete_agreement.html:29
 #: account/templates/account/delete_user.html:37
 #: account/templates/account/list_agreements.html:43
-#: account/templates/account/view_user.html:42
+#: account/templates/account/view_user.html:45
 msgid "Delete"
 msgstr "Löschen"
 
@@ -100,16 +109,19 @@ msgid "Delete user"
 msgstr "Benutzer:in löschen"
 
 #: account/templates/account/delete_user.html:9
+#: account/templates/account/merge_user.html:10
 #: account/templates/account/view_user.html:13
 msgid "Account data"
 msgstr "Account Daten"
 
 #: account/templates/account/delete_user.html:11
+#: account/templates/account/merge_user.html:12
 #: account/templates/account/view_user.html:15
 msgid "Login"
 msgstr "Login"
 
 #: account/templates/account/delete_user.html:19
+#: account/templates/account/merge_user.html:20
 #: account/templates/account/view_user.html:23
 msgid "Email address"
 msgstr "E-Mail Adresse"
@@ -133,7 +145,7 @@ msgstr "Neue Nutzungsvereinbarung"
 
 #: account/templates/account/edit_agreement.html:45
 #: account/templates/account/edit_user.html:33
-#: account/templates/account/view_user.html:57
+#: account/templates/account/view_user.html:60
 msgid "Save"
 msgstr "Sichern"
 
@@ -201,6 +213,23 @@ msgstr "Deaktiviert"
 msgid "No users found."
 msgstr "Keine Benutzer:in gefunden."
 
+#: account/templates/account/merge_user.html:5
+msgid "Merge user"
+msgstr "Benutzer:in zusammenfassen"
+
+#: account/templates/account/merge_user.html:7
+msgid "Remaining user"
+msgstr "Verbleibende Benutzer:in"
+
+#: account/templates/account/merge_user.html:27
+msgid "User for deletion"
+msgstr "Benutzer:in zur Löschung"
+
+#: account/templates/account/merge_user.html:41
+#: account/templates/account/view_user.html:42
+msgid "Merge"
+msgstr "Zusammenfassen"
+
 #: account/templates/account/view_user.html:6
 msgid "My account"
 msgstr "Mein Account"
@@ -209,11 +238,11 @@ msgstr "Mein Account"
 msgid "Details"
 msgstr "Details"
 
-#: account/templates/account/view_user.html:47
+#: account/templates/account/view_user.html:50
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: account/templates/account/view_user.html:62
+#: account/templates/account/view_user.html:65
 msgid "The password cannot be changed here."
 msgstr "Das Passwort kann hier nicht geändert werden."
 
@@ -234,14 +263,18 @@ msgstr "Gestern"
 msgid "%(last_login_ago)s ago"
 msgstr "Vor %(last_login_ago)s"
 
-#: account/views/account.py:34
+#: account/views/account.py:35
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Benutzer:in %(username)s hinzugefügt"
 
-#: account/views/account.py:84
+#: account/views/account.py:90
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
+
+#: account/views/account.py:187
+msgid "Merged user {} into {}"
+msgstr "Benutzer:in {} mit {} zusammengefasst"
 
 #~ msgid "Username"
 #~ msgstr "Benuzername"
@@ -261,9 +294,6 @@ msgstr "Das Passwort wurde erfolgreich geändert"
 #~ msgctxt "No filter"
 #~ msgid "None"
 #~ msgstr "Kein Filter"
-
-#~ msgid "The user does not exist."
-#~ msgstr "Der Benutzer existiert nicht."
 
 #~ msgid "First name"
 #~ msgstr "Vorname"

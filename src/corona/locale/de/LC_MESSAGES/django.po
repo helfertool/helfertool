@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: 2021-11-13 21:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -62,7 +62,7 @@ msgstr "Schichten und Aufgaben"
 msgid "Coordinator"
 msgstr "Koordinator:in"
 
-#: corona/forms/data.py:24
+#: corona/forms/data.py:27
 msgid "You have to provide correct data."
 msgstr "Du musst korrekte Daten angeben."
 
@@ -290,11 +290,11 @@ msgstr ""
 msgid "Back"
 msgstr "Zurück"
 
-#: corona/views/cleanup.py:43
+#: corona/views/cleanup.py:47
 msgid "Contact tracing data deleted"
 msgstr "Daten zur Kontaktverfolgung wurden gelöscht"
 
-#: corona/views/data.py:83
+#: corona/views/data.py:85
 msgid "Corona contact tracing"
 msgstr "Corona Kontaktverfolgung"
 

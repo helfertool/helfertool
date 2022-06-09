@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,11 +38,11 @@ msgstr "Text"
 msgid "English text"
 msgstr "Englischer Text"
 
-#: news/forms/mail.py:54
+#: news/forms/mail.py:52
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
-#: news/forms/remove.py:9 news/forms/subscribe.py:13 news/models/person.py:39
+#: news/forms/remove.py:9 news/forms/subscribe.py:14 news/models/person.py:43
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -50,23 +50,23 @@ msgstr "E-Mail"
 msgid "Unknown e-mail address"
 msgstr "Unbekannte E-Mail Adresse"
 
-#: news/forms/subscribe.py:20
+#: news/forms/subscribe.py:21
 msgid "I agree with the data privacy statement."
 msgstr "Ich stimme der Datenschutzerklärung zu."
 
-#: news/forms/subscribe.py:21
+#: news/forms/subscribe.py:22
 msgid "Show"
 msgstr "Anzeigen"
 
-#: news/forms/subscribe.py:23
+#: news/forms/subscribe.py:24
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: news/models/person.py:49
+#: news/models/person.py:53
 msgid "Validation e-mail was confirmed (double opt-in)"
 msgstr "Bestätigungsmail wurde bestätigt (Double Opt-In)"
 
-#: news/models/person.py:59
+#: news/models/person.py:63
 msgid "Helper subscribed during registration for event"
 msgstr ""
 "Helfer:in hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
@@ -226,15 +226,15 @@ msgstr ""
 "Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
 "der Vergangenheit!"
 
-#: news/views/remove.py:32
+#: news/views/remove.py:33
 msgid "Recipient removed."
 msgstr "Empfänger:in entfernt."
 
-#: news/views/send.py:39
+#: news/views/send.py:40
 msgid "Mails are being sent now."
 msgstr "E-Mails werden jetzt verschickt."
 
-#: news/views/subscribe.py:47
+#: news/views/subscribe.py:48
 msgid "The link is not valid anymore. Please subscribe again."
 msgstr "Der Link ist nicht mehr gültig. Bitte trage dich erneut ein."
 

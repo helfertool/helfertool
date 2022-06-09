@@ -184,7 +184,7 @@ def merge_user(request, user_pk):
         form.merge()
 
         messages.success(
-            request, _("Merged user {} into {}".format(form.deleted_user_obj.username, remaining_user.username))
+            request, _("Merged user {} into {}").format(form.deleted_user_obj.username, remaining_user.username)
         )
 
         return redirect("account:list_users")

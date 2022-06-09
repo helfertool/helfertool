@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 21:35+0100\n"
+"POT-Creation-Date: 2022-06-09 21:49+0200\n"
 "PO-Revision-Date: 2021-06-09 21:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,37 +18,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: toollog/models.py:31 toollog/templates/toollog/event_audit_log.html:28
+#: toollog/models.py:30 toollog/templates/toollog/event_audit_log.html:28
 msgid "Timestamp"
 msgstr "Zeitstempel"
 
-#: toollog/models.py:36
+#: toollog/models.py:32
 msgid "Log level"
 msgstr "Log Level"
 
-#: toollog/models.py:41 toollog/templates/toollog/event_audit_log.html:31
+#: toollog/models.py:36 toollog/templates/toollog/event_audit_log.html:31
 msgid "Entry"
 msgstr "Eintrag"
 
-#: toollog/models.py:49
+#: toollog/models.py:44
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: toollog/models.py:57 toollog/templates/toollog/event_audit_log.html:34
+#: toollog/models.py:52 toollog/templates/toollog/event_audit_log.html:34
 #: toollog/templates/toollog/event_audit_log.html:65
 msgid "Helper"
 msgstr "Helfer:in"
 
-#: toollog/models.py:65 toollog/templates/toollog/event_audit_log.html:37
+#: toollog/models.py:60 toollog/templates/toollog/event_audit_log.html:37
 #: toollog/templates/toollog/event_audit_log.html:70
 msgid "User"
 msgstr "Benutzer:in"
 
-#: toollog/models.py:72
+#: toollog/models.py:67
 msgid "Extra data"
 msgstr "Extra Daten"
 
-#: toollog/models.py:78
+#: toollog/models.py:73
 msgid "Helfertool module"
 msgstr "Helfertool Modul"
 
