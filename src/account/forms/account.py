@@ -268,6 +268,16 @@ class MergeUserForm(forms.Form):
             self.add_error("deleted_user", _("User does not exist"))
 
     def merge(self):
+        # global permissions
+        if self.deleted_user_obj.is_superuser:
+            self._remaining_user.is_superuser = True
+            self._remaining_user.save()
+
+        for groupname in [settings.GROUP_ADDUSER, settings.GROUP_ADDEVENT, settings.GROUP_SENDNEWS]:
+            if self.deleted_user_obj.groups.filter(name=groupname).exists():
+                group, created = Group.objects.get_or_create(name=groupname)
+                self._remaining_user.groups.add(group)
+
         # registration -> EventAdminRoles
         for admin in EventAdminRoles.objects.filter(user=self.deleted_user_obj):
             try:
