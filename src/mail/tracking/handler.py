@@ -43,7 +43,7 @@ def _handle_registration(uuid_str, deliverynotification):
     # uuid is PK of helper
     try:
         helper = registration.models.Helper.objects.get(id=uuid_str)
-        helper.mail_failed = deliverynotification.error_text[:500]
+        helper.mail_failed = deliverynotification.error_text
         helper.save()
 
         logger.info(

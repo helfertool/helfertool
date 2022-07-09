@@ -1,5 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n django_bootstrap5 %}
+{% load i18n django_bootstrap5 icons %}
 
 {% block content %}
     <h1>{% trans "Mail:" %} {{ mail.subject }}</h1>
@@ -41,6 +41,18 @@
                                 <li>{{ tmp }}</li>
                             {% endfor %}
                         </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">{% trans "Mail delivery errors" %}</th>
+                    <td>
+                        {% if mail.failed_deliveries_exist or mail.failed %}
+                            <a href="{% url 'mail:show_errors' event.url_name mail.pk %}">
+                                {% trans "Show delivery errors" %}
+                            </a>
+                        {% else %}
+                            <span class="text-muted">{% trans "No delivery errors are known for now." %}</span>
+                        {% endif %}
                     </td>
                 </tr>
             </table>

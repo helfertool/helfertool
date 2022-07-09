@@ -1,0 +1,31 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 %}
+
+{% block content %}
+    <h1>{% trans "Mail delivery errors:" %} {{ mail.subject }}</h1>
+
+    {% if mail.failed %}
+        <div class="alert alert-danger" role="alert">
+            {% trans "This mail was not sent successfully." %}
+        </div>
+    {% elif mail.failed_deliveries_exist %}
+        <ul class="list-group">
+            {% for error in mail.failed_deliveries %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-12 col-md-3 py-1 text-break">
+                        <a href="{% url "view_helper" event.url_name error.helper.pk %}">
+                            {{ error.helper }}
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-9 py-1">
+                        <code>{{ error.failed }}</code>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">{% trans "No delivery errors are known for now." %}</p>
+    {% endif %}
+{% endblock %}

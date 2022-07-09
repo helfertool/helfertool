@@ -7,7 +7,7 @@ class DeliveryNotification:
     def __init__(self, recipient, status, error_text, original_mail):
         self.recipient = recipient
         self.status = status
-        self.error_text = error_text
+        self.error_text = error_text[:500]  # limit length to prevent db errors later
         self.original_mail = original_mail
 
     def __str__(self):

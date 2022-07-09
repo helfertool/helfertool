@@ -67,6 +67,8 @@ class SentMail(models.Model):
         blank=True,
     )
 
+    # sending the mail failed (= smtp errors)
+    # failures per recipient are tracked via MailDelivery
     failed = models.BooleanField(
         default=False,
     )
@@ -130,6 +132,14 @@ class SentMail(models.Model):
             tmp.append(str(shift))
 
         return tmp
+
+    @property
+    def failed_deliveries(self):
+        return self.maildelivery_set.filter(failed__isnull=False)
+
+    @property
+    def failed_deliveries_exist(self):
+        return self.failed_deliveries.exists()
 
 
 class MailDelivery(models.Model):
