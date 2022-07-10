@@ -35,7 +35,7 @@
                             {% icon "search" %}
                             {% trans "View" %}
                         </a>
-                        {% if mail.failed_deliveries_exist %}
+                        {% if mail.failed_deliveries_exist and not event.archived %}
                             <br/>
                             <a href="{% url 'mail:show_errors' event.url_name mail.pk %}">
                                 {% icon "exclamation" %}
