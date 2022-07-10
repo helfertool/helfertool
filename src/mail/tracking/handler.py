@@ -1,11 +1,33 @@
 import registration
 import mail
+import news
 
 from .ids import parse_tracking, MAIL_EVENT, MAIL_NEWS, MAIL_NEWS_CONFIRM, MAIL_REGISTRATION
 
 import logging
 
 logger = logging.getLogger("helfertool.mail")
+
+
+def _handle_registration(uuid_str, deliverynotification):
+    # uuid is PK of helper
+    try:
+        helper = registration.models.Helper.objects.get(id=uuid_str)
+        helper.mail_failed = deliverynotification.error_text
+        helper.save()
+
+        logger.info(
+            "mail handled",
+            extra={
+                "type": MAIL_REGISTRATION,
+                "event": helper.event,
+                "helper": helper,
+            },
+        )
+
+        return True
+    except registration.models.Helper.DoesNotExist:
+        return False
 
 
 def _handle_event(uuid_str, deliverynotification):
@@ -39,32 +61,35 @@ def _handle_event(uuid_str, deliverynotification):
     return True
 
 
-def _handle_registration(uuid_str, deliverynotification):
-    # uuid is PK of helper
+def _handle_news(uuid_str, deliverynotification, logging_type=MAIL_NEWS):
+    # uuid is token of news -> Person
     try:
-        helper = registration.models.Helper.objects.get(id=uuid_str)
-        helper.mail_failed = deliverynotification.error_text
-        helper.save()
+        person = news.models.Person.objects.get(token=uuid_str)
+        person.mail_failed = deliverynotification.error_text
+        person.save()
 
         logger.info(
             "mail handled",
             extra={
-                "type": MAIL_REGISTRATION,
-                "event": helper.event,
-                "helper": helper,
+                "type": logging_type,
+                "email": person.email,
             },
         )
 
         return True
-    except registration.models.Helper.DoesNotExist:
+    except news.models.Person.DoesNotExist:
         return False
 
 
+def _handle_news_confirm(uuid_str, deliverynotification):
+    return _handle_news(uuid_str, deliverynotification, logging_type=MAIL_NEWS_CONFIRM)
+
+
 _handlers = {
-    MAIL_EVENT: _handle_event,
-    MAIL_NEWS: None,
-    MAIL_NEWS_CONFIRM: None,
     MAIL_REGISTRATION: _handle_registration,
+    MAIL_EVENT: _handle_event,
+    MAIL_NEWS: _handle_news,
+    MAIL_NEWS_CONFIRM: _handle_news_confirm,
 }
 
 

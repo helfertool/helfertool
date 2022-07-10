@@ -23,6 +23,10 @@ def send_news_mails(first_language, append_english, subject, text, text_en, unsu
 
     prev_language = translation.get_language()
 
+    # before sending the newsletter, we clear the mail_failed field, so only the recent failtures are tracked
+    Person.objects.filter(validated=True).update(mail_failed=None)
+
+    # send newsletter in batches
     count = 0
     for person in Person.objects.filter(validated=True):
         # build mail text

@@ -26,6 +26,7 @@ class Person(models.Model):
         :validated: Mail address validated (GDPR double opt-in)
         :timestamp_validated: Timestamp of mail validation (GDPR double opt-in)
         :withevent: Subscription during event registration or separately? (for statistics)
+        :mail_failed: Error message if mail delivery failed (cleared every time a newsletter is sent)
     """
 
     class Meta:
@@ -61,6 +62,13 @@ class Person(models.Model):
     withevent = models.BooleanField(
         default=True,
         verbose_name=_("Helper subscribed during registration for event"),
+    )
+
+    mail_failed = models.CharField(
+        blank=True,
+        null=True,
+        default=None,
+        max_length=512,
     )
 
     def __str__(self):
