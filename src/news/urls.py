@@ -8,6 +8,7 @@ urlpatterns = [
     # management
     url(r"^manage/news/$", views.send, name="send"),
     url(r"^manage/news/remove/$", views.remove, name="remove"),
+    url(r"^manage/news/failures/$", views.failures, name="failures"),
     # subscribe and unsubcribe
     url(r"^subscribe/$", views.subscribe, name="subscribe"),
     url(r"^subscribe/done/$", TemplateView.as_view(template_name="news/subscribe_done.html"), name="subscribe_done"),

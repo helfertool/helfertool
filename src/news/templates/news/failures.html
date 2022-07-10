@@ -1,0 +1,43 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons static %}
+
+{% block content %}
+    <h1>{% trans "Newsletter delivery failures" %}</h1>
+
+    <div class="alert alert-secondary" role="alert">
+        {% blocktrans trimmed %}
+            The delivery failures are cleared when sending a newsletter.
+            So after sending a newsletter, it takes a bit until the list is filled again.
+        {% endblocktrans %}
+    </div>
+
+    {% if form.visible_fields %}
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <ul class="list-group mt-4 mb-4">
+                {% for field in form.visible_fields %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-4 col-lg-3 col-xl-2">
+                            {% bootstrap_field field show_label=False show_help=False wrapper_class='' %}
+                        </div>
+                        <div class="col-8 col-lg-4 col-xl-4 text-break">
+                            {{ field.label }}
+                        </div>
+                        <div class="col-12 col-lg-5 col-xl-6 text-break">
+                            <code>{{ field.help_text }}</code>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% bootstrap_form_errors form %}
+
+            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>
+        </form>
+    {% else %}
+        <p class="text-muted">{% trans "No delivery errors are known for now." %}</p>
+    {% endif %}
+{% endblock %}
