@@ -513,7 +513,7 @@ def resend_mail(request, event_url_name, helper_pk):
             },
         )
 
-        if helper.send_mail(request, internal=False):
+        if helper.send_mail(request, internal=False, language=form.cleaned_data["language"]):
             messages.success(request, _("Confirmation mail was sent"))
 
             # clear error message about undelivered mail

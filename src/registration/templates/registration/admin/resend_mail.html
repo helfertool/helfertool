@@ -4,13 +4,19 @@
 {% block content %}
     <h1>{{ helper.full_name }}</h1>
 
-    <div class="alert alert-info">
-        {% trans "Send confirmation mail again?" %}
-    </div>
-
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form %}
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="alert alert-info">
+                    {% trans "Send confirmation mail again?" %}
+                </div>
+
+                {% bootstrap_field form.language layout="floating" %}
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-outline-primary">{% icon "paper-plane" %} {% trans "Send" %}</button>
     </form>
 {% endblock %}

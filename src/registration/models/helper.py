@@ -5,6 +5,7 @@ from django.db import models
 from django.db.models.signals import m2m_changed, post_save
 from django.dispatch import receiver
 from django.template.loader import get_template
+from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from badges.models import Badge
@@ -223,7 +224,7 @@ class Helper(models.Model):
 
         return False
 
-    def send_mail(self, request, internal):
+    def send_mail(self, request, internal, language=None):
         """Send a confirmation e-mail to the registered helper.
 
         This e-mail contains a list of the shifts, the helper registered for.
@@ -240,6 +241,10 @@ class Helper(models.Model):
         registered_url = request.build_absolute_uri(reverse("registered", args=[event.url_name, self.id]))
 
         # generate subject and text from templates
+        if language:
+            prev_language = translation.get_language()
+            translation.activate(language)
+
         subject_template = get_template("registration/mail/subject.txt")
         subject = subject_template.render({"event": event}).rstrip()
 
@@ -258,6 +263,9 @@ class Helper(models.Model):
                 "contact_mail": settings.CONTACT_MAIL,
             }
         )
+
+        if language:
+            translation.activate(prev_language)
 
         # header for mail tracking
         tracking_header = new_tracking_registration(self)
