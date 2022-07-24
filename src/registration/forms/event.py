@@ -355,7 +355,7 @@ class EventMoveForm(forms.ModelForm):
             # change date of every shift
             for job in self.instance.job_set.all():
                 for shift in job.shift_set.all():
-                    shift.move_date(new_date)
+                    shift.move_date(diff_days)
                     shift.save()
 
             # change event date
