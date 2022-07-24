@@ -182,13 +182,12 @@ class Shift(models.Model):
 
             # if shift is copied to new event, move begin and end time according to diff in event dates
             if self.job.event != new_job.event:
-                diff = new_job.event.date - self.job.event.date
-                new_shift.begin += diff
-                new_shift.end += diff
+                diff_days = new_job.event.date - self.job.event.date
+                new_shift.move_date_by_days(diff_days)
 
         # maybe just the date is changed
         if new_date:
-            new_shift.move_date(new_date)
+            new_shift.move_date_to(new_date)
 
         # now save that
         new_shift.save()
@@ -202,7 +201,8 @@ class Shift(models.Model):
 
         return new_shift
 
-    def move_date(self, diff_days):
+    def move_date_by_days(self, diff_days):
+        """Move begin and end date by number of days."""
         # current begin and end in local time
         old_begin_localtime = localtime(self.begin)
         old_end_localtime = localtime(self.end)
@@ -217,6 +217,12 @@ class Shift(models.Model):
 
         self.begin = datetime.combine(new_begin_date, begin_time)
         self.end = datetime.combine(new_end_date, end_time)
+
+    def move_date_to(self, new_date):
+        """Move begin and end date to a new date.
+        The new date is set as begin date and the end date is moved accordingly."""
+        diff_days = new_date - localtime(self.begin).date()
+        self.move_date_by_days(diff_days)
 
 
 @receiver(pre_delete, sender=Shift)
