@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 21:49+0200\n"
+"POT-Creation-Date: 2022-07-25 19:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,38 +16,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: registration/export/excel.py:96 registration/models/helper.py:110
+#: registration/export/excel.py:96 registration/models/helper.py:111
 #: registration/templates/registration/partials/helpers_table.html:30
 msgid "First name"
 msgstr "Vorname"
 
-#: registration/export/excel.py:97 registration/models/helper.py:115
+#: registration/export/excel.py:97 registration/models/helper.py:116
 #: registration/templates/registration/partials/helpers_table.html:33
 msgid "Surname"
 msgstr "Nachname"
 
 #: registration/export/excel.py:98 registration/models/event.py:159
-#: registration/models/helper.py:119
+#: registration/models/helper.py:120
 #: registration/templates/registration/partials/helper_view_data.html:21
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: registration/export/excel.py:102 registration/models/helper.py:124
+#: registration/export/excel.py:102 registration/models/helper.py:125
 #: registration/templates/registration/partials/helper_view_data.html:28
 msgid "Mobile phone"
 msgstr "Handynummer"
 
 #: registration/export/excel.py:106 registration/export/pdf.py:51
-#: registration/models/helper.py:142
+#: registration/models/helper.py:143
 #: registration/templates/registration/partials/helper_view_data.html:42
 #: registration/templates/registration/partials/helpers_table.html:38
 #: registration/templates/registration/partials/helpers_table.html:82
 msgid "T-shirt"
 msgstr "T-Shirt"
 
-#: registration/export/excel.py:110 registration/models/helper.py:149
+#: registration/export/excel.py:110 registration/models/helper.py:150
 #: registration/templates/registration/partials/helper_view_data.html:56
 #: registration/templates/registration/partials/helpers_table.html:44
 #: registration/templates/registration/partials/helpers_table.html:89
@@ -62,7 +62,7 @@ msgid "Food handling"
 msgstr "Gesundheits<wbr>belehrung"
 
 #: registration/export/excel.py:117 registration/export/pdf.py:53
-#: registration/models/helper.py:130
+#: registration/models/helper.py:131
 #: registration/templates/registration/partials/helper_view_data.html:62
 #: registration/templates/registration/partials/helpers_table.html:56
 #: registration/templates/registration/partials/helpers_table.html:102
@@ -113,30 +113,34 @@ msgstr "Neues Datum"
 msgid "Months"
 msgstr "Monate"
 
-#: registration/forms/helper.py:85
+#: registration/forms/helper.py:86
 msgid "If you do not enter new data, the old one is kept."
 msgstr "Wenn du keine neuen Daten eingibst, werden die alten beibehalten."
 
-#: registration/forms/helper.py:161
+#: registration/forms/helper.py:162
 msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
 
-#: registration/forms/helper.py:165
+#: registration/forms/helper.py:166
 msgid "This shift if already full: {}"
 msgstr "Die Schicht ist bereits voll: {}"
 
-#: registration/forms/helper.py:239
+#: registration/forms/helper.py:240
 msgid "No shift selected"
 msgstr "Keine Schicht ausgewählt"
 
-#: registration/forms/helper.py:245
+#: registration/forms/helper.py:246
 #, python-format
 msgid "You are not allowed to delete a helper from the job \"%(jobname)s\""
 msgstr "Du darfst keine Helfer:in aus der Aufgabe \"%(jobname)s\" löschen"
 
-#: registration/forms/helper.py:276
+#: registration/forms/helper.py:277
 msgid "Search term"
 msgstr "Suchbegriff"
+
+#: registration/forms/helper.py:348
+msgid "Language"
+msgstr "Sprache"
 
 #: registration/forms/job.py:58
 #, python-format
@@ -513,76 +517,76 @@ msgstr "Version"
 msgid "Data"
 msgstr "Daten"
 
-#: registration/models/helper.py:59
+#: registration/models/helper.py:60
 msgid "I never got an instruction"
 msgstr "Einweisung noch nie erhalten"
 
-#: registration/models/helper.py:60
+#: registration/models/helper.py:61
 msgid "I have a valid instruction"
 msgstr "Einweisung gültig"
 
-#: registration/models/helper.py:61
+#: registration/models/helper.py:62
 msgid "I got a instruction by a doctor, it must be refreshed"
 msgstr "Einweisung von Arzt erhalten, Auffrischung nötig"
 
-#: registration/models/helper.py:65
+#: registration/models/helper.py:66
 msgid "No"
 msgstr "Nein"
 
-#: registration/models/helper.py:66
+#: registration/models/helper.py:67
 msgid "Valid"
 msgstr "Gültig"
 
-#: registration/models/helper.py:67
+#: registration/models/helper.py:68
 msgid "Refreshment"
 msgstr "Auffrischung"
 
-#: registration/models/helper.py:77 registration/models/helper.py:85
+#: registration/models/helper.py:78 registration/models/helper.py:86
 msgid "No preference"
 msgstr "Keine Präferenz"
 
 #. Translators: adjective
-#: registration/models/helper.py:79 registration/models/helper.py:87
+#: registration/models/helper.py:80 registration/models/helper.py:88
 msgid "Vegetarian"
 msgstr "Vegetarisch"
 
-#: registration/models/helper.py:80 registration/models/helper.py:88
+#: registration/models/helper.py:81 registration/models/helper.py:89
 msgid "Vegan"
 msgstr "Vegan"
 
-#: registration/models/helper.py:81
+#: registration/models/helper.py:82
 msgid "Other (please specify in comment)"
 msgstr "Anderes (bitte im Kommentar angeben)"
 
-#: registration/models/helper.py:89
+#: registration/models/helper.py:90
 msgid "Other"
 msgstr "Anderes"
 
-#: registration/models/helper.py:135
+#: registration/models/helper.py:136
 #: registration/templates/registration/admin/view_helper.html:137
 #: registration/templates/registration/admin/view_helper.html:150
 #: registration/templates/registration/partials/helper_view_data.html:68
 msgid "Internal comment"
 msgstr "Interner Kommentar"
 
-#: registration/models/helper.py:150
+#: registration/models/helper.py:151
 msgid "This helps us estimating the food for our helpers."
 msgstr "Dies hilft uns, das Helferessen abzuschätzen."
 
-#: registration/models/helper.py:157
+#: registration/models/helper.py:158
 #: registration/templates/registration/partials/helper_view_data.html:49
 msgid "Instruction for the handling of food"
 msgstr "Belehrung für Umgang mit Lebensmitteln"
 
-#: registration/models/helper.py:160
+#: registration/models/helper.py:161
 msgid "Registration time for the helper"
 msgstr "Anmeldezeit der Helfer:in"
 
-#: registration/models/helper.py:164
+#: registration/models/helper.py:165
 msgid "E-Mail address was confirmed"
 msgstr "E-Mail Adresse wurde bestätigt"
 
-#: registration/models/helper.py:186
+#: registration/models/helper.py:187
 msgid "I agree with the data privacy statement."
 msgstr "Ich stimme der Datenschutzerklärung zu."
 
@@ -1413,11 +1417,11 @@ msgstr "(%(time)s alt)"
 msgid "No events found."
 msgstr "Keine Veranstaltungen gefunden."
 
-#: registration/templates/registration/admin/resend_mail.html:8
+#: registration/templates/registration/admin/resend_mail.html:13
 msgid "Send confirmation mail again?"
 msgstr "Bestätigungsmail nochmal senden?"
 
-#: registration/templates/registration/admin/resend_mail.html:14
+#: registration/templates/registration/admin/resend_mail.html:20
 msgid "Send"
 msgstr "Senden"
 
@@ -1479,8 +1483,9 @@ msgid "Helper was absent for some shifts (see below)"
 msgstr "Helfer:in war bei manchen Schichten abwesend (siehe unten)"
 
 #: registration/templates/registration/admin/view_helper.html:22
-msgid "Mail delivery failed"
-msgstr "E-Mail Zustellung fehlgeschlagen"
+#: registration/templates/registration/partials/helpers_table.html:132
+msgid "Confirmation mail not delivered"
+msgstr "Bestätigungsmail wurde nicht zugestellt"
 
 #: registration/templates/registration/admin/view_helper.html:23
 msgid "Details"
@@ -1736,10 +1741,6 @@ msgstr "Badge Barcode"
 msgid "View"
 msgstr "Anzeigen"
 
-#: registration/templates/registration/partials/helpers_table.html:132
-msgid "Mail not delivered"
-msgstr "E-Mail nicht zugestellt"
-
 #: registration/templates/registration/partials/helpers_table.html:134
 msgid "Mail not validated"
 msgstr "E-Mail nicht validiert"
@@ -1893,6 +1894,12 @@ msgstr ""
 #: registration/views/shift.py:69
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Mail delivery failed"
+#~ msgstr "E-Mail Zustellung fehlgeschlagen"
+
+#~ msgid "Mail not delivered"
+#~ msgstr "E-Mail nicht zugestellt"
 
 #~ msgid "Admins for this job"
 #~ msgstr "Admins für diese Aufgabe"

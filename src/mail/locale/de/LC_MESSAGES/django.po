@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 21:49+0200\n"
+"POT-Creation-Date: 2022-07-25 19:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.1.1\n"
 
-#: mail/forms.py:44 mail/models.py:117
+#: mail/forms.py:44 mail/models.py:119
 msgid "All helpers and coordinators"
 msgstr "Alle Helfer:innen und Koordinator:innen"
 
-#: mail/forms.py:45 mail/models.py:121
+#: mail/forms.py:45 mail/models.py:123
 msgid "All coordinators"
 msgstr "Alle Koordinator:innen"
 
@@ -30,11 +30,11 @@ msgstr "Alle Koordinator:innen"
 msgid "General"
 msgstr "Allgemein"
 
-#: mail/forms.py:54 mail/models.py:124
+#: mail/forms.py:54 mail/models.py:126
 msgid "{}, Helpers and coordinators"
 msgstr "{}, Helfer:innen und Koordinator:innen"
 
-#: mail/forms.py:59 mail/models.py:127
+#: mail/forms.py:59 mail/models.py:129
 msgid "{}, Coordinators"
 msgstr "{}, Koordinator:innen"
 
@@ -72,7 +72,7 @@ msgstr "Text"
 
 #: mail/forms.py:117
 msgid "You must specify a custom reply to address."
-msgstr "Du musst eine andere Antwortadresse angeben"
+msgstr "Du musst eine andere Antwortadresse angeben."
 
 #: mail/forms.py:167
 msgid "There are no helpers or coordinators that would receive this mail."
@@ -88,7 +88,11 @@ msgstr "Alle E-Mails"
 msgid "View"
 msgstr "Anzeigen"
 
-#: mail/templates/mail/list_mails.html:44
+#: mail/templates/mail/list_mails.html:42
+msgid "Delivery failures"
+msgstr "Fehler bei Zustellung"
+
+#: mail/templates/mail/list_mails.html:51
 msgid "No mails were sent (or you are not allowed to see these mails)."
 msgstr "Es wurden keine E-Mails verschickt (oder du kannst diese nicht sehen)."
 
@@ -105,6 +109,7 @@ msgid "Mail:"
 msgstr "E-Mail:"
 
 #: mail/templates/mail/show_mail.html:9
+#: mail/templates/mail/show_mail_errors.html:9
 msgid "This mail was not sent successfully."
 msgstr "Diese E-Mail konnte nicht erfolgreich verschickt werden."
 
@@ -127,6 +132,23 @@ msgstr "Absender Adresse"
 #: mail/templates/mail/show_mail.html:37
 msgid "Receiver"
 msgstr "Empfänger:innen"
+
+#: mail/templates/mail/show_mail.html:48
+msgid "Mail delivery failures"
+msgstr "Fehler bei E-Mail Zustellung"
+
+#: mail/templates/mail/show_mail.html:52
+msgid "Show delivery failures"
+msgstr "Fehler bei Zustellung anzeigen"
+
+#: mail/templates/mail/show_mail.html:55
+#: mail/templates/mail/show_mail_errors.html:29
+msgid "No delivery failures are known for now."
+msgstr "Es sind bisher keine Fehler bei der Zustellung bekannt."
+
+#: mail/templates/mail/show_mail_errors.html:5
+msgid "Mail delivery failures:"
+msgstr "Fehler bei E-Mail Zustellung:"
 
 #: mail/views/send_mail.py:37
 msgid "Mail was sent successfully"

@@ -2,7 +2,7 @@
 {% load i18n django_bootstrap5 %}
 
 {% block content %}
-    <h1>{% trans "Mail delivery errors:" %} {{ mail.subject }}</h1>
+    <h1>{% trans "Mail delivery failures:" %} {{ mail.subject }}</h1>
 
     {% if mail.failed %}
         <div class="alert alert-danger" role="alert">
@@ -26,6 +26,6 @@
             {% endfor %}
         </ul>
     {% else %}
-        <p class="text-muted">{% trans "No delivery errors are known for now." %}</p>
+        <p class="text-muted">{% trans "No delivery failures are known for now." %}</p>
     {% endif %}
 {% endblock %}

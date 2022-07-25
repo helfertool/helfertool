@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-09 21:49+0200\n"
+"POT-Creation-Date: 2022-07-25 19:30+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: news/forms/failures.py:16 news/templates/news/remove.html:14
+msgid "Remove"
+msgstr "Entfernen"
+
+#: news/forms/failures.py:17
+msgid "Clear"
+msgstr "Zurücksetzen"
+
+#: news/forms/failures.py:18
+msgid "Skip"
+msgstr "Überspringen"
 
 #: news/forms/mail.py:21
 msgid "Language"
@@ -42,7 +54,7 @@ msgstr "Englischer Text"
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
-#: news/forms/remove.py:9 news/forms/subscribe.py:14 news/models/person.py:43
+#: news/forms/remove.py:9 news/forms/subscribe.py:14 news/models/person.py:44
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -62,14 +74,35 @@ msgstr "Anzeigen"
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
-#: news/models/person.py:53
+#: news/models/person.py:54
 msgid "Validation e-mail was confirmed (double opt-in)"
 msgstr "Bestätigungsmail wurde bestätigt (Double Opt-In)"
 
-#: news/models/person.py:63
+#: news/models/person.py:64
 msgid "Helper subscribed during registration for event"
 msgstr ""
 "Helfer:in hat sich während der Anmeldung zu einer Veranstaltung eingetragen"
+
+#: news/templates/news/failures.html:5
+msgid "Newsletter delivery failures"
+msgstr "Fehler bei Zustellung des Newsletters"
+
+#: news/templates/news/failures.html:8
+msgid ""
+"The delivery failures are cleared when sending a newsletter. So after "
+"sending a newsletter, it takes a bit until the list is filled again."
+msgstr ""
+"Die Zustellungsfehler werden beim Versand eines Newsletters gelöscht. Nach "
+"dem Versand eines Newsletters dauert es also ein wenig, bis die Liste wieder "
+"gefüllt ist."
+
+#: news/templates/news/failures.html:38
+msgid "Save"
+msgstr "Speichern"
+
+#: news/templates/news/failures.html:41
+msgid "No delivery failures are known for now."
+msgstr "Es sind bisher keine Fehler bei der Zustellung bekannt."
 
 #: news/templates/news/mail/newsletter_end.txt:2
 #, python-format
@@ -127,10 +160,6 @@ msgstr ""
 msgid "Remove recipient"
 msgstr "Empfänger:in entfernen"
 
-#: news/templates/news/remove.html:14
-msgid "Remove"
-msgstr "Entfernen"
-
 #: news/templates/news/send.html:5
 msgid "Send news"
 msgstr "Newsletter versenden"
@@ -187,7 +216,7 @@ msgid ""
 "clicking on the link in this mail."
 msgstr ""
 "Wir haben dir eine E-Mail zur Bestätigung gesendet. Bitte schließe deine "
-"Anmeldung ab, indem du auf den Link in der E-Mail klickst. "
+"Anmeldung ab, indem du auf den Link in der E-Mail klickst."
 
 #: news/templates/news/subscribe_done.html:9
 msgid ""
@@ -225,6 +254,10 @@ msgid ""
 msgstr ""
 "Du wirst keine weiteren E-Mail erhalten. Danke für deine Unterstützung in "
 "der Vergangenheit!"
+
+#: news/views/failures.py:34
+msgid "Newsletter recipients were updated"
+msgstr "Newsletter Empfänger:innen wurden aktualisiert"
 
 #: news/views/remove.py:33
 msgid "Recipient removed."
