@@ -113,9 +113,15 @@ class EditUserForm(forms.ModelForm):
 
         super(EditUserForm, self).__init__(*args, **kwargs)
 
-        # set required fields
+        # set attributes for name/email fields
+        # if user is local, the fields are required
+        # if users is from external idp, the fields cannot be changed
         for f in ("first_name", "last_name", "email"):
-            self.fields[f].required = True
+            if self.instance.has_usable_password():
+                self.fields[f].required = True
+            else:
+                self.fields[f].help_text = _("Managed by external identity provider")
+                self.fields[f].disabled = True
 
         # adjust labels of active and superuser flags
         self._active_initial = self.instance.is_active
