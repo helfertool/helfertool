@@ -39,7 +39,7 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     def verify_claims(self, claims):
         verified = super(CustomOIDCAuthenticationBackend, self).verify_claims(claims)
 
-        # we require the given_name and family_name
+        # we require the given_name and family_name, email is already checked by verify_claims
         if "given_name" not in claims or "family_name" not in claims:
             return False
 
@@ -52,6 +52,16 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
 
         return verified and is_active
 
+    # match users based on username field
+    # default is email field, but it is not unique which can result in issues
+    # we set username = email, so finally its the email address, but stored in another field
+    def filter_users_by_claims(self, claims):
+        email = claims.get("email")
+        if not email:
+            return self.UserModel.objects.none()
+
+        return self.UserModel.objects.filter(username__exact=generate_username(email))
+
     # called on first login when no user object exists
     def create_user(self, claims):
         user = super(CustomOIDCAuthenticationBackend, self).create_user(claims)
@@ -61,9 +71,10 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
 
     # called on login when the user already exists, just update all attributes
     def update_user(self, user, claims):
-        # name
+        # name + email
         user.first_name = claims.get("given_name")
         user.last_name = claims.get("family_name")
+        user.email = claims.get("email")
 
         # check if login should be restricted (if not, login is allowed)
         if settings.OIDC_CUSTOM_CLAIM_LOGIN:
