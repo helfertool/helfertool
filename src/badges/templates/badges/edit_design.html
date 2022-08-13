@@ -35,9 +35,17 @@
         <div class="row mb-3">
             <div class="col-12 col-md-6">
                 {{ form.bg_front.label_tag }} {{ form.bg_front }}
+                <div class="text-muted">{{ form.bg_front.help_text }}</div>
+                {% for text in form.bg_front.errors %}
+                    <div class="text-danger">{{ text }}</div>
+                {% endfor %}
             </div>
             <div class="col-12 col-md-6">
                 {{ form.bg_back.label_tag }} {{ form.bg_back }}
+                <div class="text-muted">{{ form.bg_back.help_text }}</div>
+                {% for text in form.bg_back.errors %}
+                    <div class="text-danger">{{ text }}</div>
+                {% endfor %}
             </div>
         </div>
 

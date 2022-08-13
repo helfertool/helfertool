@@ -51,6 +51,10 @@
         <div class="row mb-3">
             <div class="col-12 col-md-6">
                 {{ form.photo.label_tag }} {{ form.photo }}
+                <div class="text-muted">{{ form.photo.help_text }}</div>
+                {% for text in form.photo.errors %}
+                    <div class="text-danger">{{ text }}</div>
+                {% endfor %}
             </div>
         </div>
 
