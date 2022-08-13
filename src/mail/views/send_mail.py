@@ -45,7 +45,11 @@ def send_mail(request, event_url_name):
                 },
             )
         except (SMTPException, ConnectionError, MailFormError) as e:
-            messages.error(request, _("Sending mails failed"))
+            if isinstance(e, MailFormError):
+                # exceptions of type MailFormError are displayed to the user, other exceptions not
+                messages.error(request, e)
+            else:
+                messages.error(request, _("Sending mails failed"))
 
             logger.error(
                 "mail error",
