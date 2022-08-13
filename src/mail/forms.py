@@ -13,6 +13,8 @@ from registration.permissions import has_access, ACCESS_MAILS_SEND
 
 
 class MailFormError(Exception):
+    """Error during mail sending. The message will be displayed to the user, so do not include sensitive data."""
+
     pass
 
 
@@ -114,7 +116,11 @@ class MailForm(forms.Form):
         cleaned_data = super(MailForm, self).clean()
 
         if cleaned_data.get("reply_to") == "-" and not cleaned_data.get("custom_reply_to"):
-            raise forms.ValidationError(_("You must specify a custom reply " "to address."))
+            raise forms.ValidationError(_("You must specify a custom reply to address."))
+
+        # check if there are recipients (will be checked again in send_mail, but we can provide better feedback here)
+        if not self._get_helpers():
+            raise forms.ValidationError(_("There are no helpers or coordinators that would receive this mail."))
 
     def send_mail(self):
         # basic parameters
@@ -164,8 +170,9 @@ class MailForm(forms.Form):
         if not receiver_list:
             sentmail.failed = True
             sentmail.save()
-            raise MailFormError(_("There are no helpers or coordinators that " "would receive this mail."))
+            raise MailFormError(_("There are no helpers or coordinators that would receive this mail."))
 
+        # send mail now
         mail = EmailMessage(
             subject,
             text,
@@ -188,32 +195,42 @@ class MailForm(forms.Form):
             sentmail.save()
             raise
 
-    def _get_helpers(self, sentmail):
+    def _get_helpers(self, sentmail=None):
+        """Get the helpers that would receive the mail.
+
+        If `sentmail` if provided the `SentMail` object is updated to contain this info."""
         receiver_list = self.cleaned_data.get("receiver")
 
         tmp = []
 
         for receiver in receiver_list:
+            # all helpers and coordinators - special case: we can abort now
             if receiver == "all":
-                sentmail.all_helpers_and_coordinators = True
+                if sentmail:
+                    sentmail.all_helpers_and_coordinators = True
                 return self.event.helper_set.distinct()
+            # all coordinators
             elif receiver == "all-coords":
-                sentmail.all_coordinators = True
                 tmp.extend(self.event.all_coordinators)
+                if sentmail:
+                    sentmail.all_coordinators = True
             # helpers and coordinators for job
             elif receiver in self.jobs_all:
                 job_obj = self.jobs_all[receiver]
-                sentmail.jobs_all.add(job_obj)
                 tmp.extend(job_obj.helpers_and_coordinators())
+                if sentmail:
+                    sentmail.jobs_all.add(job_obj)
             # only coordinators for job
             elif receiver in self.jobs_coordinators:
                 job_obj = self.jobs_coordinators[receiver]
-                sentmail.jobs_only_coordinators.add(job_obj)
                 tmp.extend(job_obj.coordinators.all())
+                if sentmail:
+                    sentmail.jobs_only_coordinators.add(job_obj)
             # single shifts
             elif receiver in self.shifts:
                 shift_obj = self.shifts[receiver]
-                sentmail.shifts.add(shift_obj)
                 tmp.extend(shift_obj.helper_set.all())
+                if sentmail:
+                    sentmail.shifts.add(shift_obj)
 
         return tmp
