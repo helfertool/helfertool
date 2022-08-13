@@ -118,12 +118,14 @@
         <div class="row mb-3">
             <div class="col-12 col-md-6">
                 {{ form.logo.label_tag }} {{ form.logo }}
+                <div class="text-muted">{{ form.logo.help_text }}</div>
                 {% for text in form.logo.errors %}
                     <div class="text-danger">{{ text }}</div>
                 {% endfor %}
             </div>
             <div class="col-12 col-md-6">
                 {{ form.logo_social.label_tag }} {{ form.logo_social }}
+                <div class="text-muted">{{ form.logo_social.help_text }}</div>
                 {% for text in form.logo_social.errors %}
                     <div class="text-danger">{{ text }}</div>
                 {% endfor %}
