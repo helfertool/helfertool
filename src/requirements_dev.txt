@@ -1,5 +1,8 @@
+# packages that we downgrade (for now)
 pylint<2.15.0
-pylint-django
-pylint-celery
-bump2version
-pre-commit
+
+# packages pinned to compatible version
+pylint-django~=2.5
+pylint-celery~=0.3
+bump2version~=1.0
+pre-commit~=2.20
