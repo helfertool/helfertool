@@ -9,7 +9,7 @@
             <div class="title">{% trans "People" %}</div>
 
             <canvas class="chart" data-url="{% url 'statistic:chart_helpers' event.url_name %}" data-empty="helpers_empty"></canvas>
-            <div id="helpers_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
+            <div id="helpers_empty" class="placeholdertext d-none">{% trans "There are no helpers." %}</div>
 
             {% if num_people %}
                 <div class="details">{% trans "Total number of people" %}: {{ num_people }}</div>
@@ -20,7 +20,7 @@
             <div class="title">{% trans "Shifts" %}</div>
 
             <canvas class="chart" data-url="{% url 'statistic:chart_shifts' event.url_name %}" data-empty="shifts_empty"></canvas>
-            <div id="shifts_empty" class="placeholder d-none">{% trans "There are no shifts." %}</div>
+            <div id="shifts_empty" class="placeholdertext d-none">{% trans "There are no shifts." %}</div>
 
             {% if num_shift_slots %}
                 <div class="details">{% trans "Total number of shift slots" %}: {{ num_shift_slots }}</div>
@@ -32,7 +32,7 @@
             <div class="title">{% trans "Nutrition" %}</div>
 
             <canvas class="chart" data-url="{% url 'statistic:chart_nutrition' event.url_name %}" data-empty="nutrition_empty"></canvas>
-            <div id="nutrition_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
+            <div id="nutrition_empty" class="placeholdertext d-none">{% trans "There are no helpers." %}</div>
         </div>
         {% endif %}
     </div>
@@ -42,7 +42,7 @@
             <div class="title">{% trans "Timeline of registrations" %}</div>
             <div class="timeline-wrapper">
                 <canvas class="chart" data-url="{% url 'statistic:chart_timeline' event.url_name %}" data-empty="overview_empty"></canvas>
-                <div id="overview_empty" class="placeholder d-none">{% trans "There are no helpers." %}</div>
+                <div id="overview_empty" class="placeholdertext d-none">{% trans "There are no helpers." %}</div>
             </div>
         </div>
     </div>
