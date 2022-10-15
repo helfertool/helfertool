@@ -276,7 +276,9 @@ class Event(models.Model):
         # the shirt sizes of the helpers must be selected in shirt_sizes
         # this means that it is not possible to disable a size as long one
         # helper has selected this size
-        if self.ask_shirt:
+
+        # if PK is not set (=new event), the helper_set query fails
+        if self.ask_shirt and self.pk:
             not_removable = []
 
             new_choices = self.get_shirt_choices()
