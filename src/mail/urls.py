@@ -1,14 +1,14 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = "mail"
 urlpatterns = [
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/mail/$", views.send_mail, name="send"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/mail/list/$", views.list_mails, name="list"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/mail/(?P<mail_pk>[0-9]+)/$", views.show_mail, name="show"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/mail/(?P<mail_pk>[0-9]+)/errors/$",
+    path("<slug:event_url_name>/mail/", views.send_mail, name="send"),
+    path("<slug:event_url_name>/mail/list/", views.list_mails, name="list"),
+    path("<slug:event_url_name>/mail/<int:mail_pk>/", views.show_mail, name="show"),
+    path(
+        "<slug:event_url_name>/mail/<int:mail_pk>/errors/",
         views.show_mail_errors,
         name="show_errors",
     ),

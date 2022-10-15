@@ -1,21 +1,21 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = "corona"
 urlpatterns = [
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/corona/settings/$", views.settings, name="settings"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/corona/cleanup/$", views.cleanup, name="cleanup"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/corona/data/$", views.data, name="data"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/corona/export/$", views.export, name="export"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/corona/missing/$", views.missing, name="missing"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/corona/$",
+    path("<slug:event_url_name>/corona/settings/", views.settings, name="settings"),
+    path("<slug:event_url_name>/corona/cleanup/", views.cleanup, name="cleanup"),
+    path("<slug:event_url_name>/corona/data/", views.data, name="data"),
+    path("<slug:event_url_name>/corona/export/", views.export, name="export"),
+    path("<slug:event_url_name>/corona/missing/", views.missing, name="missing"),
+    path(
+        "<slug:event_url_name>/helpers/<uuid:helper_pk>/corona/",
         views.view_helper,
         name="view_helper",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/corona/edit/$",
+    path(
+        "<slug:event_url_name>/helpers/<uuid:helper_pk>/corona/edit/",
         views.edit_helper,
         name="edit_helper",
     ),

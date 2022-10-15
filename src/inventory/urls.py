@@ -1,42 +1,44 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = "inventory"
 urlpatterns = [
     # pages for single event
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/settings/$", views.event_settings, name="event_settings"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/register/$", views.register_item, name="register"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/register/" "(?P<item_pk>[0-9]+)/$",
+    path("<slug:event_url_name>/inventory/settings/", views.event_settings, name="event_settings"),
+    path("<slug:event_url_name>/inventory/register/", views.register_item, name="register"),
+    path(
+        "<slug:event_url_name>/inventory/register/<int:item_pk>/",
         views.register_badge,
         name="register_badge",
     ),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/take_back/$", views.take_back_item, name="take_back"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/take_back/" "(?P<item_pk>[0-9]+)/$",
+    path("<slug:event_url_name>/inventory/take_back/", views.take_back_item, name="take_back"),
+    path(
+        "<slug:event_url_name>/inventory/take_back/<int:item_pk>/",
         views.take_back_badge,
         name="take_back_badge",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/take_back/" "(?P<item_pk>[0-9]+)/direct/$",
+    path(
+        "<slug:event_url_name>/inventory/take_back/<int:item_pk>/direct/",
         views.take_back_direct,
         name="take_back_direct",
     ),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/inventory/list/$", views.event_list, name="list"),
+    path("<slug:event_url_name>/inventory/list/", views.event_list, name="list"),
     # inventory management
-    url(r"^manage/inventory/$", views.inventory_list, name="inventory_list"),
-    url(r"^manage/inventory/new/$", views.edit_inventory, name="new_inventory"),
-    url(r"^manage/inventory/(?P<inventory_pk>[0-9]+)/$", views.edit_inventory, name="edit_inventory"),
-    url(r"^manage/inventory/(?P<inventory_pk>[0-9]+)/delete$", views.delete_inventory, name="delete_inventory"),
-    url(r"^manage/inventory/(?P<inventory_pk>[0-9]+)/items/$", views.inventory_items, name="inventory_items"),
+    path("manage/inventory/", views.inventory_list, name="inventory_list"),
+    path("manage/inventory/new/", views.edit_inventory, name="new_inventory"),
+    path("manage/inventory/<int:inventory_pk>/", views.edit_inventory, name="edit_inventory"),
+    path("manage/inventory/<int:inventory_pk>/delete", views.delete_inventory, name="delete_inventory"),
+    path("manage/inventory/<int:inventory_pk>/items/", views.inventory_items, name="inventory_items"),
     # item management
-    url(r"^manage/inventory/(?P<inventory_pk>[0-9]+)/items/new/$", views.edit_item, name="new_item"),
-    url(
-        r"^manage/inventory/(?P<inventory_pk>[0-9]+)/items/" "(?P<item_pk>[0-9]+)/$", views.edit_item, name="edit_item"
+    path("manage/inventory/<int:inventory_pk>/items/new/", views.edit_item, name="new_item"),
+    path(
+        "manage/inventory/<int:inventory_pk>/items/<int:item_pk>/",
+        views.edit_item,
+        name="edit_item",
     ),
-    url(
-        r"^manage/inventory/(?P<inventory_pk>[0-9]+)/items/" "(?P<item_pk>[0-9]+)/delete/$",
+    path(
+        "manage/inventory/<int:inventory_pk>/items/<int:item_pk>/delete/",
         views.delete_item,
         name="delete_item",
     ),

@@ -116,12 +116,12 @@ class Event(models.Model):
         verbose_name=_("Event name"),
     )
 
-    url_name = models.CharField(
+    url_name = models.SlugField(
         max_length=200,
         unique=True,
-        validators=[RegexValidator("^[a-zA-Z0-9]+$"), _validate_url_blocklist],
+        validators=[_validate_url_blocklist],
         verbose_name=_("Name for URL"),
-        help_text=_("May contain the following chars: a-zA-Z0-9."),
+        help_text=_("May contain letters, numbers, underscores or hyphens."),
     )
 
     date = models.DateField(

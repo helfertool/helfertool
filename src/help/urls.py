@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 app_name = "help"
 urlpatterns = [
-    url(r"^help/$", views.create_issue, name="create_issue"),
+    path("help/", views.create_issue, name="create_issue"),
 ]
