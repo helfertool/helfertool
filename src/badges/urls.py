@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
@@ -7,65 +7,63 @@ urlpatterns = [
     #
     # settings
     #
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/$", views.settings, name="settings"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/settings/advanced", views.settings_advanced, name="settings_advanced"
-    ),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/defaulttemplate", views.default_template, name="default_template"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/currenttemplate", views.current_template, name="current_template"),
+    path("<slug:event_url_name>/badges/settings/", views.settings, name="settings"),
+    path("<slug:event_url_name>/badges/settings/advanced/", views.settings_advanced, name="settings_advanced"),
+    path("<slug:event_url_name>/badges/defaulttemplate/", views.default_template, name="default_template"),
+    path("<slug:event_url_name>/badges/currenttemplate/", views.current_template, name="current_template"),
     #
     # edit badge
     #
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/$",
+    path(
+        "<slug:event_url_name>/helpers/<uuid:helper_pk>/badge/",
         views.edit_badge,
         name="edit_badge",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/(?P<helper_pk>[0-9a-f\-]+)/badge/photo/$",
+    path(
+        "<slug:event_url_name>/helpers/<uuid:helper_pk>/badge/photo/",
         views.get_badge_photo,
         name="get_badge_photo",
     ),
     #
     # permission
     #
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/(?P<permission_pk>[0-9]+)/$",
+    path(
+        "<slug:event_url_name>/badges/permission/<int:permission_pk>/",
         views.edit_permission,
         name="edit_permission",
     ),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/add/", views.edit_permission, name="new_permission"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/permission/(?P<permission_pk>[0-9]+)/delete/$",
+    path("<slug:event_url_name>/badges/permission/add/", views.edit_permission, name="new_permission"),
+    path(
+        "<slug:event_url_name>/badges/permission/<int:permission_pk>/delete/",
         views.delete_permission,
         name="delete_permission",
     ),
     #
     # role
     #
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/(?P<role_pk>[0-9]+)/$", views.edit_role, name="edit_role"),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/add/", views.edit_role, name="new_role"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/role/(?P<role_pk>[0-9]+)/delete/$",
+    path("<slug:event_url_name>/badges/role/<int:role_pk>/", views.edit_role, name="edit_role"),
+    path("<slug:event_url_name>/badges/role/add/", views.edit_role, name="new_role"),
+    path(
+        "<slug:event_url_name>/badges/role/<int:role_pk>/delete/",
         views.delete_role,
         name="delete_role",
     ),
     #
     # design
     #
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/$",
+    path(
+        "<slug:event_url_name>/badges/design/<int:design_pk>/",
         views.edit_design,
         name="edit_design",
     ),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/add/", views.edit_design, name="new_design"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/delete/$",
+    path("<slug:event_url_name>/badges/design/add/", views.edit_design, name="new_design"),
+    path(
+        "<slug:event_url_name>/badges/design/<int:design_pk>/delete/",
         views.delete_design,
         name="delete_design",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/design/(?P<design_pk>[0-9]+)/bg/(?P<side>[a-z]+)/$",
+    path(
+        "<slug:event_url_name>/badges/design/<int:design_pk>/bg/<side>/",
         views.get_design_bg,
         name="get_design_bg",
     ),
@@ -73,79 +71,79 @@ urlpatterns = [
     # badge generation
     #
     # overview page
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/$", views.index, name="index"),
+    path("<slug:event_url_name>/badges/", views.index, name="index"),
     # overview of generated badges (list of tasks)
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/tasklist/$", views.tasklist, name="tasklist"),
+    path("<slug:event_url_name>/badges/tasklist/", views.tasklist, name="tasklist"),
     # warnings
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/warnings/(?P<job_pk>[0-9]+)$", views.warnings, name="warnings"),
+    path("<slug:event_url_name>/badges/warnings/<int:job_pk>/", views.warnings, name="warnings"),
     # generate for job
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/(?P<job_pk>[0-9]+)/$",
+    path(
+        "<slug:event_url_name>/badges/generate/<int:job_pk>/",
         views.generate,
         {"generate": "job"},
         name="generate_for_job",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/(?P<job_pk>[0-9]+)/all/$",
+    path(
+        "<slug:event_url_name>/badges/generate/<int:job_pk>/all/",
         views.generate,
         {"generate": "job", "skip_printed": False},
         name="generate_all_for_job",
     ),
     # generate special badges
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/special/$",
+    path(
+        "<slug:event_url_name>/badges/generate/special/",
         views.generate,
         {"generate": "special"},
         name="generate_special",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/special/all/$",
+    path(
+        "<slug:event_url_name>/badges/generate/special/all/",
         views.generate,
         {"generate": "special", "skip_printed": False},
         name="generate_all_special",
     ),
     # generate for all jobs and special badges
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/$", views.generate, {"generate": "all"}, name="generate"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/generate/all/$",
+    path("<slug:event_url_name>/badges/generate/", views.generate, {"generate": "all"}, name="generate"),
+    path(
+        "<slug:event_url_name>/badges/generate/all/",
         views.generate,
         {"generate": "all", "skip_printed": False},
         name="generate_all",
     ),
     # failed page
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/failed/" r"(?P<task_id>[a-z0-9\-]+)/$", views.failed, name="failed"),
+    path("<slug:event_url_name>/badges/failed/<task_id>/", views.failed, name="failed"),
     # download badges
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/download/" r"(?P<task_id>[a-z0-9\-]+)/$",
+    path(
+        "<slug:event_url_name>/badges/download/<task_id>/",
         views.download,
         name="download",
     ),
     #
     # register badges
     #
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/register/", views.register, name="register"),
+    path("<slug:event_url_name>/badges/register/", views.register, name="register"),
     #
     # special badges
     #
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/$", views.list_specialbadges, name="list_specialbadges"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/$",
+    path("<slug:event_url_name>/badges/special/", views.list_specialbadges, name="list_specialbadges"),
+    path(
+        "<slug:event_url_name>/badges/special/<int:specialbadges_pk>/",
         views.edit_specialbadges,
         name="edit_specialbadges",
     ),
-    url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/add/$", views.edit_specialbadges, name="new_specialbadges"),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/$",
+    path("<slug:event_url_name>/badges/special/add/", views.edit_specialbadges, name="new_specialbadges"),
+    path(
+        "<slug:event_url_name>/badges/special/<int:specialbadges_pk>/template/",
         views.edit_specialbadges_template,
         name="edit_specialbadges_template",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/delete/$",
+    path(
+        "<slug:event_url_name>/badges/special/<int:specialbadges_pk>/delete/",
         views.delete_specialbadges,
         name="delete_specialbadges",
     ),
-    url(
-        r"^(?P<event_url_name>[a-zA-Z0-9]+)/badges/special/(?P<specialbadges_pk>[0-9]+)/template/photo/$",
+    path(
+        "<slug:event_url_name>/badges/special/<int:specialbadges_pk>/template/photo/",
         views.get_specialbadges_photo,
         name="get_specialbadges_photo",
     ),

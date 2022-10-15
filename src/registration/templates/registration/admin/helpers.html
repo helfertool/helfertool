@@ -36,20 +36,18 @@
                                 </li>
 
                                 {% for day in days %}
-                                    {% with day_str=day|date:"Y-m-d" %}
                                     <li class="list-group-item">
                                         {{ day }}
 
                                         <div class="float-end">
-                                            <a href="{% url 'export_date' event.url_name 'excel' day_str %}" class="mr-2">
+                                            <a href="{% url 'export_date' event.url_name 'excel' day %}" class="mr-2">
                                                 <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
                                             </a>
-                                            <a href="{% url 'export_date' event.url_name 'pdf' day_str %}">
+                                            <a href="{% url 'export_date' event.url_name 'pdf' day %}">
                                                 <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
                                             </a>
                                         </div>
                                     </li>
-                                    {% endwith %}
                                 {% endfor %}
                             </ul>
                         </div>

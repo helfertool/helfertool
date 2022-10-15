@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from django.shortcuts import get_object_or_404
-from django.utils.dateparse import parse_date
 from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
@@ -23,7 +22,7 @@ logger = logging.getLogger("helfertool.registration")
 @login_required
 @never_cache
 @archived_not_available
-def export(request, event_url_name, filetype, job_pk=None, date_str=None):
+def export(request, event_url_name, filetype, job_pk=None, date=None):
     # check for valid export type
     if filetype not in ["excel", "pdf"]:
         raise Http404
@@ -56,13 +55,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
         filename = event.name
 
     # parse date
-    date = None
-    if date_str:
-        try:
-            date = parse_date(date_str)
-        except ValueError:
-            raise Http404
-
+    if date:
         # check if there are any shifts with this start date
         if not Shift.objects.filter(job__in=jobs, begin__date=date).exists():
             raise Http404
@@ -98,7 +91,7 @@ def export(request, event_url_name, filetype, job_pk=None, date_str=None):
             "job": job_for_log,
             "type": filetype,
             "file": filename,
-            "date": date_str,
+            "date": date.strftime("%Y-%m-%d") if date else None,
         },
     )
 

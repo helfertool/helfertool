@@ -44,20 +44,18 @@
                             </li>
 
                             {% for day, shifts in shifts_by_day %}
-                                {% with day_str=day|date:"Y-m-d" %}
                                 <li class="list-group-item">
                                     {{ day }}
 
                                     <div class="float-end">
-                                        <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day_str %}" class="icon mr-2">
+                                        <a href="{% url 'export_job_date' event.url_name 'excel' job.pk day %}" class="icon mr-2">
                                             <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
                                         </a>
-                                        <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day_str %}" class="icon">
+                                        <a href="{% url 'export_job_date' event.url_name 'pdf' job.pk day %}" class="icon">
                                             <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
                                         </a>
                                     </div>
                                 </li>
-                                {% endwith %}
                             {% endfor %}
                         </ul>
                     </div>
