@@ -84,10 +84,10 @@ def check(request):
         ldap_ok = False
 
     # headers
-    header_host = request.META.get("HTTP_HOST")
-    header_remote_addr = request.META.get("REMOTE_ADDR")
-    header_x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-    header_x_forwarded_proto = request.META.get("HTTP_X_FORWARDED_PROTO")
+    header_host = request.headers.get("host")
+    header_remote_addr = request.headers.get("remote_addr")
+    header_x_forwarded_for = request.headers.get("x-forwarded-for")
+    header_x_forwarded_proto = request.headers.get("x-forwarded-proto")
 
     context = {
         "version": settings.HELFERTOOL_VERSION,

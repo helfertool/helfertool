@@ -1,6 +1,6 @@
 from django import template
 from django.utils.timesince import timesince
-from django.utils.timezone import is_aware, utc
+from django.utils.timezone import is_aware
 from django.utils.translation import gettext_lazy as _
 
 import datetime
@@ -15,7 +15,7 @@ def lastlogin(user):
         return _("Never")
 
     login_date = _to_date(user.last_login)
-    now_date = _to_date(datetime.datetime.now(utc if is_aware(login_date) else None))
+    now_date = _to_date(datetime.datetime.now(datetime.timezone.utc if is_aware(login_date) else None))
 
     if login_date == now_date:
         return _("Today")

@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 
 from ..forms import SubscribeForm

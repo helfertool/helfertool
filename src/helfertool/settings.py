@@ -7,7 +7,7 @@ import socket
 import sys
 import yaml
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from datetime import timedelta
 from pathlib import Path
@@ -64,7 +64,6 @@ LANGUAGES = (
 )
 
 USE_I18N = True
-USE_L10N = True
 USE_TZ = True
 
 DEFAULT_COUNTRY = dict_get(config, "DE", "language", "country")
@@ -312,14 +311,20 @@ if OIDC_CUSTOM_PROVIDER_NAME is not None:
 # security
 DEBUG = dict_get(config, False, "security", "debug")
 SECRET_KEY = dict_get(config, "CHANGEME", "security", "secret")
-ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts")
+ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts") or []  # empty list in config is None, but we need []
 
 # use X-Forwarded-Proto header to determine if https is used (overwritten in settings_container.py)
 if dict_get(config, False, "security", "behind_proxy"):
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-# enable X-XSS-Protection (although modern browsers do not support it anymore)
-SECURE_BROWSER_XSS_FILTER = True
+# password hashers: use scrypt instead of PBKDF2
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
 
 # cookies
 LANGUAGE_COOKIE_NAME = "lang"

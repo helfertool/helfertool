@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.db.models import Count
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.urls import reverse
 
 from badges.models import SpecialBadges

@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import formats
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from helfertool.forms import DatePicker, SingleUserSelectWidget
 from prerequisites.forms import PrerequisiteSelectWidget

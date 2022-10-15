@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
 from account.templatetags.globalpermissions import has_sendnews_group

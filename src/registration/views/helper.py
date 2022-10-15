@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.functions import TruncDate
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
 from corona.forms import ContactTracingDataForm

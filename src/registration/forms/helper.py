@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.db.models.functions import Greatest
 from django.utils import translation
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from badges.models import Badge
 
