@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # Django uses the first translation it detects in an installed app.
 # The "helfertool" app is listed first, so we have can override default translations here.

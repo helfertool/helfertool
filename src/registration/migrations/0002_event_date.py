@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 import datetime
 from django.db import migrations, models
-from django.utils.timezone import utc
 
 
 class Migration(migrations.Migration):
@@ -18,7 +17,7 @@ class Migration(migrations.Migration):
             model_name="event",
             name="date",
             field=models.DateField(
-                default=datetime.datetime(2016, 3, 5, 18, 4, 27, 134060, tzinfo=utc),
+                default=datetime.datetime(2016, 3, 5, 18, 4, 27, 134060, tzinfo=datetime.timezone.utc),
                 help_text="First day of event",
                 verbose_name="Date",
             ),

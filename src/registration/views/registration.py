@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
 from corona.forms import ContactTracingDataForm

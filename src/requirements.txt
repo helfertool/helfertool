@@ -1,5 +1,5 @@
 # django release
-django==3.2.*
+django==4.1.*
 
 # packages that we downgrade (for now)
 celery<5.0.0
