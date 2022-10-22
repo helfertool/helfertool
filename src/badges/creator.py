@@ -6,6 +6,7 @@ import subprocess
 import shutil
 
 import badges.models
+from badges.encoding import LATEX_T1_CHARS
 
 
 class BadgeCreatorError(Exception):
@@ -231,19 +232,35 @@ class BadgeCreator:
         return string.upper()
 
     def _latex_escape(self, string):
-        string = string.replace("\\", r"\textbackslash ")
-        string = string.replace(r" ", r"\ ")
-        string = string.replace(r"&", r"\&")
-        string = string.replace(r"%", r"\%")
-        string = string.replace(r"$", r"\$")
-        string = string.replace(r"#", r"\#")
-        string = string.replace(r"_", r"\_")
-        string = string.replace(r"{", r"\{")
-        string = string.replace(r"}", r"\}")
-        string = string.replace(r"~", r"\textasciitilde ")
-        string = string.replace(r"^", r"\textasciicircum ")
+        # mapping for special chars to LaTeX
+        mapping = [
+            ["\\", "\\textbackslash "],
+            [" ", "\\ "],
+            ["&", "\\&"],
+            ["%", "\\%"],
+            ["$", "\\$"],
+            ["#", "\\#"],
+            ["_", "\\_"],
+            ["{", "\\{"],
+            ["}", "\\}"],
+            ["~", "\\textasciitilde "],
+            ["^", "\\textasciicircum "],
+        ]
 
-        return "{" + string + "}"
+        # allowed chars (LaTeX T1 encoding + mapped chars)
+        allowed_chars = LATEX_T1_CHARS + [m[0] for m in mapping]
+
+        # remove chars that we do not want to have
+        string_cleaned = ""
+        for s in string:
+            if s in allowed_chars:
+                string_cleaned += s
+
+        # apply mapping
+        for search, replace in mapping:
+            string_cleaned = string_cleaned.replace(search, replace)
+
+        return "{" + string_cleaned + "}"
 
     def _copy_photo(self, src_path):
         return self._copy_file(src_path, self.dir_photos)
