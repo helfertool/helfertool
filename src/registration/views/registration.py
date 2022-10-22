@@ -143,7 +143,13 @@ def form(request, event_url_name, link_pk=None):
 
         return redirect("registered", event_url_name=event.url_name, helper_pk=helper.pk)
 
-    context = {"event": event, "form": form, "corona_form": corona_form, "user_is_involved": user_is_involved}
+    context = {
+        "event": event,
+        "form": form,
+        "corona_form": corona_form,
+        "user_is_involved": user_is_involved,
+        "link": link,
+    }
     return render(request, "registration/form.html", context)
 
 
