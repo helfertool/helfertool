@@ -184,7 +184,7 @@ class BadgeCreator:
         r = ""
 
         # begin of table
-        r = r + r"\begin{tabular}{|l|l|}" + "\n"
+        r = r + r"\begin{tabular}{|" + "|".join("l" * self.columns) + "|}" + "\n"
         r = r + r"\hline" + "\n"
 
         # add rows until all helpers were added
