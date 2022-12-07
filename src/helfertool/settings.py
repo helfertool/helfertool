@@ -58,10 +58,22 @@ LANGUAGE_CODE = dict_get(config, "de", "language", "default")
 
 TIME_ZONE = dict_get(config, "Europe/Berlin", "language", "timezone")
 
-LANGUAGES = (
-    ("de", _("German")),
-    ("en", _("English")),
-)
+MULTILANGUAGE = dict_get(config, "True", "language", "multilanguage")
+
+if MULTILANGUAGE == "de":
+    LANGUAGES = (
+        ("de", _("German")),
+    )
+elif MULTILANGUAGE == "en":
+    LANGUAGES = (
+        ("en", _("English")),
+    )
+else:
+    LANGUAGES = (
+        ("de", _("German")),
+        ("en", _("English")),
+    )
+
 
 USE_I18N = True
 USE_L10N = True
