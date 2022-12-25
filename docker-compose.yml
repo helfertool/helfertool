@@ -1,0 +1,48 @@
+version: "3.2"
+services:
+  helfertool:
+    build: .
+    depends_on:
+      - postgres
+      - rabbitmq
+    ports:
+      - "8080:8000"
+    networks:
+      - internal
+    volumes:
+      - type: bind
+        source: ./test/container/config
+        target: /config
+      - type: bind
+        source: ./test/container/data
+        target: /data
+      - type: bind
+        source: ./test/container/log
+        target: /log
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: helfertool
+      POSTGRES_USER: helfertool
+      POSTGRES_DB: helfertool
+    volumes:
+      - db-data:/data
+    networks:
+      - internal
+  rabbitmq:
+   image: rabbitmq
+   restart: always
+   environment:
+     RABBITMQ_DEFAULT_USER: helfertool
+     RABBITMQ_DEFAULT_PASS: helfertool
+     RABBITMQ_DEFAULT_VHOST: helfertool
+   networks:
+     - internal
+
+networks:
+  internal: {}
+
+volumes:
+  db-data:

@@ -14,6 +14,19 @@ Please have a look at the
 [admin guide](https://docs.helfertool.org/admin/index.html)
 in our documentation.
 
+# Docker Compose
+For a immediate testing a docker compose file is available
+```bash
+# Allow bind to container
+chmod -R o+rw test/container
+docker-compose up -d
+sleep 10
+docker-compose exec helfertool helfertool init
+docker-compose exec helfertool helfertool manage createsuperuser
+# import example event
+docker-compose exec helfertool helfertool manage exampledata 
+```
+
 # Environment for development
 
 Please have a look at the

@@ -1,6 +1,17 @@
 database:
-    backend: "sqlite3"
-    name: "/data/db.sqlite3"
+    backend: "postgresql"
+    name: "helfertool"
+    user: "helfertool"
+    password: "helfertool"
+    host: postgres
+    port: 5432
+
+rabbitmq:
+    vhost: "helfertool"
+    user: "helfertool"
+    password: "helfertool"
+    host: rabbitmq
+    port: 5672
 
 security:
     debug: False
