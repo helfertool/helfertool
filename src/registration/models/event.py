@@ -15,6 +15,7 @@ from gifts.models import HelpersGifts
 from gifts.models.giftsettings import GiftSettings
 from helfertool.forms import RestrictedImageField
 from inventory.models import InventorySettings
+from pretix.models import PretixSettings
 
 import datetime
 import os
@@ -269,6 +270,11 @@ class Event(models.Model):
         verbose_name=_("Available T-shirt sizes"),
     )
 
+    pretix = models.BooleanField(
+        default=False,
+        verbose_name=_("Create tickets in Pretix"),
+    )
+
     def __str__(self):
         return self.name
 
@@ -355,6 +361,13 @@ class Event(models.Model):
     def corona_settings(self):
         try:
             return self.coronasettings
+        except AttributeError:
+            return None
+
+    @property
+    def pretix_settings(self):
+        try:
+            return self.pretixsettings
         except AttributeError:
             return None
 
@@ -456,6 +469,13 @@ class Event(models.Model):
         if not self.corona_settings:
             CoronaSettings.objects.create(event=self)
 
+    def _setup_pretix_settings(self):
+        """
+        Setup pretix settings for the event (called from post_save handler).
+        """
+        if not self.pretix_settings:
+            PretixSettings.objects.create(event=self)
+
 
 @receiver(pre_save, sender=Event, dispatch_uid="pre_event_saved")
 def pre_event_saved(sender, instance, using, **kwargs):
@@ -477,6 +497,9 @@ def post_event_saved(sender, instance, using, **kwargs):
 
     if instance.corona:
         instance._setup_corona_settings()
+
+    if instance.pretix:
+        instance._setup_pretix_settings()
 
 
 @receiver(post_delete, sender=Event, dispatch_uid="event_deleted")

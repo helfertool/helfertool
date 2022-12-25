@@ -102,5 +102,11 @@
         </p>
     {% endif %}
 
+    {% if pretix_ticket_link %}
+    <a class="btn btn-primary" target="_blank" rel="noopener" href="{{ pretix_ticket_link }}">
+        <em class="fa fa-ticket-alt fa-lg"></em> {% trans "Download ticket" %}
+    </a>
+    {% endif %}
+
     {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}

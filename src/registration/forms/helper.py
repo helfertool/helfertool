@@ -7,6 +7,7 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 
 from badges.models import Badge
+from pretix.models import PretixOrder
 
 from ..models import Helper, Shift, Job
 from ..permissions import (
@@ -284,7 +285,7 @@ class HelperSearchForm(forms.Form):
 
         super(HelperSearchForm, self).__init__(*args, **kwargs)
 
-    def check_barcode(self):
+    def check_badge_barcode(self):
         if not self.event.badges:
             return None
 
@@ -303,6 +304,23 @@ class HelperSearchForm(forms.Form):
         if badge.helper and has_access(self.user, badge.helper, ACCESS_HELPER_VIEW):
             return badge.helper
 
+        return None
+
+    def check_pretix_ticket_code(self):
+        if not self.event.pretix:
+            return None
+        p = self.cleaned_data.get("pattern")
+        try:
+            order = PretixOrder.objects.get(pretix_ticket_code=p)
+        except PretixOrder.DoesNotExist:
+            return None
+
+        if (
+            order.helper
+            and order.helper.event == self.event
+            and has_access(self.user, order.helper, ACCESS_HELPER_VIEW)
+        ):
+            return order.helper
         return None
 
     def get(self):

@@ -10,6 +10,8 @@ from django.views.decorators.cache import never_cache
 from corona.forms import ContactTracingDataForm
 from helfertool.utils import nopermission
 from news.helper import news_validate_helper
+from pretix.sync import sync_pretix_order
+from pretix.models import PretixOrder
 
 from ..utils import get_or_404
 from ..forms import RegisterForm, DeregisterForm, HelperForm
@@ -150,8 +152,13 @@ def form(request, event_url_name, link_pk=None):
 @never_cache
 def registered(request, event_url_name, helper_pk=None):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
+    pretix_ticket_link = None
+    if event.pretix:
+        orders = PretixOrder.objects.filter(helper=helper)
+        if len(orders) > 0 and orders[0].pretix_order_link:
+            pretix_ticket_link = orders[0].pretix_order_link + "download/pdf"
 
-    context = {"event": event, "data": helper}
+    context = {"event": event, "data": helper, "pretix_ticket_link": pretix_ticket_link}
     return render(request, "registration/registered.html", context)
 
 
@@ -168,6 +175,8 @@ def validate(request, event_url_name, helper_pk, validation_id=None):
         except ValueError:
             raise Http404
 
+    if event.pretix:
+        sync_pretix_order(helper)
     if not helper.validated:
         helper.validated = True
         helper.timestamp_validated = timezone.now()
@@ -199,6 +208,10 @@ def deregister(request, event_url_name, helper_pk, shift_pk):
     form = DeregisterForm(request.POST or None, instance=helper, shift=shift)
 
     if form.is_valid():
+        if event.pretix:
+            # retrieve order before helper is potentially deleted
+            order = next(iter(PretixOrder.objects.filter(helper=helper)), None)
+
         form.delete()
 
         logger.info(
@@ -208,6 +221,8 @@ def deregister(request, event_url_name, helper_pk, shift_pk):
                 "helper": helper,
             },
         )
+        if event.pretix:
+            sync_pretix_order(helper, order)
 
         if not helper.pk:
             return redirect("deleted", event_url_name=event.url_name)

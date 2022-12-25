@@ -52,6 +52,9 @@ ACCESS_PREREQUISITES_HANDLE = "ACCESS_PREREQUISITES_HANDLE"  # set for helpers w
 ACCESS_CORONA_EDIT = "ACCESS_CORONA_EDIT"  # edit corona settings for an event
 ACCESS_CORONA_VIEW = "ACCESS_CORONA_VIEW"  # view contact tracing data for an event
 
+ACCESS_PRETIX_EDIT = "ACCESS_PRETIX_EDIT"  # edit pretix settings and manually sync orders
+ACCESS_PRETIX_VIEW = "ACCESS_PRETIX_VIEW"  # view pretix order
+
 # Based on requested access and role, we can decide whether we grant access or not.
 # Here, for each access type, the allowed/required roles are listed (on event and job level)
 _rbac_matrix = {
@@ -359,6 +362,24 @@ _rbac_matrix = {
             EventAdminRoles.ROLE_ADMIN,
         ],
         [],
+    ],
+    ACCESS_PRETIX_EDIT: [
+        [
+            EventAdminRoles.ROLE_ADMIN,
+        ],
+        [],
+    ],
+    ACCESS_PRETIX_VIEW: [
+        [
+            EventAdminRoles.ROLE_ADMIN,
+            EventAdminRoles.ROLE_RESTRICTED_ADMIN,
+            EventAdminRoles.ROLE_FRONTDESK,
+            EventAdminRoles.ROLE_INVENTORY,
+            EventAdminRoles.ROLE_BADGES,
+        ],
+        [
+            JobAdminRoles.ROLE_FULL,
+        ],
     ],
 }
 

@@ -46,6 +46,7 @@ urlpatterns += [
     url(r"", include("prerequisites.urls")),
     url(r"", include("toollog.urls")),
     url(r"", include("corona.urls")),
+    url(r"", include("pretix.urls")),
 ]
 
 # for development

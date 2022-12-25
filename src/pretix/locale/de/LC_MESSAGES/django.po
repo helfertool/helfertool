@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-25 20:56+0100\n"
+"PO-Revision-Date: 2021-11-13 21:14+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#: pretix/forms/settings.py:53
+msgid "Pretix ticket type"
+msgstr "Pretix Tickettyp"
+
+#: pretix/forms/settings.py:56
+msgid "Could not find in Pretix"
+msgstr "Konnte nicht in Pretix gefunden werden"
+
+#: pretix/models/settings.py:22 pretix/models/settings.py:40
+msgid "Reference to the Pretix item"
+msgstr "Referenz zu Pretix item"
+
+#: pretix/models/settings.py:35
+msgid "Order failed"
+msgstr "Bestellung fehltgeschlagen"
+
+#: pretix/models/settings.py:45
+msgid "Id of the Pretix order"
+msgstr "Id der Pretix Bestellung"
+
+#: pretix/models/settings.py:51
+msgid "Id of the position of the item in the Pretix order"
+msgstr "Id der Position des items in der Pretix Bestellung"
+
+#: pretix/models/settings.py:56
+msgid "Public link to the Pretix order"
+msgstr "Öffentlicher Link zur Pretix Bestellung"
+
+#: pretix/models/settings.py:62
+msgid "Code printed on the Pretix ticket"
+msgstr "Code auf dem Pretix ticket"
+
+#: pretix/templates/pretix/not_active.html:8
+msgid "The pretix synchronisation is not activated"
+msgstr "Synchronisierung mit Pretix ist nicht aktiviert"
+
+#: pretix/templates/pretix/settings.html:5
+msgid "Pretix settings"
+msgstr "Pretix Einstellungen"
+
+#: pretix/templates/pretix/settings.html:7
+msgid "Ticket assignments"
+msgstr "Ticket Zuweisungen"
+
+#: pretix/templates/pretix/settings.html:37
+msgid "Save"
+msgstr "Speichern"

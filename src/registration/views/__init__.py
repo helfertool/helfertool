@@ -25,6 +25,7 @@ from .helper import (
     search_helper,
     view_helper,
     resend_mail,
+    sync_pretix,
 )
 from .link import links, edit_link, delete_link
 from .export import export

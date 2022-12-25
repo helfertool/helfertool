@@ -171,6 +171,10 @@
             {% if form.corona %}
                 {% bootstrap_field form.corona %}
             {% endif %}
+
+            {% if form.pretix %}
+                {% bootstrap_field form.pretix %}
+            {% endif %}
         {% endif %}
 
         <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Save" %}</button>

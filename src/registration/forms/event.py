@@ -71,6 +71,8 @@ class EventForm(forms.ModelForm):
             self.fields.pop("inventory")
         if not settings.FEATURES_CORONA and "corona" in self.fields:
             self.fields.pop("corona")
+        if len(settings.PRETIX_SYSTEMS) == 0:
+            self.fields.pop("pretix")
 
         # change labels of ckeditor fields: We only want to have the language name as label
         # everything else is in the template.

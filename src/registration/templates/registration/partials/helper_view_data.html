@@ -7,6 +7,7 @@ Parameters:
     mask_sensitive
     show_internal_comment
     show_badge_barcode
+    pretix_ticket_code
 {% endcomment %}
 
 <div class="row">
@@ -88,6 +89,13 @@ Parameters:
                     <th scope="row">{% trans "Badge Barcode" %}</th>
                     <td>{{ helper.badge.barcode }}</td>
                 </tr>
+            {% endif %}
+
+            {% if pretix_ticket_code %}
+            <tr>
+                <th scope="row">{% trans "Pretix ticket code" %}</th>
+                <td>{{ pretix_ticket_code }}</td>
+            </tr>
             {% endif %}
         </table>
     </div>

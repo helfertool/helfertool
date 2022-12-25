@@ -285,6 +285,16 @@
         </li>
         {% endif %}
         {% endif %}
+        {% if event.pretix %}
+        <li class="nav-item">
+            <p class="sidemenu-section">{% trans "Pretix" %}</p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a href="{% url 'pretix:settings' event.url_name %}" class="nav-link">{% trans "Settings" %}</a>
+                </li>
+            </ul>
+        </li>
+        {% endif %}
     </ul>
 </nav>
 {% endif %}
