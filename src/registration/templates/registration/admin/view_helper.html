@@ -6,6 +6,7 @@
     {% has_access helper "ACCESS_HELPER_EDIT" as user_helper_edit %}
     {% has_access helper "ACCESS_HELPER_RESEND" as user_helper_resend %}
     {% has_access helper "ACCESS_CORONA_VIEW" as user_corona_view %}
+    {% has_access helper "ACCESS_PRETIX_EDIT" as user_pretix_edit %}
     {% has_access_event_or_job event "ACCESS_JOB_EDIT_HELPERS" as user_any_job_edit_helpers %}
 
     <h1>{{ helper.full_name }}</h1>
@@ -30,6 +31,15 @@
         <p class="text-secondary">
             {% icon "exclamation-circle" %} {% trans "Helper did not validate the mail address." %}
         </p>
+    {% endif %}
+
+    {% if pretix.failed %}
+    <p class="text-danger">
+        {% icon "exclamation-circle" %} {% trans "Order of Pretix ticket failed" %}
+        {% if user_pretix_edit %}
+            <a href="{% url 'sync_pretix' event.url_name helper.pk %}" class="btn btn-sm btn-outline-danger ms-2">{% trans "Retry" %}</a>
+        {% endif %}
+    </p>
     {% endif %}
 
     {# personal data #}
@@ -61,11 +71,19 @@
             {% icon "head-side-mask" %}
             {% trans "COVID-19 contact tracing" %}
         </a>
-    {% endif %}
+        {% endif %}
+
+        {% if pretix.order_link %}
+        <a href="{{ pretix.order_link }}" class="me-3 text-nowrap">
+            {% icon "ticket-alt" %}
+            {% trans "Pretix order" %}
+        </a>
+        {% endif %}
+
 
     </p>
 
-    {% include "registration/partials/helper_view_data.html" with helper=helper show_sensitive=user_view_sensitive show_badge_barcode=True %}
+    {% include "registration/partials/helper_view_data.html" with helper=helper show_sensitive=user_view_sensitive show_badge_barcode=True pretix_ticket_code=pretix.ticket_code %}
 
     {# coordinated jobs #}
     {% if helper.is_coordinator %}

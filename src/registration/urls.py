@@ -143,6 +143,11 @@ urlpatterns = [
         views.resend_mail,
         name="resend_mail",
     ),
+    url(
+        r"^(?P<event_url_name>[a-zA-Z0-9]+)/helpers/" r"(?P<helper_pk>[0-9a-f\-]+)/sync_pretix/$",
+        views.sync_pretix,
+        name="sync_pretix",
+    ),
     # export
     url(r"^(?P<event_url_name>[a-zA-Z0-9]+)/export/(?P<filetype>[a-z]+)/all/$", views.export, name="export"),
     url(

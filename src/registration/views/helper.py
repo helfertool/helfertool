@@ -10,6 +10,8 @@ from corona.forms import ContactTracingDataForm
 from gifts.forms import HelpersGiftsForm
 from helfertool.utils import nopermission
 from prerequisites.forms import HelperPrerequisiteForm
+from pretix.sync import sync_pretix_order
+from pretix.models import PretixOrder
 
 from ..utils import get_or_404
 from ..models import Event, Shift
@@ -42,6 +44,8 @@ from ..permissions import (
     ACCESS_PREREQUISITES_HANDLE,
     ACCESS_HELPER_INTERNAL_COMMENT_VIEW,
     ACCESS_HELPER_INTERNAL_COMMENT_EDIT,
+    ACCESS_PRETIX_EDIT,
+    ACCESS_PRETIX_VIEW,
 )
 
 import logging
@@ -116,6 +120,7 @@ def view_helper(request, event_url_name, helper_pk):
     edit_gifts = event.gifts and has_access(request.user, helper, ACCESS_GIFTS_HANDLE_GIFTS)
     edit_presence = event.gifts and has_access(request.user, helper, ACCESS_GIFTS_HANDLE_PRESENCE)
     edit_prerequisites = event.prerequisites and has_access(request.user, helper, ACCESS_PREREQUISITES_HANDLE)
+    view_pretix = has_access(request.user, helper, ACCESS_PRETIX_VIEW)
 
     # we have multiple forms. all of them need to be valid in order to save them
     forms_valid = True
@@ -169,6 +174,16 @@ def view_helper(request, event_url_name, helper_pk):
         messages.success(request, _("Changes were saved."))
         return redirect("view_helper", event_url_name=event.url_name, helper_pk=helper.pk)
 
+    pretix = None
+    if event.pretix and view_pretix:
+        order = next(iter(PretixOrder.objects.filter(helper=helper)), None)
+        if order:
+            pretix = {
+                "order_link": order.pretix_order_link,
+                "ticket_code": order.pretix_ticket_code,
+                "failed": order.failed,
+            }
+
     # render page
     context = {
         "event": event,
@@ -178,6 +193,7 @@ def view_helper(request, event_url_name, helper_pk):
         "internal_comment_form": internal_comment_form,
         "gifts_form": gifts_form,
         "prerequisites_form": prerequisites_form,
+        "pretix": pretix,
     }
     return render(request, "registration/admin/view_helper.html", context)
 
@@ -331,6 +347,9 @@ def add_helper_to_shift(request, event_url_name, helper_pk):
     if form.is_valid():
         form.save()
 
+        if event.pretix:
+            sync_pretix_order(helper)
+
         # TODO: add shifts
         logger.info(
             "helper newshift",
@@ -362,6 +381,8 @@ def add_helper_as_coordinator(request, event_url_name, helper_pk):
 
     if form.is_valid():
         form.save()
+        if event.pretix:
+            sync_pretix_order(helper)
 
         # TODO: add job
         logger.info(
@@ -399,6 +420,9 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk, show_all_shifts=
     )
 
     if form.is_valid():
+        if event.pretix:
+            order = next(iter(PretixOrder.objects.filter(helper=helper)), None)
+
         form.delete()
         messages.success(request, _("Helper deleted: %(name)s") % {"name": helper.full_name})
 
@@ -411,6 +435,9 @@ def delete_helper(request, event_url_name, helper_pk, shift_pk, show_all_shifts=
                 "helper": helper,
             },
         )
+
+        if event.pretix:
+            sync_pretix_order(helper, order)
 
         # redirect to shift
         return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=shift.job.pk)
@@ -437,6 +464,9 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
     form = HelperDeleteCoordinatorForm(request.POST or None, instance=helper, job=job)
 
     if form.is_valid():
+        if event.pretix:
+            order = next(iter(PretixOrder.objects.filter(helper=helper)), None)
+
         form.delete()
 
         # TODO: only one job or completely?
@@ -453,6 +483,9 @@ def delete_coordinator(request, event_url_name, helper_pk, job_pk):
             request,
             _("Coordinator %(name)s from job " '"%(jobname)s"') % {"name": helper.full_name, "jobname": job.name},
         )
+
+        if event.pretix:
+            sync_pretix_order(helper, order)
 
         # redirect to shift
         return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
@@ -479,7 +512,7 @@ def search_helper(request, event_url_name):
 
     if form.is_valid():
         # input was barcode -> redirect
-        helper = form.check_barcode()
+        helper = form.check_badge_barcode() or form.check_pretix_ticket_code()
         if helper:
             return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)
 
@@ -526,3 +559,20 @@ def resend_mail(request, event_url_name, helper_pk):
 
     context = {"event": event, "helper": helper, "form": form}
     return render(request, "registration/admin/resend_mail.html", context)
+
+
+@login_required
+@never_cache
+@archived_not_available
+def sync_pretix(request, event_url_name, helper_pk):
+    event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
+
+    if not has_access(request.user, helper, ACCESS_PRETIX_EDIT):
+        return nopermission(request)
+
+    if sync_pretix_order(helper=helper):
+        messages.success(request, _("Synchronisation with Pretix was successful."))
+    else:
+        messages.error(request, _("Synchronisation with Pretix failed."))
+
+    return redirect("view_helper", event_url_name=event_url_name, helper_pk=helper.pk)

@@ -1,0 +1,39 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons pretix %}
+
+{% block content %}
+<h1>{% trans 'Pretix settings' %}</h1>
+
+<h2>{% trans "Ticket assignments" %}</h2>
+<form action="" method="post">
+    {% csrf_token %}
+
+    {% if form.warnings %}
+    <ul class="list-unstyled text-warning">
+        {% for warning in form.warnings %}
+        <li>{{ warning }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if form.jobs %}
+    <ul class="list-group mb-3">
+        {% for job in form.jobs %}
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-12 col-md-3 my-1">
+                    {{ job.name }}
+                </div>
+                <div class="col-12 col-md-5 my-1">
+                    {% pretix_job_item_field form job.pk as field %}
+                    {% bootstrap_field field layout="floating" %}
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <button type="submit" class="btn btn-outline-primary mb-3">{% icon "save" %} {% trans "Save" %}</button>
+</form>
+{% endblock %}

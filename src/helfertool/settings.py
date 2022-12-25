@@ -474,6 +474,21 @@ BADGE_LANGUAGE_CODE = dict_get(config, "de", "language", "badges")
 # newsletter
 NEWS_SUBSCRIBE_DEADLINE = dict_get(config, 3, "subscribe_deadline", "newsletter")
 
+# pretix
+PRETIX_SYSTEMS = []
+for system_config in dict_get(config, [], "pretix"):
+    name = dict_get(system_config, "default", "name")
+    if any((system["name"] == name for system in PRETIX_SYSTEMS)):
+        print(f"duplicate pretix.name '{name}'")
+        sys.exit(1)
+    url = dict_get(system_config, "https://pretix.eu", "url")
+    token = dict_get(system_config, None, "token")
+    if token is None:
+        print("pretix.token must be set")
+        sys.exit(1)
+    allowed_events = dict_get(system_config, None, "allowed_events")
+    PRETIX_SYSTEMS.append({"name": name, "url": url, "token": token, "allowed_events": allowed_events})
+
 # internal group names
 GROUP_ADDUSER = "registration_adduser"
 GROUP_ADDEVENT = "registration_addevent"
@@ -557,6 +572,7 @@ INSTALLED_APPS = (
     "prerequisites.apps.PrerequisitesConfig",
     "toollog.apps.ToollogConfig",
     "corona.apps.CoronaConfig",
+    "pretix.apps.PretixConfig",
 )
 
 # middleware

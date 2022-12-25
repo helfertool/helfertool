@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2022-12-25 20:56+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -176,6 +176,7 @@ msgstr "Geschenke und Anwesenheit"
 #: helfertool/templates/helfertool/admin_event_menu.html:203
 #: helfertool/templates/helfertool/admin_event_menu.html:247
 #: helfertool/templates/helfertool/admin_event_menu.html:276
+#: helfertool/templates/helfertool/admin_event_menu.html:293
 #: helfertool/templates/helfertool/admin_general_menu.html:6
 #: helfertool/templates/helfertool/admin_general_menu.html:90
 msgid "Settings"
@@ -239,6 +240,10 @@ msgstr "COVID-19"
 #: helfertool/templates/helfertool/admin_event_menu.html:281
 msgid "Data"
 msgstr "Daten"
+
+#: helfertool/templates/helfertool/admin_event_menu.html:290
+msgid "Pretix"
+msgstr "Pretix"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:13
 msgid "My account"
@@ -324,15 +329,15 @@ msgstr "Logout"
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:126
+#: helfertool/templates/helfertool/base.html:124
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:128
+#: helfertool/templates/helfertool/base.html:126
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:130
+#: helfertool/templates/helfertool/base.html:128
 msgid "About this software"
 msgstr "Über diese Software"
 
