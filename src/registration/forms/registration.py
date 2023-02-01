@@ -1,3 +1,4 @@
+import uuid
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.html import format_html
@@ -6,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from news.helper import news_add_email
 
 from .widgets import ShiftTableRegistrationWidget
-from ..models import Helper, Shift
+from ..models import Helper, Shift, HelperShift
 
 import itertools
 
@@ -29,7 +30,7 @@ class RegisterForm(forms.ModelForm):
             "infection_instruction",
             "comment",
             "privacy_statement",
-            "shifts",
+            "shifts"
         ]
         widgets = {
             "shifts": ShiftTableRegistrationWidget,
@@ -42,11 +43,27 @@ class RegisterForm(forms.ModelForm):
         """
         self.event = kwargs.pop("event")
         self.shifts_qs = kwargs.pop("shifts_qs", None)
-        self.preselected_shifts = kwargs.pop("preselected_shifts", None)
+        self.preselected_shifts = kwargs.pop("preselected_shifts", set())
         self.is_internal = kwargs.pop("is_internal", False)
-        self.is_link = kwargs.pop("is_link", False)
-
+        self.is_link = kwargs.pop("is_link", False)        
+        self.user = kwargs.pop("request").user
+        self.id = None
         super(RegisterForm, self).__init__(*args, **kwargs)
+
+        if self.user.is_authenticated:
+            old = Helper.objects.filter(event=self.event, user_id=self.user)
+            if old.exists():
+                old = old.get()
+                self.id = old.id
+                for x in old.shifts.iterator():
+                    self.preselected_shifts.add(x.id)
+                self.fields["phone"].initial = old.phone 
+                self.fields["shirt"].initial = old.shirt   
+                self.fields["nutrition"].initial = old.nutrition                 
+            self.fields.pop("firstname")
+            self.fields.pop("surname")
+            self.fields.pop("email")
+
 
         # remove field for phone number?
         if not self.event.ask_phone:
@@ -64,7 +81,7 @@ class RegisterForm(forms.ModelForm):
             self.fields.pop("nutrition")
 
         # remove field or privacy statement?
-        if self.is_internal:
+        if self.is_internal or self.user is not None:
             self.fields.pop("privacy_statement")
         else:
             # add link to show privacy statement after label
@@ -81,7 +98,7 @@ class RegisterForm(forms.ModelForm):
             self.fields["full_age"] = forms.BooleanField(label=_("I confirm to be full aged."), required=False)
 
         # add field for notification about new events?
-        self.ask_news = self.event.ask_news and not self.is_internal
+        self.ask_news = self.event.ask_news and (not self.is_internal and self.id is None)
         if self.ask_news:
             news_label = format_html(
                 '{} (<a href="" data-bs-toggle="modal" data-bs-target="#privacy-newsletter">{}</a>)',
@@ -135,7 +152,7 @@ class RegisterForm(forms.ModelForm):
             self.add_error("full_age", _("We are not allowed to accept helpers that are not of full age."))
 
         # check if the data privacy statement was accepted (but continue with further checks)
-        if not self.is_internal and not self.cleaned_data.get("privacy_statement"):
+        if not self.is_internal and self.user is None and not self.cleaned_data.get("privacy_statement"):
             self.add_error("privacy_statement", _("Please accept the data privacy statement."))
 
         # iterate over all (selected) shifts
@@ -170,16 +187,31 @@ class RegisterForm(forms.ModelForm):
 
     def save(self, commit=True):
         instance = super(RegisterForm, self).save(False)
+        #Helper.objects.filter(id = self.id).delete()
         instance.event = self.event
+        instance.id = uuid.uuid4
+        if self.id is not None:
+            instance.id = self.id
+
+        if self.user.id:
+            instance.timestamp = "2022-11-12 12:22"
+            instance.user_id = self.user
+            instance.firstname = self.user.username
+            instance.surname = self.user.username
+            instance.email = self.user.email
 
         if commit:
-            instance.save()
+            if instance.id is None:
+              instance.save()
+            else:
+              instance.save(update_fields = {"firstname", "surname", "email", "shirt"})
 
+        HelperShift.objects.filter(helper = instance).delete()
         self.save_m2m()
 
         # add to news
         if self.ask_news and self.cleaned_data.get("news"):
-            news_add_email(self.cleaned_data.get("email"), withevent=True)
+           news_add_email(self.cleaned_data.get("email"), withevent=True)
 
         return instance
 

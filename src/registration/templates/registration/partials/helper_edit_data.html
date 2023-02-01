@@ -3,17 +3,24 @@
 {# personal data of helper, which can also be changed in public forms #}
 
 <div class="row">
+    {% if form.firstname %}
     <div class="col-lg-6">
         {% bootstrap_field form.firstname layout="floating" %}
     </div>
+    {% endif %}
 
+    {% if form.surname %}
     <div class="col-lg-6">
         {% bootstrap_field form.surname layout="floating" %}
     </div>
+    {% endif %}
 
+    {% if form.email %}
     <div class="col-lg-6">
         {% bootstrap_field form.email layout="floating" %}
     </div>
+    {% endif %}
+
 
     {% if form.phone %}
         <div class="col-lg-6">
