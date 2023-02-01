@@ -189,7 +189,6 @@ class RegisterForm(forms.ModelForm):
         instance = super(RegisterForm, self).save(False)
         #Helper.objects.filter(id = self.id).delete()
         instance.event = self.event
-        instance.id = uuid.uuid4
         if self.id is not None:
             instance.id = self.id
 
@@ -202,6 +201,7 @@ class RegisterForm(forms.ModelForm):
 
         if commit:
             if instance.id is None:
+              instance.id = uuid.uuid4()
               instance.save()
             else:
               instance.save(update_fields = {"firstname", "surname", "email", "shirt"})
