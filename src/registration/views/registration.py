@@ -115,7 +115,7 @@ def form(request, event_url_name, link_pk=None):
             return nopermission(request)
 
     # handle form
-    form = RegisterForm(request.POST or None, event=event, shifts_qs=shifts_qs, is_link=link is not None)
+    form = RegisterForm(request.POST or None, event=event, shifts_qs=shifts_qs, is_link=link is not None, request = request)
 
     if event.corona:
         corona_form = ContactTracingDataForm(request.POST or None, event=event, prefix="corona")

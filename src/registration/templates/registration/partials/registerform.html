@@ -17,7 +17,7 @@
         {% bootstrap_field form.full_age layout="floating" required_css_class="" %}
     {% endif %}
 
-    {% if not form.is_internal %}
+    {% if form.privacy_statement %}
         {% bootstrap_field form.privacy_statement %}
 
         <div class="modal fade" id="privacy" tabindex="-1" aria-labelledby="privacy-label" aria-hidden="true">
