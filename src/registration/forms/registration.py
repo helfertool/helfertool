@@ -144,7 +144,7 @@ class RegisterForm(forms.ModelForm):
             )
 
         # check if shift was selected
-        if not self.cleaned_data.get("shifts"):
+        if not self.cleaned_data.get("shifts") and self.user is None:
             raise ValidationError(_("You must select at least one shift."))
 
         # check if helper if full age (but continue with further checks)
