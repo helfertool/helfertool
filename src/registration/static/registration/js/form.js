@@ -81,10 +81,10 @@ $('input.registration_possible').each(function (i, element) {
 /*
  * Show/hide Nutrition field
  */
-var nutrition = $('#field_nutrition')
+let nutrition = $('#field_nutrition')
 
 function show_hide_nutrition_field() {
-    var ask_nutrition = false;
+    let ask_nutrition = false;
     $('input.registration_possible').each(function(i, elem) {
         if (elem.checked && $(elem).data('ask-nutrition') == 'True') {
             ask_nutrition = true;
