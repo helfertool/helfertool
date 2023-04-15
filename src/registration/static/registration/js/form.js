@@ -84,13 +84,13 @@ $('input.registration_possible').each(function (i, element) {
 var nutrition = $('#field_nutrition')
 
 function show_hide_nutrition_field() {
-    var collect_nutritional_preferences = false;
+    var ask_nutrition = false;
     $('input.registration_possible').each(function(i, elem) {
-        if (elem.checked && $(elem).data('collect-nutritional-preferences') == 'True') {
-            collect_nutritional_preferences = true;
+        if (elem.checked && $(elem).data('ask-nutrition') == 'True') {
+            ask_nutrition = true;
         }
     });
-    if (collect_nutritional_preferences) {
+    if (ask_nutrition) {
         nutrition.show();
     }
     else {

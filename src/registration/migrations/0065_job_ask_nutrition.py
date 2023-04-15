@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name="job",
-            name="collect_nutritional_preferences",
+            name="ask_nutrition",
             field=models.BooleanField(default=True, verbose_name="Collect helper nutritional preferences"),
         ),
     ]

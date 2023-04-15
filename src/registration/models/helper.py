@@ -354,10 +354,10 @@ class Helper(models.Model):
         return jobs
 
     @property
-    def collect_nutritional_preferences(self) -> bool:
+    def ask_nutrition(self) -> bool:
         """Returns True if the nutritional prefernce is required."""
 
-        return any(j.collect_nutritional_preferences for j in self.all_jobs)
+        return any(j.ask_nutrition for j in self.all_jobs)
 
 
 @receiver(post_save, sender=Helper, dispatch_uid="helper_saved")
