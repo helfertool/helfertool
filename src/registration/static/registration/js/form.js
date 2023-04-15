@@ -79,6 +79,32 @@ $('input.registration_possible').each(function (i, element) {
 });
 
 /*
+ * Show/hide Nutrition field
+ */
+var nutrition = $('#field_nutrition')
+
+function show_hide_nutrition_field() {
+    var collect_nutritional_preferences = false;
+    $('input.registration_possible').each(function(i, elem) {
+        if (elem.checked && $(elem).data('collect-nutritional-preferences') == 'True') {
+            collect_nutritional_preferences = true;
+        }
+    });
+    if (collect_nutritional_preferences) {
+        nutrition.show();
+    }
+    else {
+        nutrition.hide();
+    }
+}
+
+// The Nutrition field may not be rendered in the first place if it is disabled on the Event level.
+if (nutrition.length > 0) {
+    show_hide_nutrition_field();
+    $('input.registration_possible').change(show_hide_nutrition_field);
+}
+
+/*
  * infection instruction
  */
 

@@ -51,7 +51,7 @@ Parameters:
                 </tr>
             {% endif %}
 
-            {% if helper.event.ask_nutrition %}
+            {% if helper.event.ask_nutrition and helper.collect_nutritional_preferences %}
                 <tr>
                     <th scope="row">{% trans "Nutrition" %}: </th>
                     <td>{{ helper.get_nutrition_short }}</td>

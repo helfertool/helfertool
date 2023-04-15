@@ -49,6 +49,10 @@
             {% bootstrap_field form.infection_instruction layout="floating" %}
         {% endif %}
 
+        {% if event.ask_nutrition %}
+            {% bootstrap_field form.collect_nutritional_preferences layout="floating" %}
+        {% endif %}
+
         {% if form.prerequisites %}
             {% bootstrap_field form.prerequisites layout="floating" %}
         {% endif %}
