@@ -68,6 +68,10 @@
                     <span class="badge badge-outline-secondary fs-6 align-middle">
                         {% icon "eye" %} {% trans "Public" %}
                     </span>
+                {% else %}
+                    <span class="badge badge-outline-secondary fs-6 align-middle">
+                        {% icon "lock" %} {% trans "Private" %}
+                    </span>
                 {% endif %}
             </h2>
 
