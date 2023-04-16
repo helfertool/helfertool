@@ -70,6 +70,20 @@ function update_shift_registration(input_field) {
     });
 }
 
+function disable_shift_in_past() {
+    // do not allow to select shifts in the past
+    $('.timeouted input.registration_possible').each(function (i, element) {
+        if(element.dataset.begin < Date.now() / 1000) {
+            // Shift started in the past
+            console.log(element)
+            element.disabled = true;
+            $(element).removeClass('registration_possible');
+        }
+    });
+}
+disable_shift_in_past();
+setInterval(disable_shift_in_past, 5 * 60 * 1000);
+
 // update and register event handler for every field
 $('input.registration_possible').each(function (i, element) {
     update_shift_registration(element);
