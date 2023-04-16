@@ -1,6 +1,6 @@
 {% load i18n django_bootstrap5 icons static shifts toolsettings %}
 
-<form action="" method="post" id="register_form" data-max-overlapping="{{ event.max_overlapping }}">
+<form action="" method="post" id="register_form" class="{% if not form.is_internal %}timeouted{% endif %}" data-max-overlapping="{{ event.max_overlapping }}">
     {% csrf_token %}
 
     {% form_shifttable form.shifts %}

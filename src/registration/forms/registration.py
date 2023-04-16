@@ -9,6 +9,7 @@ from .widgets import ShiftTableRegistrationWidget
 from ..models import Helper, Shift
 
 import itertools
+import datetime
 
 
 class RegisterForm(forms.ModelForm):
@@ -152,6 +153,9 @@ class RegisterForm(forms.ModelForm):
             # check if shift is blocked
             if shift.blocked and self.respect_blocked:
                 raise ValidationError(_("You selected a blocked shift."))
+
+            if shift.begin < datetime.datetime.now().astimezone():
+                raise ValidationError(_("You selected shift in the past."))
 
         # infection instruction needed but field not set?
         if infection_instruction_needed and not self.cleaned_data.get("infection_instruction"):
