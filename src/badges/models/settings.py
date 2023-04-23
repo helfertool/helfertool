@@ -109,7 +109,7 @@ Nevertheless, the weekday or date may be required for events with several days."
     )
 
     def __str__(self):
-        return "Badge settings - {}".format(self.event)
+        return str(self.event)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not hasattr(self, "defaults"):

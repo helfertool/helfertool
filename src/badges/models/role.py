@@ -31,7 +31,7 @@ class BadgeRole(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return "{} - {}".format(self.badge_settings.event, self.name)
 
     def duplicate(self, settings, permission_map):
         new_role = deepcopy(self)

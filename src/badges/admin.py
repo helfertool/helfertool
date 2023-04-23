@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BadgeSettings, BadgeDesign, BadgePermission, BadgeRole, Badge, SpecialBadges
+from .models import BadgeSettings, BadgeDesign, BadgePermission, BadgeRole, BadgeDefaults, Badge, SpecialBadges
 
 
 class SpecialBadgesAdmin(admin.ModelAdmin):
@@ -12,4 +12,5 @@ admin.site.register(BadgeSettings)
 admin.site.register(BadgeDesign)
 admin.site.register(BadgePermission)
 admin.site.register(BadgeRole)
+admin.site.register(BadgeDefaults)
 admin.site.register(SpecialBadges, SpecialBadgesAdmin)

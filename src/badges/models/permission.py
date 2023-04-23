@@ -24,7 +24,7 @@ class BadgePermission(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return "{} - {}".format(self.badge_settings.event, self.name)
 
     def duplicate(self, settings):
         new_permission = deepcopy(self)

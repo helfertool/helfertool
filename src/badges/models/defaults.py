@@ -28,6 +28,11 @@ class BadgeDefaults(models.Model):
         verbose_name=_("Do not print default roles on badges"),
     )
 
+    def __str__(self):
+        if hasattr(self, "badgesettings"):
+            return str(self.badgesettings.event)
+        return "Badge defaults without settings"
+
     def duplicate(self):
         new_defaults = deepcopy(self)
         new_defaults.pk = None
