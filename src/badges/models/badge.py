@@ -122,7 +122,7 @@ class Badge(models.Model):
 
         if not self.barcode:
             self.barcode = self.pk + 1000  # prevent barcodes like "10"
-            self.save()
+            self.save(update_fields=["barcode"])
 
         if self._old_photo != self.photo and self.photo:
             # pylint: disable=no-member

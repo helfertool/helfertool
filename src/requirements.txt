@@ -1,17 +1,17 @@
 # django release
-django==4.1.*
+django==4.2.*
 
 # packages pinned to compatible version
 django_compressor~=4.1
 django_ical~=1.8
-django_select2~=7.10
+django_select2~=8.1.1
 django-auth-ldap~=4.1
 django-axes~=5.39
 django-bleach~=3.0
-django-bootstrap5~=22.1
+django-bootstrap5~=23.1
 django-ckeditor~=6.5
 django-countries~=7.3
-django-icons~=22.1
+django-icons~=23.1
 django-libsass~=0.9
 django-modeltranslation~=0.18
 django-multiselectfield~=0.1
@@ -19,7 +19,7 @@ celery~=5.2.7
 django-celery-results~=2.5.0
 csscompressor~=0.9
 jmespath~=1.0
-mozilla-django-oidc~=2.0
+mozilla-django-oidc~=3.0.0
 pillow~=9.2
 python-dateutil~=2.8
 python-magic~=0.4

@@ -108,14 +108,24 @@ Nevertheless, the weekday or date may be required for events with several days."
         verbose_name=_("Print barcodes on badges to avoid duplicates"),
     )
 
-    def save(self, *args, **kwargs):
+    def __str__(self):
+        return "Badge settings - {}".format(self.event)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not hasattr(self, "defaults"):
             defaults = BadgeDefaults()
             defaults.save()
 
             self.defaults = defaults
+            if update_fields is not None:
+                update_fields = {"defaults"}.union(update_fields)
 
-        super(BadgeSettings, self).save(*args, **kwargs)
+        super(BadgeSettings, self).save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields,
+        )
 
     def creation_possible(self):
         if not self.latex_template:

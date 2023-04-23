@@ -316,7 +316,7 @@ class Event(models.Model):
         if initial_save:
             self.logo = logo_original
             self.logo_social = logo_social_original
-            self.save()
+            self.save(update_fields=["logo", "logo_social"])
 
     def get_shirt_choices(self, internal=True):
         """
