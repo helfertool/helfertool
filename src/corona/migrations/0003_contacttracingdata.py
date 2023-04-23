@@ -6,7 +6,6 @@ import django_countries.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0055_event_corona"),
         ("corona", "0002_coronasettings_rules"),

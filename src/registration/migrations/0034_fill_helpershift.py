@@ -29,7 +29,6 @@ def create_helpershift_relations(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0033_add_helpershift"),
         ("gifts", "0008_auto_20170401_1512"),

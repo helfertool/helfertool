@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0048_rename_ask_vegetarian_event_ask_nutrition"),
     ]

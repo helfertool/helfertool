@@ -5,7 +5,6 @@ import multiselectfield.db.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0042_admins_unique"),
     ]

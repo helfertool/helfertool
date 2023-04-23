@@ -19,7 +19,6 @@ def create_through_relations(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0059_add_job_admin_roles"),
     ]

@@ -8,7 +8,6 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0023_auto_20170618_1101"),
     ]

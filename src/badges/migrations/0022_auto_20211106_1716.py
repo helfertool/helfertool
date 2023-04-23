@@ -7,7 +7,6 @@ import helfertool.forms.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("badges", "0021_auto_20210523_1533"),
     ]

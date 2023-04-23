@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0030_helper_mail_failed"),
         ("mail", "0006_auto_20160730_1610"),

@@ -13,7 +13,6 @@ def create_giftsettings(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("gifts", "0009_giftsettings"),
     ]

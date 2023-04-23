@@ -12,7 +12,6 @@ def fill_event_field(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("badges", "0015_badge_add_event"),
     ]

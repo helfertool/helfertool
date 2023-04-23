@@ -6,7 +6,6 @@ import registration.models.event
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ("registration", "0063_alter_event_url_name"),

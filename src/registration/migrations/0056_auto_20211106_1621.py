@@ -6,7 +6,6 @@ import registration.models.event
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0055_event_corona"),
     ]

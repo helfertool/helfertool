@@ -14,7 +14,6 @@ def gen_uuid(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("news", "0002_person_token"),
     ]

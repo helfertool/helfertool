@@ -5,7 +5,6 @@ import django_bleach.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0061_remove_old_job_job_admins"),
     ]

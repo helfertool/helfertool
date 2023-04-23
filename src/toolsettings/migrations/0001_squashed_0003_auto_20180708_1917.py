@@ -8,7 +8,6 @@ import django_bleach.models
 
 
 class Migration(migrations.Migration):
-
     replaces = [
         ("toolsettings", "0001_initial"),
         ("toolsettings", "0002_auto_20180624_1505"),

@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("prerequisites", "0001_initial"),
         ("registration", "0031_event_ask_phone"),

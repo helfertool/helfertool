@@ -9,7 +9,6 @@ import django_bleach.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0026_auto_20180806_1400"),
     ]

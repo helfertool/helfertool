@@ -9,7 +9,6 @@ import django.core.validators
 
 
 class Migration(migrations.Migration):
-
     dependencies = []
 
     operations = [

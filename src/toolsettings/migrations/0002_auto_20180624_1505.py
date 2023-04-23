@@ -7,7 +7,6 @@ import django_bleach.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("toolsettings", "0001_initial"),
     ]

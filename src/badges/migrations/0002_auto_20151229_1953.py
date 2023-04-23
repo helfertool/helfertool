@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("badges", "0001_initial"),
         ("registration", "0001_initial"),

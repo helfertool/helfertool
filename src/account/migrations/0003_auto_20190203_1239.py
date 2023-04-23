@@ -7,7 +7,6 @@ import django.utils.datetime_safe
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("account", "0002_auto_20190202_2336"),
     ]

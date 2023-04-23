@@ -5,7 +5,6 @@ import registration.models.event
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0046_auto_20210523_1533"),
     ]

@@ -13,7 +13,6 @@ def migrate_vegetarian(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0049_auto_20210806_1249"),
     ]

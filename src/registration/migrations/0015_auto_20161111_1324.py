@@ -7,7 +7,6 @@ import registration.models.event
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0014_event_inventory"),
     ]

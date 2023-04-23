@@ -7,7 +7,6 @@ import multiselectfield.db.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0020_event_logo_social"),
     ]

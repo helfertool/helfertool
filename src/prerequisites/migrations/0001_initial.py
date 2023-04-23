@@ -6,7 +6,6 @@ import django_bleach.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [

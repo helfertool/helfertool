@@ -13,7 +13,6 @@ def copy_barcode(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("badges", "0010_badge_barcode"),
     ]

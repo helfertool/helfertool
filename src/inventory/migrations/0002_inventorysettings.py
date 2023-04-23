@@ -7,7 +7,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0015_auto_20161111_1324"),
         ("inventory", "0001_initial"),

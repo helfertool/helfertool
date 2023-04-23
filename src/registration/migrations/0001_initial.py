@@ -9,7 +9,6 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("badges", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

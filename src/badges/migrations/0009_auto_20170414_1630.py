@@ -7,7 +7,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("badges", "0008_badgesettings_only_coordinators"),
     ]

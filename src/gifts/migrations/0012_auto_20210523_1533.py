@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("gifts", "0011_remove_helpersgifts_accomplished_shifts"),
     ]

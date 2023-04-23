@@ -6,7 +6,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("gifts", "0004_helpersgifts_got_shirt"),
     ]

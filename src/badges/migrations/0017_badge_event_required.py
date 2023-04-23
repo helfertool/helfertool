@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("registration", "0043_auto_20200409_1711"),
         ("badges", "0016_badge_fill_event"),
