@@ -64,7 +64,7 @@ class HelperForm(forms.ModelForm):
             self.fields["shirt"].choices = self.related_event.get_shirt_choices(True)
 
         # remove field for nutrition
-        if not (self.related_event.ask_nutrition and self.instance.ask_nutrition):
+        if not self.instance.ask_nutrition and not (self.job and self.job.ask_nutrition):
             self.fields.pop("nutrition")
 
         # remove field for instruction for food handling

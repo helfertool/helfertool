@@ -98,7 +98,7 @@ class Job(models.Model):
 
     ask_nutrition = models.BooleanField(
         default=True,
-        verbose_name=_("Collect helper nutritional preferences"),
+        verbose_name=_("Ask for preferred nutrition for this job"),
     )
 
     def __str__(self):

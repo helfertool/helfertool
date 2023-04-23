@@ -60,6 +60,7 @@ class RegisterForm(forms.ModelForm):
             self.fields["shirt"].choices = self.event.get_shirt_choices(internal=self.is_internal)
 
         # remove field for nutrition?
+        # would also be removed via javascript, but let's just remove it completely
         if not self.event.ask_nutrition:
             self.fields.pop("nutrition")
 

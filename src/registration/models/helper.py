@@ -354,8 +354,10 @@ class Helper(models.Model):
         return jobs
 
     @property
-    def ask_nutrition(self) -> bool:
-        """Returns True if the nutritional prefernce is required."""
+    def ask_nutrition(self):
+        """Returns True if the nutritional preference is required."""
+        if hasattr(self, "event") and not self.event.ask_nutrition:
+            return False
 
         return any(j.ask_nutrition for j in self.all_jobs)
 
