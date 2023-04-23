@@ -3,10 +3,10 @@ from django.db import connection
 from django.http import FileResponse, Http404
 from django.shortcuts import render
 
-from celery.five import monotonic  # pylint: disable=E0611
 from contextlib import contextmanager
 from pathlib import Path
 
+import time
 import mimetypes
 
 
@@ -84,13 +84,13 @@ def cache_lock(lock_id, oid, expire=60 * 10):
     We use the database cache backend here, this is not as good as using memcached,
     but should be good enough for the use case. By default, the lock expires after 10 minutes.
     """
-    timeout_at = monotonic() + expire - 3
+    timeout_at = time.monotonic() + expire - 3
     # cache.add fails if the key already exists
     status = caches["locks"].add(lock_id, oid, expire)
     try:
         yield status
     finally:
-        if monotonic() < timeout_at and status:
+        if time.monotonic() < timeout_at and status:
             # don't release the lock if we exceeded the timeout
             # to lessen the chance of releasing an expired lock
             # owned by someone else

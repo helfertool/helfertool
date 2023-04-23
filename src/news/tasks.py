@@ -5,7 +5,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils import translation, timezone
 
-from celery import task, shared_task
+from celery import shared_task
 
 from mail.tracking import new_tracking_news
 
@@ -16,7 +16,7 @@ from dateutil.relativedelta import relativedelta
 
 
 @shared_task
-def send_news_mails(first_language, append_english, subject, text, text_en, unsubsribe_url):
+def send_news_mails(first_language, append_english, subject, text, text_en, unsubscribe_url):
     # import on top would break setup_periodic_tasks in helfertool/celery.py as django is not fully loaded
     # so we import it here
     from news.models import Person
@@ -31,7 +31,7 @@ def send_news_mails(first_language, append_english, subject, text, text_en, unsu
     for person in Person.objects.filter(validated=True):
         # build mail text
         mail_text = ""
-        tmp_unsubscribe_url = unsubsribe_url + str(person.token)
+        tmp_unsubscribe_url = unsubscribe_url + str(person.token)
 
         if append_english:
             mail_text += render_to_string("news/mail/newsletter_english.txt")
@@ -81,7 +81,7 @@ def _mail_text_language(language, text, unsubscribe_url):
     return tmp
 
 
-@task
+@shared_task
 def cleanup():
     """Delete newsletter subscriptions that were not validated for some time (3 days by default).
 

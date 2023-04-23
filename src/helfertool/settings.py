@@ -95,7 +95,7 @@ CELERY_BROKER_URL = "amqp://{}:{}@{}:{}/{}".format(
     dict_get(config, "5672", "rabbitmq", "port"),
     dict_get(config, "", "rabbitmq", "vhost"),
 )
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = "django-db"
 CELERY_BROKER_POOL_LIMIT = None
 
 # caches
@@ -549,6 +549,7 @@ INSTALLED_APPS = (
     "django_countries",
     "ckeditor",
     "compressor",
+    "django_celery_results",
     "registration.apps.RegistrationConfig",
     "statistic.apps.StatisticConfig",
     "badges.apps.BadgesConfig",

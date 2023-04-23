@@ -16,6 +16,7 @@ urlpatterns = [
     # empty tokens are allowed since this is used to generate the link once
     # and add the specific tokens
     # empty tokens are handled in the view with an 404
+    path("unsubscribe/", views.unsubscribe, name="unsubscribe_empty"),
     path("unsubscribe/<uuid:token>/", views.unsubscribe, name="unsubscribe"),
     path(
         "unsubscribe/done/",

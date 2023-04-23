@@ -64,7 +64,7 @@ class MailForm(forms.Form):
             # english may be set anyway
             append_english = False
 
-        unsubscribe_url = self.request.build_absolute_uri(reverse("news:unsubscribe", args=[""]))
+        unsubscribe_url = self.request.build_absolute_uri(reverse("news:unsubscribe_empty"))
         # since args is empty, the URL ends with // (this is a dirty trick to get the base URL for unsubscribe)
         unsubscribe_url = re.sub("//$", "/", unsubscribe_url)
 

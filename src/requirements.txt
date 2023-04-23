@@ -1,11 +1,6 @@
 # django release
 django==4.1.*
 
-# packages that we downgrade (for now)
-celery<5.0.0
-vine<5.0.0  # added due to celery
-amqp<5.0.0  # pinned due to celery
-
 # packages pinned to compatible version
 django_compressor~=4.1
 django_ical~=1.8
@@ -20,6 +15,8 @@ django-icons~=22.1
 django-libsass~=0.9
 django-modeltranslation~=0.18
 django-multiselectfield~=0.1
+celery~=5.2.7
+django-celery-results~=2.5.0
 csscompressor~=0.9
 jmespath~=1.0
 mozilla-django-oidc~=2.0
