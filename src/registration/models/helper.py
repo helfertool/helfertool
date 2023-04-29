@@ -148,6 +148,7 @@ class Helper(models.Model):
         choices=NUTRITION_CHOICES,
         default=NUTRITION_NO_PREFERENCE,
         verbose_name=_("Nutrition"),
+        blank=True,
         help_text=_("This helps us estimating the food for our helpers."),
     )
 
