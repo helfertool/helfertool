@@ -63,7 +63,7 @@ set -u
 # command: build
 if [ "$action" = "build" ] ; then
     # build without cache and with updated base image
-    container_version="$(date --utc --iso-8601=seconds)"
+    container_version="$(date -u -Iseconds)"
     podman build --no-cache --pull \
         --build-arg CONTAINER_VERSION="$container_version" \
         --format docker \
