@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.mail import EmailMessage
 from django.urls import reverse
 from django.db import models
@@ -90,9 +91,15 @@ class Helper(models.Model):
         (NUTRITION_OTHER, _("Other")),
     )
 
+    user_id = models.ForeignKey(
+        get_user_model(),
+        null=True,
+        on_delete=models.CASCADE
+    )
+
     id = models.UUIDField(
         primary_key=True,
-        default=uuid.uuid4,
+        #default=uuid.uuid4,
         editable=False,
     )
 

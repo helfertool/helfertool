@@ -40,7 +40,7 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
         verified = super(CustomOIDCAuthenticationBackend, self).verify_claims(claims)
 
         # we require the given_name and family_name
-        if "given_name" not in claims or "family_name" not in claims:
+        if "preferred_username" not in claims or "preferred_username" not in claims:
             return False
 
         # abort login early when user is not allowed to login -> do not create account in database
@@ -62,8 +62,8 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     # called on login when the user already exists, just update all attributes
     def update_user(self, user, claims):
         # name
-        user.first_name = claims.get("given_name")
-        user.last_name = claims.get("family_name")
+        user.first_name = claims.get("preferred_username")
+        user.last_name = claims.get("preferred_username")
 
         # check if login should be restricted (if not, login is allowed)
         if settings.OIDC_CUSTOM_CLAIM_LOGIN:
