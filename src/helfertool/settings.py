@@ -97,6 +97,7 @@ CELERY_BROKER_URL = "amqp://{}:{}@{}:{}/{}".format(
 )
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_BROKER_POOL_LIMIT = None
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 # caches
 CACHES = {
@@ -296,9 +297,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # axes: user lockout based on username, not IP or user agent
+AXES_LOCKOUT_PARAMETERS = ["username"]
 AXES_LOCK_OUT_AT_FAILURE = True
-AXES_ONLY_USER_FAILURES = True
-AXES_USE_USER_AGENT = False
 
 AXES_FAILURE_LIMIT = dict_get(config, 5, "security", "lockout", "limit")
 AXES_COOLOFF_TIME = timedelta(minutes=dict_get(config, 10, "security", "lockout", "time"))

@@ -3,5 +3,5 @@ pylint~=2.17.2
 pylint-django~=2.5.3
 pylint-celery~=0.3
 bump2version~=1.0.1
-pre-commit~=3.2.2
-django-upgrade~=1.13.0
+pre-commit~=3.4.0
+django-upgrade~=1.14.1
