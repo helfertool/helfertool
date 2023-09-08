@@ -65,6 +65,7 @@ if [ "$action" = "build" ] ; then
     # build without cache and with updated base image
     container_version="$(date -u -Iseconds)"
     podman build --no-cache --pull \
+        --arch=amd64 \
         --build-arg CONTAINER_VERSION="$container_version" \
         --format docker \
         -t "$container_name:$container_tag" .
@@ -73,6 +74,7 @@ if [ "$action" = "build" ] ; then
 elif [ "$action" = "fastbuild" ] ; then
     # build with cache, as fast as possible
     podman build \
+        --arch=amd64 \
         --build-arg CONTAINER_VERSION="fastbuild" \
         --format docker \
         -t "$container_name:$container_tag" .
