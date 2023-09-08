@@ -435,6 +435,9 @@ if EVENTS_LAST_YEARS < 0:
 # announcement on every page
 ANNOUNCEMENT_TEXT = dict_get(config, None, "announcement")
 
+# title for all pages
+PAGE_TITLE = dict_get(config, "Helfertool", "customization", "title")
+
 # external URLs
 PRIVACY_URL = dict_get(config, "https://app.helfertool.org/datenschutz/", "customization", "urls", "privacy")
 IMPRINT_URL = dict_get(config, "https://app.helfertool.org/impressum/", "customization", "urls", "imprint")

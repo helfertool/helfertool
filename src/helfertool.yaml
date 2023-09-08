@@ -273,6 +273,9 @@ features:
 
 # Custom URLs, mail addresses, ...
 customization:
+    # Title for all pages
+    title: "Helfertool"
+
     # Modify certain properties for the general helfertool to display
     display:
         # Maximum years of events to be displayed by default on the main page

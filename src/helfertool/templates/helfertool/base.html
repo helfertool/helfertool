@@ -21,7 +21,7 @@
         {% block adminheader %}{% endblock %}
         {% block socialheader %}{% endblock %}
 
-        <title>{% block title %}{% trans "Helfertool" %}{% endblock %}</title>
+        <title>{% djangosetting "PAGE_TITLE" %}</title>
 
         <link rel="shortcut icon" type="image/x-icon" href="{% static "helfertool/img/logo/icon.png" %}">
     </head>
@@ -29,10 +29,6 @@
     <body>
         <nav class="navbar navbar-expand navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url "index" %}">
-                    <img src="{% static "helfertool/img/logo/logo.svg" %}" height="20" alt="">
-                </a>
-
                 {# left menu #}
                 <ul class="navbar-nav me-auto">
                     {% block sidemenubutton %}{% endblock %}

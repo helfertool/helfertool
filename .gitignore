@@ -12,6 +12,9 @@ Session.vim
 # PyCharm
 .idea
 
+# macOS
+.DS_Store
+
 # python/django
 *.pyc
 *.pyo
