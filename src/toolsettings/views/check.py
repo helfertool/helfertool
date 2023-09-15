@@ -85,7 +85,6 @@ def check(request):
 
     # headers
     header_host = request.headers.get("host")
-    header_remote_addr = request.headers.get("remote_addr")
     header_x_forwarded_for = request.headers.get("x-forwarded-for")
     header_x_forwarded_proto = request.headers.get("x-forwarded-proto")
 
@@ -101,7 +100,6 @@ def check(request):
         "ldap_configured": ldap_configured,
         "ldap_ok": ldap_ok,
         "header_host": header_host,
-        "header_remote_addr": header_remote_addr,
         "header_x_forwarded_for": header_x_forwarded_for,
         "header_x_forwarded_proto": header_x_forwarded_proto,
     }

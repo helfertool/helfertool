@@ -240,8 +240,8 @@ security:
     #    - "app.helfertool.org"
     #    - "www.app.helfertool.org"
 
-    # Application is behind additional/second proxy. In this case, the HTTP
-    # header X-Forwarded-Host is used. Example: Apache > nginx > uwsgi
+    # Application is behind reverse proxy. In this case, the HTTP header X-Forwarded-Proto
+    # is used to check if the application is accessed via HTTPS.
     behind_proxy: False
 
     # Account lockout

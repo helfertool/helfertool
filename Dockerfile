@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 ARG CONTAINER_VERSION="unknown"
 
@@ -9,8 +9,8 @@ ENV HELFERTOOL_CONFIG_FILE="/config/helfertool.yaml"
 RUN apt-get update && apt-get full-upgrade -y && \
     apt-get install --no-install-recommends -y \
         supervisor nginx rsyslog pwgen curl \
-        python3 python3-pip python3-dev uwsgi uwsgi-plugin-python3 \
-        build-essential pkg-config libldap2-dev libsasl2-dev libmariadb-dev libpq-dev libmagic1 \
+        python3 python3-venv python3-dev uwsgi uwsgi-plugin-python3 \
+        build-essential pkg-config ldap-utils libldap2-dev libsasl2-dev libmariadb-dev libpq-dev libmagic1 \
         texlive-latex-extra texlive-plain-generic texlive-fonts-recommended texlive-lang-german && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc/* && \
@@ -34,12 +34,13 @@ COPY deployment/container/healthcheck.sh /usr/local/bin/healthcheck
 RUN echo $CONTAINER_VERSION > /helfertool/container_version && \
     # install python libs
     cd /helfertool/src/ && \
-    pip3 install -r requirements.txt -r requirements_prod.txt && \
+    python3 -m venv /helfertool/venv/ && \
+    /helfertool/venv/bin/pip install wheel -r requirements.txt -r requirements_prod.txt && \
     rm -rf /root/.cache/pip/ && \
     # generate compressed CSS/JS files
-    HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py compress --force && \
+    HELFERTOOL_CONFIG_FILE=/dev/null /helfertool/venv/bin/python manage.py compress --force && \
     # copy static files
-    HELFERTOOL_CONFIG_FILE=/dev/null python3 manage.py collectstatic --noinput && \
+    HELFERTOOL_CONFIG_FILE=/dev/null /helfertool/venv/bin/python manage.py collectstatic --noinput && \
     chmod -R go+rX /helfertool/static && \
     # fix permissions
     chmod +x /usr/local/bin/helfertool /usr/local/bin/healthcheck

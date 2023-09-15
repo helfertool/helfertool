@@ -117,24 +117,6 @@
                 </tr>
 
                 <tr class="d-flex">
-                    <th class="col-6" scope="row">{% trans "Remote IP" %}</th>
-                    <td class="col-6 text-break">
-                        {% if header_remote_addr %}
-                            {{ header_remote_addr }}
-                            {% if header_remote_addr != header_x_forwarded_for %}
-                                <br/>
-                                <span class="text-danger">
-                                    {% icon "exclamation-triangle" %}
-                                    {% trans "X-Forwarded-For is set to different value" %}
-                                </span>
-                            {% endif %}
-                        {% else %}
-                            <em class="fas fa-times text-danger"></em>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr class="d-flex">
                     <th class="col-6" scope="row">X-Forwarded-For</th>
                     <td class="col-6 text-break">
                         {% if header_x_forwarded_for %}

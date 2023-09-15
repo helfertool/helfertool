@@ -34,7 +34,7 @@ mkdir -p /data/media /data/tmp /helfertool/run/tmp
 # command: init
 if [ "$1" = "init" ] ; then
     # initialise database with default settings
-    python3 manage.py loaddata toolsettings
+    /helfertool/venv/bin/python manage.py loaddata toolsettings
 
 # command: reload
 elif [ "$1" = "reload" ] ; then
@@ -54,7 +54,7 @@ elif [ "$1" = "postrotate" ] ; then
 # command: manage
 elif [ "$1" = "manage" ] ; then
     shift
-    python3 manage.py $@
+    /helfertool/venv/bin/python manage.py $@
 
 # command: run
 elif [ "$1" = "run" ] ; then
@@ -82,8 +82,8 @@ elif [ "$1" = "run" ] ; then
     sed "s/will_be_replaced/$(pwgen 40 1)/g" /helfertool/etc/supervisord.conf > /helfertool/run/supervisord.conf
 
     # run migrations and go
-    python3 manage.py migrate --noinput
-    python3 manage.py createcachetable
+    /helfertool/venv/bin/python manage.py migrate --noinput
+    /helfertool/venv/bin/python manage.py createcachetable
     exec supervisord --nodaemon --configuration /helfertool/run/supervisord.conf
 
 # help message
