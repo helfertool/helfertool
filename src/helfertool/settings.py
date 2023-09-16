@@ -328,23 +328,25 @@ PASSWORD_HASHERS = [
 
 # cookies
 LANGUAGE_COOKIE_NAME = "lang"
+LANGUAGE_COOKIE_HTTPONLY = True
+LANGUAGE_COOKIE_SAMESITE = "Lax"
+LANGUAGE_COOKIE_AGE = 31449600
+
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = "Strict"
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_HTTPONLY = True
+# OIDC with foreign TLDs is blocked by SAMESITE=Strict, so make this configurable
+if oidc_config and dict_get(oidc_config, False, "provider", "thirdparty_domain"):
+    SESSION_COOKIE_SAMESITE = "Lax"
+else:
+    SESSION_COOKIE_SAMESITE = "Strict"
 
 if not DEBUG:
-    CSRF_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_SAMESITE = "Strict"
-
-    SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SECURE = True
-    # OIDC with foreign TLDs is blocked by SAMESITE=Strict, so make this configurable
-    if oidc_config and dict_get(oidc_config, False, "provider", "thirdparty_domain"):
-        SESSION_COOKIE_SAMESITE = "Lax"
-    else:
-        SESSION_COOKIE_SAMESITE = "Strict"
-
-    LANGUAGE_COOKIE_HTTPONLY = True
     LANGUAGE_COOKIE_SECURE = True
-    LANGUAGE_COOKIE_SAMESITE = "Strict"
 
 # logging
 ADMINS = [(mail, mail) for mail in dict_get(config, [], "logging", "mails")]
