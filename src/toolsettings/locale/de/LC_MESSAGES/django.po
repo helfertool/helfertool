@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2023-09-30 16:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -91,14 +91,6 @@ msgstr "Header"
 msgid "Status of HTTP headers"
 msgstr "Status der HTTP Header"
 
-#: toolsettings/templates/toolsettings/check.html:120
-msgid "Remote IP"
-msgstr "Remote IP"
-
-#: toolsettings/templates/toolsettings/check.html:128
-msgid "X-Forwarded-For is set to different value"
-msgstr "X-Forwarded-For hat einen anderen Wert"
-
 #: toolsettings/templates/toolsettings/template_about.html:5
 msgid "Template: About this software"
 msgstr "Template: Über diese Software"
@@ -162,6 +154,12 @@ msgstr "Nutzer:in hinzufügen"
 #: toolsettings/templates/toolsettings/templates.html:11
 msgid "About this software"
 msgstr "Über diese Software"
+
+#~ msgid "Remote IP"
+#~ msgstr "Remote IP"
+
+#~ msgid "X-Forwarded-For is set to different value"
+#~ msgstr "X-Forwarded-For hat einen anderen Wert"
 
 #~ msgid "Mail"
 #~ msgstr "E-Mail"

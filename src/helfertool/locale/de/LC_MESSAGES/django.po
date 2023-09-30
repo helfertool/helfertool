@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2023-09-30 16:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -300,39 +300,35 @@ msgstr "Installation überprüfen"
 msgid "Django Admin Interface"
 msgstr "Django Admin Interface"
 
-#: helfertool/templates/helfertool/base.html:24
-msgid "Helfertool"
-msgstr "Helfertool"
-
-#: helfertool/templates/helfertool/base.html:42
+#: helfertool/templates/helfertool/base.html:38
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: helfertool/templates/helfertool/base.html:49
+#: helfertool/templates/helfertool/base.html:45
 msgctxt "Admin interface"
 msgid "Administration"
 msgstr "Verwaltung"
 
-#: helfertool/templates/helfertool/base.html:87
-#: helfertool/templates/helfertool/base.html:92
+#: helfertool/templates/helfertool/base.html:83
+#: helfertool/templates/helfertool/base.html:88
 msgid "Logout"
 msgstr "Logout"
 
-#: helfertool/templates/helfertool/base.html:97
+#: helfertool/templates/helfertool/base.html:93
 #: helfertool/templates/helfertool/login.html:5
 #: helfertool/templates/helfertool/login.html:34
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:126
+#: helfertool/templates/helfertool/base.html:120
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:128
+#: helfertool/templates/helfertool/base.html:122
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:130
+#: helfertool/templates/helfertool/base.html:124
 msgid "About this software"
 msgstr "Über diese Software"
 
@@ -378,6 +374,9 @@ msgstr "Kein Zugriff"
 #: helfertool/templates/helfertool/nopermission.html:10
 msgid "You have no permission to view this page!"
 msgstr "Du hast keine Berechtigung, um diese Seite anzusehen!"
+
+#~ msgid "Helfertool"
+#~ msgstr "Helfertool"
 
 #~ msgid "User management"
 #~ msgstr "Benutzerverwaltung"

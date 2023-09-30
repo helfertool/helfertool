@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2023-09-30 16:49+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,35 +18,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: account/forms/account.py:125 account/forms/account.py:133
+#: account/forms/account.py:123 account/forms/account.py:131
+#: account/forms/account.py:139
 msgid "Managed by external identity provider"
 msgstr "Durch externen Identity Provider verwaltet"
 
-#: account/forms/account.py:129 account/templates/account/list_users.html:35
+#: account/forms/account.py:135 account/templates/account/list_users.html:35
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
 msgstr "Administrator:in"
 
-#: account/forms/account.py:139 account/templates/account/list_users.html:43
+#: account/forms/account.py:145 account/templates/account/list_users.html:43
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
 msgstr "Benutzer:innen hinzufügen"
 
-#: account/forms/account.py:147 account/templates/account/list_users.html:39
+#: account/forms/account.py:153 account/templates/account/list_users.html:39
 #: account/templates/account/user_permissions.html:14
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:156 account/templates/account/list_users.html:49
+#: account/forms/account.py:162 account/templates/account/list_users.html:49
 #: account/templates/account/user_permissions.html:24
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
 
-#: account/forms/account.py:243
+#: account/forms/account.py:249
 msgid "Other user, which will be deleted"
 msgstr "Andere Benutzer:in, welche gelöscht wird"
 
-#: account/forms/account.py:268
+#: account/forms/account.py:274
 msgid "User does not exist"
 msgstr "Benutzer:in existiert nicht"
 
