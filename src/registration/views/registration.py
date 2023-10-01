@@ -17,7 +17,6 @@ from ..models import Event, Link
 from ..permissions import has_access, ACCESS_INVOLVED
 
 import datetime
-import uuid
 from collections import OrderedDict
 from itertools import groupby
 
@@ -167,12 +166,8 @@ def validate(request, event_url_name, helper_pk, validation_id=None):
 
     # the validation_id should prevent that users guess the url of this page
     # for now, we accept links without this ID, but future releases will require it
-    if validation_id:
-        try:
-            if helper.validation_id != uuid.UUID(validation_id):
-                raise Http404
-        except ValueError:
-            raise Http404
+    if validation_id and helper.validation_id != validation_id:
+        raise Http404
 
     if not helper.validated:
         helper.validated = True
