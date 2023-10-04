@@ -9,6 +9,7 @@ from badges.models import SpecialBadges
 from registration.decorators import archived_not_available
 from registration.models import Event, Shift, HelperShift, Helper
 from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
+from statistic.views.nutrition import NutritionData
 
 from datetime import timedelta
 from itertools import cycle
@@ -236,22 +237,25 @@ def chart_nutrition(request, event_url_name):
         JsonResponse({})
 
     # get data
-    num_no_preference = event.helper_set.filter(nutrition=Helper.NUTRITION_NO_PREFERENCE).count()
-    num_vegetarian = event.helper_set.filter(nutrition=Helper.NUTRITION_VEGETARIAN).count()
-    num_vegean = event.helper_set.filter(nutrition=Helper.NUTRITION_VEGAN).count()
-    num_other = event.helper_set.filter(nutrition=Helper.NUTRITION_OTHER).count()
+    data = NutritionData(event.helper_set)
 
     # abort if nothing to show
-    if num_no_preference + num_vegetarian + num_vegean + num_other == 0:
+    if event.helper_set.count() == 0:
         return JsonResponse({})
 
     # output format
-    data = [
-        {"value": num_no_preference, "label": _("No preference")},
+    response = [
+        {"value": data.num_no_preference, "label": _("No preference")},
         # Translators: adjective
-        {"value": num_vegetarian, "label": _("Vegetarian")},
-        {"value": num_vegean, "label": _("Vegan")},
-        {"value": num_other, "label": _("Other")},
+        {"value": data.num_vegetarian, "label": _("Vegetarian")},
+        {"value": data.num_vegan, "label": _("Vegan")},
+        {"value": data.num_other, "label": _("Other")},
     ]
 
-    return _chart_doughnut(data)
+    # Showing the number of responses where no preference is specified is only relevant if the
+    # event is later changed to ask for nutrition preferences, so we only show it if there are
+    # any such responses.
+    if data.num_blank > 0:
+        response.append({"value": data.num_blank, "label": _("Not specified")})
+
+    return _chart_doughnut(response)

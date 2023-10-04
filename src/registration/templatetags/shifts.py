@@ -117,9 +117,7 @@ def form_shifttable(field):
         if job in jobs_and_shifts:
             jobs_and_shifts[job].append(shift)
         else:
-            jobs_and_shifts[job] = [
-                shift,
-            ]
+            jobs_and_shifts[job] = [shift]
 
     # for rendering, we first need the widget
     widget = field.field.widget

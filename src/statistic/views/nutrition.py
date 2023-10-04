@@ -15,6 +15,7 @@ class NutritionData:
 
     def __init__(self, helper_set):
         # numbers
+        self.num_blank = helper_set.filter(nutrition=None).count()
         self.num_no_preference = helper_set.filter(nutrition=Helper.NUTRITION_NO_PREFERENCE).count()
         self.num_vegetarian = helper_set.filter(nutrition=Helper.NUTRITION_VEGETARIAN).count()
         self.num_vegan = helper_set.filter(nutrition=Helper.NUTRITION_VEGAN).count()

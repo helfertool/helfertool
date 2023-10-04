@@ -96,6 +96,11 @@ class Job(models.Model):
         verbose_name=_("Prerequisites for this job"),
     )
 
+    ask_nutrition = models.BooleanField(
+        default=True,
+        verbose_name=_("Ask for preferred nutrition for this job"),
+    )
+
     def __str__(self):
         return "%s" % self.name
 

@@ -9,7 +9,7 @@ function update_shift_registration(input_field) {
         return
     }
 
-    var modifier = null;
+    let modifier = null;
     if (input_field.checked) {
         // the user has selected a shift, disable all colliding shifts
         modifier = function(e){
@@ -79,15 +79,13 @@ $('input.registration_possible').each(function (i, element) {
 });
 
 /*
- * infection instruction
+ * Optional fields depending on shift (nutrition, infection instruction)
  */
-
-function handle_infection_instruction()
-{
-    var show_field = 0;
+function handle_optional_field(name) {
+    let show_field = 0;
 
     // iterate over all relevant checkboxes
-    $(".infection_instruction").each(function() {
+    $("input." + name).each(function() {
         if($(this).prop('checked'))
         {
             show_field = 1;
@@ -96,18 +94,25 @@ function handle_infection_instruction()
     })
 
     // show or hide input field
-    if(show_field)
-        $("#id_infection_instruction").parent().show()
-    else
-        $("#id_infection_instruction").parent().hide()
+    if(show_field) {
+        $("#id_" + name).parent().show();
+    } else {
+        $("#id_" + name).parent().hide();
+    }
 }
 
-// register event handler
-$('input.infection_instruction').each(function (i, element) {
-    $(this).change(function () {
-        handle_infection_instruction();
+function init_optional_field(name) {
+    // register event handler
+    $("input." + name).each(function (i, element) {
+        $(this).change(function () {
+            handle_optional_field(name);
+        });
     });
-});
 
-// and run it directly
-handle_infection_instruction();
+    // and run it directly
+    handle_optional_field(name);
+}
+
+// do it
+init_optional_field("nutrition");
+init_optional_field("infection_instruction");

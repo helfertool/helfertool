@@ -148,6 +148,7 @@ class Helper(models.Model):
         choices=NUTRITION_CHOICES,
         default=NUTRITION_NO_PREFERENCE,
         verbose_name=_("Nutrition"),
+        blank=True,
         help_text=_("This helps us estimating the food for our helpers."),
     )
 
@@ -352,6 +353,14 @@ class Helper(models.Model):
             jobs.add(shift.job)
 
         return jobs
+
+    @property
+    def ask_nutrition(self):
+        """Returns True if the nutritional preference is required."""
+        if hasattr(self, "event") and not self.event.ask_nutrition:
+            return False
+
+        return any(j.ask_nutrition for j in self.all_jobs)
 
 
 @receiver(post_save, sender=Helper, dispatch_uid="helper_saved")

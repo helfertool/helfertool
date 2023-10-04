@@ -1,10 +1,16 @@
 {% load icons %}
 
 <div class="form-check">
-    <input type="checkbox" name="{{ widget.name }}" value="{{ widget.value }}" id="{{ widget.name }}_{{ widget.value }}"
-        class="form-check-input {% if shift.job.infection_instruction %}infection_instruction{% endif %} {% if not widget.attrs.disabled %}registration_possible{% endif %}"
+    <input
+        type="checkbox"
+        name="{{ widget.name }}"
+        value="{{ widget.value }}"
+        id="{{ widget.name }}_{{ widget.value }}"
+        class="form-check-input {% if shift.job.infection_instruction %}infection_instruction{% endif %} {% if event.ask_nutrition and shift.job.ask_nutrition %}nutrition{% endif %} {% if not widget.attrs.disabled %}registration_possible{% endif %}"
         {% if widget.attrs.checked %}checked{% endif %} {% if widget.attrs.disabled %}disabled{% endif %}
-        data-begin="{{ shift.begin_timestamp }}" data-end="{{ shift.end_timestamp }}">
+        data-begin="{{ shift.begin_timestamp }}"
+        data-end="{{ shift.end_timestamp }}"
+    />
 
     <label class="form-check-label w-100" for="{{ widget.name }}_{{ widget.value }}">
         {{ shift.time_hours }}

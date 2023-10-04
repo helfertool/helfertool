@@ -53,6 +53,10 @@ class JobForm(forms.ModelForm):
         else:
             self.fields["prerequisites"].queryset = Prerequisite.objects.filter(event=self.event)
 
+        # remove ask_nutrition field
+        if not self.event.ask_nutrition:
+            self.fields.pop("ask_nutrition")
+
         # set better label for description fields
         for lang, name in settings.LANGUAGES:
             self.fields["description_{}".format(lang)].label = _("Description (%(lang)s)") % {"lang": name}
