@@ -8,9 +8,9 @@ ENV HELFERTOOL_CONFIG_FILE="/config/helfertool.yaml"
 
 RUN apt-get update && apt-get full-upgrade -y && \
     apt-get install --no-install-recommends -y \
-        supervisor nginx rsyslog pwgen curl \
-        python3 python3-venv python3-dev uwsgi uwsgi-plugin-python3 \
-        build-essential pkg-config ldap-utils libldap2-dev libsasl2-dev libmariadb-dev libpq-dev libmagic1 \
+        supervisor pkg-config nginx rsyslog pwgen curl \
+        python3 python3-pip python3-dev uwsgi uwsgi-plugin-python3 \
+        build-essential libldap2-dev libsasl2-dev libmariadb-dev libmagic1 \
         texlive-latex-extra texlive-plain-generic texlive-fonts-recommended texlive-lang-german && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc/* && \
