@@ -1018,7 +1018,7 @@ msgstr ""
 #: registration/templates/registration/admin/edit_event.html:204
 #: registration/templates/registration/admin/move_event.html:5
 msgid "Move event"
-msgstr "Veranstaltung veschieben"
+msgstr "Veranstaltung verschieben"
 
 #: registration/templates/registration/admin/edit_event.html:199
 msgid "You can move this event."
