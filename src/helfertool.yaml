@@ -24,6 +24,9 @@ language:
     # Default country for Corona contact tracing (ISO-3166-1)
     country: "DE"
 
+    # Multi Language Support (True for german and english, de for german, en for english)
+    multilanguage: "de"
+
 # Database connection
 database:
     # SQLite
