@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bullseye-20240612
 
 ARG CONTAINER_VERSION="unknown"
 
@@ -6,8 +6,7 @@ ENV LANG=C.UTF-8
 ENV DJANGO_SETTINGS_MODULE="helfertool.settings_container"
 ENV HELFERTOOL_CONFIG_FILE="/config/helfertool.yaml"
 
-RUN apt-get update && apt-get full-upgrade -y && \
-    apt-get install --no-install-recommends -y \
+RUN apt-get install --no-install-recommends -y \
         supervisor pkg-config nginx rsyslog pwgen curl \
         python3 python3-pip python3-dev uwsgi uwsgi-plugin-python3 \
         build-essential libldap2-dev libsasl2-dev libmariadb-dev libmagic1 \
