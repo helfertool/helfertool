@@ -1,4 +1,4 @@
 # packages pinned to compatible version
-mysqlclient~=2.2.0
-psycopg~=3.1.10
-uwsgitop~=0.11
+mysqlclient~=2.2.7
+psycopg~=3.2.4
+uwsgitop~=0.12

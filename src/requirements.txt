@@ -2,27 +2,31 @@
 django==4.2.*
 
 # packages pinned to compatible version
-django_compressor~=4.1
-django_ical~=1.8
-django_select2~=8.1.1
-django-auth-ldap~=4.1
-django-axes~=6.1.1
+django_compressor~=4.5.1
+django_ical~=1.9.2
+django_select2~=8.3.0
+django-auth-ldap~=5.1.0
+django-axes~=7.0.1
 django-bleach~=3.1.0
-django-bootstrap5~=23.1
-django-ckeditor~=6.5
-django-countries~=7.3
-django-icons~=23.1
+django-bootstrap5~=24.3
+django-ckeditor~=6.7.2
+django-countries~=7.6.1
+django-icons~=24.4
 django-libsass~=0.9
-django-modeltranslation~=0.18
-django-multiselectfield~=0.1
-celery~=5.3.4
+django-modeltranslation~=0.19.12
+django-multiselectfield~=0.1.13
+celery~=5.4.0
 django-celery-results~=2.5.1
-csscompressor~=0.9
-jmespath~=1.0
-mozilla-django-oidc~=3.0.0
-pillow~=10.3.0
-python-dateutil~=2.8
-python-magic~=0.4
-pyyaml~=6.0
-reportlab~=4.0.4
-xlsxwriter~=3.0
+csscompressor~=0.9.5
+jmespath~=1.0.1
+mozilla-django-oidc~=4.0.1
+pillow~=11.1.0
+python-dateutil~=2.9.0
+python-magic~=0.4.27
+pyyaml~=6.0.2
+reportlab~=4.3.1
+xlsxwriter~=3.2.2
+
+# dependencies of dependencies
+# celery crashs if old celerybeat-schedule file exists and pytz is missing...
+pytz~=2025.1
