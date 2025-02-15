@@ -58,10 +58,21 @@ LANGUAGE_CODE = dict_get(config, "de", "language", "default")
 
 TIME_ZONE = dict_get(config, "Europe/Berlin", "language", "timezone")
 
-LANGUAGES = (
-    ("de", _("German")),
-    ("en", _("English")),
-)
+LANGUAGE_SINGLELANGUAGE = dict_get(config, False, "language", "singlelanguage")
+
+if LANGUAGE_SINGLELANGUAGE:
+    if LANGUAGE_CODE == "de":
+        LANGUAGES = (("de", _("German")),)
+    elif LANGUAGE_CODE == "en":
+        LANGUAGES = (("en", _("English")),)
+    else:
+        print("Invalid language: {}".format(LANGUAGE_CODE))
+        sys.exit(1)
+else:
+    LANGUAGES = (
+        ("de", _("German")),
+        ("en", _("English")),
+    )
 
 USE_I18N = True
 USE_TZ = True

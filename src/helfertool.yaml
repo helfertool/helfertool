@@ -15,6 +15,9 @@ language:
     # Default language if not specified by the browser
     default: "de"
 
+    # Only provide the tool in the default language (removed the language selection)
+    singlelanguage: false
+
     # Language used for badges
     badges: "de"
 

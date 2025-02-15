@@ -50,28 +50,29 @@
 
                 <ul class="navbar-nav ms-auto">
                     {# switch language #}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <em class="fas fa-globe-europe"></em>
-                        </a>
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% if LANGUAGES|length > 1 %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <em class="fas fa-globe-europe"></em>
+                            </a>
 
-                        <ul class="dropdown-menu dropdown-menu-end bg-white">
-                            {# form for language change as we need POSTs #}
-                            <form action="{% url 'set_language' %}" method="post" role="form" class="form-inline">
-                                {% csrf_token %}
-                                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                            <ul class="dropdown-menu dropdown-menu-end bg-white">
+                                {# form for language change as we need POSTs #}
+                                <form action="{% url 'set_language' %}" method="post" role="form" class="form-inline">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ redirect_to }}" />
 
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-
-                                {% for language in languages %}
-                                    <li class="dropdown-item bg-white">
-                                        <button name="language" value="{{ language.code }}" type="submit" class="btn btn-link shadow-none">{{ language.name_local }}</button>
-                                    </li>
-                                {% endfor %}
-                            </form>
-                        </ul>
-                    </li>
+                                    {% for language in languages %}
+                                        <li class="dropdown-item bg-white">
+                                            <button name="language" value="{{ language.code }}" type="submit" class="btn btn-link shadow-none">{{ language.name_local }}</button>
+                                        </li>
+                                    {% endfor %}
+                                </form>
+                            </ul>
+                        </li>
+                    {% endif %}
 
                     {# login/logout #}
                     <li class="nav-item">
