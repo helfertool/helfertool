@@ -45,6 +45,9 @@
 
         <h2>{% trans "Registration" %}</h2>
         {% bootstrap_field form.active %}
+        <div class="alert alert-info" role="alert">
+            {% trans "For internal events, you can create registration links instead of publishing the event." %}
+        </div>
         {% bootstrap_field form.show_public_numbers %}
 
         <div class="row">

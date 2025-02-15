@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 16:49+0200\n"
+"POT-Creation-Date: 2025-02-15 20:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,11 +29,11 @@ msgstr "Bild löschen"
 msgid "User"
 msgstr "Benutzer:in"
 
-#: helfertool/settings.py:62
+#: helfertool/settings.py:65 helfertool/settings.py:73
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:63
+#: helfertool/settings.py:67 helfertool/settings.py:74
 msgid "English"
 msgstr "English"
 
@@ -309,26 +309,26 @@ msgctxt "Admin interface"
 msgid "Administration"
 msgstr "Verwaltung"
 
-#: helfertool/templates/helfertool/base.html:83
-#: helfertool/templates/helfertool/base.html:88
+#: helfertool/templates/helfertool/base.html:84
+#: helfertool/templates/helfertool/base.html:89
 msgid "Logout"
 msgstr "Logout"
 
-#: helfertool/templates/helfertool/base.html:93
+#: helfertool/templates/helfertool/base.html:94
 #: helfertool/templates/helfertool/login.html:5
 #: helfertool/templates/helfertool/login.html:34
 msgid "Login"
 msgstr "Login"
 
-#: helfertool/templates/helfertool/base.html:120
+#: helfertool/templates/helfertool/base.html:121
 msgid "Privacy"
 msgstr "Datenschutz"
 
-#: helfertool/templates/helfertool/base.html:122
+#: helfertool/templates/helfertool/base.html:123
 msgid "Imprint"
 msgstr "Impressum"
 
-#: helfertool/templates/helfertool/base.html:124
+#: helfertool/templates/helfertool/base.html:125
 msgid "About this software"
 msgstr "Über diese Software"
 
