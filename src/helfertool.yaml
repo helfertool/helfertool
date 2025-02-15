@@ -158,6 +158,9 @@ authentication:
     #        client_id: "helfertool"
     #        client_secret: "<SECRET>"
     #
+    #        # The requested scopes
+    #        scopes: "openid email profile"
+    #
     #        # Controls the session cookie SameSite attribute, forcing it to "Lax". This is necessary if your OIDC provider
     #        # resides on a different top level domain name than the Helfertool (error message: "Login failed")
     #        # Set it to true in this case.

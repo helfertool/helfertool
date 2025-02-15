@@ -240,7 +240,7 @@ if oidc_config:
     OIDC_OP_TOKEN_ENDPOINT = dict_get(oidc_config, None, "provider", "token_endpoint")
     OIDC_OP_USER_ENDPOINT = dict_get(oidc_config, None, "provider", "user_endpoint")
 
-    OIDC_RP_SCOPES = "openid email profile"  # also ask for profile -> given_name and family_name
+    OIDC_RP_SCOPES = dict_get(oidc_config, "openid email profile", "provider", "scopes")
 
     oidc_renew_check_interval = dict_get(oidc_config, 0, "provider", "renew_check_interval")
     if oidc_renew_check_interval > 0:
