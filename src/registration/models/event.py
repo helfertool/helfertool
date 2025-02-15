@@ -67,6 +67,7 @@ class Event(models.Model):
 
     SHIRT_UNKNOWN = "UNKNOWN"
     SHIRT_NO = "NO"
+    SHIRT_XXS = "XXS"
     SHIRT_XS = "XS"
     SHIRT_S = "S"
     SHIRT_M = "M"
@@ -74,16 +75,21 @@ class Event(models.Model):
     SHIRT_XL = "XL"
     SHIRT_XXL = "XXL"
     SHIRT_3XL = "3XL"
+    SHIRT_4XL = "4XL"
+    SHIRT_XXS_GIRLY = "XXS_GIRLY"
     SHIRT_XS_GIRLY = "XS_GIRLY"
     SHIRT_S_GIRLY = "S_GIRLY"
     SHIRT_M_GIRLY = "M_GIRLY"
     SHIRT_L_GIRLY = "L_GIRLY"
     SHIRT_XL_GIRLY = "XL_GIRLY"
     SHIRT_XXL_GIRLY = "XXL_GIRLY"
+    SHIRT_3XL_GIRLY = "3XL_GIRLY"
+    SHIRT_4XL_GIRLY = "4XL_GIRLY"
 
     SHIRT_CHOICES = (
         (SHIRT_UNKNOWN, _("Unknown")),
         (SHIRT_NO, _("I do not want a T-Shirt")),
+        (SHIRT_XXS, _("XXS")),
         (SHIRT_XS, _("XS")),
         (SHIRT_S, _("S")),
         (SHIRT_M, _("M")),
@@ -91,12 +97,16 @@ class Event(models.Model):
         (SHIRT_XL, _("XL")),
         (SHIRT_XXL, _("XXL")),
         (SHIRT_3XL, _("3XL")),
+        (SHIRT_4XL, _("4XL")),
+        (SHIRT_XXS_GIRLY, _("XXS (girly)")),
         (SHIRT_XS_GIRLY, _("XS (girly)")),
         (SHIRT_S_GIRLY, _("S (girly)")),
         (SHIRT_M_GIRLY, _("M (girly)")),
         (SHIRT_L_GIRLY, _("L (girly)")),
         (SHIRT_XL_GIRLY, _("XL (girly)")),
         (SHIRT_XXL_GIRLY, _("XXL (girly)")),
+        (SHIRT_3XL_GIRLY, _("3XL (girly)")),
+        (SHIRT_4XL_GIRLY, _("4XL (girly)")),
     )
 
     SHIRT_CHOICES_DEFAULTS = (
@@ -300,13 +310,12 @@ class Event(models.Model):
         # if we do the initial save, we do not have a PK yet, but we need the PK for the path of uploaded images
         # we therefore remove the logos temporarily, save the model, add them again and save again
         initial_save = False
+        logo_original = self.logo
+        logo_social_original = self.logo_social
         if not self.pk:
             initial_save = True
 
-            logo_original = self.logo
             self.logo = None
-
-            logo_social_original = self.logo_social
             self.logo_social = None
 
         # save
