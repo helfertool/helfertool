@@ -1,7 +1,11 @@
 from django import forms
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+
+from captcha.fields import CaptchaField
+from helfertool.forms import CustomCaptchaTextInput
 
 from news.helper import news_add_email
 
@@ -63,7 +67,7 @@ class RegisterForm(forms.ModelForm):
         if not self.event.ask_nutrition:
             self.fields.pop("nutrition")
 
-        # remove field or privacy statement?
+        # remove field for privacy statement?
         if self.is_internal:
             self.fields.pop("privacy_statement")
         else:
@@ -89,6 +93,11 @@ class RegisterForm(forms.ModelForm):
                 _("Show privacy statement"),
             )
             self.fields["news"] = forms.BooleanField(label=news_label, required=False)
+
+        # add captcha?
+        self.ask_captcha = settings.CAPTCHAS_REGISTRATION and not self.is_internal
+        if self.ask_captcha:
+            self.fields["captcha"] = CaptchaField(widget=CustomCaptchaTextInput)
 
         # specify, which shifts are included in the form
         if not self.shifts_qs:

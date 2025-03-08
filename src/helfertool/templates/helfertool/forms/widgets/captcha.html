@@ -1,0 +1,21 @@
+{% load i18n static %}
+<div class="row align-items-center">
+    <div class="col">
+        {% spaceless %}
+            {% for widget in widget.subwidgets %}
+                <div class="form-floating">
+                    {% include widget.template_name %}
+                    <label class="form-label" for="{{ widget.attrs.id }}">{{ widget.attrs.placeholder }}</label>
+                </div>
+            {% endfor %}
+        {% endspaceless %}
+    </div>
+    <div class="col">
+        {% spaceless %}
+            <img src="{{ image }}" alt="captcha" class="captcha" />
+        {% endspaceless %}
+    </div>
+</div>
+<div class="form-text">{% trans "Click on the captcha to load a new one" %}</div>
+
+<script src="{% static "helfertool/js/captcha.js" %}"></script>

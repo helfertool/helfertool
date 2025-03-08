@@ -261,6 +261,14 @@ security:
     # Minimal password length (for local accounts)
     password_length: 12
 
+    # Enable captchas
+    captchas:
+        # for newsletter registration (recommended)
+        newsletter: true
+
+        # for event registration
+        registration: false
+
 # Helfertool features can be disabled globally here (true means enabled, false means disabled).
 # If a flag is changed to disabled, all events are modified automatically after a reload (of celery).
 # Enabling a feature does not change event settings.

@@ -15,6 +15,7 @@ django-icons~=24.4
 django-libsass~=0.9
 django-modeltranslation~=0.19.12
 django-multiselectfield~=0.1.13
+django-simple-captcha~=0.6.2
 celery~=5.4.0
 django-celery-results~=2.5.1
 csscompressor~=0.9.5

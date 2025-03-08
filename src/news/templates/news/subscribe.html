@@ -16,6 +16,11 @@
                 {% bootstrap_field form.email required_css_class="" layout="floating" %}
                 {% bootstrap_field form.privacy_statement %}
 
+                {% if form.captcha %}
+                    <div class="mt-4">
+                        {% bootstrap_field form.captcha required_css_class="" show_label=False %}
+                    </div>
+                {% endif %}
             </div>
         </div>
 

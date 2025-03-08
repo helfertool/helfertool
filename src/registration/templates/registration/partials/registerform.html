@@ -72,6 +72,12 @@
         </div>
     {% endif %}
 
+    {% if form.captcha %}
+        <div class="mt-4">
+            {% bootstrap_field form.captcha required_css_class="" show_label=False %}
+        </div>
+    {% endif %}
+
     <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Register" %}</button>
 
     <script src="{% static "registration/js/form.js" %}"></script>

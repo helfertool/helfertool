@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from django_select2.forms import ModelSelect2Widget, ModelSelect2MultipleWidget
+from captcha.fields import CaptchaTextInput
 
 
 class DatePicker(forms.DateInput):
@@ -78,3 +79,7 @@ class ImageFileInput(forms.ClearableFileInput):
         context = super().get_context(name, value, attrs)
         context["widget"]["download_url"] = self.download_url
         return context
+
+
+class CustomCaptchaTextInput(CaptchaTextInput):
+    template_name = "helfertool/forms/widgets/captcha.html"

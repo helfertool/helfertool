@@ -17,6 +17,8 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     # django-select2
     path("select2/", include("django_select2.urls")),
+    # django-simple-captcha
+    path("captcha/", include("captcha.urls")),
     # authentication
     path("login/", auth_views.LoginView.as_view(template_name="helfertool/login.html"), name="login"),
     path("logout/", auth_views.LogoutView.as_view(next_page="/"), name="logout"),

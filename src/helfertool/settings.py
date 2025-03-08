@@ -324,6 +324,9 @@ DEBUG = dict_get(config, False, "security", "debug")
 SECRET_KEY = dict_get(config, "CHANGEME", "security", "secret")
 ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts") or []  # empty list in config is None, but we need []
 
+CAPTCHAS_NEWSLETTER = dict_get(config, False, "security", "captchas", "newsletter")
+CAPTCHAS_REGISTRATION = dict_get(config, False, "security", "captchas", "registration")
+
 # use X-Forwarded-Proto header to determine if https is used (overwritten in settings_container.py)
 if dict_get(config, False, "security", "behind_proxy"):
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -547,6 +550,12 @@ DJANGO_ICONS = {
     },
 }
 
+# django-simple-captcha
+CAPTCHA_FONT_SIZE = 30
+CAPTCHA_IMAGE_SIZE = (120, 50)
+CAPTCHA_LETTER_ROTATION = (-30, 30)
+CAPTCHA_FOREGROUND_COLOR = "#1ea082"
+
 # application definition
 INSTALLED_APPS = (
     "helfertool",  # we override some default translations here, so put it first
@@ -563,6 +572,7 @@ INSTALLED_APPS = (
     "django_icons",
     "django_select2",
     "django_countries",
+    "captcha",
     "ckeditor",
     "compressor",
     "django_celery_results",
