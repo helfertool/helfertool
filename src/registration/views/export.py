@@ -73,6 +73,7 @@ def export(request, event_url_name, filetype, job_pk=None, date=None):
     buffer = BytesIO()
 
     # do filetype specific stuff
+    content_type = None
     if filetype == "excel":
         filename = "%s.xlsx" % filename
         content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
