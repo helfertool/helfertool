@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
+from django.utils.http import urlencode
 from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
@@ -27,7 +28,7 @@ def event_audit_log(request, event_url_name):
         all_logs = LogEntry.objects.filter(event=event)
 
         # form for filter
-        form = EventAuditLogFilter(request.POST or None, event=event)
+        form = EventAuditLogFilter(request.GET or None, event=event)
         if form.is_valid():
             # apply filters
             if form.instance.user:
@@ -41,11 +42,25 @@ def event_audit_log(request, event_url_name):
         paginator = Paginator(all_logs, 50)
         page = request.GET.get("page")
         log = paginator.get_page(page)
+        paginator_search_string = "?" + urlencode(
+            {
+                "user": form.instance.user.pk if form.instance.user else "",
+                "helper": form.instance.helper.pk if form.instance.helper else "",
+                "message": form.instance.message,
+            }
+        )
     else:
         enabled = False
         log = None
         form = None
+        paginator_search_string = ""
 
     # render page
-    context = {"event": event, "enabled": enabled, "form": form, "log": log}
+    context = {
+        "event": event,
+        "enabled": enabled,
+        "form": form,
+        "log": log,
+        "paginator_search_string": paginator_search_string,
+    }
     return render(request, "toollog/event_audit_log.html", context)

@@ -5,8 +5,7 @@
     <h1>{% trans "Audit log" %}</h1>
 
     {% if enabled %}
-        <form action="{% url 'toollog:event_audit_log' event.url_name %}" method="post" class="mb-3">
-            {% csrf_token %}
+        <form action="{% url 'toollog:event_audit_log' event.url_name %}" method="get" class="mb-3">
             <div class="row">
                 <div class="col-lg-4">{% bootstrap_field form.user %}</div>
                 <div class="col-lg-4">{% bootstrap_field form.helper %}</div>
@@ -81,7 +80,7 @@
                 {% endfor %}
             </ul>
 
-            {% bootstrap_pagination log %}
+            {% bootstrap_pagination log url=paginator_search_string %}
         {% else %}
             <p class="text-muted">{% trans "No log entries found." %}</p>
         {% endif %}
