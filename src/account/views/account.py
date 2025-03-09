@@ -200,7 +200,7 @@ def merge_user(request, user_pk):
 @never_cache
 def list_users(request):
     # check permission
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or has_adduser_group(request.user)):
         return nopermission(request)
 
     # get users based on search term

@@ -53,29 +53,41 @@
 
     {% if users %}
         <ul class="list-group mb-3">
-            {% for user in users %}
+            {% for u in users %}
             <li class="list-group-item">
                 <div class="row">
                     <div class="col-12 col-lg-5 py-1 text-break">
-                        {% if user.get_full_name %}
-                            <a href="{% url "account:view_user" user.pk %}">
-                                {{ user.get_full_name }}
-                            </a>
+                        {% if user.is_superuser %}
+                            {% if u.get_full_name %}
+                                <a href="{% url "account:view_user" u.pk %}">
+                                    {{ u.get_full_name }}
+                                </a>
 
-                            <span class="text-muted">
-                                {{ user.username }}
-                            </span>
+                                <span class="text-muted">
+                                    {{ u.username }}
+                                </span>
+                            {% else %}
+                                <a href="{% url "account:view_user" u.pk %}">
+                                    {{ u.username }}
+                                </a>
+                            {% endif %}
                         {% else %}
-                            <a href="{% url "account:view_user" user.pk %}">
-                                {{ user.username }}
-                            </a>
+                            {# no superuser, but add user -> show users, but no links #}
+                            {% if u.get_full_name %}
+                                {{ u.get_full_name }}
+                                <span class="text-muted">
+                                    {{ u.username }}
+                                </span>
+                            {% else %}
+                                {{ u.username }}
+                            {% endif %}
                         {% endif %}
                     </div>
                     <div class="col-12 col-lg-4 py-1">
-                        {% include "account/user_permissions.html" with user=user %}
+                        {% include "account/user_permissions.html" with user=u %}
                     </div>
                     <div class="col-12 col-lg-3 py-1">
-                        {% icon "clock" %} {{ user|lastlogin }}
+                        {% icon "clock" %} {{ u|lastlogin }}
                     </div>
                 </div>
             </li>

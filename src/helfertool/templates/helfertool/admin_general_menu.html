@@ -47,13 +47,13 @@
                 <li class="nav-item">
                     <a href="{% url 'account:add_user' %}" class="nav-link">{% trans "Add user" %}</a>
                 </li>
-                {% endif %}
 
-                {% if user.is_superuser %}
                 <li class="nav-item">
                     <a href="{% url 'account:list_users' %}" class="nav-link">{% trans "All users" %}</a>
                 </li>
+                {% endif %}
 
+                {% if user.is_superuser %}
                 <li class="nav-item">
                     <a href="{% url 'account:list_agreements' %}" class="nav-link">{% trans "User agreements" %}</a>
                 </li>
