@@ -94,7 +94,7 @@
             {% endfor %}
         </ul>
 
-        {% bootstrap_pagination users %}
+        {% bootstrap_pagination users url=paginator_search_string %}
     {% else %}
         <p class="text-muted">{% trans "No users found." %}</p>
     {% endif %}

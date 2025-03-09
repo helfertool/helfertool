@@ -6,6 +6,7 @@ from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.http import urlencode
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
@@ -218,6 +219,7 @@ def list_users(request):
         )
     else:
         all_users = get_user_model().objects.all().order_by("last_name")
+        search = ""
 
     # apply filters
     filterstr = request.GET.get("filter")
@@ -251,9 +253,12 @@ def list_users(request):
     page = request.GET.get("page")
     users = paginator.get_page(page)
 
+    paginator_search_string = "?" + urlencode({"search": search, "filter": filterstr})
+
     context = {
         "users": users,
-        "search": search or "",
+        "search": search,
         "filter": filterstr,
+        "paginator_search_string": paginator_search_string,
     }
     return render(request, "account/list_users.html", context)
