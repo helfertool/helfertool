@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2025-03-09 12:28+0100\n"
 "PO-Revision-Date: 2021-06-09 21:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: toollog/models.py:30 toollog/templates/toollog/event_audit_log.html:28
+#: toollog/models.py:30 toollog/templates/toollog/event_audit_log.html:27
 msgid "Timestamp"
 msgstr "Zeitstempel"
 
@@ -26,7 +26,7 @@ msgstr "Zeitstempel"
 msgid "Log level"
 msgstr "Log Level"
 
-#: toollog/models.py:36 toollog/templates/toollog/event_audit_log.html:31
+#: toollog/models.py:36 toollog/templates/toollog/event_audit_log.html:30
 msgid "Entry"
 msgstr "Eintrag"
 
@@ -34,13 +34,13 @@ msgstr "Eintrag"
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: toollog/models.py:52 toollog/templates/toollog/event_audit_log.html:34
-#: toollog/templates/toollog/event_audit_log.html:65
+#: toollog/models.py:52 toollog/templates/toollog/event_audit_log.html:33
+#: toollog/templates/toollog/event_audit_log.html:64
 msgid "Helper"
 msgstr "Helfer:in"
 
-#: toollog/models.py:60 toollog/templates/toollog/event_audit_log.html:37
-#: toollog/templates/toollog/event_audit_log.html:70
+#: toollog/models.py:60 toollog/templates/toollog/event_audit_log.html:36
+#: toollog/templates/toollog/event_audit_log.html:69
 msgid "User"
 msgstr "Benutzer:in"
 
@@ -56,23 +56,23 @@ msgstr "Helfertool Modul"
 msgid "Audit log"
 msgstr "Auditprotokoll"
 
-#: toollog/templates/toollog/event_audit_log.html:18
+#: toollog/templates/toollog/event_audit_log.html:17
 msgid "Search"
 msgstr "Suchen"
 
-#: toollog/templates/toollog/event_audit_log.html:19
+#: toollog/templates/toollog/event_audit_log.html:18
 msgid "Clear filter"
 msgstr "Filter löschen"
 
-#: toollog/templates/toollog/event_audit_log.html:42
+#: toollog/templates/toollog/event_audit_log.html:41
 msgid "Entries"
 msgstr "Einträge"
 
-#: toollog/templates/toollog/event_audit_log.html:86
+#: toollog/templates/toollog/event_audit_log.html:85
 msgid "No log entries found."
 msgstr "Keine Logeinträge gefunden."
 
-#: toollog/templates/toollog/event_audit_log.html:90
+#: toollog/templates/toollog/event_audit_log.html:89
 msgid "Logging to database not enabled."
 msgstr "Logging in Datenbank nicht aktiviert."
 

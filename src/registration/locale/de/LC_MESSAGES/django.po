@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-15 20:45+0100\n"
+"POT-Creation-Date: 2025-03-09 12:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Date to copy from"
 msgstr "Datum, von dem kopiert werden soll"
 
-#: registration/forms/registration.py:74
+#: registration/forms/registration.py:78
 #: registration/templates/registration/admin/delete_helper.html:31
 #: registration/templates/registration/admin/edit_event_admins.html:10
 #: registration/templates/registration/admin/edit_job_admins.html:10
@@ -169,25 +169,25 @@ msgstr "Datum, von dem kopiert werden soll"
 msgid "Show"
 msgstr "Anzeigen"
 
-#: registration/forms/registration.py:81
+#: registration/forms/registration.py:85
 msgid "I confirm to be full aged."
 msgstr "Ich bestätige volljährig zu sein."
 
-#: registration/forms/registration.py:88
+#: registration/forms/registration.py:92
 msgid "I want to be informed about future events that are looking for helpers."
 msgstr ""
 "Ich möchte über weitere Veranstaltungen, die nach Helfer:innen suchen, "
 "informiert werden."
 
-#: registration/forms/registration.py:89
+#: registration/forms/registration.py:93
 msgid "Show privacy statement"
 msgstr "Datenschutzerklärung anzeigen"
 
-#: registration/forms/registration.py:120
+#: registration/forms/registration.py:129
 msgid "The registration is not possible as the event is archived."
 msgstr "Die Anmeldung ist nicht möglich, da die Veranstaltung archiviert ist."
 
-#: registration/forms/registration.py:126
+#: registration/forms/registration.py:135
 msgid ""
 "The public registration for this event is disabled. Use the form in the "
 "admin interface."
@@ -195,27 +195,27 @@ msgstr ""
 "Die öffentliche Anmeldung für diese Veranstaltung ist deaktiviert. Verwende "
 "das Formular im Admin Interface."
 
-#: registration/forms/registration.py:131
+#: registration/forms/registration.py:140
 msgid "You must select at least one shift."
 msgstr "Du musst mindestens eine Schicht auswählen."
 
-#: registration/forms/registration.py:135
+#: registration/forms/registration.py:144
 msgid "We are not allowed to accept helpers that are not of full age."
 msgstr "Wir dürfen keine Helfer:innen akzeptieren, die nicht volljährig sind."
 
-#: registration/forms/registration.py:139
+#: registration/forms/registration.py:148
 msgid "Please accept the data privacy statement."
 msgstr "Bitte akzeptiere die Datenschutzerklärung."
 
-#: registration/forms/registration.py:150
+#: registration/forms/registration.py:159
 msgid "You selected a full shift."
 msgstr "Du hast eine volle Schicht ausgewählt."
 
-#: registration/forms/registration.py:154
+#: registration/forms/registration.py:163
 msgid "You selected a blocked shift."
 msgstr "Du hast eine gesperrte Schicht ausgewählt."
 
-#: registration/forms/registration.py:160
+#: registration/forms/registration.py:169
 msgid ""
 "Please tell us, if you received already an instruction for the handling of "
 "food."
@@ -223,7 +223,7 @@ msgstr ""
 "Bitte gib an, ob du bereits eine Belehrung im Umgang mit Lebensmitteln "
 "erhalten hast."
 
-#: registration/forms/registration.py:168
+#: registration/forms/registration.py:177
 #, python-format
 msgid "Some of your shifts overlap more then %(minutes)d minutes."
 msgstr ""
@@ -648,8 +648,8 @@ msgid ""
 "This text is directly shown on the registration page, so that helpers cannot "
 "miss notes in the description."
 msgstr ""
-"Dieser Text wird direkt auf der Anmeldeseite angezeigt, so dass die Helfer:"
-"innen keine Hinweise in der Beschreibung übersehen können."
+"Dieser Text wird direkt auf der Anmeldeseite angezeigt, so dass die "
+"Helfer:innen keine Hinweise in der Beschreibung übersehen können."
 
 #: registration/models/job.py:85
 msgid "Number of coordinators for archived event"
@@ -761,8 +761,8 @@ msgstr "Bitte beachten: Überlappende Schichten werden hier nicht geprüft."
 msgid ""
 "There are no shifts left for which you have the permission to add helpers."
 msgstr ""
-"Es gibt keine Schichten mehr, bei denen du die Berechtigung hast, Helfer:"
-"innen hinzuzufügen."
+"Es gibt keine Schichten mehr, bei denen du die Berechtigung hast, "
+"Helfer:innen hinzuzufügen."
 
 #: registration/templates/registration/admin/archive_event.html:5
 #: registration/templates/registration/admin/edit_event.html:211
@@ -1128,8 +1128,9 @@ msgid ""
 "change the presence or any other data."
 msgstr ""
 "Kann alle Daten der Helfer:innen lesen, Bestätigungsmails erneut versenden, "
-"den internen Kommentar bearbeiten und die ausgegebenen Geschenke der Helfer:"
-"innen setzen. Der Nutzer kann die Anwesenheit und weitere Daten nicht ändern."
+"den internen Kommentar bearbeiten und die ausgegebenen Geschenke der "
+"Helfer:innen setzen. Der Nutzer kann die Anwesenheit und weitere Daten nicht "
+"ändern."
 
 #: registration/templates/registration/admin/edit_event_admins.html:37
 msgid "Can read all helper data and register or take back inventory items."
@@ -1799,7 +1800,7 @@ msgstr "Datenschutzerklärung für Newsletter"
 msgid "Make sure that the helper is full age!"
 msgstr "Versichere dich, dass die Helfer:in volljährig ist!"
 
-#: registration/templates/registration/partials/registerform.html:75
+#: registration/templates/registration/partials/registerform.html:81
 msgid "Register"
 msgstr "Anmelden"
 

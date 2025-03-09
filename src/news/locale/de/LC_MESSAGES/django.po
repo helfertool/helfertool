@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2025-03-09 12:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -54,7 +54,7 @@ msgstr "Englischer Text"
 msgid "This field is required."
 msgstr "Dieses Feld ist zwingend erforderlich."
 
-#: news/forms/remove.py:9 news/forms/subscribe.py:14 news/models/person.py:44
+#: news/forms/remove.py:9 news/forms/subscribe.py:24 news/models/person.py:44
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -62,15 +62,15 @@ msgstr "E-Mail"
 msgid "Unknown e-mail address"
 msgstr "Unbekannte E-Mail Adresse"
 
-#: news/forms/subscribe.py:21
+#: news/forms/subscribe.py:31
 msgid "I agree with the data privacy statement."
 msgstr "Ich stimme der Datenschutzerklärung zu."
 
-#: news/forms/subscribe.py:22
+#: news/forms/subscribe.py:32
 msgid "Show"
 msgstr "Anzeigen"
 
-#: news/forms/subscribe.py:24
+#: news/forms/subscribe.py:34
 msgid "You have to accept the data privacy statement."
 msgstr "Du musst die Datenschutzerklärung akzeptieren."
 
@@ -178,15 +178,15 @@ msgstr "Senden"
 msgid "Subscribe to newsletter"
 msgstr "Newsletter abonnieren"
 
-#: news/templates/news/subscribe.html:27
+#: news/templates/news/subscribe.html:32
 msgid "Privacy statement"
 msgstr "Datenschutzerklärung"
 
-#: news/templates/news/subscribe.html:34
+#: news/templates/news/subscribe.html:39
 msgid "OK"
 msgstr "OK"
 
-#: news/templates/news/subscribe.html:40
+#: news/templates/news/subscribe.html:45
 msgid "Subscribe"
 msgstr "Eintragen"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 16:49+0200\n"
+"POT-Creation-Date: 2025-03-09 12:28+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -210,7 +210,7 @@ msgstr "Kein Filter"
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: account/templates/account/list_users.html:87
+#: account/templates/account/list_users.html:99
 msgid "No users found."
 msgstr "Keine Benutzer:in gefunden."
 
@@ -264,16 +264,16 @@ msgstr "Gestern"
 msgid "%(last_login_ago)s ago"
 msgstr "Vor %(last_login_ago)s"
 
-#: account/views/account.py:35
+#: account/views/account.py:36
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Benutzer:in %(username)s hinzugefügt"
 
-#: account/views/account.py:90
+#: account/views/account.py:91
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
-#: account/views/account.py:187
+#: account/views/account.py:188
 msgid "Merged user {} into {}"
 msgstr "Benutzer:in {} mit {} zusammengefasst"
 
