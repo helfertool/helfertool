@@ -6,8 +6,11 @@ $primary-text:  #ffffff;  // custom variable
 $body-bg:       #ffffff;  // bootstrap variable
 $body-color:    #212529;  // bootstrap variable (gray-900)
 
-$danger:        #d53e54;  // bootstrap variable
+$secondary:     #6c757d;  // bootstrap variable
 $success:       #1a876e;  // bootstrap variable
+$info:          $secondary; //bootstrap variable
+$danger:        #d53e54;  // bootstrap variable
+$warning:       $danger;    // bootstrap variable
 
 // contrast level: 3.0, 4.5 (bootstrap default), or 7.0
 // with the bootstrap default, the buttons have a black text. white text is (imho) better readable
