@@ -120,8 +120,15 @@ authentication:
     #
     #    # LDAP schema and attributes
     #    schema:
-    #        # User definition
-    #        user_dn_template: "uid=%(user)s,ou=People,dc=helfertool,dc=org"
+    #        # User search - option 1: search for user based on attribute, bind then
+    #        user_search_base: "ou=People,dc=helfertool,dc=org"
+    #        user_search_filter: "(uid=%(user)s)"
+    #
+    #        # User search - option 2: direct bind
+    #        # If this option is enabled, the search is skipped
+    #        #user_dn_template: "uid=%(user)s,ou=People,dc=helfertool,dc=org"
+    #
+    #        # User attribute definition
     #        first_name_attr: "givenName"
     #        last_name_attr: "sn"
     #        email_attr: "mail"

@@ -204,8 +204,19 @@ if ldap_config:
     AUTH_LDAP_BIND_DN = dict_get(ldap_config, None, "server", "bind_dn")
     AUTH_LDAP_BIND_PASSWORD = dict_get(ldap_config, None, "server", "bind_password")
 
-    # user schema
+    # user search
+    user_search_base = dict_get(ldap_config, None, "schema", "user_search_base")
+    user_search_filter = dict_get(ldap_config, None, "schema", "user_search_filter")
+    if user_search_base is not None and user_search_filter is not None:
+        AUTH_LDAP_USER_SEARCH = django_auth_ldap.config.LDAPSearch(
+            user_search_base,
+            ldap.SCOPE_SUBTREE,  # pylint: disable=E1101
+            user_search_filter,
+        )
+
     AUTH_LDAP_USER_DN_TEMPLATE = dict_get(ldap_config, None, "schema", "user_dn_template")
+
+    # user schema
     AUTH_LDAP_USER_ATTR_MAP = {
         "first_name": dict_get(ldap_config, "givenName", "schema", "first_name_attr"),
         "last_name": dict_get(ldap_config, "sn", "schema", "last_name_attr"),
