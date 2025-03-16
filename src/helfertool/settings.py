@@ -107,6 +107,7 @@ CELERY_BROKER_URL = "amqp://{}:{}@{}:{}/{}".format(
     dict_get(config, "", "rabbitmq", "vhost"),
 )
 CELERY_RESULT_BACKEND = "django-db"
+CELERY_RESULT_EXTENDED = True
 CELERY_BROKER_POOL_LIMIT = None
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
