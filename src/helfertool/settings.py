@@ -14,6 +14,9 @@ from pathlib import Path
 
 from .utils import dict_get, build_path, get_version, pg_trgm_installed
 
+# import josepy, otherwise the oidc module does not work properly...
+import josepy
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # import configuration file
