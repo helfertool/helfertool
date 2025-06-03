@@ -4,7 +4,7 @@ django==4.2.*
 # packages pinned to compatible version
 django_compressor~=4.5.1
 django_ical~=1.9.2
-django_select2~=8.3.0
+django_select2~=8.4.1
 django-auth-ldap~=5.1.0
 django-axes~=7.0.1
 django-bleach~=3.1.0
