@@ -17,6 +17,7 @@ RUN apt-get update && apt-get full-upgrade -y && \
     # add user, some directories and set file permissions
     useradd --shell /bin/bash --home-dir /helfertool --create-home helfertool --uid 10001 && \
     mkdir -p /config /data /log /helfertool/run && \
+    chown -R helfertool:helfertool /config /data /log && \
     chmod -R 0777 /helfertool/run && \
     # nginx always writes to /var/log/nginx/error.log before reading the config
     # so we redirect it to a writable location
