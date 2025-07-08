@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
@@ -62,7 +63,7 @@ def edit_job(request, event_url_name, job_pk=None):
             },
         )
 
-        return redirect("jobs_and_shifts", event_url_name=event_url_name)
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#{job.pk}")
 
     # render page
     context = {"event": event, "job": job, "form": form}
@@ -82,7 +83,11 @@ def edit_job_admins(request, event_url_name, job_pk=None):
     all_forms = []
     job_admin_roles = JobAdminRoles.objects.filter(job=job)
     for job_admin in job_admin_roles:
-        form = JobAdminRolesForm(request.POST or None, instance=job_admin, prefix="user_{}".format(job_admin.user.pk))
+        form = JobAdminRolesForm(
+            request.POST or None,
+            instance=job_admin,
+            prefix="user_{}".format(job_admin.user.pk),
+        )
         all_forms.append(form)
 
     # another form to add one new admin
@@ -178,7 +183,12 @@ def delete_job(request, event_url_name, job_pk):
                 break
 
     # render page
-    context = {"event": event, "job": job, "helpers_registered": helpers_registered, "form": form}
+    context = {
+        "event": event,
+        "job": job,
+        "helpers_registered": helpers_registered,
+        "form": form,
+    }
     return render(request, "registration/admin/delete_job.html", context)
 
 

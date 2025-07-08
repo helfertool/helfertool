@@ -101,7 +101,7 @@
 
         {# iterate over shifts on this day #}
         {% for shift in shifts %}
-            <h3 class="m-0">{{ shift.time_hours }}
+            <h3 class="m-0" id="{{ shift.pk }}">{{ shift.time_hours }}
                 <span class="badge badge-outline-secondary ms-1">
                     {% blocktrans trimmed with current=shift.num_helpers total=shift.number %}
                         {{ current }} of {{ total }}

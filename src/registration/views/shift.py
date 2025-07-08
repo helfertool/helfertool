@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
@@ -44,7 +45,7 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
             },
         )
 
-        return redirect("jobs_and_shifts", event_url_name=event_url_name)
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name':event_url_name})}#{job_pk}")
 
     # render page
     context = {"event": job.event, "job": job, "shift": shift, "form": form}
