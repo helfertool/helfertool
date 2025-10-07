@@ -268,12 +268,11 @@ if oidc_config:
 
     OIDC_RP_SCOPES = dict_get(oidc_config, "openid email profile", "provider", "scopes")
 
+    OIDC_CUSTOM_USERNAME_CLAIM = dict_get(oidc_config, "email", "provider", "username_claim")
+
     oidc_renew_check_interval = dict_get(oidc_config, 0, "provider", "renew_check_interval")
     if oidc_renew_check_interval > 0:
         OIDC_RENEW_ID_TOKEN_EXPIRY_SECONDS = oidc_renew_check_interval * 60
-
-    # username is mail address
-    OIDC_USERNAME_ALGO = "helfertool.oidc.generate_username"
 
     # login and logout
     LOGIN_REDIRECT_URL_FAILURE = "/oidc/failed"

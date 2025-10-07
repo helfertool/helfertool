@@ -171,6 +171,10 @@ authentication:
     #        # The requested scopes
     #        scopes: "openid email profile"
     #
+    #        # The claim that should be used as username
+    #        # Reasonable choices are email or preferred_username
+    #        username_claim: "email"
+    #
     #        # Controls the session cookie SameSite attribute, forcing it to "Lax". This is necessary if your OIDC provider
     #        # resides on a different top level domain name than the Helfertool (error message: "Login failed")
     #        # Set it to true in this case.

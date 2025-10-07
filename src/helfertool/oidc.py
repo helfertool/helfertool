@@ -10,11 +10,6 @@ import jmespath
 import unicodedata
 
 
-# the username is the mail address
-def generate_username(email):
-    return unicodedata.normalize("NFKC", email)[:150]
-
-
 # whitelist logins via openid connect in django-axes as locking it the job if the identity provider
 # (and we cannot do it properly with django-axes)
 @sensitive_variables("credentials")
@@ -39,6 +34,10 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     def verify_claims(self, claims):
         verified = super(CustomOIDCAuthenticationBackend, self).verify_claims(claims)
 
+        # we require the claim that contains the username (obviously)
+        if settings.OIDC_CUSTOM_USERNAME_CLAIM not in claims:
+            return False
+
         # we require the given_name and family_name, email is already checked by verify_claims
         if "given_name" not in claims or "family_name" not in claims:
             return False
@@ -52,15 +51,21 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
 
         return verified and is_active
 
+    def get_username(self, claims):
+        return claims.get(settings.OIDC_CUSTOM_USERNAME_CLAIM)
+
     # match users based on username field
-    # default is email field, but it is not unique which can result in issues
-    # we set username = email, so finally its the email address, but stored in another field
     def filter_users_by_claims(self, claims):
-        email = claims.get("email")
-        if not email:
+        username = self.get_username(claims)
+
+        if not username:
             return self.UserModel.objects.none()
 
-        return self.UserModel.objects.filter(username__exact=generate_username(email))
+        try:
+            user = self.UserModel.objects.get(username__iexact=username)
+            return [user]
+        except self.UserModel.DoesNotExist:
+            return self.UserModel.objects.none()
 
     # called on first login when no user object exists
     def create_user(self, claims):
@@ -72,9 +77,10 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
     # called on login when the user already exists, just update all attributes
     def update_user(self, user, claims):
         # name + email
+        # email is optional here, but will be required by verify_claims if the email scope is requested
         user.first_name = claims.get("given_name")
         user.last_name = claims.get("family_name")
-        user.email = claims.get("email")
+        user.email = claims.get("email", "")
 
         # check if login should be restricted (if not, login is allowed)
         if settings.OIDC_CUSTOM_CLAIM_LOGIN:
