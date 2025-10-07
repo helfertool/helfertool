@@ -278,10 +278,14 @@ if oidc_config:
     LOGIN_REDIRECT_URL_FAILURE = "/oidc/failed"
     ALLOW_LOGOUT_GET_METHOD = True
 
+    # store id token so that we can use it for the logout endpoint
+    OIDC_STORE_ID_TOKEN = True
+
     oidc_logout = dict_get(oidc_config, None, "provider", "logout")
     if oidc_logout:
         OIDC_CUSTOM_LOGOUT_ENDPOINT = dict_get(oidc_logout, None, "endpoint")
-        OIDC_CUSTOM_LOGOUT_REDIRECT_PARAMTER = dict_get(oidc_logout, None, "redirect_parameter")
+        OIDC_CUSTOM_LOGOUT_REDIRECT_PARAMTER = dict_get(oidc_logout, "post_logout_redirect_uri", "redirect_parameter")
+        OIDC_CUSTOM_LOGOUT_ID_TOKEN_HINT = dict_get(oidc_logout, True, "id_token_hint")
 
         OIDC_OP_LOGOUT_URL_METHOD = "helfertool.oidc.custom_oidc_logout"
 

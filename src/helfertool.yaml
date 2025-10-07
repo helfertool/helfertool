@@ -187,10 +187,11 @@ authentication:
     #
     #        # If the session is only terminated in the application, the login via OIDC works again without asking for credentials.
     #        # Therefore, we can also trigger a logout at the OIDC provider.
-    #        # The URL is less well specified and depends on the provider (here: Keycloak)
+    #        # We built URLs according to the OpenID Connect RP-Initiated Logout 1.0 standard by default
     #        logout:
     #            endpoint: "https://auth.helfertool.org/auth/realms/test/protocol/openid-connect/logout"
     #            redirect_parameter: "redirect_uri"
+    #            id_token_hint: true
     #
     #    # Permissions based on claims
     #    claims:
