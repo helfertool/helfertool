@@ -67,10 +67,10 @@
     </div>
     {% endif %}
 
-    {% if involved_events_by_year %}
+    {% if inactive_events_by_year %}
         <h2 class="mt-3">{% trans "Not published" %}</h2>
 
-        {% for year, events in involved_events_by_year.items %}
+        {% for year, events in inactive_events_by_year.items %}
             <h3>{{ year }}</h3>
 
             <ul class="list-group mb-3">
