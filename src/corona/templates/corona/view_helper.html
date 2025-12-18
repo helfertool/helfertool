@@ -18,6 +18,13 @@
                         <td class="text-break">{{ helper.email }}</td>
                     </tr>
 
+                    {% if helper.event.ask_mxid %}
+                        <tr>
+                            <th scope="row">{% trans "Matrix ID" %}: </th>
+                            <td class="text-break">{{ helper.mxid }}</td>
+                        </tr>
+                    {% endif %}
+
                     {% if helper.event.ask_phone %}
                         <tr>
                             <th scope="row">{% trans "Mobile phone" %}: </th>

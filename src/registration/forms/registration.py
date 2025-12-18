@@ -27,6 +27,7 @@ class RegisterForm(forms.ModelForm):
             "firstname",
             "surname",
             "email",
+            "mxid",
             "phone",
             "shirt",
             "nutrition",
@@ -51,6 +52,10 @@ class RegisterForm(forms.ModelForm):
         self.is_link = kwargs.pop("is_link", False)
 
         super(RegisterForm, self).__init__(*args, **kwargs)
+
+        # remove field for Matrix ID?
+        if not self.event.ask_mxid:
+            self.fields.pop("mxid")
 
         # remove field for phone number?
         if not self.event.ask_phone:

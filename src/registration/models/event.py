@@ -217,6 +217,11 @@ class Event(models.Model):
         blank=True,
     )
 
+    ask_mxid = models.BooleanField(
+        default=True,
+        verbose_name=_("Ask for Matrix ID"),
+    )
+
     ask_phone = models.BooleanField(
         default=True,
         verbose_name=_("Ask for phone number"),

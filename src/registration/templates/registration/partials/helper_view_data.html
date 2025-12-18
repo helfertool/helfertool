@@ -22,6 +22,11 @@ Parameters:
                 <td class="text-break">{{ helper.email }}</td>
             </tr>
 
+            {% if helper.event.ask_mxid %}
+                <th scope="row">{% trans "Matrix ID" %}: </th>
+                <td class="text-break">{{ helper.mxid }}</td>
+            {% endif %}
+
             {% if helper.event.ask_phone %}
                 {% if show_sensitive or mask_sensitive %}
                     <tr>

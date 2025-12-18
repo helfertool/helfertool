@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 19:30+0200\n"
+"POT-Creation-Date: 2025-12-18 17:35+0100\n"
 "PO-Revision-Date: 2021-11-13 21:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,7 +34,7 @@ msgstr "Nachname"
 msgid "E-Mail"
 msgstr "E-Mail"
 
-#: corona/export.py:26 corona/templates/corona/view_helper.html:23
+#: corona/export.py:26 corona/templates/corona/view_helper.html:30
 msgid "Mobile phone"
 msgstr "Handynummer"
 
@@ -268,25 +268,29 @@ msgstr "Persönliche Daten der Helfer:in"
 msgid "Name"
 msgstr "Name"
 
-#: corona/templates/corona/view_helper.html:30
+#: corona/templates/corona/view_helper.html:23
+msgid "Matrix ID"
+msgstr "Matrix ID"
+
+#: corona/templates/corona/view_helper.html:37
 msgid "Address"
 msgstr "Adresse"
 
-#: corona/templates/corona/view_helper.html:32
+#: corona/templates/corona/view_helper.html:39
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: corona/templates/corona/view_helper.html:47
+#: corona/templates/corona/view_helper.html:54
 msgid "Add data"
 msgstr "Daten hinzufügen"
 
-#: corona/templates/corona/view_helper.html:52
+#: corona/templates/corona/view_helper.html:59
 msgid "COVID-19 contact tracing was not enabled while the helper registered."
 msgstr ""
 "Die COVID-19 Kontaktverfolgung war nicht aktiv als sich die Helfer:in "
 "angemeldet hat."
 
-#: corona/templates/corona/view_helper.html:58
+#: corona/templates/corona/view_helper.html:65
 msgid "Back"
 msgstr "Zurück"
 

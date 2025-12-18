@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-23 19:51+0100\n"
+"POT-Creation-Date: 2025-12-27 10:56+0100\n"
 "PO-Revision-Date: 2025-12-23 19:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -75,21 +75,21 @@ msgstr "Automatische Erinnerungen"
 msgid "(%(time)s ago)"
 msgstr "(vor %(time)s)"
 
-#: adminautomation/templates/adminautomation/event_archive_status.html:57
+#: adminautomation/templates/adminautomation/event_archive_status.html:64
 #, python-format
 msgid "Exception until %(exception_date)s"
 msgstr "Ausnahme bis %(exception_date)s"
 
-#: adminautomation/templates/adminautomation/event_archive_status.html:62
+#: adminautomation/templates/adminautomation/event_archive_status.html:69
 #, python-format
 msgid "Sent on %(last_reminder)s"
 msgstr "Gesendet am %(last_reminder)s"
 
-#: adminautomation/templates/adminautomation/event_archive_status.html:69
+#: adminautomation/templates/adminautomation/event_archive_status.html:76
 msgid "Edit exception"
 msgstr "Ausnahme bearbeiten"
 
-#: adminautomation/templates/adminautomation/event_archive_status.html:78
+#: adminautomation/templates/adminautomation/event_archive_status.html:85
 msgid "No events found."
 msgstr "Keine Veranstaltungen gefunden."
 

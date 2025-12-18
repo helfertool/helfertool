@@ -15,6 +15,12 @@
         {% bootstrap_field form.email layout="floating" %}
     </div>
 
+    {% if form.mxid %}
+        <div class="col-lg-6">
+                {% bootstrap_field form.mxid layout="floating" %}
+        </div>
+    {% endif %}
+
     {% if form.phone %}
         <div class="col-lg-6">
                 {% bootstrap_field form.phone layout="floating" %}

@@ -53,6 +53,10 @@ class HelperForm(forms.ModelForm):
 
         super(HelperForm, self).__init__(*args, **kwargs)
 
+        # remove field for matrix id
+        if not self.related_event.ask_mxid:
+            self.fields.pop("mxid")
+
         # remove field for phone number
         if not self.related_event.ask_phone:
             self.fields.pop("phone")

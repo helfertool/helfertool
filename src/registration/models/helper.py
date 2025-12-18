@@ -120,6 +120,11 @@ class Helper(models.Model):
         verbose_name=_("E-Mail"),
     )
 
+    mxid = models.CharField(
+        max_length=200,
+        verbose_name=_("Matrix ID"),
+    )
+
     phone = models.CharField(
         max_length=200,
         verbose_name=_("Mobile phone"),
