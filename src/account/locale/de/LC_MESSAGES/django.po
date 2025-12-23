@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-09 12:28+0100\n"
+"POT-Creation-Date: 2025-12-23 19:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -274,6 +274,7 @@ msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
 #: account/views/account.py:188
+#, python-brace-format
 msgid "Merged user {} into {}"
 msgstr "Benutzer:in {} mit {} zusammengefasst"
 

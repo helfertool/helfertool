@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-09 12:28+0100\n"
+"POT-Creation-Date: 2025-12-23 19:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: helfertool/forms/fields.py:18
 msgid "File type not supported, use JPG or PNG."
@@ -29,11 +29,11 @@ msgstr "Bild löschen"
 msgid "User"
 msgstr "Benutzer:in"
 
-#: helfertool/settings.py:65 helfertool/settings.py:73
+#: helfertool/settings.py:68 helfertool/settings.py:76
 msgid "German"
 msgstr "Deutsch"
 
-#: helfertool/settings.py:67 helfertool/settings.py:74
+#: helfertool/settings.py:70 helfertool/settings.py:77
 msgid "English"
 msgstr "English"
 
@@ -249,8 +249,8 @@ msgid "New event"
 msgstr "Neue Veranstaltung"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:24
-msgid "Past events"
-msgstr "Vergangene Veranstaltungen"
+msgid "Archiving"
+msgstr "Archivierung"
 
 #: helfertool/templates/helfertool/admin_general_menu.html:37
 msgid "Support"
@@ -378,6 +378,9 @@ msgstr "Kein Zugriff"
 #: helfertool/templates/helfertool/nopermission.html:10
 msgid "You have no permission to view this page!"
 msgstr "Du hast keine Berechtigung, um diese Seite anzusehen!"
+
+#~ msgid "Past events"
+#~ msgstr "Vergangene Veranstaltungen"
 
 #~ msgid "Helfertool"
 #~ msgstr "Helfertool"

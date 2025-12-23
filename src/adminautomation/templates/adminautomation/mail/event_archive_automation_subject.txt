@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with eventname=event.name|safe page_title=page_title|safe %}Deletion of personal data for {{ eventname }} ({{ page_title }}){% endblocktrans %}

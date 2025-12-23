@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.db.models.signals import pre_save, post_save, post_delete
@@ -21,6 +22,7 @@ import os
 import posixpath
 import shutil
 import uuid
+from smtplib import SMTPException
 
 
 def _default_mail():
@@ -326,6 +328,38 @@ class Event(models.Model):
             self.logo = logo_original
             self.logo_social = logo_social_original
             self.save(update_fields=["logo", "logo_social"])
+
+    def send_admin_mail(self, subject, text):
+        """Send a mail to the admins of the event.
+
+        Returns true on success, false on error."""
+        # get admins
+        from .adminroles import EventAdminRoles
+
+        recipients = EventAdminRoles.objects.filter(event=self, roles__contains=EventAdminRoles.ROLE_ADMIN).values_list(
+            "user__email", flat=True
+        )
+        recipients = list(filter(lambda e: e != "", recipients))
+
+        # add the main event address
+        recipients.append(self.email)
+
+        # send mail
+        mail = EmailMessage(
+            subject,
+            text,
+            settings.EMAIL_SENDER_ADDRESS,
+            recipients,
+            reply_to=[
+                settings.EMAIL_SENDER_ADDRESS,
+            ],
+        )
+
+        try:
+            mail.send(fail_silently=False)
+            return True
+        except (SMTPException, ConnectionError) as e:
+            return False
 
     def get_shirt_choices(self, internal=True):
         """

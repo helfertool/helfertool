@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-09 12:28+0100\n"
+"POT-Creation-Date: 2025-12-23 19:42+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,7 +28,7 @@ msgstr "Vorname"
 msgid "Surname"
 msgstr "Nachname"
 
-#: registration/export/excel.py:98 registration/models/event.py:169
+#: registration/export/excel.py:98 registration/models/event.py:171
 #: registration/models/helper.py:120
 #: registration/templates/registration/partials/helper_view_data.html:21
 msgid "E-Mail"
@@ -109,10 +109,6 @@ msgstr ""
 msgid "New date"
 msgstr "Neues Datum"
 
-#: registration/forms/event.py:376
-msgid "Months"
-msgstr "Monate"
-
 #: registration/forms/helper.py:86
 msgid "If you do not enter new data, the old one is kept."
 msgstr "Wenn du keine neuen Daten eingibst, werden die alten beibehalten."
@@ -122,6 +118,7 @@ msgid "No shifts selected"
 msgstr "Keine Schichten ausgewählt"
 
 #: registration/forms/helper.py:166
+#, python-brace-format
 msgid "This shift if already full: {}"
 msgstr "Die Schicht ist bereits voll: {}"
 
@@ -281,166 +278,166 @@ msgstr "Voller Zugriff auf alle Daten"
 msgid "Default access"
 msgstr "Standardzugriff"
 
-#: registration/models/event.py:42
+#: registration/models/event.py:44
 #, python-format
 msgid "%(value)s cannot be used here"
 msgstr "%(value)s kann hier nicht genutzt werden"
 
-#: registration/models/event.py:90
+#: registration/models/event.py:92
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: registration/models/event.py:91
+#: registration/models/event.py:93
 msgid "I do not want a T-Shirt"
 msgstr "Ich möchte kein T-Shirt"
 
-#: registration/models/event.py:92
+#: registration/models/event.py:94
 msgid "XXS"
 msgstr "XXS"
 
-#: registration/models/event.py:93
+#: registration/models/event.py:95
 msgid "XS"
 msgstr "XS"
 
-#: registration/models/event.py:94
+#: registration/models/event.py:96
 msgid "S"
 msgstr "S"
 
-#: registration/models/event.py:95
+#: registration/models/event.py:97
 msgid "M"
 msgstr "M"
 
-#: registration/models/event.py:96
+#: registration/models/event.py:98
 msgid "L"
 msgstr "L"
 
-#: registration/models/event.py:97
+#: registration/models/event.py:99
 msgid "XL"
 msgstr "XL"
 
-#: registration/models/event.py:98
+#: registration/models/event.py:100
 msgid "XXL"
 msgstr "XXL"
 
-#: registration/models/event.py:99
+#: registration/models/event.py:101
 msgid "3XL"
 msgstr "3XL"
 
-#: registration/models/event.py:100
+#: registration/models/event.py:102
 msgid "4XL"
 msgstr "4XL"
 
-#: registration/models/event.py:101
+#: registration/models/event.py:103
 msgid "XXS (girly)"
 msgstr "XXS (girly)"
 
-#: registration/models/event.py:102
+#: registration/models/event.py:104
 msgid "XS (girly)"
 msgstr "XS (girly)"
 
-#: registration/models/event.py:103
+#: registration/models/event.py:105
 msgid "S (girly)"
 msgstr "S (girly)"
 
-#: registration/models/event.py:104
+#: registration/models/event.py:106
 msgid "M (girly)"
 msgstr "M (girly)"
 
-#: registration/models/event.py:105
+#: registration/models/event.py:107
 msgid "L (girly)"
 msgstr "L (girly)"
 
-#: registration/models/event.py:106
+#: registration/models/event.py:108
 msgid "XL (girly)"
 msgstr "XL (girly)"
 
-#: registration/models/event.py:107
+#: registration/models/event.py:109
 msgid "XXL (girly)"
 msgstr "XXL (girly)"
 
-#: registration/models/event.py:108
+#: registration/models/event.py:110
 msgid "3XL (girly)"
 msgstr "3XL (girly)"
 
-#: registration/models/event.py:109
+#: registration/models/event.py:111
 msgid "4XL (girly)"
 msgstr "4XL (girly)"
 
-#: registration/models/event.py:126
+#: registration/models/event.py:128
 msgid "Event name"
 msgstr "Veranstaltungsname"
 
-#: registration/models/event.py:133
+#: registration/models/event.py:135
 msgid "Name for URL"
 msgstr "Name für URL"
 
-#: registration/models/event.py:134
+#: registration/models/event.py:136
 msgid "May contain letters, numbers, underscores or hyphens."
 msgstr "Kann Buchstaben, Zahlen, Unterstriche oder Bindestriche enthalten."
 
-#: registration/models/event.py:138
+#: registration/models/event.py:140
 msgid "Date"
 msgstr "Datum"
 
-#: registration/models/event.py:139
+#: registration/models/event.py:141
 msgid "First day of event"
 msgstr "Erster Tag der Veranstaltung"
 
-#: registration/models/event.py:144
+#: registration/models/event.py:146
 msgid "Number of days"
 msgstr "Anzahl an Tage"
 
-#: registration/models/event.py:145
+#: registration/models/event.py:147
 msgid "Displayed on the main page"
 msgstr "Auf der Hauptseite sichtbar"
 
-#: registration/models/event.py:151
+#: registration/models/event.py:153
 msgid "Text before registration"
 msgstr "Text vor Anmeldung"
 
-#: registration/models/event.py:152
+#: registration/models/event.py:154
 msgid "Displayed as first text of the registration form."
 msgstr "Wird als erster Text bei der Anmeldung angezeigt."
 
-#: registration/models/event.py:157
+#: registration/models/event.py:159
 #: registration/templates/registration/admin/edit_event.html:79
 #: registration/templates/registration/partials/contact.html:5
 msgid "Contact"
 msgstr "Kontakt"
 
-#: registration/models/event.py:158
+#: registration/models/event.py:160
 msgid "Displayed at the bottom of all pages for the event."
 msgstr "Wird auf allen Seiten dieser Veranstaltung unten angezeigt."
 
-#: registration/models/event.py:163
+#: registration/models/event.py:165
 msgid "Text after registration"
 msgstr "Text nach Anmeldung"
 
-#: registration/models/event.py:164
+#: registration/models/event.py:166
 msgid "Displayed after registration."
 msgstr "Wird nach der Anmeldung angezeigt."
 
-#: registration/models/event.py:170
+#: registration/models/event.py:172
 msgid "Used as Reply-to address for mails sent to helpers"
 msgstr "Wird als Antwortadresse für E-Mails an Helfer:innen verwendet"
 
-#: registration/models/event.py:178
+#: registration/models/event.py:180
 msgid "Logo"
 msgstr "Logo"
 
-#: registration/models/event.py:186
+#: registration/models/event.py:188
 msgid "Logo for Facebook"
 msgstr "Logo für Facebook"
 
-#: registration/models/event.py:187
+#: registration/models/event.py:189
 msgid "Best results with 1052 x 548 px."
 msgstr "Bestes Ergebnis mit 1052 x 548 px."
 
-#: registration/models/event.py:193
+#: registration/models/event.py:195
 msgid "Maximal overlapping of shifts"
 msgstr "Maximale Überlappung von Schichten"
 
-#: registration/models/event.py:195
+#: registration/models/event.py:197
 msgid ""
 "If two shifts overlap more than this value in minutes it is not possible to "
 "register for both shifts. Leave empty to disable this check."
@@ -449,15 +446,15 @@ msgstr ""
 "man sich nicht für beide Schichten anmelden. Wenn das Feld leer ist, wird "
 "die Überlappung nicht geprüft."
 
-#: registration/models/event.py:205
+#: registration/models/event.py:207
 msgid "Registration publicly visible"
 msgstr "Anmeldung öffentlich sichtbar"
 
-#: registration/models/event.py:209
+#: registration/models/event.py:211
 msgid "Deregistration and changes possible until"
 msgstr "Abmeldung und Änderungen möglich bis"
 
-#: registration/models/event.py:211
+#: registration/models/event.py:213
 msgid ""
 "Helpers can change their personal data and shifts until this date "
 "themselves. Leave emtpy to disable this."
@@ -465,61 +462,62 @@ msgstr ""
 "Helfer:innen können ihre persönlichen Daten und Schichten bis zu diesem "
 "Datum selbst bearbeiten. Leer lassen, um dies zu deaktivieren."
 
-#: registration/models/event.py:220
+#: registration/models/event.py:222
 msgid "Ask for phone number"
 msgstr "Nach Handynummer fragen"
 
-#: registration/models/event.py:225
+#: registration/models/event.py:227
 msgid "Ask for T-shirt size"
 msgstr "Nach T-Shirt Größe fragen"
 
-#: registration/models/event.py:230
+#: registration/models/event.py:232
 msgid "Ask for preferred nutrition"
 msgstr "Nach bevorzugter Ernährungsweise fragen"
 
-#: registration/models/event.py:233
+#: registration/models/event.py:235
 msgid "Helpers have to confirm to be full age"
 msgstr "Helfer:innen müssen bestätigen, volljährig zu sein"
 
-#: registration/models/event.py:237
+#: registration/models/event.py:239
 msgid "Ask if helper wants to be notified about new events"
 msgstr ""
 "Fragen, ob die Helfer:in über weitere Veranstaltungen informiert werden "
 "möchte"
 
-#: registration/models/event.py:242
+#: registration/models/event.py:244
 msgid "Show number of helpers on registration page"
 msgstr "Anzahl der Helfer:innen auf der Anmeldeseite anzeigen"
 
-#: registration/models/event.py:247
+#: registration/models/event.py:249
 msgid "Use badge creation"
 msgstr "Badge Generierung nutzen"
 
-#: registration/models/event.py:252
+#: registration/models/event.py:254
 msgid "Manage gifts and presence for helpers"
 msgstr "Geschenke und Anwesenheit der Helfer:innen verwalten"
 
-#: registration/models/event.py:257
+#: registration/models/event.py:259
 msgid "Use the inventory functionality"
 msgstr "Die Inventar Funktion verwenden"
 
-#: registration/models/event.py:262
+#: registration/models/event.py:264
 msgid "Manage prerequisites for helpers"
 msgstr "Voraussetzungen für Helfer:innen verwalten"
 
-#: registration/models/event.py:267
+#: registration/models/event.py:269
 msgid "Collect additional data for COVID-19 contact tracing"
 msgstr "Zusätzliche Daten für COVID-19 Kontaktverfolgung abfragen"
 
-#: registration/models/event.py:272
+#: registration/models/event.py:274
 msgid "Event is archived"
 msgstr "Die Veranstaltung ist archiviert"
 
-#: registration/models/event.py:279
+#: registration/models/event.py:281
 msgid "Available T-shirt sizes"
 msgstr "Verfügbare T-Shirt Größen"
 
-#: registration/models/event.py:304
+#: registration/models/event.py:306
+#, python-brace-format
 msgid "The following sizes are used and therefore cannot be removed: {}"
 msgstr ""
 "Die folgenden Größen werden verwendet und können daher nicht entfernt "
@@ -1421,31 +1419,6 @@ msgstr "Wochentag:"
 msgid "Move"
 msgstr "Verschieben"
 
-#: registration/templates/registration/admin/past_events.html:5
-msgid "Past events"
-msgstr "Vergangene Veranstaltungen"
-
-#: registration/templates/registration/admin/past_events.html:8
-msgid ""
-"This page shows events, which are older then the specified time, but not "
-"archived yet."
-msgstr ""
-"Diese Seite zeigt Veranstaltungen an, die älter als die angegebene Zeit "
-"sind, aber noch nicht archiviert sind."
-
-#: registration/templates/registration/admin/past_events.html:17
-msgid "Update"
-msgstr "Aktualisieren"
-
-#: registration/templates/registration/admin/past_events.html:31
-#, python-format
-msgid "(%(time)s ago)"
-msgstr "(%(time)s alt)"
-
-#: registration/templates/registration/admin/past_events.html:50
-msgid "No events found."
-msgstr "Keine Veranstaltungen gefunden."
-
 #: registration/templates/registration/admin/resend_mail.html:13
 msgid "Send confirmation mail again?"
 msgstr "Bestätigungsmail nochmal senden?"
@@ -1848,22 +1821,22 @@ msgstr "Danke! Du hast deine Anmeldung bestätigt."
 msgid "View my data"
 msgstr "Meine Daten anzeigen"
 
-#: registration/views/event.py:70
+#: registration/views/event.py:66
 #, python-format
 msgid "Event was created: %(event)s"
 msgstr "Veranstaltung wurde angelegt: %(event)s"
 
-#: registration/views/event.py:185
+#: registration/views/event.py:181
 #, python-format
 msgid "Event deleted: %(name)s"
 msgstr "Veranstaltung gelöscht: %(name)s"
 
-#: registration/views/event.py:251
+#: registration/views/event.py:247
 #, python-format
 msgid "Event was duplicated: %(event)s"
 msgstr "Veranstaltung wurde kopiert: %(event)s"
 
-#: registration/views/event.py:284
+#: registration/views/event.py:280
 #, python-format
 msgid "Event was moved: %(event)s"
 msgstr "Veranstaltung wurde verschoben: %(event)s"
@@ -1910,12 +1883,12 @@ msgstr "Aufgabe gelöscht: %(name)s"
 msgid "Link deleted"
 msgstr "Link gelöscht"
 
-#: registration/views/registration.py:141
+#: registration/views/registration.py:149
 msgid "Sending the mail failed, but the registration was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Anmeldung wurde dennoch gespeichert."
 
-#: registration/views/registration.py:263
+#: registration/views/registration.py:271
 msgid "Sending the mail failed, but the change was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Änderung wurde dennoch gespeichert."
@@ -1923,6 +1896,29 @@ msgstr ""
 #: registration/views/shift.py:69
 msgid "Shift deleted"
 msgstr "Schicht gelöscht"
+
+#~ msgid "Months"
+#~ msgstr "Monate"
+
+#~ msgid "Past events"
+#~ msgstr "Vergangene Veranstaltungen"
+
+#~ msgid ""
+#~ "This page shows events, which are older then the specified time, but not "
+#~ "archived yet."
+#~ msgstr ""
+#~ "Diese Seite zeigt Veranstaltungen an, die älter als die angegebene Zeit "
+#~ "sind, aber noch nicht archiviert sind."
+
+#~ msgid "Update"
+#~ msgstr "Aktualisieren"
+
+#, python-format
+#~ msgid "(%(time)s ago)"
+#~ msgstr "(%(time)s alt)"
+
+#~ msgid "No events found."
+#~ msgstr "Keine Veranstaltungen gefunden."
 
 #~ msgid "May contain the following chars: a-zA-Z0-9."
 #~ msgstr "Darf die folgenden Zeichen enthalten: a-zA-Z0-9."

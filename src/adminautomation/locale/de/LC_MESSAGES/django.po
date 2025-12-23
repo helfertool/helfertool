@@ -1,0 +1,133 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-23 19:51+0100\n"
+"PO-Revision-Date: 2025-12-23 19:51+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+#: adminautomation/forms/event.py:12
+msgid "Months"
+msgstr "Monate"
+
+#: adminautomation/templates/adminautomation/edit_event_archive_exception.html:5
+msgid "Exception for automatic archiving reminders"
+msgstr "Ausnahme für automatische Archivierungserinnerungen"
+
+#: adminautomation/templates/adminautomation/edit_event_archive_exception.html:9
+msgid ""
+"No reminder mails to archive the event will be sent until the specified date."
+msgstr ""
+"Bis zum angegebenen Datum werden keine Erinnerungs-Mails zum Archivieren der "
+"Veranstaltung versendet."
+
+#: adminautomation/templates/adminautomation/edit_event_archive_exception.html:23
+msgid "Save"
+msgstr "Speichern"
+
+#: adminautomation/templates/adminautomation/edit_event_archive_exception.html:27
+msgid "Automatic archiving reminders are not configured."
+msgstr "Automatische Archivierungserinnerungen sind nicht konfiguriert."
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:5
+msgid "Event archiving"
+msgstr "Archivierung von Veranstaltungen"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:8
+msgid ""
+"This page shows events, which are older then the specified time, but not "
+"archived yet."
+msgstr ""
+"Diese Seite zeigt Veranstaltungen an, die älter als die angegebene Zeit "
+"sind, aber noch nicht archiviert sind."
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:17
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:25
+msgid "Event"
+msgstr "Veranstaltung"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:28
+msgid "Event date"
+msgstr "Veranstaltungsdatum"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:32
+msgid "Automatic reminder"
+msgstr "Automatische Erinnerungen"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:47
+#, python-format
+msgid "(%(time)s ago)"
+msgstr "(vor %(time)s)"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:57
+#, python-format
+msgid "Exception until %(exception_date)s"
+msgstr "Ausnahme bis %(exception_date)s"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:62
+#, python-format
+msgid "Sent on %(last_reminder)s"
+msgstr "Gesendet am %(last_reminder)s"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:69
+msgid "Edit exception"
+msgstr "Ausnahme bearbeiten"
+
+#: adminautomation/templates/adminautomation/event_archive_status.html:78
+msgid "No events found."
+msgstr "Keine Veranstaltungen gefunden."
+
+#: adminautomation/templates/adminautomation/mail/event_archive_automation.txt:1
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"the event %(eventname)s has meanwhile taken place. Therefore, the personal "
+"data must be deleted.\n"
+"\n"
+"Please archive the event now (Edit event -> Archive event).\n"
+"\n"
+"This will delete all personal data. The remaining data will be retained and "
+"can be reused for future events. The number of registered people will also "
+"be saved."
+msgstr ""
+"Hallo,\n"
+"\n"
+"die Veranstaltung %(eventname)s hat inzwischen stattgefunden. Daher müssen "
+"nun die personenbezogenen Daten gelöscht werden.\n"
+"\n"
+"Bitte archiviere die Veranstaltung jetzt (Veranstaltung bearbeiten -> "
+"Veranstaltung archivieren).\n"
+"\n"
+"Dadurch werden alle personenbezogenen Daten gelöscht. Die übrigen Daten "
+"bleiben erhalten und können für zukünftige Veranstaltungen wiederverwendet "
+"werden. Die Anzahl der registrierten Personen wird ebenfalls gespeichert."
+
+#: adminautomation/templates/adminautomation/mail/event_archive_automation.txt:9
+msgid "Further information:"
+msgstr "Weitere Informationen:"
+
+#: adminautomation/templates/adminautomation/mail/event_archive_automation.txt:11
+msgid "Thank you!"
+msgstr "Danke!"
+
+#: adminautomation/templates/adminautomation/mail/event_archive_automation_subject.txt:1
+#, python-format
+msgid "Deletion of personal data for %(eventname)s (%(page_title)s)"
+msgstr "Löschen der personenbezogenen Daten für %(eventname)s (%(page_title)s)"

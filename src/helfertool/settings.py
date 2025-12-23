@@ -514,7 +514,15 @@ else:
 BADGE_LANGUAGE_CODE = dict_get(config, "de", "language", "badges")
 
 # newsletter
-NEWS_SUBSCRIBE_DEADLINE = dict_get(config, 3, "subscribe_deadline", "newsletter")
+NEWS_SUBSCRIBE_DEADLINE = dict_get(config, 3, "newsletter", "subscribe_deadline")
+
+# automation
+AUTOMATION_EVENTS_ARCHIVE_DEADLINE = dict_get(config, None, "automation", "event_archive", "deadline")  # months
+AUTOMATION_EVENTS_ARCHIVE_INTERVAL = dict_get(config, None, "automation", "event_archive", "interval")  # days
+AUTOMATION_EVENTS_ARCHIVE_START_BEFORE_DEADLINE = dict_get(
+    config, 0, "automation", "event_archive", "start_before_deadline"
+)  # days
+AUTOMATION_EVENTS_ARCHIVE_DOCS = dict_get(config, None, "automation", "event_archive", "docs")
 
 # internal group names
 GROUP_ADDUSER = "registration_adduser"
@@ -607,6 +615,7 @@ INSTALLED_APPS = (
     "prerequisites.apps.PrerequisitesConfig",
     "toollog.apps.ToollogConfig",
     "corona.apps.CoronaConfig",
+    "adminautomation.apps.AdminautomationConfig",
 )
 
 # middleware

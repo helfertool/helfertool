@@ -51,6 +51,7 @@ urlpatterns += [
     path("", include("prerequisites.urls")),
     path("", include("toollog.urls")),
     path("", include("corona.urls")),
+    path("", include("adminautomation.urls")),
 ]
 
 # for development

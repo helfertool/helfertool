@@ -17,13 +17,9 @@ from ..forms import (
     EventArchiveForm,
     EventDuplicateForm,
     EventMoveForm,
-    PastEventForm,
 )
 from ..models import Event, EventAdminRoles
 from ..permissions import has_access, ACCESS_EVENT_EDIT
-
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 import logging
 
@@ -288,29 +284,6 @@ def move_event(request, event_url_name):
     # render page
     context = {"event": event, "form": form}
     return render(request, "registration/admin/move_event.html", context)
-
-
-@login_required
-@never_cache
-def past_events(request):
-    if not request.user.is_superuser:
-        return nopermission(request)
-
-    # form for months
-    months = 4  # the default value
-    form = PastEventForm(request.GET or None, initial={"months": months})
-    if form.is_valid():
-        months = form.cleaned_data.get("months")
-
-    # get events
-    deadline = datetime.today() - relativedelta(months=months)
-    events = Event.objects.filter(archived=False, date__lte=deadline).order_by("date")
-
-    context = {
-        "form": form,
-        "events": events,
-    }
-    return render(request, "registration/admin/past_events.html", context)
 
 
 @login_required

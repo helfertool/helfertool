@@ -368,10 +368,3 @@ class EventMoveForm(forms.ModelForm):
             self.instance.save()
 
         return self.instance
-
-
-class PastEventForm(forms.Form):
-    months = forms.IntegerField(
-        min_value=0,
-        label=_("Months"),
-    )

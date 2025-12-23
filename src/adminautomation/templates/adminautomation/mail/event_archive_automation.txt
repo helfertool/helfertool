@@ -1,0 +1,11 @@
+{% load i18n %}{% blocktrans with eventname=event.name|safe %}Hello,
+
+the event {{ eventname }} has meanwhile taken place. Therefore, the personal data must be deleted.
+
+Please archive the event now (Edit event -> Archive event).
+
+This will delete all personal data. The remaining data will be retained and can be reused for future events. The number of registered people will also be saved.{% endblocktrans %}
+{% if docs %}
+{% trans "Further information:" %} {{ docs|safe }}
+{% endif %}
+{% trans "Thank you!" %}

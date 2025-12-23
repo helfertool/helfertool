@@ -8,6 +8,7 @@ from django.views.debug import ExceptionReporter
 
 from celery import Celery
 from celery.signals import task_failure
+from celery.schedules import crontab
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "helfertool.settings")
@@ -24,13 +25,20 @@ def setup_periodic_tasks(sender, **kwargs):
     # for debugging, add own exception handling that prints all exceptions
     #
     # additionally, django is not fully loaded here. importing models will fail
-    from mail.tasks import receive_mails
+    try:
+        from mail.tasks import receive_mails
 
-    sender.add_periodic_task(settings.RECEIVE_INTERVAL, receive_mails.s())
+        sender.add_periodic_task(settings.RECEIVE_INTERVAL, receive_mails.s())
 
-    from news.tasks import cleanup
+        from news.tasks import cleanup
 
-    sender.add_periodic_task(3600, cleanup.s())
+        sender.add_periodic_task(3600, cleanup.s())
+
+        from adminautomation.tasks import event_archive_automation
+
+        sender.add_periodic_task(crontab(hour=21, minute=0), event_archive_automation.s())
+    except Exception as e:
+        print(f"ERROR during setup of periodic tasks (setup_periodic_tasks): {e}")
 
 
 @task_failure.connect

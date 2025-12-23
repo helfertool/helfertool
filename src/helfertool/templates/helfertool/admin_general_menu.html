@@ -21,7 +21,7 @@
 
                 {% if user.is_superuser %}
                 <li class="nav-item">
-                    <a href="{% url 'past_events' %}" class="nav-link">{% trans "Past events" %}</a>
+                    <a href="{% url 'adminautomation:event_archive_status' %}" class="nav-link">{% trans "Archiving" %}</a>
                 </li>
                 {% endif %}
 

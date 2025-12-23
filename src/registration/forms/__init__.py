@@ -6,7 +6,6 @@ from .event import (
     EventArchiveForm,
     EventDuplicateForm,
     EventMoveForm,
-    PastEventForm,
 )
 from .job import (
     JobForm,

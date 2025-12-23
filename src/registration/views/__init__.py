@@ -7,7 +7,6 @@ from .event import (
     archive_event,
     duplicate_event,
     move_event,
-    past_events,
     get_event_logo,
 )
 from .job import edit_job, edit_job_admins, delete_job, duplicate_job, duplicate_job_day, sort_job

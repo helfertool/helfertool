@@ -360,3 +360,20 @@ newsletter:
     # Newsletter subscriptions need to be confirmed with by clicking on a link.
     # This setting specifies how long the link is valid (days). Afterwards, the mail address is deleted.
     subscribe_deadline: 3
+
+# Automations for Helfertool management
+automation:
+    # Send reminder mails to event admins that did not archive the event within time
+    # "deadline" and "interval" need to be set to enable the feature
+    #event_archive:
+    #    # Deadline (months)
+    #    deadline: 6
+    #
+    #    # Interval of mails (days)
+    #    interval: 7
+    #
+    #    # Start this number of days before the deadline (optional)
+    #    start_before_deadline: 14
+    #
+    #    # Link to some documentation that is included in the mail (optional)
+    #    #docs: ""

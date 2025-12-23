@@ -1,0 +1,86 @@
+{% extends "helfertool/admin.html" %}
+{% load i18n django_bootstrap5 icons %}
+
+{% block content %}
+    <h1>{% trans "Event archiving" %}</h1>
+
+    <div class="alert alert-secondary" role="alert">
+        {% blocktrans trimmed %}
+            This page shows events, which are older then the specified time, but not archived yet.
+        {% endblocktrans %}
+    </div>
+
+    <form action="" method="get">
+        {% bootstrap_form form layout="floating" %}
+        {% bootstrap_form_errors form %}
+
+        <button type="submit" class="btn btn-outline-primary mb-4">{% icon "sync" %} {% trans "Update" %}</button>
+    </form>
+
+    {% if events %}
+        <ul class="list-group">
+            <li class="list-group-item fw-bold">
+                <div class="row">
+                    <div class="col-12 col-md-3 py-1">
+                        {% trans "Event" %}
+                    </div>
+                    <div class="col-12 col-md-4 py-1">
+                        {% trans "Event date" %}
+                    </div>
+                    {% if archive_automation_enabled %}
+                        <div class="col-12 col-md-5 py-1">
+                            {% trans "Automatic reminder" %}
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+
+            {% for event in events %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-12 col-md-3 py-1">
+                        <a href="{% url 'edit_event' event.url_name %}">{{ event.name }}</a>
+                    </div>
+                    <div class="col-12 col-md-4 py-1">
+                        {{ event.date }}
+                        <span class="text-muted">
+                        {% blocktrans trimmed with time=event.date|timesince %}
+                            ({{ time }} ago)
+                        {% endblocktrans %}
+                        </span>
+                    </div>
+                    {% if archive_automation_enabled %}
+                        <div class="col-12 col-md-5 py-1">
+                            {% if event.eventarchiveautomation %}
+                                {% comment %}
+                                we show the exception date if no reminder mail was sent since then
+                                this means:
+                                - a exception date is set, but no last reminder date is set (= the exception was set before the first reminder)
+                                - the last reminder was sent before the excetption date (=the exception was added after a reminder)
+                                {% endcomment %}
+                                {% if event.eventarchiveautomation.exception_date != None and event.eventarchiveautomation.last_reminder == None or event.eventarchiveautomation.exception_date > event.eventarchiveautomation.last_reminder %}
+                                    {% icon "check-circle" %}
+                                    {% blocktrans with exception_date=event.eventarchiveautomation.exception_date trimmed %}
+                                        Exception until {{ exception_date }}
+                                    {% endblocktrans %}
+                                {% elif event.eventarchiveautomation.last_reminder %}
+                                    {% icon "envelope" %}
+                                    {% blocktrans with last_reminder=event.eventarchiveautomation.last_reminder trimmed %}
+                                        Sent on {{ last_reminder }}
+                                    {% endblocktrans %}
+                                {% endif %}
+                                </br>
+                            {% endif %}
+                            <a href="{% url 'adminautomation:edit_event_archive_exception' event.url_name %}">
+                                {% icon "pencil-alt" %} {% trans "Edit exception" %}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">{% trans "No events found." %}</p>
+    {% endif %}
+{% endblock %}
