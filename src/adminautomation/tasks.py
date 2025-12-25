@@ -29,7 +29,7 @@ def event_archive_automation(self):
             deadline = (
                 today
                 - relativedelta(months=settings.AUTOMATION_EVENTS_ARCHIVE_DEADLINE)
-                + relativedelta(day=settings.AUTOMATION_EVENTS_ARCHIVE_START_BEFORE_DEADLINE)
+                + relativedelta(days=settings.AUTOMATION_EVENTS_ARCHIVE_START_BEFORE_DEADLINE)
             )
             events = Event.objects.filter(archived=False, date__lte=deadline)
 
