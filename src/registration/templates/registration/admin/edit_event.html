@@ -146,13 +146,8 @@
 
         {% bootstrap_field form.ask_shirt %}
         <div class="ms-4">
-        {% if not event or event.ask_shirt %}
+        {% if form.shirt_sizes %}
             {% bootstrap_field form.shirt_sizes %}
-
-            {# render errors for this field manually since they do not appear otherwise #}
-            {% for text in form.shirt_sizes.errors %}
-                <div class="text-danger">{{ text }}</div>
-            {% endfor %}
         {% endif %}
         </div>
 

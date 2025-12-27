@@ -218,22 +218,22 @@ class Event(models.Model):
     )
 
     ask_mxid = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("Ask for Matrix ID"),
     )
 
     ask_phone = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("Ask for phone number"),
     )
 
     ask_shirt = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("Ask for T-shirt size"),
     )
 
     ask_nutrition = models.BooleanField(
-        default=True,
+        default=False,
         verbose_name=_("Ask for preferred nutrition"),
     )
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-27 10:56+0100\n"
+"POT-Creation-Date: 2025-12-27 12:32+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -99,13 +99,20 @@ msgstr ""
 "Du kannst keine Helfer:innen zusammenfassen, welche für die gleiche Schicht "
 "angemeldet sind."
 
-#: registration/forms/event.py:133
+#: registration/forms/event.py:60
+msgid ""
+"T-shirt sizes can be edited after enabling this option and saving the event."
+msgstr ""
+"Die T-Shirt Größen können bearbeitet werden, nachdem diese Option aktiviert "
+"und die Veranstaltung gespeichert wurde."
+
+#: registration/forms/event.py:134
 msgid "User already has permissions for this event assigned"
 msgstr ""
 "Der Benutzer:in wurden bereits Berechtigungen für diese Veranstaltungen "
 "zugewiesen"
 
-#: registration/forms/event.py:346 registration/forms/job.py:152
+#: registration/forms/event.py:347 registration/forms/job.py:152
 msgid "New date"
 msgstr "Neues Datum"
 
@@ -772,8 +779,8 @@ msgstr ""
 "Helfer:innen hinzuzufügen."
 
 #: registration/templates/registration/admin/archive_event.html:5
-#: registration/templates/registration/admin/edit_event.html:212
-#: registration/templates/registration/admin/edit_event.html:222
+#: registration/templates/registration/admin/edit_event.html:207
+#: registration/templates/registration/admin/edit_event.html:217
 msgid "Archive event"
 msgstr "Veranstaltung archivieren"
 
@@ -786,7 +793,7 @@ msgstr ""
 "und Koordinator:innen gelöscht!"
 
 #: registration/templates/registration/admin/archive_event.html:10
-#: registration/templates/registration/admin/edit_event.html:216
+#: registration/templates/registration/admin/edit_event.html:211
 msgid ""
 "The number of registered helpers per shift and the number of coordinators "
 "are saved. All personal data will be deleted irrevocably."
@@ -842,8 +849,8 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: registration/templates/registration/admin/delete_event.html:5
+#: registration/templates/registration/admin/edit_event.html:224
 #: registration/templates/registration/admin/edit_event.html:229
-#: registration/templates/registration/admin/edit_event.html:234
 msgid "Delete event"
 msgstr "Veranstaltung löschen"
 
@@ -910,8 +917,8 @@ msgid "There are registered helpers for this shift!"
 msgstr "Es sind Helfer:innen für diese Schicht angemeldet!"
 
 #: registration/templates/registration/admin/duplicate_event.html:5
-#: registration/templates/registration/admin/edit_event.html:187
-#: registration/templates/registration/admin/edit_event.html:194
+#: registration/templates/registration/admin/edit_event.html:182
+#: registration/templates/registration/admin/edit_event.html:189
 msgid "Duplicate event"
 msgstr "Veranstaltung duplizieren"
 
@@ -1023,11 +1030,11 @@ msgstr "Logos"
 msgid "Requested helper data"
 msgstr "Abgefragte Daten der Helfer:innen"
 
-#: registration/templates/registration/admin/edit_event.html:160
+#: registration/templates/registration/admin/edit_event.html:155
 msgid "Features"
 msgstr "Features"
 
-#: registration/templates/registration/admin/edit_event.html:182
+#: registration/templates/registration/admin/edit_event.html:177
 #: registration/templates/registration/admin/edit_helper.html:38
 #: registration/templates/registration/admin/edit_job.html:56
 #: registration/templates/registration/admin/edit_link.html:20
@@ -1039,32 +1046,32 @@ msgstr "Features"
 msgid "Save"
 msgstr "Speichern"
 
-#: registration/templates/registration/admin/edit_event.html:189
+#: registration/templates/registration/admin/edit_event.html:184
 msgid "You can duplicate this event."
 msgstr "Du kannst diese Veranstaltung duplizieren."
 
-#: registration/templates/registration/admin/edit_event.html:191
+#: registration/templates/registration/admin/edit_event.html:186
 msgid "All settings are copied to the new event, but personal data is not."
 msgstr ""
 "Alle Einstellungen werden in die neue Veranstaltung kopiert, "
 "personenbezogene Daten nicht."
 
-#: registration/templates/registration/admin/edit_event.html:201
-#: registration/templates/registration/admin/edit_event.html:208
+#: registration/templates/registration/admin/edit_event.html:196
+#: registration/templates/registration/admin/edit_event.html:203
 #: registration/templates/registration/admin/move_event.html:5
 msgid "Move event"
 msgstr "Veranstaltung verschieben"
 
-#: registration/templates/registration/admin/edit_event.html:203
+#: registration/templates/registration/admin/edit_event.html:198
 msgid "You can move this event."
 msgstr "Du kannst diese Veranstaltung verschieben."
 
-#: registration/templates/registration/admin/edit_event.html:205
+#: registration/templates/registration/admin/edit_event.html:200
 msgid "The event with all shifts is moved to a new date."
 msgstr ""
 "Die Veranstaltung wird mit allen Schichten auf ein neues Datum verschoben."
 
-#: registration/templates/registration/admin/edit_event.html:214
+#: registration/templates/registration/admin/edit_event.html:209
 msgid ""
 "You can archive this event, this means that all coordinators and helpers are "
 "deleted."
@@ -1072,7 +1079,7 @@ msgstr ""
 "Du kannst diese Veranstaltung archivieren, das bedeutet, dass alle "
 "Koordinator:innen und Helfer:innen gelöscht werden."
 
-#: registration/templates/registration/admin/edit_event.html:231
+#: registration/templates/registration/admin/edit_event.html:226
 msgid "You can delete this event including all jobs, shifts and helpers."
 msgstr ""
 "Du kannst diese Veranstaltung mit allen Aufgaben, Schichten und Helfer:innen "

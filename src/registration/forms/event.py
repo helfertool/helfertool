@@ -57,6 +57,9 @@ class EventForm(forms.ModelForm):
         if not self.instance.ask_shirt and "shirt_sizes" in self.fields:
             # 'shirt_sizes' is not in fields for EventDuplicateForm
             self.fields.pop("shirt_sizes")
+            self.fields["ask_shirt"].help_text = _(
+                "T-shirt sizes can be edited after enabling this option and saving the event."
+            )
 
         # remove flags for disabled features
         if not settings.FEATURES_NEWSLETTER and "ask_news" in self.fields:
