@@ -63,7 +63,7 @@ def edit_job(request, event_url_name, job_pk=None):
             },
         )
 
-        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#{job.pk}")
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#job_{job.pk}")
 
     # render page
     context = {"event": event, "job": job, "form": form}
@@ -219,7 +219,7 @@ def duplicate_job(request, event_url_name, job_pk):
             },
         )
 
-        return redirect("jobs_and_shifts", event_url_name=event_url_name)
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#job_{new_job.pk}")
 
     # render page
     context = {"event": event, "duplicate_job": job, "form": form}
@@ -252,7 +252,7 @@ def duplicate_job_day(request, event_url_name, job_pk):
                 },
             )
 
-        return redirect("jobs_and_shifts", event_url_name=event_url_name)
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#job_{job.pk}")
 
     # render page
     context = {"event": event, "job": job, "form": form}

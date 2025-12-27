@@ -18,7 +18,7 @@ from .utils import notactive
 @never_cache
 @archived_not_available
 def set_present(request, event_url_name, shift_pk):
-    event, job, shift, _helper = get_or_404(event_url_name, shift_pk=shift_pk)
+    event, job, shift, helper = get_or_404(event_url_name, shift_pk=shift_pk)
 
     # check permission
     if not has_access(request.user, event, ACCESS_GIFTS_HANDLE_PRESENCE):
@@ -36,7 +36,7 @@ def set_present(request, event_url_name, shift_pk):
         messages.success(request, _("Presence was saved"))
 
         return redirect(
-            f"{reverse('helpers_for_job', kwargs={'event_url_name': event.url_name, 'job_pk': shift.job.pk})}#{shift.pk}"
+            f"{reverse('helpers_for_job', kwargs={'event_url_name': event.url_name, 'job_pk': shift.job.pk})}#shift_{shift.pk}"
         )
 
     context = {"event": event, "shift": shift, "form": form}

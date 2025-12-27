@@ -45,7 +45,7 @@ def edit_shift(request, event_url_name, job_pk, shift_pk=None):
             },
         )
 
-        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name':event_url_name})}#{job_pk}")
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#job_{job_pk}")
 
     # render page
     context = {"event": job.event, "job": job, "shift": shift, "form": form}
@@ -79,7 +79,7 @@ def delete_shift(request, event_url_name, job_pk, shift_pk):
         )
 
         # redirect to shift
-        return redirect("jobs_and_shifts", event_url_name=event_url_name)
+        return redirect(f"{reverse('jobs_and_shifts', kwargs={'event_url_name': event_url_name})}#job_{job.pk}")
 
     # render page
     context = {"event": event, "shift": shift, "job": job, "form": form}

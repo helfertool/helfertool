@@ -13,7 +13,7 @@
     {% endif %}
 
     {% for job in event.job_set.all %}
-        <h2 id="{{ job.pk }}">
+        <h2 id="job_{{ job.pk }}">
             {{ job.name }}
 
             {% if job.public %}

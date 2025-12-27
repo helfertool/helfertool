@@ -266,7 +266,7 @@ def add_helper(request, event_url_name, shift_pk):
         if not helper.send_mail(request, internal=True):
             messages.error(request, _("Sending the mail failed, but the helper was saved."))
 
-        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=shift.job.pk)
+        return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
     context = {"event": event, "form": form, "corona_form": corona_form}
