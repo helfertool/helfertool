@@ -80,14 +80,20 @@
                             {% djangosetting "OIDC_CUSTOM_LOGOUT_ENDPOINT" as oidc_logout_endpoint %}
                             {% if user.has_usable_password or not oidc_logout_endpoint %}
                                 {# local user or openid logout disabled -> django logout only #}
-                                <a class="nav-link" href="{% url "logout" %}">
-                                    <em class="fas fa-sign-out-alt"></em> <span class="d-none d-md-inline-block">{% trans "Logout" %}</span>
-                                </a>
+                                <form action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="nav-link" type="submit">
+                                        <em class="fas fa-sign-out-alt"></em> <span class="d-none d-md-inline-block"></span> {% trans "Logout" %}
+                                    </button>
+                                </form>
                             {% else %}
                                 {# not a local user and openid logout enabled -> oidc logout #}
-                                <a class="nav-link" href="{% url "oidc_logout" %}">
-                                    <em class="fas fa-sign-out-alt"></em> <span class="d-none d-md-inline-block">{% trans "Logout" %}</span>
-                                </a>
+                                <form action="{% url 'oidc_logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="nav-link" type="submit">
+                                        <em class="fas fa-sign-out-alt"></em> <span class="d-none d-md-inline-block"></span> {% trans "Logout" %}
+                                    </button>
+                                </form>
                             {% endif %}
                         {% else %}
                             <a class="nav-link" href="{% url "login" %}">

@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import django.utils.datetime_safe
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="agreement",
             name="start",
-            field=models.DateField(default=django.utils.datetime_safe.datetime.now, verbose_name="Start date"),
+            field=models.DateField(default=datetime.datetime.now, verbose_name="Start date"),
             preserve_default=False,
         ),
     ]

@@ -14,9 +14,6 @@ from pathlib import Path
 
 from .utils import dict_get, build_path, get_version, pg_trgm_installed
 
-# import josepy, otherwise the oidc module does not work properly...
-import josepy
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # import configuration file
@@ -276,7 +273,6 @@ if oidc_config:
 
     # login and logout
     LOGIN_REDIRECT_URL_FAILURE = "/oidc/failed"
-    ALLOW_LOGOUT_GET_METHOD = True
 
     # store id token so that we can use it for the logout endpoint
     OIDC_STORE_ID_TOKEN = True
@@ -326,7 +322,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # axes: user lockout based on username, not IP or user agent
-AXES_LOCKOUT_PARAMETERS = ["username"]
+# if we remove the ip_address, axes complains... so we have both now
+AXES_LOCKOUT_PARAMETERS = [
+    ["username"],
+    ["username", "ip_address"],
+]
 AXES_LOCK_OUT_AT_FAILURE = True
 
 AXES_FAILURE_LIMIT = dict_get(config, 5, "security", "lockout", "limit")
