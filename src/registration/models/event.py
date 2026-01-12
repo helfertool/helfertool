@@ -7,8 +7,10 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save, post_delete
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from django_bleach.models import BleachField
 from multiselectfield import MultiSelectField
+
+from django_prose_editor.fields import ProseEditorField
+from helfertool.utils import PROSE_EDITOR_DEFAULT_EXTENSIONS
 
 from badges.models import BadgeSettings, BadgeDefaults, Badge
 from corona.models import CoronaSettings
@@ -148,19 +150,25 @@ class Event(models.Model):
         validators=[MinValueValidator(0)],
     )
 
-    text = BleachField(
+    text = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         verbose_name=_("Text before registration"),
         help_text=_("Displayed as first text of the registration form."),
     )
 
-    imprint = BleachField(
+    imprint = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         verbose_name=_("Contact"),
         help_text=_("Displayed at the bottom of all pages for the event."),
     )
 
-    registered = BleachField(
+    registered = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         verbose_name=_("Text after registration"),
         help_text=_("Displayed after registration."),

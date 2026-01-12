@@ -12,7 +12,6 @@ from toollog.models import LogEntry
 
 from ..models import Event, EventAdminRoles, EventArchive
 
-from ckeditor.widgets import CKEditorWidget
 from copy import deepcopy
 
 import os
@@ -30,20 +29,11 @@ class EventForm(forms.ModelForm):
             "archived",
         ]
         widgets = {
-            "text": CKEditorWidget,
             "date": DatePicker,
             "changes_until": DatePicker,
             "logo": ImageFileInput,
             "logo_social": ImageFileInput,
         }
-
-        # According to the documentation django-modeltranslations copies the
-        # widget from the original field.
-        # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
-        # Therefore set it manually...
-        for w in ("text", "imprint", "registered"):
-            for lang, name in settings.LANGUAGES:
-                widgets["{}_{}".format(w, lang)] = CKEditorWidget()
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
@@ -75,7 +65,7 @@ class EventForm(forms.ModelForm):
         if not settings.FEATURES_CORONA and "corona" in self.fields:
             self.fields.pop("corona")
 
-        # change labels of ckeditor fields: We only want to have the language name as label
+        # change labels of editor fields: We only want to have the language name as label
         # everything else is in the template.
         for field in ("text", "imprint", "registered"):
             for lang, name in settings.LANGUAGES:

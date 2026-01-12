@@ -8,9 +8,7 @@ django-celery-results~=2.6.0
 # packages pinned to compatible version
 django-auth-ldap~=5.3.0
 django-axes~=8.1.0
-django-bleach~=3.1.0
 django-bootstrap5~=25.3
-django-ckeditor~=6.7.3
 django-compressor~=4.6.0
 django-countries~=8.2.0
 django-ical~=1.9.2
@@ -18,6 +16,7 @@ django-icons~=25.3
 django-libsass~=0.9
 django-modeltranslation~=0.19.19
 django-multiselectfield~=1.0.1
+django-prose-editor[sanitize]~=0.22.5
 django-select2~=8.4.7
 django-simple-captcha~=0.6.3
 csscompressor~=0.9.5
@@ -33,3 +32,6 @@ xlsxwriter~=3.2.9
 # dependencies of dependencies
 # celery crashs if old celerybeat-schedule file exists and pytz is missing...
 pytz~=2025.1
+
+# old packages, not used anymore but included in migrations
+django-bleach~=3.1.0

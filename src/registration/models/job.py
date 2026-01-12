@@ -3,7 +3,9 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
-from django_bleach.models import BleachField
+
+from django_prose_editor.fields import ProseEditorField
+from helfertool.utils import PROSE_EDITOR_DEFAULT_EXTENSIONS
 
 from badges.models import BadgeDefaults
 from prerequisites.models import Prerequisite
@@ -51,12 +53,16 @@ class Job(models.Model):
         verbose_name=_("Instruction for the handling of food necessary"),
     )
 
-    description = BleachField(
+    description = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         verbose_name=_("Description"),
     )
 
-    important_notes = BleachField(
+    important_notes = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         verbose_name=_("Important notes"),
         help_text=_(

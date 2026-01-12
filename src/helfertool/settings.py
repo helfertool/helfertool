@@ -534,35 +534,6 @@ BOOTSTRAP5 = {
     "required_css_class": "required-form",
 }
 
-# HTML sanitization for text fields
-BLEACH_ALLOWED_TAGS = ["p", "b", "i", "u", "em", "strong", "a", "br", "ul", "ol", "li"]
-BLEACH_ALLOWED_ATTRIBUTES = [
-    "href",
-]
-BLEACH_ALLOWED_STYLES = []
-BLEACH_STRIP_TAGS = True
-
-# editor for text fields
-CKEDITOR_CONFIGS = {
-    "default": {
-        "toolbar": "Custom",
-        "toolbar_Custom": [
-            ["Bold", "Italic", "Underline"],
-            [
-                "NumberedList",
-                "BulletedList",
-                "-",
-            ],
-            ["Link", "Unlink"],
-            ["Source"],
-        ],
-        # we want to have a responsive ckeditor:
-        # 1. set width for editor itself here
-        # 2. set width also vor div.django-ckeditor-widget via custom CSS
-        "width": "100%",
-    }
-}
-
 # django-select2 config
 SELECT2_CACHE_BACKEND = "select2"
 
@@ -598,8 +569,8 @@ INSTALLED_APPS = (
     "django_icons",
     "django_select2",
     "django_countries",
+    "django_prose_editor",
     "captcha",
-    "ckeditor",
     "compressor",
     "django_celery_results",
     "registration.apps.RegistrationConfig",

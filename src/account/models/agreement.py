@@ -2,7 +2,9 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_bleach.models import BleachField
+
+from django_prose_editor.fields import ProseEditorField
+from helfertool.utils import PROSE_EDITOR_DEFAULT_EXTENSIONS
 
 import datetime
 
@@ -13,7 +15,9 @@ class Agreement(models.Model):
         verbose_name=_("Name"),
     )
 
-    text = BleachField(
+    text = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         verbose_name=_("Text"),
     )
 

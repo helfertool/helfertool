@@ -120,3 +120,19 @@ def nopermission(request):
     Render the "no permission" page".
     """
     return render(request, "helfertool/nopermission.html")
+
+
+PROSE_EDITOR_DEFAULT_EXTENSIONS = {
+    "Bold": True,
+    "Italic": True,
+    "Underline": True,
+    "Strike": True,
+    "BulletList": True,
+    "OrderedList": True,
+    "ListItem": True,
+    "Link": {
+        "protocols": ["http", "https", "mailto"],
+    },
+    "History": True,
+    "HTML": True,
+}

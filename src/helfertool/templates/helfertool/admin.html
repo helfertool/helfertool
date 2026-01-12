@@ -4,6 +4,10 @@
 {% block adminheader %}
     {% compress css file admin %}
         <link href="{% static "helfertool/vendor/select2/css/select2.min.css" %}" rel="stylesheet" />
+
+        <link href="/static/django_prose_editor/material-icons.css" media="all" rel="stylesheet">
+        <link href="/static/django_prose_editor/editor.css" media="all" rel="stylesheet">
+        <link href="/static/django_prose_editor/overrides.css" media="all" rel="stylesheet">
     {% endcompress %}
 
     {% compress js file admin %}
@@ -13,11 +17,12 @@
         <script src="{% static "helfertool/vendor/chart.js/chart.umd.js" %}"></script>
         <script src="{% static "helfertool/vendor/momentjs/moment.min.js" %}"></script>
         <script src="{% static "helfertool/vendor/chartjs-adapter-moment/chartjs-adapter-moment.min.js" %}"></script>
-
-        <script>window.CKEDITOR_BASEPATH = '{% static "ckeditor/ckeditor/" %}';</script>
-        <script src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-        <script src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
     {% endcompress %}
+
+    {# the javascript part of django-prose-editor does not work well with compressor #}
+    <script type="importmap">{"imports": {"django-prose-editor/editor": "/static/django_prose_editor/editor.js", "django-prose-editor/configurable": "/static/django_prose_editor/configurable.js"}}</script>
+    <script src="/static/django_prose_editor/editor.js" type="module"></script>
+    <script src="/static/django_prose_editor/configurable.js" type="module"></script>
 
     {% get_current_language as LANGUAGE_CODE %}
     <script src="{% static "helfertool/vendor/select2/js/i18n/" %}{{ LANGUAGE_CODE }}.js"></script>

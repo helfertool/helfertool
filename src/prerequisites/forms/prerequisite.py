@@ -1,7 +1,6 @@
 from django import forms
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from ckeditor.widgets import CKEditorWidget
 
 from ..models import Prerequisite
 
@@ -18,15 +17,6 @@ class PrerequisiteForm(forms.ModelForm):
             "description",
             "event",
         ]
-
-        widgets = {}
-
-        # According to the documentation django-modeltranslations copies the
-        # widget from the original field.
-        # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
-        # Therefore set it manually...
-        for lang, name in settings.LANGUAGES:
-            widgets["description_{}".format(lang)] = CKEditorWidget()
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop("event")

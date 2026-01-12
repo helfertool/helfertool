@@ -10,7 +10,6 @@ from prerequisites.models import Prerequisite
 
 from ..models import Job, JobAdminRoles
 
-from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
 
@@ -33,14 +32,6 @@ class JobForm(forms.ModelForm):
         widgets = {
             "prerequisites": PrerequisiteSelectWidget,
         }
-
-        # According to the documentation django-modeltranslations copies the
-        # widget from the original field.
-        # But when setting BLEACH_DEFAULT_WIDGET this does not happen.
-        # Therefore set it manually...
-        for lang, name in settings.LANGUAGES:
-            widgets["description_{}".format(lang)] = CKEditorWidget()
-            widgets["important_notes_{}".format(lang)] = CKEditorWidget()
 
     def __init__(self, *args, **kwargs):
         self.event = kwargs.pop("event")

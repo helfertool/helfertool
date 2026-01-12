@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_bleach.models import BleachField
+
+from django_prose_editor.fields import ProseEditorField
+from helfertool.utils import PROSE_EDITOR_DEFAULT_EXTENSIONS
 
 from copy import deepcopy
 
@@ -25,7 +27,9 @@ class Prerequisite(models.Model):
         verbose_name=_("Name"),
     )
 
-    description = BleachField(
+    description = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         verbose_name=_("Description"),
     )

@@ -1,7 +1,9 @@
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django_bleach.models import BleachField
+
+from django_prose_editor.fields import ProseEditorField
+from helfertool.utils import PROSE_EDITOR_DEFAULT_EXTENSIONS
 
 
 class AbstractSetting(models.Model):
@@ -24,7 +26,9 @@ class AbstractSetting(models.Model):
 
 
 class HTMLSetting(AbstractSetting):
-    value = BleachField(
+    value = ProseEditorField(
+        extensions=PROSE_EDITOR_DEFAULT_EXTENSIONS,
+        sanitize=True,
         blank=True,
         default="",
         verbose_name=_("HTML"),
