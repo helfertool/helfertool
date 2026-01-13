@@ -26,7 +26,7 @@ Please feel free to create issues here in Github!
 
 # License
 
-Copyright (C) 2015-2025  Sven Hertle and contributors
+Copyright (C) 2015-2026  Sven Hertle and contributors
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
