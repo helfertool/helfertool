@@ -24,9 +24,6 @@ language:
     # Timezone
     timezone: "Europe/Berlin"
 
-    # Default country for Corona contact tracing (ISO-3166-1)
-    country: "DE"
-
 # Database connection
 database:
     # SQLite
@@ -295,7 +292,6 @@ features:
     gifts: true
     prerequisites: true
     inventory: true
-    corona: true
 
 # Custom URLs, mail addresses, ...
 customization:

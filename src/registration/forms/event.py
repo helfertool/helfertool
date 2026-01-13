@@ -62,8 +62,6 @@ class EventForm(forms.ModelForm):
             self.fields.pop("prerequisites")
         if not settings.FEATURES_INVENTORY and "inventory" in self.fields:
             self.fields.pop("inventory")
-        if not settings.FEATURES_CORONA and "corona" in self.fields:
-            self.fields.pop("corona")
 
         # change labels of editor fields: We only want to have the language name as label
         # everything else is in the template.
@@ -228,12 +226,10 @@ class EventDuplicateForm(EventForm):
         activate_gifts = self.instance.gifts
         activate_prerequisites = self.instance.prerequisites
         activate_inventory = self.instance.inventory
-        activate_corona = self.instance.corona
         self.instance.badges = False
         self.instance.gifts = False
         self.instance.prerequisites = False
         self.instance.inventory = False
-        self.instance.corona = False
 
         super(EventDuplicateForm, self).save(commit=True)  # we have to save
 
@@ -266,7 +262,6 @@ class EventDuplicateForm(EventForm):
         # copy other features
         self._duplicate_badges(activate_badges)
         self._duplicate_inventory(activate_inventory)
-        self._duplicate_corona(activate_corona)
 
     def _duplicate_gifts(self, activate):
         # gifts
@@ -320,13 +315,6 @@ class EventDuplicateForm(EventForm):
             self.other_event.inventory_settings.duplicate(self.instance)
 
         self.instance.inventory = activate
-        self.instance.save()
-
-    def _duplicate_corona(self, activate):
-        if self.other_event.corona_settings:
-            self.other_event.corona_settings.duplicate(self.instance)
-
-        self.instance.corona = activate
         self.instance.save()
 
 

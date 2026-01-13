@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
-from corona.forms import ContactTracingDataForm
 from gifts.forms import HelpersGiftsForm
 from helfertool.utils import nopermission
 from prerequisites.forms import HelperPrerequisiteForm
@@ -241,16 +240,9 @@ def add_helper(request, event_url_name, shift_pk):
         ],
         is_internal=True,
     )
-    if event.corona:
-        corona_form = ContactTracingDataForm(request.POST or None, event=event, prefix="corona")
-    else:
-        corona_form = None
 
-    if form.is_valid() and (corona_form is None or corona_form.is_valid()):
+    if form.is_valid():
         helper = form.save()
-
-        if corona_form:
-            corona_form.save(helper=helper)
 
         shiftids = [s.pk for s in helper.shifts.all()]
         logger.info(
@@ -269,7 +261,7 @@ def add_helper(request, event_url_name, shift_pk):
         return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
-    context = {"event": event, "form": form, "corona_form": corona_form}
+    context = {"event": event, "form": form}
     return render(request, "registration/admin/add_helper.html", context)
 
 
@@ -285,16 +277,9 @@ def add_coordinator(request, event_url_name, job_pk):
 
     # form
     form = HelperForm(request.POST or None, job=job, event=event, show_sensitive=True)
-    if event.corona:
-        corona_form = ContactTracingDataForm(request.POST or None, event=event, prefix="corona")
-    else:
-        corona_form = None
 
-    if form.is_valid() and (corona_form is None or corona_form.is_valid()):
+    if form.is_valid():
         helper = form.save()
-
-        if corona_form:
-            corona_form.save(helper=helper)
 
         logger.info(
             "helper created",
@@ -312,7 +297,7 @@ def add_coordinator(request, event_url_name, job_pk):
         return redirect("helpers_for_job", event_url_name=event_url_name, job_pk=job.pk)
 
     # render page
-    context = {"event": event, "form": form, "corona_form": corona_form}
+    context = {"event": event, "form": form}
     return render(request, "registration/admin/edit_helper.html", context)
 
 

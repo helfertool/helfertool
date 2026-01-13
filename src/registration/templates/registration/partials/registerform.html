@@ -9,10 +9,6 @@
 
     {% include "registration/partials/helper_edit_data.html" with form=form %}
 
-    {% if corona_form %}
-        {% include "corona/registration.html" with form=corona_form event=event %}
-    {% endif %}
-
     {% if form.ask_full_age %}
         {% bootstrap_field form.full_age layout="floating" required_css_class="" %}
     {% endif %}

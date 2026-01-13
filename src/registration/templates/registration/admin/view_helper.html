@@ -5,7 +5,6 @@
     {% has_access helper "ACCESS_HELPER_VIEW_SENSITIVE" as user_view_sensitive %}
     {% has_access helper "ACCESS_HELPER_EDIT" as user_helper_edit %}
     {% has_access helper "ACCESS_HELPER_RESEND" as user_helper_resend %}
-    {% has_access helper "ACCESS_CORONA_VIEW" as user_corona_view %}
     {% has_access_event_or_job event "ACCESS_JOB_EDIT_HELPERS" as user_any_job_edit_helpers %}
 
     <h1>{{ helper.full_name }}</h1>
@@ -55,12 +54,6 @@
                 {% trans "Resend confirmation mail" %}
             </a>
         {% endif %}
-
-        {% if event.corona and user_corona_view %}
-        <a href="{% url 'corona:view_helper' event.url_name helper.pk %}" class="me-3 text-nowrap">
-            {% icon "head-side-mask" %}
-            {% trans "COVID-19 contact tracing" %}
-        </a>
     {% endif %}
 
     </p>

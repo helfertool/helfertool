@@ -77,8 +77,6 @@ else:
 USE_I18N = True
 USE_TZ = True
 
-DEFAULT_COUNTRY = dict_get(config, "DE", "language", "country")
-
 # database
 DATABASES = {
     "default": {
@@ -457,7 +455,6 @@ FEATURES_BADGES = bool(dict_get(config, True, "features", "badges"))
 FEATURES_GIFTS = bool(dict_get(config, True, "features", "gifts"))
 FEATURES_PREREQUISITES = bool(dict_get(config, True, "features", "prerequisites"))
 FEATURES_INVENTORY = bool(dict_get(config, True, "features", "inventory"))
-FEATURES_CORONA = bool(dict_get(config, True, "features", "corona"))
 
 # Display Options
 # Maximum years of events to be displayed by default on the main page
@@ -568,7 +565,6 @@ INSTALLED_APPS = (
     "django_bootstrap5",
     "django_icons",
     "django_select2",
-    "django_countries",
     "django_prose_editor",
     "captcha",
     "compressor",
@@ -585,7 +581,6 @@ INSTALLED_APPS = (
     "toolsettings.apps.ToolsettingsConfig",
     "prerequisites.apps.PrerequisitesConfig",
     "toollog.apps.ToollogConfig",
-    "corona.apps.CoronaConfig",
     "adminautomation.apps.AdminautomationConfig",
 )
 

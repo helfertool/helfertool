@@ -8,7 +8,6 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
 
-from corona.forms import ContactTracingDataForm
 from helfertool.utils import nopermission
 from news.helper import news_validate_helper
 
@@ -125,16 +124,8 @@ def form(request, event_url_name, link_pk=None):
     # handle form
     form = RegisterForm(request.POST or None, event=event, shifts_qs=shifts_qs, is_link=link is not None)
 
-    if event.corona:
-        corona_form = ContactTracingDataForm(request.POST or None, event=event, prefix="corona")
-    else:
-        corona_form = None
-
-    if form.is_valid() and (corona_form is None or corona_form.is_valid()):
+    if form.is_valid():
         helper = form.save()
-
-        if corona_form:
-            corona_form.save(helper=helper)
 
         logger.info(
             "helper registered",
@@ -153,7 +144,6 @@ def form(request, event_url_name, link_pk=None):
     context = {
         "event": event,
         "form": form,
-        "corona_form": corona_form,
         "user_is_involved": user_is_involved,
         "link": link,
     }
@@ -245,18 +235,8 @@ def update_personal(request, event_url_name, helper_pk):
 
     form = HelperForm(request.POST or None, instance=helper, event=event, public=True, mask_sensitive=True)
 
-    if event.corona:
-        corona_form = ContactTracingDataForm(
-            request.POST or None, instance=helper.contacttracingdata, event=event, prefix="corona"
-        )
-    else:
-        corona_form = None
-
-    if form.is_valid() and (corona_form is None or corona_form.is_valid()):
+    if form.is_valid():
         form.save()
-
-        if corona_form:
-            corona_form.save(helper=helper)
 
         logger.info(
             "helper dataupdated",
@@ -272,5 +252,5 @@ def update_personal(request, event_url_name, helper_pk):
 
         return redirect("registered", event_url_name=event.url_name, helper_pk=helper.pk)
 
-    context = {"event": event, "data": helper, "personal_data_form": form, "corona_form": corona_form}
+    context = {"event": event, "data": helper, "personal_data_form": form}
     return render(request, "registration/registered.html", context)

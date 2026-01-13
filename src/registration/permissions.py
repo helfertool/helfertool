@@ -49,9 +49,6 @@ ACCESS_PREREQUISITES_EDIT = "ACCESS_PREREQUISITES_EDIT"  # edit prerequisite set
 ACCESS_PREREQUISITES_VIEW = "ACCESS_PREREQUISITES_VIEW"  # view global lists which helper fulfils which prerequisites
 ACCESS_PREREQUISITES_HANDLE = "ACCESS_PREREQUISITES_HANDLE"  # set for helpers whether they fulfil prerequisites
 
-ACCESS_CORONA_EDIT = "ACCESS_CORONA_EDIT"  # edit corona settings for an event
-ACCESS_CORONA_VIEW = "ACCESS_CORONA_VIEW"  # view contact tracing data for an event
-
 # Based on requested access and role, we can decide whether we grant access or not.
 # Here, for each access type, the allowed/required roles are listed (on event and job level)
 _rbac_matrix = {
@@ -347,18 +344,6 @@ _rbac_matrix = {
             JobAdminRoles.ROLE_FULL,
             JobAdminRoles.ROLE_DEFAULT,
         ],
-    ],
-    ACCESS_CORONA_EDIT: [
-        [
-            EventAdminRoles.ROLE_ADMIN,
-        ],
-        [],
-    ],
-    ACCESS_CORONA_VIEW: [
-        [
-            EventAdminRoles.ROLE_ADMIN,
-        ],
-        [],
     ],
 }
 

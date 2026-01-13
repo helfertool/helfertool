@@ -48,7 +48,7 @@
 
     {{ event.text | safe }}
 
-    {% include "registration/partials/registerform.html" with event=event form=form corona_form=corona_form %}
+    {% include "registration/partials/registerform.html" with event=event form=form %}
 
     {% include "registration/partials/contact.html" with event=event %}
 {% endblock %}
