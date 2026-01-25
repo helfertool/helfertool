@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-30 16:49+0200\n"
+"POT-Creation-Date: 2026-01-25 15:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: toolsettings/models.py:19
+#: toolsettings/models.py:21
 msgid "Key"
 msgstr "Key"
 
-#: toolsettings/models.py:30
+#: toolsettings/models.py:34
 msgid "HTML"
 msgstr "HTML"
 
-#: toolsettings/models.py:38
+#: toolsettings/models.py:42
 msgid "Text"
 msgstr "Text"
 

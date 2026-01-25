@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-23 19:42+0100\n"
+"POT-Creation-Date: 2026-01-25 15:26+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,47 +16,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.8\n"
 
-#: account/forms/account.py:123 account/forms/account.py:131
-#: account/forms/account.py:139
+#: account/forms/account.py:94
+msgid "Do not set password now"
+msgstr "Passwort jetzt nicht setzen"
+
+#: account/forms/account.py:95
+msgid ""
+"The user is notified via email and can set the password (via the password "
+"reset)"
+msgstr ""
+"Benutzer:in wird per E-Mail benachrichtigt und kann das Passwort festlegen "
+"(durch einen Passwort Reset)"
+
+#: account/forms/account.py:127 account/forms/account.py:129
+msgid "Password is required"
+msgstr "Passwort ist erforderlich"
+
+#: account/forms/account.py:151 account/forms/account.py:159
+#: account/forms/account.py:167
 msgid "Managed by external identity provider"
 msgstr "Durch externen Identity Provider verwaltet"
 
-#: account/forms/account.py:135 account/templates/account/list_users.html:35
+#: account/forms/account.py:163 account/templates/account/list_users.html:35
 #: account/templates/account/user_permissions.html:10
 msgid "Administrator"
 msgstr "Administrator:in"
 
-#: account/forms/account.py:145 account/templates/account/list_users.html:43
+#: account/forms/account.py:173 account/templates/account/list_users.html:43
 #: account/templates/account/user_permissions.html:19
 msgid "Add users"
 msgstr "Benutzer:innen hinzufügen"
 
-#: account/forms/account.py:153 account/templates/account/list_users.html:39
+#: account/forms/account.py:181 account/templates/account/list_users.html:39
 #: account/templates/account/user_permissions.html:14
 msgid "Add events"
 msgstr "Veranstaltungen hinzufügen"
 
-#: account/forms/account.py:162 account/templates/account/list_users.html:49
+#: account/forms/account.py:190 account/templates/account/list_users.html:49
 #: account/templates/account/user_permissions.html:24
 msgid "Send newsletter"
 msgstr "Newsletter versenden"
 
-#: account/forms/account.py:249
+#: account/forms/account.py:277
 msgid "Other user, which will be deleted"
 msgstr "Andere Benutzer:in, welche gelöscht wird"
 
-#: account/forms/account.py:274
+#: account/forms/account.py:302
 msgid "User does not exist"
 msgstr "Benutzer:in existiert nicht"
 
-#: account/forms/agreement.py:35
+#: account/forms/agreement.py:26
 #, python-format
 msgid "Text (%(lang)s)"
 msgstr "Text (%(lang)s)"
 
-#: account/models/agreement.py:13
+#: account/models/agreement.py:15
 #: account/templates/account/delete_agreement.html:11
 #: account/templates/account/delete_user.html:15
 #: account/templates/account/merge_user.html:16
@@ -64,21 +80,21 @@ msgstr "Text (%(lang)s)"
 msgid "Name"
 msgstr "Name"
 
-#: account/models/agreement.py:17
+#: account/models/agreement.py:21
 msgid "Text"
 msgstr "Text"
 
-#: account/models/agreement.py:21
+#: account/models/agreement.py:25
 #: account/templates/account/delete_agreement.html:15
 msgid "Start date"
 msgstr "Startdatum"
 
-#: account/models/agreement.py:25
+#: account/models/agreement.py:29
 #: account/templates/account/delete_agreement.html:19
 msgid "End date"
 msgstr "Enddatum"
 
-#: account/models/agreement.py:32
+#: account/models/agreement.py:36
 msgid "End date must be after start date."
 msgstr "Enddatum muss nach Startdatum liegen."
 
@@ -86,9 +102,44 @@ msgstr "Enddatum muss nach Startdatum liegen."
 msgid "Add user"
 msgstr "Benutzer:in hinzufügen"
 
-#: account/templates/account/add_user.html:16
+#: account/templates/account/add_user.html:22
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: account/templates/account/add_user_mail.txt:1
+#, python-format
+msgid ""
+"Hello %(firstname)s,\n"
+"\n"
+"your user for %(page_title)s was created.\n"
+"\n"
+"Your username is: %(username)s\n"
+"\n"
+"You can set your password here by using the password reset: "
+"%(password_reset_url)s\n"
+"\n"
+"If you did not expect this mail, please contact %(contact_mail)s.\n"
+"\n"
+"Best regards"
+msgstr ""
+"Hallo %(firstname)s,\n"
+"\n"
+"dein Benutzer für %(page_title)s wurde erstellt.\n"
+"\n"
+"Der Benutzername ist: %(username)s\n"
+"\n"
+"Du kannst dein Passwort hier setzen, indem du den Passwort Reset nutzt: "
+"%(password_reset_url)s\n"
+"\n"
+"Wenn du diese E-Mail nicht erwartet hast, wende dich bitte an "
+"%(contact_mail)s.\n"
+"\n"
+"Viele Grüße"
+
+#: account/templates/account/add_user_mail_subject.txt:3
+#, python-format
+msgid "Your access to %(page_title)s"
+msgstr "Dein Zugang zu %(page_title)s"
 
 #: account/templates/account/delete_agreement.html:5
 msgid "Delete user agreement"
@@ -117,6 +168,7 @@ msgstr "Account Daten"
 
 #: account/templates/account/delete_user.html:11
 #: account/templates/account/merge_user.html:12
+#: account/templates/account/password_reset/completed.html:10
 #: account/templates/account/view_user.html:15
 msgid "Login"
 msgstr "Login"
@@ -231,6 +283,109 @@ msgstr "Benutzer:in zur Löschung"
 msgid "Merge"
 msgstr "Zusammenfassen"
 
+#: account/templates/account/password_reset/completed.html:5
+#: account/templates/account/password_reset/confirm.html:5
+#: account/templates/account/password_reset/form.html:5
+#: account/templates/account/password_reset/sent.html:5
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: account/templates/account/password_reset/completed.html:7
+msgid "Your password has been set."
+msgstr "Dein Passwort wurde gesetzt."
+
+#: account/templates/account/password_reset/completed_mail.txt:1
+#, python-format
+msgid ""
+"Hello %(firstname)s,\n"
+"\n"
+"your password for %(page_title)s has been successfully reset.\n"
+"\n"
+"If you have not done this yourself, please contact %(contact_mail)s "
+"immediately.\n"
+"\n"
+"Best regards"
+msgstr ""
+"Hallo %(firstname)s,\n"
+"\n"
+"dein Passwort für %(page_title)s wurde erfolgreich zurückgesetzt.\n"
+"\n"
+"Wenn du dies nicht selbst getan hast, wende dich bitte umgehend an "
+"%(contact_mail)s.\n"
+"\n"
+"Viele Grüße"
+
+#: account/templates/account/password_reset/completed_mail_subject.txt:3
+#, python-format
+msgid "Successful password reset for %(page_title)s"
+msgstr "Erfolgreicher Passwort Reset für %(page_title)s"
+
+#: account/templates/account/password_reset/confirm.html:20
+msgid "Set password"
+msgstr "Passwort setzen"
+
+#: account/templates/account/password_reset/confirm.html:23
+msgid "The password reset link was invalid."
+msgstr "Der Link zum Zurücksetzen des Passworts war ungültig."
+
+#: account/templates/account/password_reset/confirm_mail.txt:2
+#, python-format
+msgid ""
+"Hello %(firstname)s,\n"
+"\n"
+"you're receiving this email because you requested a password reset for "
+"%(page_title)s.\n"
+"\n"
+"Please set a new password on the following page:"
+msgstr ""
+"Hallo %(firstname)s,\n"
+"\n"
+"du erhältst diese E-Mail, weil du das Zurücksetzen des Passworts für "
+"%(page_title)s angefordert hast.\n"
+"\n"
+"Bitte setze auf der folgenden Seite ein neues Passwort:"
+
+#: account/templates/account/password_reset/confirm_mail.txt:10
+#, python-format
+msgid ""
+"Your username is: %(username)s\n"
+"\n"
+"Best regards"
+msgstr ""
+"Dein Benutzername ist: %(username)s\n"
+"\n"
+"Viele Grüße"
+
+#: account/templates/account/password_reset/confirm_mail_subject.txt:4
+#, python-format
+msgid "Password reset for %(page_title)s"
+msgstr "Passwort zurücksetzen für %(page_title)s"
+
+#: account/templates/account/password_reset/form.html:7
+msgid ""
+"Enter your email address, and you will receive email instructions for "
+"setting a new password."
+msgstr ""
+"Gib deine E-Mail Adresse ein und du wirst die Anweisungen zum Setzen eines "
+"neuen Passworts per E-Mail erhalten."
+
+#: account/templates/account/password_reset/form.html:12
+msgid "The password reset only works for local user accounts."
+msgstr "Das Zurücksetzen des Passworts funktioniert nur für lokale Accounts."
+
+#: account/templates/account/password_reset/form.html:32
+msgid "Reset password"
+msgstr "Passwort zurücksetzen"
+
+#: account/templates/account/password_reset/sent.html:7
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered."
+msgstr ""
+"Wir haben dir eine E-Mail mit Anweisungen zum Setzen deines Passworts "
+"geschickt, falls ein Account mit der von dir angegebenen E-Mail-Adresse "
+"existiert."
+
 #: account/templates/account/view_user.html:6
 msgid "My account"
 msgstr "Mein Account"
@@ -264,16 +419,23 @@ msgstr "Gestern"
 msgid "%(last_login_ago)s ago"
 msgstr "Vor %(last_login_ago)s"
 
-#: account/views/account.py:36
+#: account/views/account.py:70
+msgid ""
+"Failed to send the notification email. Please contact the user on your own."
+msgstr ""
+"Die E-Mail zur Benachrichtigung konnte nicht gesendet werden. Bitte "
+"kontaktiere den Benutzer selbst."
+
+#: account/views/account.py:73
 #, python-format
 msgid "Added user %(username)s"
 msgstr "Benutzer:in %(username)s hinzugefügt"
 
-#: account/views/account.py:91
+#: account/views/account.py:129
 msgid "Changed password successfully"
 msgstr "Das Passwort wurde erfolgreich geändert"
 
-#: account/views/account.py:188
+#: account/views/account.py:226
 #, python-brace-format
 msgid "Merged user {} into {}"
 msgstr "Benutzer:in {} mit {} zusammengefasst"
