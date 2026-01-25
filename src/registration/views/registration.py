@@ -159,12 +159,11 @@ def registered(request, event_url_name, helper_pk=None):
 
 
 @never_cache
-def validate(request, event_url_name, helper_pk, validation_id=None):
+def validate(request, event_url_name, helper_pk, validation_id):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk, handle_duplicates=True)
 
     # the validation_id should prevent that users guess the url of this page
-    # for now, we accept links without this ID, but future releases will require it
-    if validation_id and helper.validation_id != validation_id:
+    if helper.validation_id != validation_id:
         raise Http404
 
     if not helper.validated:

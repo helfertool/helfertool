@@ -24,11 +24,6 @@ urlpatterns = [
         views.validate,
         name="validate",
     ),
-    path(
-        "<slug:event_url_name>/validate/<uuid:helper_pk>/",
-        views.validate,
-        name="validate_old",
-    ),
     path("<slug:event_url_name>/ical/<uuid:helper_pk>/", HelperFeed(), name="ical"),
     path(
         "<slug:event_url_name>/update/<uuid:helper_pk>/",
