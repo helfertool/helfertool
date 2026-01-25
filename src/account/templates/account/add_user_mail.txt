@@ -1,0 +1,12 @@
+{% load i18n %}{% autoescape off %}{% blocktranslate %}Hello {{ firstname }},
+
+your user for {{ page_title }} was created.
+
+Your username is: {{ username }}
+
+You can set your password here by using the password reset: {{ password_reset_url }}
+
+If you did not expect this mail, please contact {{ contact_mail }}.
+
+Best regards{% endblocktranslate %}
+{% endautoescape %}

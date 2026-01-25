@@ -1,5 +1,5 @@
 {% extends "helfertool/admin.html" %}
-{% load i18n django_bootstrap5 icons toolsettings %}
+{% load i18n django_bootstrap5 icons toolsettings static %}
 
 {% block content %}
     <h1>{% trans "Add user" %}</h1>
@@ -11,10 +11,18 @@
 
         <div class="row">
             <div class="col-xs-12 col-xl-6">
-                {% bootstrap_form form layout="floating" %}
+                {% bootstrap_field form.username layout="floating" %}
+                {% bootstrap_field form.email layout="floating" %}
+                {% bootstrap_field form.first_name layout="floating" %}
+                {% bootstrap_field form.last_name layout="floating" %}
+                {% bootstrap_field form.no_password layout="floating" %}
+                {% bootstrap_field form.password1 layout="floating" %}
+                {% bootstrap_field form.password2 layout="floating" %}
 
                 <button type="submit" class="btn btn-outline-primary">{% icon "plus" %} {% trans "Add" %}</button>
             </div>
         </div>
     </form>
+
+    <script src="{% static "account/js/add_user.js" %}"></script>
 {% endblock %}

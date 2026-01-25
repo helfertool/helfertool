@@ -22,7 +22,7 @@ function handle_lang()
         if($("#id_english").prop('checked')) {
             $("#englishbelow").show()
             $("#block_en").show()
-            $("#id_text_en").setAttr('required', '');
+            $("#id_text_en").attr('required', '');
         }
         else {
             $("#englishbelow").hide()

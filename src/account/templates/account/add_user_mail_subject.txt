@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Your access to {{ page_title }}{% endblocktrans %}
+{% endautoescape %}

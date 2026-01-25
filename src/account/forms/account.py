@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.debug import sensitive_variables
 
 from django_select2.forms import Select2Widget
 
@@ -15,6 +16,7 @@ from toollog.models import LogEntry
 
 from ..templatetags.globalpermissions import has_adduser_group, has_addevent_group, has_sendnews_group
 
+import secrets
 import logging
 
 logger = logging.getLogger("helfertool.account")
@@ -88,17 +90,43 @@ class CreateUserForm(UserCreationForm):
             ),
         }
 
+    no_password = forms.BooleanField(
+        label=_("Do not set password now"),
+        help_text=_("The user is notified via email and can set the password (via the password reset)"),
+        required=False,
+    )
+
     def __init__(self, *args, **kwargs):
         super(CreateUserForm, self).__init__(*args, **kwargs)
 
+        # compared to the django default, we need some data
         for f in ("email", "first_name", "last_name"):
             self.fields[f].required = True
 
+        # if no_password is set, the password is not required, see clean() for more validation
+        for f in ("password1", "password2"):
+            self.fields[f].required = False
+
+        self.fields["no_password"].widget.attrs["onChange"] = "handle_password()"
+
+    @sensitive_variables("password")
     def clean(self):
         # add LOCAL_USER_CHAR to the beginning
         char = settings.LOCAL_USER_CHAR
         if char and not self.cleaned_data.get("username").startswith(char):
             self.cleaned_data["username"] = char + self.cleaned_data.get("username")
+
+        # if no_password is set, set a randomly generated password
+        # otherwise, check if password is set
+        if self.cleaned_data["no_password"]:
+            password = secrets.token_urlsafe(100)
+            self.cleaned_data["password1"] = password
+            self.cleaned_data["password2"] = password
+        else:
+            if not self.cleaned_data["password1"]:
+                self.add_error("password1", _("Password is required"))
+            if not self.cleaned_data["password2"]:
+                self.add_error("password2", _("Password is required"))
 
         return super(CreateUserForm, self).clean()
 

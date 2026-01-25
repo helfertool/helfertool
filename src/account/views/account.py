@@ -3,9 +3,12 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
+from django.core.mail import EmailMessage
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import get_template
+from django.urls import reverse
 from django.utils.http import urlencode
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
@@ -14,6 +17,8 @@ from helfertool.utils import nopermission
 
 from ..forms import CreateUserForm, EditUserForm, DeleteUserForm, MergeUserForm
 from ..templatetags.globalpermissions import has_adduser_group
+
+from smtplib import SMTPException
 
 import logging
 
@@ -32,6 +37,38 @@ def add_user(request):
 
     if form.is_valid():
         user = form.save()
+        no_password = form.cleaned_data["no_password"]
+
+        # if not password was set, send mail to user
+        if no_password:
+            context = {
+                "firstname": user.first_name,
+                "username": user.username,
+                "page_title": settings.PAGE_TITLE,
+                "contact_mail": settings.CONTACT_MAIL,
+                "password_reset_url": request.build_absolute_uri(reverse("account:password_reset")),
+            }
+            subject_template = get_template("account/add_user_mail_subject.txt")
+            subject = subject_template.render(context).strip()
+
+            text_template = get_template("account/add_user_mail.txt")
+            text = text_template.render(context)
+
+            # sent it and handle errors
+            mail = EmailMessage(
+                subject,
+                text,
+                settings.EMAIL_SENDER_ADDRESS,
+                [user.email],  # to
+                reply_to=[settings.EMAIL_SENDER_ADDRESS],
+            )
+
+            try:
+                mail.send(fail_silently=False)
+            except (SMTPException, ConnectionError):
+                messages.warning(
+                    request, _("Failed to send the notification email. Please contact the user on your own.")
+                )
 
         messages.success(request, _("Added user %(username)s" % {"username": user}))
 
@@ -40,6 +77,7 @@ def add_user(request):
             extra={
                 "user": request.user,
                 "added_user": user.username,
+                "no_password": no_password,
             },
         )
 
