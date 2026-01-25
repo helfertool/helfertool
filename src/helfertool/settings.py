@@ -171,6 +171,7 @@ EMAIL_SENDER_ADDRESS = dict_get(config, "helfertool@localhost", "mail", "sender_
 EMAIL_SENDER_NAME = dict_get(config, EMAIL_SENDER_ADDRESS, "mail", "sender_name")
 
 SERVER_EMAIL = EMAIL_SENDER_ADDRESS  # for error messages
+DEFAULT_FROM_EMAIL = EMAIL_SENDER_ADDRESS  # for other messages, like password resets
 
 # forward mails that were not handled automatically to this address
 # the display name defaults to the mail address
