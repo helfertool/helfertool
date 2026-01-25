@@ -1,0 +1,13 @@
+{% load i18n toolsettings %}{% djangosetting "PAGE_TITLE" as page_title %}{% autoescape off %}
+{% blocktranslate with firstname=user.first_name %}Hello {{ firstname }},
+
+you're receiving this email because you requested a password reset for {{ page_title }}.
+
+Please set a new password on the following page:{% endblocktranslate %}
+
+{{ protocol }}://{{ domain }}{% url 'account:password_reset_confirm' uidb64=uid token=token %}
+
+{% blocktranslate with username=user.get_username %}Your username is: {{ username }}
+
+Best regards{% endblocktranslate %}
+{% endautoescape %}

@@ -1,0 +1,12 @@
+{% extends "helfertool/base.html" %}
+{% load i18n django_bootstrap5 icons toolsettings %}
+
+{% block content %}
+    <h1>{% trans "Password reset" %}</h1>
+
+    <p>{% translate "Your password has been set." %}</p>
+
+    <a class="btn btn-outline-primary" href="{% url "login" %}">
+        {% icon "sign-in-alt" %} {% trans "Login" %}
+    </a>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Successful password reset for {{ page_title }}{% endblocktrans %}
+{% endautoescape %}

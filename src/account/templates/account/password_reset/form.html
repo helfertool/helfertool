@@ -1,0 +1,34 @@
+{% extends "helfertool/base.html" %}
+{% load i18n django_bootstrap5 icons toolsettings %}
+
+{% block content %}
+    <h1>{% trans "Password reset" %}</h1>
+
+    <p>{% translate "Enter your email address, and you will receive email instructions for setting a new password." %}</p>
+
+    {% djangosetting "OIDC_CUSTOM_PROVIDER_NAME" as OIDC_CUSTOM_PROVIDER_NAME %}
+    {% djangosetting "AUTH_LDAP_SERVER_URI" as AUTH_LDAP_SERVER_URI %}
+    {% if OIDC_CUSTOM_PROVIDER_NAME or AUTH_LDAP_SERVER_URI %}
+        <p>{% translate "The password reset only works for local user accounts." %}</p>
+    {%endif %}
+
+    <form action="{% url "account:password_reset" %}" method="post" accept-charset="utf-8" role="form">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                {% bootstrap_form_errors form %}
+
+                {% bootstrap_field form.email required_css_class="" layout="floating" %}
+
+                {% if form.captcha %}
+                    <div class="mt-4">
+                        {% bootstrap_field form.captcha required_css_class="" show_label=False %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">{% icon "unlock" %} {% trans "Reset password" %}</button>
+    </form>
+{% endblock %}

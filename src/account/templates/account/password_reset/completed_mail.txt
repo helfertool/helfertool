@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}{% blocktranslate %}Hello {{ firstname }},
+
+your password for {{ page_title }} has been successfully reset.
+
+If you have not done this yourself, please contact {{ contact_mail }} immediately.
+
+Best regards{% endblocktranslate %}
+{% endautoescape %}

@@ -1,0 +1,25 @@
+{% extends "helfertool/base.html" %}
+{% load i18n django_bootstrap5 icons toolsettings %}
+
+{% block content %}
+    <h1>{% trans "Password reset" %}</h1>
+
+    {% if validlink %}
+        <form method="post" accept-charset="utf-8" role="form">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    {% bootstrap_form_errors form %}
+
+                    {% bootstrap_field form.new_password1 required_css_class="" layout="floating" %}
+                    {% bootstrap_field form.new_password2 required_css_class="" layout="floating" %}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary">{% icon "save" %} {% trans "Set password" %}</button>
+        </form>
+    {% else %}
+        <p>{% translate "The password reset link was invalid." %}</p>
+    {% endif %}
+{% endblock %}

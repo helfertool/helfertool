@@ -1,0 +1,5 @@
+{% load i18n toolsettings %}
+{% djangosetting "PAGE_TITLE" as page_title %}
+{% autoescape off %}
+{% blocktrans with page_title=page_title %}Password reset for {{ page_title }}{% endblocktrans %}
+{% endautoescape %}

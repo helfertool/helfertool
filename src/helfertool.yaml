@@ -172,11 +172,6 @@ authentication:
     #        # Reasonable choices are email or preferred_username
     #        username_claim: "email"
     #
-    #        # Controls the session cookie SameSite attribute, forcing it to "Lax". This is necessary if your OIDC provider
-    #        # resides on a different top level domain name than the Helfertool (error message: "Login failed")
-    #        # Set it to true in this case.
-    #        thirdparty_domain: false
-    #
     #        # It could happen that the user is disabled or claims change. So we can redirect the users from time to time
     #        # to the OIDC provider and validate if they are still allowed to login.
     #        # Time in minutes, set to 0 to disable it (Note: the idle timeout of the provider should be higher than this value)
@@ -274,6 +269,9 @@ security:
     captchas:
         # for newsletter registration (recommended)
         newsletter: true
+
+        # for password reset (recommended)
+        password_reset: true
 
         # for event registration
         registration: false

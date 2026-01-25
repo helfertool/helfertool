@@ -186,6 +186,8 @@ LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/manage/account/check/"
 LOGOUT_REDIRECT_URL = "/"
 
+PASSWORD_RESET_TIMEOUT = 1800  # 30 minutes
+
 LOCAL_USER_CHAR = dict_get(config, None, "authentication", "local_user_char")
 
 # LDAP
@@ -341,6 +343,7 @@ SECRET_KEY = dict_get(config, "CHANGEME", "security", "secret")
 ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts") or []  # empty list in config is None, but we need []
 
 CAPTCHAS_NEWSLETTER = dict_get(config, False, "security", "captchas", "newsletter")
+CAPTCHAS_PASSWORD_RESET = dict_get(config, False, "security", "captchas", "password_reset")
 CAPTCHAS_REGISTRATION = dict_get(config, False, "security", "captchas", "registration")
 
 # use X-Forwarded-Proto header to determine if https is used (overwritten in settings_container.py)
@@ -367,11 +370,7 @@ CSRF_COOKIE_SAMESITE = "Strict"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_HTTPONLY = True
-# OIDC with foreign TLDs is blocked by SAMESITE=Strict, so make this configurable
-if oidc_config and dict_get(oidc_config, False, "provider", "thirdparty_domain"):
-    SESSION_COOKIE_SAMESITE = "Lax"
-else:
-    SESSION_COOKIE_SAMESITE = "Strict"
+SESSION_COOKIE_SAMESITE = "Lax"
 
 if not DEBUG:
     CSRF_COOKIE_SECURE = True
