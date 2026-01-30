@@ -48,13 +48,29 @@ def get_or_404(event_url_name=None, job_pk=None, shift_pk=None, helper_pk=None, 
         raise Http404
 
     # sanity checks
-    if event and job and job.event != event:
+    # event needs to be the same for job, shift and helper
+    event_values = [
+        event,
+        job.event if job is not None else None,
+        shift.job.event if shift is not None else None,
+        helper.event if helper is not None else None,
+    ]
+    event_values_not_none = list(filter(lambda e: e is not None, event_values))
+    if event_values_not_none:
+        # all(...) checks if all events are the same
+        if not all(e == event_values_not_none[0] for e in event_values_not_none):
+            raise Http404
+
+    # helper needs to belong to shift
+    if helper and shift and not helper.shifts.filter(pk=shift.pk).exists():
         raise Http404
 
+    # helper needs to belong to job
+    if helper and job and job not in helper.all_jobs:
+        raise Http404
+
+    # shift needs to belong to job
     if job and shift and shift.job != job:
-        raise Http404
-
-    if shift and helper and not helper.shifts.filter(pk=shift.pk).exists():
         raise Http404
 
     # and return data

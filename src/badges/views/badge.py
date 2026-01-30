@@ -16,7 +16,7 @@ def edit_badge(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not has_access(request.user, event, ACCESS_BADGES_EDIT_HELPER):
+    if not has_access(request.user, helper, ACCESS_BADGES_EDIT_HELPER):
         return nopermission(request)
 
     # check if badge system is active
@@ -44,7 +44,7 @@ def get_badge_photo(request, event_url_name, helper_pk):
     event, job, shift, helper = get_or_404(event_url_name, helper_pk=helper_pk)
 
     # check permission
-    if not has_access(request.user, event, ACCESS_BADGES_EDIT_HELPER):
+    if not has_access(request.user, helper, ACCESS_BADGES_EDIT_HELPER):
         return nopermission(request)
 
     # check if badge system is active
