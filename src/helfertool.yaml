@@ -342,6 +342,9 @@ badges:
     # Maximum number of copies for special badges
     special_badges_max: 50
 
+    # Time until PDF build is aborted in minutes
+    build_timeout: 5
+
     # Time until PDF file is deleted after it was created in minutes
     pdf_timeout: 30
 

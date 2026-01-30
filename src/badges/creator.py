@@ -137,7 +137,11 @@ class BadgeCreator:
                     os.path.basename(self.latex_file_path),
                 ],
                 cwd=self.dir,
+                env=env,
+                timeout=settings.BADGE_BUILD_TIMEOUT,
             )
+        except subprocess.TimeoutExpired:
+            raise BadgeCreatorError("PDF generation took too long")
         except subprocess.CalledProcessError as e:
             raise BadgeCreatorError("PDF generation failed", e.output.decode("utf8"))
 
