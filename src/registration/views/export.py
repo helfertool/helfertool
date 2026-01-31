@@ -10,7 +10,7 @@ from ..export.excel import xlsx
 from ..export.pdf import pdf
 from ..models import Event, Job, Shift
 from ..permissions import ACCESS_HELPER_VIEW_SENSITIVE, has_access, ACCESS_EVENT_EXPORT_HELPERS
-from ..utils import escape_filename
+from ..utils import escape_filename, get_or_404
 
 from io import BytesIO
 
@@ -28,12 +28,10 @@ def export(request, event_url_name, filetype, job_pk=None, date=None):
         raise Http404
 
     # get event
-    event = get_object_or_404(Event, url_name=event_url_name)
+    event, job, shift, helper = get_or_404(event_url_name=event_url_name, job_pk=job_pk)
 
     # list of jobs for export
-    if job_pk:
-        job = get_object_or_404(Job, pk=job_pk)
-
+    if job:
         # check permission
         if not has_access(request.user, job, ACCESS_EVENT_EXPORT_HELPERS):
             return nopermission(request)

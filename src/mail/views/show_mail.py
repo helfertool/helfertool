@@ -13,7 +13,7 @@ from ..models import SentMail
 @never_cache
 def show_mail(request, event_url_name, mail_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
-    mail = get_object_or_404(SentMail, pk=mail_pk)
+    mail = get_object_or_404(SentMail, pk=mail_pk, event=event)
 
     # check permission
     if not mail.can_see_mail(request.user):
@@ -29,7 +29,7 @@ def show_mail(request, event_url_name, mail_pk):
 @archived_not_available
 def show_mail_errors(request, event_url_name, mail_pk):
     event = get_object_or_404(Event, url_name=event_url_name)
-    mail = get_object_or_404(SentMail, pk=mail_pk)
+    mail = get_object_or_404(SentMail, pk=mail_pk, event=event)
 
     # check permission
     if not mail.can_see_mail(request.user):
