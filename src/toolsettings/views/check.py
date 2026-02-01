@@ -23,6 +23,13 @@ def check(request):
     if not request.user.is_superuser:
         return nopermission(request)
 
+    # weak secret key
+    secret_ok = True
+    if settings.SECRET_KEY in ["change_this_for_production", "CHANGEME"]:
+        secret_ok = False
+    if len(settings.SECRET_KEY) < 50:
+        secret_ok = False
+
     # templates
     templates_ok = True
 
@@ -91,7 +98,9 @@ def check(request):
     context = {
         "version": settings.HELFERTOOL_VERSION,
         "container_version": settings.HELFERTOOL_CONTAINER_VERSION,
+        "debug": settings.DEBUG,
         "similarity_search": not settings.SEARCH_SIMILARITY_DISABLED,
+        "secret_ok": secret_ok,
         "templates_ok": templates_ok,
         "mail_smtp_ok": mail_smtp_ok,
         "mail_imap_configured": mail_imap_configured,

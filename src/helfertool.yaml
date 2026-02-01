@@ -243,6 +243,7 @@ security:
     debug: true
 
     # Unique and secret key
+    # At least 50 characters recommended, for example: pwgen -s 50 1
     secret: "change_this_for_production"
 
     # URLs that are used for the software
