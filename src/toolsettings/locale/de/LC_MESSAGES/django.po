@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 15:26+0100\n"
+"POT-Creation-Date: 2026-02-02 21:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.8\n"
 
 #: toolsettings/models.py:21
 msgid "Key"
@@ -51,43 +51,80 @@ msgid "Container:"
 msgstr "Container:"
 
 #: toolsettings/templates/toolsettings/check.html:21
+msgid "Debug mode"
+msgstr "Debug Modus"
+
+#: toolsettings/templates/toolsettings/check.html:25
+msgid "Debug mode enabled"
+msgstr "Debug Modus aktiviert"
+
+#: toolsettings/templates/toolsettings/check.html:28
+msgid "Debug mode disabled"
+msgstr "Debug Modus deaktiviert"
+
+#: toolsettings/templates/toolsettings/check.html:33
+msgid "Secret key"
+msgstr "Secret Key"
+
+#: toolsettings/templates/toolsettings/check.html:39
+msgid "Weak secret key"
+msgstr "Schwacher Secret Key"
+
+#: toolsettings/templates/toolsettings/check.html:45
 #: toolsettings/templates/toolsettings/templates.html:5
 msgid "Templates"
 msgstr "Templates"
 
-#: toolsettings/templates/toolsettings/check.html:34
+#: toolsettings/templates/toolsettings/check.html:51
+msgid "Templates missing"
+msgstr "Fehlende Templates"
+
+#: toolsettings/templates/toolsettings/check.html:60
 msgid "External services"
 msgstr "Externe Dienste"
 
-#: toolsettings/templates/toolsettings/check.html:37
+#: toolsettings/templates/toolsettings/check.html:63
 msgid "Status of external services"
 msgstr "Status der externen Dienste"
 
-#: toolsettings/templates/toolsettings/check.html:39
+#: toolsettings/templates/toolsettings/check.html:65
 msgid "Mail (SMTP)"
 msgstr "Mail (SMTP)"
 
-#: toolsettings/templates/toolsettings/check.html:50
+#: toolsettings/templates/toolsettings/check.html:71
+#: toolsettings/templates/toolsettings/check.html:85
+msgid "Cannot connect to mail server"
+msgstr "Verbindung zum Mailserver nicht möglich"
+
+#: toolsettings/templates/toolsettings/check.html:78
 msgid "Mail (IMAP)"
 msgstr "Mail (IMAP)"
 
-#: toolsettings/templates/toolsettings/check.html:65
+#: toolsettings/templates/toolsettings/check.html:95
 msgid "RabbitMQ"
 msgstr "RabbitMQ"
 
-#: toolsettings/templates/toolsettings/check.html:76
+#: toolsettings/templates/toolsettings/check.html:101
+msgid "Cannot connect to RabbitMQ server"
+msgstr "Verbindung zum RabbitMQ Server nicht möglich"
+
+#: toolsettings/templates/toolsettings/check.html:108
 msgid "LDAP"
 msgstr "LDAP"
 
-#: toolsettings/templates/toolsettings/check.html:91
+#: toolsettings/templates/toolsettings/check.html:115
+msgid "Cannot connect to LDAP server"
+msgstr "Verbindung zum LDAP Server nicht möglich"
+
+#: toolsettings/templates/toolsettings/check.html:125
 msgid "Search for similar names"
 msgstr "Suche nach ähnlichen Namen"
 
-#: toolsettings/templates/toolsettings/check.html:104
+#: toolsettings/templates/toolsettings/check.html:138
 msgid "Header"
 msgstr "Header"
 
-#: toolsettings/templates/toolsettings/check.html:107
+#: toolsettings/templates/toolsettings/check.html:141
 msgid "Status of HTTP headers"
 msgstr "Status der HTTP Header"
 

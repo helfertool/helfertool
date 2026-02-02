@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 15:26+0100\n"
+"POT-Creation-Date: 2026-02-02 21:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -308,7 +308,7 @@ msgstr "Geschenk gelöscht: %(name)s"
 msgid "Presence was saved"
 msgstr "Anwesenheit wurde gespeichert"
 
-#: gifts/views/set.py:96
+#: gifts/views/set.py:90
 #, python-format
 msgid "Gift set deleted: %(name)s"
 msgstr "Geschenkset gelöscht: %(name)s"

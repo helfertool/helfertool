@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helfertool\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 15:26+0100\n"
+"POT-Creation-Date: 2026-02-02 21:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -593,8 +593,8 @@ msgid "Matrix ID"
 msgstr "Matrix ID"
 
 #: registration/models/helper.py:141
-#: registration/templates/registration/admin/view_helper.html:130
-#: registration/templates/registration/admin/view_helper.html:143
+#: registration/templates/registration/admin/view_helper.html:128
+#: registration/templates/registration/admin/view_helper.html:141
 #: registration/templates/registration/partials/helper_view_data.html:73
 msgid "Internal comment"
 msgstr "Interner Kommentar"
@@ -704,7 +704,7 @@ msgid "The shift is not visible."
 msgstr "Diese Schicht ist nicht sichtbar."
 
 #: registration/models/shift.py:68
-#: registration/templates/registration/admin/view_helper.html:155
+#: registration/templates/registration/admin/view_helper.html:153
 msgid "Gifts"
 msgstr "Geschenke"
 
@@ -737,7 +737,7 @@ msgid "Add helper"
 msgstr "Helfer:in hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_as_coordinator.html:5
-#: registration/templates/registration/admin/view_helper.html:123
+#: registration/templates/registration/admin/view_helper.html:121
 msgid "Add as coordinator"
 msgstr "Als Koordinator:in hinzufügen"
 
@@ -759,7 +759,7 @@ msgid "Back"
 msgstr "Zurück"
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:5
-#: registration/templates/registration/admin/view_helper.html:118
+#: registration/templates/registration/admin/view_helper.html:116
 msgid "Add to shift"
 msgstr "Zu Schicht hinzufügen"
 
@@ -870,7 +870,7 @@ msgstr "Daten der Helfer:in"
 
 #: registration/templates/registration/admin/delete_helper.html:20
 #: registration/templates/registration/admin/delete_link.html:10
-#: registration/templates/registration/admin/view_helper.html:90
+#: registration/templates/registration/admin/view_helper.html:88
 #: registration/templates/registration/registered.html:70
 msgid "Shifts"
 msgstr "Schichten"
@@ -1036,7 +1036,7 @@ msgstr "Features"
 #: registration/templates/registration/admin/edit_link.html:20
 #: registration/templates/registration/admin/edit_shift.html:52
 #: registration/templates/registration/admin/sort_job.html:48
-#: registration/templates/registration/admin/view_helper.html:159
+#: registration/templates/registration/admin/view_helper.html:157
 #: registration/templates/registration/partials/adminroles_form.html:32
 #: registration/templates/registration/registered.html:33
 msgid "Save"
@@ -1519,16 +1519,16 @@ msgstr "Badge bearbeiten"
 msgid "Resend confirmation mail"
 msgstr "Bestätigungsmail nochmal senden"
 
-#: registration/templates/registration/admin/view_helper.html:65
+#: registration/templates/registration/admin/view_helper.html:63
 msgid "Coordinator"
 msgstr "Koordinator:in"
 
-#: registration/templates/registration/admin/view_helper.html:78
-#: registration/templates/registration/admin/view_helper.html:103
+#: registration/templates/registration/admin/view_helper.html:76
+#: registration/templates/registration/admin/view_helper.html:101
 msgid "Remove"
 msgstr "Entfernen"
 
-#: registration/templates/registration/admin/view_helper.html:149
+#: registration/templates/registration/admin/view_helper.html:147
 msgid "Prerequisites"
 msgstr "Voraussetzungen"
 
@@ -1892,7 +1892,7 @@ msgid "Sending the mail failed, but the registration was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Anmeldung wurde dennoch gespeichert."
 
-#: registration/views/registration.py:251
+#: registration/views/registration.py:250
 msgid "Sending the mail failed, but the change was saved."
 msgstr ""
 "Senden der E-Mail fehlgeschlagen, die Änderung wurde dennoch gespeichert."
