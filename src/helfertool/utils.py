@@ -132,6 +132,7 @@ PROSE_EDITOR_DEFAULT_EXTENSIONS = {
     "ListItem": True,
     "Link": {
         "protocols": ["http", "https", "mailto"],
+        "enableTarget": False,
     },
     "History": True,
     "HTML": True,
