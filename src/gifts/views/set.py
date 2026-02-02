@@ -19,18 +19,6 @@ import logging
 logger = logging.getLogger("helfertool.gifts")
 
 
-def _validate_gift_set(event, gift_set_pk):
-    if gift_set_pk:
-        gift_set = get_object_or_404(GiftSet, pk=gift_set_pk)
-
-        # check if permission belongs to event
-        if gift_set.event != event:
-            raise Http404()
-
-        return gift_set
-    return None
-
-
 @login_required
 @never_cache
 @archived_not_available
@@ -45,7 +33,10 @@ def edit_gift_set(request, event_url_name, gift_set_pk=None):
     if not event.gifts:
         return notactive(request)
 
-    gift_set = _validate_gift_set(event, gift_set_pk)
+    # get gift set
+    gift_set = None
+    if gift_set_pk:
+        gift_set = get_object_or_404(GiftSet, pk=gift_set_pk, event=event)
 
     # form
     form = GiftSetForm(request.POST or None, instance=gift_set, event=event)
@@ -86,7 +77,10 @@ def delete_gift_set(request, event_url_name, gift_set_pk):
     if not event.gifts:
         return notactive(request)
 
-    gift_set = _validate_gift_set(event, gift_set_pk)
+    # get gift set
+    gift_set = None
+    if gift_set_pk:
+        gift_set = get_object_or_404(GiftSet, pk=gift_set_pk, event=event)
 
     # form
     form = GiftSetDeleteForm(request.POST or None, instance=gift_set)

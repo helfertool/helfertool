@@ -25,7 +25,7 @@ class GiftSetForm(forms.ModelForm):
             self.gift_form_ids[gift.pk] = gift_id
 
             number = 0
-            if self.instance:
+            if self.instance.pk:
                 number = self.instance.get_gift_num(gift)
 
             self.fields[gift_id] = forms.IntegerField(label=gift.name, required=False, min_value=0, initial=number)
