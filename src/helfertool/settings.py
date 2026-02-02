@@ -343,8 +343,8 @@ DEBUG = dict_get(config, False, "security", "debug")
 SECRET_KEY = dict_get(config, "CHANGEME", "security", "secret")
 ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts") or []  # empty list in config is None, but we need []
 
-CAPTCHAS_NEWSLETTER = dict_get(config, False, "security", "captchas", "newsletter")
-CAPTCHAS_PASSWORD_RESET = dict_get(config, False, "security", "captchas", "password_reset")
+CAPTCHAS_NEWSLETTER = dict_get(config, True, "security", "captchas", "newsletter")
+CAPTCHAS_PASSWORD_RESET = dict_get(config, True, "security", "captchas", "password_reset")
 CAPTCHAS_REGISTRATION = dict_get(config, False, "security", "captchas", "registration")
 
 # use X-Forwarded-Proto header to determine if https is used (overwritten in settings_container.py)
