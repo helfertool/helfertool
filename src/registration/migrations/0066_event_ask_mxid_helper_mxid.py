@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="event",
             name="ask_mxid",
-            field=models.BooleanField(default=True, verbose_name="Ask for Matrix ID"),
+            field=models.BooleanField(default=False, verbose_name="Ask for Matrix ID"),
         ),
         migrations.AddField(
             model_name="helper",
