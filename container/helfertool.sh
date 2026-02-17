@@ -36,6 +36,10 @@ if [ "$1" = "init" ] ; then
     # initialise database with default settings
     /helfertool/venv/bin/python manage.py loaddata toolsettings
 
+elif [ "$1" = "createadmin" ] ; then
+    # create admin user
+    /helfertool/venv/bin/python manage.py createsuperuser
+
 # command: reload
 elif [ "$1" = "reload" ] ; then
     # reload uwsgi and celery

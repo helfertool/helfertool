@@ -28,9 +28,9 @@ RUN apt-get update && apt-get full-upgrade -y && \
     ln -s /helfertool/run/tmp /tmp
 
 COPY src /helfertool/src
-COPY deployment/container/etc /helfertool/etc
-COPY deployment/container/helfertool.sh /usr/local/bin/helfertool
-COPY deployment/container/healthcheck.sh /usr/local/bin/healthcheck
+COPY container/etc /helfertool/etc
+COPY container/helfertool.sh /usr/local/bin/helfertool
+COPY container/healthcheck.sh /usr/local/bin/healthcheck
 
 RUN echo $CONTAINER_VERSION > /helfertool/container_version && \
     # install python libs

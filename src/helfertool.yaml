@@ -1,3 +1,10 @@
+# Secrets can either be stored in this file, loaded from another file or read from the environment
+# Examples:
+#   password: "..."
+#   password_file: "/run/secrets/db_password"
+#   password_env: "DB_PASSWORD"
+# If multiple are provided, the order is: file, env, value from file
+
 # Show this announcement on every page (for example for maintenance)
 #announcement: ""
 
@@ -35,6 +42,8 @@ database:
     #name: "helfertool"
     #user: "helfertool"
     #password: "<PASSWORD>"
+    #password_file: "<PATH TO FILE>"
+    #password_env: "MYSQL_PASSWORD"
     #host: 127.0.0.1
     #port: 3306
 
@@ -43,6 +52,8 @@ database:
     #name: "helfertool"
     #user: "helfertool"
     #password: "<PASSWORD>"
+    #password_file: "<PATH TO FILE>"
+    #password_env: "POSTGRES_PASSWORD"
     #host: 127.0.0.1
     #port: 5432
 
@@ -59,6 +70,8 @@ rabbitmq:
     # Login credentials
     user: "guest"
     password: "guest"
+    #password_file: "<PATH TO FILE>"
+    #password_env: "RABBITMQ_PASSWORD"
 
     # Hostname and port
     host: 127.0.0.1
@@ -72,6 +85,8 @@ mail:
         port: 25
         user: null
         password: null
+        #password_file: "<PATH TO FILE>"
+        #password_env: "MAIL_SMTP_PASSWORD"
         tls: false
         starttls: false
 
@@ -81,6 +96,8 @@ mail:
     #    port: 993
     #    user: "helfertool"
     #    password: "<PASSWORD>"
+    #    password_file: "<PATH TO FILE>"
+    #    password_env: "MAIL_IMAP_PASSWORD"
     #    tls: true
     #    starttls: false
     #
@@ -114,6 +131,8 @@ authentication:
     #        host: "ldaps://ldap.helfertool.org"
     #        bind_dn: "cn=helfertool,ou=Roles,dc=helfertool,dc=org"
     #        bind_password: null
+    #        bind_password_file: "<PATH TO FILE>"
+    #        bind_password_env: "LDAP_BIND_PASSWORD"
     #
     #    # LDAP schema and attributes
     #    schema:
@@ -164,6 +183,8 @@ authentication:
     #        # Client ID and secret
     #        client_id: "helfertool"
     #        client_secret: "<SECRET>"
+    #        client_secret_file: "<PATH TO FILE>"
+    #        client_secret_env: "OAUTH_CLIENT_SECRET"
     #
     #        # The requested scopes
     #        scopes: "openid email profile"
@@ -245,6 +266,8 @@ security:
     # Unique and secret key
     # At least 50 characters recommended, for example: pwgen -s 50 1
     secret: "change_this_for_production"
+    #secret_file: "<PATH TO FILE>"
+    #secret_env: "SECRET_KEY"
 
     # URLs that are used for the software
     allowed_hosts:

@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from datetime import timedelta
 from pathlib import Path
 
-from .utils import dict_get, build_path, get_version, pg_trgm_installed
+from .utils import dict_get, dict_get_secret, build_path, get_version, pg_trgm_installed
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -83,7 +83,7 @@ DATABASES = {
         "ENGINE": "django.db.backends." + dict_get(config, "sqlite3", "database", "backend"),
         "NAME": dict_get(config, "db.sqlite3", "database", "name"),
         "USER": dict_get(config, None, "database", "user"),
-        "PASSWORD": dict_get(config, None, "database", "password"),
+        "PASSWORD": dict_get_secret(config, None, "database", "password"),
         "HOST": dict_get(config, None, "database", "host"),
         "PORT": dict_get(config, None, "database", "port"),
         "OPTIONS": dict_get(config, {}, "database", "options"),
@@ -99,7 +99,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # rabbitmq
 CELERY_BROKER_URL = "amqp://{}:{}@{}:{}/{}".format(
     dict_get(config, "guest", "rabbitmq", "user"),
-    dict_get(config, "guest", "rabbitmq", "password"),
+    dict_get_secret(config, "guest", "rabbitmq", "password"),
     dict_get(config, "localhost", "rabbitmq", "host"),
     dict_get(config, "5672", "rabbitmq", "port"),
     dict_get(config, "", "rabbitmq", "vhost"),
@@ -135,7 +135,7 @@ if dict_get(config, None, "mail", "host") is None:
     EMAIL_HOST = dict_get(config, "localhost", "mail", "send", "host")
     EMAIL_PORT = dict_get(config, 25, "mail", "send", "port")
     EMAIL_HOST_USER = dict_get(config, None, "mail", "send", "user")
-    EMAIL_HOST_PASSWORD = dict_get(config, None, "mail", "send", "password")
+    EMAIL_HOST_PASSWORD = dict_get_secret(config, None, "mail", "send", "password")
     EMAIL_USE_SSL = dict_get(config, False, "mail", "send", "tls")
     EMAIL_USE_TLS = dict_get(config, False, "mail", "send", "starttls")
 
@@ -147,7 +147,7 @@ if dict_get(config, None, "mail", "host") is None:
     RECEIVE_EMAIL_HOST = dict_get(config, None, "mail", "receive", "host")
     RECEIVE_EMAIL_PORT = dict_get(config, None, "mail", "receive", "port")
     RECEIVE_EMAIL_HOST_USER = dict_get(config, None, "mail", "receive", "user")
-    RECEIVE_EMAIL_HOST_PASSWORD = dict_get(config, None, "mail", "receive", "password")
+    RECEIVE_EMAIL_HOST_PASSWORD = dict_get_secret(config, None, "mail", "receive", "password")
     RECEIVE_EMAIL_USE_SSL = dict_get(config, False, "mail", "receive", "tls")
     RECEIVE_EMAIL_USE_TLS = dict_get(config, False, "mail", "receive", "starttls")
 
@@ -162,7 +162,7 @@ else:
     EMAIL_HOST = dict_get(config, "localhost", "mail", "host")
     EMAIL_PORT = dict_get(config, 25, "mail", "port")
     EMAIL_HOST_USER = dict_get(config, None, "mail", "user")
-    EMAIL_HOST_PASSWORD = dict_get(config, None, "mail", "password")
+    EMAIL_HOST_PASSWORD = dict_get_secret(config, None, "mail", "password")
     EMAIL_USE_TLS = dict_get(config, False, "mail", "tls")
 
 # sender of all mails (because of SPF, DKIM, DMARC)
@@ -200,7 +200,7 @@ if ldap_config:
     # server address and authentication
     AUTH_LDAP_SERVER_URI = dict_get(ldap_config, "ldaps://localhost", "server", "host")
     AUTH_LDAP_BIND_DN = dict_get(ldap_config, None, "server", "bind_dn")
-    AUTH_LDAP_BIND_PASSWORD = dict_get(ldap_config, None, "server", "bind_password")
+    AUTH_LDAP_BIND_PASSWORD = dict_get_secret(ldap_config, None, "server", "bind_password")
 
     # user search
     user_search_base = dict_get(ldap_config, None, "schema", "user_search_base")
@@ -258,7 +258,7 @@ if oidc_config:
     OIDC_OP_JWKS_ENDPOINT = dict_get(oidc_config, None, "provider", "jwks_uri")
 
     OIDC_RP_CLIENT_ID = dict_get(oidc_config, None, "provider", "client_id")
-    OIDC_RP_CLIENT_SECRET = dict_get(oidc_config, None, "provider", "client_secret")
+    OIDC_RP_CLIENT_SECRET = dict_get_secret(oidc_config, None, "provider", "client_secret")
 
     OIDC_OP_AUTHORIZATION_ENDPOINT = dict_get(oidc_config, None, "provider", "authorization_endpoint")
     OIDC_OP_TOKEN_ENDPOINT = dict_get(oidc_config, None, "provider", "token_endpoint")
@@ -340,7 +340,7 @@ if OIDC_CUSTOM_PROVIDER_NAME is not None:
 
 # security
 DEBUG = dict_get(config, False, "security", "debug")
-SECRET_KEY = dict_get(config, "CHANGEME", "security", "secret")
+SECRET_KEY = dict_get_secret(config, "CHANGEME", "security", "secret")
 ALLOWED_HOSTS = dict_get(config, [], "security", "allowed_hosts") or []  # empty list in config is None, but we need []
 
 CAPTCHAS_NEWSLETTER = dict_get(config, True, "security", "captchas", "newsletter")

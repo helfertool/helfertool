@@ -6,13 +6,15 @@ from django.shortcuts import render
 from contextlib import contextmanager
 from pathlib import Path
 
+import os
+import sys
 import time
 import mimetypes
 
 
 def dict_get(data, default, *keys):
     """
-    Lookup in nested dict.
+    Lookup setting in loaded yaml configuration file (nested dict).
 
     Example:
         data = {
@@ -35,6 +37,49 @@ def dict_get(data, default, *keys):
         return data
     except (KeyError, TypeError):
         return default
+
+
+def dict_get_secret(data, default, *keys):
+    """
+    Lookup a secret in loaded yaml configuration file (nested dict).
+
+    Secrets can be provided in different ways:
+    - Directly in yaml file, example: password: "..."
+    - In another file, example: password_file: "/run/secrets/password"
+    - In an environment variable, example: password_env: "DB_PASSWORD"
+
+    If multiple are provided, the order is: file, env, value from file
+
+    This method lookups all options in the config, decided which to use and returns the data.
+
+    Important: Only use during config parsing. If the file is specified, but cannot be read, the process is ended (sys.exit)
+    """
+    # try to lookup _file value
+    keys_for_file = list(keys[:-1])
+    keys_for_file.append(keys[-1] + "_file")
+    file_path = dict_get(data, None, *keys_for_file)
+    if file_path:
+        try:
+            with open(file_path) as f:
+                data = f.readlines()
+                return data[0].rstrip("\n\r")
+        except (IOError, IndexError):
+            print("Cannot read secret file: {}".format(file_path))
+            sys.exit(1)
+
+    # try to lookup _env value
+    keys_for_env = list(keys[:-1])
+    keys_for_env.append(keys[-1] + "_env")
+    env_name = dict_get(data, None, *keys_for_env)
+    if env_name:
+        try:
+            return os.environ[env_name]
+        except KeyError:
+            print("Cannot read secret from environment variable: {}".format(env_name))
+            sys.exit(1)
+
+    # otherwise, just use the value from the file
+    return dict_get(data, default, *keys)
 
 
 def build_path(path, base_dir):
