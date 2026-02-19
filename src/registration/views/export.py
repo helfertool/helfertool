@@ -8,6 +8,7 @@ from helfertool.utils import nopermission
 from ..decorators import archived_not_available
 from ..export.excel import xlsx
 from ..export.pdf import pdf
+from ..export.pdf_handnotes import pdf_handnotes
 from ..models import Event, Job, Shift
 from ..permissions import ACCESS_HELPER_VIEW_SENSITIVE, has_access, ACCESS_EVENT_EXPORT_HELPERS
 from ..utils import escape_filename, get_or_404
@@ -24,7 +25,7 @@ logger = logging.getLogger("helfertool.registration")
 @archived_not_available
 def export(request, event_url_name, filetype, job_pk=None, date=None):
     # check for valid export type
-    if filetype not in ["excel", "pdf"]:
+    if filetype not in ["excel", "pdf", "pdf_handnotes"]:
         raise Http404
 
     # get event
@@ -80,6 +81,10 @@ def export(request, event_url_name, filetype, job_pk=None, date=None):
         filename = "%s.pdf" % filename
         content_type = "application/pdf"
         pdf(buffer, event, jobs, date)
+    elif filetype == "pdf_handnotes":
+        filename = "%s.pdf" % filename
+        content_type = "application/pdf"
+        pdf_handnotes(buffer, event, jobs, date)
 
     # log
     logger.info(
