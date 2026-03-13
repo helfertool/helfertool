@@ -8,7 +8,6 @@ from helfertool.utils import nopermission
 from ..decorators import archived_not_available
 from ..export.excel import xlsx
 from ..export.pdf import pdf
-from ..export.pdf_handnotes import pdf_handnotes
 from ..models import Event, Job, Shift
 from ..permissions import ACCESS_HELPER_VIEW_SENSITIVE, has_access, ACCESS_EVENT_EXPORT_HELPERS
 from ..utils import escape_filename, get_or_404
@@ -84,7 +83,7 @@ def export(request, event_url_name, filetype, job_pk=None, date=None):
     elif filetype == "pdf_handnotes":
         filename = "%s.pdf" % filename
         content_type = "application/pdf"
-        pdf_handnotes(buffer, event, jobs, date)
+        pdf(buffer, event, jobs, date, handnote_optimized=True)
 
     # log
     logger.info(
