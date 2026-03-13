@@ -1,21 +1,19 @@
 {% extends "helfertool/admin.html" %}
 {% load i18n django_bootstrap5 icons static permissions shifts %}
+
 {% block content %}
     <h1>{% trans "Overview of helpers" %}</h1>
+
     {% if not event.job_set.exists %}
         <p class="text-muted">{% trans "There are no jobs and shifts." %}</p>
     {% else %}
         {# export data #}
         {% if user_can_export and not event.archived %}
-            <button type="button"
-                    class="btn btn-outline-primary mt-1 mb-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exportdata">{% icon "download" %} {% trans "Export data" %}</button>
-            <div class="modal fade"
-                 id="exportdata"
-                 tabindex="-1"
-                 aria-labelledby="exportdata-label"
-                 aria-hidden="true">
+            <button type="button" class="btn btn-outline-primary mt-1 mb-3" data-bs-toggle="modal" data-bs-target="#exportdata">
+                {% icon "download" %} {% trans "Export data" %}
+            </button>
+
+            <div class="modal fade" id="exportdata" tabindex="-1" aria-labelledby="exportdata-label" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -25,43 +23,35 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     {% trans "All days" %}
+
                                     <div class="float-end">
                                         <a href="{% url 'export' event.url_name 'excel' %}" class="mr-2">
-                                            <img src="{% static "helfertool/img/icons/xls.svg" %}"
-                                                 class="icon"
-                                                 alt="Excel" />
+                                            <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
                                         </a>
+
                                         <a href="{% url 'export' event.url_name 'pdf' %}">
-                                            <img src="{% static "helfertool/img/icons/pdf.svg" %}"
-                                                 class="icon"
-                                                 alt="PDF" />
+                                            <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
                                         </a>
+
                                         <a href="{% url 'export' event.url_name 'pdf_handnotes' %}">
-                                            <img src="{% static "helfertool/img/icons/pdf_handnotes.svg" %}"
-                                                 class="icon"
-                                                 alt="PDF" />
-                                        </a>
+                                                <img src="{% static "helfertool/img/icons/pdf_handnotes.svg" %}" class="icon" alt="PDF-handnote-optimized" />
+                                            </a>
                                     </div>
                                 </li>
+
                                 {% for day in days %}
                                     <li class="list-group-item">
                                         {{ day }}
+
                                         <div class="float-end">
-                                            <a href="{% url 'export_date' event.url_name 'excel' day %}"
-                                               class="mr-2">
-                                                <img src="{% static "helfertool/img/icons/xls.svg" %}"
-                                                     class="icon"
-                                                     alt="Excel" />
+                                            <a href="{% url 'export_date' event.url_name 'excel' day %}" class="mr-2">
+                                                <img src="{% static "helfertool/img/icons/xls.svg" %}" class="icon" alt="Excel" />
                                             </a>
                                             <a href="{% url 'export_date' event.url_name 'pdf' day %}">
-                                                <img src="{% static "helfertool/img/icons/pdf.svg" %}"
-                                                     class="icon"
-                                                     alt="PDF" />
+                                                <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
                                             </a>
                                             <a href="{% url 'export_date' event.url_name 'pdf_handnotes' day %}">
-                                                <img src="{% static "helfertool/img/icons/pdf_handnotes.svg" %}"
-                                                     class="icon"
-                                                     alt="PDF" />
+                                                <img src="{% static "helfertool/img/icons/pdf_handnotes.svg" %}" class="icon" alt="PDF-handnote-optimized" />
                                             </a>
                                         </div>
                                     </li>
@@ -69,47 +59,58 @@
                             </ul>
                         </div>
                         <div class="modal-footer">
-                            <button type="button"
-                                    class="btn btn-outline-secondary"
-                                    data-bs-dismiss="modal">{% icon "times" %} {% trans "Close" %}</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% icon "times" %} {% trans "Close" %}</button>
                         </div>
                     </div>
                 </div>
             </div>
         {% endif %}
+
         {# list jobs and shifts #}
         {% for job in event.job_set.all %}
             <h2>
                 {{ job.name }}
+
                 {% if job.public %}
-                    <span class="badge badge-outline-secondary fs-6 align-middle">{% icon "eye" %} {% trans "Public" %}</span>
+                    <span class="badge badge-outline-secondary fs-6 align-middle">
+                        {% icon "eye" %} {% trans "Public" %}
+                    </span>
                 {% endif %}
             </h2>
+
             {% has_access job "ACCESS_JOB_VIEW_HELPERS" as show_link %}
             {% if show_link and not event.archived %}
                 <p>
-                    <a href="{% url 'helpers_for_job' event.url_name job.pk %}">{% icon "angle-double-right" %} {% trans "Show" %}</a>
+                    <a href="{% url 'helpers_for_job' event.url_name job.pk %}">
+                    {% icon "angle-double-right" %} {% trans "Show" %}</a>
                 </p>
             {% endif %}
+
             <p>
                 {% blocktrans trimmed with number=job.num_coordinators %}
                     Number of coordinators: {{ number }}
                 {% endblocktrans %}
             </p>
+
             {% shifttable job %}
-            <div class="mb-1">
-                {% if shift.hidden %}
-                    {% icon "eye-slash" %}
-                {% elif shift.blocked %}
-                    {% icon "lock" %}
-                {% endif %}
-                {{ shift.time_hours }}
-                <span class="badge badge-outline-dark float-end">{{ shift.num_helpers_archived }}/{{ shift.number }}</span>
-            </div>
-            {% shift_progress shift %}
-            <span class="d-inline-block mt-1 text-truncate shifttable-maxwidth"
-                  title="{{ shift.name }}">{{ shift.name|default:"&nbsp;" }}</span>
-        {% endshifttable %}
-    {% endfor %}
-{% endif %}
+                <div class="mb-1">
+                    {% if shift.hidden %}
+                        {% icon "eye-slash" %}
+                    {% elif shift.blocked %}
+                        {% icon "lock" %}
+                    {% endif %}
+                    {{ shift.time_hours }}
+                    <span class="badge badge-outline-dark float-end">
+                        {{ shift.num_helpers_archived }}/{{ shift.number }}
+                    </span>
+                </div>
+
+                {% shift_progress shift %}
+
+                <span class="d-inline-block mt-1 text-truncate shifttable-maxwidth" title="{{ shift.name }}">
+                    {{ shift.name|default:"&nbsp;" }}
+                </span>
+            {% endshifttable %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
