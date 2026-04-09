@@ -12,7 +12,7 @@ die () {
 
 # check webserver (with a host header that is allowed)
 cd /helfertool/src
-host="$(/helfertool/venv/bin/python manage.py shell -c "from django.conf import settings ; print(settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else '')")"
+host="$(/helfertool/venv/bin/python manage.py shell -c "from django.conf import settings ; print(settings.ALLOWED_HOSTS[0] if settings.ALLOWED_HOSTS else '')" | tail -n 1)"
 curl --fail --silent --output /dev/null -H "Host: $host" http://localhost:8000 || die "Error on HTTP query"
 
 # check supervisord
