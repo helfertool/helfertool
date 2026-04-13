@@ -32,6 +32,10 @@
                                         <a href="{% url 'export' event.url_name 'pdf' %}">
                                             <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
                                         </a>
+
+                                        <a href="{% url 'export' event.url_name 'pdf_handnotes' %}">
+                                                <img src="{% static "helfertool/img/icons/pdf_handnotes.svg" %}" class="icon" alt="PDF-handnote-optimized" />
+                                            </a>
                                     </div>
                                 </li>
 
@@ -45,6 +49,9 @@
                                             </a>
                                             <a href="{% url 'export_date' event.url_name 'pdf' day %}">
                                                 <img src="{% static "helfertool/img/icons/pdf.svg" %}" class="icon" alt="PDF" />
+                                            </a>
+                                            <a href="{% url 'export_date' event.url_name 'pdf_handnotes' day %}">
+                                                <img src="{% static "helfertool/img/icons/pdf_handnotes.svg" %}" class="icon" alt="PDF-handnote-optimized" />
                                             </a>
                                         </div>
                                     </li>

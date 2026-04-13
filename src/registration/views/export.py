@@ -24,7 +24,7 @@ logger = logging.getLogger("helfertool.registration")
 @archived_not_available
 def export(request, event_url_name, filetype, job_pk=None, date=None):
     # check for valid export type
-    if filetype not in ["excel", "pdf"]:
+    if filetype not in ["excel", "pdf", "pdf_handnotes"]:
         raise Http404
 
     # get event
@@ -80,6 +80,10 @@ def export(request, event_url_name, filetype, job_pk=None, date=None):
         filename = "%s.pdf" % filename
         content_type = "application/pdf"
         pdf(buffer, event, jobs, date)
+    elif filetype == "pdf_handnotes":
+        filename = "%s.pdf" % filename
+        content_type = "application/pdf"
+        pdf(buffer, event, jobs, date, handnote_optimized=True)
 
     # log
     logger.info(
