@@ -27,6 +27,7 @@ python-magic~=0.4.27
 pyyaml~=6.0.3
 reportlab~=4.4.7
 xlsxwriter~=3.2.9
+qrcode==8.2
 
 # dependencies of dependencies
 # celery crashs if old celerybeat-schedule file exists and pytz is missing...
