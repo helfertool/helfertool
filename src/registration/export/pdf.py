@@ -33,6 +33,12 @@ def par(text):
     return Paragraph(text, par_style)
 
 
+def shift_heading(shift):
+    if shift.name:
+        return "{} ({})".format(shift.time_with_day(), shift.name)
+    return shift.time_with_day()
+
+
 def add_table(elements, data, widths):
     t = Table(data, widths, hAlign="LEFT")
     t.setStyle(table_style)
@@ -95,7 +101,7 @@ def pdf(buffer, event, jobs, date):
             if date and shift.date() != date:
                 continue
 
-            heading = h2(shift.time_with_day())
+            heading = h2(shift_heading(shift))
             elements.append(heading)
 
             if shift.helper_set.count() > 0:
