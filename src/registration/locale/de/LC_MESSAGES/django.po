@@ -764,7 +764,7 @@ msgid "Add to shift"
 msgstr "Zu Schicht hinzufügen"
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:9
-msgid "Plase note: Overlapping shifts are not checked here."
+msgid "Please note: Overlapping shifts are not checked here."
 msgstr "Bitte beachten: Überlappende Schichten werden hier nicht geprüft."
 
 #: registration/templates/registration/admin/add_helper_to_shift.html:22
