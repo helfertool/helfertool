@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.cache import never_cache
 
 from helfertool.utils import nopermission
+from registration.export.csv import csv_export
 
 from ..decorators import archived_not_available
 from ..export.excel import xlsx
@@ -12,7 +13,7 @@ from ..models import Event, Job, Shift
 from ..permissions import ACCESS_HELPER_VIEW_SENSITIVE, has_access, ACCESS_EVENT_EXPORT_HELPERS
 from ..utils import escape_filename, get_or_404
 
-from io import BytesIO
+from io import BytesIO, StringIO
 
 import logging
 
@@ -24,7 +25,7 @@ logger = logging.getLogger("helfertool.registration")
 @archived_not_available
 def export(request, event_url_name, filetype, job_pk=None, date=None):
     # check for valid export type
-    if filetype not in ["excel", "pdf"]:
+    if filetype not in ["excel", "pdf", "csv"]:
         raise Http404
 
     # get event
@@ -76,6 +77,11 @@ def export(request, event_url_name, filetype, job_pk=None, date=None):
         filename = "%s.xlsx" % filename
         content_type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         xlsx(buffer, event, jobs, date, include_sensitive)
+    elif filetype == "csv":
+        buffer = StringIO()
+        filename = "%s.csv" % filename
+        content_type = "text/csv"
+        csv_export(buffer, event, jobs, date, include_sensitive)
     elif filetype == "pdf":
         filename = "%s.pdf" % filename
         content_type = "application/pdf"

@@ -1,3 +1,6 @@
+import base64
+import io
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models.functions import TruncDate
@@ -5,6 +8,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext as _
 from django.views.decorators.cache import never_cache
+import qrcode
 
 from gifts.forms import HelpersGiftsForm
 from helfertool.utils import nopermission
@@ -168,6 +172,20 @@ def view_helper(request, event_url_name, helper_pk):
         messages.success(request, _("Changes were saved."))
         return redirect("view_helper", event_url_name=event.url_name, helper_pk=helper.pk)
 
+    # create qr code
+    stustapay_qr = dict(
+        firstName=helper.firstname,
+        lastName=helper.surname,
+        description=f"helper tool id: {helper.id}; shifts: "
+        + ", ".join(set([i.job.name for i in helper.shifts.all()])),
+    )
+    img = qrcode.make(json.dumps(stustapay_qr))
+    buffer = io.BytesIO()
+    img.save(buffer, format="PNG")
+    buffer.seek(0)
+    img_png = buffer.getvalue()
+    stustapay_qr_b64 = base64.b64encode(img_png).decode("ascii")
+
     # render page
     context = {
         "event": event,
@@ -177,6 +195,7 @@ def view_helper(request, event_url_name, helper_pk):
         "internal_comment_form": internal_comment_form,
         "gifts_form": gifts_form,
         "prerequisites_form": prerequisites_form,
+        "stustapay_qr_code": f"data:image/png;base64,{stustapay_qr_b64}",
     }
     return render(request, "registration/admin/view_helper.html", context)
 
