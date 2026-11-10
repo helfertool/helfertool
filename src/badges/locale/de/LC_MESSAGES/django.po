@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-23 19:42+0100\n"
+"POT-Creation-Date: 2026-11-10 21:56+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -190,7 +190,7 @@ msgstr "Rolle für Helfer:innen"
 msgid "Format for shift on badges"
 msgstr "Format für Schichten auf Badges"
 
-#: badges/models/settings.py:91
+#: badges/models/settings.py:90
 msgid ""
 "There is not much space on the badges, so the list of shifts needs to be as "
 "small as possible.\n"
@@ -202,15 +202,15 @@ msgstr ""
 "Bei Veranstaltungen mit mehreren Tagen könnten der Wochentag oder das Datum "
 "aber dennoch notwendig sein."
 
-#: badges/models/settings.py:98
+#: badges/models/settings.py:96
 msgid "Do not use shift names for badges, always print times"
 msgstr "Keine Schichtnamen verwenden, immer die Zeiten abdrucken"
 
-#: badges/models/settings.py:103
+#: badges/models/settings.py:101
 msgid "Badges only for coordinators"
 msgstr "Badges nur für Koordinator:innen"
 
-#: badges/models/settings.py:108
+#: badges/models/settings.py:106
 msgid "Print barcodes on badges to avoid duplicates"
 msgstr "Barcodes auf Badges drucken, um Duplikate zu verhindern"
 
