@@ -260,6 +260,9 @@ if oidc_config:
     OIDC_RP_CLIENT_ID = dict_get(oidc_config, None, "provider", "client_id")
     OIDC_RP_CLIENT_SECRET = dict_get(oidc_config, None, "provider", "client_secret")
 
+    OIDC_USE_PKCE = dict_get(oidc_config, None, "provider", "pkce")
+    OIDC_PKCE_CODE_CHALLENGE_METHOD = dict_get(oidc_config, "S256", "provider", "pkce_code_challenge")
+
     OIDC_OP_AUTHORIZATION_ENDPOINT = dict_get(oidc_config, None, "provider", "authorization_endpoint")
     OIDC_OP_TOKEN_ENDPOINT = dict_get(oidc_config, None, "provider", "token_endpoint")
     OIDC_OP_USER_ENDPOINT = dict_get(oidc_config, None, "provider", "user_endpoint")
