@@ -2,35 +2,35 @@
 django==5.2.*
 
 # celery release
-celery~=5.6.0
+celery~=5.7.0
 django-celery-results~=2.6.0
 
 # packages pinned to compatible version
-django-auth-ldap~=5.3.0
-django-axes~=8.1.0
-django-bootstrap5~=25.3
+django-auth-ldap~=5.4.0
+django-axes~=9.0.0
+django-bootstrap5~=26.4
 django-compressor~=4.6.0
 django-ical~=1.9.2
-django-icons~=25.3
+django-icons~=26.3
 django-libsass~=0.9
-django-modeltranslation~=0.19.19
+django-modeltranslation~=0.20.6
 django-multiselectfield~=1.0.1
-django-prose-editor[sanitize]~=0.27.2
-django-select2~=8.4.7
-django-simple-captcha~=0.6.3
+django-prose-editor[sanitize]~=0.28.0
+django-select2~=8.6.1
+django-simple-captcha~=0.7.0
 csscompressor~=0.9.5
-jmespath~=1.0.1
+jmespath~=1.1.0
 mozilla-django-oidc~=5.0.2
-pillow~=12.3.0
+pillow~=13.0.0
 python-dateutil~=2.9.0
 python-magic~=0.4.27
 pyyaml~=6.0.3
-reportlab~=4.4.7
-xlsxwriter~=3.2.9
+reportlab~=5.1.0
+xlsxwriter~=3.3.1
 
 # dependencies of dependencies
 # celery crashs if old celerybeat-schedule file exists and pytz is missing...
-pytz~=2025.1
+pytz~=2026.6
 
 # old packages, not used anymore but included in migrations
 django-bleach~=3.1.0

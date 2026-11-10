@@ -13,7 +13,6 @@ from registration.permissions import has_access, ACCESS_STATISTICS_VIEW
 from datetime import timedelta
 from itertools import cycle
 
-
 # colors
 # TODO: get from theming config, if this is implemented
 colors_primary = [

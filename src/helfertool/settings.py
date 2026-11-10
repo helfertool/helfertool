@@ -413,7 +413,7 @@ LOGGING = {
         "helfertool_database": {
             "class": "toollog.handlers.DatabaseHandler",
             "level": "INFO",
-        }
+        },
         # syslog handlers are added dynamically below
     },
     "loggers": {
