@@ -293,6 +293,11 @@ if oidc_config:
     OIDC_CUSTOM_CLAIM_LOGIN = dict_get(oidc_config, None, "claims", "login")
     OIDC_CUSTOM_CLAIM_ADMIN = dict_get(oidc_config, None, "claims", "admin")
 
+    # claims for global permissions (group memberships)
+    OIDC_CUSTOM_CLAIM_ADDUSER = dict_get(oidc_config, None, "claims", "adduser")
+    OIDC_CUSTOM_CLAIM_ADDEVENT = dict_get(oidc_config, None, "claims", "addevent")
+    OIDC_CUSTOM_CLAIM_SENDNEWS = dict_get(oidc_config, None, "claims", "sendnews")
+
 # django auth backends
 AUTHENTICATION_BACKENDS = [
     "axes.backends.AxesBackend",

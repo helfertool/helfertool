@@ -6,6 +6,9 @@ from django.views.decorators.debug import sensitive_variables
 
 from mozilla_django_oidc.auth import OIDCAuthenticationBackend
 
+from account.forms.account import _change_permission
+from account.templatetags.globalpermissions import has_group
+
 import jmespath
 
 
@@ -96,6 +99,18 @@ class CustomOIDCAuthenticationBackend(OIDCAuthenticationBackend):
             user.is_superuser = user.is_staff = self._check_claim_for_flag(claims, settings.OIDC_CUSTOM_CLAIM_ADMIN)
 
         user.save()
+
+        # global permissions (group memberships), only managed if the claim is configured
+        for groupname, claim_conf in (
+            (settings.GROUP_ADDUSER, settings.OIDC_CUSTOM_CLAIM_ADDUSER),
+            (settings.GROUP_ADDEVENT, settings.OIDC_CUSTOM_CLAIM_ADDEVENT),
+            (settings.GROUP_SENDNEWS, settings.OIDC_CUSTOM_CLAIM_SENDNEWS),
+        ):
+            if claim_conf:
+                has_perm = self._check_claim_for_flag(claims, claim_conf)
+                if has_perm != has_group(user, groupname):
+                    _change_permission(user, groupname, has_perm, None)
+
         return user
 
     def get_userinfo(self, access_token, id_token, payload):

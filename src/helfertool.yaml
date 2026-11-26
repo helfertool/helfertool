@@ -211,6 +211,22 @@ authentication:
     #            compare: "member"
     #            path: "roles"
     #            value: "helfertool_admin"
+    #
+    #        # Global permissions to add users, add events and send newsletters.
+    #        # Each one is optional: if it is not configured, the permission is managed manually in the Helfertool.
+    #        # If it is configured, it is granted and revoked on every login and manual changes are overwritten.
+    #        #adduser:
+    #        #    compare: "member"
+    #        #    path: "roles"
+    #        #    value: "helfertool_adduser"
+    #        #addevent:
+    #        #    compare: "member"
+    #        #    path: "roles"
+    #        #    value: "helfertool_addevent"
+    #        #sendnews:
+    #        #    compare: "member"
+    #        #    path: "roles"
+    #        #    value: "helfertool_sendnews"
 
     # Prepend character to all locally created users
     # This is useful if you have for example users from LDAP but also local

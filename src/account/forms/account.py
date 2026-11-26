@@ -74,6 +74,12 @@ def _user_flag_changeable(user, flag):
             return False
         if flag == "is_superuser" and settings.OIDC_CUSTOM_CLAIM_ADMIN is not None:
             return False
+        if flag == "perm_adduser" and settings.OIDC_CUSTOM_CLAIM_ADDUSER is not None:
+            return False
+        if flag == "perm_addevent" and settings.OIDC_CUSTOM_CLAIM_ADDEVENT is not None:
+            return False
+        if flag == "perm_sendnews" and settings.OIDC_CUSTOM_CLAIM_SENDNEWS is not None:
+            return False
 
     return True
 
@@ -191,6 +197,11 @@ class EditUserForm(forms.ModelForm):
                 required=False,
                 initial=self._sendnews_initial,
             )
+
+        for f in ("perm_adduser", "perm_addevent", "perm_sendnews"):
+            if f in self.fields and not _user_flag_changeable(self.instance, f):
+                self.fields[f].help_text = _("Managed by external identity provider")
+                self.fields[f].disabled = True
 
     def save(self, commit=True):
         # set is_staff to same value as is_superuser
